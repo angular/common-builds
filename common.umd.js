@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-3019140
+ * @license AngularJS v2.0.0-390046d
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -825,8 +825,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     var ObservableStrategy = (function () {
         function ObservableStrategy() {
         }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return ObservableWrapper.subscribe(async, updateLatestValue, function (e) { throw e; });
+        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue, onError) {
+            if (onError === void 0) { onError = function (e) { throw e; }; }
+            return ObservableWrapper.subscribe(async, updateLatestValue, onError);
         };
         ObservableStrategy.prototype.dispose = function (subscription) { ObservableWrapper.dispose(subscription); };
         ObservableStrategy.prototype.onDestroy = function (subscription) { ObservableWrapper.dispose(subscription); };
@@ -835,8 +836,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     var PromiseStrategy = (function () {
         function PromiseStrategy() {
         }
-        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue);
+        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue, onError) {
+            if (onError === void 0) { onError = function (e) { throw e; }; }
+            return async.then(updateLatestValue, onError);
         };
         PromiseStrategy.prototype.dispose = function (subscription) { };
         PromiseStrategy.prototype.onDestroy = function (subscription) { };
@@ -862,17 +864,17 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this._dispose();
             }
         };
-        AsyncPipe.prototype.transform = function (obj) {
+        AsyncPipe.prototype.transform = function (obj, onError) {
             if (isBlank(this._obj)) {
                 if (isPresent(obj)) {
-                    this._subscribe(obj);
+                    this._subscribe(obj, onError);
                 }
                 this._latestReturnedValue = this._latestValue;
                 return this._latestValue;
             }
             if (obj !== this._obj) {
                 this._dispose();
-                return this.transform(obj);
+                return this.transform(obj, onError);
             }
             if (this._latestValue === this._latestReturnedValue) {
                 return this._latestReturnedValue;
@@ -883,11 +885,11 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
         };
         /** @internal */
-        AsyncPipe.prototype._subscribe = function (obj) {
+        AsyncPipe.prototype._subscribe = function (obj, onError) {
             var _this = this;
             this._obj = obj;
             this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); }, onError);
         };
         /** @internal */
         AsyncPipe.prototype._selectStrategy = function (obj) {
