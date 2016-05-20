@@ -6,9 +6,9 @@ import { Location } from '../index';
 export declare class SpyLocation implements Location {
     urlChanges: string[];
     /** @internal */
-    _path: string;
+    private _history;
     /** @internal */
-    _query: string;
+    private _historyIndex;
     /** @internal */
     _subject: EventEmitter<any>;
     /** @internal */

@@ -4,9 +4,9 @@ export class SpyLocation {
     constructor() {
         this.urlChanges = [];
         /** @internal */
-        this._path = '';
+        this._history = [new LocationState('', '')];
         /** @internal */
-        this._query = '';
+        this._historyIndex = 0;
         /** @internal */
         this._subject = new EventEmitter();
         /** @internal */
@@ -14,9 +14,9 @@ export class SpyLocation {
         // TODO: remove these once Location is an interface, and can be implemented cleanly
         this.platformStrategy = null;
     }
-    setInitialPath(url) { this._path = url; }
+    setInitialPath(url) { this._history[this._historyIndex].path = url; }
     setBaseHref(url) { this._baseHref = url; }
-    path() { return this._path; }
+    path() { return this._history[this._historyIndex].path; }
     simulateUrlPop(pathname) {
         ObservableWrapper.callEmit(this._subject, { 'url': pathname, 'pop': true });
     }
@@ -34,26 +34,36 @@ export class SpyLocation {
     }
     go(path, query = '') {
         path = this.prepareExternalUrl(path);
-        if (this._path == path && this._query == query) {
+        if (this._historyIndex > 0) {
+            this._history.splice(this._historyIndex + 1);
+        }
+        this._history.push(new LocationState(path, query));
+        this._historyIndex = this._history.length - 1;
+        var locationState = this._history[this._historyIndex - 1];
+        if (locationState.path == path && locationState.query == query) {
             return;
         }
-        this._path = path;
-        this._query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
     }
     replaceState(path, query = '') {
         path = this.prepareExternalUrl(path);
-        this._path = path;
-        this._query = query;
+        this._history[this._historyIndex].path = path;
+        this._history[this._historyIndex].query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     }
     forward() {
-        // TODO
+        if (this._historyIndex < (this._history.length - 1)) {
+            this._historyIndex++;
+            ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     }
     back() {
-        // TODO
+        if (this._historyIndex > 0) {
+            this._historyIndex--;
+            ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     }
     subscribe(onNext, onThrow = null, onReturn = null) {
         return ObservableWrapper.subscribe(this._subject, onNext, onThrow, onReturn);
@@ -63,4 +73,10 @@ export class SpyLocation {
 SpyLocation.decorators = [
     { type: Injectable },
 ];
+class LocationState {
+    constructor(path, query) {
+        this.path = path;
+        this.query = query;
+    }
+}
 //# sourceMappingURL=location_mock.js.map

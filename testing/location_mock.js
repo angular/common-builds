@@ -5,9 +5,9 @@ var SpyLocation = (function () {
     function SpyLocation() {
         this.urlChanges = [];
         /** @internal */
-        this._path = '';
+        this._history = [new LocationState('', '')];
         /** @internal */
-        this._query = '';
+        this._historyIndex = 0;
         /** @internal */
         this._subject = new core_1.EventEmitter();
         /** @internal */
@@ -15,9 +15,9 @@ var SpyLocation = (function () {
         // TODO: remove these once Location is an interface, and can be implemented cleanly
         this.platformStrategy = null;
     }
-    SpyLocation.prototype.setInitialPath = function (url) { this._path = url; };
+    SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
     SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };
-    SpyLocation.prototype.path = function () { return this._path; };
+    SpyLocation.prototype.path = function () { return this._history[this._historyIndex].path; };
     SpyLocation.prototype.simulateUrlPop = function (pathname) {
         async_1.ObservableWrapper.callEmit(this._subject, { 'url': pathname, 'pop': true });
     };
@@ -36,27 +36,37 @@ var SpyLocation = (function () {
     SpyLocation.prototype.go = function (path, query) {
         if (query === void 0) { query = ''; }
         path = this.prepareExternalUrl(path);
-        if (this._path == path && this._query == query) {
+        if (this._historyIndex > 0) {
+            this._history.splice(this._historyIndex + 1);
+        }
+        this._history.push(new LocationState(path, query));
+        this._historyIndex = this._history.length - 1;
+        var locationState = this._history[this._historyIndex - 1];
+        if (locationState.path == path && locationState.query == query) {
             return;
         }
-        this._path = path;
-        this._query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
     };
     SpyLocation.prototype.replaceState = function (path, query) {
         if (query === void 0) { query = ''; }
         path = this.prepareExternalUrl(path);
-        this._path = path;
-        this._query = query;
+        this._history[this._historyIndex].path = path;
+        this._history[this._historyIndex].query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     };
     SpyLocation.prototype.forward = function () {
-        // TODO
+        if (this._historyIndex < (this._history.length - 1)) {
+            this._historyIndex++;
+            async_1.ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     };
     SpyLocation.prototype.back = function () {
-        // TODO
+        if (this._historyIndex > 0) {
+            this._historyIndex--;
+            async_1.ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     };
     SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
         if (onThrow === void 0) { onThrow = null; }
@@ -70,4 +80,11 @@ var SpyLocation = (function () {
     return SpyLocation;
 }());
 exports.SpyLocation = SpyLocation;
+var LocationState = (function () {
+    function LocationState(path, query) {
+        this.path = path;
+        this.query = query;
+    }
+    return LocationState;
+}());
 //# sourceMappingURL=location_mock.js.map
