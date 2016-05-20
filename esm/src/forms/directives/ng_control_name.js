@@ -45,7 +45,7 @@ export class NgControlName extends NgControl {
 NgControlName.decorators = [
     { type: Directive, args: [{
                 selector: '[ngControl]',
-                bindings: [controlNameBinding],
+                providers: [controlNameBinding],
                 inputs: ['name: ngControl', 'model: ngModel'],
                 outputs: ['update: ngModelChange'],
                 exportAs: 'ngForm'

@@ -77,7 +77,7 @@ export class NgForm extends ControlContainer {
 NgForm.decorators = [
     { type: Directive, args: [{
                 selector: 'form:not([ngNoForm]):not([ngFormModel]),ngForm,[ngForm]',
-                bindings: [formDirectiveProvider],
+                providers: [formDirectiveProvider],
                 host: {
                     '(submit)': 'onSubmit()',
                 },

@@ -71,7 +71,7 @@ var NgControlName = (function (_super) {
     NgControlName.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngControl]',
-                    bindings: [exports.controlNameBinding],
+                    providers: [exports.controlNameBinding],
                     inputs: ['name: ngControl', 'model: ngModel'],
                     outputs: ['update: ngModelChange'],
                     exportAs: 'ngForm'

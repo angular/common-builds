@@ -20,8 +20,6 @@ export declare function isControl(control: Object): boolean;
 export declare abstract class AbstractControl {
     validator: ValidatorFn;
     asyncValidator: AsyncValidatorFn;
-    /** @internal */
-    _value: any;
     private _valueChanges;
     private _statusChanges;
     private _status;
@@ -94,15 +92,7 @@ export declare abstract class AbstractControl {
     getError(errorCode: string, path?: string[]): any;
     hasError(errorCode: string, path?: string[]): boolean;
     readonly root: AbstractControl;
-    /** @internal */
-    _updateControlsErrors(): void;
-    /** @internal */
-    _initObservables(): void;
     private _calculateStatus();
-    /** @internal */
-    abstract _updateValue(): void;
-    /** @internal */
-    abstract _anyControlsHaveStatus(status: string): boolean;
 }
 /**
  * Defines a part of a form that cannot be divided into other controls. `Control`s have values and
@@ -121,8 +111,6 @@ export declare abstract class AbstractControl {
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
  */
 export declare class Control extends AbstractControl {
-    /** @internal */
-    _onChange: Function;
     constructor(value?: any, validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn);
     /**
      * Set the value of the control to `value`.
@@ -141,14 +129,6 @@ export declare class Control extends AbstractControl {
         emitEvent?: boolean;
         emitModelToViewChange?: boolean;
     }): void;
-    /**
-     * @internal
-     */
-    _updateValue(): void;
-    /**
-     * @internal
-     */
-    _anyControlsHaveStatus(status: string): boolean;
     /**
      * Register a listener for change events.
      */
@@ -198,18 +178,6 @@ export declare class ControlGroup extends AbstractControl {
      * Check whether there is a control with the given name in the group.
      */
     contains(controlName: string): boolean;
-    /** @internal */
-    _setParentForControls(): void;
-    /** @internal */
-    _updateValue(): void;
-    /** @internal */
-    _anyControlsHaveStatus(status: string): boolean;
-    /** @internal */
-    _reduceValue(): any;
-    /** @internal */
-    _reduceChildren(initValue: any, fn: Function): any;
-    /** @internal */
-    _included(controlName: string): boolean;
 }
 /**
  * Defines a part of a form, of variable length, that can contain other controls.
@@ -256,10 +224,4 @@ export declare class ControlArray extends AbstractControl {
      * Length of the control array.
      */
     readonly length: number;
-    /** @internal */
-    _updateValue(): void;
-    /** @internal */
-    _anyControlsHaveStatus(status: string): boolean;
-    /** @internal */
-    _setParentForControls(): void;
 }

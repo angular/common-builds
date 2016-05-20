@@ -62,12 +62,4 @@ export declare class FormBuilder {
      * configuration, with the given optional `validator` and `asyncValidator`.
      */
     array(controlsConfig: any[], validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn): modelModule.ControlArray;
-    /** @internal */
-    _reduceControls(controlsConfig: {
-        [k: string]: any;
-    }): {
-        [key: string]: modelModule.AbstractControl;
-    };
-    /** @internal */
-    _createControl(controlConfig: any): modelModule.AbstractControl;
 }

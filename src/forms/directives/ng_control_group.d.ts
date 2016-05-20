@@ -52,8 +52,6 @@ export declare const controlGroupProvider: any;
 export declare class NgControlGroup extends ControlContainer implements OnInit, OnDestroy {
     private _validators;
     private _asyncValidators;
-    /** @internal */
-    _parent: ControlContainer;
     constructor(parent: ControlContainer, _validators: any[], _asyncValidators: any[]);
     ngOnInit(): void;
     ngOnDestroy(): void;

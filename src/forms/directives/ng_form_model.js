@@ -94,7 +94,7 @@ var NgFormModel = (function (_super) {
     NgFormModel.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngFormModel]',
-                    bindings: [exports.formDirectiveProvider],
+                    providers: [exports.formDirectiveProvider],
                     inputs: ['form: ngFormModel'],
                     host: { '(submit)': 'onSubmit()' },
                     outputs: ['ngSubmit'],

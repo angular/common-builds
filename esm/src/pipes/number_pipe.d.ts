@@ -1,11 +1,8 @@
 import { PipeTransform } from '@angular/core';
-import { NumberFormatStyle } from '../../src/facade/intl';
 /**
  * Internal base class for numeric pipes.
  */
 export declare class NumberPipe {
-    /** @internal */
-    static _format(value: number, style: NumberFormatStyle, digits: string, currency?: string, currencyAsSymbol?: boolean): string;
 }
 /**
  * WARNING: this pipe uses the Internationalization API.

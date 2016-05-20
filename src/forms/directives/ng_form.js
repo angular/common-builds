@@ -104,7 +104,7 @@ var NgForm = (function (_super) {
     NgForm.decorators = [
         { type: core_1.Directive, args: [{
                     selector: 'form:not([ngNoForm]):not([ngFormModel]),ngForm,[ngForm]',
-                    bindings: [exports.formDirectiveProvider],
+                    providers: [exports.formDirectiveProvider],
                     host: {
                         '(submit)': 'onSubmit()',
                     },

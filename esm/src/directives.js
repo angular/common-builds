@@ -10,6 +10,5 @@ export { NgTemplateOutlet } from './directives/ng_template_outlet';
 export { NgStyle } from './directives/ng_style';
 export { NgSwitch, NgSwitchWhen, NgSwitchDefault } from './directives/ng_switch';
 export { NgPlural, NgPluralCase, NgLocalization } from './directives/ng_plural';
-export * from './directives/observable_list_diff';
 export { CORE_DIRECTIVES } from './directives/core_directives';
 //# sourceMappingURL=directives.js.map

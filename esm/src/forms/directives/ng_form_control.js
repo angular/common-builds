@@ -43,7 +43,7 @@ export class NgFormControl extends NgControl {
 NgFormControl.decorators = [
     { type: Directive, args: [{
                 selector: '[ngFormControl]',
-                bindings: [formControlBinding],
+                providers: [formControlBinding],
                 inputs: ['form: ngFormControl', 'model: ngModel'],
                 outputs: ['update: ngModelChange'],
                 exportAs: 'ngForm'

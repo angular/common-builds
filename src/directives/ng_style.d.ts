@@ -1,4 +1,4 @@
-import { DoCheck, KeyValueDiffer, KeyValueDiffers, ElementRef, Renderer } from '@angular/core';
+import { DoCheck, KeyValueDiffers, ElementRef, Renderer } from '@angular/core';
 /**
  * The `NgStyle` directive changes styles based on a result of expression evaluation.
  *
@@ -54,12 +54,6 @@ export declare class NgStyle implements DoCheck {
     private _differs;
     private _ngEl;
     private _renderer;
-    /** @internal */
-    _rawStyle: {
-        [key: string]: string;
-    };
-    /** @internal */
-    _differ: KeyValueDiffer;
     constructor(_differs: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer);
     rawStyle: {
         [key: string]: string;

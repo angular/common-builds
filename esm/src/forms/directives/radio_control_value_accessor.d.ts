@@ -42,13 +42,7 @@ export declare class RadioControlValueAccessor implements ControlValueAccessor, 
     private _elementRef;
     private _registry;
     private _injector;
-    /** @internal */
-    _state: RadioButtonState;
-    /** @internal */
-    _control: NgControl;
     name: string;
-    /** @internal */
-    _fn: Function;
     onChange: () => void;
     onTouched: () => void;
     constructor(_renderer: Renderer, _elementRef: ElementRef, _registry: RadioControlRegistry, _injector: Injector);

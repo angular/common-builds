@@ -29,10 +29,6 @@ export declare const formControlBinding: any;
 export declare class NgModel extends NgControl implements OnChanges {
     private _validators;
     private _asyncValidators;
-    /** @internal */
-    _control: Control;
-    /** @internal */
-    _added: boolean;
     update: EventEmitter<{}>;
     model: any;
     viewModel: any;

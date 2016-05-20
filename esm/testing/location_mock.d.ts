@@ -1,18 +1,9 @@
-import { EventEmitter } from '@angular/core';
 import { Location } from '../index';
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
  */
 export declare class SpyLocation implements Location {
     urlChanges: string[];
-    /** @internal */
-    private _history;
-    /** @internal */
-    private _historyIndex;
-    /** @internal */
-    _subject: EventEmitter<any>;
-    /** @internal */
-    _baseHref: string;
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;

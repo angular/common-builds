@@ -7,7 +7,7 @@ var Location = (function () {
         var _this = this;
         this.platformStrategy = platformStrategy;
         /** @internal */
-        this._subject = new async_1.EventEmitter();
+        this._subject = new core_1.EventEmitter();
         var browserBaseHref = this.platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this.platformStrategy.onPopState(function (ev) {

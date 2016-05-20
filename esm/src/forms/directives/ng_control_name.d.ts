@@ -1,5 +1,4 @@
 import { OnChanges, OnDestroy, SimpleChange } from '@angular/core';
-import { EventEmitter } from '../../../src/facade/async';
 import { ControlContainer } from './control_container';
 import { NgControl } from './ng_control';
 import { ControlValueAccessor } from './control_value_accessor';
@@ -65,8 +64,6 @@ export declare class NgControlName extends NgControl implements OnChanges, OnDes
     private _parent;
     private _validators;
     private _asyncValidators;
-    /** @internal */
-    update: EventEmitter<{}>;
     model: any;
     viewModel: any;
     private _added;

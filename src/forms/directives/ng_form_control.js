@@ -65,7 +65,7 @@ var NgFormControl = (function (_super) {
     NgFormControl.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngFormControl]',
-                    bindings: [exports.formControlBinding],
+                    providers: [exports.formControlBinding],
                     inputs: ['form: ngFormControl', 'model: ngModel'],
                     outputs: ['update: ngModelChange'],
                     exportAs: 'ngForm'

@@ -1,5 +1,4 @@
 import { ViewContainerRef, TemplateRef, QueryList, AfterContentInit } from '@angular/core';
-import { SwitchView } from './ng_switch';
 export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any): string;
 }
@@ -60,8 +59,6 @@ export declare abstract class NgLocalization {
  */
 export declare class NgPluralCase {
     value: string;
-    /** @internal */
-    _view: SwitchView;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef);
 }
 export declare class NgPlural implements AfterContentInit {
@@ -73,18 +70,4 @@ export declare class NgPlural implements AfterContentInit {
     constructor(_localization: NgLocalization);
     ngPlural: number;
     ngAfterContentInit(): void;
-    /** @internal */
-    _updateView(): void;
-    /** @internal */
-    _clearViews(): void;
-    /** @internal */
-    _activateView(view: SwitchView): void;
-    /** @internal */
-    _getCategoryView(value: number): SwitchView;
-    /** @internal */
-    _isValueView(pluralCase: NgPluralCase): boolean;
-    /** @internal */
-    _formatValue(pluralCase: NgPluralCase): any;
-    /** @internal */
-    _stripValue(value: string): number;
 }

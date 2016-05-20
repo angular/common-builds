@@ -29,7 +29,7 @@ var NumberValueAccessor = (function () {
                         '(input)': 'onChange($event.target.value)',
                         '(blur)': 'onTouched()'
                     },
-                    bindings: [exports.NUMBER_VALUE_ACCESSOR]
+                    providers: [exports.NUMBER_VALUE_ACCESSOR]
                 },] },
     ];
     NumberValueAccessor.ctorParameters = [

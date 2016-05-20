@@ -19,26 +19,8 @@ import { Observable, EventEmitter } from '../../src/facade/async';
  * ```
  */
 export declare class AsyncPipe implements OnDestroy {
-    /** @internal */
-    _latestValue: Object;
-    /** @internal */
-    _latestReturnedValue: Object;
-    /** @internal */
-    _subscription: Object;
-    /** @internal */
-    _obj: Observable<any> | Promise<any> | EventEmitter<any>;
     private _strategy;
-    /** @internal */
-    _ref: ChangeDetectorRef;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
     transform(obj: Observable<any> | Promise<any> | EventEmitter<any>, onError?: (v: any) => any): any;
-    /** @internal */
-    _subscribe(obj: Observable<any> | Promise<any> | EventEmitter<any>, onError?: any): void;
-    /** @internal */
-    _selectStrategy(obj: Observable<any> | Promise<any> | EventEmitter<any>): any;
-    /** @internal */
-    _dispose(): void;
-    /** @internal */
-    _updateLatestValue(async: any, value: Object): void;
 }

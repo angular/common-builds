@@ -1,7 +1,4 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 /**
  * @module
  * @description
@@ -25,7 +22,6 @@ var ng_plural_1 = require('./directives/ng_plural');
 exports.NgPlural = ng_plural_1.NgPlural;
 exports.NgPluralCase = ng_plural_1.NgPluralCase;
 exports.NgLocalization = ng_plural_1.NgLocalization;
-__export(require('./directives/observable_list_diff'));
 var core_directives_1 = require('./directives/core_directives');
 exports.CORE_DIRECTIVES = core_directives_1.CORE_DIRECTIVES;
 //# sourceMappingURL=directives.js.map

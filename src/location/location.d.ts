@@ -1,4 +1,3 @@
-import { EventEmitter } from '../../src/facade/async';
 import { LocationStrategy } from './location_strategy';
 /**
  * `Location` is a service that applications can use to interact with a browser's URL.
@@ -42,10 +41,6 @@ import { LocationStrategy } from './location_strategy';
  */
 export declare class Location {
     platformStrategy: LocationStrategy;
-    /** @internal */
-    _subject: EventEmitter<any>;
-    /** @internal */
-    _baseHref: string;
     constructor(platformStrategy: LocationStrategy);
     /**
      * Returns the normalized URL path.

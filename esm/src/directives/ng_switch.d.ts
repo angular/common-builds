@@ -68,16 +68,6 @@ export declare class NgSwitch {
     private _valueViews;
     private _activeViews;
     ngSwitch: any;
-    /** @internal */
-    _onWhenValueChanged(oldWhen: any, newWhen: any, view: SwitchView): void;
-    /** @internal */
-    _emptyAllActiveViews(): void;
-    /** @internal */
-    _activateViews(views: SwitchView[]): void;
-    /** @internal */
-    _registerView(value: any, view: SwitchView): void;
-    /** @internal */
-    _deregisterView(value: any, view: SwitchView): void;
 }
 /**
  * Insert the sub-tree when the `ngSwitchWhen` expression evaluates to the same value as the
@@ -88,10 +78,6 @@ export declare class NgSwitch {
  * See {@link NgSwitch} for more details and example.
  */
 export declare class NgSwitchWhen {
-    /** @internal */
-    _value: any;
-    /** @internal */
-    _view: SwitchView;
     private _switch;
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     ngSwitchWhen: any;

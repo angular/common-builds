@@ -82,6 +82,4 @@ export declare class NgForm extends ControlContainer implements Form {
     getControlGroup(dir: NgControlGroup): ControlGroup;
     updateModel(dir: NgControl, value: any): void;
     onSubmit(): boolean;
-    /** @internal */
-    _findContainer(path: string[]): ControlGroup;
 }
