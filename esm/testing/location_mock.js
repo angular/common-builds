@@ -17,6 +17,11 @@ export class SpyLocation {
     setInitialPath(url) { this._history[this._historyIndex].path = url; }
     setBaseHref(url) { this._baseHref = url; }
     path() { return this._history[this._historyIndex].path; }
+    isCurrentPathEqualTo(path, query = '') {
+        var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+        var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+        return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+    }
     simulateUrlPop(pathname) {
         ObservableWrapper.callEmit(this._subject, { 'url': pathname, 'pop': true });
     }
@@ -48,8 +53,12 @@ export class SpyLocation {
     }
     replaceState(path, query = '') {
         path = this.prepareExternalUrl(path);
-        this._history[this._historyIndex].path = path;
-        this._history[this._historyIndex].query = query;
+        var history = this._history[this._historyIndex];
+        if (history.path == path && history.query == query) {
+            return;
+        }
+        history.path = path;
+        history.query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     }

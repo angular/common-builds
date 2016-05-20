@@ -18,6 +18,12 @@ var SpyLocation = (function () {
     SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
     SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };
     SpyLocation.prototype.path = function () { return this._history[this._historyIndex].path; };
+    SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
+        if (query === void 0) { query = ''; }
+        var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+        var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+        return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+    };
     SpyLocation.prototype.simulateUrlPop = function (pathname) {
         async_1.ObservableWrapper.callEmit(this._subject, { 'url': pathname, 'pop': true });
     };
@@ -51,8 +57,12 @@ var SpyLocation = (function () {
     SpyLocation.prototype.replaceState = function (path, query) {
         if (query === void 0) { query = ''; }
         path = this.prepareExternalUrl(path);
-        this._history[this._historyIndex].path = path;
-        this._history[this._historyIndex].query = query;
+        var history = this._history[this._historyIndex];
+        if (history.path == path && history.query == query) {
+            return;
+        }
+        history.path = path;
+        history.query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     };

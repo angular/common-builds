@@ -19,6 +19,13 @@ var Location = (function () {
      */
     Location.prototype.path = function () { return this.normalize(this.platformStrategy.path()); };
     /**
+     * Normalizes the given path and compares to the current normalized path.
+     */
+    Location.prototype.isCurrentPathEqualTo = function (path, query) {
+        if (query === void 0) { query = ''; }
+        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+    };
+    /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes
      */

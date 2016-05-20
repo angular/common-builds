@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-165357b
+ * @license AngularJS v2.0.0-2bf21e1
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4023,6 +4023,13 @@ var __extends = (this && this.__extends) || function (d, b) {
          * Returns the normalized URL path.
          */
         Location.prototype.path = function () { return this.normalize(this.platformStrategy.path()); };
+        /**
+         * Normalizes the given path and compares to the current normalized path.
+         */
+        Location.prototype.isCurrentPathEqualTo = function (path, query) {
+            if (query === void 0) { query = ''; }
+            return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+        };
         /**
          * Given a string representing a URL, returns the normalized URL path without leading or
          * trailing slashes

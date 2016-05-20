@@ -7,6 +7,7 @@ export declare class SpyLocation implements Location {
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;
+    isCurrentPathEqualTo(path: string, query?: string): boolean;
     simulateUrlPop(pathname: string): void;
     simulateHashChange(pathname: string): void;
     prepareExternalUrl(url: string): string;

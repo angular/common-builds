@@ -17,6 +17,12 @@ export class Location {
      */
     path() { return this.normalize(this.platformStrategy.path()); }
     /**
+     * Normalizes the given path and compares to the current normalized path.
+     */
+    isCurrentPathEqualTo(path, query = '') {
+        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+    }
+    /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes
      */
