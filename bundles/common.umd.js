@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-ac6959c
+ * @license AngularJS v2.0.0-9c2fe66
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1043,12 +1043,23 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isNumber(value)) {
                 value = DateWrapper.fromMillis(value);
             }
+            else if (isString(value)) {
+                value = DateWrapper.fromISOString(value);
+            }
             if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
                 pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
             }
             return DateFormatter.format(value, defaultLocale, pattern);
         };
-        DatePipe.prototype.supports = function (obj) { return isDate(obj) || isNumber(obj); };
+        DatePipe.prototype.supports = function (obj) {
+            if (isDate(obj) || isNumber(obj)) {
+                return true;
+            }
+            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
+                return true;
+            }
+            return false;
+        };
         return DatePipe;
     }());
     /** @internal */

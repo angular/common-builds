@@ -1,5 +1,4 @@
 import { AbstractControl } from '../model';
-import * as modelModule from '../model';
 /**
  * An interface that can be implemented by classes that can act as validators.
  *
@@ -18,7 +17,7 @@ import * as modelModule from '../model';
  * ```
  */
 export interface Validator {
-    validate(c: modelModule.AbstractControl): {
+    validate(c: AbstractControl): {
         [key: string]: any;
     };
 }

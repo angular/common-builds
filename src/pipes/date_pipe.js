@@ -19,12 +19,23 @@ var DatePipe = (function () {
         if (lang_1.isNumber(value)) {
             value = lang_1.DateWrapper.fromMillis(value);
         }
+        else if (lang_1.isString(value)) {
+            value = lang_1.DateWrapper.fromISOString(value);
+        }
         if (collection_1.StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
             pattern = collection_1.StringMapWrapper.get(DatePipe._ALIASES, pattern);
         }
         return intl_1.DateFormatter.format(value, defaultLocale, pattern);
     };
-    DatePipe.prototype.supports = function (obj) { return lang_1.isDate(obj) || lang_1.isNumber(obj); };
+    DatePipe.prototype.supports = function (obj) {
+        if (lang_1.isDate(obj) || lang_1.isNumber(obj)) {
+            return true;
+        }
+        if (lang_1.isString(obj) && lang_1.isDate(lang_1.DateWrapper.fromISOString(obj))) {
+            return true;
+        }
+        return false;
+    };
     /** @internal */
     DatePipe._ALIASES = {
         'medium': 'yMMMdjms',
