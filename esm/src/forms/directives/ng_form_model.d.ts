@@ -1,4 +1,4 @@
-import { SimpleChange, OnChanges } from '@angular/core';
+import { SimpleChanges, OnChanges } from '@angular/core';
 import { EventEmitter } from '../../../src/facade/async';
 import { NgControl } from './ng_control';
 import { NgControlGroup } from './ng_control_group';
@@ -85,9 +85,7 @@ export declare class NgFormModel extends ControlContainer implements Form, OnCha
     directives: NgControl[];
     ngSubmit: EventEmitter<{}>;
     constructor(_validators: any[], _asyncValidators: any[]);
-    ngOnChanges(changes: {
-        [key: string]: SimpleChange;
-    }): void;
+    ngOnChanges(changes: SimpleChanges): void;
     readonly formDirective: Form;
     readonly control: ControlGroup;
     readonly path: string[];

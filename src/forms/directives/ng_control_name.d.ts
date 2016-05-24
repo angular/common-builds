@@ -1,4 +1,4 @@
-import { OnChanges, OnDestroy, SimpleChange } from '@angular/core';
+import { OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ControlContainer } from './control_container';
 import { NgControl } from './ng_control';
 import { ControlValueAccessor } from './control_value_accessor';
@@ -68,9 +68,7 @@ export declare class NgControlName extends NgControl implements OnChanges, OnDes
     viewModel: any;
     private _added;
     constructor(_parent: ControlContainer, _validators: any[], _asyncValidators: any[], valueAccessors: ControlValueAccessor[]);
-    ngOnChanges(changes: {
-        [key: string]: SimpleChange;
-    }): void;
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     viewToModelUpdate(newValue: any): void;
     path: string[];
