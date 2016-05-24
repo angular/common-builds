@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "2.0.0-798bfac",
+  "version": "2.0.0-982fad0",
   "description": "",
   "main": "index.js",
   "jsnext:main": "esm/index.js",
@@ -8,7 +8,7 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "2.0.0-798bfac"
+    "@angular/core": "2.0.0-982fad0"
   },
   "repository": {
     "type": "git",
