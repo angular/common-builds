@@ -34,7 +34,10 @@ export class SelectControlValueAccessor {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', valueString);
     }
     registerOnChange(fn) {
-        this.onChange = (valueString) => { fn(this._getOptionValue(valueString)); };
+        this.onChange = (valueString) => {
+            this.value = valueString;
+            fn(this._getOptionValue(valueString));
+        };
     }
     registerOnTouched(fn) { this.onTouched = fn; }
     /** @internal */

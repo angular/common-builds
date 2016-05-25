@@ -36,7 +36,10 @@ var SelectControlValueAccessor = (function () {
     };
     SelectControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;
-        this.onChange = function (valueString) { fn(_this._getOptionValue(valueString)); };
+        this.onChange = function (valueString) {
+            _this.value = valueString;
+            fn(_this._getOptionValue(valueString));
+        };
     };
     SelectControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
     /** @internal */

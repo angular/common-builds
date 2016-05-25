@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-982fad0
+ * @license AngularJS v2.0.0-7a2ce7f
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2848,7 +2848,10 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         SelectControlValueAccessor.prototype.registerOnChange = function (fn) {
             var _this = this;
-            this.onChange = function (valueString) { fn(_this._getOptionValue(valueString)); };
+            this.onChange = function (valueString) {
+                _this.value = valueString;
+                fn(_this._getOptionValue(valueString));
+            };
         };
         SelectControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
         /** @internal */
