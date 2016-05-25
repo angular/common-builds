@@ -4,11 +4,11 @@ import { ListWrapper } from '../../src/facade/collection';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class SlicePipe {
     transform(value, start, end = null) {
+        if (isBlank(value))
+            return value;
         if (!this.supports(value)) {
             throw new InvalidPipeArgumentException(SlicePipe, value);
         }
-        if (isBlank(value))
-            return value;
         if (isString(value)) {
             return StringWrapper.slice(value, start, end);
         }

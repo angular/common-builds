@@ -35,6 +35,8 @@ import { PipeTransform } from '@angular/core';
  * When operating on a [List], the returned list is always a copy even when all
  * the elements are being returned.
  *
+ * When operating on a blank value, returns it.
+ *
  * ## List Example
  *
  * This `ngFor` example:

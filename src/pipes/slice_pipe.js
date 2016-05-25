@@ -8,11 +8,11 @@ var SlicePipe = (function () {
     }
     SlicePipe.prototype.transform = function (value, start, end) {
         if (end === void 0) { end = null; }
+        if (lang_1.isBlank(value))
+            return value;
         if (!this.supports(value)) {
             throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(SlicePipe, value);
         }
-        if (lang_1.isBlank(value))
-            return value;
         if (lang_1.isString(value)) {
             return lang_1.StringWrapper.slice(value, start, end);
         }

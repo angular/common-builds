@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-a38c9a1
+ * @license AngularJS v2.0.0-60a2ba8
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1098,11 +1098,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         SlicePipe.prototype.transform = function (value, start, end) {
             if (end === void 0) { end = null; }
+            if (isBlank(value))
+                return value;
             if (!this.supports(value)) {
                 throw new InvalidPipeArgumentException(SlicePipe, value);
             }
-            if (isBlank(value))
-                return value;
             if (isString(value)) {
                 return StringWrapper.slice(value, start, end);
             }
