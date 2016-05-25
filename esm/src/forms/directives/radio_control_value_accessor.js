@@ -26,10 +26,14 @@ export class RadioControlRegistry {
     }
     select(accessor) {
         this._accessors.forEach((c) => {
-            if (c[0].control.root === accessor._control.control.root && c[1] !== accessor) {
+            if (this._isSameGroup(c, accessor) && c[1] !== accessor) {
                 c[1].fireUncheck();
             }
         });
+    }
+    _isSameGroup(controlPair, accessor) {
+        return controlPair[0].control.root === accessor._control.control.root &&
+            controlPair[1].name === accessor.name;
     }
 }
 RadioControlRegistry.decorators = [

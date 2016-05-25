@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-7a2ce7f
+ * @license AngularJS v2.0.0-a38c9a1
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2957,11 +2957,16 @@ var __extends = (this && this.__extends) || function (d, b) {
             ListWrapper.removeAt(this._accessors, indexToRemove);
         };
         RadioControlRegistry.prototype.select = function (accessor) {
+            var _this = this;
             this._accessors.forEach(function (c) {
-                if (c[0].control.root === accessor._control.control.root && c[1] !== accessor) {
+                if (_this._isSameGroup(c, accessor) && c[1] !== accessor) {
                     c[1].fireUncheck();
                 }
             });
+        };
+        RadioControlRegistry.prototype._isSameGroup = function (controlPair, accessor) {
+            return controlPair[0].control.root === accessor._control.control.root &&
+                controlPair[1].name === accessor.name;
         };
         return RadioControlRegistry;
     }());

@@ -10,6 +10,7 @@ export declare class RadioControlRegistry {
     add(control: NgControl, accessor: RadioControlValueAccessor): void;
     remove(accessor: RadioControlValueAccessor): void;
     select(accessor: RadioControlValueAccessor): void;
+    private _isSameGroup(controlPair, accessor);
 }
 /**
  * The value provided by the forms API for radio buttons.

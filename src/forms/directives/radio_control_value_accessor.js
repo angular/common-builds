@@ -26,11 +26,16 @@ var RadioControlRegistry = (function () {
         collection_1.ListWrapper.removeAt(this._accessors, indexToRemove);
     };
     RadioControlRegistry.prototype.select = function (accessor) {
+        var _this = this;
         this._accessors.forEach(function (c) {
-            if (c[0].control.root === accessor._control.control.root && c[1] !== accessor) {
+            if (_this._isSameGroup(c, accessor) && c[1] !== accessor) {
                 c[1].fireUncheck();
             }
         });
+    };
+    RadioControlRegistry.prototype._isSameGroup = function (controlPair, accessor) {
+        return controlPair[0].control.root === accessor._control.control.root &&
+            controlPair[1].name === accessor.name;
     };
     RadioControlRegistry.decorators = [
         { type: core_1.Injectable },
