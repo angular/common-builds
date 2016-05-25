@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-6c6b316
+ * @license AngularJS v2.0.0-cb980d3
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -436,6 +436,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * https://github.com/jhusain/observable-spec
      *
      * Once a reference implementation of the spec is available, switch to it.
+     * @stable
      */
     var EventEmitter$1 = (function (_super) {
         __extends(EventEmitter$1, _super);
@@ -807,6 +808,9 @@ var __extends = (this && this.__extends) || function (d, b) {
             };
         }
     })();
+    /**
+     * @stable
+     */
     var BaseException = (function (_super) {
         __extends(BaseException, _super);
         function BaseException(message) {
