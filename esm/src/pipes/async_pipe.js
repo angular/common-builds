@@ -3,15 +3,15 @@ import { isBlank, isPresent, isPromise } from '../../src/facade/lang';
 import { ObservableWrapper } from '../../src/facade/async';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 class ObservableStrategy {
-    createSubscription(async, updateLatestValue, onError = e => { throw e; }) {
-        return ObservableWrapper.subscribe(async, updateLatestValue, onError);
+    createSubscription(async, updateLatestValue) {
+        return ObservableWrapper.subscribe(async, updateLatestValue, e => { throw e; });
     }
     dispose(subscription) { ObservableWrapper.dispose(subscription); }
     onDestroy(subscription) { ObservableWrapper.dispose(subscription); }
 }
 class PromiseStrategy {
-    createSubscription(async, updateLatestValue, onError = e => { throw e; }) {
-        return async.then(updateLatestValue, onError);
+    createSubscription(async, updateLatestValue) {
+        return async.then(updateLatestValue, e => { throw e; });
     }
     dispose(subscription) { }
     onDestroy(subscription) { }
@@ -37,17 +37,17 @@ export class AsyncPipe {
             this._dispose();
         }
     }
-    transform(obj, onError) {
+    transform(obj) {
         if (isBlank(this._obj)) {
             if (isPresent(obj)) {
-                this._subscribe(obj, onError);
+                this._subscribe(obj);
             }
             this._latestReturnedValue = this._latestValue;
             return this._latestValue;
         }
         if (obj !== this._obj) {
             this._dispose();
-            return this.transform(obj, onError);
+            return this.transform(obj);
         }
         if (this._latestValue === this._latestReturnedValue) {
             return this._latestReturnedValue;
@@ -58,10 +58,10 @@ export class AsyncPipe {
         }
     }
     /** @internal */
-    _subscribe(obj, onError) {
+    _subscribe(obj) {
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value), onError);
+        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
     }
     /** @internal */
     _selectStrategy(obj) {

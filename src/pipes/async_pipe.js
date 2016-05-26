@@ -6,9 +6,8 @@ var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_excepti
 var ObservableStrategy = (function () {
     function ObservableStrategy() {
     }
-    ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue, onError) {
-        if (onError === void 0) { onError = function (e) { throw e; }; }
-        return async_1.ObservableWrapper.subscribe(async, updateLatestValue, onError);
+    ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async_1.ObservableWrapper.subscribe(async, updateLatestValue, function (e) { throw e; });
     };
     ObservableStrategy.prototype.dispose = function (subscription) { async_1.ObservableWrapper.dispose(subscription); };
     ObservableStrategy.prototype.onDestroy = function (subscription) { async_1.ObservableWrapper.dispose(subscription); };
@@ -17,9 +16,8 @@ var ObservableStrategy = (function () {
 var PromiseStrategy = (function () {
     function PromiseStrategy() {
     }
-    PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue, onError) {
-        if (onError === void 0) { onError = function (e) { throw e; }; }
-        return async.then(updateLatestValue, onError);
+    PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async.then(updateLatestValue, function (e) { throw e; });
     };
     PromiseStrategy.prototype.dispose = function (subscription) { };
     PromiseStrategy.prototype.onDestroy = function (subscription) { };
@@ -46,17 +44,17 @@ var AsyncPipe = (function () {
             this._dispose();
         }
     };
-    AsyncPipe.prototype.transform = function (obj, onError) {
+    AsyncPipe.prototype.transform = function (obj) {
         if (lang_1.isBlank(this._obj)) {
             if (lang_1.isPresent(obj)) {
-                this._subscribe(obj, onError);
+                this._subscribe(obj);
             }
             this._latestReturnedValue = this._latestValue;
             return this._latestValue;
         }
         if (obj !== this._obj) {
             this._dispose();
-            return this.transform(obj, onError);
+            return this.transform(obj);
         }
         if (this._latestValue === this._latestReturnedValue) {
             return this._latestReturnedValue;
@@ -67,11 +65,11 @@ var AsyncPipe = (function () {
         }
     };
     /** @internal */
-    AsyncPipe.prototype._subscribe = function (obj, onError) {
+    AsyncPipe.prototype._subscribe = function (obj) {
         var _this = this;
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); }, onError);
+        this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
     };
     /** @internal */
     AsyncPipe.prototype._selectStrategy = function (obj) {
