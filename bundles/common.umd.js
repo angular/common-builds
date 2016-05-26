@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-e5904f4
+ * @license AngularJS v2.0.0-cf1122c
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -445,7 +445,7 @@ var __extends = (this && this.__extends) || function (d, b) {
          * delivers events synchronously or asynchronously.
          */
         function EventEmitter$1(isAsync) {
-            if (isAsync === void 0) { isAsync = false; }
+            if (isAsync === void 0) { isAsync = true; }
             _super.call(this);
             this.__isAsync = isAsync;
         }
