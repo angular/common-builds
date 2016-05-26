@@ -60,7 +60,7 @@ var SelectControlValueAccessor = (function () {
     };
     SelectControlValueAccessor.decorators = [
         { type: core_1.Directive, args: [{
-                    selector: 'select[ngControl],select[ngFormControl],select[ngModel]',
+                    selector: 'select:not([multiple])[ngControl],select:not([multiple])[ngFormControl],select:not([multiple])[ngModel]',
                     host: { '(change)': 'onChange($event.target.value)', '(blur)': 'onTouched()' },
                     providers: [exports.SELECT_VALUE_ACCESSOR]
                 },] },

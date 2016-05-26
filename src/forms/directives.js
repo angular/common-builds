@@ -11,6 +11,7 @@ var number_value_accessor_1 = require('./directives/number_value_accessor');
 var radio_control_value_accessor_1 = require('./directives/radio_control_value_accessor');
 var ng_control_status_1 = require('./directives/ng_control_status');
 var select_control_value_accessor_1 = require('./directives/select_control_value_accessor');
+var select_multiple_control_value_accessor_1 = require('./directives/select_multiple_control_value_accessor');
 var validators_1 = require('./directives/validators');
 var ng_control_name_2 = require('./directives/ng_control_name');
 exports.NgControlName = ng_control_name_2.NgControlName;
@@ -38,6 +39,9 @@ exports.NgControlStatus = ng_control_status_2.NgControlStatus;
 var select_control_value_accessor_2 = require('./directives/select_control_value_accessor');
 exports.SelectControlValueAccessor = select_control_value_accessor_2.SelectControlValueAccessor;
 exports.NgSelectOption = select_control_value_accessor_2.NgSelectOption;
+var select_multiple_control_value_accessor_2 = require('./directives/select_multiple_control_value_accessor');
+exports.SelectMultipleControlValueAccessor = select_multiple_control_value_accessor_2.SelectMultipleControlValueAccessor;
+exports.NgSelectMultipleOption = select_multiple_control_value_accessor_2.NgSelectMultipleOption;
 var validators_2 = require('./directives/validators');
 exports.RequiredValidator = validators_2.RequiredValidator;
 exports.MinLengthValidator = validators_2.MinLengthValidator;
@@ -69,10 +73,12 @@ exports.FORM_DIRECTIVES = [
     ng_form_model_1.NgFormModel,
     ng_form_1.NgForm,
     select_control_value_accessor_1.NgSelectOption,
+    select_multiple_control_value_accessor_1.NgSelectMultipleOption,
     default_value_accessor_1.DefaultValueAccessor,
     number_value_accessor_1.NumberValueAccessor,
     checkbox_value_accessor_1.CheckboxControlValueAccessor,
     select_control_value_accessor_1.SelectControlValueAccessor,
+    select_multiple_control_value_accessor_1.SelectMultipleControlValueAccessor,
     radio_control_value_accessor_1.RadioControlValueAccessor,
     ng_control_status_1.NgControlStatus,
     validators_1.RequiredValidator,

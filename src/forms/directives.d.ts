@@ -11,6 +11,7 @@ export { RadioControlValueAccessor, RadioButtonState } from './directives/radio_
 export { NumberValueAccessor } from './directives/number_value_accessor';
 export { NgControlStatus } from './directives/ng_control_status';
 export { SelectControlValueAccessor, NgSelectOption } from './directives/select_control_value_accessor';
+export { SelectMultipleControlValueAccessor, NgSelectMultipleOption } from './directives/select_multiple_control_value_accessor';
 export { RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator } from './directives/validators';
 export { NgControl } from './directives/ng_control';
 export { ControlValueAccessor } from './directives/control_value_accessor';
