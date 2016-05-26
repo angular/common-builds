@@ -23,6 +23,7 @@ var NgFormModel = (function (_super) {
         _super.call(this);
         this._validators = _validators;
         this._asyncValidators = _asyncValidators;
+        this._submitted = false;
         this.form = null;
         this.directives = [];
         this.ngSubmit = new async_1.EventEmitter();
@@ -38,6 +39,11 @@ var NgFormModel = (function (_super) {
         }
         this._updateDomValue();
     };
+    Object.defineProperty(NgFormModel.prototype, "submitted", {
+        get: function () { return this._submitted; },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(NgFormModel.prototype, "formDirective", {
         get: function () { return this; },
         enumerable: true,
@@ -75,6 +81,7 @@ var NgFormModel = (function (_super) {
         ctrl.updateValue(value);
     };
     NgFormModel.prototype.onSubmit = function () {
+        this._submitted = true;
         async_1.ObservableWrapper.callEmit(this.ngSubmit, null);
         return false;
     };

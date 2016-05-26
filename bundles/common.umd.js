@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v2.0.0-89f6108
+ * @license AngularJS v2.0.0-420e83a
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3417,6 +3417,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             _super.call(this);
             this._validators = _validators;
             this._asyncValidators = _asyncValidators;
+            this._submitted = false;
             this.form = null;
             this.directives = [];
             this.ngSubmit = new EventEmitter$1();
@@ -3432,6 +3433,11 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             this._updateDomValue();
         };
+        Object.defineProperty(NgFormModel.prototype, "submitted", {
+            get: function () { return this._submitted; },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(NgFormModel.prototype, "formDirective", {
             get: function () { return this; },
             enumerable: true,
@@ -3469,6 +3475,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             ctrl.updateValue(value);
         };
         NgFormModel.prototype.onSubmit = function () {
+            this._submitted = true;
             ObservableWrapper.callEmit(this.ngSubmit, null);
             return false;
         };
@@ -3507,9 +3514,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         __extends(NgForm, _super);
         function NgForm(validators, asyncValidators) {
             _super.call(this);
+            this._submitted = false;
             this.ngSubmit = new EventEmitter$1();
             this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
         }
+        Object.defineProperty(NgForm.prototype, "submitted", {
+            get: function () { return this._submitted; },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(NgForm.prototype, "formDirective", {
             get: function () { return this; },
             enumerable: true,
@@ -3582,6 +3595,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             });
         };
         NgForm.prototype.onSubmit = function () {
+            this._submitted = true;
             ObservableWrapper.callEmit(this.ngSubmit, null);
             return false;
         };

@@ -11,9 +11,11 @@ export const formDirectiveProvider =
 export class NgForm extends ControlContainer {
     constructor(validators, asyncValidators) {
         super();
+        this._submitted = false;
         this.ngSubmit = new EventEmitter();
         this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
     }
+    get submitted() { return this._submitted; }
     get formDirective() { return this; }
     get control() { return this.form; }
     get path() { return []; }
@@ -65,6 +67,7 @@ export class NgForm extends ControlContainer {
         });
     }
     onSubmit() {
+        this._submitted = true;
         ObservableWrapper.callEmit(this.ngSubmit, null);
         return false;
     }
