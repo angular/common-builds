@@ -43,7 +43,7 @@ import { DoCheck, OnDestroy, ElementRef, IterableDiffers, KeyValueDiffers, Rende
  *       color: gray;
  *       border: medium solid gray;
  *     }
- *   `]
+ *   `],
  *   directives: [NgClass]
  * })
  * class ToggleButton {
