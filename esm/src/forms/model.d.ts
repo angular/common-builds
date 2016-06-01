@@ -15,7 +15,7 @@ export declare const INVALID: string;
 export declare const PENDING: string;
 export declare function isControl(control: Object): boolean;
 /**
- *
+ * @experimental
  */
 export declare abstract class AbstractControl {
     validator: ValidatorFn;
@@ -109,6 +109,8 @@ export declare abstract class AbstractControl {
  * validation function.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export declare class Control extends AbstractControl {
     constructor(value?: any, validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn);
@@ -147,6 +149,8 @@ export declare class Control extends AbstractControl {
  * controls, but is of variable length.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export declare class ControlGroup extends AbstractControl {
     controls: {
@@ -200,6 +204,8 @@ export declare class ControlGroup extends AbstractControl {
  * as broken change detection.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export declare class ControlArray extends AbstractControl {
     controls: AbstractControl[];

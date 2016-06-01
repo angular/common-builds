@@ -61,6 +61,8 @@ export declare class SwitchView {
  *
  * bootstrap(App).catch(err => console.error(err));
  * ```
+ *
+ * @experimental
  */
 export declare class NgSwitch {
     private _switchValue;
@@ -76,6 +78,8 @@ export declare class NgSwitch {
  * If multiple match expression match the switch expression value, all of them are displayed.
  *
  * See {@link NgSwitch} for more details and example.
+ *
+ * @experimental
  */
 export declare class NgSwitchWhen {
     private _switch;
@@ -87,6 +91,8 @@ export declare class NgSwitchWhen {
  * value.
  *
  * See {@link NgSwitch} for more details and example.
+ *
+ * @experimental
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, sswitch: NgSwitch);

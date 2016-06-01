@@ -1,4 +1,4 @@
-import { Injectable, Pipe } from '@angular/core';
+import { Pipe } from '@angular/core';
 import { isString, isBlank } from '../../src/facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class UpperCasePipe {
@@ -13,6 +13,5 @@ export class UpperCasePipe {
 }
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
-    { type: Injectable },
 ];
 //# sourceMappingURL=uppercase_pipe.js.map

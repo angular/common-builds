@@ -15,7 +15,6 @@ var UpperCasePipe = (function () {
     };
     UpperCasePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'uppercase' },] },
-        { type: core_1.Injectable },
     ];
     return UpperCasePipe;
 }());

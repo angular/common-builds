@@ -45,6 +45,8 @@ var ng_plural_1 = require('./ng_plural');
  *   ...
  * }
  * ```
+ *
+ * @stable
  */
 exports.CORE_DIRECTIVES = [
     ng_class_1.NgClass,

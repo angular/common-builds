@@ -39,6 +39,8 @@ import { UrlChangeListener, PlatformLocation } from './platform_location';
  *   provide(LocationStrategy, {useClass: HashLocationStrategy})
  * ]);
  * ```
+ *
+ * @stable
  */
 export declare class HashLocationStrategy extends LocationStrategy {
     private _platformLocation;

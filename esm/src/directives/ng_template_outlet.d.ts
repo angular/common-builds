@@ -4,6 +4,8 @@ import { ViewContainerRef, TemplateRef } from '@angular/core';
  *
  * ### Syntax
  * - `<template [ngTemplateOutlet]="templateRefExpression"></template>`
+ *
+ * @experimental
  */
 export declare class NgTemplateOutlet {
     private _viewContainerRef;

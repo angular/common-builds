@@ -69,18 +69,6 @@ MaxLengthValidator.decorators = [
 MaxLengthValidator.ctorParameters = [
     { type: undefined, decorators: [{ type: Attribute, args: ["maxlength",] },] },
 ];
-/**
- * A Directive that adds the `pattern` validator to any controls marked with the
- * `pattern` attribute, via the {@link NG_VALIDATORS} binding. Uses attribute value
- * as the regex to validate Control value against.  Follows pattern attribute
- * semantics; i.e. regex must match entire Control value.
- *
- * ### Example
- *
- * ```
- * <input [ngControl]="fullName" pattern="[a-zA-Z ]*">
- * ```
- */
 export const PATTERN_VALIDATOR = {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => PatternValidator),

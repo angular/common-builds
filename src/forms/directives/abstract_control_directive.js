@@ -5,6 +5,8 @@ var exceptions_1 = require('../../../src/facade/exceptions');
  * Base class for control directives.
  *
  * Only used internally in the forms module.
+ *
+ * @experimental
  */
 var AbstractControlDirective = (function () {
     function AbstractControlDirective() {

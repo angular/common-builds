@@ -11,6 +11,8 @@ var abstract_control_directive_1 = require('./abstract_control_directive');
  * It binds a {@link Control} object to a DOM element.
  *
  * Used internally by Angular forms.
+ *
+ * @experimental
  */
 var NgControl = (function (_super) {
     __extends(NgControl, _super);

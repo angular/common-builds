@@ -1,4 +1,7 @@
 import { ViewContainerRef, TemplateRef, QueryList, AfterContentInit } from '@angular/core';
+/**
+ * @experimental
+ */
 export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any): string;
 }
@@ -56,11 +59,15 @@ export declare abstract class NgLocalization {
  * }
  *
  * ```
+ * @experimental
  */
 export declare class NgPluralCase {
     value: string;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef);
 }
+/**
+ * @experimental
+ */
 export declare class NgPlural implements AfterContentInit {
     private _localization;
     private _switchValue;

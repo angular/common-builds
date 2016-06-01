@@ -4,6 +4,8 @@ import { unimplemented } from '../../../src/facade/exceptions';
  * Base class for control directives.
  *
  * Only used internally in the forms module.
+ *
+ * @experimental
  */
 export class AbstractControlDirective {
     get control() { return unimplemented(); }

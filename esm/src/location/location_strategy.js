@@ -14,6 +14,8 @@ import { OpaqueToken } from '@angular/core';
  * `http://example.com/foo` as an equivalent URL.
  *
  * See these two classes for more.
+ *
+ * @stable
  */
 export class LocationStrategy {
 }
@@ -45,6 +47,7 @@ export class LocationStrategy {
  *   provide(APP_BASE_HREF, {useValue: '/my/app'})
  * ]);
  * ```
+ * @stable
  */
 export const APP_BASE_HREF = new OpaqueToken('appBaseHref');
 //# sourceMappingURL=location_strategy.js.map

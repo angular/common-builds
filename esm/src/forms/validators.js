@@ -11,6 +11,7 @@ import { StringMapWrapper } from '../../src/facade/collection';
  * ### Example
  *
  * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
+ * @experimental
  */
 export const NG_VALIDATORS = new OpaqueToken("NgValidators");
 /**
@@ -20,6 +21,8 @@ export const NG_VALIDATORS = new OpaqueToken("NgValidators");
  * Provide this using `multi: true` to add validators.
  *
  * See {@link NG_VALIDATORS} for more details.
+ *
+ * @experimental
  */
 export const NG_ASYNC_VALIDATORS = 
 /*@ts2dart_const*/ new OpaqueToken("NgAsyncValidators");
@@ -34,6 +37,8 @@ export const NG_ASYNC_VALIDATORS =
  * ```typescript
  * var loginControl = new Control("", Validators.required)
  * ```
+ *
+ * @experimental
  */
 export class Validators {
     /**

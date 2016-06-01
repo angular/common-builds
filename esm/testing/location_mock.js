@@ -11,8 +11,8 @@ export class SpyLocation {
         this._subject = new EventEmitter();
         /** @internal */
         this._baseHref = '';
-        // TODO: remove these once Location is an interface, and can be implemented cleanly
-        this.platformStrategy = null;
+        /** @internal */
+        this._platformStrategy = null;
     }
     setInitialPath(url) { this._history[this._historyIndex].path = url; }
     setBaseHref(url) { this._baseHref = url; }

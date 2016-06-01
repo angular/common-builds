@@ -20,6 +20,8 @@ var i18n_select_pipe_1 = require('./i18n_select_pipe');
  *
  * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
  * property of the `@Component` decorator.
+ *
+ * @experimental Contains i18n pipes which are experimental
  */
 exports.COMMON_PIPES = [
     async_pipe_1.AsyncPipe,

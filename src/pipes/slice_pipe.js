@@ -21,7 +21,6 @@ var SlicePipe = (function () {
     SlicePipe.prototype.supports = function (obj) { return lang_1.isString(obj) || lang_1.isArray(obj); };
     SlicePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'slice', pure: false },] },
-        { type: core_1.Injectable },
     ];
     return SlicePipe;
 }());

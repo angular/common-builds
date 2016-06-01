@@ -38,5 +38,7 @@ import { Type } from '../../src/facade/lang';
  *   ...
  * }
  * ```
+ *
+ * @stable
  */
 export declare const CORE_DIRECTIVES: Type[];

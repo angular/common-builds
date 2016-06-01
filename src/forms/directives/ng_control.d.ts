@@ -6,6 +6,8 @@ import { AsyncValidatorFn, ValidatorFn } from './validators';
  * It binds a {@link Control} object to a DOM element.
  *
  * Used internally by Angular forms.
+ *
+ * @experimental
  */
 export declare abstract class NgControl extends AbstractControlDirective {
     name: string;

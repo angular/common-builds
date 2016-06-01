@@ -59,6 +59,8 @@ export declare const controlNameBinding: any;
  *  }
  * }
  *  ```
+ *
+ *  @experimental
  */
 export declare class NgControlName extends NgControl implements OnChanges, OnDestroy {
     private _parent;

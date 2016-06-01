@@ -41,6 +41,8 @@ RadioControlRegistry.decorators = [
 ];
 /**
  * The value provided by the forms API for radio buttons.
+ *
+ * @experimental
  */
 export class RadioButtonState {
     constructor(checked, value) {

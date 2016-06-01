@@ -14,5 +14,7 @@ import { I18nSelectPipe } from './i18n_select_pipe';
  *
  * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
  * property of the `@Component` decorator.
+ *
+ * @experimental Contains i18n pipes which are experimental
  */
 export declare const COMMON_PIPES: (typeof AsyncPipe | typeof SlicePipe | typeof ReplacePipe | typeof I18nPluralPipe | typeof I18nSelectPipe)[];

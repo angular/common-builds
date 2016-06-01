@@ -12,8 +12,8 @@ var SpyLocation = (function () {
         this._subject = new core_1.EventEmitter();
         /** @internal */
         this._baseHref = '';
-        // TODO: remove these once Location is an interface, and can be implemented cleanly
-        this.platformStrategy = null;
+        /** @internal */
+        this._platformStrategy = null;
     }
     SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
     SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };

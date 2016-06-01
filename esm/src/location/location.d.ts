@@ -38,9 +38,10 @@ import { LocationStrategy } from './location_strategy';
  *
  * bootstrap(AppCmp, [ROUTER_PROVIDERS]);
  * ```
+ *
+ * @stable
  */
 export declare class Location {
-    platformStrategy: LocationStrategy;
     constructor(platformStrategy: LocationStrategy);
     /**
      * Returns the normalized URL path.

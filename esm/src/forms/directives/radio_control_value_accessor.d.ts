@@ -14,6 +14,8 @@ export declare class RadioControlRegistry {
 }
 /**
  * The value provided by the forms API for radio buttons.
+ *
+ * @experimental
  */
 export declare class RadioButtonState {
     checked: boolean;

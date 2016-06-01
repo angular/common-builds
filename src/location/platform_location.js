@@ -22,6 +22,8 @@
  * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class
  * they are all platform independent.
+ *
+ * @stable
  */
 var PlatformLocation = (function () {
     function PlatformLocation() {

@@ -44,6 +44,8 @@ import { NgPlural, NgPluralCase } from './ng_plural';
  *   ...
  * }
  * ```
+ *
+ * @stable
  */
 export const CORE_DIRECTIVES = [
     NgClass,

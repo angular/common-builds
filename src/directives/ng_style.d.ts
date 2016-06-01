@@ -49,6 +49,8 @@ import { DoCheck, KeyValueDiffers, ElementRef, Renderer } from '@angular/core';
  *
  * In this example the `font-style`, `font-size` and `font-weight` styles will be updated
  * based on the `style` property's value changes.
+ *
+ * @stable
  */
 export declare class NgStyle implements DoCheck {
     private _differs;

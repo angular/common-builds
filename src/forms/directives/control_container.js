@@ -9,6 +9,8 @@ var abstract_control_directive_1 = require('./abstract_control_directive');
  * A directive that contains multiple {@link NgControl}s.
  *
  * Only used by the forms module.
+ *
+ * @experimental
  */
 var ControlContainer = (function (_super) {
     __extends(ControlContainer, _super);

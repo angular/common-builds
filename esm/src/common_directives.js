@@ -42,6 +42,8 @@ import { CORE_DIRECTIVES } from './directives';
  *   ...
  * }
  * ```
+ *
+ * @experimental Contains forms which are experimental.
  */
 export const COMMON_DIRECTIVES = [CORE_DIRECTIVES, FORM_DIRECTIVES];
 //# sourceMappingURL=common_directives.js.map

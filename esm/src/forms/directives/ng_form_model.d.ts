@@ -77,6 +77,8 @@ export declare const formDirectiveProvider: any;
  *  }
  * }
  *  ```
+ *
+ *  @experimental
  */
 export declare class NgFormModel extends ControlContainer implements Form, OnChanges {
     private _validators;

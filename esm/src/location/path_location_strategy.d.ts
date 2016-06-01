@@ -47,6 +47,8 @@ import { LocationStrategy } from './location_strategy';
  *   provide(APP_BASE_HREF, {useValue: '/my/app'})
  * ]);
  * ```
+ *
+ * @stable
  */
 export declare class PathLocationStrategy extends LocationStrategy {
     private _platformLocation;

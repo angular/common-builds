@@ -42,6 +42,7 @@ export { NgControl } from './directives/ng_control';
  * })
  * class MyApp {}
  * ```
+ * @experimental
  */
 export const FORM_DIRECTIVES = [
     NgControlName,

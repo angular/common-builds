@@ -69,12 +69,8 @@ var radio_control_value_accessor_1 = require('./forms/directives/radio_control_v
  * ```typescript
  * bootstrap(MyApp, [FORM_PROVIDERS]);
  * ```
+ *
+ * @experimental
  */
 exports.FORM_PROVIDERS = [form_builder_2.FormBuilder, radio_control_value_accessor_1.RadioControlRegistry];
-/**
- * See {@link FORM_PROVIDERS} instead.
- *
- * @deprecated
- */
-exports.FORM_BINDINGS = exports.FORM_PROVIDERS;
 //# sourceMappingURL=forms.js.map

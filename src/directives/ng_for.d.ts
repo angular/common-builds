@@ -59,6 +59,8 @@ export declare class NgForRow {
  *
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
+ *
+ * @stable
  */
 export declare class NgFor implements DoCheck {
     private _viewContainer;

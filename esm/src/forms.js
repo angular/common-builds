@@ -39,12 +39,8 @@ import { RadioControlRegistry } from './forms/directives/radio_control_value_acc
  * ```typescript
  * bootstrap(MyApp, [FORM_PROVIDERS]);
  * ```
+ *
+ * @experimental
  */
 export const FORM_PROVIDERS = [FormBuilder, RadioControlRegistry];
-/**
- * See {@link FORM_PROVIDERS} instead.
- *
- * @deprecated
- */
-export const FORM_BINDINGS = FORM_PROVIDERS;
 //# sourceMappingURL=forms.js.map

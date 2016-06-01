@@ -39,11 +39,7 @@ import { Type } from '@angular/core';
  * ```typescript
  * bootstrap(MyApp, [FORM_PROVIDERS]);
  * ```
+ *
+ * @experimental
  */
 export declare const FORM_PROVIDERS: Type[];
-/**
- * See {@link FORM_PROVIDERS} instead.
- *
- * @deprecated
- */
-export declare const FORM_BINDINGS: Type[];

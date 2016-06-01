@@ -31,6 +31,8 @@ export declare const REQUIRED_VALIDATOR: any;
  * ```
  * <input ngControl="fullName" required>
  * ```
+ *
+ * @experimental
  */
 export declare class RequiredValidator {
 }
@@ -53,6 +55,8 @@ export declare const MIN_LENGTH_VALIDATOR: any;
 /**
  * A directive which installs the {@link MinLengthValidator} for any `ngControl`,
  * `ngFormControl`, or control with `ngModel` that also has a `minlength` attribute.
+ *
+ * @experimental
  */
 export declare class MinLengthValidator implements Validator {
     private _validator;
@@ -72,6 +76,8 @@ export declare const MAX_LENGTH_VALIDATOR: any;
 /**
  * A directive which installs the {@link MaxLengthValidator} for any `ngControl, `ngFormControl`,
  * or control with `ngModel` that also has a `maxlength` attribute.
+ *
+ * @experimental
  */
 export declare class MaxLengthValidator implements Validator {
     private _validator;
@@ -80,6 +86,7 @@ export declare class MaxLengthValidator implements Validator {
         [key: string]: any;
     };
 }
+export declare const PATTERN_VALIDATOR: any;
 /**
  * A Directive that adds the `pattern` validator to any controls marked with the
  * `pattern` attribute, via the {@link NG_VALIDATORS} binding. Uses attribute value
@@ -91,8 +98,8 @@ export declare class MaxLengthValidator implements Validator {
  * ```
  * <input [ngControl]="fullName" pattern="[a-zA-Z ]*">
  * ```
+ * @experimental
  */
-export declare const PATTERN_VALIDATOR: any;
 export declare class PatternValidator implements Validator {
     private _validator;
     constructor(pattern: string);

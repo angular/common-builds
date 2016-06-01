@@ -14,7 +14,6 @@ var I18nSelectPipe = (function () {
     };
     I18nSelectPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-        { type: core_1.Injectable },
     ];
     return I18nSelectPipe;
 }());

@@ -24,6 +24,8 @@ import { Observable, EventEmitter } from '../../src/facade/async';
  * to the view. Every 500ms, the `time` Observable updates the view with the current time.
  *
  * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipeObservable'}
+ *
+ * @stable
  */
 export declare class AsyncPipe implements OnDestroy {
     private _strategy;

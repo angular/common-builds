@@ -64,6 +64,7 @@ exports.NgControl = ng_control_1.NgControl;
  * })
  * class MyApp {}
  * ```
+ * @experimental
  */
 exports.FORM_DIRECTIVES = [
     ng_control_name_1.NgControlName,

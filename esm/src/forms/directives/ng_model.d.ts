@@ -25,6 +25,8 @@ export declare const formControlBinding: any;
  *  searchQuery: string;
  * }
  *  ```
+ *
+ *  @experimental
  */
 export declare class NgModel extends NgControl implements OnChanges {
     private _validators;

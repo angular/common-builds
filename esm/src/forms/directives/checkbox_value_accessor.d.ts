@@ -8,6 +8,8 @@ export declare const CHECKBOX_VALUE_ACCESSOR: any;
  *  ```
  *  <input type="checkbox" ngControl="rememberLogin">
  *  ```
+ *
+ *  @experimental
  */
 export declare class CheckboxControlValueAccessor implements ControlValueAccessor {
     private _renderer;

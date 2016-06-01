@@ -51,6 +51,8 @@ import { PipeTransform } from '@angular/core';
  * ## String Examples
  *
  * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
+ *
+ * @stable
  */
 export declare class SlicePipe implements PipeTransform {
     transform(value: any, start: number, end?: number): any;

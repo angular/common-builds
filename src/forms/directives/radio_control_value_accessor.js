@@ -45,6 +45,8 @@ var RadioControlRegistry = (function () {
 exports.RadioControlRegistry = RadioControlRegistry;
 /**
  * The value provided by the forms API for radio buttons.
+ *
+ * @experimental
  */
 var RadioButtonState = (function () {
     function RadioButtonState(checked, value) {

@@ -57,6 +57,8 @@ import { DoCheck, OnDestroy, ElementRef, IterableDiffers, KeyValueDiffers, Rende
  *   }
  * }
  * ```
+ *
+ * @stable
  */
 export declare class NgClass implements DoCheck, OnDestroy {
     private _iterableDiffers;

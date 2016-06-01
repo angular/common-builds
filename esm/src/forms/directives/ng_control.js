@@ -5,6 +5,8 @@ import { AbstractControlDirective } from './abstract_control_directive';
  * It binds a {@link Control} object to a DOM element.
  *
  * Used internally by Angular forms.
+ *
+ * @experimental
  */
 export class NgControl extends AbstractControlDirective {
     constructor(...args) {

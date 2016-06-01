@@ -1169,7 +1169,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     JsonPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-        { type: _angular_core.Injectable },
     ];
     var SlicePipe = (function () {
         function SlicePipe() {
@@ -1191,7 +1190,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     SlicePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-        { type: _angular_core.Injectable },
     ];
     var LowerCasePipe = (function () {
         function LowerCasePipe() {
@@ -1208,97 +1206,81 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     LowerCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-        { type: _angular_core.Injectable },
     ];
     var defaultLocale$1 = 'en-US';
     var _re = RegExpWrapper.create('^(\\d+)?\\.((\\d+)(\\-(\\d+))?)?$');
-    var NumberPipe = (function () {
-        function NumberPipe() {
+    /**
+     * Internal function to format numbers used by Decimal, Percent and Date pipes.
+     */
+    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
+        if (currency === void 0) { currency = null; }
+        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+        if (isBlank(value))
+            return null;
+        if (!isNumber(value)) {
+            throw new InvalidPipeArgumentException(pipe, value);
         }
-        /** @internal */
-        NumberPipe._format = function (value, style, digits, currency, currencyAsSymbol) {
-            if (currency === void 0) { currency = null; }
-            if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-            if (isBlank(value))
-                return null;
-            if (!isNumber(value)) {
-                throw new InvalidPipeArgumentException(NumberPipe, value);
+        var minInt = 1, minFraction = 0, maxFraction = 3;
+        if (isPresent(digits)) {
+            var parts = RegExpWrapper.firstMatch(_re, digits);
+            if (isBlank(parts)) {
+                throw new BaseException(digits + " is not a valid digit info for number pipes");
             }
-            var minInt = 1, minFraction = 0, maxFraction = 3;
-            if (isPresent(digits)) {
-                var parts = RegExpWrapper.firstMatch(_re, digits);
-                if (isBlank(parts)) {
-                    throw new BaseException(digits + " is not a valid digit info for number pipes");
-                }
-                if (isPresent(parts[1])) {
-                    minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
-                }
-                if (isPresent(parts[3])) {
-                    minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
-                }
-                if (isPresent(parts[5])) {
-                    maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
-                }
+            if (isPresent(parts[1])) {
+                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
             }
-            return NumberFormatter.format(value, defaultLocale$1, style, {
-                minimumIntegerDigits: minInt,
-                minimumFractionDigits: minFraction,
-                maximumFractionDigits: maxFraction,
-                currency: currency,
-                currencyAsSymbol: currencyAsSymbol
-            });
-        };
-        return NumberPipe;
-    }());
-    NumberPipe.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    var DecimalPipe = (function (_super) {
-        __extends(DecimalPipe, _super);
+            if (isPresent(parts[3])) {
+                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
+            }
+            if (isPresent(parts[5])) {
+                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
+            }
+        }
+        return NumberFormatter.format(value, defaultLocale$1, style, {
+            minimumIntegerDigits: minInt,
+            minimumFractionDigits: minFraction,
+            maximumFractionDigits: maxFraction,
+            currency: currency,
+            currencyAsSymbol: currencyAsSymbol
+        });
+    }
+    var DecimalPipe = (function () {
         function DecimalPipe() {
-            _super.apply(this, arguments);
         }
         DecimalPipe.prototype.transform = function (value, digits) {
             if (digits === void 0) { digits = null; }
-            return NumberPipe._format(value, NumberFormatStyle.Decimal, digits);
+            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
         };
         return DecimalPipe;
-    }(NumberPipe));
+    }());
     DecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-        { type: _angular_core.Injectable },
     ];
-    var PercentPipe = (function (_super) {
-        __extends(PercentPipe, _super);
+    var PercentPipe = (function () {
         function PercentPipe() {
-            _super.apply(this, arguments);
         }
         PercentPipe.prototype.transform = function (value, digits) {
             if (digits === void 0) { digits = null; }
-            return NumberPipe._format(value, NumberFormatStyle.Percent, digits);
+            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
         };
         return PercentPipe;
-    }(NumberPipe));
+    }());
     PercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-        { type: _angular_core.Injectable },
     ];
-    var CurrencyPipe = (function (_super) {
-        __extends(CurrencyPipe, _super);
+    var CurrencyPipe = (function () {
         function CurrencyPipe() {
-            _super.apply(this, arguments);
         }
         CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
             if (currencyCode === void 0) { currencyCode = 'USD'; }
             if (symbolDisplay === void 0) { symbolDisplay = false; }
             if (digits === void 0) { digits = null; }
-            return NumberPipe._format(value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
         };
         return CurrencyPipe;
-    }(NumberPipe));
+    }());
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-        { type: _angular_core.Injectable },
     ];
     var UpperCasePipe = (function () {
         function UpperCasePipe() {
@@ -1315,7 +1297,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     UpperCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-        { type: _angular_core.Injectable },
     ];
     var ReplacePipe = (function () {
         function ReplacePipe() {
@@ -1377,7 +1358,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     I18nPluralPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-        { type: _angular_core.Injectable },
     ];
     var I18nSelectPipe = (function () {
         function I18nSelectPipe() {
@@ -1392,7 +1372,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     I18nSelectPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-        { type: _angular_core.Injectable },
     ];
     /**
      * A collection of Angular core pipes that are likely to be used in each and every
@@ -1400,6 +1379,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
      * property of the `@Component` decorator.
+     *
+     * @experimental Contains i18n pipes which are experimental
      */
     var COMMON_PIPES = [
         AsyncPipe,
@@ -1919,6 +1900,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
     ];
     var _CATEGORY_DEFAULT = 'other';
+    /**
+     * @experimental
+     */
     var NgLocalization = (function () {
         function NgLocalization() {
         }
@@ -2045,6 +2029,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   ...
      * }
      * ```
+     *
+     * @stable
      */
     var CORE_DIRECTIVES = [
         NgClass,
@@ -2097,7 +2083,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return PromiseWrapper.isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
     }
     /**
-     *
+     * @experimental
      */
     var AbstractControl = (function () {
         function AbstractControl(validator, asyncValidator) {
@@ -2316,6 +2302,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * validation function.
      *
      * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+     *
+     * @experimental
      */
     var Control = (function (_super) {
         __extends(Control, _super);
@@ -2375,6 +2363,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * controls, but is of variable length.
      *
      * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+     *
+     * @experimental
      */
     var ControlGroup = (function (_super) {
         __extends(ControlGroup, _super);
@@ -2483,6 +2473,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * as broken change detection.
      *
      * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+     *
+     * @experimental
      */
     var ControlArray = (function (_super) {
         __extends(ControlArray, _super);
@@ -2547,6 +2539,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Base class for control directives.
      *
      * Only used internally in the forms module.
+     *
+     * @experimental
      */
     var AbstractControlDirective = (function () {
         function AbstractControlDirective() {
@@ -2604,6 +2598,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * A directive that contains multiple {@link NgControl}s.
      *
      * Only used by the forms module.
+     *
+     * @experimental
      */
     var ControlContainer = (function (_super) {
         __extends(ControlContainer, _super);
@@ -2633,6 +2629,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * It binds a {@link Control} object to a DOM element.
      *
      * Used internally by Angular forms.
+     *
+     * @experimental
      */
     var NgControl = (function (_super) {
         __extends(NgControl, _super);
@@ -2661,6 +2659,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Used to provide a {@link ControlValueAccessor} for form controls.
      *
      * See {@link DefaultValueAccessor} for how to implement one.
+     * @experimental
      */
     var NG_VALUE_ACCESSOR = 
     /*@ts2dart_const*/ new _angular_core.OpaqueToken("NgValueAccessor");
@@ -2672,6 +2671,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ### Example
      *
      * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
+     * @experimental
      */
     var NG_VALIDATORS = new _angular_core.OpaqueToken("NgValidators");
     /**
@@ -2681,6 +2681,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Provide this using `multi: true` to add validators.
      *
      * See {@link NG_VALIDATORS} for more details.
+     *
+     * @experimental
      */
     var NG_ASYNC_VALIDATORS = 
     /*@ts2dart_const*/ new _angular_core.OpaqueToken("NgAsyncValidators");
@@ -2695,6 +2697,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ```typescript
      * var loginControl = new Control("", Validators.required)
      * ```
+     *
+     * @experimental
      */
     var Validators = (function () {
         function Validators() {
@@ -3053,6 +3057,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     ];
     /**
      * The value provided by the forms API for radio buttons.
+     *
+     * @experimental
      */
     var RadioButtonState = (function () {
         function RadioButtonState(checked, value) {
@@ -3990,18 +3996,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     MaxLengthValidator.ctorParameters = [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ["maxlength",] },] },
     ];
-    /**
-     * A Directive that adds the `pattern` validator to any controls marked with the
-     * `pattern` attribute, via the {@link NG_VALIDATORS} binding. Uses attribute value
-     * as the regex to validate Control value against.  Follows pattern attribute
-     * semantics; i.e. regex must match entire Control value.
-     *
-     * ### Example
-     *
-     * ```
-     * <input [ngControl]="fullName" pattern="[a-zA-Z ]*">
-     * ```
-     */
     var PATTERN_VALIDATOR = {
         provide: NG_VALIDATORS,
         useExisting: _angular_core.forwardRef(function () { return PatternValidator; }),
@@ -4038,6 +4032,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * })
      * class MyApp {}
      * ```
+     * @experimental
      */
     var FORM_DIRECTIVES = [
         NgControlName,
@@ -4135,14 +4130,10 @@ var __extends = (this && this.__extends) || function (d, b) {
      * ```typescript
      * bootstrap(MyApp, [FORM_PROVIDERS]);
      * ```
+     *
+     * @experimental
      */
     var FORM_PROVIDERS = [FormBuilder, RadioControlRegistry];
-    /**
-     * See {@link FORM_PROVIDERS} instead.
-     *
-     * @deprecated
-     */
-    var FORM_BINDINGS = FORM_PROVIDERS;
     /**
      * A collection of Angular core directives that are likely to be used in each and every Angular
      * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
@@ -4185,6 +4176,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   ...
      * }
      * ```
+     *
+     * @experimental Contains forms which are experimental.
      */
     var COMMON_DIRECTIVES = [CORE_DIRECTIVES, FORM_DIRECTIVES];
     /**
@@ -4210,6 +4203,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
      * class
      * they are all platform independent.
+     *
+     * @stable
      */
     var PlatformLocation = (function () {
         function PlatformLocation() {
@@ -4246,6 +4241,8 @@ var __extends = (this && this.__extends) || function (d, b) {
      * `http://example.com/foo` as an equivalent URL.
      *
      * See these two classes for more.
+     *
+     * @stable
      */
     var LocationStrategy = (function () {
         function LocationStrategy() {
@@ -4280,24 +4277,25 @@ var __extends = (this && this.__extends) || function (d, b) {
      *   provide(APP_BASE_HREF, {useValue: '/my/app'})
      * ]);
      * ```
+     * @stable
      */
     var APP_BASE_HREF = new _angular_core.OpaqueToken('appBaseHref');
     var Location = (function () {
         function Location(platformStrategy) {
             var _this = this;
-            this.platformStrategy = platformStrategy;
             /** @internal */
             this._subject = new _angular_core.EventEmitter();
-            var browserBaseHref = this.platformStrategy.getBaseHref();
+            this._platformStrategy = platformStrategy;
+            var browserBaseHref = this._platformStrategy.getBaseHref();
             this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-            this.platformStrategy.onPopState(function (ev) {
+            this._platformStrategy.onPopState(function (ev) {
                 ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(), 'pop': true, 'type': ev.type });
             });
         }
         /**
          * Returns the normalized URL path.
          */
-        Location.prototype.path = function () { return this.normalize(this.platformStrategy.path()); };
+        Location.prototype.path = function () { return this.normalize(this._platformStrategy.path()); };
         /**
          * Normalizes the given path and compares to the current normalized path.
          */
@@ -4322,7 +4320,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (url.length > 0 && !url.startsWith('/')) {
                 url = '/' + url;
             }
-            return this.platformStrategy.prepareExternalUrl(url);
+            return this._platformStrategy.prepareExternalUrl(url);
         };
         // TODO: rename this method to pushState
         /**
@@ -4331,7 +4329,7 @@ var __extends = (this && this.__extends) || function (d, b) {
          */
         Location.prototype.go = function (path, query) {
             if (query === void 0) { query = ''; }
-            this.platformStrategy.pushState(null, '', path, query);
+            this._platformStrategy.pushState(null, '', path, query);
         };
         /**
          * Changes the browsers URL to the normalized version of the given URL, and replaces
@@ -4339,16 +4337,16 @@ var __extends = (this && this.__extends) || function (d, b) {
          */
         Location.prototype.replaceState = function (path, query) {
             if (query === void 0) { query = ''; }
-            this.platformStrategy.replaceState(null, '', path, query);
+            this._platformStrategy.replaceState(null, '', path, query);
         };
         /**
          * Navigates forward in the platform's history.
          */
-        Location.prototype.forward = function () { this.platformStrategy.forward(); };
+        Location.prototype.forward = function () { this._platformStrategy.forward(); };
         /**
          * Navigates back in the platform's history.
          */
-        Location.prototype.back = function () { this.platformStrategy.back(); };
+        Location.prototype.back = function () { this._platformStrategy.back(); };
         /**
          * Subscribe to the platform's `popState` events.
          */
@@ -4523,7 +4521,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.JsonPipe = JsonPipe;
     exports.SlicePipe = SlicePipe;
     exports.LowerCasePipe = LowerCasePipe;
-    exports.NumberPipe = NumberPipe;
     exports.DecimalPipe = DecimalPipe;
     exports.PercentPipe = PercentPipe;
     exports.CurrencyPipe = CurrencyPipe;
@@ -4545,7 +4542,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgLocalization = NgLocalization;
     exports.CORE_DIRECTIVES = CORE_DIRECTIVES;
     exports.FORM_PROVIDERS = FORM_PROVIDERS;
-    exports.FORM_BINDINGS = FORM_BINDINGS;
     exports.AbstractControl = AbstractControl;
     exports.Control = Control;
     exports.ControlGroup = ControlGroup;

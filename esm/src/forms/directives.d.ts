@@ -30,5 +30,6 @@ export { ControlValueAccessor } from './directives/control_value_accessor';
  * })
  * class MyApp {}
  * ```
+ * @experimental
  */
 export declare const FORM_DIRECTIVES: Type[];

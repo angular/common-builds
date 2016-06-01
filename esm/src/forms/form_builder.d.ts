@@ -40,6 +40,8 @@ import { ValidatorFn, AsyncValidatorFn } from './directives/validators';
  *   }
  * }
  * ```
+ *
+ * @experimental
  */
 export declare class FormBuilder {
     /**

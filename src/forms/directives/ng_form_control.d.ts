@@ -51,6 +51,8 @@ export declare const formControlBinding: any;
  *  login:string;
  * }
  *  ```
+ *
+ *  @experimental
  */
 export declare class NgFormControl extends NgControl implements OnChanges {
     private _validators;

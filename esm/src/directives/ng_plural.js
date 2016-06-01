@@ -3,6 +3,9 @@ import { isPresent, NumberWrapper } from '../../src/facade/lang';
 import { Map } from '../../src/facade/collection';
 import { SwitchView } from './ng_switch';
 const _CATEGORY_DEFAULT = 'other';
+/**
+ * @experimental
+ */
 export class NgLocalization {
 }
 export class NgPluralCase {

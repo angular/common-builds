@@ -4,6 +4,8 @@ import { AbstractControlDirective } from './abstract_control_directive';
  * A directive that contains multiple {@link NgControl}s.
  *
  * Only used by the forms module.
+ *
+ * @experimental
  */
 export declare class ControlContainer extends AbstractControlDirective {
     name: string;

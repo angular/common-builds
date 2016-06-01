@@ -44,7 +44,7 @@ function toObservable(r) {
     return PromiseWrapper.isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
 }
 /**
- *
+ * @experimental
  */
 export class AbstractControl {
     constructor(validator, asyncValidator) {
@@ -207,6 +207,8 @@ export class AbstractControl {
  * validation function.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export class Control extends AbstractControl {
     constructor(value = null, validator = null, asyncValidator = null) {
@@ -260,6 +262,8 @@ export class Control extends AbstractControl {
  * controls, but is of variable length.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export class ControlGroup extends AbstractControl {
     constructor(controls, optionals = null, validator = null, asyncValidator = null) {
@@ -360,6 +364,8 @@ export class ControlGroup extends AbstractControl {
  * as broken change detection.
  *
  * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
+ *
+ * @experimental
  */
 export class ControlArray extends AbstractControl {
     constructor(controls, validator = null, asyncValidator = null) {

@@ -15,7 +15,6 @@ exports.SlicePipe = slice_pipe_1.SlicePipe;
 var lowercase_pipe_1 = require('./pipes/lowercase_pipe');
 exports.LowerCasePipe = lowercase_pipe_1.LowerCasePipe;
 var number_pipe_1 = require('./pipes/number_pipe');
-exports.NumberPipe = number_pipe_1.NumberPipe;
 exports.DecimalPipe = number_pipe_1.DecimalPipe;
 exports.PercentPipe = number_pipe_1.PercentPipe;
 exports.CurrencyPipe = number_pipe_1.CurrencyPipe;
