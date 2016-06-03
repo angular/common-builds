@@ -1,6 +1,6 @@
 import { Directive, ElementRef, IterableDiffers, KeyValueDiffers, Renderer } from '@angular/core';
-import { isPresent, isString, isArray } from '../../src/facade/lang';
-import { StringMapWrapper, isListLikeIterable } from '../../src/facade/collection';
+import { isPresent, isString, isArray } from '../facade/lang';
+import { StringMapWrapper, isListLikeIterable } from '../facade/collection';
 export class NgClass {
     constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;

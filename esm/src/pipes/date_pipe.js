@@ -1,7 +1,7 @@
 import { Pipe, Injectable } from '@angular/core';
-import { isDate, isNumber, isString, DateWrapper, isBlank } from '../../src/facade/lang';
-import { DateFormatter } from '../../src/facade/intl';
-import { StringMapWrapper } from '../../src/facade/collection';
+import { isDate, isNumber, isString, DateWrapper, isBlank } from '../facade/lang';
+import { DateFormatter } from '../facade/intl';
+import { StringMapWrapper } from '../facade/collection';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 // TODO: move to a global configurable location along with other i18n components.
 var defaultLocale = 'en-US';

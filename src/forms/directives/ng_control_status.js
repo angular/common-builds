@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var ng_control_1 = require('./ng_control');
-var lang_1 = require('../../../src/facade/lang');
+var lang_1 = require('../../facade/lang');
 var NgControlStatus = (function () {
     function NgControlStatus(cd) {
         this._cd = cd;

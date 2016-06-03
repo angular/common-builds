@@ -1,8 +1,8 @@
 import { Directive, forwardRef, Inject, Optional, Self } from '@angular/core';
-import { isBlank } from '../../../src/facade/lang';
-import { ListWrapper, StringMapWrapper } from '../../../src/facade/collection';
-import { BaseException } from '../../../src/facade/exceptions';
-import { ObservableWrapper, EventEmitter } from '../../../src/facade/async';
+import { isBlank } from '../../facade/lang';
+import { ListWrapper, StringMapWrapper } from '../../facade/collection';
+import { BaseException } from '../../facade/exceptions';
+import { ObservableWrapper, EventEmitter } from '../../facade/async';
 import { ControlContainer } from './control_container';
 import { setUpControl, setUpControlGroup, composeValidators, composeAsyncValidators } from './shared';
 import { Validators, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';

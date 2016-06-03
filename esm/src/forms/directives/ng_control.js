@@ -1,4 +1,4 @@
-import { unimplemented } from '../../../src/facade/exceptions';
+import { unimplemented } from '../../facade/exceptions';
 import { AbstractControlDirective } from './abstract_control_directive';
 /**
  * A base class that all control directive extend.

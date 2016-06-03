@@ -1,7 +1,7 @@
-import { isPresent, isBlank, normalizeBool } from '../../src/facade/lang';
-import { EventEmitter, ObservableWrapper } from '../../src/facade/async';
-import { PromiseWrapper } from '../../src/facade/promise';
-import { StringMapWrapper, ListWrapper } from '../../src/facade/collection';
+import { isPresent, isBlank, normalizeBool } from '../facade/lang';
+import { EventEmitter, ObservableWrapper } from '../facade/async';
+import { PromiseWrapper } from '../facade/promise';
+import { StringMapWrapper, ListWrapper } from '../facade/collection';
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */

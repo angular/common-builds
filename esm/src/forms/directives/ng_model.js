@@ -1,5 +1,5 @@
 import { Directive, forwardRef, Inject, Optional, Self } from '@angular/core';
-import { EventEmitter, ObservableWrapper } from '../../../src/facade/async';
+import { EventEmitter, ObservableWrapper } from '../../facade/async';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 import { NgControl } from './ng_control';
 import { Control } from '../model';

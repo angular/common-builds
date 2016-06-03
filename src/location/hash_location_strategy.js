@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var location_strategy_1 = require('./location_strategy');
 var location_1 = require('./location');
 var platform_location_1 = require('./platform_location');

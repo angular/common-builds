@@ -1,9 +1,9 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var promise_1 = require('../../src/facade/promise');
-var async_1 = require('../../src/facade/async');
-var collection_1 = require('../../src/facade/collection');
+var lang_1 = require('../facade/lang');
+var promise_1 = require('../facade/promise');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
 /**
  * Providers for validators to be used for {@link Control}s in a form.
  *

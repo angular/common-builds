@@ -1,6 +1,6 @@
-import { ListWrapper, StringMapWrapper } from '../../../src/facade/collection';
-import { isBlank, isPresent, looseIdentical, hasConstructor } from '../../../src/facade/lang';
-import { BaseException } from '../../../src/facade/exceptions';
+import { ListWrapper, StringMapWrapper } from '../../facade/collection';
+import { isBlank, isPresent, looseIdentical, hasConstructor } from '../../facade/lang';
+import { BaseException } from '../../facade/exceptions';
 import { Validators } from '../validators';
 import { DefaultValueAccessor } from './default_value_accessor';
 import { NumberValueAccessor } from './number_value_accessor';

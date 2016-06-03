@@ -1,5 +1,5 @@
 import { Directive, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isBlank } from '../../src/facade/lang';
+import { isBlank } from '../facade/lang';
 export class NgIf {
     constructor(_viewContainer, _templateRef) {
         this._viewContainer = _viewContainer;

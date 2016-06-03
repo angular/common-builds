@@ -20,7 +20,7 @@ import { LocationStrategy } from './location_strategy';
  * ### Example
  *
  * ```
- * import {Component, provide} from '@angular/core';
+ * import {Component} from '@angular/core';
  * import {bootstrap} from '@angular/platform-browser/browser';
  * import {
  *   Location,
@@ -44,7 +44,7 @@ import { LocationStrategy } from './location_strategy';
  *
  * bootstrap(AppCmp, [
  *   ROUTER_PROVIDERS, // includes binding to PathLocationStrategy
- *   provide(APP_BASE_HREF, {useValue: '/my/app'})
+ *   {provide: APP_BASE_HREF, useValue: '/my/app'}
  * ]);
  * ```
  *

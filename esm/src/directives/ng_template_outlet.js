@@ -1,5 +1,5 @@
 import { Directive, Input, ViewContainerRef } from '@angular/core';
-import { isPresent } from '../../src/facade/lang';
+import { isPresent } from '../facade/lang';
 export class NgTemplateOutlet {
     constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;

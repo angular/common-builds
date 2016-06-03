@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
 var location_strategy_1 = require('./location_strategy');
 var Location = (function () {
     function Location(platformStrategy) {

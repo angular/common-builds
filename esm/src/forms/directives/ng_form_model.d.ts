@@ -1,5 +1,5 @@
 import { SimpleChanges, OnChanges } from '@angular/core';
-import { EventEmitter } from '../../../src/facade/async';
+import { EventEmitter } from '../../facade/async';
 import { NgControl } from './ng_control';
 import { NgControlGroup } from './ng_control_group';
 import { ControlContainer } from './control_container';

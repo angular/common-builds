@@ -53,7 +53,7 @@ export declare abstract class LocationStrategy {
  *
  * bootstrap(AppCmp, [
  *   ROUTER_PROVIDERS,
- *   provide(APP_BASE_HREF, {useValue: '/my/app'})
+ *   {provide: APP_BASE_HREF, useValue: '/my/app'}
  * ]);
  * ```
  * @stable

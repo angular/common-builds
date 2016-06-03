@@ -1,7 +1,7 @@
 import { Directive, forwardRef, Optional, Inject, Self } from '@angular/core';
-import { PromiseWrapper, ObservableWrapper, EventEmitter } from '../../../src/facade/async';
-import { ListWrapper } from '../../../src/facade/collection';
-import { isPresent } from '../../../src/facade/lang';
+import { PromiseWrapper, ObservableWrapper, EventEmitter } from '../../facade/async';
+import { ListWrapper } from '../../facade/collection';
+import { isPresent } from '../../facade/lang';
 import { ControlContainer } from './control_container';
 import { ControlGroup, Control } from '../model';
 import { setUpControl, setUpControlGroup, composeValidators, composeAsyncValidators } from './shared';

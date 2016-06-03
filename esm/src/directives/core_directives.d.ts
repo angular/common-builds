@@ -1,4 +1,4 @@
-import { Type } from '../../src/facade/lang';
+import { Type } from '../facade/lang';
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
  * application.

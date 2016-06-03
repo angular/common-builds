@@ -1,7 +1,7 @@
 "use strict";
-var collection_1 = require('../../../src/facade/collection');
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
+var collection_1 = require('../../facade/collection');
+var lang_1 = require('../../facade/lang');
+var exceptions_1 = require('../../facade/exceptions');
 var validators_1 = require('../validators');
 var default_value_accessor_1 = require('./default_value_accessor');
 var number_value_accessor_1 = require('./number_value_accessor');

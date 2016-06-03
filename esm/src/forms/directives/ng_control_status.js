@@ -1,6 +1,6 @@
 import { Directive, Self } from '@angular/core';
 import { NgControl } from './ng_control';
-import { isPresent } from '../../../src/facade/lang';
+import { isPresent } from '../../facade/lang';
 export class NgControlStatus {
     constructor(cd) {
         this._cd = cd;

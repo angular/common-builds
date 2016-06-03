@@ -1,6 +1,6 @@
 import { Directive, forwardRef, Inject, Optional, Self } from '@angular/core';
-import { StringMapWrapper } from '../../../src/facade/collection';
-import { EventEmitter, ObservableWrapper } from '../../../src/facade/async';
+import { StringMapWrapper } from '../../facade/collection';
+import { EventEmitter, ObservableWrapper } from '../../facade/async';
 import { NgControl } from './ng_control';
 import { NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';

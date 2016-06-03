@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../../src/facade/lang');
+var lang_1 = require('../../facade/lang');
 var control_value_accessor_1 = require('./control_value_accessor');
 exports.DEFAULT_VALUE_ACCESSOR = 
 /* @ts2dart_Provider */ {

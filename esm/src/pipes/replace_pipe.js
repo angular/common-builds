@@ -1,5 +1,5 @@
 import { Injectable, Pipe } from '@angular/core';
-import { isBlank, isString, isNumber, isFunction, RegExpWrapper, StringWrapper } from '../../src/facade/lang';
+import { isBlank, isString, isNumber, isFunction, RegExpWrapper, StringWrapper } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class ReplacePipe {
     transform(value, pattern, replacement) {

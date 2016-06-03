@@ -1,5 +1,5 @@
 import { Pipe } from '@angular/core';
-import { Json } from '../../src/facade/lang';
+import { Json } from '../facade/lang';
 export class JsonPipe {
     transform(value) { return Json.stringify(value); }
 }

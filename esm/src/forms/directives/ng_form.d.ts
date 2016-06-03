@@ -1,4 +1,4 @@
-import { EventEmitter } from '../../../src/facade/async';
+import { EventEmitter } from '../../facade/async';
 import { NgControl } from './ng_control';
 import { Form } from './form_interface';
 import { NgControlGroup } from './ng_control_group';

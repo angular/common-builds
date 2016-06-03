@@ -1,5 +1,5 @@
 import { Pipe } from '@angular/core';
-import { isString, isBlank } from '../../src/facade/lang';
+import { isString, isBlank } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class UpperCasePipe {
     transform(value) {

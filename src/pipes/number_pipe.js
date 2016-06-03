@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var intl_1 = require('../../src/facade/intl');
+var lang_1 = require('../facade/lang');
+var exceptions_1 = require('../facade/exceptions');
+var intl_1 = require('../facade/intl');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var defaultLocale = 'en-US';
 var _re = lang_1.RegExpWrapper.create('^(\\d+)?\\.((\\d+)(\\-(\\d+))?)?$');

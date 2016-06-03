@@ -1,6 +1,6 @@
 import { Pipe, Injectable, ChangeDetectorRef, WrappedValue } from '@angular/core';
-import { isBlank, isPresent, isPromise } from '../../src/facade/lang';
-import { ObservableWrapper } from '../../src/facade/async';
+import { isBlank, isPresent, isPromise } from '../facade/lang';
+import { ObservableWrapper } from '../facade/async';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 class ObservableStrategy {
     createSubscription(async, updateLatestValue) {

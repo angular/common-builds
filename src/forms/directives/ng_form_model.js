@@ -5,10 +5,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../../src/facade/lang');
-var collection_1 = require('../../../src/facade/collection');
-var exceptions_1 = require('../../../src/facade/exceptions');
-var async_1 = require('../../../src/facade/async');
+var lang_1 = require('../../facade/lang');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var async_1 = require('../../facade/async');
 var control_container_1 = require('./control_container');
 var shared_1 = require('./shared');
 var validators_1 = require('../validators');

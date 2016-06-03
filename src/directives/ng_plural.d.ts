@@ -34,7 +34,7 @@ export declare abstract class NgLocalization {
  *
  * @Component({
  *    selector: 'app',
- *    providers: [provide(NgLocalization, {useClass: MyLocalization})]
+ *    providers: [{provide: NgLocalization, useClass: MyLocalization}]
  * })
  * @View({
  *   template: `

@@ -1,7 +1,7 @@
 import { Input, Directive, ElementRef, Renderer, Optional, Host, forwardRef } from "@angular/core";
-import { isBlank, isPrimitive, StringWrapper, isPresent, looseIdentical, isString } from '../../../src/facade/lang';
+import { isBlank, isPrimitive, StringWrapper, isPresent, looseIdentical, isString } from '../../facade/lang';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
-import { MapWrapper } from '../../../src/facade/collection';
+import { MapWrapper } from '../../facade/collection';
 const SELECT_MULTIPLE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SelectMultipleControlValueAccessor),

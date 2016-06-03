@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var lang_1 = require('../facade/lang');
+var collection_1 = require('../facade/collection');
 var _WHEN_DEFAULT = new Object();
 var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {

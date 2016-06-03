@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Renderer, forwardRef, Input, Injector, Injectable } from '@angular/core';
-import { isPresent } from '../../../src/facade/lang';
-import { ListWrapper } from '../../../src/facade/collection';
+import { isPresent } from '../../facade/lang';
+import { ListWrapper } from '../../facade/collection';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 import { NgControl } from './ng_control';
 export const RADIO_VALUE_ACCESSOR = {

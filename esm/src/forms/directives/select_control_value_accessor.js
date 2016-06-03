@@ -1,6 +1,6 @@
 import { Directive, Renderer, forwardRef, ElementRef, Input, Host, Optional } from '@angular/core';
-import { StringWrapper, isPrimitive, isPresent, isBlank, looseIdentical } from '../../../src/facade/lang';
-import { MapWrapper } from '../../../src/facade/collection';
+import { StringWrapper, isPrimitive, isPresent, isBlank, looseIdentical } from '../../facade/lang';
+import { MapWrapper } from '../../facade/collection';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 export const SELECT_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

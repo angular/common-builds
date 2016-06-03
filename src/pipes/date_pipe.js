@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var intl_1 = require('../../src/facade/intl');
-var collection_1 = require('../../src/facade/collection');
+var lang_1 = require('../facade/lang');
+var intl_1 = require('../facade/intl');
+var collection_1 = require('../facade/collection');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 // TODO: move to a global configurable location along with other i18n components.
 var defaultLocale = 'en-US';

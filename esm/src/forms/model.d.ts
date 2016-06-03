@@ -1,4 +1,4 @@
-import { Observable } from '../../src/facade/async';
+import { Observable } from '../facade/async';
 import { ValidatorFn, AsyncValidatorFn } from './directives/validators';
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.

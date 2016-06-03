@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../../src/facade/lang');
-var collection_1 = require('../../../src/facade/collection');
+var lang_1 = require('../../facade/lang');
+var collection_1 = require('../../facade/collection');
 var control_value_accessor_1 = require('./control_value_accessor');
 exports.SELECT_VALUE_ACCESSOR = {
     provide: control_value_accessor_1.NG_VALUE_ACCESSOR,

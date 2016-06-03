@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var async_1 = require('../../../src/facade/async');
+var async_1 = require('../../facade/async');
 var control_container_1 = require('./control_container');
 var ng_control_1 = require('./ng_control');
 var control_value_accessor_1 = require('./control_value_accessor');

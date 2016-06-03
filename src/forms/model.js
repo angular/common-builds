@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
-var promise_1 = require('../../src/facade/promise');
-var collection_1 = require('../../src/facade/collection');
+var lang_1 = require('../facade/lang');
+var async_1 = require('../facade/async');
+var promise_1 = require('../facade/promise');
+var collection_1 = require('../facade/collection');
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */

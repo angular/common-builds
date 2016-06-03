@@ -1,5 +1,5 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
-import { EventEmitter } from '../../../src/facade/async';
+import { EventEmitter } from '../../facade/async';
 import { ControlValueAccessor } from './control_value_accessor';
 import { NgControl } from './ng_control';
 import { Control } from '../model';
