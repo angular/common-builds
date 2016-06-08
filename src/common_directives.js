@@ -1,5 +1,5 @@
 "use strict";
-var forms_1 = require('./forms');
+var forms_deprecated_1 = require('./forms-deprecated');
 var directives_1 = require('./directives');
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
@@ -46,5 +46,5 @@ var directives_1 = require('./directives');
  *
  * @experimental Contains forms which are experimental.
  */
-exports.COMMON_DIRECTIVES = [directives_1.CORE_DIRECTIVES, forms_1.FORM_DIRECTIVES];
+exports.COMMON_DIRECTIVES = [directives_1.CORE_DIRECTIVES, forms_deprecated_1.FORM_DIRECTIVES];
 //# sourceMappingURL=common_directives.js.map

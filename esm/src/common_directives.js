@@ -1,4 +1,4 @@
-import { FORM_DIRECTIVES } from './forms';
+import { FORM_DIRECTIVES } from './forms-deprecated';
 import { CORE_DIRECTIVES } from './directives';
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
