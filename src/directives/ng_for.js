@@ -98,7 +98,7 @@ var NgFor = (function () {
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange(function (record) {
+        changes.forEachIdentityChange(function (record /** TODO #9100 */) {
             var viewRef = _this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
         });

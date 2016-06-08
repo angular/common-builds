@@ -60,7 +60,7 @@ export class NgFor {
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange((record) => {
+        changes.forEachIdentityChange((record /** TODO #9100 */) => {
             var viewRef = this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
         });

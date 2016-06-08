@@ -160,7 +160,7 @@ function dateFormatter(format, date, locale) {
     return text;
 }
 var slice = [].slice;
-function concat(array1, array2, index) {
+function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
     return array1.concat(slice.call(array2, index));
 }
 export class DateFormatter {

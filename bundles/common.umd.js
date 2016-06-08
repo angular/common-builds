@@ -67,11 +67,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function isArray(obj) {
         return Array.isArray(obj);
     }
-    function isDate(obj) {
+    function isDate(obj /** TODO #9100 */) {
         return obj instanceof Date && !isNaN(obj.valueOf());
     }
     function noop() { }
-    function stringify(token) {
+    function stringify(token /** TODO #9100 */) {
         if (typeof token === 'string') {
             return token;
         }
@@ -132,7 +132,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         StringWrapper.replaceAllMapped = function (s, from, cb) {
             return s.replace(from, function () {
-                var matches = [];
+                var matches = []; /** TODO #9100 */
                 for (var _i = 0; _i < arguments.length; _i++) {
                     matches[_i - 0] = arguments[_i];
                 }
@@ -250,7 +250,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return RegExpWrapper;
     }());
     // JS has NaN !== NaN
-    function looseIdentical(a, b) {
+    function looseIdentical(a /** TODO #9100 */, b /** TODO #9100 */) {
         return a === b || typeof a === "number" && typeof b === "number" && isNaN(a) && isNaN(b);
     }
     function normalizeBlank(obj) {
@@ -332,7 +332,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         function PromiseWrapper() {
         }
         PromiseWrapper.resolve = function (obj) { return Promise.resolve(obj); };
-        PromiseWrapper.reject = function (obj, _) { return Promise.reject(obj); };
+        PromiseWrapper.reject = function (obj, _ /** TODO #9100 */) { return Promise.reject(obj); };
         // Note: We can't rename this method into `catch`, as this is not a valid
         // method name in Dart.
         PromiseWrapper.catchError = function (promise, onError) {
@@ -459,8 +459,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             var errorFn = function (err) { return null; };
             var completeFn = function () { return null; };
             if (generatorOrNext && typeof generatorOrNext === 'object') {
-                schedulerFn = this.__isAsync ? function (value) { setTimeout(function () { return generatorOrNext.next(value); }); } :
-                    function (value) { generatorOrNext.next(value); };
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) { setTimeout(function () { return generatorOrNext.next(value); }); } :
+                    function (value /** TODO #9100 */) { generatorOrNext.next(value); };
                 if (generatorOrNext.error) {
                     errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
                         function (err) { generatorOrNext.error(err); };
@@ -471,8 +471,8 @@ var __extends = (this && this.__extends) || function (d, b) {
                 }
             }
             else {
-                schedulerFn = this.__isAsync ? function (value) { setTimeout(function () { return generatorOrNext(value); }); } :
-                    function (value) { generatorOrNext(value); };
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) { setTimeout(function () { return generatorOrNext(value); }); } :
+                    function (value /** TODO #9100 */) { generatorOrNext(value); };
                 if (error) {
                     errorFn =
                         this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
@@ -1101,7 +1101,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return text;
     }
     var slice = [].slice;
-    function concat(array1, array2, index) {
+    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
         return array1.concat(slice.call(array2, index));
     }
     var DateFormatter = (function () {
@@ -1604,7 +1604,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 viewRef.context.index = i;
                 viewRef.context.count = ilen;
             }
-            changes.forEachIdentityChange(function (record) {
+            changes.forEachIdentityChange(function (record /** TODO #9100 */) {
                 var viewRef = _this._viewContainer.get(record.currentIndex);
                 viewRef.context.$implicit = record.item;
             });
