@@ -163,6 +163,10 @@ export declare class ControlGroup extends AbstractControl {
         [key: string]: boolean;
     }, validator?: ValidatorFn, asyncValidator?: AsyncValidatorFn);
     /**
+     * Register a control with the group's list of controls.
+     */
+    registerControl(name: string, control: AbstractControl): void;
+    /**
      * Add a control to this group.
      */
     addControl(name: string, control: AbstractControl): void;

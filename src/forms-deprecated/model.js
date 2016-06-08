@@ -350,16 +350,26 @@ var ControlGroup = (function (_super) {
         this.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
     /**
-     * Add a control to this group.
+     * Register a control with the group's list of controls.
      */
-    ControlGroup.prototype.addControl = function (name, control) {
+    ControlGroup.prototype.registerControl = function (name, control) {
         this.controls[name] = control;
         control.setParent(this);
     };
     /**
+     * Add a control to this group.
+     */
+    ControlGroup.prototype.addControl = function (name, control) {
+        this.registerControl(name, control);
+        this.updateValueAndValidity();
+    };
+    /**
      * Remove a control from this group.
      */
-    ControlGroup.prototype.removeControl = function (name) { collection_1.StringMapWrapper.delete(this.controls, name); };
+    ControlGroup.prototype.removeControl = function (name) {
+        collection_1.StringMapWrapper.delete(this.controls, name);
+        this.updateValueAndValidity();
+    };
     /**
      * Mark the named control as non-optional.
      */

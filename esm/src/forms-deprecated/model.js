@@ -275,16 +275,26 @@ export class ControlGroup extends AbstractControl {
         this.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
     /**
-     * Add a control to this group.
+     * Register a control with the group's list of controls.
      */
-    addControl(name, control) {
+    registerControl(name, control) {
         this.controls[name] = control;
         control.setParent(this);
     }
     /**
+     * Add a control to this group.
+     */
+    addControl(name, control) {
+        this.registerControl(name, control);
+        this.updateValueAndValidity();
+    }
+    /**
      * Remove a control from this group.
      */
-    removeControl(name) { StringMapWrapper.delete(this.controls, name); }
+    removeControl(name) {
+        StringMapWrapper.delete(this.controls, name);
+        this.updateValueAndValidity();
+    }
     /**
      * Mark the named control as non-optional.
      */

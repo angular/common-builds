@@ -53,7 +53,7 @@ var NgForm = (function (_super) {
             var container = _this._findContainer(dir.path);
             var ctrl = new model_1.Control();
             shared_1.setUpControl(ctrl, dir);
-            container.addControl(dir.name, ctrl);
+            container.registerControl(dir.name, ctrl);
             ctrl.updateValueAndValidity({ emitEvent: false });
         });
     };
@@ -64,7 +64,6 @@ var NgForm = (function (_super) {
             var container = _this._findContainer(dir.path);
             if (lang_1.isPresent(container)) {
                 container.removeControl(dir.name);
-                container.updateValueAndValidity({ emitEvent: false });
             }
         });
     };
@@ -74,7 +73,7 @@ var NgForm = (function (_super) {
             var container = _this._findContainer(dir.path);
             var group = new model_1.ControlGroup({});
             shared_1.setUpControlGroup(group, dir);
-            container.addControl(dir.name, group);
+            container.registerControl(dir.name, group);
             group.updateValueAndValidity({ emitEvent: false });
         });
     };
@@ -84,7 +83,6 @@ var NgForm = (function (_super) {
             var container = _this._findContainer(dir.path);
             if (lang_1.isPresent(container)) {
                 container.removeControl(dir.name);
-                container.updateValueAndValidity({ emitEvent: false });
             }
         });
     };

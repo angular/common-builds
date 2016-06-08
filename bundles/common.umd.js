@@ -2380,16 +2380,26 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.updateValueAndValidity({ onlySelf: true, emitEvent: false });
         }
         /**
-         * Add a control to this group.
+         * Register a control with the group's list of controls.
          */
-        ControlGroup.prototype.addControl = function (name, control) {
+        ControlGroup.prototype.registerControl = function (name, control) {
             this.controls[name] = control;
             control.setParent(this);
         };
         /**
+         * Add a control to this group.
+         */
+        ControlGroup.prototype.addControl = function (name, control) {
+            this.registerControl(name, control);
+            this.updateValueAndValidity();
+        };
+        /**
          * Remove a control from this group.
          */
-        ControlGroup.prototype.removeControl = function (name) { StringMapWrapper.delete(this.controls, name); };
+        ControlGroup.prototype.removeControl = function (name) {
+            StringMapWrapper.delete(this.controls, name);
+            this.updateValueAndValidity();
+        };
         /**
          * Mark the named control as non-optional.
          */
@@ -3631,7 +3641,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 var container = _this._findContainer(dir.path);
                 var ctrl = new Control();
                 setUpControl(ctrl, dir);
-                container.addControl(dir.name, ctrl);
+                container.registerControl(dir.name, ctrl);
                 ctrl.updateValueAndValidity({ emitEvent: false });
             });
         };
@@ -3642,7 +3652,6 @@ var __extends = (this && this.__extends) || function (d, b) {
                 var container = _this._findContainer(dir.path);
                 if (isPresent(container)) {
                     container.removeControl(dir.name);
-                    container.updateValueAndValidity({ emitEvent: false });
                 }
             });
         };
@@ -3652,7 +3661,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 var container = _this._findContainer(dir.path);
                 var group = new ControlGroup({});
                 setUpControlGroup(group, dir);
-                container.addControl(dir.name, group);
+                container.registerControl(dir.name, group);
                 group.updateValueAndValidity({ emitEvent: false });
             });
         };
@@ -3662,7 +3671,6 @@ var __extends = (this && this.__extends) || function (d, b) {
                 var container = _this._findContainer(dir.path);
                 if (isPresent(container)) {
                     container.removeControl(dir.name);
-                    container.updateValueAndValidity({ emitEvent: false });
                 }
             });
         };
