@@ -58,6 +58,7 @@ var SelectControlValueAccessor = (function () {
         var value = this._optionMap.get(_extractId(valueString));
         return lang_1.isPresent(value) ? value : valueString;
     };
+    /** @nocollapse */
     SelectControlValueAccessor.decorators = [
         { type: core_1.Directive, args: [{
                     selector: 'select:not([multiple])[ngControl],select:not([multiple])[ngFormControl],select:not([multiple])[ngModel]',
@@ -65,6 +66,7 @@ var SelectControlValueAccessor = (function () {
                     providers: [exports.SELECT_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     SelectControlValueAccessor.ctorParameters = [
         { type: core_1.Renderer, },
         { type: core_1.ElementRef, },
@@ -110,14 +112,17 @@ var NgSelectOption = (function () {
             this._select.writeValue(this._select.value);
         }
     };
+    /** @nocollapse */
     NgSelectOption.decorators = [
         { type: core_1.Directive, args: [{ selector: 'option' },] },
     ];
+    /** @nocollapse */
     NgSelectOption.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
         { type: SelectControlValueAccessor, decorators: [{ type: core_1.Optional }, { type: core_1.Host },] },
     ];
+    /** @nocollapse */
     NgSelectOption.propDecorators = {
         'ngValue': [{ type: core_1.Input, args: ['ngValue',] },],
         'value': [{ type: core_1.Input, args: ['value',] },],

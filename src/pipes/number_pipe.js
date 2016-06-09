@@ -48,6 +48,7 @@ var DecimalPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(DecimalPipe, value, intl_1.NumberFormatStyle.Decimal, digits);
     };
+    /** @nocollapse */
     DecimalPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'number' },] },
     ];
@@ -61,6 +62,7 @@ var PercentPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(PercentPipe, value, intl_1.NumberFormatStyle.Percent, digits);
     };
+    /** @nocollapse */
     PercentPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'percent' },] },
     ];
@@ -76,6 +78,7 @@ var CurrencyPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(CurrencyPipe, value, intl_1.NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
+    /** @nocollapse */
     CurrencyPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'currency' },] },
     ];

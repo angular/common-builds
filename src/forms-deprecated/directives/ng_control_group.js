@@ -57,6 +57,7 @@ var NgControlGroup = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /** @nocollapse */
     NgControlGroup.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngControlGroup]',
@@ -65,10 +66,11 @@ var NgControlGroup = (function (_super) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgControlGroup.ctorParameters = [
         { type: control_container_1.ControlContainer, decorators: [{ type: core_1.Host }, { type: core_1.SkipSelf },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
     ];
     return NgControlGroup;
 }(control_container_1.ControlContainer));

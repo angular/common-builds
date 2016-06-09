@@ -31,6 +31,7 @@ export class NgControlGroup extends ControlContainer {
     get validator() { return composeValidators(this._validators); }
     get asyncValidator() { return composeAsyncValidators(this._asyncValidators); }
 }
+/** @nocollapse */
 NgControlGroup.decorators = [
     { type: Directive, args: [{
                 selector: '[ngControlGroup]',
@@ -39,9 +40,10 @@ NgControlGroup.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgControlGroup.ctorParameters = [
     { type: ControlContainer, decorators: [{ type: Host }, { type: SkipSelf },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
 ];
 //# sourceMappingURL=ng_control_group.js.map

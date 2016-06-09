@@ -9,6 +9,7 @@ export const REQUIRED_VALIDATOR = {
 };
 export class RequiredValidator {
 }
+/** @nocollapse */
 RequiredValidator.decorators = [
     { type: Directive, args: [{
                 selector: '[required][ngControl],[required][ngFormControl],[required][ngModel]',
@@ -33,12 +34,14 @@ export class MinLengthValidator {
     }
     validate(c) { return this._validator(c); }
 }
+/** @nocollapse */
 MinLengthValidator.decorators = [
     { type: Directive, args: [{
                 selector: '[minlength][ngControl],[minlength][ngFormControl],[minlength][ngModel]',
                 providers: [MIN_LENGTH_VALIDATOR]
             },] },
 ];
+/** @nocollapse */
 MinLengthValidator.ctorParameters = [
     { type: undefined, decorators: [{ type: Attribute, args: ["minlength",] },] },
 ];
@@ -60,12 +63,14 @@ export class MaxLengthValidator {
     }
     validate(c) { return this._validator(c); }
 }
+/** @nocollapse */
 MaxLengthValidator.decorators = [
     { type: Directive, args: [{
                 selector: '[maxlength][ngControl],[maxlength][ngFormControl],[maxlength][ngModel]',
                 providers: [MAX_LENGTH_VALIDATOR]
             },] },
 ];
+/** @nocollapse */
 MaxLengthValidator.ctorParameters = [
     { type: undefined, decorators: [{ type: Attribute, args: ["maxlength",] },] },
 ];
@@ -80,12 +85,14 @@ export class PatternValidator {
     }
     validate(c) { return this._validator(c); }
 }
+/** @nocollapse */
 PatternValidator.decorators = [
     { type: Directive, args: [{
                 selector: '[pattern][ngControl],[pattern][ngFormControl],[pattern][ngModel]',
                 providers: [PATTERN_VALIDATOR]
             },] },
 ];
+/** @nocollapse */
 PatternValidator.ctorParameters = [
     { type: undefined, decorators: [{ type: Attribute, args: ["pattern",] },] },
 ];

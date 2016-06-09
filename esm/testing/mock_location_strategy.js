@@ -47,9 +47,11 @@ export class MockLocationStrategy extends LocationStrategy {
     }
     forward() { throw 'not implemented'; }
 }
+/** @nocollapse */
 MockLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 MockLocationStrategy.ctorParameters = [];
 class _MockPopStateEvent {
     constructor(newUrl) {

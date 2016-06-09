@@ -98,10 +98,12 @@ var AsyncPipe = (function () {
             this._ref.markForCheck();
         }
     };
+    /** @nocollapse */
     AsyncPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'async', pure: false },] },
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     AsyncPipe.ctorParameters = [
         { type: core_1.ChangeDetectorRef, },
     ];

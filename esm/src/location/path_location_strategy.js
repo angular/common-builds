@@ -39,9 +39,11 @@ export class PathLocationStrategy extends LocationStrategy {
     forward() { this._platformLocation.forward(); }
     back() { this._platformLocation.back(); }
 }
+/** @nocollapse */
 PathLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 PathLocationStrategy.ctorParameters = [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },

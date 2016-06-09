@@ -49,9 +49,11 @@ export class HashLocationStrategy extends LocationStrategy {
     forward() { this._platformLocation.forward(); }
     back() { this._platformLocation.back(); }
 }
+/** @nocollapse */
 HashLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 HashLocationStrategy.ctorParameters = [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },

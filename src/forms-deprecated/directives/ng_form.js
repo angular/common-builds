@@ -106,6 +106,7 @@ var NgForm = (function (_super) {
         path.pop();
         return collection_1.ListWrapper.isEmpty(path) ? this.form : this.form.find(path);
     };
+    /** @nocollapse */
     NgForm.decorators = [
         { type: core_1.Directive, args: [{
                     selector: 'form:not([ngNoForm]):not([ngFormModel]),ngForm,[ngForm]',
@@ -117,9 +118,10 @@ var NgForm = (function (_super) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgForm.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
     ];
     return NgForm;
 }(control_container_1.ControlContainer));

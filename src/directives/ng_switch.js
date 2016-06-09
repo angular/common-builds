@@ -98,6 +98,7 @@ var NgSwitch = (function () {
             collection_1.ListWrapper.remove(views, view);
         }
     };
+    /** @nocollapse */
     NgSwitch.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
     ];
@@ -120,9 +121,11 @@ var NgSwitchWhen = (function () {
         enumerable: true,
         configurable: true
     });
+    /** @nocollapse */
     NgSwitchWhen.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngSwitchWhen]', inputs: ['ngSwitchWhen'] },] },
     ];
+    /** @nocollapse */
     NgSwitchWhen.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },
@@ -135,9 +138,11 @@ var NgSwitchDefault = (function () {
     function NgSwitchDefault(viewContainer, templateRef, sswitch) {
         sswitch._registerView(_WHEN_DEFAULT, new SwitchView(viewContainer, templateRef));
     }
+    /** @nocollapse */
     NgSwitchDefault.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
     ];
+    /** @nocollapse */
     NgSwitchDefault.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },

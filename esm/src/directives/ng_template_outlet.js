@@ -13,12 +13,15 @@ export class NgTemplateOutlet {
         }
     }
 }
+/** @nocollapse */
 NgTemplateOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
 ];
+/** @nocollapse */
 NgTemplateOutlet.ctorParameters = [
     { type: ViewContainerRef, },
 ];
+/** @nocollapse */
 NgTemplateOutlet.propDecorators = {
     'ngTemplateOutlet': [{ type: Input },],
 };

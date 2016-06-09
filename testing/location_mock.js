@@ -84,6 +84,7 @@ var SpyLocation = (function () {
         return async_1.ObservableWrapper.subscribe(this._subject, onNext, onThrow, onReturn);
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
+    /** @nocollapse */
     SpyLocation.decorators = [
         { type: core_1.Injectable },
     ];

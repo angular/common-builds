@@ -11,6 +11,7 @@ export class UpperCasePipe {
         return value.toUpperCase();
     }
 }
+/** @nocollapse */
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];

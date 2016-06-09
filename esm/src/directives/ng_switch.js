@@ -92,6 +92,7 @@ export class NgSwitch {
         }
     }
 }
+/** @nocollapse */
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
 ];
@@ -108,9 +109,11 @@ export class NgSwitchWhen {
         this._value = value;
     }
 }
+/** @nocollapse */
 NgSwitchWhen.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchWhen]', inputs: ['ngSwitchWhen'] },] },
 ];
+/** @nocollapse */
 NgSwitchWhen.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
@@ -121,9 +124,11 @@ export class NgSwitchDefault {
         sswitch._registerView(_WHEN_DEFAULT, new SwitchView(viewContainer, templateRef));
     }
 }
+/** @nocollapse */
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
 ];
+/** @nocollapse */
 NgSwitchDefault.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

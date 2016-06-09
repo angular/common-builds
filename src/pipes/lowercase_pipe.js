@@ -13,6 +13,7 @@ var LowerCasePipe = (function () {
         }
         return value.toLowerCase();
     };
+    /** @nocollapse */
     LowerCasePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'lowercase' },] },
     ];

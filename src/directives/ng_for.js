@@ -138,9 +138,11 @@ var NgFor = (function () {
         }
         return tuples;
     };
+    /** @nocollapse */
     NgFor.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
     ];
+    /** @nocollapse */
     NgFor.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },

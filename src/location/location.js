@@ -118,9 +118,11 @@ var Location = (function () {
         }
         return url;
     };
+    /** @nocollapse */
     Location.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     Location.ctorParameters = [
         { type: location_strategy_1.LocationStrategy, },
     ];

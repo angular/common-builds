@@ -17,9 +17,11 @@ export class NgIf {
         }
     }
 }
+/** @nocollapse */
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]', inputs: ['ngIf'] },] },
 ];
+/** @nocollapse */
 NgIf.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

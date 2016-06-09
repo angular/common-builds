@@ -42,6 +42,7 @@ export class NgControlName extends NgControl {
     get asyncValidator() { return composeAsyncValidators(this._asyncValidators); }
     get control() { return this.formDirective.getControl(this); }
 }
+/** @nocollapse */
 NgControlName.decorators = [
     { type: Directive, args: [{
                 selector: '[ngControl]',
@@ -51,10 +52,11 @@ NgControlName.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgControlName.ctorParameters = [
     { type: ControlContainer, decorators: [{ type: Host }, { type: SkipSelf },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
 ];
 //# sourceMappingURL=ng_control_name.js.map

@@ -62,6 +62,7 @@ var NgFormControl = (function (_super) {
     NgFormControl.prototype._isControlChanged = function (changes) {
         return collection_1.StringMapWrapper.contains(changes, "form");
     };
+    /** @nocollapse */
     NgFormControl.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngFormControl]',
@@ -71,10 +72,11 @@ var NgFormControl = (function (_super) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgFormControl.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [control_value_accessor_1.NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [control_value_accessor_1.NG_VALUE_ACCESSOR,] },] },
     ];
     return NgFormControl;
 }(ng_control_1.NgControl));

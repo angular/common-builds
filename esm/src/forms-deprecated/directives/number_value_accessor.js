@@ -21,6 +21,7 @@ export class NumberValueAccessor {
     }
     registerOnTouched(fn) { this.onTouched = fn; }
 }
+/** @nocollapse */
 NumberValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'input[type=number][ngControl],input[type=number][ngFormControl],input[type=number][ngModel]',
@@ -32,6 +33,7 @@ NumberValueAccessor.decorators = [
                 providers: [NUMBER_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 NumberValueAccessor.ctorParameters = [
     { type: Renderer, },
     { type: ElementRef, },

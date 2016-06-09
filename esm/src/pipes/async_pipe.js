@@ -91,10 +91,12 @@ export class AsyncPipe {
         }
     }
 }
+/** @nocollapse */
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
     { type: Injectable },
 ];
+/** @nocollapse */
 AsyncPipe.ctorParameters = [
     { type: ChangeDetectorRef, },
 ];

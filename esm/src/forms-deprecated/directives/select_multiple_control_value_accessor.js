@@ -87,6 +87,7 @@ export class SelectMultipleControlValueAccessor {
         return isPresent(opt) ? opt._value : valueString;
     }
 }
+/** @nocollapse */
 SelectMultipleControlValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'select[multiple][ngControl],select[multiple][ngFormControl],select[multiple][ngModel]',
@@ -94,6 +95,7 @@ SelectMultipleControlValueAccessor.decorators = [
                 providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 SelectMultipleControlValueAccessor.ctorParameters = [];
 export class NgSelectMultipleOption {
     constructor(_element, _renderer, _select) {
@@ -136,14 +138,17 @@ export class NgSelectMultipleOption {
         }
     }
 }
+/** @nocollapse */
 NgSelectMultipleOption.decorators = [
     { type: Directive, args: [{ selector: 'option' },] },
 ];
+/** @nocollapse */
 NgSelectMultipleOption.ctorParameters = [
     { type: ElementRef, },
     { type: Renderer, },
     { type: SelectMultipleControlValueAccessor, decorators: [{ type: Optional }, { type: Host },] },
 ];
+/** @nocollapse */
 NgSelectMultipleOption.propDecorators = {
     'ngValue': [{ type: Input, args: ['ngValue',] },],
     'value': [{ type: Input, args: ['value',] },],

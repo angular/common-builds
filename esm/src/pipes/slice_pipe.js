@@ -16,6 +16,7 @@ export class SlicePipe {
     }
     supports(obj) { return isString(obj) || isArray(obj); }
 }
+/** @nocollapse */
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];

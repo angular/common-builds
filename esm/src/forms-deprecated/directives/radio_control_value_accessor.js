@@ -36,6 +36,7 @@ export class RadioControlRegistry {
             controlPair[1].name === accessor.name;
     }
 }
+/** @nocollapse */
 RadioControlRegistry.decorators = [
     { type: Injectable },
 ];
@@ -80,6 +81,7 @@ export class RadioControlValueAccessor {
     fireUncheck() { this._fn(new RadioButtonState(false, this._state.value)); }
     registerOnTouched(fn) { this.onTouched = fn; }
 }
+/** @nocollapse */
 RadioControlValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'input[type=radio][ngControl],input[type=radio][ngFormControl],input[type=radio][ngModel]',
@@ -87,12 +89,14 @@ RadioControlValueAccessor.decorators = [
                 providers: [RADIO_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 RadioControlValueAccessor.ctorParameters = [
     { type: Renderer, },
     { type: ElementRef, },
     { type: RadioControlRegistry, },
     { type: Injector, },
 ];
+/** @nocollapse */
 RadioControlValueAccessor.propDecorators = {
     'name': [{ type: Input },],
 };

@@ -64,6 +64,7 @@ var NgModel = (function (_super) {
         this.viewModel = newValue;
         async_1.ObservableWrapper.callEmit(this.update, newValue);
     };
+    /** @nocollapse */
     NgModel.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngModel]:not([ngControl]):not([ngFormControl])',
@@ -73,10 +74,11 @@ var NgModel = (function (_super) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgModel.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [control_value_accessor_1.NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [validators_1.NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: core_1.Optional }, { type: core_1.Self }, { type: core_1.Inject, args: [control_value_accessor_1.NG_VALUE_ACCESSOR,] },] },
     ];
     return NgModel;
 }(ng_control_1.NgControl));

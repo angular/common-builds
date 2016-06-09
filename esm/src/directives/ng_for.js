@@ -99,9 +99,11 @@ export class NgFor {
         return tuples;
     }
 }
+/** @nocollapse */
 NgFor.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
 ];
+/** @nocollapse */
 NgFor.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

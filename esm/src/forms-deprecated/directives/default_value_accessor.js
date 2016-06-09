@@ -21,6 +21,7 @@ export class DefaultValueAccessor {
     registerOnChange(fn) { this.onChange = fn; }
     registerOnTouched(fn) { this.onTouched = fn; }
 }
+/** @nocollapse */
 DefaultValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'input:not([type=checkbox])[ngControl],textarea[ngControl],input:not([type=checkbox])[ngFormControl],textarea[ngFormControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]',
@@ -31,6 +32,7 @@ DefaultValueAccessor.decorators = [
                 providers: [DEFAULT_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 DefaultValueAccessor.ctorParameters = [
     { type: Renderer, },
     { type: ElementRef, },

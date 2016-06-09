@@ -36,6 +36,7 @@ export class ReplacePipe {
         return isString(replacement) || isFunction(replacement);
     }
 }
+/** @nocollapse */
 ReplacePipe.decorators = [
     { type: Pipe, args: [{ name: 'replace' },] },
     { type: Injectable },

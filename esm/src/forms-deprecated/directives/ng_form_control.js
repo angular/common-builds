@@ -40,6 +40,7 @@ export class NgFormControl extends NgControl {
         return StringMapWrapper.contains(changes, "form");
     }
 }
+/** @nocollapse */
 NgFormControl.decorators = [
     { type: Directive, args: [{
                 selector: '[ngFormControl]',
@@ -49,9 +50,10 @@ NgFormControl.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgFormControl.ctorParameters = [
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
 ];
 //# sourceMappingURL=ng_form_control.js.map

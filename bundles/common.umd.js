@@ -928,10 +928,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return AsyncPipe;
     }());
+    /** @nocollapse */
     AsyncPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
         { type: _angular_core.Injectable },
     ];
+    /** @nocollapse */
     AsyncPipe.ctorParameters = [
         { type: _angular_core.ChangeDetectorRef, },
     ];
@@ -1157,6 +1159,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         'mediumTime': 'jms',
         'shortTime': 'jm'
     };
+    /** @nocollapse */
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
         { type: _angular_core.Injectable },
@@ -1167,6 +1170,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
         return JsonPipe;
     }());
+    /** @nocollapse */
     JsonPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
     ];
@@ -1188,6 +1192,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
         return SlicePipe;
     }());
+    /** @nocollapse */
     SlicePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
     ];
@@ -1204,6 +1209,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return LowerCasePipe;
     }());
+    /** @nocollapse */
     LowerCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
@@ -1253,6 +1259,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return DecimalPipe;
     }());
+    /** @nocollapse */
     DecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
     ];
@@ -1265,6 +1272,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return PercentPipe;
     }());
+    /** @nocollapse */
     PercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
     ];
@@ -1279,6 +1287,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return CurrencyPipe;
     }());
+    /** @nocollapse */
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
     ];
@@ -1295,6 +1304,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return UpperCasePipe;
     }());
+    /** @nocollapse */
     UpperCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
     ];
@@ -1336,6 +1346,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return ReplacePipe;
     }());
+    /** @nocollapse */
     ReplacePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
         { type: _angular_core.Injectable },
@@ -1356,6 +1367,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return I18nPluralPipe;
     }());
+    /** @nocollapse */
     I18nPluralPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
     ];
@@ -1370,6 +1382,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return I18nSelectPipe;
     }());
+    /** @nocollapse */
     I18nSelectPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
     ];
@@ -1506,9 +1519,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgClass;
     }());
+    /** @nocollapse */
     NgClass.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngClass]', inputs: ['rawClass: ngClass', 'initialClasses: class'] },] },
     ];
+    /** @nocollapse */
     NgClass.ctorParameters = [
         { type: _angular_core.IterableDiffers, },
         { type: _angular_core.KeyValueDiffers, },
@@ -1644,9 +1659,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgFor;
     }());
+    /** @nocollapse */
     NgFor.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
     ];
+    /** @nocollapse */
     NgFor.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -1682,9 +1699,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgIf;
     }());
+    /** @nocollapse */
     NgIf.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngIf]', inputs: ['ngIf'] },] },
     ];
+    /** @nocollapse */
     NgIf.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -1707,12 +1726,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgTemplateOutlet;
     }());
+    /** @nocollapse */
     NgTemplateOutlet.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
     ];
+    /** @nocollapse */
     NgTemplateOutlet.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
     ];
+    /** @nocollapse */
     NgTemplateOutlet.propDecorators = {
         'ngTemplateOutlet': [{ type: _angular_core.Input },],
     };
@@ -1751,9 +1773,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgStyle;
     }());
+    /** @nocollapse */
     NgStyle.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
     ];
+    /** @nocollapse */
     NgStyle.ctorParameters = [
         { type: _angular_core.KeyValueDiffers, },
         { type: _angular_core.ElementRef, },
@@ -1856,6 +1880,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgSwitch;
     }());
+    /** @nocollapse */
     NgSwitch.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
     ];
@@ -1877,9 +1902,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgSwitchWhen;
     }());
+    /** @nocollapse */
     NgSwitchWhen.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitchWhen]', inputs: ['ngSwitchWhen'] },] },
     ];
+    /** @nocollapse */
     NgSwitchWhen.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -1891,9 +1918,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return NgSwitchDefault;
     }());
+    /** @nocollapse */
     NgSwitchDefault.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
     ];
+    /** @nocollapse */
     NgSwitchDefault.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -1915,9 +1944,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return NgPluralCase;
     }());
+    /** @nocollapse */
     NgPluralCase.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
     ];
+    /** @nocollapse */
     NgPluralCase.ctorParameters = [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
         { type: _angular_core.TemplateRef, },
@@ -1980,12 +2011,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgPlural.prototype._stripValue = function (value) { return NumberWrapper.parseInt(value.substring(1), 10); };
         return NgPlural;
     }());
+    /** @nocollapse */
     NgPlural.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
     ];
+    /** @nocollapse */
     NgPlural.ctorParameters = [
         { type: NgLocalization, },
     ];
+    /** @nocollapse */
     NgPlural.propDecorators = {
         'cases': [{ type: _angular_core.ContentChildren, args: [NgPluralCase,] },],
         'ngPlural': [{ type: _angular_core.Input },],
@@ -2827,6 +2861,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         DefaultValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
         return DefaultValueAccessor;
     }());
+    /** @nocollapse */
     DefaultValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'input:not([type=checkbox])[ngControl],textarea[ngControl],input:not([type=checkbox])[ngFormControl],textarea[ngFormControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]',
@@ -2837,6 +2872,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [DEFAULT_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     DefaultValueAccessor.ctorParameters = [
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
@@ -2862,6 +2898,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         NumberValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
         return NumberValueAccessor;
     }());
+    /** @nocollapse */
     NumberValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'input[type=number][ngControl],input[type=number][ngFormControl],input[type=number][ngModel]',
@@ -2873,6 +2910,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [NUMBER_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     NumberValueAccessor.ctorParameters = [
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
@@ -2896,6 +2934,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         CheckboxControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
         return CheckboxControlValueAccessor;
     }());
+    /** @nocollapse */
     CheckboxControlValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'input[type=checkbox][ngControl],input[type=checkbox][ngFormControl],input[type=checkbox][ngModel]',
@@ -2903,6 +2942,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [CHECKBOX_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     CheckboxControlValueAccessor.ctorParameters = [
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
@@ -2964,6 +3004,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return SelectControlValueAccessor;
     }());
+    /** @nocollapse */
     SelectControlValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'select:not([multiple])[ngControl],select:not([multiple])[ngFormControl],select:not([multiple])[ngModel]',
@@ -2971,6 +3012,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [SELECT_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     SelectControlValueAccessor.ctorParameters = [
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
@@ -3015,14 +3057,17 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgSelectOption;
     }());
+    /** @nocollapse */
     NgSelectOption.decorators = [
         { type: _angular_core.Directive, args: [{ selector: 'option' },] },
     ];
+    /** @nocollapse */
     NgSelectOption.ctorParameters = [
         { type: _angular_core.ElementRef, },
         { type: _angular_core.Renderer, },
         { type: SelectControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
     ];
+    /** @nocollapse */
     NgSelectOption.propDecorators = {
         'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
         'value': [{ type: _angular_core.Input, args: ['value',] },],
@@ -3062,6 +3107,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return RadioControlRegistry;
     }());
+    /** @nocollapse */
     RadioControlRegistry.decorators = [
         { type: _angular_core.Injectable },
     ];
@@ -3109,6 +3155,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         RadioControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
         return RadioControlValueAccessor;
     }());
+    /** @nocollapse */
     RadioControlValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'input[type=radio][ngControl],input[type=radio][ngFormControl],input[type=radio][ngModel]',
@@ -3116,12 +3163,14 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [RADIO_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     RadioControlValueAccessor.ctorParameters = [
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
         { type: RadioControlRegistry, },
         { type: _angular_core.Injector, },
     ];
+    /** @nocollapse */
     RadioControlValueAccessor.propDecorators = {
         'name': [{ type: _angular_core.Input },],
     };
@@ -3283,6 +3332,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgControlName;
     }(NgControl));
+    /** @nocollapse */
     NgControlName.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngControl]',
@@ -3292,11 +3342,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgControlName.ctorParameters = [
         { type: ControlContainer, decorators: [{ type: _angular_core.Host }, { type: _angular_core.SkipSelf },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
     var formControlBinding = 
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -3351,6 +3402,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgFormControl;
     }(NgControl));
+    /** @nocollapse */
     NgFormControl.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngFormControl]',
@@ -3360,10 +3412,11 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgFormControl.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
     var formControlBinding$1 = 
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -3420,6 +3473,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgModel;
     }(NgControl));
+    /** @nocollapse */
     NgModel.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngModel]:not([ngControl]):not([ngFormControl])',
@@ -3429,10 +3483,11 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgModel.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
     var controlGroupProvider = 
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -3485,6 +3540,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgControlGroup;
     }(ControlContainer));
+    /** @nocollapse */
     NgControlGroup.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngControlGroup]',
@@ -3493,10 +3549,11 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgControlGroup.ctorParameters = [
         { type: ControlContainer, decorators: [{ type: _angular_core.Host }, { type: _angular_core.SkipSelf },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
     var formDirectiveProvider = 
     /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -3586,6 +3643,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgFormModel;
     }(ControlContainer));
+    /** @nocollapse */
     NgFormModel.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngFormModel]',
@@ -3596,9 +3654,10 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgFormModel.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
     var formDirectiveProvider$1 = 
     /*@ts2dart_const*/ { provide: ControlContainer, useExisting: _angular_core.forwardRef(function () { return NgForm; }) };
@@ -3696,6 +3755,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgForm;
     }(ControlContainer));
+    /** @nocollapse */
     NgForm.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'form:not([ngNoForm]):not([ngFormModel]),ngForm,[ngForm]',
@@ -3707,9 +3767,10 @@ var __extends = (this && this.__extends) || function (d, b) {
                     exportAs: 'ngForm'
                 },] },
     ];
+    /** @nocollapse */
     NgForm.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
     var NgControlStatus = (function () {
         function NgControlStatus(cd) {
@@ -3759,6 +3820,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgControlStatus;
     }());
+    /** @nocollapse */
     NgControlStatus.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[ngControl],[ngModel],[ngFormControl]',
@@ -3772,6 +3834,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     }
                 },] },
     ];
+    /** @nocollapse */
     NgControlStatus.ctorParameters = [
         { type: NgControl, decorators: [{ type: _angular_core.Self },] },
     ];
@@ -3861,6 +3924,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return SelectMultipleControlValueAccessor;
     }());
+    /** @nocollapse */
     SelectMultipleControlValueAccessor.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: 'select[multiple][ngControl],select[multiple][ngFormControl],select[multiple][ngModel]',
@@ -3868,6 +3932,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     SelectMultipleControlValueAccessor.ctorParameters = [];
     var NgSelectMultipleOption = (function () {
         function NgSelectMultipleOption(_element, _renderer, _select) {
@@ -3919,14 +3984,17 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NgSelectMultipleOption;
     }());
+    /** @nocollapse */
     NgSelectMultipleOption.decorators = [
         { type: _angular_core.Directive, args: [{ selector: 'option' },] },
     ];
+    /** @nocollapse */
     NgSelectMultipleOption.ctorParameters = [
         { type: _angular_core.ElementRef, },
         { type: _angular_core.Renderer, },
         { type: SelectMultipleControlValueAccessor, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Host },] },
     ];
+    /** @nocollapse */
     NgSelectMultipleOption.propDecorators = {
         'ngValue': [{ type: _angular_core.Input, args: ['ngValue',] },],
         'value': [{ type: _angular_core.Input, args: ['value',] },],
@@ -3942,6 +4010,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return RequiredValidator;
     }());
+    /** @nocollapse */
     RequiredValidator.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[required][ngControl],[required][ngFormControl],[required][ngModel]',
@@ -3967,12 +4036,14 @@ var __extends = (this && this.__extends) || function (d, b) {
         MinLengthValidator.prototype.validate = function (c) { return this._validator(c); };
         return MinLengthValidator;
     }());
+    /** @nocollapse */
     MinLengthValidator.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[minlength][ngControl],[minlength][ngFormControl],[minlength][ngModel]',
                     providers: [MIN_LENGTH_VALIDATOR]
                 },] },
     ];
+    /** @nocollapse */
     MinLengthValidator.ctorParameters = [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ["minlength",] },] },
     ];
@@ -3995,12 +4066,14 @@ var __extends = (this && this.__extends) || function (d, b) {
         MaxLengthValidator.prototype.validate = function (c) { return this._validator(c); };
         return MaxLengthValidator;
     }());
+    /** @nocollapse */
     MaxLengthValidator.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[maxlength][ngControl],[maxlength][ngFormControl],[maxlength][ngModel]',
                     providers: [MAX_LENGTH_VALIDATOR]
                 },] },
     ];
+    /** @nocollapse */
     MaxLengthValidator.ctorParameters = [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ["maxlength",] },] },
     ];
@@ -4016,12 +4089,14 @@ var __extends = (this && this.__extends) || function (d, b) {
         PatternValidator.prototype.validate = function (c) { return this._validator(c); };
         return PatternValidator;
     }());
+    /** @nocollapse */
     PatternValidator.decorators = [
         { type: _angular_core.Directive, args: [{
                     selector: '[pattern][ngControl],[pattern][ngFormControl],[pattern][ngModel]',
                     providers: [PATTERN_VALIDATOR]
                 },] },
     ];
+    /** @nocollapse */
     PatternValidator.ctorParameters = [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ["pattern",] },] },
     ];
@@ -4127,6 +4202,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return FormBuilder;
     }());
+    /** @nocollapse */
     FormBuilder.decorators = [
         { type: _angular_core.Injectable },
     ];
@@ -4406,9 +4482,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return Location;
     }());
+    /** @nocollapse */
     Location.decorators = [
         { type: _angular_core.Injectable },
     ];
+    /** @nocollapse */
     Location.ctorParameters = [
         { type: LocationStrategy, },
     ];
@@ -4473,9 +4551,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
         return HashLocationStrategy;
     }(LocationStrategy));
+    /** @nocollapse */
     HashLocationStrategy.decorators = [
         { type: _angular_core.Injectable },
     ];
+    /** @nocollapse */
     HashLocationStrategy.ctorParameters = [
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
@@ -4517,9 +4597,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
         return PathLocationStrategy;
     }(LocationStrategy));
+    /** @nocollapse */
     PathLocationStrategy.decorators = [
         { type: _angular_core.Injectable },
     ];
+    /** @nocollapse */
     PathLocationStrategy.ctorParameters = [
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },

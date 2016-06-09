@@ -93,6 +93,7 @@ var SelectMultipleControlValueAccessor = (function () {
         var opt = this._optionMap.get(_extractId(valueString));
         return lang_1.isPresent(opt) ? opt._value : valueString;
     };
+    /** @nocollapse */
     SelectMultipleControlValueAccessor.decorators = [
         { type: core_1.Directive, args: [{
                     selector: 'select[multiple][ngControl],select[multiple][ngFormControl],select[multiple][ngModel]',
@@ -100,6 +101,7 @@ var SelectMultipleControlValueAccessor = (function () {
                     providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     SelectMultipleControlValueAccessor.ctorParameters = [];
     return SelectMultipleControlValueAccessor;
 }());
@@ -152,14 +154,17 @@ var NgSelectMultipleOption = (function () {
             this._select.writeValue(this._select.value);
         }
     };
+    /** @nocollapse */
     NgSelectMultipleOption.decorators = [
         { type: core_1.Directive, args: [{ selector: 'option' },] },
     ];
+    /** @nocollapse */
     NgSelectMultipleOption.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
         { type: SelectMultipleControlValueAccessor, decorators: [{ type: core_1.Optional }, { type: core_1.Host },] },
     ];
+    /** @nocollapse */
     NgSelectMultipleOption.propDecorators = {
         'ngValue': [{ type: core_1.Input, args: ['ngValue',] },],
         'value': [{ type: core_1.Input, args: ['value',] },],

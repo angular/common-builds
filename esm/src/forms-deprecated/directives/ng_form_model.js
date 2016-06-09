@@ -75,6 +75,7 @@ export class NgFormModel extends ControlContainer {
         }
     }
 }
+/** @nocollapse */
 NgFormModel.decorators = [
     { type: Directive, args: [{
                 selector: '[ngFormModel]',
@@ -85,8 +86,9 @@ NgFormModel.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgFormModel.ctorParameters = [
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
 ];
 //# sourceMappingURL=ng_form_model.js.map

@@ -37,6 +37,7 @@ var RadioControlRegistry = (function () {
         return controlPair[0].control.root === accessor._control.control.root &&
             controlPair[1].name === accessor.name;
     };
+    /** @nocollapse */
     RadioControlRegistry.decorators = [
         { type: core_1.Injectable },
     ];
@@ -86,6 +87,7 @@ var RadioControlValueAccessor = (function () {
     };
     RadioControlValueAccessor.prototype.fireUncheck = function () { this._fn(new RadioButtonState(false, this._state.value)); };
     RadioControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /** @nocollapse */
     RadioControlValueAccessor.decorators = [
         { type: core_1.Directive, args: [{
                     selector: 'input[type=radio][ngControl],input[type=radio][ngFormControl],input[type=radio][ngModel]',
@@ -93,12 +95,14 @@ var RadioControlValueAccessor = (function () {
                     providers: [exports.RADIO_VALUE_ACCESSOR]
                 },] },
     ];
+    /** @nocollapse */
     RadioControlValueAccessor.ctorParameters = [
         { type: core_1.Renderer, },
         { type: core_1.ElementRef, },
         { type: RadioControlRegistry, },
         { type: core_1.Injector, },
     ];
+    /** @nocollapse */
     RadioControlValueAccessor.propDecorators = {
         'name': [{ type: core_1.Input },],
     };

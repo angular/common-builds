@@ -112,9 +112,11 @@ export class Location {
         return url;
     }
 }
+/** @nocollapse */
 Location.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 Location.ctorParameters = [
     { type: LocationStrategy, },
 ];

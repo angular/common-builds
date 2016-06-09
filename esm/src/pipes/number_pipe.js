@@ -43,6 +43,7 @@ export class DecimalPipe {
         return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
     }
 }
+/** @nocollapse */
 DecimalPipe.decorators = [
     { type: Pipe, args: [{ name: 'number' },] },
 ];
@@ -51,6 +52,7 @@ export class PercentPipe {
         return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
     }
 }
+/** @nocollapse */
 PercentPipe.decorators = [
     { type: Pipe, args: [{ name: 'percent' },] },
 ];
@@ -59,6 +61,7 @@ export class CurrencyPipe {
         return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     }
 }
+/** @nocollapse */
 CurrencyPipe.decorators = [
     { type: Pipe, args: [{ name: 'currency' },] },
 ];

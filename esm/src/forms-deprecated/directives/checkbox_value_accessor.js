@@ -18,6 +18,7 @@ export class CheckboxControlValueAccessor {
     registerOnChange(fn) { this.onChange = fn; }
     registerOnTouched(fn) { this.onTouched = fn; }
 }
+/** @nocollapse */
 CheckboxControlValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'input[type=checkbox][ngControl],input[type=checkbox][ngFormControl],input[type=checkbox][ngModel]',
@@ -25,6 +26,7 @@ CheckboxControlValueAccessor.decorators = [
                 providers: [CHECKBOX_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 CheckboxControlValueAccessor.ctorParameters = [
     { type: Renderer, },
     { type: ElementRef, },

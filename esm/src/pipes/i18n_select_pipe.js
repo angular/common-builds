@@ -10,6 +10,7 @@ export class I18nSelectPipe {
         return StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
     }
 }
+/** @nocollapse */
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];

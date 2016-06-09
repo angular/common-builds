@@ -48,6 +48,7 @@ var NgControlStatus = (function () {
         enumerable: true,
         configurable: true
     });
+    /** @nocollapse */
     NgControlStatus.decorators = [
         { type: core_1.Directive, args: [{
                     selector: '[ngControl],[ngModel],[ngFormControl]',
@@ -61,6 +62,7 @@ var NgControlStatus = (function () {
                     }
                 },] },
     ];
+    /** @nocollapse */
     NgControlStatus.ctorParameters = [
         { type: ng_control_1.NgControl, decorators: [{ type: core_1.Self },] },
     ];

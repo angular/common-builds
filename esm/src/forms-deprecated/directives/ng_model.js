@@ -42,6 +42,7 @@ export class NgModel extends NgControl {
         ObservableWrapper.callEmit(this.update, newValue);
     }
 }
+/** @nocollapse */
 NgModel.decorators = [
     { type: Directive, args: [{
                 selector: '[ngModel]:not([ngControl]):not([ngFormControl])',
@@ -51,9 +52,10 @@ NgModel.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgModel.ctorParameters = [
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALUE_ACCESSOR,] },] },
 ];
 //# sourceMappingURL=ng_model.js.map

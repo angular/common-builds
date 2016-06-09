@@ -53,9 +53,11 @@ var MockLocationStrategy = (function (_super) {
         }
     };
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
+    /** @nocollapse */
     MockLocationStrategy.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     MockLocationStrategy.ctorParameters = [];
     return MockLocationStrategy;
 }(index_1.LocationStrategy));

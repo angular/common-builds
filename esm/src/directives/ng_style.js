@@ -29,9 +29,11 @@ export class NgStyle {
         this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     }
 }
+/** @nocollapse */
 NgStyle.decorators = [
     { type: Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
 ];
+/** @nocollapse */
 NgStyle.ctorParameters = [
     { type: KeyValueDiffers, },
     { type: ElementRef, },

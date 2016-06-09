@@ -79,6 +79,7 @@ export class SpyLocation {
     }
     normalize(url) { return null; }
 }
+/** @nocollapse */
 SpyLocation.decorators = [
     { type: Injectable },
 ];

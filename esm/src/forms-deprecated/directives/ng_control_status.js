@@ -24,6 +24,7 @@ export class NgControlStatus {
         return isPresent(this._cd.control) ? !this._cd.control.valid : false;
     }
 }
+/** @nocollapse */
 NgControlStatus.decorators = [
     { type: Directive, args: [{
                 selector: '[ngControl],[ngModel],[ngFormControl]',
@@ -37,6 +38,7 @@ NgControlStatus.decorators = [
                 }
             },] },
 ];
+/** @nocollapse */
 NgControlStatus.ctorParameters = [
     { type: NgControl, decorators: [{ type: Self },] },
 ];

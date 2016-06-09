@@ -11,6 +11,7 @@ export class LowerCasePipe {
         return value.toLowerCase();
     }
 }
+/** @nocollapse */
 LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];

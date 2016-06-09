@@ -98,9 +98,11 @@ export class NgClass {
         }
     }
 }
+/** @nocollapse */
 NgClass.decorators = [
     { type: Directive, args: [{ selector: '[ngClass]', inputs: ['rawClass: ngClass', 'initialClasses: class'] },] },
 ];
+/** @nocollapse */
 NgClass.ctorParameters = [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },

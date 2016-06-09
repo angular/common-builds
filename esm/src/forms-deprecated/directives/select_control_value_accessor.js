@@ -56,6 +56,7 @@ export class SelectControlValueAccessor {
         return isPresent(value) ? value : valueString;
     }
 }
+/** @nocollapse */
 SelectControlValueAccessor.decorators = [
     { type: Directive, args: [{
                 selector: 'select:not([multiple])[ngControl],select:not([multiple])[ngFormControl],select:not([multiple])[ngModel]',
@@ -63,6 +64,7 @@ SelectControlValueAccessor.decorators = [
                 providers: [SELECT_VALUE_ACCESSOR]
             },] },
 ];
+/** @nocollapse */
 SelectControlValueAccessor.ctorParameters = [
     { type: Renderer, },
     { type: ElementRef, },
@@ -98,14 +100,17 @@ export class NgSelectOption {
         }
     }
 }
+/** @nocollapse */
 NgSelectOption.decorators = [
     { type: Directive, args: [{ selector: 'option' },] },
 ];
+/** @nocollapse */
 NgSelectOption.ctorParameters = [
     { type: ElementRef, },
     { type: Renderer, },
     { type: SelectControlValueAccessor, decorators: [{ type: Optional }, { type: Host },] },
 ];
+/** @nocollapse */
 NgSelectOption.propDecorators = {
     'ngValue': [{ type: Input, args: ['ngValue',] },],
     'value': [{ type: Input, args: ['value',] },],

@@ -75,6 +75,7 @@ export class NgForm extends ControlContainer {
         return ListWrapper.isEmpty(path) ? this.form : this.form.find(path);
     }
 }
+/** @nocollapse */
 NgForm.decorators = [
     { type: Directive, args: [{
                 selector: 'form:not([ngNoForm]):not([ngFormModel]),ngForm,[ngForm]',
@@ -86,8 +87,9 @@ NgForm.decorators = [
                 exportAs: 'ngForm'
             },] },
 ];
+/** @nocollapse */
 NgForm.ctorParameters = [
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_ASYNC_VALIDATORS,] },] },
 ];
 //# sourceMappingURL=ng_form.js.map

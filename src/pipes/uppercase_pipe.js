@@ -13,6 +13,7 @@ var UpperCasePipe = (function () {
         }
         return value.toUpperCase();
     };
+    /** @nocollapse */
     UpperCasePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'uppercase' },] },
     ];

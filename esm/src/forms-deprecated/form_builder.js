@@ -56,6 +56,7 @@ export class FormBuilder {
         }
     }
 }
+/** @nocollapse */
 FormBuilder.decorators = [
     { type: Injectable },
 ];
