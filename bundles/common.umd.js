@@ -2007,18 +2007,36 @@ var __extends = (this && this.__extends) || function (d, b) {
         function NgTemplateOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
         }
-        Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
-            set: function (templateRef) {
-                if (isPresent(this._insertedViewRef)) {
-                    this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._insertedViewRef));
-                }
-                if (isPresent(templateRef)) {
-                    this._insertedViewRef = this._viewContainerRef.createEmbeddedView(templateRef);
+        Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
+            set: function (context) {
+                if (this._context !== context) {
+                    this._context = context;
+                    if (isPresent(this._viewRef)) {
+                        this.createView();
+                    }
                 }
             },
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
+            set: function (templateRef) {
+                if (this._templateRef !== templateRef) {
+                    this._templateRef = templateRef;
+                    this.createView();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        NgTemplateOutlet.prototype.createView = function () {
+            if (isPresent(this._viewRef)) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+            }
+            if (isPresent(this._templateRef)) {
+                this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
+            }
+        };
         return NgTemplateOutlet;
     }());
     /** @nocollapse */
@@ -2031,6 +2049,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     ];
     /** @nocollapse */
     NgTemplateOutlet.propDecorators = {
+        'ngOutletContext': [{ type: _angular_core.Input },],
         'ngTemplateOutlet': [{ type: _angular_core.Input },],
     };
     /**

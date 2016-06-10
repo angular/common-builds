@@ -4,12 +4,26 @@ export class NgTemplateOutlet {
     constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
-    set ngTemplateOutlet(templateRef) {
-        if (isPresent(this._insertedViewRef)) {
-            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._insertedViewRef));
+    set ngOutletContext(context) {
+        if (this._context !== context) {
+            this._context = context;
+            if (isPresent(this._viewRef)) {
+                this.createView();
+            }
         }
-        if (isPresent(templateRef)) {
-            this._insertedViewRef = this._viewContainerRef.createEmbeddedView(templateRef);
+    }
+    set ngTemplateOutlet(templateRef) {
+        if (this._templateRef !== templateRef) {
+            this._templateRef = templateRef;
+            this.createView();
+        }
+    }
+    createView() {
+        if (isPresent(this._viewRef)) {
+            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+        }
+        if (isPresent(this._templateRef)) {
+            this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
         }
     }
 }
@@ -23,6 +37,7 @@ NgTemplateOutlet.ctorParameters = [
 ];
 /** @nocollapse */
 NgTemplateOutlet.propDecorators = {
+    'ngOutletContext': [{ type: Input },],
     'ngTemplateOutlet': [{ type: Input },],
 };
 //# sourceMappingURL=ng_template_outlet.js.map
