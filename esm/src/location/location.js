@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ObservableWrapper } from '../facade/async';
 import { LocationStrategy } from './location_strategy';
 export class Location {

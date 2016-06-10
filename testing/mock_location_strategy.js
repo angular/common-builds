@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var async_1 = require('../src/facade/async');
 var index_1 = require('../index');
+var async_1 = require('../src/facade/async');
 var MockLocationStrategy = (function (_super) {
     __extends(MockLocationStrategy, _super);
     function MockLocationStrategy() {

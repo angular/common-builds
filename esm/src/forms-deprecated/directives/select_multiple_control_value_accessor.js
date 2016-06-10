@@ -1,7 +1,7 @@
-import { Input, Directive, ElementRef, Renderer, Optional, Host, forwardRef } from "@angular/core";
-import { isBlank, isPrimitive, StringWrapper, isPresent, looseIdentical, isString } from '../../facade/lang';
-import { NG_VALUE_ACCESSOR } from './control_value_accessor';
+import { Directive, ElementRef, Host, Input, Optional, Renderer, forwardRef } from '@angular/core';
 import { MapWrapper } from '../../facade/collection';
+import { StringWrapper, isBlank, isPresent, isPrimitive, isString, looseIdentical } from '../../facade/lang';
+import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 const SELECT_MULTIPLE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SelectMultipleControlValueAccessor),
@@ -13,11 +13,11 @@ function _buildValueString(id, value) {
     if (isString(value))
         value = `'${value}'`;
     if (!isPrimitive(value))
-        value = "Object";
+        value = 'Object';
     return StringWrapper.slice(`${id}: ${value}`, 0, 50);
 }
 function _extractId(valueString) {
-    return valueString.split(":")[0];
+    return valueString.split(':')[0];
 }
 /** Mock interface for HTMLCollection */
 class HTMLCollection {
@@ -38,9 +38,7 @@ export class SelectMultipleControlValueAccessor {
         let values = value;
         // convert values to ids
         let ids = values.map((v) => this._getOptionId(v));
-        this._optionMap.forEach((opt, o) => {
-            opt._setSelected(ids.indexOf(o.toString()) > -1);
-        });
+        this._optionMap.forEach((opt, o) => { opt._setSelected(ids.indexOf(o.toString()) > -1); });
     }
     registerOnChange(fn) {
         this.onChange = (_) => {

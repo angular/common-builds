@@ -1,6 +1,6 @@
-import { Directive, Host, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isPresent, isBlank, normalizeBlank } from '../facade/lang';
+import { Directive, Host, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ListWrapper, Map } from '../facade/collection';
+import { isBlank, isPresent, normalizeBlank } from '../facade/lang';
 const _WHEN_DEFAULT = new Object();
 export class SwitchView {
     constructor(_viewContainerRef, _templateRef) {

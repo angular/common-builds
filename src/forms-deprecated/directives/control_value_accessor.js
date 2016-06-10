@@ -7,5 +7,5 @@ var core_1 = require('@angular/core');
  * @experimental
  */
 exports.NG_VALUE_ACCESSOR = 
-/*@ts2dart_const*/ new core_1.OpaqueToken("NgValueAccessor");
+/*@ts2dart_const*/ new core_1.OpaqueToken('NgValueAccessor');
 //# sourceMappingURL=control_value_accessor.js.map

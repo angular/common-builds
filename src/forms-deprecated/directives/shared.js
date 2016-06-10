@@ -1,14 +1,14 @@
 "use strict";
 var collection_1 = require('../../facade/collection');
-var lang_1 = require('../../facade/lang');
 var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 var validators_1 = require('../validators');
-var default_value_accessor_1 = require('./default_value_accessor');
-var number_value_accessor_1 = require('./number_value_accessor');
 var checkbox_value_accessor_1 = require('./checkbox_value_accessor');
-var select_control_value_accessor_1 = require('./select_control_value_accessor');
-var radio_control_value_accessor_1 = require('./radio_control_value_accessor');
+var default_value_accessor_1 = require('./default_value_accessor');
 var normalize_validator_1 = require('./normalize_validator');
+var number_value_accessor_1 = require('./number_value_accessor');
+var radio_control_value_accessor_1 = require('./radio_control_value_accessor');
+var select_control_value_accessor_1 = require('./select_control_value_accessor');
 function controlPath(name, parent) {
     var p = collection_1.ListWrapper.clone(parent.path);
     p.push(name);
@@ -17,9 +17,9 @@ function controlPath(name, parent) {
 exports.controlPath = controlPath;
 function setUpControl(control, dir) {
     if (lang_1.isBlank(control))
-        _throwError(dir, "Cannot find control");
+        _throwError(dir, 'Cannot find control');
     if (lang_1.isBlank(dir.valueAccessor))
-        _throwError(dir, "No value accessor for");
+        _throwError(dir, 'No value accessor for');
     control.validator = validators_1.Validators.compose([control.validator, dir.validator]);
     control.asyncValidator = validators_1.Validators.composeAsync([control.asyncValidator, dir.asyncValidator]);
     dir.valueAccessor.writeValue(control.value);
@@ -37,13 +37,13 @@ function setUpControl(control, dir) {
 exports.setUpControl = setUpControl;
 function setUpControlGroup(control, dir) {
     if (lang_1.isBlank(control))
-        _throwError(dir, "Cannot find control");
+        _throwError(dir, 'Cannot find control');
     control.validator = validators_1.Validators.compose([control.validator, dir.validator]);
     control.asyncValidator = validators_1.Validators.composeAsync([control.asyncValidator, dir.asyncValidator]);
 }
 exports.setUpControlGroup = setUpControlGroup;
 function _throwError(dir, message) {
-    var path = dir.path.join(" -> ");
+    var path = dir.path.join(' -> ');
     throw new exceptions_1.BaseException(message + " '" + path + "'");
 }
 function composeValidators(validators) {
@@ -56,9 +56,9 @@ function composeAsyncValidators(validators) {
 }
 exports.composeAsyncValidators = composeAsyncValidators;
 function isPropertyUpdated(changes, viewModel) {
-    if (!collection_1.StringMapWrapper.contains(changes, "model"))
+    if (!collection_1.StringMapWrapper.contains(changes, 'model'))
         return false;
-    var change = changes["model"];
+    var change = changes['model'];
     if (change.isFirstChange())
         return true;
     return !lang_1.looseIdentical(viewModel, change.currentValue);
@@ -75,17 +75,16 @@ function selectValueAccessor(dir, valueAccessors) {
         if (lang_1.hasConstructor(v, default_value_accessor_1.DefaultValueAccessor)) {
             defaultAccessor = v;
         }
-        else if (lang_1.hasConstructor(v, checkbox_value_accessor_1.CheckboxControlValueAccessor) ||
-            lang_1.hasConstructor(v, number_value_accessor_1.NumberValueAccessor) ||
+        else if (lang_1.hasConstructor(v, checkbox_value_accessor_1.CheckboxControlValueAccessor) || lang_1.hasConstructor(v, number_value_accessor_1.NumberValueAccessor) ||
             lang_1.hasConstructor(v, select_control_value_accessor_1.SelectControlValueAccessor) ||
             lang_1.hasConstructor(v, radio_control_value_accessor_1.RadioControlValueAccessor)) {
             if (lang_1.isPresent(builtinAccessor))
-                _throwError(dir, "More than one built-in value accessor matches");
+                _throwError(dir, 'More than one built-in value accessor matches');
             builtinAccessor = v;
         }
         else {
             if (lang_1.isPresent(customAccessor))
-                _throwError(dir, "More than one custom value accessor matches");
+                _throwError(dir, 'More than one custom value accessor matches');
             customAccessor = v;
         }
     });
@@ -95,7 +94,7 @@ function selectValueAccessor(dir, valueAccessors) {
         return builtinAccessor;
     if (lang_1.isPresent(defaultAccessor))
         return defaultAccessor;
-    _throwError(dir, "No valid value accessor for");
+    _throwError(dir, 'No valid value accessor for');
     return null;
 }
 exports.selectValueAccessor = selectValueAccessor;

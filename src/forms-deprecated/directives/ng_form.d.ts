@@ -1,9 +1,9 @@
 import { EventEmitter } from '../../facade/async';
-import { NgControl } from './ng_control';
-import { Form } from './form_interface';
-import { NgControlGroup } from './ng_control_group';
+import { AbstractControl, Control, ControlGroup } from '../model';
 import { ControlContainer } from './control_container';
-import { AbstractControl, ControlGroup, Control } from '../model';
+import { Form } from './form_interface';
+import { NgControl } from './ng_control';
+import { NgControlGroup } from './ng_control_group';
 export declare const formDirectiveProvider: any;
 /**
  * If `NgForm` is bound in a component, `<form>` elements in that component will be

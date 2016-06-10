@@ -1,5 +1,5 @@
-import { PlatformLocation, UrlChangeListener } from './platform_location';
 import { LocationStrategy } from './location_strategy';
+import { PlatformLocation, UrlChangeListener } from './platform_location';
 /**
  * `PathLocationStrategy` is a {@link LocationStrategy} used to configure the
  * {@link Location} service to represent its state in the

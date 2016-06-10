@@ -1,7 +1,7 @@
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { isPresent } from '../facade/lang';
-import { LocationStrategy, APP_BASE_HREF } from './location_strategy';
 import { Location } from './location';
+import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
 import { PlatformLocation } from './platform_location';
 export class HashLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, _baseHref) {

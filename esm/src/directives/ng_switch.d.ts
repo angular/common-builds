@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 export declare class SwitchView {
     private _viewContainerRef;
     private _templateRef;

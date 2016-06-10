@@ -5,11 +5,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var collection_1 = require('../../facade/collection');
 var async_1 = require('../../facade/async');
-var ng_control_1 = require('./ng_control');
+var collection_1 = require('../../facade/collection');
 var validators_1 = require('../validators');
 var control_value_accessor_1 = require('./control_value_accessor');
+var ng_control_1 = require('./ng_control');
 var shared_1 = require('./shared');
 exports.formControlBinding = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -46,7 +46,9 @@ var NgFormControl = (function (_super) {
         configurable: true
     });
     Object.defineProperty(NgFormControl.prototype, "asyncValidator", {
-        get: function () { return shared_1.composeAsyncValidators(this._asyncValidators); },
+        get: function () {
+            return shared_1.composeAsyncValidators(this._asyncValidators);
+        },
         enumerable: true,
         configurable: true
     });
@@ -60,7 +62,7 @@ var NgFormControl = (function (_super) {
         async_1.ObservableWrapper.callEmit(this.update, newValue);
     };
     NgFormControl.prototype._isControlChanged = function (changes) {
-        return collection_1.StringMapWrapper.contains(changes, "form");
+        return collection_1.StringMapWrapper.contains(changes, 'form');
     };
     /** @nocollapse */
     NgFormControl.decorators = [

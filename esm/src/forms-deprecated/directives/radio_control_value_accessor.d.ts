@@ -1,4 +1,4 @@
-import { ElementRef, Renderer, OnInit, OnDestroy, Injector } from '@angular/core';
+import { ElementRef, Injector, OnDestroy, OnInit, Renderer } from '@angular/core';
 import { ControlValueAccessor } from './control_value_accessor';
 import { NgControl } from './ng_control';
 export declare const RADIO_VALUE_ACCESSOR: any;

@@ -1,6 +1,6 @@
 import { OpaqueToken } from '@angular/core';
+import { AsyncValidatorFn, ValidatorFn } from './directives/validators';
 import * as modelModule from './model';
-import { ValidatorFn, AsyncValidatorFn } from './directives/validators';
 /**
  * Providers for validators to be used for {@link Control}s in a form.
  *

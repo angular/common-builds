@@ -1,6 +1,6 @@
 import { Pipe } from '@angular/core';
-import { isStringMap } from '../facade/lang';
 import { StringMapWrapper } from '../facade/collection';
+import { isStringMap } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class I18nSelectPipe {
     transform(value, mapping) {

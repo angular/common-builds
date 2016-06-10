@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * Creates and inserts an embedded view based on a prepared `TemplateRef`.
  *

@@ -1,5 +1,5 @@
-import { KeyValueDiffers, ElementRef, Directive, Renderer } from '@angular/core';
-import { isPresent, isBlank } from '../facade/lang';
+import { Directive, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
+import { isBlank, isPresent } from '../facade/lang';
 export class NgStyle {
     constructor(_differs, _ngEl, _renderer) {
         this._differs = _differs;

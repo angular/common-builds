@@ -1,7 +1,7 @@
 import { Pipe } from '@angular/core';
-import { isNumber, isPresent, isBlank, NumberWrapper, RegExpWrapper } from '../facade/lang';
 import { BaseException } from '../facade/exceptions';
-import { NumberFormatter, NumberFormatStyle } from '../facade/intl';
+import { NumberFormatStyle, NumberFormatter } from '../facade/intl';
+import { NumberWrapper, RegExpWrapper, isBlank, isNumber, isPresent } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 var defaultLocale = 'en-US';
 var _re = RegExpWrapper.create('^(\\d+)?\\.((\\d+)(\\-(\\d+))?)?$');

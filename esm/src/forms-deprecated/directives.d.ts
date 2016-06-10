@@ -1,20 +1,20 @@
 import { Type } from '@angular/core';
-export { NgControlName } from './directives/ng_control_name';
-export { NgFormControl } from './directives/ng_form_control';
-export { NgModel } from './directives/ng_model';
-export { NgControlGroup } from './directives/ng_control_group';
-export { NgFormModel } from './directives/ng_form_model';
-export { NgForm } from './directives/ng_form';
-export { DefaultValueAccessor } from './directives/default_value_accessor';
 export { CheckboxControlValueAccessor } from './directives/checkbox_value_accessor';
-export { RadioControlValueAccessor, RadioButtonState } from './directives/radio_control_value_accessor';
-export { NumberValueAccessor } from './directives/number_value_accessor';
-export { NgControlStatus } from './directives/ng_control_status';
-export { SelectControlValueAccessor, NgSelectOption } from './directives/select_control_value_accessor';
-export { SelectMultipleControlValueAccessor, NgSelectMultipleOption } from './directives/select_multiple_control_value_accessor';
-export { RequiredValidator, MinLengthValidator, MaxLengthValidator, PatternValidator } from './directives/validators';
-export { NgControl } from './directives/ng_control';
 export { ControlValueAccessor } from './directives/control_value_accessor';
+export { DefaultValueAccessor } from './directives/default_value_accessor';
+export { NgControl } from './directives/ng_control';
+export { NgControlGroup } from './directives/ng_control_group';
+export { NgControlName } from './directives/ng_control_name';
+export { NgControlStatus } from './directives/ng_control_status';
+export { NgForm } from './directives/ng_form';
+export { NgFormControl } from './directives/ng_form_control';
+export { NgFormModel } from './directives/ng_form_model';
+export { NgModel } from './directives/ng_model';
+export { NumberValueAccessor } from './directives/number_value_accessor';
+export { RadioButtonState, RadioControlValueAccessor } from './directives/radio_control_value_accessor';
+export { NgSelectOption, SelectControlValueAccessor } from './directives/select_control_value_accessor';
+export { NgSelectMultipleOption, SelectMultipleControlValueAccessor } from './directives/select_multiple_control_value_accessor';
+export { MaxLengthValidator, MinLengthValidator, PatternValidator, RequiredValidator } from './directives/validators';
 /**
  *
  * A list of all the form directives used as part of a `@Component` annotation.

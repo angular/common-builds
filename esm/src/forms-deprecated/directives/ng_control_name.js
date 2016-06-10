@@ -1,10 +1,10 @@
-import { Directive, forwardRef, Host, SkipSelf, Inject, Optional, Self } from '@angular/core';
+import { Directive, Host, Inject, Optional, Self, SkipSelf, forwardRef } from '@angular/core';
 import { EventEmitter, ObservableWrapper } from '../../facade/async';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { ControlContainer } from './control_container';
-import { NgControl } from './ng_control';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
-import { controlPath, composeValidators, composeAsyncValidators, isPropertyUpdated, selectValueAccessor } from './shared';
-import { NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
+import { NgControl } from './ng_control';
+import { composeAsyncValidators, composeValidators, controlPath, isPropertyUpdated, selectValueAccessor } from './shared';
 export const controlNameBinding = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: NgControl,
@@ -39,7 +39,9 @@ export class NgControlName extends NgControl {
     get path() { return controlPath(this.name, this._parent); }
     get formDirective() { return this._parent.formDirective; }
     get validator() { return composeValidators(this._validators); }
-    get asyncValidator() { return composeAsyncValidators(this._asyncValidators); }
+    get asyncValidator() {
+        return composeAsyncValidators(this._asyncValidators);
+    }
     get control() { return this.formDirective.getControl(this); }
 }
 /** @nocollapse */

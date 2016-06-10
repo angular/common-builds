@@ -1,6 +1,6 @@
-import { OnInit, OnDestroy } from '@angular/core';
-import { ControlContainer } from './control_container';
+import { OnDestroy, OnInit } from '@angular/core';
 import { ControlGroup } from '../model';
+import { ControlContainer } from './control_container';
 import { Form } from './form_interface';
 import { AsyncValidatorFn, ValidatorFn } from './validators';
 export declare const controlGroupProvider: any;

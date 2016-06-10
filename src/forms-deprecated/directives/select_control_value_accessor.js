@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../facade/lang');
 var collection_1 = require('../../facade/collection');
+var lang_1 = require('../../facade/lang');
 var control_value_accessor_1 = require('./control_value_accessor');
 exports.SELECT_VALUE_ACCESSOR = {
     provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
@@ -12,11 +12,11 @@ function _buildValueString(id, value) {
     if (lang_1.isBlank(id))
         return "" + value;
     if (!lang_1.isPrimitive(value))
-        value = "Object";
+        value = 'Object';
     return lang_1.StringWrapper.slice(id + ": " + value, 0, 50);
 }
 function _extractId(valueString) {
-    return valueString.split(":")[0];
+    return valueString.split(':')[0];
 }
 var SelectControlValueAccessor = (function () {
     function SelectControlValueAccessor(_renderer, _elementRef) {

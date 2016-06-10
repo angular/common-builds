@@ -1,4 +1,4 @@
-import { Renderer, ElementRef, OnDestroy } from '@angular/core';
+import { ElementRef, OnDestroy, Renderer } from '@angular/core';
 import { ControlValueAccessor } from './control_value_accessor';
 export declare const SELECT_VALUE_ACCESSOR: any;
 /**

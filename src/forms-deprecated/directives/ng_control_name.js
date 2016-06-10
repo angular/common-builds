@@ -6,11 +6,11 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var async_1 = require('../../facade/async');
-var control_container_1 = require('./control_container');
-var ng_control_1 = require('./ng_control');
-var control_value_accessor_1 = require('./control_value_accessor');
-var shared_1 = require('./shared');
 var validators_1 = require('../validators');
+var control_container_1 = require('./control_container');
+var control_value_accessor_1 = require('./control_value_accessor');
+var ng_control_1 = require('./ng_control');
+var shared_1 = require('./shared');
 exports.controlNameBinding = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: ng_control_1.NgControl,
@@ -59,7 +59,9 @@ var NgControlName = (function (_super) {
         configurable: true
     });
     Object.defineProperty(NgControlName.prototype, "asyncValidator", {
-        get: function () { return shared_1.composeAsyncValidators(this._asyncValidators); },
+        get: function () {
+            return shared_1.composeAsyncValidators(this._asyncValidators);
+        },
         enumerable: true,
         configurable: true
     });

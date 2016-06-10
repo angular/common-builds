@@ -1,6 +1,6 @@
-import { Directive, Renderer, forwardRef, ElementRef, Input, Host, Optional } from '@angular/core';
-import { StringWrapper, isPrimitive, isPresent, isBlank, looseIdentical } from '../../facade/lang';
+import { Directive, ElementRef, Host, Input, Optional, Renderer, forwardRef } from '@angular/core';
 import { MapWrapper } from '../../facade/collection';
+import { StringWrapper, isBlank, isPresent, isPrimitive, looseIdentical } from '../../facade/lang';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 export const SELECT_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -11,11 +11,11 @@ function _buildValueString(id, value) {
     if (isBlank(id))
         return `${value}`;
     if (!isPrimitive(value))
-        value = "Object";
+        value = 'Object';
     return StringWrapper.slice(`${id}: ${value}`, 0, 50);
 }
 function _extractId(valueString) {
-    return valueString.split(":")[0];
+    return valueString.split(':')[0];
 }
 export class SelectControlValueAccessor {
     constructor(_renderer, _elementRef) {

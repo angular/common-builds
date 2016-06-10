@@ -4,10 +4,10 @@
  * This module provides a set of common Pipes.
  */
 import { AsyncPipe } from './async_pipe';
-import { SlicePipe } from './slice_pipe';
-import { ReplacePipe } from './replace_pipe';
 import { I18nPluralPipe } from './i18n_plural_pipe';
 import { I18nSelectPipe } from './i18n_select_pipe';
+import { ReplacePipe } from './replace_pipe';
+import { SlicePipe } from './slice_pipe';
 /**
  * A collection of Angular core pipes that are likely to be used in each and every
  * application.

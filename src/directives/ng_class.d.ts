@@ -1,4 +1,4 @@
-import { DoCheck, OnDestroy, ElementRef, IterableDiffers, KeyValueDiffers, Renderer } from '@angular/core';
+import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, OnDestroy, Renderer } from '@angular/core';
 /**
  * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
  * an expression's evaluation result.

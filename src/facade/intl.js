@@ -36,16 +36,11 @@ var PATTERN_ALIASES = {
         digitCondition('second', 1),
     ])),
     yMdjm: datePartGetterFactory(combine([
-        digitCondition('year', 1),
-        digitCondition('month', 1),
-        digitCondition('day', 1),
-        digitCondition('hour', 1),
-        digitCondition('minute', 1)
+        digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+        digitCondition('hour', 1), digitCondition('minute', 1)
     ])),
     yMMMMEEEEd: datePartGetterFactory(combine([
-        digitCondition('year', 1),
-        nameCondition('month', 4),
-        nameCondition('weekday', 4),
+        digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
         digitCondition('day', 1)
     ])),
     yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
@@ -161,7 +156,7 @@ function dateFormatter(format, date, locale) {
     parts.forEach(function (part) {
         fn = DATE_FORMATS[part];
         text += fn ? fn(date, locale) :
-            part === "''" ? "'" : part.replace(/(^'|'$)/g, '').replace(/''/g, "'");
+            part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
     });
     return text;
 }

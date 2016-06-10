@@ -5,9 +5,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
+var validators_1 = require('../validators');
 var control_container_1 = require('./control_container');
 var shared_1 = require('./shared');
-var validators_1 = require('../validators');
 exports.controlGroupProvider = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: control_container_1.ControlContainer,

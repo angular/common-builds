@@ -1,6 +1,6 @@
-import { Directive, ChangeDetectorRef, IterableDiffers, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isPresent, isBlank, getTypeNameForDebugging } from '../facade/lang';
+import { ChangeDetectorRef, Directive, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BaseException } from '../facade/exceptions';
+import { getTypeNameForDebugging, isBlank, isPresent } from '../facade/lang';
 export class NgForRow {
     constructor($implicit, index, count) {
         this.$implicit = $implicit;

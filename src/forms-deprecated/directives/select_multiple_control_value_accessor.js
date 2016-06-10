@@ -1,8 +1,8 @@
 "use strict";
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
+var collection_1 = require('../../facade/collection');
 var lang_1 = require('../../facade/lang');
 var control_value_accessor_1 = require('./control_value_accessor');
-var collection_1 = require('../../facade/collection');
 var SELECT_MULTIPLE_VALUE_ACCESSOR = {
     provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
     useExisting: core_1.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
@@ -14,11 +14,11 @@ function _buildValueString(id, value) {
     if (lang_1.isString(value))
         value = "'" + value + "'";
     if (!lang_1.isPrimitive(value))
-        value = "Object";
+        value = 'Object';
     return lang_1.StringWrapper.slice(id + ": " + value, 0, 50);
 }
 function _extractId(valueString) {
-    return valueString.split(":")[0];
+    return valueString.split(':')[0];
 }
 /** Mock interface for HTMLCollection */
 var HTMLCollection = (function () {
@@ -43,9 +43,7 @@ var SelectMultipleControlValueAccessor = (function () {
         var values = value;
         // convert values to ids
         var ids = values.map(function (v) { return _this._getOptionId(v); });
-        this._optionMap.forEach(function (opt, o) {
-            opt._setSelected(ids.indexOf(o.toString()) > -1);
-        });
+        this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
     };
     SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;

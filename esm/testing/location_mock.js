@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ObservableWrapper } from '../src/facade/async';
 export class SpyLocation {
     constructor() {

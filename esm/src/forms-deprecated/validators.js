@@ -1,8 +1,8 @@
 import { OpaqueToken } from '@angular/core';
-import { isBlank, isPresent, isString } from '../facade/lang';
-import { PromiseWrapper } from '../facade/promise';
 import { ObservableWrapper } from '../facade/async';
 import { StringMapWrapper } from '../facade/collection';
+import { isBlank, isPresent, isString } from '../facade/lang';
+import { PromiseWrapper } from '../facade/promise';
 /**
  * Providers for validators to be used for {@link Control}s in a form.
  *
@@ -13,7 +13,7 @@ import { StringMapWrapper } from '../facade/collection';
  * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
  * @experimental
  */
-export const NG_VALIDATORS = new OpaqueToken("NgValidators");
+export const NG_VALIDATORS = new OpaqueToken('NgValidators');
 /**
  * Providers for asynchronous validators to be used for {@link Control}s
  * in a form.
@@ -25,7 +25,7 @@ export const NG_VALIDATORS = new OpaqueToken("NgValidators");
  * @experimental
  */
 export const NG_ASYNC_VALIDATORS = 
-/*@ts2dart_const*/ new OpaqueToken("NgAsyncValidators");
+/*@ts2dart_const*/ new OpaqueToken('NgAsyncValidators');
 /**
  * Provides a set of validators used by form controls.
  *
@@ -45,8 +45,8 @@ export class Validators {
      * Validator that requires controls to have a non-empty value.
      */
     static required(control) {
-        return isBlank(control.value) || (isString(control.value) && control.value == "") ?
-            { "required": true } :
+        return isBlank(control.value) || (isString(control.value) && control.value == '') ?
+            { 'required': true } :
             null;
     }
     /**
@@ -58,7 +58,7 @@ export class Validators {
                 return null;
             var v = control.value;
             return v.length < minLength ?
-                { "minlength": { "requiredLength": minLength, "actualLength": v.length } } :
+                { 'minlength': { 'requiredLength': minLength, 'actualLength': v.length } } :
                 null;
         };
     }
@@ -71,7 +71,7 @@ export class Validators {
                 return null;
             var v = control.value;
             return v.length > maxLength ?
-                { "maxlength": { "requiredLength": maxLength, "actualLength": v.length } } :
+                { 'maxlength': { 'requiredLength': maxLength, 'actualLength': v.length } } :
                 null;
         };
     }
@@ -85,7 +85,7 @@ export class Validators {
             let regex = new RegExp(`^${pattern}$`);
             let v = control.value;
             return regex.test(v) ? null :
-                { "pattern": { "requiredPattern": `^${pattern}$`, "actualValue": v } };
+                { 'pattern': { 'requiredPattern': `^${pattern}$`, 'actualValue': v } };
         };
     }
     /**

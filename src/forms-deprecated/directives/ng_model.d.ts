@@ -1,9 +1,9 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '../../facade/async';
+import { Control } from '../model';
 import { ControlValueAccessor } from './control_value_accessor';
 import { NgControl } from './ng_control';
-import { Control } from '../model';
-import { ValidatorFn, AsyncValidatorFn } from './validators';
+import { AsyncValidatorFn, ValidatorFn } from './validators';
 export declare const formControlBinding: any;
 /**
  * Binds a domain model to a form control.

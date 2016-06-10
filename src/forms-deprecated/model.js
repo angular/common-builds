@@ -4,23 +4,23 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../facade/lang');
 var async_1 = require('../facade/async');
-var promise_1 = require('../facade/promise');
 var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var promise_1 = require('../facade/promise');
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */
-exports.VALID = "VALID";
+exports.VALID = 'VALID';
 /**
  * Indicates that a Control is invalid, i.e. that an error exists in the input value.
  */
-exports.INVALID = "INVALID";
+exports.INVALID = 'INVALID';
 /**
  * Indicates that a Control is pending, i.e. that async validation is occurring and
  * errors are not yet available for the input value.
  */
-exports.PENDING = "PENDING";
+exports.PENDING = 'PENDING';
 function isControl(control) {
     return control instanceof AbstractControl;
 }
@@ -29,12 +29,11 @@ function _find(control, path) {
     if (lang_1.isBlank(path))
         return null;
     if (!(path instanceof Array)) {
-        path = path.split("/");
+        path = path.split('/');
     }
     if (path instanceof Array && collection_1.ListWrapper.isEmpty(path))
         return null;
-    return path
-        .reduce(function (v, name) {
+    return path.reduce(function (v, name) {
         if (v instanceof ControlGroup) {
             return lang_1.isPresent(v.controls[name]) ? v.controls[name] : null;
         }

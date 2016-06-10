@@ -1,4 +1,4 @@
-import { Renderer, ElementRef } from '@angular/core';
+import { ElementRef, Renderer } from '@angular/core';
 import { ControlValueAccessor } from './control_value_accessor';
 export declare const CHECKBOX_VALUE_ACCESSOR: any;
 /**

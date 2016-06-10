@@ -1,11 +1,11 @@
-import { Directive, forwardRef, Optional, Inject, Self } from '@angular/core';
-import { PromiseWrapper, ObservableWrapper, EventEmitter } from '../../facade/async';
+import { Directive, Inject, Optional, Self, forwardRef } from '@angular/core';
+import { EventEmitter, ObservableWrapper, PromiseWrapper } from '../../facade/async';
 import { ListWrapper } from '../../facade/collection';
 import { isPresent } from '../../facade/lang';
+import { Control, ControlGroup } from '../model';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { ControlContainer } from './control_container';
-import { ControlGroup, Control } from '../model';
-import { setUpControl, setUpControlGroup, composeValidators, composeAsyncValidators } from './shared';
-import { NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
+import { composeAsyncValidators, composeValidators, setUpControl, setUpControlGroup } from './shared';
 export const formDirectiveProvider = 
 /*@ts2dart_const*/ { provide: ControlContainer, useExisting: forwardRef(() => NgForm) };
 export class NgForm extends ControlContainer {

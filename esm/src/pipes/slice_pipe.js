@@ -1,6 +1,6 @@
 import { Pipe } from '@angular/core';
-import { isBlank, isString, isArray, StringWrapper } from '../facade/lang';
 import { ListWrapper } from '../facade/collection';
+import { StringWrapper, isArray, isBlank, isString } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class SlicePipe {
     transform(value, start, end = null) {

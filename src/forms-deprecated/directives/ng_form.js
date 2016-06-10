@@ -8,10 +8,10 @@ var core_1 = require('@angular/core');
 var async_1 = require('../../facade/async');
 var collection_1 = require('../../facade/collection');
 var lang_1 = require('../../facade/lang');
-var control_container_1 = require('./control_container');
 var model_1 = require('../model');
-var shared_1 = require('./shared');
 var validators_1 = require('../validators');
+var control_container_1 = require('./control_container');
+var shared_1 = require('./shared');
 exports.formDirectiveProvider = 
 /*@ts2dart_const*/ { provide: control_container_1.ControlContainer, useExisting: core_1.forwardRef(function () { return NgForm; }) };
 var NgForm = (function (_super) {

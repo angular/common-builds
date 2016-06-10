@@ -1,9 +1,9 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../facade/lang');
-var promise_1 = require('../facade/promise');
 var async_1 = require('../facade/async');
 var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var promise_1 = require('../facade/promise');
 /**
  * Providers for validators to be used for {@link Control}s in a form.
  *
@@ -14,7 +14,7 @@ var collection_1 = require('../facade/collection');
  * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
  * @experimental
  */
-exports.NG_VALIDATORS = new core_1.OpaqueToken("NgValidators");
+exports.NG_VALIDATORS = new core_1.OpaqueToken('NgValidators');
 /**
  * Providers for asynchronous validators to be used for {@link Control}s
  * in a form.
@@ -26,7 +26,7 @@ exports.NG_VALIDATORS = new core_1.OpaqueToken("NgValidators");
  * @experimental
  */
 exports.NG_ASYNC_VALIDATORS = 
-/*@ts2dart_const*/ new core_1.OpaqueToken("NgAsyncValidators");
+/*@ts2dart_const*/ new core_1.OpaqueToken('NgAsyncValidators');
 /**
  * Provides a set of validators used by form controls.
  *
@@ -48,8 +48,8 @@ var Validators = (function () {
      * Validator that requires controls to have a non-empty value.
      */
     Validators.required = function (control) {
-        return lang_1.isBlank(control.value) || (lang_1.isString(control.value) && control.value == "") ?
-            { "required": true } :
+        return lang_1.isBlank(control.value) || (lang_1.isString(control.value) && control.value == '') ?
+            { 'required': true } :
             null;
     };
     /**
@@ -61,7 +61,7 @@ var Validators = (function () {
                 return null;
             var v = control.value;
             return v.length < minLength ?
-                { "minlength": { "requiredLength": minLength, "actualLength": v.length } } :
+                { 'minlength': { 'requiredLength': minLength, 'actualLength': v.length } } :
                 null;
         };
     };
@@ -74,7 +74,7 @@ var Validators = (function () {
                 return null;
             var v = control.value;
             return v.length > maxLength ?
-                { "maxlength": { "requiredLength": maxLength, "actualLength": v.length } } :
+                { 'maxlength': { 'requiredLength': maxLength, 'actualLength': v.length } } :
                 null;
         };
     };
@@ -88,7 +88,7 @@ var Validators = (function () {
             var regex = new RegExp("^" + pattern + "$");
             var v = control.value;
             return regex.test(v) ? null :
-                { "pattern": { "requiredPattern": "^" + pattern + "$", "actualValue": v } };
+                { 'pattern': { 'requiredPattern': "^" + pattern + "$", 'actualValue': v } };
         };
     };
     /**

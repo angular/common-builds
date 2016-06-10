@@ -1,10 +1,10 @@
-import { Directive, forwardRef, Inject, Optional, Self } from '@angular/core';
-import { StringMapWrapper } from '../../facade/collection';
+import { Directive, Inject, Optional, Self, forwardRef } from '@angular/core';
 import { EventEmitter, ObservableWrapper } from '../../facade/async';
-import { NgControl } from './ng_control';
-import { NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
+import { StringMapWrapper } from '../../facade/collection';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
-import { setUpControl, composeValidators, composeAsyncValidators, isPropertyUpdated, selectValueAccessor } from './shared';
+import { NgControl } from './ng_control';
+import { composeAsyncValidators, composeValidators, isPropertyUpdated, selectValueAccessor, setUpControl } from './shared';
 export const formControlBinding = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: NgControl,
@@ -30,14 +30,16 @@ export class NgFormControl extends NgControl {
     }
     get path() { return []; }
     get validator() { return composeValidators(this._validators); }
-    get asyncValidator() { return composeAsyncValidators(this._asyncValidators); }
+    get asyncValidator() {
+        return composeAsyncValidators(this._asyncValidators);
+    }
     get control() { return this.form; }
     viewToModelUpdate(newValue) {
         this.viewModel = newValue;
         ObservableWrapper.callEmit(this.update, newValue);
     }
     _isControlChanged(changes) {
-        return StringMapWrapper.contains(changes, "form");
+        return StringMapWrapper.contains(changes, 'form');
     }
 }
 /** @nocollapse */

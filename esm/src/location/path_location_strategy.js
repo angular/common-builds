@@ -1,9 +1,9 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { isBlank } from '../facade/lang';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { BaseException } from '../facade/exceptions';
-import { PlatformLocation } from './platform_location';
-import { LocationStrategy, APP_BASE_HREF } from './location_strategy';
+import { isBlank } from '../facade/lang';
 import { Location } from './location';
+import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
+import { PlatformLocation } from './platform_location';
 export class PathLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, href) {
         super();

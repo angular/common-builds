@@ -1,20 +1,20 @@
-import { isPresent, isBlank, normalizeBool } from '../facade/lang';
 import { EventEmitter, ObservableWrapper } from '../facade/async';
+import { ListWrapper, StringMapWrapper } from '../facade/collection';
+import { isBlank, isPresent, normalizeBool } from '../facade/lang';
 import { PromiseWrapper } from '../facade/promise';
-import { StringMapWrapper, ListWrapper } from '../facade/collection';
 /**
  * Indicates that a Control is valid, i.e. that no errors exist in the input value.
  */
-export const VALID = "VALID";
+export const VALID = 'VALID';
 /**
  * Indicates that a Control is invalid, i.e. that an error exists in the input value.
  */
-export const INVALID = "INVALID";
+export const INVALID = 'INVALID';
 /**
  * Indicates that a Control is pending, i.e. that async validation is occurring and
  * errors are not yet available for the input value.
  */
-export const PENDING = "PENDING";
+export const PENDING = 'PENDING';
 export function isControl(control) {
     return control instanceof AbstractControl;
 }
@@ -22,12 +22,11 @@ function _find(control, path) {
     if (isBlank(path))
         return null;
     if (!(path instanceof Array)) {
-        path = path.split("/");
+        path = path.split('/');
     }
     if (path instanceof Array && ListWrapper.isEmpty(path))
         return null;
-    return path
-        .reduce((v, name) => {
+    return path.reduce((v, name) => {
         if (v instanceof ControlGroup) {
             return isPresent(v.controls[name]) ? v.controls[name] : null;
         }

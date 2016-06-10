@@ -1,6 +1,6 @@
-import { Directive, ViewContainerRef, TemplateRef, ContentChildren, Attribute, Input } from '@angular/core';
-import { isPresent, NumberWrapper } from '../facade/lang';
+import { Attribute, ContentChildren, Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Map } from '../facade/collection';
+import { NumberWrapper, isPresent } from '../facade/lang';
 import { SwitchView } from './ng_switch';
 const _CATEGORY_DEFAULT = 'other';
 /**
@@ -67,7 +67,7 @@ export class NgPlural {
         return isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
     }
     /** @internal */
-    _isValueView(pluralCase) { return pluralCase.value[0] === "="; }
+    _isValueView(pluralCase) { return pluralCase.value[0] === '='; }
     /** @internal */
     _formatValue(pluralCase) {
         return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;

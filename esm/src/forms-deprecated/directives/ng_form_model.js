@@ -1,11 +1,11 @@
-import { Directive, forwardRef, Inject, Optional, Self } from '@angular/core';
-import { isBlank } from '../../facade/lang';
+import { Directive, Inject, Optional, Self, forwardRef } from '@angular/core';
+import { EventEmitter, ObservableWrapper } from '../../facade/async';
 import { ListWrapper, StringMapWrapper } from '../../facade/collection';
 import { BaseException } from '../../facade/exceptions';
-import { ObservableWrapper, EventEmitter } from '../../facade/async';
+import { isBlank } from '../../facade/lang';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validators } from '../validators';
 import { ControlContainer } from './control_container';
-import { setUpControl, setUpControlGroup, composeValidators, composeAsyncValidators } from './shared';
-import { Validators, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
+import { composeAsyncValidators, composeValidators, setUpControl, setUpControlGroup } from './shared';
 export const formDirectiveProvider = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: ControlContainer,
@@ -23,7 +23,7 @@ export class NgFormModel extends ControlContainer {
     }
     ngOnChanges(changes) {
         this._checkFormPresent();
-        if (StringMapWrapper.contains(changes, "form")) {
+        if (StringMapWrapper.contains(changes, 'form')) {
             var sync = composeValidators(this._validators);
             this.form.validator = Validators.compose([this.form.validator, sync]);
             var async = composeAsyncValidators(this._asyncValidators);

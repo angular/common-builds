@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * Removes or recreates a portion of the DOM tree based on an {expression}.
  *

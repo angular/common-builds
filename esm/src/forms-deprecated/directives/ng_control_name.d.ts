@@ -1,9 +1,9 @@
 import { OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { ControlContainer } from './control_container';
-import { NgControl } from './ng_control';
-import { ControlValueAccessor } from './control_value_accessor';
 import { Control } from '../model';
-import { ValidatorFn, AsyncValidatorFn } from './validators';
+import { ControlContainer } from './control_container';
+import { ControlValueAccessor } from './control_value_accessor';
+import { NgControl } from './ng_control';
+import { AsyncValidatorFn, ValidatorFn } from './validators';
 export declare const controlNameBinding: any;
 /**
  * Creates and binds a control with a specified name to a DOM element.

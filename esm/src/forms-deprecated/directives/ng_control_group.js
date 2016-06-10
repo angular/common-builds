@@ -1,7 +1,7 @@
-import { Directive, Optional, Inject, Host, SkipSelf, forwardRef, Self } from '@angular/core';
+import { Directive, Host, Inject, Optional, Self, SkipSelf, forwardRef } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { ControlContainer } from './control_container';
-import { controlPath, composeValidators, composeAsyncValidators } from './shared';
-import { NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '../validators';
+import { composeAsyncValidators, composeValidators, controlPath } from './shared';
 export const controlGroupProvider = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: ControlContainer,

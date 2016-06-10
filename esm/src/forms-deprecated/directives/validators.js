@@ -1,6 +1,6 @@
-import { forwardRef, Attribute, Directive } from '@angular/core';
+import { Attribute, Directive, forwardRef } from '@angular/core';
 import { NumberWrapper } from '../../facade/lang';
-import { Validators, NG_VALIDATORS } from '../validators';
+import { NG_VALIDATORS, Validators } from '../validators';
 const REQUIRED = Validators.required;
 export const REQUIRED_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -43,7 +43,7 @@ MinLengthValidator.decorators = [
 ];
 /** @nocollapse */
 MinLengthValidator.ctorParameters = [
-    { type: undefined, decorators: [{ type: Attribute, args: ["minlength",] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['minlength',] },] },
 ];
 /**
  * Provider which adds {@link MaxLengthValidator} to {@link NG_VALIDATORS}.
@@ -72,7 +72,7 @@ MaxLengthValidator.decorators = [
 ];
 /** @nocollapse */
 MaxLengthValidator.ctorParameters = [
-    { type: undefined, decorators: [{ type: Attribute, args: ["maxlength",] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['maxlength',] },] },
 ];
 export const PATTERN_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -94,6 +94,6 @@ PatternValidator.decorators = [
 ];
 /** @nocollapse */
 PatternValidator.ctorParameters = [
-    { type: undefined, decorators: [{ type: Attribute, args: ["pattern",] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['pattern',] },] },
 ];
 //# sourceMappingURL=validators.js.map

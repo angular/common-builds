@@ -5,13 +5,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../facade/lang');
+var async_1 = require('../../facade/async');
 var collection_1 = require('../../facade/collection');
 var exceptions_1 = require('../../facade/exceptions');
-var async_1 = require('../../facade/async');
+var lang_1 = require('../../facade/lang');
+var validators_1 = require('../validators');
 var control_container_1 = require('./control_container');
 var shared_1 = require('./shared');
-var validators_1 = require('../validators');
 exports.formDirectiveProvider = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
     provide: control_container_1.ControlContainer,
@@ -30,7 +30,7 @@ var NgFormModel = (function (_super) {
     }
     NgFormModel.prototype.ngOnChanges = function (changes) {
         this._checkFormPresent();
-        if (collection_1.StringMapWrapper.contains(changes, "form")) {
+        if (collection_1.StringMapWrapper.contains(changes, 'form')) {
             var sync = shared_1.composeValidators(this._validators);
             this.form.validator = validators_1.Validators.compose([this.form.validator, sync]);
             var async = shared_1.composeAsyncValidators(this._asyncValidators);

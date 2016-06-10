@@ -1,4 +1,4 @@
-import { Pipe, Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { isDate, isNumber, isString, DateWrapper, isBlank } from '../facade/lang';
 import { DateFormatter } from '../facade/intl';
 import { StringMapWrapper } from '../facade/collection';

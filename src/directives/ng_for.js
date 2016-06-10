@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../facade/lang');
 var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var NgForRow = (function () {
     function NgForRow($implicit, index, count) {
         this.$implicit = $implicit;

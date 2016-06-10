@@ -1,5 +1,5 @@
-import { ControlValueAccessor } from './control_value_accessor';
 import { AbstractControlDirective } from './abstract_control_directive';
+import { ControlValueAccessor } from './control_value_accessor';
 import { AsyncValidatorFn, ValidatorFn } from './validators';
 /**
  * A base class that all control directive extend.

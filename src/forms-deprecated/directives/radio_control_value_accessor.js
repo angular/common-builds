@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../facade/lang');
 var collection_1 = require('../../facade/collection');
+var lang_1 = require('../../facade/lang');
 var control_value_accessor_1 = require('./control_value_accessor');
 var ng_control_1 = require('./ng_control');
 exports.RADIO_VALUE_ACCESSOR = {

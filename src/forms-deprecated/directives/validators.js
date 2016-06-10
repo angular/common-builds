@@ -47,7 +47,7 @@ var MinLengthValidator = (function () {
     ];
     /** @nocollapse */
     MinLengthValidator.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Attribute, args: ["minlength",] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['minlength',] },] },
     ];
     return MinLengthValidator;
 }());
@@ -78,7 +78,7 @@ var MaxLengthValidator = (function () {
     ];
     /** @nocollapse */
     MaxLengthValidator.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Attribute, args: ["maxlength",] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['maxlength',] },] },
     ];
     return MaxLengthValidator;
 }());
@@ -102,7 +102,7 @@ var PatternValidator = (function () {
     ];
     /** @nocollapse */
     PatternValidator.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Attribute, args: ["pattern",] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['pattern',] },] },
     ];
     return PatternValidator;
 }());

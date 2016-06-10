@@ -1,4 +1,4 @@
-import { DoCheck, KeyValueDiffers, ElementRef, Renderer } from '@angular/core';
+import { DoCheck, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
 /**
  * The `NgStyle` directive changes styles based on a result of expression evaluation.
  *

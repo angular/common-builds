@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef, QueryList, AfterContentInit } from '@angular/core';
+import { AfterContentInit, QueryList, TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * @experimental
  */

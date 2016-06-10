@@ -1,5 +1,5 @@
+import { AsyncValidatorFn, ValidatorFn } from './directives/validators';
 import * as modelModule from './model';
-import { ValidatorFn, AsyncValidatorFn } from './directives/validators';
 /**
  * Creates a form object from a user-specified configuration.
  *

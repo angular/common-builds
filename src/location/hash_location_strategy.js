@@ -6,8 +6,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var lang_1 = require('../facade/lang');
-var location_strategy_1 = require('./location_strategy');
 var location_1 = require('./location');
+var location_strategy_1 = require('./location_strategy');
 var platform_location_1 = require('./platform_location');
 var HashLocationStrategy = (function (_super) {
     __extends(HashLocationStrategy, _super);

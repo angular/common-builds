@@ -1,4 +1,4 @@
-import { Directive, Renderer, ElementRef, forwardRef } from '@angular/core';
+import { Directive, ElementRef, Renderer, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 export const CHECKBOX_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

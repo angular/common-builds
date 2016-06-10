@@ -1,10 +1,10 @@
-import { SimpleChanges, OnChanges } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '../../facade/async';
-import { NgControl } from './ng_control';
-import { NgControlGroup } from './ng_control_group';
+import { Control, ControlGroup } from '../model';
 import { ControlContainer } from './control_container';
 import { Form } from './form_interface';
-import { Control, ControlGroup } from '../model';
+import { NgControl } from './ng_control';
+import { NgControlGroup } from './ng_control_group';
 export declare const formDirectiveProvider: any;
 /**
  * Binds an existing control group to a DOM element.

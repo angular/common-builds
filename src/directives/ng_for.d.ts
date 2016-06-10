@@ -1,4 +1,4 @@
-import { DoCheck, ChangeDetectorRef, IterableDiffers, ViewContainerRef, TemplateRef, TrackByFn } from '@angular/core';
+import { ChangeDetectorRef, DoCheck, IterableDiffers, TemplateRef, TrackByFn, ViewContainerRef } from '@angular/core';
 export declare class NgForRow {
     $implicit: any;
     index: number;
