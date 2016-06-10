@@ -3,7 +3,7 @@ import { NgFor } from './ng_for';
 import { NgIf } from './ng_if';
 import { NgPlural, NgPluralCase } from './ng_plural';
 import { NgStyle } from './ng_style';
-import { NgSwitch, NgSwitchDefault, NgSwitchWhen } from './ng_switch';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from './ng_switch';
 import { NgTemplateOutlet } from './ng_template_outlet';
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
@@ -54,7 +54,7 @@ export const CORE_DIRECTIVES = [
     NgTemplateOutlet,
     NgStyle,
     NgSwitch,
-    NgSwitchWhen,
+    NgSwitchCase,
     NgSwitchDefault,
     NgPlural,
     NgPluralCase,

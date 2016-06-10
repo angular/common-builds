@@ -55,7 +55,7 @@ exports.CORE_DIRECTIVES = [
     ng_template_outlet_1.NgTemplateOutlet,
     ng_style_1.NgStyle,
     ng_switch_1.NgSwitch,
-    ng_switch_1.NgSwitchWhen,
+    ng_switch_1.NgSwitchCase,
     ng_switch_1.NgSwitchDefault,
     ng_plural_1.NgPlural,
     ng_plural_1.NgPluralCase,
