@@ -8,7 +8,8 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  * Note: using the key `$implicit` in the context object will set it's value as default.
  *
  * ### Syntax
- * - `<template [ngTemplateOutlet]="templateRefExpression" [ngOutletContext]="objectExpression"></template>`
+ * - `<template [ngTemplateOutlet]="templateRefExpression"
+ * [ngOutletContext]="objectExpression"></template>`
  *
  * @experimental
  */
