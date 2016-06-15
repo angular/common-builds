@@ -13,6 +13,11 @@ export class NgForm extends ControlContainer {
         super();
         this._submitted = false;
         this.ngSubmit = new EventEmitter();
+        console.warn(`
+      *It looks like you're using the old forms module. This will be opt-in in the next RC, and
+      will eventually be removed in favor of the new forms module. For more information, see:
+      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub
+    `);
         this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
     }
     get submitted() { return this._submitted; }

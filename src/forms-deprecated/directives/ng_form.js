@@ -20,6 +20,7 @@ var NgForm = (function (_super) {
         _super.call(this);
         this._submitted = false;
         this.ngSubmit = new async_1.EventEmitter();
+        console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
         this.form = new model_1.ControlGroup({}, null, shared_1.composeValidators(validators), shared_1.composeAsyncValidators(asyncValidators));
     }
     Object.defineProperty(NgForm.prototype, "submitted", {

@@ -3585,6 +3585,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             _super.call(this);
             this._submitted = false;
             this.ngSubmit = new EventEmitter$1();
+            console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
             this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
         }
         Object.defineProperty(NgForm.prototype, "submitted", {
@@ -3776,6 +3777,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.form = null;
             this.directives = [];
             this.ngSubmit = new EventEmitter$1();
+            console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
         }
         NgFormModel.prototype.ngOnChanges = function (changes) {
             this._checkFormPresent();
