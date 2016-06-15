@@ -71,6 +71,7 @@ export declare class NgForm extends ControlContainer implements Form {
     form: ControlGroup;
     ngSubmit: EventEmitter<{}>;
     constructor(validators: any[], asyncValidators: any[]);
+    private _displayWarning();
     submitted: boolean;
     formDirective: Form;
     control: ControlGroup;

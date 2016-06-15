@@ -8,17 +8,25 @@ import { ControlContainer } from './control_container';
 import { composeAsyncValidators, composeValidators, setUpControl, setUpControlGroup } from './shared';
 export const formDirectiveProvider = 
 /*@ts2dart_const*/ { provide: ControlContainer, useExisting: forwardRef(() => NgForm) };
+let _formWarningDisplayed = false;
 export class NgForm extends ControlContainer {
     constructor(validators, asyncValidators) {
         super();
         this._submitted = false;
         this.ngSubmit = new EventEmitter();
-        console.warn(`
+        this._displayWarning();
+        this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
+    }
+    _displayWarning() {
+        // TODO(kara): Update this when the new forms module becomes the default
+        if (!_formWarningDisplayed) {
+            _formWarningDisplayed = true;
+            console.warn(`
       *It looks like you're using the old forms module. This will be opt-in in the next RC, and
       will eventually be removed in favor of the new forms module. For more information, see:
       https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub
     `);
-        this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
+        }
     }
     get submitted() { return this._submitted; }
     get formDirective() { return this; }

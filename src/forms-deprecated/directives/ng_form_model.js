@@ -17,6 +17,7 @@ exports.formDirectiveProvider =
     provide: control_container_1.ControlContainer,
     useExisting: core_1.forwardRef(function () { return NgFormModel; })
 };
+var _formModelWarningDisplayed = false;
 var NgFormModel = (function (_super) {
     __extends(NgFormModel, _super);
     function NgFormModel(_validators, _asyncValidators) {
@@ -27,8 +28,15 @@ var NgFormModel = (function (_super) {
         this.form = null;
         this.directives = [];
         this.ngSubmit = new async_1.EventEmitter();
-        console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+        this._displayWarning();
     }
+    NgFormModel.prototype._displayWarning = function () {
+        // TODO(kara): Update this when the new forms module becomes the default
+        if (!_formModelWarningDisplayed) {
+            _formModelWarningDisplayed = true;
+            console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+        }
+    };
     NgFormModel.prototype.ngOnChanges = function (changes) {
         this._checkFormPresent();
         if (collection_1.StringMapWrapper.contains(changes, 'form')) {

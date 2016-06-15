@@ -3579,15 +3579,23 @@ var __extends = (this && this.__extends) || function (d, b) {
     ];
     var formDirectiveProvider = 
     /*@ts2dart_const*/ { provide: ControlContainer, useExisting: _angular_core.forwardRef(function () { return NgForm; }) };
+    var _formWarningDisplayed = false;
     var NgForm = (function (_super) {
         __extends(NgForm, _super);
         function NgForm(validators, asyncValidators) {
             _super.call(this);
             this._submitted = false;
             this.ngSubmit = new EventEmitter$1();
-            console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+            this._displayWarning();
             this.form = new ControlGroup({}, null, composeValidators(validators), composeAsyncValidators(asyncValidators));
         }
+        NgForm.prototype._displayWarning = function () {
+            // TODO(kara): Update this when the new forms module becomes the default
+            if (!_formWarningDisplayed) {
+                _formWarningDisplayed = true;
+                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+            }
+        };
         Object.defineProperty(NgForm.prototype, "submitted", {
             get: function () { return this._submitted; },
             enumerable: true,
@@ -3767,6 +3775,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         provide: ControlContainer,
         useExisting: _angular_core.forwardRef(function () { return NgFormModel; })
     };
+    var _formModelWarningDisplayed = false;
     var NgFormModel = (function (_super) {
         __extends(NgFormModel, _super);
         function NgFormModel(_validators, _asyncValidators) {
@@ -3777,8 +3786,15 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.form = null;
             this.directives = [];
             this.ngSubmit = new EventEmitter$1();
-            console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+            this._displayWarning();
         }
+        NgFormModel.prototype._displayWarning = function () {
+            // TODO(kara): Update this when the new forms module becomes the default
+            if (!_formModelWarningDisplayed) {
+                _formModelWarningDisplayed = true;
+                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+            }
+        };
         NgFormModel.prototype.ngOnChanges = function (changes) {
             this._checkFormPresent();
             if (StringMapWrapper.contains(changes, 'form')) {
