@@ -203,6 +203,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
         NumberWrapper.isNaN = function (value) { return isNaN(value); };
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
@@ -1122,8 +1123,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (!this.supports(value)) {
                 throw new InvalidPipeArgumentException(DatePipe, value);
             }
-            if (isNumber(value)) {
-                value = DateWrapper.fromMillis(value);
+            if (NumberWrapper.isNumeric(value)) {
+                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
             }
             else if (isString(value)) {
                 value = DateWrapper.fromISOString(value);
@@ -1134,7 +1135,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             return DateFormatter.format(value, defaultLocale, pattern);
         };
         DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || isNumber(obj)) {
+            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
                 return true;
             }
             if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
