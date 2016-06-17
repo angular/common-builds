@@ -1,4 +1,4 @@
-import { Injectable, Pipe } from '@angular/core';
+import { Pipe } from '@angular/core';
 import { RegExpWrapper, StringWrapper, isBlank, isFunction, isNumber, isString } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class ReplacePipe {
@@ -39,6 +39,5 @@ export class ReplacePipe {
 /** @nocollapse */
 ReplacePipe.decorators = [
     { type: Pipe, args: [{ name: 'replace' },] },
-    { type: Injectable },
 ];
 //# sourceMappingURL=replace_pipe.js.map

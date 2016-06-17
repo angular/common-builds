@@ -933,7 +933,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     AsyncPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-        { type: _angular_core.Injectable },
     ];
     /** @nocollapse */
     AsyncPipe.ctorParameters = [
@@ -1159,9 +1158,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-        { type: _angular_core.Injectable },
     ];
-    var interpolationExp = RegExpWrapper.create('#');
+    var _INTERPOLATION_REGEXP = /#/g;
     var I18nPluralPipe = (function () {
         function I18nPluralPipe() {
         }
@@ -1173,7 +1171,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             key = value === 0 || value === 1 ? "=" + value : 'other';
             valueStr = isPresent(value) ? value.toString() : '';
-            return StringWrapper.replaceAll(pluralMap[key], interpolationExp, valueStr);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
         };
         return I18nPluralPipe;
     }());
@@ -1224,7 +1222,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
     var defaultLocale$1 = 'en-US';
-    var _re = RegExpWrapper.create('^(\\d+)?\\.((\\d+)(\\-(\\d+))?)?$');
+    var _NUMBER_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$'/g;
     /**
      * Internal function to format numbers used by Decimal, Percent and Date pipes.
      */
@@ -1238,7 +1236,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         var minInt = 1, minFraction = 0, maxFraction = 3;
         if (isPresent(digits)) {
-            var parts = RegExpWrapper.firstMatch(_re, digits);
+            var parts = RegExpWrapper.firstMatch(_NUMBER_REGEXP, digits);
             if (isBlank(parts)) {
                 throw new BaseException(digits + " is not a valid digit info for number pipes");
             }
@@ -1342,7 +1340,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     ReplacePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
-        { type: _angular_core.Injectable },
     ];
     var SlicePipe = (function () {
         function SlicePipe() {

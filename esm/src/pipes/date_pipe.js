@@ -1,4 +1,4 @@
-import { Injectable, Pipe } from '@angular/core';
+import { Pipe } from '@angular/core';
 import { isDate, isNumber, isString, DateWrapper, isBlank } from '../facade/lang';
 import { DateFormatter } from '../facade/intl';
 import { StringMapWrapper } from '../facade/collection';
@@ -47,6 +47,5 @@ DatePipe._ALIASES = {
 /** @nocollapse */
 DatePipe.decorators = [
     { type: Pipe, args: [{ name: 'date', pure: true },] },
-    { type: Injectable },
 ];
 //# sourceMappingURL=date_pipe.js.map

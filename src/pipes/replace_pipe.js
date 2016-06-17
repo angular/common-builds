@@ -41,7 +41,6 @@ var ReplacePipe = (function () {
     /** @nocollapse */
     ReplacePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'replace' },] },
-        { type: core_1.Injectable },
     ];
     return ReplacePipe;
 }());
