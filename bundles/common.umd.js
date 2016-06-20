@@ -359,7 +359,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         PromiseWrapper.scheduleMicrotask = function (computation) {
             PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
         };
-        PromiseWrapper.isPromise = function (obj) { return obj instanceof Promise; };
         PromiseWrapper.completer = function () { return new PromiseCompleter(); };
         return PromiseWrapper;
     }());
@@ -382,7 +381,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         /**
          * @deprecated - use callEmit() instead
          */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.next(value); };
+        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
         ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
         ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
@@ -2345,7 +2344,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }, control);
     }
     function toObservable(r) {
-        return PromiseWrapper.isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
+        return isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
     }
     /**
      * @experimental
@@ -3066,7 +3065,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return Validators;
     }());
     function _convertToPromise(obj) {
-        return PromiseWrapper.isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
+        return isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
     }
     function _executeValidators(control, validators) {
         return validators.map(function (v) { return v(control); });
