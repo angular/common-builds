@@ -16,10 +16,8 @@ export class ReplacePipe {
         if (!this._supportedReplacement(replacement)) {
             throw new InvalidPipeArgumentException(ReplacePipe, replacement);
         }
-        // template fails with literal RegExp e.g /pattern/igm
-        // var rgx = pattern instanceof RegExp ? pattern : RegExpWrapper.create(pattern);
         if (isFunction(replacement)) {
-            var rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
+            const rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
             return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
         }
         if (pattern instanceof RegExp) {
