@@ -1707,6 +1707,8 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
     ];
     var _CASE_DEFAULT = new Object();
+    // TODO: remove when fully deprecated
+    var _warned = false;
     var SwitchView = (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -1825,8 +1827,8 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         Object.defineProperty(NgSwitchCase.prototype, "ngSwitchWhen", {
             set: function (value) {
-                if (!this._warned) {
-                    this._warned = true;
+                if (!_warned) {
+                    _warned = true;
                     console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
                 }
                 this._switch._onCaseValueChanged(this._value, value, this._view);
