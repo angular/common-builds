@@ -7,17 +7,18 @@
  */
 "use strict";
 var core_1 = require('@angular/core');
-var collection_1 = require('../facade/collection');
 var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var I18nSelectPipe = (function () {
     function I18nSelectPipe() {
     }
     I18nSelectPipe.prototype.transform = function (value, mapping) {
+        if (lang_1.isBlank(value))
+            return '';
         if (!lang_1.isStringMap(mapping)) {
             throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(I18nSelectPipe, mapping);
         }
-        return collection_1.StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
+        return mapping.hasOwnProperty(value) ? mapping[value] : '';
     };
     /** @nocollapse */
     I18nSelectPipe.decorators = [

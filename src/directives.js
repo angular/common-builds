@@ -20,7 +20,6 @@ exports.NgFor = ng_for_1.NgFor;
 var ng_if_1 = require('./directives/ng_if');
 exports.NgIf = ng_if_1.NgIf;
 var ng_plural_1 = require('./directives/ng_plural');
-exports.NgLocalization = ng_plural_1.NgLocalization;
 exports.NgPlural = ng_plural_1.NgPlural;
 exports.NgPluralCase = ng_plural_1.NgPluralCase;
 var ng_style_1 = require('./directives/ng_style');

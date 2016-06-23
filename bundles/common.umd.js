@@ -1186,19 +1186,38 @@ var __extends = (this && this.__extends) || function (d, b) {
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
     ];
+    /**
+     * @experimental
+     */
+    var NgLocalization = (function () {
+        function NgLocalization() {
+        }
+        return NgLocalization;
+    }());
+    /**
+     * Returns the plural category for a given value.
+     * - "=value" when the case exists,
+     * - the plural category otherwise
+     *
+     * @internal
+     */
+    function getPluralCategory(value, cases, ngLocalization) {
+        var nbCase = "=" + value;
+        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+    }
     var _INTERPOLATION_REGEXP = /#/g;
     var I18nPluralPipe = (function () {
-        function I18nPluralPipe() {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
         }
         I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            var key;
-            var valueStr;
+            if (isBlank(value))
+                return '';
             if (!isStringMap(pluralMap)) {
                 throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
             }
-            key = value === 0 || value === 1 ? "=" + value : 'other';
-            valueStr = isPresent(value) ? value.toString() : '';
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, valueStr);
+            var key = getPluralCategory(value, Object.getOwnPropertyNames(pluralMap), this._localization);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
         };
         return I18nPluralPipe;
     }());
@@ -1206,14 +1225,20 @@ var __extends = (this && this.__extends) || function (d, b) {
     I18nPluralPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
     ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = [
+        { type: NgLocalization, },
+    ];
     var I18nSelectPipe = (function () {
         function I18nSelectPipe() {
         }
         I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (isBlank(value))
+                return '';
             if (!isStringMap(mapping)) {
                 throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
             }
-            return StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
         };
         return I18nSelectPipe;
     }());
@@ -1886,15 +1911,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
         { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
     ];
-    var _CATEGORY_DEFAULT = 'other';
-    /**
-     * @experimental
-     */
-    var NgLocalization = (function () {
-        function NgLocalization() {
-        }
-        return NgLocalization;
-    }());
     var NgPluralCase = (function () {
         function NgPluralCase(value, template, viewContainer) {
             this.value = value;
@@ -1915,7 +1931,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     var NgPlural = (function () {
         function NgPlural(_localization) {
             this._localization = _localization;
-            this._caseViews = new Map$1();
+            this._caseViews = {};
             this.cases = null;
         }
         Object.defineProperty(NgPlural.prototype, "ngPlural", {
@@ -1929,17 +1945,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgPlural.prototype.ngAfterContentInit = function () {
             var _this = this;
             this.cases.forEach(function (pluralCase) {
-                _this._caseViews.set(_this._formatValue(pluralCase), pluralCase._view);
+                _this._caseViews[pluralCase.value] = pluralCase._view;
             });
             this._updateView();
         };
         /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
-            var view = this._caseViews.get(this._switchValue);
-            if (!isPresent(view))
-                view = this._getCategoryView(this._switchValue);
-            this._activateView(view);
+            var key = getPluralCategory(this._switchValue, Object.getOwnPropertyNames(this._caseViews), this._localization);
+            this._activateView(this._caseViews[key]);
         };
         /** @internal */
         NgPlural.prototype._clearViews = function () {
@@ -1953,20 +1967,6 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._activeView = view;
             this._activeView.create();
         };
-        /** @internal */
-        NgPlural.prototype._getCategoryView = function (value) {
-            var category = this._localization.getPluralCategory(value);
-            var categoryView = this._caseViews.get(category);
-            return isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
-        };
-        /** @internal */
-        NgPlural.prototype._isValueView = function (pluralCase) { return pluralCase.value[0] === '='; };
-        /** @internal */
-        NgPlural.prototype._formatValue = function (pluralCase) {
-            return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;
-        };
-        /** @internal */
-        NgPlural.prototype._stripValue = function (value) { return NumberWrapper.parseInt(value.substring(1), 10); };
         return NgPlural;
     }());
     /** @nocollapse */
@@ -4692,6 +4692,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
     ];
+    exports.NgLocalization = NgLocalization;
     exports.AsyncPipe = AsyncPipe;
     exports.COMMON_PIPES = COMMON_PIPES;
     exports.DatePipe = DatePipe;
@@ -4709,7 +4710,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgIf = NgIf;
-    exports.NgLocalization = NgLocalization;
     exports.NgPlural = NgPlural;
     exports.NgPluralCase = NgPluralCase;
     exports.NgStyle = NgStyle;
