@@ -4466,13 +4466,18 @@ var __extends = (this && this.__extends) || function (d, b) {
             var browserBaseHref = this._platformStrategy.getBaseHref();
             this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
             this._platformStrategy.onPopState(function (ev) {
-                ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(), 'pop': true, 'type': ev.type });
+                ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(true), 'pop': true, 'type': ev.type });
             });
         }
         /**
          * Returns the normalized URL path.
          */
-        Location.prototype.path = function () { return this.normalize(this._platformStrategy.path()); };
+        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+        // removed.
+        Location.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            return this.normalize(this._platformStrategy.path(includeHash));
+        };
         /**
          * Normalizes the given path and compares to the current normalized path.
          */
@@ -4611,7 +4616,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._platformLocation.onHashChange(fn);
         };
         HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-        HashLocationStrategy.prototype.path = function () {
+        HashLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
             // the hash value is always prefixed with a `#`
             // and if it is empty then it will stay empty
             var path = this._platformLocation.hash;
@@ -4674,9 +4680,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
             return Location.joinWithSlash(this._baseHref, internal);
         };
-        PathLocationStrategy.prototype.path = function () {
-            return this._platformLocation.pathname +
+        PathLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            var pathname = this._platformLocation.pathname +
                 Location.normalizeQueryParams(this._platformLocation.search);
+            var hash = this._platformLocation.hash;
+            return hash && includeHash ? "" + pathname + hash : pathname;
         };
         PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
             var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));

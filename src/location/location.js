@@ -18,13 +18,18 @@ var Location = (function () {
         var browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState(function (ev) {
-            async_1.ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(), 'pop': true, 'type': ev.type });
+            async_1.ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(true), 'pop': true, 'type': ev.type });
         });
     }
     /**
      * Returns the normalized URL path.
      */
-    Location.prototype.path = function () { return this.normalize(this._platformStrategy.path()); };
+    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+    // removed.
+    Location.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
+        return this.normalize(this._platformStrategy.path(includeHash));
+    };
     /**
      * Normalizes the given path and compares to the current normalized path.
      */

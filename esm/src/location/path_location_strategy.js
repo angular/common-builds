@@ -31,9 +31,11 @@ export class PathLocationStrategy extends LocationStrategy {
     prepareExternalUrl(internal) {
         return Location.joinWithSlash(this._baseHref, internal);
     }
-    path() {
-        return this._platformLocation.pathname +
+    path(includeHash = false) {
+        const pathname = this._platformLocation.pathname +
             Location.normalizeQueryParams(this._platformLocation.search);
+        const hash = this._platformLocation.hash;
+        return hash && includeHash ? `${pathname}${hash}` : pathname;
     }
     pushState(state, title, url, queryParams) {
         var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));

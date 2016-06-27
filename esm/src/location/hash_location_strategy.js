@@ -24,7 +24,7 @@ export class HashLocationStrategy extends LocationStrategy {
         this._platformLocation.onHashChange(fn);
     }
     getBaseHref() { return this._baseHref; }
-    path() {
+    path(includeHash = false) {
         // the hash value is always prefixed with a `#`
         // and if it is empty then it will stay empty
         var path = this._platformLocation.hash;

@@ -31,7 +31,8 @@ var HashLocationStrategy = (function (_super) {
         this._platformLocation.onHashChange(fn);
     };
     HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-    HashLocationStrategy.prototype.path = function () {
+    HashLocationStrategy.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
         // the hash value is always prefixed with a `#`
         // and if it is empty then it will stay empty
         var path = this._platformLocation.hash;
