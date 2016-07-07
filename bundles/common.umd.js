@@ -984,7 +984,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return NumberFormatter;
     }());
-    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsaZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|Z|G+|w+))(.*)/;
+    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
     var PATTERN_ALIASES = {
         yMMMdjms: datePartGetterFactory(combine([
             digitCondition('year', 1),
@@ -1038,8 +1038,8 @@ var __extends = (this && this.__extends) || function (d, b) {
         EE: datePartGetterFactory(nameCondition('weekday', 2)),
         E: datePartGetterFactory(nameCondition('weekday', 1)),
         a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        Z: datePartGetterFactory({ timeZoneName: 'long' }),
-        z: datePartGetterFactory({ timeZoneName: 'short' }),
+        Z: timeZoneGetter('short'),
+        z: timeZoneGetter('long'),
         ww: datePartGetterFactory({}),
         // first Thursday of the year. not support ?
         w: datePartGetterFactory({}),
@@ -1065,6 +1065,15 @@ var __extends = (this && this.__extends) || function (d, b) {
         return function (date, locale) {
             var result = inner(date, locale);
             return result.split(' ')[0];
+        };
+    }
+    function timeZoneGetter(timezone) {
+        // To workaround `Intl` API restriction for single timezone let format with 24 hours
+        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+        return function (date, locale) {
+            var result = new Intl.DateTimeFormat(locale, format).format(date);
+            // Then extract first 3 letters that related to hours
+            return result ? result.substring(3) : '';
         };
     }
     function hour12Modify(options, value) {
