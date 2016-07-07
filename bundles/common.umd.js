@@ -1927,28 +1927,10 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
         { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
     ];
-    var NgPluralCase = (function () {
-        function NgPluralCase(value, template, viewContainer) {
-            this.value = value;
-            this._view = new SwitchView(viewContainer, template);
-        }
-        return NgPluralCase;
-    }());
-    /** @nocollapse */
-    NgPluralCase.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
-    ];
-    /** @nocollapse */
-    NgPluralCase.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
-        { type: _angular_core.TemplateRef, },
-        { type: _angular_core.ViewContainerRef, },
-    ];
     var NgPlural = (function () {
         function NgPlural(_localization) {
             this._localization = _localization;
             this._caseViews = {};
-            this.cases = null;
         }
         Object.defineProperty(NgPlural.prototype, "ngPlural", {
             set: function (value) {
@@ -1958,13 +1940,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
-        NgPlural.prototype.ngAfterContentInit = function () {
-            var _this = this;
-            this.cases.forEach(function (pluralCase) {
-                _this._caseViews[pluralCase.value] = pluralCase._view;
-            });
-            this._updateView();
-        };
+        NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
         /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
@@ -1995,9 +1971,26 @@ var __extends = (this && this.__extends) || function (d, b) {
     ];
     /** @nocollapse */
     NgPlural.propDecorators = {
-        'cases': [{ type: _angular_core.ContentChildren, args: [NgPluralCase,] },],
         'ngPlural': [{ type: _angular_core.Input },],
     };
+    var NgPluralCase = (function () {
+        function NgPluralCase(value, template, viewContainer, ngPlural) {
+            this.value = value;
+            ngPlural.addCase(value, new SwitchView(viewContainer, template));
+        }
+        return NgPluralCase;
+    }());
+    /** @nocollapse */
+    NgPluralCase.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
+        { type: _angular_core.TemplateRef, },
+        { type: _angular_core.ViewContainerRef, },
+        { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
+    ];
     var NgStyle = (function () {
         function NgStyle(_differs, _ngEl, _renderer) {
             this._differs = _differs;
