@@ -14,7 +14,7 @@ var NgStyle = (function () {
         this._ngEl = _ngEl;
         this._renderer = _renderer;
     }
-    Object.defineProperty(NgStyle.prototype, "rawStyle", {
+    Object.defineProperty(NgStyle.prototype, "ngStyle", {
         set: function (v) {
             this._rawStyle = v;
             if (lang_1.isBlank(this._differ) && lang_1.isPresent(v)) {
@@ -51,6 +51,10 @@ var NgStyle = (function () {
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
     ];
+    /** @nocollapse */
+    NgStyle.propDecorators = {
+        'ngStyle': [{ type: core_1.Input },],
+    };
     return NgStyle;
 }());
 exports.NgStyle = NgStyle;

@@ -64,7 +64,7 @@ export declare class NgStyle implements DoCheck {
     private _ngEl;
     private _renderer;
     constructor(_differs: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer);
-    rawStyle: {
+    ngStyle: {
         [key: string]: string;
     };
     ngDoCheck(): void;

@@ -1487,7 +1487,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(NgClass.prototype, "rawClass", {
+        Object.defineProperty(NgClass.prototype, "ngClass", {
             set: function (v) {
                 this._cleanupClasses(this._rawClass);
                 if (isString(v)) {
@@ -1581,7 +1581,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     NgClass.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngClass]', inputs: ['rawClass: ngClass', 'initialClasses: class'] },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
     ];
     /** @nocollapse */
     NgClass.ctorParameters = [
@@ -1590,6 +1590,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.ElementRef, },
         { type: _angular_core.Renderer, },
     ];
+    /** @nocollapse */
+    NgClass.propDecorators = {
+        'initialClasses': [{ type: _angular_core.Input, args: ['class',] },],
+        'ngClass': [{ type: _angular_core.Input },],
+    };
     var NgForRow = (function () {
         function NgForRow($implicit, index, count) {
             this.$implicit = $implicit;
@@ -1744,7 +1749,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._prevCondition = null;
         }
         Object.defineProperty(NgIf.prototype, "ngIf", {
-            set: function (newCondition /* boolean */) {
+            set: function (newCondition) {
                 if (newCondition && (isBlank(this._prevCondition) || !this._prevCondition)) {
                     this._prevCondition = true;
                     this._viewContainer.createEmbeddedView(this._templateRef);
@@ -1761,13 +1766,17 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     NgIf.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngIf]', inputs: ['ngIf'] },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
     ];
     /** @nocollapse */
     NgIf.ctorParameters = [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
     ];
+    /** @nocollapse */
+    NgIf.propDecorators = {
+        'ngIf': [{ type: _angular_core.Input },],
+    };
     var _CASE_DEFAULT = new Object();
     // TODO: remove when fully deprecated
     var _warned = false;
@@ -1783,7 +1792,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     var NgSwitch = (function () {
         function NgSwitch() {
             this._useDefault = false;
-            this._valueViews = new Map$1();
+            this._valueViews = new Map();
             this._activeViews = [];
         }
         Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
@@ -1869,8 +1878,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     NgSwitch.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
     ];
+    /** @nocollapse */
+    NgSwitch.propDecorators = {
+        'ngSwitch': [{ type: _angular_core.Input },],
+    };
     var NgSwitchCase = (function () {
         function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
             // `_CASE_DEFAULT` is used as a marker for a not yet initialized value
@@ -1903,7 +1916,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     NgSwitchCase.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]', inputs: ['ngSwitchCase', 'ngSwitchWhen'] },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]' },] },
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = [
@@ -1911,6 +1924,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.TemplateRef, },
         { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
     ];
+    /** @nocollapse */
+    NgSwitchCase.propDecorators = {
+        'ngSwitchCase': [{ type: _angular_core.Input },],
+        'ngSwitchWhen': [{ type: _angular_core.Input },],
+    };
     var NgSwitchDefault = (function () {
         function NgSwitchDefault(viewContainer, templateRef, sswitch) {
             sswitch._registerView(_CASE_DEFAULT, new SwitchView(viewContainer, templateRef));
@@ -1997,7 +2015,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._ngEl = _ngEl;
             this._renderer = _renderer;
         }
-        Object.defineProperty(NgStyle.prototype, "rawStyle", {
+        Object.defineProperty(NgStyle.prototype, "ngStyle", {
             set: function (v) {
                 this._rawStyle = v;
                 if (isBlank(this._differ) && isPresent(v)) {
@@ -2036,6 +2054,10 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.ElementRef, },
         { type: _angular_core.Renderer, },
     ];
+    /** @nocollapse */
+    NgStyle.propDecorators = {
+        'ngStyle': [{ type: _angular_core.Input },],
+    };
     var NgTemplateOutlet = (function () {
         function NgTemplateOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;

@@ -78,7 +78,7 @@ export declare class NgClass implements DoCheck, OnDestroy {
     private _rawClass;
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer);
     initialClasses: string;
-    rawClass: string | string[] | Set<string> | {
+    ngClass: string | string[] | Set<string> | {
         [key: string]: any;
     };
     ngDoCheck(): void;

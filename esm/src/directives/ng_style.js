@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Directive, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
+import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angular/core';
 import { isBlank, isPresent } from '../facade/lang';
 export class NgStyle {
     constructor(_differs, _ngEl, _renderer) {
@@ -13,7 +13,7 @@ export class NgStyle {
         this._ngEl = _ngEl;
         this._renderer = _renderer;
     }
-    set rawStyle(v) {
+    set ngStyle(v) {
         this._rawStyle = v;
         if (isBlank(this._differ) && isPresent(v)) {
             this._differ = this._differs.find(this._rawStyle).create(null);
@@ -46,4 +46,8 @@ NgStyle.ctorParameters = [
     { type: ElementRef, },
     { type: Renderer, },
 ];
+/** @nocollapse */
+NgStyle.propDecorators = {
+    'ngStyle': [{ type: Input },],
+};
 //# sourceMappingURL=ng_style.js.map
