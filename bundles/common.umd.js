@@ -2017,9 +2017,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         Object.defineProperty(NgStyle.prototype, "ngStyle", {
             set: function (v) {
-                this._rawStyle = v;
+                this._ngStyle = v;
                 if (isBlank(this._differ) && isPresent(v)) {
-                    this._differ = this._differs.find(this._rawStyle).create(null);
+                    this._differ = this._differs.find(this._ngStyle).create(null);
                 }
             },
             enumerable: true,
@@ -2027,7 +2027,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         NgStyle.prototype.ngDoCheck = function () {
             if (isPresent(this._differ)) {
-                var changes = this._differ.diff(this._rawStyle);
+                var changes = this._differ.diff(this._ngStyle);
                 if (isPresent(changes)) {
                     this._applyChanges(changes);
                 }
@@ -2046,7 +2046,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     NgStyle.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
     ];
     /** @nocollapse */
     NgStyle.ctorParameters = [

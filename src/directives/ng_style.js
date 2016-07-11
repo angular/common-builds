@@ -16,9 +16,9 @@ var NgStyle = (function () {
     }
     Object.defineProperty(NgStyle.prototype, "ngStyle", {
         set: function (v) {
-            this._rawStyle = v;
+            this._ngStyle = v;
             if (lang_1.isBlank(this._differ) && lang_1.isPresent(v)) {
-                this._differ = this._differs.find(this._rawStyle).create(null);
+                this._differ = this._differs.find(this._ngStyle).create(null);
             }
         },
         enumerable: true,
@@ -26,7 +26,7 @@ var NgStyle = (function () {
     });
     NgStyle.prototype.ngDoCheck = function () {
         if (lang_1.isPresent(this._differ)) {
-            var changes = this._differ.diff(this._rawStyle);
+            var changes = this._differ.diff(this._ngStyle);
             if (lang_1.isPresent(changes)) {
                 this._applyChanges(changes);
             }
@@ -43,7 +43,7 @@ var NgStyle = (function () {
     };
     /** @nocollapse */
     NgStyle.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
+        { type: core_1.Directive, args: [{ selector: '[ngStyle]' },] },
     ];
     /** @nocollapse */
     NgStyle.ctorParameters = [

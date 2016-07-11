@@ -14,14 +14,14 @@ export class NgStyle {
         this._renderer = _renderer;
     }
     set ngStyle(v) {
-        this._rawStyle = v;
+        this._ngStyle = v;
         if (isBlank(this._differ) && isPresent(v)) {
-            this._differ = this._differs.find(this._rawStyle).create(null);
+            this._differ = this._differs.find(this._ngStyle).create(null);
         }
     }
     ngDoCheck() {
         if (isPresent(this._differ)) {
-            var changes = this._differ.diff(this._rawStyle);
+            var changes = this._differ.diff(this._ngStyle);
             if (isPresent(changes)) {
                 this._applyChanges(changes);
             }
@@ -38,7 +38,7 @@ export class NgStyle {
 }
 /** @nocollapse */
 NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
+    { type: Directive, args: [{ selector: '[ngStyle]' },] },
 ];
 /** @nocollapse */
 NgStyle.ctorParameters = [
