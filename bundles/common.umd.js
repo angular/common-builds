@@ -2945,9 +2945,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     function setUpControl(control, dir) {
         if (isBlank(control))
-            _throwError(dir, 'Cannot find control');
+            _throwError(dir, 'Cannot find control with');
         if (isBlank(dir.valueAccessor))
-            _throwError(dir, 'No value accessor for');
+            _throwError(dir, 'No value accessor for form control with');
         control.validator = Validators.compose([control.validator, dir.validator]);
         control.asyncValidator = Validators.composeAsync([control.asyncValidator, dir.asyncValidator]);
         dir.valueAccessor.writeValue(control.value);
@@ -2964,13 +2964,22 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     function setUpControlGroup(control, dir) {
         if (isBlank(control))
-            _throwError(dir, 'Cannot find control');
+            _throwError(dir, 'Cannot find control with');
         control.validator = Validators.compose([control.validator, dir.validator]);
         control.asyncValidator = Validators.composeAsync([control.asyncValidator, dir.asyncValidator]);
     }
     function _throwError(dir, message) {
-        var path = dir.path.join(' -> ');
-        throw new BaseException(message + " '" + path + "'");
+        var messageEnd;
+        if (dir.path.length > 1) {
+            messageEnd = "path: '" + dir.path.join(' -> ') + "'";
+        }
+        else if (dir.path[0]) {
+            messageEnd = "name: '" + dir.path + "'";
+        }
+        else {
+            messageEnd = 'unspecified name';
+        }
+        throw new BaseException(message + " " + messageEnd);
     }
     function composeValidators(validators) {
         return isPresent(validators) ? Validators.compose(validators.map(normalizeValidator)) : null;
@@ -3003,12 +3012,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                 hasConstructor(v, SelectMultipleControlValueAccessor) ||
                 hasConstructor(v, RadioControlValueAccessor)) {
                 if (isPresent(builtinAccessor))
-                    _throwError(dir, 'More than one built-in value accessor matches');
+                    _throwError(dir, 'More than one built-in value accessor matches form control with');
                 builtinAccessor = v;
             }
             else {
                 if (isPresent(customAccessor))
-                    _throwError(dir, 'More than one custom value accessor matches');
+                    _throwError(dir, 'More than one custom value accessor matches form control with');
                 customAccessor = v;
             }
         });
@@ -3018,7 +3027,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             return builtinAccessor;
         if (isPresent(defaultAccessor))
             return defaultAccessor;
-        _throwError(dir, 'No valid value accessor for');
+        _throwError(dir, 'No valid value accessor for form control with');
         return null;
     }
     var controlGroupProvider = 
