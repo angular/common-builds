@@ -45,21 +45,6 @@ var NgFor = (function () {
         this._iterableDiffers = _iterableDiffers;
         this._cdr = _cdr;
     }
-    Object.defineProperty(NgFor.prototype, "ngForOf", {
-        set: function (value) {
-            this._ngForOf = value;
-            if (lang_1.isBlank(this._differ) && lang_1.isPresent(value)) {
-                try {
-                    this._differ = this._iterableDiffers.find(value).create(this._cdr, this._ngForTrackBy);
-                }
-                catch (e) {
-                    throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
-                }
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(NgFor.prototype, "ngForTemplate", {
         set: function (value) {
             if (lang_1.isPresent(value)) {
@@ -69,14 +54,23 @@ var NgFor = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgFor.prototype, "ngForTrackBy", {
-        set: function (value) { this._ngForTrackBy = value; },
-        enumerable: true,
-        configurable: true
-    });
+    NgFor.prototype.ngOnChanges = function (changes) {
+        if ('ngForOf' in changes) {
+            // React on ngForOf changes only once all inputs have been initialized
+            var value = changes['ngForOf'].currentValue;
+            if (lang_1.isBlank(this._differ) && lang_1.isPresent(value)) {
+                try {
+                    this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
+                }
+                catch (e) {
+                    throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                }
+            }
+        }
+    };
     NgFor.prototype.ngDoCheck = function () {
         if (lang_1.isPresent(this._differ)) {
-            var changes = this._differ.diff(this._ngForOf);
+            var changes = this._differ.diff(this.ngForOf);
             if (lang_1.isPresent(changes))
                 this._applyChanges(changes);
         }
@@ -105,7 +99,7 @@ var NgFor = (function () {
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange(function (record /** TODO #9100 */) {
+        changes.forEachIdentityChange(function (record) {
             var viewRef = _this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
         });
@@ -147,7 +141,7 @@ var NgFor = (function () {
     };
     /** @nocollapse */
     NgFor.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
+        { type: core_1.Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
     ];
     /** @nocollapse */
     NgFor.ctorParameters = [
@@ -156,6 +150,12 @@ var NgFor = (function () {
         { type: core_1.IterableDiffers, },
         { type: core_1.ChangeDetectorRef, },
     ];
+    /** @nocollapse */
+    NgFor.propDecorators = {
+        'ngForOf': [{ type: core_1.Input },],
+        'ngForTrackBy': [{ type: core_1.Input },],
+        'ngForTemplate': [{ type: core_1.Input },],
+    };
     return NgFor;
 }());
 exports.NgFor = NgFor;
