@@ -1293,10 +1293,14 @@ var __extends = (this && this.__extends) || function (d, b) {
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
         if (isBlank(value))
             return null;
+        // Convert strings to numbers
+        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
         if (!isNumber(value)) {
             throw new InvalidPipeArgumentException(pipe, value);
         }
-        var minInt = 1, minFraction = 0, maxFraction = 3;
+        var minInt = 1;
+        var minFraction = 0;
+        var maxFraction = 3;
         if (isPresent(digits)) {
             var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
             if (isBlank(parts)) {

@@ -21,10 +21,14 @@ function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
     if (lang_1.isBlank(value))
         return null;
+    // Convert strings to numbers
+    value = lang_1.isString(value) && lang_1.NumberWrapper.isNumeric(value) ? +value : value;
     if (!lang_1.isNumber(value)) {
         throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(pipe, value);
     }
-    var minInt = 1, minFraction = 0, maxFraction = 3;
+    var minInt = 1;
+    var minFraction = 0;
+    var maxFraction = 3;
     if (lang_1.isPresent(digits)) {
         var parts = lang_1.RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
         if (lang_1.isBlank(parts)) {

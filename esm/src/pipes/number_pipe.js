@@ -8,7 +8,7 @@
 import { Pipe } from '@angular/core';
 import { BaseException } from '../facade/exceptions';
 import { NumberFormatStyle, NumberFormatter } from '../facade/intl';
-import { NumberWrapper, RegExpWrapper, isBlank, isNumber, isPresent } from '../facade/lang';
+import { NumberWrapper, RegExpWrapper, isBlank, isNumber, isPresent, isString } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 var defaultLocale = 'en-US';
 const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
@@ -18,10 +18,14 @@ const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
 function formatNumber(pipe, value, style, digits, currency = null, currencyAsSymbol = false) {
     if (isBlank(value))
         return null;
+    // Convert strings to numbers
+    value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
     if (!isNumber(value)) {
         throw new InvalidPipeArgumentException(pipe, value);
     }
-    var minInt = 1, minFraction = 0, maxFraction = 3;
+    let minInt = 1;
+    let minFraction = 0;
+    let maxFraction = 3;
     if (isPresent(digits)) {
         var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
         if (isBlank(parts)) {
