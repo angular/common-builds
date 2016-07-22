@@ -963,18 +963,18 @@ var __extends = (this && this.__extends) || function (d, b) {
         function NumberFormatter() {
         }
         NumberFormatter.format = function (num, locale, style, _a) {
-            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
-            var options = {
+            var _b = _a === void 0 ? {} : _a, _c = _b.minimumIntegerDigits, minimumIntegerDigits = _c === void 0 ? 1 : _c, _d = _b.minimumFractionDigits, minimumFractionDigits = _d === void 0 ? 0 : _d, _e = _b.maximumFractionDigits, maximumFractionDigits = _e === void 0 ? 3 : _e, currency = _b.currency, _f = _b.currencyAsSymbol, currencyAsSymbol = _f === void 0 ? false : _f;
+            var intlOptions = {
                 minimumIntegerDigits: minimumIntegerDigits,
                 minimumFractionDigits: minimumFractionDigits,
-                maximumFractionDigits: maximumFractionDigits,
-                style: NumberFormatStyle[style].toLowerCase()
+                maximumFractionDigits: maximumFractionDigits
             };
+            intlOptions.style = NumberFormatStyle[style].toLowerCase();
             if (style == NumberFormatStyle.Currency) {
-                options.currency = currency;
-                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+                intlOptions.currency = currency;
+                intlOptions.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
             }
-            return new Intl.NumberFormat(locale, options).format(num);
+            return new Intl.NumberFormat(locale, intlOptions).format(num);
         };
         return NumberFormatter;
     }());
@@ -1285,6 +1285,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     ];
     var defaultLocale$1 = 'en-US';
     var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+    /**
+     * Internal function to format numbers used by Decimal, Percent and Date pipes.
+     */
     function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
@@ -1295,19 +1298,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         if (!isNumber(value)) {
             throw new InvalidPipeArgumentException(pipe, value);
         }
-        var minInt;
-        var minFraction;
-        var maxFraction;
-        if (style !== NumberFormatStyle.Currency) {
-            // rely on Intl default for currency
-            minInt = 1;
-            minFraction = 0;
-            maxFraction = 3;
-        }
+        var minInt = 1;
+        var minFraction = 0;
+        var maxFraction = 3;
         if (isPresent(digits)) {
             var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-            if (!parts) {
-                throw new Error(digits + " is not a valid digit info for number pipes");
+            if (isBlank(parts)) {
+                throw new BaseException(digits + " is not a valid digit info for number pipes");
             }
             if (isPresent(parts[1])) {
                 minInt = NumberWrapper.parseIntAutoRadix(parts[1]);

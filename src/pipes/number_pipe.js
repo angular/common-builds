@@ -7,11 +7,15 @@
  */
 "use strict";
 var core_1 = require('@angular/core');
+var exceptions_1 = require('../facade/exceptions');
 var intl_1 = require('../facade/intl');
 var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var defaultLocale = 'en-US';
 var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+/**
+ * Internal function to format numbers used by Decimal, Percent and Date pipes.
+ */
 function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
@@ -22,19 +26,13 @@ function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
     if (!lang_1.isNumber(value)) {
         throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(pipe, value);
     }
-    var minInt;
-    var minFraction;
-    var maxFraction;
-    if (style !== intl_1.NumberFormatStyle.Currency) {
-        // rely on Intl default for currency
-        minInt = 1;
-        minFraction = 0;
-        maxFraction = 3;
-    }
+    var minInt = 1;
+    var minFraction = 0;
+    var maxFraction = 3;
     if (lang_1.isPresent(digits)) {
         var parts = lang_1.RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-        if (!parts) {
-            throw new Error(digits + " is not a valid digit info for number pipes");
+        if (lang_1.isBlank(parts)) {
+            throw new exceptions_1.BaseException(digits + " is not a valid digit info for number pipes");
         }
         if (lang_1.isPresent(parts[1])) {
             minInt = lang_1.NumberWrapper.parseIntAutoRadix(parts[1]);
