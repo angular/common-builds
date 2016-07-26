@@ -3803,7 +3803,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             // TODO(kara): Update this when the new forms module becomes the default
             if (!_formWarningDisplayed) {
                 _formWarningDisplayed = true;
-                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/preview\n    ");
             }
         };
         Object.defineProperty(NgForm.prototype, "submitted", {
@@ -4002,7 +4002,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             // TODO(kara): Update this when the new forms module becomes the default
             if (!_formModelWarningDisplayed) {
                 _formModelWarningDisplayed = true;
-                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/u/1/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/pub\n    ");
+                console.warn("\n      *It looks like you're using the old forms module. This will be opt-in in the next RC, and\n      will eventually be removed in favor of the new forms module. For more information, see:\n      https://docs.google.com/document/d/1RIezQqE4aEhBRmArIAS1mRIZtWFf6JxN_7B4meyWK0Y/preview\n    ");
             }
         };
         NgFormModel.prototype.ngOnChanges = function (changes) {
