@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { AppModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FORM_DIRECTIVES } from './forms-deprecated/directives';
 import { RadioControlRegistry } from './forms-deprecated/directives/radio_control_value_accessor';
 import { FormBuilder } from './forms-deprecated/form_builder';
@@ -44,12 +44,12 @@ export class DeprecatedFormsModule {
 }
 /** @nocollapse */
 DeprecatedFormsModule.decorators = [
-    { type: AppModule, args: [{
+    { type: NgModule, args: [{
                 providers: [
                     FORM_PROVIDERS,
                 ],
-                directives: FORM_DIRECTIVES,
-                pipes: []
+                declarations: FORM_DIRECTIVES,
+                exports: FORM_DIRECTIVES
             },] },
 ];
 //# sourceMappingURL=forms-deprecated.js.map

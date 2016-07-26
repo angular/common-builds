@@ -87,12 +87,12 @@ var DeprecatedFormsModule = (function () {
     }
     /** @nocollapse */
     DeprecatedFormsModule.decorators = [
-        { type: core_1.AppModule, args: [{
+        { type: core_1.NgModule, args: [{
                     providers: [
                         exports.FORM_PROVIDERS,
                     ],
-                    directives: directives_1.FORM_DIRECTIVES,
-                    pipes: []
+                    declarations: directives_1.FORM_DIRECTIVES,
+                    exports: directives_1.FORM_DIRECTIVES
                 },] },
     ];
     return DeprecatedFormsModule;

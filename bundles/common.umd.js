@@ -85,11 +85,11 @@ var __extends = (this && this.__extends) || function (d, b) {
         if (token === undefined || token === null) {
             return '' + token;
         }
-        if (token.name) {
-            return token.name;
-        }
         if (token.overriddenName) {
             return token.overriddenName;
+        }
+        if (token.name) {
+            return token.name;
         }
         var res = token.toString();
         var newLineIndex = res.indexOf('\n');
@@ -325,183 +325,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function hasConstructor(value, type) {
         return value.constructor === type;
     }
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var PromiseCompleter = (function () {
-        function PromiseCompleter() {
-            var _this = this;
-            this.promise = new Promise(function (res, rej) {
-                _this.resolve = res;
-                _this.reject = rej;
-            });
-        }
-        return PromiseCompleter;
-    }());
-    var PromiseWrapper = (function () {
-        function PromiseWrapper() {
-        }
-        PromiseWrapper.resolve = function (obj) { return Promise.resolve(obj); };
-        PromiseWrapper.reject = function (obj, _) { return Promise.reject(obj); };
-        // Note: We can't rename this method into `catch`, as this is not a valid
-        // method name in Dart.
-        PromiseWrapper.catchError = function (promise, onError) {
-            return promise.catch(onError);
-        };
-        PromiseWrapper.all = function (promises) {
-            if (promises.length == 0)
-                return Promise.resolve([]);
-            return Promise.all(promises);
-        };
-        PromiseWrapper.then = function (promise, success, rejection) {
-            return promise.then(success, rejection);
-        };
-        PromiseWrapper.wrap = function (computation) {
-            return new Promise(function (res, rej) {
-                try {
-                    res(computation());
-                }
-                catch (e) {
-                    rej(e);
-                }
-            });
-        };
-        PromiseWrapper.scheduleMicrotask = function (computation) {
-            PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
-        };
-        PromiseWrapper.completer = function () { return new PromiseCompleter(); };
-        return PromiseWrapper;
-    }());
-    var ObservableWrapper = (function () {
-        function ObservableWrapper() {
-        }
-        // TODO(vsavkin): when we use rxnext, try inferring the generic type from the first arg
-        ObservableWrapper.subscribe = function (emitter, onNext, onError, onComplete) {
-            if (onComplete === void 0) { onComplete = function () { }; }
-            onError = (typeof onError === 'function') && onError || noop;
-            onComplete = (typeof onComplete === 'function') && onComplete || noop;
-            return emitter.subscribe({ next: onNext, error: onError, complete: onComplete });
-        };
-        ObservableWrapper.isObservable = function (obs) { return !!obs.subscribe; };
-        /**
-         * Returns whether `obs` has any subscribers listening to events.
-         */
-        ObservableWrapper.hasSubscribers = function (obs) { return obs.observers.length > 0; };
-        ObservableWrapper.dispose = function (subscription) { subscription.unsubscribe(); };
-        /**
-         * @deprecated - use callEmit() instead
-         */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
-        ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
-        ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
-        ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
-        ObservableWrapper.fromPromise = function (promise) {
-            return rxjs_observable_PromiseObservable.PromiseObservable.create(promise);
-        };
-        ObservableWrapper.toPromise = function (obj) { return rxjs_operator_toPromise.toPromise.call(obj); };
-        return ObservableWrapper;
-    }());
-    /**
-     * Use by directives and components to emit custom Events.
-     *
-     * ### Examples
-     *
-     * In the following example, `Zippy` alternatively emits `open` and `close` events when its
-     * title gets clicked:
-     *
-     * ```
-     * @Component({
-     *   selector: 'zippy',
-     *   template: `
-     *   <div class="zippy">
-     *     <div (click)="toggle()">Toggle</div>
-     *     <div [hidden]="!visible">
-     *       <ng-content></ng-content>
-     *     </div>
-     *  </div>`})
-     * export class Zippy {
-     *   visible: boolean = true;
-     *   @Output() open: EventEmitter<any> = new EventEmitter();
-     *   @Output() close: EventEmitter<any> = new EventEmitter();
-     *
-     *   toggle() {
-     *     this.visible = !this.visible;
-     *     if (this.visible) {
-     *       this.open.emit(null);
-     *     } else {
-     *       this.close.emit(null);
-     *     }
-     *   }
-     * }
-     * ```
-     *
-     * The events payload can be accessed by the parameter `$event` on the components output event
-     * handler:
-     *
-     * ```
-     * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
-     * ```
-     *
-     * Uses Rx.Observable but provides an adapter to make it work as specified here:
-     * https://github.com/jhusain/observable-spec
-     *
-     * Once a reference implementation of the spec is available, switch to it.
-     * @stable
-     */
-    var EventEmitter$1 = (function (_super) {
-        __extends(EventEmitter$1, _super);
-        /**
-         * Creates an instance of [EventEmitter], which depending on [isAsync],
-         * delivers events synchronously or asynchronously.
-         */
-        function EventEmitter$1(isAsync) {
-            if (isAsync === void 0) { isAsync = false; }
-            _super.call(this);
-            this.__isAsync = isAsync;
-        }
-        EventEmitter$1.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
-        /**
-         * @deprecated - use .emit(value) instead
-         */
-        EventEmitter$1.prototype.next = function (value) { _super.prototype.next.call(this, value); };
-        EventEmitter$1.prototype.subscribe = function (generatorOrNext, error, complete) {
-            var schedulerFn;
-            var errorFn = function (err) { return null; };
-            var completeFn = function () { return null; };
-            if (generatorOrNext && typeof generatorOrNext === 'object') {
-                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
-                    setTimeout(function () { return generatorOrNext.next(value); });
-                } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
-                if (generatorOrNext.error) {
-                    errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
-                        function (err) { generatorOrNext.error(err); };
-                }
-                if (generatorOrNext.complete) {
-                    completeFn = this.__isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
-                        function () { generatorOrNext.complete(); };
-                }
-            }
-            else {
-                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
-                    setTimeout(function () { return generatorOrNext(value); });
-                } : function (value /** TODO #9100 */) { generatorOrNext(value); };
-                if (error) {
-                    errorFn =
-                        this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
-                }
-                if (complete) {
-                    completeFn =
-                        this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
-                }
-            }
-            return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
-        };
-        return EventEmitter$1;
-    }(rxjs_Subject.Subject));
     var Map$1 = global$1.Map;
     var Set$1 = global$1.Set;
     // Safari and Internet Explorer do not support the iterable parameter to the
@@ -818,658 +641,6 @@ var __extends = (this && this.__extends) || function (d, b) {
             };
         }
     })();
-    /**
-     * @stable
-     */
-    var BaseException = (function (_super) {
-        __extends(BaseException, _super);
-        function BaseException(message) {
-            if (message === void 0) { message = '--'; }
-            _super.call(this, message);
-            this.message = message;
-            this.stack = (new Error(message)).stack;
-        }
-        BaseException.prototype.toString = function () { return this.message; };
-        return BaseException;
-    }(Error));
-    function unimplemented() {
-        throw new BaseException('unimplemented');
-    }
-    var InvalidPipeArgumentException = (function (_super) {
-        __extends(InvalidPipeArgumentException, _super);
-        function InvalidPipeArgumentException(type, value) {
-            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
-        }
-        return InvalidPipeArgumentException;
-    }(BaseException));
-    var ObservableStrategy = (function () {
-        function ObservableStrategy() {
-        }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return ObservableWrapper.subscribe(async, updateLatestValue, function (e) { throw e; });
-        };
-        ObservableStrategy.prototype.dispose = function (subscription) { ObservableWrapper.dispose(subscription); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { ObservableWrapper.dispose(subscription); };
-        return ObservableStrategy;
-    }());
-    var PromiseStrategy = (function () {
-        function PromiseStrategy() {
-        }
-        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) { throw e; });
-        };
-        PromiseStrategy.prototype.dispose = function (subscription) { };
-        PromiseStrategy.prototype.onDestroy = function (subscription) { };
-        return PromiseStrategy;
-    }());
-    var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
-    var AsyncPipe = (function () {
-        function AsyncPipe(_ref) {
-            /** @internal */
-            this._latestValue = null;
-            /** @internal */
-            this._latestReturnedValue = null;
-            /** @internal */
-            this._subscription = null;
-            /** @internal */
-            this._obj = null;
-            this._strategy = null;
-            this._ref = _ref;
-        }
-        AsyncPipe.prototype.ngOnDestroy = function () {
-            if (isPresent(this._subscription)) {
-                this._dispose();
-            }
-        };
-        AsyncPipe.prototype.transform = function (obj) {
-            if (isBlank(this._obj)) {
-                if (isPresent(obj)) {
-                    this._subscribe(obj);
-                }
-                this._latestReturnedValue = this._latestValue;
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform(obj);
-            }
-            if (this._latestValue === this._latestReturnedValue) {
-                return this._latestReturnedValue;
-            }
-            else {
-                this._latestReturnedValue = this._latestValue;
-                return _angular_core.WrappedValue.wrap(this._latestValue);
-            }
-        };
-        /** @internal */
-        AsyncPipe.prototype._subscribe = function (obj) {
-            var _this = this;
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
-        };
-        /** @internal */
-        AsyncPipe.prototype._selectStrategy = function (obj) {
-            if (isPromise(obj)) {
-                return _promiseStrategy;
-            }
-            else if (ObservableWrapper.isObservable(obj)) {
-                return _observableStrategy;
-            }
-            else {
-                throw new InvalidPipeArgumentException(AsyncPipe, obj);
-            }
-        };
-        /** @internal */
-        AsyncPipe.prototype._dispose = function () {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
-        };
-        /** @internal */
-        AsyncPipe.prototype._updateLatestValue = function (async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
-            }
-        };
-        return AsyncPipe;
-    }());
-    /** @nocollapse */
-    AsyncPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-    ];
-    /** @nocollapse */
-    AsyncPipe.ctorParameters = [
-        { type: _angular_core.ChangeDetectorRef, },
-    ];
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var NumberFormatStyle;
-    (function (NumberFormatStyle) {
-        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
-        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
-        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
-    })(NumberFormatStyle || (NumberFormatStyle = {}));
-    var NumberFormatter = (function () {
-        function NumberFormatter() {
-        }
-        NumberFormatter.format = function (num, locale, style, _a) {
-            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
-            var options = {
-                minimumIntegerDigits: minimumIntegerDigits,
-                minimumFractionDigits: minimumFractionDigits,
-                maximumFractionDigits: maximumFractionDigits,
-                style: NumberFormatStyle[style].toLowerCase()
-            };
-            if (style == NumberFormatStyle.Currency) {
-                options.currency = currency;
-                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
-            }
-            return new Intl.NumberFormat(locale, options).format(num);
-        };
-        return NumberFormatter;
-    }());
-    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-    var PATTERN_ALIASES = {
-        yMMMdjms: datePartGetterFactory(combine([
-            digitCondition('year', 1),
-            nameCondition('month', 3),
-            digitCondition('day', 1),
-            digitCondition('hour', 1),
-            digitCondition('minute', 1),
-            digitCondition('second', 1),
-        ])),
-        yMdjm: datePartGetterFactory(combine([
-            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
-            digitCondition('hour', 1), digitCondition('minute', 1)
-        ])),
-        yMMMMEEEEd: datePartGetterFactory(combine([
-            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
-            digitCondition('day', 1)
-        ])),
-        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
-        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
-        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
-        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
-        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
-    };
-    var DATE_FORMATS = {
-        yyyy: datePartGetterFactory(digitCondition('year', 4)),
-        yy: datePartGetterFactory(digitCondition('year', 2)),
-        y: datePartGetterFactory(digitCondition('year', 1)),
-        MMMM: datePartGetterFactory(nameCondition('month', 4)),
-        MMM: datePartGetterFactory(nameCondition('month', 3)),
-        MM: datePartGetterFactory(digitCondition('month', 2)),
-        M: datePartGetterFactory(digitCondition('month', 1)),
-        LLLL: datePartGetterFactory(nameCondition('month', 4)),
-        dd: datePartGetterFactory(digitCondition('day', 2)),
-        d: datePartGetterFactory(digitCondition('day', 1)),
-        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
-        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
-        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
-        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        jj: datePartGetterFactory(digitCondition('hour', 2)),
-        j: datePartGetterFactory(digitCondition('hour', 1)),
-        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
-        m: datePartGetterFactory(digitCondition('minute', 1)),
-        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
-        s: datePartGetterFactory(digitCondition('second', 1)),
-        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
-        // we can be just safely rely on using `sss` since we currently don't support single or two digit
-        // fractions
-        sss: datePartGetterFactory(digitCondition('second', 3)),
-        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
-        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
-        EE: datePartGetterFactory(nameCondition('weekday', 2)),
-        E: datePartGetterFactory(nameCondition('weekday', 1)),
-        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        Z: timeZoneGetter('short'),
-        z: timeZoneGetter('long'),
-        ww: datePartGetterFactory({}),
-        // first Thursday of the year. not support ?
-        w: datePartGetterFactory({}),
-        // of the year not support ?
-        G: datePartGetterFactory(nameCondition('era', 1)),
-        GG: datePartGetterFactory(nameCondition('era', 2)),
-        GGG: datePartGetterFactory(nameCondition('era', 3)),
-        GGGG: datePartGetterFactory(nameCondition('era', 4))
-    };
-    function digitModifier(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.length == 1 ? '0' + result : result;
-        };
-    }
-    function hourClockExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[1];
-        };
-    }
-    function hourExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[0];
-        };
-    }
-    function timeZoneGetter(timezone) {
-        // To workaround `Intl` API restriction for single timezone let format with 24 hours
-        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
-        return function (date, locale) {
-            var result = new Intl.DateTimeFormat(locale, format).format(date);
-            // Then extract first 3 letters that related to hours
-            return result ? result.substring(3) : '';
-        };
-    }
-    function hour12Modify(options, value) {
-        options.hour12 = value;
-        return options;
-    }
-    function digitCondition(prop, len) {
-        var result = {};
-        result[prop] = len == 2 ? '2-digit' : 'numeric';
-        return result;
-    }
-    function nameCondition(prop, len) {
-        var result = {};
-        result[prop] = len < 4 ? 'short' : 'long';
-        return result;
-    }
-    function combine(options) {
-        var result = {};
-        options.forEach(function (option) { Object.assign(result, option); });
-        return result;
-    }
-    function datePartGetterFactory(ret) {
-        return function (date, locale) {
-            return new Intl.DateTimeFormat(locale, ret).format(date);
-        };
-    }
-    var datePartsFormatterCache = new Map();
-    function dateFormatter(format, date, locale) {
-        var text = '';
-        var match;
-        var fn;
-        var parts = [];
-        if (PATTERN_ALIASES[format]) {
-            return PATTERN_ALIASES[format](date, locale);
-        }
-        if (datePartsFormatterCache.has(format)) {
-            parts = datePartsFormatterCache.get(format);
-        }
-        else {
-            var matchs = DATE_FORMATS_SPLIT.exec(format);
-            while (format) {
-                match = DATE_FORMATS_SPLIT.exec(format);
-                if (match) {
-                    parts = concat(parts, match, 1);
-                    format = parts.pop();
-                }
-                else {
-                    parts.push(format);
-                    format = null;
-                }
-            }
-            datePartsFormatterCache.set(format, parts);
-        }
-        parts.forEach(function (part) {
-            fn = DATE_FORMATS[part];
-            text += fn ? fn(date, locale) :
-                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-        });
-        return text;
-    }
-    var slice = [].slice;
-    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
-        return array1.concat(slice.call(array2, index));
-    }
-    var DateFormatter = (function () {
-        function DateFormatter() {
-        }
-        DateFormatter.format = function (date, locale, pattern) {
-            return dateFormatter(pattern, date, locale);
-        };
-        return DateFormatter;
-    }());
-    // TODO: move to a global configurable location along with other i18n components.
-    var defaultLocale = 'en-US';
-    var DatePipe = (function () {
-        function DatePipe() {
-        }
-        DatePipe.prototype.transform = function (value, pattern) {
-            if (pattern === void 0) { pattern = 'mediumDate'; }
-            if (isBlank(value))
-                return null;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(DatePipe, value);
-            }
-            if (NumberWrapper.isNumeric(value)) {
-                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
-            }
-            else if (isString(value)) {
-                value = DateWrapper.fromISOString(value);
-            }
-            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
-                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
-            }
-            return DateFormatter.format(value, defaultLocale, pattern);
-        };
-        DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
-                return true;
-            }
-            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
-                return true;
-            }
-            return false;
-        };
-        return DatePipe;
-    }());
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
-    };
-    /** @nocollapse */
-    DatePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    /**
-     * @experimental
-     */
-    var NgLocalization = (function () {
-        function NgLocalization() {
-        }
-        return NgLocalization;
-    }());
-    /**
-     * Returns the plural category for a given value.
-     * - "=value" when the case exists,
-     * - the plural category otherwise
-     *
-     * @internal
-     */
-    function getPluralCategory(value, cases, ngLocalization) {
-        var nbCase = "=" + value;
-        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
-    }
-    var _INTERPOLATION_REGEXP = /#/g;
-    var I18nPluralPipe = (function () {
-        function I18nPluralPipe(_localization) {
-            this._localization = _localization;
-        }
-        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(pluralMap)) {
-                throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
-            }
-            var key = getPluralCategory(value, Object.getOwnPropertyNames(pluralMap), this._localization);
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
-        };
-        return I18nPluralPipe;
-    }());
-    /** @nocollapse */
-    I18nPluralPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nPluralPipe.ctorParameters = [
-        { type: NgLocalization, },
-    ];
-    var I18nSelectPipe = (function () {
-        function I18nSelectPipe() {
-        }
-        I18nSelectPipe.prototype.transform = function (value, mapping) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(mapping)) {
-                throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
-            }
-            return mapping.hasOwnProperty(value) ? mapping[value] : '';
-        };
-        return I18nSelectPipe;
-    }());
-    /** @nocollapse */
-    I18nSelectPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    ];
-    var JsonPipe = (function () {
-        function JsonPipe() {
-        }
-        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
-        return JsonPipe;
-    }());
-    /** @nocollapse */
-    JsonPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-    ];
-    var LowerCasePipe = (function () {
-        function LowerCasePipe() {
-        }
-        LowerCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentException(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
-        };
-        return LowerCasePipe;
-    }());
-    /** @nocollapse */
-    LowerCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-    ];
-    var defaultLocale$1 = 'en-US';
-    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
-    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
-        if (currency === void 0) { currency = null; }
-        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-        if (isBlank(value))
-            return null;
-        // Convert strings to numbers
-        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
-        if (!isNumber(value)) {
-            throw new InvalidPipeArgumentException(pipe, value);
-        }
-        var minInt;
-        var minFraction;
-        var maxFraction;
-        if (style !== NumberFormatStyle.Currency) {
-            // rely on Intl default for currency
-            minInt = 1;
-            minFraction = 0;
-            maxFraction = 3;
-        }
-        if (isPresent(digits)) {
-            var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-            if (!parts) {
-                throw new Error(digits + " is not a valid digit info for number pipes");
-            }
-            if (isPresent(parts[1])) {
-                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
-            }
-            if (isPresent(parts[3])) {
-                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
-            }
-            if (isPresent(parts[5])) {
-                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
-            }
-        }
-        return NumberFormatter.format(value, defaultLocale$1, style, {
-            minimumIntegerDigits: minInt,
-            minimumFractionDigits: minFraction,
-            maximumFractionDigits: maxFraction,
-            currency: currency,
-            currencyAsSymbol: currencyAsSymbol
-        });
-    }
-    var DecimalPipe = (function () {
-        function DecimalPipe() {
-        }
-        DecimalPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
-        };
-        return DecimalPipe;
-    }());
-    /** @nocollapse */
-    DecimalPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-    ];
-    var PercentPipe = (function () {
-        function PercentPipe() {
-        }
-        PercentPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
-        };
-        return PercentPipe;
-    }());
-    /** @nocollapse */
-    PercentPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-    ];
-    var CurrencyPipe = (function () {
-        function CurrencyPipe() {
-        }
-        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
-            if (currencyCode === void 0) { currencyCode = 'USD'; }
-            if (symbolDisplay === void 0) { symbolDisplay = false; }
-            if (digits === void 0) { digits = null; }
-            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-        };
-        return CurrencyPipe;
-    }());
-    /** @nocollapse */
-    CurrencyPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-    ];
-    var ReplacePipe = (function () {
-        function ReplacePipe() {
-        }
-        ReplacePipe.prototype.transform = function (value, pattern, replacement) {
-            if (isBlank(value)) {
-                return value;
-            }
-            if (!this._supportedInput(value)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, value);
-            }
-            var input = value.toString();
-            if (!this._supportedPattern(pattern)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, pattern);
-            }
-            if (!this._supportedReplacement(replacement)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, replacement);
-            }
-            if (isFunction(replacement)) {
-                var rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
-                return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
-            }
-            if (pattern instanceof RegExp) {
-                // use the replaceAll variant
-                return StringWrapper.replaceAll(input, pattern, replacement);
-            }
-            return StringWrapper.replace(input, pattern, replacement);
-        };
-        ReplacePipe.prototype._supportedInput = function (input) { return isString(input) || isNumber(input); };
-        ReplacePipe.prototype._supportedPattern = function (pattern) {
-            return isString(pattern) || pattern instanceof RegExp;
-        };
-        ReplacePipe.prototype._supportedReplacement = function (replacement) {
-            return isString(replacement) || isFunction(replacement);
-        };
-        return ReplacePipe;
-    }());
-    /** @nocollapse */
-    ReplacePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
-    ];
-    var SlicePipe = (function () {
-        function SlicePipe() {
-        }
-        SlicePipe.prototype.transform = function (value, start, end) {
-            if (end === void 0) { end = null; }
-            if (isBlank(value))
-                return value;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(SlicePipe, value);
-            }
-            if (isString(value)) {
-                return StringWrapper.slice(value, start, end);
-            }
-            return ListWrapper.slice(value, start, end);
-        };
-        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
-        return SlicePipe;
-    }());
-    /** @nocollapse */
-    SlicePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-    ];
-    var UpperCasePipe = (function () {
-        function UpperCasePipe() {
-        }
-        UpperCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentException(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        return UpperCasePipe;
-    }());
-    /** @nocollapse */
-    UpperCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-    ];
-    /**
-     * A collection of Angular core pipes that are likely to be used in each and every
-     * application.
-     *
-     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
-     * property of the `@Component` decorator.
-     *
-     * @experimental Contains i18n pipes which are experimental
-     */
-    var COMMON_PIPES = [
-        AsyncPipe,
-        UpperCasePipe,
-        LowerCasePipe,
-        JsonPipe,
-        SlicePipe,
-        DecimalPipe,
-        PercentPipe,
-        CurrencyPipe,
-        DatePipe,
-        ReplacePipe,
-        I18nPluralPipe,
-        I18nSelectPipe,
-    ];
     var NgClass = (function () {
         function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
             this._iterableDiffers = _iterableDiffers;
@@ -1596,6 +767,23 @@ var __extends = (this && this.__extends) || function (d, b) {
         'initialClasses': [{ type: _angular_core.Input, args: ['class',] },],
         'ngClass': [{ type: _angular_core.Input },],
     };
+    /**
+     * @stable
+     */
+    var BaseException = (function (_super) {
+        __extends(BaseException, _super);
+        function BaseException(message) {
+            if (message === void 0) { message = '--'; }
+            _super.call(this, message);
+            this.message = message;
+            this.stack = (new Error(message)).stack;
+        }
+        BaseException.prototype.toString = function () { return this.message; };
+        return BaseException;
+    }(Error));
+    function unimplemented() {
+        throw new BaseException('unimplemented');
+    }
     var NgForRow = (function () {
         function NgForRow($implicit, index, count) {
             this.$implicit = $implicit;
@@ -1778,6 +966,32 @@ var __extends = (this && this.__extends) || function (d, b) {
     NgIf.propDecorators = {
         'ngIf': [{ type: _angular_core.Input },],
     };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @experimental
+     */
+    var NgLocalization = (function () {
+        function NgLocalization() {
+        }
+        return NgLocalization;
+    }());
+    /**
+     * Returns the plural category for a given value.
+     * - "=value" when the case exists,
+     * - the plural category otherwise
+     *
+     * @internal
+     */
+    function getPluralCategory(value, cases, ngLocalization) {
+        var nbCase = "=" + value;
+        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+    }
     var _CASE_DEFAULT = new Object();
     // TODO: remove when fully deprecated
     var _warned = false;
@@ -2161,6 +1375,838 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgSwitchDefault,
         NgPlural,
         NgPluralCase,
+    ];
+    /**
+     * A collection of Angular core directives that are likely to be used in each and every Angular
+     * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
+     * NgModel).
+     *
+     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
+     * property of the `@Component` decorator.
+     *
+     * ### Example
+     *
+     * Instead of writing:
+     *
+     * ```typescript
+     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm} from
+     * '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm,
+     * OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     * one could import all the common directives at once:
+     *
+     * ```typescript
+     * import {COMMON_DIRECTIVES} from '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [COMMON_DIRECTIVES, OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     *
+     * @experimental Contains forms which are experimental.
+     */
+    var COMMON_DIRECTIVES = [CORE_DIRECTIVES];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var PromiseCompleter = (function () {
+        function PromiseCompleter() {
+            var _this = this;
+            this.promise = new Promise(function (res, rej) {
+                _this.resolve = res;
+                _this.reject = rej;
+            });
+        }
+        return PromiseCompleter;
+    }());
+    var PromiseWrapper = (function () {
+        function PromiseWrapper() {
+        }
+        PromiseWrapper.resolve = function (obj) { return Promise.resolve(obj); };
+        PromiseWrapper.reject = function (obj, _) { return Promise.reject(obj); };
+        // Note: We can't rename this method into `catch`, as this is not a valid
+        // method name in Dart.
+        PromiseWrapper.catchError = function (promise, onError) {
+            return promise.catch(onError);
+        };
+        PromiseWrapper.all = function (promises) {
+            if (promises.length == 0)
+                return Promise.resolve([]);
+            return Promise.all(promises);
+        };
+        PromiseWrapper.then = function (promise, success, rejection) {
+            return promise.then(success, rejection);
+        };
+        PromiseWrapper.wrap = function (computation) {
+            return new Promise(function (res, rej) {
+                try {
+                    res(computation());
+                }
+                catch (e) {
+                    rej(e);
+                }
+            });
+        };
+        PromiseWrapper.scheduleMicrotask = function (computation) {
+            PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
+        };
+        PromiseWrapper.completer = function () { return new PromiseCompleter(); };
+        return PromiseWrapper;
+    }());
+    var ObservableWrapper = (function () {
+        function ObservableWrapper() {
+        }
+        // TODO(vsavkin): when we use rxnext, try inferring the generic type from the first arg
+        ObservableWrapper.subscribe = function (emitter, onNext, onError, onComplete) {
+            if (onComplete === void 0) { onComplete = function () { }; }
+            onError = (typeof onError === 'function') && onError || noop;
+            onComplete = (typeof onComplete === 'function') && onComplete || noop;
+            return emitter.subscribe({ next: onNext, error: onError, complete: onComplete });
+        };
+        ObservableWrapper.isObservable = function (obs) { return !!obs.subscribe; };
+        /**
+         * Returns whether `obs` has any subscribers listening to events.
+         */
+        ObservableWrapper.hasSubscribers = function (obs) { return obs.observers.length > 0; };
+        ObservableWrapper.dispose = function (subscription) { subscription.unsubscribe(); };
+        /**
+         * @deprecated - use callEmit() instead
+         */
+        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
+        ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
+        ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
+        ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
+        ObservableWrapper.fromPromise = function (promise) {
+            return rxjs_observable_PromiseObservable.PromiseObservable.create(promise);
+        };
+        ObservableWrapper.toPromise = function (obj) { return rxjs_operator_toPromise.toPromise.call(obj); };
+        return ObservableWrapper;
+    }());
+    /**
+     * Use by directives and components to emit custom Events.
+     *
+     * ### Examples
+     *
+     * In the following example, `Zippy` alternatively emits `open` and `close` events when its
+     * title gets clicked:
+     *
+     * ```
+     * @Component({
+     *   selector: 'zippy',
+     *   template: `
+     *   <div class="zippy">
+     *     <div (click)="toggle()">Toggle</div>
+     *     <div [hidden]="!visible">
+     *       <ng-content></ng-content>
+     *     </div>
+     *  </div>`})
+     * export class Zippy {
+     *   visible: boolean = true;
+     *   @Output() open: EventEmitter<any> = new EventEmitter();
+     *   @Output() close: EventEmitter<any> = new EventEmitter();
+     *
+     *   toggle() {
+     *     this.visible = !this.visible;
+     *     if (this.visible) {
+     *       this.open.emit(null);
+     *     } else {
+     *       this.close.emit(null);
+     *     }
+     *   }
+     * }
+     * ```
+     *
+     * The events payload can be accessed by the parameter `$event` on the components output event
+     * handler:
+     *
+     * ```
+     * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
+     * ```
+     *
+     * Uses Rx.Observable but provides an adapter to make it work as specified here:
+     * https://github.com/jhusain/observable-spec
+     *
+     * Once a reference implementation of the spec is available, switch to it.
+     * @stable
+     */
+    var EventEmitter$1 = (function (_super) {
+        __extends(EventEmitter$1, _super);
+        /**
+         * Creates an instance of [EventEmitter], which depending on [isAsync],
+         * delivers events synchronously or asynchronously.
+         */
+        function EventEmitter$1(isAsync) {
+            if (isAsync === void 0) { isAsync = false; }
+            _super.call(this);
+            this.__isAsync = isAsync;
+        }
+        EventEmitter$1.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
+        /**
+         * @deprecated - use .emit(value) instead
+         */
+        EventEmitter$1.prototype.next = function (value) { _super.prototype.next.call(this, value); };
+        EventEmitter$1.prototype.subscribe = function (generatorOrNext, error, complete) {
+            var schedulerFn;
+            var errorFn = function (err) { return null; };
+            var completeFn = function () { return null; };
+            if (generatorOrNext && typeof generatorOrNext === 'object') {
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                    setTimeout(function () { return generatorOrNext.next(value); });
+                } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
+                if (generatorOrNext.error) {
+                    errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
+                        function (err) { generatorOrNext.error(err); };
+                }
+                if (generatorOrNext.complete) {
+                    completeFn = this.__isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
+                        function () { generatorOrNext.complete(); };
+                }
+            }
+            else {
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                    setTimeout(function () { return generatorOrNext(value); });
+                } : function (value /** TODO #9100 */) { generatorOrNext(value); };
+                if (error) {
+                    errorFn =
+                        this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
+                }
+                if (complete) {
+                    completeFn =
+                        this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
+                }
+            }
+            return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+        };
+        return EventEmitter$1;
+    }(rxjs_Subject.Subject));
+    var InvalidPipeArgumentException = (function (_super) {
+        __extends(InvalidPipeArgumentException, _super);
+        function InvalidPipeArgumentException(type, value) {
+            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
+        }
+        return InvalidPipeArgumentException;
+    }(BaseException));
+    var ObservableStrategy = (function () {
+        function ObservableStrategy() {
+        }
+        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return ObservableWrapper.subscribe(async, updateLatestValue, function (e) { throw e; });
+        };
+        ObservableStrategy.prototype.dispose = function (subscription) { ObservableWrapper.dispose(subscription); };
+        ObservableStrategy.prototype.onDestroy = function (subscription) { ObservableWrapper.dispose(subscription); };
+        return ObservableStrategy;
+    }());
+    var PromiseStrategy = (function () {
+        function PromiseStrategy() {
+        }
+        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.then(updateLatestValue, function (e) { throw e; });
+        };
+        PromiseStrategy.prototype.dispose = function (subscription) { };
+        PromiseStrategy.prototype.onDestroy = function (subscription) { };
+        return PromiseStrategy;
+    }());
+    var _promiseStrategy = new PromiseStrategy();
+    var _observableStrategy = new ObservableStrategy();
+    var AsyncPipe = (function () {
+        function AsyncPipe(_ref) {
+            /** @internal */
+            this._latestValue = null;
+            /** @internal */
+            this._latestReturnedValue = null;
+            /** @internal */
+            this._subscription = null;
+            /** @internal */
+            this._obj = null;
+            this._strategy = null;
+            this._ref = _ref;
+        }
+        AsyncPipe.prototype.ngOnDestroy = function () {
+            if (isPresent(this._subscription)) {
+                this._dispose();
+            }
+        };
+        AsyncPipe.prototype.transform = function (obj) {
+            if (isBlank(this._obj)) {
+                if (isPresent(obj)) {
+                    this._subscribe(obj);
+                }
+                this._latestReturnedValue = this._latestValue;
+                return this._latestValue;
+            }
+            if (obj !== this._obj) {
+                this._dispose();
+                return this.transform(obj);
+            }
+            if (this._latestValue === this._latestReturnedValue) {
+                return this._latestReturnedValue;
+            }
+            else {
+                this._latestReturnedValue = this._latestValue;
+                return _angular_core.WrappedValue.wrap(this._latestValue);
+            }
+        };
+        /** @internal */
+        AsyncPipe.prototype._subscribe = function (obj) {
+            var _this = this;
+            this._obj = obj;
+            this._strategy = this._selectStrategy(obj);
+            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+        };
+        /** @internal */
+        AsyncPipe.prototype._selectStrategy = function (obj) {
+            if (isPromise(obj)) {
+                return _promiseStrategy;
+            }
+            else if (ObservableWrapper.isObservable(obj)) {
+                return _observableStrategy;
+            }
+            else {
+                throw new InvalidPipeArgumentException(AsyncPipe, obj);
+            }
+        };
+        /** @internal */
+        AsyncPipe.prototype._dispose = function () {
+            this._strategy.dispose(this._subscription);
+            this._latestValue = null;
+            this._latestReturnedValue = null;
+            this._subscription = null;
+            this._obj = null;
+        };
+        /** @internal */
+        AsyncPipe.prototype._updateLatestValue = function (async, value) {
+            if (async === this._obj) {
+                this._latestValue = value;
+                this._ref.markForCheck();
+            }
+        };
+        return AsyncPipe;
+    }());
+    /** @nocollapse */
+    AsyncPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = [
+        { type: _angular_core.ChangeDetectorRef, },
+    ];
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var NumberFormatStyle;
+    (function (NumberFormatStyle) {
+        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
+        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
+        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
+    })(NumberFormatStyle || (NumberFormatStyle = {}));
+    var NumberFormatter = (function () {
+        function NumberFormatter() {
+        }
+        NumberFormatter.format = function (num, locale, style, _a) {
+            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+            var options = {
+                minimumIntegerDigits: minimumIntegerDigits,
+                minimumFractionDigits: minimumFractionDigits,
+                maximumFractionDigits: maximumFractionDigits,
+                style: NumberFormatStyle[style].toLowerCase()
+            };
+            if (style == NumberFormatStyle.Currency) {
+                options.currency = currency;
+                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+            }
+            return new Intl.NumberFormat(locale, options).format(num);
+        };
+        return NumberFormatter;
+    }());
+    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+    var PATTERN_ALIASES = {
+        yMMMdjms: datePartGetterFactory(combine([
+            digitCondition('year', 1),
+            nameCondition('month', 3),
+            digitCondition('day', 1),
+            digitCondition('hour', 1),
+            digitCondition('minute', 1),
+            digitCondition('second', 1),
+        ])),
+        yMdjm: datePartGetterFactory(combine([
+            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+            digitCondition('hour', 1), digitCondition('minute', 1)
+        ])),
+        yMMMMEEEEd: datePartGetterFactory(combine([
+            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
+            digitCondition('day', 1)
+        ])),
+        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
+        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
+        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
+        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
+        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+    };
+    var DATE_FORMATS = {
+        yyyy: datePartGetterFactory(digitCondition('year', 4)),
+        yy: datePartGetterFactory(digitCondition('year', 2)),
+        y: datePartGetterFactory(digitCondition('year', 1)),
+        MMMM: datePartGetterFactory(nameCondition('month', 4)),
+        MMM: datePartGetterFactory(nameCondition('month', 3)),
+        MM: datePartGetterFactory(digitCondition('month', 2)),
+        M: datePartGetterFactory(digitCondition('month', 1)),
+        LLLL: datePartGetterFactory(nameCondition('month', 4)),
+        dd: datePartGetterFactory(digitCondition('day', 2)),
+        d: datePartGetterFactory(digitCondition('day', 1)),
+        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
+        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
+        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
+        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        jj: datePartGetterFactory(digitCondition('hour', 2)),
+        j: datePartGetterFactory(digitCondition('hour', 1)),
+        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
+        m: datePartGetterFactory(digitCondition('minute', 1)),
+        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
+        s: datePartGetterFactory(digitCondition('second', 1)),
+        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
+        // we can be just safely rely on using `sss` since we currently don't support single or two digit
+        // fractions
+        sss: datePartGetterFactory(digitCondition('second', 3)),
+        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
+        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
+        EE: datePartGetterFactory(nameCondition('weekday', 2)),
+        E: datePartGetterFactory(nameCondition('weekday', 1)),
+        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        Z: timeZoneGetter('short'),
+        z: timeZoneGetter('long'),
+        ww: datePartGetterFactory({}),
+        // first Thursday of the year. not support ?
+        w: datePartGetterFactory({}),
+        // of the year not support ?
+        G: datePartGetterFactory(nameCondition('era', 1)),
+        GG: datePartGetterFactory(nameCondition('era', 2)),
+        GGG: datePartGetterFactory(nameCondition('era', 3)),
+        GGGG: datePartGetterFactory(nameCondition('era', 4))
+    };
+    function digitModifier(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.length == 1 ? '0' + result : result;
+        };
+    }
+    function hourClockExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[1];
+        };
+    }
+    function hourExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[0];
+        };
+    }
+    function timeZoneGetter(timezone) {
+        // To workaround `Intl` API restriction for single timezone let format with 24 hours
+        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+        return function (date, locale) {
+            var result = new Intl.DateTimeFormat(locale, format).format(date);
+            // Then extract first 3 letters that related to hours
+            return result ? result.substring(3) : '';
+        };
+    }
+    function hour12Modify(options, value) {
+        options.hour12 = value;
+        return options;
+    }
+    function digitCondition(prop, len) {
+        var result = {};
+        result[prop] = len == 2 ? '2-digit' : 'numeric';
+        return result;
+    }
+    function nameCondition(prop, len) {
+        var result = {};
+        result[prop] = len < 4 ? 'short' : 'long';
+        return result;
+    }
+    function combine(options) {
+        var result = {};
+        options.forEach(function (option) { Object.assign(result, option); });
+        return result;
+    }
+    function datePartGetterFactory(ret) {
+        return function (date, locale) {
+            return new Intl.DateTimeFormat(locale, ret).format(date);
+        };
+    }
+    var datePartsFormatterCache = new Map();
+    function dateFormatter(format, date, locale) {
+        var text = '';
+        var match;
+        var fn;
+        var parts = [];
+        if (PATTERN_ALIASES[format]) {
+            return PATTERN_ALIASES[format](date, locale);
+        }
+        if (datePartsFormatterCache.has(format)) {
+            parts = datePartsFormatterCache.get(format);
+        }
+        else {
+            var matchs = DATE_FORMATS_SPLIT.exec(format);
+            while (format) {
+                match = DATE_FORMATS_SPLIT.exec(format);
+                if (match) {
+                    parts = concat(parts, match, 1);
+                    format = parts.pop();
+                }
+                else {
+                    parts.push(format);
+                    format = null;
+                }
+            }
+            datePartsFormatterCache.set(format, parts);
+        }
+        parts.forEach(function (part) {
+            fn = DATE_FORMATS[part];
+            text += fn ? fn(date, locale) :
+                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+        });
+        return text;
+    }
+    var slice = [].slice;
+    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
+        return array1.concat(slice.call(array2, index));
+    }
+    var DateFormatter = (function () {
+        function DateFormatter() {
+        }
+        DateFormatter.format = function (date, locale, pattern) {
+            return dateFormatter(pattern, date, locale);
+        };
+        return DateFormatter;
+    }());
+    // TODO: move to a global configurable location along with other i18n components.
+    var defaultLocale = 'en-US';
+    var DatePipe = (function () {
+        function DatePipe() {
+        }
+        DatePipe.prototype.transform = function (value, pattern) {
+            if (pattern === void 0) { pattern = 'mediumDate'; }
+            if (isBlank(value))
+                return null;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentException(DatePipe, value);
+            }
+            if (NumberWrapper.isNumeric(value)) {
+                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
+            }
+            else if (isString(value)) {
+                value = DateWrapper.fromISOString(value);
+            }
+            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
+                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
+            }
+            return DateFormatter.format(value, defaultLocale, pattern);
+        };
+        DatePipe.prototype.supports = function (obj) {
+            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
+                return true;
+            }
+            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
+                return true;
+            }
+            return false;
+        };
+        return DatePipe;
+    }());
+    /** @internal */
+    DatePipe._ALIASES = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+    /** @nocollapse */
+    DatePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    var _INTERPOLATION_REGEXP = /#/g;
+    var I18nPluralPipe = (function () {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
+        }
+        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(pluralMap)) {
+                throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
+            }
+            var key = getPluralCategory(value, Object.getOwnPropertyNames(pluralMap), this._localization);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
+        };
+        return I18nPluralPipe;
+    }());
+    /** @nocollapse */
+    I18nPluralPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = [
+        { type: NgLocalization, },
+    ];
+    var I18nSelectPipe = (function () {
+        function I18nSelectPipe() {
+        }
+        I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(mapping)) {
+                throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
+            }
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
+        };
+        return I18nSelectPipe;
+    }());
+    /** @nocollapse */
+    I18nSelectPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+    ];
+    var JsonPipe = (function () {
+        function JsonPipe() {
+        }
+        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
+        return JsonPipe;
+    }());
+    /** @nocollapse */
+    JsonPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
+    ];
+    var LowerCasePipe = (function () {
+        function LowerCasePipe() {
+        }
+        LowerCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentException(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        return LowerCasePipe;
+    }());
+    /** @nocollapse */
+    LowerCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+    ];
+    var defaultLocale$1 = 'en-US';
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
+        if (currency === void 0) { currency = null; }
+        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+        if (isBlank(value))
+            return null;
+        // Convert strings to numbers
+        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
+        if (!isNumber(value)) {
+            throw new InvalidPipeArgumentException(pipe, value);
+        }
+        var minInt;
+        var minFraction;
+        var maxFraction;
+        if (style !== NumberFormatStyle.Currency) {
+            // rely on Intl default for currency
+            minInt = 1;
+            minFraction = 0;
+            maxFraction = 3;
+        }
+        if (isPresent(digits)) {
+            var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
+            if (!parts) {
+                throw new Error(digits + " is not a valid digit info for number pipes");
+            }
+            if (isPresent(parts[1])) {
+                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
+            }
+            if (isPresent(parts[3])) {
+                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
+            }
+            if (isPresent(parts[5])) {
+                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
+            }
+        }
+        return NumberFormatter.format(value, defaultLocale$1, style, {
+            minimumIntegerDigits: minInt,
+            minimumFractionDigits: minFraction,
+            maximumFractionDigits: maxFraction,
+            currency: currency,
+            currencyAsSymbol: currencyAsSymbol
+        });
+    }
+    var DecimalPipe = (function () {
+        function DecimalPipe() {
+        }
+        DecimalPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
+        };
+        return DecimalPipe;
+    }());
+    /** @nocollapse */
+    DecimalPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
+    ];
+    var PercentPipe = (function () {
+        function PercentPipe() {
+        }
+        PercentPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
+        };
+        return PercentPipe;
+    }());
+    /** @nocollapse */
+    PercentPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
+    ];
+    var CurrencyPipe = (function () {
+        function CurrencyPipe() {
+        }
+        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+            if (currencyCode === void 0) { currencyCode = 'USD'; }
+            if (symbolDisplay === void 0) { symbolDisplay = false; }
+            if (digits === void 0) { digits = null; }
+            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        };
+        return CurrencyPipe;
+    }());
+    /** @nocollapse */
+    CurrencyPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+    ];
+    var ReplacePipe = (function () {
+        function ReplacePipe() {
+        }
+        ReplacePipe.prototype.transform = function (value, pattern, replacement) {
+            if (isBlank(value)) {
+                return value;
+            }
+            if (!this._supportedInput(value)) {
+                throw new InvalidPipeArgumentException(ReplacePipe, value);
+            }
+            var input = value.toString();
+            if (!this._supportedPattern(pattern)) {
+                throw new InvalidPipeArgumentException(ReplacePipe, pattern);
+            }
+            if (!this._supportedReplacement(replacement)) {
+                throw new InvalidPipeArgumentException(ReplacePipe, replacement);
+            }
+            if (isFunction(replacement)) {
+                var rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
+                return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
+            }
+            if (pattern instanceof RegExp) {
+                // use the replaceAll variant
+                return StringWrapper.replaceAll(input, pattern, replacement);
+            }
+            return StringWrapper.replace(input, pattern, replacement);
+        };
+        ReplacePipe.prototype._supportedInput = function (input) { return isString(input) || isNumber(input); };
+        ReplacePipe.prototype._supportedPattern = function (pattern) {
+            return isString(pattern) || pattern instanceof RegExp;
+        };
+        ReplacePipe.prototype._supportedReplacement = function (replacement) {
+            return isString(replacement) || isFunction(replacement);
+        };
+        return ReplacePipe;
+    }());
+    /** @nocollapse */
+    ReplacePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
+    ];
+    var SlicePipe = (function () {
+        function SlicePipe() {
+        }
+        SlicePipe.prototype.transform = function (value, start, end) {
+            if (end === void 0) { end = null; }
+            if (isBlank(value))
+                return value;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentException(SlicePipe, value);
+            }
+            if (isString(value)) {
+                return StringWrapper.slice(value, start, end);
+            }
+            return ListWrapper.slice(value, start, end);
+        };
+        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
+        return SlicePipe;
+    }());
+    /** @nocollapse */
+    SlicePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
+    ];
+    var UpperCasePipe = (function () {
+        function UpperCasePipe() {
+        }
+        UpperCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentException(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        return UpperCasePipe;
+    }());
+    /** @nocollapse */
+    UpperCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+    ];
+    /**
+     * A collection of Angular core pipes that are likely to be used in each and every
+     * application.
+     *
+     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
+     * property of the `@Component` decorator.
+     *
+     * @experimental Contains i18n pipes which are experimental
+     */
+    var COMMON_PIPES = [
+        AsyncPipe,
+        UpperCasePipe,
+        LowerCasePipe,
+        JsonPipe,
+        SlicePipe,
+        DecimalPipe,
+        PercentPipe,
+        CurrencyPipe,
+        DatePipe,
+        ReplacePipe,
+        I18nPluralPipe,
+        I18nSelectPipe,
     ];
     /**
      * Used to provide a {@link ControlValueAccessor} for form controls.
@@ -4345,60 +4391,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     DeprecatedFormsModule.decorators = [
-        { type: _angular_core.AppModule, args: [{
+        { type: _angular_core.NgModule, args: [{
                     providers: [
                         FORM_PROVIDERS,
                     ],
-                    directives: FORM_DIRECTIVES,
-                    pipes: []
+                    declarations: FORM_DIRECTIVES,
+                    exports: FORM_DIRECTIVES
                 },] },
     ];
-    /**
-     * A collection of Angular core directives that are likely to be used in each and every Angular
-     * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
-     * NgModel).
-     *
-     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
-     * property of the `@Component` decorator.
-     *
-     * ### Example
-     *
-     * Instead of writing:
-     *
-     * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm} from
-     * '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm,
-     * OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     * one could import all the common directives at once:
-     *
-     * ```typescript
-     * import {COMMON_DIRECTIVES} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [COMMON_DIRECTIVES, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     *
-     * @experimental Contains forms which are experimental.
-     */
-    var COMMON_DIRECTIVES = [CORE_DIRECTIVES];
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -4757,6 +4757,16 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
     ];
+    var CommonModule = (function () {
+        function CommonModule() {
+        }
+        return CommonModule;
+    }());
+    /** @nocollapse */
+    CommonModule.decorators = [
+        { type: _angular_core.NgModule, args: [{ declarations: [COMMON_DIRECTIVES, COMMON_PIPES], exports: [COMMON_DIRECTIVES, COMMON_PIPES] },] },
+    ];
+    exports.CommonModule = CommonModule;
     exports.NgLocalization = NgLocalization;
     exports.AsyncPipe = AsyncPipe;
     exports.COMMON_PIPES = COMMON_PIPES;

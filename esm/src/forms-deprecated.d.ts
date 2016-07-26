@@ -51,7 +51,7 @@ export { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validators } from './forms-deprecat
  */
 export declare const FORM_PROVIDERS: Type[];
 /**
- * The app module for the deprecated forms API.
+ * The ng module for the deprecated forms API.
  * @deprecated
  */
 export declare class DeprecatedFormsModule {
