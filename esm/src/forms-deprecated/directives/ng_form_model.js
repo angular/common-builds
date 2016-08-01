@@ -13,8 +13,7 @@ import { isBlank } from '../../facade/lang';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validators } from '../validators';
 import { ControlContainer } from './control_container';
 import { composeAsyncValidators, composeValidators, setUpControl, setUpControlGroup } from './shared';
-export const formDirectiveProvider = 
-/*@ts2dart_const*/ /* @ts2dart_Provider */ {
+export const formDirectiveProvider = {
     provide: ControlContainer,
     useExisting: forwardRef(() => NgFormModel)
 };

@@ -12,8 +12,7 @@ import { ControlContainer } from './control_container';
 import { NG_VALUE_ACCESSOR } from './control_value_accessor';
 import { NgControl } from './ng_control';
 import { composeAsyncValidators, composeValidators, controlPath, isPropertyUpdated, selectValueAccessor } from './shared';
-export const controlNameBinding = 
-/*@ts2dart_const*/ /* @ts2dart_Provider */ {
+export const controlNameBinding = {
     provide: NgControl,
     useExisting: forwardRef(() => NgControlName)
 };

@@ -18,8 +18,7 @@ var control_container_1 = require('./control_container');
 var control_value_accessor_1 = require('./control_value_accessor');
 var ng_control_1 = require('./ng_control');
 var shared_1 = require('./shared');
-exports.controlNameBinding = 
-/*@ts2dart_const*/ /* @ts2dart_Provider */ {
+exports.controlNameBinding = {
     provide: ng_control_1.NgControl,
     useExisting: core_1.forwardRef(function () { return NgControlName; })
 };

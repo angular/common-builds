@@ -13,8 +13,10 @@ import { Control, ControlGroup } from '../model';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS } from '../validators';
 import { ControlContainer } from './control_container';
 import { composeAsyncValidators, composeValidators, setUpControl, setUpControlGroup } from './shared';
-export const formDirectiveProvider = 
-/*@ts2dart_const*/ { provide: ControlContainer, useExisting: forwardRef(() => NgForm) };
+export const formDirectiveProvider = {
+    provide: ControlContainer,
+    useExisting: forwardRef(() => NgForm)
+};
 let _formWarningDisplayed = false;
 export class NgForm extends ControlContainer {
     constructor(validators, asyncValidators) {

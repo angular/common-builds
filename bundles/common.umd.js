@@ -2194,8 +2194,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * See {@link DefaultValueAccessor} for how to implement one.
      * @experimental
      */
-    var NG_VALUE_ACCESSOR = 
-    /*@ts2dart_const*/ new _angular_core.OpaqueToken('NgValueAccessor');
+    var NG_VALUE_ACCESSOR = new _angular_core.OpaqueToken('NgValueAccessor');
     var CHECKBOX_VALUE_ACCESSOR = {
         provide: NG_VALUE_ACCESSOR,
         useExisting: _angular_core.forwardRef(function () { return CheckboxControlValueAccessor; }),
@@ -2228,8 +2227,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
     ];
-    var DEFAULT_VALUE_ACCESSOR = 
-    /* @ts2dart_Provider */ {
+    var DEFAULT_VALUE_ACCESSOR = {
         provide: NG_VALUE_ACCESSOR,
         useExisting: _angular_core.forwardRef(function () { return DefaultValueAccessor; }),
         multi: true
@@ -2286,8 +2284,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * @experimental
      */
-    var NG_ASYNC_VALIDATORS = 
-    /*@ts2dart_const*/ new _angular_core.OpaqueToken('NgAsyncValidators');
+    var NG_ASYNC_VALIDATORS = new _angular_core.OpaqueToken('NgAsyncValidators');
     /**
      * Provides a set of validators used by form controls.
      *
@@ -3059,8 +3056,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         _throwError(dir, 'No valid value accessor for form control with');
         return null;
     }
-    var controlGroupProvider = 
-    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+    var controlGroupProvider = {
         provide: ControlContainer,
         useExisting: _angular_core.forwardRef(function () { return NgControlGroup; })
     };
@@ -3125,8 +3121,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var controlNameBinding = 
-    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+    var controlNameBinding = {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgControlName; })
     };
@@ -3769,8 +3764,10 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return ControlArray;
     }(AbstractControl));
-    var formDirectiveProvider = 
-    /*@ts2dart_const*/ { provide: ControlContainer, useExisting: _angular_core.forwardRef(function () { return NgForm; }) };
+    var formDirectiveProvider = {
+        provide: ControlContainer,
+        useExisting: _angular_core.forwardRef(function () { return NgForm; })
+    };
     var _formWarningDisplayed = false;
     var NgForm = (function (_super) {
         __extends(NgForm, _super);
@@ -3891,8 +3888,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var formControlBinding = 
-    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+    var formControlBinding = {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgFormControl; })
     };
@@ -3962,8 +3958,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALUE_ACCESSOR,] },] },
     ];
-    var formDirectiveProvider$1 = 
-    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+    var formDirectiveProvider$1 = {
         provide: ControlContainer,
         useExisting: _angular_core.forwardRef(function () { return NgFormModel; })
     };
@@ -4075,8 +4070,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
-    var formControlBinding$1 = 
-    /*@ts2dart_const*/ /* @ts2dart_Provider */ {
+    var formControlBinding$1 = {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgModel; })
     };
@@ -4654,10 +4648,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             var path = this._platformLocation.hash;
             if (!isPresent(path))
                 path = '#';
-            // Dart will complain if a call to substring is
-            // executed with a position value that extends the
-            // length of string.
-            return (path.length > 0 ? path.substring(1) : path);
+            return path.length > 0 ? path.substring(1) : path;
         };
         HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
             var url = Location.joinWithSlash(this._baseHref, internal);
