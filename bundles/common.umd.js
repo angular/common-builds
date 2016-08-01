@@ -852,14 +852,23 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgFor.prototype._applyChanges = function (changes) {
             var _this = this;
-            // TODO(rado): check if change detection can produce a change record that is
-            // easier to consume than current.
-            var recordViewTuples = [];
-            changes.forEachRemovedItem(function (removedRecord) { return recordViewTuples.push(new RecordViewTuple(removedRecord, null)); });
-            changes.forEachMovedItem(function (movedRecord) { return recordViewTuples.push(new RecordViewTuple(movedRecord, null)); });
-            var insertTuples = this._bulkRemove(recordViewTuples);
-            changes.forEachAddedItem(function (addedRecord) { return insertTuples.push(new RecordViewTuple(addedRecord, null)); });
-            this._bulkInsert(insertTuples);
+            var insertTuples = [];
+            changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
+                if (item.previousIndex == null) {
+                    var view = _this._viewContainer.createEmbeddedView(_this._templateRef, new NgForRow(null, null, null), currentIndex);
+                    var tuple = new RecordViewTuple(item, view);
+                    insertTuples.push(tuple);
+                }
+                else if (currentIndex == null) {
+                    _this._viewContainer.remove(adjustedPreviousIndex);
+                }
+                else {
+                    var view = _this._viewContainer.get(adjustedPreviousIndex);
+                    _this._viewContainer.move(view, currentIndex);
+                    var tuple = new RecordViewTuple(item, view);
+                    insertTuples.push(tuple);
+                }
+            });
             for (var i = 0; i < insertTuples.length; i++) {
                 this._perViewChange(insertTuples[i].view, insertTuples[i].record);
             }
@@ -875,36 +884,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgFor.prototype._perViewChange = function (view, record) {
             view.context.$implicit = record.item;
-        };
-        NgFor.prototype._bulkRemove = function (tuples) {
-            tuples.sort(function (a, b) { return a.record.previousIndex - b.record.previousIndex; });
-            var movedTuples = [];
-            for (var i = tuples.length - 1; i >= 0; i--) {
-                var tuple = tuples[i];
-                // separate moved views from removed views.
-                if (isPresent(tuple.record.currentIndex)) {
-                    tuple.view =
-                        this._viewContainer.detach(tuple.record.previousIndex);
-                    movedTuples.push(tuple);
-                }
-                else {
-                    this._viewContainer.remove(tuple.record.previousIndex);
-                }
-            }
-            return movedTuples;
-        };
-        NgFor.prototype._bulkInsert = function (tuples) {
-            tuples.sort(function (a, b) { return a.record.currentIndex - b.record.currentIndex; });
-            for (var i = 0; i < tuples.length; i++) {
-                var tuple = tuples[i];
-                if (isPresent(tuple.view)) {
-                    this._viewContainer.insert(tuple.view, tuple.record.currentIndex);
-                }
-                else {
-                    tuple.view = this._viewContainer.createEmbeddedView(this._templateRef, new NgForRow(null, null, null), tuple.record.currentIndex);
-                }
-            }
-            return tuples;
         };
         return NgFor;
     }());
