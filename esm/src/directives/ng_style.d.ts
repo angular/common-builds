@@ -15,7 +15,8 @@ import { DoCheck, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
  *
  * ### Syntax
  *
- * - `<div [ngStyle]="{'font-style': style}"></div>`
+ * - `<div [ngStyle]="{'font-style': styleExp}"></div>`
+ * - `<div [ngStyle]="{'max-width.px': widthExp}"></div>`
  * - `<div [ngStyle]="styleExp"></div>` - here the `styleExp` must evaluate to an object
  *
  * ### Example ([live demo](http://plnkr.co/edit/YamGS6GkUh9GqWNQhCyM?p=preview)):
