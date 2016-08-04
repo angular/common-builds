@@ -1157,7 +1157,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
-            var key = getPluralCategory(this._switchValue, Object.getOwnPropertyNames(this._caseViews), this._localization);
+            var key = getPluralCategory(this._switchValue, Object.keys(this._caseViews), this._localization);
             this._activateView(this._caseViews[key]);
         };
         /** @internal */
@@ -1944,7 +1944,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (!isStringMap(pluralMap)) {
                 throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
             }
-            var key = getPluralCategory(value, Object.getOwnPropertyNames(pluralMap), this._localization);
+            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
             return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
         };
         return I18nPluralPipe;
