@@ -70,7 +70,7 @@ var NgModel = (function (_super) {
     });
     NgModel.prototype.viewToModelUpdate = function (newValue) {
         this.viewModel = newValue;
-        async_1.ObservableWrapper.callEmit(this.update, newValue);
+        this.update.emit(newValue);
     };
     /** @nocollapse */
     NgModel.decorators = [

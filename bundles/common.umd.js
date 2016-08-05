@@ -9,10 +9,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/observable/PromiseObservable'), require('rxjs/operator/toPromise'), require('rxjs/Observable')) :
-        typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/Subject', 'rxjs/observable/PromiseObservable', 'rxjs/operator/toPromise', 'rxjs/Observable'], factory) :
-            (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx));
-}(this, function (exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/operator/toPromise'), require('rxjs/Subject'), require('rxjs/Observable'), require('rxjs/observable/PromiseObservable')) :
+        typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/operator/toPromise', 'rxjs/Subject', 'rxjs/Observable', 'rxjs/observable/PromiseObservable'], factory) :
+            (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx.Observable.prototype, global.Rx, global.Rx, global.Rx));
+}(this, function (exports, _angular_core, rxjs_operator_toPromise, rxjs_Subject, rxjs_Observable, rxjs_observable_PromiseObservable) {
     'use strict';
     /**
      * @license
@@ -36,18 +36,18 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     // Need to declare a new variable for global here since TypeScript
     // exports the original value of the symbol.
-    var global$1 = globalScope;
+    var _global = globalScope;
     function getTypeNameForDebugging(type) {
         if (type['name']) {
             return type['name'];
         }
         return typeof type;
     }
-    var Date = global$1.Date;
+    var Date = _global.Date;
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
-    global$1.assert = function assert(condition) {
+    _global.assert = function assert(condition) {
         // TODO: to be fixed properly via #2830, noop for now
     };
     function isPresent(obj) {
@@ -79,7 +79,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function isDate(obj) {
         return obj instanceof Date && !isNaN(obj.valueOf());
     }
-    function noop() { }
     function stringify(token) {
         if (typeof token === 'string') {
             return token;
@@ -234,10 +233,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     var Json = (function () {
         function Json() {
         }
-        Json.parse = function (s) { return global$1.JSON.parse(s); };
+        Json.parse = function (s) { return _global.JSON.parse(s); };
         Json.stringify = function (data) {
             // Dart doesn't take 3 arguments
-            return global$1.JSON.stringify(data, null, 2);
+            return _global.JSON.stringify(data, null, 2);
         };
         return Json;
     }());
@@ -286,8 +285,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function hasConstructor(value, type) {
         return value.constructor === type;
     }
-    var Map$1 = global$1.Map;
-    var Set$1 = global$1.Set;
+    var Map$1 = _global.Map;
+    var Set$1 = _global.Set;
     // Safari and Internet Explorer do not support the iterable parameter to the
     // Map constructor.  We work around that by manually adding the items.
     var createMapFromPairs = (function () {
@@ -1352,183 +1351,6 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @experimental Contains forms which are experimental.
      */
     var COMMON_DIRECTIVES = [CORE_DIRECTIVES];
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var PromiseCompleter = (function () {
-        function PromiseCompleter() {
-            var _this = this;
-            this.promise = new Promise(function (res, rej) {
-                _this.resolve = res;
-                _this.reject = rej;
-            });
-        }
-        return PromiseCompleter;
-    }());
-    var PromiseWrapper = (function () {
-        function PromiseWrapper() {
-        }
-        PromiseWrapper.resolve = function (obj) { return Promise.resolve(obj); };
-        PromiseWrapper.reject = function (obj, _) { return Promise.reject(obj); };
-        // Note: We can't rename this method into `catch`, as this is not a valid
-        // method name in Dart.
-        PromiseWrapper.catchError = function (promise, onError) {
-            return promise.catch(onError);
-        };
-        PromiseWrapper.all = function (promises) {
-            if (promises.length == 0)
-                return Promise.resolve([]);
-            return Promise.all(promises);
-        };
-        PromiseWrapper.then = function (promise, success, rejection) {
-            return promise.then(success, rejection);
-        };
-        PromiseWrapper.wrap = function (computation) {
-            return new Promise(function (res, rej) {
-                try {
-                    res(computation());
-                }
-                catch (e) {
-                    rej(e);
-                }
-            });
-        };
-        PromiseWrapper.scheduleMicrotask = function (computation) {
-            PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function (_) { });
-        };
-        PromiseWrapper.completer = function () { return new PromiseCompleter(); };
-        return PromiseWrapper;
-    }());
-    var ObservableWrapper = (function () {
-        function ObservableWrapper() {
-        }
-        // TODO(vsavkin): when we use rxnext, try inferring the generic type from the first arg
-        ObservableWrapper.subscribe = function (emitter, onNext, onError, onComplete) {
-            if (onComplete === void 0) { onComplete = function () { }; }
-            onError = (typeof onError === 'function') && onError || noop;
-            onComplete = (typeof onComplete === 'function') && onComplete || noop;
-            return emitter.subscribe({ next: onNext, error: onError, complete: onComplete });
-        };
-        ObservableWrapper.isObservable = function (obs) { return !!obs.subscribe; };
-        /**
-         * Returns whether `obs` has any subscribers listening to events.
-         */
-        ObservableWrapper.hasSubscribers = function (obs) { return obs.observers.length > 0; };
-        ObservableWrapper.dispose = function (subscription) { subscription.unsubscribe(); };
-        /**
-         * @deprecated - use callEmit() instead
-         */
-        ObservableWrapper.callNext = function (emitter, value) { emitter.emit(value); };
-        ObservableWrapper.callEmit = function (emitter, value) { emitter.emit(value); };
-        ObservableWrapper.callError = function (emitter, error) { emitter.error(error); };
-        ObservableWrapper.callComplete = function (emitter) { emitter.complete(); };
-        ObservableWrapper.fromPromise = function (promise) {
-            return rxjs_observable_PromiseObservable.PromiseObservable.create(promise);
-        };
-        ObservableWrapper.toPromise = function (obj) { return rxjs_operator_toPromise.toPromise.call(obj); };
-        return ObservableWrapper;
-    }());
-    /**
-     * Use by directives and components to emit custom Events.
-     *
-     * ### Examples
-     *
-     * In the following example, `Zippy` alternatively emits `open` and `close` events when its
-     * title gets clicked:
-     *
-     * ```
-     * @Component({
-     *   selector: 'zippy',
-     *   template: `
-     *   <div class="zippy">
-     *     <div (click)="toggle()">Toggle</div>
-     *     <div [hidden]="!visible">
-     *       <ng-content></ng-content>
-     *     </div>
-     *  </div>`})
-     * export class Zippy {
-     *   visible: boolean = true;
-     *   @Output() open: EventEmitter<any> = new EventEmitter();
-     *   @Output() close: EventEmitter<any> = new EventEmitter();
-     *
-     *   toggle() {
-     *     this.visible = !this.visible;
-     *     if (this.visible) {
-     *       this.open.emit(null);
-     *     } else {
-     *       this.close.emit(null);
-     *     }
-     *   }
-     * }
-     * ```
-     *
-     * The events payload can be accessed by the parameter `$event` on the components output event
-     * handler:
-     *
-     * ```
-     * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
-     * ```
-     *
-     * Uses Rx.Observable but provides an adapter to make it work as specified here:
-     * https://github.com/jhusain/observable-spec
-     *
-     * Once a reference implementation of the spec is available, switch to it.
-     * @stable
-     */
-    var EventEmitter$1 = (function (_super) {
-        __extends(EventEmitter$1, _super);
-        /**
-         * Creates an instance of [EventEmitter], which depending on [isAsync],
-         * delivers events synchronously or asynchronously.
-         */
-        function EventEmitter$1(isAsync) {
-            if (isAsync === void 0) { isAsync = false; }
-            _super.call(this);
-            this.__isAsync = isAsync;
-        }
-        EventEmitter$1.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
-        /**
-         * @deprecated - use .emit(value) instead
-         */
-        EventEmitter$1.prototype.next = function (value) { _super.prototype.next.call(this, value); };
-        EventEmitter$1.prototype.subscribe = function (generatorOrNext, error, complete) {
-            var schedulerFn;
-            var errorFn = function (err) { return null; };
-            var completeFn = function () { return null; };
-            if (generatorOrNext && typeof generatorOrNext === 'object') {
-                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
-                    setTimeout(function () { return generatorOrNext.next(value); });
-                } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
-                if (generatorOrNext.error) {
-                    errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
-                        function (err) { generatorOrNext.error(err); };
-                }
-                if (generatorOrNext.complete) {
-                    completeFn = this.__isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
-                        function () { generatorOrNext.complete(); };
-                }
-            }
-            else {
-                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
-                    setTimeout(function () { return generatorOrNext(value); });
-                } : function (value /** TODO #9100 */) { generatorOrNext(value); };
-                if (error) {
-                    errorFn =
-                        this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
-                }
-                if (complete) {
-                    completeFn =
-                        this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
-                }
-            }
-            return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
-        };
-        return EventEmitter$1;
-    }(rxjs_Subject.Subject));
     var InvalidPipeArgumentException = (function (_super) {
         __extends(InvalidPipeArgumentException, _super);
         function InvalidPipeArgumentException(type, value) {
@@ -1540,10 +1362,10 @@ var __extends = (this && this.__extends) || function (d, b) {
         function ObservableStrategy() {
         }
         ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return ObservableWrapper.subscribe(async, updateLatestValue, function (e) { throw e; });
+            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
         };
-        ObservableStrategy.prototype.dispose = function (subscription) { ObservableWrapper.dispose(subscription); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { ObservableWrapper.dispose(subscription); };
+        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
         return ObservableStrategy;
     }());
     var PromiseStrategy = (function () {
@@ -1608,7 +1430,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isPromise(obj)) {
                 return _promiseStrategy;
             }
-            else if (ObservableWrapper.isObservable(obj)) {
+            else if (obj.subscribe) {
                 return _observableStrategy;
             }
             else {
@@ -2325,13 +2147,13 @@ var __extends = (this && this.__extends) || function (d, b) {
                 return null;
             return function (control) {
                 var promises = _executeAsyncValidators(control, presentValidators).map(_convertToPromise);
-                return PromiseWrapper.all(promises).then(_mergeErrors);
+                return Promise.all(promises).then(_mergeErrors);
             };
         };
         return Validators;
     }());
     function _convertToPromise(obj) {
-        return isPromise(obj) ? obj : ObservableWrapper.toPromise(obj);
+        return isPromise(obj) ? obj : rxjs_operator_toPromise.toPromise.call(obj);
     }
     function _executeValidators(control, validators) {
         return validators.map(function (v) { return v(control); });
@@ -3071,6 +2893,103 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_VALIDATORS,] },] },
         { type: Array, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Self }, { type: _angular_core.Inject, args: [NG_ASYNC_VALIDATORS,] },] },
     ];
+    /**
+     * Use by directives and components to emit custom Events.
+     *
+     * ### Examples
+     *
+     * In the following example, `Zippy` alternatively emits `open` and `close` events when its
+     * title gets clicked:
+     *
+     * ```
+     * @Component({
+     *   selector: 'zippy',
+     *   template: `
+     *   <div class="zippy">
+     *     <div (click)="toggle()">Toggle</div>
+     *     <div [hidden]="!visible">
+     *       <ng-content></ng-content>
+     *     </div>
+     *  </div>`})
+     * export class Zippy {
+     *   visible: boolean = true;
+     *   @Output() open: EventEmitter<any> = new EventEmitter();
+     *   @Output() close: EventEmitter<any> = new EventEmitter();
+     *
+     *   toggle() {
+     *     this.visible = !this.visible;
+     *     if (this.visible) {
+     *       this.open.emit(null);
+     *     } else {
+     *       this.close.emit(null);
+     *     }
+     *   }
+     * }
+     * ```
+     *
+     * The events payload can be accessed by the parameter `$event` on the components output event
+     * handler:
+     *
+     * ```
+     * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
+     * ```
+     *
+     * Uses Rx.Observable but provides an adapter to make it work as specified here:
+     * https://github.com/jhusain/observable-spec
+     *
+     * Once a reference implementation of the spec is available, switch to it.
+     * @stable
+     */
+    var EventEmitter$1 = (function (_super) {
+        __extends(EventEmitter$1, _super);
+        /**
+         * Creates an instance of [EventEmitter], which depending on [isAsync],
+         * delivers events synchronously or asynchronously.
+         */
+        function EventEmitter$1(isAsync) {
+            if (isAsync === void 0) { isAsync = false; }
+            _super.call(this);
+            this.__isAsync = isAsync;
+        }
+        EventEmitter$1.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
+        /**
+         * @deprecated - use .emit(value) instead
+         */
+        EventEmitter$1.prototype.next = function (value) { _super.prototype.next.call(this, value); };
+        EventEmitter$1.prototype.subscribe = function (generatorOrNext, error, complete) {
+            var schedulerFn;
+            var errorFn = function (err) { return null; };
+            var completeFn = function () { return null; };
+            if (generatorOrNext && typeof generatorOrNext === 'object') {
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                    setTimeout(function () { return generatorOrNext.next(value); });
+                } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
+                if (generatorOrNext.error) {
+                    errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
+                        function (err) { generatorOrNext.error(err); };
+                }
+                if (generatorOrNext.complete) {
+                    completeFn = this.__isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
+                        function () { generatorOrNext.complete(); };
+                }
+            }
+            else {
+                schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                    setTimeout(function () { return generatorOrNext(value); });
+                } : function (value /** TODO #9100 */) { generatorOrNext(value); };
+                if (error) {
+                    errorFn =
+                        this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
+                }
+                if (complete) {
+                    completeFn =
+                        this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
+                }
+            }
+            return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+        };
+        return EventEmitter$1;
+    }(rxjs_Subject.Subject));
     var controlNameBinding = {
         provide: NgControl,
         useExisting: _angular_core.forwardRef(function () { return NgControlName; })
@@ -3100,7 +3019,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgControlName.prototype.ngOnDestroy = function () { this.formDirective.removeControl(this); };
         NgControlName.prototype.viewToModelUpdate = function (newValue) {
             this.viewModel = newValue;
-            ObservableWrapper.callEmit(this.update, newValue);
+            this.update.emit(newValue);
         };
         Object.defineProperty(NgControlName.prototype, "path", {
             get: function () { return controlPath(this.name, this._parent); },
@@ -3249,7 +3168,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }, control);
     }
     function toObservable(r) {
-        return isPromise(r) ? ObservableWrapper.fromPromise(r) : r;
+        return isPromise(r) ? rxjs_observable_PromiseObservable.PromiseObservable.create(r) : r;
     }
     /**
      * @experimental
@@ -3348,8 +3267,8 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this._runAsyncValidator(emitEvent);
             }
             if (emitEvent) {
-                ObservableWrapper.callEmit(this._valueChanges, this._value);
-                ObservableWrapper.callEmit(this._statusChanges, this._status);
+                this._valueChanges.emit(this._value);
+                this._statusChanges.emit(this._status);
             }
             if (isPresent(this._parent) && !onlySelf) {
                 this._parent.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
@@ -3364,12 +3283,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this._status = PENDING;
                 this._cancelExistingSubscription();
                 var obs = toObservable(this.asyncValidator(this));
-                this._asyncValidationSubscription = ObservableWrapper.subscribe(obs, function (res) { return _this.setErrors(res, { emitEvent: emitEvent }); });
+                this._asyncValidationSubscription = obs.subscribe({ next: function (res) { return _this.setErrors(res, { emitEvent: emitEvent }); } });
             }
         };
         AbstractControl.prototype._cancelExistingSubscription = function () {
             if (isPresent(this._asyncValidationSubscription)) {
-                ObservableWrapper.dispose(this._asyncValidationSubscription);
+                this._asyncValidationSubscription.unsubscribe();
             }
         };
         /**
@@ -3401,7 +3320,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._errors = errors;
             this._status = this._calculateStatus();
             if (emitEvent) {
-                ObservableWrapper.callEmit(this._statusChanges, this._status);
+                this._statusChanges.emit(this._status);
             }
             if (isPresent(this._parent)) {
                 this._parent._updateControlsErrors();
@@ -3719,6 +3638,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         useExisting: _angular_core.forwardRef(function () { return NgForm; })
     };
     var _formWarningDisplayed = false;
+    var resolvedPromise = Promise.resolve(null);
     var NgForm = (function (_super) {
         __extends(NgForm, _super);
         function NgForm(validators, asyncValidators) {
@@ -3762,7 +3682,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         NgForm.prototype.addControl = function (dir) {
             var _this = this;
-            PromiseWrapper.scheduleMicrotask(function () {
+            resolvedPromise.then(function () {
                 var container = _this._findContainer(dir.path);
                 var ctrl = new Control();
                 setUpControl(ctrl, dir);
@@ -3773,7 +3693,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgForm.prototype.getControl = function (dir) { return this.form.find(dir.path); };
         NgForm.prototype.removeControl = function (dir) {
             var _this = this;
-            PromiseWrapper.scheduleMicrotask(function () {
+            resolvedPromise.then(function () {
                 var container = _this._findContainer(dir.path);
                 if (isPresent(container)) {
                     container.removeControl(dir.name);
@@ -3782,7 +3702,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgForm.prototype.addControlGroup = function (dir) {
             var _this = this;
-            PromiseWrapper.scheduleMicrotask(function () {
+            resolvedPromise.then(function () {
                 var container = _this._findContainer(dir.path);
                 var group = new ControlGroup({});
                 setUpControlGroup(group, dir);
@@ -3792,7 +3712,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgForm.prototype.removeControlGroup = function (dir) {
             var _this = this;
-            PromiseWrapper.scheduleMicrotask(function () {
+            resolvedPromise.then(function () {
                 var container = _this._findContainer(dir.path);
                 if (isPresent(container)) {
                     container.removeControl(dir.name);
@@ -3804,14 +3724,14 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgForm.prototype.updateModel = function (dir, value) {
             var _this = this;
-            PromiseWrapper.scheduleMicrotask(function () {
+            resolvedPromise.then(function () {
                 var ctrl = _this.form.find(dir.path);
                 ctrl.updateValue(value);
             });
         };
         NgForm.prototype.onSubmit = function () {
             this._submitted = true;
-            ObservableWrapper.callEmit(this.ngSubmit, null);
+            this.ngSubmit.emit(null);
             return false;
         };
         /** @internal */
@@ -3885,7 +3805,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         NgFormControl.prototype.viewToModelUpdate = function (newValue) {
             this.viewModel = newValue;
-            ObservableWrapper.callEmit(this.update, newValue);
+            this.update.emit(newValue);
         };
         NgFormControl.prototype._isControlChanged = function (changes) {
             return StringMapWrapper.contains(changes, 'form');
@@ -3986,7 +3906,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgFormModel.prototype.onSubmit = function () {
             this._submitted = true;
-            ObservableWrapper.callEmit(this.ngSubmit, null);
+            this.ngSubmit.emit(null);
             return false;
         };
         /** @internal */
@@ -4072,7 +3992,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         NgModel.prototype.viewToModelUpdate = function (newValue) {
             this.viewModel = newValue;
-            ObservableWrapper.callEmit(this.update, newValue);
+            this.update.emit(newValue);
         };
         return NgModel;
     }(NgControl));
@@ -4440,9 +4360,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._platformStrategy = platformStrategy;
             var browserBaseHref = this._platformStrategy.getBaseHref();
             this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-            this._platformStrategy.onPopState(function (ev) {
-                ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(true), 'pop': true, 'type': ev.type });
-            });
+            this._platformStrategy.onPopState(function (ev) { _this._subject.emit({ 'url': _this.path(true), 'pop': true, 'type': ev.type }); });
         }
         /**
          * Returns the normalized URL path.
@@ -4510,7 +4428,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
             if (onThrow === void 0) { onThrow = null; }
             if (onReturn === void 0) { onReturn = null; }
-            return ObservableWrapper.subscribe(this._subject, onNext, onThrow, onReturn);
+            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
         /**
          * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as

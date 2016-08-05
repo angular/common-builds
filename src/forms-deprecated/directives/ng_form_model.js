@@ -97,7 +97,7 @@ var NgFormModel = (function (_super) {
     };
     NgFormModel.prototype.onSubmit = function () {
         this._submitted = true;
-        async_1.ObservableWrapper.callEmit(this.ngSubmit, null);
+        this.ngSubmit.emit(null);
         return false;
     };
     /** @internal */

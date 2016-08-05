@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Directive, Inject, Optional, Self, forwardRef } from '@angular/core';
-import { EventEmitter, ObservableWrapper } from '../../facade/async';
+import { EventEmitter } from '../../facade/async';
 import { ListWrapper, StringMapWrapper } from '../../facade/collection';
 import { BaseException } from '../../facade/exceptions';
 import { isBlank } from '../../facade/lang';
@@ -78,7 +78,7 @@ export class NgFormModel extends ControlContainer {
     }
     onSubmit() {
         this._submitted = true;
-        ObservableWrapper.callEmit(this.ngSubmit, null);
+        this.ngSubmit.emit(null);
         return false;
     }
     /** @internal */
