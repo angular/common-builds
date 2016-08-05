@@ -217,47 +217,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
     }());
-    var RegExpWrapper = (function () {
-        function RegExpWrapper() {
-        }
-        RegExpWrapper.create = function (regExpStr, flags) {
-            if (flags === void 0) { flags = ''; }
-            flags = flags.replace(/g/g, '');
-            return new global$1.RegExp(regExpStr, flags + 'g');
-        };
-        RegExpWrapper.firstMatch = function (regExp, input) {
-            // Reset multimatch regex state
-            regExp.lastIndex = 0;
-            return regExp.exec(input);
-        };
-        RegExpWrapper.test = function (regExp, input) {
-            regExp.lastIndex = 0;
-            return regExp.test(input);
-        };
-        RegExpWrapper.matcher = function (regExp, input) {
-            // Reset regex state for the case
-            // someone did not loop over all matches
-            // last time.
-            regExp.lastIndex = 0;
-            return { re: regExp, input: input };
-        };
-        RegExpWrapper.replaceAll = function (regExp, input, replace) {
-            var c = regExp.exec(input);
-            var res = '';
-            regExp.lastIndex = 0;
-            var prev = 0;
-            while (c) {
-                res += input.substring(prev, c.index);
-                res += replace(c);
-                prev = c.index + c[0].length;
-                regExp.lastIndex = prev;
-                c = regExp.exec(input);
-            }
-            res += input.substring(prev);
-            return res;
-        };
-        return RegExpWrapper;
-    }());
     // JS has NaN !== NaN
     function looseIdentical(a, b) {
         return a === b || typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b);
@@ -1842,7 +1801,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             parts = datePartsFormatterCache.get(format);
         }
         else {
-            var matchs = DATE_FORMATS_SPLIT.exec(format);
+            var matches = DATE_FORMATS_SPLIT.exec(format);
             while (format) {
                 match = DATE_FORMATS_SPLIT.exec(format);
                 if (match) {
@@ -1993,7 +1952,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
     var defaultLocale$1 = 'en-US';
-    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
     function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
@@ -2014,8 +1973,8 @@ var __extends = (this && this.__extends) || function (d, b) {
             maxFraction = 3;
         }
         if (isPresent(digits)) {
-            var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-            if (!parts) {
+            var parts = digits.match(_NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
                 throw new Error(digits + " is not a valid digit info for number pipes");
             }
             if (isPresent(parts[1])) {
@@ -2095,7 +2054,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 throw new InvalidPipeArgumentException(ReplacePipe, replacement);
             }
             if (isFunction(replacement)) {
-                var rgxPattern = isString(pattern) ? RegExpWrapper.create(pattern) : pattern;
+                var rgxPattern = isString(pattern) ? new RegExp(pattern, 'g') : pattern;
                 return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
             }
             if (pattern instanceof RegExp) {

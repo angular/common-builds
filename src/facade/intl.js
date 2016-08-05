@@ -161,7 +161,7 @@ function dateFormatter(format, date, locale) {
         parts = datePartsFormatterCache.get(format);
     }
     else {
-        var matchs = DATE_FORMATS_SPLIT.exec(format);
+        var matches = DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
             if (match) {

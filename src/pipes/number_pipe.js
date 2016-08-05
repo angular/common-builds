@@ -11,7 +11,7 @@ var intl_1 = require('../facade/intl');
 var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var defaultLocale = 'en-US';
-var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
 function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
@@ -32,8 +32,8 @@ function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
         maxFraction = 3;
     }
     if (lang_1.isPresent(digits)) {
-        var parts = lang_1.RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-        if (!parts) {
+        var parts = digits.match(_NUMBER_FORMAT_REGEXP);
+        if (parts === null) {
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
         if (lang_1.isPresent(parts[1])) {

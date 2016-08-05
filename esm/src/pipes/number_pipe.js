@@ -7,10 +7,10 @@
  */
 import { Pipe } from '@angular/core';
 import { NumberFormatStyle, NumberFormatter } from '../facade/intl';
-import { NumberWrapper, RegExpWrapper, isBlank, isNumber, isPresent, isString } from '../facade/lang';
+import { NumberWrapper, isBlank, isNumber, isPresent, isString } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 var defaultLocale = 'en-US';
-const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/g;
+const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
 function formatNumber(pipe, value, style, digits, currency = null, currencyAsSymbol = false) {
     if (isBlank(value))
         return null;
@@ -29,8 +29,8 @@ function formatNumber(pipe, value, style, digits, currency = null, currencyAsSym
         maxFraction = 3;
     }
     if (isPresent(digits)) {
-        var parts = RegExpWrapper.firstMatch(_NUMBER_FORMAT_REGEXP, digits);
-        if (!parts) {
+        var parts = digits.match(_NUMBER_FORMAT_REGEXP);
+        if (parts === null) {
             throw new Error(`${digits} is not a valid digit info for number pipes`);
         }
         if (isPresent(parts[1])) {
