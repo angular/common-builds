@@ -726,23 +726,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         'initialClasses': [{ type: _angular_core.Input, args: ['class',] },],
         'ngClass': [{ type: _angular_core.Input },],
     };
-    /**
-     * @stable
-     */
-    var BaseException = (function (_super) {
-        __extends(BaseException, _super);
-        function BaseException(message) {
-            if (message === void 0) { message = '--'; }
-            _super.call(this, message);
-            this.message = message;
-            this.stack = (new Error(message)).stack;
-        }
-        BaseException.prototype.toString = function () { return this.message; };
-        return BaseException;
-    }(Error));
-    function unimplemented() {
-        throw new BaseException('unimplemented');
-    }
     var NgForRow = (function () {
         function NgForRow($implicit, index, count) {
             this.$implicit = $implicit;
@@ -796,7 +779,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                         this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
                     }
                     catch (e) {
-                        throw new BaseException("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                        throw new _angular_core.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                     }
                 }
             }
@@ -1357,7 +1340,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
         }
         return InvalidPipeArgumentException;
-    }(BaseException));
+    }(_angular_core.BaseException));
     var ObservableStrategy = (function () {
         function ObservableStrategy() {
         }
@@ -2167,6 +2150,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         }, {});
         return StringMapWrapper.isEmpty(res) ? null : res;
     }
+    function unimplemented() {
+        throw new _angular_core.BaseException('unimplemented');
+    }
     /**
      * Base class for control directives.
      *
@@ -2319,6 +2305,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: _angular_core.Renderer, },
         { type: _angular_core.ElementRef, },
     ];
+    function unimplemented$1() {
+        throw new _angular_core.BaseException('unimplemented');
+    }
     /**
      * A base class that all control directive extend.
      * It binds a {@link Control} object to a DOM element.
@@ -2339,12 +2328,12 @@ var __extends = (this && this.__extends) || function (d, b) {
             this.valueAccessor = null;
         }
         Object.defineProperty(NgControl.prototype, "validator", {
-            get: function () { return unimplemented(); },
+            get: function () { return unimplemented$1(); },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgControl.prototype, "asyncValidator", {
-            get: function () { return unimplemented(); },
+            get: function () { return unimplemented$1(); },
             enumerable: true,
             configurable: true
         });
@@ -2777,7 +2766,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         else {
             messageEnd = 'unspecified name';
         }
-        throw new BaseException(message + " " + messageEnd);
+        throw new _angular_core.BaseException(message + " " + messageEnd);
     }
     function composeValidators(validators) {
         return isPresent(validators) ? Validators.compose(validators.map(normalizeValidator)) : null;
@@ -3919,7 +3908,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         NgFormModel.prototype._checkFormPresent = function () {
             if (isBlank(this.form)) {
-                throw new BaseException("ngFormModel expects a form. Please pass one in. Example: <form [ngFormModel]=\"myCoolForm\">");
+                throw new _angular_core.BaseException("ngFormModel expects a form. Please pass one in. Example: <form [ngFormModel]=\"myCoolForm\">");
             }
         };
         return NgFormModel;
@@ -4558,7 +4547,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 href = this._platformLocation.getBaseHrefFromDOM();
             }
             if (isBlank(href)) {
-                throw new BaseException("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
+                throw new _angular_core.BaseException("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
             }
             this._baseHref = href;
         }

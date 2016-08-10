@@ -6,8 +6,11 @@
  * found in the LICENSE file at https://angular.io/license
  */
 "use strict";
-var exceptions_1 = require('../../facade/exceptions');
+var core_1 = require('@angular/core');
 var lang_1 = require('../../facade/lang');
+function unimplemented() {
+    throw new core_1.BaseException('unimplemented');
+}
 /**
  * Base class for control directives.
  *
@@ -19,7 +22,7 @@ var AbstractControlDirective = (function () {
     function AbstractControlDirective() {
     }
     Object.defineProperty(AbstractControlDirective.prototype, "control", {
-        get: function () { return exceptions_1.unimplemented(); },
+        get: function () { return unimplemented(); },
         enumerable: true,
         configurable: true
     });

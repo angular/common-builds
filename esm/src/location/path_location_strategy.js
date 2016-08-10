@@ -5,8 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Inject, Injectable, Optional } from '@angular/core';
-import { BaseException } from '../facade/exceptions';
+import { BaseException, Inject, Injectable, Optional } from '@angular/core';
 import { isBlank } from '../facade/lang';
 import { Location } from './location';
 import { APP_BASE_HREF, LocationStrategy } from './location_strategy';

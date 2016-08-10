@@ -14,7 +14,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 var core_1 = require('@angular/core');
 var async_1 = require('../../facade/async');
 var collection_1 = require('../../facade/collection');
-var exceptions_1 = require('../../facade/exceptions');
 var lang_1 = require('../../facade/lang');
 var validators_1 = require('../validators');
 var control_container_1 = require('./control_container');
@@ -110,7 +109,7 @@ var NgFormModel = (function (_super) {
     };
     NgFormModel.prototype._checkFormPresent = function () {
         if (lang_1.isBlank(this.form)) {
-            throw new exceptions_1.BaseException("ngFormModel expects a form. Please pass one in. Example: <form [ngFormModel]=\"myCoolForm\">");
+            throw new core_1.BaseException("ngFormModel expects a form. Please pass one in. Example: <form [ngFormModel]=\"myCoolForm\">");
         }
     };
     /** @nocollapse */
