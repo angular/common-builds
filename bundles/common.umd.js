@@ -1333,7 +1333,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      *
      * @experimental Contains forms which are experimental.
      */
-    var COMMON_DIRECTIVES = [CORE_DIRECTIVES];
+    var COMMON_DIRECTIVES = CORE_DIRECTIVES;
     var InvalidPipeArgumentException = (function (_super) {
         __extends(InvalidPipeArgumentException, _super);
         function InvalidPipeArgumentException(type, value) {
