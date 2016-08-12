@@ -12,6 +12,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
+var exceptions_1 = require('../facade/exceptions');
 var lang_1 = require('../facade/lang');
 var location_1 = require('./location');
 var location_strategy_1 = require('./location_strategy');
@@ -25,7 +26,7 @@ var PathLocationStrategy = (function (_super) {
             href = this._platformLocation.getBaseHrefFromDOM();
         }
         if (lang_1.isBlank(href)) {
-            throw new core_1.BaseException("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
+            throw new exceptions_1.BaseException("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
         }
         this._baseHref = href;
     }

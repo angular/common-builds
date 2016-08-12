@@ -7,6 +7,7 @@
  */
 "use strict";
 var core_1 = require('@angular/core');
+var exceptions_1 = require('../facade/exceptions');
 var lang_1 = require('../facade/lang');
 var NgForRow = (function () {
     function NgForRow($implicit, index, count) {
@@ -62,7 +63,7 @@ var NgFor = (function () {
                     this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
                 }
                 catch (e) {
-                    throw new core_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                    throw new exceptions_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                 }
             }
         }

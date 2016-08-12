@@ -52,5 +52,5 @@ var directives_1 = require('./directives');
  *
  * @experimental Contains forms which are experimental.
  */
-exports.COMMON_DIRECTIVES = directives_1.CORE_DIRECTIVES;
+exports.COMMON_DIRECTIVES = [directives_1.CORE_DIRECTIVES];
 //# sourceMappingURL=common_directives.js.map
