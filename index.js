@@ -14,7 +14,6 @@ var common_directives_1 = require('./src/common_directives');
 var pipes_1 = require('./src/pipes');
 __export(require('./src/pipes'));
 __export(require('./src/directives'));
-__export(require('./src/forms-deprecated'));
 __export(require('./src/common_directives'));
 __export(require('./src/location'));
 var localization_1 = require('./src/localization');

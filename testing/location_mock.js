@@ -57,6 +57,7 @@ var SpyLocation = (function () {
         }
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
+        this._subject.emit({ 'url': url, 'pop': false });
     };
     SpyLocation.prototype.replaceState = function (path, query) {
         if (query === void 0) { query = ''; }

@@ -5,8 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
-import { BaseException } from '../facade/exceptions';
+import { BaseException, ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
 import { getTypeNameForDebugging, isBlank, isPresent } from '../facade/lang';
 export class NgForRow {
     constructor($implicit, index, count) {
