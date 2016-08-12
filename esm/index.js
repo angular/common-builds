@@ -12,7 +12,7 @@ export * from './src/pipes';
 export * from './src/directives';
 export * from './src/common_directives';
 export * from './src/location';
-export { NgLocalization } from './src/localization';
+export { NgLocalization, NgLocaleLocalization, Plural, getPluralCase } from './src/localization';
 export class CommonModule {
 }
 /** @nocollapse */

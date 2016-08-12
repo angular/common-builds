@@ -18,6 +18,9 @@ __export(require('./src/common_directives'));
 __export(require('./src/location'));
 var localization_1 = require('./src/localization');
 exports.NgLocalization = localization_1.NgLocalization;
+exports.NgLocaleLocalization = localization_1.NgLocaleLocalization;
+exports.Plural = localization_1.Plural;
+exports.getPluralCase = localization_1.getPluralCase;
 var CommonModule = (function () {
     function CommonModule() {
     }
