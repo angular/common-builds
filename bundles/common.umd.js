@@ -36,18 +36,18 @@ var __extends = (this && this.__extends) || function (d, b) {
     }
     // Need to declare a new variable for global here since TypeScript
     // exports the original value of the symbol.
-    var _global = globalScope;
+    var global$1 = globalScope;
     function getTypeNameForDebugging(type) {
         if (type['name']) {
             return type['name'];
         }
         return typeof type;
     }
-    var Date = _global.Date;
+    var Date = global$1.Date;
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
-    _global.assert = function assert(condition) {
+    global$1.assert = function assert(condition) {
         // TODO: to be fixed properly via #2830, noop for now
     };
     function isPresent(obj) {
@@ -226,10 +226,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     var Json = (function () {
         function Json() {
         }
-        Json.parse = function (s) { return _global.JSON.parse(s); };
+        Json.parse = function (s) { return global$1.JSON.parse(s); };
         Json.stringify = function (data) {
             // Dart doesn't take 3 arguments
-            return _global.JSON.stringify(data, null, 2);
+            return global$1.JSON.stringify(data, null, 2);
         };
         return Json;
     }());
@@ -272,8 +272,119 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return _symbolIterator;
     }
-    var Map$1 = _global.Map;
-    var Set$1 = _global.Set;
+    var InvalidPipeArgumentException = (function (_super) {
+        __extends(InvalidPipeArgumentException, _super);
+        function InvalidPipeArgumentException(type, value) {
+            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
+        }
+        return InvalidPipeArgumentException;
+    }(_angular_core.BaseException));
+    var ObservableStrategy = (function () {
+        function ObservableStrategy() {
+        }
+        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+        };
+        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+        return ObservableStrategy;
+    }());
+    var PromiseStrategy = (function () {
+        function PromiseStrategy() {
+        }
+        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.then(updateLatestValue, function (e) { throw e; });
+        };
+        PromiseStrategy.prototype.dispose = function (subscription) { };
+        PromiseStrategy.prototype.onDestroy = function (subscription) { };
+        return PromiseStrategy;
+    }());
+    var _promiseStrategy = new PromiseStrategy();
+    var _observableStrategy = new ObservableStrategy();
+    var AsyncPipe = (function () {
+        function AsyncPipe(_ref) {
+            /** @internal */
+            this._latestValue = null;
+            /** @internal */
+            this._latestReturnedValue = null;
+            /** @internal */
+            this._subscription = null;
+            /** @internal */
+            this._obj = null;
+            this._strategy = null;
+            this._ref = _ref;
+        }
+        AsyncPipe.prototype.ngOnDestroy = function () {
+            if (isPresent(this._subscription)) {
+                this._dispose();
+            }
+        };
+        AsyncPipe.prototype.transform = function (obj) {
+            if (isBlank(this._obj)) {
+                if (isPresent(obj)) {
+                    this._subscribe(obj);
+                }
+                this._latestReturnedValue = this._latestValue;
+                return this._latestValue;
+            }
+            if (obj !== this._obj) {
+                this._dispose();
+                return this.transform(obj);
+            }
+            if (this._latestValue === this._latestReturnedValue) {
+                return this._latestReturnedValue;
+            }
+            else {
+                this._latestReturnedValue = this._latestValue;
+                return _angular_core.WrappedValue.wrap(this._latestValue);
+            }
+        };
+        /** @internal */
+        AsyncPipe.prototype._subscribe = function (obj) {
+            var _this = this;
+            this._obj = obj;
+            this._strategy = this._selectStrategy(obj);
+            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+        };
+        /** @internal */
+        AsyncPipe.prototype._selectStrategy = function (obj) {
+            if (isPromise(obj)) {
+                return _promiseStrategy;
+            }
+            else if (obj.subscribe) {
+                return _observableStrategy;
+            }
+            else {
+                throw new InvalidPipeArgumentException(AsyncPipe, obj);
+            }
+        };
+        /** @internal */
+        AsyncPipe.prototype._dispose = function () {
+            this._strategy.dispose(this._subscription);
+            this._latestValue = null;
+            this._latestReturnedValue = null;
+            this._subscription = null;
+            this._obj = null;
+        };
+        /** @internal */
+        AsyncPipe.prototype._updateLatestValue = function (async, value) {
+            if (async === this._obj) {
+                this._latestValue = value;
+                this._ref.markForCheck();
+            }
+        };
+        return AsyncPipe;
+    }());
+    /** @nocollapse */
+    AsyncPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = [
+        { type: _angular_core.ChangeDetectorRef, },
+    ];
+    var Map$1 = global$1.Map;
+    var Set$1 = global$1.Set;
     // Safari and Internet Explorer do not support the iterable parameter to the
     // Map constructor.  We work around that by manually adding the items.
     var createMapFromPairs = (function () {
@@ -565,6 +676,932 @@ var __extends = (this && this.__extends) || function (d, b) {
             };
         }
     })();
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var NumberFormatStyle;
+    (function (NumberFormatStyle) {
+        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
+        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
+        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
+    })(NumberFormatStyle || (NumberFormatStyle = {}));
+    var NumberFormatter = (function () {
+        function NumberFormatter() {
+        }
+        NumberFormatter.format = function (num, locale, style, _a) {
+            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+            var options = {
+                minimumIntegerDigits: minimumIntegerDigits,
+                minimumFractionDigits: minimumFractionDigits,
+                maximumFractionDigits: maximumFractionDigits,
+                style: NumberFormatStyle[style].toLowerCase()
+            };
+            if (style == NumberFormatStyle.Currency) {
+                options.currency = currency;
+                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+            }
+            return new Intl.NumberFormat(locale, options).format(num);
+        };
+        return NumberFormatter;
+    }());
+    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+    var PATTERN_ALIASES = {
+        yMMMdjms: datePartGetterFactory(combine([
+            digitCondition('year', 1),
+            nameCondition('month', 3),
+            digitCondition('day', 1),
+            digitCondition('hour', 1),
+            digitCondition('minute', 1),
+            digitCondition('second', 1),
+        ])),
+        yMdjm: datePartGetterFactory(combine([
+            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+            digitCondition('hour', 1), digitCondition('minute', 1)
+        ])),
+        yMMMMEEEEd: datePartGetterFactory(combine([
+            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
+            digitCondition('day', 1)
+        ])),
+        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
+        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
+        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
+        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
+        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+    };
+    var DATE_FORMATS = {
+        yyyy: datePartGetterFactory(digitCondition('year', 4)),
+        yy: datePartGetterFactory(digitCondition('year', 2)),
+        y: datePartGetterFactory(digitCondition('year', 1)),
+        MMMM: datePartGetterFactory(nameCondition('month', 4)),
+        MMM: datePartGetterFactory(nameCondition('month', 3)),
+        MM: datePartGetterFactory(digitCondition('month', 2)),
+        M: datePartGetterFactory(digitCondition('month', 1)),
+        LLLL: datePartGetterFactory(nameCondition('month', 4)),
+        dd: datePartGetterFactory(digitCondition('day', 2)),
+        d: datePartGetterFactory(digitCondition('day', 1)),
+        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
+        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
+        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
+        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        jj: datePartGetterFactory(digitCondition('hour', 2)),
+        j: datePartGetterFactory(digitCondition('hour', 1)),
+        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
+        m: datePartGetterFactory(digitCondition('minute', 1)),
+        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
+        s: datePartGetterFactory(digitCondition('second', 1)),
+        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
+        // we can be just safely rely on using `sss` since we currently don't support single or two digit
+        // fractions
+        sss: datePartGetterFactory(digitCondition('second', 3)),
+        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
+        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
+        EE: datePartGetterFactory(nameCondition('weekday', 2)),
+        E: datePartGetterFactory(nameCondition('weekday', 1)),
+        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        Z: timeZoneGetter('short'),
+        z: timeZoneGetter('long'),
+        ww: datePartGetterFactory({}),
+        // first Thursday of the year. not support ?
+        w: datePartGetterFactory({}),
+        // of the year not support ?
+        G: datePartGetterFactory(nameCondition('era', 1)),
+        GG: datePartGetterFactory(nameCondition('era', 2)),
+        GGG: datePartGetterFactory(nameCondition('era', 3)),
+        GGGG: datePartGetterFactory(nameCondition('era', 4))
+    };
+    function digitModifier(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.length == 1 ? '0' + result : result;
+        };
+    }
+    function hourClockExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[1];
+        };
+    }
+    function hourExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[0];
+        };
+    }
+    function timeZoneGetter(timezone) {
+        // To workaround `Intl` API restriction for single timezone let format with 24 hours
+        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+        return function (date, locale) {
+            var result = new Intl.DateTimeFormat(locale, format).format(date);
+            // Then extract first 3 letters that related to hours
+            return result ? result.substring(3) : '';
+        };
+    }
+    function hour12Modify(options, value) {
+        options.hour12 = value;
+        return options;
+    }
+    function digitCondition(prop, len) {
+        var result = {};
+        result[prop] = len == 2 ? '2-digit' : 'numeric';
+        return result;
+    }
+    function nameCondition(prop, len) {
+        var result = {};
+        result[prop] = len < 4 ? 'short' : 'long';
+        return result;
+    }
+    function combine(options) {
+        var result = {};
+        options.forEach(function (option) { Object.assign(result, option); });
+        return result;
+    }
+    function datePartGetterFactory(ret) {
+        return function (date, locale) {
+            return new Intl.DateTimeFormat(locale, ret).format(date);
+        };
+    }
+    var datePartsFormatterCache = new Map();
+    function dateFormatter(format, date, locale) {
+        var text = '';
+        var match;
+        var fn;
+        var parts = [];
+        if (PATTERN_ALIASES[format]) {
+            return PATTERN_ALIASES[format](date, locale);
+        }
+        if (datePartsFormatterCache.has(format)) {
+            parts = datePartsFormatterCache.get(format);
+        }
+        else {
+            var matches = DATE_FORMATS_SPLIT.exec(format);
+            while (format) {
+                match = DATE_FORMATS_SPLIT.exec(format);
+                if (match) {
+                    parts = concat(parts, match, 1);
+                    format = parts.pop();
+                }
+                else {
+                    parts.push(format);
+                    format = null;
+                }
+            }
+            datePartsFormatterCache.set(format, parts);
+        }
+        parts.forEach(function (part) {
+            fn = DATE_FORMATS[part];
+            text += fn ? fn(date, locale) :
+                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+        });
+        return text;
+    }
+    var slice = [].slice;
+    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
+        return array1.concat(slice.call(array2, index));
+    }
+    var DateFormatter = (function () {
+        function DateFormatter() {
+        }
+        DateFormatter.format = function (date, locale, pattern) {
+            return dateFormatter(pattern, date, locale);
+        };
+        return DateFormatter;
+    }());
+    // TODO: move to a global configurable location along with other i18n components.
+    var defaultLocale = 'en-US';
+    var DatePipe = (function () {
+        function DatePipe() {
+        }
+        DatePipe.prototype.transform = function (value, pattern) {
+            if (pattern === void 0) { pattern = 'mediumDate'; }
+            if (isBlank(value))
+                return null;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentException(DatePipe, value);
+            }
+            if (NumberWrapper.isNumeric(value)) {
+                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
+            }
+            else if (isString(value)) {
+                value = DateWrapper.fromISOString(value);
+            }
+            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
+                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
+            }
+            return DateFormatter.format(value, defaultLocale, pattern);
+        };
+        DatePipe.prototype.supports = function (obj) {
+            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
+                return true;
+            }
+            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
+                return true;
+            }
+            return false;
+        };
+        return DatePipe;
+    }());
+    /** @internal */
+    DatePipe._ALIASES = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+    /** @nocollapse */
+    DatePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /**
+     * @experimental
+     */
+    var NgLocalization = (function () {
+        function NgLocalization() {
+        }
+        return NgLocalization;
+    }());
+    /**
+     * Returns the plural category for a given value.
+     * - "=value" when the case exists,
+     * - the plural category otherwise
+     *
+     * @internal
+     */
+    function getPluralCategory(value, cases, ngLocalization) {
+        var nbCase = "=" + value;
+        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+    }
+    var NgLocaleLocalization = (function (_super) {
+        __extends(NgLocaleLocalization, _super);
+        function NgLocaleLocalization(_locale) {
+            _super.call(this);
+            this._locale = _locale;
+        }
+        NgLocaleLocalization.prototype.getPluralCategory = function (value) {
+            var plural = getPluralCase(this._locale, value);
+            switch (plural) {
+                case Plural.Zero:
+                    return 'zero';
+                case Plural.One:
+                    return 'one';
+                case Plural.Two:
+                    return 'two';
+                case Plural.Few:
+                    return 'few';
+                case Plural.Many:
+                    return 'many';
+                default:
+                    return 'other';
+            }
+        };
+        return NgLocaleLocalization;
+    }(NgLocalization));
+    /** @nocollapse */
+    NgLocaleLocalization.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    NgLocaleLocalization.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ];
+    // This is generated code DO NOT MODIFY
+    // see angular2/script/cldr/gen_plural_rules.js
+    /** @experimental */
+    var Plural;
+    (function (Plural) {
+        Plural[Plural["Zero"] = 0] = "Zero";
+        Plural[Plural["One"] = 1] = "One";
+        Plural[Plural["Two"] = 2] = "Two";
+        Plural[Plural["Few"] = 3] = "Few";
+        Plural[Plural["Many"] = 4] = "Many";
+        Plural[Plural["Other"] = 5] = "Other";
+    })(Plural || (Plural = {}));
+    /**
+     * Returns the plural case based on the locale
+     *
+     * @experimental
+     */
+    function getPluralCase(locale, nLike) {
+        // TODO(vicb): lazy compute
+        if (typeof nLike === 'string') {
+            nLike = parseInt(nLike, 10);
+        }
+        var n = nLike;
+        var nDecimal = n.toString().replace(/^[^.]*\.?/, '');
+        var i = Math.floor(Math.abs(n));
+        var v = nDecimal.length;
+        var f = parseInt(nDecimal, 10);
+        var t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+        var lang = locale.split('_')[0].toLowerCase();
+        switch (lang) {
+            case 'af':
+            case 'asa':
+            case 'az':
+            case 'bem':
+            case 'bez':
+            case 'bg':
+            case 'brx':
+            case 'ce':
+            case 'cgg':
+            case 'chr':
+            case 'ckb':
+            case 'ee':
+            case 'el':
+            case 'eo':
+            case 'es':
+            case 'eu':
+            case 'fo':
+            case 'fur':
+            case 'gsw':
+            case 'ha':
+            case 'haw':
+            case 'hu':
+            case 'jgo':
+            case 'jmc':
+            case 'ka':
+            case 'kk':
+            case 'kkj':
+            case 'kl':
+            case 'ks':
+            case 'ksb':
+            case 'ky':
+            case 'lb':
+            case 'lg':
+            case 'mas':
+            case 'mgo':
+            case 'ml':
+            case 'mn':
+            case 'nb':
+            case 'nd':
+            case 'ne':
+            case 'nn':
+            case 'nnh':
+            case 'nyn':
+            case 'om':
+            case 'or':
+            case 'os':
+            case 'ps':
+            case 'rm':
+            case 'rof':
+            case 'rwk':
+            case 'saq':
+            case 'seh':
+            case 'sn':
+            case 'so':
+            case 'sq':
+            case 'ta':
+            case 'te':
+            case 'teo':
+            case 'tk':
+            case 'tr':
+            case 'ug':
+            case 'uz':
+            case 'vo':
+            case 'vun':
+            case 'wae':
+            case 'xog':
+                if (n === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'agq':
+            case 'bas':
+            case 'cu':
+            case 'dav':
+            case 'dje':
+            case 'dua':
+            case 'dyo':
+            case 'ebu':
+            case 'ewo':
+            case 'guz':
+            case 'kam':
+            case 'khq':
+            case 'ki':
+            case 'kln':
+            case 'kok':
+            case 'ksf':
+            case 'lrc':
+            case 'lu':
+            case 'luo':
+            case 'luy':
+            case 'mer':
+            case 'mfe':
+            case 'mgh':
+            case 'mua':
+            case 'mzn':
+            case 'nmg':
+            case 'nus':
+            case 'qu':
+            case 'rn':
+            case 'rw':
+            case 'sbp':
+            case 'twq':
+            case 'vai':
+            case 'yav':
+            case 'yue':
+            case 'zgh':
+            case 'ak':
+            case 'ln':
+            case 'mg':
+            case 'pa':
+            case 'ti':
+                if (n === Math.floor(n) && n >= 0 && n <= 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'am':
+            case 'as':
+            case 'bn':
+            case 'fa':
+            case 'gu':
+            case 'hi':
+            case 'kn':
+            case 'mr':
+            case 'zu':
+                if (i === 0 || n === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'ar':
+                if (n === 0)
+                    return Plural.Zero;
+                if (n === 1)
+                    return Plural.One;
+                if (n === 2)
+                    return Plural.Two;
+                if (n % 100 === Math.floor(n % 100) && n % 100 >= 3 && n % 100 <= 10)
+                    return Plural.Few;
+                if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 99)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'ast':
+            case 'ca':
+            case 'de':
+            case 'en':
+            case 'et':
+            case 'fi':
+            case 'fy':
+            case 'gl':
+            case 'it':
+            case 'nl':
+            case 'sv':
+            case 'sw':
+            case 'ur':
+            case 'yi':
+                if (i === 1 && v === 0)
+                    return Plural.One;
+                return Plural.Other;
+            case 'be':
+                if (n % 10 === 1 && !(n % 100 === 11))
+                    return Plural.One;
+                if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 4 &&
+                    !(n % 100 >= 12 && n % 100 <= 14))
+                    return Plural.Few;
+                if (n % 10 === 0 || n % 10 === Math.floor(n % 10) && n % 10 >= 5 && n % 10 <= 9 ||
+                    n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 14)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'br':
+                if (n % 10 === 1 && !(n % 100 === 11 || n % 100 === 71 || n % 100 === 91))
+                    return Plural.One;
+                if (n % 10 === 2 && !(n % 100 === 12 || n % 100 === 72 || n % 100 === 92))
+                    return Plural.Two;
+                if (n % 10 === Math.floor(n % 10) && (n % 10 >= 3 && n % 10 <= 4 || n % 10 === 9) &&
+                    !(n % 100 >= 10 && n % 100 <= 19 || n % 100 >= 70 && n % 100 <= 79 ||
+                        n % 100 >= 90 && n % 100 <= 99))
+                    return Plural.Few;
+                if (!(n === 0) && n % 1e6 === 0)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'bs':
+            case 'hr':
+            case 'sr':
+                if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
+                    return Plural.One;
+                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                    !(i % 100 >= 12 && i % 100 <= 14) ||
+                    f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
+                        !(f % 100 >= 12 && f % 100 <= 14))
+                    return Plural.Few;
+                return Plural.Other;
+            case 'cs':
+            case 'sk':
+                if (i === 1 && v === 0)
+                    return Plural.One;
+                if (i === Math.floor(i) && i >= 2 && i <= 4 && v === 0)
+                    return Plural.Few;
+                if (!(v === 0))
+                    return Plural.Many;
+                return Plural.Other;
+            case 'cy':
+                if (n === 0)
+                    return Plural.Zero;
+                if (n === 1)
+                    return Plural.One;
+                if (n === 2)
+                    return Plural.Two;
+                if (n === 3)
+                    return Plural.Few;
+                if (n === 6)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'da':
+                if (n === 1 || !(t === 0) && (i === 0 || i === 1))
+                    return Plural.One;
+                return Plural.Other;
+            case 'dsb':
+            case 'hsb':
+                if (v === 0 && i % 100 === 1 || f % 100 === 1)
+                    return Plural.One;
+                if (v === 0 && i % 100 === 2 || f % 100 === 2)
+                    return Plural.Two;
+                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
+                    f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
+                    return Plural.Few;
+                return Plural.Other;
+            case 'ff':
+            case 'fr':
+            case 'hy':
+            case 'kab':
+                if (i === 0 || i === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'fil':
+                if (v === 0 && (i === 1 || i === 2 || i === 3) ||
+                    v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
+                    !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))
+                    return Plural.One;
+                return Plural.Other;
+            case 'ga':
+                if (n === 1)
+                    return Plural.One;
+                if (n === 2)
+                    return Plural.Two;
+                if (n === Math.floor(n) && n >= 3 && n <= 6)
+                    return Plural.Few;
+                if (n === Math.floor(n) && n >= 7 && n <= 10)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'gd':
+                if (n === 1 || n === 11)
+                    return Plural.One;
+                if (n === 2 || n === 12)
+                    return Plural.Two;
+                if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
+                    return Plural.Few;
+                return Plural.Other;
+            case 'gv':
+                if (v === 0 && i % 10 === 1)
+                    return Plural.One;
+                if (v === 0 && i % 10 === 2)
+                    return Plural.Two;
+                if (v === 0 &&
+                    (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
+                    return Plural.Few;
+                if (!(v === 0))
+                    return Plural.Many;
+                return Plural.Other;
+            case 'he':
+                if (i === 1 && v === 0)
+                    return Plural.One;
+                if (i === 2 && v === 0)
+                    return Plural.Two;
+                if (v === 0 && !(n >= 0 && n <= 10) && n % 10 === 0)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'is':
+                if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
+                    return Plural.One;
+                return Plural.Other;
+            case 'ksh':
+                if (n === 0)
+                    return Plural.Zero;
+                if (n === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'kw':
+            case 'naq':
+            case 'se':
+            case 'smn':
+                if (n === 1)
+                    return Plural.One;
+                if (n === 2)
+                    return Plural.Two;
+                return Plural.Other;
+            case 'lag':
+                if (n === 0)
+                    return Plural.Zero;
+                if ((i === 0 || i === 1) && !(n === 0))
+                    return Plural.One;
+                return Plural.Other;
+            case 'lt':
+                if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
+                    return Plural.One;
+                if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
+                    !(n % 100 >= 11 && n % 100 <= 19))
+                    return Plural.Few;
+                if (!(f === 0))
+                    return Plural.Many;
+                return Plural.Other;
+            case 'lv':
+            case 'prg':
+                if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 ||
+                    v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19)
+                    return Plural.Zero;
+                if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) ||
+                    !(v === 2) && f % 10 === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'mk':
+                if (v === 0 && i % 10 === 1 || f % 10 === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'mt':
+                if (n === 1)
+                    return Plural.One;
+                if (n === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 2 && n % 100 <= 10)
+                    return Plural.Few;
+                if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'pl':
+                if (i === 1 && v === 0)
+                    return Plural.One;
+                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                    !(i % 100 >= 12 && i % 100 <= 14))
+                    return Plural.Few;
+                if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
+                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'pt':
+                if (n === Math.floor(n) && n >= 0 && n <= 2 && !(n === 2))
+                    return Plural.One;
+                return Plural.Other;
+            case 'ro':
+                if (i === 1 && v === 0)
+                    return Plural.One;
+                if (!(v === 0) || n === 0 ||
+                    !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
+                    return Plural.Few;
+                return Plural.Other;
+            case 'ru':
+            case 'uk':
+                if (v === 0 && i % 10 === 1 && !(i % 100 === 11))
+                    return Plural.One;
+                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                    !(i % 100 >= 12 && i % 100 <= 14))
+                    return Plural.Few;
+                if (v === 0 && i % 10 === 0 ||
+                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)
+                    return Plural.Many;
+                return Plural.Other;
+            case 'shi':
+                if (i === 0 || n === 1)
+                    return Plural.One;
+                if (n === Math.floor(n) && n >= 2 && n <= 10)
+                    return Plural.Few;
+                return Plural.Other;
+            case 'si':
+                if (n === 0 || n === 1 || i === 0 && f === 1)
+                    return Plural.One;
+                return Plural.Other;
+            case 'sl':
+                if (v === 0 && i % 100 === 1)
+                    return Plural.One;
+                if (v === 0 && i % 100 === 2)
+                    return Plural.Two;
+                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0))
+                    return Plural.Few;
+                return Plural.Other;
+            case 'tzm':
+                if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99)
+                    return Plural.One;
+                return Plural.Other;
+            default:
+                return Plural.Other;
+        }
+    }
+    var _INTERPOLATION_REGEXP = /#/g;
+    var I18nPluralPipe = (function () {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
+        }
+        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(pluralMap)) {
+                throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
+            }
+            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
+        };
+        return I18nPluralPipe;
+    }());
+    /** @nocollapse */
+    I18nPluralPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = [
+        { type: NgLocalization, },
+    ];
+    var I18nSelectPipe = (function () {
+        function I18nSelectPipe() {
+        }
+        I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(mapping)) {
+                throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
+            }
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
+        };
+        return I18nSelectPipe;
+    }());
+    /** @nocollapse */
+    I18nSelectPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+    ];
+    var JsonPipe = (function () {
+        function JsonPipe() {
+        }
+        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
+        return JsonPipe;
+    }());
+    /** @nocollapse */
+    JsonPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
+    ];
+    var LowerCasePipe = (function () {
+        function LowerCasePipe() {
+        }
+        LowerCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentException(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        return LowerCasePipe;
+    }());
+    /** @nocollapse */
+    LowerCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+    ];
+    var defaultLocale$1 = 'en-US';
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
+    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
+        if (currency === void 0) { currency = null; }
+        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+        if (isBlank(value))
+            return null;
+        // Convert strings to numbers
+        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
+        if (!isNumber(value)) {
+            throw new InvalidPipeArgumentException(pipe, value);
+        }
+        var minInt;
+        var minFraction;
+        var maxFraction;
+        if (style !== NumberFormatStyle.Currency) {
+            // rely on Intl default for currency
+            minInt = 1;
+            minFraction = 0;
+            maxFraction = 3;
+        }
+        if (isPresent(digits)) {
+            var parts = digits.match(_NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                throw new Error(digits + " is not a valid digit info for number pipes");
+            }
+            if (isPresent(parts[1])) {
+                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
+            }
+            if (isPresent(parts[3])) {
+                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
+            }
+            if (isPresent(parts[5])) {
+                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
+            }
+        }
+        return NumberFormatter.format(value, defaultLocale$1, style, {
+            minimumIntegerDigits: minInt,
+            minimumFractionDigits: minFraction,
+            maximumFractionDigits: maxFraction,
+            currency: currency,
+            currencyAsSymbol: currencyAsSymbol
+        });
+    }
+    var DecimalPipe = (function () {
+        function DecimalPipe() {
+        }
+        DecimalPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
+        };
+        return DecimalPipe;
+    }());
+    /** @nocollapse */
+    DecimalPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
+    ];
+    var PercentPipe = (function () {
+        function PercentPipe() {
+        }
+        PercentPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
+        };
+        return PercentPipe;
+    }());
+    /** @nocollapse */
+    PercentPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
+    ];
+    var CurrencyPipe = (function () {
+        function CurrencyPipe() {
+        }
+        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+            if (currencyCode === void 0) { currencyCode = 'USD'; }
+            if (symbolDisplay === void 0) { symbolDisplay = false; }
+            if (digits === void 0) { digits = null; }
+            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        };
+        return CurrencyPipe;
+    }());
+    /** @nocollapse */
+    CurrencyPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+    ];
+    var SlicePipe = (function () {
+        function SlicePipe() {
+        }
+        SlicePipe.prototype.transform = function (value, start, end) {
+            if (end === void 0) { end = null; }
+            if (isBlank(value))
+                return value;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentException(SlicePipe, value);
+            }
+            if (isString(value)) {
+                return StringWrapper.slice(value, start, end);
+            }
+            return ListWrapper.slice(value, start, end);
+        };
+        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
+        return SlicePipe;
+    }());
+    /** @nocollapse */
+    SlicePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
+    ];
+    var UpperCasePipe = (function () {
+        function UpperCasePipe() {
+        }
+        UpperCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentException(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        return UpperCasePipe;
+    }());
+    /** @nocollapse */
+    UpperCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+    ];
+    /**
+     * A collection of Angular core pipes that are likely to be used in each and every
+     * application.
+     *
+     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
+     * property of the `@Component` decorator.
+     *
+     * @experimental Contains i18n pipes which are experimental
+     */
+    var COMMON_PIPES = [
+        AsyncPipe,
+        UpperCasePipe,
+        LowerCasePipe,
+        JsonPipe,
+        SlicePipe,
+        DecimalPipe,
+        PercentPipe,
+        CurrencyPipe,
+        DatePipe,
+        I18nPluralPipe,
+        I18nSelectPipe,
+    ];
     var NgClass = (function () {
         function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
             this._iterableDiffers = _iterableDiffers;
@@ -851,475 +1888,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     NgIf.propDecorators = {
         'ngIf': [{ type: _angular_core.Input },],
     };
-    /**
-     * @experimental
-     */
-    var NgLocalization = (function () {
-        function NgLocalization() {
-        }
-        return NgLocalization;
-    }());
-    /**
-     * Returns the plural category for a given value.
-     * - "=value" when the case exists,
-     * - the plural category otherwise
-     *
-     * @internal
-     */
-    function getPluralCategory(value, cases, ngLocalization) {
-        var nbCase = "=" + value;
-        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
-    }
-    var NgLocaleLocalization = (function (_super) {
-        __extends(NgLocaleLocalization, _super);
-        function NgLocaleLocalization(_locale) {
-            _super.call(this);
-            this._locale = _locale;
-        }
-        NgLocaleLocalization.prototype.getPluralCategory = function (value) {
-            var plural = getPluralCase(this._locale, value);
-            switch (plural) {
-                case exports.Plural.Zero:
-                    return 'zero';
-                case exports.Plural.One:
-                    return 'one';
-                case exports.Plural.Two:
-                    return 'two';
-                case exports.Plural.Few:
-                    return 'few';
-                case exports.Plural.Many:
-                    return 'many';
-                default:
-                    return 'other';
-            }
-        };
-        return NgLocaleLocalization;
-    }(NgLocalization));
-    /** @nocollapse */
-    NgLocaleLocalization.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    /** @nocollapse */
-    NgLocaleLocalization.ctorParameters = [
-        null,
-    ];
-    // This is generated code DO NOT MODIFY
-    // see angular2/script/cldr/gen_plural_rules.js
-    /** @experimental */
-    exports.Plural;
-    (function (Plural) {
-        Plural[Plural["Zero"] = 0] = "Zero";
-        Plural[Plural["One"] = 1] = "One";
-        Plural[Plural["Two"] = 2] = "Two";
-        Plural[Plural["Few"] = 3] = "Few";
-        Plural[Plural["Many"] = 4] = "Many";
-        Plural[Plural["Other"] = 5] = "Other";
-    })(exports.Plural || (exports.Plural = {}));
-    /**
-     * Returns the plural case based on the locale
-     *
-     * @experimental
-     */
-    function getPluralCase(locale, nLike) {
-        // TODO(vicb): lazy compute
-        if (typeof nLike === 'string') {
-            nLike = parseInt(nLike, 10);
-        }
-        var n = nLike;
-        var nDecimal = n.toString().replace(/^[^.]*\.?/, '');
-        var i = Math.floor(Math.abs(n));
-        var v = nDecimal.length;
-        var f = parseInt(nDecimal, 10);
-        var t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-        var lang = locale.split('_')[0].toLowerCase();
-        switch (lang) {
-            case 'af':
-            case 'asa':
-            case 'az':
-            case 'bem':
-            case 'bez':
-            case 'bg':
-            case 'brx':
-            case 'ce':
-            case 'cgg':
-            case 'chr':
-            case 'ckb':
-            case 'ee':
-            case 'el':
-            case 'eo':
-            case 'es':
-            case 'eu':
-            case 'fo':
-            case 'fur':
-            case 'gsw':
-            case 'ha':
-            case 'haw':
-            case 'hu':
-            case 'jgo':
-            case 'jmc':
-            case 'ka':
-            case 'kk':
-            case 'kkj':
-            case 'kl':
-            case 'ks':
-            case 'ksb':
-            case 'ky':
-            case 'lb':
-            case 'lg':
-            case 'mas':
-            case 'mgo':
-            case 'ml':
-            case 'mn':
-            case 'nb':
-            case 'nd':
-            case 'ne':
-            case 'nn':
-            case 'nnh':
-            case 'nyn':
-            case 'om':
-            case 'or':
-            case 'os':
-            case 'ps':
-            case 'rm':
-            case 'rof':
-            case 'rwk':
-            case 'saq':
-            case 'seh':
-            case 'sn':
-            case 'so':
-            case 'sq':
-            case 'ta':
-            case 'te':
-            case 'teo':
-            case 'tk':
-            case 'tr':
-            case 'ug':
-            case 'uz':
-            case 'vo':
-            case 'vun':
-            case 'wae':
-            case 'xog':
-                if (n === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'agq':
-            case 'bas':
-            case 'cu':
-            case 'dav':
-            case 'dje':
-            case 'dua':
-            case 'dyo':
-            case 'ebu':
-            case 'ewo':
-            case 'guz':
-            case 'kam':
-            case 'khq':
-            case 'ki':
-            case 'kln':
-            case 'kok':
-            case 'ksf':
-            case 'lrc':
-            case 'lu':
-            case 'luo':
-            case 'luy':
-            case 'mer':
-            case 'mfe':
-            case 'mgh':
-            case 'mua':
-            case 'mzn':
-            case 'nmg':
-            case 'nus':
-            case 'qu':
-            case 'rn':
-            case 'rw':
-            case 'sbp':
-            case 'twq':
-            case 'vai':
-            case 'yav':
-            case 'yue':
-            case 'zgh':
-            case 'ak':
-            case 'ln':
-            case 'mg':
-            case 'pa':
-            case 'ti':
-                if (n === Math.floor(n) && n >= 0 && n <= 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'am':
-            case 'as':
-            case 'bn':
-            case 'fa':
-            case 'gu':
-            case 'hi':
-            case 'kn':
-            case 'mr':
-            case 'zu':
-                if (i === 0 || n === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'ar':
-                if (n === 0)
-                    return exports.Plural.Zero;
-                if (n === 1)
-                    return exports.Plural.One;
-                if (n === 2)
-                    return exports.Plural.Two;
-                if (n % 100 === Math.floor(n % 100) && n % 100 >= 3 && n % 100 <= 10)
-                    return exports.Plural.Few;
-                if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 99)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'ast':
-            case 'ca':
-            case 'de':
-            case 'en':
-            case 'et':
-            case 'fi':
-            case 'fy':
-            case 'gl':
-            case 'it':
-            case 'nl':
-            case 'sv':
-            case 'sw':
-            case 'ur':
-            case 'yi':
-                if (i === 1 && v === 0)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'be':
-                if (n % 10 === 1 && !(n % 100 === 11))
-                    return exports.Plural.One;
-                if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 4 &&
-                    !(n % 100 >= 12 && n % 100 <= 14))
-                    return exports.Plural.Few;
-                if (n % 10 === 0 || n % 10 === Math.floor(n % 10) && n % 10 >= 5 && n % 10 <= 9 ||
-                    n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 14)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'br':
-                if (n % 10 === 1 && !(n % 100 === 11 || n % 100 === 71 || n % 100 === 91))
-                    return exports.Plural.One;
-                if (n % 10 === 2 && !(n % 100 === 12 || n % 100 === 72 || n % 100 === 92))
-                    return exports.Plural.Two;
-                if (n % 10 === Math.floor(n % 10) && (n % 10 >= 3 && n % 10 <= 4 || n % 10 === 9) &&
-                    !(n % 100 >= 10 && n % 100 <= 19 || n % 100 >= 70 && n % 100 <= 79 ||
-                        n % 100 >= 90 && n % 100 <= 99))
-                    return exports.Plural.Few;
-                if (!(n === 0) && n % 1e6 === 0)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'bs':
-            case 'hr':
-            case 'sr':
-                if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
-                    return exports.Plural.One;
-                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                    !(i % 100 >= 12 && i % 100 <= 14) ||
-                    f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
-                        !(f % 100 >= 12 && f % 100 <= 14))
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'cs':
-            case 'sk':
-                if (i === 1 && v === 0)
-                    return exports.Plural.One;
-                if (i === Math.floor(i) && i >= 2 && i <= 4 && v === 0)
-                    return exports.Plural.Few;
-                if (!(v === 0))
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'cy':
-                if (n === 0)
-                    return exports.Plural.Zero;
-                if (n === 1)
-                    return exports.Plural.One;
-                if (n === 2)
-                    return exports.Plural.Two;
-                if (n === 3)
-                    return exports.Plural.Few;
-                if (n === 6)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'da':
-                if (n === 1 || !(t === 0) && (i === 0 || i === 1))
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'dsb':
-            case 'hsb':
-                if (v === 0 && i % 100 === 1 || f % 100 === 1)
-                    return exports.Plural.One;
-                if (v === 0 && i % 100 === 2 || f % 100 === 2)
-                    return exports.Plural.Two;
-                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
-                    f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'ff':
-            case 'fr':
-            case 'hy':
-            case 'kab':
-                if (i === 0 || i === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'fil':
-                if (v === 0 && (i === 1 || i === 2 || i === 3) ||
-                    v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
-                    !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'ga':
-                if (n === 1)
-                    return exports.Plural.One;
-                if (n === 2)
-                    return exports.Plural.Two;
-                if (n === Math.floor(n) && n >= 3 && n <= 6)
-                    return exports.Plural.Few;
-                if (n === Math.floor(n) && n >= 7 && n <= 10)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'gd':
-                if (n === 1 || n === 11)
-                    return exports.Plural.One;
-                if (n === 2 || n === 12)
-                    return exports.Plural.Two;
-                if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'gv':
-                if (v === 0 && i % 10 === 1)
-                    return exports.Plural.One;
-                if (v === 0 && i % 10 === 2)
-                    return exports.Plural.Two;
-                if (v === 0 &&
-                    (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
-                    return exports.Plural.Few;
-                if (!(v === 0))
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'he':
-                if (i === 1 && v === 0)
-                    return exports.Plural.One;
-                if (i === 2 && v === 0)
-                    return exports.Plural.Two;
-                if (v === 0 && !(n >= 0 && n <= 10) && n % 10 === 0)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'is':
-                if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'ksh':
-                if (n === 0)
-                    return exports.Plural.Zero;
-                if (n === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'kw':
-            case 'naq':
-            case 'se':
-            case 'smn':
-                if (n === 1)
-                    return exports.Plural.One;
-                if (n === 2)
-                    return exports.Plural.Two;
-                return exports.Plural.Other;
-            case 'lag':
-                if (n === 0)
-                    return exports.Plural.Zero;
-                if ((i === 0 || i === 1) && !(n === 0))
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'lt':
-                if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
-                    return exports.Plural.One;
-                if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
-                    !(n % 100 >= 11 && n % 100 <= 19))
-                    return exports.Plural.Few;
-                if (!(f === 0))
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'lv':
-            case 'prg':
-                if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 ||
-                    v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19)
-                    return exports.Plural.Zero;
-                if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) ||
-                    !(v === 2) && f % 10 === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'mk':
-                if (v === 0 && i % 10 === 1 || f % 10 === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'mt':
-                if (n === 1)
-                    return exports.Plural.One;
-                if (n === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 2 && n % 100 <= 10)
-                    return exports.Plural.Few;
-                if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'pl':
-                if (i === 1 && v === 0)
-                    return exports.Plural.One;
-                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                    !(i % 100 >= 12 && i % 100 <= 14))
-                    return exports.Plural.Few;
-                if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
-                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'pt':
-                if (n === Math.floor(n) && n >= 0 && n <= 2 && !(n === 2))
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'ro':
-                if (i === 1 && v === 0)
-                    return exports.Plural.One;
-                if (!(v === 0) || n === 0 ||
-                    !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'ru':
-            case 'uk':
-                if (v === 0 && i % 10 === 1 && !(i % 100 === 11))
-                    return exports.Plural.One;
-                if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                    !(i % 100 >= 12 && i % 100 <= 14))
-                    return exports.Plural.Few;
-                if (v === 0 && i % 10 === 0 ||
-                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)
-                    return exports.Plural.Many;
-                return exports.Plural.Other;
-            case 'shi':
-                if (i === 0 || n === 1)
-                    return exports.Plural.One;
-                if (n === Math.floor(n) && n >= 2 && n <= 10)
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'si':
-                if (n === 0 || n === 1 || i === 0 && f === 1)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            case 'sl':
-                if (v === 0 && i % 100 === 1)
-                    return exports.Plural.One;
-                if (v === 0 && i % 100 === 2)
-                    return exports.Plural.Two;
-                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0))
-                    return exports.Plural.Few;
-                return exports.Plural.Other;
-            case 'tzm':
-                if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99)
-                    return exports.Plural.One;
-                return exports.Plural.Other;
-            default:
-                return exports.Plural.Other;
-        }
-    }
     var _CASE_DEFAULT = new Object();
     // TODO: remove when fully deprecated
     var _warned = false;
@@ -1741,574 +2309,6 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @experimental Contains forms which are experimental.
      */
     var COMMON_DIRECTIVES = CORE_DIRECTIVES;
-    var InvalidPipeArgumentException = (function (_super) {
-        __extends(InvalidPipeArgumentException, _super);
-        function InvalidPipeArgumentException(type, value) {
-            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
-        }
-        return InvalidPipeArgumentException;
-    }(_angular_core.BaseException));
-    var ObservableStrategy = (function () {
-        function ObservableStrategy() {
-        }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
-        };
-        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
-        return ObservableStrategy;
-    }());
-    var PromiseStrategy = (function () {
-        function PromiseStrategy() {
-        }
-        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) { throw e; });
-        };
-        PromiseStrategy.prototype.dispose = function (subscription) { };
-        PromiseStrategy.prototype.onDestroy = function (subscription) { };
-        return PromiseStrategy;
-    }());
-    var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
-    var AsyncPipe = (function () {
-        function AsyncPipe(_ref) {
-            /** @internal */
-            this._latestValue = null;
-            /** @internal */
-            this._latestReturnedValue = null;
-            /** @internal */
-            this._subscription = null;
-            /** @internal */
-            this._obj = null;
-            this._strategy = null;
-            this._ref = _ref;
-        }
-        AsyncPipe.prototype.ngOnDestroy = function () {
-            if (isPresent(this._subscription)) {
-                this._dispose();
-            }
-        };
-        AsyncPipe.prototype.transform = function (obj) {
-            if (isBlank(this._obj)) {
-                if (isPresent(obj)) {
-                    this._subscribe(obj);
-                }
-                this._latestReturnedValue = this._latestValue;
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform(obj);
-            }
-            if (this._latestValue === this._latestReturnedValue) {
-                return this._latestReturnedValue;
-            }
-            else {
-                this._latestReturnedValue = this._latestValue;
-                return _angular_core.WrappedValue.wrap(this._latestValue);
-            }
-        };
-        /** @internal */
-        AsyncPipe.prototype._subscribe = function (obj) {
-            var _this = this;
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
-        };
-        /** @internal */
-        AsyncPipe.prototype._selectStrategy = function (obj) {
-            if (isPromise(obj)) {
-                return _promiseStrategy;
-            }
-            else if (obj.subscribe) {
-                return _observableStrategy;
-            }
-            else {
-                throw new InvalidPipeArgumentException(AsyncPipe, obj);
-            }
-        };
-        /** @internal */
-        AsyncPipe.prototype._dispose = function () {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
-        };
-        /** @internal */
-        AsyncPipe.prototype._updateLatestValue = function (async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
-            }
-        };
-        return AsyncPipe;
-    }());
-    /** @nocollapse */
-    AsyncPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-    ];
-    /** @nocollapse */
-    AsyncPipe.ctorParameters = [
-        { type: _angular_core.ChangeDetectorRef, },
-    ];
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var NumberFormatStyle;
-    (function (NumberFormatStyle) {
-        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
-        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
-        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
-    })(NumberFormatStyle || (NumberFormatStyle = {}));
-    var NumberFormatter = (function () {
-        function NumberFormatter() {
-        }
-        NumberFormatter.format = function (num, locale, style, _a) {
-            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
-            var options = {
-                minimumIntegerDigits: minimumIntegerDigits,
-                minimumFractionDigits: minimumFractionDigits,
-                maximumFractionDigits: maximumFractionDigits,
-                style: NumberFormatStyle[style].toLowerCase()
-            };
-            if (style == NumberFormatStyle.Currency) {
-                options.currency = currency;
-                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
-            }
-            return new Intl.NumberFormat(locale, options).format(num);
-        };
-        return NumberFormatter;
-    }());
-    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-    var PATTERN_ALIASES = {
-        yMMMdjms: datePartGetterFactory(combine([
-            digitCondition('year', 1),
-            nameCondition('month', 3),
-            digitCondition('day', 1),
-            digitCondition('hour', 1),
-            digitCondition('minute', 1),
-            digitCondition('second', 1),
-        ])),
-        yMdjm: datePartGetterFactory(combine([
-            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
-            digitCondition('hour', 1), digitCondition('minute', 1)
-        ])),
-        yMMMMEEEEd: datePartGetterFactory(combine([
-            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
-            digitCondition('day', 1)
-        ])),
-        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
-        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
-        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
-        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
-        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
-    };
-    var DATE_FORMATS = {
-        yyyy: datePartGetterFactory(digitCondition('year', 4)),
-        yy: datePartGetterFactory(digitCondition('year', 2)),
-        y: datePartGetterFactory(digitCondition('year', 1)),
-        MMMM: datePartGetterFactory(nameCondition('month', 4)),
-        MMM: datePartGetterFactory(nameCondition('month', 3)),
-        MM: datePartGetterFactory(digitCondition('month', 2)),
-        M: datePartGetterFactory(digitCondition('month', 1)),
-        LLLL: datePartGetterFactory(nameCondition('month', 4)),
-        dd: datePartGetterFactory(digitCondition('day', 2)),
-        d: datePartGetterFactory(digitCondition('day', 1)),
-        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
-        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
-        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
-        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        jj: datePartGetterFactory(digitCondition('hour', 2)),
-        j: datePartGetterFactory(digitCondition('hour', 1)),
-        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
-        m: datePartGetterFactory(digitCondition('minute', 1)),
-        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
-        s: datePartGetterFactory(digitCondition('second', 1)),
-        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
-        // we can be just safely rely on using `sss` since we currently don't support single or two digit
-        // fractions
-        sss: datePartGetterFactory(digitCondition('second', 3)),
-        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
-        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
-        EE: datePartGetterFactory(nameCondition('weekday', 2)),
-        E: datePartGetterFactory(nameCondition('weekday', 1)),
-        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        Z: timeZoneGetter('short'),
-        z: timeZoneGetter('long'),
-        ww: datePartGetterFactory({}),
-        // first Thursday of the year. not support ?
-        w: datePartGetterFactory({}),
-        // of the year not support ?
-        G: datePartGetterFactory(nameCondition('era', 1)),
-        GG: datePartGetterFactory(nameCondition('era', 2)),
-        GGG: datePartGetterFactory(nameCondition('era', 3)),
-        GGGG: datePartGetterFactory(nameCondition('era', 4))
-    };
-    function digitModifier(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.length == 1 ? '0' + result : result;
-        };
-    }
-    function hourClockExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[1];
-        };
-    }
-    function hourExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[0];
-        };
-    }
-    function timeZoneGetter(timezone) {
-        // To workaround `Intl` API restriction for single timezone let format with 24 hours
-        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
-        return function (date, locale) {
-            var result = new Intl.DateTimeFormat(locale, format).format(date);
-            // Then extract first 3 letters that related to hours
-            return result ? result.substring(3) : '';
-        };
-    }
-    function hour12Modify(options, value) {
-        options.hour12 = value;
-        return options;
-    }
-    function digitCondition(prop, len) {
-        var result = {};
-        result[prop] = len == 2 ? '2-digit' : 'numeric';
-        return result;
-    }
-    function nameCondition(prop, len) {
-        var result = {};
-        result[prop] = len < 4 ? 'short' : 'long';
-        return result;
-    }
-    function combine(options) {
-        var result = {};
-        options.forEach(function (option) { Object.assign(result, option); });
-        return result;
-    }
-    function datePartGetterFactory(ret) {
-        return function (date, locale) {
-            return new Intl.DateTimeFormat(locale, ret).format(date);
-        };
-    }
-    var datePartsFormatterCache = new Map();
-    function dateFormatter(format, date, locale) {
-        var text = '';
-        var match;
-        var fn;
-        var parts = [];
-        if (PATTERN_ALIASES[format]) {
-            return PATTERN_ALIASES[format](date, locale);
-        }
-        if (datePartsFormatterCache.has(format)) {
-            parts = datePartsFormatterCache.get(format);
-        }
-        else {
-            var matches = DATE_FORMATS_SPLIT.exec(format);
-            while (format) {
-                match = DATE_FORMATS_SPLIT.exec(format);
-                if (match) {
-                    parts = concat(parts, match, 1);
-                    format = parts.pop();
-                }
-                else {
-                    parts.push(format);
-                    format = null;
-                }
-            }
-            datePartsFormatterCache.set(format, parts);
-        }
-        parts.forEach(function (part) {
-            fn = DATE_FORMATS[part];
-            text += fn ? fn(date, locale) :
-                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-        });
-        return text;
-    }
-    var slice = [].slice;
-    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
-        return array1.concat(slice.call(array2, index));
-    }
-    var DateFormatter = (function () {
-        function DateFormatter() {
-        }
-        DateFormatter.format = function (date, locale, pattern) {
-            return dateFormatter(pattern, date, locale);
-        };
-        return DateFormatter;
-    }());
-    // TODO: move to a global configurable location along with other i18n components.
-    var defaultLocale = 'en-US';
-    var DatePipe = (function () {
-        function DatePipe() {
-        }
-        DatePipe.prototype.transform = function (value, pattern) {
-            if (pattern === void 0) { pattern = 'mediumDate'; }
-            if (isBlank(value))
-                return null;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(DatePipe, value);
-            }
-            if (NumberWrapper.isNumeric(value)) {
-                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
-            }
-            else if (isString(value)) {
-                value = DateWrapper.fromISOString(value);
-            }
-            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
-                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
-            }
-            return DateFormatter.format(value, defaultLocale, pattern);
-        };
-        DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
-                return true;
-            }
-            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
-                return true;
-            }
-            return false;
-        };
-        return DatePipe;
-    }());
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
-    };
-    /** @nocollapse */
-    DatePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    var _INTERPOLATION_REGEXP = /#/g;
-    var I18nPluralPipe = (function () {
-        function I18nPluralPipe(_localization) {
-            this._localization = _localization;
-        }
-        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(pluralMap)) {
-                throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
-            }
-            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
-        };
-        return I18nPluralPipe;
-    }());
-    /** @nocollapse */
-    I18nPluralPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nPluralPipe.ctorParameters = [
-        { type: NgLocalization, },
-    ];
-    var I18nSelectPipe = (function () {
-        function I18nSelectPipe() {
-        }
-        I18nSelectPipe.prototype.transform = function (value, mapping) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(mapping)) {
-                throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
-            }
-            return mapping.hasOwnProperty(value) ? mapping[value] : '';
-        };
-        return I18nSelectPipe;
-    }());
-    /** @nocollapse */
-    I18nSelectPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    ];
-    var JsonPipe = (function () {
-        function JsonPipe() {
-        }
-        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
-        return JsonPipe;
-    }());
-    /** @nocollapse */
-    JsonPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-    ];
-    var LowerCasePipe = (function () {
-        function LowerCasePipe() {
-        }
-        LowerCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentException(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
-        };
-        return LowerCasePipe;
-    }());
-    /** @nocollapse */
-    LowerCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-    ];
-    var defaultLocale$1 = 'en-US';
-    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
-    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
-        if (currency === void 0) { currency = null; }
-        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-        if (isBlank(value))
-            return null;
-        // Convert strings to numbers
-        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
-        if (!isNumber(value)) {
-            throw new InvalidPipeArgumentException(pipe, value);
-        }
-        var minInt;
-        var minFraction;
-        var maxFraction;
-        if (style !== NumberFormatStyle.Currency) {
-            // rely on Intl default for currency
-            minInt = 1;
-            minFraction = 0;
-            maxFraction = 3;
-        }
-        if (isPresent(digits)) {
-            var parts = digits.match(_NUMBER_FORMAT_REGEXP);
-            if (parts === null) {
-                throw new Error(digits + " is not a valid digit info for number pipes");
-            }
-            if (isPresent(parts[1])) {
-                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
-            }
-            if (isPresent(parts[3])) {
-                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
-            }
-            if (isPresent(parts[5])) {
-                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
-            }
-        }
-        return NumberFormatter.format(value, defaultLocale$1, style, {
-            minimumIntegerDigits: minInt,
-            minimumFractionDigits: minFraction,
-            maximumFractionDigits: maxFraction,
-            currency: currency,
-            currencyAsSymbol: currencyAsSymbol
-        });
-    }
-    var DecimalPipe = (function () {
-        function DecimalPipe() {
-        }
-        DecimalPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
-        };
-        return DecimalPipe;
-    }());
-    /** @nocollapse */
-    DecimalPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-    ];
-    var PercentPipe = (function () {
-        function PercentPipe() {
-        }
-        PercentPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
-        };
-        return PercentPipe;
-    }());
-    /** @nocollapse */
-    PercentPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-    ];
-    var CurrencyPipe = (function () {
-        function CurrencyPipe() {
-        }
-        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
-            if (currencyCode === void 0) { currencyCode = 'USD'; }
-            if (symbolDisplay === void 0) { symbolDisplay = false; }
-            if (digits === void 0) { digits = null; }
-            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-        };
-        return CurrencyPipe;
-    }());
-    /** @nocollapse */
-    CurrencyPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-    ];
-    var SlicePipe = (function () {
-        function SlicePipe() {
-        }
-        SlicePipe.prototype.transform = function (value, start, end) {
-            if (end === void 0) { end = null; }
-            if (isBlank(value))
-                return value;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(SlicePipe, value);
-            }
-            if (isString(value)) {
-                return StringWrapper.slice(value, start, end);
-            }
-            return ListWrapper.slice(value, start, end);
-        };
-        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
-        return SlicePipe;
-    }());
-    /** @nocollapse */
-    SlicePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-    ];
-    var UpperCasePipe = (function () {
-        function UpperCasePipe() {
-        }
-        UpperCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentException(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        return UpperCasePipe;
-    }());
-    /** @nocollapse */
-    UpperCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-    ];
-    /**
-     * A collection of Angular core pipes that are likely to be used in each and every
-     * application.
-     *
-     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
-     * property of the `@Component` decorator.
-     *
-     * @experimental Contains i18n pipes which are experimental
-     */
-    var COMMON_PIPES = [
-        AsyncPipe,
-        UpperCasePipe,
-        LowerCasePipe,
-        JsonPipe,
-        SlicePipe,
-        DecimalPipe,
-        PercentPipe,
-        CurrencyPipe,
-        DatePipe,
-        I18nPluralPipe,
-        I18nSelectPipe,
-    ];
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -2669,12 +2669,16 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     /** @nocollapse */
     CommonModule.decorators = [
-        { type: _angular_core.NgModule, args: [{ declarations: [COMMON_DIRECTIVES, COMMON_PIPES], exports: [COMMON_DIRECTIVES, COMMON_PIPES] },] },
+        { type: _angular_core.NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] },
     ];
-    exports.CommonModule = CommonModule;
     exports.NgLocalization = NgLocalization;
-    exports.NgLocaleLocalization = NgLocaleLocalization;
-    exports.getPluralCase = getPluralCase;
+    exports.CommonModule = CommonModule;
     exports.AsyncPipe = AsyncPipe;
     exports.COMMON_PIPES = COMMON_PIPES;
     exports.DatePipe = DatePipe;

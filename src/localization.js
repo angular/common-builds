@@ -62,7 +62,7 @@ var NgLocaleLocalization = (function (_super) {
     ];
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = [
-        null,
+        { type: undefined, decorators: [{ type: core_1.Inject, args: [core_1.LOCALE_ID,] },] },
     ];
     return NgLocaleLocalization;
 }(NgLocalization));

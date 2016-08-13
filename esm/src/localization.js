@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 /**
  * @experimental
  */
@@ -51,7 +51,7 @@ NgLocaleLocalization.decorators = [
 ];
 /** @nocollapse */
 NgLocaleLocalization.ctorParameters = [
-    null,
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ];
 // This is generated code DO NOT MODIFY
 // see angular2/script/cldr/gen_plural_rules.js
