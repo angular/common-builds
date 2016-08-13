@@ -1112,11 +1112,10 @@ var __extends = (this && this.__extends) || function (d, b) {
             case 'bs':
             case 'hr':
             case 'sr':
-                // https://github.com/papandreou/node-cldr/issues/31
-                if (v === 0 && i % 10 === 1 && (!(i % 100 === 11)) || f % 10 === 1 && !(f % 100 === 11))
+                if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
                     return exports.Plural.One;
                 if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                    (!(i % 100 >= 12 && i % 100 <= 14)) ||
+                    !(i % 100 >= 12 && i % 100 <= 14) ||
                     f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
                         !(f % 100 >= 12 && f % 100 <= 14))
                     return exports.Plural.Few;
@@ -1148,12 +1147,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                 return exports.Plural.Other;
             case 'dsb':
             case 'hsb':
-                if (v === 0 && (i % 100 === 1 || f % 100 === 1))
+                if (v === 0 && i % 100 === 1 || f % 100 === 1)
                     return exports.Plural.One;
-                if (v === 0 && (i % 100 === 2 || f % 100 === 2))
+                if (v === 0 && i % 100 === 2 || f % 100 === 2)
                     return exports.Plural.Two;
-                if (v === 0 && (i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
-                    f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4))
+                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
+                    f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
                     return exports.Plural.Few;
                 return exports.Plural.Other;
             case 'ff':
@@ -1164,9 +1163,9 @@ var __extends = (this && this.__extends) || function (d, b) {
                     return exports.Plural.One;
                 return exports.Plural.Other;
             case 'fil':
-                if (v === 0 && (i === 1 || i === 2 || i === 3 ||
-                    v === 0 && (!(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
-                        !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))))
+                if (v === 0 && (i === 1 || i === 2 || i === 3) ||
+                    v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
+                    !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))
                     return exports.Plural.One;
                 return exports.Plural.Other;
             case 'ga':
@@ -1207,7 +1206,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     return exports.Plural.Many;
                 return exports.Plural.Other;
             case 'is':
-                if (t === 0 && i % 10 === 1 && (!(i % 100 === 11) || !(t === 0)))
+                if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
                     return exports.Plural.One;
                 return exports.Plural.Other;
             case 'ksh':
@@ -1245,13 +1244,12 @@ var __extends = (this && this.__extends) || function (d, b) {
                 if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 ||
                     v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19)
                     return exports.Plural.Zero;
-                if (n % 10 === 1 &&
-                    (!(n % 100 === 11) ||
-                        v === 2 && f % 10 === 1 && (!(f % 100 === 11) || !(v === 2) && f % 10 === 1)))
+                if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) ||
+                    !(v === 2) && f % 10 === 1)
                     return exports.Plural.One;
                 return exports.Plural.Other;
             case 'mk':
-                if (v === 0 && (i % 10 === 1 || f % 10 === 1))
+                if (v === 0 && i % 10 === 1 || f % 10 === 1)
                     return exports.Plural.One;
                 return exports.Plural.Other;
             case 'mt':
@@ -1268,11 +1266,9 @@ var __extends = (this && this.__extends) || function (d, b) {
                 if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
                     !(i % 100 >= 12 && i % 100 <= 14))
                     return exports.Plural.Few;
-                if (v === 0 && !(i === 1) &&
-                    (i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
-                        v === 0 &&
-                            (i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                                v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)))
+                if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
+                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)
                     return exports.Plural.Many;
                 return exports.Plural.Other;
             case 'pt':
@@ -1293,10 +1289,9 @@ var __extends = (this && this.__extends) || function (d, b) {
                 if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
                     !(i % 100 >= 12 && i % 100 <= 14))
                     return exports.Plural.Few;
-                if (v === 0 && (i % 10 === 0 ||
-                    v === 0 && (i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                        v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 &&
-                            i % 100 <= 14)))
+                if (v === 0 && i % 10 === 0 ||
+                    v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                    v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)
                     return exports.Plural.Many;
                 return exports.Plural.Other;
             case 'shi':
@@ -1314,8 +1309,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     return exports.Plural.One;
                 if (v === 0 && i % 100 === 2)
                     return exports.Plural.Two;
-                if (v === 0 &&
-                    (i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0)))
+                if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0))
                     return exports.Plural.Few;
                 return exports.Plural.Other;
             case 'tzm':
