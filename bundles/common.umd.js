@@ -2254,46 +2254,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
     ];
-    var ReplacePipe = (function () {
-        function ReplacePipe() {
-        }
-        ReplacePipe.prototype.transform = function (value, pattern, replacement) {
-            if (isBlank(value)) {
-                return value;
-            }
-            if (!this._supportedInput(value)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, value);
-            }
-            var input = value.toString();
-            if (!this._supportedPattern(pattern)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, pattern);
-            }
-            if (!this._supportedReplacement(replacement)) {
-                throw new InvalidPipeArgumentException(ReplacePipe, replacement);
-            }
-            if (isFunction(replacement)) {
-                var rgxPattern = isString(pattern) ? new RegExp(pattern, 'g') : pattern;
-                return StringWrapper.replaceAllMapped(input, rgxPattern, replacement);
-            }
-            if (pattern instanceof RegExp) {
-                // use the replaceAll variant
-                return StringWrapper.replaceAll(input, pattern, replacement);
-            }
-            return StringWrapper.replace(input, pattern, replacement);
-        };
-        ReplacePipe.prototype._supportedInput = function (input) { return isString(input) || isNumber(input); };
-        ReplacePipe.prototype._supportedPattern = function (pattern) {
-            return isString(pattern) || pattern instanceof RegExp;
-        };
-        ReplacePipe.prototype._supportedReplacement = function (replacement) {
-            return isString(replacement) || isFunction(replacement);
-        };
-        return ReplacePipe;
-    }());
-    /** @nocollapse */
-    ReplacePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'replace' },] },
-    ];
     var SlicePipe = (function () {
         function SlicePipe() {
         }
@@ -2352,7 +2312,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         PercentPipe,
         CurrencyPipe,
         DatePipe,
-        ReplacePipe,
         I18nPluralPipe,
         I18nSelectPipe,
     ];
@@ -2732,7 +2691,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.CurrencyPipe = CurrencyPipe;
     exports.DecimalPipe = DecimalPipe;
     exports.PercentPipe = PercentPipe;
-    exports.ReplacePipe = ReplacePipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
     exports.CORE_DIRECTIVES = CORE_DIRECTIVES;
