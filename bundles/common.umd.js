@@ -883,7 +883,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 throw new InvalidPipeArgumentException(DatePipe, value);
             }
             if (NumberWrapper.isNumeric(value)) {
-                value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
+                value = DateWrapper.fromMillis(parseFloat(value));
             }
             else if (isString(value)) {
                 value = DateWrapper.fromISOString(value);
