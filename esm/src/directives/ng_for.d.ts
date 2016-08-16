@@ -83,6 +83,4 @@ export declare class NgFor implements DoCheck, OnChanges {
     ngDoCheck(): void;
     private _applyChanges(changes);
     private _perViewChange(view, record);
-    private _bulkRemove(tuples);
-    private _bulkInsert(tuples);
 }

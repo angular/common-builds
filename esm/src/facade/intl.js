@@ -12,18 +12,18 @@ export var NumberFormatStyle;
     NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
 })(NumberFormatStyle || (NumberFormatStyle = {}));
 export class NumberFormatter {
-    static format(num, locale, style, { minimumIntegerDigits = 1, minimumFractionDigits = 0, maximumFractionDigits = 3, currency, currencyAsSymbol = false } = {}) {
-        var intlOptions = {
-            minimumIntegerDigits: minimumIntegerDigits,
-            minimumFractionDigits: minimumFractionDigits,
-            maximumFractionDigits: maximumFractionDigits
+    static format(num, locale, style, { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = {}) {
+        let options = {
+            minimumIntegerDigits,
+            minimumFractionDigits,
+            maximumFractionDigits,
+            style: NumberFormatStyle[style].toLowerCase()
         };
-        intlOptions.style = NumberFormatStyle[style].toLowerCase();
         if (style == NumberFormatStyle.Currency) {
-            intlOptions.currency = currency;
-            intlOptions.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+            options.currency = currency;
+            options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
-        return new Intl.NumberFormat(locale, intlOptions).format(num);
+        return new Intl.NumberFormat(locale, options).format(num);
     }
 }
 var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
@@ -155,7 +155,7 @@ function dateFormatter(format, date, locale) {
         parts = datePartsFormatterCache.get(format);
     }
     else {
-        var matchs = DATE_FORMATS_SPLIT.exec(format);
+        const matches = DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
             if (match) {

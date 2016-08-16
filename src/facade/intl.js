@@ -16,18 +16,18 @@ var NumberFormatter = (function () {
     function NumberFormatter() {
     }
     NumberFormatter.format = function (num, locale, style, _a) {
-        var _b = _a === void 0 ? {} : _a, _c = _b.minimumIntegerDigits, minimumIntegerDigits = _c === void 0 ? 1 : _c, _d = _b.minimumFractionDigits, minimumFractionDigits = _d === void 0 ? 0 : _d, _e = _b.maximumFractionDigits, maximumFractionDigits = _e === void 0 ? 3 : _e, currency = _b.currency, _f = _b.currencyAsSymbol, currencyAsSymbol = _f === void 0 ? false : _f;
-        var intlOptions = {
+        var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+        var options = {
             minimumIntegerDigits: minimumIntegerDigits,
             minimumFractionDigits: minimumFractionDigits,
-            maximumFractionDigits: maximumFractionDigits
+            maximumFractionDigits: maximumFractionDigits,
+            style: NumberFormatStyle[style].toLowerCase()
         };
-        intlOptions.style = NumberFormatStyle[style].toLowerCase();
         if (style == NumberFormatStyle.Currency) {
-            intlOptions.currency = currency;
-            intlOptions.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+            options.currency = currency;
+            options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
-        return new Intl.NumberFormat(locale, intlOptions).format(num);
+        return new Intl.NumberFormat(locale, options).format(num);
     };
     return NumberFormatter;
 }());
@@ -161,7 +161,7 @@ function dateFormatter(format, date, locale) {
         parts = datePartsFormatterCache.get(format);
     }
     else {
-        var matchs = DATE_FORMATS_SPLIT.exec(format);
+        var matches = DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
             if (match) {

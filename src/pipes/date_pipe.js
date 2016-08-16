@@ -24,7 +24,7 @@ var DatePipe = (function () {
             throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(DatePipe, value);
         }
         if (lang_1.NumberWrapper.isNumeric(value)) {
-            value = lang_1.DateWrapper.fromMillis(lang_1.NumberWrapper.parseInt(value, 10));
+            value = lang_1.DateWrapper.fromMillis(parseFloat(value));
         }
         else if (lang_1.isString(value)) {
             value = lang_1.DateWrapper.fromISOString(value);
