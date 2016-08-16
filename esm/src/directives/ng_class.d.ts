@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer } from '@angular/core';
+import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, OnDestroy, Renderer } from '@angular/core';
 /**
  * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
  * an expression's evaluation result.
@@ -67,7 +67,7 @@ import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer } from 
  *
  * @stable
  */
-export declare class NgClass implements DoCheck {
+export declare class NgClass implements DoCheck, OnDestroy {
     private _iterableDiffers;
     private _keyValueDiffers;
     private _ngEl;
@@ -82,6 +82,7 @@ export declare class NgClass implements DoCheck {
         [key: string]: any;
     };
     ngDoCheck(): void;
+    ngOnDestroy(): void;
     private _cleanupClasses(rawClassVal);
     private _applyKeyValueChanges(changes);
     private _applyIterableChanges(changes);

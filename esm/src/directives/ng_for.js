@@ -5,7 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
+import { BaseException } from '../facade/exceptions';
 import { getTypeNameForDebugging, isBlank, isPresent } from '../facade/lang';
 export class NgForRow {
     constructor($implicit, index, count) {
@@ -52,23 +53,14 @@ export class NgFor {
         }
     }
     _applyChanges(changes) {
-        const insertTuples = [];
-        changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
-            if (item.previousIndex == null) {
-                let view = this._viewContainer.createEmbeddedView(this._templateRef, new NgForRow(null, null, null), currentIndex);
-                let tuple = new RecordViewTuple(item, view);
-                insertTuples.push(tuple);
-            }
-            else if (currentIndex == null) {
-                this._viewContainer.remove(adjustedPreviousIndex);
-            }
-            else {
-                let view = this._viewContainer.get(adjustedPreviousIndex);
-                this._viewContainer.move(view, currentIndex);
-                let tuple = new RecordViewTuple(item, view);
-                insertTuples.push(tuple);
-            }
-        });
+        // TODO(rado): check if change detection can produce a change record that is
+        // easier to consume than current.
+        const recordViewTuples = [];
+        changes.forEachRemovedItem((removedRecord) => recordViewTuples.push(new RecordViewTuple(removedRecord, null)));
+        changes.forEachMovedItem((movedRecord) => recordViewTuples.push(new RecordViewTuple(movedRecord, null)));
+        const insertTuples = this._bulkRemove(recordViewTuples);
+        changes.forEachAddedItem((addedRecord) => insertTuples.push(new RecordViewTuple(addedRecord, null)));
+        this._bulkInsert(insertTuples);
         for (let i = 0; i < insertTuples.length; i++) {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
@@ -84,6 +76,36 @@ export class NgFor {
     }
     _perViewChange(view, record) {
         view.context.$implicit = record.item;
+    }
+    _bulkRemove(tuples) {
+        tuples.sort((a, b) => a.record.previousIndex - b.record.previousIndex);
+        const movedTuples = [];
+        for (let i = tuples.length - 1; i >= 0; i--) {
+            const tuple = tuples[i];
+            // separate moved views from removed views.
+            if (isPresent(tuple.record.currentIndex)) {
+                tuple.view =
+                    this._viewContainer.detach(tuple.record.previousIndex);
+                movedTuples.push(tuple);
+            }
+            else {
+                this._viewContainer.remove(tuple.record.previousIndex);
+            }
+        }
+        return movedTuples;
+    }
+    _bulkInsert(tuples) {
+        tuples.sort((a, b) => a.record.currentIndex - b.record.currentIndex);
+        for (let i = 0; i < tuples.length; i++) {
+            var tuple = tuples[i];
+            if (isPresent(tuple.view)) {
+                this._viewContainer.insert(tuple.view, tuple.record.currentIndex);
+            }
+            else {
+                tuple.view = this._viewContainer.createEmbeddedView(this._templateRef, new NgForRow(null, null, null), tuple.record.currentIndex);
+            }
+        }
+        return tuples;
     }
 }
 /** @nocollapse */

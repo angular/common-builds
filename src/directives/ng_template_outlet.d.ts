@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { OnChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * Creates and inserts an embedded view based on a prepared `TemplateRef`.
  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
@@ -24,7 +24,7 @@ import { OnChanges, TemplateRef, ViewContainerRef } from '@angular/core';
  *
  * @experimental
  */
-export declare class NgTemplateOutlet implements OnChanges {
+export declare class NgTemplateOutlet {
     private _viewContainerRef;
     private _viewRef;
     private _context;
@@ -32,5 +32,5 @@ export declare class NgTemplateOutlet implements OnChanges {
     constructor(_viewContainerRef: ViewContainerRef);
     ngOutletContext: Object;
     ngTemplateOutlet: TemplateRef<Object>;
-    ngOnChanges(): void;
+    private createView();
 }

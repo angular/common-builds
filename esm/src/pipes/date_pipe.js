@@ -20,7 +20,7 @@ export class DatePipe {
             throw new InvalidPipeArgumentException(DatePipe, value);
         }
         if (NumberWrapper.isNumeric(value)) {
-            value = DateWrapper.fromMillis(parseFloat(value));
+            value = DateWrapper.fromMillis(NumberWrapper.parseInt(value, 10));
         }
         else if (isString(value)) {
             value = DateWrapper.fromISOString(value);

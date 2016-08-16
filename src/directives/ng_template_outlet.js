@@ -7,25 +7,38 @@
  */
 "use strict";
 var core_1 = require('@angular/core');
+var lang_1 = require('../facade/lang');
 var NgTemplateOutlet = (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
     Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
-        set: function (context) { this._context = context; },
+        set: function (context) {
+            if (this._context !== context) {
+                this._context = context;
+                if (lang_1.isPresent(this._viewRef)) {
+                    this.createView();
+                }
+            }
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
-        set: function (templateRef) { this._templateRef = templateRef; },
+        set: function (templateRef) {
+            if (this._templateRef !== templateRef) {
+                this._templateRef = templateRef;
+                this.createView();
+            }
+        },
         enumerable: true,
         configurable: true
     });
-    NgTemplateOutlet.prototype.ngOnChanges = function () {
-        if (this._viewRef) {
+    NgTemplateOutlet.prototype.createView = function () {
+        if (lang_1.isPresent(this._viewRef)) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
         }
-        if (this._templateRef) {
+        if (lang_1.isPresent(this._templateRef)) {
             this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
         }
     };

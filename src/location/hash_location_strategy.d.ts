@@ -12,16 +12,32 @@ import { PlatformLocation, UrlChangeListener } from './platform_location';
  * ### Example
  *
  * ```
- * import {Component, NgModule} from '@angular/core';
+ * import {Component, provide} from '@angular/core';
  * import {
+ *   Location,
  *   LocationStrategy,
  *   HashLocationStrategy
  * } from '@angular/common';
+ * import {
+ *   ROUTER_DIRECTIVES,
+ *   ROUTER_PROVIDERS,
+ *   RouteConfig
+ * } from '@angular/router';
  *
- * @NgModule({
- *   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
- * })
- * class AppModule {}
+ * @Component({directives: [ROUTER_DIRECTIVES]})
+ * @RouteConfig([
+ *  {...},
+ * ])
+ * class AppCmp {
+ *   constructor(location: Location) {
+ *     location.go('/foo');
+ *   }
+ * }
+ *
+ * bootstrap(AppCmp, [
+ *   ROUTER_PROVIDERS,
+ *   {provide: LocationStrategy, useClass: HashLocationStrategy}
+ * ]);
  * ```
  *
  * @stable

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Type } from '@angular/core';
+import { Type } from '../facade/lang';
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
  * application.
@@ -48,4 +48,4 @@ import { Type } from '@angular/core';
  *
  * @stable
  */
-export declare const CORE_DIRECTIVES: Type<any>[];
+export declare const CORE_DIRECTIVES: Type[];

@@ -27,7 +27,7 @@ var NgPlural = (function () {
     /** @internal */
     NgPlural.prototype._updateView = function () {
         this._clearViews();
-        var key = localization_1.getPluralCategory(this._switchValue, Object.keys(this._caseViews), this._localization);
+        var key = localization_1.getPluralCategory(this._switchValue, Object.getOwnPropertyNames(this._caseViews), this._localization);
         this._activateView(this._caseViews[key]);
     };
     /** @internal */

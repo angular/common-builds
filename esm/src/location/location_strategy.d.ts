@@ -45,15 +45,24 @@ export declare abstract class LocationStrategy {
  *
  * ### Example
  *
- * import {Component, NgModule} from '@angular/core';
+ * ```
+ * import {Component} from '@angular/core';
+ * import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from '@angular/router';
  * import {APP_BASE_HREF} from '@angular/common';
  *
- * @NgModule({
- *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
- * })
- * class AppModule {}
- * ```
+ * @Component({directives: [ROUTER_DIRECTIVES]})
+ * @RouteConfig([
+ *  {...},
+ * ])
+ * class AppCmp {
+ *   // ...
+ * }
  *
+ * bootstrap(AppCmp, [
+ *   ROUTER_PROVIDERS,
+ *   {provide: APP_BASE_HREF, useValue: '/my/app'}
+ * ]);
+ * ```
  * @stable
  */
 export declare const APP_BASE_HREF: OpaqueToken;

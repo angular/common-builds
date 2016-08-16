@@ -62,6 +62,7 @@ var NgClass = (function () {
             }
         }
     };
+    NgClass.prototype.ngOnDestroy = function () { this._cleanupClasses(this._rawClass); };
     NgClass.prototype._cleanupClasses = function (rawClassVal) {
         this._applyClasses(rawClassVal, true);
         this._applyInitialClasses(false);

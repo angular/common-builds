@@ -28,15 +28,12 @@ export class NgStyle {
         }
     }
     _applyChanges(changes) {
-        changes.forEachRemovedItem((record) => { this._setStyle(record.key, null); });
         changes.forEachAddedItem((record) => { this._setStyle(record.key, record.currentValue); });
         changes.forEachChangedItem((record) => { this._setStyle(record.key, record.currentValue); });
+        changes.forEachRemovedItem((record) => { this._setStyle(record.key, null); });
     }
     _setStyle(name, val) {
-        const nameParts = name.split('.');
-        const nameToSet = nameParts[0];
-        const valToSet = isPresent(val) && nameParts.length === 2 ? `${val}${nameParts[1]}` : val;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, nameToSet, valToSet);
+        this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     }
 }
 /** @nocollapse */

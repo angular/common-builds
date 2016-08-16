@@ -27,8 +27,8 @@ import { PipeTransform } from '@angular/core';
  *  class MyApp {
  *    gender: string = 'male';
  *    inviteMap: any = {
- *      'male': 'Invite him.',
- *      'female': 'Invite her.',
+ *      'male': 'Invite her.',
+ *      'female': 'Invite him.',
  *      'other': 'Invite them.'
  *    }
  *    ...

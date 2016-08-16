@@ -34,15 +34,12 @@ var NgStyle = (function () {
     };
     NgStyle.prototype._applyChanges = function (changes) {
         var _this = this;
-        changes.forEachRemovedItem(function (record) { _this._setStyle(record.key, null); });
         changes.forEachAddedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
         changes.forEachChangedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
+        changes.forEachRemovedItem(function (record) { _this._setStyle(record.key, null); });
     };
     NgStyle.prototype._setStyle = function (name, val) {
-        var nameParts = name.split('.');
-        var nameToSet = nameParts[0];
-        var valToSet = lang_1.isPresent(val) && nameParts.length === 2 ? "" + val + nameParts[1] : val;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, nameToSet, valToSet);
+        this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     };
     /** @nocollapse */
     NgStyle.decorators = [
