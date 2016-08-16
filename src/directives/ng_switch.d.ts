@@ -90,7 +90,6 @@ export declare class NgSwitchCase {
     private _switch;
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     ngSwitchCase: any;
-    ngSwitchWhen: any;
 }
 /**
  * Default case statements are displayed when no match expression matches the switch expression

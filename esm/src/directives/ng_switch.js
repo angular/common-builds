@@ -9,8 +9,6 @@ import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/
 import { ListWrapper } from '../facade/collection';
 import { isBlank, isPresent, normalizeBlank } from '../facade/lang';
 const _CASE_DEFAULT = new Object();
-// TODO: remove when fully deprecated
-let _warned = false;
 export class SwitchView {
     constructor(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -121,18 +119,10 @@ export class NgSwitchCase {
         this._switch._onCaseValueChanged(this._value, value, this._view);
         this._value = value;
     }
-    set ngSwitchWhen(value) {
-        if (!_warned) {
-            _warned = true;
-            console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
-        }
-        this._switch._onCaseValueChanged(this._value, value, this._view);
-        this._value = value;
-    }
 }
 /** @nocollapse */
 NgSwitchCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]' },] },
+    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
 ];
 /** @nocollapse */
 NgSwitchCase.ctorParameters = [
@@ -143,7 +133,6 @@ NgSwitchCase.ctorParameters = [
 /** @nocollapse */
 NgSwitchCase.propDecorators = {
     'ngSwitchCase': [{ type: Input },],
-    'ngSwitchWhen': [{ type: Input },],
 };
 export class NgSwitchDefault {
     constructor(viewContainer, templateRef, sswitch) {

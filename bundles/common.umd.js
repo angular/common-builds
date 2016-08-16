@@ -1889,8 +1889,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         'ngIf': [{ type: _angular_core.Input },],
     };
     var _CASE_DEFAULT = new Object();
-    // TODO: remove when fully deprecated
-    var _warned = false;
     var SwitchView = (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -2011,23 +2009,11 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(NgSwitchCase.prototype, "ngSwitchWhen", {
-            set: function (value) {
-                if (!_warned) {
-                    _warned = true;
-                    console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
-                }
-                this._switch._onCaseValueChanged(this._value, value, this._view);
-                this._value = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
         return NgSwitchCase;
     }());
     /** @nocollapse */
     NgSwitchCase.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]' },] },
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = [
@@ -2038,7 +2024,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     NgSwitchCase.propDecorators = {
         'ngSwitchCase': [{ type: _angular_core.Input },],
-        'ngSwitchWhen': [{ type: _angular_core.Input },],
     };
     var NgSwitchDefault = (function () {
         function NgSwitchDefault(viewContainer, templateRef, sswitch) {
@@ -2221,13 +2206,13 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Instead of writing:
      *
      * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from '@angular/common';
+     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
      * import {OtherDirective} from './myDirectives';
      *
      * @Component({
      *   selector: 'my-component',
      *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, OtherDirective]
+     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, OtherDirective]
      * })
      * export class MyComponent {
      *   ...
@@ -2276,14 +2261,14 @@ var __extends = (this && this.__extends) || function (d, b) {
      * Instead of writing:
      *
      * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm} from
+     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm} from
      * '@angular/common';
      * import {OtherDirective} from './myDirectives';
      *
      * @Component({
      *   selector: 'my-component',
      *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm,
+     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm,
      * OtherDirective]
      * })
      * export class MyComponent {

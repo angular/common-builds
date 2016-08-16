@@ -10,8 +10,6 @@ var core_1 = require('@angular/core');
 var collection_1 = require('../facade/collection');
 var lang_1 = require('../facade/lang');
 var _CASE_DEFAULT = new Object();
-// TODO: remove when fully deprecated
-var _warned = false;
 var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -134,21 +132,9 @@ var NgSwitchCase = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgSwitchCase.prototype, "ngSwitchWhen", {
-        set: function (value) {
-            if (!_warned) {
-                _warned = true;
-                console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
-            }
-            this._switch._onCaseValueChanged(this._value, value, this._view);
-            this._value = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /** @nocollapse */
     NgSwitchCase.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]' },] },
+        { type: core_1.Directive, args: [{ selector: '[ngSwitchCase]' },] },
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = [
@@ -159,7 +145,6 @@ var NgSwitchCase = (function () {
     /** @nocollapse */
     NgSwitchCase.propDecorators = {
         'ngSwitchCase': [{ type: core_1.Input },],
-        'ngSwitchWhen': [{ type: core_1.Input },],
     };
     return NgSwitchCase;
 }());
