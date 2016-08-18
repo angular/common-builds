@@ -791,11 +791,14 @@ var __extends = (this && this.__extends) || function (d, b) {
             return result.split(' ')[0];
         };
     }
+    function intlDateFormat(date, locale, options) {
+        return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
+    }
     function timeZoneGetter(timezone) {
         // To workaround `Intl` API restriction for single timezone let format with 24 hours
-        var format = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+        var options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
         return function (date, locale) {
-            var result = new Intl.DateTimeFormat(locale, format).format(date);
+            var result = intlDateFormat(date, locale, options);
             // Then extract first 3 letters that related to hours
             return result ? result.substring(3) : '';
         };
@@ -820,9 +823,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         return result;
     }
     function datePartGetterFactory(ret) {
-        return function (date, locale) {
-            return new Intl.DateTimeFormat(locale, ret).format(date);
-        };
+        return function (date, locale) { return intlDateFormat(date, locale, ret); };
     }
     var datePartsFormatterCache = new Map();
     function dateFormatter(format, date, locale) {
