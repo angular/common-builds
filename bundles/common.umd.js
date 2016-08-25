@@ -1581,28 +1581,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     UpperCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
     ];
-    /**
-     * A collection of Angular core pipes that are likely to be used in each and every
-     * application.
-     *
-     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
-     * property of the `@Component` decorator.
-     *
-     * @experimental Contains i18n pipes which are experimental
-     */
-    var COMMON_PIPES = [
-        AsyncPipe,
-        UpperCasePipe,
-        LowerCasePipe,
-        JsonPipe,
-        SlicePipe,
-        DecimalPipe,
-        PercentPipe,
-        CurrencyPipe,
-        DatePipe,
-        I18nPluralPipe,
-        I18nSelectPipe,
-    ];
     var NgClass = (function () {
         function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
             this._iterableDiffers = _iterableDiffers;
@@ -2196,106 +2174,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         'ngTemplateOutlet': [{ type: _angular_core.Input },],
     };
     /**
-     * A collection of Angular core directives that are likely to be used in each and every Angular
-     * application.
-     *
-     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
-     * property of the `@Component` annotation.
-     *
-     * ### Example ([live demo](http://plnkr.co/edit/yakGwpCdUkg0qfzX5m8g?p=preview))
-     *
-     * Instead of writing:
-     *
-     * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     * one could import all the core directives at once:
-     *
-     * ```typescript
-     * import {CORE_DIRECTIVES} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [CORE_DIRECTIVES, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     *
-     * @stable
-     */
-    var CORE_DIRECTIVES = [
-        NgClass,
-        NgFor,
-        NgIf,
-        NgTemplateOutlet,
-        NgStyle,
-        NgSwitch,
-        NgSwitchCase,
-        NgSwitchDefault,
-        NgPlural,
-        NgPluralCase,
-    ];
-    /**
-     * A collection of Angular core directives that are likely to be used in each and every Angular
-     * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
-     * NgModel).
-     *
-     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
-     * property of the `@Component` decorator.
-     *
-     * ### Example
-     *
-     * Instead of writing:
-     *
-     * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm} from
-     * '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm,
-     * OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     * one could import all the common directives at once:
-     *
-     * ```typescript
-     * import {COMMON_DIRECTIVES} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [COMMON_DIRECTIVES, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     *
-     * @experimental Contains forms which are experimental.
-     */
-    var COMMON_DIRECTIVES = CORE_DIRECTIVES;
-    /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
      *
@@ -2639,6 +2517,128 @@ var __extends = (this && this.__extends) || function (d, b) {
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
     ];
+    /**
+     * A collection of Angular core directives that are likely to be used in each and every Angular
+     * application.
+     *
+     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
+     * property of the `@Component` annotation.
+     *
+     * ### Example ([live demo](http://plnkr.co/edit/yakGwpCdUkg0qfzX5m8g?p=preview))
+     *
+     * Instead of writing:
+     *
+     * ```typescript
+     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     * one could import all the core directives at once:
+     *
+     * ```typescript
+     * import {CORE_DIRECTIVES} from '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [CORE_DIRECTIVES, OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     *
+     * @stable
+     */
+    var CORE_DIRECTIVES = [
+        NgClass,
+        NgFor,
+        NgIf,
+        NgTemplateOutlet,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgPlural,
+        NgPluralCase,
+    ];
+    /**
+     * A collection of Angular core directives that are likely to be used in each and every Angular
+     * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
+     * NgModel).
+     *
+     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
+     * property of the `@Component` decorator.
+     *
+     * ### Example
+     *
+     * Instead of writing:
+     *
+     * ```typescript
+     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm} from
+     * '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm,
+     * OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     * one could import all the common directives at once:
+     *
+     * ```typescript
+     * import {COMMON_DIRECTIVES} from '@angular/common';
+     * import {OtherDirective} from './myDirectives';
+     *
+     * @Component({
+     *   selector: 'my-component',
+     *   templateUrl: 'myComponent.html',
+     *   directives: [COMMON_DIRECTIVES, OtherDirective]
+     * })
+     * export class MyComponent {
+     *   ...
+     * }
+     * ```
+     *
+     * @experimental Contains forms which are experimental.
+     */
+    var COMMON_DIRECTIVES = CORE_DIRECTIVES;
+    /**
+     * A collection of Angular core pipes that are likely to be used in each and every
+     * application.
+     *
+     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
+     * property of the `@Component` decorator.
+     *
+     * @experimental Contains i18n pipes which are experimental
+     */
+    var COMMON_PIPES = [
+        AsyncPipe,
+        UpperCasePipe,
+        LowerCasePipe,
+        JsonPipe,
+        SlicePipe,
+        DecimalPipe,
+        PercentPipe,
+        CurrencyPipe,
+        DatePipe,
+        I18nPluralPipe,
+        I18nSelectPipe,
+    ];
     var CommonModule = (function () {
         function CommonModule() {
         }
@@ -2657,7 +2657,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
     exports.AsyncPipe = AsyncPipe;
-    exports.COMMON_PIPES = COMMON_PIPES;
     exports.DatePipe = DatePipe;
     exports.I18nPluralPipe = I18nPluralPipe;
     exports.I18nSelectPipe = I18nSelectPipe;
@@ -2668,7 +2667,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.PercentPipe = PercentPipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
-    exports.CORE_DIRECTIVES = CORE_DIRECTIVES;
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgIf = NgIf;
@@ -2679,7 +2677,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.NgSwitchCase = NgSwitchCase;
     exports.NgSwitchDefault = NgSwitchDefault;
     exports.NgTemplateOutlet = NgTemplateOutlet;
-    exports.COMMON_DIRECTIVES = COMMON_DIRECTIVES;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;

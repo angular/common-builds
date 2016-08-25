@@ -71,7 +71,7 @@ import { PipeTransform } from '@angular/core';
  *
  * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
  *
- * @experimental
+ * @stable
  */
 export declare class DatePipe implements PipeTransform {
     transform(value: any, pattern?: string): string;

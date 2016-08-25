@@ -67,7 +67,7 @@ export declare class SwitchView {
  * }
  * ```
  *
- * @experimental
+ * @stable
  */
 export declare class NgSwitch {
     private _switchValue;
@@ -84,7 +84,7 @@ export declare class NgSwitch {
  *
  * See {@link NgSwitch} for more details and example.
  *
- * @experimental
+ * @stable
  */
 export declare class NgSwitchCase {
     private _switch;
@@ -97,7 +97,7 @@ export declare class NgSwitchCase {
  *
  * See {@link NgSwitch} for more details and example.
  *
- * @experimental
+ * @stable
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, sswitch: NgSwitch);

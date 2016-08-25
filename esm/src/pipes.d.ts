@@ -11,7 +11,6 @@
  * This module provides a set of common Pipes.
  */
 export { AsyncPipe } from './pipes/async_pipe';
-export { COMMON_PIPES } from './pipes/common_pipes';
 export { DatePipe } from './pipes/date_pipe';
 export { I18nPluralPipe } from './pipes/i18n_plural_pipe';
 export { I18nSelectPipe } from './pipes/i18n_select_pipe';

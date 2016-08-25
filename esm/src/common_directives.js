@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { CORE_DIRECTIVES } from './directives';
+import { CORE_DIRECTIVES } from './directives/core_directives';
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
  * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,

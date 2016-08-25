@@ -11,8 +11,6 @@
  * @description
  * Common directives shipped with Angular.
  */
-var core_directives_1 = require('./directives/core_directives');
-exports.CORE_DIRECTIVES = core_directives_1.CORE_DIRECTIVES;
 var ng_class_1 = require('./directives/ng_class');
 exports.NgClass = ng_class_1.NgClass;
 var ng_for_1 = require('./directives/ng_for');

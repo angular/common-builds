@@ -9,15 +9,15 @@
 var core_1 = require('@angular/core');
 var common_directives_1 = require('./common_directives');
 var localization_1 = require('./localization');
-var pipes_1 = require('./pipes');
+var common_pipes_1 = require('./pipes/common_pipes');
 var CommonModule = (function () {
     function CommonModule() {
     }
     /** @nocollapse */
     CommonModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    declarations: [common_directives_1.COMMON_DIRECTIVES, pipes_1.COMMON_PIPES],
-                    exports: [common_directives_1.COMMON_DIRECTIVES, pipes_1.COMMON_PIPES],
+                    declarations: [common_directives_1.COMMON_DIRECTIVES, common_pipes_1.COMMON_PIPES],
+                    exports: [common_directives_1.COMMON_DIRECTIVES, common_pipes_1.COMMON_PIPES],
                     providers: [
                         { provide: localization_1.NgLocalization, useClass: localization_1.NgLocaleLocalization },
                     ],

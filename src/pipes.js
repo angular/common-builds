@@ -13,8 +13,6 @@
  */
 var async_pipe_1 = require('./pipes/async_pipe');
 exports.AsyncPipe = async_pipe_1.AsyncPipe;
-var common_pipes_1 = require('./pipes/common_pipes');
-exports.COMMON_PIPES = common_pipes_1.COMMON_PIPES;
 var date_pipe_1 = require('./pipes/date_pipe');
 exports.DatePipe = date_pipe_1.DatePipe;
 var i18n_plural_pipe_1 = require('./pipes/i18n_plural_pipe');

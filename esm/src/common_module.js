@@ -8,7 +8,7 @@
 import { NgModule } from '@angular/core';
 import { COMMON_DIRECTIVES } from './common_directives';
 import { NgLocaleLocalization, NgLocalization } from './localization';
-import { COMMON_PIPES } from './pipes';
+import { COMMON_PIPES } from './pipes/common_pipes';
 export class CommonModule {
 }
 /** @nocollapse */

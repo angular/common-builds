@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 "use strict";
-var directives_1 = require('./directives');
+var core_directives_1 = require('./directives/core_directives');
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
  * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
@@ -52,5 +52,5 @@ var directives_1 = require('./directives');
  *
  * @experimental Contains forms which are experimental.
  */
-exports.COMMON_DIRECTIVES = directives_1.CORE_DIRECTIVES;
+exports.COMMON_DIRECTIVES = core_directives_1.CORE_DIRECTIVES;
 //# sourceMappingURL=common_directives.js.map
