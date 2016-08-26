@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
 import { getTypeNameForDebugging, isBlank, isPresent } from '../facade/lang';
 export class NgForRow {
     constructor($implicit, index, count) {
@@ -39,7 +39,7 @@ export class NgFor {
                     this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
                 }
                 catch (e) {
-                    throw new BaseException(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
                 }
             }
         }

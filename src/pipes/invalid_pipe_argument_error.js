@@ -11,14 +11,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
+var errors_1 = require('../facade/errors');
 var lang_1 = require('../facade/lang');
-var InvalidPipeArgumentException = (function (_super) {
-    __extends(InvalidPipeArgumentException, _super);
-    function InvalidPipeArgumentException(type, value) {
+var InvalidPipeArgumentError = (function (_super) {
+    __extends(InvalidPipeArgumentError, _super);
+    function InvalidPipeArgumentError(type, value) {
         _super.call(this, "Invalid argument '" + value + "' for pipe '" + lang_1.stringify(type) + "'");
     }
-    return InvalidPipeArgumentException;
-}(core_1.BaseException));
-exports.InvalidPipeArgumentException = InvalidPipeArgumentException;
-//# sourceMappingURL=invalid_pipe_argument_exception.js.map
+    return InvalidPipeArgumentError;
+}(errors_1.BaseError));
+exports.InvalidPipeArgumentError = InvalidPipeArgumentError;
+//# sourceMappingURL=invalid_pipe_argument_error.js.map

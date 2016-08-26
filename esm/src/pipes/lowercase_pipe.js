@@ -7,13 +7,13 @@
  */
 import { Pipe } from '@angular/core';
 import { isBlank, isString } from '../facade/lang';
-import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
+import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 export class LowerCasePipe {
     transform(value) {
         if (isBlank(value))
             return value;
         if (!isString(value)) {
-            throw new InvalidPipeArgumentException(LowerCasePipe, value);
+            throw new InvalidPipeArgumentError(LowerCasePipe, value);
         }
         return value.toLowerCase();
     }

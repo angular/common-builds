@@ -7,13 +7,13 @@
  */
 import { Pipe } from '@angular/core';
 import { isBlank, isStringMap } from '../facade/lang';
-import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
+import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 export class I18nSelectPipe {
     transform(value, mapping) {
         if (isBlank(value))
             return '';
         if (!isStringMap(mapping)) {
-            throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
+            throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
         }
         return mapping.hasOwnProperty(value) ? mapping[value] : '';
     }

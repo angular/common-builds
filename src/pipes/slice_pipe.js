@@ -9,7 +9,7 @@
 var core_1 = require('@angular/core');
 var collection_1 = require('../facade/collection');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var SlicePipe = (function () {
     function SlicePipe() {
     }
@@ -18,7 +18,7 @@ var SlicePipe = (function () {
         if (lang_1.isBlank(value))
             return value;
         if (!this.supports(value)) {
-            throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(SlicePipe, value);
+            throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(SlicePipe, value);
         }
         if (lang_1.isString(value)) {
             return lang_1.StringWrapper.slice(value, start, end);

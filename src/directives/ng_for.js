@@ -62,7 +62,7 @@ var NgFor = (function () {
                     this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
                 }
                 catch (e) {
-                    throw new core_1.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + lang_1.getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                 }
             }
         }

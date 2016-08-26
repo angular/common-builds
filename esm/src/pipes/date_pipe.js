@@ -9,7 +9,7 @@ import { Inject, LOCALE_ID, Pipe } from '@angular/core';
 import { StringMapWrapper } from '../facade/collection';
 import { DateFormatter } from '../facade/intl';
 import { DateWrapper, NumberWrapper, isBlank, isDate, isString } from '../facade/lang';
-import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
+import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 export class DatePipe {
     constructor(_locale) {
         this._locale = _locale;
@@ -18,7 +18,7 @@ export class DatePipe {
         if (isBlank(value))
             return null;
         if (!this.supports(value)) {
-            throw new InvalidPipeArgumentException(DatePipe, value);
+            throw new InvalidPipeArgumentError(DatePipe, value);
         }
         if (NumberWrapper.isNumeric(value)) {
             value = DateWrapper.fromMillis(parseFloat(value));

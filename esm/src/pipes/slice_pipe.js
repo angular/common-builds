@@ -8,13 +8,13 @@
 import { Pipe } from '@angular/core';
 import { ListWrapper } from '../facade/collection';
 import { StringWrapper, isArray, isBlank, isString } from '../facade/lang';
-import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
+import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 export class SlicePipe {
     transform(value, start, end = null) {
         if (isBlank(value))
             return value;
         if (!this.supports(value)) {
-            throw new InvalidPipeArgumentException(SlicePipe, value);
+            throw new InvalidPipeArgumentError(SlicePipe, value);
         }
         if (isString(value)) {
             return StringWrapper.slice(value, start, end);

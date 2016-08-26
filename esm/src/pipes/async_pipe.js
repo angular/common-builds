@@ -7,7 +7,7 @@
  */
 import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core';
 import { isBlank, isPresent, isPromise } from '../facade/lang';
-import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
+import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 class ObservableStrategy {
     createSubscription(async, updateLatestValue) {
         return async.subscribe({ next: updateLatestValue, error: (e) => { throw e; } });
@@ -78,7 +78,7 @@ export class AsyncPipe {
             return _observableStrategy;
         }
         else {
-            throw new InvalidPipeArgumentException(AsyncPipe, obj);
+            throw new InvalidPipeArgumentError(AsyncPipe, obj);
         }
     }
     /** @internal */

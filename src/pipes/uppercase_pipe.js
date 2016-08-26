@@ -8,7 +8,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var UpperCasePipe = (function () {
     function UpperCasePipe() {
     }
@@ -16,7 +16,7 @@ var UpperCasePipe = (function () {
         if (lang_1.isBlank(value))
             return value;
         if (!lang_1.isString(value)) {
-            throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(UpperCasePipe, value);
+            throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(UpperCasePipe, value);
         }
         return value.toUpperCase();
     };

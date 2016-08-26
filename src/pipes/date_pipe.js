@@ -10,7 +10,7 @@ var core_1 = require('@angular/core');
 var collection_1 = require('../facade/collection');
 var intl_1 = require('../facade/intl');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var DatePipe = (function () {
     function DatePipe(_locale) {
         this._locale = _locale;
@@ -20,7 +20,7 @@ var DatePipe = (function () {
         if (lang_1.isBlank(value))
             return null;
         if (!this.supports(value)) {
-            throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(DatePipe, value);
+            throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(DatePipe, value);
         }
         if (lang_1.NumberWrapper.isNumeric(value)) {
             value = lang_1.DateWrapper.fromMillis(parseFloat(value));

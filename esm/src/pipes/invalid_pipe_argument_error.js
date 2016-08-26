@@ -5,11 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException } from '@angular/core';
+import { BaseError } from '../facade/errors';
 import { stringify } from '../facade/lang';
-export class InvalidPipeArgumentException extends BaseException {
+export class InvalidPipeArgumentError extends BaseError {
     constructor(type, value) {
         super(`Invalid argument '${value}' for pipe '${stringify(type)}'`);
     }
 }
-//# sourceMappingURL=invalid_pipe_argument_exception.js.map
+//# sourceMappingURL=invalid_pipe_argument_error.js.map

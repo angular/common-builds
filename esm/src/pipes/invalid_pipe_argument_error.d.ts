@@ -5,7 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, Type } from '@angular/core';
-export declare class InvalidPipeArgumentException extends BaseException {
+import { Type } from '@angular/core';
+import { BaseError } from '../facade/errors';
+export declare class InvalidPipeArgumentError extends BaseError {
     constructor(type: Type<any>, value: Object);
 }

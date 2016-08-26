@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { isBlank } from '../facade/lang';
 import { Location } from './location';
 import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
@@ -18,7 +18,7 @@ export class PathLocationStrategy extends LocationStrategy {
             href = this._platformLocation.getBaseHrefFromDOM();
         }
         if (isBlank(href)) {
-            throw new BaseException(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
+            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
         }
         this._baseHref = href;
     }

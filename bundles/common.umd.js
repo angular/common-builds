@@ -164,15 +164,6 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return StringWrapper;
     }());
-    var NumberParseError = (function (_super) {
-        __extends(NumberParseError, _super);
-        function NumberParseError(message) {
-            _super.call(this);
-            this.message = message;
-        }
-        NumberParseError.prototype.toString = function () { return this.message; };
-        return NumberParseError;
-    }(Error));
     var NumberWrapper = (function () {
         function NumberWrapper() {
         }
@@ -181,7 +172,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         NumberWrapper.parseIntAutoRadix = function (text) {
             var result = parseInt(text);
             if (isNaN(result)) {
-                throw new NumberParseError('Invalid integer literal when parsing ' + text);
+                throw new Error('Invalid integer literal when parsing ' + text);
             }
             return result;
         };
@@ -202,7 +193,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                     return result;
                 }
             }
-            throw new NumberParseError('Invalid integer literal when parsing ' + text + ' in base ' + radix);
+            throw new Error('Invalid integer literal when parsing ' + text + ' in base ' + radix);
         };
         // TODO: NaN is a valid literal but is returned by parseFloat to indicate an error.
         NumberWrapper.parseFloat = function (text) { return parseFloat(text); };
@@ -272,13 +263,44 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return _symbolIterator;
     }
-    var InvalidPipeArgumentException = (function (_super) {
-        __extends(InvalidPipeArgumentException, _super);
-        function InvalidPipeArgumentException(type, value) {
+    /**
+     * @stable
+     */
+    var BaseError = (function (_super) {
+        __extends(BaseError, _super);
+        function BaseError(message) {
+            // Errors don't use current this, instead they create a new instance.
+            // We have to do forward all of our api to the nativeInstance.
+            var nativeError = _super.call(this, message);
+            this._nativeError = nativeError;
+        }
+        Object.defineProperty(BaseError.prototype, "message", {
+            get: function () { return this._nativeError.message; },
+            set: function (message) { this._nativeError.message = message; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseError.prototype, "name", {
+            get: function () { return this._nativeError.name; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseError.prototype, "stack", {
+            get: function () { return this._nativeError.stack; },
+            set: function (value) { this._nativeError.stack = value; },
+            enumerable: true,
+            configurable: true
+        });
+        BaseError.prototype.toString = function () { return this._nativeError.toString(); };
+        return BaseError;
+    }(Error));
+    var InvalidPipeArgumentError = (function (_super) {
+        __extends(InvalidPipeArgumentError, _super);
+        function InvalidPipeArgumentError(type, value) {
             _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
         }
-        return InvalidPipeArgumentException;
-    }(_angular_core.BaseException));
+        return InvalidPipeArgumentError;
+    }(BaseError));
     var ObservableStrategy = (function () {
         function ObservableStrategy() {
         }
@@ -355,7 +377,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 return _observableStrategy;
             }
             else {
-                throw new InvalidPipeArgumentException(AsyncPipe, obj);
+                throw new InvalidPipeArgumentError(AsyncPipe, obj);
             }
         };
         /** @internal */
@@ -880,7 +902,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return null;
             if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(DatePipe, value);
+                throw new InvalidPipeArgumentError(DatePipe, value);
             }
             if (NumberWrapper.isNumeric(value)) {
                 value = DateWrapper.fromMillis(parseFloat(value));
@@ -1401,7 +1423,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return '';
             if (!isStringMap(pluralMap)) {
-                throw new InvalidPipeArgumentException(I18nPluralPipe, pluralMap);
+                throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
             return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
@@ -1423,7 +1445,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return '';
             if (!isStringMap(mapping)) {
-                throw new InvalidPipeArgumentException(I18nSelectPipe, mapping);
+                throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
             }
             return mapping.hasOwnProperty(value) ? mapping[value] : '';
         };
@@ -1450,7 +1472,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return value;
             if (!isString(value)) {
-                throw new InvalidPipeArgumentException(LowerCasePipe, value);
+                throw new InvalidPipeArgumentError(LowerCasePipe, value);
             }
             return value.toLowerCase();
         };
@@ -1469,7 +1491,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         // Convert strings to numbers
         value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
         if (!isNumber(value)) {
-            throw new InvalidPipeArgumentException(pipe, value);
+            throw new InvalidPipeArgumentError(pipe, value);
         }
         var minInt;
         var minFraction;
@@ -1567,7 +1589,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return value;
             if (!this.supports(value)) {
-                throw new InvalidPipeArgumentException(SlicePipe, value);
+                throw new InvalidPipeArgumentError(SlicePipe, value);
             }
             if (isString(value)) {
                 return StringWrapper.slice(value, start, end);
@@ -1588,7 +1610,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (isBlank(value))
                 return value;
             if (!isString(value)) {
-                throw new InvalidPipeArgumentException(UpperCasePipe, value);
+                throw new InvalidPipeArgumentError(UpperCasePipe, value);
             }
             return value.toUpperCase();
         };
@@ -1776,7 +1798,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                         this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
                     }
                     catch (e) {
-                        throw new _angular_core.BaseException("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                        throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                     }
                 }
             }
@@ -2494,7 +2516,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 href = this._platformLocation.getBaseHrefFromDOM();
             }
             if (isBlank(href)) {
-                throw new _angular_core.BaseException("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
+                throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
             }
             this._baseHref = href;
         }

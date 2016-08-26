@@ -8,7 +8,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var ObservableStrategy = (function () {
     function ObservableStrategy() {
     }
@@ -86,7 +86,7 @@ var AsyncPipe = (function () {
             return _observableStrategy;
         }
         else {
-            throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(AsyncPipe, obj);
+            throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(AsyncPipe, obj);
         }
     };
     /** @internal */

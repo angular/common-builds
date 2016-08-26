@@ -9,7 +9,7 @@
 var core_1 = require('@angular/core');
 var intl_1 = require('../facade/intl');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
 function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
@@ -19,7 +19,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
     // Convert strings to numbers
     value = lang_1.isString(value) && lang_1.NumberWrapper.isNumeric(value) ? +value : value;
     if (!lang_1.isNumber(value)) {
-        throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(pipe, value);
+        throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(pipe, value);
     }
     var minInt;
     var minFraction;

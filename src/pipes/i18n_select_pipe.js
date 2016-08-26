@@ -8,7 +8,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var lang_1 = require('../facade/lang');
-var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
+var invalid_pipe_argument_error_1 = require('./invalid_pipe_argument_error');
 var I18nSelectPipe = (function () {
     function I18nSelectPipe() {
     }
@@ -16,7 +16,7 @@ var I18nSelectPipe = (function () {
         if (lang_1.isBlank(value))
             return '';
         if (!lang_1.isStringMap(mapping)) {
-            throw new invalid_pipe_argument_exception_1.InvalidPipeArgumentException(I18nSelectPipe, mapping);
+            throw new invalid_pipe_argument_error_1.InvalidPipeArgumentError(I18nSelectPipe, mapping);
         }
         return mapping.hasOwnProperty(value) ? mapping[value] : '';
     };
