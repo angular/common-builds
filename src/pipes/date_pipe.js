@@ -11,10 +11,9 @@ var collection_1 = require('../facade/collection');
 var intl_1 = require('../facade/intl');
 var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
-// TODO: move to a global configurable location along with other i18n components.
-var defaultLocale = 'en-US';
 var DatePipe = (function () {
-    function DatePipe() {
+    function DatePipe(_locale) {
+        this._locale = _locale;
     }
     DatePipe.prototype.transform = function (value, pattern) {
         if (pattern === void 0) { pattern = 'mediumDate'; }
@@ -32,7 +31,7 @@ var DatePipe = (function () {
         if (collection_1.StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
             pattern = collection_1.StringMapWrapper.get(DatePipe._ALIASES, pattern);
         }
-        return intl_1.DateFormatter.format(value, defaultLocale, pattern);
+        return intl_1.DateFormatter.format(value, this._locale, pattern);
     };
     DatePipe.prototype.supports = function (obj) {
         if (lang_1.isDate(obj) || lang_1.NumberWrapper.isNumeric(obj)) {
@@ -57,6 +56,10 @@ var DatePipe = (function () {
     /** @nocollapse */
     DatePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = [
+        { type: undefined, decorators: [{ type: core_1.Inject, args: [core_1.LOCALE_ID,] },] },
     ];
     return DatePipe;
 }());

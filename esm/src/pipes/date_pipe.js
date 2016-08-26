@@ -5,14 +5,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core';
+import { Inject, LOCALE_ID, Pipe } from '@angular/core';
 import { StringMapWrapper } from '../facade/collection';
 import { DateFormatter } from '../facade/intl';
 import { DateWrapper, NumberWrapper, isBlank, isDate, isString } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
-// TODO: move to a global configurable location along with other i18n components.
-var defaultLocale = 'en-US';
 export class DatePipe {
+    constructor(_locale) {
+        this._locale = _locale;
+    }
     transform(value, pattern = 'mediumDate') {
         if (isBlank(value))
             return null;
@@ -28,7 +29,7 @@ export class DatePipe {
         if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
             pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
         }
-        return DateFormatter.format(value, defaultLocale, pattern);
+        return DateFormatter.format(value, this._locale, pattern);
     }
     supports(obj) {
         if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
@@ -54,5 +55,9 @@ DatePipe._ALIASES = {
 /** @nocollapse */
 DatePipe.decorators = [
     { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DatePipe.ctorParameters = [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ];
 //# sourceMappingURL=date_pipe.js.map

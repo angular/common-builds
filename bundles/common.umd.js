@@ -871,10 +871,9 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return DateFormatter;
     }());
-    // TODO: move to a global configurable location along with other i18n components.
-    var defaultLocale = 'en-US';
     var DatePipe = (function () {
-        function DatePipe() {
+        function DatePipe(_locale) {
+            this._locale = _locale;
         }
         DatePipe.prototype.transform = function (value, pattern) {
             if (pattern === void 0) { pattern = 'mediumDate'; }
@@ -892,7 +891,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
                 pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
             }
-            return DateFormatter.format(value, defaultLocale, pattern);
+            return DateFormatter.format(value, this._locale, pattern);
         };
         DatePipe.prototype.supports = function (obj) {
             if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
@@ -919,6 +918,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     /** @nocollapse */
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ];
     /**
      * @experimental
@@ -1457,9 +1460,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     LowerCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
-    var defaultLocale$1 = 'en-US';
     var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
-    function formatNumber(pipe, value, style, digits, currency, currencyAsSymbol) {
+    function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
         if (isBlank(value))
@@ -1493,7 +1495,7 @@ var __extends = (this && this.__extends) || function (d, b) {
                 maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
             }
         }
-        return NumberFormatter.format(value, defaultLocale$1, style, {
+        return NumberFormatter.format(value, locale, style, {
             minimumIntegerDigits: minInt,
             minimumFractionDigits: minFraction,
             maximumFractionDigits: maxFraction,
@@ -1502,11 +1504,12 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
     }
     var DecimalPipe = (function () {
-        function DecimalPipe() {
+        function DecimalPipe(_locale) {
+            this._locale = _locale;
         }
         DecimalPipe.prototype.transform = function (value, digits) {
             if (digits === void 0) { digits = null; }
-            return formatNumber(DecimalPipe, value, NumberFormatStyle.Decimal, digits);
+            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
         };
         return DecimalPipe;
     }());
@@ -1514,12 +1517,17 @@ var __extends = (this && this.__extends) || function (d, b) {
     DecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
     ];
+    /** @nocollapse */
+    DecimalPipe.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ];
     var PercentPipe = (function () {
-        function PercentPipe() {
+        function PercentPipe(_locale) {
+            this._locale = _locale;
         }
         PercentPipe.prototype.transform = function (value, digits) {
             if (digits === void 0) { digits = null; }
-            return formatNumber(PercentPipe, value, NumberFormatStyle.Percent, digits);
+            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
         };
         return PercentPipe;
     }());
@@ -1527,20 +1535,29 @@ var __extends = (this && this.__extends) || function (d, b) {
     PercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
     ];
+    /** @nocollapse */
+    PercentPipe.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ];
     var CurrencyPipe = (function () {
-        function CurrencyPipe() {
+        function CurrencyPipe(_locale) {
+            this._locale = _locale;
         }
         CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
             if (currencyCode === void 0) { currencyCode = 'USD'; }
             if (symbolDisplay === void 0) { symbolDisplay = false; }
             if (digits === void 0) { digits = null; }
-            return formatNumber(CurrencyPipe, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
         };
         return CurrencyPipe;
     }());
     /** @nocollapse */
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+    ];
+    /** @nocollapse */
+    CurrencyPipe.ctorParameters = [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ];
     var SlicePipe = (function () {
         function SlicePipe() {
