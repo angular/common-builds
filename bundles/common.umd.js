@@ -3,17 +3,12 @@
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-        typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
-            (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core));
-}(this, function (exports, _angular_core) {
-    'use strict';
+    typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
+    (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}),global.ng.core));
+}(this, function (exports,_angular_core) { 'use strict';
+
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -263,11 +258,24 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return _symbolIterator;
     }
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends$1 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
     /**
      * @stable
      */
     var BaseError = (function (_super) {
-        __extends(BaseError, _super);
+        __extends$1(BaseError, _super);
         function BaseError(message) {
             // Errors don't use current this, instead they create a new instance.
             // We have to do forward all of our api to the nativeInstance.
@@ -294,6 +302,38 @@ var __extends = (this && this.__extends) || function (d, b) {
         BaseError.prototype.toString = function () { return this._nativeError.toString(); };
         return BaseError;
     }(Error));
+    /**
+     * @stable
+     */
+    var WrappedError = (function (_super) {
+        __extends$1(WrappedError, _super);
+        function WrappedError(message, error) {
+            _super.call(this, message + " caused by: " + (error instanceof Error ? error.message : error));
+            this.originalError = error;
+        }
+        Object.defineProperty(WrappedError.prototype, "stack", {
+            get: function () {
+                return (this.originalError instanceof Error ? this.originalError : this._nativeError)
+                    .stack;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return WrappedError;
+    }(BaseError));
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
     var InvalidPipeArgumentError = (function (_super) {
         __extends(InvalidPipeArgumentError, _super);
         function InvalidPipeArgumentError(type, value) {
@@ -301,6 +341,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return InvalidPipeArgumentError;
     }(BaseError));
+
     var ObservableStrategy = (function () {
         function ObservableStrategy() {
         }
@@ -323,6 +364,34 @@ var __extends = (this && this.__extends) || function (d, b) {
     }());
     var _promiseStrategy = new PromiseStrategy();
     var _observableStrategy = new ObservableStrategy();
+    // avoid unused import when Promise union types are erased
+    /**
+     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
+     * emitted.
+     * When a new value is emitted, the `async` pipe marks the component to be checked for changes.
+     * When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * potential memory leaks.
+     *
+     * ## Usage
+     *
+     *     object | async
+     *
+     * where `object` is of type `Observable` or of type `Promise`.
+     *
+     * ## Examples
+     *
+     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
+     * promise.
+     *
+     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipePromise'}
+     *
+     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
+     * to the view. Every 500ms, the `time` Observable updates the view with the current time.
+     *
+     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipeObservable'}
+     *
+     * @stable
+     */
     var AsyncPipe = (function () {
         function AsyncPipe(_ref) {
             /** @internal */
@@ -395,16 +464,16 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this._ref.markForCheck();
             }
         };
+        AsyncPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
+        ];
+        /** @nocollapse */
+        AsyncPipe.ctorParameters = [
+            { type: _angular_core.ChangeDetectorRef, },
+        ];
         return AsyncPipe;
     }());
-    /** @nocollapse */
-    AsyncPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-    ];
-    /** @nocollapse */
-    AsyncPipe.ctorParameters = [
-        { type: _angular_core.ChangeDetectorRef, },
-    ];
+
     var Map$1 = global$1.Map;
     var Set$1 = global$1.Set;
     // Safari and Internet Explorer do not support the iterable parameter to the
@@ -698,6 +767,7 @@ var __extends = (this && this.__extends) || function (d, b) {
             };
         }
     })();
+
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -893,6 +963,74 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         return DateFormatter;
     }());
+
+    /**
+     * Formats a date value to a string based on the requested format.
+     *
+     * WARNINGS:
+     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+     *   Instead users should treat the date as an immutable object and change the reference when the
+     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+     *   which would be an expensive operation).
+     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+     *   browsers.
+     *
+     * ## Usage
+     *
+     *     expression | date[:format]
+     *
+     * where `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime) and `format` indicates which date/time components to
+     * include:
+     *
+     *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | a (PM)       | -                 | -         | -         |
+     *
+     * In javascript, only the components specified will be respected (not the ordering,
+     * punctuations, ...) and details of the formatting will be dependent on the locale.
+     *
+     * `format` can also be one of the following predefined formats:
+     *
+     *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
+     *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
+     *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
+     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010)
+     *  - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. Sep 3, 2010 for en-US)
+     *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
+     *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
+     *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
+     *
+     * Timezone of the formatted text will be the local system timezone of the end-users machine.
+     *
+     * ### Examples
+     *
+     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+     * in the _local_ time and locale is 'en-US':
+     *
+     * ```
+     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
+     * ```
+     *
+     * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
+     *
+     * @stable
+     */
     var DatePipe = (function () {
         function DatePipe(_locale) {
             this._locale = _locale;
@@ -924,27 +1062,39 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             return false;
         };
+        /** @internal */
+        DatePipe._ALIASES = {
+            'medium': 'yMMMdjms',
+            'short': 'yMdjm',
+            'fullDate': 'yMMMMEEEEd',
+            'longDate': 'yMMMMd',
+            'mediumDate': 'yMMMd',
+            'shortDate': 'yMd',
+            'mediumTime': 'jms',
+            'shortTime': 'jm'
+        };
+        DatePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+        ];
+        /** @nocollapse */
+        DatePipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
         return DatePipe;
     }());
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends$2 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    /** @nocollapse */
-    DatePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    /** @nocollapse */
-    DatePipe.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ];
     /**
      * @experimental
      */
@@ -964,8 +1114,13 @@ var __extends = (this && this.__extends) || function (d, b) {
         var nbCase = "=" + value;
         return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
     }
+    /**
+     * Returns the plural case based on the locale
+     *
+     * @experimental
+     */
     var NgLocaleLocalization = (function (_super) {
-        __extends(NgLocaleLocalization, _super);
+        __extends$2(NgLocaleLocalization, _super);
         function NgLocaleLocalization(_locale) {
             _super.call(this);
             this._locale = _locale;
@@ -987,16 +1142,15 @@ var __extends = (this && this.__extends) || function (d, b) {
                     return 'other';
             }
         };
+        NgLocaleLocalization.decorators = [
+            { type: _angular_core.Injectable },
+        ];
+        /** @nocollapse */
+        NgLocaleLocalization.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
         return NgLocaleLocalization;
     }(NgLocalization));
-    /** @nocollapse */
-    NgLocaleLocalization.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    /** @nocollapse */
-    NgLocaleLocalization.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ];
     // This is generated code DO NOT MODIFY
     // see angular2/script/cldr/gen_plural_rules.js
     /** @experimental */
@@ -1414,7 +1568,45 @@ var __extends = (this && this.__extends) || function (d, b) {
                 return Plural.Other;
         }
     }
+
     var _INTERPOLATION_REGEXP = /#/g;
+    /**
+     *  Maps a value to a string that pluralizes the value properly.
+     *
+     *  ## Usage
+     *
+     *  expression | i18nPlural:mapping
+     *
+     *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
+     *  see http://userguide.icu-project.org/formatparse/messages
+     *
+     *  ## Example
+     *
+     *  ```
+     *  @Component({
+     *    selector: 'app',
+     *    template: `
+     *      <div>
+     *        {{ messages.length | i18nPlural: messageMapping }}
+     *      </div>
+     *    `,
+     *    // best practice is to define the locale at the application level
+     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
+     *  })
+     *
+     *  class MyApp {
+     *    messages: any[];
+     *    messageMapping: {[k:string]: string} = {
+     *      '=0': 'No messages.',
+     *      '=1': 'One message.',
+     *      'other': '# messages.'
+     *    }
+     *    ...
+     *  }
+     *  ```
+     *
+     * @experimental
+     */
     var I18nPluralPipe = (function () {
         function I18nPluralPipe(_localization) {
             this._localization = _localization;
@@ -1428,16 +1620,47 @@ var __extends = (this && this.__extends) || function (d, b) {
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
             return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
         };
+        I18nPluralPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+        ];
+        /** @nocollapse */
+        I18nPluralPipe.ctorParameters = [
+            { type: NgLocalization, },
+        ];
         return I18nPluralPipe;
     }());
-    /** @nocollapse */
-    I18nPluralPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nPluralPipe.ctorParameters = [
-        { type: NgLocalization, },
-    ];
+
+    /**
+     *
+     *  Generic selector that displays the string that matches the current value.
+     *
+     *  ## Usage
+     *
+     *  expression | i18nSelect:mapping
+     *
+     *  where `mapping` is an object that indicates the text that should be displayed
+     *  for different values of the provided `expression`.
+     *
+     *  ## Example
+     *
+     *  ```
+     *  <div>
+     *    {{ gender | i18nSelect: inviteMap }}
+     *  </div>
+     *
+     *  class MyApp {
+     *    gender: string = 'male';
+     *    inviteMap: any = {
+     *      'male': 'Invite him.',
+     *      'female': 'Invite her.',
+     *      'other': 'Invite them.'
+     *    }
+     *    ...
+     *  }
+     *  ```
+     *
+     *  @experimental
+     */
     var I18nSelectPipe = (function () {
         function I18nSelectPipe() {
         }
@@ -1449,22 +1672,43 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             return mapping.hasOwnProperty(value) ? mapping[value] : '';
         };
+        I18nSelectPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+        ];
+        /** @nocollapse */
+        I18nSelectPipe.ctorParameters = [];
         return I18nSelectPipe;
     }());
-    /** @nocollapse */
-    I18nSelectPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    ];
+
+    /**
+     * Transforms any input value using `JSON.stringify`. Useful for debugging.
+     *
+     * ### Example
+     * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
+     *
+     * @stable
+     */
     var JsonPipe = (function () {
         function JsonPipe() {
         }
         JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
+        JsonPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
+        ];
+        /** @nocollapse */
+        JsonPipe.ctorParameters = [];
         return JsonPipe;
     }());
-    /** @nocollapse */
-    JsonPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-    ];
+
+    /**
+     * Transforms text to lowercase.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
+     *
+     * @stable
+     */
     var LowerCasePipe = (function () {
         function LowerCasePipe() {
         }
@@ -1476,12 +1720,14 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             return value.toLowerCase();
         };
+        LowerCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+        ];
+        /** @nocollapse */
+        LowerCasePipe.ctorParameters = [];
         return LowerCasePipe;
     }());
-    /** @nocollapse */
-    LowerCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-    ];
+
     var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
     function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
@@ -1525,6 +1771,35 @@ var __extends = (this && this.__extends) || function (d, b) {
             currencyAsSymbol: currencyAsSymbol
         });
     }
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     * Formats a number as local text. i.e. group sizing and separator and other locale-specific
+     * configurations are based on the active locale.
+     *
+     * ### Usage
+     *
+     *     expression | number[:digitInfo]
+     *
+     * where `expression` is a number and `digitInfo` has the following format:
+     *
+     *     {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+     *
+     * - minIntegerDigits is the minimum number of integer digits to use. Defaults to 1.
+     * - minFractionDigits is the minimum number of digits after fraction. Defaults to 0.
+     * - maxFractionDigits is the maximum number of digits after fraction. Defaults to 3.
+     *
+     * For more information on the acceptable range for each of these numbers and other
+     * details see your native internationalization library.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
+     *
+     * @stable
+     */
     var DecimalPipe = (function () {
         function DecimalPipe(_locale) {
             this._locale = _locale;
@@ -1533,16 +1808,34 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (digits === void 0) { digits = null; }
             return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
         };
+        DecimalPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'number' },] },
+        ];
+        /** @nocollapse */
+        DecimalPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
         return DecimalPipe;
     }());
-    /** @nocollapse */
-    DecimalPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-    ];
-    /** @nocollapse */
-    DecimalPipe.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ];
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     * Formats a number as local percent.
+     *
+     * ### Usage
+     *
+     *     expression | percent[:digitInfo]
+     *
+     * For more information about `digitInfo` see {@link DecimalPipe}
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
+     *
+     * @stable
+     */
     var PercentPipe = (function () {
         function PercentPipe(_locale) {
             this._locale = _locale;
@@ -1551,16 +1844,39 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (digits === void 0) { digits = null; }
             return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
         };
+        PercentPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
+        ];
+        /** @nocollapse */
+        PercentPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
         return PercentPipe;
     }());
-    /** @nocollapse */
-    PercentPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-    ];
-    /** @nocollapse */
-    PercentPipe.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ];
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     *
+     * Formats a number as local currency.
+     *
+     * ### Usage
+     *
+     *     expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]
+     *
+     * where `currencyCode` is the ISO 4217 currency code, such as "USD" for the US dollar and
+     * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
+     * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
+     * is `false`.
+     * For more information about `digitInfo` see {@link DecimalPipe}
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
+     *
+     * @stable
+     */
     var CurrencyPipe = (function () {
         function CurrencyPipe(_locale) {
             this._locale = _locale;
@@ -1571,16 +1887,71 @@ var __extends = (this && this.__extends) || function (d, b) {
             if (digits === void 0) { digits = null; }
             return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
         };
+        CurrencyPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+        ];
+        /** @nocollapse */
+        CurrencyPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
         return CurrencyPipe;
     }());
-    /** @nocollapse */
-    CurrencyPipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-    ];
-    /** @nocollapse */
-    CurrencyPipe.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ];
+
+    /**
+     * Creates a new List or String containing only a subset (slice) of the
+     * elements.
+     *
+     * The starting index of the subset to return is specified by the `start` parameter.
+     *
+     * The ending index of the subset to return is specified by the optional `end` parameter.
+     *
+     * ### Usage
+     *
+     *     expression | slice:start[:end]
+     *
+     * All behavior is based on the expected behavior of the JavaScript API
+     * Array.prototype.slice() and String.prototype.slice()
+     *
+     * Where the input expression is a [List] or [String], and `start` is:
+     *
+     * - **a positive integer**: return the item at _start_ index and all items after
+     * in the list or string expression.
+     * - **a negative integer**: return the item at _start_ index from the end and all items after
+     * in the list or string expression.
+     * - **`|start|` greater than the size of the expression**: return an empty list or string.
+     * - **`|start|` negative greater than the size of the expression**: return entire list or
+     * string expression.
+     *
+     * and where `end` is:
+     *
+     * - **omitted**: return all items until the end of the input
+     * - **a positive integer**: return all items before _end_ index of the list or string
+     * expression.
+     * - **a negative integer**: return all items before _end_ index from the end of the list
+     * or string expression.
+     *
+     * When operating on a [List], the returned list is always a copy even when all
+     * the elements are being returned.
+     *
+     * When operating on a blank value, returns it.
+     *
+     * ## List Example
+     *
+     * This `ngFor` example:
+     *
+     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_list'}
+     *
+     * produces the following:
+     *
+     *     <li>b</li>
+     *     <li>c</li>
+     *
+     * ## String Examples
+     *
+     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
+     *
+     * @stable
+     */
     var SlicePipe = (function () {
         function SlicePipe() {
         }
@@ -1597,12 +1968,23 @@ var __extends = (this && this.__extends) || function (d, b) {
             return ListWrapper.slice(value, start, end);
         };
         SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
+        SlicePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
+        ];
+        /** @nocollapse */
+        SlicePipe.ctorParameters = [];
         return SlicePipe;
     }());
-    /** @nocollapse */
-    SlicePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-    ];
+
+    /**
+     * Implements uppercase transforms to text.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
+     *
+     * @stable
+     */
     var UpperCasePipe = (function () {
         function UpperCasePipe() {
         }
@@ -1614,12 +1996,75 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             return value.toUpperCase();
         };
+        UpperCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+        ];
+        /** @nocollapse */
+        UpperCasePipe.ctorParameters = [];
         return UpperCasePipe;
     }());
-    /** @nocollapse */
-    UpperCasePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-    ];
+
+    /**
+     * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
+     * an expression's evaluation result.
+     *
+     * The result of an expression evaluation is interpreted differently depending on type of
+     * the expression evaluation result:
+     * - `string` - all the CSS classes listed in a string (space delimited) are added
+     * - `Array` - all the CSS classes (Array elements) are added
+     * - `Object` - each key corresponds to a CSS class name while values are interpreted as expressions
+     * evaluating to `Boolean`. If a given expression evaluates to `true` a corresponding CSS class
+     * is added - otherwise it is removed.
+     *
+     * While the `NgClass` directive can interpret expressions evaluating to `string`, `Array`
+     * or `Object`, the `Object`-based version is the most often used and has an advantage of keeping
+     * all the CSS class names in a template.
+     *
+     * ### Example ([live demo](http://plnkr.co/edit/a4YdtmWywhJ33uqfpPPn?p=preview)):
+     *
+     * ```
+     * import {Component} from '@angular/core';
+     * import {NgClass} from '@angular/common';
+     *
+     * @Component({
+     *   selector: 'toggle-button',
+     *   inputs: ['isDisabled'],
+     *   template: `
+     *      <div class="button" [ngClass]="{active: isOn, disabled: isDisabled}"
+     *          (click)="toggle(!isOn)">
+     *          Click me!
+     *      </div>`,
+     *   styles: [`
+     *     .button {
+     *       width: 120px;
+     *       border: medium solid black;
+     *     }
+     *
+     *     .active {
+     *       background-color: red;
+     *    }
+     *
+     *     .disabled {
+     *       color: gray;
+     *       border: medium solid gray;
+     *     }
+     *   `],
+     *   directives: [NgClass]
+     * })
+     * class ToggleButton {
+     *   isOn = false;
+     *   isDisabled = false;
+     *
+     *   toggle(newState) {
+     *     if (!this.isDisabled) {
+     *       this.isOn = newState;
+     *     }
+     *   }
+     * }
+     * ```
+     *
+     * @stable
+     */
     var NgClass = (function () {
         function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
             this._iterableDiffers = _iterableDiffers;
@@ -1727,24 +2172,23 @@ var __extends = (this && this.__extends) || function (d, b) {
                 }
             }
         };
+        NgClass.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
+        ];
+        /** @nocollapse */
+        NgClass.ctorParameters = [
+            { type: _angular_core.IterableDiffers, },
+            { type: _angular_core.KeyValueDiffers, },
+            { type: _angular_core.ElementRef, },
+            { type: _angular_core.Renderer, },
+        ];
+        NgClass.propDecorators = {
+            'initialClasses': [{ type: _angular_core.Input, args: ['class',] },],
+            'ngClass': [{ type: _angular_core.Input },],
+        };
         return NgClass;
     }());
-    /** @nocollapse */
-    NgClass.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
-    ];
-    /** @nocollapse */
-    NgClass.ctorParameters = [
-        { type: _angular_core.IterableDiffers, },
-        { type: _angular_core.KeyValueDiffers, },
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer, },
-    ];
-    /** @nocollapse */
-    NgClass.propDecorators = {
-        'initialClasses': [{ type: _angular_core.Input, args: ['class',] },],
-        'ngClass': [{ type: _angular_core.Input },],
-    };
+
     var NgForRow = (function () {
         function NgForRow($implicit, index, count) {
             this.$implicit = $implicit;
@@ -1773,6 +2217,70 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return NgForRow;
     }());
+    /**
+     * The `NgFor` directive instantiates a template once per item from an iterable. The context for
+     * each instantiated template inherits from the outer context with the given loop variable set
+     * to the current item from the iterable.
+     *
+     * ### Local Variables
+     *
+     * `NgFor` provides several exported values that can be aliased to local variables:
+     *
+     * * `index` will be set to the current loop iteration for each template context.
+     * * `first` will be set to a boolean value indicating whether the item is the first one in the
+     *   iteration.
+     * * `last` will be set to a boolean value indicating whether the item is the last one in the
+     *   iteration.
+     * * `even` will be set to a boolean value indicating whether this item has an even index.
+     * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+     *
+     * ### Change Propagation
+     *
+     * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
+     *
+     * * When an item is added, a new instance of the template is added to the DOM.
+     * * When an item is removed, its template instance is removed from the DOM.
+     * * When items are reordered, their respective templates are reordered in the DOM.
+     * * Otherwise, the DOM element for that item will remain the same.
+     *
+     * Angular uses object identity to track insertions and deletions within the iterator and reproduce
+     * those changes in the DOM. This has important implications for animations and any stateful
+     * controls
+     * (such as `<input>` elements which accept user input) that are present. Inserted rows can be
+     * animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state such
+     * as user input.
+     *
+     * It is possible for the identities of elements in the iterator to change while the data does not.
+     * This can happen, for example, if the iterator produced from an RPC to the server, and that
+     * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
+     * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
+     * elements were deleted and all new elements inserted). This is an expensive operation and should
+     * be avoided if possible.
+     *
+     * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
+     * `trackBy` takes a function which has two arguments: `index` and `item`.
+     * If `trackBy` is given, Angular tracks changes by the return value of the function.
+     *
+     * ### Syntax
+     *
+     * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
+     * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
+     *
+     * With `<template>` element:
+     *
+     * ```
+     * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+     *   <li>...</li>
+     * </template>
+     * ```
+     *
+     * ### Example
+     *
+     * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
+     * example.
+     *
+     * @stable
+     */
     var NgFor = (function () {
         function NgFor(_viewContainer, _templateRef, _iterableDiffers, _cdr) {
             this._viewContainer = _viewContainer;
@@ -1845,25 +2353,23 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgFor.prototype._perViewChange = function (view, record) {
             view.context.$implicit = record.item;
         };
+        NgFor.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
+        ];
+        /** @nocollapse */
+        NgFor.ctorParameters = [
+            { type: _angular_core.ViewContainerRef, },
+            { type: _angular_core.TemplateRef, },
+            { type: _angular_core.IterableDiffers, },
+            { type: _angular_core.ChangeDetectorRef, },
+        ];
+        NgFor.propDecorators = {
+            'ngForOf': [{ type: _angular_core.Input },],
+            'ngForTrackBy': [{ type: _angular_core.Input },],
+            'ngForTemplate': [{ type: _angular_core.Input },],
+        };
         return NgFor;
     }());
-    /** @nocollapse */
-    NgFor.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
-    ];
-    /** @nocollapse */
-    NgFor.ctorParameters = [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: _angular_core.IterableDiffers, },
-        { type: _angular_core.ChangeDetectorRef, },
-    ];
-    /** @nocollapse */
-    NgFor.propDecorators = {
-        'ngForOf': [{ type: _angular_core.Input },],
-        'ngForTrackBy': [{ type: _angular_core.Input },],
-        'ngForTemplate': [{ type: _angular_core.Input },],
-    };
     var RecordViewTuple = (function () {
         function RecordViewTuple(record, view) {
             this.record = record;
@@ -1871,6 +2377,31 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return RecordViewTuple;
     }());
+
+    /**
+     * Removes or recreates a portion of the DOM tree based on an {expression}.
+     *
+     * If the expression assigned to `ngIf` evaluates to a false value then the element
+     * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
+     *
+     * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
+     *
+     * ```
+     * <div *ngIf="errorCount > 0" class="error">
+     *   <!-- Error message displayed when the errorCount property on the current context is greater
+     * than 0. -->
+     *   {{errorCount}} errors detected
+     * </div>
+     * ```
+     *
+     * ### Syntax
+     *
+     * - `<div *ngIf="condition">...</div>`
+     * - `<div template="ngIf condition">...</div>`
+     * - `<template [ngIf]="condition"><div>...</div></template>`
+     *
+     * @stable
+     */
     var NgIf = (function () {
         function NgIf(_viewContainer, _templateRef) {
             this._viewContainer = _viewContainer;
@@ -1891,21 +2422,20 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NgIf.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
+        ];
+        /** @nocollapse */
+        NgIf.ctorParameters = [
+            { type: _angular_core.ViewContainerRef, },
+            { type: _angular_core.TemplateRef, },
+        ];
+        NgIf.propDecorators = {
+            'ngIf': [{ type: _angular_core.Input },],
+        };
         return NgIf;
     }());
-    /** @nocollapse */
-    NgIf.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
-    ];
-    /** @nocollapse */
-    NgIf.ctorParameters = [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-    ];
-    /** @nocollapse */
-    NgIf.propDecorators = {
-        'ngIf': [{ type: _angular_core.Input },],
-    };
+
     var _CASE_DEFAULT = new Object();
     var SwitchView = (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
@@ -1916,6 +2446,62 @@ var __extends = (this && this.__extends) || function (d, b) {
         SwitchView.prototype.destroy = function () { this._viewContainerRef.clear(); };
         return SwitchView;
     }());
+    /**
+     * Adds or removes DOM sub-trees when their match expressions match the switch expression.
+     *
+     * Elements within `NgSwitch` but without `NgSwitchCase` or `NgSwitchDefault` directives will be
+     * preserved at the location as specified in the template.
+     *
+     * `NgSwitch` simply inserts nested elements based on which match expression matches the value
+     * obtained from the evaluated switch expression. In other words, you define a container element
+     * (where you place the directive with a switch expression on the
+     * `[ngSwitch]="..."` attribute), define any inner elements inside of the directive and
+     * place a `[ngSwitchCase]` attribute per element.
+     *
+     * The `ngSwitchCase` property is used to inform `NgSwitch` which element to display when the
+     * expression is evaluated. If a matching expression is not found via a `ngSwitchCase` property
+     * then an element with the `ngSwitchDefault` attribute is displayed.
+     *
+     * ### Example ([live demo](http://plnkr.co/edit/DQMTII95CbuqWrl3lYAs?p=preview))
+     *
+     * ```typescript
+     * @Component({
+     *   selector: 'app',
+     *   template: `
+     *     <p>Value = {{value}}</p>
+     *     <button (click)="inc()">Increment</button>
+     *
+     *     <div [ngSwitch]="value">
+     *       <p *ngSwitchCase="'init'">increment to start</p>
+     *       <p *ngSwitchCase="0">0, increment again</p>
+     *       <p *ngSwitchCase="1">1, increment again</p>
+     *       <p *ngSwitchCase="2">2, stop incrementing</p>
+     *       <p *ngSwitchDefault>&gt; 2, STOP!</p>
+     *     </div>
+     *
+     *     <!-- alternate syntax -->
+     *
+     *     <p [ngSwitch]="value">
+     *       <template ngSwitchCase="init">increment to start</template>
+     *       <template [ngSwitchCase]="0">0, increment again</template>
+     *       <template [ngSwitchCase]="1">1, increment again</template>
+     *       <template [ngSwitchCase]="2">2, stop incrementing</template>
+     *       <template ngSwitchDefault>&gt; 2, STOP!</template>
+     *     </p>
+     *   `,
+     *   directives: [NgSwitch, NgSwitchCase, NgSwitchDefault]
+     * })
+     * export class App {
+     *   value = 'init';
+     *
+     *   inc() {
+     *     this.value = this.value === 'init' ? 0 : this.value + 1;
+     *   }
+     * }
+     * ```
+     *
+     * @stable
+     */
     var NgSwitch = (function () {
         function NgSwitch() {
             this._useDefault = false;
@@ -2001,16 +2587,26 @@ var __extends = (this && this.__extends) || function (d, b) {
                 ListWrapper.remove(views, view);
             }
         };
+        NgSwitch.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
+        ];
+        /** @nocollapse */
+        NgSwitch.ctorParameters = [];
+        NgSwitch.propDecorators = {
+            'ngSwitch': [{ type: _angular_core.Input },],
+        };
         return NgSwitch;
     }());
-    /** @nocollapse */
-    NgSwitch.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitch.propDecorators = {
-        'ngSwitch': [{ type: _angular_core.Input },],
-    };
+    /**
+     * Insert the sub-tree when the `ngSwitchCase` expression evaluates to the same value as the
+     * enclosing switch expression.
+     *
+     * If multiple match expression match the switch expression value, all of them are displayed.
+     *
+     * See {@link NgSwitch} for more details and example.
+     *
+     * @stable
+     */
     var NgSwitchCase = (function () {
         function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
             // `_CASE_DEFAULT` is used as a marker for a not yet initialized value
@@ -2027,38 +2623,89 @@ var __extends = (this && this.__extends) || function (d, b) {
             enumerable: true,
             configurable: true
         });
+        NgSwitchCase.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
+        ];
+        /** @nocollapse */
+        NgSwitchCase.ctorParameters = [
+            { type: _angular_core.ViewContainerRef, },
+            { type: _angular_core.TemplateRef, },
+            { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+        ];
+        NgSwitchCase.propDecorators = {
+            'ngSwitchCase': [{ type: _angular_core.Input },],
+        };
         return NgSwitchCase;
     }());
-    /** @nocollapse */
-    NgSwitchCase.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchCase.ctorParameters = [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
-    ];
-    /** @nocollapse */
-    NgSwitchCase.propDecorators = {
-        'ngSwitchCase': [{ type: _angular_core.Input },],
-    };
+    /**
+     * Default case statements are displayed when no match expression matches the switch expression
+     * value.
+     *
+     * See {@link NgSwitch} for more details and example.
+     *
+     * @stable
+     */
     var NgSwitchDefault = (function () {
         function NgSwitchDefault(viewContainer, templateRef, sswitch) {
             sswitch._registerView(_CASE_DEFAULT, new SwitchView(viewContainer, templateRef));
         }
+        NgSwitchDefault.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+        ];
+        /** @nocollapse */
+        NgSwitchDefault.ctorParameters = [
+            { type: _angular_core.ViewContainerRef, },
+            { type: _angular_core.TemplateRef, },
+            { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+        ];
         return NgSwitchDefault;
     }());
-    /** @nocollapse */
-    NgSwitchDefault.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchDefault.ctorParameters = [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
-    ];
+
+    /**
+     * `ngPlural` is an i18n directive that displays DOM sub-trees that match the switch expression
+     * value, or failing that, DOM sub-trees that match the switch expression's pluralization category.
+     *
+     * To use this directive you must provide a container element that sets the `[ngPlural]` attribute
+     * to a
+     * switch expression.
+     *    - Inner elements defined with an `[ngPluralCase]` attribute will display based on their
+     * expression.
+     *    - If `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
+     * matches the switch expression exactly.
+     *    - Otherwise, the view will be treated as a "category match", and will only display if exact
+     * value matches aren't found and the value maps to its category for the defined locale.
+     *
+     * ```typescript
+     * @Component({
+     *    selector: 'app',
+     *    // best practice is to define the locale at the application level
+     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
+     * })
+     * @View({
+     *   template: `
+     *     <p>Value = {{value}}</p>
+     *     <button (click)="inc()">Increment</button>
+     *
+     *     <div [ngPlural]="value">
+     *       <template ngPluralCase="=0">there is nothing</template>
+     *       <template ngPluralCase="=1">there is one</template>
+     *       <template ngPluralCase="few">there are a few</template>
+     *       <template ngPluralCase="other">there is some number</template>
+     *     </div>
+     *   `,
+     *   directives: [NgPlural, NgPluralCase]
+     * })
+     * export class App {
+     *   value = 'init';
+     *
+     *   inc() {
+     *     this.value = this.value === 'init' ? 0 : this.value + 1;
+     *   }
+     * }
+     *
+     * ```
+     * @experimental
+     */
     var NgPlural = (function () {
         function NgPlural(_localization) {
             this._localization = _localization;
@@ -2091,38 +2738,93 @@ var __extends = (this && this.__extends) || function (d, b) {
             this._activeView = view;
             this._activeView.create();
         };
+        NgPlural.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
+        ];
+        /** @nocollapse */
+        NgPlural.ctorParameters = [
+            { type: NgLocalization, },
+        ];
+        NgPlural.propDecorators = {
+            'ngPlural': [{ type: _angular_core.Input },],
+        };
         return NgPlural;
     }());
-    /** @nocollapse */
-    NgPlural.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
-    ];
-    /** @nocollapse */
-    NgPlural.ctorParameters = [
-        { type: NgLocalization, },
-    ];
-    /** @nocollapse */
-    NgPlural.propDecorators = {
-        'ngPlural': [{ type: _angular_core.Input },],
-    };
+    /**
+     * @experimental
+     */
     var NgPluralCase = (function () {
         function NgPluralCase(value, template, viewContainer, ngPlural) {
             this.value = value;
             ngPlural.addCase(value, new SwitchView(viewContainer, template));
         }
+        NgPluralCase.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
+        ];
+        /** @nocollapse */
+        NgPluralCase.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
+            { type: _angular_core.TemplateRef, },
+            { type: _angular_core.ViewContainerRef, },
+            { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
+        ];
         return NgPluralCase;
     }());
-    /** @nocollapse */
-    NgPluralCase.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
-    ];
-    /** @nocollapse */
-    NgPluralCase.ctorParameters = [
-        { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
-        { type: _angular_core.TemplateRef, },
-        { type: _angular_core.ViewContainerRef, },
-        { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
-    ];
+
+    /**
+     * The `NgStyle` directive changes styles based on a result of expression evaluation.
+     *
+     * An expression assigned to the `ngStyle` property must evaluate to an object and the
+     * corresponding element styles are updated based on changes to this object. Style names to update
+     * are taken from the object's keys, and values - from the corresponding object's values.
+     *
+     * ### Syntax
+     *
+     * - `<div [ngStyle]="{'font-style': styleExp}"></div>`
+     * - `<div [ngStyle]="{'max-width.px': widthExp}"></div>`
+     * - `<div [ngStyle]="styleExp"></div>` - here the `styleExp` must evaluate to an object
+     *
+     * ### Example ([live demo](http://plnkr.co/edit/YamGS6GkUh9GqWNQhCyM?p=preview)):
+     *
+     * ```
+     * import {Component} from '@angular/core';
+     * import {NgStyle} from '@angular/common';
+     *
+     * @Component({
+     *  selector: 'ngStyle-example',
+     *  template: `
+     *    <h1 [ngStyle]="{'font-style': style, 'font-size': size, 'font-weight': weight}">
+     *      Change style of this text!
+     *    </h1>
+     *
+     *    <hr>
+     *
+     *    <label>Italic: <input type="checkbox" (change)="changeStyle($event)"></label>
+     *    <label>Bold: <input type="checkbox" (change)="changeWeight($event)"></label>
+     *    <label>Size: <input type="text" [value]="size" (change)="size = $event.target.value"></label>
+     *  `,
+     *  directives: [NgStyle]
+     * })
+     * export class NgStyleExample {
+     *    style = 'normal';
+     *    weight = 'normal';
+     *    size = '20px';
+     *
+     *    changeStyle($event: any) {
+     *      this.style = $event.target.checked ? 'italic' : 'normal';
+     *    }
+     *
+     *    changeWeight($event: any) {
+     *      this.weight = $event.target.checked ? 'bold' : 'normal';
+     *    }
+     * }
+     * ```
+     *
+     * In this example the `font-style`, `font-size` and `font-weight` styles will be updated
+     * based on the `style` property's value changes.
+     *
+     * @stable
+     */
     var NgStyle = (function () {
         function NgStyle(_differs, _ngEl, _renderer) {
             this._differs = _differs;
@@ -2159,22 +2861,39 @@ var __extends = (this && this.__extends) || function (d, b) {
             var valToSet = isPresent(val) && nameParts.length === 2 ? "" + val + nameParts[1] : val;
             this._renderer.setElementStyle(this._ngEl.nativeElement, nameToSet, valToSet);
         };
+        NgStyle.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
+        ];
+        /** @nocollapse */
+        NgStyle.ctorParameters = [
+            { type: _angular_core.KeyValueDiffers, },
+            { type: _angular_core.ElementRef, },
+            { type: _angular_core.Renderer, },
+        ];
+        NgStyle.propDecorators = {
+            'ngStyle': [{ type: _angular_core.Input },],
+        };
         return NgStyle;
     }());
-    /** @nocollapse */
-    NgStyle.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
-    ];
-    /** @nocollapse */
-    NgStyle.ctorParameters = [
-        { type: _angular_core.KeyValueDiffers, },
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer, },
-    ];
-    /** @nocollapse */
-    NgStyle.propDecorators = {
-        'ngStyle': [{ type: _angular_core.Input },],
-    };
+
+    /**
+     * Creates and inserts an embedded view based on a prepared `TemplateRef`.
+     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
+     * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
+     * available within the `TemplateRef`.
+     *
+     * Note: using the key `$implicit` in the context object will set it's value as default.
+     *
+     * ### Syntax
+     *
+     * ```
+     * <template [ngTemplateOutlet]="templateRefExpression"
+     *           [ngOutletContext]="objectExpression">
+     * </template>
+     * ```
+     *
+     * @experimental
+     */
     var NgTemplateOutlet = (function () {
         function NgTemplateOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -2197,21 +2916,20 @@ var __extends = (this && this.__extends) || function (d, b) {
                 this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
             }
         };
+        NgTemplateOutlet.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+        ];
+        /** @nocollapse */
+        NgTemplateOutlet.ctorParameters = [
+            { type: _angular_core.ViewContainerRef, },
+        ];
+        NgTemplateOutlet.propDecorators = {
+            'ngOutletContext': [{ type: _angular_core.Input },],
+            'ngTemplateOutlet': [{ type: _angular_core.Input },],
+        };
         return NgTemplateOutlet;
     }());
-    /** @nocollapse */
-    NgTemplateOutlet.decorators = [
-        { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgTemplateOutlet.ctorParameters = [
-        { type: _angular_core.ViewContainerRef, },
-    ];
-    /** @nocollapse */
-    NgTemplateOutlet.propDecorators = {
-        'ngOutletContext': [{ type: _angular_core.Input },],
-        'ngTemplateOutlet': [{ type: _angular_core.Input },],
-    };
+
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -2265,6 +2983,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         });
         return PlatformLocation;
     }());
+
     /**
      * `LocationStrategy` is responsible for representing and reading route state
      * from the browser's URL. Angular provides two strategies:
@@ -2310,6 +3029,39 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @stable
      */
     var APP_BASE_HREF = new _angular_core.OpaqueToken('appBaseHref');
+
+    /**
+     * `Location` is a service that applications can use to interact with a browser's URL.
+     * Depending on which {@link LocationStrategy} is used, `Location` will either persist
+     * to the URL's path or the URL's hash segment.
+     *
+     * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
+     * `Location` only if you need to interact with or create normalized URLs outside of
+     * routing.
+     *
+     * `Location` is responsible for normalizing the URL against the application's base href.
+     * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+     * trailing slash:
+     * - `/my/app/user/123` is normalized
+     * - `my/app/user/123` **is not** normalized
+     * - `/my/app/user/123/` **is not** normalized
+     *
+     * ### Example
+     *
+     * ```
+     * import {Component} from '@angular/core';
+     * import {Location} from '@angular/common';
+     *
+     * @Component({selector: 'app-component'})
+     * class AppCmp {
+     *   constructor(location: Location) {
+     *     location.go('/foo');
+     *   }
+     * }
+     * ```
+     *
+     * @stable
+     */
     var Location = (function () {
         function Location(platformStrategy) {
             var _this = this;
@@ -2429,16 +3181,15 @@ var __extends = (this && this.__extends) || function (d, b) {
             }
             return url;
         };
+        Location.decorators = [
+            { type: _angular_core.Injectable },
+        ];
+        /** @nocollapse */
+        Location.ctorParameters = [
+            { type: LocationStrategy, },
+        ];
         return Location;
     }());
-    /** @nocollapse */
-    Location.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    /** @nocollapse */
-    Location.ctorParameters = [
-        { type: LocationStrategy, },
-    ];
     function _stripBaseHref(baseHref, url) {
         if (baseHref.length > 0 && url.startsWith(baseHref)) {
             return url.substring(baseHref.length);
@@ -2452,8 +3203,47 @@ var __extends = (this && this.__extends) || function (d, b) {
         }
         return url;
     }
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends$3 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * `HashLocationStrategy` is a {@link LocationStrategy} used to configure the
+     * {@link Location} service to represent its state in the
+     * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
+     * of the browser's URL.
+     *
+     * For instance, if you call `location.go('/foo')`, the browser's URL will become
+     * `example.com#/foo`.
+     *
+     * ### Example
+     *
+     * ```
+     * import {Component, NgModule} from '@angular/core';
+     * import {
+     *   LocationStrategy,
+     *   HashLocationStrategy
+     * } from '@angular/common';
+     *
+     * @NgModule({
+     *   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
+     * })
+     * class AppModule {}
+     * ```
+     *
+     * @stable
+     */
     var HashLocationStrategy = (function (_super) {
-        __extends(HashLocationStrategy, _super);
+        __extends$3(HashLocationStrategy, _super);
         function HashLocationStrategy(_platformLocation, _baseHref) {
             _super.call(this);
             this._platformLocation = _platformLocation;
@@ -2496,19 +3286,54 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+        HashLocationStrategy.decorators = [
+            { type: _angular_core.Injectable },
+        ];
+        /** @nocollapse */
+        HashLocationStrategy.ctorParameters = [
+            { type: PlatformLocation, },
+            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+        ];
         return HashLocationStrategy;
     }(LocationStrategy));
-    /** @nocollapse */
-    HashLocationStrategy.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    /** @nocollapse */
-    HashLocationStrategy.ctorParameters = [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
-    ];
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends$4 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * `PathLocationStrategy` is a {@link LocationStrategy} used to configure the
+     * {@link Location} service to represent its state in the
+     * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
+     * browser's URL.
+     *
+     * `PathLocationStrategy` is the default binding for {@link LocationStrategy}
+     * provided in {@link ROUTER_PROVIDERS}.
+     *
+     * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
+     * or add a base element to the document. This URL prefix that will be preserved
+     * when generating and recognizing URLs.
+     *
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * Similarly, if you add `<base href='/my/app'/>` to the document and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * @stable
+     */
     var PathLocationStrategy = (function (_super) {
-        __extends(PathLocationStrategy, _super);
+        __extends$4(PathLocationStrategy, _super);
         function PathLocationStrategy(_platformLocation, href) {
             _super.call(this);
             this._platformLocation = _platformLocation;
@@ -2545,17 +3370,17 @@ var __extends = (this && this.__extends) || function (d, b) {
         };
         PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+        PathLocationStrategy.decorators = [
+            { type: _angular_core.Injectable },
+        ];
+        /** @nocollapse */
+        PathLocationStrategy.ctorParameters = [
+            { type: PlatformLocation, },
+            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+        ];
         return PathLocationStrategy;
     }(LocationStrategy));
-    /** @nocollapse */
-    PathLocationStrategy.decorators = [
-        { type: _angular_core.Injectable },
-    ];
-    /** @nocollapse */
-    PathLocationStrategy.ctorParameters = [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
-    ];
+
     /**
      * A collection of Angular core directives that are likely to be used in each and every Angular
      * application.
@@ -2610,6 +3435,7 @@ var __extends = (this && this.__extends) || function (d, b) {
         NgPlural,
         NgPluralCase,
     ];
+
     /**
      * A collection of Angular core directives that are likely to be used in each and every Angular
      * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
@@ -2656,6 +3482,7 @@ var __extends = (this && this.__extends) || function (d, b) {
      * @experimental Contains forms which are experimental.
      */
     var COMMON_DIRECTIVES = CORE_DIRECTIVES;
+
     /**
      * A collection of Angular core pipes that are likely to be used in each and every
      * application.
@@ -2678,21 +3505,31 @@ var __extends = (this && this.__extends) || function (d, b) {
         I18nPluralPipe,
         I18nSelectPipe,
     ];
+
+    // Note: This does not contain the location providers,
+    // as they need some platform specific implementations to work.
+    /**
+     * The module that includes all the basic Angular directives like {@link NgIf}, ${link NgFor}, ...
+     *
+     * @stable
+     */
     var CommonModule = (function () {
         function CommonModule() {
         }
+        CommonModule.decorators = [
+            { type: _angular_core.NgModule, args: [{
+                        declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                        exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                        providers: [
+                            { provide: NgLocalization, useClass: NgLocaleLocalization },
+                        ],
+                    },] },
+        ];
+        /** @nocollapse */
+        CommonModule.ctorParameters = [];
         return CommonModule;
     }());
-    /** @nocollapse */
-    CommonModule.decorators = [
-        { type: _angular_core.NgModule, args: [{
-                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                    providers: [
-                        { provide: NgLocalization, useClass: NgLocaleLocalization },
-                    ],
-                },] },
-    ];
+
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
     exports.AsyncPipe = AsyncPipe;
@@ -2722,4 +3559,5 @@ var __extends = (this && this.__extends) || function (d, b) {
     exports.HashLocationStrategy = HashLocationStrategy;
     exports.PathLocationStrategy = PathLocationStrategy;
     exports.Location = Location;
+
 }));

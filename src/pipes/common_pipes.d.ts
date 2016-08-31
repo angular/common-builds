@@ -25,4 +25,4 @@ import { SlicePipe } from './slice_pipe';
  *
  * @experimental Contains i18n pipes which are experimental
  */
-export declare const COMMON_PIPES: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe)[];
+export declare const COMMON_PIPES: (typeof AsyncPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof SlicePipe)[];

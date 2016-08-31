@@ -5,22 +5,20 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 /**
  * @experimental
  */
-var NgLocalization = (function () {
+export var NgLocalization = (function () {
     function NgLocalization() {
     }
     return NgLocalization;
 }());
-exports.NgLocalization = NgLocalization;
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
@@ -28,12 +26,16 @@ exports.NgLocalization = NgLocalization;
  *
  * @internal
  */
-function getPluralCategory(value, cases, ngLocalization) {
+export function getPluralCategory(value, cases, ngLocalization) {
     var nbCase = "=" + value;
     return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
 }
-exports.getPluralCategory = getPluralCategory;
-var NgLocaleLocalization = (function (_super) {
+/**
+ * Returns the plural case based on the locale
+ *
+ * @experimental
+ */
+export var NgLocaleLocalization = (function (_super) {
     __extends(NgLocaleLocalization, _super);
     function NgLocaleLocalization(_locale) {
         _super.call(this);
@@ -56,20 +58,19 @@ var NgLocaleLocalization = (function (_super) {
                 return 'other';
         }
     };
-    /** @nocollapse */
     NgLocaleLocalization.decorators = [
-        { type: core_1.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Inject, args: [core_1.LOCALE_ID,] },] },
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
     ];
     return NgLocaleLocalization;
 }(NgLocalization));
-exports.NgLocaleLocalization = NgLocaleLocalization;
 // This is generated code DO NOT MODIFY
 // see angular2/script/cldr/gen_plural_rules.js
 /** @experimental */
+export var Plural;
 (function (Plural) {
     Plural[Plural["Zero"] = 0] = "Zero";
     Plural[Plural["One"] = 1] = "One";
@@ -77,14 +78,13 @@ exports.NgLocaleLocalization = NgLocaleLocalization;
     Plural[Plural["Few"] = 3] = "Few";
     Plural[Plural["Many"] = 4] = "Many";
     Plural[Plural["Other"] = 5] = "Other";
-})(exports.Plural || (exports.Plural = {}));
-var Plural = exports.Plural;
+})(Plural || (Plural = {}));
 /**
  * Returns the plural case based on the locale
  *
  * @experimental
  */
-function getPluralCase(locale, nLike) {
+export function getPluralCase(locale, nLike) {
     // TODO(vicb): lazy compute
     if (typeof nLike === 'string') {
         nLike = parseInt(nLike, 10);
@@ -484,5 +484,4 @@ function getPluralCase(locale, nLike) {
             return Plural.Other;
     }
 }
-exports.getPluralCase = getPluralCase;
 //# sourceMappingURL=localization.js.map

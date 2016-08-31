@@ -8,7 +8,7 @@
 /**
  * @module
  * @description
- * Entry point for all public APIs of the common package.
+ * Entry point for all public APIs of the common/testing package.
  */
-export * from './src/common';
-//# sourceMappingURL=index.js.map
+export { SpyLocation } from './location_mock';
+export { MockLocationStrategy } from './mock_location_strategy';

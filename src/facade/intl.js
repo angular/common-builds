@@ -5,14 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-"use strict";
+export var NumberFormatStyle;
 (function (NumberFormatStyle) {
     NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
     NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
     NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
-})(exports.NumberFormatStyle || (exports.NumberFormatStyle = {}));
-var NumberFormatStyle = exports.NumberFormatStyle;
-var NumberFormatter = (function () {
+})(NumberFormatStyle || (NumberFormatStyle = {}));
+export var NumberFormatter = (function () {
     function NumberFormatter() {
     }
     NumberFormatter.format = function (num, locale, style, _a) {
@@ -31,7 +30,6 @@ var NumberFormatter = (function () {
     };
     return NumberFormatter;
 }());
-exports.NumberFormatter = NumberFormatter;
 var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
 var PATTERN_ALIASES = {
     yMMMdjms: datePartGetterFactory(combine([
@@ -187,7 +185,7 @@ var slice = [].slice;
 function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
     return array1.concat(slice.call(array2, index));
 }
-var DateFormatter = (function () {
+export var DateFormatter = (function () {
     function DateFormatter() {
     }
     DateFormatter.format = function (date, locale, pattern) {
@@ -195,5 +193,4 @@ var DateFormatter = (function () {
     };
     return DateFormatter;
 }());
-exports.DateFormatter = DateFormatter;
 //# sourceMappingURL=intl.js.map

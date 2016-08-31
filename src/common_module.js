@@ -5,25 +5,31 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-"use strict";
-var core_1 = require('@angular/core');
-var common_directives_1 = require('./common_directives');
-var localization_1 = require('./localization');
-var common_pipes_1 = require('./pipes/common_pipes');
-var CommonModule = (function () {
+import { NgModule } from '@angular/core';
+import { COMMON_DIRECTIVES } from './common_directives';
+import { NgLocaleLocalization, NgLocalization } from './localization';
+import { COMMON_PIPES } from './pipes/common_pipes';
+// Note: This does not contain the location providers,
+// as they need some platform specific implementations to work.
+/**
+ * The module that includes all the basic Angular directives like {@link NgIf}, ${link NgFor}, ...
+ *
+ * @stable
+ */
+export var CommonModule = (function () {
     function CommonModule() {
     }
-    /** @nocollapse */
     CommonModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    declarations: [common_directives_1.COMMON_DIRECTIVES, common_pipes_1.COMMON_PIPES],
-                    exports: [common_directives_1.COMMON_DIRECTIVES, common_pipes_1.COMMON_PIPES],
+        { type: NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
                     providers: [
-                        { provide: localization_1.NgLocalization, useClass: localization_1.NgLocaleLocalization },
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
                     ],
                 },] },
     ];
+    /** @nocollapse */
+    CommonModule.ctorParameters = [];
     return CommonModule;
 }());
-exports.CommonModule = CommonModule;
 //# sourceMappingURL=common_module.js.map

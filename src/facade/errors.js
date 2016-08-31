@@ -5,20 +5,18 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-function unimplemented() {
+export function unimplemented() {
     throw new Error('unimplemented');
 }
-exports.unimplemented = unimplemented;
 /**
  * @stable
  */
-var BaseError = (function (_super) {
+export var BaseError = (function (_super) {
     __extends(BaseError, _super);
     function BaseError(message) {
         // Errors don't use current this, instead they create a new instance.
@@ -46,11 +44,10 @@ var BaseError = (function (_super) {
     BaseError.prototype.toString = function () { return this._nativeError.toString(); };
     return BaseError;
 }(Error));
-exports.BaseError = BaseError;
 /**
  * @stable
  */
-var WrappedError = (function (_super) {
+export var WrappedError = (function (_super) {
     __extends(WrappedError, _super);
     function WrappedError(message, error) {
         _super.call(this, message + " caused by: " + (error instanceof Error ? error.message : error));
@@ -66,5 +63,4 @@ var WrappedError = (function (_super) {
     });
     return WrappedError;
 }(BaseError));
-exports.WrappedError = WrappedError;
 //# sourceMappingURL=errors.js.map

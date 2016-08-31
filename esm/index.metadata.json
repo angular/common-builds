@@ -1,1 +1,0 @@
-{"__symbolic":"module","version":1,"metadata":{},"exports":[{"from":"./src/pipes"},{"from":"./src/directives"},{"from":"./src/location"},{"from":"./src/localization","export":["NgLocalization"]},{"from":"./src/common_module","export":["CommonModule"]}]}
