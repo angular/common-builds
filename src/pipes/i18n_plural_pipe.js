@@ -15,7 +15,7 @@ var _INTERPOLATION_REGEXP = /#/g;
  *
  *  ## Usage
  *
- *  expression | i18nPlural:mapping
+ *      expression | i18nPlural:mapping
  *
  *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
  *  see http://userguide.icu-project.org/formatparse/messages

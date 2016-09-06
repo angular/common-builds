@@ -54,7 +54,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
 }
 /**
  * WARNING: this pipe uses the Internationalization API.
- * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+ * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
  * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
  *
  * Formats a number as local text. i.e. group sizing and separator and other locale-specific
@@ -100,7 +100,7 @@ export var DecimalPipe = (function () {
 }());
 /**
  * WARNING: this pipe uses the Internationalization API.
- * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+ * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
  * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
  *
  * Formats a number as local percent.
@@ -136,7 +136,7 @@ export var PercentPipe = (function () {
 }());
 /**
  * WARNING: this pipe uses the Internationalization API.
- * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+ * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
  * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
  *
  *
@@ -150,7 +150,7 @@ export var PercentPipe = (function () {
  * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
  * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
  * is `false`.
- * For more information about `digitInfo` see {@link DecimalPipe}
+ * For more information about `digitInfo` see {@link DecimalPipe}.
  *
  * ### Example
  *

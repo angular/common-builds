@@ -1007,13 +1007,13 @@
      *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
      *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
      *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
-     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010)
+     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010 for en-US)
      *  - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. Sep 3, 2010 for en-US)
      *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
      *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
      *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
      *
-     * Timezone of the formatted text will be the local system timezone of the end-users machine.
+     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
      *
      * ### Examples
      *
@@ -1575,7 +1575,7 @@
      *
      *  ## Usage
      *
-     *  expression | i18nPlural:mapping
+     *      expression | i18nPlural:mapping
      *
      *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
      *  see http://userguide.icu-project.org/formatparse/messages
@@ -1773,7 +1773,7 @@
     }
     /**
      * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
      * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
      *
      * Formats a number as local text. i.e. group sizing and separator and other locale-specific
@@ -1819,7 +1819,7 @@
     }());
     /**
      * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
      * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
      *
      * Formats a number as local percent.
@@ -1855,7 +1855,7 @@
     }());
     /**
      * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use an
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
      * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
      *
      *
@@ -1869,7 +1869,7 @@
      * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
      * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
      * is `false`.
-     * For more information about `digitInfo` see {@link DecimalPipe}
+     * For more information about `digitInfo` see {@link DecimalPipe}.
      *
      * ### Example
      *
@@ -3017,6 +3017,7 @@
      *
      * ### Example
      *
+     * ```typescript
      * import {Component, NgModule} from '@angular/core';
      * import {APP_BASE_HREF} from '@angular/common';
      *
@@ -3090,7 +3091,7 @@
         };
         /**
          * Given a string representing a URL, returns the normalized URL path without leading or
-         * trailing slashes
+         * trailing slashes.
          */
         Location.prototype.normalize = function (url) {
             return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
@@ -3509,7 +3510,7 @@
     // Note: This does not contain the location providers,
     // as they need some platform specific implementations to work.
     /**
-     * The module that includes all the basic Angular directives like {@link NgIf}, ${link NgFor}, ...
+     * The module that includes all the basic Angular directives like {@link NgIf}, {@link NgFor}, ...
      *
      * @stable
      */
