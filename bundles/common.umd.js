@@ -16,6 +16,107 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * This class should not be used directly by an application developer. Instead, use
+     * {@link Location}.
+     *
+     * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
+     * agnostic.
+     * This means that we can have different implementation of `PlatformLocation` for the different
+     * platforms
+     * that angular supports. For example, the default `PlatformLocation` is {@link
+     * BrowserPlatformLocation},
+     * however when you run your app in a WebWorker you use {@link WebWorkerPlatformLocation}.
+     *
+     * The `PlatformLocation` class is used directly by all implementations of {@link LocationStrategy}
+     * when
+     * they need to interact with the DOM apis like pushState, popState, etc...
+     *
+     * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
+     * by
+     * the {@link Router} in order to navigate between routes. Since all interactions between {@link
+     * Router} /
+     * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
+     * class
+     * they are all platform independent.
+     *
+     * @stable
+     */
+    var PlatformLocation = (function () {
+        function PlatformLocation() {
+        }
+        Object.defineProperty(PlatformLocation.prototype, "pathname", {
+            get: function () { return null; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PlatformLocation.prototype, "search", {
+            get: function () { return null; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PlatformLocation.prototype, "hash", {
+            get: function () { return null; },
+            enumerable: true,
+            configurable: true
+        });
+        return PlatformLocation;
+    }());
+
+    /**
+     * `LocationStrategy` is responsible for representing and reading route state
+     * from the browser's URL. Angular provides two strategies:
+     * {@link HashLocationStrategy} and {@link PathLocationStrategy} (default).
+     *
+     * This is used under the hood of the {@link Location} service.
+     *
+     * Applications should use the {@link Router} or {@link Location} services to
+     * interact with application route state.
+     *
+     * For instance, {@link HashLocationStrategy} produces URLs like
+     * `http://example.com#/foo`, and {@link PathLocationStrategy} produces
+     * `http://example.com/foo` as an equivalent URL.
+     *
+     * See these two classes for more.
+     *
+     * @stable
+     */
+    var LocationStrategy = (function () {
+        function LocationStrategy() {
+        }
+        return LocationStrategy;
+    }());
+    /**
+     * The `APP_BASE_HREF` token represents the base href to be used with the
+     * {@link PathLocationStrategy}.
+     *
+     * If you're using {@link PathLocationStrategy}, you must provide a provider to a string
+     * representing the URL prefix that should be preserved when generating and recognizing
+     * URLs.
+     *
+     * ### Example
+     *
+     * ```typescript
+     * import {Component, NgModule} from '@angular/core';
+     * import {APP_BASE_HREF} from '@angular/common';
+     *
+     * @NgModule({
+     *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+     * })
+     * class AppModule {}
+     * ```
+     *
+     * @stable
+     */
+    var APP_BASE_HREF = new _angular_core.OpaqueToken('appBaseHref');
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var globalScope;
     if (typeof window === 'undefined') {
         if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
@@ -258,67 +359,178 @@
     }
 
     /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * `Location` is a service that applications can use to interact with a browser's URL.
+     * Depending on which {@link LocationStrategy} is used, `Location` will either persist
+     * to the URL's path or the URL's hash segment.
      *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var __extends$1 = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
+     * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
+     * `Location` only if you need to interact with or create normalized URLs outside of
+     * routing.
+     *
+     * `Location` is responsible for normalizing the URL against the application's base href.
+     * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+     * trailing slash:
+     * - `/my/app/user/123` is normalized
+     * - `my/app/user/123` **is not** normalized
+     * - `/my/app/user/123/` **is not** normalized
+     *
+     * ### Example
+     *
+     * ```
+     * import {Component} from '@angular/core';
+     * import {Location} from '@angular/common';
+     *
+     * @Component({selector: 'app-component'})
+     * class AppCmp {
+     *   constructor(location: Location) {
+     *     location.go('/foo');
+     *   }
+     * }
+     * ```
+     *
      * @stable
      */
-    var BaseError = (function (_super) {
-        __extends$1(BaseError, _super);
-        function BaseError(message) {
-            // Errors don't use current this, instead they create a new instance.
-            // We have to do forward all of our api to the nativeInstance.
-            var nativeError = _super.call(this, message);
-            this._nativeError = nativeError;
+    var Location = (function () {
+        function Location(platformStrategy) {
+            var _this = this;
+            /** @internal */
+            this._subject = new _angular_core.EventEmitter();
+            this._platformStrategy = platformStrategy;
+            var browserBaseHref = this._platformStrategy.getBaseHref();
+            this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
+            this._platformStrategy.onPopState(function (ev) { _this._subject.emit({ 'url': _this.path(true), 'pop': true, 'type': ev.type }); });
         }
-        Object.defineProperty(BaseError.prototype, "message", {
-            get: function () { return this._nativeError.message; },
-            set: function (message) { this._nativeError.message = message; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BaseError.prototype, "name", {
-            get: function () { return this._nativeError.name; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BaseError.prototype, "stack", {
-            get: function () { return this._nativeError.stack; },
-            set: function (value) { this._nativeError.stack = value; },
-            enumerable: true,
-            configurable: true
-        });
-        BaseError.prototype.toString = function () { return this._nativeError.toString(); };
-        return BaseError;
-    }(Error));
-    /**
-     * @stable
-     */
-    var WrappedError = (function (_super) {
-        __extends$1(WrappedError, _super);
-        function WrappedError(message, error) {
-            _super.call(this, message + " caused by: " + (error instanceof Error ? error.message : error));
-            this.originalError = error;
+        /**
+         * Returns the normalized URL path.
+         */
+        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+        // removed.
+        Location.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            return this.normalize(this._platformStrategy.path(includeHash));
+        };
+        /**
+         * Normalizes the given path and compares to the current normalized path.
+         */
+        Location.prototype.isCurrentPathEqualTo = function (path, query) {
+            if (query === void 0) { query = ''; }
+            return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+        };
+        /**
+         * Given a string representing a URL, returns the normalized URL path without leading or
+         * trailing slashes.
+         */
+        Location.prototype.normalize = function (url) {
+            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+        };
+        /**
+         * Given a string representing a URL, returns the platform-specific external URL path.
+         * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+         * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+         * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+         */
+        Location.prototype.prepareExternalUrl = function (url) {
+            if (url.length > 0 && !url.startsWith('/')) {
+                url = '/' + url;
+            }
+            return this._platformStrategy.prepareExternalUrl(url);
+        };
+        // TODO: rename this method to pushState
+        /**
+         * Changes the browsers URL to the normalized version of the given URL, and pushes a
+         * new item onto the platform's history.
+         */
+        Location.prototype.go = function (path, query) {
+            if (query === void 0) { query = ''; }
+            this._platformStrategy.pushState(null, '', path, query);
+        };
+        /**
+         * Changes the browsers URL to the normalized version of the given URL, and replaces
+         * the top item on the platform's history stack.
+         */
+        Location.prototype.replaceState = function (path, query) {
+            if (query === void 0) { query = ''; }
+            this._platformStrategy.replaceState(null, '', path, query);
+        };
+        /**
+         * Navigates forward in the platform's history.
+         */
+        Location.prototype.forward = function () { this._platformStrategy.forward(); };
+        /**
+         * Navigates back in the platform's history.
+         */
+        Location.prototype.back = function () { this._platformStrategy.back(); };
+        /**
+         * Subscribe to the platform's `popState` events.
+         */
+        Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
+            if (onThrow === void 0) { onThrow = null; }
+            if (onReturn === void 0) { onReturn = null; }
+            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+        };
+        /**
+         * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
+         * is.
+         */
+        Location.normalizeQueryParams = function (params) {
+            return (params.length > 0 && params.substring(0, 1) != '?') ? ('?' + params) : params;
+        };
+        /**
+         * Given 2 parts of a url, join them with a slash if needed.
+         */
+        Location.joinWithSlash = function (start, end) {
+            if (start.length == 0) {
+                return end;
+            }
+            if (end.length == 0) {
+                return start;
+            }
+            var slashes = 0;
+            if (start.endsWith('/')) {
+                slashes++;
+            }
+            if (end.startsWith('/')) {
+                slashes++;
+            }
+            if (slashes == 2) {
+                return start + end.substring(1);
+            }
+            if (slashes == 1) {
+                return start + end;
+            }
+            return start + '/' + end;
+        };
+        /**
+         * If url has a trailing slash, remove it, otherwise return url as is.
+         */
+        Location.stripTrailingSlash = function (url) {
+            if (/\/$/g.test(url)) {
+                url = url.substring(0, url.length - 1);
+            }
+            return url;
+        };
+        Location.decorators = [
+            { type: _angular_core.Injectable },
+        ];
+        /** @nocollapse */
+        Location.ctorParameters = [
+            { type: LocationStrategy, },
+        ];
+        return Location;
+    }());
+    function _stripBaseHref(baseHref, url) {
+        if (baseHref.length > 0 && url.startsWith(baseHref)) {
+            return url.substring(baseHref.length);
         }
-        Object.defineProperty(WrappedError.prototype, "stack", {
-            get: function () {
-                return (this.originalError instanceof Error ? this.originalError : this._nativeError)
-                    .stack;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return WrappedError;
-    }(BaseError));
+        return url;
+    }
+    function _stripIndexHtml(url) {
+        if (/\/index.html$/g.test(url)) {
+            // '/index.html'.length == 11
+            return url.substring(0, url.length - 11);
+        }
+        return url;
+    }
 
     /**
      * @license
@@ -332,438 +544,86 @@
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var InvalidPipeArgumentError = (function (_super) {
-        __extends(InvalidPipeArgumentError, _super);
-        function InvalidPipeArgumentError(type, value) {
-            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
-        }
-        return InvalidPipeArgumentError;
-    }(BaseError));
-
-    var ObservableStrategy = (function () {
-        function ObservableStrategy() {
-        }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
-        };
-        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
-        return ObservableStrategy;
-    }());
-    var PromiseStrategy = (function () {
-        function PromiseStrategy() {
-        }
-        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) { throw e; });
-        };
-        PromiseStrategy.prototype.dispose = function (subscription) { };
-        PromiseStrategy.prototype.onDestroy = function (subscription) { };
-        return PromiseStrategy;
-    }());
-    var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
-    // avoid unused import when Promise union types are erased
     /**
-     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
-     * emitted.
-     * When a new value is emitted, the `async` pipe marks the component to be checked for changes.
-     * When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
-     * potential memory leaks.
+     * `HashLocationStrategy` is a {@link LocationStrategy} used to configure the
+     * {@link Location} service to represent its state in the
+     * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
+     * of the browser's URL.
      *
-     * ## Usage
+     * For instance, if you call `location.go('/foo')`, the browser's URL will become
+     * `example.com#/foo`.
      *
-     *     object | async
+     * ### Example
      *
-     * where `object` is of type `Observable` or of type `Promise`.
+     * ```
+     * import {Component, NgModule} from '@angular/core';
+     * import {
+     *   LocationStrategy,
+     *   HashLocationStrategy
+     * } from '@angular/common';
      *
-     * ## Examples
-     *
-     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
-     * promise.
-     *
-     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipePromise'}
-     *
-     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
-     * to the view. Every 500ms, the `time` Observable updates the view with the current time.
-     *
-     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipeObservable'}
+     * @NgModule({
+     *   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
+     * })
+     * class AppModule {}
+     * ```
      *
      * @stable
      */
-    var AsyncPipe = (function () {
-        function AsyncPipe(_ref) {
-            /** @internal */
-            this._latestValue = null;
-            /** @internal */
-            this._latestReturnedValue = null;
-            /** @internal */
-            this._subscription = null;
-            /** @internal */
-            this._obj = null;
-            this._strategy = null;
-            this._ref = _ref;
+    var HashLocationStrategy = (function (_super) {
+        __extends(HashLocationStrategy, _super);
+        function HashLocationStrategy(_platformLocation, _baseHref) {
+            _super.call(this);
+            this._platformLocation = _platformLocation;
+            this._baseHref = '';
+            if (isPresent(_baseHref)) {
+                this._baseHref = _baseHref;
+            }
         }
-        AsyncPipe.prototype.ngOnDestroy = function () {
-            if (isPresent(this._subscription)) {
-                this._dispose();
-            }
+        HashLocationStrategy.prototype.onPopState = function (fn) {
+            this._platformLocation.onPopState(fn);
+            this._platformLocation.onHashChange(fn);
         };
-        AsyncPipe.prototype.transform = function (obj) {
-            if (isBlank(this._obj)) {
-                if (isPresent(obj)) {
-                    this._subscribe(obj);
-                }
-                this._latestReturnedValue = this._latestValue;
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform(obj);
-            }
-            if (this._latestValue === this._latestReturnedValue) {
-                return this._latestReturnedValue;
-            }
-            else {
-                this._latestReturnedValue = this._latestValue;
-                return _angular_core.WrappedValue.wrap(this._latestValue);
-            }
+        HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+        HashLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            // the hash value is always prefixed with a `#`
+            // and if it is empty then it will stay empty
+            var path = this._platformLocation.hash;
+            if (!isPresent(path))
+                path = '#';
+            return path.length > 0 ? path.substring(1) : path;
         };
-        /** @internal */
-        AsyncPipe.prototype._subscribe = function (obj) {
-            var _this = this;
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+        HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+            var url = Location.joinWithSlash(this._baseHref, internal);
+            return url.length > 0 ? ('#' + url) : url;
         };
-        /** @internal */
-        AsyncPipe.prototype._selectStrategy = function (obj) {
-            if (isPromise(obj)) {
-                return _promiseStrategy;
+        HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
+            var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+            if (url.length == 0) {
+                url = this._platformLocation.pathname;
             }
-            else if (obj.subscribe) {
-                return _observableStrategy;
-            }
-            else {
-                throw new InvalidPipeArgumentError(AsyncPipe, obj);
-            }
+            this._platformLocation.pushState(state, title, url);
         };
-        /** @internal */
-        AsyncPipe.prototype._dispose = function () {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
-        };
-        /** @internal */
-        AsyncPipe.prototype._updateLatestValue = function (async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
+        HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
+            var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+            if (url.length == 0) {
+                url = this._platformLocation.pathname;
             }
+            this._platformLocation.replaceState(state, title, url);
         };
-        AsyncPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
+        HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+        HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+        HashLocationStrategy.decorators = [
+            { type: _angular_core.Injectable },
         ];
         /** @nocollapse */
-        AsyncPipe.ctorParameters = [
-            { type: _angular_core.ChangeDetectorRef, },
+        HashLocationStrategy.ctorParameters = [
+            { type: PlatformLocation, },
+            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
         ];
-        return AsyncPipe;
-    }());
-
-    var Map$1 = global$1.Map;
-    var Set$1 = global$1.Set;
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Map constructor.  We work around that by manually adding the items.
-    var createMapFromPairs = (function () {
-        try {
-            if (new Map$1([[1, 2]]).size === 1) {
-                return function createMapFromPairs(pairs) { return new Map$1(pairs); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromPairs(pairs) {
-            var map = new Map$1();
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                map.set(pair[0], pair[1]);
-            }
-            return map;
-        };
-    })();
-    var createMapFromMap = (function () {
-        try {
-            if (new Map$1(new Map$1())) {
-                return function createMapFromMap(m) { return new Map$1(m); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromMap(m) {
-            var map = new Map$1();
-            m.forEach(function (v, k) { map.set(k, v); });
-            return map;
-        };
-    })();
-    var _clearValues = (function () {
-        if ((new Map$1()).keys().next) {
-            return function _clearValues(m) {
-                var keyIterator = m.keys();
-                var k;
-                while (!((k = keyIterator.next()).done)) {
-                    m.set(k.value, null);
-                }
-            };
-        }
-        else {
-            return function _clearValuesWithForeEach(m) {
-                m.forEach(function (v, k) { m.set(k, null); });
-            };
-        }
-    })();
-    // Safari doesn't implement MapIterator.next(), which is used is Traceur's polyfill of Array.from
-    // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
-    var _arrayFromMap = (function () {
-        try {
-            if ((new Map$1()).values().next) {
-                return function createArrayFromMap(m, getValues) {
-                    return getValues ? Array.from(m.values()) : Array.from(m.keys());
-                };
-            }
-        }
-        catch (e) {
-        }
-        return function createArrayFromMapWithForeach(m, getValues) {
-            var res = ListWrapper.createFixedSize(m.size), i = 0;
-            m.forEach(function (v, k) {
-                res[i] = getValues ? v : k;
-                i++;
-            });
-            return res;
-        };
-    })();
-    /**
-     * Wraps Javascript Objects
-     */
-    var StringMapWrapper = (function () {
-        function StringMapWrapper() {
-        }
-        StringMapWrapper.create = function () {
-            // Note: We are not using Object.create(null) here due to
-            // performance!
-            // http://jsperf.com/ng2-object-create-null
-            return {};
-        };
-        StringMapWrapper.contains = function (map, key) {
-            return map.hasOwnProperty(key);
-        };
-        StringMapWrapper.get = function (map, key) {
-            return map.hasOwnProperty(key) ? map[key] : undefined;
-        };
-        StringMapWrapper.set = function (map, key, value) { map[key] = value; };
-        StringMapWrapper.keys = function (map) { return Object.keys(map); };
-        StringMapWrapper.values = function (map) {
-            return Object.keys(map).map(function (k) { return map[k]; });
-        };
-        StringMapWrapper.isEmpty = function (map) {
-            for (var prop in map) {
-                return false;
-            }
-            return true;
-        };
-        StringMapWrapper.delete = function (map, key) { delete map[key]; };
-        StringMapWrapper.forEach = function (map, callback) {
-            for (var _i = 0, _a = Object.keys(map); _i < _a.length; _i++) {
-                var k = _a[_i];
-                callback(map[k], k);
-            }
-        };
-        StringMapWrapper.merge = function (m1, m2) {
-            var m = {};
-            for (var _i = 0, _a = Object.keys(m1); _i < _a.length; _i++) {
-                var k = _a[_i];
-                m[k] = m1[k];
-            }
-            for (var _b = 0, _c = Object.keys(m2); _b < _c.length; _b++) {
-                var k = _c[_b];
-                m[k] = m2[k];
-            }
-            return m;
-        };
-        StringMapWrapper.equals = function (m1, m2) {
-            var k1 = Object.keys(m1);
-            var k2 = Object.keys(m2);
-            if (k1.length != k2.length) {
-                return false;
-            }
-            for (var i = 0; i < k1.length; i++) {
-                var key = k1[i];
-                if (m1[key] !== m2[key]) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        return StringMapWrapper;
-    }());
-    var ListWrapper = (function () {
-        function ListWrapper() {
-        }
-        // JS has no way to express a statically fixed size list, but dart does so we
-        // keep both methods.
-        ListWrapper.createFixedSize = function (size) { return new Array(size); };
-        ListWrapper.createGrowableSize = function (size) { return new Array(size); };
-        ListWrapper.clone = function (array) { return array.slice(0); };
-        ListWrapper.forEachWithIndex = function (array, fn) {
-            for (var i = 0; i < array.length; i++) {
-                fn(array[i], i);
-            }
-        };
-        ListWrapper.first = function (array) {
-            if (!array)
-                return null;
-            return array[0];
-        };
-        ListWrapper.last = function (array) {
-            if (!array || array.length == 0)
-                return null;
-            return array[array.length - 1];
-        };
-        ListWrapper.indexOf = function (array, value, startIndex) {
-            if (startIndex === void 0) { startIndex = 0; }
-            return array.indexOf(value, startIndex);
-        };
-        ListWrapper.contains = function (list, el) { return list.indexOf(el) !== -1; };
-        ListWrapper.reversed = function (array) {
-            var a = ListWrapper.clone(array);
-            return a.reverse();
-        };
-        ListWrapper.concat = function (a, b) { return a.concat(b); };
-        ListWrapper.insert = function (list, index, value) { list.splice(index, 0, value); };
-        ListWrapper.removeAt = function (list, index) {
-            var res = list[index];
-            list.splice(index, 1);
-            return res;
-        };
-        ListWrapper.removeAll = function (list, items) {
-            for (var i = 0; i < items.length; ++i) {
-                var index = list.indexOf(items[i]);
-                list.splice(index, 1);
-            }
-        };
-        ListWrapper.remove = function (list, el) {
-            var index = list.indexOf(el);
-            if (index > -1) {
-                list.splice(index, 1);
-                return true;
-            }
-            return false;
-        };
-        ListWrapper.clear = function (list) { list.length = 0; };
-        ListWrapper.isEmpty = function (list) { return list.length == 0; };
-        ListWrapper.fill = function (list, value, start, end) {
-            if (start === void 0) { start = 0; }
-            if (end === void 0) { end = null; }
-            list.fill(value, start, end === null ? list.length : end);
-        };
-        ListWrapper.equals = function (a, b) {
-            if (a.length != b.length)
-                return false;
-            for (var i = 0; i < a.length; ++i) {
-                if (a[i] !== b[i])
-                    return false;
-            }
-            return true;
-        };
-        ListWrapper.slice = function (l, from, to) {
-            if (from === void 0) { from = 0; }
-            if (to === void 0) { to = null; }
-            return l.slice(from, to === null ? undefined : to);
-        };
-        ListWrapper.splice = function (l, from, length) { return l.splice(from, length); };
-        ListWrapper.sort = function (l, compareFn) {
-            if (isPresent(compareFn)) {
-                l.sort(compareFn);
-            }
-            else {
-                l.sort();
-            }
-        };
-        ListWrapper.toString = function (l) { return l.toString(); };
-        ListWrapper.toJSON = function (l) { return JSON.stringify(l); };
-        ListWrapper.maximum = function (list, predicate) {
-            if (list.length == 0) {
-                return null;
-            }
-            var solution = null;
-            var maxValue = -Infinity;
-            for (var index = 0; index < list.length; index++) {
-                var candidate = list[index];
-                if (isBlank(candidate)) {
-                    continue;
-                }
-                var candidateValue = predicate(candidate);
-                if (candidateValue > maxValue) {
-                    solution = candidate;
-                    maxValue = candidateValue;
-                }
-            }
-            return solution;
-        };
-        ListWrapper.flatten = function (list) {
-            var target = [];
-            _flattenArray(list, target);
-            return target;
-        };
-        ListWrapper.addAll = function (list, source) {
-            for (var i = 0; i < source.length; i++) {
-                list.push(source[i]);
-            }
-        };
-        return ListWrapper;
-    }());
-    function _flattenArray(source, target) {
-        if (isPresent(source)) {
-            for (var i = 0; i < source.length; i++) {
-                var item = source[i];
-                if (isArray(item)) {
-                    _flattenArray(item, target);
-                }
-                else {
-                    target.push(item);
-                }
-            }
-        }
-        return target;
-    }
-    function isListLikeIterable(obj) {
-        if (!isJsObject(obj))
-            return false;
-        return isArray(obj) ||
-            (!(obj instanceof Map$1) &&
-                getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
-    }
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Set constructor.  We work around that by manually adding the items.
-    var createSetFromList = (function () {
-        var test = new Set$1([1, 2, 3]);
-        if (test.size === 3) {
-            return function createSetFromList(lst) { return new Set$1(lst); };
-        }
-        else {
-            return function createSetAndPopulateFromList(lst) {
-                var res = new Set$1(lst);
-                if (res.size !== lst.length) {
-                    for (var i = 0; i < lst.length; i++) {
-                        res.add(lst[i]);
-                    }
-                }
-                return res;
-            };
-        }
-    })();
+        return HashLocationStrategy;
+    }(LocationStrategy));
 
     /**
      * @license
@@ -772,313 +632,82 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var NumberFormatStyle;
-    (function (NumberFormatStyle) {
-        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
-        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
-        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
-    })(NumberFormatStyle || (NumberFormatStyle = {}));
-    var NumberFormatter = (function () {
-        function NumberFormatter() {
-        }
-        NumberFormatter.format = function (num, locale, style, _a) {
-            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
-            var options = {
-                minimumIntegerDigits: minimumIntegerDigits,
-                minimumFractionDigits: minimumFractionDigits,
-                maximumFractionDigits: maximumFractionDigits,
-                style: NumberFormatStyle[style].toLowerCase()
-            };
-            if (style == NumberFormatStyle.Currency) {
-                options.currency = currency;
-                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
-            }
-            return new Intl.NumberFormat(locale, options).format(num);
-        };
-        return NumberFormatter;
-    }());
-    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-    var PATTERN_ALIASES = {
-        yMMMdjms: datePartGetterFactory(combine([
-            digitCondition('year', 1),
-            nameCondition('month', 3),
-            digitCondition('day', 1),
-            digitCondition('hour', 1),
-            digitCondition('minute', 1),
-            digitCondition('second', 1),
-        ])),
-        yMdjm: datePartGetterFactory(combine([
-            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
-            digitCondition('hour', 1), digitCondition('minute', 1)
-        ])),
-        yMMMMEEEEd: datePartGetterFactory(combine([
-            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
-            digitCondition('day', 1)
-        ])),
-        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
-        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
-        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
-        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
-        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+    var __extends$1 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var DATE_FORMATS = {
-        yyyy: datePartGetterFactory(digitCondition('year', 4)),
-        yy: datePartGetterFactory(digitCondition('year', 2)),
-        y: datePartGetterFactory(digitCondition('year', 1)),
-        MMMM: datePartGetterFactory(nameCondition('month', 4)),
-        MMM: datePartGetterFactory(nameCondition('month', 3)),
-        MM: datePartGetterFactory(digitCondition('month', 2)),
-        M: datePartGetterFactory(digitCondition('month', 1)),
-        LLLL: datePartGetterFactory(nameCondition('month', 4)),
-        dd: datePartGetterFactory(digitCondition('day', 2)),
-        d: datePartGetterFactory(digitCondition('day', 1)),
-        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
-        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
-        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
-        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        jj: datePartGetterFactory(digitCondition('hour', 2)),
-        j: datePartGetterFactory(digitCondition('hour', 1)),
-        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
-        m: datePartGetterFactory(digitCondition('minute', 1)),
-        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
-        s: datePartGetterFactory(digitCondition('second', 1)),
-        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
-        // we can be just safely rely on using `sss` since we currently don't support single or two digit
-        // fractions
-        sss: datePartGetterFactory(digitCondition('second', 3)),
-        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
-        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
-        EE: datePartGetterFactory(nameCondition('weekday', 2)),
-        E: datePartGetterFactory(nameCondition('weekday', 1)),
-        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-        Z: timeZoneGetter('short'),
-        z: timeZoneGetter('long'),
-        ww: datePartGetterFactory({}),
-        // first Thursday of the year. not support ?
-        w: datePartGetterFactory({}),
-        // of the year not support ?
-        G: datePartGetterFactory(nameCondition('era', 1)),
-        GG: datePartGetterFactory(nameCondition('era', 2)),
-        GGG: datePartGetterFactory(nameCondition('era', 3)),
-        GGGG: datePartGetterFactory(nameCondition('era', 4))
-    };
-    function digitModifier(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.length == 1 ? '0' + result : result;
-        };
-    }
-    function hourClockExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[1];
-        };
-    }
-    function hourExtracter(inner) {
-        return function (date, locale) {
-            var result = inner(date, locale);
-            return result.split(' ')[0];
-        };
-    }
-    function intlDateFormat(date, locale, options) {
-        return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
-    }
-    function timeZoneGetter(timezone) {
-        // To workaround `Intl` API restriction for single timezone let format with 24 hours
-        var options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
-        return function (date, locale) {
-            var result = intlDateFormat(date, locale, options);
-            // Then extract first 3 letters that related to hours
-            return result ? result.substring(3) : '';
-        };
-    }
-    function hour12Modify(options, value) {
-        options.hour12 = value;
-        return options;
-    }
-    function digitCondition(prop, len) {
-        var result = {};
-        result[prop] = len == 2 ? '2-digit' : 'numeric';
-        return result;
-    }
-    function nameCondition(prop, len) {
-        var result = {};
-        result[prop] = len < 4 ? 'short' : 'long';
-        return result;
-    }
-    function combine(options) {
-        var result = {};
-        options.forEach(function (option) { Object.assign(result, option); });
-        return result;
-    }
-    function datePartGetterFactory(ret) {
-        return function (date, locale) { return intlDateFormat(date, locale, ret); };
-    }
-    var datePartsFormatterCache = new Map();
-    function dateFormatter(format, date, locale) {
-        var text = '';
-        var match;
-        var fn;
-        var parts = [];
-        if (PATTERN_ALIASES[format]) {
-            return PATTERN_ALIASES[format](date, locale);
-        }
-        if (datePartsFormatterCache.has(format)) {
-            parts = datePartsFormatterCache.get(format);
-        }
-        else {
-            var matches = DATE_FORMATS_SPLIT.exec(format);
-            while (format) {
-                match = DATE_FORMATS_SPLIT.exec(format);
-                if (match) {
-                    parts = concat(parts, match, 1);
-                    format = parts.pop();
-                }
-                else {
-                    parts.push(format);
-                    format = null;
-                }
-            }
-            datePartsFormatterCache.set(format, parts);
-        }
-        parts.forEach(function (part) {
-            fn = DATE_FORMATS[part];
-            text += fn ? fn(date, locale) :
-                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-        });
-        return text;
-    }
-    var slice = [].slice;
-    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
-        return array1.concat(slice.call(array2, index));
-    }
-    var DateFormatter = (function () {
-        function DateFormatter() {
-        }
-        DateFormatter.format = function (date, locale, pattern) {
-            return dateFormatter(pattern, date, locale);
-        };
-        return DateFormatter;
-    }());
-
     /**
-     * Formats a date value to a string based on the requested format.
+     * `PathLocationStrategy` is a {@link LocationStrategy} used to configure the
+     * {@link Location} service to represent its state in the
+     * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
+     * browser's URL.
      *
-     * WARNINGS:
-     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
-     *   Instead users should treat the date as an immutable object and change the reference when the
-     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
-     *   which would be an expensive operation).
-     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
-     *   browsers.
+     * `PathLocationStrategy` is the default binding for {@link LocationStrategy}
+     * provided in {@link ROUTER_PROVIDERS}.
      *
-     * ## Usage
+     * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
+     * or add a base element to the document. This URL prefix that will be preserved
+     * when generating and recognizing URLs.
      *
-     *     expression | date[:format]
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
      *
-     * where `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
-     * (https://www.w3.org/TR/NOTE-datetime) and `format` indicates which date/time components to
-     * include:
-     *
-     *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
-     *  |-----------|:------:|--------------|-------------------|-----------|-----------|
-     *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
-     *  | year      |   y    | -            | -                 | y (2015)  | yy (15)   |
-     *  | month     |   M    | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
-     *  | day       |   d    | -            | -                 | d (3)     | dd (03)   |
-     *  | weekday   |   E    | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
-     *  | hour      |   j    | -            | -                 | j (13)    | jj (13)   |
-     *  | hour12    |   h    | -            | -                 | h (1 PM)  | hh (01 PM)|
-     *  | hour24    |   H    | -            | -                 | H (13)    | HH (13)   |
-     *  | minute    |   m    | -            | -                 | m (5)     | mm (05)   |
-     *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
-     *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
-     *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
-     *  | timezone  |   a    | a (PM)       | -                 | -         | -         |
-     *
-     * In javascript, only the components specified will be respected (not the ordering,
-     * punctuations, ...) and details of the formatting will be dependent on the locale.
-     *
-     * `format` can also be one of the following predefined formats:
-     *
-     *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
-     *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
-     *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
-     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010 for en-US)
-     *  - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. Sep 3, 2010 for en-US)
-     *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
-     *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
-     *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
-     *
-     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
-     *
-     * ### Examples
-     *
-     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
-     * in the _local_ time and locale is 'en-US':
-     *
-     * ```
-     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
-     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
-     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
-     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
-     * ```
-     *
-     * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
+     * Similarly, if you add `<base href='/my/app'/>` to the document and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
      *
      * @stable
      */
-    var DatePipe = (function () {
-        function DatePipe(_locale) {
-            this._locale = _locale;
+    var PathLocationStrategy = (function (_super) {
+        __extends$1(PathLocationStrategy, _super);
+        function PathLocationStrategy(_platformLocation, href) {
+            _super.call(this);
+            this._platformLocation = _platformLocation;
+            if (isBlank(href)) {
+                href = this._platformLocation.getBaseHrefFromDOM();
+            }
+            if (isBlank(href)) {
+                throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
+            }
+            this._baseHref = href;
         }
-        DatePipe.prototype.transform = function (value, pattern) {
-            if (pattern === void 0) { pattern = 'mediumDate'; }
-            if (isBlank(value))
-                return null;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentError(DatePipe, value);
-            }
-            if (NumberWrapper.isNumeric(value)) {
-                value = DateWrapper.fromMillis(parseFloat(value));
-            }
-            else if (isString(value)) {
-                value = DateWrapper.fromISOString(value);
-            }
-            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
-                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
-            }
-            return DateFormatter.format(value, this._locale, pattern);
+        PathLocationStrategy.prototype.onPopState = function (fn) {
+            this._platformLocation.onPopState(fn);
+            this._platformLocation.onHashChange(fn);
         };
-        DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
-                return true;
-            }
-            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
-                return true;
-            }
-            return false;
+        PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+        PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+            return Location.joinWithSlash(this._baseHref, internal);
         };
-        /** @internal */
-        DatePipe._ALIASES = {
-            'medium': 'yMMMdjms',
-            'short': 'yMdjm',
-            'fullDate': 'yMMMMEEEEd',
-            'longDate': 'yMMMMd',
-            'mediumDate': 'yMMMd',
-            'shortDate': 'yMd',
-            'mediumTime': 'jms',
-            'shortTime': 'jm'
+        PathLocationStrategy.prototype.path = function (includeHash) {
+            if (includeHash === void 0) { includeHash = false; }
+            var pathname = this._platformLocation.pathname +
+                Location.normalizeQueryParams(this._platformLocation.search);
+            var hash = this._platformLocation.hash;
+            return hash && includeHash ? "" + pathname + hash : pathname;
         };
-        DatePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+        PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+            var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+            this._platformLocation.pushState(state, title, externalUrl);
+        };
+        PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+            var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+            this._platformLocation.replaceState(state, title, externalUrl);
+        };
+        PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+        PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+        PathLocationStrategy.decorators = [
+            { type: _angular_core.Injectable },
         ];
         /** @nocollapse */
-        DatePipe.ctorParameters = [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        PathLocationStrategy.ctorParameters = [
+            { type: PlatformLocation, },
+            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
         ];
-        return DatePipe;
-    }());
+        return PathLocationStrategy;
+    }(LocationStrategy));
 
     /**
      * @license
@@ -1566,440 +1195,298 @@
         }
     }
 
-    var _INTERPOLATION_REGEXP = /#/g;
-    /**
-     *  Maps a value to a string that pluralizes the value properly.
-     *
-     *  ## Usage
-     *
-     *      expression | i18nPlural:mapping
-     *
-     *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
-     *  see http://userguide.icu-project.org/formatparse/messages
-     *
-     *  ## Example
-     *
-     *  ```
-     *  @Component({
-     *    selector: 'app',
-     *    template: `
-     *      <div>
-     *        {{ messages.length | i18nPlural: messageMapping }}
-     *      </div>
-     *    `,
-     *    // best practice is to define the locale at the application level
-     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
-     *  })
-     *
-     *  class MyApp {
-     *    messages: any[];
-     *    messageMapping: {[k:string]: string} = {
-     *      '=0': 'No messages.',
-     *      '=1': 'One message.',
-     *      'other': '# messages.'
-     *    }
-     *    ...
-     *  }
-     *  ```
-     *
-     * @experimental
-     */
-    var I18nPluralPipe = (function () {
-        function I18nPluralPipe(_localization) {
-            this._localization = _localization;
-        }
-        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(pluralMap)) {
-                throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
+    var Map$1 = global$1.Map;
+    var Set$1 = global$1.Set;
+    // Safari and Internet Explorer do not support the iterable parameter to the
+    // Map constructor.  We work around that by manually adding the items.
+    var createMapFromPairs = (function () {
+        try {
+            if (new Map$1([[1, 2]]).size === 1) {
+                return function createMapFromPairs(pairs) { return new Map$1(pairs); };
             }
-            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
+        }
+        catch (e) {
+        }
+        return function createMapAndPopulateFromPairs(pairs) {
+            var map = new Map$1();
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i];
+                map.set(pair[0], pair[1]);
+            }
+            return map;
         };
-        I18nPluralPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-        ];
-        /** @nocollapse */
-        I18nPluralPipe.ctorParameters = [
-            { type: NgLocalization, },
-        ];
-        return I18nPluralPipe;
-    }());
-
-    /**
-     *
-     *  Generic selector that displays the string that matches the current value.
-     *
-     *  ## Usage
-     *
-     *  expression | i18nSelect:mapping
-     *
-     *  where `mapping` is an object that indicates the text that should be displayed
-     *  for different values of the provided `expression`.
-     *
-     *  ## Example
-     *
-     *  ```
-     *  <div>
-     *    {{ gender | i18nSelect: inviteMap }}
-     *  </div>
-     *
-     *  class MyApp {
-     *    gender: string = 'male';
-     *    inviteMap: any = {
-     *      'male': 'Invite him.',
-     *      'female': 'Invite her.',
-     *      'other': 'Invite them.'
-     *    }
-     *    ...
-     *  }
-     *  ```
-     *
-     *  @experimental
-     */
-    var I18nSelectPipe = (function () {
-        function I18nSelectPipe() {
-        }
-        I18nSelectPipe.prototype.transform = function (value, mapping) {
-            if (isBlank(value))
-                return '';
-            if (!isStringMap(mapping)) {
-                throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
+    })();
+    var createMapFromMap = (function () {
+        try {
+            if (new Map$1(new Map$1())) {
+                return function createMapFromMap(m) { return new Map$1(m); };
             }
-            return mapping.hasOwnProperty(value) ? mapping[value] : '';
+        }
+        catch (e) {
+        }
+        return function createMapAndPopulateFromMap(m) {
+            var map = new Map$1();
+            m.forEach(function (v, k) { map.set(k, v); });
+            return map;
         };
-        I18nSelectPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-        ];
-        /** @nocollapse */
-        I18nSelectPipe.ctorParameters = [];
-        return I18nSelectPipe;
-    }());
-
-    /**
-     * Transforms any input value using `JSON.stringify`. Useful for debugging.
-     *
-     * ### Example
-     * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
-     *
-     * @stable
-     */
-    var JsonPipe = (function () {
-        function JsonPipe() {
+    })();
+    var _clearValues = (function () {
+        if ((new Map$1()).keys().next) {
+            return function _clearValues(m) {
+                var keyIterator = m.keys();
+                var k;
+                while (!((k = keyIterator.next()).done)) {
+                    m.set(k.value, null);
+                }
+            };
         }
-        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
-        JsonPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-        ];
-        /** @nocollapse */
-        JsonPipe.ctorParameters = [];
-        return JsonPipe;
-    }());
-
-    /**
-     * Transforms text to lowercase.
-     *
-     * ### Example
-     *
-     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
-     *
-     * @stable
-     */
-    var LowerCasePipe = (function () {
-        function LowerCasePipe() {
+        else {
+            return function _clearValuesWithForeEach(m) {
+                m.forEach(function (v, k) { m.set(k, null); });
+            };
         }
-        LowerCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentError(LowerCasePipe, value);
+    })();
+    // Safari doesn't implement MapIterator.next(), which is used is Traceur's polyfill of Array.from
+    // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
+    var _arrayFromMap = (function () {
+        try {
+            if ((new Map$1()).values().next) {
+                return function createArrayFromMap(m, getValues) {
+                    return getValues ? Array.from(m.values()) : Array.from(m.keys());
+                };
             }
-            return value.toLowerCase();
+        }
+        catch (e) {
+        }
+        return function createArrayFromMapWithForeach(m, getValues) {
+            var res = ListWrapper.createFixedSize(m.size), i = 0;
+            m.forEach(function (v, k) {
+                res[i] = getValues ? v : k;
+                i++;
+            });
+            return res;
         };
-        LowerCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-        ];
-        /** @nocollapse */
-        LowerCasePipe.ctorParameters = [];
-        return LowerCasePipe;
-    }());
-
-    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
-    function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
-        if (currency === void 0) { currency = null; }
-        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-        if (isBlank(value))
-            return null;
-        // Convert strings to numbers
-        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
-        if (!isNumber(value)) {
-            throw new InvalidPipeArgumentError(pipe, value);
-        }
-        var minInt;
-        var minFraction;
-        var maxFraction;
-        if (style !== NumberFormatStyle.Currency) {
-            // rely on Intl default for currency
-            minInt = 1;
-            minFraction = 0;
-            maxFraction = 3;
-        }
-        if (isPresent(digits)) {
-            var parts = digits.match(_NUMBER_FORMAT_REGEXP);
-            if (parts === null) {
-                throw new Error(digits + " is not a valid digit info for number pipes");
-            }
-            if (isPresent(parts[1])) {
-                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
-            }
-            if (isPresent(parts[3])) {
-                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
-            }
-            if (isPresent(parts[5])) {
-                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
-            }
-        }
-        return NumberFormatter.format(value, locale, style, {
-            minimumIntegerDigits: minInt,
-            minimumFractionDigits: minFraction,
-            maximumFractionDigits: maxFraction,
-            currency: currency,
-            currencyAsSymbol: currencyAsSymbol
-        });
-    }
+    })();
     /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
-     *
-     * Formats a number as local text. i.e. group sizing and separator and other locale-specific
-     * configurations are based on the active locale.
-     *
-     * ### Usage
-     *
-     *     expression | number[:digitInfo]
-     *
-     * where `expression` is a number and `digitInfo` has the following format:
-     *
-     *     {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
-     *
-     * - minIntegerDigits is the minimum number of integer digits to use. Defaults to 1.
-     * - minFractionDigits is the minimum number of digits after fraction. Defaults to 0.
-     * - maxFractionDigits is the maximum number of digits after fraction. Defaults to 3.
-     *
-     * For more information on the acceptable range for each of these numbers and other
-     * details see your native internationalization library.
-     *
-     * ### Example
-     *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
-     *
-     * @stable
+     * Wraps Javascript Objects
      */
-    var DecimalPipe = (function () {
-        function DecimalPipe(_locale) {
-            this._locale = _locale;
+    var StringMapWrapper = (function () {
+        function StringMapWrapper() {
         }
-        DecimalPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        StringMapWrapper.create = function () {
+            // Note: We are not using Object.create(null) here due to
+            // performance!
+            // http://jsperf.com/ng2-object-create-null
+            return {};
         };
-        DecimalPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-        ];
-        /** @nocollapse */
-        DecimalPipe.ctorParameters = [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ];
-        return DecimalPipe;
-    }());
-    /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
-     *
-     * Formats a number as local percent.
-     *
-     * ### Usage
-     *
-     *     expression | percent[:digitInfo]
-     *
-     * For more information about `digitInfo` see {@link DecimalPipe}
-     *
-     * ### Example
-     *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
-     *
-     * @stable
-     */
-    var PercentPipe = (function () {
-        function PercentPipe(_locale) {
-            this._locale = _locale;
-        }
-        PercentPipe.prototype.transform = function (value, digits) {
-            if (digits === void 0) { digits = null; }
-            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        StringMapWrapper.contains = function (map, key) {
+            return map.hasOwnProperty(key);
         };
-        PercentPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-        ];
-        /** @nocollapse */
-        PercentPipe.ctorParameters = [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ];
-        return PercentPipe;
-    }());
-    /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
-     *
-     *
-     * Formats a number as local currency.
-     *
-     * ### Usage
-     *
-     *     expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]
-     *
-     * where `currencyCode` is the ISO 4217 currency code, such as "USD" for the US dollar and
-     * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
-     * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
-     * is `false`.
-     * For more information about `digitInfo` see {@link DecimalPipe}.
-     *
-     * ### Example
-     *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
-     *
-     * @stable
-     */
-    var CurrencyPipe = (function () {
-        function CurrencyPipe(_locale) {
-            this._locale = _locale;
-        }
-        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
-            if (currencyCode === void 0) { currencyCode = 'USD'; }
-            if (symbolDisplay === void 0) { symbolDisplay = false; }
-            if (digits === void 0) { digits = null; }
-            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        StringMapWrapper.get = function (map, key) {
+            return map.hasOwnProperty(key) ? map[key] : undefined;
         };
-        CurrencyPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-        ];
-        /** @nocollapse */
-        CurrencyPipe.ctorParameters = [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ];
-        return CurrencyPipe;
+        StringMapWrapper.set = function (map, key, value) { map[key] = value; };
+        StringMapWrapper.keys = function (map) { return Object.keys(map); };
+        StringMapWrapper.values = function (map) {
+            return Object.keys(map).map(function (k) { return map[k]; });
+        };
+        StringMapWrapper.isEmpty = function (map) {
+            for (var prop in map) {
+                return false;
+            }
+            return true;
+        };
+        StringMapWrapper.delete = function (map, key) { delete map[key]; };
+        StringMapWrapper.forEach = function (map, callback) {
+            for (var _i = 0, _a = Object.keys(map); _i < _a.length; _i++) {
+                var k = _a[_i];
+                callback(map[k], k);
+            }
+        };
+        StringMapWrapper.merge = function (m1, m2) {
+            var m = {};
+            for (var _i = 0, _a = Object.keys(m1); _i < _a.length; _i++) {
+                var k = _a[_i];
+                m[k] = m1[k];
+            }
+            for (var _b = 0, _c = Object.keys(m2); _b < _c.length; _b++) {
+                var k = _c[_b];
+                m[k] = m2[k];
+            }
+            return m;
+        };
+        StringMapWrapper.equals = function (m1, m2) {
+            var k1 = Object.keys(m1);
+            var k2 = Object.keys(m2);
+            if (k1.length != k2.length) {
+                return false;
+            }
+            for (var i = 0; i < k1.length; i++) {
+                var key = k1[i];
+                if (m1[key] !== m2[key]) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        return StringMapWrapper;
     }());
-
-    /**
-     * Creates a new List or String containing only a subset (slice) of the
-     * elements.
-     *
-     * The starting index of the subset to return is specified by the `start` parameter.
-     *
-     * The ending index of the subset to return is specified by the optional `end` parameter.
-     *
-     * ### Usage
-     *
-     *     expression | slice:start[:end]
-     *
-     * All behavior is based on the expected behavior of the JavaScript API
-     * Array.prototype.slice() and String.prototype.slice()
-     *
-     * Where the input expression is a [List] or [String], and `start` is:
-     *
-     * - **a positive integer**: return the item at _start_ index and all items after
-     * in the list or string expression.
-     * - **a negative integer**: return the item at _start_ index from the end and all items after
-     * in the list or string expression.
-     * - **`|start|` greater than the size of the expression**: return an empty list or string.
-     * - **`|start|` negative greater than the size of the expression**: return entire list or
-     * string expression.
-     *
-     * and where `end` is:
-     *
-     * - **omitted**: return all items until the end of the input
-     * - **a positive integer**: return all items before _end_ index of the list or string
-     * expression.
-     * - **a negative integer**: return all items before _end_ index from the end of the list
-     * or string expression.
-     *
-     * When operating on a [List], the returned list is always a copy even when all
-     * the elements are being returned.
-     *
-     * When operating on a blank value, returns it.
-     *
-     * ## List Example
-     *
-     * This `ngFor` example:
-     *
-     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_list'}
-     *
-     * produces the following:
-     *
-     *     <li>b</li>
-     *     <li>c</li>
-     *
-     * ## String Examples
-     *
-     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
-     *
-     * @stable
-     */
-    var SlicePipe = (function () {
-        function SlicePipe() {
+    var ListWrapper = (function () {
+        function ListWrapper() {
         }
-        SlicePipe.prototype.transform = function (value, start, end) {
+        // JS has no way to express a statically fixed size list, but dart does so we
+        // keep both methods.
+        ListWrapper.createFixedSize = function (size) { return new Array(size); };
+        ListWrapper.createGrowableSize = function (size) { return new Array(size); };
+        ListWrapper.clone = function (array) { return array.slice(0); };
+        ListWrapper.forEachWithIndex = function (array, fn) {
+            for (var i = 0; i < array.length; i++) {
+                fn(array[i], i);
+            }
+        };
+        ListWrapper.first = function (array) {
+            if (!array)
+                return null;
+            return array[0];
+        };
+        ListWrapper.last = function (array) {
+            if (!array || array.length == 0)
+                return null;
+            return array[array.length - 1];
+        };
+        ListWrapper.indexOf = function (array, value, startIndex) {
+            if (startIndex === void 0) { startIndex = 0; }
+            return array.indexOf(value, startIndex);
+        };
+        ListWrapper.contains = function (list, el) { return list.indexOf(el) !== -1; };
+        ListWrapper.reversed = function (array) {
+            var a = ListWrapper.clone(array);
+            return a.reverse();
+        };
+        ListWrapper.concat = function (a, b) { return a.concat(b); };
+        ListWrapper.insert = function (list, index, value) { list.splice(index, 0, value); };
+        ListWrapper.removeAt = function (list, index) {
+            var res = list[index];
+            list.splice(index, 1);
+            return res;
+        };
+        ListWrapper.removeAll = function (list, items) {
+            for (var i = 0; i < items.length; ++i) {
+                var index = list.indexOf(items[i]);
+                list.splice(index, 1);
+            }
+        };
+        ListWrapper.remove = function (list, el) {
+            var index = list.indexOf(el);
+            if (index > -1) {
+                list.splice(index, 1);
+                return true;
+            }
+            return false;
+        };
+        ListWrapper.clear = function (list) { list.length = 0; };
+        ListWrapper.isEmpty = function (list) { return list.length == 0; };
+        ListWrapper.fill = function (list, value, start, end) {
+            if (start === void 0) { start = 0; }
             if (end === void 0) { end = null; }
-            if (isBlank(value))
-                return value;
-            if (!this.supports(value)) {
-                throw new InvalidPipeArgumentError(SlicePipe, value);
-            }
-            if (isString(value)) {
-                return StringWrapper.slice(value, start, end);
-            }
-            return ListWrapper.slice(value, start, end);
+            list.fill(value, start, end === null ? list.length : end);
         };
-        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
-        SlicePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-        ];
-        /** @nocollapse */
-        SlicePipe.ctorParameters = [];
-        return SlicePipe;
+        ListWrapper.equals = function (a, b) {
+            if (a.length != b.length)
+                return false;
+            for (var i = 0; i < a.length; ++i) {
+                if (a[i] !== b[i])
+                    return false;
+            }
+            return true;
+        };
+        ListWrapper.slice = function (l, from, to) {
+            if (from === void 0) { from = 0; }
+            if (to === void 0) { to = null; }
+            return l.slice(from, to === null ? undefined : to);
+        };
+        ListWrapper.splice = function (l, from, length) { return l.splice(from, length); };
+        ListWrapper.sort = function (l, compareFn) {
+            if (isPresent(compareFn)) {
+                l.sort(compareFn);
+            }
+            else {
+                l.sort();
+            }
+        };
+        ListWrapper.toString = function (l) { return l.toString(); };
+        ListWrapper.toJSON = function (l) { return JSON.stringify(l); };
+        ListWrapper.maximum = function (list, predicate) {
+            if (list.length == 0) {
+                return null;
+            }
+            var solution = null;
+            var maxValue = -Infinity;
+            for (var index = 0; index < list.length; index++) {
+                var candidate = list[index];
+                if (isBlank(candidate)) {
+                    continue;
+                }
+                var candidateValue = predicate(candidate);
+                if (candidateValue > maxValue) {
+                    solution = candidate;
+                    maxValue = candidateValue;
+                }
+            }
+            return solution;
+        };
+        ListWrapper.flatten = function (list) {
+            var target = [];
+            _flattenArray(list, target);
+            return target;
+        };
+        ListWrapper.addAll = function (list, source) {
+            for (var i = 0; i < source.length; i++) {
+                list.push(source[i]);
+            }
+        };
+        return ListWrapper;
     }());
-
-    /**
-     * Implements uppercase transforms to text.
-     *
-     * ### Example
-     *
-     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
-     *
-     * @stable
-     */
-    var UpperCasePipe = (function () {
-        function UpperCasePipe() {
+    function _flattenArray(source, target) {
+        if (isPresent(source)) {
+            for (var i = 0; i < source.length; i++) {
+                var item = source[i];
+                if (isArray(item)) {
+                    _flattenArray(item, target);
+                }
+                else {
+                    target.push(item);
+                }
+            }
         }
-        UpperCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (!isString(value)) {
-                throw new InvalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        UpperCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-        ];
-        /** @nocollapse */
-        UpperCasePipe.ctorParameters = [];
-        return UpperCasePipe;
-    }());
+        return target;
+    }
+    function isListLikeIterable(obj) {
+        if (!isJsObject(obj))
+            return false;
+        return isArray(obj) ||
+            (!(obj instanceof Map$1) &&
+                getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
+    }
+    // Safari and Internet Explorer do not support the iterable parameter to the
+    // Set constructor.  We work around that by manually adding the items.
+    var createSetFromList = (function () {
+        var test = new Set$1([1, 2, 3]);
+        if (test.size === 3) {
+            return function createSetFromList(lst) { return new Set$1(lst); };
+        }
+        else {
+            return function createSetAndPopulateFromList(lst) {
+                var res = new Set$1(lst);
+                if (res.size !== lst.length) {
+                    for (var i = 0; i < lst.length; i++) {
+                        res.add(lst[i]);
+                    }
+                }
+                return res;
+            };
+        }
+    })();
 
     /**
      * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
@@ -2915,372 +2402,21 @@
     }());
 
     /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
+     * A collection of Angular directives that are likely to be used in each and every Angular
+     * application.
      */
-    /**
-     * This class should not be used directly by an application developer. Instead, use
-     * {@link Location}.
-     *
-     * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
-     * agnostic.
-     * This means that we can have different implementation of `PlatformLocation` for the different
-     * platforms
-     * that angular supports. For example, the default `PlatformLocation` is {@link
-     * BrowserPlatformLocation},
-     * however when you run your app in a WebWorker you use {@link WebWorkerPlatformLocation}.
-     *
-     * The `PlatformLocation` class is used directly by all implementations of {@link LocationStrategy}
-     * when
-     * they need to interact with the DOM apis like pushState, popState, etc...
-     *
-     * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
-     * by
-     * the {@link Router} in order to navigate between routes. Since all interactions between {@link
-     * Router} /
-     * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
-     * class
-     * they are all platform independent.
-     *
-     * @stable
-     */
-    var PlatformLocation = (function () {
-        function PlatformLocation() {
-        }
-        Object.defineProperty(PlatformLocation.prototype, "pathname", {
-            get: function () { return null; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PlatformLocation.prototype, "search", {
-            get: function () { return null; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PlatformLocation.prototype, "hash", {
-            get: function () { return null; },
-            enumerable: true,
-            configurable: true
-        });
-        return PlatformLocation;
-    }());
-
-    /**
-     * `LocationStrategy` is responsible for representing and reading route state
-     * from the browser's URL. Angular provides two strategies:
-     * {@link HashLocationStrategy} and {@link PathLocationStrategy} (default).
-     *
-     * This is used under the hood of the {@link Location} service.
-     *
-     * Applications should use the {@link Router} or {@link Location} services to
-     * interact with application route state.
-     *
-     * For instance, {@link HashLocationStrategy} produces URLs like
-     * `http://example.com#/foo`, and {@link PathLocationStrategy} produces
-     * `http://example.com/foo` as an equivalent URL.
-     *
-     * See these two classes for more.
-     *
-     * @stable
-     */
-    var LocationStrategy = (function () {
-        function LocationStrategy() {
-        }
-        return LocationStrategy;
-    }());
-    /**
-     * The `APP_BASE_HREF` token represents the base href to be used with the
-     * {@link PathLocationStrategy}.
-     *
-     * If you're using {@link PathLocationStrategy}, you must provide a provider to a string
-     * representing the URL prefix that should be preserved when generating and recognizing
-     * URLs.
-     *
-     * ### Example
-     *
-     * ```typescript
-     * import {Component, NgModule} from '@angular/core';
-     * import {APP_BASE_HREF} from '@angular/common';
-     *
-     * @NgModule({
-     *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-     * })
-     * class AppModule {}
-     * ```
-     *
-     * @stable
-     */
-    var APP_BASE_HREF = new _angular_core.OpaqueToken('appBaseHref');
-
-    /**
-     * `Location` is a service that applications can use to interact with a browser's URL.
-     * Depending on which {@link LocationStrategy} is used, `Location` will either persist
-     * to the URL's path or the URL's hash segment.
-     *
-     * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
-     * `Location` only if you need to interact with or create normalized URLs outside of
-     * routing.
-     *
-     * `Location` is responsible for normalizing the URL against the application's base href.
-     * A normalized URL is absolute from the URL host, includes the application's base href, and has no
-     * trailing slash:
-     * - `/my/app/user/123` is normalized
-     * - `my/app/user/123` **is not** normalized
-     * - `/my/app/user/123/` **is not** normalized
-     *
-     * ### Example
-     *
-     * ```
-     * import {Component} from '@angular/core';
-     * import {Location} from '@angular/common';
-     *
-     * @Component({selector: 'app-component'})
-     * class AppCmp {
-     *   constructor(location: Location) {
-     *     location.go('/foo');
-     *   }
-     * }
-     * ```
-     *
-     * @stable
-     */
-    var Location = (function () {
-        function Location(platformStrategy) {
-            var _this = this;
-            /** @internal */
-            this._subject = new _angular_core.EventEmitter();
-            this._platformStrategy = platformStrategy;
-            var browserBaseHref = this._platformStrategy.getBaseHref();
-            this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-            this._platformStrategy.onPopState(function (ev) { _this._subject.emit({ 'url': _this.path(true), 'pop': true, 'type': ev.type }); });
-        }
-        /**
-         * Returns the normalized URL path.
-         */
-        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-        // removed.
-        Location.prototype.path = function (includeHash) {
-            if (includeHash === void 0) { includeHash = false; }
-            return this.normalize(this._platformStrategy.path(includeHash));
-        };
-        /**
-         * Normalizes the given path and compares to the current normalized path.
-         */
-        Location.prototype.isCurrentPathEqualTo = function (path, query) {
-            if (query === void 0) { query = ''; }
-            return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
-        };
-        /**
-         * Given a string representing a URL, returns the normalized URL path without leading or
-         * trailing slashes.
-         */
-        Location.prototype.normalize = function (url) {
-            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
-        };
-        /**
-         * Given a string representing a URL, returns the platform-specific external URL path.
-         * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-         * before normalizing. This method will also add a hash if `HashLocationStrategy` is
-         * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-         */
-        Location.prototype.prepareExternalUrl = function (url) {
-            if (url.length > 0 && !url.startsWith('/')) {
-                url = '/' + url;
-            }
-            return this._platformStrategy.prepareExternalUrl(url);
-        };
-        // TODO: rename this method to pushState
-        /**
-         * Changes the browsers URL to the normalized version of the given URL, and pushes a
-         * new item onto the platform's history.
-         */
-        Location.prototype.go = function (path, query) {
-            if (query === void 0) { query = ''; }
-            this._platformStrategy.pushState(null, '', path, query);
-        };
-        /**
-         * Changes the browsers URL to the normalized version of the given URL, and replaces
-         * the top item on the platform's history stack.
-         */
-        Location.prototype.replaceState = function (path, query) {
-            if (query === void 0) { query = ''; }
-            this._platformStrategy.replaceState(null, '', path, query);
-        };
-        /**
-         * Navigates forward in the platform's history.
-         */
-        Location.prototype.forward = function () { this._platformStrategy.forward(); };
-        /**
-         * Navigates back in the platform's history.
-         */
-        Location.prototype.back = function () { this._platformStrategy.back(); };
-        /**
-         * Subscribe to the platform's `popState` events.
-         */
-        Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
-            if (onThrow === void 0) { onThrow = null; }
-            if (onReturn === void 0) { onReturn = null; }
-            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-        };
-        /**
-         * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-         * is.
-         */
-        Location.normalizeQueryParams = function (params) {
-            return (params.length > 0 && params.substring(0, 1) != '?') ? ('?' + params) : params;
-        };
-        /**
-         * Given 2 parts of a url, join them with a slash if needed.
-         */
-        Location.joinWithSlash = function (start, end) {
-            if (start.length == 0) {
-                return end;
-            }
-            if (end.length == 0) {
-                return start;
-            }
-            var slashes = 0;
-            if (start.endsWith('/')) {
-                slashes++;
-            }
-            if (end.startsWith('/')) {
-                slashes++;
-            }
-            if (slashes == 2) {
-                return start + end.substring(1);
-            }
-            if (slashes == 1) {
-                return start + end;
-            }
-            return start + '/' + end;
-        };
-        /**
-         * If url has a trailing slash, remove it, otherwise return url as is.
-         */
-        Location.stripTrailingSlash = function (url) {
-            if (/\/$/g.test(url)) {
-                url = url.substring(0, url.length - 1);
-            }
-            return url;
-        };
-        Location.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        Location.ctorParameters = [
-            { type: LocationStrategy, },
-        ];
-        return Location;
-    }());
-    function _stripBaseHref(baseHref, url) {
-        if (baseHref.length > 0 && url.startsWith(baseHref)) {
-            return url.substring(baseHref.length);
-        }
-        return url;
-    }
-    function _stripIndexHtml(url) {
-        if (/\/index.html$/g.test(url)) {
-            // '/index.html'.length == 11
-            return url.substring(0, url.length - 11);
-        }
-        return url;
-    }
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var __extends$3 = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * `HashLocationStrategy` is a {@link LocationStrategy} used to configure the
-     * {@link Location} service to represent its state in the
-     * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
-     * of the browser's URL.
-     *
-     * For instance, if you call `location.go('/foo')`, the browser's URL will become
-     * `example.com#/foo`.
-     *
-     * ### Example
-     *
-     * ```
-     * import {Component, NgModule} from '@angular/core';
-     * import {
-     *   LocationStrategy,
-     *   HashLocationStrategy
-     * } from '@angular/common';
-     *
-     * @NgModule({
-     *   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
-     * })
-     * class AppModule {}
-     * ```
-     *
-     * @stable
-     */
-    var HashLocationStrategy = (function (_super) {
-        __extends$3(HashLocationStrategy, _super);
-        function HashLocationStrategy(_platformLocation, _baseHref) {
-            _super.call(this);
-            this._platformLocation = _platformLocation;
-            this._baseHref = '';
-            if (isPresent(_baseHref)) {
-                this._baseHref = _baseHref;
-            }
-        }
-        HashLocationStrategy.prototype.onPopState = function (fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
-        };
-        HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-        HashLocationStrategy.prototype.path = function (includeHash) {
-            if (includeHash === void 0) { includeHash = false; }
-            // the hash value is always prefixed with a `#`
-            // and if it is empty then it will stay empty
-            var path = this._platformLocation.hash;
-            if (!isPresent(path))
-                path = '#';
-            return path.length > 0 ? path.substring(1) : path;
-        };
-        HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
-            var url = Location.joinWithSlash(this._baseHref, internal);
-            return url.length > 0 ? ('#' + url) : url;
-        };
-        HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
-            var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.pushState(state, title, url);
-        };
-        HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
-            var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.replaceState(state, title, url);
-        };
-        HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-        HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        HashLocationStrategy.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        HashLocationStrategy.ctorParameters = [
-            { type: PlatformLocation, },
-            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
-        ];
-        return HashLocationStrategy;
-    }(LocationStrategy));
+    var COMMON_DIRECTIVES = [
+        NgClass,
+        NgFor,
+        NgIf,
+        NgTemplateOutlet,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgPlural,
+        NgPluralCase,
+    ];
 
     /**
      * @license
@@ -3295,187 +2431,960 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     /**
-     * `PathLocationStrategy` is a {@link LocationStrategy} used to configure the
-     * {@link Location} service to represent its state in the
-     * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
-     * browser's URL.
+     * @stable
+     */
+    var BaseError = (function (_super) {
+        __extends$4(BaseError, _super);
+        function BaseError(message) {
+            // Errors don't use current this, instead they create a new instance.
+            // We have to do forward all of our api to the nativeInstance.
+            var nativeError = _super.call(this, message);
+            this._nativeError = nativeError;
+        }
+        Object.defineProperty(BaseError.prototype, "message", {
+            get: function () { return this._nativeError.message; },
+            set: function (message) { this._nativeError.message = message; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseError.prototype, "name", {
+            get: function () { return this._nativeError.name; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseError.prototype, "stack", {
+            get: function () { return this._nativeError.stack; },
+            set: function (value) { this._nativeError.stack = value; },
+            enumerable: true,
+            configurable: true
+        });
+        BaseError.prototype.toString = function () { return this._nativeError.toString(); };
+        return BaseError;
+    }(Error));
+    /**
+     * @stable
+     */
+    var WrappedError = (function (_super) {
+        __extends$4(WrappedError, _super);
+        function WrappedError(message, error) {
+            _super.call(this, message + " caused by: " + (error instanceof Error ? error.message : error));
+            this.originalError = error;
+        }
+        Object.defineProperty(WrappedError.prototype, "stack", {
+            get: function () {
+                return (this.originalError instanceof Error ? this.originalError : this._nativeError)
+                    .stack;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return WrappedError;
+    }(BaseError));
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
      *
-     * `PathLocationStrategy` is the default binding for {@link LocationStrategy}
-     * provided in {@link ROUTER_PROVIDERS}.
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var __extends$3 = (this && this.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    var InvalidPipeArgumentError = (function (_super) {
+        __extends$3(InvalidPipeArgumentError, _super);
+        function InvalidPipeArgumentError(type, value) {
+            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
+        }
+        return InvalidPipeArgumentError;
+    }(BaseError));
+
+    var ObservableStrategy = (function () {
+        function ObservableStrategy() {
+        }
+        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+        };
+        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+        return ObservableStrategy;
+    }());
+    var PromiseStrategy = (function () {
+        function PromiseStrategy() {
+        }
+        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.then(updateLatestValue, function (e) { throw e; });
+        };
+        PromiseStrategy.prototype.dispose = function (subscription) { };
+        PromiseStrategy.prototype.onDestroy = function (subscription) { };
+        return PromiseStrategy;
+    }());
+    var _promiseStrategy = new PromiseStrategy();
+    var _observableStrategy = new ObservableStrategy();
+    // avoid unused import when Promise union types are erased
+    /**
+     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
+     * emitted.
+     * When a new value is emitted, the `async` pipe marks the component to be checked for changes.
+     * When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * potential memory leaks.
      *
-     * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
-     * or add a base element to the document. This URL prefix that will be preserved
-     * when generating and recognizing URLs.
+     * ## Usage
      *
-     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
-     * `location.go('/foo')`, the browser's URL will become
-     * `example.com/my/app/foo`.
+     *     object | async
      *
-     * Similarly, if you add `<base href='/my/app'/>` to the document and call
-     * `location.go('/foo')`, the browser's URL will become
-     * `example.com/my/app/foo`.
+     * where `object` is of type `Observable` or of type `Promise`.
+     *
+     * ## Examples
+     *
+     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
+     * promise.
+     *
+     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipePromise'}
+     *
+     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
+     * to the view. Every 500ms, the `time` Observable updates the view with the current time.
+     *
+     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipeObservable'}
      *
      * @stable
      */
-    var PathLocationStrategy = (function (_super) {
-        __extends$4(PathLocationStrategy, _super);
-        function PathLocationStrategy(_platformLocation, href) {
-            _super.call(this);
-            this._platformLocation = _platformLocation;
-            if (isBlank(href)) {
-                href = this._platformLocation.getBaseHrefFromDOM();
-            }
-            if (isBlank(href)) {
-                throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
-            }
-            this._baseHref = href;
+    var AsyncPipe = (function () {
+        function AsyncPipe(_ref) {
+            /** @internal */
+            this._latestValue = null;
+            /** @internal */
+            this._latestReturnedValue = null;
+            /** @internal */
+            this._subscription = null;
+            /** @internal */
+            this._obj = null;
+            this._strategy = null;
+            this._ref = _ref;
         }
-        PathLocationStrategy.prototype.onPopState = function (fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
+        AsyncPipe.prototype.ngOnDestroy = function () {
+            if (isPresent(this._subscription)) {
+                this._dispose();
+            }
         };
-        PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-        PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
-            return Location.joinWithSlash(this._baseHref, internal);
+        AsyncPipe.prototype.transform = function (obj) {
+            if (isBlank(this._obj)) {
+                if (isPresent(obj)) {
+                    this._subscribe(obj);
+                }
+                this._latestReturnedValue = this._latestValue;
+                return this._latestValue;
+            }
+            if (obj !== this._obj) {
+                this._dispose();
+                return this.transform(obj);
+            }
+            if (this._latestValue === this._latestReturnedValue) {
+                return this._latestReturnedValue;
+            }
+            else {
+                this._latestReturnedValue = this._latestValue;
+                return _angular_core.WrappedValue.wrap(this._latestValue);
+            }
         };
-        PathLocationStrategy.prototype.path = function (includeHash) {
-            if (includeHash === void 0) { includeHash = false; }
-            var pathname = this._platformLocation.pathname +
-                Location.normalizeQueryParams(this._platformLocation.search);
-            var hash = this._platformLocation.hash;
-            return hash && includeHash ? "" + pathname + hash : pathname;
+        /** @internal */
+        AsyncPipe.prototype._subscribe = function (obj) {
+            var _this = this;
+            this._obj = obj;
+            this._strategy = this._selectStrategy(obj);
+            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
         };
-        PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
-            var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-            this._platformLocation.pushState(state, title, externalUrl);
+        /** @internal */
+        AsyncPipe.prototype._selectStrategy = function (obj) {
+            if (isPromise(obj)) {
+                return _promiseStrategy;
+            }
+            else if (obj.subscribe) {
+                return _observableStrategy;
+            }
+            else {
+                throw new InvalidPipeArgumentError(AsyncPipe, obj);
+            }
         };
-        PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
-            var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-            this._platformLocation.replaceState(state, title, externalUrl);
+        /** @internal */
+        AsyncPipe.prototype._dispose = function () {
+            this._strategy.dispose(this._subscription);
+            this._latestValue = null;
+            this._latestReturnedValue = null;
+            this._subscription = null;
+            this._obj = null;
         };
-        PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-        PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        PathLocationStrategy.decorators = [
-            { type: _angular_core.Injectable },
+        /** @internal */
+        AsyncPipe.prototype._updateLatestValue = function (async, value) {
+            if (async === this._obj) {
+                this._latestValue = value;
+                this._ref.markForCheck();
+            }
+        };
+        AsyncPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
         ];
         /** @nocollapse */
-        PathLocationStrategy.ctorParameters = [
-            { type: PlatformLocation, },
-            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+        AsyncPipe.ctorParameters = [
+            { type: _angular_core.ChangeDetectorRef, },
         ];
-        return PathLocationStrategy;
-    }(LocationStrategy));
+        return AsyncPipe;
+    }());
 
     /**
-     * A collection of Angular core directives that are likely to be used in each and every Angular
-     * application.
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
      *
-     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
-     * property of the `@Component` annotation.
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var NumberFormatStyle;
+    (function (NumberFormatStyle) {
+        NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
+        NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
+        NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
+    })(NumberFormatStyle || (NumberFormatStyle = {}));
+    var NumberFormatter = (function () {
+        function NumberFormatter() {
+        }
+        NumberFormatter.format = function (num, locale, style, _a) {
+            var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+            var options = {
+                minimumIntegerDigits: minimumIntegerDigits,
+                minimumFractionDigits: minimumFractionDigits,
+                maximumFractionDigits: maximumFractionDigits,
+                style: NumberFormatStyle[style].toLowerCase()
+            };
+            if (style == NumberFormatStyle.Currency) {
+                options.currency = currency;
+                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+            }
+            return new Intl.NumberFormat(locale, options).format(num);
+        };
+        return NumberFormatter;
+    }());
+    var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+    var PATTERN_ALIASES = {
+        yMMMdjms: datePartGetterFactory(combine([
+            digitCondition('year', 1),
+            nameCondition('month', 3),
+            digitCondition('day', 1),
+            digitCondition('hour', 1),
+            digitCondition('minute', 1),
+            digitCondition('second', 1),
+        ])),
+        yMdjm: datePartGetterFactory(combine([
+            digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+            digitCondition('hour', 1), digitCondition('minute', 1)
+        ])),
+        yMMMMEEEEd: datePartGetterFactory(combine([
+            digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
+            digitCondition('day', 1)
+        ])),
+        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
+        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
+        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
+        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
+        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+    };
+    var DATE_FORMATS = {
+        yyyy: datePartGetterFactory(digitCondition('year', 4)),
+        yy: datePartGetterFactory(digitCondition('year', 2)),
+        y: datePartGetterFactory(digitCondition('year', 1)),
+        MMMM: datePartGetterFactory(nameCondition('month', 4)),
+        MMM: datePartGetterFactory(nameCondition('month', 3)),
+        MM: datePartGetterFactory(digitCondition('month', 2)),
+        M: datePartGetterFactory(digitCondition('month', 1)),
+        LLLL: datePartGetterFactory(nameCondition('month', 4)),
+        dd: datePartGetterFactory(digitCondition('day', 2)),
+        d: datePartGetterFactory(digitCondition('day', 1)),
+        HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
+        H: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
+        hh: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
+        h: hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        jj: datePartGetterFactory(digitCondition('hour', 2)),
+        j: datePartGetterFactory(digitCondition('hour', 1)),
+        mm: digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
+        m: datePartGetterFactory(digitCondition('minute', 1)),
+        ss: digitModifier(datePartGetterFactory(digitCondition('second', 2))),
+        s: datePartGetterFactory(digitCondition('second', 1)),
+        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
+        // we can be just safely rely on using `sss` since we currently don't support single or two digit
+        // fractions
+        sss: datePartGetterFactory(digitCondition('second', 3)),
+        EEEE: datePartGetterFactory(nameCondition('weekday', 4)),
+        EEE: datePartGetterFactory(nameCondition('weekday', 3)),
+        EE: datePartGetterFactory(nameCondition('weekday', 2)),
+        E: datePartGetterFactory(nameCondition('weekday', 1)),
+        a: hourClockExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+        Z: timeZoneGetter('short'),
+        z: timeZoneGetter('long'),
+        ww: datePartGetterFactory({}),
+        // first Thursday of the year. not support ?
+        w: datePartGetterFactory({}),
+        // of the year not support ?
+        G: datePartGetterFactory(nameCondition('era', 1)),
+        GG: datePartGetterFactory(nameCondition('era', 2)),
+        GGG: datePartGetterFactory(nameCondition('era', 3)),
+        GGGG: datePartGetterFactory(nameCondition('era', 4))
+    };
+    function digitModifier(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.length == 1 ? '0' + result : result;
+        };
+    }
+    function hourClockExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[1];
+        };
+    }
+    function hourExtracter(inner) {
+        return function (date, locale) {
+            var result = inner(date, locale);
+            return result.split(' ')[0];
+        };
+    }
+    function intlDateFormat(date, locale, options) {
+        return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
+    }
+    function timeZoneGetter(timezone) {
+        // To workaround `Intl` API restriction for single timezone let format with 24 hours
+        var options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+        return function (date, locale) {
+            var result = intlDateFormat(date, locale, options);
+            // Then extract first 3 letters that related to hours
+            return result ? result.substring(3) : '';
+        };
+    }
+    function hour12Modify(options, value) {
+        options.hour12 = value;
+        return options;
+    }
+    function digitCondition(prop, len) {
+        var result = {};
+        result[prop] = len == 2 ? '2-digit' : 'numeric';
+        return result;
+    }
+    function nameCondition(prop, len) {
+        var result = {};
+        result[prop] = len < 4 ? 'short' : 'long';
+        return result;
+    }
+    function combine(options) {
+        var result = {};
+        options.forEach(function (option) { Object.assign(result, option); });
+        return result;
+    }
+    function datePartGetterFactory(ret) {
+        return function (date, locale) { return intlDateFormat(date, locale, ret); };
+    }
+    var datePartsFormatterCache = new Map();
+    function dateFormatter(format, date, locale) {
+        var text = '';
+        var match;
+        var fn;
+        var parts = [];
+        if (PATTERN_ALIASES[format]) {
+            return PATTERN_ALIASES[format](date, locale);
+        }
+        if (datePartsFormatterCache.has(format)) {
+            parts = datePartsFormatterCache.get(format);
+        }
+        else {
+            var matches = DATE_FORMATS_SPLIT.exec(format);
+            while (format) {
+                match = DATE_FORMATS_SPLIT.exec(format);
+                if (match) {
+                    parts = concat(parts, match, 1);
+                    format = parts.pop();
+                }
+                else {
+                    parts.push(format);
+                    format = null;
+                }
+            }
+            datePartsFormatterCache.set(format, parts);
+        }
+        parts.forEach(function (part) {
+            fn = DATE_FORMATS[part];
+            text += fn ? fn(date, locale) :
+                part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+        });
+        return text;
+    }
+    var slice = [].slice;
+    function concat(array1 /** TODO #9100 */, array2 /** TODO #9100 */, index /** TODO #9100 */) {
+        return array1.concat(slice.call(array2, index));
+    }
+    var DateFormatter = (function () {
+        function DateFormatter() {
+        }
+        DateFormatter.format = function (date, locale, pattern) {
+            return dateFormatter(pattern, date, locale);
+        };
+        return DateFormatter;
+    }());
+
+    /**
+     * Formats a date value to a string based on the requested format.
      *
-     * ### Example ([live demo](http://plnkr.co/edit/yakGwpCdUkg0qfzX5m8g?p=preview))
+     * WARNINGS:
+     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+     *   Instead users should treat the date as an immutable object and change the reference when the
+     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+     *   which would be an expensive operation).
+     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+     *   browsers.
      *
-     * Instead of writing:
+     * ## Usage
      *
-     * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
+     *     expression | date[:format]
      *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
+     * where `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime) and `format` indicates which date/time components to
+     * include:
+     *
+     *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | a (PM)       | -                 | -         | -         |
+     *
+     * In javascript, only the components specified will be respected (not the ordering,
+     * punctuations, ...) and details of the formatting will be dependent on the locale.
+     *
+     * `format` can also be one of the following predefined formats:
+     *
+     *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
+     *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
+     *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
+     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010 for en-US)
+     *  - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. Sep 3, 2010 for en-US)
+     *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
+     *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
+     *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
+     *
+     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
+     *
+     * ### Examples
+     *
+     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+     * in the _local_ time and locale is 'en-US':
+     *
      * ```
-     * one could import all the core directives at once:
-     *
-     * ```typescript
-     * import {CORE_DIRECTIVES} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [CORE_DIRECTIVES, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
+     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
      * ```
+     *
+     * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
      *
      * @stable
      */
-    var CORE_DIRECTIVES = [
-        NgClass,
-        NgFor,
-        NgIf,
-        NgTemplateOutlet,
-        NgStyle,
-        NgSwitch,
-        NgSwitchCase,
-        NgSwitchDefault,
-        NgPlural,
-        NgPluralCase,
-    ];
+    var DatePipe = (function () {
+        function DatePipe(_locale) {
+            this._locale = _locale;
+        }
+        DatePipe.prototype.transform = function (value, pattern) {
+            if (pattern === void 0) { pattern = 'mediumDate'; }
+            if (isBlank(value))
+                return null;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentError(DatePipe, value);
+            }
+            if (NumberWrapper.isNumeric(value)) {
+                value = DateWrapper.fromMillis(parseFloat(value));
+            }
+            else if (isString(value)) {
+                value = DateWrapper.fromISOString(value);
+            }
+            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
+                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
+            }
+            return DateFormatter.format(value, this._locale, pattern);
+        };
+        DatePipe.prototype.supports = function (obj) {
+            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
+                return true;
+            }
+            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
+                return true;
+            }
+            return false;
+        };
+        /** @internal */
+        DatePipe._ALIASES = {
+            'medium': 'yMMMdjms',
+            'short': 'yMdjm',
+            'fullDate': 'yMMMMEEEEd',
+            'longDate': 'yMMMMd',
+            'mediumDate': 'yMMMd',
+            'shortDate': 'yMd',
+            'mediumTime': 'jms',
+            'shortTime': 'jm'
+        };
+        DatePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+        ];
+        /** @nocollapse */
+        DatePipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
+        return DatePipe;
+    }());
+
+    var _INTERPOLATION_REGEXP = /#/g;
+    /**
+     *  Maps a value to a string that pluralizes the value properly.
+     *
+     *  ## Usage
+     *
+     *      expression | i18nPlural:mapping
+     *
+     *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
+     *  see http://userguide.icu-project.org/formatparse/messages
+     *
+     *  ## Example
+     *
+     *  ```
+     *  @Component({
+     *    selector: 'app',
+     *    template: `
+     *      <div>
+     *        {{ messages.length | i18nPlural: messageMapping }}
+     *      </div>
+     *    `,
+     *    // best practice is to define the locale at the application level
+     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
+     *  })
+     *
+     *  class MyApp {
+     *    messages: any[];
+     *    messageMapping: {[k:string]: string} = {
+     *      '=0': 'No messages.',
+     *      '=1': 'One message.',
+     *      'other': '# messages.'
+     *    }
+     *    ...
+     *  }
+     *  ```
+     *
+     * @experimental
+     */
+    var I18nPluralPipe = (function () {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
+        }
+        I18nPluralPipe.prototype.transform = function (value, pluralMap) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(pluralMap)) {
+                throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
+            }
+            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
+        };
+        I18nPluralPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+        ];
+        /** @nocollapse */
+        I18nPluralPipe.ctorParameters = [
+            { type: NgLocalization, },
+        ];
+        return I18nPluralPipe;
+    }());
 
     /**
-     * A collection of Angular core directives that are likely to be used in each and every Angular
-     * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
-     * NgModel).
      *
-     * This collection can be used to quickly enumerate all the built-in directives in the `directives`
-     * property of the `@Component` decorator.
+     *  Generic selector that displays the string that matches the current value.
+     *
+     *  ## Usage
+     *
+     *  expression | i18nSelect:mapping
+     *
+     *  where `mapping` is an object that indicates the text that should be displayed
+     *  for different values of the provided `expression`.
+     *
+     *  ## Example
+     *
+     *  ```
+     *  <div>
+     *    {{ gender | i18nSelect: inviteMap }}
+     *  </div>
+     *
+     *  class MyApp {
+     *    gender: string = 'male';
+     *    inviteMap: any = {
+     *      'male': 'Invite him.',
+     *      'female': 'Invite her.',
+     *      'other': 'Invite them.'
+     *    }
+     *    ...
+     *  }
+     *  ```
+     *
+     *  @experimental
+     */
+    var I18nSelectPipe = (function () {
+        function I18nSelectPipe() {
+        }
+        I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (isBlank(value))
+                return '';
+            if (!isStringMap(mapping)) {
+                throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
+            }
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
+        };
+        I18nSelectPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+        ];
+        /** @nocollapse */
+        I18nSelectPipe.ctorParameters = [];
+        return I18nSelectPipe;
+    }());
+
+    /**
+     * Transforms any input value using `JSON.stringify`. Useful for debugging.
+     *
+     * ### Example
+     * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
+     *
+     * @stable
+     */
+    var JsonPipe = (function () {
+        function JsonPipe() {
+        }
+        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
+        JsonPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
+        ];
+        /** @nocollapse */
+        JsonPipe.ctorParameters = [];
+        return JsonPipe;
+    }());
+
+    /**
+     * Transforms text to lowercase.
      *
      * ### Example
      *
-     * Instead of writing:
+     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
      *
-     * ```typescript
-     * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm} from
-     * '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [NgClass, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgModel, NgForm,
-     * OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     * one could import all the common directives at once:
-     *
-     * ```typescript
-     * import {COMMON_DIRECTIVES} from '@angular/common';
-     * import {OtherDirective} from './myDirectives';
-     *
-     * @Component({
-     *   selector: 'my-component',
-     *   templateUrl: 'myComponent.html',
-     *   directives: [COMMON_DIRECTIVES, OtherDirective]
-     * })
-     * export class MyComponent {
-     *   ...
-     * }
-     * ```
-     *
-     * @experimental Contains forms which are experimental.
+     * @stable
      */
-    var COMMON_DIRECTIVES = CORE_DIRECTIVES;
+    var LowerCasePipe = (function () {
+        function LowerCasePipe() {
+        }
+        LowerCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentError(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        LowerCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+        ];
+        /** @nocollapse */
+        LowerCasePipe.ctorParameters = [];
+        return LowerCasePipe;
+    }());
+
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
+    function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
+        if (currency === void 0) { currency = null; }
+        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+        if (isBlank(value))
+            return null;
+        // Convert strings to numbers
+        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
+        if (!isNumber(value)) {
+            throw new InvalidPipeArgumentError(pipe, value);
+        }
+        var minInt;
+        var minFraction;
+        var maxFraction;
+        if (style !== NumberFormatStyle.Currency) {
+            // rely on Intl default for currency
+            minInt = 1;
+            minFraction = 0;
+            maxFraction = 3;
+        }
+        if (isPresent(digits)) {
+            var parts = digits.match(_NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                throw new Error(digits + " is not a valid digit info for number pipes");
+            }
+            if (isPresent(parts[1])) {
+                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
+            }
+            if (isPresent(parts[3])) {
+                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
+            }
+            if (isPresent(parts[5])) {
+                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
+            }
+        }
+        return NumberFormatter.format(value, locale, style, {
+            minimumIntegerDigits: minInt,
+            minimumFractionDigits: minFraction,
+            maximumFractionDigits: maxFraction,
+            currency: currency,
+            currencyAsSymbol: currencyAsSymbol
+        });
+    }
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     * Formats a number as local text. i.e. group sizing and separator and other locale-specific
+     * configurations are based on the active locale.
+     *
+     * ### Usage
+     *
+     *     expression | number[:digitInfo]
+     *
+     * where `expression` is a number and `digitInfo` has the following format:
+     *
+     *     {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+     *
+     * - minIntegerDigits is the minimum number of integer digits to use. Defaults to 1.
+     * - minFractionDigits is the minimum number of digits after fraction. Defaults to 0.
+     * - maxFractionDigits is the maximum number of digits after fraction. Defaults to 3.
+     *
+     * For more information on the acceptable range for each of these numbers and other
+     * details see your native internationalization library.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
+     *
+     * @stable
+     */
+    var DecimalPipe = (function () {
+        function DecimalPipe(_locale) {
+            this._locale = _locale;
+        }
+        DecimalPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        };
+        DecimalPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'number' },] },
+        ];
+        /** @nocollapse */
+        DecimalPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
+        return DecimalPipe;
+    }());
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     * Formats a number as local percent.
+     *
+     * ### Usage
+     *
+     *     expression | percent[:digitInfo]
+     *
+     * For more information about `digitInfo` see {@link DecimalPipe}
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
+     *
+     * @stable
+     */
+    var PercentPipe = (function () {
+        function PercentPipe(_locale) {
+            this._locale = _locale;
+        }
+        PercentPipe.prototype.transform = function (value, digits) {
+            if (digits === void 0) { digits = null; }
+            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        };
+        PercentPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
+        ];
+        /** @nocollapse */
+        PercentPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
+        return PercentPipe;
+    }());
+    /**
+     * WARNING: this pipe uses the Internationalization API.
+     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
+     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     *
+     *
+     * Formats a number as local currency.
+     *
+     * ### Usage
+     *
+     *     expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]
+     *
+     * where `currencyCode` is the ISO 4217 currency code, such as "USD" for the US dollar and
+     * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
+     * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
+     * is `false`.
+     * For more information about `digitInfo` see {@link DecimalPipe}.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
+     *
+     * @stable
+     */
+    var CurrencyPipe = (function () {
+        function CurrencyPipe(_locale) {
+            this._locale = _locale;
+        }
+        CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+            if (currencyCode === void 0) { currencyCode = 'USD'; }
+            if (symbolDisplay === void 0) { symbolDisplay = false; }
+            if (digits === void 0) { digits = null; }
+            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        };
+        CurrencyPipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+        ];
+        /** @nocollapse */
+        CurrencyPipe.ctorParameters = [
+            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        ];
+        return CurrencyPipe;
+    }());
 
     /**
-     * A collection of Angular core pipes that are likely to be used in each and every
-     * application.
+     * Creates a new List or String containing only a subset (slice) of the
+     * elements.
      *
-     * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
-     * property of the `@Component` decorator.
+     * The starting index of the subset to return is specified by the `start` parameter.
      *
-     * @experimental Contains i18n pipes which are experimental
+     * The ending index of the subset to return is specified by the optional `end` parameter.
+     *
+     * ### Usage
+     *
+     *     expression | slice:start[:end]
+     *
+     * All behavior is based on the expected behavior of the JavaScript API
+     * Array.prototype.slice() and String.prototype.slice()
+     *
+     * Where the input expression is a [List] or [String], and `start` is:
+     *
+     * - **a positive integer**: return the item at _start_ index and all items after
+     * in the list or string expression.
+     * - **a negative integer**: return the item at _start_ index from the end and all items after
+     * in the list or string expression.
+     * - **`|start|` greater than the size of the expression**: return an empty list or string.
+     * - **`|start|` negative greater than the size of the expression**: return entire list or
+     * string expression.
+     *
+     * and where `end` is:
+     *
+     * - **omitted**: return all items until the end of the input
+     * - **a positive integer**: return all items before _end_ index of the list or string
+     * expression.
+     * - **a negative integer**: return all items before _end_ index from the end of the list
+     * or string expression.
+     *
+     * When operating on a [List], the returned list is always a copy even when all
+     * the elements are being returned.
+     *
+     * When operating on a blank value, returns it.
+     *
+     * ## List Example
+     *
+     * This `ngFor` example:
+     *
+     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_list'}
+     *
+     * produces the following:
+     *
+     *     <li>b</li>
+     *     <li>c</li>
+     *
+     * ## String Examples
+     *
+     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
+     *
+     * @stable
+     */
+    var SlicePipe = (function () {
+        function SlicePipe() {
+        }
+        SlicePipe.prototype.transform = function (value, start, end) {
+            if (end === void 0) { end = null; }
+            if (isBlank(value))
+                return value;
+            if (!this.supports(value)) {
+                throw new InvalidPipeArgumentError(SlicePipe, value);
+            }
+            if (isString(value)) {
+                return StringWrapper.slice(value, start, end);
+            }
+            return ListWrapper.slice(value, start, end);
+        };
+        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
+        SlicePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
+        ];
+        /** @nocollapse */
+        SlicePipe.ctorParameters = [];
+        return SlicePipe;
+    }());
+
+    /**
+     * Implements uppercase transforms to text.
+     *
+     * ### Example
+     *
+     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
+     *
+     * @stable
+     */
+    var UpperCasePipe = (function () {
+        function UpperCasePipe() {
+        }
+        UpperCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (!isString(value)) {
+                throw new InvalidPipeArgumentError(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        UpperCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+        ];
+        /** @nocollapse */
+        UpperCasePipe.ctorParameters = [];
+        return UpperCasePipe;
+    }());
+
+    /**
+     * A collection of Angular pipes that are likely to be used in each and every application.
      */
     var COMMON_PIPES = [
         AsyncPipe,
@@ -3517,6 +3426,16 @@
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
+    exports.NgClass = NgClass;
+    exports.NgFor = NgFor;
+    exports.NgIf = NgIf;
+    exports.NgPlural = NgPlural;
+    exports.NgPluralCase = NgPluralCase;
+    exports.NgStyle = NgStyle;
+    exports.NgSwitch = NgSwitch;
+    exports.NgSwitchCase = NgSwitchCase;
+    exports.NgSwitchDefault = NgSwitchDefault;
+    exports.NgTemplateOutlet = NgTemplateOutlet;
     exports.AsyncPipe = AsyncPipe;
     exports.DatePipe = DatePipe;
     exports.I18nPluralPipe = I18nPluralPipe;
@@ -3528,16 +3447,6 @@
     exports.PercentPipe = PercentPipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
-    exports.NgClass = NgClass;
-    exports.NgFor = NgFor;
-    exports.NgIf = NgIf;
-    exports.NgPlural = NgPlural;
-    exports.NgPluralCase = NgPluralCase;
-    exports.NgStyle = NgStyle;
-    exports.NgSwitch = NgSwitch;
-    exports.NgSwitchCase = NgSwitchCase;
-    exports.NgSwitchDefault = NgSwitchDefault;
-    exports.NgTemplateOutlet = NgTemplateOutlet;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;
