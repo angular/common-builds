@@ -77,9 +77,9 @@ export declare class NgClass implements DoCheck {
     private _initialClasses;
     private _rawClass;
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer);
-    initialClasses: string;
+    klass: string;
     ngClass: string | string[] | Set<string> | {
-        [key: string]: any;
+        [klass: string]: any;
     };
     ngDoCheck(): void;
     private _cleanupClasses(rawClassVal);
@@ -87,5 +87,5 @@ export declare class NgClass implements DoCheck {
     private _applyIterableChanges(changes);
     private _applyInitialClasses(isCleanup);
     private _applyClasses(rawClassVal, isCleanup);
-    private _toggleClass(className, enabled);
+    private _toggleClass(klass, enabled);
 }
