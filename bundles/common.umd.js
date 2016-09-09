@@ -301,9 +301,6 @@
         NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
     }());
-    function normalizeBlank(obj) {
-        return isBlank(obj) ? null : obj;
-    }
     function isJsObject(o) {
         return o !== null && (typeof o === 'function' || typeof o === 'object');
     }
@@ -1753,16 +1750,17 @@
      * @stable
      */
     var NgFor = (function () {
-        function NgFor(_viewContainer, _templateRef, _iterableDiffers, _cdr) {
+        function NgFor(_viewContainer, _template, _differs, _cdr) {
             this._viewContainer = _viewContainer;
-            this._templateRef = _templateRef;
-            this._iterableDiffers = _iterableDiffers;
+            this._template = _template;
+            this._differs = _differs;
             this._cdr = _cdr;
+            this._differ = null;
         }
         Object.defineProperty(NgFor.prototype, "ngForTemplate", {
             set: function (value) {
-                if (isPresent(value)) {
-                    this._templateRef = value;
+                if (value) {
+                    this._template = value;
                 }
             },
             enumerable: true,
@@ -1772,9 +1770,9 @@
             if ('ngForOf' in changes) {
                 // React on ngForOf changes only once all inputs have been initialized
                 var value = changes['ngForOf'].currentValue;
-                if (isBlank(this._differ) && isPresent(value)) {
+                if (!this._differ && value) {
                     try {
-                        this._differ = this._iterableDiffers.find(value).create(this._cdr, this.ngForTrackBy);
+                        this._differ = this._differs.find(value).create(this._cdr, this.ngForTrackBy);
                     }
                     catch (e) {
                         throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
@@ -1783,9 +1781,9 @@
             }
         };
         NgFor.prototype.ngDoCheck = function () {
-            if (isPresent(this._differ)) {
+            if (this._differ) {
                 var changes = this._differ.diff(this.ngForOf);
-                if (isPresent(changes))
+                if (changes)
                     this._applyChanges(changes);
             }
         };
@@ -1794,7 +1792,7 @@
             var insertTuples = [];
             changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
                 if (item.previousIndex == null) {
-                    var view = _this._viewContainer.createEmbeddedView(_this._templateRef, new NgForRow(null, null, null), currentIndex);
+                    var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForRow(null, null, null), currentIndex);
                     var tuple = new RecordViewTuple(item, view);
                     insertTuples.push(tuple);
                 }
@@ -1874,19 +1872,19 @@
      * @stable
      */
     var NgIf = (function () {
-        function NgIf(_viewContainer, _templateRef) {
+        function NgIf(_viewContainer, _template) {
             this._viewContainer = _viewContainer;
-            this._templateRef = _templateRef;
-            this._prevCondition = null;
+            this._template = _template;
+            this._hasView = false;
         }
         Object.defineProperty(NgIf.prototype, "ngIf", {
-            set: function (newCondition) {
-                if (newCondition && (isBlank(this._prevCondition) || !this._prevCondition)) {
-                    this._prevCondition = true;
-                    this._viewContainer.createEmbeddedView(this._templateRef);
+            set: function (condition) {
+                if (condition && !this._hasView) {
+                    this._hasView = true;
+                    this._viewContainer.createEmbeddedView(this._template);
                 }
-                else if (!newCondition && (isBlank(this._prevCondition) || this._prevCondition)) {
-                    this._prevCondition = false;
+                else if (!condition && this._hasView) {
+                    this._hasView = false;
                     this._viewContainer.clear();
                 }
             },
@@ -1986,9 +1984,9 @@
                 // Add the ViewContainers matching the value (with a fallback to default)
                 this._useDefault = false;
                 var views = this._valueViews.get(value);
-                if (isBlank(views)) {
+                if (!views) {
                     this._useDefault = true;
-                    views = normalizeBlank(this._valueViews.get(_CASE_DEFAULT));
+                    views = this._valueViews.get(_CASE_DEFAULT) || null;
                 }
                 this._activateViews(views);
                 this._switchValue = value;
@@ -2029,7 +2027,7 @@
         /** @internal */
         NgSwitch.prototype._activateViews = function (views) {
             // TODO(vicb): assert(this._activeViews.length === 0);
-            if (isPresent(views)) {
+            if (views) {
                 for (var i = 0; i < views.length; i++) {
                     views[i].create();
                 }
@@ -2039,7 +2037,7 @@
         /** @internal */
         NgSwitch.prototype._registerView = function (value, view) {
             var views = this._valueViews.get(value);
-            if (isBlank(views)) {
+            if (!views) {
                 views = [];
                 this._valueViews.set(value, views);
             }
@@ -2194,20 +2192,21 @@
         /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
-            var key = getPluralCategory(this._switchValue, Object.keys(this._caseViews), this._localization);
+            var cases = Object.keys(this._caseViews);
+            var key = getPluralCategory(this._switchValue, cases, this._localization);
             this._activateView(this._caseViews[key]);
         };
         /** @internal */
         NgPlural.prototype._clearViews = function () {
-            if (isPresent(this._activeView))
+            if (this._activeView)
                 this._activeView.destroy();
         };
         /** @internal */
         NgPlural.prototype._activateView = function (view) {
-            if (!isPresent(view))
-                return;
-            this._activeView = view;
-            this._activeView.create();
+            if (view) {
+                this._activeView = view;
+                this._activeView.create();
+            }
         };
         NgPlural.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
@@ -2305,32 +2304,31 @@
         Object.defineProperty(NgStyle.prototype, "ngStyle", {
             set: function (v) {
                 this._ngStyle = v;
-                if (isBlank(this._differ) && isPresent(v)) {
-                    this._differ = this._differs.find(this._ngStyle).create(null);
+                if (!this._differ && v) {
+                    this._differ = this._differs.find(v).create(null);
                 }
             },
             enumerable: true,
             configurable: true
         });
         NgStyle.prototype.ngDoCheck = function () {
-            if (isPresent(this._differ)) {
+            if (this._differ) {
                 var changes = this._differ.diff(this._ngStyle);
-                if (isPresent(changes)) {
+                if (changes) {
                     this._applyChanges(changes);
                 }
             }
         };
         NgStyle.prototype._applyChanges = function (changes) {
             var _this = this;
-            changes.forEachRemovedItem(function (record) { _this._setStyle(record.key, null); });
-            changes.forEachAddedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
+            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
         };
-        NgStyle.prototype._setStyle = function (name, val) {
-            var nameParts = name.split('.');
-            var nameToSet = nameParts[0];
-            var valToSet = isPresent(val) && nameParts.length === 2 ? "" + val + nameParts[1] : val;
-            this._renderer.setElementStyle(this._ngEl.nativeElement, nameToSet, valToSet);
+        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+            var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
+            value = value !== null && value !== void (0) && unit ? "" + value + unit : value;
+            this._renderer.setElementStyle(this._ngEl.nativeElement, name, value);
         };
         NgStyle.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },

@@ -70,5 +70,5 @@ export declare class NgStyle implements DoCheck {
     };
     ngDoCheck(): void;
     private _applyChanges(changes);
-    private _setStyle(name, val);
+    private _setStyle(nameAndUnit, value);
 }

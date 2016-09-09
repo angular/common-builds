@@ -7,7 +7,6 @@
  */
 import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ListWrapper } from '../facade/collection';
-import { isBlank, isPresent, normalizeBlank } from '../facade/lang';
 var _CASE_DEFAULT = new Object();
 export var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
@@ -87,9 +86,9 @@ export var NgSwitch = (function () {
             // Add the ViewContainers matching the value (with a fallback to default)
             this._useDefault = false;
             var views = this._valueViews.get(value);
-            if (isBlank(views)) {
+            if (!views) {
                 this._useDefault = true;
-                views = normalizeBlank(this._valueViews.get(_CASE_DEFAULT));
+                views = this._valueViews.get(_CASE_DEFAULT) || null;
             }
             this._activateViews(views);
             this._switchValue = value;
@@ -130,7 +129,7 @@ export var NgSwitch = (function () {
     /** @internal */
     NgSwitch.prototype._activateViews = function (views) {
         // TODO(vicb): assert(this._activeViews.length === 0);
-        if (isPresent(views)) {
+        if (views) {
             for (var i = 0; i < views.length; i++) {
                 views[i].create();
             }
@@ -140,7 +139,7 @@ export var NgSwitch = (function () {
     /** @internal */
     NgSwitch.prototype._registerView = function (value, view) {
         var views = this._valueViews.get(value);
-        if (isBlank(views)) {
+        if (!views) {
             views = [];
             this._valueViews.set(value, views);
         }

@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Attribute, Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { isPresent } from '../facade/lang';
 import { NgLocalization, getPluralCategory } from '../localization';
 import { SwitchView } from './ng_switch';
 /**
@@ -71,20 +70,21 @@ export var NgPlural = (function () {
     /** @internal */
     NgPlural.prototype._updateView = function () {
         this._clearViews();
-        var key = getPluralCategory(this._switchValue, Object.keys(this._caseViews), this._localization);
+        var cases = Object.keys(this._caseViews);
+        var key = getPluralCategory(this._switchValue, cases, this._localization);
         this._activateView(this._caseViews[key]);
     };
     /** @internal */
     NgPlural.prototype._clearViews = function () {
-        if (isPresent(this._activeView))
+        if (this._activeView)
             this._activeView.destroy();
     };
     /** @internal */
     NgPlural.prototype._activateView = function (view) {
-        if (!isPresent(view))
-            return;
-        this._activeView = view;
-        this._activeView.create();
+        if (view) {
+            this._activeView = view;
+            this._activeView.create();
+        }
     };
     NgPlural.decorators = [
         { type: Directive, args: [{ selector: '[ngPlural]' },] },

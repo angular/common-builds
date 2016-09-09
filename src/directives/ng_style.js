@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angular/core';
-import { isBlank, isPresent } from '../facade/lang';
 /**
  * The `NgStyle` directive changes styles based on a result of expression evaluation.
  *
@@ -70,32 +69,31 @@ export var NgStyle = (function () {
     Object.defineProperty(NgStyle.prototype, "ngStyle", {
         set: function (v) {
             this._ngStyle = v;
-            if (isBlank(this._differ) && isPresent(v)) {
-                this._differ = this._differs.find(this._ngStyle).create(null);
+            if (!this._differ && v) {
+                this._differ = this._differs.find(v).create(null);
             }
         },
         enumerable: true,
         configurable: true
     });
     NgStyle.prototype.ngDoCheck = function () {
-        if (isPresent(this._differ)) {
+        if (this._differ) {
             var changes = this._differ.diff(this._ngStyle);
-            if (isPresent(changes)) {
+            if (changes) {
                 this._applyChanges(changes);
             }
         }
     };
     NgStyle.prototype._applyChanges = function (changes) {
         var _this = this;
-        changes.forEachRemovedItem(function (record) { _this._setStyle(record.key, null); });
-        changes.forEachAddedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
-        changes.forEachChangedItem(function (record) { _this._setStyle(record.key, record.currentValue); });
+        changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+        changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
     };
-    NgStyle.prototype._setStyle = function (name, val) {
-        var nameParts = name.split('.');
-        var nameToSet = nameParts[0];
-        var valToSet = isPresent(val) && nameParts.length === 2 ? "" + val + nameParts[1] : val;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, nameToSet, valToSet);
+    NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+        var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
+        value = value !== null && value !== void (0) && unit ? "" + value + unit : value;
+        this._renderer.setElementStyle(this._ngEl.nativeElement, name, value);
     };
     NgStyle.decorators = [
         { type: Directive, args: [{ selector: '[ngStyle]' },] },
