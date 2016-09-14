@@ -2523,29 +2523,27 @@
     var _observableStrategy = new ObservableStrategy();
     // avoid unused import when Promise union types are erased
     /**
+     * @ngModule CommonModule
+     * @whatItDoes Unwraps a value from an asynchronous primitive.
+     * @howToUse `observable_or_promise_expression | async`
+     * @description
      * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
-     * emitted.
-     * When a new value is emitted, the `async` pipe marks the component to be checked for changes.
-     * When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
+     * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
      * potential memory leaks.
      *
-     * ## Usage
-     *
-     *     object | async
-     *
-     * where `object` is of type `Observable` or of type `Promise`.
      *
      * ## Examples
      *
      * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
      * promise.
      *
-     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipePromise'}
+     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
      *
      * It's also possible to use `async` with Observables. The example below binds the `time` Observable
-     * to the view. Every 500ms, the `time` Observable updates the view with the current time.
+     * to the view. The Observable continuesly updates the view with the current time.
      *
-     * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipeObservable'}
+     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
      *
      * @stable
      */
@@ -2828,23 +2826,25 @@
     }());
 
     /**
-     * Formats a date value to a string based on the requested format.
+     * @ngModule CommonModule
+     * @whatItDoes Formats a date according to locale rules.
+     * @howToUse `date_expression | date[:format]`
+     * @description
      *
-     * WARNINGS:
-     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
-     *   Instead users should treat the date as an immutable object and change the reference when the
-     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
-     *   which would be an expensive operation).
-     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
-     *   browsers.
+     * Where:
+     * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * - `format` indicates which date/time components to include. The format can be predifined as
+     *   shown below or custom as shown in the table.
+     *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
+     *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
+     *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
+     *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
+     *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
+     *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
+     *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
+     *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
      *
-     * ## Usage
-     *
-     *     expression | date[:format]
-     *
-     * where `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
-     * (https://www.w3.org/TR/NOTE-datetime) and `format` indicates which date/time components to
-     * include:
      *
      *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
      *  |-----------|:------:|--------------|-------------------|-----------|-----------|
@@ -2865,18 +2865,15 @@
      * In javascript, only the components specified will be respected (not the ordering,
      * punctuations, ...) and details of the formatting will be dependent on the locale.
      *
-     * `format` can also be one of the following predefined formats:
-     *
-     *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
-     *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
-     *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
-     *  - `'longDate'`: equivalent to `'yMMMMd'` (e.g. September 3, 2010 for en-US)
-     *  - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. Sep 3, 2010 for en-US)
-     *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
-     *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
-     *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
-     *
      * Timezone of the formatted text will be the local system timezone of the end-user's machine.
+     *
+     * WARNINGS:
+     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+     *   Instead users should treat the date as an immutable object and change the reference when the
+     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+     *   which would be an expensive operation).
+     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+     *   browsers.
      *
      * ### Examples
      *
@@ -2890,7 +2887,7 @@
      *     {{ dateObj | date:'mmss' }}        // output is '43:11'
      * ```
      *
-     * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
+     * {@example common/pipes/ts/date_pipe.ts region='DatePipe'}
      *
      * @stable
      */
@@ -2948,39 +2945,19 @@
 
     var _INTERPOLATION_REGEXP = /#/g;
     /**
-     *  Maps a value to a string that pluralizes the value properly.
+     * @ngModule CommonModule
+     * @whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
+     * @howToUse `expression | i18nPlural:mapping`
+     * @description
      *
-     *  ## Usage
-     *
-     *      expression | i18nPlural:mapping
-     *
-     *  where `expression` is a number and `mapping` is an object that mimics the ICU format,
-     *  see http://userguide.icu-project.org/formatparse/messages
+     *  Where:
+     *  - `expression` is a number.
+     *  - `mapping` is an object that mimics the ICU format, see
+     *    http://userguide.icu-project.org/formatparse/messages
      *
      *  ## Example
      *
-     *  ```
-     *  @Component({
-     *    selector: 'app',
-     *    template: `
-     *      <div>
-     *        {{ messages.length | i18nPlural: messageMapping }}
-     *      </div>
-     *    `,
-     *    // best practice is to define the locale at the application level
-     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
-     *  })
-     *
-     *  class MyApp {
-     *    messages: any[];
-     *    messageMapping: {[k:string]: string} = {
-     *      '=0': 'No messages.',
-     *      '=1': 'One message.',
-     *      'other': '# messages.'
-     *    }
-     *    ...
-     *  }
-     *  ```
+     * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
      *
      * @experimental
      */
@@ -3008,33 +2985,18 @@
     }());
 
     /**
+     * @ngModule CommonModule
+     * @whatItDoes Generic selector that displays the string that matches the current value.
+     * @howToUse `expression | i18nSelect:mapping`
+     * @description
      *
-     *  Generic selector that displays the string that matches the current value.
-     *
-     *  ## Usage
-     *
-     *  expression | i18nSelect:mapping
-     *
-     *  where `mapping` is an object that indicates the text that should be displayed
+     *  Where:
+     *  - `mapping`: is an object that indicates the text that should be displayed
      *  for different values of the provided `expression`.
      *
      *  ## Example
      *
-     *  ```
-     *  <div>
-     *    {{ gender | i18nSelect: inviteMap }}
-     *  </div>
-     *
-     *  class MyApp {
-     *    gender: string = 'male';
-     *    inviteMap: any = {
-     *      'male': 'Invite him.',
-     *      'female': 'Invite her.',
-     *      'other': 'Invite them.'
-     *    }
-     *    ...
-     *  }
-     *  ```
+     * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
      *
      *  @experimental
      */
@@ -3058,10 +3020,15 @@
     }());
 
     /**
-     * Transforms any input value using `JSON.stringify`. Useful for debugging.
+     * @ngModule CommonModule
+     * @whatItDoes Converts value into JSON string.
+     * @howToUse `expression | json`
+     * @description
+     *
+     * Converts value into string using `JSON.stringify`. Useful for debugging.
      *
      * ### Example
-     * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
+     * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
      *
      * @stable
      */
@@ -3078,11 +3045,16 @@
     }());
 
     /**
-     * Transforms text to lowercase.
+     * @ngModule CommonModule
+     * @whatItDoes Transforms string to lowercase.
+     * @howToUse `expression | lowercase`
+     * @description
+     *
+     * Converts value into lowercase string using `String.prototype.toLowerCase()`.
      *
      * ### Example
      *
-     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
+     * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
      *
      * @stable
      */
@@ -3149,31 +3121,29 @@
         });
     }
     /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     * @ngModule CommonModule
+     * @whatItDoes Formats a number according to locale rules.
+     * @howToUse `number_expression | number[:digitInfo]`
      *
-     * Formats a number as local text. i.e. group sizing and separator and other locale-specific
+     * Formats a number as text. Group sizing and separator and other locale-specific
      * configurations are based on the active locale.
      *
-     * ### Usage
-     *
-     *     expression | number[:digitInfo]
-     *
-     * where `expression` is a number and `digitInfo` has the following format:
-     *
-     *     {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
-     *
-     * - minIntegerDigits is the minimum number of integer digits to use. Defaults to 1.
-     * - minFractionDigits is the minimum number of digits after fraction. Defaults to 0.
-     * - maxFractionDigits is the maximum number of digits after fraction. Defaults to 3.
+     * where `expression` is a number:
+     *  - `digitInfo` is a `string` which has a following format: <br>
+     *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
      *
      * For more information on the acceptable range for each of these numbers and other
      * details see your native internationalization library.
      *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
+     *
      * ### Example
      *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
+     * {@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
      *
      * @stable
      */
@@ -3195,21 +3165,22 @@
         return DecimalPipe;
     }());
     /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     * @ngModule CommonModule
+     * @whatItDoes Formats a number as a percentage according to locale rules.
+     * @howToUse `number_expression | percent[:digitInfo]`
      *
-     * Formats a number as local percent.
+     * @description
      *
-     * ### Usage
+     * Formats a number as percentage.
      *
-     *     expression | percent[:digitInfo]
+     * - `digitInfo` See {@link DecimalPipe} for detailed description.
      *
-     * For more information about `digitInfo` see {@link DecimalPipe}
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
      *
      * ### Example
      *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
+     * {@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
      *
      * @stable
      */
@@ -3231,26 +3202,26 @@
         return PercentPipe;
     }());
     /**
-     * WARNING: this pipe uses the Internationalization API.
-     * Therefore it is only reliable in Chrome and Opera browsers. For other browsers please use a
-     * polyfill, for example: [https://github.com/andyearnshaw/Intl.js/].
+     * @ngModule CommonModule
+     * @whatItDoes Formats a number as currency using locale rules.
+     * @howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
+     * @description
      *
+     * Use `currency` to format a number as currency.
      *
-     * Formats a number as local currency.
+     * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+     *    as `USD` for the US dollar and `EUR` for the euro.
+     * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
+     *   - `true`: use symbol (e.g. `$`).
+     *   - `false`(default): use code (e.g. `USD`).
+     * - `digitInfo` See {@link DecimalPipe} for detailed description.
      *
-     * ### Usage
-     *
-     *     expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]
-     *
-     * where `currencyCode` is the ISO 4217 currency code, such as "USD" for the US dollar and
-     * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
-     * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
-     * is `false`.
-     * For more information about `digitInfo` see {@link DecimalPipe}.
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
      *
      * ### Example
      *
-     * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
+     * {@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
      *
      * @stable
      */
@@ -3275,48 +3246,37 @@
     }());
 
     /**
-     * Creates a new List or String containing only a subset (slice) of the
-     * elements.
+     * @ngModule CommonModule
+     * @whatItDoes Creates a new List or String containing a subset (slice) of the elements.
+     * @howToUse `array_or_string_expression | slice:start[:end]`
+     * @description
      *
-     * The starting index of the subset to return is specified by the `start` parameter.
+     * Where the input expression is a `List` or `String`, and:
+     * - `start`: The starting index of the subset to return.
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * - `end`: The ending index of the subset to return.
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
      *
-     * The ending index of the subset to return is specified by the optional `end` parameter.
-     *
-     * ### Usage
-     *
-     *     expression | slice:start[:end]
-     *
-     * All behavior is based on the expected behavior of the JavaScript API
-     * Array.prototype.slice() and String.prototype.slice()
-     *
-     * Where the input expression is a [List] or [String], and `start` is:
-     *
-     * - **a positive integer**: return the item at _start_ index and all items after
-     * in the list or string expression.
-     * - **a negative integer**: return the item at _start_ index from the end and all items after
-     * in the list or string expression.
-     * - **`|start|` greater than the size of the expression**: return an empty list or string.
-     * - **`|start|` negative greater than the size of the expression**: return entire list or
-     * string expression.
-     *
-     * and where `end` is:
-     *
-     * - **omitted**: return all items until the end of the input
-     * - **a positive integer**: return all items before _end_ index of the list or string
-     * expression.
-     * - **a negative integer**: return all items before _end_ index from the end of the list
-     * or string expression.
+     * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
+     * and `String.prototype.slice()`.
      *
      * When operating on a [List], the returned list is always a copy even when all
      * the elements are being returned.
      *
-     * When operating on a blank value, returns it.
+     * When operating on a blank value, the pipe returns the blank value.
      *
      * ## List Example
      *
      * This `ngFor` example:
      *
-     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_list'}
+     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
      *
      * produces the following:
      *
@@ -3325,7 +3285,7 @@
      *
      * ## String Examples
      *
-     * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
+     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
      *
      * @stable
      */
@@ -3354,11 +3314,16 @@
     }());
 
     /**
-     * Implements uppercase transforms to text.
+     * @ngModule CommonModule
+     * @whatItDoes Transforms string to uppercase.
+     * @howToUse `expression | uppercase`
+     * @description
+     *
+     * Converts value into lowercase string using `String.prototype.toUpperCase()`.
      *
      * ### Example
      *
-     * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
+     * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
      *
      * @stable
      */
