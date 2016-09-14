@@ -1486,63 +1486,28 @@
     })();
 
     /**
-     * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
-     * an expression's evaluation result.
+     * @ngModule CommonModule
      *
-     * The result of an expression evaluation is interpreted differently depending on type of
-     * the expression evaluation result:
-     * - `string` - all the CSS classes listed in a string (space delimited) are added
-     * - `Array` - all the CSS classes (Array elements) are added
-     * - `Object` - each key corresponds to a CSS class name while values are interpreted as expressions
-     * evaluating to `Boolean`. If a given expression evaluates to `true` a corresponding CSS class
-     * is added - otherwise it is removed.
+     * @whatItDoes Adds and removes CSS classes on an HTML element.
      *
-     * While the `NgClass` directive can interpret expressions evaluating to `string`, `Array`
-     * or `Object`, the `Object`-based version is the most often used and has an advantage of keeping
-     * all the CSS class names in a template.
-     *
-     * ### Example ([live demo](http://plnkr.co/edit/a4YdtmWywhJ33uqfpPPn?p=preview)):
-     *
+     * @howToUse
      * ```
-     * import {Component} from '@angular/core';
-     * import {NgClass} from '@angular/common';
+     *     <some-element [ngClass]="'first second'">...</some-element>
      *
-     * @Component({
-     *   selector: 'toggle-button',
-     *   inputs: ['isDisabled'],
-     *   template: `
-     *      <div class="button" [ngClass]="{active: isOn, disabled: isDisabled}"
-     *          (click)="toggle(!isOn)">
-     *          Click me!
-     *      </div>`,
-     *   styles: [`
-     *     .button {
-     *       width: 120px;
-     *       border: medium solid black;
-     *     }
+     *     <some-element [ngClass]="['first', 'second']">...</some-element>
      *
-     *     .active {
-     *       background-color: red;
-     *    }
+     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
      *
-     *     .disabled {
-     *       color: gray;
-     *       border: medium solid gray;
-     *     }
-     *   `],
-     *   directives: [NgClass]
-     * })
-     * class ToggleButton {
-     *   isOn = false;
-     *   isDisabled = false;
-     *
-     *   toggle(newState) {
-     *     if (!this.isDisabled) {
-     *       this.isOn = newState;
-     *     }
-     *   }
-     * }
+     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
      * ```
+     *
+     * @description
+     *
+     * The CSS classes are updated as follow depending on the type of the expression evaluation:
+     * - `string` - the CSS classes listed in a string (space delimited) are added,
+     * - `Array` - the CSS classes (Array elements) are added,
+     * - `Object` - keys are CSS class names that get added when the expression given in the value
+     *              evaluates to a truthy value, otherwise class are removed.
      *
      * @stable
      */
@@ -1916,58 +1881,44 @@
         return SwitchView;
     }());
     /**
-     * Adds or removes DOM sub-trees when their match expressions match the switch expression.
+     * @ngModule CommonModule
      *
-     * Elements within `NgSwitch` but without `NgSwitchCase` or `NgSwitchDefault` directives will be
-     * preserved at the location as specified in the template.
+     * @whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
+     *             expression.
      *
-     * `NgSwitch` simply inserts nested elements based on which match expression matches the value
-     * obtained from the evaluated switch expression. In other words, you define a container element
-     * (where you place the directive with a switch expression on the
-     * `[ngSwitch]="..."` attribute), define any inner elements inside of the directive and
-     * place a `[ngSwitchCase]` attribute per element.
-     *
-     * The `ngSwitchCase` property is used to inform `NgSwitch` which element to display when the
-     * expression is evaluated. If a matching expression is not found via a `ngSwitchCase` property
-     * then an element with the `ngSwitchDefault` attribute is displayed.
-     *
-     * ### Example ([live demo](http://plnkr.co/edit/DQMTII95CbuqWrl3lYAs?p=preview))
-     *
-     * ```typescript
-     * @Component({
-     *   selector: 'app',
-     *   template: `
-     *     <p>Value = {{value}}</p>
-     *     <button (click)="inc()">Increment</button>
-     *
-     *     <div [ngSwitch]="value">
-     *       <p *ngSwitchCase="'init'">increment to start</p>
-     *       <p *ngSwitchCase="0">0, increment again</p>
-     *       <p *ngSwitchCase="1">1, increment again</p>
-     *       <p *ngSwitchCase="2">2, stop incrementing</p>
-     *       <p *ngSwitchDefault>&gt; 2, STOP!</p>
-     *     </div>
-     *
-     *     <!-- alternate syntax -->
-     *
-     *     <p [ngSwitch]="value">
-     *       <template ngSwitchCase="init">increment to start</template>
-     *       <template [ngSwitchCase]="0">0, increment again</template>
-     *       <template [ngSwitchCase]="1">1, increment again</template>
-     *       <template [ngSwitchCase]="2">2, stop incrementing</template>
-     *       <template ngSwitchDefault>&gt; 2, STOP!</template>
-     *     </p>
-     *   `,
-     *   directives: [NgSwitch, NgSwitchCase, NgSwitchDefault]
-     * })
-     * export class App {
-     *   value = 'init';
-     *
-     *   inc() {
-     *     this.value = this.value === 'init' ? 0 : this.value + 1;
-     *   }
-     * }
+     * @howToUse
      * ```
+     *     <container-element [ngSwitch]="switch_expression">
+     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *       <some-element *ngSwitchCase="match_expression_2">...</some-element>
+     *       <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
+     *       <ng-container *ngSwitchCase="match_expression_3">
+     *         <!-- use a ng-container to group multiple root nodes -->
+     *         <inner-element></inner-element>
+     *         <inner-other-element></inner-other-element>
+     *       </ng-container>
+     *       <some-element *ngSwitchDefault>...</p>
+     *     </container-element>
+     * ```
+     * @description
+     *
+     * `NgSwitch` stamps out nested views when their match expression value matches the value of the
+     * switch expression.
+     *
+     * In other words:
+     * - you define a container element (where you place the directive with a switch expression on the
+     * `[ngSwitch]="..."` attribute)
+     * - you define inner views inside the `NgSwitch` and place a `*ngSwitchCase` attribute on the view
+     * root elements.
+     *
+     * Elements within `NgSwitch` but outside of a `NgSwitchCase` or `NgSwitchDefault` directives will
+     * be
+     * preserved at the location.
+     *
+     * The `ngSwitchCase` directive informs the parent `NgSwitch` of which view to display when the
+     * expression is evaluated.
+     * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
+     * stamped out.
      *
      * @stable
      */
@@ -2067,10 +2018,23 @@
         return NgSwitch;
     }());
     /**
-     * Insert the sub-tree when the `ngSwitchCase` expression evaluates to the same value as the
-     * enclosing switch expression.
+     * @ngModule CommonModule
      *
-     * If multiple match expression match the switch expression value, all of them are displayed.
+     * @whatItDoes Creates a view that will be added/removed from the parent {@link NgSwitch} when the
+     *             given expression evaluate to respectively the same/different value as the switch
+     *             expression.
+     *
+     * @howToUse
+     *     <container-element [ngSwitch]="switch_expression">
+     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *     </container-element>
+     *
+     * @description
+     *
+     * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
+     * expression.
+     *
+     * If multiple match expressions match the switch expression value, all of them are displayed.
      *
      * See {@link NgSwitch} for more details and example.
      *
@@ -2107,8 +2071,21 @@
         return NgSwitchCase;
     }());
     /**
-     * Default case statements are displayed when no match expression matches the switch expression
-     * value.
+     * @ngModule CommonModule
+     * @whatItDoes Creates a view that is added to the parent {@link NgSwitch} when no case expressions
+     * match the
+     *             switch expression.
+     *
+     * @howToUse
+     *     <container-element [ngSwitch]="switch_expression">
+     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *       <some-other-element *ngSwitchDefault>...</some-other-element>
+     *     </container-element>
+     *
+     * @description
+     *
+     * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
+     * expression.
      *
      * See {@link NgSwitch} for more details and example.
      *
@@ -2131,48 +2108,35 @@
     }());
 
     /**
-     * `ngPlural` is an i18n directive that displays DOM sub-trees that match the switch expression
-     * value, or failing that, DOM sub-trees that match the switch expression's pluralization category.
+     * @ngModule CommonModule
+     *
+     * @whatItDoes Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
+     *
+     * @howToUse
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
+     *   <ng-container *ngPluralCase="'=1'">there is one</ng-container>
+     *   <ng-container *ngPluralCase="'few'">there are a few</ng-container>
+     *   <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
+     * </some-element>
+     * ```
+     *
+     * @description
+     *
+     * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
+     * that match the switch expression's pluralization category.
      *
      * To use this directive you must provide a container element that sets the `[ngPlural]` attribute
-     * to a
-     * switch expression.
-     *    - Inner elements defined with an `[ngPluralCase]` attribute will display based on their
-     * expression.
-     *    - If `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
-     * matches the switch expression exactly.
-     *    - Otherwise, the view will be treated as a "category match", and will only display if exact
-     * value matches aren't found and the value maps to its category for the defined locale.
+     * to a switch expression. Inner elements with a `[ngPluralCase]` will display based on their
+     * expression:
+     * - if `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
+     *   matches the switch expression exactly,
+     * - otherwise, the view will be treated as a "category match", and will only display if exact
+     *   value matches aren't found and the value maps to its category for the defined locale.
      *
-     * ```typescript
-     * @Component({
-     *    selector: 'app',
-     *    // best practice is to define the locale at the application level
-     *    providers: [{provide: LOCALE_ID, useValue: 'en_US'}]
-     * })
-     * @View({
-     *   template: `
-     *     <p>Value = {{value}}</p>
-     *     <button (click)="inc()">Increment</button>
+     * See http://cldr.unicode.org/index/cldr-spec/plural-rules
      *
-     *     <div [ngPlural]="value">
-     *       <template ngPluralCase="=0">there is nothing</template>
-     *       <template ngPluralCase="=1">there is one</template>
-     *       <template ngPluralCase="few">there are a few</template>
-     *       <template ngPluralCase="other">there is some number</template>
-     *     </div>
-     *   `,
-     *   directives: [NgPlural, NgPluralCase]
-     * })
-     * export class App {
-     *   value = 'init';
-     *
-     *   inc() {
-     *     this.value = this.value === 'init' ? 0 : this.value + 1;
-     *   }
-     * }
-     *
-     * ```
      * @experimental
      */
     var NgPlural = (function () {
@@ -2221,6 +2185,19 @@
         return NgPlural;
     }());
     /**
+     * @ngModule CommonModule
+     *
+     * @whatItDoes Creates a view that will be added/removed from the parent {@link NgPlural} when the
+     *             given expression matches the plural expression according to CLDR rules.
+     *
+     * @howToUse
+     *     <some-element [ngPlural]="value">
+     *       <ng-container *ngPluralCase="'=0'">...</ng-container>
+     *       <ng-container *ngPluralCase="'other'">...</ng-container>
+     *     </some-element>
+     *
+     * See {@link NgPlural} for more details and example.
+     *
      * @experimental
      */
     var NgPluralCase = (function () {
@@ -2242,56 +2219,24 @@
     }());
 
     /**
-     * The `NgStyle` directive changes styles based on a result of expression evaluation.
+     * @ngModule CommonModule
      *
-     * An expression assigned to the `ngStyle` property must evaluate to an object and the
-     * corresponding element styles are updated based on changes to this object. Style names to update
-     * are taken from the object's keys, and values - from the corresponding object's values.
+     * @whatItDoes Update an HTML element styles.
      *
-     * ### Syntax
-     *
-     * - `<div [ngStyle]="{'font-style': styleExp}"></div>`
-     * - `<div [ngStyle]="{'max-width.px': widthExp}"></div>`
-     * - `<div [ngStyle]="styleExp"></div>` - here the `styleExp` must evaluate to an object
-     *
-     * ### Example ([live demo](http://plnkr.co/edit/YamGS6GkUh9GqWNQhCyM?p=preview)):
-     *
+     * @howToUse
      * ```
-     * import {Component} from '@angular/core';
-     * import {NgStyle} from '@angular/common';
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
      *
-     * @Component({
-     *  selector: 'ngStyle-example',
-     *  template: `
-     *    <h1 [ngStyle]="{'font-style': style, 'font-size': size, 'font-weight': weight}">
-     *      Change style of this text!
-     *    </h1>
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
      *
-     *    <hr>
-     *
-     *    <label>Italic: <input type="checkbox" (change)="changeStyle($event)"></label>
-     *    <label>Bold: <input type="checkbox" (change)="changeWeight($event)"></label>
-     *    <label>Size: <input type="text" [value]="size" (change)="size = $event.target.value"></label>
-     *  `,
-     *  directives: [NgStyle]
-     * })
-     * export class NgStyleExample {
-     *    style = 'normal';
-     *    weight = 'normal';
-     *    size = '20px';
-     *
-     *    changeStyle($event: any) {
-     *      this.style = $event.target.checked ? 'italic' : 'normal';
-     *    }
-     *
-     *    changeWeight($event: any) {
-     *      this.weight = $event.target.checked ? 'bold' : 'normal';
-     *    }
-     * }
+     * <some-element [ngStyle]="objExp">...</some-element>
      * ```
      *
-     * In this example the `font-style`, `font-size` and `font-weight` styles will be updated
-     * based on the `style` property's value changes.
+     * @description
+     *
+     * The styles are updated according to the value of the expression evaluation:
+     * - keys are style names with an option `.<unit>` suffix (ie 'top.px', 'font-style.em'),
+     * - values are the values assigned to those properties (expressed in the given unit).
      *
      * @stable
      */
@@ -2346,20 +2291,24 @@
     }());
 
     /**
-     * Creates and inserts an embedded view based on a prepared `TemplateRef`.
-     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
-     * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
-     * available within the `TemplateRef`.
+     * @ngModule CommonModule
      *
-     * Note: using the key `$implicit` in the context object will set it's value as default.
+     * @whatItDoes Inserts an embedded view from a prepared `TemplateRef`
      *
-     * ### Syntax
-     *
+     * @howToUse
      * ```
      * <template [ngTemplateOutlet]="templateRefExpression"
      *           [ngOutletContext]="objectExpression">
      * </template>
      * ```
+     *
+     * @description
+     *
+     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
+     * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
+     * available within the `TemplateRef`.
+     *
+     * Note: using the key `$implicit` in the context object will set it's value as default.
      *
      * @experimental
      */
