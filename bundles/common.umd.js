@@ -2025,10 +2025,11 @@
      *             expression.
      *
      * @howToUse
-     *     <container-element [ngSwitch]="switch_expression">
-     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
-     *     </container-element>
-     *
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     * </container-element>
+     *```
      * @description
      *
      * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
@@ -2077,10 +2078,12 @@
      *             switch expression.
      *
      * @howToUse
-     *     <container-element [ngSwitch]="switch_expression">
-     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
-     *       <some-other-element *ngSwitchDefault>...</some-other-element>
-     *     </container-element>
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *   <some-other-element *ngSwitchDefault>...</some-other-element>
+     * </container-element>
+     * ```
      *
      * @description
      *
@@ -2191,10 +2194,12 @@
      *             given expression matches the plural expression according to CLDR rules.
      *
      * @howToUse
-     *     <some-element [ngPlural]="value">
-     *       <ng-container *ngPluralCase="'=0'">...</ng-container>
-     *       <ng-container *ngPluralCase="'other'">...</ng-container>
-     *     </some-element>
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <ng-container *ngPluralCase="'=0'">...</ng-container>
+     *   <ng-container *ngPluralCase="'other'">...</ng-container>
+     * </some-element>
+     *```
      *
      * See {@link NgPlural} for more details and example.
      *
