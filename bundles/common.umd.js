@@ -2331,7 +2331,7 @@
             enumerable: true,
             configurable: true
         });
-        NgTemplateOutlet.prototype.ngOnChanges = function () {
+        NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
             if (this._viewRef) {
                 this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
             }
