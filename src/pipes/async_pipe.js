@@ -6,7 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core';
-import { isBlank, isPresent, isPromise } from '../facade/lang';
+import { isBlank, isPresent } from '../facade/lang';
+import { isPromise } from '../private_import_core';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 var ObservableStrategy = (function () {
     function ObservableStrategy() {
