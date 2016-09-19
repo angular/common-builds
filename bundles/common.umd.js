@@ -139,7 +139,7 @@
         }
         return typeof type;
     }
-    var Date = global$1.Date;
+    var Date$1 = global$1.Date;
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
@@ -152,12 +152,6 @@
     function isBlank(obj) {
         return obj === undefined || obj === null;
     }
-    function isNumber(obj) {
-        return typeof obj === 'number';
-    }
-    function isString(obj) {
-        return typeof obj === 'string';
-    }
     function isStringMap(obj) {
         return typeof obj === 'object' && obj !== null;
     }
@@ -165,7 +159,7 @@
         return Array.isArray(obj);
     }
     function isDate(obj) {
-        return obj instanceof Date && !isNaN(obj.valueOf());
+        return obj instanceof Date$1 && !isNaN(obj.valueOf());
     }
     function stringify(token) {
         if (typeof token === 'string') {
@@ -184,74 +178,6 @@
         var newLineIndex = res.indexOf('\n');
         return (newLineIndex === -1) ? res : res.substring(0, newLineIndex);
     }
-    var StringWrapper = (function () {
-        function StringWrapper() {
-        }
-        StringWrapper.fromCharCode = function (code) { return String.fromCharCode(code); };
-        StringWrapper.charCodeAt = function (s, index) { return s.charCodeAt(index); };
-        StringWrapper.split = function (s, regExp) { return s.split(regExp); };
-        StringWrapper.equals = function (s, s2) { return s === s2; };
-        StringWrapper.stripLeft = function (s, charVal) {
-            if (s && s.length) {
-                var pos = 0;
-                for (var i = 0; i < s.length; i++) {
-                    if (s[i] != charVal)
-                        break;
-                    pos++;
-                }
-                s = s.substring(pos);
-            }
-            return s;
-        };
-        StringWrapper.stripRight = function (s, charVal) {
-            if (s && s.length) {
-                var pos = s.length;
-                for (var i = s.length - 1; i >= 0; i--) {
-                    if (s[i] != charVal)
-                        break;
-                    pos--;
-                }
-                s = s.substring(0, pos);
-            }
-            return s;
-        };
-        StringWrapper.replace = function (s, from, replace) {
-            return s.replace(from, replace);
-        };
-        StringWrapper.replaceAll = function (s, from, replace) {
-            return s.replace(from, replace);
-        };
-        StringWrapper.slice = function (s, from, to) {
-            if (from === void 0) { from = 0; }
-            if (to === void 0) { to = null; }
-            return s.slice(from, to === null ? undefined : to);
-        };
-        StringWrapper.replaceAllMapped = function (s, from, cb) {
-            return s.replace(from, function () {
-                var matches = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    matches[_i - 0] = arguments[_i];
-                }
-                // Remove offset & string from the result array
-                matches.splice(-2, 2);
-                // The callback receives match, p1, ..., pn
-                return cb(matches);
-            });
-        };
-        StringWrapper.contains = function (s, substr) { return s.indexOf(substr) != -1; };
-        StringWrapper.compare = function (a, b) {
-            if (a < b) {
-                return -1;
-            }
-            else if (a > b) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        };
-        return StringWrapper;
-    }());
     var NumberWrapper = (function () {
         function NumberWrapper() {
         }
@@ -306,25 +232,6 @@
             return global$1.JSON.stringify(data, null, 2);
         };
         return Json;
-    }());
-    var DateWrapper = (function () {
-        function DateWrapper() {
-        }
-        DateWrapper.create = function (year, month, day, hour, minutes, seconds, milliseconds) {
-            if (month === void 0) { month = 1; }
-            if (day === void 0) { day = 1; }
-            if (hour === void 0) { hour = 0; }
-            if (minutes === void 0) { minutes = 0; }
-            if (seconds === void 0) { seconds = 0; }
-            if (milliseconds === void 0) { milliseconds = 0; }
-            return new Date(year, month - 1, day, hour, minutes, seconds, milliseconds);
-        };
-        DateWrapper.fromISOString = function (str) { return new Date(str); };
-        DateWrapper.fromMillis = function (ms) { return new Date(ms); };
-        DateWrapper.toMillis = function (date) { return date.getTime(); };
-        DateWrapper.now = function () { return new Date(); };
-        DateWrapper.toJson = function (date) { return date.toJSON(); };
-        return DateWrapper;
     }());
     var _symbolIterator = null;
     function getSymbolIterator() {
@@ -1256,70 +1163,6 @@
             return res;
         };
     })();
-    /**
-     * Wraps Javascript Objects
-     */
-    var StringMapWrapper = (function () {
-        function StringMapWrapper() {
-        }
-        StringMapWrapper.create = function () {
-            // Note: We are not using Object.create(null) here due to
-            // performance!
-            // http://jsperf.com/ng2-object-create-null
-            return {};
-        };
-        StringMapWrapper.contains = function (map, key) {
-            return map.hasOwnProperty(key);
-        };
-        StringMapWrapper.get = function (map, key) {
-            return map.hasOwnProperty(key) ? map[key] : undefined;
-        };
-        StringMapWrapper.set = function (map, key, value) { map[key] = value; };
-        StringMapWrapper.keys = function (map) { return Object.keys(map); };
-        StringMapWrapper.values = function (map) {
-            return Object.keys(map).map(function (k) { return map[k]; });
-        };
-        StringMapWrapper.isEmpty = function (map) {
-            for (var prop in map) {
-                return false;
-            }
-            return true;
-        };
-        StringMapWrapper.delete = function (map, key) { delete map[key]; };
-        StringMapWrapper.forEach = function (map, callback) {
-            for (var _i = 0, _a = Object.keys(map); _i < _a.length; _i++) {
-                var k = _a[_i];
-                callback(map[k], k);
-            }
-        };
-        StringMapWrapper.merge = function (m1, m2) {
-            var m = {};
-            for (var _i = 0, _a = Object.keys(m1); _i < _a.length; _i++) {
-                var k = _a[_i];
-                m[k] = m1[k];
-            }
-            for (var _b = 0, _c = Object.keys(m2); _b < _c.length; _b++) {
-                var k = _c[_b];
-                m[k] = m2[k];
-            }
-            return m;
-        };
-        StringMapWrapper.equals = function (m1, m2) {
-            var k1 = Object.keys(m1);
-            var k2 = Object.keys(m2);
-            if (k1.length != k2.length) {
-                return false;
-            }
-            for (var i = 0; i < k1.length; i++) {
-                var key = k1[i];
-                if (m1[key] !== m2[key]) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        return StringMapWrapper;
-    }());
     var ListWrapper = (function () {
         function ListWrapper() {
         }
@@ -2469,7 +2312,6 @@
     }());
     var _promiseStrategy = new PromiseStrategy();
     var _observableStrategy = new ObservableStrategy();
-    // avoid unused import when Promise union types are erased
     /**
      * @ngModule CommonModule
      * @whatItDoes Unwraps a value from an asynchronous primitive.
@@ -2497,25 +2339,21 @@
      */
     var AsyncPipe = (function () {
         function AsyncPipe(_ref) {
-            /** @internal */
+            this._ref = _ref;
             this._latestValue = null;
-            /** @internal */
             this._latestReturnedValue = null;
-            /** @internal */
             this._subscription = null;
-            /** @internal */
             this._obj = null;
             this._strategy = null;
-            this._ref = _ref;
         }
         AsyncPipe.prototype.ngOnDestroy = function () {
-            if (isPresent(this._subscription)) {
+            if (this._subscription) {
                 this._dispose();
             }
         };
         AsyncPipe.prototype.transform = function (obj) {
-            if (isBlank(this._obj)) {
-                if (isPresent(obj)) {
+            if (!this._obj) {
+                if (obj) {
                     this._subscribe(obj);
                 }
                 this._latestReturnedValue = this._latestValue;
@@ -2528,31 +2366,24 @@
             if (this._latestValue === this._latestReturnedValue) {
                 return this._latestReturnedValue;
             }
-            else {
-                this._latestReturnedValue = this._latestValue;
-                return _angular_core.WrappedValue.wrap(this._latestValue);
-            }
+            this._latestReturnedValue = this._latestValue;
+            return _angular_core.WrappedValue.wrap(this._latestValue);
         };
-        /** @internal */
         AsyncPipe.prototype._subscribe = function (obj) {
             var _this = this;
             this._obj = obj;
             this._strategy = this._selectStrategy(obj);
             this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
         };
-        /** @internal */
         AsyncPipe.prototype._selectStrategy = function (obj) {
             if (isPromise(obj)) {
                 return _promiseStrategy;
             }
-            else if (obj.subscribe) {
+            if (obj.subscribe) {
                 return _observableStrategy;
             }
-            else {
-                throw new InvalidPipeArgumentError(AsyncPipe, obj);
-            }
+            throw new InvalidPipeArgumentError(AsyncPipe, obj);
         };
-        /** @internal */
         AsyncPipe.prototype._dispose = function () {
             this._strategy.dispose(this._subscription);
             this._latestValue = null;
@@ -2560,7 +2391,6 @@
             this._subscription = null;
             this._obj = null;
         };
-        /** @internal */
         AsyncPipe.prototype._updateLatestValue = function (async, value) {
             if (async === this._obj) {
                 this._latestValue = value;
@@ -2851,24 +2681,13 @@
                 throw new InvalidPipeArgumentError(DatePipe, value);
             }
             if (NumberWrapper.isNumeric(value)) {
-                value = DateWrapper.fromMillis(parseFloat(value));
+                value = parseFloat(value);
             }
-            else if (isString(value)) {
-                value = DateWrapper.fromISOString(value);
-            }
-            if (StringMapWrapper.contains(DatePipe._ALIASES, pattern)) {
-                pattern = StringMapWrapper.get(DatePipe._ALIASES, pattern);
-            }
-            return DateFormatter.format(value, this._locale, pattern);
+            return DateFormatter.format(new Date(value), this._locale, DatePipe._ALIASES[pattern] || pattern);
         };
         DatePipe.prototype.supports = function (obj) {
-            if (isDate(obj) || NumberWrapper.isNumeric(obj)) {
-                return true;
-            }
-            if (isString(obj) && isDate(DateWrapper.fromISOString(obj))) {
-                return true;
-            }
-            return false;
+            return isDate(obj) || NumberWrapper.isNumeric(obj) ||
+                (typeof obj === 'string' && isDate(new Date(obj)));
         };
         /** @internal */
         DatePipe._ALIASES = {
@@ -2920,7 +2739,7 @@
                 throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
-            return StringWrapper.replaceAll(pluralMap[key], _INTERPOLATION_REGEXP, value.toString());
+            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
         };
         I18nPluralPipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
@@ -3012,7 +2831,7 @@
         LowerCasePipe.prototype.transform = function (value) {
             if (isBlank(value))
                 return value;
-            if (!isString(value)) {
+            if (typeof value !== 'string') {
                 throw new InvalidPipeArgumentError(LowerCasePipe, value);
             }
             return value.toLowerCase();
@@ -3025,15 +2844,15 @@
         return LowerCasePipe;
     }());
 
-    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(\-(\d+))?)?$/;
+    var _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
     function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
         if (isBlank(value))
             return null;
         // Convert strings to numbers
-        value = isString(value) && NumberWrapper.isNumeric(value) ? +value : value;
-        if (!isNumber(value)) {
+        value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
+        if (typeof value !== 'number') {
             throw new InvalidPipeArgumentError(pipe, value);
         }
         var minInt;
@@ -3045,7 +2864,7 @@
             minFraction = 0;
             maxFraction = 3;
         }
-        if (isPresent(digits)) {
+        if (digits) {
             var parts = digits.match(_NUMBER_FORMAT_REGEXP);
             if (parts === null) {
                 throw new Error(digits + " is not a valid digit info for number pipes");
@@ -3065,7 +2884,7 @@
             minimumFractionDigits: minFraction,
             maximumFractionDigits: maxFraction,
             currency: currency,
-            currencyAsSymbol: currencyAsSymbol
+            currencyAsSymbol: currencyAsSymbol,
         });
     }
     /**
@@ -3241,18 +3060,14 @@
         function SlicePipe() {
         }
         SlicePipe.prototype.transform = function (value, start, end) {
-            if (end === void 0) { end = null; }
             if (isBlank(value))
                 return value;
             if (!this.supports(value)) {
                 throw new InvalidPipeArgumentError(SlicePipe, value);
             }
-            if (isString(value)) {
-                return StringWrapper.slice(value, start, end);
-            }
-            return ListWrapper.slice(value, start, end);
+            return value.slice(start, end);
         };
-        SlicePipe.prototype.supports = function (obj) { return isString(obj) || isArray(obj); };
+        SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
         SlicePipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
         ];
@@ -3281,7 +3096,7 @@
         UpperCasePipe.prototype.transform = function (value) {
             if (isBlank(value))
                 return value;
-            if (!isString(value)) {
+            if (typeof value !== 'string') {
                 throw new InvalidPipeArgumentError(UpperCasePipe, value);
             }
             return value.toUpperCase();
