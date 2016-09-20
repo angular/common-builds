@@ -132,18 +132,18 @@
     }
     // Need to declare a new variable for global here since TypeScript
     // exports the original value of the symbol.
-    var global$1 = globalScope;
+    var _global = globalScope;
     function getTypeNameForDebugging(type) {
         if (type['name']) {
             return type['name'];
         }
         return typeof type;
     }
-    var Date$1 = global$1.Date;
+    var Date$1 = _global.Date;
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
-    global$1.assert = function assert(condition) {
+    _global.assert = function assert(condition) {
         // TODO: to be fixed properly via #2830, noop for now
     };
     function isPresent(obj) {
@@ -226,10 +226,10 @@
     var Json = (function () {
         function Json() {
         }
-        Json.parse = function (s) { return global$1.JSON.parse(s); };
+        Json.parse = function (s) { return _global.JSON.parse(s); };
         Json.stringify = function (data) {
             // Dart doesn't take 3 arguments
-            return global$1.JSON.stringify(data, null, 2);
+            return _global.JSON.stringify(data, null, 2);
         };
         return Json;
     }());
@@ -1091,43 +1091,8 @@
         }
     }
 
-    var Map$1 = global$1.Map;
-    var Set$1 = global$1.Set;
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Map constructor.  We work around that by manually adding the items.
-    var createMapFromPairs = (function () {
-        try {
-            if (new Map$1([[1, 2]]).size === 1) {
-                return function createMapFromPairs(pairs) { return new Map$1(pairs); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromPairs(pairs) {
-            var map = new Map$1();
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                map.set(pair[0], pair[1]);
-            }
-            return map;
-        };
-    })();
-    var createMapFromMap = (function () {
-        try {
-            if (new Map$1(new Map$1())) {
-                return function createMapFromMap(m) { return new Map$1(m); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromMap(m) {
-            var map = new Map$1();
-            m.forEach(function (v, k) { map.set(k, v); });
-            return map;
-        };
-    })();
     var _clearValues = (function () {
-        if ((new Map$1()).keys().next) {
+        if ((new Map()).keys().next) {
             return function _clearValues(m) {
                 var keyIterator = m.keys();
                 var k;
@@ -1146,7 +1111,7 @@
     // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
     var _arrayFromMap = (function () {
         try {
-            if ((new Map$1()).values().next) {
+            if ((new Map()).values().next) {
                 return function createArrayFromMap(m, getValues) {
                     return getValues ? Array.from(m.values()) : Array.from(m.keys());
                 };
@@ -1155,7 +1120,7 @@
         catch (e) {
         }
         return function createArrayFromMapWithForeach(m, getValues) {
-            var res = ListWrapper.createFixedSize(m.size), i = 0;
+            var res = new Array(m.size), i = 0;
             m.forEach(function (v, k) {
                 res[i] = getValues ? v : k;
                 i++;
@@ -1297,28 +1262,9 @@
         if (!isJsObject(obj))
             return false;
         return isArray(obj) ||
-            (!(obj instanceof Map$1) &&
+            (!(obj instanceof Map) &&
                 getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
     }
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Set constructor.  We work around that by manually adding the items.
-    var createSetFromList = (function () {
-        var test = new Set$1([1, 2, 3]);
-        if (test.size === 3) {
-            return function createSetFromList(lst) { return new Set$1(lst); };
-        }
-        else {
-            return function createSetAndPopulateFromList(lst) {
-                var res = new Set$1(lst);
-                if (res.size !== lst.length) {
-                    for (var i = 0; i < lst.length; i++) {
-                        res.add(lst[i]);
-                    }
-                }
-                return res;
-            };
-        }
-    })();
 
     /**
      * @ngModule CommonModule
