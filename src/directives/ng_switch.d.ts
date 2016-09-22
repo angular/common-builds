@@ -61,6 +61,9 @@ export declare class NgSwitch {
     private _valueViews;
     private _activeViews;
     ngSwitch: any;
+    private _emptyAllActiveViews();
+    private _activateViews(views);
+    private _deregisterView(value, view);
 }
 /**
  * @ngModule CommonModule
@@ -87,6 +90,8 @@ export declare class NgSwitch {
  * @stable
  */
 export declare class NgSwitchCase {
+    private _value;
+    private _view;
     private _switch;
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     ngSwitchCase: any;

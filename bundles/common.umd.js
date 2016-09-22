@@ -294,7 +294,13 @@
             this._platformStrategy = platformStrategy;
             var browserBaseHref = this._platformStrategy.getBaseHref();
             this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-            this._platformStrategy.onPopState(function (ev) { _this._subject.emit({ 'url': _this.path(true), 'pop': true, 'type': ev.type }); });
+            this._platformStrategy.onPopState(function (ev) {
+                _this._subject.emit({
+                    'url': _this.path(true),
+                    'pop': true,
+                    'type': ev.type,
+                });
+            });
         }
         /**
          * Returns the normalized URL path.
@@ -1748,7 +1754,6 @@
                 this._activateViews(this._valueViews.get(_CASE_DEFAULT));
             }
         };
-        /** @internal */
         NgSwitch.prototype._emptyAllActiveViews = function () {
             var activeContainers = this._activeViews;
             for (var i = 0; i < activeContainers.length; i++) {
@@ -1756,9 +1761,7 @@
             }
             this._activeViews = [];
         };
-        /** @internal */
         NgSwitch.prototype._activateViews = function (views) {
-            // TODO(vicb): assert(this._activeViews.length === 0);
             if (views) {
                 for (var i = 0; i < views.length; i++) {
                     views[i].create();
@@ -1775,7 +1778,6 @@
             }
             views.push(view);
         };
-        /** @internal */
         NgSwitch.prototype._deregisterView = function (value, view) {
             // `_CASE_DEFAULT` is used a marker for non-registered cases
             if (value === _CASE_DEFAULT)
@@ -1825,7 +1827,6 @@
     var NgSwitchCase = (function () {
         function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
             // `_CASE_DEFAULT` is used as a marker for a not yet initialized value
-            /** @internal */
             this._value = _CASE_DEFAULT;
             this._switch = ngSwitch;
             this._view = new SwitchView(viewContainer, templateRef);
@@ -1937,19 +1938,16 @@
             configurable: true
         });
         NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
-        /** @internal */
         NgPlural.prototype._updateView = function () {
             this._clearViews();
             var cases = Object.keys(this._caseViews);
             var key = getPluralCategory(this._switchValue, cases, this._localization);
             this._activateView(this._caseViews[key]);
         };
-        /** @internal */
         NgPlural.prototype._clearViews = function () {
             if (this._activeView)
                 this._activeView.destroy();
         };
-        /** @internal */
         NgPlural.prototype._activateView = function (view) {
             if (view) {
                 this._activeView = view;
