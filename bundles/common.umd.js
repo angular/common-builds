@@ -134,12 +134,8 @@
     // exports the original value of the symbol.
     var _global = globalScope;
     function getTypeNameForDebugging(type) {
-        if (type['name']) {
-            return type['name'];
-        }
-        return typeof type;
+        return type['name'] || typeof type;
     }
-    var Date$1 = _global.Date;
     // TODO: remove calls to assert in production environment
     // Note: Can't just export this and import in in other files
     // as `assert` is a reserved keyword in Dart
@@ -159,7 +155,7 @@
         return Array.isArray(obj);
     }
     function isDate(obj) {
-        return obj instanceof Date$1 && !isNaN(obj.valueOf());
+        return obj instanceof Date && !isNaN(obj.valueOf());
     }
     function stringify(token) {
         if (typeof token === 'string') {
@@ -176,7 +172,7 @@
         }
         var res = token.toString();
         var newLineIndex = res.indexOf('\n');
-        return (newLineIndex === -1) ? res : res.substring(0, newLineIndex);
+        return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
     }
     var NumberWrapper = (function () {
         function NumberWrapper() {
