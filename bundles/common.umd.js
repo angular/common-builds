@@ -1680,7 +1680,7 @@
      *         <inner-element></inner-element>
      *         <inner-other-element></inner-other-element>
      *       </ng-container>
-     *       <some-element *ngSwitchDefault>...</p>
+     *       <some-element *ngSwitchDefault>...</some-element>
      *     </container-element>
      * ```
      * @description
