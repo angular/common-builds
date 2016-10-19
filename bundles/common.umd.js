@@ -148,12 +148,6 @@
     function isBlank(obj) {
         return obj === undefined || obj === null;
     }
-    function isStringMap(obj) {
-        return typeof obj === 'object' && obj !== null;
-    }
-    function isArray(obj) {
-        return Array.isArray(obj);
-    }
     function isDate(obj) {
         return obj instanceof Date && !isNaN(obj.valueOf());
     }
@@ -177,8 +171,6 @@
     var NumberWrapper = (function () {
         function NumberWrapper() {
         }
-        NumberWrapper.toFixed = function (n, fractionDigits) { return n.toFixed(fractionDigits); };
-        NumberWrapper.equal = function (a, b) { return a === b; };
         NumberWrapper.parseIntAutoRadix = function (text) {
             var result = parseInt(text);
             if (isNaN(result)) {
@@ -205,30 +197,12 @@
             }
             throw new Error('Invalid integer literal when parsing ' + text + ' in base ' + radix);
         };
-        Object.defineProperty(NumberWrapper, "NaN", {
-            get: function () { return NaN; },
-            enumerable: true,
-            configurable: true
-        });
         NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
-        NumberWrapper.isNaN = function (value) { return isNaN(value); };
-        NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
     }());
     function isJsObject(o) {
         return o !== null && (typeof o === 'function' || typeof o === 'object');
     }
-    // Can't be all uppercase as our transpiler would think it is a special directive...
-    var Json = (function () {
-        function Json() {
-        }
-        Json.parse = function (s) { return _global.JSON.parse(s); };
-        Json.stringify = function (data) {
-            // Dart doesn't take 3 arguments
-            return _global.JSON.stringify(data, null, 2);
-        };
-        return Json;
-    }());
     var _symbolIterator = null;
     function getSymbolIterator() {
         if (isBlank(_symbolIterator)) {
@@ -1234,7 +1208,7 @@
         if (isPresent(source)) {
             for (var i = 0; i < source.length; i++) {
                 var item = source[i];
-                if (isArray(item)) {
+                if (Array.isArray(item)) {
                     _flattenArray(item, target);
                 }
                 else {
@@ -1247,7 +1221,7 @@
     function isListLikeIterable(obj) {
         if (!isJsObject(obj))
             return false;
-        return isArray(obj) ||
+        return Array.isArray(obj) ||
             (!(obj instanceof Map) &&
                 getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
     }
@@ -2670,7 +2644,7 @@
         I18nPluralPipe.prototype.transform = function (value, pluralMap) {
             if (isBlank(value))
                 return '';
-            if (!isStringMap(pluralMap)) {
+            if (typeof pluralMap !== 'object' || pluralMap === null) {
                 throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
@@ -2708,10 +2682,10 @@
         I18nSelectPipe.prototype.transform = function (value, mapping) {
             if (isBlank(value))
                 return '';
-            if (!isStringMap(mapping)) {
+            if (typeof mapping !== 'object' || mapping === null) {
                 throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
             }
-            return mapping.hasOwnProperty(value) ? mapping[value] : '';
+            return mapping[value] || '';
         };
         I18nSelectPipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
@@ -2737,7 +2711,7 @@
     var JsonPipe = (function () {
         function JsonPipe() {
         }
-        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
+        JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
         JsonPipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
         ];
