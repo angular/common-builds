@@ -148,6 +148,12 @@
     function isBlank(obj) {
         return obj === undefined || obj === null;
     }
+    function isStringMap(obj) {
+        return typeof obj === 'object' && obj !== null;
+    }
+    function isArray(obj) {
+        return Array.isArray(obj);
+    }
     function isDate(obj) {
         return obj instanceof Date && !isNaN(obj.valueOf());
     }
@@ -171,6 +177,8 @@
     var NumberWrapper = (function () {
         function NumberWrapper() {
         }
+        NumberWrapper.toFixed = function (n, fractionDigits) { return n.toFixed(fractionDigits); };
+        NumberWrapper.equal = function (a, b) { return a === b; };
         NumberWrapper.parseIntAutoRadix = function (text) {
             var result = parseInt(text);
             if (isNaN(result)) {
@@ -197,12 +205,30 @@
             }
             throw new Error('Invalid integer literal when parsing ' + text + ' in base ' + radix);
         };
+        Object.defineProperty(NumberWrapper, "NaN", {
+            get: function () { return NaN; },
+            enumerable: true,
+            configurable: true
+        });
         NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
+        NumberWrapper.isNaN = function (value) { return isNaN(value); };
+        NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
         return NumberWrapper;
     }());
     function isJsObject(o) {
         return o !== null && (typeof o === 'function' || typeof o === 'object');
     }
+    // Can't be all uppercase as our transpiler would think it is a special directive...
+    var Json = (function () {
+        function Json() {
+        }
+        Json.parse = function (s) { return _global.JSON.parse(s); };
+        Json.stringify = function (data) {
+            // Dart doesn't take 3 arguments
+            return _global.JSON.stringify(data, null, 2);
+        };
+        return Json;
+    }());
     var _symbolIterator = null;
     function getSymbolIterator() {
         if (isBlank(_symbolIterator)) {
@@ -1067,6 +1093,22 @@
         }
     }
 
+    var _clearValues = (function () {
+        if ((new Map()).keys().next) {
+            return function _clearValues(m) {
+                var keyIterator = m.keys();
+                var k;
+                while (!((k = keyIterator.next()).done)) {
+                    m.set(k.value, null);
+                }
+            };
+        }
+        else {
+            return function _clearValuesWithForeEach(m) {
+                m.forEach(function (v, k) { m.set(k, null); });
+            };
+        }
+    })();
     // Safari doesn't implement MapIterator.next(), which is used is Traceur's polyfill of Array.from
     // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
     var _arrayFromMap = (function () {
@@ -1208,7 +1250,7 @@
         if (isPresent(source)) {
             for (var i = 0; i < source.length; i++) {
                 var item = source[i];
-                if (Array.isArray(item)) {
+                if (isArray(item)) {
                     _flattenArray(item, target);
                 }
                 else {
@@ -1221,7 +1263,7 @@
     function isListLikeIterable(obj) {
         if (!isJsObject(obj))
             return false;
-        return Array.isArray(obj) ||
+        return isArray(obj) ||
             (!(obj instanceof Map) &&
                 getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
     }
@@ -1556,14 +1598,14 @@
     /**
      * Removes or recreates a portion of the DOM tree based on an {expression}.
      *
-     * If the expression assigned to `ngIf` evaluates to a falsy value then the element
+     * If the expression assigned to `ngIf` evaluates to a false value then the element
      * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
      *
      * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
      *
      * ```
      * <div *ngIf="errorCount > 0" class="error">
-     *   <!-- Error message displayed when the errorCount property in the current context is greater
+     *   <!-- Error message displayed when the errorCount property on the current context is greater
      * than 0. -->
      *   {{errorCount}} errors detected
      * </div>
@@ -1611,7 +1653,7 @@
         return NgIf;
     }());
 
-    var _CASE_DEFAULT = {};
+    var _CASE_DEFAULT = new Object();
     var SwitchView = (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -1638,7 +1680,7 @@
      *         <inner-element></inner-element>
      *         <inner-other-element></inner-other-element>
      *       </ng-container>
-     *       <some-element *ngSwitchDefault>...</some-element>
+     *       <some-element *ngSwitchDefault>...</p>
      *     </container-element>
      * ```
      * @description
@@ -1653,7 +1695,8 @@
      * root elements.
      *
      * Elements within `NgSwitch` but outside of a `NgSwitchCase` or `NgSwitchDefault` directives will
-     * be preserved at the location.
+     * be
+     * preserved at the location.
      *
      * The `ngSwitchCase` directive informs the parent `NgSwitch` of which view to display when the
      * expression is evaluated.
@@ -1670,21 +1713,15 @@
         }
         Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
             set: function (value) {
-                // Set of views to display for this value
-                var views = this._valueViews.get(value);
-                if (views) {
-                    this._useDefault = false;
-                }
-                else {
-                    // No view to display for the current value -> default case
-                    // Nothing to do if the default case was already active
-                    if (this._useDefault) {
-                        return;
-                    }
-                    this._useDefault = true;
-                    views = this._valueViews.get(_CASE_DEFAULT);
-                }
+                // Empty the currently active ViewContainers
                 this._emptyAllActiveViews();
+                // Add the ViewContainers matching the value (with a fallback to default)
+                this._useDefault = false;
+                var views = this._valueViews.get(value);
+                if (!views) {
+                    this._useDefault = true;
+                    views = this._valueViews.get(_CASE_DEFAULT) || null;
+                }
                 this._activateViews(views);
                 this._switchValue = value;
             },
@@ -2375,7 +2412,6 @@
         MM: datePartGetterFactory(digitCondition('month', 2)),
         M: datePartGetterFactory(digitCondition('month', 1)),
         LLLL: datePartGetterFactory(nameCondition('month', 4)),
-        L: datePartGetterFactory(nameCondition('month', 1)),
         dd: datePartGetterFactory(digitCondition('day', 2)),
         d: datePartGetterFactory(digitCondition('day', 1)),
         HH: digitModifier(hourExtracter(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
@@ -2444,17 +2480,12 @@
     }
     function digitCondition(prop, len) {
         var result = {};
-        result[prop] = len === 2 ? '2-digit' : 'numeric';
+        result[prop] = len == 2 ? '2-digit' : 'numeric';
         return result;
     }
     function nameCondition(prop, len) {
         var result = {};
-        if (len < 4) {
-            result[prop] = len > 1 ? 'short' : 'narrow';
-        }
-        else {
-            result[prop] = 'long';
-        }
+        result[prop] = len < 4 ? 'short' : 'long';
         return result;
     }
     function combine(options) {
@@ -2533,21 +2564,21 @@
      *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
      *
      *
-     *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
-     *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
-     *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
-     *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
-     *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
-     *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
-     *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
-     *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
-     *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
-     *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
-     *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
-     *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
-     *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
-     *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
-     *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
+     *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | a (PM)       | -                 | -         | -         |
      *
      * In javascript, only the components specified will be respected (not the ordering,
      * punctuations, ...) and details of the formatting will be dependent on the locale.
@@ -2644,7 +2675,7 @@
         I18nPluralPipe.prototype.transform = function (value, pluralMap) {
             if (isBlank(value))
                 return '';
-            if (typeof pluralMap !== 'object' || pluralMap === null) {
+            if (!isStringMap(pluralMap)) {
                 throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
@@ -2682,10 +2713,10 @@
         I18nSelectPipe.prototype.transform = function (value, mapping) {
             if (isBlank(value))
                 return '';
-            if (typeof mapping !== 'object' || mapping === null) {
+            if (!isStringMap(mapping)) {
                 throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
             }
-            return mapping[value] || '';
+            return mapping.hasOwnProperty(value) ? mapping[value] : '';
         };
         I18nSelectPipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
@@ -2711,7 +2742,7 @@
     var JsonPipe = (function () {
         function JsonPipe() {
         }
-        JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
+        JsonPipe.prototype.transform = function (value) { return Json.stringify(value); };
         JsonPipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
         ];

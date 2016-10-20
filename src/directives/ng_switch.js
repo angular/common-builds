@@ -7,7 +7,7 @@
  */
 import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ListWrapper } from '../facade/collection';
-var _CASE_DEFAULT = {};
+var _CASE_DEFAULT = new Object();
 export var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -34,7 +34,7 @@ export var SwitchView = (function () {
  *         <inner-element></inner-element>
  *         <inner-other-element></inner-other-element>
  *       </ng-container>
- *       <some-element *ngSwitchDefault>...</some-element>
+ *       <some-element *ngSwitchDefault>...</p>
  *     </container-element>
  * ```
  * @description
@@ -49,7 +49,8 @@ export var SwitchView = (function () {
  * root elements.
  *
  * Elements within `NgSwitch` but outside of a `NgSwitchCase` or `NgSwitchDefault` directives will
- * be preserved at the location.
+ * be
+ * preserved at the location.
  *
  * The `ngSwitchCase` directive informs the parent `NgSwitch` of which view to display when the
  * expression is evaluated.
@@ -66,21 +67,15 @@ export var NgSwitch = (function () {
     }
     Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
         set: function (value) {
-            // Set of views to display for this value
-            var views = this._valueViews.get(value);
-            if (views) {
-                this._useDefault = false;
-            }
-            else {
-                // No view to display for the current value -> default case
-                // Nothing to do if the default case was already active
-                if (this._useDefault) {
-                    return;
-                }
-                this._useDefault = true;
-                views = this._valueViews.get(_CASE_DEFAULT);
-            }
+            // Empty the currently active ViewContainers
             this._emptyAllActiveViews();
+            // Add the ViewContainers matching the value (with a fallback to default)
+            this._useDefault = false;
+            var views = this._valueViews.get(value);
+            if (!views) {
+                this._useDefault = true;
+                views = this._valueViews.get(_CASE_DEFAULT) || null;
+            }
             this._activateViews(views);
             this._switchValue = value;
         },
