@@ -2648,7 +2648,7 @@
      * @howToUse `expression | lowercase`
      * @description
      *
-     * Converts value into lowercase string using `String.prototype.toLowerCase()`.
+     * Converts value into a lowercase string using `String.prototype.toLowerCase()`.
      *
      * ### Example
      *
@@ -2913,7 +2913,7 @@
      * @howToUse `expression | uppercase`
      * @description
      *
-     * Converts value into lowercase string using `String.prototype.toUpperCase()`.
+     * Converts value into an uppercase string using `String.prototype.toUpperCase()`.
      *
      * ### Example
      *
