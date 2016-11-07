@@ -1167,7 +1167,14 @@
         };
         NgClass.prototype._applyIterableChanges = function (changes) {
             var _this = this;
-            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.item, true); });
+            changes.forEachAddedItem(function (record) {
+                if (typeof record.item === 'string') {
+                    _this._toggleClass(record.item, true);
+                }
+                else {
+                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + stringify(record.item));
+                }
+            });
             changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
         };
         NgClass.prototype._applyInitialClasses = function (isCleanup) {
