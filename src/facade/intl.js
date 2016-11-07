@@ -63,6 +63,7 @@ var DATE_FORMATS = {
     MM: datePartGetterFactory(digitCondition('month', 2)),
     M: datePartGetterFactory(digitCondition('month', 1)),
     LLLL: datePartGetterFactory(nameCondition('month', 4)),
+    L: datePartGetterFactory(nameCondition('month', 1)),
     dd: datePartGetterFactory(digitCondition('day', 2)),
     d: datePartGetterFactory(digitCondition('day', 1)),
     HH: digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
@@ -125,12 +126,17 @@ function hour12Modify(options, value) {
 }
 function digitCondition(prop, len) {
     var result = {};
-    result[prop] = len == 2 ? '2-digit' : 'numeric';
+    result[prop] = len === 2 ? '2-digit' : 'numeric';
     return result;
 }
 function nameCondition(prop, len) {
     var result = {};
-    result[prop] = len < 4 ? 'short' : 'long';
+    if (len < 4) {
+        result[prop] = len > 1 ? 'short' : 'narrow';
+    }
+    else {
+        result[prop] = 'long';
+    }
     return result;
 }
 function combine(options) {
