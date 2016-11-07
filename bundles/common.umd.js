@@ -1067,6 +1067,27 @@
         }
     }
 
+    // Safari doesn't implement MapIterator.next(), which is used is Traceur's polyfill of Array.from
+    // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
+    var _arrayFromMap = (function () {
+        try {
+            if ((new Map()).values().next) {
+                return function createArrayFromMap(m, getValues) {
+                    return getValues ? Array.from(m.values()) : Array.from(m.keys());
+                };
+            }
+        }
+        catch (e) {
+        }
+        return function createArrayFromMapWithForeach(m, getValues) {
+            var res = new Array(m.size), i = 0;
+            m.forEach(function (v, k) {
+                res[i] = getValues ? v : k;
+                i++;
+            });
+            return res;
+        };
+    })();
     var ListWrapper = (function () {
         function ListWrapper() {
         }
@@ -1893,7 +1914,7 @@
      * @description
      *
      * The styles are updated according to the value of the expression evaluation:
-     * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
+     * - keys are style names with an option `.<unit>` suffix (ie 'top.px', 'font-style.em'),
      * - values are the values assigned to those properties (expressed in the given unit).
      *
      * @stable
@@ -2290,7 +2311,6 @@
         MM: datePartGetterFactory(digitCondition('month', 2)),
         M: datePartGetterFactory(digitCondition('month', 1)),
         LLLL: datePartGetterFactory(nameCondition('month', 4)),
-        L: datePartGetterFactory(nameCondition('month', 1)),
         dd: datePartGetterFactory(digitCondition('day', 2)),
         d: datePartGetterFactory(digitCondition('day', 1)),
         HH: digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
@@ -2353,17 +2373,12 @@
     }
     function digitCondition(prop, len) {
         var result = {};
-        result[prop] = len === 2 ? '2-digit' : 'numeric';
+        result[prop] = len == 2 ? '2-digit' : 'numeric';
         return result;
     }
     function nameCondition(prop, len) {
         var result = {};
-        if (len < 4) {
-            result[prop] = len > 1 ? 'short' : 'narrow';
-        }
-        else {
-            result[prop] = 'long';
-        }
+        result[prop] = len < 4 ? 'short' : 'long';
         return result;
     }
     function combine(options) {
@@ -2434,21 +2449,21 @@
      *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
      *
      *
-     *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
-     *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
-     *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
-     *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
-     *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
-     *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
-     *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
-     *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
-     *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
-     *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
-     *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
-     *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
-     *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
-     *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
-     *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
+     *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | a (PM)       | -                 | -         | -         |
      *
      * In javascript, only the components specified will be respected (not the ordering,
      * punctuations, ...) and details of the formatting will be dependent on the locale.
