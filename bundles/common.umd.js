@@ -2373,19 +2373,25 @@
         }
         DatePipe.prototype.transform = function (value, pattern) {
             if (pattern === void 0) { pattern = 'mediumDate'; }
-            if (isBlank(value))
+            if (isBlank$1(value))
                 return null;
-            if (!this.supports(value)) {
+            if (typeof value === 'string') {
+                value = value.trim();
+            }
+            var date;
+            if (isDate(value)) {
+                date = value;
+            }
+            else if (NumberWrapper.isNumeric(value)) {
+                date = new Date(parseFloat(value));
+            }
+            else {
+                date = new Date(value);
+            }
+            if (!isDate(date)) {
                 throw new InvalidPipeArgumentError(DatePipe, value);
             }
-            if (NumberWrapper.isNumeric(value)) {
-                value = parseFloat(value);
-            }
-            return DateFormatter.format(new Date(value), this._locale, DatePipe._ALIASES[pattern] || pattern);
-        };
-        DatePipe.prototype.supports = function (obj) {
-            return isDate(obj) || NumberWrapper.isNumeric(obj) ||
-                (typeof obj === 'string' && isDate(new Date(obj)));
+            return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
         };
         /** @internal */
         DatePipe._ALIASES = {
@@ -2407,6 +2413,9 @@
         ];
         return DatePipe;
     }());
+    function isBlank$1(obj) {
+        return obj == null || obj === '';
+    }
 
     var _INTERPOLATION_REGEXP = /#/g;
     /**

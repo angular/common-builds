@@ -76,5 +76,4 @@ export declare class DatePipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, pattern?: string): string;
-    private supports(obj);
 }

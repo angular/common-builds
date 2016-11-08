@@ -7,7 +7,7 @@
  */
 import { Inject, LOCALE_ID, Pipe } from '@angular/core';
 import { DateFormatter } from '../facade/intl';
-import { NumberWrapper, isBlank, isDate } from '../facade/lang';
+import { NumberWrapper, isDate } from '../facade/lang';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * @ngModule CommonModule
@@ -83,17 +83,23 @@ export var DatePipe = (function () {
         if (pattern === void 0) { pattern = 'mediumDate'; }
         if (isBlank(value))
             return null;
-        if (!this.supports(value)) {
+        if (typeof value === 'string') {
+            value = value.trim();
+        }
+        var date;
+        if (isDate(value)) {
+            date = value;
+        }
+        else if (NumberWrapper.isNumeric(value)) {
+            date = new Date(parseFloat(value));
+        }
+        else {
+            date = new Date(value);
+        }
+        if (!isDate(date)) {
             throw new InvalidPipeArgumentError(DatePipe, value);
         }
-        if (NumberWrapper.isNumeric(value)) {
-            value = parseFloat(value);
-        }
-        return DateFormatter.format(new Date(value), this._locale, DatePipe._ALIASES[pattern] || pattern);
-    };
-    DatePipe.prototype.supports = function (obj) {
-        return isDate(obj) || NumberWrapper.isNumeric(obj) ||
-            (typeof obj === 'string' && isDate(new Date(obj)));
+        return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
     };
     /** @internal */
     DatePipe._ALIASES = {
@@ -115,4 +121,7 @@ export var DatePipe = (function () {
     ];
     return DatePipe;
 }());
+function isBlank(obj) {
+    return obj == null || obj === '';
+}
 //# sourceMappingURL=date_pipe.js.map
