@@ -48,6 +48,9 @@ import { PipeTransform } from '@angular/core';
  *
  * Timezone of the formatted text will be the local system timezone of the end-user's machine.
  *
+ * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+ * applied and the formatted text will have the same day, month and year of the expression.
+ *
  * WARNINGS:
  * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
  *   Instead users should treat the date as an immutable object and change the reference when the
