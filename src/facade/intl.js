@@ -1,22 +1,23 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-export var NumberFormatStyle;
-(function (NumberFormatStyle) {
-    NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
-    NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
-    NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
-})(NumberFormatStyle || (NumberFormatStyle = {}));
+export var NumberFormatStyle = {};
+NumberFormatStyle.Decimal = 0;
+NumberFormatStyle.Percent = 1;
+NumberFormatStyle.Currency = 2;
+NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
+NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
+NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
 export var NumberFormatter = (function () {
     function NumberFormatter() {
     }
+    /**
+     * @param {?} num
+     * @param {?} locale
+     * @param {?} style
+     * @param {?=} __3
+     * @return {?}
+     */
     NumberFormatter.format = function (num, locale, style, _a) {
         var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
-        var options = {
+        var /** @type {?} */ options = {
             minimumIntegerDigits: minimumIntegerDigits,
             minimumFractionDigits: minimumFractionDigits,
             maximumFractionDigits: maximumFractionDigits,
@@ -30,8 +31,8 @@ export var NumberFormatter = (function () {
     };
     return NumberFormatter;
 }());
-var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-var PATTERN_ALIASES = {
+var /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+var /** @type {?} */ PATTERN_ALIASES = {
     yMMMdjms: datePartGetterFactory(combine([
         digitCondition('year', 1),
         nameCondition('month', 3),
@@ -54,7 +55,7 @@ var PATTERN_ALIASES = {
     jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
     jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
 };
-var DATE_FORMATS = {
+var /** @type {?} */ DATE_FORMATS = {
     yyyy: datePartGetterFactory(digitCondition('year', 4)),
     yy: datePartGetterFactory(digitCondition('year', 2)),
     y: datePartGetterFactory(digitCondition('year', 1)),
@@ -96,41 +97,78 @@ var DATE_FORMATS = {
     GGG: datePartGetterFactory(nameCondition('era', 3)),
     GGGG: datePartGetterFactory(nameCondition('era', 4))
 };
+/**
+ * @param {?} inner
+ * @return {?}
+ */
 function digitModifier(inner) {
     return function (date, locale) {
-        var result = inner(date, locale);
+        var /** @type {?} */ result = inner(date, locale);
         return result.length == 1 ? '0' + result : result;
     };
 }
+/**
+ * @param {?} inner
+ * @return {?}
+ */
 function hourClockExtractor(inner) {
     return function (date, locale) { return inner(date, locale).split(' ')[1]; };
 }
+/**
+ * @param {?} inner
+ * @return {?}
+ */
 function hourExtractor(inner) {
     return function (date, locale) { return inner(date, locale).split(' ')[0]; };
 }
+/**
+ * @param {?} date
+ * @param {?} locale
+ * @param {?} options
+ * @return {?}
+ */
 function intlDateFormat(date, locale, options) {
     return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
 }
+/**
+ * @param {?} timezone
+ * @return {?}
+ */
 function timeZoneGetter(timezone) {
     // To workaround `Intl` API restriction for single timezone let format with 24 hours
-    var options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+    var /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
     return function (date, locale) {
-        var result = intlDateFormat(date, locale, options);
+        var /** @type {?} */ result = intlDateFormat(date, locale, options);
         // Then extract first 3 letters that related to hours
         return result ? result.substring(3) : '';
     };
 }
+/**
+ * @param {?} options
+ * @param {?} value
+ * @return {?}
+ */
 function hour12Modify(options, value) {
     options.hour12 = value;
     return options;
 }
+/**
+ * @param {?} prop
+ * @param {?} len
+ * @return {?}
+ */
 function digitCondition(prop, len) {
-    var result = {};
+    var /** @type {?} */ result = {};
     result[prop] = len === 2 ? '2-digit' : 'numeric';
     return result;
 }
+/**
+ * @param {?} prop
+ * @param {?} len
+ * @return {?}
+ */
 function nameCondition(prop, len) {
-    var result = {};
+    var /** @type {?} */ result = {};
     if (len < 4) {
         result[prop] = len > 1 ? 'short' : 'narrow';
     }
@@ -139,22 +177,36 @@ function nameCondition(prop, len) {
     }
     return result;
 }
+/**
+ * @param {?} options
+ * @return {?}
+ */
 function combine(options) {
-    return (_a = Object).assign.apply(_a, [{}].concat(options));
+    return (_a = ((Object))).assign.apply(_a, [{}].concat(options));
     var _a;
 }
+/**
+ * @param {?} ret
+ * @return {?}
+ */
 function datePartGetterFactory(ret) {
     return function (date, locale) { return intlDateFormat(date, locale, ret); };
 }
-var DATE_FORMATTER_CACHE = new Map();
+var /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
+/**
+ * @param {?} format
+ * @param {?} date
+ * @param {?} locale
+ * @return {?}
+ */
 function dateFormatter(format, date, locale) {
-    var fn = PATTERN_ALIASES[format];
+    var /** @type {?} */ fn = PATTERN_ALIASES[format];
     if (fn)
         return fn(date, locale);
-    var parts = DATE_FORMATTER_CACHE.get(format);
+    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(format);
     if (!parts) {
         parts = [];
-        var match = void 0;
+        var /** @type {?} */ match = void 0;
         DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
@@ -170,16 +222,26 @@ function dateFormatter(format, date, locale) {
         DATE_FORMATTER_CACHE.set(format, parts);
     }
     return parts.reduce(function (text, part) {
-        var fn = DATE_FORMATS[part];
+        var /** @type {?} */ fn = DATE_FORMATS[part];
         return text + (fn ? fn(date, locale) : partToTime(part));
     }, '');
 }
+/**
+ * @param {?} part
+ * @return {?}
+ */
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
 export var DateFormatter = (function () {
     function DateFormatter() {
     }
+    /**
+     * @param {?} date
+     * @param {?} locale
+     * @param {?} pattern
+     * @return {?}
+     */
     DateFormatter.format = function (date, locale, pattern) {
         return dateFormatter(pattern, date, locale);
     };
