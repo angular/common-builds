@@ -2648,7 +2648,7 @@
     }());
     var /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
     var /** @type {?} */ PATTERN_ALIASES = {
-        yMMMdjms: datePartGetterFactory(combine([
+        'yMMMdjms': datePartGetterFactory(combine([
             digitCondition('year', 1),
             nameCondition('month', 3),
             digitCondition('day', 1),
@@ -2656,19 +2656,19 @@
             digitCondition('minute', 1),
             digitCondition('second', 1),
         ])),
-        yMdjm: datePartGetterFactory(combine([
+        'yMdjm': datePartGetterFactory(combine([
             digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
             digitCondition('hour', 1), digitCondition('minute', 1)
         ])),
-        yMMMMEEEEd: datePartGetterFactory(combine([
+        'yMMMMEEEEd': datePartGetterFactory(combine([
             digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
             digitCondition('day', 1)
         ])),
-        yMMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
-        yMMMd: datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
-        yMd: datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
-        jms: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
-        jm: datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+        'yMMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
+        'yMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
+        'yMd': datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
+        'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
+        'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
     };
     var /** @type {?} */ DATE_FORMATS = {
         yyyy: datePartGetterFactory(digitCondition('year', 4)),
