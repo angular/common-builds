@@ -7,43 +7,36 @@
  */
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 /**
- *  Removes or recreates a portion of the DOM tree based on an {expression}.
-  * *
-  * If the expression assigned to `ngIf` evaluates to a falsy value then the element
-  * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
-  * *
-  * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
-  * *
-  * ```
-  * <div *ngIf="errorCount > 0" class="error">
-  * <!-- Error message displayed when the errorCount property in the current context is greater
-  * than 0. -->
-  * {{errorCount}} errors detected
-  * </div>
-  * ```
-  * *
-  * ### Syntax
-  * *
-  * - `<div *ngIf="condition">...</div>`
-  * - `<div template="ngIf condition">...</div>`
-  * - `<template [ngIf]="condition"><div>...</div></template>`
-  * *
+ * Removes or recreates a portion of the DOM tree based on an {expression}.
+ *
+ * If the expression assigned to `ngIf` evaluates to a falsy value then the element
+ * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
+ *
+ * ```
+ * <div *ngIf="errorCount > 0" class="error">
+ *   <!-- Error message displayed when the errorCount property in the current context is greater
+ * than 0. -->
+ *   {{errorCount}} errors detected
+ * </div>
+ * ```
+ *
+ * ### Syntax
+ *
+ * - `<div *ngIf="condition">...</div>`
+ * - `<div template="ngIf condition">...</div>`
+ * - `<template [ngIf]="condition"><div>...</div></template>`
+ *
+ * @stable
  */
 export var NgIf = (function () {
-    /**
-     * @param {?} _viewContainer
-     * @param {?} _template
-     */
     function NgIf(_viewContainer, _template) {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._hasView = false;
     }
     Object.defineProperty(NgIf.prototype, "ngIf", {
-        /**
-         * @param {?} condition
-         * @return {?}
-         */
         set: function (condition) {
             if (condition && !this._hasView) {
                 this._hasView = true;
@@ -61,30 +54,13 @@ export var NgIf = (function () {
         { type: Directive, args: [{ selector: '[ngIf]' },] },
     ];
     /** @nocollapse */
-    NgIf.ctorParameters = function () { return [
+    NgIf.ctorParameters = [
         { type: ViewContainerRef, },
         { type: TemplateRef, },
-    ]; };
+    ];
     NgIf.propDecorators = {
         'ngIf': [{ type: Input },],
     };
     return NgIf;
 }());
-function NgIf_tsickle_Closure_declarations() {
-    /** @type {?} */
-    NgIf.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    NgIf.ctorParameters;
-    /** @type {?} */
-    NgIf.propDecorators;
-    /** @type {?} */
-    NgIf.prototype._hasView;
-    /** @type {?} */
-    NgIf.prototype._viewContainer;
-    /** @type {?} */
-    NgIf.prototype._template;
-}
 //# sourceMappingURL=ng_if.js.map
