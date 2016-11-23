@@ -9,21 +9,22 @@ import { Pipe } from '@angular/core';
 import { isBlank } from '../facade/lang';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
- *  *
-  * Converts value into an uppercase string using `String.prototype.toUpperCase()`.
-  * *
-  * ### Example
-  * *
-  * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
-  * *
+ * @ngModule CommonModule
+ * @whatItDoes Transforms string to uppercase.
+ * @howToUse `expression | uppercase`
+ * @description
+ *
+ * Converts value into an uppercase string using `String.prototype.toUpperCase()`.
+ *
+ * ### Example
+ *
+ * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
+ *
+ * @stable
  */
 export var UpperCasePipe = (function () {
     function UpperCasePipe() {
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     UpperCasePipe.prototype.transform = function (value) {
         if (isBlank(value))
             return value;
@@ -36,16 +37,7 @@ export var UpperCasePipe = (function () {
         { type: Pipe, args: [{ name: 'uppercase' },] },
     ];
     /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
+    UpperCasePipe.ctorParameters = [];
     return UpperCasePipe;
 }());
-function UpperCasePipe_tsickle_Closure_declarations() {
-    /** @type {?} */
-    UpperCasePipe.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    UpperCasePipe.ctorParameters;
-}
 //# sourceMappingURL=uppercase_pipe.js.map
