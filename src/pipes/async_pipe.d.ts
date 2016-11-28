@@ -26,7 +26,7 @@ import { EventEmitter, Observable } from '../facade/async';
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
  *
  * It's also possible to use `async` with Observables. The example below binds the `time` Observable
- * to the view. The Observable continuesly updates the view with the current time.
+ * to the view. The Observable continuously updates the view with the current time.
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *

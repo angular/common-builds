@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-beta.0-be3784c
+ * @license Angular v2.3.0-beta.0-f5c8e09
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2512,7 +2512,7 @@
       * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
       * *
       * It's also possible to use `async` with Observables. The example below binds the `time` Observable
-      * to the view. The Observable continuesly updates the view with the current time.
+      * to the view. The Observable continuously updates the view with the current time.
       * *
       * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
       * *
