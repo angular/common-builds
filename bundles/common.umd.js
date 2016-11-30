@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-beta.0-3e73bea
+ * @license Angular v2.3.0-beta.0-e628b66
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3476,6 +3476,12 @@
         return CommonModule;
     }());
 
+    /**
+     * @stable
+     */
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-beta.0-e628b66');
+
+    exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;
