@@ -7,35 +7,27 @@
  */
 import { Pipe } from '@angular/core';
 /**
- *  *
-  * Converts value into string using `JSON.stringify`. Useful for debugging.
-  * *
-  * ### Example
-  * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
-  * *
+ * @ngModule CommonModule
+ * @whatItDoes Converts value into JSON string.
+ * @howToUse `expression | json`
+ * @description
+ *
+ * Converts value into string using `JSON.stringify`. Useful for debugging.
+ *
+ * ### Example
+ * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+ *
+ * @stable
  */
 export var JsonPipe = (function () {
     function JsonPipe() {
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
     JsonPipe.decorators = [
         { type: Pipe, args: [{ name: 'json', pure: false },] },
     ];
     /** @nocollapse */
-    JsonPipe.ctorParameters = function () { return []; };
+    JsonPipe.ctorParameters = [];
     return JsonPipe;
 }());
-function JsonPipe_tsickle_Closure_declarations() {
-    /** @type {?} */
-    JsonPipe.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    JsonPipe.ctorParameters;
-}
 //# sourceMappingURL=json_pipe.js.map
