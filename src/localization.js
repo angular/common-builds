@@ -36,8 +36,18 @@ export var NgLocalization = (function () {
  * @return {?}
  */
 export function getPluralCategory(value, cases, ngLocalization) {
-    var /** @type {?} */ nbCase = "=" + value;
-    return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+    var /** @type {?} */ key = "=" + value;
+    if (cases.indexOf(key) > -1) {
+        return key;
+    }
+    key = ngLocalization.getPluralCategory(value);
+    if (cases.indexOf(key) > -1) {
+        return key;
+    }
+    if (cases.indexOf('other') > -1) {
+        return 'other';
+    }
+    throw new Error("No plural message found for value \"" + value + "\"");
 }
 /**
  *  Returns the plural case based on the locale

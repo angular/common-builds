@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-12959f4
+ * @license Angular v2.3.0-rc.0-82c81cd
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -839,8 +839,18 @@
      * @return {?}
      */
     function getPluralCategory(value, cases, ngLocalization) {
-        var /** @type {?} */ nbCase = "=" + value;
-        return cases.indexOf(nbCase) > -1 ? nbCase : ngLocalization.getPluralCategory(value);
+        var /** @type {?} */ key = "=" + value;
+        if (cases.indexOf(key) > -1) {
+            return key;
+        }
+        key = ngLocalization.getPluralCategory(value);
+        if (cases.indexOf(key) > -1) {
+            return key;
+        }
+        if (cases.indexOf('other') > -1) {
+            return 'other';
+        }
+        throw new Error("No plural message found for value \"" + value + "\"");
     }
     /**
      *  Returns the plural case based on the locale
@@ -3479,7 +3489,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-12959f4');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-82c81cd');
 
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
