@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-aa4bd14
+ * @license Angular v2.3.0-rc.0-51b0692
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3489,7 +3489,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-aa4bd14');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-51b0692');
 
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
