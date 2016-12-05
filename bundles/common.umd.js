@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-b8c839b
+ * @license Angular v2.3.0-rc.0-a132287
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2830,7 +2830,8 @@
         var /** @type {?} */ fn = PATTERN_ALIASES[format];
         if (fn)
             return fn(date, locale);
-        var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(format);
+        var /** @type {?} */ cacheKey = format;
+        var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
         if (!parts) {
             parts = [];
             var /** @type {?} */ match = void 0;
@@ -2846,7 +2847,7 @@
                     format = null;
                 }
             }
-            DATE_FORMATTER_CACHE.set(format, parts);
+            DATE_FORMATTER_CACHE.set(cacheKey, parts);
         }
         return parts.reduce(function (text, part) {
             var /** @type {?} */ fn = DATE_FORMATS[part];
@@ -3489,7 +3490,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-b8c839b');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-a132287');
 
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;

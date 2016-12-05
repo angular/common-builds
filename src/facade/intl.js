@@ -205,7 +205,8 @@ function dateFormatter(format, date, locale) {
     var /** @type {?} */ fn = PATTERN_ALIASES[format];
     if (fn)
         return fn(date, locale);
-    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(format);
+    var /** @type {?} */ cacheKey = format;
+    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
     if (!parts) {
         parts = [];
         var /** @type {?} */ match = void 0;
@@ -221,7 +222,7 @@ function dateFormatter(format, date, locale) {
                 format = null;
             }
         }
-        DATE_FORMATTER_CACHE.set(format, parts);
+        DATE_FORMATTER_CACHE.set(cacheKey, parts);
     }
     return parts.reduce(function (text, part) {
         var /** @type {?} */ fn = DATE_FORMATS[part];
