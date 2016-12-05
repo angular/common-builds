@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-dea5916
+ * @license Angular v2.3.0-rc.0-307c469
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -421,7 +421,7 @@
          * @return {?}
          */
         Location.prototype.prepareExternalUrl = function (url) {
-            if (url.length > 0 && !url.startsWith('/')) {
+            if (url && url[0] !== '/') {
                 url = '/' + url;
             }
             return this._platformStrategy.prepareExternalUrl(url);
@@ -477,7 +477,7 @@
          * @return {?}
          */
         Location.normalizeQueryParams = function (params) {
-            return (params.length > 0 && params.substring(0, 1) != '?') ? ('?' + params) : params;
+            return params && params[0] !== '?' ? '?' + params : params;
         };
         /**
          *  Given 2 parts of a url, join them with a slash if needed.
@@ -512,12 +512,7 @@
          * @param {?} url
          * @return {?}
          */
-        Location.stripTrailingSlash = function (url) {
-            if (/\/$/g.test(url)) {
-                url = url.substring(0, url.length - 1);
-            }
-            return url;
-        };
+        Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
         Location.decorators = [
             { type: _angular_core.Injectable },
         ];
@@ -533,21 +528,14 @@
      * @return {?}
      */
     function _stripBaseHref(baseHref, url) {
-        if (baseHref.length > 0 && url.startsWith(baseHref)) {
-            return url.substring(baseHref.length);
-        }
-        return url;
+        return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
     }
     /**
      * @param {?} url
      * @return {?}
      */
     function _stripIndexHtml(url) {
-        if (/\/index.html$/g.test(url)) {
-            // '/index.html'.length == 11
-            return url.substring(0, url.length - 11);
-        }
-        return url;
+        return url.replace(/\/index.html$/, '');
     }
 
     /**
@@ -3490,7 +3478,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-dea5916');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-307c469');
 
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
