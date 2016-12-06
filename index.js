@@ -10,7 +10,7 @@
  * @description
  * Entry point for all public APIs of the common package.
  */
-export { PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location } from './src/location';
+export { PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location } from './src/location/index';
 export { NgLocalization } from './src/localization';
 export { CommonModule } from './src/common_module';
 export { NgClass, NgFor, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from './src/directives/index';
@@ -19,5 +19,5 @@ import { Version } from '@angular/core';
 /**
  * @stable
  */
-export var /** @type {?} */ VERSION = new Version('2.3.0-rc.0-f31c947');
+export var /** @type {?} */ VERSION = new Version('2.3.0-rc.0-2893c2c');
 //# sourceMappingURL=index.js.map
