@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-rc.0-986abbe
+ * @license Angular v2.3.0-rc.0-16efb13
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3478,15 +3478,8 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-986abbe');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-rc.0-16efb13');
 
-    exports.VERSION = VERSION;
-    exports.PlatformLocation = PlatformLocation;
-    exports.LocationStrategy = LocationStrategy;
-    exports.APP_BASE_HREF = APP_BASE_HREF;
-    exports.HashLocationStrategy = HashLocationStrategy;
-    exports.PathLocationStrategy = PathLocationStrategy;
-    exports.Location = Location;
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
     exports.NgClass = NgClass;
@@ -3510,5 +3503,13 @@
     exports.PercentPipe = PercentPipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
+    exports.VERSION = VERSION;
+    exports.Version = _angular_core.Version;
+    exports.PlatformLocation = PlatformLocation;
+    exports.LocationStrategy = LocationStrategy;
+    exports.APP_BASE_HREF = APP_BASE_HREF;
+    exports.HashLocationStrategy = HashLocationStrategy;
+    exports.PathLocationStrategy = PathLocationStrategy;
+    exports.Location = Location;
 
 }));
