@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-bf93389
+ * @license Angular v2.3.0-61d7c1e
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2611,6 +2611,87 @@
         return AsyncPipe;
     }());
 
+    /**
+     *  Transforms text to lowercase.
+      * *
+      * {@example  core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe' }
+      * *
+     */
+    var LowerCasePipe = (function () {
+        function LowerCasePipe() {
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        LowerCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw new InvalidPipeArgumentError(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        LowerCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+        ];
+        /** @nocollapse */
+        LowerCasePipe.ctorParameters = function () { return []; };
+        return LowerCasePipe;
+    }());
+    /**
+     *  Transforms text to titlecase.
+      * *
+     */
+    var TitleCasePipe = (function () {
+        function TitleCasePipe() {
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        TitleCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw new InvalidPipeArgumentError(TitleCasePipe, value);
+            }
+            return value[0].toUpperCase() + value.substr(1).toLowerCase();
+        };
+        TitleCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
+        ];
+        /** @nocollapse */
+        TitleCasePipe.ctorParameters = function () { return []; };
+        return TitleCasePipe;
+    }());
+    /**
+     *  Transforms text to uppercase.
+      * *
+     */
+    var UpperCasePipe = (function () {
+        function UpperCasePipe() {
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        UpperCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw new InvalidPipeArgumentError(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        UpperCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+        ];
+        /** @nocollapse */
+        UpperCasePipe.ctorParameters = function () { return []; };
+        return UpperCasePipe;
+    }());
+
     var NumberFormatStyle = {};
     NumberFormatStyle.Decimal = 0;
     NumberFormatStyle.Percent = 1;
@@ -3114,38 +3195,6 @@
         return JsonPipe;
     }());
 
-    /**
-     *  *
-      * Converts value into a lowercase string using `String.prototype.toLowerCase()`.
-      * *
-      * ### Example
-      * *
-      * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
-      * *
-     */
-    var LowerCasePipe = (function () {
-        function LowerCasePipe() {
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        LowerCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
-        };
-        LowerCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-        ];
-        /** @nocollapse */
-        LowerCasePipe.ctorParameters = function () { return []; };
-        return LowerCasePipe;
-    }());
-
     var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
     /**
      * @param {?} pipe
@@ -3406,38 +3455,6 @@
     }());
 
     /**
-     *  *
-      * Converts value into an uppercase string using `String.prototype.toUpperCase()`.
-      * *
-      * ### Example
-      * *
-      * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
-      * *
-     */
-    var UpperCasePipe = (function () {
-        function UpperCasePipe() {
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        UpperCasePipe.prototype.transform = function (value) {
-            if (isBlank(value))
-                return value;
-            if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        UpperCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-        ];
-        /** @nocollapse */
-        UpperCasePipe.ctorParameters = function () { return []; };
-        return UpperCasePipe;
-    }());
-
-    /**
      * A collection of Angular pipes that are likely to be used in each and every application.
      */
     var /** @type {?} */ COMMON_PIPES = [
@@ -3448,6 +3465,7 @@
         SlicePipe,
         DecimalPipe,
         PercentPipe,
+        TitleCasePipe,
         CurrencyPipe,
         DatePipe,
         I18nPluralPipe,
@@ -3478,7 +3496,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-bf93389');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-61d7c1e');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
@@ -3503,6 +3521,7 @@
     exports.PercentPipe = PercentPipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
+    exports.TitleCasePipe = TitleCasePipe;
     exports.VERSION = VERSION;
     exports.Version = _angular_core.Version;
     exports.PlatformLocation = PlatformLocation;
