@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-5c6ec20
+ * @license Angular v2.3.0-72361fb
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3496,7 +3496,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-5c6ec20');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-72361fb');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
