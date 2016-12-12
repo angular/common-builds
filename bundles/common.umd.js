@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-4c35be3
+ * @license Angular v2.3.0-7295a5e
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -111,7 +111,7 @@
     /**
      *  `LocationStrategy` is responsible for representing and reading route state
       * from the browser's URL. Angular provides two strategies:
-      * {@link HashLocationStrategy} and {@link PathLocationStrategy} (default).
+      * {@link HashLocationStrategy} and {@link PathLocationStrategy}.
       * *
       * This is used under the hood of the {@link Location} service.
       * *
@@ -337,8 +337,7 @@
     }
 
     /**
-     *  `Location` is a service that applications can use to interact with a browser's URL.
-      * Depending on which {@link LocationStrategy} is used, `Location` will either persist
+     *  Depending on which {@link LocationStrategy} is used, `Location` will either persist
       * to the URL's path or the URL's hash segment.
       * *
       * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
@@ -353,18 +352,7 @@
       * - `/my/app/user/123/` **is not** normalized
       * *
       * ### Example
-      * *
-      * ```
-      * import {Component} from '@angular/core';
-      * import {Location} from '@angular/common';
-      * *
-      * class AppCmp {
-      * constructor(location: Location) {
-      * location.go('/foo');
-      * }
-      * }
-      * ```
-      * *
+      * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
      */
     var Location = (function () {
         /**
@@ -561,17 +549,7 @@
       * *
       * ### Example
       * *
-      * ```
-      * import {Component, NgModule} from '@angular/core';
-      * import {
-      * LocationStrategy,
-      * HashLocationStrategy
-      * } from '@angular/common';
-      * *
-      * providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
-      * })
-      * class AppModule {}
-      * ```
+      * {@example common/location/ts/hash_location_component.ts region='LocationComponent'}
       * *
      */
     var HashLocationStrategy = (function (_super) {
@@ -686,9 +664,6 @@
       * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
       * browser's URL.
       * *
-      * `PathLocationStrategy` is the default binding for {@link LocationStrategy}
-      * provided in {@link ROUTER_PROVIDERS}.
-      * *
       * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
       * or add a base element to the document. This URL prefix that will be preserved
       * when generating and recognizing URLs.
@@ -700,6 +675,10 @@
       * Similarly, if you add `<base href='/my/app'/>` to the document and call
       * `location.go('/foo')`, the browser's URL will become
       * `example.com/my/app/foo`.
+      * *
+      * ### Example
+      * *
+      * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
       * *
      */
     var PathLocationStrategy = (function (_super) {
@@ -3619,7 +3598,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-4c35be3');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-7295a5e');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
