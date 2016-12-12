@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-8a8c532
+ * @license Angular v2.3.0-56dce0e
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -847,18 +847,18 @@
     var NgLocaleLocalization = (function (_super) {
         __extends$2(NgLocaleLocalization, _super);
         /**
-         * @param {?} _locale
+         * @param {?} locale
          */
-        function NgLocaleLocalization(_locale) {
+        function NgLocaleLocalization(locale) {
             _super.call(this);
-            this._locale = _locale;
+            this.locale = locale;
         }
         /**
          * @param {?} value
          * @return {?}
          */
         NgLocaleLocalization.prototype.getPluralCategory = function (value) {
-            var /** @type {?} */ plural = getPluralCase(this._locale, value);
+            var /** @type {?} */ plural = getPluralCase(this.locale, value);
             switch (plural) {
                 case Plural.Zero:
                     return 'zero';
@@ -3619,8 +3619,9 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-8a8c532');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-56dce0e');
 
+    exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
     exports.NgClass = NgClass;
