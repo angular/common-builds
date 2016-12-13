@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "2.3.0-d17e690",
+  "version": "2.3.0-d036165",
   "description": "Angular - commonly needed directives and services",
   "main": "bundles/common.umd.js",
   "module": "index.js",
@@ -8,7 +8,7 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "2.3.0-d17e690"
+    "@angular/core": "2.3.0-d036165"
   },
   "repository": {
     "type": "git",
