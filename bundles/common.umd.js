@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-aa40366
+ * @license Angular v2.3.0-fd8e15b
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3601,7 +3601,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-aa40366');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-fd8e15b');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
