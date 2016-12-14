@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.3.0-42203ea
+ * @license Angular v2.3.0-f5f1d5f
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -275,10 +275,10 @@
             return '' + token;
         }
         if (token.overriddenName) {
-            return token.overriddenName;
+            return "" + token.overriddenName;
         }
         if (token.name) {
-            return token.name;
+            return "" + token.name;
         }
         var /** @type {?} */ res = token.toString();
         var /** @type {?} */ newLineIndex = res.indexOf('\n');
@@ -3598,7 +3598,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-42203ea');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.3.0-f5f1d5f');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
