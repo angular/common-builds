@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.0-f0e0925
+ * @license Angular v4.0.0-beta.0-732f446
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1780,7 +1780,7 @@
       * Simple form:
       * - `<div *ngIf="condition">...</div>`
       * - `<div template="ngIf condition">...</div>`
-      * - `<ng-container [ngIf]="condition"><div>...</div></ng-container>`
+      * - `<template [ngIf]="condition"><div>...</div></template>`
       * *
       * Form with an else block:
       * ```
@@ -3601,7 +3601,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.0-f0e0925');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.0-732f446');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
