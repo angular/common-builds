@@ -45,6 +45,17 @@ function LowerCasePipe_tsickle_Closure_declarations() {
     LowerCasePipe.ctorParameters;
 }
 /**
+ *  Helper method to transform a single word to titlecase.
+  * *
+ * @param {?} word
+ * @return {?}
+ */
+function titleCaseWord(word) {
+    if (!word)
+        return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+}
+/**
  *  Transforms text to titlecase.
   * *
  */
@@ -61,7 +72,7 @@ export var TitleCasePipe = (function () {
         if (typeof value !== 'string') {
             throw new InvalidPipeArgumentError(TitleCasePipe, value);
         }
-        return value[0].toUpperCase() + value.substr(1).toLowerCase();
+        return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
     };
     TitleCasePipe.decorators = [
         { type: Pipe, args: [{ name: 'titlecase' },] },

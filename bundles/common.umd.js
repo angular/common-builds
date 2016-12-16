@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.0-4568d5d
+ * @license Angular v4.0.0-beta.0-a23fa94
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2745,6 +2745,17 @@
         return LowerCasePipe;
     }());
     /**
+     *  Helper method to transform a single word to titlecase.
+      * *
+     * @param {?} word
+     * @return {?}
+     */
+    function titleCaseWord(word) {
+        if (!word)
+            return word;
+        return word[0].toUpperCase() + word.substr(1).toLowerCase();
+    }
+    /**
      *  Transforms text to titlecase.
       * *
      */
@@ -2761,7 +2772,7 @@
             if (typeof value !== 'string') {
                 throw new InvalidPipeArgumentError(TitleCasePipe, value);
             }
-            return value[0].toUpperCase() + value.substr(1).toLowerCase();
+            return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
         };
         TitleCasePipe.decorators = [
             { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
@@ -3601,7 +3612,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.0-4568d5d');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.0-a23fa94');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
