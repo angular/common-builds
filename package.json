@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "4.0.0-beta.0-171a9bd",
+  "version": "2.4.0-6efdf84",
   "description": "Angular - commonly needed directives and services",
   "main": "bundles/common.umd.js",
   "module": "index.js",
@@ -8,7 +8,7 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "4.0.0-beta.0-171a9bd"
+    "@angular/core": "2.4.0-6efdf84"
   },
   "repository": {
     "type": "git",
