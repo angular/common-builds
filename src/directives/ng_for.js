@@ -137,6 +137,24 @@ export var NgFor = (function () {
         this._cdr = _cdr;
         this._differ = null;
     }
+    Object.defineProperty(NgFor.prototype, "ngForTrackBy", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._trackByFn; },
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        set: function (fn) {
+            if (typeof fn !== 'function') {
+                throw new Error("trackBy must be a function, but received " + JSON.stringify(fn));
+            }
+            this._trackByFn = fn;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(NgFor.prototype, "ngForTemplate", {
         /**
          * @param {?} value
@@ -252,9 +270,9 @@ function NgFor_tsickle_Closure_declarations() {
     /** @type {?} */
     NgFor.prototype.ngForOf;
     /** @type {?} */
-    NgFor.prototype.ngForTrackBy;
-    /** @type {?} */
     NgFor.prototype._differ;
+    /** @type {?} */
+    NgFor.prototype._trackByFn;
     /** @type {?} */
     NgFor.prototype._viewContainer;
     /** @type {?} */
