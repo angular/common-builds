@@ -148,7 +148,7 @@ export var NgFor = (function () {
          */
         set: function (fn) {
             if (typeof fn !== 'function') {
-                throw new Error("trackBy must be a function, but received " + JSON.stringify(fn));
+                throw new Error("trackBy must be a function, but received " + JSON.stringify(fn) + ".\n      See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
             }
             this._trackByFn = fn;
         },
