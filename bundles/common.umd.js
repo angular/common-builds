@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.1-e85232a
+ * @license Angular v4.0.0-beta.1-0448e80
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2737,7 +2737,7 @@
     /**
      *  Transforms text to lowercase.
       * *
-      * {@example  core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe' }
+      * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
       * *
      */
     var LowerCasePipe = (function () {
@@ -3630,7 +3630,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.1-e85232a');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.1-0448e80');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

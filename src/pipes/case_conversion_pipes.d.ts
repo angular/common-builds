@@ -9,7 +9,7 @@ import { PipeTransform } from '@angular/core';
 /**
  * Transforms text to lowercase.
  *
- * {@example  core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe' }
+ * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
  * @stable
  */
