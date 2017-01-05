@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.1-f822f95
+ * @license Angular v4.0.0-beta.1-1bd04e9
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1611,8 +1611,12 @@
              * @return {?}
              */
             set: function (fn) {
-                if (typeof fn !== 'function') {
-                    throw new Error("trackBy must be a function, but received " + JSON.stringify(fn) + ".\n      See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                if (_angular_core.isDevMode() && fn != null && typeof fn !== 'function') {
+                    // TODO(vicb): use a log service once there is a public one available
+                    if ((console) && (console.warn)) {
+                        console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                            "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                    }
                 }
                 this._trackByFn = fn;
             },
@@ -3632,7 +3636,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.1-f822f95');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.1-1bd04e9');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

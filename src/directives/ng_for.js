@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, isDevMode } from '@angular/core';
 import { getTypeNameForDebugging } from '../facade/lang';
 export var NgForRow = (function () {
     /**
@@ -147,8 +147,12 @@ export var NgFor = (function () {
          * @return {?}
          */
         set: function (fn) {
-            if (typeof fn !== 'function') {
-                throw new Error("trackBy must be a function, but received " + JSON.stringify(fn) + ".\n      See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+            if (isDevMode() && fn != null && typeof fn !== 'function') {
+                // TODO(vicb): use a log service once there is a public one available
+                if ((console) && (console.warn)) {
+                    console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                        "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                }
             }
             this._trackByFn = fn;
         },
