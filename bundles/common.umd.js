@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.4.1-28a92b2
+ * @license Angular v2.4.1-56b4296
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1306,6 +1306,8 @@
       * <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
       * *
       * <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+      * *
+      * <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
       * ```
       * *
       * *
@@ -1609,8 +1611,12 @@
              * @return {?}
              */
             set: function (fn) {
-                if (typeof fn !== 'function') {
-                    throw new Error("trackBy must be a function, but received " + JSON.stringify(fn));
+                if (_angular_core.isDevMode() && fn != null && typeof fn !== 'function') {
+                    // TODO(vicb): use a log service once there is a public one available
+                    if ((console) && (console.warn)) {
+                        console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                            "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                    }
                 }
                 this._trackByFn = fn;
             },
@@ -3478,7 +3484,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.1-28a92b2');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.1-56b4296');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
