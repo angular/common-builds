@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.2-02dd90f
+ * @license Angular v4.0.0-beta.2-8578682
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1479,6 +1479,92 @@
         return NgClass;
     }());
 
+    /**
+     *  Instantiates a single {@link Component} type and inserts its Host View into current View.
+      * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
+      * *
+      * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
+      * any existing component will get destroyed.
+      * *
+      * ### Fine tune control
+      * *
+      * You can control the component creation process by using the following optional attributes:
+      * *
+      * * `ngOutletInjector`: Optional custom {@link Injector} that will be used as parent for the
+      * Component.
+      * Defaults to the injector of the current view container.
+      * *
+      * * `ngOutletProviders`: Optional injectable objects ({@link Provider}) that are visible to the
+      * component.
+      * *
+      * * `ngOutletContent`: Optional list of projectable nodes to insert into the content
+      * section of the component, if exists. ({@link NgContent}).
+      * *
+      * *
+      * ### Syntax
+      * *
+      * Simple
+      * ```
+      * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
+      * ```
+      * *
+      * Customized
+      * ```
+      * <ng-container *ngComponentOutlet="componentTypeExpression;
+      * injector: injectorExpression;
+      * content: contentNodesExpression">
+      * </ng-container>
+      * ```
+      * *
+      * # Example
+      * *
+      * {@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
+      * *
+      * A more complete example with additional options:
+      * *
+      * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
+      * *
+     */
+    var NgComponentOutlet = (function () {
+        /**
+         * @param {?} _cmpFactoryResolver
+         * @param {?} _viewContainerRef
+         */
+        function NgComponentOutlet(_cmpFactoryResolver, _viewContainerRef) {
+            this._cmpFactoryResolver = _cmpFactoryResolver;
+            this._viewContainerRef = _viewContainerRef;
+        }
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        NgComponentOutlet.prototype.ngOnChanges = function (changes) {
+            if (this.componentRef) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this.componentRef.hostView));
+            }
+            this._viewContainerRef.clear();
+            this.componentRef = null;
+            if (this.ngComponentOutlet) {
+                var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+                this.componentRef = this._viewContainerRef.createComponent(this._cmpFactoryResolver.resolveComponentFactory(this.ngComponentOutlet), this._viewContainerRef.length, injector, this.ngComponentOutletContent);
+            }
+        };
+        NgComponentOutlet.decorators = [
+            { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+        ];
+        /** @nocollapse */
+        NgComponentOutlet.ctorParameters = function () { return [
+            { type: _angular_core.ComponentFactoryResolver, },
+            { type: _angular_core.ViewContainerRef, },
+        ]; };
+        NgComponentOutlet.propDecorators = {
+            'ngComponentOutlet': [{ type: _angular_core.Input },],
+            'ngComponentOutletInjector': [{ type: _angular_core.Input },],
+            'ngComponentOutletContent': [{ type: _angular_core.Input },],
+        };
+        return NgComponentOutlet;
+    }());
+
     var NgForRow = (function () {
         /**
          * @param {?} $implicit
@@ -2380,17 +2466,19 @@
      *  *
       * *
       * ```
-      * <template [ngTemplateOutlet]="templateRefExpression"
-      * [ngOutletContext]="objectExpression">
-      * </template>
+      * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
       * ```
       * *
       * *
-      * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
-      * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
-      * available within the `TemplateRef`.
+      * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+      * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+      * by the local template `let` declarations.
       * *
       * Note: using the key `$implicit` in the context object will set it's value as default.
+      * *
+      * # Example
+      * *
+      * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
       * *
      */
     var NgTemplateOutlet = (function () {
@@ -2402,19 +2490,11 @@
         }
         Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
             /**
+             * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
              * @param {?} context
              * @return {?}
              */
-            set: function (context) { this._context = context; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
-            /**
-             * @param {?} templateRef
-             * @return {?}
-             */
-            set: function (templateRef) { this._templateRef = templateRef; },
+            set: function (context) { this.ngTemplateOutletContext = context; },
             enumerable: true,
             configurable: true
         });
@@ -2426,8 +2506,8 @@
             if (this._viewRef) {
                 this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
             }
-            if (this._templateRef) {
-                this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
+            if (this.ngTemplateOutlet) {
+                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
             }
         };
         NgTemplateOutlet.decorators = [
@@ -2438,8 +2518,9 @@
             { type: _angular_core.ViewContainerRef, },
         ]; };
         NgTemplateOutlet.propDecorators = {
-            'ngOutletContext': [{ type: _angular_core.Input },],
+            'ngTemplateOutletContext': [{ type: _angular_core.Input },],
             'ngTemplateOutlet': [{ type: _angular_core.Input },],
+            'ngOutletContext': [{ type: _angular_core.Input },],
         };
         return NgTemplateOutlet;
     }());
@@ -2450,6 +2531,7 @@
      */
     var /** @type {?} */ COMMON_DIRECTIVES = [
         NgClass,
+        NgComponentOutlet,
         NgFor,
         NgIf,
         NgTemplateOutlet,
@@ -3636,7 +3718,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-02dd90f');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-8578682');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
@@ -3651,6 +3733,7 @@
     exports.NgSwitchCase = NgSwitchCase;
     exports.NgSwitchDefault = NgSwitchDefault;
     exports.NgTemplateOutlet = NgTemplateOutlet;
+    exports.NgComponentOutlet = NgComponentOutlet;
     exports.AsyncPipe = AsyncPipe;
     exports.DatePipe = DatePipe;
     exports.I18nPluralPipe = I18nPluralPipe;
