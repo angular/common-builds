@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.2-5d9cbd7
+ * @license Angular v4.0.0-beta.2-f14d549
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1373,15 +1373,15 @@
          */
         NgClass.prototype.ngDoCheck = function () {
             if (this._iterableDiffer) {
-                var /** @type {?} */ changes = this._iterableDiffer.diff(this._rawClass);
-                if (changes) {
-                    this._applyIterableChanges(changes);
+                var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
+                if (iterableChanges) {
+                    this._applyIterableChanges(iterableChanges);
                 }
             }
             else if (this._keyValueDiffer) {
-                var /** @type {?} */ changes = this._keyValueDiffer.diff(this._rawClass);
-                if (changes) {
-                    this._applyKeyValueChanges(changes);
+                var /** @type {?} */ keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
+                if (keyValueChanges) {
+                    this._applyKeyValueChanges(keyValueChanges);
                 }
             }
         };
@@ -1459,7 +1459,7 @@
             var _this = this;
             klass = klass.trim();
             if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, enabled); });
+                klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
             }
         };
         NgClass.decorators = [
@@ -2444,8 +2444,8 @@
          */
         NgStyle.prototype._setStyle = function (nameAndUnit, value) {
             var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
-            value = value && unit ? "" + value + unit : value;
-            this._renderer.setElementStyle(this._ngEl.nativeElement, name, value);
+            value = value != null && unit ? "" + value + unit : value;
+            this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
         };
         NgStyle.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
@@ -3718,7 +3718,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-5d9cbd7');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-f14d549');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
@@ -3747,7 +3747,6 @@
     exports.UpperCasePipe = UpperCasePipe;
     exports.TitleCasePipe = TitleCasePipe;
     exports.VERSION = VERSION;
-    exports.Version = _angular_core.Version;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;
