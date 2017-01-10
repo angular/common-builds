@@ -10,17 +10,19 @@ import { Directive, Input, ViewContainerRef } from '@angular/core';
  *  *
   * *
   * ```
-  * <template [ngTemplateOutlet]="templateRefExpression"
-  * [ngOutletContext]="objectExpression">
-  * </template>
+  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
   * ```
   * *
   * *
-  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
-  * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
-  * available within the `TemplateRef`.
+  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+  * by the local template `let` declarations.
   * *
   * Note: using the key `$implicit` in the context object will set it's value as default.
+  * *
+  * # Example
+  * *
+  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
   * *
  */
 export var NgTemplateOutlet = (function () {
@@ -32,19 +34,11 @@ export var NgTemplateOutlet = (function () {
     }
     Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
         /**
+         * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
          * @param {?} context
          * @return {?}
          */
-        set: function (context) { this._context = context; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
-        /**
-         * @param {?} templateRef
-         * @return {?}
-         */
-        set: function (templateRef) { this._templateRef = templateRef; },
+        set: function (context) { this.ngTemplateOutletContext = context; },
         enumerable: true,
         configurable: true
     });
@@ -56,8 +50,8 @@ export var NgTemplateOutlet = (function () {
         if (this._viewRef) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
         }
-        if (this._templateRef) {
-            this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
+        if (this.ngTemplateOutlet) {
+            this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
         }
     };
     NgTemplateOutlet.decorators = [
@@ -68,8 +62,9 @@ export var NgTemplateOutlet = (function () {
         { type: ViewContainerRef, },
     ]; };
     NgTemplateOutlet.propDecorators = {
-        'ngOutletContext': [{ type: Input },],
+        'ngTemplateOutletContext': [{ type: Input },],
         'ngTemplateOutlet': [{ type: Input },],
+        'ngOutletContext': [{ type: Input },],
     };
     return NgTemplateOutlet;
 }());
@@ -86,9 +81,9 @@ function NgTemplateOutlet_tsickle_Closure_declarations() {
     /** @type {?} */
     NgTemplateOutlet.prototype._viewRef;
     /** @type {?} */
-    NgTemplateOutlet.prototype._context;
+    NgTemplateOutlet.prototype.ngTemplateOutletContext;
     /** @type {?} */
-    NgTemplateOutlet.prototype._templateRef;
+    NgTemplateOutlet.prototype.ngTemplateOutlet;
     /** @type {?} */
     NgTemplateOutlet.prototype._viewContainerRef;
 }

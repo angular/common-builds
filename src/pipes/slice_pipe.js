@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Pipe } from '@angular/core';
-import { isBlank } from '../facade/lang';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  *  *
@@ -57,7 +56,7 @@ export var SlicePipe = (function () {
      * @return {?}
      */
     SlicePipe.prototype.transform = function (value, start, end) {
-        if (isBlank(value))
+        if (value == null)
             return value;
         if (!this.supports(value)) {
             throw new InvalidPipeArgumentError(SlicePipe, value);

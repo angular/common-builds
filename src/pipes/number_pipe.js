@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Inject, LOCALE_ID, Pipe } from '@angular/core';
-import { NumberWrapper, isBlank, isPresent } from '../facade/lang';
+import { NumberWrapper } from '../facade/lang';
 import { NumberFormatStyle, NumberFormatter } from './intl';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
@@ -23,7 +23,7 @@ var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-    if (isBlank(value))
+    if (value == null)
         return null;
     // Convert strings to numbers
     value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
@@ -44,13 +44,13 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
         if (parts === null) {
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
-        if (isPresent(parts[1])) {
+        if (parts[1] != null) {
             minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
         }
-        if (isPresent(parts[3])) {
+        if (parts[3] != null) {
             minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
         }
-        if (isPresent(parts[5])) {
+        if (parts[5] != null) {
             maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
         }
     }
