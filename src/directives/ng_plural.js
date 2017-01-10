@@ -13,9 +13,10 @@ import { SwitchView } from './ng_switch';
   * *
   * ```
   * <some-element [ngPlural]="value">
-  * <template ngPluralCase="=0">there is nothing</template>
-  * <template ngPluralCase="=1">there is one</template>
-  * <template ngPluralCase="few">there are a few</template>
+  * <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
+  * <ng-container *ngPluralCase="'=1'">there is one</ng-container>
+  * <ng-container *ngPluralCase="'few'">there are a few</ng-container>
+  * <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
   * </some-element>
   * ```
   * *
@@ -123,8 +124,8 @@ function NgPlural_tsickle_Closure_declarations() {
   * *
   * ```
   * <some-element [ngPlural]="value">
-  * <template ngPluralCase="=0">...</template>
-  * <template ngPluralCase="other">...</template>
+  * <ng-container *ngPluralCase="'=0'">...</ng-container>
+  * <ng-container *ngPluralCase="'other'">...</ng-container>
   * </some-element>
   * *```
   * *

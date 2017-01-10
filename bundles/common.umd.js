@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.2-9aeb8c5
+ * @license Angular v2.4.2-d43e5dd
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -826,18 +826,18 @@
     var NgLocaleLocalization = (function (_super) {
         __extends$2(NgLocaleLocalization, _super);
         /**
-         * @param {?} locale
+         * @param {?} _locale
          */
-        function NgLocaleLocalization(locale) {
+        function NgLocaleLocalization(_locale) {
             _super.call(this);
-            this.locale = locale;
+            this._locale = _locale;
         }
         /**
          * @param {?} value
          * @return {?}
          */
         NgLocaleLocalization.prototype.getPluralCategory = function (value) {
-            var /** @type {?} */ plural = getPluralCase(this.locale, value);
+            var /** @type {?} */ plural = getPluralCase(this._locale, value);
             switch (plural) {
                 case Plural.Zero:
                     return 'zero';
@@ -1373,15 +1373,15 @@
          */
         NgClass.prototype.ngDoCheck = function () {
             if (this._iterableDiffer) {
-                var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
+                var /** @type {?} */ changes = this._iterableDiffer.diff(this._rawClass);
+                if (changes) {
+                    this._applyIterableChanges(changes);
                 }
             }
             else if (this._keyValueDiffer) {
-                var /** @type {?} */ keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
+                var /** @type {?} */ changes = this._keyValueDiffer.diff(this._rawClass);
+                if (changes) {
+                    this._applyKeyValueChanges(changes);
                 }
             }
         };
@@ -1459,7 +1459,7 @@
             var _this = this;
             klass = klass.trim();
             if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
+                klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, enabled); });
             }
         };
         NgClass.decorators = [
@@ -1477,92 +1477,6 @@
             'ngClass': [{ type: _angular_core.Input },],
         };
         return NgClass;
-    }());
-
-    /**
-     *  Instantiates a single {@link Component} type and inserts its Host View into current View.
-      * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
-      * *
-      * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
-      * any existing component will get destroyed.
-      * *
-      * ### Fine tune control
-      * *
-      * You can control the component creation process by using the following optional attributes:
-      * *
-      * * `ngOutletInjector`: Optional custom {@link Injector} that will be used as parent for the
-      * Component.
-      * Defaults to the injector of the current view container.
-      * *
-      * * `ngOutletProviders`: Optional injectable objects ({@link Provider}) that are visible to the
-      * component.
-      * *
-      * * `ngOutletContent`: Optional list of projectable nodes to insert into the content
-      * section of the component, if exists. ({@link NgContent}).
-      * *
-      * *
-      * ### Syntax
-      * *
-      * Simple
-      * ```
-      * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
-      * ```
-      * *
-      * Customized
-      * ```
-      * <ng-container *ngComponentOutlet="componentTypeExpression;
-      * injector: injectorExpression;
-      * content: contentNodesExpression">
-      * </ng-container>
-      * ```
-      * *
-      * # Example
-      * *
-      * {@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
-      * *
-      * A more complete example with additional options:
-      * *
-      * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
-      * *
-     */
-    var NgComponentOutlet = (function () {
-        /**
-         * @param {?} _cmpFactoryResolver
-         * @param {?} _viewContainerRef
-         */
-        function NgComponentOutlet(_cmpFactoryResolver, _viewContainerRef) {
-            this._cmpFactoryResolver = _cmpFactoryResolver;
-            this._viewContainerRef = _viewContainerRef;
-        }
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-        NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-            if (this.componentRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this.componentRef.hostView));
-            }
-            this._viewContainerRef.clear();
-            this.componentRef = null;
-            if (this.ngComponentOutlet) {
-                var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-                this.componentRef = this._viewContainerRef.createComponent(this._cmpFactoryResolver.resolveComponentFactory(this.ngComponentOutlet), this._viewContainerRef.length, injector, this.ngComponentOutletContent);
-            }
-        };
-        NgComponentOutlet.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
-        ];
-        /** @nocollapse */
-        NgComponentOutlet.ctorParameters = function () { return [
-            { type: _angular_core.ComponentFactoryResolver, },
-            { type: _angular_core.ViewContainerRef, },
-        ]; };
-        NgComponentOutlet.propDecorators = {
-            'ngComponentOutlet': [{ type: _angular_core.Input },],
-            'ngComponentOutletInjector': [{ type: _angular_core.Input },],
-            'ngComponentOutletContent': [{ type: _angular_core.Input },],
-        };
-        return NgComponentOutlet;
     }());
 
     var NgForRow = (function () {
@@ -1824,107 +1738,37 @@
     }());
 
     /**
-     *  Conditionally includes a template based on the value of an `expression`.
+     *  Removes or recreates a portion of the DOM tree based on an {expression}.
       * *
-      * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
-      * when expression is truthy or falsy respectively. Typically the:
-      * - `then` template is the inline template of `ngIf` unless bound to a different value.
-      * - `else` template is blank unless it is bound.
+      * If the expression assigned to `ngIf` evaluates to a falsy value then the element
+      * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
       * *
-      * # Most common usage
-      * *
-      * The most common usage of the `ngIf` directive is to conditionally show the inline template as
-      * seen in this example:
-      * {@example common/ngIf/ts/module.ts region='NgIfSimple'}
-      * *
-      * # Showing an alternative template using `else`
-      * *
-      * If it is necessary to display a template when the `expression` is falsy use the `else` template
-      * binding as shown. Note that the `else` binding points to a `<template>` labeled `#elseBlock`.
-      * The template can be defined anywhere in the component view but is typically placed right after
-      * `ngIf` for readability.
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfElse'}
-      * *
-      * # Using non-inlined `then` template
-      * *
-      * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
-      * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
-      * change at runtime as shown in this example.
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfThenElse'}
-      * *
-      * # Storing conditional result in a variable
-      * *
-      * A common pattern is that we need to show a set of properties from the same object. If the
-      * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
-      * dereferencing a `null` value. This is especially the case when waiting on async data such as
-      * when using the `async` pipe as shown in folowing example:
+      * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
       * *
       * ```
-      * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
+      * <div *ngIf="errorCount > 0" class="error">
+      * <!-- Error message displayed when the errorCount property in the current context is greater
+      * than 0. -->
+      * {{errorCount}} errors detected
+      * </div>
       * ```
-      * *
-      * There are several inefficiencies in the above example:
-      * - We create multiple subscriptions on `userStream`. One for each `async` pipe, or two in the
-      * example above.
-      * - We cannot display an alternative screen while waiting for the data to arrive asynchronously.
-      * - We have to use the safe-traversal-operator `?.` to access properties, which is cumbersome.
-      * - We have to place the `async` pipe in parenthesis.
-      * *
-      * A better way to do this is to use `ngIf` and store the result of the condition in a local
-      * variable as shown in the the example below:
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfLet'}
-      * *
-      * Notice that:
-      * - We use only one `async` pipe and hence only one subscription gets created.
-      * - `ngIf` stores the result of the `userStream|async` in the local variable `user`.
-      * - The local `user` can then be bound repeatedly in a more efficient way.
-      * - No need to use the safe-traversal-operator `?.` to access properties as `ngIf` will only
-      * display the data if `userStream` returns a value.
-      * - We can display an alternative template while waiting for the data.
       * *
       * ### Syntax
       * *
-      * Simple form:
       * - `<div *ngIf="condition">...</div>`
       * - `<div template="ngIf condition">...</div>`
       * - `<template [ngIf]="condition"><div>...</div></template>`
-      * *
-      * Form with an else block:
-      * ```
-      * <div *ngIf="condition; else elseBlock">...</div>
-      * <template #elseBlock>...</template>
-      * ```
-      * *
-      * Form with a `then` and `else` block:
-      * ```
-      * <div *ngIf="condition; then thenBlock else elseBlock"></div>
-      * <template #thenBlock>...</template>
-      * <template #elseBlock>...</template>
-      * ```
-      * *
-      * Form with storing the value locally:
-      * ```
-      * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
-      * <template #elseBlock>...</template>
-      * ```
       * *
      */
     var NgIf = (function () {
         /**
          * @param {?} _viewContainer
-         * @param {?} templateRef
+         * @param {?} _template
          */
-        function NgIf(_viewContainer, templateRef) {
+        function NgIf(_viewContainer, _template) {
             this._viewContainer = _viewContainer;
-            this._context = new NgIfContext();
-            this._thenTemplateRef = null;
-            this._elseTemplateRef = null;
-            this._thenViewRef = null;
-            this._elseViewRef = null;
-            this._thenTemplateRef = templateRef;
+            this._template = _template;
+            this._hasView = false;
         }
         Object.defineProperty(NgIf.prototype, "ngIf", {
             /**
@@ -1932,63 +1776,18 @@
              * @return {?}
              */
             set: function (condition) {
-                this._context.$implicit = condition;
-                this._updateView();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgIf.prototype, "ngIfThen", {
-            /**
-             * @param {?} templateRef
-             * @return {?}
-             */
-            set: function (templateRef) {
-                this._thenTemplateRef = templateRef;
-                this._thenViewRef = null; // clear previous view if any.
-                this._updateView();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgIf.prototype, "ngIfElse", {
-            /**
-             * @param {?} templateRef
-             * @return {?}
-             */
-            set: function (templateRef) {
-                this._elseTemplateRef = templateRef;
-                this._elseViewRef = null; // clear previous view if any.
-                this._updateView();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        NgIf.prototype._updateView = function () {
-            if (this._context.$implicit) {
-                if (!this._thenViewRef) {
-                    this._viewContainer.clear();
-                    this._elseViewRef = null;
-                    if (this._thenTemplateRef) {
-                        this._thenViewRef =
-                            this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
-                    }
+                if (condition && !this._hasView) {
+                    this._hasView = true;
+                    this._viewContainer.createEmbeddedView(this._template);
                 }
-            }
-            else {
-                if (!this._elseViewRef) {
+                else if (!condition && this._hasView) {
+                    this._hasView = false;
                     this._viewContainer.clear();
-                    this._thenViewRef = null;
-                    if (this._elseTemplateRef) {
-                        this._elseViewRef =
-                            this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
-                    }
                 }
-            }
-        };
+            },
+            enumerable: true,
+            configurable: true
+        });
         NgIf.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
         ];
@@ -1999,16 +1798,8 @@
         ]; };
         NgIf.propDecorators = {
             'ngIf': [{ type: _angular_core.Input },],
-            'ngIfThen': [{ type: _angular_core.Input },],
-            'ngIfElse': [{ type: _angular_core.Input },],
         };
         return NgIf;
-    }());
-    var NgIfContext = (function () {
-        function NgIfContext() {
-            this.$implicit = null;
-        }
-        return NgIfContext;
     }());
 
     var SwitchView = (function () {
@@ -2250,9 +2041,10 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <template ngPluralCase="=0">there is nothing</template>
-      * <template ngPluralCase="=1">there is one</template>
-      * <template ngPluralCase="few">there are a few</template>
+      * <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
+      * <ng-container *ngPluralCase="'=1'">there is one</ng-container>
+      * <ng-container *ngPluralCase="'few'">there are a few</ng-container>
+      * <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
       * </some-element>
       * ```
       * *
@@ -2341,8 +2133,8 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <template ngPluralCase="=0">...</template>
-      * <template ngPluralCase="other">...</template>
+      * <ng-container *ngPluralCase="'=0'">...</ng-container>
+      * <ng-container *ngPluralCase="'other'">...</ng-container>
       * </some-element>
       * *```
       * *
@@ -2443,8 +2235,8 @@
          */
         NgStyle.prototype._setStyle = function (nameAndUnit, value) {
             var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
-            value = value != null && unit ? "" + value + unit : value;
-            this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+            value = value && unit ? "" + value + unit : value;
+            this._renderer.setElementStyle(this._ngEl.nativeElement, name, value);
         };
         NgStyle.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
@@ -2465,19 +2257,17 @@
      *  *
       * *
       * ```
-      * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+      * <template [ngTemplateOutlet]="templateRefExpression"
+      * [ngOutletContext]="objectExpression">
+      * </template>
       * ```
       * *
       * *
-      * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
-      * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
-      * by the local template `let` declarations.
+      * You can attach a context object to the `EmbeddedViewRef` by setting `[ngOutletContext]`.
+      * `[ngOutletContext]` should be an object, the object's keys will be the local template variables
+      * available within the `TemplateRef`.
       * *
       * Note: using the key `$implicit` in the context object will set it's value as default.
-      * *
-      * # Example
-      * *
-      * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
       * *
      */
     var NgTemplateOutlet = (function () {
@@ -2489,11 +2279,19 @@
         }
         Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
             /**
-             * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
              * @param {?} context
              * @return {?}
              */
-            set: function (context) { this.ngTemplateOutletContext = context; },
+            set: function (context) { this._context = context; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(NgTemplateOutlet.prototype, "ngTemplateOutlet", {
+            /**
+             * @param {?} templateRef
+             * @return {?}
+             */
+            set: function (templateRef) { this._templateRef = templateRef; },
             enumerable: true,
             configurable: true
         });
@@ -2505,8 +2303,8 @@
             if (this._viewRef) {
                 this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
             }
-            if (this.ngTemplateOutlet) {
-                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+            if (this._templateRef) {
+                this._viewRef = this._viewContainerRef.createEmbeddedView(this._templateRef, this._context);
             }
         };
         NgTemplateOutlet.decorators = [
@@ -2517,9 +2315,8 @@
             { type: _angular_core.ViewContainerRef, },
         ]; };
         NgTemplateOutlet.propDecorators = {
-            'ngTemplateOutletContext': [{ type: _angular_core.Input },],
-            'ngTemplateOutlet': [{ type: _angular_core.Input },],
             'ngOutletContext': [{ type: _angular_core.Input },],
+            'ngTemplateOutlet': [{ type: _angular_core.Input },],
         };
         return NgTemplateOutlet;
     }());
@@ -2530,7 +2327,6 @@
      */
     var /** @type {?} */ COMMON_DIRECTIVES = [
         NgClass,
-        NgComponentOutlet,
         NgFor,
         NgIf,
         NgTemplateOutlet,
@@ -2819,98 +2615,6 @@
             { type: _angular_core.ChangeDetectorRef, },
         ]; };
         return AsyncPipe;
-    }());
-
-    /**
-     *  Transforms text to lowercase.
-      * *
-      * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
-      * *
-     */
-    var LowerCasePipe = (function () {
-        function LowerCasePipe() {
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        LowerCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
-        };
-        LowerCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-        ];
-        /** @nocollapse */
-        LowerCasePipe.ctorParameters = function () { return []; };
-        return LowerCasePipe;
-    }());
-    /**
-     *  Helper method to transform a single word to titlecase.
-      * *
-     * @param {?} word
-     * @return {?}
-     */
-    function titleCaseWord(word) {
-        if (!word)
-            return word;
-        return word[0].toUpperCase() + word.substr(1).toLowerCase();
-    }
-    /**
-     *  Transforms text to titlecase.
-      * *
-     */
-    var TitleCasePipe = (function () {
-        function TitleCasePipe() {
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        TitleCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(TitleCasePipe, value);
-            }
-            return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
-        };
-        TitleCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
-        ];
-        /** @nocollapse */
-        TitleCasePipe.ctorParameters = function () { return []; };
-        return TitleCasePipe;
-    }());
-    /**
-     *  Transforms text to uppercase.
-      * *
-     */
-    var UpperCasePipe = (function () {
-        function UpperCasePipe() {
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        UpperCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        UpperCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-        ];
-        /** @nocollapse */
-        UpperCasePipe.ctorParameters = function () { return []; };
-        return UpperCasePipe;
     }());
 
     var NumberFormatStyle = {};
@@ -3416,6 +3120,38 @@
         return JsonPipe;
     }());
 
+    /**
+     *  *
+      * Converts value into a lowercase string using `String.prototype.toLowerCase()`.
+      * *
+      * ### Example
+      * *
+      * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
+      * *
+     */
+    var LowerCasePipe = (function () {
+        function LowerCasePipe() {
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        LowerCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (typeof value !== 'string') {
+                throw new InvalidPipeArgumentError(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        LowerCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+        ];
+        /** @nocollapse */
+        LowerCasePipe.ctorParameters = function () { return []; };
+        return LowerCasePipe;
+    }());
+
     var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
     /**
      * @param {?} pipe
@@ -3676,6 +3412,38 @@
     }());
 
     /**
+     *  *
+      * Converts value into an uppercase string using `String.prototype.toUpperCase()`.
+      * *
+      * ### Example
+      * *
+      * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
+      * *
+     */
+    var UpperCasePipe = (function () {
+        function UpperCasePipe() {
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        UpperCasePipe.prototype.transform = function (value) {
+            if (isBlank(value))
+                return value;
+            if (typeof value !== 'string') {
+                throw new InvalidPipeArgumentError(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        UpperCasePipe.decorators = [
+            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+        ];
+        /** @nocollapse */
+        UpperCasePipe.ctorParameters = function () { return []; };
+        return UpperCasePipe;
+    }());
+
+    /**
      * A collection of Angular pipes that are likely to be used in each and every application.
      */
     var /** @type {?} */ COMMON_PIPES = [
@@ -3686,7 +3454,6 @@
         SlicePipe,
         DecimalPipe,
         PercentPipe,
-        TitleCasePipe,
         CurrencyPipe,
         DatePipe,
         I18nPluralPipe,
@@ -3717,9 +3484,8 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-9aeb8c5');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.2-d43e5dd');
 
-    exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
     exports.NgClass = NgClass;
@@ -3732,7 +3498,6 @@
     exports.NgSwitchCase = NgSwitchCase;
     exports.NgSwitchDefault = NgSwitchDefault;
     exports.NgTemplateOutlet = NgTemplateOutlet;
-    exports.NgComponentOutlet = NgComponentOutlet;
     exports.AsyncPipe = AsyncPipe;
     exports.DatePipe = DatePipe;
     exports.I18nPluralPipe = I18nPluralPipe;
@@ -3744,8 +3509,8 @@
     exports.PercentPipe = PercentPipe;
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
-    exports.TitleCasePipe = TitleCasePipe;
     exports.VERSION = VERSION;
+    exports.Version = _angular_core.Version;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;

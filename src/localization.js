@@ -56,18 +56,18 @@ export function getPluralCategory(value, cases, ngLocalization) {
 export var NgLocaleLocalization = (function (_super) {
     __extends(NgLocaleLocalization, _super);
     /**
-     * @param {?} locale
+     * @param {?} _locale
      */
-    function NgLocaleLocalization(locale) {
+    function NgLocaleLocalization(_locale) {
         _super.call(this);
-        this.locale = locale;
+        this._locale = _locale;
     }
     /**
      * @param {?} value
      * @return {?}
      */
     NgLocaleLocalization.prototype.getPluralCategory = function (value) {
-        var /** @type {?} */ plural = getPluralCase(this.locale, value);
+        var /** @type {?} */ plural = getPluralCase(this._locale, value);
         switch (plural) {
             case Plural.Zero:
                 return 'zero';
@@ -101,7 +101,7 @@ function NgLocaleLocalization_tsickle_Closure_declarations() {
      */
     NgLocaleLocalization.ctorParameters;
     /** @type {?} */
-    NgLocaleLocalization.prototype.locale;
+    NgLocaleLocalization.prototype._locale;
 }
 export var Plural = {};
 Plural.Zero = 0;

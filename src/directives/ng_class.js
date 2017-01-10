@@ -86,15 +86,15 @@ export var NgClass = (function () {
      */
     NgClass.prototype.ngDoCheck = function () {
         if (this._iterableDiffer) {
-            var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
-            if (iterableChanges) {
-                this._applyIterableChanges(iterableChanges);
+            var /** @type {?} */ changes = this._iterableDiffer.diff(this._rawClass);
+            if (changes) {
+                this._applyIterableChanges(changes);
             }
         }
         else if (this._keyValueDiffer) {
-            var /** @type {?} */ keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
-            if (keyValueChanges) {
-                this._applyKeyValueChanges(keyValueChanges);
+            var /** @type {?} */ changes = this._keyValueDiffer.diff(this._rawClass);
+            if (changes) {
+                this._applyKeyValueChanges(changes);
             }
         }
     };
@@ -172,7 +172,7 @@ export var NgClass = (function () {
         var _this = this;
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
+            klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, enabled); });
         }
     };
     NgClass.decorators = [

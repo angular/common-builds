@@ -76,8 +76,8 @@ export var NgStyle = (function () {
      */
     NgStyle.prototype._setStyle = function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
-        value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        value = value && unit ? "" + value + unit : value;
+        this._renderer.setElementStyle(this._ngEl.nativeElement, name, value);
     };
     NgStyle.decorators = [
         { type: Directive, args: [{ selector: '[ngStyle]' },] },
