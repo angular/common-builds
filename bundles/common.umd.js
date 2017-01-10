@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.2-f14d549
+ * @license Angular v4.0.0-beta.2-9aeb8c5
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2250,10 +2250,9 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
-      * <ng-container *ngPluralCase="'=1'">there is one</ng-container>
-      * <ng-container *ngPluralCase="'few'">there are a few</ng-container>
-      * <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
+      * <template ngPluralCase="=0">there is nothing</template>
+      * <template ngPluralCase="=1">there is one</template>
+      * <template ngPluralCase="few">there are a few</template>
       * </some-element>
       * ```
       * *
@@ -2342,8 +2341,8 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">...</ng-container>
-      * <ng-container *ngPluralCase="'other'">...</ng-container>
+      * <template ngPluralCase="=0">...</template>
+      * <template ngPluralCase="other">...</template>
       * </some-element>
       * *```
       * *
@@ -3718,7 +3717,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-f14d549');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-9aeb8c5');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
