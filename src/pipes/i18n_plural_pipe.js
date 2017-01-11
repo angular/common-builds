@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Pipe } from '@angular/core';
-import { isBlank } from '../facade/lang';
 import { NgLocalization, getPluralCategory } from '../localization';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
@@ -35,7 +34,7 @@ export var I18nPluralPipe = (function () {
      * @return {?}
      */
     I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-        if (isBlank(value))
+        if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
             throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);

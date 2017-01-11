@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.2-ed32340
+ * @license Angular v4.0.0-beta.2-95cbca2
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1444,7 +1444,7 @@
                 }
                 else {
                     Object.keys(rawClassVal).forEach(function (klass) {
-                        if (isPresent(rawClassVal[klass]))
+                        if (rawClassVal[klass] != null)
                             _this._toggleClass(klass, !isCleanup);
                     });
                 }
@@ -2250,10 +2250,9 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
-      * <ng-container *ngPluralCase="'=1'">there is one</ng-container>
-      * <ng-container *ngPluralCase="'few'">there are a few</ng-container>
-      * <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
+      * <template ngPluralCase="=0">there is nothing</template>
+      * <template ngPluralCase="=1">there is one</template>
+      * <template ngPluralCase="few">there are a few</template>
       * </some-element>
       * ```
       * *
@@ -2342,8 +2341,8 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">...</ng-container>
-      * <ng-container *ngPluralCase="'other'">...</ng-container>
+      * <template ngPluralCase="=0">...</template>
+      * <template ngPluralCase="other">...</template>
       * </some-element>
       * *```
       * *
@@ -3332,7 +3331,7 @@
          * @return {?}
          */
         I18nPluralPipe.prototype.transform = function (value, pluralMap) {
-            if (isBlank(value))
+            if (value == null)
                 return '';
             if (typeof pluralMap !== 'object' || pluralMap === null) {
                 throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
@@ -3431,7 +3430,7 @@
     function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
         if (currency === void 0) { currency = null; }
         if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-        if (isBlank(value))
+        if (value == null)
             return null;
         // Convert strings to numbers
         value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
@@ -3452,13 +3451,13 @@
             if (parts === null) {
                 throw new Error(digits + " is not a valid digit info for number pipes");
             }
-            if (isPresent(parts[1])) {
+            if (parts[1] != null) {
                 minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
             }
-            if (isPresent(parts[3])) {
+            if (parts[3] != null) {
                 minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
             }
-            if (isPresent(parts[5])) {
+            if (parts[5] != null) {
                 maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
             }
         }
@@ -3656,7 +3655,7 @@
          * @return {?}
          */
         SlicePipe.prototype.transform = function (value, start, end) {
-            if (isBlank(value))
+            if (value == null)
                 return value;
             if (!this.supports(value)) {
                 throw new InvalidPipeArgumentError(SlicePipe, value);
@@ -3718,7 +3717,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-ed32340');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.2-95cbca2');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

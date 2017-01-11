@@ -7,7 +7,7 @@
  */
 import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer } from '@angular/core';
 import { isListLikeIterable } from '../facade/collection';
-import { isPresent, stringify } from '../facade/lang';
+import { stringify } from '../facade/lang';
 /**
  *  *
   * *
@@ -157,7 +157,7 @@ export var NgClass = (function () {
             }
             else {
                 Object.keys(rawClassVal).forEach(function (klass) {
-                    if (isPresent(rawClassVal[klass]))
+                    if (rawClassVal[klass] != null)
                         _this._toggleClass(klass, !isCleanup);
                 });
             }
