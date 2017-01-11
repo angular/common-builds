@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.4.2-d43e5dd
+ * @license Angular v2.4.2-d7f2a3c
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2041,10 +2041,9 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">there is nothing</ng-container>
-      * <ng-container *ngPluralCase="'=1'">there is one</ng-container>
-      * <ng-container *ngPluralCase="'few'">there are a few</ng-container>
-      * <ng-container *ngPluralCase="'other'">there are exactly #</ng-container>
+      * <template ngPluralCase="=0">there is nothing</template>
+      * <template ngPluralCase="=1">there is one</template>
+      * <template ngPluralCase="few">there are a few</template>
       * </some-element>
       * ```
       * *
@@ -2133,8 +2132,8 @@
       * *
       * ```
       * <some-element [ngPlural]="value">
-      * <ng-container *ngPluralCase="'=0'">...</ng-container>
-      * <ng-container *ngPluralCase="'other'">...</ng-container>
+      * <template ngPluralCase="=0">...</template>
+      * <template ngPluralCase="other">...</template>
       * </some-element>
       * *```
       * *
@@ -3484,7 +3483,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.2-d43e5dd');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.2-d7f2a3c');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
