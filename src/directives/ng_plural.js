@@ -140,7 +140,8 @@ export var NgPluralCase = (function () {
      */
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
-        ngPlural.addCase(value, new SwitchView(viewContainer, template));
+        var isANumber = !isNaN(Number(value));
+        ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
     NgPluralCase.decorators = [
         { type: Directive, args: [{ selector: '[ngPluralCase]' },] },

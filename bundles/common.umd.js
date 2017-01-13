@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.3-dc63cef
+ * @license Angular v4.0.0-beta.3-5237b1c
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2358,7 +2358,8 @@
          */
         function NgPluralCase(value, template, viewContainer, ngPlural) {
             this.value = value;
-            ngPlural.addCase(value, new SwitchView(viewContainer, template));
+            var isANumber = !isNaN(Number(value));
+            ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
         }
         NgPluralCase.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
@@ -3717,7 +3718,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-dc63cef');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-5237b1c');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
