@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { OpaqueToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 /**
  *  `LocationStrategy` is responsible for representing and reading route state
   * from the browser's URL. Angular provides two strategies:
@@ -102,5 +102,5 @@ export var LocationStrategy = (function () {
  *
  * @stable
  */
-export var /** @type {?} */ APP_BASE_HREF = new OpaqueToken('appBaseHref');
+export var /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
 //# sourceMappingURL=location_strategy.js.map
