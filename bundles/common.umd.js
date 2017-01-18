@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.3-d169c24
+ * @license Angular v4.0.0-beta.3-e8ea741
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,29 +10,30 @@
 }(this, function (exports,_angular_core) { 'use strict';
 
     /**
-     *  This class should not be used directly by an application developer. Instead, use
-      * {@link Location}.
-      * *
-      * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
-      * agnostic.
-      * This means that we can have different implementation of `PlatformLocation` for the different
-      * platforms
-      * that angular supports. For example, the default `PlatformLocation` is {@link
-      * BrowserPlatformLocation},
-      * however when you run your app in a WebWorker you use {@link WebWorkerPlatformLocation}.
-      * *
-      * The `PlatformLocation` class is used directly by all implementations of {@link LocationStrategy}
-      * when
-      * they need to interact with the DOM apis like pushState, popState, etc...
-      * *
-      * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
-      * by
-      * the {@link Router} in order to navigate between routes. Since all interactions between {@link
-      * Router} /
-      * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
-      * class
-      * they are all platform independent.
-      * *
+     * This class should not be used directly by an application developer. Instead, use
+     * {\@link Location}.
+     *
+     * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
+     * agnostic.
+     * This means that we can have different implementation of `PlatformLocation` for the different
+     * platforms
+     * that angular supports. For example, the default `PlatformLocation` is {\@link
+     * BrowserPlatformLocation},
+     * however when you run your app in a WebWorker you use {\@link WebWorkerPlatformLocation}.
+     *
+     * The `PlatformLocation` class is used directly by all implementations of {\@link LocationStrategy}
+     * when
+     * they need to interact with the DOM apis like pushState, popState, etc...
+     *
+     * {\@link LocationStrategy} in turn is used by the {\@link Location} service which is used directly
+     * by
+     * the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
+     * Router} /
+     * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
+     * class
+     * they are all platform independent.
+     *
+     * \@stable
      * @abstract
      */
     var PlatformLocation = (function () {
@@ -109,21 +110,22 @@
     }());
 
     /**
-     *  `LocationStrategy` is responsible for representing and reading route state
-      * from the browser's URL. Angular provides two strategies:
-      * {@link HashLocationStrategy} and {@link PathLocationStrategy}.
-      * *
-      * This is used under the hood of the {@link Location} service.
-      * *
-      * Applications should use the {@link Router} or {@link Location} services to
-      * interact with application route state.
-      * *
-      * For instance, {@link HashLocationStrategy} produces URLs like
-      * `http://example.com#/foo`, and {@link PathLocationStrategy} produces
-      * `http://example.com/foo` as an equivalent URL.
-      * *
-      * See these two classes for more.
-      * *
+     * `LocationStrategy` is responsible for representing and reading route state
+     * from the browser's URL. Angular provides two strategies:
+     * {\@link HashLocationStrategy} and {\@link PathLocationStrategy}.
+     *
+     * This is used under the hood of the {\@link Location} service.
+     *
+     * Applications should use the {\@link Router} or {\@link Location} services to
+     * interact with application route state.
+     *
+     * For instance, {\@link HashLocationStrategy} produces URLs like
+     * `http://example.com#/foo`, and {\@link PathLocationStrategy} produces
+     * `http://example.com/foo` as an equivalent URL.
+     *
+     * See these two classes for more.
+     *
+     * \@stable
      * @abstract
      */
     var LocationStrategy = (function () {
@@ -337,22 +339,25 @@
     }
 
     /**
-     *  Depending on which {@link LocationStrategy} is used, `Location` will either persist
-      * to the URL's path or the URL's hash segment.
-      * *
-      * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
-      * `Location` only if you need to interact with or create normalized URLs outside of
-      * routing.
-      * *
-      * `Location` is responsible for normalizing the URL against the application's base href.
-      * A normalized URL is absolute from the URL host, includes the application's base href, and has no
-      * trailing slash:
-      * - `/my/app/user/123` is normalized
-      * - `my/app/user/123` **is not** normalized
-      * - `/my/app/user/123/` **is not** normalized
-      * *
-      * ### Example
-      * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
+     * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
+     * \@description
+     * Depending on which {\@link LocationStrategy} is used, `Location` will either persist
+     * to the URL's path or the URL's hash segment.
+     *
+     * Note: it's better to use {\@link Router#navigate} service to trigger route changes. Use
+     * `Location` only if you need to interact with or create normalized URLs outside of
+     * routing.
+     *
+     * `Location` is responsible for normalizing the URL against the application's base href.
+     * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+     * trailing slash:
+     * - `/my/app/user/123` is normalized
+     * - `my/app/user/123` **is not** normalized
+     * - `/my/app/user/123/` **is not** normalized
+     *
+     * ### Example
+     * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
+     * \@stable
      */
     var Location = (function () {
         /**
@@ -382,7 +387,7 @@
             return this.normalize(this._platformStrategy.path(includeHash));
         };
         /**
-         *  Normalizes the given path and compares to the current normalized path.
+         * Normalizes the given path and compares to the current normalized path.
          * @param {?} path
          * @param {?=} query
          * @return {?}
@@ -392,8 +397,8 @@
             return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
         };
         /**
-         *  Given a string representing a URL, returns the normalized URL path without leading or
-          * trailing slashes.
+         * Given a string representing a URL, returns the normalized URL path without leading or
+         * trailing slashes.
          * @param {?} url
          * @return {?}
          */
@@ -401,10 +406,10 @@
             return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
         };
         /**
-         *  Given a string representing a URL, returns the platform-specific external URL path.
-          * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-          * before normalizing. This method will also add a hash if `HashLocationStrategy` is
-          * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+         * Given a string representing a URL, returns the platform-specific external URL path.
+         * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+         * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+         * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
          * @param {?} url
          * @return {?}
          */
@@ -415,8 +420,8 @@
             return this._platformStrategy.prepareExternalUrl(url);
         };
         /**
-         *  Changes the browsers URL to the normalized version of the given URL, and pushes a
-          * new item onto the platform's history.
+         * Changes the browsers URL to the normalized version of the given URL, and pushes a
+         * new item onto the platform's history.
          * @param {?} path
          * @param {?=} query
          * @return {?}
@@ -426,8 +431,8 @@
             this._platformStrategy.pushState(null, '', path, query);
         };
         /**
-         *  Changes the browsers URL to the normalized version of the given URL, and replaces
-          * the top item on the platform's history stack.
+         * Changes the browsers URL to the normalized version of the given URL, and replaces
+         * the top item on the platform's history stack.
          * @param {?} path
          * @param {?=} query
          * @return {?}
@@ -437,17 +442,17 @@
             this._platformStrategy.replaceState(null, '', path, query);
         };
         /**
-         *  Navigates forward in the platform's history.
+         * Navigates forward in the platform's history.
          * @return {?}
          */
         Location.prototype.forward = function () { this._platformStrategy.forward(); };
         /**
-         *  Navigates back in the platform's history.
+         * Navigates back in the platform's history.
          * @return {?}
          */
         Location.prototype.back = function () { this._platformStrategy.back(); };
         /**
-         *  Subscribe to the platform's `popState` events.
+         * Subscribe to the platform's `popState` events.
          * @param {?} onNext
          * @param {?=} onThrow
          * @param {?=} onReturn
@@ -459,8 +464,8 @@
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
         /**
-         *  Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-          * is.
+         * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
+         * is.
          * @param {?} params
          * @return {?}
          */
@@ -468,7 +473,7 @@
             return params && params[0] !== '?' ? '?' + params : params;
         };
         /**
-         *  Given 2 parts of a url, join them with a slash if needed.
+         * Given 2 parts of a url, join them with a slash if needed.
          * @param {?} start
          * @param {?} end
          * @return {?}
@@ -496,7 +501,7 @@
             return start + '/' + end;
         };
         /**
-         *  If url has a trailing slash, remove it, otherwise return url as is.
+         * If url has a trailing slash, remove it, otherwise return url as is.
          * @param {?} url
          * @return {?}
          */
@@ -539,18 +544,21 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     /**
-     *  `HashLocationStrategy` is a {@link LocationStrategy} used to configure the
-      * {@link Location} service to represent its state in the
-      * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
-      * of the browser's URL.
-      * *
-      * For instance, if you call `location.go('/foo')`, the browser's URL will become
-      * `example.com#/foo`.
-      * *
-      * ### Example
-      * *
-      * {@example common/location/ts/hash_location_component.ts region='LocationComponent'}
-      * *
+     * \@whatItDoes Use URL hash for storing application location data.
+     * \@description
+     * `HashLocationStrategy` is a {\@link LocationStrategy} used to configure the
+     * {\@link Location} service to represent its state in the
+     * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
+     * of the browser's URL.
+     *
+     * For instance, if you call `location.go('/foo')`, the browser's URL will become
+     * `example.com#/foo`.
+     *
+     * ### Example
+     *
+     * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
+     *
+     * \@stable
      */
     var HashLocationStrategy = (function (_super) {
         __extends(HashLocationStrategy, _super);
@@ -659,27 +667,30 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     /**
-     *  `PathLocationStrategy` is a {@link LocationStrategy} used to configure the
-      * {@link Location} service to represent its state in the
-      * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
-      * browser's URL.
-      * *
-      * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
-      * or add a base element to the document. This URL prefix that will be preserved
-      * when generating and recognizing URLs.
-      * *
-      * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
-      * `location.go('/foo')`, the browser's URL will become
-      * `example.com/my/app/foo`.
-      * *
-      * Similarly, if you add `<base href='/my/app'/>` to the document and call
-      * `location.go('/foo')`, the browser's URL will become
-      * `example.com/my/app/foo`.
-      * *
-      * ### Example
-      * *
-      * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
-      * *
+     * \@whatItDoes Use URL for storing application location data.
+     * \@description
+     * `PathLocationStrategy` is a {\@link LocationStrategy} used to configure the
+     * {\@link Location} service to represent its state in the
+     * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
+     * browser's URL.
+     *
+     * If you're using `PathLocationStrategy`, you must provide a {\@link APP_BASE_HREF}
+     * or add a base element to the document. This URL prefix that will be preserved
+     * when generating and recognizing URLs.
+     *
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * Similarly, if you add `<base href='/my/app'/>` to the document and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * ### Example
+     *
+     * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
+     *
+     * \@stable
      */
     var PathLocationStrategy = (function (_super) {
         __extends$1(PathLocationStrategy, _super);
@@ -782,6 +793,7 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     /**
+     * \@experimental
      * @abstract
      */
     var NgLocalization = (function () {
@@ -796,10 +808,11 @@
         return NgLocalization;
     }());
     /**
-     *  Returns the plural category for a given value.
-      * - "=value" when the case exists,
-      * - the plural category otherwise
-      * *
+     * Returns the plural category for a given value.
+     * - "=value" when the case exists,
+     * - the plural category otherwise
+     *
+     * \@internal
      * @param {?} value
      * @param {?} cases
      * @param {?} ngLocalization
@@ -820,8 +833,9 @@
         throw new Error("No plural message found for value \"" + value + "\"");
     }
     /**
-     *  Returns the plural case based on the locale
-      * *
+     * Returns the plural case based on the locale
+     *
+     * \@experimental
      */
     var NgLocaleLocalization = (function (_super) {
         __extends$2(NgLocaleLocalization, _super);
@@ -876,8 +890,9 @@
     Plural[Plural.Many] = "Many";
     Plural[Plural.Other] = "Other";
     /**
-     *  Returns the plural case based on the locale
-      * *
+     * Returns the plural case based on the locale
+     *
+     * \@experimental
      * @param {?} locale
      * @param {?} nLike
      * @return {?}
@@ -1296,27 +1311,32 @@
     }
 
     /**
-     *  *
-      * *
-      * ```
-      * <some-element [ngClass]="'first second'">...</some-element>
-      * *
-      * <some-element [ngClass]="['first', 'second']">...</some-element>
-      * *
-      * <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
-      * *
-      * <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
-      * *
-      * <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
-      * ```
-      * *
-      * *
-      * The CSS classes are updated as follows, depending on the type of the expression evaluation:
-      * - `string` - the CSS classes listed in the string (space delimited) are added,
-      * - `Array` - the CSS classes declared as Array elements are added,
-      * - `Object` - keys are CSS classes that get added when the expression given in the value
-      * evaluates to a truthy value, otherwise they are removed.
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Adds and removes CSS classes on an HTML element.
+     *
+     * \@howToUse
+     * ```
+     *     <some-element [ngClass]="'first second'">...</some-element>
+     *
+     *     <some-element [ngClass]="['first', 'second']">...</some-element>
+     *
+     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+     *
+     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+     *
+     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+     * ```
+     *
+     * \@description
+     *
+     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+     * - `string` - the CSS classes listed in the string (space delimited) are added,
+     * - `Array` - the CSS classes declared as Array elements are added,
+     * - `Object` - keys are CSS classes that get added when the expression given in the value
+     *              evaluates to a truthy value, otherwise they are removed.
+     *
+     * \@stable
      */
     var NgClass = (function () {
         /**
@@ -1480,50 +1500,51 @@
     }());
 
     /**
-     *  Instantiates a single {@link Component} type and inserts its Host View into current View.
-      * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
-      * *
-      * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
-      * any existing component will get destroyed.
-      * *
-      * ### Fine tune control
-      * *
-      * You can control the component creation process by using the following optional attributes:
-      * *
-      * * `ngOutletInjector`: Optional custom {@link Injector} that will be used as parent for the
-      * Component.
-      * Defaults to the injector of the current view container.
-      * *
-      * * `ngOutletProviders`: Optional injectable objects ({@link Provider}) that are visible to the
-      * component.
-      * *
-      * * `ngOutletContent`: Optional list of projectable nodes to insert into the content
-      * section of the component, if exists. ({@link NgContent}).
-      * *
-      * *
-      * ### Syntax
-      * *
-      * Simple
-      * ```
-      * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
-      * ```
-      * *
-      * Customized
-      * ```
-      * <ng-container *ngComponentOutlet="componentTypeExpression;
-      * injector: injectorExpression;
-      * content: contentNodesExpression">
-      * </ng-container>
-      * ```
-      * *
-      * # Example
-      * *
-      * {@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
-      * *
-      * A more complete example with additional options:
-      * *
-      * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
-      * *
+     * Instantiates a single {\@link Component} type and inserts its Host View into current View.
+     * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
+     *
+     * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
+     * any existing component will get destroyed.
+     *
+     * ### Fine tune control
+     *
+     * You can control the component creation process by using the following optional attributes:
+     *
+     * * `ngOutletInjector`: Optional custom {\@link Injector} that will be used as parent for the
+     * Component.
+     * Defaults to the injector of the current view container.
+     *
+     * * `ngOutletProviders`: Optional injectable objects ({\@link Provider}) that are visible to the
+     * component.
+     *
+     * * `ngOutletContent`: Optional list of projectable nodes to insert into the content
+     * section of the component, if exists. ({\@link NgContent}).
+     *
+     *
+     * ### Syntax
+     *
+     * Simple
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
+     * ```
+     *
+     * Customized
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression;
+     *                                   injector: injectorExpression;
+     *                                   content: contentNodesExpression">
+     * </ng-container>
+     * ```
+     *
+     * # Example
+     *
+     * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
+     *
+     * A more complete example with additional options:
+     *
+     * {\@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
+     *
+     * \@experimental
      */
     var NgComponentOutlet = (function () {
         /**
@@ -1611,67 +1632,68 @@
         return NgForRow;
     }());
     /**
-     *  The `NgFor` directive instantiates a template once per item from an iterable. The context for
-      * each instantiated template inherits from the outer context with the given loop variable set
-      * to the current item from the iterable.
-      * *
-      * ### Local Variables
-      * *
-      * `NgFor` provides several exported values that can be aliased to local variables:
-      * *
-      * * `index` will be set to the current loop iteration for each template context.
-      * * `first` will be set to a boolean value indicating whether the item is the first one in the
-      * iteration.
-      * * `last` will be set to a boolean value indicating whether the item is the last one in the
-      * iteration.
-      * * `even` will be set to a boolean value indicating whether this item has an even index.
-      * * `odd` will be set to a boolean value indicating whether this item has an odd index.
-      * *
-      * ### Change Propagation
-      * *
-      * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
-      * *
-      * * When an item is added, a new instance of the template is added to the DOM.
-      * * When an item is removed, its template instance is removed from the DOM.
-      * * When items are reordered, their respective templates are reordered in the DOM.
-      * * Otherwise, the DOM element for that item will remain the same.
-      * *
-      * Angular uses object identity to track insertions and deletions within the iterator and reproduce
-      * those changes in the DOM. This has important implications for animations and any stateful
-      * controls
-      * (such as `<input>` elements which accept user input) that are present. Inserted rows can be
-      * animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state such
-      * as user input.
-      * *
-      * It is possible for the identities of elements in the iterator to change while the data does not.
-      * This can happen, for example, if the iterator produced from an RPC to the server, and that
-      * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
-      * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
-      * elements were deleted and all new elements inserted). This is an expensive operation and should
-      * be avoided if possible.
-      * *
-      * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
-      * `trackBy` takes a function which has two arguments: `index` and `item`.
-      * If `trackBy` is given, Angular tracks changes by the return value of the function.
-      * *
-      * ### Syntax
-      * *
-      * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
-      * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
-      * *
-      * With `<template>` element:
-      * *
-      * ```
-      * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
-      * <li>...</li>
-      * </template>
-      * ```
-      * *
-      * ### Example
-      * *
-      * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
-      * example.
-      * *
+     * The `NgFor` directive instantiates a template once per item from an iterable. The context for
+     * each instantiated template inherits from the outer context with the given loop variable set
+     * to the current item from the iterable.
+     *
+     * ### Local Variables
+     *
+     * `NgFor` provides several exported values that can be aliased to local variables:
+     *
+     * * `index` will be set to the current loop iteration for each template context.
+     * * `first` will be set to a boolean value indicating whether the item is the first one in the
+     *   iteration.
+     * * `last` will be set to a boolean value indicating whether the item is the last one in the
+     *   iteration.
+     * * `even` will be set to a boolean value indicating whether this item has an even index.
+     * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+     *
+     * ### Change Propagation
+     *
+     * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
+     *
+     * * When an item is added, a new instance of the template is added to the DOM.
+     * * When an item is removed, its template instance is removed from the DOM.
+     * * When items are reordered, their respective templates are reordered in the DOM.
+     * * Otherwise, the DOM element for that item will remain the same.
+     *
+     * Angular uses object identity to track insertions and deletions within the iterator and reproduce
+     * those changes in the DOM. This has important implications for animations and any stateful
+     * controls
+     * (such as `<input>` elements which accept user input) that are present. Inserted rows can be
+     * animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state such
+     * as user input.
+     *
+     * It is possible for the identities of elements in the iterator to change while the data does not.
+     * This can happen, for example, if the iterator produced from an RPC to the server, and that
+     * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
+     * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
+     * elements were deleted and all new elements inserted). This is an expensive operation and should
+     * be avoided if possible.
+     *
+     * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
+     * `trackBy` takes a function which has two arguments: `index` and `item`.
+     * If `trackBy` is given, Angular tracks changes by the return value of the function.
+     *
+     * ### Syntax
+     *
+     * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
+     * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
+     *
+     * With `<template>` element:
+     *
+     * ```
+     * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+     *   <li>...</li>
+     * </template>
+     * ```
+     *
+     * ### Example
+     *
+     * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
+     * example.
+     *
+     * \@stable
      */
     var NgFor = (function () {
         /**
@@ -1824,93 +1846,94 @@
     }());
 
     /**
-     *  Conditionally includes a template based on the value of an `expression`.
-      * *
-      * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
-      * when expression is truthy or falsy respectively. Typically the:
-      * - `then` template is the inline template of `ngIf` unless bound to a different value.
-      * - `else` template is blank unless it is bound.
-      * *
-      * # Most common usage
-      * *
-      * The most common usage of the `ngIf` directive is to conditionally show the inline template as
-      * seen in this example:
-      * {@example common/ngIf/ts/module.ts region='NgIfSimple'}
-      * *
-      * # Showing an alternative template using `else`
-      * *
-      * If it is necessary to display a template when the `expression` is falsy use the `else` template
-      * binding as shown. Note that the `else` binding points to a `<template>` labeled `#elseBlock`.
-      * The template can be defined anywhere in the component view but is typically placed right after
-      * `ngIf` for readability.
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfElse'}
-      * *
-      * # Using non-inlined `then` template
-      * *
-      * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
-      * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
-      * change at runtime as shown in this example.
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfThenElse'}
-      * *
-      * # Storing conditional result in a variable
-      * *
-      * A common pattern is that we need to show a set of properties from the same object. If the
-      * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
-      * dereferencing a `null` value. This is especially the case when waiting on async data such as
-      * when using the `async` pipe as shown in folowing example:
-      * *
-      * ```
-      * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
-      * ```
-      * *
-      * There are several inefficiencies in the above example:
-      * - We create multiple subscriptions on `userStream`. One for each `async` pipe, or two in the
-      * example above.
-      * - We cannot display an alternative screen while waiting for the data to arrive asynchronously.
-      * - We have to use the safe-traversal-operator `?.` to access properties, which is cumbersome.
-      * - We have to place the `async` pipe in parenthesis.
-      * *
-      * A better way to do this is to use `ngIf` and store the result of the condition in a local
-      * variable as shown in the the example below:
-      * *
-      * {@example common/ngIf/ts/module.ts region='NgIfLet'}
-      * *
-      * Notice that:
-      * - We use only one `async` pipe and hence only one subscription gets created.
-      * - `ngIf` stores the result of the `userStream|async` in the local variable `user`.
-      * - The local `user` can then be bound repeatedly in a more efficient way.
-      * - No need to use the safe-traversal-operator `?.` to access properties as `ngIf` will only
-      * display the data if `userStream` returns a value.
-      * - We can display an alternative template while waiting for the data.
-      * *
-      * ### Syntax
-      * *
-      * Simple form:
-      * - `<div *ngIf="condition">...</div>`
-      * - `<div template="ngIf condition">...</div>`
-      * - `<template [ngIf]="condition"><div>...</div></template>`
-      * *
-      * Form with an else block:
-      * ```
-      * <div *ngIf="condition; else elseBlock">...</div>
-      * <template #elseBlock>...</template>
-      * ```
-      * *
-      * Form with a `then` and `else` block:
-      * ```
-      * <div *ngIf="condition; then thenBlock else elseBlock"></div>
-      * <template #thenBlock>...</template>
-      * <template #elseBlock>...</template>
-      * ```
-      * *
-      * Form with storing the value locally:
-      * ```
-      * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
-      * <template #elseBlock>...</template>
-      * ```
-      * *
+     * Conditionally includes a template based on the value of an `expression`.
+     *
+     * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
+     * when expression is truthy or falsy respectively. Typically the:
+     *  - `then` template is the inline template of `ngIf` unless bound to a different value.
+     *  - `else` template is blank unless it is bound.
+     *
+     * # Most common usage
+     *
+     * The most common usage of the `ngIf` directive is to conditionally show the inline template as
+     * seen in this example:
+     * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
+     *
+     * # Showing an alternative template using `else`
+     *
+     * If it is necessary to display a template when the `expression` is falsy use the `else` template
+     * binding as shown. Note that the `else` binding points to a `<template>` labeled `#elseBlock`.
+     * The template can be defined anywhere in the component view but is typically placed right after
+     * `ngIf` for readability.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
+     *
+     * # Using non-inlined `then` template
+     *
+     * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
+     * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
+     * change at runtime as shown in this example.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
+     *
+     * # Storing conditional result in a variable
+     *
+     * A common pattern is that we need to show a set of properties from the same object. If the
+     * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
+     * dereferencing a `null` value. This is especially the case when waiting on async data such as
+     * when using the `async` pipe as shown in folowing example:
+     *
+     * ```
+     * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
+     * ```
+     *
+     * There are several inefficiencies in the above example:
+     *  - We create multiple subscriptions on `userStream`. One for each `async` pipe, or two in the
+     *    example above.
+     *  - We cannot display an alternative screen while waiting for the data to arrive asynchronously.
+     *  - We have to use the safe-traversal-operator `?.` to access properties, which is cumbersome.
+     *  - We have to place the `async` pipe in parenthesis.
+     *
+     * A better way to do this is to use `ngIf` and store the result of the condition in a local
+     * variable as shown in the the example below:
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfLet'}
+     *
+     * Notice that:
+     *  - We use only one `async` pipe and hence only one subscription gets created.
+     *  - `ngIf` stores the result of the `userStream|async` in the local variable `user`.
+     *  - The local `user` can then be bound repeatedly in a more efficient way.
+     *  - No need to use the safe-traversal-operator `?.` to access properties as `ngIf` will only
+     *    display the data if `userStream` returns a value.
+     *  - We can display an alternative template while waiting for the data.
+     *
+     * ### Syntax
+     *
+     * Simple form:
+     * - `<div *ngIf="condition">...</div>`
+     * - `<div template="ngIf condition">...</div>`
+     * - `<template [ngIf]="condition"><div>...</div></template>`
+     *
+     * Form with an else block:
+     * ```
+     * <div *ngIf="condition; else elseBlock">...</div>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * Form with a `then` and `else` block:
+     * ```
+     * <div *ngIf="condition; then thenBlock else elseBlock"></div>
+     * <template #thenBlock>...</template>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * Form with storing the value locally:
+     * ```
+     * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * \@stable
      */
     var NgIf = (function () {
         /**
@@ -2050,40 +2073,45 @@
         return SwitchView;
     }());
     /**
-     *  *
-      * expression.
-      * *
-      * ```
-      * <container-element [ngSwitch]="switch_expression">
-      * <some-element *ngSwitchCase="match_expression_1">...</some-element>
-      * <some-element *ngSwitchCase="match_expression_2">...</some-element>
-      * <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
-      * <ng-container *ngSwitchCase="match_expression_3">
-      * <!-- use a ng-container to group multiple root nodes -->
-      * <inner-element></inner-element>
-      * <inner-other-element></inner-other-element>
-      * </ng-container>
-      * <some-element *ngSwitchDefault>...</some-element>
-      * </container-element>
-      * ```
-      * *
-      * `NgSwitch` stamps out nested views when their match expression value matches the value of the
-      * switch expression.
-      * *
-      * In other words:
-      * - you define a container element (where you place the directive with a switch expression on the
-      * `[ngSwitch]="..."` attribute)
-      * - you define inner views inside the `NgSwitch` and place a `*ngSwitchCase` attribute on the view
-      * root elements.
-      * *
-      * Elements within `NgSwitch` but outside of a `NgSwitchCase` or `NgSwitchDefault` directives will
-      * be preserved at the location.
-      * *
-      * The `ngSwitchCase` directive informs the parent `NgSwitch` of which view to display when the
-      * expression is evaluated.
-      * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
-      * stamped out.
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
+     *             expression.
+     *
+     * \@howToUse
+     * ```
+     *     <container-element [ngSwitch]="switch_expression">
+     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *       <some-element *ngSwitchCase="match_expression_2">...</some-element>
+     *       <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
+     *       <ng-container *ngSwitchCase="match_expression_3">
+     *         <!-- use a ng-container to group multiple root nodes -->
+     *         <inner-element></inner-element>
+     *         <inner-other-element></inner-other-element>
+     *       </ng-container>
+     *       <some-element *ngSwitchDefault>...</some-element>
+     *     </container-element>
+     * ```
+     * \@description
+     *
+     * `NgSwitch` stamps out nested views when their match expression value matches the value of the
+     * switch expression.
+     *
+     * In other words:
+     * - you define a container element (where you place the directive with a switch expression on the
+     * `[ngSwitch]="..."` attribute)
+     * - you define inner views inside the `NgSwitch` and place a `*ngSwitchCase` attribute on the view
+     * root elements.
+     *
+     * Elements within `NgSwitch` but outside of a `NgSwitchCase` or `NgSwitchDefault` directives will
+     * be preserved at the location.
+     *
+     * The `ngSwitchCase` directive informs the parent `NgSwitch` of which view to display when the
+     * expression is evaluated.
+     * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
+     * stamped out.
+     *
+     * \@stable
      */
     var NgSwitch = (function () {
         function NgSwitch() {
@@ -2107,10 +2135,12 @@
             configurable: true
         });
         /**
+         * \@internal
          * @return {?}
          */
         NgSwitch.prototype._addCase = function () { return this._caseCount++; };
         /**
+         * \@internal
          * @param {?} view
          * @return {?}
          */
@@ -2121,6 +2151,7 @@
             this._defaultViews.push(view);
         };
         /**
+         * \@internal
          * @param {?} value
          * @return {?}
          */
@@ -2159,23 +2190,28 @@
         return NgSwitch;
     }());
     /**
-     *  *
-      * given expression evaluate to respectively the same/different value as the switch
-      * expression.
-      * *
-      * ```
-      * <container-element [ngSwitch]="switch_expression">
-      * <some-element *ngSwitchCase="match_expression_1">...</some-element>
-      * </container-element>
-      * *```
-      * *
-      * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
-      * expression.
-      * *
-      * If multiple match expressions match the switch expression value, all of them are displayed.
-      * *
-      * See {@link NgSwitch} for more details and example.
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
+     *             given expression evaluate to respectively the same/different value as the switch
+     *             expression.
+     *
+     * \@howToUse
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     * </container-element>
+     * ```
+     * \@description
+     *
+     * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
+     * expression.
+     *
+     * If multiple match expressions match the switch expression value, all of them are displayed.
+     *
+     * See {\@link NgSwitch} for more details and example.
+     *
+     * \@stable
      */
     var NgSwitchCase = (function () {
         /**
@@ -2207,22 +2243,27 @@
         return NgSwitchCase;
     }());
     /**
-     *  match the
-      * switch expression.
-      * *
-      * ```
-      * <container-element [ngSwitch]="switch_expression">
-      * <some-element *ngSwitchCase="match_expression_1">...</some-element>
-      * <some-other-element *ngSwitchDefault>...</some-other-element>
-      * </container-element>
-      * ```
-      * *
-      * *
-      * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
-      * expression.
-      * *
-      * See {@link NgSwitch} for more details and example.
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
+     * match the
+     *             switch expression.
+     *
+     * \@howToUse
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *   <some-other-element *ngSwitchDefault>...</some-other-element>
+     * </container-element>
+     * ```
+     *
+     * \@description
+     *
+     * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
+     * expression.
+     *
+     * See {\@link NgSwitch} for more details and example.
+     *
+     * \@stable
      */
     var NgSwitchDefault = (function () {
         /**
@@ -2246,30 +2287,35 @@
     }());
 
     /**
-     *  *
-      * *
-      * ```
-      * <some-element [ngPlural]="value">
-      * <template ngPluralCase="=0">there is nothing</template>
-      * <template ngPluralCase="=1">there is one</template>
-      * <template ngPluralCase="few">there are a few</template>
-      * </some-element>
-      * ```
-      * *
-      * *
-      * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
-      * that match the switch expression's pluralization category.
-      * *
-      * To use this directive you must provide a container element that sets the `[ngPlural]` attribute
-      * to a switch expression. Inner elements with a `[ngPluralCase]` will display based on their
-      * expression:
-      * - if `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
-      * matches the switch expression exactly,
-      * - otherwise, the view will be treated as a "category match", and will only display if exact
-      * value matches aren't found and the value maps to its category for the defined locale.
-      * *
-      * See http://cldr.unicode.org/index/cldr-spec/plural-rules
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
+     *
+     * \@howToUse
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <template ngPluralCase="=0">there is nothing</template>
+     *   <template ngPluralCase="=1">there is one</template>
+     *   <template ngPluralCase="few">there are a few</template>
+     * </some-element>
+     * ```
+     *
+     * \@description
+     *
+     * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
+     * that match the switch expression's pluralization category.
+     *
+     * To use this directive you must provide a container element that sets the `[ngPlural]` attribute
+     * to a switch expression. Inner elements with a `[ngPluralCase]` will display based on their
+     * expression:
+     * - if `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
+     *   matches the switch expression exactly,
+     * - otherwise, the view will be treated as a "category match", and will only display if exact
+     *   value matches aren't found and the value maps to its category for the defined locale.
+     *
+     * See http://cldr.unicode.org/index/cldr-spec/plural-rules
+     *
+     * \@experimental
      */
     var NgPlural = (function () {
         /**
@@ -2336,18 +2382,22 @@
         return NgPlural;
     }());
     /**
-     *  *
-      * given expression matches the plural expression according to CLDR rules.
-      * *
-      * ```
-      * <some-element [ngPlural]="value">
-      * <template ngPluralCase="=0">...</template>
-      * <template ngPluralCase="other">...</template>
-      * </some-element>
-      * *```
-      * *
-      * See {@link NgPlural} for more details and example.
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgPlural} when the
+     *             given expression matches the plural expression according to CLDR rules.
+     *
+     * \@howToUse
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <template ngPluralCase="=0">...</template>
+     *   <template ngPluralCase="other">...</template>
+     * </some-element>
+     * ```
+     *
+     * See {\@link NgPlural} for more details and example.
+     *
+     * \@experimental
      */
     var NgPluralCase = (function () {
         /**
@@ -2375,21 +2425,26 @@
     }());
 
     /**
-     *  *
-      * *
-      * ```
-      * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
-      * *
-      * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
-      * *
-      * <some-element [ngStyle]="objExp">...</some-element>
-      * ```
-      * *
-      * *
-      * The styles are updated according to the value of the expression evaluation:
-      * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
-      * - values are the values assigned to those properties (expressed in the given unit).
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Update an HTML element styles.
+     *
+     * \@howToUse
+     * ```
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     *
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     *
+     * <some-element [ngStyle]="objExp">...</some-element>
+     * ```
+     *
+     * \@description
+     *
+     * The styles are updated according to the value of the expression evaluation:
+     * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
+     * - values are the values assigned to those properties (expressed in the given unit).
+     *
+     * \@stable
      */
     var NgStyle = (function () {
         /**
@@ -2463,23 +2518,28 @@
     }());
 
     /**
-     *  *
-      * *
-      * ```
-      * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
-      * ```
-      * *
-      * *
-      * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
-      * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
-      * by the local template `let` declarations.
-      * *
-      * Note: using the key `$implicit` in the context object will set it's value as default.
-      * *
-      * # Example
-      * *
-      * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
-      * *
+     * \@ngModule CommonModule
+     *
+     * \@whatItDoes Inserts an embedded view from a prepared `TemplateRef`
+     *
+     * \@howToUse
+     * ```
+     * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+     * ```
+     *
+     * \@description
+     *
+     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+     * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+     * by the local template `let` declarations.
+     *
+     * Note: using the key `$implicit` in the context object will set it's value as default.
+     *
+     * # Example
+     *
+     * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+     *
+     * \@experimental
      */
     var NgTemplateOutlet = (function () {
         /**
@@ -2551,7 +2611,7 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     /**
-     * @stable
+     * \@stable
      */
     var BaseError = (function (_super) {
         __extends$4(BaseError, _super);
@@ -2608,7 +2668,7 @@
         return BaseError;
     }(Error));
     /**
-     * @stable
+     * \@stable
      */
     var WrappedError = (function (_super) {
         __extends$4(WrappedError, _super);
@@ -2707,24 +2767,29 @@
     var /** @type {?} */ _promiseStrategy = new PromiseStrategy();
     var /** @type {?} */ _observableStrategy = new ObservableStrategy();
     /**
-     *  The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
-      * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
-      * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
-      * potential memory leaks.
-      * *
-      * *
-      * ## Examples
-      * *
-      * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
-      * promise.
-      * *
-      * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
-      * *
-      * It's also possible to use `async` with Observables. The example below binds the `time` Observable
-      * to the view. The Observable continuously updates the view with the current time.
-      * *
-      * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Unwraps a value from an asynchronous primitive.
+     * \@howToUse `observable_or_promise_expression | async`
+     * \@description
+     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
+     * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
+     * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * potential memory leaks.
+     *
+     *
+     * ## Examples
+     *
+     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
+     * promise.
+     *
+     * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
+     *
+     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
+     * to the view. The Observable continuously updates the view with the current time.
+     *
+     * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
+     *
+     * \@stable
      */
     var AsyncPipe = (function () {
         /**
@@ -2823,10 +2888,11 @@
     }());
 
     /**
-     *  Transforms text to lowercase.
-      * *
-      * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
-      * *
+     * Transforms text to lowercase.
+     *
+     * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
+     *
+     * \@stable
      */
     var LowerCasePipe = (function () {
         function LowerCasePipe() {
@@ -2851,8 +2917,9 @@
         return LowerCasePipe;
     }());
     /**
-     *  Helper method to transform a single word to titlecase.
-      * *
+     * Helper method to transform a single word to titlecase.
+     *
+     * \@stable
      * @param {?} word
      * @return {?}
      */
@@ -2862,8 +2929,9 @@
         return word[0].toUpperCase() + word.substr(1).toLowerCase();
     }
     /**
-     *  Transforms text to titlecase.
-      * *
+     * Transforms text to titlecase.
+     *
+     * \@stable
      */
     var TitleCasePipe = (function () {
         function TitleCasePipe() {
@@ -2888,8 +2956,9 @@
         return TitleCasePipe;
     }());
     /**
-     *  Transforms text to uppercase.
-      * *
+     * Transforms text to uppercase.
+     *
+     * \@stable
      */
     var UpperCasePipe = (function () {
         function UpperCasePipe() {
@@ -3168,68 +3237,73 @@
     }());
 
     /**
-     *  *
-      * Where:
-      * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
-      * (https://www.w3.org/TR/NOTE-datetime).
-      * - `format` indicates which date/time components to include. The format can be predifined as
-      * shown below or custom as shown in the table.
-      * - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
-      * - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
-      * - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
-      * - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
-      * - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
-      * - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
-      * - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
-      * - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
-      * *
-      * *
-      * | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
-      * |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
-      * | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
-      * | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
-      * | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
-      * | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
-      * | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
-      * | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
-      * | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
-      * | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
-      * | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
-      * | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
-      * | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
-      * | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
-      * | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
-      * *
-      * In javascript, only the components specified will be respected (not the ordering,
-      * punctuations, ...) and details of the formatting will be dependent on the locale.
-      * *
-      * Timezone of the formatted text will be the local system timezone of the end-user's machine.
-      * *
-      * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
-      * applied and the formatted text will have the same day, month and year of the expression.
-      * *
-      * WARNINGS:
-      * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
-      * Instead users should treat the date as an immutable object and change the reference when the
-      * pipe needs to re-run (this is to avoid reformatting the date on every change detection run
-      * which would be an expensive operation).
-      * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
-      * browsers.
-      * *
-      * ### Examples
-      * *
-      * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
-      * in the _local_ time and locale is 'en-US':
-      * *
-      * ```
-      * {{ dateObj | date }}               // output is 'Jun 15, 2015'
-      * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
-      * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
-      * {{ dateObj | date:'mmss' }}        // output is '43:11'
-      * ```
-      * *
-      * {@example common/pipes/ts/date_pipe.ts region='DatePipe'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Formats a date according to locale rules.
+     * \@howToUse `date_expression | date[:format]`
+     * \@description
+     *
+     * Where:
+     * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * - `format` indicates which date/time components to include. The format can be predifined as
+     *   shown below or custom as shown in the table.
+     *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
+     *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
+     *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
+     *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
+     *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
+     *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
+     *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
+     *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
+     *
+     *
+     *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
+     *
+     * In javascript, only the components specified will be respected (not the ordering,
+     * punctuations, ...) and details of the formatting will be dependent on the locale.
+     *
+     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
+     *
+     * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+     * applied and the formatted text will have the same day, month and year of the expression.
+     *
+     * WARNINGS:
+     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+     *   Instead users should treat the date as an immutable object and change the reference when the
+     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+     *   which would be an expensive operation).
+     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+     *   browsers.
+     *
+     * ### Examples
+     *
+     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+     * in the _local_ time and locale is 'en-US':
+     *
+     * ```
+     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
+     * ```
+     *
+     * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+     *
+     * \@stable
      */
     var DatePipe = (function () {
         /**
@@ -3308,16 +3382,21 @@
 
     var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
     /**
-     *  *
-      * Where:
-      * - `expression` is a number.
-      * - `mapping` is an object that mimics the ICU format, see
-      * http://userguide.icu-project.org/formatparse/messages
-      * *
-      * ## Example
-      * *
-      * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
+     * \@howToUse `expression | i18nPlural:mapping`
+     * \@description
+     *
+     *  Where:
+     *  - `expression` is a number.
+     *  - `mapping` is an object that mimics the ICU format, see
+     *    http://userguide.icu-project.org/formatparse/messages
+     *
+     *  ## Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
+     *
+     * \@experimental
      */
     var I18nPluralPipe = (function () {
         /**
@@ -3351,17 +3430,21 @@
     }());
 
     /**
-     *  *
-      * Where `mapping` is an object that indicates the text that should be displayed
-      * for different values of the provided `expression`.
-      * If none of the keys of the mapping match the value of the `expression`, then the content
-      * of the `other` key is returned when present, otherwise an empty string is returned.
-      * *
-      * ## Example
-      * *
-      * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
-      * *
-      * @experimental
+     * \@ngModule CommonModule
+     * \@whatItDoes Generic selector that displays the string that matches the current value.
+     * \@howToUse `expression | i18nSelect:mapping`
+     * \@description
+     *
+     *  Where `mapping` is an object that indicates the text that should be displayed
+     *  for different values of the provided `expression`.
+     *  If none of the keys of the mapping match the value of the `expression`, then the content
+     *  of the `other` key is returned when present, otherwise an empty string is returned.
+     *
+     *  ## Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+     *
+     *  \@experimental
      */
     var I18nSelectPipe = (function () {
         function I18nSelectPipe() {
@@ -3394,12 +3477,17 @@
     }());
 
     /**
-     *  *
-      * Converts value into string using `JSON.stringify`. Useful for debugging.
-      * *
-      * ### Example
-      * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Converts value into JSON string.
+     * \@howToUse `expression | json`
+     * \@description
+     *
+     * Converts value into string using `JSON.stringify`. Useful for debugging.
+     *
+     * ### Example
+     * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+     *
+     * \@stable
      */
     var JsonPipe = (function () {
         function JsonPipe() {
@@ -3471,27 +3559,31 @@
         });
     }
     /**
-     *  *
-      * Formats a number as text. Group sizing and separator and other locale-specific
-      * configurations are based on the active locale.
-      * *
-      * where `expression` is a number:
-      * - `digitInfo` is a `string` which has a following format: <br>
-      * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
-      * - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
-      * - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
-      * - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
-      * *
-      * For more information on the acceptable range for each of these numbers and other
-      * details see your native internationalization library.
-      * *
-      * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-      * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
-      * *
-      * ### Example
-      * *
-      * {@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Formats a number according to locale rules.
+     * \@howToUse `number_expression | number[:digitInfo]`
+     *
+     * Formats a number as text. Group sizing and separator and other locale-specific
+     * configurations are based on the active locale.
+     *
+     * where `expression` is a number:
+     *  - `digitInfo` is a `string` which has a following format: <br>
+     *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
+     *
+     * For more information on the acceptable range for each of these numbers and other
+     * details see your native internationalization library.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+     *
+     * ### Example
+     *
+     * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+     *
+     * \@stable
      */
     var DecimalPipe = (function () {
         /**
@@ -3519,19 +3611,24 @@
         return DecimalPipe;
     }());
     /**
-     *  *
-      * *
-      * Formats a number as percentage.
-      * *
-      * - `digitInfo` See {@link DecimalPipe} for detailed description.
-      * *
-      * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-      * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
-      * *
-      * ### Example
-      * *
-      * {@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Formats a number as a percentage according to locale rules.
+     * \@howToUse `number_expression | percent[:digitInfo]`
+     *
+     * \@description
+     *
+     * Formats a number as percentage.
+     *
+     * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+     *
+     * ### Example
+     *
+     * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+     *
+     * \@stable
      */
     var PercentPipe = (function () {
         /**
@@ -3559,23 +3656,28 @@
         return PercentPipe;
     }());
     /**
-     *  *
-      * Use `currency` to format a number as currency.
-      * *
-      * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
-      * as `USD` for the US dollar and `EUR` for the euro.
-      * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
-      * - `true`: use symbol (e.g. `$`).
-      * - `false`(default): use code (e.g. `USD`).
-      * - `digitInfo` See {@link DecimalPipe} for detailed description.
-      * *
-      * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-      * and may require a polyfill. See {@linkDocs guide/browser-support} for details.
-      * *
-      * ### Example
-      * *
-      * {@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Formats a number as currency using locale rules.
+     * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
+     * \@description
+     *
+     * Use `currency` to format a number as currency.
+     *
+     * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+     *    as `USD` for the US dollar and `EUR` for the euro.
+     * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
+     *   - `true`: use symbol (e.g. `$`).
+     *   - `false`(default): use code (e.g. `USD`).
+     * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+     *
+     * ### Example
+     *
+     * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+     *
+     * \@stable
      */
     var CurrencyPipe = (function () {
         /**
@@ -3608,43 +3710,48 @@
     }());
 
     /**
-     *  *
-      * Where the input expression is a `List` or `String`, and:
-      * - `start`: The starting index of the subset to return.
-      * - **a positive integer**: return the item at `start` index and all items after
-      * in the list or string expression.
-      * - **a negative integer**: return the item at `start` index from the end and all items after
-      * in the list or string expression.
-      * - **if positive and greater than the size of the expression**: return an empty list or string.
-      * - **if negative and greater than the size of the expression**: return entire list or string.
-      * - `end`: The ending index of the subset to return.
-      * - **omitted**: return all items until the end.
-      * - **if positive**: return all items before `end` index of the list or string.
-      * - **if negative**: return all items before `end` index from the end of the list or string.
-      * *
-      * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
-      * and `String.prototype.slice()`.
-      * *
-      * When operating on a [List], the returned list is always a copy even when all
-      * the elements are being returned.
-      * *
-      * When operating on a blank value, the pipe returns the blank value.
-      * *
-      * ## List Example
-      * *
-      * This `ngFor` example:
-      * *
-      * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
-      * *
-      * produces the following:
-      * *
-      * <li>b</li>
-      * <li>c</li>
-      * *
-      * ## String Examples
-      * *
-      * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
-      * *
+     * \@ngModule CommonModule
+     * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
+     * \@howToUse `array_or_string_expression | slice:start[:end]`
+     * \@description
+     *
+     * Where the input expression is a `List` or `String`, and:
+     * - `start`: The starting index of the subset to return.
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * - `end`: The ending index of the subset to return.
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
+     *
+     * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
+     * and `String.prototype.slice()`.
+     *
+     * When operating on a [List], the returned list is always a copy even when all
+     * the elements are being returned.
+     *
+     * When operating on a blank value, the pipe returns the blank value.
+     *
+     * ## List Example
+     *
+     * This `ngFor` example:
+     *
+     * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
+     *
+     * produces the following:
+     *
+     *     <li>b</li>
+     *     <li>c</li>
+     *
+     * ## String Examples
+     *
+     * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
+     *
+     * \@stable
      */
     var SlicePipe = (function () {
         function SlicePipe() {
@@ -3695,8 +3802,9 @@
     ];
 
     /**
-     *  The module that includes all the basic Angular directives like {@link NgIf}, {@link NgFor}, ...
-      * *
+     * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgFor}, ...
+     *
+     * \@stable
      */
     var CommonModule = (function () {
         function CommonModule() {
@@ -3718,7 +3826,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-d169c24');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.3-e8ea741');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

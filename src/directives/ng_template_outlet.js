@@ -7,23 +7,28 @@
  */
 import { Directive, Input, ViewContainerRef } from '@angular/core';
 /**
- *  *
-  * *
-  * ```
-  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
-  * ```
-  * *
-  * *
-  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
-  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
-  * by the local template `let` declarations.
-  * *
-  * Note: using the key `$implicit` in the context object will set it's value as default.
-  * *
-  * # Example
-  * *
-  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
-  * *
+ * \@ngModule CommonModule
+ *
+ * \@whatItDoes Inserts an embedded view from a prepared `TemplateRef`
+ *
+ * \@howToUse
+ * ```
+ * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+ * ```
+ *
+ * \@description
+ *
+ * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+ * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+ * by the local template `let` declarations.
+ *
+ * Note: using the key `$implicit` in the context object will set it's value as default.
+ *
+ * # Example
+ *
+ * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+ *
+ * \@experimental
  */
 export var NgTemplateOutlet = (function () {
     /**

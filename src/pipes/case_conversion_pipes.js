@@ -8,10 +8,11 @@
 import { Pipe } from '@angular/core';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
- *  Transforms text to lowercase.
-  * *
-  * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
-  * *
+ * Transforms text to lowercase.
+ *
+ * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
+ *
+ * \@stable
  */
 export var LowerCasePipe = (function () {
     function LowerCasePipe() {
@@ -45,8 +46,9 @@ function LowerCasePipe_tsickle_Closure_declarations() {
     LowerCasePipe.ctorParameters;
 }
 /**
- *  Helper method to transform a single word to titlecase.
-  * *
+ * Helper method to transform a single word to titlecase.
+ *
+ * \@stable
  * @param {?} word
  * @return {?}
  */
@@ -56,8 +58,9 @@ function titleCaseWord(word) {
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
 }
 /**
- *  Transforms text to titlecase.
-  * *
+ * Transforms text to titlecase.
+ *
+ * \@stable
  */
 export var TitleCasePipe = (function () {
     function TitleCasePipe() {
@@ -91,8 +94,9 @@ function TitleCasePipe_tsickle_Closure_declarations() {
     TitleCasePipe.ctorParameters;
 }
 /**
- *  Transforms text to uppercase.
-  * *
+ * Transforms text to uppercase.
+ *
+ * \@stable
  */
 export var UpperCasePipe = (function () {
     function UpperCasePipe() {
