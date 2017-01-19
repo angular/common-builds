@@ -1,11 +1,13 @@
-export let NumberFormatStyle = {};
+export var NumberFormatStyle = {};
 NumberFormatStyle.Decimal = 0;
 NumberFormatStyle.Percent = 1;
 NumberFormatStyle.Currency = 2;
 NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
 NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
 NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
-export class NumberFormatter {
+export var NumberFormatter = (function () {
+    function NumberFormatter() {
+    }
     /**
      * @param {?} num
      * @param {?} locale
@@ -13,11 +15,12 @@ export class NumberFormatter {
      * @param {?=} __3
      * @return {?}
      */
-    static format(num, locale, style, { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = {}) {
-        const /** @type {?} */ options = {
-            minimumIntegerDigits,
-            minimumFractionDigits,
-            maximumFractionDigits,
+    NumberFormatter.format = function (num, locale, style, _a) {
+        var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+        var /** @type {?} */ options = {
+            minimumIntegerDigits: minimumIntegerDigits,
+            minimumFractionDigits: minimumFractionDigits,
+            maximumFractionDigits: maximumFractionDigits,
             style: NumberFormatStyle[style].toLowerCase()
         };
         if (style == NumberFormatStyle.Currency) {
@@ -25,10 +28,11 @@ export class NumberFormatter {
             options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
         return new Intl.NumberFormat(locale, options).format(num);
-    }
-}
-const /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-const /** @type {?} */ PATTERN_ALIASES = {
+    };
+    return NumberFormatter;
+}());
+var /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+var /** @type {?} */ PATTERN_ALIASES = {
     // Keys are quoted so they do not get renamed during closure compilation.
     'yMMMdjms': datePartGetterFactory(combine([
         digitCondition('year', 1),
@@ -52,7 +56,7 @@ const /** @type {?} */ PATTERN_ALIASES = {
     'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
     'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
 };
-const /** @type {?} */ DATE_FORMATS = {
+var /** @type {?} */ DATE_FORMATS = {
     // Keys are quoted so they do not get renamed.
     'yyyy': datePartGetterFactory(digitCondition('year', 4)),
     'yy': datePartGetterFactory(digitCondition('year', 2)),
@@ -101,7 +105,7 @@ const /** @type {?} */ DATE_FORMATS = {
  */
 function digitModifier(inner) {
     return function (date, locale) {
-        const /** @type {?} */ result = inner(date, locale);
+        var /** @type {?} */ result = inner(date, locale);
         return result.length == 1 ? '0' + result : result;
     };
 }
@@ -134,9 +138,9 @@ function intlDateFormat(date, locale, options) {
  */
 function timeZoneGetter(timezone) {
     // To workaround `Intl` API restriction for single timezone let format with 24 hours
-    const /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+    var /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
     return function (date, locale) {
-        const /** @type {?} */ result = intlDateFormat(date, locale, options);
+        var /** @type {?} */ result = intlDateFormat(date, locale, options);
         // Then extract first 3 letters that related to hours
         return result ? result.substring(3) : '';
     };
@@ -156,7 +160,7 @@ function hour12Modify(options, value) {
  * @return {?}
  */
 function digitCondition(prop, len) {
-    const /** @type {?} */ result = {};
+    var /** @type {?} */ result = {};
     result[prop] = len === 2 ? '2-digit' : 'numeric';
     return result;
 }
@@ -166,7 +170,7 @@ function digitCondition(prop, len) {
  * @return {?}
  */
 function nameCondition(prop, len) {
-    const /** @type {?} */ result = {};
+    var /** @type {?} */ result = {};
     if (len < 4) {
         result[prop] = len > 1 ? 'short' : 'narrow';
     }
@@ -180,16 +184,17 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return ((Object)).assign({}, ...options);
+    return (_a = ((Object))).assign.apply(_a, [{}].concat(options));
+    var _a;
 }
 /**
  * @param {?} ret
  * @return {?}
  */
 function datePartGetterFactory(ret) {
-    return (date, locale) => intlDateFormat(date, locale, ret);
+    return function (date, locale) { return intlDateFormat(date, locale, ret); };
 }
-const /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
+var /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
 /**
  * @param {?} format
  * @param {?} date
@@ -197,14 +202,14 @@ const /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
  * @return {?}
  */
 function dateFormatter(format, date, locale) {
-    const /** @type {?} */ fn = PATTERN_ALIASES[format];
+    var /** @type {?} */ fn = PATTERN_ALIASES[format];
     if (fn)
         return fn(date, locale);
-    const /** @type {?} */ cacheKey = format;
-    let /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
+    var /** @type {?} */ cacheKey = format;
+    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
     if (!parts) {
         parts = [];
-        let /** @type {?} */ match;
+        var /** @type {?} */ match = void 0;
         DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
@@ -219,8 +224,8 @@ function dateFormatter(format, date, locale) {
         }
         DATE_FORMATTER_CACHE.set(cacheKey, parts);
     }
-    return parts.reduce((text, part) => {
-        const /** @type {?} */ fn = DATE_FORMATS[part];
+    return parts.reduce(function (text, part) {
+        var /** @type {?} */ fn = DATE_FORMATS[part];
         return text + (fn ? fn(date, locale) : partToTime(part));
     }, '');
 }
@@ -231,15 +236,18 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-export class DateFormatter {
+export var DateFormatter = (function () {
+    function DateFormatter() {
+    }
     /**
      * @param {?} date
      * @param {?} locale
      * @param {?} pattern
      * @return {?}
      */
-    static format(date, locale, pattern) {
+    DateFormatter.format = function (date, locale, pattern) {
         return dateFormatter(pattern, date, locale);
-    }
-}
+    };
+    return DateFormatter;
+}());
 //# sourceMappingURL=intl.js.map

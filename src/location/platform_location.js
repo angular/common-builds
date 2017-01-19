@@ -25,36 +25,50 @@
  * \@stable
  * @abstract
  */
-export class PlatformLocation {
+export var PlatformLocation = (function () {
+    function PlatformLocation() {
+    }
     /**
      * @abstract
      * @return {?}
      */
-    getBaseHrefFromDOM() { }
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) { }
+    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
     /**
      * @abstract
      * @param {?} fn
      * @return {?}
      */
-    onHashChange(fn) { }
+    PlatformLocation.prototype.onPopState = function (fn) { };
     /**
+     * @abstract
+     * @param {?} fn
      * @return {?}
      */
-    get pathname() { return null; }
-    /**
-     * @return {?}
-     */
-    get search() { return null; }
-    /**
-     * @return {?}
-     */
-    get hash() { return null; }
+    PlatformLocation.prototype.onHashChange = function (fn) { };
+    Object.defineProperty(PlatformLocation.prototype, "pathname", {
+        /**
+         * @return {?}
+         */
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PlatformLocation.prototype, "search", {
+        /**
+         * @return {?}
+         */
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PlatformLocation.prototype, "hash", {
+        /**
+         * @return {?}
+         */
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @abstract
      * @param {?} state
@@ -62,7 +76,7 @@ export class PlatformLocation {
      * @param {?} url
      * @return {?}
      */
-    replaceState(state, title, url) { }
+    PlatformLocation.prototype.replaceState = function (state, title, url) { };
     /**
      * @abstract
      * @param {?} state
@@ -70,16 +84,17 @@ export class PlatformLocation {
      * @param {?} url
      * @return {?}
      */
-    pushState(state, title, url) { }
+    PlatformLocation.prototype.pushState = function (state, title, url) { };
     /**
      * @abstract
      * @return {?}
      */
-    forward() { }
+    PlatformLocation.prototype.forward = function () { };
     /**
      * @abstract
      * @return {?}
      */
-    back() { }
-}
+    PlatformLocation.prototype.back = function () { };
+    return PlatformLocation;
+}());
 //# sourceMappingURL=platform_location.js.map

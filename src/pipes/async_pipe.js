@@ -5,51 +5,57 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core/index';
+import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core';
 import { isPromise } from '../private_import_core';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
-class ObservableStrategy {
+var ObservableStrategy = (function () {
+    function ObservableStrategy() {
+    }
     /**
      * @param {?} async
      * @param {?} updateLatestValue
      * @return {?}
      */
-    createSubscription(async, updateLatestValue) {
-        return async.subscribe({ next: updateLatestValue, error: (e) => { throw e; } });
+    ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+    };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+    return ObservableStrategy;
+}());
+var PromiseStrategy = (function () {
+    function PromiseStrategy() {
     }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    dispose(subscription) { subscription.unsubscribe(); }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    onDestroy(subscription) { subscription.unsubscribe(); }
-}
-class PromiseStrategy {
     /**
      * @param {?} async
      * @param {?} updateLatestValue
      * @return {?}
      */
-    createSubscription(async, updateLatestValue) {
-        return async.then(updateLatestValue, e => { throw e; });
-    }
+    PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async.then(updateLatestValue, function (e) { throw e; });
+    };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    dispose(subscription) { }
+    PromiseStrategy.prototype.dispose = function (subscription) { };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    onDestroy(subscription) { }
-}
-const /** @type {?} */ _promiseStrategy = new PromiseStrategy();
-const /** @type {?} */ _observableStrategy = new ObservableStrategy();
+    PromiseStrategy.prototype.onDestroy = function (subscription) { };
+    return PromiseStrategy;
+}());
+var /** @type {?} */ _promiseStrategy = new PromiseStrategy();
+var /** @type {?} */ _observableStrategy = new ObservableStrategy();
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Unwraps a value from an asynchronous primitive.
@@ -75,11 +81,11 @@ const /** @type {?} */ _observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-export class AsyncPipe {
+export var AsyncPipe = (function () {
     /**
      * @param {?} _ref
      */
-    constructor(_ref) {
+    function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
         this._latestReturnedValue = null;
@@ -90,16 +96,16 @@ export class AsyncPipe {
     /**
      * @return {?}
      */
-    ngOnDestroy() {
+    AsyncPipe.prototype.ngOnDestroy = function () {
         if (this._subscription) {
             this._dispose();
         }
-    }
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    transform(obj) {
+    AsyncPipe.prototype.transform = function (obj) {
         if (!this._obj) {
             if (obj) {
                 this._subscribe(obj);
@@ -116,21 +122,22 @@ export class AsyncPipe {
         }
         this._latestReturnedValue = this._latestValue;
         return WrappedValue.wrap(this._latestValue);
-    }
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    _subscribe(obj) {
+    AsyncPipe.prototype._subscribe = function (obj) {
+        var _this = this;
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
-    }
+        this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    _selectStrategy(obj) {
+    AsyncPipe.prototype._selectStrategy = function (obj) {
         if (isPromise(obj)) {
             return _promiseStrategy;
         }
@@ -138,36 +145,37 @@ export class AsyncPipe {
             return _observableStrategy;
         }
         throw new InvalidPipeArgumentError(AsyncPipe, obj);
-    }
+    };
     /**
      * @return {?}
      */
-    _dispose() {
+    AsyncPipe.prototype._dispose = function () {
         this._strategy.dispose(this._subscription);
         this._latestValue = null;
         this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
-    }
+    };
     /**
      * @param {?} async
      * @param {?} value
      * @return {?}
      */
-    _updateLatestValue(async, value) {
+    AsyncPipe.prototype._updateLatestValue = function (async, value) {
         if (async === this._obj) {
             this._latestValue = value;
             this._ref.markForCheck();
         }
-    }
-}
-AsyncPipe.decorators = [
-    { type: Pipe, args: [{ name: 'async', pure: false },] },
-];
-/** @nocollapse */
-AsyncPipe.ctorParameters = () => [
-    { type: ChangeDetectorRef, },
-];
+    };
+    AsyncPipe.decorators = [
+        { type: Pipe, args: [{ name: 'async', pure: false },] },
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = function () { return [
+        { type: ChangeDetectorRef, },
+    ]; };
+    return AsyncPipe;
+}());
 function AsyncPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     AsyncPipe.decorators;

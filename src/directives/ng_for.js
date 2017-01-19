@@ -5,36 +5,53 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, isDevMode } from '@angular/core/index';
+import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, isDevMode } from '@angular/core';
 import { getTypeNameForDebugging } from '../facade/lang';
-export class NgForRow {
+export var NgForRow = (function () {
     /**
      * @param {?} $implicit
      * @param {?} index
      * @param {?} count
      */
-    constructor($implicit, index, count) {
+    function NgForRow($implicit, index, count) {
         this.$implicit = $implicit;
         this.index = index;
         this.count = count;
     }
-    /**
-     * @return {?}
-     */
-    get first() { return this.index === 0; }
-    /**
-     * @return {?}
-     */
-    get last() { return this.index === this.count - 1; }
-    /**
-     * @return {?}
-     */
-    get even() { return this.index % 2 === 0; }
-    /**
-     * @return {?}
-     */
-    get odd() { return !this.even; }
-}
+    Object.defineProperty(NgForRow.prototype, "first", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.index === 0; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForRow.prototype, "last", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.index === this.count - 1; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForRow.prototype, "even", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.index % 2 === 0; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForRow.prototype, "odd", {
+        /**
+         * @return {?}
+         */
+        get: function () { return !this.even; },
+        enumerable: true,
+        configurable: true
+    });
+    return NgForRow;
+}());
 function NgForRow_tsickle_Closure_declarations() {
     /** @type {?} */
     NgForRow.prototype.$implicit;
@@ -107,134 +124,144 @@ function NgForRow_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export class NgFor {
+export var NgFor = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} _template
      * @param {?} _differs
      * @param {?} _cdr
      */
-    constructor(_viewContainer, _template, _differs, _cdr) {
+    function NgFor(_viewContainer, _template, _differs, _cdr) {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
         this._cdr = _cdr;
         this._differ = null;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    set ngForTrackBy(fn) {
-        if (isDevMode() && fn != null && typeof fn !== 'function') {
-            // TODO(vicb): use a log service once there is a public one available
-            if ((console) && (console.warn)) {
-                console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
-                    `See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.`);
+    Object.defineProperty(NgFor.prototype, "ngForTrackBy", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this._trackByFn; },
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        set: function (fn) {
+            if (isDevMode() && fn != null && typeof fn !== 'function') {
+                // TODO(vicb): use a log service once there is a public one available
+                if ((console) && (console.warn)) {
+                    console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                        "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                }
             }
-        }
-        this._trackByFn = fn;
-    }
-    /**
-     * @return {?}
-     */
-    get ngForTrackBy() { return this._trackByFn; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngForTemplate(value) {
-        if (value) {
-            this._template = value;
-        }
-    }
+            this._trackByFn = fn;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgFor.prototype, "ngForTemplate", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            if (value) {
+                this._template = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} changes
      * @return {?}
      */
-    ngOnChanges(changes) {
+    NgFor.prototype.ngOnChanges = function (changes) {
         if ('ngForOf' in changes) {
             // React on ngForOf changes only once all inputs have been initialized
-            const /** @type {?} */ value = changes['ngForOf'].currentValue;
+            var /** @type {?} */ value = changes['ngForOf'].currentValue;
             if (!this._differ && value) {
                 try {
                     this._differ = this._differs.find(value).create(this._cdr, this.ngForTrackBy);
                 }
                 catch (e) {
-                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                 }
             }
         }
-    }
+    };
     /**
      * @return {?}
      */
-    ngDoCheck() {
+    NgFor.prototype.ngDoCheck = function () {
         if (this._differ) {
-            const /** @type {?} */ changes = this._differ.diff(this.ngForOf);
+            var /** @type {?} */ changes = this._differ.diff(this.ngForOf);
             if (changes)
                 this._applyChanges(changes);
         }
-    }
+    };
     /**
      * @param {?} changes
      * @return {?}
      */
-    _applyChanges(changes) {
-        const /** @type {?} */ insertTuples = [];
-        changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
+    NgFor.prototype._applyChanges = function (changes) {
+        var _this = this;
+        var /** @type {?} */ insertTuples = [];
+        changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForRow(null, null, null), currentIndex);
-                const /** @type {?} */ tuple = new RecordViewTuple(item, view);
+                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForRow(null, null, null), currentIndex);
+                var /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
             else if (currentIndex == null) {
-                this._viewContainer.remove(adjustedPreviousIndex);
+                _this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                const /** @type {?} */ view = this._viewContainer.get(adjustedPreviousIndex);
-                this._viewContainer.move(view, currentIndex);
-                const /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
+                var /** @type {?} */ view = _this._viewContainer.get(adjustedPreviousIndex);
+                _this._viewContainer.move(view, currentIndex);
+                var /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
                 insertTuples.push(tuple);
             }
         });
-        for (let /** @type {?} */ i = 0; i < insertTuples.length; i++) {
+        for (var /** @type {?} */ i = 0; i < insertTuples.length; i++) {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
-        for (let /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
-            const /** @type {?} */ viewRef = (this._viewContainer.get(i));
+        for (var /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
+            var /** @type {?} */ viewRef = (this._viewContainer.get(i));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange((record) => {
-            const /** @type {?} */ viewRef = (this._viewContainer.get(record.currentIndex));
+        changes.forEachIdentityChange(function (record) {
+            var /** @type {?} */ viewRef = (_this._viewContainer.get(record.currentIndex));
             viewRef.context.$implicit = record.item;
         });
-    }
+    };
     /**
      * @param {?} view
      * @param {?} record
      * @return {?}
      */
-    _perViewChange(view, record) {
+    NgFor.prototype._perViewChange = function (view, record) {
         view.context.$implicit = record.item;
-    }
-}
-NgFor.decorators = [
-    { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
-];
-/** @nocollapse */
-NgFor.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: IterableDiffers, },
-    { type: ChangeDetectorRef, },
-];
-NgFor.propDecorators = {
-    'ngForOf': [{ type: Input },],
-    'ngForTrackBy': [{ type: Input },],
-    'ngForTemplate': [{ type: Input },],
-};
+    };
+    NgFor.decorators = [
+        { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
+    ];
+    /** @nocollapse */
+    NgFor.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+        { type: IterableDiffers, },
+        { type: ChangeDetectorRef, },
+    ]; };
+    NgFor.propDecorators = {
+        'ngForOf': [{ type: Input },],
+        'ngForTrackBy': [{ type: Input },],
+        'ngForTemplate': [{ type: Input },],
+    };
+    return NgFor;
+}());
 function NgFor_tsickle_Closure_declarations() {
     /** @type {?} */
     NgFor.decorators;
@@ -260,16 +287,17 @@ function NgFor_tsickle_Closure_declarations() {
     /** @type {?} */
     NgFor.prototype._cdr;
 }
-class RecordViewTuple {
+var RecordViewTuple = (function () {
     /**
      * @param {?} record
      * @param {?} view
      */
-    constructor(record, view) {
+    function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
     }
-}
+    return RecordViewTuple;
+}());
 function RecordViewTuple_tsickle_Closure_declarations() {
     /** @type {?} */
     RecordViewTuple.prototype.record;

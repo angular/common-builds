@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core/index';
+import { Pipe } from '@angular/core';
 import { NgLocalization, getPluralCategory } from '../localization';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
-const /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
+var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
@@ -26,11 +26,11 @@ const /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-export class I18nPluralPipe {
+export var I18nPluralPipe = (function () {
     /**
      * @param {?} _localization
      */
-    constructor(_localization) {
+    function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
     /**
@@ -38,23 +38,24 @@ export class I18nPluralPipe {
      * @param {?} pluralMap
      * @return {?}
      */
-    transform(value, pluralMap) {
+    I18nPluralPipe.prototype.transform = function (value, pluralMap) {
         if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
             throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
-        const /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+        var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
-    }
-}
-I18nPluralPipe.decorators = [
-    { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-];
-/** @nocollapse */
-I18nPluralPipe.ctorParameters = () => [
-    { type: NgLocalization, },
-];
+    };
+    I18nPluralPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
+    return I18nPluralPipe;
+}());
 function I18nPluralPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     I18nPluralPipe.decorators;

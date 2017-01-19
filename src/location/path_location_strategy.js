@@ -5,7 +5,12 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Inject, Injectable, Optional } from '@angular/core/index';
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+import { Inject, Injectable, Optional } from '@angular/core';
 import { isBlank } from '../facade/lang';
 import { Location } from './location';
 import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
@@ -36,19 +41,20 @@ import { PlatformLocation } from './platform_location';
  *
  * \@stable
  */
-export class PathLocationStrategy extends LocationStrategy {
+export var PathLocationStrategy = (function (_super) {
+    __extends(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
      */
-    constructor(_platformLocation, href) {
-        super();
+    function PathLocationStrategy(_platformLocation, href) {
+        _super.call(this);
         this._platformLocation = _platformLocation;
         if (isBlank(href)) {
             href = this._platformLocation.getBaseHrefFromDOM();
         }
         if (isBlank(href)) {
-            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
+            throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
         }
         this._baseHref = href;
     }
@@ -56,31 +62,32 @@ export class PathLocationStrategy extends LocationStrategy {
      * @param {?} fn
      * @return {?}
      */
-    onPopState(fn) {
+    PathLocationStrategy.prototype.onPopState = function (fn) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
-    }
+    };
     /**
      * @return {?}
      */
-    getBaseHref() { return this._baseHref; }
+    PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
     /**
      * @param {?} internal
      * @return {?}
      */
-    prepareExternalUrl(internal) {
+    PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
         return Location.joinWithSlash(this._baseHref, internal);
-    }
+    };
     /**
      * @param {?=} includeHash
      * @return {?}
      */
-    path(includeHash = false) {
-        const /** @type {?} */ pathname = this._platformLocation.pathname +
+    PathLocationStrategy.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
+        var /** @type {?} */ pathname = this._platformLocation.pathname +
             Location.normalizeQueryParams(this._platformLocation.search);
-        const /** @type {?} */ hash = this._platformLocation.hash;
-        return hash && includeHash ? `${pathname}${hash}` : pathname;
-    }
+        var /** @type {?} */ hash = this._platformLocation.hash;
+        return hash && includeHash ? "" + pathname + hash : pathname;
+    };
     /**
      * @param {?} state
      * @param {?} title
@@ -88,10 +95,10 @@ export class PathLocationStrategy extends LocationStrategy {
      * @param {?} queryParams
      * @return {?}
      */
-    pushState(state, title, url, queryParams) {
-        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+    PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.pushState(state, title, externalUrl);
-    }
+    };
     /**
      * @param {?} state
      * @param {?} title
@@ -99,27 +106,28 @@ export class PathLocationStrategy extends LocationStrategy {
      * @param {?} queryParams
      * @return {?}
      */
-    replaceState(state, title, url, queryParams) {
-        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+    PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.replaceState(state, title, externalUrl);
-    }
+    };
     /**
      * @return {?}
      */
-    forward() { this._platformLocation.forward(); }
+    PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
     /**
      * @return {?}
      */
-    back() { this._platformLocation.back(); }
-}
-PathLocationStrategy.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-PathLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-];
+    PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    PathLocationStrategy.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    PathLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation, },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+    ]; };
+    return PathLocationStrategy;
+}(LocationStrategy));
 function PathLocationStrategy_tsickle_Closure_declarations() {
     /** @type {?} */
     PathLocationStrategy.decorators;

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core/index';
+import { Pipe } from '@angular/core';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * \@ngModule CommonModule
@@ -51,32 +51,35 @@ import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * \@stable
  */
-export class SlicePipe {
+export var SlicePipe = (function () {
+    function SlicePipe() {
+    }
     /**
      * @param {?} value
      * @param {?} start
      * @param {?=} end
      * @return {?}
      */
-    transform(value, start, end) {
+    SlicePipe.prototype.transform = function (value, start, end) {
         if (value == null)
             return value;
         if (!this.supports(value)) {
             throw new InvalidPipeArgumentError(SlicePipe, value);
         }
         return value.slice(start, end);
-    }
+    };
     /**
      * @param {?} obj
      * @return {?}
      */
-    supports(obj) { return typeof obj === 'string' || Array.isArray(obj); }
-}
-SlicePipe.decorators = [
-    { type: Pipe, args: [{ name: 'slice', pure: false },] },
-];
-/** @nocollapse */
-SlicePipe.ctorParameters = () => [];
+    SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+    SlicePipe.decorators = [
+        { type: Pipe, args: [{ name: 'slice', pure: false },] },
+    ];
+    /** @nocollapse */
+    SlicePipe.ctorParameters = function () { return []; };
+    return SlicePipe;
+}());
 function SlicePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     SlicePipe.decorators;

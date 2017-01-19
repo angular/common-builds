@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core/index';
+import { Pipe } from '@angular/core';
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Converts value into JSON string.
@@ -19,18 +19,21 @@ import { Pipe } from '@angular/core/index';
  *
  * \@stable
  */
-export class JsonPipe {
+export var JsonPipe = (function () {
+    function JsonPipe() {
+    }
     /**
      * @param {?} value
      * @return {?}
      */
-    transform(value) { return JSON.stringify(value, null, 2); }
-}
-JsonPipe.decorators = [
-    { type: Pipe, args: [{ name: 'json', pure: false },] },
-];
-/** @nocollapse */
-JsonPipe.ctorParameters = () => [];
+    JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
+    JsonPipe.decorators = [
+        { type: Pipe, args: [{ name: 'json', pure: false },] },
+    ];
+    /** @nocollapse */
+    JsonPipe.ctorParameters = function () { return []; };
+    return JsonPipe;
+}());
 function JsonPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     JsonPipe.decorators;

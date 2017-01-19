@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core/index';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * Conditionally includes a template based on the value of an `expression`.
  *
@@ -96,12 +96,12 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core/i
  *
  * \@stable
  */
-export class NgIf {
+export var NgIf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} templateRef
      */
-    constructor(_viewContainer, templateRef) {
+    function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
         this._thenTemplateRef = null;
@@ -110,36 +110,48 @@ export class NgIf {
         this._elseViewRef = null;
         this._thenTemplateRef = templateRef;
     }
+    Object.defineProperty(NgIf.prototype, "ngIf", {
+        /**
+         * @param {?} condition
+         * @return {?}
+         */
+        set: function (condition) {
+            this._context.$implicit = condition;
+            this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgIf.prototype, "ngIfThen", {
+        /**
+         * @param {?} templateRef
+         * @return {?}
+         */
+        set: function (templateRef) {
+            this._thenTemplateRef = templateRef;
+            this._thenViewRef = null; // clear previous view if any.
+            this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgIf.prototype, "ngIfElse", {
+        /**
+         * @param {?} templateRef
+         * @return {?}
+         */
+        set: function (templateRef) {
+            this._elseTemplateRef = templateRef;
+            this._elseViewRef = null; // clear previous view if any.
+            this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
-     * @param {?} condition
      * @return {?}
      */
-    set ngIf(condition) {
-        this._context.$implicit = condition;
-        this._updateView();
-    }
-    /**
-     * @param {?} templateRef
-     * @return {?}
-     */
-    set ngIfThen(templateRef) {
-        this._thenTemplateRef = templateRef;
-        this._thenViewRef = null; // clear previous view if any.
-        this._updateView();
-    }
-    /**
-     * @param {?} templateRef
-     * @return {?}
-     */
-    set ngIfElse(templateRef) {
-        this._elseTemplateRef = templateRef;
-        this._elseViewRef = null; // clear previous view if any.
-        this._updateView();
-    }
-    /**
-     * @return {?}
-     */
-    _updateView() {
+    NgIf.prototype._updateView = function () {
         if (this._context.$implicit) {
             if (!this._thenViewRef) {
                 this._viewContainer.clear();
@@ -160,21 +172,22 @@ export class NgIf {
                 }
             }
         }
-    }
-}
-NgIf.decorators = [
-    { type: Directive, args: [{ selector: '[ngIf]' },] },
-];
-/** @nocollapse */
-NgIf.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-];
-NgIf.propDecorators = {
-    'ngIf': [{ type: Input },],
-    'ngIfThen': [{ type: Input },],
-    'ngIfElse': [{ type: Input },],
-};
+    };
+    NgIf.decorators = [
+        { type: Directive, args: [{ selector: '[ngIf]' },] },
+    ];
+    /** @nocollapse */
+    NgIf.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+    ]; };
+    NgIf.propDecorators = {
+        'ngIf': [{ type: Input },],
+        'ngIfThen': [{ type: Input },],
+        'ngIfElse': [{ type: Input },],
+    };
+    return NgIf;
+}());
 function NgIf_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIf.decorators;
@@ -198,11 +211,12 @@ function NgIf_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIf.prototype._viewContainer;
 }
-export class NgIfContext {
-    constructor() {
+export var NgIfContext = (function () {
+    function NgIfContext() {
         this.$implicit = null;
     }
-}
+    return NgIfContext;
+}());
 function NgIfContext_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIfContext.prototype.$implicit;

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Attribute, Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core/index';
+import { Attribute, Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { NgLocalization, getPluralCategory } from '../localization';
 import { SwitchView } from './ng_switch';
 /**
@@ -39,65 +39,70 @@ import { SwitchView } from './ng_switch';
  *
  * \@experimental
  */
-export class NgPlural {
+export var NgPlural = (function () {
     /**
      * @param {?} _localization
      */
-    constructor(_localization) {
+    function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngPlural(value) {
-        this._switchValue = value;
-        this._updateView();
-    }
+    Object.defineProperty(NgPlural.prototype, "ngPlural", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            this._switchValue = value;
+            this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} value
      * @param {?} switchView
      * @return {?}
      */
-    addCase(value, switchView) { this._caseViews[value] = switchView; }
+    NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
     /**
      * @return {?}
      */
-    _updateView() {
+    NgPlural.prototype._updateView = function () {
         this._clearViews();
-        const /** @type {?} */ cases = Object.keys(this._caseViews);
-        const /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
+        var /** @type {?} */ cases = Object.keys(this._caseViews);
+        var /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
         this._activateView(this._caseViews[key]);
-    }
+    };
     /**
      * @return {?}
      */
-    _clearViews() {
+    NgPlural.prototype._clearViews = function () {
         if (this._activeView)
             this._activeView.destroy();
-    }
+    };
     /**
      * @param {?} view
      * @return {?}
      */
-    _activateView(view) {
+    NgPlural.prototype._activateView = function (view) {
         if (view) {
             this._activeView = view;
             this._activeView.create();
         }
-    }
-}
-NgPlural.decorators = [
-    { type: Directive, args: [{ selector: '[ngPlural]' },] },
-];
-/** @nocollapse */
-NgPlural.ctorParameters = () => [
-    { type: NgLocalization, },
-];
-NgPlural.propDecorators = {
-    'ngPlural': [{ type: Input },],
-};
+    };
+    NgPlural.decorators = [
+        { type: Directive, args: [{ selector: '[ngPlural]' },] },
+    ];
+    /** @nocollapse */
+    NgPlural.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
+    NgPlural.propDecorators = {
+        'ngPlural': [{ type: Input },],
+    };
+    return NgPlural;
+}());
 function NgPlural_tsickle_Closure_declarations() {
     /** @type {?} */
     NgPlural.decorators;
@@ -135,29 +140,30 @@ function NgPlural_tsickle_Closure_declarations() {
  *
  * \@experimental
  */
-export class NgPluralCase {
+export var NgPluralCase = (function () {
     /**
      * @param {?} value
      * @param {?} template
      * @param {?} viewContainer
      * @param {?} ngPlural
      */
-    constructor(value, template, viewContainer, ngPlural) {
+    function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
-        const isANumber = !isNaN(Number(value));
-        ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
+        var isANumber = !isNaN(Number(value));
+        ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
-}
-NgPluralCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
-];
-/** @nocollapse */
-NgPluralCase.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-    { type: NgPlural, decorators: [{ type: Host },] },
-];
+    NgPluralCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
+        { type: TemplateRef, },
+        { type: ViewContainerRef, },
+        { type: NgPlural, decorators: [{ type: Host },] },
+    ]; };
+    return NgPluralCase;
+}());
 function NgPluralCase_tsickle_Closure_declarations() {
     /** @type {?} */
     NgPluralCase.decorators;
