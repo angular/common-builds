@@ -11,10 +11,10 @@ export declare class NgForRow {
     index: number;
     count: number;
     constructor($implicit: any, index: number, count: number);
-    first: boolean;
-    last: boolean;
-    even: boolean;
-    odd: boolean;
+    readonly first: boolean;
+    readonly last: boolean;
+    readonly even: boolean;
+    readonly odd: boolean;
 }
 /**
  * The `NgFor` directive instantiates a template once per item from an iterable. The context for

@@ -25,50 +25,36 @@
  * \@stable
  * @abstract
  */
-export var PlatformLocation = (function () {
-    function PlatformLocation() {
-    }
+export class PlatformLocation {
     /**
      * @abstract
      * @return {?}
      */
-    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    PlatformLocation.prototype.onPopState = function (fn) { };
+    getBaseHrefFromDOM() { }
     /**
      * @abstract
      * @param {?} fn
      * @return {?}
      */
-    PlatformLocation.prototype.onHashChange = function (fn) { };
-    Object.defineProperty(PlatformLocation.prototype, "pathname", {
-        /**
-         * @return {?}
-         */
-        get: function () { return null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PlatformLocation.prototype, "search", {
-        /**
-         * @return {?}
-         */
-        get: function () { return null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PlatformLocation.prototype, "hash", {
-        /**
-         * @return {?}
-         */
-        get: function () { return null; },
-        enumerable: true,
-        configurable: true
-    });
+    onPopState(fn) { }
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    onHashChange(fn) { }
+    /**
+     * @return {?}
+     */
+    get pathname() { return null; }
+    /**
+     * @return {?}
+     */
+    get search() { return null; }
+    /**
+     * @return {?}
+     */
+    get hash() { return null; }
     /**
      * @abstract
      * @param {?} state
@@ -76,7 +62,7 @@ export var PlatformLocation = (function () {
      * @param {?} url
      * @return {?}
      */
-    PlatformLocation.prototype.replaceState = function (state, title, url) { };
+    replaceState(state, title, url) { }
     /**
      * @abstract
      * @param {?} state
@@ -84,17 +70,16 @@ export var PlatformLocation = (function () {
      * @param {?} url
      * @return {?}
      */
-    PlatformLocation.prototype.pushState = function (state, title, url) { };
+    pushState(state, title, url) { }
     /**
      * @abstract
      * @return {?}
      */
-    PlatformLocation.prototype.forward = function () { };
+    forward() { }
     /**
      * @abstract
      * @return {?}
      */
-    PlatformLocation.prototype.back = function () { };
-    return PlatformLocation;
-}());
+    back() { }
+}
 //# sourceMappingURL=platform_location.js.map

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core/index';
 import { LocationStrategy } from './location_strategy';
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
@@ -28,20 +28,19 @@ import { LocationStrategy } from './location_strategy';
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-export var Location = (function () {
+export class Location {
     /**
      * @param {?} platformStrategy
      */
-    function Location(platformStrategy) {
-        var _this = this;
+    constructor(platformStrategy) {
         /** @internal */
         this._subject = new EventEmitter();
         this._platformStrategy = platformStrategy;
-        var browserBaseHref = this._platformStrategy.getBaseHref();
+        const browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this._platformStrategy.onPopState(function (ev) {
-            _this._subject.emit({
-                'url': _this.path(true),
+        this._platformStrategy.onPopState((ev) => {
+            this._subject.emit({
+                'url': this.path(true),
                 'pop': true,
                 'type': ev.type,
             });
@@ -51,29 +50,27 @@ export var Location = (function () {
      * @param {?=} includeHash
      * @return {?}
      */
-    Location.prototype.path = function (includeHash) {
-        if (includeHash === void 0) { includeHash = false; }
+    path(includeHash = false) {
         return this.normalize(this._platformStrategy.path(includeHash));
-    };
+    }
     /**
      * Normalizes the given path and compares to the current normalized path.
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.isCurrentPathEqualTo = function (path, query) {
-        if (query === void 0) { query = ''; }
+    isCurrentPathEqualTo(path, query = '') {
         return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
-    };
+    }
     /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes.
      * @param {?} url
      * @return {?}
      */
-    Location.prototype.normalize = function (url) {
+    normalize(url) {
         return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
-    };
+    }
     /**
      * Given a string representing a URL, returns the platform-specific external URL path.
      * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
@@ -82,12 +79,12 @@ export var Location = (function () {
      * @param {?} url
      * @return {?}
      */
-    Location.prototype.prepareExternalUrl = function (url) {
+    prepareExternalUrl(url) {
         if (url && url[0] !== '/') {
             url = '/' + url;
         }
         return this._platformStrategy.prepareExternalUrl(url);
-    };
+    }
     /**
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
@@ -95,10 +92,9 @@ export var Location = (function () {
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.go = function (path, query) {
-        if (query === void 0) { query = ''; }
+    go(path, query = '') {
         this._platformStrategy.pushState(null, '', path, query);
-    };
+    }
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
@@ -106,20 +102,19 @@ export var Location = (function () {
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.replaceState = function (path, query) {
-        if (query === void 0) { query = ''; }
+    replaceState(path, query = '') {
         this._platformStrategy.replaceState(null, '', path, query);
-    };
+    }
     /**
      * Navigates forward in the platform's history.
      * @return {?}
      */
-    Location.prototype.forward = function () { this._platformStrategy.forward(); };
+    forward() { this._platformStrategy.forward(); }
     /**
      * Navigates back in the platform's history.
      * @return {?}
      */
-    Location.prototype.back = function () { this._platformStrategy.back(); };
+    back() { this._platformStrategy.back(); }
     /**
      * Subscribe to the platform's `popState` events.
      * @param {?} onNext
@@ -127,34 +122,32 @@ export var Location = (function () {
      * @param {?=} onReturn
      * @return {?}
      */
-    Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
-        if (onThrow === void 0) { onThrow = null; }
-        if (onReturn === void 0) { onReturn = null; }
+    subscribe(onNext, onThrow = null, onReturn = null) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-    };
+    }
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.
      * @param {?} params
      * @return {?}
      */
-    Location.normalizeQueryParams = function (params) {
+    static normalizeQueryParams(params) {
         return params && params[0] !== '?' ? '?' + params : params;
-    };
+    }
     /**
      * Given 2 parts of a url, join them with a slash if needed.
      * @param {?} start
      * @param {?} end
      * @return {?}
      */
-    Location.joinWithSlash = function (start, end) {
+    static joinWithSlash(start, end) {
         if (start.length == 0) {
             return end;
         }
         if (end.length == 0) {
             return start;
         }
-        var /** @type {?} */ slashes = 0;
+        let /** @type {?} */ slashes = 0;
         if (start.endsWith('/')) {
             slashes++;
         }
@@ -168,22 +161,21 @@ export var Location = (function () {
             return start + end;
         }
         return start + '/' + end;
-    };
+    }
     /**
      * If url has a trailing slash, remove it, otherwise return url as is.
      * @param {?} url
      * @return {?}
      */
-    Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
-    Location.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    Location.ctorParameters = function () { return [
-        { type: LocationStrategy, },
-    ]; };
-    return Location;
-}());
+    static stripTrailingSlash(url) { return url.replace(/\/$/, ''); }
+}
+Location.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+Location.ctorParameters = () => [
+    { type: LocationStrategy, },
+];
 function Location_tsickle_Closure_declarations() {
     /** @type {?} */
     Location.decorators;

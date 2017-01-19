@@ -5,12 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core/index';
 import { isPresent } from '../facade/lang';
 import { Location } from './location';
 import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
@@ -32,14 +27,13 @@ import { PlatformLocation } from './platform_location';
  *
  * \@stable
  */
-export var HashLocationStrategy = (function (_super) {
-    __extends(HashLocationStrategy, _super);
+export class HashLocationStrategy extends LocationStrategy {
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
      */
-    function HashLocationStrategy(_platformLocation, _baseHref) {
-        _super.call(this);
+    constructor(_platformLocation, _baseHref) {
+        super();
         this._platformLocation = _platformLocation;
         this._baseHref = '';
         if (isPresent(_baseHref)) {
@@ -50,35 +44,34 @@ export var HashLocationStrategy = (function (_super) {
      * @param {?} fn
      * @return {?}
      */
-    HashLocationStrategy.prototype.onPopState = function (fn) {
+    onPopState(fn) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
-    };
+    }
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    getBaseHref() { return this._baseHref; }
     /**
      * @param {?=} includeHash
      * @return {?}
      */
-    HashLocationStrategy.prototype.path = function (includeHash) {
-        if (includeHash === void 0) { includeHash = false; }
+    path(includeHash = false) {
         // the hash value is always prefixed with a `#`
         // and if it is empty then it will stay empty
-        var /** @type {?} */ path = this._platformLocation.hash;
+        let /** @type {?} */ path = this._platformLocation.hash;
         if (!isPresent(path))
             path = '#';
         return path.length > 0 ? path.substring(1) : path;
-    };
+    }
     /**
      * @param {?} internal
      * @return {?}
      */
-    HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
-        var /** @type {?} */ url = Location.joinWithSlash(this._baseHref, internal);
+    prepareExternalUrl(internal) {
+        const /** @type {?} */ url = Location.joinWithSlash(this._baseHref, internal);
         return url.length > 0 ? ('#' + url) : url;
-    };
+    }
     /**
      * @param {?} state
      * @param {?} title
@@ -86,13 +79,13 @@ export var HashLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
-        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+    pushState(state, title, path, queryParams) {
+        let /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
         this._platformLocation.pushState(state, title, url);
-    };
+    }
     /**
      * @param {?} state
      * @param {?} title
@@ -100,31 +93,30 @@ export var HashLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
-        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+    replaceState(state, title, path, queryParams) {
+        let /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
         this._platformLocation.replaceState(state, title, url);
-    };
+    }
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+    forward() { this._platformLocation.forward(); }
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-    HashLocationStrategy.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    HashLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-    ]; };
-    return HashLocationStrategy;
-}(LocationStrategy));
+    back() { this._platformLocation.back(); }
+}
+HashLocationStrategy.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+HashLocationStrategy.ctorParameters = () => [
+    { type: PlatformLocation, },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+];
 function HashLocationStrategy_tsickle_Closure_declarations() {
     /** @type {?} */
     HashLocationStrategy.decorators;

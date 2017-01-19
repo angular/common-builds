@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core';
+import { Pipe } from '@angular/core/index';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * \@ngModule CommonModule
@@ -24,15 +24,13 @@ import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  *  \@experimental
  */
-export var I18nSelectPipe = (function () {
-    function I18nSelectPipe() {
-    }
+export class I18nSelectPipe {
     /**
      * @param {?} value
      * @param {?} mapping
      * @return {?}
      */
-    I18nSelectPipe.prototype.transform = function (value, mapping) {
+    transform(value, mapping) {
         if (value == null)
             return '';
         if (typeof mapping !== 'object' || typeof value !== 'string') {
@@ -45,14 +43,13 @@ export var I18nSelectPipe = (function () {
             return mapping['other'];
         }
         return '';
-    };
-    I18nSelectPipe.decorators = [
-        { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () { return []; };
-    return I18nSelectPipe;
-}());
+    }
+}
+I18nSelectPipe.decorators = [
+    { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+];
+/** @nocollapse */
+I18nSelectPipe.ctorParameters = () => [];
 function I18nSelectPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     I18nSelectPipe.decorators;

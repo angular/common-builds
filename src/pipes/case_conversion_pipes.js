@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Pipe } from '@angular/core';
+import { Pipe } from '@angular/core/index';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * Transforms text to lowercase.
@@ -14,28 +14,25 @@ import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * \@stable
  */
-export var LowerCasePipe = (function () {
-    function LowerCasePipe() {
-    }
+export class LowerCasePipe {
     /**
      * @param {?} value
      * @return {?}
      */
-    LowerCasePipe.prototype.transform = function (value) {
+    transform(value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
             throw new InvalidPipeArgumentError(LowerCasePipe, value);
         }
         return value.toLowerCase();
-    };
-    LowerCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'lowercase' },] },
-    ];
-    /** @nocollapse */
-    LowerCasePipe.ctorParameters = function () { return []; };
-    return LowerCasePipe;
-}());
+    }
+}
+LowerCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'lowercase' },] },
+];
+/** @nocollapse */
+LowerCasePipe.ctorParameters = () => [];
 function LowerCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     LowerCasePipe.decorators;
@@ -62,28 +59,25 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-export var TitleCasePipe = (function () {
-    function TitleCasePipe() {
-    }
+export class TitleCasePipe {
     /**
      * @param {?} value
      * @return {?}
      */
-    TitleCasePipe.prototype.transform = function (value) {
+    transform(value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
             throw new InvalidPipeArgumentError(TitleCasePipe, value);
         }
-        return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
-    };
-    TitleCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'titlecase' },] },
-    ];
-    /** @nocollapse */
-    TitleCasePipe.ctorParameters = function () { return []; };
-    return TitleCasePipe;
-}());
+        return value.split(/\b/g).map(word => titleCaseWord(word)).join('');
+    }
+}
+TitleCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'titlecase' },] },
+];
+/** @nocollapse */
+TitleCasePipe.ctorParameters = () => [];
 function TitleCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     TitleCasePipe.decorators;
@@ -98,28 +92,25 @@ function TitleCasePipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var UpperCasePipe = (function () {
-    function UpperCasePipe() {
-    }
+export class UpperCasePipe {
     /**
      * @param {?} value
      * @return {?}
      */
-    UpperCasePipe.prototype.transform = function (value) {
+    transform(value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
             throw new InvalidPipeArgumentError(UpperCasePipe, value);
         }
         return value.toUpperCase();
-    };
-    UpperCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'uppercase' },] },
-    ];
-    /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
-    return UpperCasePipe;
-}());
+    }
+}
+UpperCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'uppercase' },] },
+];
+/** @nocollapse */
+UpperCasePipe.ctorParameters = () => [];
 function UpperCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     UpperCasePipe.decorators;

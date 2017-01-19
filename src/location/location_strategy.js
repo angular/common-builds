@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { InjectionToken } from '@angular/core';
+import { InjectionToken } from '@angular/core/index';
 /**
  * `LocationStrategy` is responsible for representing and reading route state
  * from the browser's URL. Angular provides two strategies:
@@ -25,21 +25,19 @@ import { InjectionToken } from '@angular/core';
  * \@stable
  * @abstract
  */
-export var LocationStrategy = (function () {
-    function LocationStrategy() {
-    }
+export class LocationStrategy {
     /**
      * @abstract
      * @param {?=} includeHash
      * @return {?}
      */
-    LocationStrategy.prototype.path = function (includeHash) { };
+    path(includeHash) { }
     /**
      * @abstract
      * @param {?} internal
      * @return {?}
      */
-    LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
+    prepareExternalUrl(internal) { }
     /**
      * @abstract
      * @param {?} state
@@ -48,7 +46,7 @@ export var LocationStrategy = (function () {
      * @param {?} queryParams
      * @return {?}
      */
-    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
+    pushState(state, title, url, queryParams) { }
     /**
      * @abstract
      * @param {?} state
@@ -57,30 +55,29 @@ export var LocationStrategy = (function () {
      * @param {?} queryParams
      * @return {?}
      */
-    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
+    replaceState(state, title, url, queryParams) { }
     /**
      * @abstract
      * @return {?}
      */
-    LocationStrategy.prototype.forward = function () { };
+    forward() { }
     /**
      * @abstract
      * @return {?}
      */
-    LocationStrategy.prototype.back = function () { };
+    back() { }
     /**
      * @abstract
      * @param {?} fn
      * @return {?}
      */
-    LocationStrategy.prototype.onPopState = function (fn) { };
+    onPopState(fn) { }
     /**
      * @abstract
      * @return {?}
      */
-    LocationStrategy.prototype.getBaseHref = function () { };
-    return LocationStrategy;
-}());
+    getBaseHref() { }
+}
 /**
  * The `APP_BASE_HREF` token represents the base href to be used with the
  * {@link PathLocationStrategy}.
@@ -103,5 +100,5 @@ export var LocationStrategy = (function () {
  *
  * @stable
  */
-export var /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
+export const /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
 //# sourceMappingURL=location_strategy.js.map

@@ -18,7 +18,7 @@ export { NgClass, NgComponentOutlet, NgFor, NgIf, NgPlural, NgPluralCase, NgStyl
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-export var /** @type {?} */ COMMON_DIRECTIVES = [
+export const /** @type {?} */ COMMON_DIRECTIVES = [
     NgClass,
     NgComponentOutlet,
     NgFor,

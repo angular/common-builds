@@ -5,27 +5,19 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core/index';
 /**
  * \@experimental
  * @abstract
  */
-export var NgLocalization = (function () {
-    function NgLocalization() {
-    }
+export class NgLocalization {
     /**
      * @abstract
      * @param {?} value
      * @return {?}
      */
-    NgLocalization.prototype.getPluralCategory = function (value) { };
-    return NgLocalization;
-}());
+    getPluralCategory(value) { }
+}
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
@@ -38,7 +30,7 @@ export var NgLocalization = (function () {
  * @return {?}
  */
 export function getPluralCategory(value, cases, ngLocalization) {
-    var /** @type {?} */ key = "=" + value;
+    let /** @type {?} */ key = `=${value}`;
     if (cases.indexOf(key) > -1) {
         return key;
     }
@@ -49,28 +41,27 @@ export function getPluralCategory(value, cases, ngLocalization) {
     if (cases.indexOf('other') > -1) {
         return 'other';
     }
-    throw new Error("No plural message found for value \"" + value + "\"");
+    throw new Error(`No plural message found for value "${value}"`);
 }
 /**
  * Returns the plural case based on the locale
  *
  * \@experimental
  */
-export var NgLocaleLocalization = (function (_super) {
-    __extends(NgLocaleLocalization, _super);
+export class NgLocaleLocalization extends NgLocalization {
     /**
      * @param {?} locale
      */
-    function NgLocaleLocalization(locale) {
-        _super.call(this);
+    constructor(locale) {
+        super();
         this.locale = locale;
     }
     /**
      * @param {?} value
      * @return {?}
      */
-    NgLocaleLocalization.prototype.getPluralCategory = function (value) {
-        var /** @type {?} */ plural = getPluralCase(this.locale, value);
+    getPluralCategory(value) {
+        const /** @type {?} */ plural = getPluralCase(this.locale, value);
         switch (plural) {
             case Plural.Zero:
                 return 'zero';
@@ -85,16 +76,15 @@ export var NgLocaleLocalization = (function (_super) {
             default:
                 return 'other';
         }
-    };
-    NgLocaleLocalization.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    NgLocaleLocalization.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
-    return NgLocaleLocalization;
-}(NgLocalization));
+    }
+}
+NgLocaleLocalization.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+NgLocaleLocalization.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
 function NgLocaleLocalization_tsickle_Closure_declarations() {
     /** @type {?} */
     NgLocaleLocalization.decorators;
@@ -106,7 +96,7 @@ function NgLocaleLocalization_tsickle_Closure_declarations() {
     /** @type {?} */
     NgLocaleLocalization.prototype.locale;
 }
-export var Plural = {};
+export let Plural = {};
 Plural.Zero = 0;
 Plural.One = 1;
 Plural.Two = 2;
@@ -132,13 +122,13 @@ export function getPluralCase(locale, nLike) {
     if (typeof nLike === 'string') {
         nLike = parseInt(/** @type {?} */ (nLike), 10);
     }
-    var /** @type {?} */ n = (nLike);
-    var /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
-    var /** @type {?} */ i = Math.floor(Math.abs(n));
-    var /** @type {?} */ v = nDecimal.length;
-    var /** @type {?} */ f = parseInt(nDecimal, 10);
-    var /** @type {?} */ t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-    var /** @type {?} */ lang = locale.split('-')[0].toLowerCase();
+    const /** @type {?} */ n = (nLike);
+    const /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
+    const /** @type {?} */ i = Math.floor(Math.abs(n));
+    const /** @type {?} */ v = nDecimal.length;
+    const /** @type {?} */ f = parseInt(nDecimal, 10);
+    const /** @type {?} */ t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+    const /** @type {?} */ lang = locale.split('-')[0].toLowerCase();
     switch (lang) {
         case 'af':
         case 'asa':

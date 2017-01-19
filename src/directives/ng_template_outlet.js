@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Directive, Input, ViewContainerRef } from '@angular/core';
+import { Directive, Input, ViewContainerRef } from '@angular/core/index';
 /**
  * \@ngModule CommonModule
  *
@@ -30,49 +30,44 @@ import { Directive, Input, ViewContainerRef } from '@angular/core';
  *
  * \@experimental
  */
-export var NgTemplateOutlet = (function () {
+export class NgTemplateOutlet {
     /**
      * @param {?} _viewContainerRef
      */
-    function NgTemplateOutlet(_viewContainerRef) {
+    constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
-    Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
-        /**
-         * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-         * @param {?} context
-         * @return {?}
-         */
-        set: function (context) { this.ngTemplateOutletContext = context; },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
+     * @param {?} context
+     * @return {?}
+     */
+    set ngOutletContext(context) { this.ngTemplateOutletContext = context; }
     /**
      * @param {?} changes
      * @return {?}
      */
-    NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
+    ngOnChanges(changes) {
         if (this._viewRef) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
         }
         if (this.ngTemplateOutlet) {
             this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
         }
-    };
-    NgTemplateOutlet.decorators = [
-        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgTemplateOutlet.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-    ]; };
-    NgTemplateOutlet.propDecorators = {
-        'ngTemplateOutletContext': [{ type: Input },],
-        'ngTemplateOutlet': [{ type: Input },],
-        'ngOutletContext': [{ type: Input },],
-    };
-    return NgTemplateOutlet;
-}());
+    }
+}
+NgTemplateOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+];
+/** @nocollapse */
+NgTemplateOutlet.ctorParameters = () => [
+    { type: ViewContainerRef, },
+];
+NgTemplateOutlet.propDecorators = {
+    'ngTemplateOutletContext': [{ type: Input },],
+    'ngTemplateOutlet': [{ type: Input },],
+    'ngOutletContext': [{ type: Input },],
+};
 function NgTemplateOutlet_tsickle_Closure_declarations() {
     /** @type {?} */
     NgTemplateOutlet.decorators;

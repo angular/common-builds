@@ -5,11 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Inject, LOCALE_ID, Pipe } from '@angular/core';
+import { Inject, LOCALE_ID, Pipe } from '@angular/core/index';
 import { NumberWrapper } from '../facade/lang';
 import { NumberFormatStyle, NumberFormatter } from './intl';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
-var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+const /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 /**
  * @param {?} pipe
  * @param {?} locale
@@ -20,9 +20,7 @@ var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
  * @param {?=} currencyAsSymbol
  * @return {?}
  */
-function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
-    if (currency === void 0) { currency = null; }
-    if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+function formatNumber(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
     if (value == null)
         return null;
     // Convert strings to numbers
@@ -30,9 +28,9 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
     if (typeof value !== 'number') {
         throw new InvalidPipeArgumentError(pipe, value);
     }
-    var /** @type {?} */ minInt;
-    var /** @type {?} */ minFraction;
-    var /** @type {?} */ maxFraction;
+    let /** @type {?} */ minInt;
+    let /** @type {?} */ minFraction;
+    let /** @type {?} */ maxFraction;
     if (style !== NumberFormatStyle.Currency) {
         // rely on Intl default for currency
         minInt = 1;
@@ -40,9 +38,9 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
         maxFraction = 3;
     }
     if (digits) {
-        var /** @type {?} */ parts = digits.match(_NUMBER_FORMAT_REGEXP);
+        const /** @type {?} */ parts = digits.match(_NUMBER_FORMAT_REGEXP);
         if (parts === null) {
-            throw new Error(digits + " is not a valid digit info for number pipes");
+            throw new Error(`${digits} is not a valid digit info for number pipes`);
         }
         if (parts[1] != null) {
             minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
@@ -89,11 +87,11 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * \@stable
  */
-export var DecimalPipe = (function () {
+export class DecimalPipe {
     /**
      * @param {?} _locale
      */
-    function DecimalPipe(_locale) {
+    constructor(_locale) {
         this._locale = _locale;
     }
     /**
@@ -101,19 +99,17 @@ export var DecimalPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    DecimalPipe.prototype.transform = function (value, digits) {
-        if (digits === void 0) { digits = null; }
+    transform(value, digits = null) {
         return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
-    };
-    DecimalPipe.decorators = [
-        { type: Pipe, args: [{ name: 'number' },] },
-    ];
-    /** @nocollapse */
-    DecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
-    return DecimalPipe;
-}());
+    }
+}
+DecimalPipe.decorators = [
+    { type: Pipe, args: [{ name: 'number' },] },
+];
+/** @nocollapse */
+DecimalPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
 function DecimalPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     DecimalPipe.decorators;
@@ -145,11 +141,11 @@ function DecimalPipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var PercentPipe = (function () {
+export class PercentPipe {
     /**
      * @param {?} _locale
      */
-    function PercentPipe(_locale) {
+    constructor(_locale) {
         this._locale = _locale;
     }
     /**
@@ -157,19 +153,17 @@ export var PercentPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    PercentPipe.prototype.transform = function (value, digits) {
-        if (digits === void 0) { digits = null; }
+    transform(value, digits = null) {
         return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
-    };
-    PercentPipe.decorators = [
-        { type: Pipe, args: [{ name: 'percent' },] },
-    ];
-    /** @nocollapse */
-    PercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
-    return PercentPipe;
-}());
+    }
+}
+PercentPipe.decorators = [
+    { type: Pipe, args: [{ name: 'percent' },] },
+];
+/** @nocollapse */
+PercentPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
 function PercentPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     PercentPipe.decorators;
@@ -205,11 +199,11 @@ function PercentPipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var CurrencyPipe = (function () {
+export class CurrencyPipe {
     /**
      * @param {?} _locale
      */
-    function CurrencyPipe(_locale) {
+    constructor(_locale) {
         this._locale = _locale;
     }
     /**
@@ -219,21 +213,17 @@ export var CurrencyPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
-        if (currencyCode === void 0) { currencyCode = 'USD'; }
-        if (symbolDisplay === void 0) { symbolDisplay = false; }
-        if (digits === void 0) { digits = null; }
+    transform(value, currencyCode = 'USD', symbolDisplay = false, digits = null) {
         return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-    };
-    CurrencyPipe.decorators = [
-        { type: Pipe, args: [{ name: 'currency' },] },
-    ];
-    /** @nocollapse */
-    CurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
-    return CurrencyPipe;
-}());
+    }
+}
+CurrencyPipe.decorators = [
+    { type: Pipe, args: [{ name: 'currency' },] },
+];
+/** @nocollapse */
+CurrencyPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
 function CurrencyPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     CurrencyPipe.decorators;

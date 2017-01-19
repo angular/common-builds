@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angular/core';
+import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angular/core/index';
 /**
  * \@ngModule CommonModule
  *
@@ -28,76 +28,70 @@ import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angula
  *
  * \@stable
  */
-export var NgStyle = (function () {
+export class NgStyle {
     /**
      * @param {?} _differs
      * @param {?} _ngEl
      * @param {?} _renderer
      */
-    function NgStyle(_differs, _ngEl, _renderer) {
+    constructor(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
         this._renderer = _renderer;
     }
-    Object.defineProperty(NgStyle.prototype, "ngStyle", {
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-        set: function (v) {
-            this._ngStyle = v;
-            if (!this._differ && v) {
-                this._differ = this._differs.find(v).create(null);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    set ngStyle(v) {
+        this._ngStyle = v;
+        if (!this._differ && v) {
+            this._differ = this._differs.find(v).create(null);
+        }
+    }
     /**
      * @return {?}
      */
-    NgStyle.prototype.ngDoCheck = function () {
+    ngDoCheck() {
         if (this._differ) {
-            var /** @type {?} */ changes = this._differ.diff(this._ngStyle);
+            const /** @type {?} */ changes = this._differ.diff(this._ngStyle);
             if (changes) {
                 this._applyChanges(changes);
             }
         }
-    };
+    }
     /**
      * @param {?} changes
      * @return {?}
      */
-    NgStyle.prototype._applyChanges = function (changes) {
-        var _this = this;
-        changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
-        changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-        changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-    };
+    _applyChanges(changes) {
+        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
+        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+    }
     /**
      * @param {?} nameAndUnit
      * @param {?} value
      * @return {?}
      */
-    NgStyle.prototype._setStyle = function (nameAndUnit, value) {
-        var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
-        value = value != null && unit ? "" + value + unit : value;
+    _setStyle(nameAndUnit, value) {
+        const [name, unit] = nameAndUnit.split('.');
+        value = value != null && unit ? `${value}${unit}` : value;
         this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
-    };
-    NgStyle.decorators = [
-        { type: Directive, args: [{ selector: '[ngStyle]' },] },
-    ];
-    /** @nocollapse */
-    NgStyle.ctorParameters = function () { return [
-        { type: KeyValueDiffers, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    NgStyle.propDecorators = {
-        'ngStyle': [{ type: Input },],
-    };
-    return NgStyle;
-}());
+    }
+}
+NgStyle.decorators = [
+    { type: Directive, args: [{ selector: '[ngStyle]' },] },
+];
+/** @nocollapse */
+NgStyle.ctorParameters = () => [
+    { type: KeyValueDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+];
+NgStyle.propDecorators = {
+    'ngStyle': [{ type: Input },],
+};
 function NgStyle_tsickle_Closure_declarations() {
     /** @type {?} */
     NgStyle.decorators;

@@ -5,13 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-export var SwitchView = (function () {
+import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core/index';
+export class SwitchView {
     /**
      * @param {?} _viewContainerRef
      * @param {?} _templateRef
      */
-    function SwitchView(_viewContainerRef, _templateRef) {
+    constructor(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
         this._created = false;
@@ -19,31 +19,30 @@ export var SwitchView = (function () {
     /**
      * @return {?}
      */
-    SwitchView.prototype.create = function () {
+    create() {
         this._created = true;
         this._viewContainerRef.createEmbeddedView(this._templateRef);
-    };
+    }
     /**
      * @return {?}
      */
-    SwitchView.prototype.destroy = function () {
+    destroy() {
         this._created = false;
         this._viewContainerRef.clear();
-    };
+    }
     /**
      * @param {?} created
      * @return {?}
      */
-    SwitchView.prototype.enforceState = function (created) {
+    enforceState(created) {
         if (created && !this._created) {
             this.create();
         }
         else if (!created && this._created) {
             this.destroy();
         }
-    };
-    return SwitchView;
-}());
+    }
+}
 function SwitchView_tsickle_Closure_declarations() {
     /** @type {?} */
     SwitchView.prototype._created;
@@ -93,50 +92,46 @@ function SwitchView_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitch = (function () {
-    function NgSwitch() {
+export class NgSwitch {
+    constructor() {
         this._defaultUsed = false;
         this._caseCount = 0;
         this._lastCaseCheckIndex = 0;
         this._lastCasesMatched = false;
     }
-    Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
-        /**
-         * @param {?} newValue
-         * @return {?}
-         */
-        set: function (newValue) {
-            this._ngSwitch = newValue;
-            if (this._caseCount === 0) {
-                this._updateDefaultCases(true);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * @param {?} newValue
+     * @return {?}
+     */
+    set ngSwitch(newValue) {
+        this._ngSwitch = newValue;
+        if (this._caseCount === 0) {
+            this._updateDefaultCases(true);
+        }
+    }
     /**
      * \@internal
      * @return {?}
      */
-    NgSwitch.prototype._addCase = function () { return this._caseCount++; };
+    _addCase() { return this._caseCount++; }
     /**
      * \@internal
      * @param {?} view
      * @return {?}
      */
-    NgSwitch.prototype._addDefault = function (view) {
+    _addDefault(view) {
         if (!this._defaultViews) {
             this._defaultViews = [];
         }
         this._defaultViews.push(view);
-    };
+    }
     /**
      * \@internal
      * @param {?} value
      * @return {?}
      */
-    NgSwitch.prototype._matchCase = function (value) {
-        var /** @type {?} */ matched = value == this._ngSwitch;
+    _matchCase(value) {
+        const /** @type {?} */ matched = value == this._ngSwitch;
         this._lastCasesMatched = this._lastCasesMatched || matched;
         this._lastCaseCheckIndex++;
         if (this._lastCaseCheckIndex === this._caseCount) {
@@ -145,30 +140,29 @@ export var NgSwitch = (function () {
             this._lastCasesMatched = false;
         }
         return matched;
-    };
+    }
     /**
      * @param {?} useDefault
      * @return {?}
      */
-    NgSwitch.prototype._updateDefaultCases = function (useDefault) {
+    _updateDefaultCases(useDefault) {
         if (this._defaultViews && useDefault !== this._defaultUsed) {
             this._defaultUsed = useDefault;
-            for (var /** @type {?} */ i = 0; i < this._defaultViews.length; i++) {
-                var /** @type {?} */ defaultView = this._defaultViews[i];
+            for (let /** @type {?} */ i = 0; i < this._defaultViews.length; i++) {
+                const /** @type {?} */ defaultView = this._defaultViews[i];
                 defaultView.enforceState(useDefault);
             }
         }
-    };
-    NgSwitch.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitch]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitch.ctorParameters = function () { return []; };
-    NgSwitch.propDecorators = {
-        'ngSwitch': [{ type: Input },],
-    };
-    return NgSwitch;
-}());
+    }
+}
+NgSwitch.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitch]' },] },
+];
+/** @nocollapse */
+NgSwitch.ctorParameters = () => [];
+NgSwitch.propDecorators = {
+    'ngSwitch': [{ type: Input },],
+};
 function NgSwitch_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitch.decorators;
@@ -216,13 +210,13 @@ function NgSwitch_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitchCase = (function () {
+export class NgSwitchCase {
     /**
      * @param {?} viewContainer
      * @param {?} templateRef
      * @param {?} ngSwitch
      */
-    function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
+    constructor(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
         this._view = new SwitchView(viewContainer, templateRef);
@@ -230,21 +224,20 @@ export var NgSwitchCase = (function () {
     /**
      * @return {?}
      */
-    NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-    NgSwitchCase.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchCase.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: Host },] },
-    ]; };
-    NgSwitchCase.propDecorators = {
-        'ngSwitchCase': [{ type: Input },],
-    };
-    return NgSwitchCase;
-}());
+    ngDoCheck() { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); }
+}
+NgSwitchCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
+];
+/** @nocollapse */
+NgSwitchCase.ctorParameters = () => [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+];
+NgSwitchCase.propDecorators = {
+    'ngSwitchCase': [{ type: Input },],
+};
 function NgSwitchCase_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitchCase.decorators;
@@ -285,26 +278,25 @@ function NgSwitchCase_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitchDefault = (function () {
+export class NgSwitchDefault {
     /**
      * @param {?} viewContainer
      * @param {?} templateRef
      * @param {?} ngSwitch
      */
-    function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
+    constructor(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
-    NgSwitchDefault.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchDefault.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: Host },] },
-    ]; };
-    return NgSwitchDefault;
-}());
+}
+NgSwitchDefault.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+];
+/** @nocollapse */
+NgSwitchDefault.ctorParameters = () => [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+];
 function NgSwitchDefault_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitchDefault.decorators;

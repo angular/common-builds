@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Inject, LOCALE_ID, Pipe } from '@angular/core';
+import { Inject, LOCALE_ID, Pipe } from '@angular/core/index';
 import { NumberWrapper, isDate } from '../facade/lang';
 import { DateFormatter } from './intl';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
@@ -78,11 +78,11 @@ import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * \@stable
  */
-export var DatePipe = (function () {
+export class DatePipe {
     /**
      * @param {?} _locale
      */
-    function DatePipe(_locale) {
+    constructor(_locale) {
         this._locale = _locale;
     }
     /**
@@ -90,9 +90,8 @@ export var DatePipe = (function () {
      * @param {?=} pattern
      * @return {?}
      */
-    DatePipe.prototype.transform = function (value, pattern) {
-        if (pattern === void 0) { pattern = 'mediumDate'; }
-        var /** @type {?} */ date;
+    transform(value, pattern = 'mediumDate') {
+        let /** @type {?} */ date;
         if (isBlank(value))
             return null;
         if (typeof value === 'string') {
@@ -114,7 +113,7 @@ export var DatePipe = (function () {
             * is applied
             * Note: ISO months are 0 for January, 1 for February, ...
             */
-            var _a = value.split('-').map(function (val) { return parseInt(val, 10); }), y = _a[0], m = _a[1], d = _a[2];
+            const [y, m, d] = value.split('-').map((val) => parseInt(val, 10));
             date = new Date(y, m - 1, d);
         }
         else {
@@ -124,27 +123,26 @@ export var DatePipe = (function () {
             throw new InvalidPipeArgumentError(DatePipe, value);
         }
         return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
-    };
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
-    };
-    DatePipe.decorators = [
-        { type: Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    /** @nocollapse */
-    DatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
-    return DatePipe;
-}());
+    }
+}
+/** @internal */
+DatePipe._ALIASES = {
+    'medium': 'yMMMdjms',
+    'short': 'yMdjm',
+    'fullDate': 'yMMMMEEEEd',
+    'longDate': 'yMMMMd',
+    'mediumDate': 'yMMMd',
+    'shortDate': 'yMd',
+    'mediumTime': 'jms',
+    'shortTime': 'jm'
+};
+DatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DatePipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
 function DatePipe_tsickle_Closure_declarations() {
     /**
      * \@internal

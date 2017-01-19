@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ComponentFactoryResolver, Directive, Input, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryResolver, Directive, Input, ViewContainerRef } from '@angular/core/index';
 /**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
@@ -53,12 +53,12 @@ import { ComponentFactoryResolver, Directive, Input, ViewContainerRef } from '@a
  *
  * \@experimental
  */
-export var NgComponentOutlet = (function () {
+export class NgComponentOutlet {
     /**
      * @param {?} _cmpFactoryResolver
      * @param {?} _viewContainerRef
      */
-    function NgComponentOutlet(_cmpFactoryResolver, _viewContainerRef) {
+    constructor(_cmpFactoryResolver, _viewContainerRef) {
         this._cmpFactoryResolver = _cmpFactoryResolver;
         this._viewContainerRef = _viewContainerRef;
     }
@@ -66,32 +66,31 @@ export var NgComponentOutlet = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgComponentOutlet.prototype.ngOnChanges = function (changes) {
+    ngOnChanges(changes) {
         if (this.componentRef) {
             this._viewContainerRef.remove(this._viewContainerRef.indexOf(this.componentRef.hostView));
         }
         this._viewContainerRef.clear();
         this.componentRef = null;
         if (this.ngComponentOutlet) {
-            var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            let /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
             this.componentRef = this._viewContainerRef.createComponent(this._cmpFactoryResolver.resolveComponentFactory(this.ngComponentOutlet), this._viewContainerRef.length, injector, this.ngComponentOutletContent);
         }
-    };
-    NgComponentOutlet.decorators = [
-        { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgComponentOutlet.ctorParameters = function () { return [
-        { type: ComponentFactoryResolver, },
-        { type: ViewContainerRef, },
-    ]; };
-    NgComponentOutlet.propDecorators = {
-        'ngComponentOutlet': [{ type: Input },],
-        'ngComponentOutletInjector': [{ type: Input },],
-        'ngComponentOutletContent': [{ type: Input },],
-    };
-    return NgComponentOutlet;
-}());
+    }
+}
+NgComponentOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+];
+/** @nocollapse */
+NgComponentOutlet.ctorParameters = () => [
+    { type: ComponentFactoryResolver, },
+    { type: ViewContainerRef, },
+];
+NgComponentOutlet.propDecorators = {
+    'ngComponentOutlet': [{ type: Input },],
+    'ngComponentOutletInjector': [{ type: Input },],
+    'ngComponentOutletContent': [{ type: Input },],
+};
 function NgComponentOutlet_tsickle_Closure_declarations() {
     /** @type {?} */
     NgComponentOutlet.decorators;
