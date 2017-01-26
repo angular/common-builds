@@ -1510,16 +1510,17 @@
      *
      * You can control the component creation process by using the following optional attributes:
      *
-     * * `ngOutletInjector`: Optional custom {\@link Injector} that will be used as parent for the
-     * Component.
-     * Defaults to the injector of the current view container.
+     * * `ngComponentOutletInjector`: Optional custom {\@link Injector} that will be used as parent for
+     * the Component. Defaults to the injector of the current view container.
      *
-     * * `ngOutletProviders`: Optional injectable objects ({\@link Provider}) that are visible to the
-     * component.
+     * * `ngComponentOutletProviders`: Optional injectable objects ({\@link Provider}) that are visible
+     * to the component.
      *
-     * * `ngOutletContent`: Optional list of projectable nodes to insert into the content
-     * section of the component, if exists. ({\@link NgContent}).
+     * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
+     * section of the component, if exists.
      *
+     * * `ngComponentOutletNgModuleFactory`: Optional module factory to allow dynamically loading other
+     * module, then load a component from that module.
      *
      * ### Syntax
      *
@@ -1528,14 +1529,20 @@
      * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
      * ```
      *
-     * Customized
+     * Customized injector/content
      * ```
      * <ng-container *ngComponentOutlet="componentTypeExpression;
      *                                   injector: injectorExpression;
-     *                                   content: contentNodesExpression">
+     *                                   content: contentNodesExpression;">
      * </ng-container>
      * ```
      *
+     * Customized ngModuleFactory
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression;
+     *                                   ngModuleFactory: moduleFactory;">
+     * </ng-container>
+     * ```
      * # Example
      *
      * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
@@ -1543,45 +1550,69 @@
      * A more complete example with additional options:
      *
      * {\@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
+     * A more complete example with ngModuleFactory:
+     *
+     * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
      *
      * \@experimental
      */
     var NgComponentOutlet = (function () {
         /**
-         * @param {?} _cmpFactoryResolver
          * @param {?} _viewContainerRef
          */
-        function NgComponentOutlet(_cmpFactoryResolver, _viewContainerRef) {
-            this._cmpFactoryResolver = _cmpFactoryResolver;
+        function NgComponentOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
+            this._componentRef = null;
+            this._moduleRef = null;
         }
         /**
          * @param {?} changes
          * @return {?}
          */
         NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-            if (this.componentRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this.componentRef.hostView));
+            if (this._componentRef) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
             }
             this._viewContainerRef.clear();
-            this.componentRef = null;
+            this._componentRef = null;
             if (this.ngComponentOutlet) {
                 var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-                this.componentRef = this._viewContainerRef.createComponent(this._cmpFactoryResolver.resolveComponentFactory(this.ngComponentOutlet), this._viewContainerRef.length, injector, this.ngComponentOutletContent);
+                if (((changes)).ngComponentOutletNgModuleFactory) {
+                    if (this._moduleRef)
+                        this._moduleRef.destroy();
+                    if (this.ngComponentOutletNgModuleFactory) {
+                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
+                    }
+                    else {
+                        this._moduleRef = null;
+                    }
+                }
+                if (this._moduleRef) {
+                    injector = this._moduleRef.injector;
+                }
+                var /** @type {?} */ componentFactory = injector.get(_angular_core.ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
+                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
             }
+        };
+        /**
+         * @return {?}
+         */
+        NgComponentOutlet.prototype.ngOnDestroy = function () {
+            if (this._moduleRef)
+                this._moduleRef.destroy();
         };
         NgComponentOutlet.decorators = [
             { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
         ];
         /** @nocollapse */
         NgComponentOutlet.ctorParameters = function () { return [
-            { type: _angular_core.ComponentFactoryResolver, },
             { type: _angular_core.ViewContainerRef, },
         ]; };
         NgComponentOutlet.propDecorators = {
             'ngComponentOutlet': [{ type: _angular_core.Input },],
             'ngComponentOutletInjector': [{ type: _angular_core.Input },],
             'ngComponentOutletContent': [{ type: _angular_core.Input },],
+            'ngComponentOutletNgModuleFactory': [{ type: _angular_core.Input },],
         };
         return NgComponentOutlet;
     }());
