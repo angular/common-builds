@@ -3351,7 +3351,7 @@
         DatePipe.prototype.transform = function (value, pattern) {
             if (pattern === void 0) { pattern = 'mediumDate'; }
             var /** @type {?} */ date;
-            if (isBlank$1(value))
+            if (isBlank$1(value) || value !== value)
                 return null;
             if (typeof value === 'string') {
                 value = value.trim();

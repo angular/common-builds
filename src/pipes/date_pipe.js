@@ -92,7 +92,7 @@ export class DatePipe {
      */
     transform(value, pattern = 'mediumDate') {
         let /** @type {?} */ date;
-        if (isBlank(value))
+        if (isBlank(value) || value !== value)
             return null;
         if (typeof value === 'string') {
             value = value.trim();
