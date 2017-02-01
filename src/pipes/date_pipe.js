@@ -6,9 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Inject, LOCALE_ID, Pipe } from '@angular/core/index';
-import { NumberWrapper, isDate } from '../facade/lang';
+import { NumberWrapper } from '../facade/lang';
 import { DateFormatter } from './intl';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+const /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a date according to locale rules.
@@ -120,7 +121,13 @@ export class DatePipe {
             date = new Date(value);
         }
         if (!isDate(date)) {
-            throw new InvalidPipeArgumentError(DatePipe, value);
+            let /** @type {?} */ match;
+            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                date = isoStringToDate(match);
+            }
+            else {
+                throw new InvalidPipeArgumentError(DatePipe, value);
+            }
         }
         return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
     }
@@ -165,5 +172,41 @@ function DatePipe_tsickle_Closure_declarations() {
  */
 function isBlank(obj) {
     return obj == null || obj === '';
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isDate(obj) {
+    return obj instanceof Date && !isNaN(obj.valueOf());
+}
+/**
+ * @param {?} match
+ * @return {?}
+ */
+function isoStringToDate(match) {
+    const /** @type {?} */ date = new Date(0);
+    let /** @type {?} */ tzHour = 0;
+    let /** @type {?} */ tzMin = 0;
+    const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+    const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    if (match[9]) {
+        tzHour = toInt(match[9] + match[10]);
+        tzMin = toInt(match[9] + match[11]);
+    }
+    dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
+    const /** @type {?} */ h = toInt(match[4] || '0') - tzHour;
+    const /** @type {?} */ m = toInt(match[5] || '0') - tzMin;
+    const /** @type {?} */ s = toInt(match[6] || '0');
+    const /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    timeSetter.call(date, h, m, s, ms);
+    return date;
+}
+/**
+ * @param {?} str
+ * @return {?}
+ */
+function toInt(str) {
+    return parseInt(str, 10);
 }
 //# sourceMappingURL=date_pipe.js.map
