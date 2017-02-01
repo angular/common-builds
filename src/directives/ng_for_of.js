@@ -5,20 +5,25 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, isDevMode } from '@angular/core';
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, forwardRef, isDevMode } from '@angular/core';
 import { getTypeNameForDebugging } from '../facade/lang';
-export var NgForRow = (function () {
+export var NgForOfRow = (function () {
     /**
      * @param {?} $implicit
      * @param {?} index
      * @param {?} count
      */
-    function NgForRow($implicit, index, count) {
+    function NgForOfRow($implicit, index, count) {
         this.$implicit = $implicit;
         this.index = index;
         this.count = count;
     }
-    Object.defineProperty(NgForRow.prototype, "first", {
+    Object.defineProperty(NgForOfRow.prototype, "first", {
         /**
          * @return {?}
          */
@@ -26,7 +31,7 @@ export var NgForRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForRow.prototype, "last", {
+    Object.defineProperty(NgForOfRow.prototype, "last", {
         /**
          * @return {?}
          */
@@ -34,7 +39,7 @@ export var NgForRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForRow.prototype, "even", {
+    Object.defineProperty(NgForOfRow.prototype, "even", {
         /**
          * @return {?}
          */
@@ -42,7 +47,7 @@ export var NgForRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForRow.prototype, "odd", {
+    Object.defineProperty(NgForOfRow.prototype, "odd", {
         /**
          * @return {?}
          */
@@ -50,24 +55,24 @@ export var NgForRow = (function () {
         enumerable: true,
         configurable: true
     });
-    return NgForRow;
+    return NgForOfRow;
 }());
-function NgForRow_tsickle_Closure_declarations() {
+function NgForOfRow_tsickle_Closure_declarations() {
     /** @type {?} */
-    NgForRow.prototype.$implicit;
+    NgForOfRow.prototype.$implicit;
     /** @type {?} */
-    NgForRow.prototype.index;
+    NgForOfRow.prototype.index;
     /** @type {?} */
-    NgForRow.prototype.count;
+    NgForOfRow.prototype.count;
 }
 /**
- * The `NgFor` directive instantiates a template once per item from an iterable. The context for
- * each instantiated template inherits from the outer context with the given loop variable set
- * to the current item from the iterable.
+ * The `NgForOf` directive instantiates a template once per item from an iterable. The context
+ * for each instantiated template inherits from the outer context with the given loop variable
+ * set to the current item from the iterable.
  *
  * ### Local Variables
  *
- * `NgFor` provides several exported values that can be aliased to local variables:
+ * `NgForOf` provides several exported values that can be aliased to local variables:
  *
  * * `index` will be set to the current loop iteration for each template context.
  * * `first` will be set to a boolean value indicating whether the item is the first one in the
@@ -79,7 +84,7 @@ function NgForRow_tsickle_Closure_declarations() {
  *
  * ### Change Propagation
  *
- * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
+ * When the contents of the iterator changes, `NgForOf` makes the corresponding changes to the DOM:
  *
  * * When an item is added, a new instance of the template is added to the DOM.
  * * When an item is removed, its template instance is removed from the DOM.
@@ -88,10 +93,9 @@ function NgForRow_tsickle_Closure_declarations() {
  *
  * Angular uses object identity to track insertions and deletions within the iterator and reproduce
  * those changes in the DOM. This has important implications for animations and any stateful
- * controls
- * (such as `<input>` elements which accept user input) that are present. Inserted rows can be
- * animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state such
- * as user input.
+ * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
+ * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
+ * such as user input.
  *
  * It is possible for the identities of elements in the iterator to change while the data does not.
  * This can happen, for example, if the iterator produced from an RPC to the server, and that
@@ -100,7 +104,7 @@ function NgForRow_tsickle_Closure_declarations() {
  * elements were deleted and all new elements inserted). This is an expensive operation and should
  * be avoided if possible.
  *
- * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
+ * To customize the default tracking algorithm, `NgForOf` supports `trackBy` option.
  * `trackBy` takes a function which has two arguments: `index` and `item`.
  * If `trackBy` is given, Angular tracks changes by the return value of the function.
  *
@@ -124,21 +128,21 @@ function NgForRow_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgFor = (function () {
+export var NgForOf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} _template
      * @param {?} _differs
      * @param {?} _cdr
      */
-    function NgFor(_viewContainer, _template, _differs, _cdr) {
+    function NgForOf(_viewContainer, _template, _differs, _cdr) {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
         this._cdr = _cdr;
         this._differ = null;
     }
-    Object.defineProperty(NgFor.prototype, "ngForTrackBy", {
+    Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
         /**
          * @return {?}
          */
@@ -160,12 +164,15 @@ export var NgFor = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgFor.prototype, "ngForTemplate", {
+    Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
         /**
          * @param {?} value
          * @return {?}
          */
         set: function (value) {
+            // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
+            // The current type is too restrictive; a template that just uses index, for example,
+            // should be acceptable.
             if (value) {
                 this._template = value;
             }
@@ -177,7 +184,7 @@ export var NgFor = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgFor.prototype.ngOnChanges = function (changes) {
+    NgForOf.prototype.ngOnChanges = function (changes) {
         if ('ngForOf' in changes) {
             // React on ngForOf changes only once all inputs have been initialized
             var /** @type {?} */ value = changes['ngForOf'].currentValue;
@@ -194,7 +201,7 @@ export var NgFor = (function () {
     /**
      * @return {?}
      */
-    NgFor.prototype.ngDoCheck = function () {
+    NgForOf.prototype.ngDoCheck = function () {
         if (this._differ) {
             var /** @type {?} */ changes = this._differ.diff(this.ngForOf);
             if (changes)
@@ -205,12 +212,12 @@ export var NgFor = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgFor.prototype._applyChanges = function (changes) {
+    NgForOf.prototype._applyChanges = function (changes) {
         var _this = this;
         var /** @type {?} */ insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForRow(null, null, null), currentIndex);
+                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfRow(null, null, null), currentIndex);
                 var /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -242,50 +249,53 @@ export var NgFor = (function () {
      * @param {?} record
      * @return {?}
      */
-    NgFor.prototype._perViewChange = function (view, record) {
+    NgForOf.prototype._perViewChange = function (view, record) {
         view.context.$implicit = record.item;
     };
-    NgFor.decorators = [
-        { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
+    NgForOf.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ngFor][ngForOf]',
+                    providers: [{ provide: forwardRef(function () { return NgFor; }), useExisting: forwardRef(function () { return NgForOf; }) }]
+                },] },
     ];
     /** @nocollapse */
-    NgFor.ctorParameters = function () { return [
+    NgForOf.ctorParameters = function () { return [
         { type: ViewContainerRef, },
         { type: TemplateRef, },
         { type: IterableDiffers, },
         { type: ChangeDetectorRef, },
     ]; };
-    NgFor.propDecorators = {
+    NgForOf.propDecorators = {
         'ngForOf': [{ type: Input },],
         'ngForTrackBy': [{ type: Input },],
         'ngForTemplate': [{ type: Input },],
     };
-    return NgFor;
+    return NgForOf;
 }());
-function NgFor_tsickle_Closure_declarations() {
+function NgForOf_tsickle_Closure_declarations() {
     /** @type {?} */
-    NgFor.decorators;
+    NgForOf.decorators;
     /**
      * @nocollapse
      * @type {?}
      */
-    NgFor.ctorParameters;
+    NgForOf.ctorParameters;
     /** @type {?} */
-    NgFor.propDecorators;
+    NgForOf.propDecorators;
     /** @type {?} */
-    NgFor.prototype.ngForOf;
+    NgForOf.prototype.ngForOf;
     /** @type {?} */
-    NgFor.prototype._differ;
+    NgForOf.prototype._differ;
     /** @type {?} */
-    NgFor.prototype._trackByFn;
+    NgForOf.prototype._trackByFn;
     /** @type {?} */
-    NgFor.prototype._viewContainer;
+    NgForOf.prototype._viewContainer;
     /** @type {?} */
-    NgFor.prototype._template;
+    NgForOf.prototype._template;
     /** @type {?} */
-    NgFor.prototype._differs;
+    NgForOf.prototype._differs;
     /** @type {?} */
-    NgFor.prototype._cdr;
+    NgForOf.prototype._cdr;
 }
 var RecordViewTuple = (function () {
     /**
@@ -304,4 +314,74 @@ function RecordViewTuple_tsickle_Closure_declarations() {
     /** @type {?} */
     RecordViewTuple.prototype.view;
 }
-//# sourceMappingURL=ng_for.js.map
+/**
+ * The `NgFor` directive instantiates a template once per item from an iterable. The context
+ * for each instantiated template inherits from the outer context with the given loop variable
+ * set to the current item from the iterable.
+ *
+ * ### Local Variables
+ *
+ * `NgFor` provides several exported values that can be aliased to local variables:
+ *
+ * * `index` will be set to the current loop iteration for each template context.
+ * * `first` will be set to a boolean value indicating whether the item is the first one in the
+ *   iteration.
+ * * `last` will be set to a boolean value indicating whether the item is the last one in the
+ *   iteration.
+ * * `even` will be set to a boolean value indicating whether this item has an even index.
+ * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+ *
+ * ### Change Propagation
+ *
+ * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
+ *
+ * * When an item is added, a new instance of the template is added to the DOM.
+ * * When an item is removed, its template instance is removed from the DOM.
+ * * When items are reordered, their respective templates are reordered in the DOM.
+ * * Otherwise, the DOM element for that item will remain the same.
+ *
+ * Angular uses object identity to track insertions and deletions within the iterator and reproduce
+ * those changes in the DOM. This has important implications for animations and any stateful
+ * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
+ * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
+ * such as user input.
+ *
+ * It is possible for the identities of elements in the iterator to change while the data does not.
+ * This can happen, for example, if the iterator produced from an RPC to the server, and that
+ * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
+ * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
+ * elements were deleted and all new elements inserted). This is an expensive operation and should
+ * be avoided if possible.
+ *
+ * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
+ * `trackBy` takes a function which has two arguments: `index` and `item`.
+ * If `trackBy` is given, Angular tracks changes by the return value of the function.
+ *
+ * ### Syntax
+ *
+ * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
+ * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
+ *
+ * With `<template>` element:
+ *
+ * ```
+ * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+ *   <li>...</li>
+ * </template>
+ * ```
+ *
+ * ### Example
+ *
+ * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
+ * example.
+ *
+ * @deprecated v4.0.0 - Use `NgForOf<T>` instead.
+ */
+export var NgFor = (function (_super) {
+    __extends(NgFor, _super);
+    function NgFor() {
+        _super.apply(this, arguments);
+    }
+    return NgFor;
+}(NgForOf));
+//# sourceMappingURL=ng_for_of.js.map
