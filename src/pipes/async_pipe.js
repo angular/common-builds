@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core/index';
-import { isPromise } from '../private_import_core';
+import { isObservable, isPromise } from '../private_import_core';
 import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
 class ObservableStrategy {
     /**
@@ -134,7 +134,7 @@ export class AsyncPipe {
         if (isPromise(obj)) {
             return _promiseStrategy;
         }
-        if (((obj)).subscribe) {
+        if (isObservable(obj)) {
             return _observableStrategy;
         }
         throw new InvalidPipeArgumentError(AsyncPipe, obj);
