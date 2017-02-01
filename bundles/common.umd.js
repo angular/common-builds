@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.5-2205829
+ * @license Angular v4.0.0-beta.5-8270bec
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2635,6 +2635,7 @@
     ];
 
     var /** @type {?} */ isPromise = _angular_core.__core_private__.isPromise;
+    var /** @type {?} */ isObservable = _angular_core.__core_private__.isObservable;
 
     var __extends$4 = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2882,7 +2883,7 @@
             if (isPromise(obj)) {
                 return _promiseStrategy;
             }
-            if (((obj)).subscribe) {
+            if (isObservable(obj)) {
                 return _observableStrategy;
             }
             throw new InvalidPipeArgumentError(AsyncPipe, obj);
@@ -3857,7 +3858,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.5-2205829');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.5-8270bec');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
