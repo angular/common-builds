@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.4.5-8d4aa82
+ * @license Angular v2.4.5-7ed39eb
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3018,7 +3018,7 @@
         DatePipe.prototype.transform = function (value, pattern) {
             if (pattern === void 0) { pattern = 'mediumDate'; }
             var /** @type {?} */ date;
-            if (isBlank$1(value) || value !== value)
+            if (isBlank$1(value))
                 return null;
             if (typeof value === 'string') {
                 value = value.trim();
@@ -3597,7 +3597,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.5-8d4aa82');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.5-7ed39eb');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
