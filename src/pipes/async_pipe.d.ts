@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
 import { EventEmitter, Observable } from '../facade/async';
 /**
  * @ngModule CommonModule
@@ -32,7 +32,7 @@ import { EventEmitter, Observable } from '../facade/async';
  *
  * @stable
  */
-export declare class AsyncPipe implements OnDestroy {
+export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _ref;
     private _latestValue;
     private _latestReturnedValue;

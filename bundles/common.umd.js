@@ -1,6 +1,6 @@
 /**
- * @license Angular v2.4.5-7ed39eb
- * (c) 2010-2016 Google, Inc. https://angular.io/
+ * @license Angular v2.4.6-343ee8a
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
@@ -257,13 +257,6 @@
      */
     function isBlank(obj) {
         return obj == null;
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isDate(obj) {
-        return obj instanceof Date && !isNaN(obj.valueOf());
     }
     /**
      * @param {?} token
@@ -2398,6 +2391,7 @@
     ];
 
     var /** @type {?} */ isPromise = _angular_core.__core_private__.isPromise;
+    var /** @type {?} */ isObservable = _angular_core.__core_private__.isObservable;
 
     var __extends$4 = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2645,7 +2639,7 @@
             if (isPromise(obj)) {
                 return _promiseStrategy;
             }
-            if (((obj)).subscribe) {
+            if (isObservable(obj)) {
                 return _observableStrategy;
             }
             throw new InvalidPipeArgumentError(AsyncPipe, obj);
@@ -2934,6 +2928,7 @@
         return DateFormatter;
     }());
 
+    var /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
     /**
      * \@ngModule CommonModule
      * \@whatItDoes Formats a date according to locale rules.
@@ -3018,7 +3013,7 @@
         DatePipe.prototype.transform = function (value, pattern) {
             if (pattern === void 0) { pattern = 'mediumDate'; }
             var /** @type {?} */ date;
-            if (isBlank$1(value))
+            if (isBlank$1(value) || value !== value)
                 return null;
             if (typeof value === 'string') {
                 value = value.trim();
@@ -3046,7 +3041,13 @@
                 date = new Date(value);
             }
             if (!isDate(date)) {
-                throw new InvalidPipeArgumentError(DatePipe, value);
+                var /** @type {?} */ match = void 0;
+                if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                    date = isoStringToDate(match);
+                }
+                else {
+                    throw new InvalidPipeArgumentError(DatePipe, value);
+                }
             }
             return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
         };
@@ -3076,6 +3077,42 @@
      */
     function isBlank$1(obj) {
         return obj == null || obj === '';
+    }
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function isDate(obj) {
+        return obj instanceof Date && !isNaN(obj.valueOf());
+    }
+    /**
+     * @param {?} match
+     * @return {?}
+     */
+    function isoStringToDate(match) {
+        var /** @type {?} */ date = new Date(0);
+        var /** @type {?} */ tzHour = 0;
+        var /** @type {?} */ tzMin = 0;
+        var /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+        var /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+        if (match[9]) {
+            tzHour = toInt(match[9] + match[10]);
+            tzMin = toInt(match[9] + match[11]);
+        }
+        dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
+        var /** @type {?} */ h = toInt(match[4] || '0') - tzHour;
+        var /** @type {?} */ m = toInt(match[5] || '0') - tzMin;
+        var /** @type {?} */ s = toInt(match[6] || '0');
+        var /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+        timeSetter.call(date, h, m, s, ms);
+        return date;
+    }
+    /**
+     * @param {?} str
+     * @return {?}
+     */
+    function toInt(str) {
+        return parseInt(str, 10);
     }
 
     var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
@@ -3597,7 +3634,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.5-7ed39eb');
+    var /** @type {?} */ VERSION = new _angular_core.Version('2.4.6-343ee8a');
 
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
