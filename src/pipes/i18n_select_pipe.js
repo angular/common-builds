@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Pipe } from '@angular/core';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Generic selector that displays the string that matches the current value.
@@ -36,7 +36,7 @@ export var I18nSelectPipe = (function () {
         if (value == null)
             return '';
         if (typeof mapping !== 'object' || typeof value !== 'string') {
-            throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
+            throw invalidPipeArgumentError(I18nSelectPipe, mapping);
         }
         if (mapping.hasOwnProperty(value)) {
             return mapping[value];

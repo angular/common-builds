@@ -8,7 +8,7 @@
 import { Inject, LOCALE_ID, Pipe } from '@angular/core';
 import { NumberWrapper } from '../facade/lang';
 import { DateFormatter } from './intl';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 var /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 /**
  * \@ngModule CommonModule
@@ -127,7 +127,7 @@ export var DatePipe = (function () {
                 date = isoStringToDate(match);
             }
             else {
-                throw new InvalidPipeArgumentError(DatePipe, value);
+                throw invalidPipeArgumentError(DatePipe, value);
             }
         }
         return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);

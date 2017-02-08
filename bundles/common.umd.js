@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.6-2e14130
+ * @license Angular v4.0.0-beta.6-c33fda2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2717,118 +2717,14 @@
     var /** @type {?} */ isPromise = _angular_core.__core_private__.isPromise;
     var /** @type {?} */ isObservable = _angular_core.__core_private__.isObservable;
 
-    var __extends$5 = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
     /**
-     * \@stable
+     * @param {?} type
+     * @param {?} value
+     * @return {?}
      */
-    var BaseError = (function (_super) {
-        __extends$5(BaseError, _super);
-        /**
-         * @param {?} message
-         */
-        function BaseError(message) {
-            _super.call(this, message);
-            // Errors don't use current this, instead they create a new instance.
-            // We have to do forward all of our api to the nativeInstance.
-            // TODO(bradfordcsmith): Remove this hack when
-            //     google/closure-compiler/issues/2102 is fixed.
-            var nativeError = new Error(message);
-            this._nativeError = nativeError;
-        }
-        Object.defineProperty(BaseError.prototype, "message", {
-            /**
-             * @return {?}
-             */
-            get: function () { return this._nativeError.message; },
-            /**
-             * @param {?} message
-             * @return {?}
-             */
-            set: function (message) { this._nativeError.message = message; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BaseError.prototype, "name", {
-            /**
-             * @return {?}
-             */
-            get: function () { return this._nativeError.name; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BaseError.prototype, "stack", {
-            /**
-             * @return {?}
-             */
-            get: function () { return ((this._nativeError)).stack; },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            set: function (value) { ((this._nativeError)).stack = value; },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        BaseError.prototype.toString = function () { return this._nativeError.toString(); };
-        return BaseError;
-    }(Error));
-    /**
-     * \@stable
-     */
-    var WrappedError = (function (_super) {
-        __extends$5(WrappedError, _super);
-        /**
-         * @param {?} message
-         * @param {?} error
-         */
-        function WrappedError(message, error) {
-            _super.call(this, message + " caused by: " + (error instanceof Error ? error.message : error));
-            this.originalError = error;
-        }
-        Object.defineProperty(WrappedError.prototype, "stack", {
-            /**
-             * @return {?}
-             */
-            get: function () {
-                return (((this.originalError instanceof Error ? this.originalError : this._nativeError)))
-                    .stack;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return WrappedError;
-    }(BaseError));
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var __extends$4 = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    var InvalidPipeArgumentError = (function (_super) {
-        __extends$4(InvalidPipeArgumentError, _super);
-        /**
-         * @param {?} type
-         * @param {?} value
-         */
-        function InvalidPipeArgumentError(type, value) {
-            _super.call(this, "Invalid argument '" + value + "' for pipe '" + stringify(type) + "'");
-        }
-        return InvalidPipeArgumentError;
-    }(BaseError));
+    function invalidPipeArgumentError(type, value) {
+        return Error("InvalidPipeArgument: '" + value + "' for pipe '" + stringify(type) + "'");
+    }
 
     var ObservableStrategy = (function () {
         function ObservableStrategy() {
@@ -2966,7 +2862,7 @@
             if (isObservable(obj)) {
                 return _observableStrategy;
             }
-            throw new InvalidPipeArgumentError(AsyncPipe, obj);
+            throw invalidPipeArgumentError(AsyncPipe, obj);
         };
         /**
          * @return {?}
@@ -3017,7 +2913,7 @@
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(LowerCasePipe, value);
+                throw invalidPipeArgumentError(LowerCasePipe, value);
             }
             return value.toLowerCase();
         };
@@ -3056,7 +2952,7 @@
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(TitleCasePipe, value);
+                throw invalidPipeArgumentError(TitleCasePipe, value);
             }
             return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
         };
@@ -3083,7 +2979,7 @@
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(UpperCasePipe, value);
+                throw invalidPipeArgumentError(UpperCasePipe, value);
             }
             return value.toUpperCase();
         };
@@ -3466,7 +3362,7 @@
                     date = isoStringToDate(match);
                 }
                 else {
-                    throw new InvalidPipeArgumentError(DatePipe, value);
+                    throw invalidPipeArgumentError(DatePipe, value);
                 }
             }
             return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
@@ -3569,7 +3465,7 @@
             if (value == null)
                 return '';
             if (typeof pluralMap !== 'object' || pluralMap === null) {
-                throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
+                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
             return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
@@ -3613,7 +3509,7 @@
             if (value == null)
                 return '';
             if (typeof mapping !== 'object' || typeof value !== 'string') {
-                throw new InvalidPipeArgumentError(I18nSelectPipe, mapping);
+                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
             }
             if (mapping.hasOwnProperty(value)) {
                 return mapping[value];
@@ -3679,7 +3575,7 @@
         // Convert strings to numbers
         value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
         if (typeof value !== 'number') {
-            throw new InvalidPipeArgumentError(pipe, value);
+            throw invalidPipeArgumentError(pipe, value);
         }
         var /** @type {?} */ minInt;
         var /** @type {?} */ minFraction;
@@ -3921,7 +3817,7 @@
             if (value == null)
                 return value;
             if (!this.supports(value)) {
-                throw new InvalidPipeArgumentError(SlicePipe, value);
+                throw invalidPipeArgumentError(SlicePipe, value);
             }
             return value.slice(start, end);
         };
@@ -3981,7 +3877,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.6-2e14130');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.6-c33fda2');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

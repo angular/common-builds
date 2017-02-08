@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Pipe } from '@angular/core';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
@@ -64,7 +64,7 @@ export var SlicePipe = (function () {
         if (value == null)
             return value;
         if (!this.supports(value)) {
-            throw new InvalidPipeArgumentError(SlicePipe, value);
+            throw invalidPipeArgumentError(SlicePipe, value);
         }
         return value.slice(start, end);
     };

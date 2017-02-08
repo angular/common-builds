@@ -1,3 +1,4 @@
+
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -6,7 +7,4 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Type } from '@angular/core';
-import { BaseError } from '../facade/errors';
-export declare class InvalidPipeArgumentError extends BaseError {
-    constructor(type: Type<any>, value: Object);
-}
+export declare function invalidPipeArgumentError(type: Type<any>, value: Object): Error;
