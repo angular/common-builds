@@ -499,15 +499,15 @@
          * @return {?}
          */
         Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
-        Location.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        Location.ctorParameters = function () { return [
-            { type: LocationStrategy, },
-        ]; };
         return Location;
     }());
+    Location.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    Location.ctorParameters = function () { return [
+        { type: LocationStrategy, },
+    ]; };
     /**
      * @param {?} baseHref
      * @param {?} url
@@ -560,12 +560,13 @@
          * @param {?=} _baseHref
          */
         function HashLocationStrategy(_platformLocation, _baseHref) {
-            _super.call(this);
-            this._platformLocation = _platformLocation;
-            this._baseHref = '';
+            var _this = _super.call(this) || this;
+            _this._platformLocation = _platformLocation;
+            _this._baseHref = '';
             if (isPresent(_baseHref)) {
-                this._baseHref = _baseHref;
+                _this._baseHref = _baseHref;
             }
+            return _this;
         }
         /**
          * @param {?} fn
@@ -636,16 +637,16 @@
          * @return {?}
          */
         HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        HashLocationStrategy.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        HashLocationStrategy.ctorParameters = function () { return [
-            { type: PlatformLocation, },
-            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
-        ]; };
         return HashLocationStrategy;
     }(LocationStrategy));
+    HashLocationStrategy.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HashLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation, },
+        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+    ]; };
 
     /**
      * @license
@@ -692,15 +693,16 @@
          * @param {?=} href
          */
         function PathLocationStrategy(_platformLocation, href) {
-            _super.call(this);
-            this._platformLocation = _platformLocation;
+            var _this = _super.call(this) || this;
+            _this._platformLocation = _platformLocation;
             if (isBlank(href)) {
-                href = this._platformLocation.getBaseHrefFromDOM();
+                href = _this._platformLocation.getBaseHrefFromDOM();
             }
             if (isBlank(href)) {
                 throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
             }
-            this._baseHref = href;
+            _this._baseHref = href;
+            return _this;
         }
         /**
          * @param {?} fn
@@ -762,16 +764,16 @@
          * @return {?}
          */
         PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        PathLocationStrategy.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        PathLocationStrategy.ctorParameters = function () { return [
-            { type: PlatformLocation, },
-            { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
-        ]; };
         return PathLocationStrategy;
     }(LocationStrategy));
+    PathLocationStrategy.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    PathLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation, },
+        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+    ]; };
 
     /**
      * @license
@@ -836,8 +838,9 @@
          * @param {?} locale
          */
         function NgLocaleLocalization(locale) {
-            _super.call(this);
-            this.locale = locale;
+            var _this = _super.call(this) || this;
+            _this.locale = locale;
+            return _this;
         }
         /**
          * @param {?} value
@@ -860,15 +863,15 @@
                     return 'other';
             }
         };
-        NgLocaleLocalization.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        NgLocaleLocalization.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ]; };
         return NgLocaleLocalization;
     }(NgLocalization));
+    NgLocaleLocalization.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    NgLocaleLocalization.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ]; };
     var Plural = {};
     Plural.Zero = 0;
     Plural.One = 1;
@@ -1475,22 +1478,22 @@
                 klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
             }
         };
-        NgClass.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
-        ];
-        /** @nocollapse */
-        NgClass.ctorParameters = function () { return [
-            { type: _angular_core.IterableDiffers, },
-            { type: _angular_core.KeyValueDiffers, },
-            { type: _angular_core.ElementRef, },
-            { type: _angular_core.Renderer, },
-        ]; };
-        NgClass.propDecorators = {
-            'klass': [{ type: _angular_core.Input, args: ['class',] },],
-            'ngClass': [{ type: _angular_core.Input },],
-        };
         return NgClass;
     }());
+    NgClass.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
+    ];
+    /** @nocollapse */
+    NgClass.ctorParameters = function () { return [
+        { type: _angular_core.IterableDiffers, },
+        { type: _angular_core.KeyValueDiffers, },
+        { type: _angular_core.ElementRef, },
+        { type: _angular_core.Renderer, },
+    ]; };
+    NgClass.propDecorators = {
+        'klass': [{ type: _angular_core.Input, args: ['class',] },],
+        'ngClass': [{ type: _angular_core.Input },],
+    };
 
     /**
      * Instantiates a single {\@link Component} type and inserts its Host View into current View.
@@ -1594,21 +1597,21 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        NgComponentOutlet.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
-        ];
-        /** @nocollapse */
-        NgComponentOutlet.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-        ]; };
-        NgComponentOutlet.propDecorators = {
-            'ngComponentOutlet': [{ type: _angular_core.Input },],
-            'ngComponentOutletInjector': [{ type: _angular_core.Input },],
-            'ngComponentOutletContent': [{ type: _angular_core.Input },],
-            'ngComponentOutletNgModuleFactory': [{ type: _angular_core.Input },],
-        };
         return NgComponentOutlet;
     }());
+    NgComponentOutlet.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+    ];
+    /** @nocollapse */
+    NgComponentOutlet.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+    ]; };
+    NgComponentOutlet.propDecorators = {
+        'ngComponentOutlet': [{ type: _angular_core.Input },],
+        'ngComponentOutletInjector': [{ type: _angular_core.Input },],
+        'ngComponentOutletContent': [{ type: _angular_core.Input },],
+        'ngComponentOutletNgModuleFactory': [{ type: _angular_core.Input },],
+    };
 
     /**
      * @license
@@ -1757,7 +1760,7 @@
                 if (_angular_core.isDevMode() && fn != null && typeof fn !== 'function') {
                     // TODO(vicb): use a log service once there is a public one available
                     if ((console) && (console.warn)) {
-                        console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                        console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
                             "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
                     }
                 }
@@ -1854,26 +1857,26 @@
         NgForOf.prototype._perViewChange = function (view, record) {
             view.context.$implicit = record.item;
         };
-        NgForOf.decorators = [
-            { type: _angular_core.Directive, args: [{
-                        selector: '[ngFor][ngForOf]',
-                        providers: [{ provide: _angular_core.forwardRef(function () { return NgFor; }), useExisting: _angular_core.forwardRef(function () { return NgForOf; }) }]
-                    },] },
-        ];
-        /** @nocollapse */
-        NgForOf.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-            { type: _angular_core.TemplateRef, },
-            { type: _angular_core.IterableDiffers, },
-            { type: _angular_core.ChangeDetectorRef, },
-        ]; };
-        NgForOf.propDecorators = {
-            'ngForOf': [{ type: _angular_core.Input },],
-            'ngForTrackBy': [{ type: _angular_core.Input },],
-            'ngForTemplate': [{ type: _angular_core.Input },],
-        };
         return NgForOf;
     }());
+    NgForOf.decorators = [
+        { type: _angular_core.Directive, args: [{
+                    selector: '[ngFor][ngForOf]',
+                    providers: [{ provide: _angular_core.forwardRef(function () { return NgFor; }), useExisting: _angular_core.forwardRef(function () { return NgForOf; }) }]
+                },] },
+    ];
+    /** @nocollapse */
+    NgForOf.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.TemplateRef, },
+        { type: _angular_core.IterableDiffers, },
+        { type: _angular_core.ChangeDetectorRef, },
+    ]; };
+    NgForOf.propDecorators = {
+        'ngForOf': [{ type: _angular_core.Input },],
+        'ngForTrackBy': [{ type: _angular_core.Input },],
+        'ngForTemplate': [{ type: _angular_core.Input },],
+    };
     var RecordViewTuple = (function () {
         /**
          * @param {?} record
@@ -1951,7 +1954,7 @@
     var NgFor = (function (_super) {
         __extends$3(NgFor, _super);
         function NgFor() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         return NgFor;
     }(NgForOf));
@@ -2123,21 +2126,21 @@
                 }
             }
         };
-        NgIf.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
-        ];
-        /** @nocollapse */
-        NgIf.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-            { type: _angular_core.TemplateRef, },
-        ]; };
-        NgIf.propDecorators = {
-            'ngIf': [{ type: _angular_core.Input },],
-            'ngIfThen': [{ type: _angular_core.Input },],
-            'ngIfElse': [{ type: _angular_core.Input },],
-        };
         return NgIf;
     }());
+    NgIf.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
+    ];
+    /** @nocollapse */
+    NgIf.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.TemplateRef, },
+    ]; };
+    NgIf.propDecorators = {
+        'ngIf': [{ type: _angular_core.Input },],
+        'ngIfThen': [{ type: _angular_core.Input },],
+        'ngIfElse': [{ type: _angular_core.Input },],
+    };
     var NgIfContext = (function () {
         function NgIfContext() {
             this.$implicit = null;
@@ -2290,16 +2293,16 @@
                 }
             }
         };
-        NgSwitch.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
-        ];
-        /** @nocollapse */
-        NgSwitch.ctorParameters = function () { return []; };
-        NgSwitch.propDecorators = {
-            'ngSwitch': [{ type: _angular_core.Input },],
-        };
         return NgSwitch;
     }());
+    NgSwitch.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitch.ctorParameters = function () { return []; };
+    NgSwitch.propDecorators = {
+        'ngSwitch': [{ type: _angular_core.Input },],
+    };
     /**
      * \@ngModule CommonModule
      *
@@ -2339,20 +2342,20 @@
          * @return {?}
          */
         NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-        NgSwitchCase.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
-        ];
-        /** @nocollapse */
-        NgSwitchCase.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-            { type: _angular_core.TemplateRef, },
-            { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
-        ]; };
-        NgSwitchCase.propDecorators = {
-            'ngSwitchCase': [{ type: _angular_core.Input },],
-        };
         return NgSwitchCase;
     }());
+    NgSwitchCase.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitchCase.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.TemplateRef, },
+        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+    ]; };
+    NgSwitchCase.propDecorators = {
+        'ngSwitchCase': [{ type: _angular_core.Input },],
+    };
     /**
      * \@ngModule CommonModule
      * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
@@ -2385,17 +2388,17 @@
         function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
-        NgSwitchDefault.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
-        ];
-        /** @nocollapse */
-        NgSwitchDefault.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-            { type: _angular_core.TemplateRef, },
-            { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
-        ]; };
         return NgSwitchDefault;
     }());
+    NgSwitchDefault.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitchDefault.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.TemplateRef, },
+        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+    ]; };
 
     /**
      * \@ngModule CommonModule
@@ -2480,18 +2483,18 @@
                 this._activeView.create();
             }
         };
-        NgPlural.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
-        ];
-        /** @nocollapse */
-        NgPlural.ctorParameters = function () { return [
-            { type: NgLocalization, },
-        ]; };
-        NgPlural.propDecorators = {
-            'ngPlural': [{ type: _angular_core.Input },],
-        };
         return NgPlural;
     }());
+    NgPlural.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
+    ];
+    /** @nocollapse */
+    NgPlural.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
+    NgPlural.propDecorators = {
+        'ngPlural': [{ type: _angular_core.Input },],
+    };
     /**
      * \@ngModule CommonModule
      *
@@ -2522,18 +2525,18 @@
             var isANumber = !isNaN(Number(value));
             ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
         }
-        NgPluralCase.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
-        ];
-        /** @nocollapse */
-        NgPluralCase.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
-            { type: _angular_core.TemplateRef, },
-            { type: _angular_core.ViewContainerRef, },
-            { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
-        ]; };
         return NgPluralCase;
     }());
+    NgPluralCase.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
+        { type: _angular_core.TemplateRef, },
+        { type: _angular_core.ViewContainerRef, },
+        { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
+    ]; };
 
     /**
      * \@ngModule CommonModule
@@ -2613,20 +2616,20 @@
             value = value != null && unit ? "" + value + unit : value;
             this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
         };
-        NgStyle.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
-        ];
-        /** @nocollapse */
-        NgStyle.ctorParameters = function () { return [
-            { type: _angular_core.KeyValueDiffers, },
-            { type: _angular_core.ElementRef, },
-            { type: _angular_core.Renderer, },
-        ]; };
-        NgStyle.propDecorators = {
-            'ngStyle': [{ type: _angular_core.Input },],
-        };
         return NgStyle;
     }());
+    NgStyle.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
+    ];
+    /** @nocollapse */
+    NgStyle.ctorParameters = function () { return [
+        { type: _angular_core.KeyValueDiffers, },
+        { type: _angular_core.ElementRef, },
+        { type: _angular_core.Renderer, },
+    ]; };
+    NgStyle.propDecorators = {
+        'ngStyle': [{ type: _angular_core.Input },],
+    };
 
     /**
      * \@ngModule CommonModule
@@ -2681,20 +2684,20 @@
                 this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
             }
         };
-        NgTemplateOutlet.decorators = [
-            { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-        ];
-        /** @nocollapse */
-        NgTemplateOutlet.ctorParameters = function () { return [
-            { type: _angular_core.ViewContainerRef, },
-        ]; };
-        NgTemplateOutlet.propDecorators = {
-            'ngTemplateOutletContext': [{ type: _angular_core.Input },],
-            'ngTemplateOutlet': [{ type: _angular_core.Input },],
-            'ngOutletContext': [{ type: _angular_core.Input },],
-        };
         return NgTemplateOutlet;
     }());
+    NgTemplateOutlet.decorators = [
+        { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+    ];
+    /** @nocollapse */
+    NgTemplateOutlet.ctorParameters = function () { return [
+        { type: _angular_core.ViewContainerRef, },
+    ]; };
+    NgTemplateOutlet.propDecorators = {
+        'ngTemplateOutletContext': [{ type: _angular_core.Input },],
+        'ngTemplateOutlet': [{ type: _angular_core.Input },],
+        'ngOutletContext': [{ type: _angular_core.Input },],
+    };
 
     /**
      * A collection of Angular directives that are likely to be used in each and every Angular
@@ -2885,15 +2888,15 @@
                 this._ref.markForCheck();
             }
         };
-        AsyncPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
-        ];
-        /** @nocollapse */
-        AsyncPipe.ctorParameters = function () { return [
-            { type: _angular_core.ChangeDetectorRef, },
-        ]; };
         return AsyncPipe;
     }());
+    AsyncPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = function () { return [
+        { type: _angular_core.ChangeDetectorRef, },
+    ]; };
 
     /**
      * Transforms text to lowercase.
@@ -2917,13 +2920,13 @@
             }
             return value.toLowerCase();
         };
-        LowerCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
-        ];
-        /** @nocollapse */
-        LowerCasePipe.ctorParameters = function () { return []; };
         return LowerCasePipe;
     }());
+    LowerCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
+    ];
+    /** @nocollapse */
+    LowerCasePipe.ctorParameters = function () { return []; };
     /**
      * Helper method to transform a single word to titlecase.
      *
@@ -2956,13 +2959,13 @@
             }
             return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
         };
-        TitleCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
-        ];
-        /** @nocollapse */
-        TitleCasePipe.ctorParameters = function () { return []; };
         return TitleCasePipe;
     }());
+    TitleCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
+    ];
+    /** @nocollapse */
+    TitleCasePipe.ctorParameters = function () { return []; };
     /**
      * Transforms text to uppercase.
      *
@@ -2983,13 +2986,13 @@
             }
             return value.toUpperCase();
         };
-        UpperCasePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
-        ];
-        /** @nocollapse */
-        UpperCasePipe.ctorParameters = function () { return []; };
         return UpperCasePipe;
     }());
+    UpperCasePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
+    ];
+    /** @nocollapse */
+    UpperCasePipe.ctorParameters = function () { return []; };
 
     var NumberFormatStyle = {};
     NumberFormatStyle.Decimal = 0;
@@ -3367,26 +3370,26 @@
             }
             return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
         };
-        /** @internal */
-        DatePipe._ALIASES = {
-            'medium': 'yMMMdjms',
-            'short': 'yMdjm',
-            'fullDate': 'yMMMMEEEEd',
-            'longDate': 'yMMMMd',
-            'mediumDate': 'yMMMd',
-            'shortDate': 'yMd',
-            'mediumTime': 'jms',
-            'shortTime': 'jm'
-        };
-        DatePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-        ];
-        /** @nocollapse */
-        DatePipe.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ]; };
         return DatePipe;
     }());
+    /** @internal */
+    DatePipe._ALIASES = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+    DatePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ]; };
     /**
      * @param {?} obj
      * @return {?}
@@ -3470,15 +3473,15 @@
             var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
             return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
         };
-        I18nPluralPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-        ];
-        /** @nocollapse */
-        I18nPluralPipe.ctorParameters = function () { return [
-            { type: NgLocalization, },
-        ]; };
         return I18nPluralPipe;
     }());
+    I18nPluralPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
 
     /**
      * \@ngModule CommonModule
@@ -3519,13 +3522,13 @@
             }
             return '';
         };
-        I18nSelectPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-        ];
-        /** @nocollapse */
-        I18nSelectPipe.ctorParameters = function () { return []; };
         return I18nSelectPipe;
     }());
+    I18nSelectPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nSelectPipe.ctorParameters = function () { return []; };
 
     /**
      * \@ngModule CommonModule
@@ -3548,13 +3551,13 @@
          * @return {?}
          */
         JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
-        JsonPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
-        ];
-        /** @nocollapse */
-        JsonPipe.ctorParameters = function () { return []; };
         return JsonPipe;
     }());
+    JsonPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
+    ];
+    /** @nocollapse */
+    JsonPipe.ctorParameters = function () { return []; };
 
     var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
     /**
@@ -3652,15 +3655,15 @@
             if (digits === void 0) { digits = null; }
             return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
         };
-        DecimalPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'number' },] },
-        ];
-        /** @nocollapse */
-        DecimalPipe.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ]; };
         return DecimalPipe;
     }());
+    DecimalPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'number' },] },
+    ];
+    /** @nocollapse */
+    DecimalPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ]; };
     /**
      * \@ngModule CommonModule
      * \@whatItDoes Formats a number as a percentage according to locale rules.
@@ -3697,15 +3700,15 @@
             if (digits === void 0) { digits = null; }
             return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
         };
-        PercentPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
-        ];
-        /** @nocollapse */
-        PercentPipe.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ]; };
         return PercentPipe;
     }());
+    PercentPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
+    ];
+    /** @nocollapse */
+    PercentPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ]; };
     /**
      * \@ngModule CommonModule
      * \@whatItDoes Formats a number as currency using locale rules.
@@ -3750,15 +3753,15 @@
             if (digits === void 0) { digits = null; }
             return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
         };
-        CurrencyPipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
-        ];
-        /** @nocollapse */
-        CurrencyPipe.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        ]; };
         return CurrencyPipe;
     }());
+    CurrencyPipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
+    ];
+    /** @nocollapse */
+    CurrencyPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+    ]; };
 
     /**
      * \@ngModule CommonModule
@@ -3826,13 +3829,13 @@
          * @return {?}
          */
         SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
-        SlicePipe.decorators = [
-            { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
-        ];
-        /** @nocollapse */
-        SlicePipe.ctorParameters = function () { return []; };
         return SlicePipe;
     }());
+    SlicePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
+    ];
+    /** @nocollapse */
+    SlicePipe.ctorParameters = function () { return []; };
 
     /**
      * A collection of Angular pipes that are likely to be used in each and every application.
@@ -3860,19 +3863,19 @@
     var CommonModule = (function () {
         function CommonModule() {
         }
-        CommonModule.decorators = [
-            { type: _angular_core.NgModule, args: [{
-                        declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                        exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                        providers: [
-                            { provide: NgLocalization, useClass: NgLocaleLocalization },
-                        ],
-                    },] },
-        ];
-        /** @nocollapse */
-        CommonModule.ctorParameters = function () { return []; };
         return CommonModule;
     }());
+    CommonModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    CommonModule.ctorParameters = function () { return []; };
 
     /**
      * @stable
