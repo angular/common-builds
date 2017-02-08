@@ -11,7 +11,7 @@ import { EventEmitter, Injectable } from '@angular/core';
  *
  * @experimental
  */
-export var SpyLocation = (function () {
+var SpyLocation = (function () {
     function SpyLocation() {
         this.urlChanges = [];
         this._history = [new LocationState('', '')];
@@ -91,13 +91,14 @@ export var SpyLocation = (function () {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
-    SpyLocation.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
+export { SpyLocation };
+SpyLocation.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+SpyLocation.ctorParameters = function () { return []; };
 var LocationState = (function () {
     function LocationState(path, query) {
         this.path = path;

@@ -36,7 +36,7 @@ import { stringify } from '../facade/lang';
  *
  * \@stable
  */
-export var NgClass = (function () {
+var NgClass = (function () {
     /**
      * @param {?} _iterableDiffers
      * @param {?} _keyValueDiffers
@@ -180,22 +180,23 @@ export var NgClass = (function () {
             klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
         }
     };
-    NgClass.decorators = [
-        { type: Directive, args: [{ selector: '[ngClass]' },] },
-    ];
-    /** @nocollapse */
-    NgClass.ctorParameters = function () { return [
-        { type: IterableDiffers, },
-        { type: KeyValueDiffers, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    NgClass.propDecorators = {
-        'klass': [{ type: Input, args: ['class',] },],
-        'ngClass': [{ type: Input },],
-    };
     return NgClass;
 }());
+export { NgClass };
+NgClass.decorators = [
+    { type: Directive, args: [{ selector: '[ngClass]' },] },
+];
+/** @nocollapse */
+NgClass.ctorParameters = function () { return [
+    { type: IterableDiffers, },
+    { type: KeyValueDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+NgClass.propDecorators = {
+    'klass': [{ type: Input, args: ['class',] },],
+    'ngClass': [{ type: Input },],
+};
 function NgClass_tsickle_Closure_declarations() {
     /** @type {?} */
     NgClass.decorators;

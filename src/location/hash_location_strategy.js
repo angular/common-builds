@@ -32,19 +32,20 @@ import { PlatformLocation } from './platform_location';
  *
  * \@stable
  */
-export var HashLocationStrategy = (function (_super) {
+var HashLocationStrategy = (function (_super) {
     __extends(HashLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
      */
     function HashLocationStrategy(_platformLocation, _baseHref) {
-        _super.call(this);
-        this._platformLocation = _platformLocation;
-        this._baseHref = '';
+        var _this = _super.call(this) || this;
+        _this._platformLocation = _platformLocation;
+        _this._baseHref = '';
         if (isPresent(_baseHref)) {
-            this._baseHref = _baseHref;
+            _this._baseHref = _baseHref;
         }
+        return _this;
     }
     /**
      * @param {?} fn
@@ -115,16 +116,17 @@ export var HashLocationStrategy = (function (_super) {
      * @return {?}
      */
     HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-    HashLocationStrategy.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    HashLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-    ]; };
     return HashLocationStrategy;
 }(LocationStrategy));
+export { HashLocationStrategy };
+HashLocationStrategy.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+HashLocationStrategy.ctorParameters = function () { return [
+    { type: PlatformLocation, },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+]; };
 function HashLocationStrategy_tsickle_Closure_declarations() {
     /** @type {?} */
     HashLocationStrategy.decorators;

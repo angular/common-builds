@@ -26,7 +26,7 @@ var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-export var I18nPluralPipe = (function () {
+var I18nPluralPipe = (function () {
     /**
      * @param {?} _localization
      */
@@ -47,15 +47,16 @@ export var I18nPluralPipe = (function () {
         var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
-    I18nPluralPipe.decorators = [
-        { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nPluralPipe.ctorParameters = function () { return [
-        { type: NgLocalization, },
-    ]; };
     return I18nPluralPipe;
 }());
+export { I18nPluralPipe };
+I18nPluralPipe.decorators = [
+    { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+];
+/** @nocollapse */
+I18nPluralPipe.ctorParameters = function () { return [
+    { type: NgLocalization, },
+]; };
 function I18nPluralPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     I18nPluralPipe.decorators;

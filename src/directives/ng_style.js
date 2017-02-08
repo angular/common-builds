@@ -28,7 +28,7 @@ import { Directive, ElementRef, Input, KeyValueDiffers, Renderer } from '@angula
  *
  * \@stable
  */
-export var NgStyle = (function () {
+var NgStyle = (function () {
     /**
      * @param {?} _differs
      * @param {?} _ngEl
@@ -84,20 +84,21 @@ export var NgStyle = (function () {
         value = value != null && unit ? "" + value + unit : value;
         this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
-    NgStyle.decorators = [
-        { type: Directive, args: [{ selector: '[ngStyle]' },] },
-    ];
-    /** @nocollapse */
-    NgStyle.ctorParameters = function () { return [
-        { type: KeyValueDiffers, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    NgStyle.propDecorators = {
-        'ngStyle': [{ type: Input },],
-    };
     return NgStyle;
 }());
+export { NgStyle };
+NgStyle.decorators = [
+    { type: Directive, args: [{ selector: '[ngStyle]' },] },
+];
+/** @nocollapse */
+NgStyle.ctorParameters = function () { return [
+    { type: KeyValueDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+NgStyle.propDecorators = {
+    'ngStyle': [{ type: Input },],
+};
 function NgStyle_tsickle_Closure_declarations() {
     /** @type {?} */
     NgStyle.decorators;

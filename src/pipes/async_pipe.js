@@ -81,7 +81,7 @@ var /** @type {?} */ _observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-export var AsyncPipe = (function () {
+var AsyncPipe = (function () {
     /**
      * @param {?} _ref
      */
@@ -167,15 +167,16 @@ export var AsyncPipe = (function () {
             this._ref.markForCheck();
         }
     };
-    AsyncPipe.decorators = [
-        { type: Pipe, args: [{ name: 'async', pure: false },] },
-    ];
-    /** @nocollapse */
-    AsyncPipe.ctorParameters = function () { return [
-        { type: ChangeDetectorRef, },
-    ]; };
     return AsyncPipe;
 }());
+export { AsyncPipe };
+AsyncPipe.decorators = [
+    { type: Pipe, args: [{ name: 'async', pure: false },] },
+];
+/** @nocollapse */
+AsyncPipe.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+]; };
 function AsyncPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     AsyncPipe.decorators;

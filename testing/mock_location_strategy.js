@@ -18,16 +18,17 @@ import { EventEmitter, Injectable } from '@angular/core';
  *
  * @stable
  */
-export var MockLocationStrategy = (function (_super) {
+var MockLocationStrategy = (function (_super) {
     __extends(MockLocationStrategy, _super);
     function MockLocationStrategy() {
-        _super.call(this);
-        this.internalBaseHref = '/';
-        this.internalPath = '/';
-        this.internalTitle = '';
-        this.urlChanges = [];
+        var _this = _super.call(this) || this;
+        _this.internalBaseHref = '/';
+        _this.internalPath = '/';
+        _this.internalTitle = '';
+        _this.urlChanges = [];
         /** @internal */
-        this._subject = new EventEmitter();
+        _this._subject = new EventEmitter();
+        return _this;
     }
     MockLocationStrategy.prototype.simulatePopState = function (url) {
         this.internalPath = url;
@@ -67,13 +68,14 @@ export var MockLocationStrategy = (function (_super) {
         }
     };
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
-    MockLocationStrategy.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    MockLocationStrategy.ctorParameters = function () { return []; };
     return MockLocationStrategy;
 }(LocationStrategy));
+export { MockLocationStrategy };
+MockLocationStrategy.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+MockLocationStrategy.ctorParameters = function () { return []; };
 var _MockPopStateEvent = (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;

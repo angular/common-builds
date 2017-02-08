@@ -5,7 +5,7 @@ NumberFormatStyle.Currency = 2;
 NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
 NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
 NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
-export var NumberFormatter = (function () {
+var NumberFormatter = (function () {
     function NumberFormatter() {
     }
     /**
@@ -31,6 +31,7 @@ export var NumberFormatter = (function () {
     };
     return NumberFormatter;
 }());
+export { NumberFormatter };
 var /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
 var /** @type {?} */ PATTERN_ALIASES = {
     // Keys are quoted so they do not get renamed during closure compilation.
@@ -236,7 +237,7 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-export var DateFormatter = (function () {
+var DateFormatter = (function () {
     function DateFormatter() {
     }
     /**
@@ -250,4 +251,5 @@ export var DateFormatter = (function () {
     };
     return DateFormatter;
 }());
+export { DateFormatter };
 //# sourceMappingURL=intl.js.map

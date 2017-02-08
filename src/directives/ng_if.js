@@ -96,7 +96,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
  *
  * \@stable
  */
-export var NgIf = (function () {
+var NgIf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} templateRef
@@ -173,21 +173,22 @@ export var NgIf = (function () {
             }
         }
     };
-    NgIf.decorators = [
-        { type: Directive, args: [{ selector: '[ngIf]' },] },
-    ];
-    /** @nocollapse */
-    NgIf.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-    ]; };
-    NgIf.propDecorators = {
-        'ngIf': [{ type: Input },],
-        'ngIfThen': [{ type: Input },],
-        'ngIfElse': [{ type: Input },],
-    };
     return NgIf;
 }());
+export { NgIf };
+NgIf.decorators = [
+    { type: Directive, args: [{ selector: '[ngIf]' },] },
+];
+/** @nocollapse */
+NgIf.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+]; };
+NgIf.propDecorators = {
+    'ngIf': [{ type: Input },],
+    'ngIfThen': [{ type: Input },],
+    'ngIfElse': [{ type: Input },],
+};
 function NgIf_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIf.decorators;
@@ -211,12 +212,13 @@ function NgIf_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIf.prototype._viewContainer;
 }
-export var NgIfContext = (function () {
+var NgIfContext = (function () {
     function NgIfContext() {
         this.$implicit = null;
     }
     return NgIfContext;
 }());
+export { NgIfContext };
 function NgIfContext_tsickle_Closure_declarations() {
     /** @type {?} */
     NgIfContext.prototype.$implicit;

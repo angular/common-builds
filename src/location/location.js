@@ -28,7 +28,7 @@ import { LocationStrategy } from './location_strategy';
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-export var Location = (function () {
+var Location = (function () {
     /**
      * @param {?} platformStrategy
      */
@@ -175,15 +175,16 @@ export var Location = (function () {
      * @return {?}
      */
     Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
-    Location.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    Location.ctorParameters = function () { return [
-        { type: LocationStrategy, },
-    ]; };
     return Location;
 }());
+export { Location };
+Location.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+Location.ctorParameters = function () { return [
+    { type: LocationStrategy, },
+]; };
 function Location_tsickle_Closure_declarations() {
     /** @type {?} */
     Location.decorators;

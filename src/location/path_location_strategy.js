@@ -41,22 +41,23 @@ import { PlatformLocation } from './platform_location';
  *
  * \@stable
  */
-export var PathLocationStrategy = (function (_super) {
+var PathLocationStrategy = (function (_super) {
     __extends(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
      */
     function PathLocationStrategy(_platformLocation, href) {
-        _super.call(this);
-        this._platformLocation = _platformLocation;
+        var _this = _super.call(this) || this;
+        _this._platformLocation = _platformLocation;
         if (isBlank(href)) {
-            href = this._platformLocation.getBaseHrefFromDOM();
+            href = _this._platformLocation.getBaseHrefFromDOM();
         }
         if (isBlank(href)) {
             throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
         }
-        this._baseHref = href;
+        _this._baseHref = href;
+        return _this;
     }
     /**
      * @param {?} fn
@@ -118,16 +119,17 @@ export var PathLocationStrategy = (function (_super) {
      * @return {?}
      */
     PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-    PathLocationStrategy.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    PathLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-    ]; };
     return PathLocationStrategy;
 }(LocationStrategy));
+export { PathLocationStrategy };
+PathLocationStrategy.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+PathLocationStrategy.ctorParameters = function () { return [
+    { type: PlatformLocation, },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+]; };
 function PathLocationStrategy_tsickle_Closure_declarations() {
     /** @type {?} */
     PathLocationStrategy.decorators;

@@ -39,7 +39,7 @@ import { SwitchView } from './ng_switch';
  *
  * \@experimental
  */
-export var NgPlural = (function () {
+var NgPlural = (function () {
     /**
      * @param {?} _localization
      */
@@ -91,18 +91,19 @@ export var NgPlural = (function () {
             this._activeView.create();
         }
     };
-    NgPlural.decorators = [
-        { type: Directive, args: [{ selector: '[ngPlural]' },] },
-    ];
-    /** @nocollapse */
-    NgPlural.ctorParameters = function () { return [
-        { type: NgLocalization, },
-    ]; };
-    NgPlural.propDecorators = {
-        'ngPlural': [{ type: Input },],
-    };
     return NgPlural;
 }());
+export { NgPlural };
+NgPlural.decorators = [
+    { type: Directive, args: [{ selector: '[ngPlural]' },] },
+];
+/** @nocollapse */
+NgPlural.ctorParameters = function () { return [
+    { type: NgLocalization, },
+]; };
+NgPlural.propDecorators = {
+    'ngPlural': [{ type: Input },],
+};
 function NgPlural_tsickle_Closure_declarations() {
     /** @type {?} */
     NgPlural.decorators;
@@ -140,7 +141,7 @@ function NgPlural_tsickle_Closure_declarations() {
  *
  * \@experimental
  */
-export var NgPluralCase = (function () {
+var NgPluralCase = (function () {
     /**
      * @param {?} value
      * @param {?} template
@@ -152,18 +153,19 @@ export var NgPluralCase = (function () {
         var isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
-    NgPluralCase.decorators = [
-        { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
-    ];
-    /** @nocollapse */
-    NgPluralCase.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
-        { type: TemplateRef, },
-        { type: ViewContainerRef, },
-        { type: NgPlural, decorators: [{ type: Host },] },
-    ]; };
     return NgPluralCase;
 }());
+export { NgPluralCase };
+NgPluralCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
+];
+/** @nocollapse */
+NgPluralCase.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
+    { type: TemplateRef, },
+    { type: ViewContainerRef, },
+    { type: NgPlural, decorators: [{ type: Host },] },
+]; };
 function NgPluralCase_tsickle_Closure_declarations() {
     /** @type {?} */
     NgPluralCase.decorators;

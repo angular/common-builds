@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.6-c33fda2
+ * @license Angular v4.0.0-beta.6-7a4c255
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -94,13 +94,13 @@
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
         SpyLocation.prototype.normalize = function (url) { return null; };
-        SpyLocation.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        SpyLocation.ctorParameters = function () { return []; };
         return SpyLocation;
     }());
+    SpyLocation.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    SpyLocation.ctorParameters = function () { return []; };
     var LocationState = (function () {
         function LocationState(path, query) {
             this.path = path;
@@ -130,13 +130,14 @@
     var MockLocationStrategy = (function (_super) {
         __extends(MockLocationStrategy, _super);
         function MockLocationStrategy() {
-            _super.call(this);
-            this.internalBaseHref = '/';
-            this.internalPath = '/';
-            this.internalTitle = '';
-            this.urlChanges = [];
+            var _this = _super.call(this) || this;
+            _this.internalBaseHref = '/';
+            _this.internalPath = '/';
+            _this.internalTitle = '';
+            _this.urlChanges = [];
             /** @internal */
-            this._subject = new _angular_core.EventEmitter();
+            _this._subject = new _angular_core.EventEmitter();
+            return _this;
         }
         MockLocationStrategy.prototype.simulatePopState = function (url) {
             this.internalPath = url;
@@ -176,13 +177,13 @@
             }
         };
         MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
-        MockLocationStrategy.decorators = [
-            { type: _angular_core.Injectable },
-        ];
-        /** @nocollapse */
-        MockLocationStrategy.ctorParameters = function () { return []; };
         return MockLocationStrategy;
     }(_angular_common.LocationStrategy));
+    MockLocationStrategy.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    MockLocationStrategy.ctorParameters = function () { return []; };
     var _MockPopStateEvent = (function () {
         function _MockPopStateEvent(newUrl) {
             this.newUrl = newUrl;

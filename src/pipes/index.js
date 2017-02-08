@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @module
+ * @description
+ * This module provides a set of common Pipes.
+ */
 import { AsyncPipe } from './async_pipe';
 import { LowerCasePipe, TitleCasePipe, UpperCasePipe } from './case_conversion_pipes';
 import { DatePipe } from './date_pipe';

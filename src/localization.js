@@ -15,7 +15,7 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core';
  * \@experimental
  * @abstract
  */
-export var NgLocalization = (function () {
+var NgLocalization = (function () {
     function NgLocalization() {
     }
     /**
@@ -26,6 +26,7 @@ export var NgLocalization = (function () {
     NgLocalization.prototype.getPluralCategory = function (value) { };
     return NgLocalization;
 }());
+export { NgLocalization };
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
@@ -56,14 +57,15 @@ export function getPluralCategory(value, cases, ngLocalization) {
  *
  * \@experimental
  */
-export var NgLocaleLocalization = (function (_super) {
+var NgLocaleLocalization = (function (_super) {
     __extends(NgLocaleLocalization, _super);
     /**
      * @param {?} locale
      */
     function NgLocaleLocalization(locale) {
-        _super.call(this);
-        this.locale = locale;
+        var _this = _super.call(this) || this;
+        _this.locale = locale;
+        return _this;
     }
     /**
      * @param {?} value
@@ -86,15 +88,16 @@ export var NgLocaleLocalization = (function (_super) {
                 return 'other';
         }
     };
-    NgLocaleLocalization.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    NgLocaleLocalization.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
+export { NgLocaleLocalization };
+NgLocaleLocalization.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+NgLocaleLocalization.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 function NgLocaleLocalization_tsickle_Closure_declarations() {
     /** @type {?} */
     NgLocaleLocalization.decorators;

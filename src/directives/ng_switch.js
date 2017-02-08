@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Directive, Host, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-export var SwitchView = (function () {
+var SwitchView = (function () {
     /**
      * @param {?} _viewContainerRef
      * @param {?} _templateRef
@@ -44,6 +44,7 @@ export var SwitchView = (function () {
     };
     return SwitchView;
 }());
+export { SwitchView };
 function SwitchView_tsickle_Closure_declarations() {
     /** @type {?} */
     SwitchView.prototype._created;
@@ -93,7 +94,7 @@ function SwitchView_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitch = (function () {
+var NgSwitch = (function () {
     function NgSwitch() {
         this._defaultUsed = false;
         this._caseCount = 0;
@@ -159,16 +160,17 @@ export var NgSwitch = (function () {
             }
         }
     };
-    NgSwitch.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitch]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitch.ctorParameters = function () { return []; };
-    NgSwitch.propDecorators = {
-        'ngSwitch': [{ type: Input },],
-    };
     return NgSwitch;
 }());
+export { NgSwitch };
+NgSwitch.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitch]' },] },
+];
+/** @nocollapse */
+NgSwitch.ctorParameters = function () { return []; };
+NgSwitch.propDecorators = {
+    'ngSwitch': [{ type: Input },],
+};
 function NgSwitch_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitch.decorators;
@@ -216,7 +218,7 @@ function NgSwitch_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitchCase = (function () {
+var NgSwitchCase = (function () {
     /**
      * @param {?} viewContainer
      * @param {?} templateRef
@@ -231,20 +233,21 @@ export var NgSwitchCase = (function () {
      * @return {?}
      */
     NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-    NgSwitchCase.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchCase.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: Host },] },
-    ]; };
-    NgSwitchCase.propDecorators = {
-        'ngSwitchCase': [{ type: Input },],
-    };
     return NgSwitchCase;
 }());
+export { NgSwitchCase };
+NgSwitchCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
+];
+/** @nocollapse */
+NgSwitchCase.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+]; };
+NgSwitchCase.propDecorators = {
+    'ngSwitchCase': [{ type: Input },],
+};
 function NgSwitchCase_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitchCase.decorators;
@@ -285,7 +288,7 @@ function NgSwitchCase_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgSwitchDefault = (function () {
+var NgSwitchDefault = (function () {
     /**
      * @param {?} viewContainer
      * @param {?} templateRef
@@ -294,17 +297,18 @@ export var NgSwitchDefault = (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
-    NgSwitchDefault.decorators = [
-        { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
-    ];
-    /** @nocollapse */
-    NgSwitchDefault.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: Host },] },
-    ]; };
     return NgSwitchDefault;
 }());
+export { NgSwitchDefault };
+NgSwitchDefault.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+];
+/** @nocollapse */
+NgSwitchDefault.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+]; };
 function NgSwitchDefault_tsickle_Closure_declarations() {
     /** @type {?} */
     NgSwitchDefault.decorators;

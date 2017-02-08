@@ -79,7 +79,7 @@ var /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?:
  *
  * \@stable
  */
-export var DatePipe = (function () {
+var DatePipe = (function () {
     /**
      * @param {?} _locale
      */
@@ -132,26 +132,27 @@ export var DatePipe = (function () {
         }
         return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
     };
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
-    };
-    DatePipe.decorators = [
-        { type: Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    /** @nocollapse */
-    DatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
     return DatePipe;
 }());
+export { DatePipe };
+/** @internal */
+DatePipe._ALIASES = {
+    'medium': 'yMMMdjms',
+    'short': 'yMdjm',
+    'fullDate': 'yMMMMEEEEd',
+    'longDate': 'yMMMMd',
+    'mediumDate': 'yMMMd',
+    'shortDate': 'yMd',
+    'mediumTime': 'jms',
+    'shortTime': 'jm'
+};
+DatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DatePipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 function DatePipe_tsickle_Closure_declarations() {
     /**
      * \@internal

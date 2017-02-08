@@ -89,7 +89,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * \@stable
  */
-export var DecimalPipe = (function () {
+var DecimalPipe = (function () {
     /**
      * @param {?} _locale
      */
@@ -105,15 +105,16 @@ export var DecimalPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
-    DecimalPipe.decorators = [
-        { type: Pipe, args: [{ name: 'number' },] },
-    ];
-    /** @nocollapse */
-    DecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
     return DecimalPipe;
 }());
+export { DecimalPipe };
+DecimalPipe.decorators = [
+    { type: Pipe, args: [{ name: 'number' },] },
+];
+/** @nocollapse */
+DecimalPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 function DecimalPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     DecimalPipe.decorators;
@@ -145,7 +146,7 @@ function DecimalPipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var PercentPipe = (function () {
+var PercentPipe = (function () {
     /**
      * @param {?} _locale
      */
@@ -161,15 +162,16 @@ export var PercentPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
-    PercentPipe.decorators = [
-        { type: Pipe, args: [{ name: 'percent' },] },
-    ];
-    /** @nocollapse */
-    PercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
     return PercentPipe;
 }());
+export { PercentPipe };
+PercentPipe.decorators = [
+    { type: Pipe, args: [{ name: 'percent' },] },
+];
+/** @nocollapse */
+PercentPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 function PercentPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     PercentPipe.decorators;
@@ -205,7 +207,7 @@ function PercentPipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var CurrencyPipe = (function () {
+var CurrencyPipe = (function () {
     /**
      * @param {?} _locale
      */
@@ -225,15 +227,16 @@ export var CurrencyPipe = (function () {
         if (digits === void 0) { digits = null; }
         return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
-    CurrencyPipe.decorators = [
-        { type: Pipe, args: [{ name: 'currency' },] },
-    ];
-    /** @nocollapse */
-    CurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    ]; };
     return CurrencyPipe;
 }());
+export { CurrencyPipe };
+CurrencyPipe.decorators = [
+    { type: Pipe, args: [{ name: 'currency' },] },
+];
+/** @nocollapse */
+CurrencyPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 function CurrencyPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     CurrencyPipe.decorators;

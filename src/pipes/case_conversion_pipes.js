@@ -14,7 +14,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * \@stable
  */
-export var LowerCasePipe = (function () {
+var LowerCasePipe = (function () {
     function LowerCasePipe() {
     }
     /**
@@ -29,13 +29,14 @@ export var LowerCasePipe = (function () {
         }
         return value.toLowerCase();
     };
-    LowerCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'lowercase' },] },
-    ];
-    /** @nocollapse */
-    LowerCasePipe.ctorParameters = function () { return []; };
     return LowerCasePipe;
 }());
+export { LowerCasePipe };
+LowerCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'lowercase' },] },
+];
+/** @nocollapse */
+LowerCasePipe.ctorParameters = function () { return []; };
 function LowerCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     LowerCasePipe.decorators;
@@ -62,7 +63,7 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-export var TitleCasePipe = (function () {
+var TitleCasePipe = (function () {
     function TitleCasePipe() {
     }
     /**
@@ -77,13 +78,14 @@ export var TitleCasePipe = (function () {
         }
         return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
     };
-    TitleCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'titlecase' },] },
-    ];
-    /** @nocollapse */
-    TitleCasePipe.ctorParameters = function () { return []; };
     return TitleCasePipe;
 }());
+export { TitleCasePipe };
+TitleCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'titlecase' },] },
+];
+/** @nocollapse */
+TitleCasePipe.ctorParameters = function () { return []; };
 function TitleCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     TitleCasePipe.decorators;
@@ -98,7 +100,7 @@ function TitleCasePipe_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var UpperCasePipe = (function () {
+var UpperCasePipe = (function () {
     function UpperCasePipe() {
     }
     /**
@@ -113,13 +115,14 @@ export var UpperCasePipe = (function () {
         }
         return value.toUpperCase();
     };
-    UpperCasePipe.decorators = [
-        { type: Pipe, args: [{ name: 'uppercase' },] },
-    ];
-    /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
     return UpperCasePipe;
 }());
+export { UpperCasePipe };
+UpperCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'uppercase' },] },
+];
+/** @nocollapse */
+UpperCasePipe.ctorParameters = function () { return []; };
 function UpperCasePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     UpperCasePipe.decorators;

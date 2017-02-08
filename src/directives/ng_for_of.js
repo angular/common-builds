@@ -12,7 +12,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, forwardRef, isDevMode } from '@angular/core';
 import { getTypeNameForDebugging } from '../facade/lang';
-export var NgForOfRow = (function () {
+var NgForOfRow = (function () {
     /**
      * @param {?} $implicit
      * @param {?} index
@@ -57,6 +57,7 @@ export var NgForOfRow = (function () {
     });
     return NgForOfRow;
 }());
+export { NgForOfRow };
 function NgForOfRow_tsickle_Closure_declarations() {
     /** @type {?} */
     NgForOfRow.prototype.$implicit;
@@ -128,7 +129,7 @@ function NgForOfRow_tsickle_Closure_declarations() {
  *
  * \@stable
  */
-export var NgForOf = (function () {
+var NgForOf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} _template
@@ -155,7 +156,7 @@ export var NgForOf = (function () {
             if (isDevMode() && fn != null && typeof fn !== 'function') {
                 // TODO(vicb): use a log service once there is a public one available
                 if ((console) && (console.warn)) {
-                    console.warn(("trackBy must be a function, but received " + JSON.stringify(fn) + ". ") +
+                    console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
                         "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
                 }
             }
@@ -252,26 +253,27 @@ export var NgForOf = (function () {
     NgForOf.prototype._perViewChange = function (view, record) {
         view.context.$implicit = record.item;
     };
-    NgForOf.decorators = [
-        { type: Directive, args: [{
-                    selector: '[ngFor][ngForOf]',
-                    providers: [{ provide: forwardRef(function () { return NgFor; }), useExisting: forwardRef(function () { return NgForOf; }) }]
-                },] },
-    ];
-    /** @nocollapse */
-    NgForOf.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-        { type: TemplateRef, },
-        { type: IterableDiffers, },
-        { type: ChangeDetectorRef, },
-    ]; };
-    NgForOf.propDecorators = {
-        'ngForOf': [{ type: Input },],
-        'ngForTrackBy': [{ type: Input },],
-        'ngForTemplate': [{ type: Input },],
-    };
     return NgForOf;
 }());
+export { NgForOf };
+NgForOf.decorators = [
+    { type: Directive, args: [{
+                selector: '[ngFor][ngForOf]',
+                providers: [{ provide: forwardRef(function () { return NgFor; }), useExisting: forwardRef(function () { return NgForOf; }) }]
+            },] },
+];
+/** @nocollapse */
+NgForOf.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: IterableDiffers, },
+    { type: ChangeDetectorRef, },
+]; };
+NgForOf.propDecorators = {
+    'ngForOf': [{ type: Input },],
+    'ngForTrackBy': [{ type: Input },],
+    'ngForTemplate': [{ type: Input },],
+};
 function NgForOf_tsickle_Closure_declarations() {
     /** @type {?} */
     NgForOf.decorators;
@@ -377,11 +379,12 @@ function RecordViewTuple_tsickle_Closure_declarations() {
  *
  * @deprecated v4.0.0 - Use `NgForOf<T>` instead.
  */
-export var NgFor = (function (_super) {
+var NgFor = (function (_super) {
     __extends(NgFor, _super);
     function NgFor() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return NgFor;
 }(NgForOf));
+export { NgFor };
 //# sourceMappingURL=ng_for_of.js.map

@@ -24,7 +24,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  *  \@experimental
  */
-export var I18nSelectPipe = (function () {
+var I18nSelectPipe = (function () {
     function I18nSelectPipe() {
     }
     /**
@@ -46,13 +46,14 @@ export var I18nSelectPipe = (function () {
         }
         return '';
     };
-    I18nSelectPipe.decorators = [
-        { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    ];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () { return []; };
     return I18nSelectPipe;
 }());
+export { I18nSelectPipe };
+I18nSelectPipe.decorators = [
+    { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+];
+/** @nocollapse */
+I18nSelectPipe.ctorParameters = function () { return []; };
 function I18nSelectPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     I18nSelectPipe.decorators;

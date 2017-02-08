@@ -19,7 +19,7 @@ import { Pipe } from '@angular/core';
  *
  * \@stable
  */
-export var JsonPipe = (function () {
+var JsonPipe = (function () {
     function JsonPipe() {
     }
     /**
@@ -27,13 +27,14 @@ export var JsonPipe = (function () {
      * @return {?}
      */
     JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
-    JsonPipe.decorators = [
-        { type: Pipe, args: [{ name: 'json', pure: false },] },
-    ];
-    /** @nocollapse */
-    JsonPipe.ctorParameters = function () { return []; };
     return JsonPipe;
 }());
+export { JsonPipe };
+JsonPipe.decorators = [
+    { type: Pipe, args: [{ name: 'json', pure: false },] },
+];
+/** @nocollapse */
+JsonPipe.ctorParameters = function () { return []; };
 function JsonPipe_tsickle_Closure_declarations() {
     /** @type {?} */
     JsonPipe.decorators;

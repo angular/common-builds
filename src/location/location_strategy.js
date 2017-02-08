@@ -25,7 +25,7 @@ import { InjectionToken } from '@angular/core';
  * \@stable
  * @abstract
  */
-export var LocationStrategy = (function () {
+var LocationStrategy = (function () {
     function LocationStrategy() {
     }
     /**
@@ -81,6 +81,7 @@ export var LocationStrategy = (function () {
     LocationStrategy.prototype.getBaseHref = function () { };
     return LocationStrategy;
 }());
+export { LocationStrategy };
 /**
  * The `APP_BASE_HREF` token represents the base href to be used with the
  * {@link PathLocationStrategy}.

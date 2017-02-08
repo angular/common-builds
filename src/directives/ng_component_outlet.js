@@ -63,7 +63,7 @@ import { ComponentFactoryResolver, Directive, Input, ViewContainerRef } from '@a
  *
  * \@experimental
  */
-export var NgComponentOutlet = (function () {
+var NgComponentOutlet = (function () {
     /**
      * @param {?} _viewContainerRef
      */
@@ -108,21 +108,22 @@ export var NgComponentOutlet = (function () {
         if (this._moduleRef)
             this._moduleRef.destroy();
     };
-    NgComponentOutlet.decorators = [
-        { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgComponentOutlet.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-    ]; };
-    NgComponentOutlet.propDecorators = {
-        'ngComponentOutlet': [{ type: Input },],
-        'ngComponentOutletInjector': [{ type: Input },],
-        'ngComponentOutletContent': [{ type: Input },],
-        'ngComponentOutletNgModuleFactory': [{ type: Input },],
-    };
     return NgComponentOutlet;
 }());
+export { NgComponentOutlet };
+NgComponentOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+];
+/** @nocollapse */
+NgComponentOutlet.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+]; };
+NgComponentOutlet.propDecorators = {
+    'ngComponentOutlet': [{ type: Input },],
+    'ngComponentOutletInjector': [{ type: Input },],
+    'ngComponentOutletContent': [{ type: Input },],
+    'ngComponentOutletNgModuleFactory': [{ type: Input },],
+};
 function NgComponentOutlet_tsickle_Closure_declarations() {
     /** @type {?} */
     NgComponentOutlet.decorators;

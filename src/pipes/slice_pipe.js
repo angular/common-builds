@@ -51,7 +51,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * \@stable
  */
-export var SlicePipe = (function () {
+var SlicePipe = (function () {
     function SlicePipe() {
     }
     /**
@@ -73,13 +73,14 @@ export var SlicePipe = (function () {
      * @return {?}
      */
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
-    SlicePipe.decorators = [
-        { type: Pipe, args: [{ name: 'slice', pure: false },] },
-    ];
-    /** @nocollapse */
-    SlicePipe.ctorParameters = function () { return []; };
     return SlicePipe;
 }());
+export { SlicePipe };
+SlicePipe.decorators = [
+    { type: Pipe, args: [{ name: 'slice', pure: false },] },
+];
+/** @nocollapse */
+SlicePipe.ctorParameters = function () { return []; };
 function SlicePipe_tsickle_Closure_declarations() {
     /** @type {?} */
     SlicePipe.decorators;

@@ -30,7 +30,7 @@ import { Directive, Input, ViewContainerRef } from '@angular/core';
  *
  * \@experimental
  */
-export var NgTemplateOutlet = (function () {
+var NgTemplateOutlet = (function () {
     /**
      * @param {?} _viewContainerRef
      */
@@ -59,20 +59,21 @@ export var NgTemplateOutlet = (function () {
             this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
         }
     };
-    NgTemplateOutlet.decorators = [
-        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgTemplateOutlet.ctorParameters = function () { return [
-        { type: ViewContainerRef, },
-    ]; };
-    NgTemplateOutlet.propDecorators = {
-        'ngTemplateOutletContext': [{ type: Input },],
-        'ngTemplateOutlet': [{ type: Input },],
-        'ngOutletContext': [{ type: Input },],
-    };
     return NgTemplateOutlet;
 }());
+export { NgTemplateOutlet };
+NgTemplateOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+];
+/** @nocollapse */
+NgTemplateOutlet.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+]; };
+NgTemplateOutlet.propDecorators = {
+    'ngTemplateOutletContext': [{ type: Input },],
+    'ngTemplateOutlet': [{ type: Input },],
+    'ngOutletContext': [{ type: Input },],
+};
 function NgTemplateOutlet_tsickle_Closure_declarations() {
     /** @type {?} */
     NgTemplateOutlet.decorators;

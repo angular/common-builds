@@ -14,22 +14,23 @@ import { COMMON_PIPES } from './pipes/index';
  *
  * \@stable
  */
-export var CommonModule = (function () {
+var CommonModule = (function () {
     function CommonModule() {
     }
-    CommonModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                    providers: [
-                        { provide: NgLocalization, useClass: NgLocaleLocalization },
-                    ],
-                },] },
-    ];
-    /** @nocollapse */
-    CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
+export { CommonModule };
+CommonModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                providers: [
+                    { provide: NgLocalization, useClass: NgLocaleLocalization },
+                ],
+            },] },
+];
+/** @nocollapse */
+CommonModule.ctorParameters = function () { return []; };
 function CommonModule_tsickle_Closure_declarations() {
     /** @type {?} */
     CommonModule.decorators;
@@ -42,16 +43,17 @@ function CommonModule_tsickle_Closure_declarations() {
 /**
  * A module to contain deprecated directives.
  */
-export var CommonDeprecatedModule = (function () {
+var CommonDeprecatedModule = (function () {
     function CommonDeprecatedModule() {
     }
-    CommonDeprecatedModule.decorators = [
-        { type: NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] },] },
-    ];
-    /** @nocollapse */
-    CommonDeprecatedModule.ctorParameters = function () { return []; };
     return CommonDeprecatedModule;
 }());
+export { CommonDeprecatedModule };
+CommonDeprecatedModule.decorators = [
+    { type: NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] },] },
+];
+/** @nocollapse */
+CommonDeprecatedModule.ctorParameters = function () { return []; };
 function CommonDeprecatedModule_tsickle_Closure_declarations() {
     /** @type {?} */
     CommonDeprecatedModule.decorators;

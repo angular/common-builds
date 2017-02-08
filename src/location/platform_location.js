@@ -25,7 +25,7 @@
  * \@stable
  * @abstract
  */
-export var PlatformLocation = (function () {
+var PlatformLocation = (function () {
     function PlatformLocation() {
     }
     /**
@@ -97,4 +97,5 @@ export var PlatformLocation = (function () {
     PlatformLocation.prototype.back = function () { };
     return PlatformLocation;
 }());
+export { PlatformLocation };
 //# sourceMappingURL=platform_location.js.map
