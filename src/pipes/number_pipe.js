@@ -8,7 +8,7 @@
 import { Inject, LOCALE_ID, Pipe } from '@angular/core/index';
 import { NumberWrapper } from '../facade/lang';
 import { NumberFormatStyle, NumberFormatter } from './intl';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 const /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 /**
  * @param {?} pipe
@@ -26,7 +26,7 @@ function formatNumber(pipe, locale, value, style, digits, currency = null, curre
     // Convert strings to numbers
     value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
     if (typeof value !== 'number') {
-        throw new InvalidPipeArgumentError(pipe, value);
+        throw invalidPipeArgumentError(pipe, value);
     }
     let /** @type {?} */ minInt;
     let /** @type {?} */ minFraction;

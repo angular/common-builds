@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Pipe } from '@angular/core/index';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
  * Transforms text to lowercase.
  *
@@ -23,7 +23,7 @@ export class LowerCasePipe {
         if (!value)
             return value;
         if (typeof value !== 'string') {
-            throw new InvalidPipeArgumentError(LowerCasePipe, value);
+            throw invalidPipeArgumentError(LowerCasePipe, value);
         }
         return value.toLowerCase();
     }
@@ -68,7 +68,7 @@ export class TitleCasePipe {
         if (!value)
             return value;
         if (typeof value !== 'string') {
-            throw new InvalidPipeArgumentError(TitleCasePipe, value);
+            throw invalidPipeArgumentError(TitleCasePipe, value);
         }
         return value.split(/\b/g).map(word => titleCaseWord(word)).join('');
     }
@@ -101,7 +101,7 @@ export class UpperCasePipe {
         if (!value)
             return value;
         if (typeof value !== 'string') {
-            throw new InvalidPipeArgumentError(UpperCasePipe, value);
+            throw invalidPipeArgumentError(UpperCasePipe, value);
         }
         return value.toUpperCase();
     }

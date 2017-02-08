@@ -7,7 +7,7 @@
  */
 import { Pipe } from '@angular/core/index';
 import { NgLocalization, getPluralCategory } from '../localization';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 const /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
@@ -42,7 +42,7 @@ export class I18nPluralPipe {
         if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
-            throw new InvalidPipeArgumentError(I18nPluralPipe, pluralMap);
+            throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
         const /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());

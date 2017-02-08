@@ -7,7 +7,7 @@
  */
 import { ChangeDetectorRef, Pipe, WrappedValue } from '@angular/core/index';
 import { isObservable, isPromise } from '../private_import_core';
-import { InvalidPipeArgumentError } from './invalid_pipe_argument_error';
+import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 class ObservableStrategy {
     /**
      * @param {?} async
@@ -137,7 +137,7 @@ export class AsyncPipe {
         if (isObservable(obj)) {
             return _observableStrategy;
         }
-        throw new InvalidPipeArgumentError(AsyncPipe, obj);
+        throw invalidPipeArgumentError(AsyncPipe, obj);
     }
     /**
      * @return {?}
