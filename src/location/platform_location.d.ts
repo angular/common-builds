@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { OpaqueToken } from '@angular/core';
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
@@ -43,6 +44,11 @@ export declare abstract class PlatformLocation {
     abstract forward(): void;
     abstract back(): void;
 }
+/**
+ * @whatItDoes indicates when a location is initialized
+ * @experimental
+ */
+export declare const LOCATION_INITIALIZED: OpaqueToken;
 /**
  * A serializable version of the event from onPopState or onHashChange
  *
