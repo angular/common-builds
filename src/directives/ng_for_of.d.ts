@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, DoCheck, IterableDiffers, NgIterable, OnChanges, SimpleChanges, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+import { DoCheck, IterableDiffers, NgIterable, OnChanges, SimpleChanges, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
 export declare class NgForOfRow<T> {
     $implicit: T;
     index: number;
@@ -83,12 +83,11 @@ export declare class NgForOf<T> implements DoCheck, OnChanges {
     private _viewContainer;
     private _template;
     private _differs;
-    private _cdr;
     ngForOf: NgIterable<T>;
     ngForTrackBy: TrackByFunction<T>;
     private _differ;
     private _trackByFn;
-    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfRow<T>>, _differs: IterableDiffers, _cdr: ChangeDetectorRef);
+    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfRow<T>>, _differs: IterableDiffers);
     ngForTemplate: TemplateRef<NgForOfRow<T>>;
     ngOnChanges(changes: SimpleChanges): void;
     ngDoCheck(): void;

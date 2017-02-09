@@ -47,7 +47,7 @@ var NgStyle = (function () {
         set: function (v) {
             this._ngStyle = v;
             if (!this._differ && v) {
-                this._differ = this._differs.find(v).create(null);
+                this._differ = this._differs.find(v).create();
             }
         },
         enumerable: true,

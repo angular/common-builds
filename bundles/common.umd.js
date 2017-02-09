@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.7-56e2f84
+ * @license Angular v4.0.0-beta.7-45cc444
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1374,10 +1374,10 @@
                 this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
                 if (this._rawClass) {
                     if (isListLikeIterable(this._rawClass)) {
-                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create(null);
+                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
                     }
                     else {
-                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create(null);
+                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
                     }
                 }
             },
@@ -1738,13 +1738,11 @@
          * @param {?} _viewContainer
          * @param {?} _template
          * @param {?} _differs
-         * @param {?} _cdr
          */
-        function NgForOf(_viewContainer, _template, _differs, _cdr) {
+        function NgForOf(_viewContainer, _template, _differs) {
             this._viewContainer = _viewContainer;
             this._template = _template;
             this._differs = _differs;
-            this._cdr = _cdr;
             this._differ = null;
         }
         Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
@@ -1795,7 +1793,7 @@
                 var /** @type {?} */ value = changes['ngForOf'].currentValue;
                 if (!this._differ && value) {
                     try {
-                        this._differ = this._differs.find(value).create(this._cdr, this.ngForTrackBy);
+                        this._differ = this._differs.find(value).create(this.ngForTrackBy);
                     }
                     catch (e) {
                         throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
@@ -1870,7 +1868,6 @@
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
         { type: _angular_core.IterableDiffers, },
-        { type: _angular_core.ChangeDetectorRef, },
     ]; };
     NgForOf.propDecorators = {
         'ngForOf': [{ type: _angular_core.Input },],
@@ -2579,7 +2576,7 @@
             set: function (v) {
                 this._ngStyle = v;
                 if (!this._differ && v) {
-                    this._differ = this._differs.find(v).create(null);
+                    this._differ = this._differs.find(v).create();
                 }
             },
             enumerable: true,
@@ -3880,7 +3877,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-56e2f84');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-45cc444');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
