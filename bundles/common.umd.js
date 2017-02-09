@@ -2833,7 +2833,7 @@
             }
             if (obj !== this._obj) {
                 this._dispose();
-                return this.transform(obj);
+                return this.transform(/** @type {?} */ (obj));
             }
             if (this._latestValue === this._latestReturnedValue) {
                 return this._latestReturnedValue;
