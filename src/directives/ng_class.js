@@ -71,10 +71,10 @@ export class NgClass {
         this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
         if (this._rawClass) {
             if (isListLikeIterable(this._rawClass)) {
-                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create(null);
+                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
             }
             else {
-                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create(null);
+                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
             }
         }
     }

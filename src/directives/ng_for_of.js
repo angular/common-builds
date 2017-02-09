@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, forwardRef, isDevMode } from '@angular/core/index';
+import { Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, forwardRef, isDevMode } from '@angular/core/index';
 import { getTypeNameForDebugging } from '../facade/lang';
 export class NgForOfRow {
     /**
@@ -111,13 +111,11 @@ export class NgForOf {
      * @param {?} _viewContainer
      * @param {?} _template
      * @param {?} _differs
-     * @param {?} _cdr
      */
-    constructor(_viewContainer, _template, _differs, _cdr) {
+    constructor(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
-        this._cdr = _cdr;
         this._differ = null;
     }
     /**
@@ -160,7 +158,7 @@ export class NgForOf {
             const /** @type {?} */ value = changes['ngForOf'].currentValue;
             if (!this._differ && value) {
                 try {
-                    this._differ = this._differs.find(value).create(this._cdr, this.ngForTrackBy);
+                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
                 catch (e) {
                     throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
@@ -233,7 +231,6 @@ NgForOf.ctorParameters = () => [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: IterableDiffers, },
-    { type: ChangeDetectorRef, },
 ];
 NgForOf.propDecorators = {
     'ngForOf': [{ type: Input },],
@@ -262,8 +259,6 @@ function NgForOf_tsickle_Closure_declarations() {
     NgForOf.prototype._template;
     /** @type {?} */
     NgForOf.prototype._differs;
-    /** @type {?} */
-    NgForOf.prototype._cdr;
 }
 class RecordViewTuple {
     /**

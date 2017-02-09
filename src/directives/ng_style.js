@@ -46,7 +46,7 @@ export class NgStyle {
     set ngStyle(v) {
         this._ngStyle = v;
         if (!this._differ && v) {
-            this._differ = this._differs.find(v).create(null);
+            this._differ = this._differs.find(v).create();
         }
     }
     /**
