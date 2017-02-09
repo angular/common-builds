@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.7-45cc444
+ * @license Angular v4.0.0-beta.7-ac6f8e3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2833,7 +2833,7 @@
             }
             if (obj !== this._obj) {
                 this._dispose();
-                return this.transform(obj);
+                return this.transform(/** @type {?} */ (obj));
             }
             if (this._latestValue === this._latestReturnedValue) {
                 return this._latestReturnedValue;
@@ -3877,7 +3877,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-45cc444');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-ac6f8e3');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

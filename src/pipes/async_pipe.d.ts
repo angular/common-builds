@@ -41,7 +41,9 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _strategy;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
-    transform(obj: Observable<any> | Promise<any> | EventEmitter<any>): any;
+    transform<T>(obj: Observable<T>): T | null;
+    transform<T>(obj: Promise<T>): T | null;
+    transform<T>(obj: EventEmitter<T>): T | null;
     private _subscribe(obj);
     private _selectStrategy(obj);
     private _dispose();
