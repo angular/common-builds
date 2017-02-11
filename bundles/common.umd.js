@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.7-2769370
+ * @license Angular v4.0.0-beta.7-d3f174a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3877,7 +3877,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-2769370');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.7-d3f174a');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
