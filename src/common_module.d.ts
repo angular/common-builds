@@ -7,6 +7,8 @@ export declare class CommonModule {
 }
 /**
  * A module to contain deprecated directives.
+ *
+ * @deprecated
  */
-export declare class CommonDeprecatedModule {
+export declare class DeprecatedCommonModule {
 }
