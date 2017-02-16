@@ -38,21 +38,23 @@ function CommonModule_tsickle_Closure_declarations() {
 }
 /**
  * A module to contain deprecated directives.
+ *
+ * @deprecated
  */
-export class CommonDeprecatedModule {
+export class DeprecatedCommonModule {
 }
-CommonDeprecatedModule.decorators = [
+DeprecatedCommonModule.decorators = [
     { type: NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] },] },
 ];
 /** @nocollapse */
-CommonDeprecatedModule.ctorParameters = () => [];
-function CommonDeprecatedModule_tsickle_Closure_declarations() {
+DeprecatedCommonModule.ctorParameters = () => [];
+function DeprecatedCommonModule_tsickle_Closure_declarations() {
     /** @type {?} */
-    CommonDeprecatedModule.decorators;
+    DeprecatedCommonModule.decorators;
     /**
      * @nocollapse
      * @type {?}
      */
-    CommonDeprecatedModule.ctorParameters;
+    DeprecatedCommonModule.ctorParameters;
 }
 //# sourceMappingURL=common_module.js.map

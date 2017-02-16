@@ -2713,6 +2713,10 @@
         NgPlural,
         NgPluralCase,
     ];
+    /**
+     * A colletion of deprecated directives that are no longer part of the core module.
+     */
+    var /** @type {?} */ COMMON_DEPRECATED_DIRECTIVES = [NgFor];
 
     var /** @type {?} */ isPromise = _angular_core.__core_private__.isPromise;
     var /** @type {?} */ isObservable = _angular_core.__core_private__.isObservable;
@@ -3873,6 +3877,21 @@
     ];
     /** @nocollapse */
     CommonModule.ctorParameters = function () { return []; };
+    /**
+     * A module to contain deprecated directives.
+     *
+     * @deprecated
+     */
+    var DeprecatedCommonModule = (function () {
+        function DeprecatedCommonModule() {
+        }
+        return DeprecatedCommonModule;
+    }());
+    DeprecatedCommonModule.decorators = [
+        { type: _angular_core.NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] },] },
+    ];
+    /** @nocollapse */
+    DeprecatedCommonModule.ctorParameters = function () { return []; };
 
     /**
      * @stable
@@ -3882,6 +3901,7 @@
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
+    exports.DeprecatedCommonModule = DeprecatedCommonModule;
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgForOf = NgForOf;
@@ -3913,5 +3933,10 @@
     exports.HashLocationStrategy = HashLocationStrategy;
     exports.PathLocationStrategy = PathLocationStrategy;
     exports.Location = Location;
+    exports.ɵd = COMMON_DEPRECATED_DIRECTIVES;
+    exports.ɵc = COMMON_DIRECTIVES;
+    exports.ɵa = NgForOfRow;
+    exports.ɵb = NgIfContext;
+    exports.ɵe = COMMON_PIPES;
 
 }));
