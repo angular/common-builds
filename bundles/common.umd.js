@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-2a191ca
+ * @license Angular v4.0.0-beta.8-2ddd1c3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -108,11 +108,6 @@
         PlatformLocation.prototype.back = function () { };
         return PlatformLocation;
     }());
-    /**
-     * @whatItDoes indicates when a location is initialized
-     * @experimental
-     */
-    var /** @type {?} */ LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialized');
 
     /**
      * `LocationStrategy` is responsible for representing and reading route state
@@ -3901,7 +3896,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-2a191ca');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-beta.8-2ddd1c3');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
@@ -3933,7 +3928,6 @@
     exports.TitleCasePipe = TitleCasePipe;
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
-    exports.LOCATION_INITIALIZED = LOCATION_INITIALIZED;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;
     exports.HashLocationStrategy = HashLocationStrategy;

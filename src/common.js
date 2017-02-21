@@ -10,7 +10,7 @@
  * @description
  * Entry point for all public APIs of the common package.
  */
-export { PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location } from './location/index';
+export { PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location } from './location/index';
 export { NgLocaleLocalization, NgLocalization } from './localization';
 export { CommonModule, DeprecatedCommonModule } from './common_module';
 export { NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet } from './directives/index';
