@@ -1,4 +1,12 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { InjectionToken } from '@angular/core';
+/**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  *
@@ -98,4 +106,9 @@ var PlatformLocation = (function () {
     return PlatformLocation;
 }());
 export { PlatformLocation };
+/**
+ * @whatItDoes indicates when a location is initialized
+ * @experimental
+ */
+export var /** @type {?} */ LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 //# sourceMappingURL=platform_location.js.map
