@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-fcc1d17
+ * @license Angular v4.0.0-beta.8-88755b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3658,6 +3658,6 @@ DeprecatedCommonModule.ctorParameters = () => [];
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-fcc1d17');
+const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-88755b0');
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, DeprecatedCommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DEPRECATED_DIRECTIVES as ɵd, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵe };
