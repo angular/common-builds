@@ -1,14 +1,15 @@
 {
   "name": "@angular/common",
-  "version": "4.0.0-beta.8-bb0460b",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "Angular - commonly needed directives and services",
-  "main": "bundles/common.umd.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
+  "main": "./bundles/common.umd.js",
+  "module": "./@angular/common.es5.js",
+  "es2015": "./@angular/common.js",
+  "typings": "./typings/common.d.ts",
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "4.0.0-beta.8-bb0460b"
+    "@angular/core": "0.0.0-PLACEHOLDER"
   },
   "repository": {
     "type": "git",

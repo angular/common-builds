@@ -1,1 +1,1 @@
-{"main": "../bundles/common-testing.umd.js"}
+{"typings": "../typings/testing/testing.d.ts", "main": "../bundles/common-testing.umd.js", "module": "../@angular/common/testing.es5.js", "es2015": "../@angular/common/testing.js"}
