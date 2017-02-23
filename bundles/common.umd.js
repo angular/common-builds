@@ -17,7 +17,7 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ɵe = exports.ɵb = exports.ɵa = exports.ɵc = exports.ɵd = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.PlatformLocation = exports.VERSION = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.DeprecatedCommonModule = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
+    exports.ɵe = exports.ɵb = exports.ɵa = exports.ɵc = exports.ɵd = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.PlatformLocation = exports.VERSION = exports.isPlatformWorkerUi = exports.isPlatformWorkerApp = exports.isPlatformServer = exports.isPlatformBrowser = exports.ɵPLATFORM_WORKER_UI_ID = exports.ɵPLATFORM_WORKER_APP_ID = exports.ɵPLATFORM_SERVER_ID = exports.ɵPLATFORM_BROWSER_ID = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.DeprecatedCommonModule = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
 
     function _toConsumableArray(arr) {
         if (Array.isArray(arr)) {
@@ -3505,6 +3505,60 @@
     };
 
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */var /** @type {?} */PLATFORM_BROWSER_ID = 'browser';
+    var /** @type {?} */PLATFORM_SERVER_ID = 'server';
+    var /** @type {?} */PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
+    var /** @type {?} */PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
+    /**
+     * Returns whether a platform id represents a browser platform.
+     * \@experimental
+     * @param {?} platformId
+     * @return {?}
+     */
+    function isPlatformBrowser(platformId) {
+        return platformId === PLATFORM_BROWSER_ID;
+    }
+    /**
+     * Returns whether a platform id represents a server platform.
+     * \@experimental
+     * @param {?} platformId
+     * @return {?}
+     */
+    function isPlatformServer(platformId) {
+        return platformId === PLATFORM_SERVER_ID;
+    }
+    /**
+     * Returns whether a platform id represents a web worker app platform.
+     * \@experimental
+     * @param {?} platformId
+     * @return {?}
+     */
+    function isPlatformWorkerApp(platformId) {
+        return platformId === PLATFORM_WORKER_APP_ID;
+    }
+    /**
+     * Returns whether a platform id represents a web worker UI platform.
+     * \@experimental
+     * @param {?} platformId
+     * @return {?}
+     */
+    function isPlatformWorkerUi(platformId) {
+        return platformId === PLATFORM_WORKER_UI_ID;
+    }
+
+    /**
      * @stable
      */
     var /** @type {?} */VERSION = new _core.Version('0.0.0-PLACEHOLDER');
@@ -3537,6 +3591,14 @@
     exports.SlicePipe = SlicePipe;
     exports.UpperCasePipe = UpperCasePipe;
     exports.TitleCasePipe = TitleCasePipe;
+    exports.ɵPLATFORM_BROWSER_ID = PLATFORM_BROWSER_ID;
+    exports.ɵPLATFORM_SERVER_ID = PLATFORM_SERVER_ID;
+    exports.ɵPLATFORM_WORKER_APP_ID = PLATFORM_WORKER_APP_ID;
+    exports.ɵPLATFORM_WORKER_UI_ID = PLATFORM_WORKER_UI_ID;
+    exports.isPlatformBrowser = isPlatformBrowser;
+    exports.isPlatformServer = isPlatformServer;
+    exports.isPlatformWorkerApp = isPlatformWorkerApp;
+    exports.isPlatformWorkerUi = isPlatformWorkerUi;
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
     exports.LocationStrategy = LocationStrategy;
