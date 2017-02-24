@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-beta.8-ee747f7
+ * @license Angular v4.0.0-beta.8-e99d721
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1591,12 +1591,12 @@ class NgForOfRow {
  * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
  * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
  *
- * With `<template>` element:
+ * With `<ng-template>` element:
  *
  * ```
- * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+ * <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
  *   <li>...</li>
- * </template>
+ * </ng-template>
  * ```
  *
  * ### Example
@@ -1766,7 +1766,7 @@ const /** @type {?} */ NgFor = NgForOf;
  * # Showing an alternative template using `else`
  *
  * If it is necessary to display a template when the `expression` is falsy use the `else` template
- * binding as shown. Note that the `else` binding points to a `<template>` labeled `#elseBlock`.
+ * binding as shown. Note that the `else` binding points to a `<ng-template>` labeled `#elseBlock`.
  * The template can be defined anywhere in the component view but is typically placed right after
  * `ngIf` for readability.
  *
@@ -1816,25 +1816,25 @@ const /** @type {?} */ NgFor = NgForOf;
  * Simple form:
  * - `<div *ngIf="condition">...</div>`
  * - `<div template="ngIf condition">...</div>`
- * - `<template [ngIf]="condition"><div>...</div></template>`
+ * - `<ng-template [ngIf]="condition"><div>...</div></ng-template>`
  *
  * Form with an else block:
  * ```
  * <div *ngIf="condition; else elseBlock">...</div>
- * <template #elseBlock>...</template>
+ * <ng-template #elseBlock>...</ng-template>
  * ```
  *
  * Form with a `then` and `else` block:
  * ```
  * <div *ngIf="condition; then thenBlock else elseBlock"></div>
- * <template #thenBlock>...</template>
- * <template #elseBlock>...</template>
+ * <ng-template #thenBlock>...</ng-template>
+ * <ng-template #elseBlock>...</ng-template>
  * ```
  *
  * Form with storing the value locally:
  * ```
  * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
- * <template #elseBlock>...</template>
+ * <ng-template #elseBlock>...</ng-template>
  * ```
  *
  * \@stable
@@ -3632,6 +3632,6 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-ee747f7');
+const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-e99d721');
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };
