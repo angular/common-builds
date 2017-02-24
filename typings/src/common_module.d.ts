@@ -5,10 +5,3 @@
  */
 export declare class CommonModule {
 }
-/**
- * A module to contain deprecated directives.
- *
- * @deprecated
- */
-export declare class DeprecatedCommonModule {
-}

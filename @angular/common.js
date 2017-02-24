@@ -1,9 +1,9 @@
 /**
- * @license Angular v4.0.0-beta.8-c53621b
+ * @license Angular v4.0.0-beta.8-a23634d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, forwardRef, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
 
 /**
  * This class should not be used directly by an application developer. Instead, use
@@ -1721,10 +1721,7 @@ class NgForOf {
     }
 }
 NgForOf.decorators = [
-    { type: Directive, args: [{
-                selector: '[ngFor][ngForOf]',
-                providers: [{ provide: forwardRef(() => NgFor), useExisting: forwardRef(() => NgForOf) }]
-            },] },
+    { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
 ];
 /** @nocollapse */
 NgForOf.ctorParameters = () => [
@@ -1748,70 +1745,9 @@ class RecordViewTuple {
     }
 }
 /**
- * The `NgFor` directive instantiates a template once per item from an iterable. The context
- * for each instantiated template inherits from the outer context with the given loop variable
- * set to the current item from the iterable.
- *
- * ### Local Variables
- *
- * `NgFor` provides several exported values that can be aliased to local variables:
- *
- * * `index` will be set to the current loop iteration for each template context.
- * * `first` will be set to a boolean value indicating whether the item is the first one in the
- *   iteration.
- * * `last` will be set to a boolean value indicating whether the item is the last one in the
- *   iteration.
- * * `even` will be set to a boolean value indicating whether this item has an even index.
- * * `odd` will be set to a boolean value indicating whether this item has an odd index.
- *
- * ### Change Propagation
- *
- * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
- *
- * * When an item is added, a new instance of the template is added to the DOM.
- * * When an item is removed, its template instance is removed from the DOM.
- * * When items are reordered, their respective templates are reordered in the DOM.
- * * Otherwise, the DOM element for that item will remain the same.
- *
- * Angular uses object identity to track insertions and deletions within the iterator and reproduce
- * those changes in the DOM. This has important implications for animations and any stateful
- * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
- * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
- * such as user input.
- *
- * It is possible for the identities of elements in the iterator to change while the data does not.
- * This can happen, for example, if the iterator produced from an RPC to the server, and that
- * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
- * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
- * elements were deleted and all new elements inserted). This is an expensive operation and should
- * be avoided if possible.
- *
- * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
- * `trackBy` takes a function which has two arguments: `index` and `item`.
- * If `trackBy` is given, Angular tracks changes by the return value of the function.
- *
- * ### Syntax
- *
- * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
- * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
- *
- * With `<template>` element:
- *
- * ```
- * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
- *   <li>...</li>
- * </template>
- * ```
- *
- * ### Example
- *
- * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
- * example.
- *
- * @deprecated v4.0.0 - Use `NgForOf<T>` instead.
+ * @deprecated from v4.0.0 - Use NgForOf instead.
  */
-class NgFor extends NgForOf {
-}
+const /** @type {?} */ NgFor = NgForOf;
 
 /**
  * Conditionally includes a template based on the value of an `expression`.
@@ -2531,10 +2467,6 @@ const /** @type {?} */ COMMON_DIRECTIVES = [
     NgPlural,
     NgPluralCase,
 ];
-/**
- * A colletion of deprecated directives that are no longer part of the core module.
- */
-const /** @type {?} */ COMMON_DEPRECATED_DIRECTIVES = [NgFor];
 
 /**
  * @param {?} type
@@ -3642,18 +3574,6 @@ CommonModule.decorators = [
 ];
 /** @nocollapse */
 CommonModule.ctorParameters = () => [];
-/**
- * A module to contain deprecated directives.
- *
- * @deprecated
- */
-class DeprecatedCommonModule {
-}
-DeprecatedCommonModule.decorators = [
-    { type: NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] },] },
-];
-/** @nocollapse */
-DeprecatedCommonModule.ctorParameters = () => [];
 
 /**
  * @license
@@ -3712,6 +3632,6 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-c53621b');
+const /** @type {?} */ VERSION = new Version('4.0.0-beta.8-a23634d');
 
-export { NgLocaleLocalization, NgLocalization, CommonModule, DeprecatedCommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DEPRECATED_DIRECTIVES as ɵd, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵe };
+export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };

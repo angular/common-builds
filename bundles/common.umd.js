@@ -17,7 +17,7 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ɵe = exports.ɵb = exports.ɵa = exports.ɵc = exports.ɵd = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.PlatformLocation = exports.VERSION = exports.isPlatformWorkerUi = exports.isPlatformWorkerApp = exports.isPlatformServer = exports.isPlatformBrowser = exports.ɵPLATFORM_WORKER_UI_ID = exports.ɵPLATFORM_WORKER_APP_ID = exports.ɵPLATFORM_SERVER_ID = exports.ɵPLATFORM_BROWSER_ID = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.DeprecatedCommonModule = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
+    exports.ɵd = exports.ɵb = exports.ɵa = exports.ɵc = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.PlatformLocation = exports.VERSION = exports.isPlatformWorkerUi = exports.isPlatformWorkerApp = exports.isPlatformServer = exports.isPlatformBrowser = exports.ɵPLATFORM_WORKER_UI_ID = exports.ɵPLATFORM_WORKER_APP_ID = exports.ɵPLATFORM_SERVER_ID = exports.ɵPLATFORM_BROWSER_ID = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
 
     function _toConsumableArray(arr) {
         if (Array.isArray(arr)) {
@@ -1628,14 +1628,7 @@
         return NgForOf;
     }();
 
-    NgForOf.decorators = [{ type: _core.Directive, args: [{
-            selector: '[ngFor][ngForOf]',
-            providers: [{ provide: (0, _core.forwardRef)(function () {
-                    return NgFor;
-                }), useExisting: (0, _core.forwardRef)(function () {
-                    return NgForOf;
-                }) }]
-        }] }];
+    NgForOf.decorators = [{ type: _core.Directive, args: [{ selector: '[ngFor][ngForOf]' }] }];
     /** @nocollapse */
     NgForOf.ctorParameters = function () {
         return [{ type: _core.ViewContainerRef }, { type: _core.TemplateRef }, { type: _core.IterableDiffers }];
@@ -1658,17 +1651,101 @@
         this.view = view;
     };
 
-    var NgFor = function (_NgForOf) {
-        _inherits(NgFor, _NgForOf);
+    /**
+     * @deprecated from v4.0.0 - Use NgForOf instead.
+     */
+    var /** @type {?} */NgFor = NgForOf;
 
-        function NgFor() {
-            _classCallCheck(this, NgFor);
-
-            return _possibleConstructorReturn(this, (NgFor.__proto__ || Object.getPrototypeOf(NgFor)).apply(this, arguments));
-        }
-
-        return NgFor;
-    }(NgForOf);
+    /**
+     * Conditionally includes a template based on the value of an `expression`.
+     *
+     * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
+     * when expression is truthy or falsy respectively. Typically the:
+     *  - `then` template is the inline template of `ngIf` unless bound to a different value.
+     *  - `else` template is blank unless it is bound.
+     *
+     * # Most common usage
+     *
+     * The most common usage of the `ngIf` directive is to conditionally show the inline template as
+     * seen in this example:
+     * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
+     *
+     * # Showing an alternative template using `else`
+     *
+     * If it is necessary to display a template when the `expression` is falsy use the `else` template
+     * binding as shown. Note that the `else` binding points to a `<template>` labeled `#elseBlock`.
+     * The template can be defined anywhere in the component view but is typically placed right after
+     * `ngIf` for readability.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
+     *
+     * # Using non-inlined `then` template
+     *
+     * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
+     * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
+     * change at runtime as shown in this example.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
+     *
+     * # Storing conditional result in a variable
+     *
+     * A common pattern is that we need to show a set of properties from the same object. If the
+     * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
+     * dereferencing a `null` value. This is especially the case when waiting on async data such as
+     * when using the `async` pipe as shown in folowing example:
+     *
+     * ```
+     * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
+     * ```
+     *
+     * There are several inefficiencies in the above example:
+     *  - We create multiple subscriptions on `userStream`. One for each `async` pipe, or two in the
+     *    example above.
+     *  - We cannot display an alternative screen while waiting for the data to arrive asynchronously.
+     *  - We have to use the safe-traversal-operator `?.` to access properties, which is cumbersome.
+     *  - We have to place the `async` pipe in parenthesis.
+     *
+     * A better way to do this is to use `ngIf` and store the result of the condition in a local
+     * variable as shown in the the example below:
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfLet'}
+     *
+     * Notice that:
+     *  - We use only one `async` pipe and hence only one subscription gets created.
+     *  - `ngIf` stores the result of the `userStream|async` in the local variable `user`.
+     *  - The local `user` can then be bound repeatedly in a more efficient way.
+     *  - No need to use the safe-traversal-operator `?.` to access properties as `ngIf` will only
+     *    display the data if `userStream` returns a value.
+     *  - We can display an alternative template while waiting for the data.
+     *
+     * ### Syntax
+     *
+     * Simple form:
+     * - `<div *ngIf="condition">...</div>`
+     * - `<div template="ngIf condition">...</div>`
+     * - `<template [ngIf]="condition"><div>...</div></template>`
+     *
+     * Form with an else block:
+     * ```
+     * <div *ngIf="condition; else elseBlock">...</div>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * Form with a `then` and `else` block:
+     * ```
+     * <div *ngIf="condition; then thenBlock else elseBlock"></div>
+     * <template #thenBlock>...</template>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * Form with storing the value locally:
+     * ```
+     * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+     * <template #elseBlock>...</template>
+     * ```
+     *
+     * \@stable
+     */
 
     var NgIf = function () {
         /**
@@ -2162,16 +2239,16 @@
         }, {
             key: '_applyChanges',
             value: function _applyChanges(changes) {
-                var _this12 = this;
+                var _this11 = this;
 
                 changes.forEachRemovedItem(function (record) {
-                    return _this12._setStyle(record.key, null);
+                    return _this11._setStyle(record.key, null);
                 });
                 changes.forEachAddedItem(function (record) {
-                    return _this12._setStyle(record.key, record.currentValue);
+                    return _this11._setStyle(record.key, record.currentValue);
                 });
                 changes.forEachChangedItem(function (record) {
-                    return _this12._setStyle(record.key, record.currentValue);
+                    return _this11._setStyle(record.key, record.currentValue);
                 });
             }
         }, {
@@ -2284,10 +2361,6 @@
      * application.
      */
     var /** @type {?} */COMMON_DIRECTIVES = [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase];
-    /**
-     * A colletion of deprecated directives that are no longer part of the core module.
-     */
-    var /** @type {?} */COMMON_DEPRECATED_DIRECTIVES = [NgFor];
 
     /**
      * @param {?} type
@@ -2425,12 +2498,12 @@
         }, {
             key: '_subscribe',
             value: function _subscribe(obj) {
-                var _this13 = this;
+                var _this12 = this;
 
                 this._obj = obj;
                 this._strategy = this._selectStrategy(obj);
                 this._subscription = this._strategy.createSubscription(obj, function (value) {
-                    return _this13._updateLatestValue(obj, value);
+                    return _this12._updateLatestValue(obj, value);
                 });
             }
         }, {
@@ -3488,21 +3561,6 @@
     CommonModule.ctorParameters = function () {
         return [];
     };
-    /**
-     * A module to contain deprecated directives.
-     *
-     * @deprecated
-     */
-
-    var DeprecatedCommonModule = function DeprecatedCommonModule() {
-        _classCallCheck(this, DeprecatedCommonModule);
-    };
-
-    DeprecatedCommonModule.decorators = [{ type: _core.NgModule, args: [{ declarations: [COMMON_DEPRECATED_DIRECTIVES], exports: [COMMON_DEPRECATED_DIRECTIVES] }] }];
-    /** @nocollapse */
-    DeprecatedCommonModule.ctorParameters = function () {
-        return [];
-    };
 
     /**
      * @license
@@ -3561,12 +3619,11 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-beta.8-c53621b');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-beta.8-a23634d');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
     exports.CommonModule = CommonModule;
-    exports.DeprecatedCommonModule = DeprecatedCommonModule;
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgForOf = NgForOf;
@@ -3606,9 +3663,8 @@
     exports.HashLocationStrategy = HashLocationStrategy;
     exports.PathLocationStrategy = PathLocationStrategy;
     exports.Location = Location;
-    exports.ɵd = COMMON_DEPRECATED_DIRECTIVES;
     exports.ɵc = COMMON_DIRECTIVES;
     exports.ɵa = NgForOfRow;
     exports.ɵb = NgIfContext;
-    exports.ɵe = COMMON_PIPES;
+    exports.ɵd = COMMON_PIPES;
 });

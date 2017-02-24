@@ -1,8 +1,8 @@
 var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=true;var _d=false;var _e=undefined;try{for(var _i=arr[Symbol.iterator](),_s;!(_n=(_s=_i.next()).done);_n=true){_arr.push(_s.value);if(i&&_arr.length===i)break;}}catch(err){_d=true;_e=err;}finally{try{if(!_n&&_i["return"])_i["return"]();}finally{if(_d)throw _e;}}return _arr;}return function(arr,i){if(Array.isArray(arr)){return arr;}else if(Symbol.iterator in Object(arr)){return sliceIterator(arr,i);}else{throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _toConsumableArray(arr){if(Array.isArray(arr)){for(var i=0,arr2=Array(arr.length);i<arr.length;i++){arr2[i]=arr[i];}return arr2;}else{return Array.from(arr);}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}/**
- * @license Angular v4.0.0-beta.8-c53621b
+ * @license Angular v4.0.0-beta.8-a23634d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
- */import{InjectionToken,Injectable,Inject,Optional,EventEmitter,LOCALE_ID,NgModule,Directive,Renderer,ElementRef,KeyValueDiffers,IterableDiffers,Input,ComponentFactoryResolver,ViewContainerRef,isDevMode,forwardRef,TemplateRef,Host,Attribute,ɵisObservable,ɵisPromise,WrappedValue,Pipe,ChangeDetectorRef,Version}from'@angular/core';/**
+ */import{InjectionToken,Injectable,Inject,Optional,EventEmitter,LOCALE_ID,NgModule,Directive,Renderer,ElementRef,KeyValueDiffers,IterableDiffers,Input,ComponentFactoryResolver,ViewContainerRef,isDevMode,TemplateRef,Host,Attribute,ɵisObservable,ɵisPromise,WrappedValue,Pipe,ChangeDetectorRef,Version}from'@angular/core';/**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  *
@@ -628,72 +628,12 @@ if(console&&console.warn){console.warn('trackBy must be a function, but received
      */},{key:'ngForTemplate',set:function set(value){// TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
 // The current type is too restrictive; a template that just uses index, for example,
 // should be acceptable.
-if(value){this._template=value;}}}]);return NgForOf;}();NgForOf.decorators=[{type:Directive,args:[{selector:'[ngFor][ngForOf]',providers:[{provide:forwardRef(function(){return NgFor;}),useExisting:forwardRef(function(){return NgForOf;})}]}]}];/** @nocollapse */NgForOf.ctorParameters=function(){return[{type:ViewContainerRef},{type:TemplateRef},{type:IterableDiffers}];};NgForOf.propDecorators={'ngForOf':[{type:Input}],'ngForTrackBy':[{type:Input}],'ngForTemplate':[{type:Input}]};var RecordViewTuple=/**
+if(value){this._template=value;}}}]);return NgForOf;}();NgForOf.decorators=[{type:Directive,args:[{selector:'[ngFor][ngForOf]'}]}];/** @nocollapse */NgForOf.ctorParameters=function(){return[{type:ViewContainerRef},{type:TemplateRef},{type:IterableDiffers}];};NgForOf.propDecorators={'ngForOf':[{type:Input}],'ngForTrackBy':[{type:Input}],'ngForTemplate':[{type:Input}]};var RecordViewTuple=/**
      * @param {?} record
      * @param {?} view
      */function RecordViewTuple(record,view){_classCallCheck(this,RecordViewTuple);this.record=record;this.view=view;};/**
- * The `NgFor` directive instantiates a template once per item from an iterable. The context
- * for each instantiated template inherits from the outer context with the given loop variable
- * set to the current item from the iterable.
- *
- * ### Local Variables
- *
- * `NgFor` provides several exported values that can be aliased to local variables:
- *
- * * `index` will be set to the current loop iteration for each template context.
- * * `first` will be set to a boolean value indicating whether the item is the first one in the
- *   iteration.
- * * `last` will be set to a boolean value indicating whether the item is the last one in the
- *   iteration.
- * * `even` will be set to a boolean value indicating whether this item has an even index.
- * * `odd` will be set to a boolean value indicating whether this item has an odd index.
- *
- * ### Change Propagation
- *
- * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
- *
- * * When an item is added, a new instance of the template is added to the DOM.
- * * When an item is removed, its template instance is removed from the DOM.
- * * When items are reordered, their respective templates are reordered in the DOM.
- * * Otherwise, the DOM element for that item will remain the same.
- *
- * Angular uses object identity to track insertions and deletions within the iterator and reproduce
- * those changes in the DOM. This has important implications for animations and any stateful
- * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
- * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
- * such as user input.
- *
- * It is possible for the identities of elements in the iterator to change while the data does not.
- * This can happen, for example, if the iterator produced from an RPC to the server, and that
- * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
- * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
- * elements were deleted and all new elements inserted). This is an expensive operation and should
- * be avoided if possible.
- *
- * To customize the default tracking algorithm, `NgFor` supports `trackBy` option.
- * `trackBy` takes a function which has two arguments: `index` and `item`.
- * If `trackBy` is given, Angular tracks changes by the return value of the function.
- *
- * ### Syntax
- *
- * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
- * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
- *
- * With `<template>` element:
- *
- * ```
- * <template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
- *   <li>...</li>
- * </template>
- * ```
- *
- * ### Example
- *
- * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
- * example.
- *
- * @deprecated v4.0.0 - Use `NgForOf<T>` instead.
- */var NgFor=function(_NgForOf){_inherits(NgFor,_NgForOf);function NgFor(){_classCallCheck(this,NgFor);return _possibleConstructorReturn(this,(NgFor.__proto__||Object.getPrototypeOf(NgFor)).apply(this,arguments));}return NgFor;}(NgForOf);/**
+ * @deprecated from v4.0.0 - Use NgForOf instead.
+ */var/** @type {?} */NgFor=NgForOf;/**
  * Conditionally includes a template based on the value of an `expression`.
  *
  * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
@@ -1021,7 +961,7 @@ this._updateView();}}]);return NgIf;}();NgIf.decorators=[{type:Directive,args:[{
      */value:function ngDoCheck(){if(this._differ){var/** @type {?} */changes=this._differ.diff(this._ngStyle);if(changes){this._applyChanges(changes);}}}/**
      * @param {?} changes
      * @return {?}
-     */},{key:'_applyChanges',value:function _applyChanges(changes){var _this12=this;changes.forEachRemovedItem(function(record){return _this12._setStyle(record.key,null);});changes.forEachAddedItem(function(record){return _this12._setStyle(record.key,record.currentValue);});changes.forEachChangedItem(function(record){return _this12._setStyle(record.key,record.currentValue);});}/**
+     */},{key:'_applyChanges',value:function _applyChanges(changes){var _this11=this;changes.forEachRemovedItem(function(record){return _this11._setStyle(record.key,null);});changes.forEachAddedItem(function(record){return _this11._setStyle(record.key,record.currentValue);});changes.forEachChangedItem(function(record){return _this11._setStyle(record.key,record.currentValue);});}/**
      * @param {?} nameAndUnit
      * @param {?} value
      * @return {?}
@@ -1061,8 +1001,6 @@ this._updateView();}}]);return NgIf;}();NgIf.decorators=[{type:Directive,args:[{
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */var/** @type {?} */COMMON_DIRECTIVES=[NgClass,NgComponentOutlet,NgForOf,NgIf,NgTemplateOutlet,NgStyle,NgSwitch,NgSwitchCase,NgSwitchDefault,NgPlural,NgPluralCase];/**
- * A colletion of deprecated directives that are no longer part of the core module.
- */var/** @type {?} */COMMON_DEPRECATED_DIRECTIVES=[NgFor];/**
  * @param {?} type
  * @param {?} value
  * @return {?}
@@ -1120,7 +1058,7 @@ this._updateView();}}]);return NgIf;}();NgIf.decorators=[{type:Directive,args:[{
      */},{key:'transform',value:function transform(obj){if(!this._obj){if(obj){this._subscribe(obj);}this._latestReturnedValue=this._latestValue;return this._latestValue;}if(obj!==this._obj){this._dispose();return this.transform(/** @type {?} */obj);}if(this._latestValue===this._latestReturnedValue){return this._latestReturnedValue;}this._latestReturnedValue=this._latestValue;return WrappedValue.wrap(this._latestValue);}/**
      * @param {?} obj
      * @return {?}
-     */},{key:'_subscribe',value:function _subscribe(obj){var _this13=this;this._obj=obj;this._strategy=this._selectStrategy(obj);this._subscription=this._strategy.createSubscription(obj,function(value){return _this13._updateLatestValue(obj,value);});}/**
+     */},{key:'_subscribe',value:function _subscribe(obj){var _this12=this;this._obj=obj;this._strategy=this._selectStrategy(obj);this._subscription=this._strategy.createSubscription(obj,function(value){return _this12._updateLatestValue(obj,value);});}/**
      * @param {?} obj
      * @return {?}
      */},{key:'_selectStrategy',value:function _selectStrategy(obj){if(ɵisPromise(obj)){return _promiseStrategy;}if(ɵisObservable(obj)){return _observableStrategy;}throw invalidPipeArgumentError(AsyncPipe,obj);}/**
@@ -1529,10 +1467,6 @@ minInt=1;minFraction=0;maxFraction=3;}if(digits){var/** @type {?} */parts=digits
  *
  * \@stable
  */var CommonModule=function CommonModule(){_classCallCheck(this,CommonModule);};CommonModule.decorators=[{type:NgModule,args:[{declarations:[COMMON_DIRECTIVES,COMMON_PIPES],exports:[COMMON_DIRECTIVES,COMMON_PIPES],providers:[{provide:NgLocalization,useClass:NgLocaleLocalization}]}]}];/** @nocollapse */CommonModule.ctorParameters=function(){return[];};/**
- * A module to contain deprecated directives.
- *
- * @deprecated
- */var DeprecatedCommonModule=function DeprecatedCommonModule(){_classCallCheck(this,DeprecatedCommonModule);};DeprecatedCommonModule.decorators=[{type:NgModule,args:[{declarations:[COMMON_DEPRECATED_DIRECTIVES],exports:[COMMON_DEPRECATED_DIRECTIVES]}]}];/** @nocollapse */DeprecatedCommonModule.ctorParameters=function(){return[];};/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -1566,4 +1500,4 @@ minInt=1;minFraction=0;maxFraction=3;}if(digits){var/** @type {?} */parts=digits
  * @return {?}
  */function isPlatformWorkerUi(platformId){return platformId===PLATFORM_WORKER_UI_ID;}/**
  * @stable
- */var/** @type {?} */VERSION=new Version('4.0.0-beta.8-c53621b');export{NgLocaleLocalization,NgLocalization,CommonModule,DeprecatedCommonModule,NgClass,NgFor,NgForOf,NgIf,NgPlural,NgPluralCase,NgStyle,NgSwitch,NgSwitchCase,NgSwitchDefault,NgTemplateOutlet,NgComponentOutlet,AsyncPipe,DatePipe,I18nPluralPipe,I18nSelectPipe,JsonPipe,LowerCasePipe,CurrencyPipe,DecimalPipe,PercentPipe,SlicePipe,UpperCasePipe,TitleCasePipe,PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID,PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID,PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID,PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID,isPlatformBrowser,isPlatformServer,isPlatformWorkerApp,isPlatformWorkerUi,VERSION,PlatformLocation,LocationStrategy,APP_BASE_HREF,HashLocationStrategy,PathLocationStrategy,Location,COMMON_DEPRECATED_DIRECTIVES as ɵd,COMMON_DIRECTIVES as ɵc,NgForOfRow as ɵa,NgIfContext as ɵb,COMMON_PIPES as ɵe};
+ */var/** @type {?} */VERSION=new Version('4.0.0-beta.8-a23634d');export{NgLocaleLocalization,NgLocalization,CommonModule,NgClass,NgFor,NgForOf,NgIf,NgPlural,NgPluralCase,NgStyle,NgSwitch,NgSwitchCase,NgSwitchDefault,NgTemplateOutlet,NgComponentOutlet,AsyncPipe,DatePipe,I18nPluralPipe,I18nSelectPipe,JsonPipe,LowerCasePipe,CurrencyPipe,DecimalPipe,PercentPipe,SlicePipe,UpperCasePipe,TitleCasePipe,PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID,PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID,PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID,PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID,isPlatformBrowser,isPlatformServer,isPlatformWorkerApp,isPlatformWorkerUi,VERSION,PlatformLocation,LocationStrategy,APP_BASE_HREF,HashLocationStrategy,PathLocationStrategy,Location,COMMON_DIRECTIVES as ɵc,NgForOfRow as ɵa,NgIfContext as ɵb,COMMON_PIPES as ɵd};
