@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.1-bc9e1de
+ * @license Angular v4.0.0-rc.1-5753de5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2176,9 +2176,9 @@ NgSwitchDefault.ctorParameters = () => [
  * \@howToUse
  * ```
  * <some-element [ngPlural]="value">
- *   <template ngPluralCase="=0">there is nothing</template>
- *   <template ngPluralCase="=1">there is one</template>
- *   <template ngPluralCase="few">there are a few</template>
+ *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
+ *   <ng-template ngPluralCase="=1">there is one</ng-template>
+ *   <ng-template ngPluralCase="few">there are a few</ng-template>
  * </some-element>
  * ```
  *
@@ -2267,8 +2267,8 @@ NgPlural.propDecorators = {
  * \@howToUse
  * ```
  * <some-element [ngPlural]="value">
- *   <template ngPluralCase="=0">...</template>
- *   <template ngPluralCase="other">...</template>
+ *   <ng-template ngPluralCase="=0">...</ng-template>
+ *   <ng-template ngPluralCase="other">...</ng-template>
  * </some-element>
  * ```
  *
@@ -3632,6 +3632,6 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-bc9e1de');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.1-5753de5');
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };

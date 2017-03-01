@@ -2059,9 +2059,9 @@
      * \@howToUse
      * ```
      * <some-element [ngPlural]="value">
-     *   <template ngPluralCase="=0">there is nothing</template>
-     *   <template ngPluralCase="=1">there is one</template>
-     *   <template ngPluralCase="few">there are a few</template>
+     *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
+     *   <ng-template ngPluralCase="=1">there is one</ng-template>
+     *   <ng-template ngPluralCase="few">there are a few</ng-template>
      * </some-element>
      * ```
      *
@@ -2153,8 +2153,8 @@
      * \@howToUse
      * ```
      * <some-element [ngPlural]="value">
-     *   <template ngPluralCase="=0">...</template>
-     *   <template ngPluralCase="other">...</template>
+     *   <ng-template ngPluralCase="=0">...</ng-template>
+     *   <ng-template ngPluralCase="other">...</ng-template>
      * </some-element>
      * ```
      *
@@ -3619,7 +3619,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.1-bc9e1de');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.1-5753de5');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
