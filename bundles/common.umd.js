@@ -3619,7 +3619,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-e6e8123');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-a24e652');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
