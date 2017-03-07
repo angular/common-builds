@@ -13,11 +13,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * @license Angular v4.0.0-rc.2-207298c
+ * @license Angular v4.0.0-rc.2-b7e76cc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
 
 /**
  * This class should not be used directly by an application developer. Instead, use
@@ -278,140 +278,6 @@ var LocationStrategy = function () {
 
 
 var /** @type {?} */APP_BASE_HREF = new InjectionToken('appBaseHref');
-
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var /** @type {?} */globalScope = void 0;
-if (typeof window === 'undefined') {
-    if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
-        // TODO: Replace any with WorkerGlobalScope from lib.webworker.d.ts #3492
-        globalScope = self;
-    } else {
-        globalScope = global;
-    }
-} else {
-    globalScope = window;
-}
-// Need to declare a new variable for global here since TypeScript
-// exports the original value of the symbol.
-var /** @type {?} */_global = globalScope;
-/**
- * @param {?} type
- * @return {?}
- */
-function getTypeNameForDebugging(type) {
-    return type['name'] || (typeof type === 'undefined' ? 'undefined' : _typeof(type));
-}
-// TODO: remove calls to assert in production environment
-// Note: Can't just export this and import in in other files
-// as `assert` is a reserved keyword in Dart
-_global.assert = function assert(condition) {
-    // TODO: to be fixed properly via #2830, noop for now
-};
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPresent(obj) {
-    return obj != null;
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isBlank(obj) {
-    return obj == null;
-}
-/**
- * @param {?} token
- * @return {?}
- */
-function stringify(token) {
-    if (typeof token === 'string') {
-        return token;
-    }
-    if (token == null) {
-        return '' + token;
-    }
-    if (token.overriddenName) {
-        return '' + token.overriddenName;
-    }
-    if (token.name) {
-        return '' + token.name;
-    }
-    var /** @type {?} */res = token.toString();
-    var /** @type {?} */newLineIndex = res.indexOf('\n');
-    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-}
-
-var NumberWrapper = function () {
-    function NumberWrapper() {
-        _classCallCheck(this, NumberWrapper);
-    }
-
-    _createClass(NumberWrapper, null, [{
-        key: 'parseIntAutoRadix',
-
-        /**
-         * @param {?} text
-         * @return {?}
-         */
-        value: function parseIntAutoRadix(text) {
-            var /** @type {?} */result = parseInt(text);
-            if (isNaN(result)) {
-                throw new Error('Invalid integer literal when parsing ' + text);
-            }
-            return result;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-
-    }, {
-        key: 'isNumeric',
-        value: function isNumeric(value) {
-            return !isNaN(value - parseFloat(value));
-        }
-    }]);
-
-    return NumberWrapper;
-}();
-/**
- * @param {?} o
- * @return {?}
- */
-
-
-function isJsObject(o) {
-    return o !== null && (typeof o === 'function' || (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === 'object');
-}
-var /** @type {?} */_symbolIterator = null;
-/**
- * @return {?}
- */
-function getSymbolIterator() {
-    if (!_symbolIterator) {
-        if (globalScope.Symbol && Symbol.iterator) {
-            _symbolIterator = Symbol.iterator;
-        } else {
-            // es6-shim specific logic
-            var /** @type {?} */keys = Object.getOwnPropertyNames(Map.prototype);
-            for (var /** @type {?} */i = 0; i < keys.length; ++i) {
-                var /** @type {?} */key = keys[i];
-                if (key !== 'entries' && key !== 'size' && Map.prototype[key] === Map.prototype['entries']) {
-                    _symbolIterator = key;
-                }
-            }
-        }
-    }
-    return _symbolIterator;
-}
 
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
@@ -691,7 +557,7 @@ var HashLocationStrategy = function (_LocationStrategy) {
 
         _this2._platformLocation = _platformLocation;
         _this2._baseHref = '';
-        if (isPresent(_baseHref)) {
+        if (_baseHref != null) {
             _this2._baseHref = _baseHref;
         }
         return _this2;
@@ -730,7 +596,7 @@ var HashLocationStrategy = function (_LocationStrategy) {
             // the hash value is always prefixed with a `#`
             // and if it is empty then it will stay empty
             var /** @type {?} */path = this._platformLocation.hash;
-            if (!isPresent(path)) path = '#';
+            if (path == null) path = '#';
             return path.length > 0 ? path.substring(1) : path;
         }
         /**
@@ -847,10 +713,10 @@ var PathLocationStrategy = function (_LocationStrategy2) {
         var _this3 = _possibleConstructorReturn(this, (PathLocationStrategy.__proto__ || Object.getPrototypeOf(PathLocationStrategy)).call(this));
 
         _this3._platformLocation = _platformLocation;
-        if (isBlank(href)) {
+        if (href == null) {
             href = _this3._platformLocation.getBaseHrefFromDOM();
         }
-        if (isBlank(href)) {
+        if (href == null) {
             throw new Error('No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.');
         }
         _this3._baseHref = href;
@@ -1387,15 +1253,6 @@ function getPluralCase(locale, nLike) {
 }
 
 /**
- * @param {?} obj
- * @return {?}
- */
-function isListLikeIterable(obj) {
-    if (!isJsObject(obj)) return false;
-    return Array.isArray(obj) || !(obj instanceof Map) && getSymbolIterator() in obj; // JS Iterable have a Symbol.iterator prop
-}
-
-/**
  * \@ngModule CommonModule
  *
  * \@whatItDoes Adds and removes CSS classes on an HTML element.
@@ -1512,7 +1369,7 @@ var NgClass = function () {
                 if (typeof record.item === 'string') {
                     _this6._toggleClass(record.item, true);
                 } else {
-                    throw new Error('NgClass can only toggle CSS classes expressed as strings, got ' + stringify(record.item));
+                    throw new Error('NgClass can only toggle CSS classes expressed as strings, got ' + ɵstringify(record.item));
                 }
             });
             changes.forEachRemovedItem(function (record) {
@@ -1595,7 +1452,7 @@ var NgClass = function () {
             this._keyValueDiffer = null;
             this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
             if (this._rawClass) {
-                if (isListLikeIterable(this._rawClass)) {
+                if (ɵisListLikeIterable(this._rawClass)) {
                     this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
                 } else {
                     this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
@@ -2029,6 +1886,13 @@ function RecordViewTuple(record, view) {
 
 
 var /** @type {?} */NgFor = NgForOf;
+/**
+ * @param {?} type
+ * @return {?}
+ */
+function getTypeNameForDebugging(type) {
+    return type['name'] || (typeof type === 'undefined' ? 'undefined' : _typeof(type));
+}
 
 /**
  * Conditionally includes a template based on the value of an `expression`.
@@ -2868,7 +2732,7 @@ var /** @type {?} */COMMON_DIRECTIVES = [NgClass, NgComponentOutlet, NgForOf, Ng
  * @return {?}
  */
 function invalidPipeArgumentError(type, value) {
-    return Error('InvalidPipeArgument: \'' + value + '\' for pipe \'' + stringify(type) + '\'');
+    return Error('InvalidPipeArgument: \'' + value + '\' for pipe \'' + ɵstringify(type) + '\'');
 }
 
 var ObservableStrategy = function () {
@@ -3489,6 +3353,255 @@ var DateFormatter = function () {
     return DateFormatter;
 }();
 
+var /** @type {?} */_NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+/**
+ * @param {?} pipe
+ * @param {?} locale
+ * @param {?} value
+ * @param {?} style
+ * @param {?} digits
+ * @param {?=} currency
+ * @param {?=} currencyAsSymbol
+ * @return {?}
+ */
+function formatNumber(pipe, locale, value, style, digits) {
+    var currency = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+    var currencyAsSymbol = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
+
+    if (value == null) return null;
+    // Convert strings to numbers
+    value = typeof value === 'string' && isNumeric(value) ? +value : value;
+    if (typeof value !== 'number') {
+        throw invalidPipeArgumentError(pipe, value);
+    }
+    var /** @type {?} */minInt = void 0;
+    var /** @type {?} */minFraction = void 0;
+    var /** @type {?} */maxFraction = void 0;
+    if (style !== NumberFormatStyle.Currency) {
+        // rely on Intl default for currency
+        minInt = 1;
+        minFraction = 0;
+        maxFraction = 3;
+    }
+    if (digits) {
+        var /** @type {?} */parts = digits.match(_NUMBER_FORMAT_REGEXP);
+        if (parts === null) {
+            throw new Error(digits + ' is not a valid digit info for number pipes');
+        }
+        if (parts[1] != null) {
+            minInt = parseIntAutoRadix(parts[1]);
+        }
+        if (parts[3] != null) {
+            minFraction = parseIntAutoRadix(parts[3]);
+        }
+        if (parts[5] != null) {
+            maxFraction = parseIntAutoRadix(parts[5]);
+        }
+    }
+    return NumberFormatter.format( /** @type {?} */value, locale, style, {
+        minimumIntegerDigits: minInt,
+        minimumFractionDigits: minFraction,
+        maximumFractionDigits: maxFraction,
+        currency: currency,
+        currencyAsSymbol: currencyAsSymbol
+    });
+}
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number according to locale rules.
+ * \@howToUse `number_expression | number[:digitInfo]`
+ *
+ * Formats a number as text. Group sizing and separator and other locale-specific
+ * configurations are based on the active locale.
+ *
+ * where `expression` is a number:
+ *  - `digitInfo` is a `string` which has a following format: <br>
+ *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+ *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+ *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+ *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
+ *
+ * For more information on the acceptable range for each of these numbers and other
+ * details see your native internationalization library.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+ *
+ * \@stable
+ */
+
+var DecimalPipe = function () {
+    /**
+     * @param {?} _locale
+     */
+    function DecimalPipe(_locale) {
+        _classCallCheck(this, DecimalPipe);
+
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+
+
+    _createClass(DecimalPipe, [{
+        key: 'transform',
+        value: function transform(value) {
+            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        }
+    }]);
+
+    return DecimalPipe;
+}();
+
+DecimalPipe.decorators = [{ type: Pipe, args: [{ name: 'number' }] }];
+/** @nocollapse */
+DecimalPipe.ctorParameters = function () {
+    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
+};
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as a percentage according to locale rules.
+ * \@howToUse `number_expression | percent[:digitInfo]`
+ *
+ * \@description
+ *
+ * Formats a number as percentage.
+ *
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ *
+ * \@stable
+ */
+
+var PercentPipe = function () {
+    /**
+     * @param {?} _locale
+     */
+    function PercentPipe(_locale) {
+        _classCallCheck(this, PercentPipe);
+
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+
+
+    _createClass(PercentPipe, [{
+        key: 'transform',
+        value: function transform(value) {
+            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        }
+    }]);
+
+    return PercentPipe;
+}();
+
+PercentPipe.decorators = [{ type: Pipe, args: [{ name: 'percent' }] }];
+/** @nocollapse */
+PercentPipe.ctorParameters = function () {
+    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
+};
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as currency using locale rules.
+ * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
+ * \@description
+ *
+ * Use `currency` to format a number as currency.
+ *
+ * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+ *    as `USD` for the US dollar and `EUR` for the euro.
+ * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
+ *   - `true`: use symbol (e.g. `$`).
+ *   - `false`(default): use code (e.g. `USD`).
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ *
+ * \@stable
+ */
+
+var CurrencyPipe = function () {
+    /**
+     * @param {?} _locale
+     */
+    function CurrencyPipe(_locale) {
+        _classCallCheck(this, CurrencyPipe);
+
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} currencyCode
+     * @param {?=} symbolDisplay
+     * @param {?=} digits
+     * @return {?}
+     */
+
+
+    _createClass(CurrencyPipe, [{
+        key: 'transform',
+        value: function transform(value) {
+            var currencyCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'USD';
+            var symbolDisplay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+            var digits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        }
+    }]);
+
+    return CurrencyPipe;
+}();
+
+CurrencyPipe.decorators = [{ type: Pipe, args: [{ name: 'currency' }] }];
+/** @nocollapse */
+CurrencyPipe.ctorParameters = function () {
+    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
+};
+/**
+ * @param {?} text
+ * @return {?}
+ */
+function parseIntAutoRadix(text) {
+    var /** @type {?} */result = parseInt(text);
+    if (isNaN(result)) {
+        throw new Error('Invalid integer literal when parsing ' + text);
+    }
+    return result;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isNumeric(value) {
+    return !isNaN(value - parseFloat(value));
+}
+
 var /** @type {?} */ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 /**
  * \@ngModule CommonModule
@@ -3582,13 +3695,13 @@ var DatePipe = function () {
             var pattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mediumDate';
 
             var /** @type {?} */date = void 0;
-            if (isBlank$1(value) || value !== value) return null;
+            if (isBlank(value) || value !== value) return null;
             if (typeof value === 'string') {
                 value = value.trim();
             }
             if (isDate(value)) {
                 date = value;
-            } else if (NumberWrapper.isNumeric(value)) {
+            } else if (isNumeric(value)) {
                 date = new Date(parseFloat(value));
             } else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
                 /**
@@ -3648,7 +3761,7 @@ DatePipe.ctorParameters = function () {
  * @param {?} obj
  * @return {?}
  */
-function isBlank$1(obj) {
+function isBlank(obj) {
     return obj == null || obj === '';
 }
 /**
@@ -3839,237 +3952,6 @@ JsonPipe.ctorParameters = function () {
     return [];
 };
 
-var /** @type {?} */_NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
-/**
- * @param {?} pipe
- * @param {?} locale
- * @param {?} value
- * @param {?} style
- * @param {?} digits
- * @param {?=} currency
- * @param {?=} currencyAsSymbol
- * @return {?}
- */
-function formatNumber(pipe, locale, value, style, digits) {
-    var currency = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-    var currencyAsSymbol = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
-
-    if (value == null) return null;
-    // Convert strings to numbers
-    value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
-    if (typeof value !== 'number') {
-        throw invalidPipeArgumentError(pipe, value);
-    }
-    var /** @type {?} */minInt = void 0;
-    var /** @type {?} */minFraction = void 0;
-    var /** @type {?} */maxFraction = void 0;
-    if (style !== NumberFormatStyle.Currency) {
-        // rely on Intl default for currency
-        minInt = 1;
-        minFraction = 0;
-        maxFraction = 3;
-    }
-    if (digits) {
-        var /** @type {?} */parts = digits.match(_NUMBER_FORMAT_REGEXP);
-        if (parts === null) {
-            throw new Error(digits + ' is not a valid digit info for number pipes');
-        }
-        if (parts[1] != null) {
-            minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
-        }
-        if (parts[3] != null) {
-            minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
-        }
-        if (parts[5] != null) {
-            maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
-        }
-    }
-    return NumberFormatter.format( /** @type {?} */value, locale, style, {
-        minimumIntegerDigits: minInt,
-        minimumFractionDigits: minFraction,
-        maximumFractionDigits: maxFraction,
-        currency: currency,
-        currencyAsSymbol: currencyAsSymbol
-    });
-}
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo]`
- *
- * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the active locale.
- *
- * where `expression` is a number:
- *  - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
- *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
- *
- * For more information on the acceptable range for each of these numbers and other
- * details see your native internationalization library.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
- *
- * \@stable
- */
-
-var DecimalPipe = function () {
-    /**
-     * @param {?} _locale
-     */
-    function DecimalPipe(_locale) {
-        _classCallCheck(this, DecimalPipe);
-
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} digits
-     * @return {?}
-     */
-
-
-    _createClass(DecimalPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
-        }
-    }]);
-
-    return DecimalPipe;
-}();
-
-DecimalPipe.decorators = [{ type: Pipe, args: [{ name: 'number' }] }];
-/** @nocollapse */
-DecimalPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo]`
- *
- * \@description
- *
- * Formats a number as percentage.
- *
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
- *
- * \@stable
- */
-
-var PercentPipe = function () {
-    /**
-     * @param {?} _locale
-     */
-    function PercentPipe(_locale) {
-        _classCallCheck(this, PercentPipe);
-
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} digits
-     * @return {?}
-     */
-
-
-    _createClass(PercentPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
-        }
-    }]);
-
-    return PercentPipe;
-}();
-
-PercentPipe.decorators = [{ type: Pipe, args: [{ name: 'percent' }] }];
-/** @nocollapse */
-PercentPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
- * \@description
- *
- * Use `currency` to format a number as currency.
- *
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
- *   - `true`: use symbol (e.g. `$`).
- *   - `false`(default): use code (e.g. `USD`).
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
- *
- * \@stable
- */
-
-var CurrencyPipe = function () {
-    /**
-     * @param {?} _locale
-     */
-    function CurrencyPipe(_locale) {
-        _classCallCheck(this, CurrencyPipe);
-
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} currencyCode
-     * @param {?=} symbolDisplay
-     * @param {?=} digits
-     * @return {?}
-     */
-
-
-    _createClass(CurrencyPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var currencyCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'USD';
-            var symbolDisplay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-            var digits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-        }
-    }]);
-
-    return CurrencyPipe;
-}();
-
-CurrencyPipe.decorators = [{ type: Pipe, args: [{ name: 'currency' }] }];
-/** @nocollapse */
-CurrencyPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
-
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
@@ -4239,6 +4121,6 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-rc.2-207298c');
+var /** @type {?} */VERSION = new Version('4.0.0-rc.2-b7e76cc');
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };

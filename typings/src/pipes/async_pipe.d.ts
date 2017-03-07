@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
-import { EventEmitter, Observable } from '../facade/async';
+import { ChangeDetectorRef, EventEmitter, OnDestroy, PipeTransform } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 /**
  * @ngModule CommonModule
  * @whatItDoes Unwraps a value from an asynchronous primitive.

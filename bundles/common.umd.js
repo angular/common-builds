@@ -21,9 +21,7 @@
 
     function _toConsumableArray(arr) {
         if (Array.isArray(arr)) {
-            for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-                arr2[i] = arr[i];
-            }
+            for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
 
             return arr2;
         } else {
@@ -69,6 +67,12 @@
         };
     }();
 
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
     function _possibleConstructorReturn(self, call) {
         if (!self) {
             throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -92,12 +96,6 @@
         });
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
-
-    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-        return typeof obj;
-    } : function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -226,129 +224,6 @@
      * @stable
      */
     var /** @type {?} */APP_BASE_HREF = new _core.InjectionToken('appBaseHref');
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var /** @type {?} */globalScope = void 0;
-    if (typeof window === 'undefined') {
-        if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
-            // TODO: Replace any with WorkerGlobalScope from lib.webworker.d.ts #3492
-            globalScope = self;
-        } else {
-            globalScope = global;
-        }
-    } else {
-        globalScope = window;
-    }
-    // Need to declare a new variable for global here since TypeScript
-    // exports the original value of the symbol.
-    var /** @type {?} */_global = globalScope;
-    /**
-     * @param {?} type
-     * @return {?}
-     */
-    function getTypeNameForDebugging(type) {
-        return type['name'] || (typeof type === 'undefined' ? 'undefined' : _typeof(type));
-    }
-    // TODO: remove calls to assert in production environment
-    // Note: Can't just export this and import in in other files
-    // as `assert` is a reserved keyword in Dart
-    _global.assert = function assert(condition) {
-        // TODO: to be fixed properly via #2830, noop for now
-    };
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isPresent(obj) {
-        return obj != null;
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isBlank(obj) {
-        return obj == null;
-    }
-    /**
-     * @param {?} token
-     * @return {?}
-     */
-    function stringify(token) {
-        if (typeof token === 'string') {
-            return token;
-        }
-        if (token == null) {
-            return '' + token;
-        }
-        if (token.overriddenName) {
-            return '' + token.overriddenName;
-        }
-        if (token.name) {
-            return '' + token.name;
-        }
-        var /** @type {?} */res = token.toString();
-        var /** @type {?} */newLineIndex = res.indexOf('\n');
-        return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-    }
-
-    var NumberWrapper = function () {
-        function NumberWrapper() {
-            _classCallCheck(this, NumberWrapper);
-        }
-
-        _createClass(NumberWrapper, null, [{
-            key: 'parseIntAutoRadix',
-            value: function parseIntAutoRadix(text) {
-                var /** @type {?} */result = parseInt(text);
-                if (isNaN(result)) {
-                    throw new Error('Invalid integer literal when parsing ' + text);
-                }
-                return result;
-            }
-        }, {
-            key: 'isNumeric',
-            value: function isNumeric(value) {
-                return !isNaN(value - parseFloat(value));
-            }
-        }]);
-
-        return NumberWrapper;
-    }();
-
-    /**
-     * @param {?} o
-     * @return {?}
-     */
-    function isJsObject(o) {
-        return o !== null && (typeof o === 'function' || (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === 'object');
-    }
-    var /** @type {?} */_symbolIterator = null;
-    /**
-     * @return {?}
-     */
-    function getSymbolIterator() {
-        if (!_symbolIterator) {
-            if (globalScope.Symbol && Symbol.iterator) {
-                _symbolIterator = Symbol.iterator;
-            } else {
-                // es6-shim specific logic
-                var /** @type {?} */keys = Object.getOwnPropertyNames(Map.prototype);
-                for (var /** @type {?} */i = 0; i < keys.length; ++i) {
-                    var /** @type {?} */key = keys[i];
-                    if (key !== 'entries' && key !== 'size' && Map.prototype[key] === Map.prototype['entries']) {
-                        _symbolIterator = key;
-                    }
-                }
-            }
-        }
-        return _symbolIterator;
-    }
 
     /**
      * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
@@ -551,7 +426,7 @@
 
             _this2._platformLocation = _platformLocation;
             _this2._baseHref = '';
-            if (isPresent(_baseHref)) {
+            if (_baseHref != null) {
                 _this2._baseHref = _baseHref;
             }
             return _this2;
@@ -581,7 +456,7 @@
                 // the hash value is always prefixed with a `#`
                 // and if it is empty then it will stay empty
                 var /** @type {?} */path = this._platformLocation.hash;
-                if (!isPresent(path)) path = '#';
+                if (path == null) path = '#';
                 return path.length > 0 ? path.substring(1) : path;
             }
         }, {
@@ -669,10 +544,10 @@
             var _this3 = _possibleConstructorReturn(this, (PathLocationStrategy.__proto__ || Object.getPrototypeOf(PathLocationStrategy)).call(this));
 
             _this3._platformLocation = _platformLocation;
-            if (isBlank(href)) {
+            if (href == null) {
                 href = _this3._platformLocation.getBaseHrefFromDOM();
             }
-            if (isBlank(href)) {
+            if (href == null) {
                 throw new Error('No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.');
             }
             _this3._baseHref = href;
@@ -1164,15 +1039,6 @@
     }
 
     /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isListLikeIterable(obj) {
-        if (!isJsObject(obj)) return false;
-        return Array.isArray(obj) || !(obj instanceof Map) && getSymbolIterator() in obj; // JS Iterable have a Symbol.iterator prop
-    }
-
-    /**
      * \@ngModule CommonModule
      *
      * \@whatItDoes Adds and removes CSS classes on an HTML element.
@@ -1270,7 +1136,7 @@
                     if (typeof record.item === 'string') {
                         _this6._toggleClass(record.item, true);
                     } else {
-                        throw new Error('NgClass can only toggle CSS classes expressed as strings, got ' + stringify(record.item));
+                        throw new Error('NgClass can only toggle CSS classes expressed as strings, got ' + (0, _core.ɵstringify)(record.item));
                     }
                 });
                 changes.forEachRemovedItem(function (record) {
@@ -1331,7 +1197,7 @@
                 this._keyValueDiffer = null;
                 this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
                 if (this._rawClass) {
-                    if (isListLikeIterable(this._rawClass)) {
+                    if ((0, _core.ɵisListLikeIterable)(this._rawClass)) {
                         this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
                     } else {
                         this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
@@ -1655,6 +1521,13 @@
      * @deprecated from v4.0.0 - Use NgForOf instead.
      */
     var /** @type {?} */NgFor = NgForOf;
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    function getTypeNameForDebugging(type) {
+        return type['name'] || (typeof type === 'undefined' ? 'undefined' : _typeof(type));
+    }
 
     /**
      * Conditionally includes a template based on the value of an `expression`.
@@ -2368,7 +2241,7 @@
      * @return {?}
      */
     function invalidPipeArgumentError(type, value) {
-        return Error('InvalidPipeArgument: \'' + value + '\' for pipe \'' + stringify(type) + '\'');
+        return Error('InvalidPipeArgument: \'' + value + '\' for pipe \'' + (0, _core.ɵstringify)(type) + '\'');
     }
 
     var ObservableStrategy = function () {
@@ -2902,335 +2775,6 @@
         return DateFormatter;
     }();
 
-    var /** @type {?} */ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
-    /**
-     * \@ngModule CommonModule
-     * \@whatItDoes Formats a date according to locale rules.
-     * \@howToUse `date_expression | date[:format]`
-     * \@description
-     *
-     * Where:
-     * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
-     * (https://www.w3.org/TR/NOTE-datetime).
-     * - `format` indicates which date/time components to include. The format can be predefined as
-     *   shown below or custom as shown in the table.
-     *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
-     *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
-     *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
-     *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
-     *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
-     *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
-     *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
-     *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
-     *
-     *
-     *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
-     *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
-     *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
-     *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
-     *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
-     *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
-     *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
-     *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
-     *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
-     *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
-     *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
-     *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
-     *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
-     *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
-     *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
-     *
-     * In javascript, only the components specified will be respected (not the ordering,
-     * punctuations, ...) and details of the formatting will be dependent on the locale.
-     *
-     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
-     *
-     * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
-     * applied and the formatted text will have the same day, month and year of the expression.
-     *
-     * WARNINGS:
-     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
-     *   Instead users should treat the date as an immutable object and change the reference when the
-     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
-     *   which would be an expensive operation).
-     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
-     *   browsers.
-     *
-     * ### Examples
-     *
-     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
-     * in the _local_ time and locale is 'en-US':
-     *
-     * ```
-     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
-     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
-     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
-     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
-     * ```
-     *
-     * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
-     *
-     * \@stable
-     */
-
-    var DatePipe = function () {
-        /**
-         * @param {?} _locale
-         */
-        function DatePipe(_locale) {
-            _classCallCheck(this, DatePipe);
-
-            this._locale = _locale;
-        }
-        /**
-         * @param {?} value
-         * @param {?=} pattern
-         * @return {?}
-         */
-
-
-        _createClass(DatePipe, [{
-            key: 'transform',
-            value: function transform(value) {
-                var pattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mediumDate';
-
-                var /** @type {?} */date = void 0;
-                if (isBlank$1(value) || value !== value) return null;
-                if (typeof value === 'string') {
-                    value = value.trim();
-                }
-                if (isDate(value)) {
-                    date = value;
-                } else if (NumberWrapper.isNumeric(value)) {
-                    date = new Date(parseFloat(value));
-                } else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-                    var _value$split$map = value.split('-').map(function (val) {
-                        return parseInt(val, 10);
-                    }),
-                        _value$split$map2 = _slicedToArray(_value$split$map, 3),
-                        y = _value$split$map2[0],
-                        m = _value$split$map2[1],
-                        d = _value$split$map2[2];
-
-                    date = new Date(y, m - 1, d);
-                } else {
-                    date = new Date(value);
-                }
-                if (!isDate(date)) {
-                    var /** @type {?} */match = void 0;
-                    if (typeof value === 'string' && (match = value.match(ISO8601_DATE_REGEX))) {
-                        date = isoStringToDate(match);
-                    } else {
-                        throw invalidPipeArgumentError(DatePipe, value);
-                    }
-                }
-                return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
-            }
-        }]);
-
-        return DatePipe;
-    }();
-
-    /** @internal */
-    DatePipe._ALIASES = {
-        'medium': 'yMMMdjms',
-        'short': 'yMdjm',
-        'fullDate': 'yMMMMEEEEd',
-        'longDate': 'yMMMMd',
-        'mediumDate': 'yMMMd',
-        'shortDate': 'yMd',
-        'mediumTime': 'jms',
-        'shortTime': 'jm'
-    };
-    DatePipe.decorators = [{ type: _core.Pipe, args: [{ name: 'date', pure: true }] }];
-    /** @nocollapse */
-    DatePipe.ctorParameters = function () {
-        return [{ type: undefined, decorators: [{ type: _core.Inject, args: [_core.LOCALE_ID] }] }];
-    };
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isBlank$1(obj) {
-        return obj == null || obj === '';
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isDate(obj) {
-        return obj instanceof Date && !isNaN(obj.valueOf());
-    }
-    /**
-     * @param {?} match
-     * @return {?}
-     */
-    function isoStringToDate(match) {
-        var /** @type {?} */date = new Date(0);
-        var /** @type {?} */tzHour = 0;
-        var /** @type {?} */tzMin = 0;
-        var /** @type {?} */dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-        var /** @type {?} */timeSetter = match[8] ? date.setUTCHours : date.setHours;
-        if (match[9]) {
-            tzHour = toInt(match[9] + match[10]);
-            tzMin = toInt(match[9] + match[11]);
-        }
-        dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
-        var /** @type {?} */h = toInt(match[4] || '0') - tzHour;
-        var /** @type {?} */m = toInt(match[5] || '0') - tzMin;
-        var /** @type {?} */s = toInt(match[6] || '0');
-        var /** @type {?} */ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
-        timeSetter.call(date, h, m, s, ms);
-        return date;
-    }
-    /**
-     * @param {?} str
-     * @return {?}
-     */
-    function toInt(str) {
-        return parseInt(str, 10);
-    }
-
-    var /** @type {?} */_INTERPOLATION_REGEXP = /#/g;
-    /**
-     * \@ngModule CommonModule
-     * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
-     * \@howToUse `expression | i18nPlural:mapping`
-     * \@description
-     *
-     *  Where:
-     *  - `expression` is a number.
-     *  - `mapping` is an object that mimics the ICU format, see
-     *    http://userguide.icu-project.org/formatparse/messages
-     *
-     *  ## Example
-     *
-     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
-     *
-     * \@experimental
-     */
-
-    var I18nPluralPipe = function () {
-        /**
-         * @param {?} _localization
-         */
-        function I18nPluralPipe(_localization) {
-            _classCallCheck(this, I18nPluralPipe);
-
-            this._localization = _localization;
-        }
-        /**
-         * @param {?} value
-         * @param {?} pluralMap
-         * @return {?}
-         */
-
-
-        _createClass(I18nPluralPipe, [{
-            key: 'transform',
-            value: function transform(value, pluralMap) {
-                if (value == null) return '';
-                if ((typeof pluralMap === 'undefined' ? 'undefined' : _typeof(pluralMap)) !== 'object' || pluralMap === null) {
-                    throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
-                }
-                var /** @type {?} */key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
-                return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
-            }
-        }]);
-
-        return I18nPluralPipe;
-    }();
-
-    I18nPluralPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'i18nPlural', pure: true }] }];
-    /** @nocollapse */
-    I18nPluralPipe.ctorParameters = function () {
-        return [{ type: NgLocalization }];
-    };
-
-    /**
-     * \@ngModule CommonModule
-     * \@whatItDoes Generic selector that displays the string that matches the current value.
-     * \@howToUse `expression | i18nSelect:mapping`
-     * \@description
-     *
-     *  Where `mapping` is an object that indicates the text that should be displayed
-     *  for different values of the provided `expression`.
-     *  If none of the keys of the mapping match the value of the `expression`, then the content
-     *  of the `other` key is returned when present, otherwise an empty string is returned.
-     *
-     *  ## Example
-     *
-     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
-     *
-     *  \@experimental
-     */
-
-    var I18nSelectPipe = function () {
-        function I18nSelectPipe() {
-            _classCallCheck(this, I18nSelectPipe);
-        }
-
-        _createClass(I18nSelectPipe, [{
-            key: 'transform',
-            value: function transform(value, mapping) {
-                if (value == null) return '';
-                if ((typeof mapping === 'undefined' ? 'undefined' : _typeof(mapping)) !== 'object' || typeof value !== 'string') {
-                    throw invalidPipeArgumentError(I18nSelectPipe, mapping);
-                }
-                if (mapping.hasOwnProperty(value)) {
-                    return mapping[value];
-                }
-                if (mapping.hasOwnProperty('other')) {
-                    return mapping['other'];
-                }
-                return '';
-            }
-        }]);
-
-        return I18nSelectPipe;
-    }();
-
-    I18nSelectPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'i18nSelect', pure: true }] }];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () {
-        return [];
-    };
-
-    /**
-     * \@ngModule CommonModule
-     * \@whatItDoes Converts value into JSON string.
-     * \@howToUse `expression | json`
-     * \@description
-     *
-     * Converts value into string using `JSON.stringify`. Useful for debugging.
-     *
-     * ### Example
-     * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
-     *
-     * \@stable
-     */
-
-    var JsonPipe = function () {
-        function JsonPipe() {
-            _classCallCheck(this, JsonPipe);
-        }
-
-        _createClass(JsonPipe, [{
-            key: 'transform',
-            value: function transform(value) {
-                return JSON.stringify(value, null, 2);
-            }
-        }]);
-
-        return JsonPipe;
-    }();
-
-    JsonPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'json', pure: false }] }];
-    /** @nocollapse */
-    JsonPipe.ctorParameters = function () {
-        return [];
-    };
-
     var /** @type {?} */_NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
     /**
      * @param {?} pipe
@@ -3248,7 +2792,7 @@
 
         if (value == null) return null;
         // Convert strings to numbers
-        value = typeof value === 'string' && NumberWrapper.isNumeric(value) ? +value : value;
+        value = typeof value === 'string' && isNumeric(value) ? +value : value;
         if (typeof value !== 'number') {
             throw invalidPipeArgumentError(pipe, value);
         }
@@ -3267,13 +2811,13 @@
                 throw new Error(digits + ' is not a valid digit info for number pipes');
             }
             if (parts[1] != null) {
-                minInt = NumberWrapper.parseIntAutoRadix(parts[1]);
+                minInt = parseIntAutoRadix(parts[1]);
             }
             if (parts[3] != null) {
-                minFraction = NumberWrapper.parseIntAutoRadix(parts[3]);
+                minFraction = parseIntAutoRadix(parts[3]);
             }
             if (parts[5] != null) {
-                maxFraction = NumberWrapper.parseIntAutoRadix(parts[5]);
+                maxFraction = parseIntAutoRadix(parts[5]);
             }
         }
         return NumberFormatter.format( /** @type {?} */value, locale, style, {
@@ -3461,6 +3005,353 @@
     CurrencyPipe.ctorParameters = function () {
         return [{ type: undefined, decorators: [{ type: _core.Inject, args: [_core.LOCALE_ID] }] }];
     };
+    /**
+     * @param {?} text
+     * @return {?}
+     */
+    function parseIntAutoRadix(text) {
+        var /** @type {?} */result = parseInt(text);
+        if (isNaN(result)) {
+            throw new Error('Invalid integer literal when parsing ' + text);
+        }
+        return result;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function isNumeric(value) {
+        return !isNaN(value - parseFloat(value));
+    }
+
+    var /** @type {?} */ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+    /**
+     * \@ngModule CommonModule
+     * \@whatItDoes Formats a date according to locale rules.
+     * \@howToUse `date_expression | date[:format]`
+     * \@description
+     *
+     * Where:
+     * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * - `format` indicates which date/time components to include. The format can be predefined as
+     *   shown below or custom as shown in the table.
+     *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
+     *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
+     *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
+     *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
+     *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
+     *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
+     *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
+     *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
+     *
+     *
+     *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
+     *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
+     *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
+     *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
+     *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+     *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
+     *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+     *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
+     *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
+     *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
+     *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
+     *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
+     *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
+     *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
+     *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
+     *
+     * In javascript, only the components specified will be respected (not the ordering,
+     * punctuations, ...) and details of the formatting will be dependent on the locale.
+     *
+     * Timezone of the formatted text will be the local system timezone of the end-user's machine.
+     *
+     * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+     * applied and the formatted text will have the same day, month and year of the expression.
+     *
+     * WARNINGS:
+     * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+     *   Instead users should treat the date as an immutable object and change the reference when the
+     *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+     *   which would be an expensive operation).
+     * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+     *   browsers.
+     *
+     * ### Examples
+     *
+     * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+     * in the _local_ time and locale is 'en-US':
+     *
+     * ```
+     *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     *     {{ dateObj | date:'mmss' }}        // output is '43:11'
+     * ```
+     *
+     * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+     *
+     * \@stable
+     */
+
+    var DatePipe = function () {
+        /**
+         * @param {?} _locale
+         */
+        function DatePipe(_locale) {
+            _classCallCheck(this, DatePipe);
+
+            this._locale = _locale;
+        }
+        /**
+         * @param {?} value
+         * @param {?=} pattern
+         * @return {?}
+         */
+
+
+        _createClass(DatePipe, [{
+            key: 'transform',
+            value: function transform(value) {
+                var pattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mediumDate';
+
+                var /** @type {?} */date = void 0;
+                if (isBlank(value) || value !== value) return null;
+                if (typeof value === 'string') {
+                    value = value.trim();
+                }
+                if (isDate(value)) {
+                    date = value;
+                } else if (isNumeric(value)) {
+                    date = new Date(parseFloat(value));
+                } else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+                    var _value$split$map = value.split('-').map(function (val) {
+                        return parseInt(val, 10);
+                    }),
+                        _value$split$map2 = _slicedToArray(_value$split$map, 3),
+                        y = _value$split$map2[0],
+                        m = _value$split$map2[1],
+                        d = _value$split$map2[2];
+
+                    date = new Date(y, m - 1, d);
+                } else {
+                    date = new Date(value);
+                }
+                if (!isDate(date)) {
+                    var /** @type {?} */match = void 0;
+                    if (typeof value === 'string' && (match = value.match(ISO8601_DATE_REGEX))) {
+                        date = isoStringToDate(match);
+                    } else {
+                        throw invalidPipeArgumentError(DatePipe, value);
+                    }
+                }
+                return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
+            }
+        }]);
+
+        return DatePipe;
+    }();
+
+    /** @internal */
+    DatePipe._ALIASES = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+    DatePipe.decorators = [{ type: _core.Pipe, args: [{ name: 'date', pure: true }] }];
+    /** @nocollapse */
+    DatePipe.ctorParameters = function () {
+        return [{ type: undefined, decorators: [{ type: _core.Inject, args: [_core.LOCALE_ID] }] }];
+    };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function isBlank(obj) {
+        return obj == null || obj === '';
+    }
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function isDate(obj) {
+        return obj instanceof Date && !isNaN(obj.valueOf());
+    }
+    /**
+     * @param {?} match
+     * @return {?}
+     */
+    function isoStringToDate(match) {
+        var /** @type {?} */date = new Date(0);
+        var /** @type {?} */tzHour = 0;
+        var /** @type {?} */tzMin = 0;
+        var /** @type {?} */dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+        var /** @type {?} */timeSetter = match[8] ? date.setUTCHours : date.setHours;
+        if (match[9]) {
+            tzHour = toInt(match[9] + match[10]);
+            tzMin = toInt(match[9] + match[11]);
+        }
+        dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
+        var /** @type {?} */h = toInt(match[4] || '0') - tzHour;
+        var /** @type {?} */m = toInt(match[5] || '0') - tzMin;
+        var /** @type {?} */s = toInt(match[6] || '0');
+        var /** @type {?} */ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+        timeSetter.call(date, h, m, s, ms);
+        return date;
+    }
+    /**
+     * @param {?} str
+     * @return {?}
+     */
+    function toInt(str) {
+        return parseInt(str, 10);
+    }
+
+    var /** @type {?} */_INTERPOLATION_REGEXP = /#/g;
+    /**
+     * \@ngModule CommonModule
+     * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
+     * \@howToUse `expression | i18nPlural:mapping`
+     * \@description
+     *
+     *  Where:
+     *  - `expression` is a number.
+     *  - `mapping` is an object that mimics the ICU format, see
+     *    http://userguide.icu-project.org/formatparse/messages
+     *
+     *  ## Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
+     *
+     * \@experimental
+     */
+
+    var I18nPluralPipe = function () {
+        /**
+         * @param {?} _localization
+         */
+        function I18nPluralPipe(_localization) {
+            _classCallCheck(this, I18nPluralPipe);
+
+            this._localization = _localization;
+        }
+        /**
+         * @param {?} value
+         * @param {?} pluralMap
+         * @return {?}
+         */
+
+
+        _createClass(I18nPluralPipe, [{
+            key: 'transform',
+            value: function transform(value, pluralMap) {
+                if (value == null) return '';
+                if ((typeof pluralMap === 'undefined' ? 'undefined' : _typeof(pluralMap)) !== 'object' || pluralMap === null) {
+                    throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
+                }
+                var /** @type {?} */key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+                return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+            }
+        }]);
+
+        return I18nPluralPipe;
+    }();
+
+    I18nPluralPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'i18nPlural', pure: true }] }];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = function () {
+        return [{ type: NgLocalization }];
+    };
+
+    /**
+     * \@ngModule CommonModule
+     * \@whatItDoes Generic selector that displays the string that matches the current value.
+     * \@howToUse `expression | i18nSelect:mapping`
+     * \@description
+     *
+     *  Where `mapping` is an object that indicates the text that should be displayed
+     *  for different values of the provided `expression`.
+     *  If none of the keys of the mapping match the value of the `expression`, then the content
+     *  of the `other` key is returned when present, otherwise an empty string is returned.
+     *
+     *  ## Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+     *
+     *  \@experimental
+     */
+
+    var I18nSelectPipe = function () {
+        function I18nSelectPipe() {
+            _classCallCheck(this, I18nSelectPipe);
+        }
+
+        _createClass(I18nSelectPipe, [{
+            key: 'transform',
+            value: function transform(value, mapping) {
+                if (value == null) return '';
+                if ((typeof mapping === 'undefined' ? 'undefined' : _typeof(mapping)) !== 'object' || typeof value !== 'string') {
+                    throw invalidPipeArgumentError(I18nSelectPipe, mapping);
+                }
+                if (mapping.hasOwnProperty(value)) {
+                    return mapping[value];
+                }
+                if (mapping.hasOwnProperty('other')) {
+                    return mapping['other'];
+                }
+                return '';
+            }
+        }]);
+
+        return I18nSelectPipe;
+    }();
+
+    I18nSelectPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'i18nSelect', pure: true }] }];
+    /** @nocollapse */
+    I18nSelectPipe.ctorParameters = function () {
+        return [];
+    };
+
+    /**
+     * \@ngModule CommonModule
+     * \@whatItDoes Converts value into JSON string.
+     * \@howToUse `expression | json`
+     * \@description
+     *
+     * Converts value into string using `JSON.stringify`. Useful for debugging.
+     *
+     * ### Example
+     * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+     *
+     * \@stable
+     */
+
+    var JsonPipe = function () {
+        function JsonPipe() {
+            _classCallCheck(this, JsonPipe);
+        }
+
+        _createClass(JsonPipe, [{
+            key: 'transform',
+            value: function transform(value) {
+                return JSON.stringify(value, null, 2);
+            }
+        }]);
+
+        return JsonPipe;
+    }();
+
+    JsonPipe.decorators = [{ type: _core.Pipe, args: [{ name: 'json', pure: false }] }];
+    /** @nocollapse */
+    JsonPipe.ctorParameters = function () {
+        return [];
+    };
 
     /**
      * \@ngModule CommonModule
@@ -3619,7 +3510,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-207298c');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-b7e76cc');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

@@ -92,3 +92,4 @@ export declare class CurrencyPipe implements PipeTransform {
     constructor(_locale: string);
     transform(value: any, currencyCode?: string, symbolDisplay?: boolean, digits?: string): string;
 }
+export declare function isNumeric(value: any): boolean;

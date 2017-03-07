@@ -102,3 +102,4 @@ export declare type NgFor = NgForOf<any>;
  * @deprecated from v4.0.0 - Use NgForOf instead.
  */
 export declare const NgFor: typeof NgForOf;
+export declare function getTypeNameForDebugging(type: any): string;
