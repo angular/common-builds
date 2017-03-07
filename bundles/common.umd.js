@@ -17,7 +17,7 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ɵd = exports.ɵb = exports.ɵa = exports.ɵc = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.PlatformLocation = exports.VERSION = exports.isPlatformWorkerUi = exports.isPlatformWorkerApp = exports.isPlatformServer = exports.isPlatformBrowser = exports.ɵPLATFORM_WORKER_UI_ID = exports.ɵPLATFORM_WORKER_APP_ID = exports.ɵPLATFORM_SERVER_ID = exports.ɵPLATFORM_BROWSER_ID = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
+    exports.ɵd = exports.ɵb = exports.ɵa = exports.ɵc = exports.Location = exports.PathLocationStrategy = exports.HashLocationStrategy = exports.APP_BASE_HREF = exports.LocationStrategy = exports.LOCATION_INITIALIZED = exports.PlatformLocation = exports.VERSION = exports.isPlatformWorkerUi = exports.isPlatformWorkerApp = exports.isPlatformServer = exports.isPlatformBrowser = exports.ɵPLATFORM_WORKER_UI_ID = exports.ɵPLATFORM_WORKER_APP_ID = exports.ɵPLATFORM_SERVER_ID = exports.ɵPLATFORM_BROWSER_ID = exports.TitleCasePipe = exports.UpperCasePipe = exports.SlicePipe = exports.PercentPipe = exports.DecimalPipe = exports.CurrencyPipe = exports.LowerCasePipe = exports.JsonPipe = exports.I18nSelectPipe = exports.I18nPluralPipe = exports.DatePipe = exports.AsyncPipe = exports.NgComponentOutlet = exports.NgTemplateOutlet = exports.NgSwitchDefault = exports.NgSwitchCase = exports.NgSwitch = exports.NgStyle = exports.NgPluralCase = exports.NgPlural = exports.NgIf = exports.NgForOf = exports.NgFor = exports.NgClass = exports.CommonModule = exports.NgLocalization = exports.NgLocaleLocalization = undefined;
 
     function _toConsumableArray(arr) {
         if (Array.isArray(arr)) {
@@ -166,6 +166,32 @@
 
         return PlatformLocation;
     }();
+
+    /**
+     * @whatItDoes indicates when a location is initialized
+     * @experimental
+     */
+    var /** @type {?} */LOCATION_INITIALIZED = new _core.InjectionToken('Location Initialized');
+
+    /**
+     * `LocationStrategy` is responsible for representing and reading route state
+     * from the browser's URL. Angular provides two strategies:
+     * {\@link HashLocationStrategy} and {\@link PathLocationStrategy}.
+     *
+     * This is used under the hood of the {\@link Location} service.
+     *
+     * Applications should use the {\@link Router} or {\@link Location} services to
+     * interact with application route state.
+     *
+     * For instance, {\@link HashLocationStrategy} produces URLs like
+     * `http://example.com#/foo`, and {\@link PathLocationStrategy} produces
+     * `http://example.com/foo` as an equivalent URL.
+     *
+     * See these two classes for more.
+     *
+     * \@stable
+     * @abstract
+     */
 
     var LocationStrategy = function () {
         function LocationStrategy() {
@@ -3510,7 +3536,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-1cff125');
+    var /** @type {?} */VERSION = new _core.Version('4.0.0-rc.2-5df998d');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
@@ -3549,6 +3575,7 @@
     exports.isPlatformWorkerUi = isPlatformWorkerUi;
     exports.VERSION = VERSION;
     exports.PlatformLocation = PlatformLocation;
+    exports.LOCATION_INITIALIZED = LOCATION_INITIALIZED;
     exports.LocationStrategy = LocationStrategy;
     exports.APP_BASE_HREF = APP_BASE_HREF;
     exports.HashLocationStrategy = HashLocationStrategy;
