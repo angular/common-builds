@@ -1,24 +1,14 @@
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
- * @license Angular v4.0.0-rc.2-5ad5301
+ * @license Angular v4.0.0-rc.3-6c8638c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
-
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
@@ -46,115 +36,83 @@ import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, 
  * \@stable
  * @abstract
  */
-
-var PlatformLocation = function () {
+var PlatformLocation = (function () {
     function PlatformLocation() {
-        _classCallCheck(this, PlatformLocation);
     }
-
-    _createClass(PlatformLocation, [{
-        key: 'getBaseHrefFromDOM',
-
-        /**
-         * @abstract
-         * @return {?}
-         */
-        value: function getBaseHrefFromDOM() {}
-        /**
-         * @abstract
-         * @param {?} fn
-         * @return {?}
-         */
-
-    }, {
-        key: 'onPopState',
-        value: function onPopState(fn) {}
-        /**
-         * @abstract
-         * @param {?} fn
-         * @return {?}
-         */
-
-    }, {
-        key: 'onHashChange',
-        value: function onHashChange(fn) {}
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    PlatformLocation.prototype.onPopState = function (fn) { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    PlatformLocation.prototype.onHashChange = function (fn) { };
+    Object.defineProperty(PlatformLocation.prototype, "pathname", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'replaceState',
-
-        /**
-         * @abstract
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @return {?}
-         */
-        value: function replaceState(state, title, url) {}
-        /**
-         * @abstract
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @return {?}
-         */
-
-    }, {
-        key: 'pushState',
-        value: function pushState(state, title, url) {}
-        /**
-         * @abstract
-         * @return {?}
-         */
-
-    }, {
-        key: 'forward',
-        value: function forward() {}
-        /**
-         * @abstract
-         * @return {?}
-         */
-
-    }, {
-        key: 'back',
-        value: function back() {}
-    }, {
-        key: 'pathname',
-        get: function get() {
-            return null;
-        }
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PlatformLocation.prototype, "search", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'search',
-        get: function get() {
-            return null;
-        }
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PlatformLocation.prototype, "hash", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'hash',
-        get: function get() {
-            return null;
-        }
-    }]);
-
+        get: function () { return null; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    PlatformLocation.prototype.replaceState = function (state, title, url) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    PlatformLocation.prototype.pushState = function (state, title, url) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.forward = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.back = function () { };
     return PlatformLocation;
-}();
+}());
 /**
  * @whatItDoes indicates when a location is initialized
  * @experimental
  */
-
-
-var /** @type {?} */LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
-
+var /** @type {?} */ LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 /**
  * `LocationStrategy` is responsible for representing and reading route state
  * from the browser's URL. Angular provides two strategies:
@@ -174,91 +132,62 @@ var /** @type {?} */LOCATION_INITIALIZED = new InjectionToken('Location Initiali
  * \@stable
  * @abstract
  */
-
-var LocationStrategy = function () {
+var LocationStrategy = (function () {
     function LocationStrategy() {
-        _classCallCheck(this, LocationStrategy);
     }
-
-    _createClass(LocationStrategy, [{
-        key: 'path',
-
-        /**
-         * @abstract
-         * @param {?=} includeHash
-         * @return {?}
-         */
-        value: function path(includeHash) {}
-        /**
-         * @abstract
-         * @param {?} internal
-         * @return {?}
-         */
-
-    }, {
-        key: 'prepareExternalUrl',
-        value: function prepareExternalUrl(internal) {}
-        /**
-         * @abstract
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'pushState',
-        value: function pushState(state, title, url, queryParams) {}
-        /**
-         * @abstract
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'replaceState',
-        value: function replaceState(state, title, url, queryParams) {}
-        /**
-         * @abstract
-         * @return {?}
-         */
-
-    }, {
-        key: 'forward',
-        value: function forward() {}
-        /**
-         * @abstract
-         * @return {?}
-         */
-
-    }, {
-        key: 'back',
-        value: function back() {}
-        /**
-         * @abstract
-         * @param {?} fn
-         * @return {?}
-         */
-
-    }, {
-        key: 'onPopState',
-        value: function onPopState(fn) {}
-        /**
-         * @abstract
-         * @return {?}
-         */
-
-    }, {
-        key: 'getBaseHref',
-        value: function getBaseHref() {}
-    }]);
-
+    /**
+     * @abstract
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    LocationStrategy.prototype.path = function (includeHash) { };
+    /**
+     * @abstract
+     * @param {?} internal
+     * @return {?}
+     */
+    LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.forward = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.back = function () { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    LocationStrategy.prototype.onPopState = function (fn) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.getBaseHref = function () { };
     return LocationStrategy;
-}();
+}());
 /**
  * The `APP_BASE_HREF` token represents the base href to be used with the
  * {@link PathLocationStrategy}.
@@ -281,10 +210,7 @@ var LocationStrategy = function () {
  *
  * @stable
  */
-
-
-var /** @type {?} */APP_BASE_HREF = new InjectionToken('appBaseHref');
-
+var /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -306,16 +232,12 @@ var /** @type {?} */APP_BASE_HREF = new InjectionToken('appBaseHref');
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-
-var Location = function () {
+var Location = (function () {
     /**
      * @param {?} platformStrategy
      */
     function Location(platformStrategy) {
         var _this = this;
-
-        _classCallCheck(this, Location);
-
         /** @internal */
         this._subject = new EventEmitter();
         this._platformStrategy = platformStrategy;
@@ -325,7 +247,7 @@ var Location = function () {
             _this._subject.emit({
                 'url': _this.path(true),
                 'pop': true,
-                'type': ev.type
+                'type': ev.type,
             });
         });
     }
@@ -333,188 +255,139 @@ var Location = function () {
      * @param {?=} includeHash
      * @return {?}
      */
-
-
-    _createClass(Location, [{
-        key: 'path',
-        value: function path() {
-            var includeHash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            return this.normalize(this._platformStrategy.path(includeHash));
+    Location.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
+        return this.normalize(this._platformStrategy.path(includeHash));
+    };
+    /**
+     * Normalizes the given path and compares to the current normalized path.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    Location.prototype.isCurrentPathEqualTo = function (path, query) {
+        if (query === void 0) { query = ''; }
+        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+    };
+    /**
+     * Given a string representing a URL, returns the normalized URL path without leading or
+     * trailing slashes.
+     * @param {?} url
+     * @return {?}
+     */
+    Location.prototype.normalize = function (url) {
+        return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+    };
+    /**
+     * Given a string representing a URL, returns the platform-specific external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+     * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+     * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     * @param {?} url
+     * @return {?}
+     */
+    Location.prototype.prepareExternalUrl = function (url) {
+        if (url && url[0] !== '/') {
+            url = '/' + url;
         }
-        /**
-         * Normalizes the given path and compares to the current normalized path.
-         * @param {?} path
-         * @param {?=} query
-         * @return {?}
-         */
-
-    }, {
-        key: 'isCurrentPathEqualTo',
-        value: function isCurrentPathEqualTo(path) {
-            var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-            return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+        return this._platformStrategy.prepareExternalUrl(url);
+    };
+    /**
+     * Changes the browsers URL to the normalized version of the given URL, and pushes a
+     * new item onto the platform's history.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    Location.prototype.go = function (path, query) {
+        if (query === void 0) { query = ''; }
+        this._platformStrategy.pushState(null, '', path, query);
+    };
+    /**
+     * Changes the browsers URL to the normalized version of the given URL, and replaces
+     * the top item on the platform's history stack.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    Location.prototype.replaceState = function (path, query) {
+        if (query === void 0) { query = ''; }
+        this._platformStrategy.replaceState(null, '', path, query);
+    };
+    /**
+     * Navigates forward in the platform's history.
+     * @return {?}
+     */
+    Location.prototype.forward = function () { this._platformStrategy.forward(); };
+    /**
+     * Navigates back in the platform's history.
+     * @return {?}
+     */
+    Location.prototype.back = function () { this._platformStrategy.back(); };
+    /**
+     * Subscribe to the platform's `popState` events.
+     * @param {?} onNext
+     * @param {?=} onThrow
+     * @param {?=} onReturn
+     * @return {?}
+     */
+    Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
+        if (onThrow === void 0) { onThrow = null; }
+        if (onReturn === void 0) { onReturn = null; }
+        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+    };
+    /**
+     * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
+     * is.
+     * @param {?} params
+     * @return {?}
+     */
+    Location.normalizeQueryParams = function (params) {
+        return params && params[0] !== '?' ? '?' + params : params;
+    };
+    /**
+     * Given 2 parts of a url, join them with a slash if needed.
+     * @param {?} start
+     * @param {?} end
+     * @return {?}
+     */
+    Location.joinWithSlash = function (start, end) {
+        if (start.length == 0) {
+            return end;
         }
-        /**
-         * Given a string representing a URL, returns the normalized URL path without leading or
-         * trailing slashes.
-         * @param {?} url
-         * @return {?}
-         */
-
-    }, {
-        key: 'normalize',
-        value: function normalize(url) {
-            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+        if (end.length == 0) {
+            return start;
         }
-        /**
-         * Given a string representing a URL, returns the platform-specific external URL path.
-         * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-         * before normalizing. This method will also add a hash if `HashLocationStrategy` is
-         * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-         * @param {?} url
-         * @return {?}
-         */
-
-    }, {
-        key: 'prepareExternalUrl',
-        value: function prepareExternalUrl(url) {
-            if (url && url[0] !== '/') {
-                url = '/' + url;
-            }
-            return this._platformStrategy.prepareExternalUrl(url);
+        var /** @type {?} */ slashes = 0;
+        if (start.endsWith('/')) {
+            slashes++;
         }
-        /**
-         * Changes the browsers URL to the normalized version of the given URL, and pushes a
-         * new item onto the platform's history.
-         * @param {?} path
-         * @param {?=} query
-         * @return {?}
-         */
-
-    }, {
-        key: 'go',
-        value: function go(path) {
-            var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-            this._platformStrategy.pushState(null, '', path, query);
+        if (end.startsWith('/')) {
+            slashes++;
         }
-        /**
-         * Changes the browsers URL to the normalized version of the given URL, and replaces
-         * the top item on the platform's history stack.
-         * @param {?} path
-         * @param {?=} query
-         * @return {?}
-         */
-
-    }, {
-        key: 'replaceState',
-        value: function replaceState(path) {
-            var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-            this._platformStrategy.replaceState(null, '', path, query);
+        if (slashes == 2) {
+            return start + end.substring(1);
         }
-        /**
-         * Navigates forward in the platform's history.
-         * @return {?}
-         */
-
-    }, {
-        key: 'forward',
-        value: function forward() {
-            this._platformStrategy.forward();
+        if (slashes == 1) {
+            return start + end;
         }
-        /**
-         * Navigates back in the platform's history.
-         * @return {?}
-         */
-
-    }, {
-        key: 'back',
-        value: function back() {
-            this._platformStrategy.back();
-        }
-        /**
-         * Subscribe to the platform's `popState` events.
-         * @param {?} onNext
-         * @param {?=} onThrow
-         * @param {?=} onReturn
-         * @return {?}
-         */
-
-    }, {
-        key: 'subscribe',
-        value: function subscribe(onNext) {
-            var onThrow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-            var onReturn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-        }
-        /**
-         * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-         * is.
-         * @param {?} params
-         * @return {?}
-         */
-
-    }], [{
-        key: 'normalizeQueryParams',
-        value: function normalizeQueryParams(params) {
-            return params && params[0] !== '?' ? '?' + params : params;
-        }
-        /**
-         * Given 2 parts of a url, join them with a slash if needed.
-         * @param {?} start
-         * @param {?} end
-         * @return {?}
-         */
-
-    }, {
-        key: 'joinWithSlash',
-        value: function joinWithSlash(start, end) {
-            if (start.length == 0) {
-                return end;
-            }
-            if (end.length == 0) {
-                return start;
-            }
-            var /** @type {?} */slashes = 0;
-            if (start.endsWith('/')) {
-                slashes++;
-            }
-            if (end.startsWith('/')) {
-                slashes++;
-            }
-            if (slashes == 2) {
-                return start + end.substring(1);
-            }
-            if (slashes == 1) {
-                return start + end;
-            }
-            return start + '/' + end;
-        }
-        /**
-         * If url has a trailing slash, remove it, otherwise return url as is.
-         * @param {?} url
-         * @return {?}
-         */
-
-    }, {
-        key: 'stripTrailingSlash',
-        value: function stripTrailingSlash(url) {
-            return url.replace(/\/$/, '');
-        }
-    }]);
-
+        return start + '/' + end;
+    };
+    /**
+     * If url has a trailing slash, remove it, otherwise return url as is.
+     * @param {?} url
+     * @return {?}
+     */
+    Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
     return Location;
-}();
-
-Location.decorators = [{ type: Injectable }];
+}());
+Location.decorators = [
+    { type: Injectable },
+];
 /** @nocollapse */
-Location.ctorParameters = function () {
-    return [{ type: LocationStrategy }];
-};
+Location.ctorParameters = function () { return [
+    { type: LocationStrategy, },
+]; };
 /**
  * @param {?} baseHref
  * @param {?} url
@@ -530,7 +403,6 @@ function _stripBaseHref(baseHref, url) {
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
-
 /**
  * \@whatItDoes Use URL hash for storing application location data.
  * \@description
@@ -548,137 +420,100 @@ function _stripIndexHtml(url) {
  *
  * \@stable
  */
-
-var HashLocationStrategy = function (_LocationStrategy) {
-    _inherits(HashLocationStrategy, _LocationStrategy);
-
+var HashLocationStrategy = (function (_super) {
+    __extends(HashLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
      */
     function HashLocationStrategy(_platformLocation, _baseHref) {
-        _classCallCheck(this, HashLocationStrategy);
-
-        var _this2 = _possibleConstructorReturn(this, (HashLocationStrategy.__proto__ || Object.getPrototypeOf(HashLocationStrategy)).call(this));
-
-        _this2._platformLocation = _platformLocation;
-        _this2._baseHref = '';
+        var _this = _super.call(this) || this;
+        _this._platformLocation = _platformLocation;
+        _this._baseHref = '';
         if (_baseHref != null) {
-            _this2._baseHref = _baseHref;
+            _this._baseHref = _baseHref;
         }
-        return _this2;
+        return _this;
     }
     /**
      * @param {?} fn
      * @return {?}
      */
-
-
-    _createClass(HashLocationStrategy, [{
-        key: 'onPopState',
-        value: function onPopState(fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
+    HashLocationStrategy.prototype.onPopState = function (fn) {
+        this._platformLocation.onPopState(fn);
+        this._platformLocation.onHashChange(fn);
+    };
+    /**
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
+        // the hash value is always prefixed with a `#`
+        // and if it is empty then it will stay empty
+        var /** @type {?} */ path = this._platformLocation.hash;
+        if (path == null)
+            path = '#';
+        return path.length > 0 ? path.substring(1) : path;
+    };
+    /**
+     * @param {?} internal
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+        var /** @type {?} */ url = Location.joinWithSlash(this._baseHref, internal);
+        return url.length > 0 ? ('#' + url) : url;
+    };
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} path
+     * @param {?} queryParams
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
+        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        if (url.length == 0) {
+            url = this._platformLocation.pathname;
         }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'getBaseHref',
-        value: function getBaseHref() {
-            return this._baseHref;
+        this._platformLocation.pushState(state, title, url);
+    };
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} path
+     * @param {?} queryParams
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
+        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        if (url.length == 0) {
+            url = this._platformLocation.pathname;
         }
-        /**
-         * @param {?=} includeHash
-         * @return {?}
-         */
-
-    }, {
-        key: 'path',
-        value: function path() {
-            var includeHash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            // the hash value is always prefixed with a `#`
-            // and if it is empty then it will stay empty
-            var /** @type {?} */path = this._platformLocation.hash;
-            if (path == null) path = '#';
-            return path.length > 0 ? path.substring(1) : path;
-        }
-        /**
-         * @param {?} internal
-         * @return {?}
-         */
-
-    }, {
-        key: 'prepareExternalUrl',
-        value: function prepareExternalUrl(internal) {
-            var /** @type {?} */url = Location.joinWithSlash(this._baseHref, internal);
-            return url.length > 0 ? '#' + url : url;
-        }
-        /**
-         * @param {?} state
-         * @param {?} title
-         * @param {?} path
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'pushState',
-        value: function pushState(state, title, path, queryParams) {
-            var /** @type {?} */url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.pushState(state, title, url);
-        }
-        /**
-         * @param {?} state
-         * @param {?} title
-         * @param {?} path
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'replaceState',
-        value: function replaceState(state, title, path, queryParams) {
-            var /** @type {?} */url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.replaceState(state, title, url);
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'forward',
-        value: function forward() {
-            this._platformLocation.forward();
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'back',
-        value: function back() {
-            this._platformLocation.back();
-        }
-    }]);
-
+        this._platformLocation.replaceState(state, title, url);
+    };
+    /**
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+    /**
+     * @return {?}
+     */
+    HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
     return HashLocationStrategy;
-}(LocationStrategy);
-
-HashLocationStrategy.decorators = [{ type: Injectable }];
+}(LocationStrategy));
+HashLocationStrategy.decorators = [
+    { type: Injectable },
+];
 /** @nocollapse */
-HashLocationStrategy.ctorParameters = function () {
-    return [{ type: PlatformLocation }, { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF] }] }];
-};
-
+HashLocationStrategy.ctorParameters = function () { return [
+    { type: PlatformLocation, },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+]; };
 /**
  * \@whatItDoes Use URL for storing application location data.
  * \@description
@@ -705,154 +540,109 @@ HashLocationStrategy.ctorParameters = function () {
  *
  * \@stable
  */
-
-var PathLocationStrategy = function (_LocationStrategy2) {
-    _inherits(PathLocationStrategy, _LocationStrategy2);
-
+var PathLocationStrategy = (function (_super) {
+    __extends(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
      */
     function PathLocationStrategy(_platformLocation, href) {
-        _classCallCheck(this, PathLocationStrategy);
-
-        var _this3 = _possibleConstructorReturn(this, (PathLocationStrategy.__proto__ || Object.getPrototypeOf(PathLocationStrategy)).call(this));
-
-        _this3._platformLocation = _platformLocation;
+        var _this = _super.call(this) || this;
+        _this._platformLocation = _platformLocation;
         if (href == null) {
-            href = _this3._platformLocation.getBaseHrefFromDOM();
+            href = _this._platformLocation.getBaseHrefFromDOM();
         }
         if (href == null) {
-            throw new Error('No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.');
+            throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");
         }
-        _this3._baseHref = href;
-        return _this3;
+        _this._baseHref = href;
+        return _this;
     }
     /**
      * @param {?} fn
      * @return {?}
      */
-
-
-    _createClass(PathLocationStrategy, [{
-        key: 'onPopState',
-        value: function onPopState(fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'getBaseHref',
-        value: function getBaseHref() {
-            return this._baseHref;
-        }
-        /**
-         * @param {?} internal
-         * @return {?}
-         */
-
-    }, {
-        key: 'prepareExternalUrl',
-        value: function prepareExternalUrl(internal) {
-            return Location.joinWithSlash(this._baseHref, internal);
-        }
-        /**
-         * @param {?=} includeHash
-         * @return {?}
-         */
-
-    }, {
-        key: 'path',
-        value: function path() {
-            var includeHash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            var /** @type {?} */pathname = this._platformLocation.pathname + Location.normalizeQueryParams(this._platformLocation.search);
-            var /** @type {?} */hash = this._platformLocation.hash;
-            return hash && includeHash ? '' + pathname + hash : pathname;
-        }
-        /**
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'pushState',
-        value: function pushState(state, title, url, queryParams) {
-            var /** @type {?} */externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-            this._platformLocation.pushState(state, title, externalUrl);
-        }
-        /**
-         * @param {?} state
-         * @param {?} title
-         * @param {?} url
-         * @param {?} queryParams
-         * @return {?}
-         */
-
-    }, {
-        key: 'replaceState',
-        value: function replaceState(state, title, url, queryParams) {
-            var /** @type {?} */externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-            this._platformLocation.replaceState(state, title, externalUrl);
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'forward',
-        value: function forward() {
-            this._platformLocation.forward();
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'back',
-        value: function back() {
-            this._platformLocation.back();
-        }
-    }]);
-
+    PathLocationStrategy.prototype.onPopState = function (fn) {
+        this._platformLocation.onPopState(fn);
+        this._platformLocation.onHashChange(fn);
+    };
+    /**
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    /**
+     * @param {?} internal
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+        return Location.joinWithSlash(this._baseHref, internal);
+    };
+    /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.path = function (includeHash) {
+        if (includeHash === void 0) { includeHash = false; }
+        var /** @type {?} */ pathname = this._platformLocation.pathname +
+            Location.normalizeQueryParams(this._platformLocation.search);
+        var /** @type {?} */ hash = this._platformLocation.hash;
+        return hash && includeHash ? "" + pathname + hash : pathname;
+    };
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+        this._platformLocation.pushState(state, title, externalUrl);
+    };
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+        this._platformLocation.replaceState(state, title, externalUrl);
+    };
+    /**
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+    /**
+     * @return {?}
+     */
+    PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
     return PathLocationStrategy;
-}(LocationStrategy);
-
-PathLocationStrategy.decorators = [{ type: Injectable }];
+}(LocationStrategy));
+PathLocationStrategy.decorators = [
+    { type: Injectable },
+];
 /** @nocollapse */
-PathLocationStrategy.ctorParameters = function () {
-    return [{ type: PlatformLocation }, { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF] }] }];
-};
-
+PathLocationStrategy.ctorParameters = function () { return [
+    { type: PlatformLocation, },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+]; };
 /**
  * \@experimental
  * @abstract
  */
-
-var NgLocalization = function () {
+var NgLocalization = (function () {
     function NgLocalization() {
-        _classCallCheck(this, NgLocalization);
     }
-
-    _createClass(NgLocalization, [{
-        key: 'getPluralCategory',
-
-        /**
-         * @abstract
-         * @param {?} value
-         * @return {?}
-         */
-        value: function getPluralCategory(value) {}
-    }]);
-
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgLocalization.prototype.getPluralCategory = function (value) { };
     return NgLocalization;
-}();
+}());
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
@@ -864,10 +654,8 @@ var NgLocalization = function () {
  * @param {?} ngLocalization
  * @return {?}
  */
-
-
 function getPluralCategory(value, cases, ngLocalization) {
-    var /** @type {?} */key = '=' + value;
+    var /** @type {?} */ key = "=" + value;
     if (cases.indexOf(key) > -1) {
         return key;
     }
@@ -878,63 +666,53 @@ function getPluralCategory(value, cases, ngLocalization) {
     if (cases.indexOf('other') > -1) {
         return 'other';
     }
-    throw new Error('No plural message found for value "' + value + '"');
+    throw new Error("No plural message found for value \"" + value + "\"");
 }
 /**
  * Returns the plural case based on the locale
  *
  * \@experimental
  */
-
-var NgLocaleLocalization = function (_NgLocalization) {
-    _inherits(NgLocaleLocalization, _NgLocalization);
-
+var NgLocaleLocalization = (function (_super) {
+    __extends(NgLocaleLocalization, _super);
     /**
      * @param {?} locale
      */
     function NgLocaleLocalization(locale) {
-        _classCallCheck(this, NgLocaleLocalization);
-
-        var _this4 = _possibleConstructorReturn(this, (NgLocaleLocalization.__proto__ || Object.getPrototypeOf(NgLocaleLocalization)).call(this));
-
-        _this4.locale = locale;
-        return _this4;
+        var _this = _super.call(this) || this;
+        _this.locale = locale;
+        return _this;
     }
     /**
      * @param {?} value
      * @return {?}
      */
-
-
-    _createClass(NgLocaleLocalization, [{
-        key: 'getPluralCategory',
-        value: function getPluralCategory(value) {
-            var /** @type {?} */plural = getPluralCase(this.locale, value);
-            switch (plural) {
-                case Plural.Zero:
-                    return 'zero';
-                case Plural.One:
-                    return 'one';
-                case Plural.Two:
-                    return 'two';
-                case Plural.Few:
-                    return 'few';
-                case Plural.Many:
-                    return 'many';
-                default:
-                    return 'other';
-            }
+    NgLocaleLocalization.prototype.getPluralCategory = function (value) {
+        var /** @type {?} */ plural = getPluralCase(this.locale, value);
+        switch (plural) {
+            case Plural.Zero:
+                return 'zero';
+            case Plural.One:
+                return 'one';
+            case Plural.Two:
+                return 'two';
+            case Plural.Few:
+                return 'few';
+            case Plural.Many:
+                return 'many';
+            default:
+                return 'other';
         }
-    }]);
-
+    };
     return NgLocaleLocalization;
-}(NgLocalization);
-
-NgLocaleLocalization.decorators = [{ type: Injectable }];
+}(NgLocalization));
+NgLocaleLocalization.decorators = [
+    { type: Injectable },
+];
 /** @nocollapse */
-NgLocaleLocalization.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
+NgLocaleLocalization.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 var Plural = {};
 Plural.Zero = 0;
 Plural.One = 1;
@@ -959,15 +737,15 @@ Plural[Plural.Other] = "Other";
 function getPluralCase(locale, nLike) {
     // TODO(vicb): lazy compute
     if (typeof nLike === 'string') {
-        nLike = parseInt( /** @type {?} */nLike, 10);
+        nLike = parseInt(/** @type {?} */ (nLike), 10);
     }
-    var /** @type {?} */n = nLike;
-    var /** @type {?} */nDecimal = n.toString().replace(/^[^.]*\.?/, '');
-    var /** @type {?} */i = Math.floor(Math.abs(n));
-    var /** @type {?} */v = nDecimal.length;
-    var /** @type {?} */f = parseInt(nDecimal, 10);
-    var /** @type {?} */t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-    var /** @type {?} */lang = locale.split('-')[0].toLowerCase();
+    var /** @type {?} */ n = (nLike);
+    var /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
+    var /** @type {?} */ i = Math.floor(Math.abs(n));
+    var /** @type {?} */ v = nDecimal.length;
+    var /** @type {?} */ f = parseInt(nDecimal, 10);
+    var /** @type {?} */ t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+    var /** @type {?} */ lang = locale.split('-')[0].toLowerCase();
     switch (lang) {
         case 'af':
         case 'asa':
@@ -1035,7 +813,8 @@ function getPluralCase(locale, nLike) {
         case 'vun':
         case 'wae':
         case 'xog':
-            if (n === 1) return Plural.One;
+            if (n === 1)
+                return Plural.One;
             return Plural.Other;
         case 'agq':
         case 'bas':
@@ -1078,7 +857,8 @@ function getPluralCase(locale, nLike) {
         case 'mg':
         case 'pa':
         case 'ti':
-            if (n === Math.floor(n) && n >= 0 && n <= 1) return Plural.One;
+            if (n === Math.floor(n) && n >= 0 && n <= 1)
+                return Plural.One;
             return Plural.Other;
         case 'am':
         case 'as':
@@ -1089,14 +869,20 @@ function getPluralCase(locale, nLike) {
         case 'kn':
         case 'mr':
         case 'zu':
-            if (i === 0 || n === 1) return Plural.One;
+            if (i === 0 || n === 1)
+                return Plural.One;
             return Plural.Other;
         case 'ar':
-            if (n === 0) return Plural.Zero;
-            if (n === 1) return Plural.One;
-            if (n === 2) return Plural.Two;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 3 && n % 100 <= 10) return Plural.Few;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 99) return Plural.Many;
+            if (n === 0)
+                return Plural.Zero;
+            if (n === 1)
+                return Plural.One;
+            if (n === 2)
+                return Plural.Two;
+            if (n % 100 === Math.floor(n % 100) && n % 100 >= 3 && n % 100 <= 10)
+                return Plural.Few;
+            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 99)
+                return Plural.Many;
             return Plural.Other;
         case 'ast':
         case 'ca':
@@ -1112,152 +898,242 @@ function getPluralCase(locale, nLike) {
         case 'sw':
         case 'ur':
         case 'yi':
-            if (i === 1 && v === 0) return Plural.One;
+            if (i === 1 && v === 0)
+                return Plural.One;
             return Plural.Other;
         case 'be':
-            if (n % 10 === 1 && !(n % 100 === 11)) return Plural.One;
-            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 4 && !(n % 100 >= 12 && n % 100 <= 14)) return Plural.Few;
-            if (n % 10 === 0 || n % 10 === Math.floor(n % 10) && n % 10 >= 5 && n % 10 <= 9 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 14) return Plural.Many;
+            if (n % 10 === 1 && !(n % 100 === 11))
+                return Plural.One;
+            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 4 &&
+                !(n % 100 >= 12 && n % 100 <= 14))
+                return Plural.Few;
+            if (n % 10 === 0 || n % 10 === Math.floor(n % 10) && n % 10 >= 5 && n % 10 <= 9 ||
+                n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 14)
+                return Plural.Many;
             return Plural.Other;
         case 'br':
-            if (n % 10 === 1 && !(n % 100 === 11 || n % 100 === 71 || n % 100 === 91)) return Plural.One;
-            if (n % 10 === 2 && !(n % 100 === 12 || n % 100 === 72 || n % 100 === 92)) return Plural.Two;
-            if (n % 10 === Math.floor(n % 10) && (n % 10 >= 3 && n % 10 <= 4 || n % 10 === 9) && !(n % 100 >= 10 && n % 100 <= 19 || n % 100 >= 70 && n % 100 <= 79 || n % 100 >= 90 && n % 100 <= 99)) return Plural.Few;
-            if (!(n === 0) && n % 1e6 === 0) return Plural.Many;
+            if (n % 10 === 1 && !(n % 100 === 11 || n % 100 === 71 || n % 100 === 91))
+                return Plural.One;
+            if (n % 10 === 2 && !(n % 100 === 12 || n % 100 === 72 || n % 100 === 92))
+                return Plural.Two;
+            if (n % 10 === Math.floor(n % 10) && (n % 10 >= 3 && n % 10 <= 4 || n % 10 === 9) &&
+                !(n % 100 >= 10 && n % 100 <= 19 || n % 100 >= 70 && n % 100 <= 79 ||
+                    n % 100 >= 90 && n % 100 <= 99))
+                return Plural.Few;
+            if (!(n === 0) && n % 1e6 === 0)
+                return Plural.Many;
             return Plural.Other;
         case 'bs':
         case 'hr':
         case 'sr':
-            if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11)) return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 && !(i % 100 >= 12 && i % 100 <= 14) || f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 && !(f % 100 >= 12 && f % 100 <= 14)) return Plural.Few;
+            if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
+                return Plural.One;
+            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                !(i % 100 >= 12 && i % 100 <= 14) ||
+                f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
+                    !(f % 100 >= 12 && f % 100 <= 14))
+                return Plural.Few;
             return Plural.Other;
         case 'cs':
         case 'sk':
-            if (i === 1 && v === 0) return Plural.One;
-            if (i === Math.floor(i) && i >= 2 && i <= 4 && v === 0) return Plural.Few;
-            if (!(v === 0)) return Plural.Many;
+            if (i === 1 && v === 0)
+                return Plural.One;
+            if (i === Math.floor(i) && i >= 2 && i <= 4 && v === 0)
+                return Plural.Few;
+            if (!(v === 0))
+                return Plural.Many;
             return Plural.Other;
         case 'cy':
-            if (n === 0) return Plural.Zero;
-            if (n === 1) return Plural.One;
-            if (n === 2) return Plural.Two;
-            if (n === 3) return Plural.Few;
-            if (n === 6) return Plural.Many;
+            if (n === 0)
+                return Plural.Zero;
+            if (n === 1)
+                return Plural.One;
+            if (n === 2)
+                return Plural.Two;
+            if (n === 3)
+                return Plural.Few;
+            if (n === 6)
+                return Plural.Many;
             return Plural.Other;
         case 'da':
-            if (n === 1 || !(t === 0) && (i === 0 || i === 1)) return Plural.One;
+            if (n === 1 || !(t === 0) && (i === 0 || i === 1))
+                return Plural.One;
             return Plural.Other;
         case 'dsb':
         case 'hsb':
-            if (v === 0 && i % 100 === 1 || f % 100 === 1) return Plural.One;
-            if (v === 0 && i % 100 === 2 || f % 100 === 2) return Plural.Two;
-            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4) return Plural.Few;
+            if (v === 0 && i % 100 === 1 || f % 100 === 1)
+                return Plural.One;
+            if (v === 0 && i % 100 === 2 || f % 100 === 2)
+                return Plural.Two;
+            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
+                f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
+                return Plural.Few;
             return Plural.Other;
         case 'ff':
         case 'fr':
         case 'hy':
         case 'kab':
-            if (i === 0 || i === 1) return Plural.One;
+            if (i === 0 || i === 1)
+                return Plural.One;
             return Plural.Other;
         case 'fil':
-            if (v === 0 && (i === 1 || i === 2 || i === 3) || v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) || !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9)) return Plural.One;
+            if (v === 0 && (i === 1 || i === 2 || i === 3) ||
+                v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
+                !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))
+                return Plural.One;
             return Plural.Other;
         case 'ga':
-            if (n === 1) return Plural.One;
-            if (n === 2) return Plural.Two;
-            if (n === Math.floor(n) && n >= 3 && n <= 6) return Plural.Few;
-            if (n === Math.floor(n) && n >= 7 && n <= 10) return Plural.Many;
+            if (n === 1)
+                return Plural.One;
+            if (n === 2)
+                return Plural.Two;
+            if (n === Math.floor(n) && n >= 3 && n <= 6)
+                return Plural.Few;
+            if (n === Math.floor(n) && n >= 7 && n <= 10)
+                return Plural.Many;
             return Plural.Other;
         case 'gd':
-            if (n === 1 || n === 11) return Plural.One;
-            if (n === 2 || n === 12) return Plural.Two;
-            if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19)) return Plural.Few;
+            if (n === 1 || n === 11)
+                return Plural.One;
+            if (n === 2 || n === 12)
+                return Plural.Two;
+            if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
+                return Plural.Few;
             return Plural.Other;
         case 'gv':
-            if (v === 0 && i % 10 === 1) return Plural.One;
-            if (v === 0 && i % 10 === 2) return Plural.Two;
-            if (v === 0 && (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80)) return Plural.Few;
-            if (!(v === 0)) return Plural.Many;
+            if (v === 0 && i % 10 === 1)
+                return Plural.One;
+            if (v === 0 && i % 10 === 2)
+                return Plural.Two;
+            if (v === 0 &&
+                (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
+                return Plural.Few;
+            if (!(v === 0))
+                return Plural.Many;
             return Plural.Other;
         case 'he':
-            if (i === 1 && v === 0) return Plural.One;
-            if (i === 2 && v === 0) return Plural.Two;
-            if (v === 0 && !(n >= 0 && n <= 10) && n % 10 === 0) return Plural.Many;
+            if (i === 1 && v === 0)
+                return Plural.One;
+            if (i === 2 && v === 0)
+                return Plural.Two;
+            if (v === 0 && !(n >= 0 && n <= 10) && n % 10 === 0)
+                return Plural.Many;
             return Plural.Other;
         case 'is':
-            if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0)) return Plural.One;
+            if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
+                return Plural.One;
             return Plural.Other;
         case 'ksh':
-            if (n === 0) return Plural.Zero;
-            if (n === 1) return Plural.One;
+            if (n === 0)
+                return Plural.Zero;
+            if (n === 1)
+                return Plural.One;
             return Plural.Other;
         case 'kw':
         case 'naq':
         case 'se':
         case 'smn':
-            if (n === 1) return Plural.One;
-            if (n === 2) return Plural.Two;
+            if (n === 1)
+                return Plural.One;
+            if (n === 2)
+                return Plural.Two;
             return Plural.Other;
         case 'lag':
-            if (n === 0) return Plural.Zero;
-            if ((i === 0 || i === 1) && !(n === 0)) return Plural.One;
+            if (n === 0)
+                return Plural.Zero;
+            if ((i === 0 || i === 1) && !(n === 0))
+                return Plural.One;
             return Plural.Other;
         case 'lt':
-            if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19)) return Plural.One;
-            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 && !(n % 100 >= 11 && n % 100 <= 19)) return Plural.Few;
-            if (!(f === 0)) return Plural.Many;
+            if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
+                return Plural.One;
+            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
+                !(n % 100 >= 11 && n % 100 <= 19))
+                return Plural.Few;
+            if (!(f === 0))
+                return Plural.Many;
             return Plural.Other;
         case 'lv':
         case 'prg':
-            if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 || v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19) return Plural.Zero;
-            if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) || !(v === 2) && f % 10 === 1) return Plural.One;
+            if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 ||
+                v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19)
+                return Plural.Zero;
+            if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) ||
+                !(v === 2) && f % 10 === 1)
+                return Plural.One;
             return Plural.Other;
         case 'mk':
-            if (v === 0 && i % 10 === 1 || f % 10 === 1) return Plural.One;
+            if (v === 0 && i % 10 === 1 || f % 10 === 1)
+                return Plural.One;
             return Plural.Other;
         case 'mt':
-            if (n === 1) return Plural.One;
-            if (n === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 2 && n % 100 <= 10) return Plural.Few;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19) return Plural.Many;
+            if (n === 1)
+                return Plural.One;
+            if (n === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 2 && n % 100 <= 10)
+                return Plural.Few;
+            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19)
+                return Plural.Many;
             return Plural.Other;
         case 'pl':
-            if (i === 1 && v === 0) return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 && !(i % 100 >= 12 && i % 100 <= 14)) return Plural.Few;
-            if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 || v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 || v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14) return Plural.Many;
+            if (i === 1 && v === 0)
+                return Plural.One;
+            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                !(i % 100 >= 12 && i % 100 <= 14))
+                return Plural.Few;
+            if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
+                v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)
+                return Plural.Many;
             return Plural.Other;
         case 'pt':
-            if (n === Math.floor(n) && n >= 0 && n <= 2 && !(n === 2)) return Plural.One;
+            if (n === Math.floor(n) && n >= 0 && n <= 2 && !(n === 2))
+                return Plural.One;
             return Plural.Other;
         case 'ro':
-            if (i === 1 && v === 0) return Plural.One;
-            if (!(v === 0) || n === 0 || !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19) return Plural.Few;
+            if (i === 1 && v === 0)
+                return Plural.One;
+            if (!(v === 0) || n === 0 ||
+                !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
+                return Plural.Few;
             return Plural.Other;
         case 'ru':
         case 'uk':
-            if (v === 0 && i % 10 === 1 && !(i % 100 === 11)) return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 && !(i % 100 >= 12 && i % 100 <= 14)) return Plural.Few;
-            if (v === 0 && i % 10 === 0 || v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 || v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14) return Plural.Many;
+            if (v === 0 && i % 10 === 1 && !(i % 100 === 11))
+                return Plural.One;
+            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+                !(i % 100 >= 12 && i % 100 <= 14))
+                return Plural.Few;
+            if (v === 0 && i % 10 === 0 ||
+                v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
+                v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)
+                return Plural.Many;
             return Plural.Other;
         case 'shi':
-            if (i === 0 || n === 1) return Plural.One;
-            if (n === Math.floor(n) && n >= 2 && n <= 10) return Plural.Few;
+            if (i === 0 || n === 1)
+                return Plural.One;
+            if (n === Math.floor(n) && n >= 2 && n <= 10)
+                return Plural.Few;
             return Plural.Other;
         case 'si':
-            if (n === 0 || n === 1 || i === 0 && f === 1) return Plural.One;
+            if (n === 0 || n === 1 || i === 0 && f === 1)
+                return Plural.One;
             return Plural.Other;
         case 'sl':
-            if (v === 0 && i % 100 === 1) return Plural.One;
-            if (v === 0 && i % 100 === 2) return Plural.Two;
-            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0)) return Plural.Few;
+            if (v === 0 && i % 100 === 1)
+                return Plural.One;
+            if (v === 0 && i % 100 === 2)
+                return Plural.Two;
+            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0))
+                return Plural.Few;
             return Plural.Other;
         case 'tzm':
-            if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99) return Plural.One;
+            if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99)
+                return Plural.One;
             return Plural.Other;
         default:
             return Plural.Other;
     }
 }
-
 /**
  * \@ngModule CommonModule
  *
@@ -1286,8 +1162,7 @@ function getPluralCase(locale, nLike) {
  *
  * \@stable
  */
-
-var NgClass = function () {
+var NgClass = (function () {
     /**
      * @param {?} _iterableDiffers
      * @param {?} _keyValueDiffers
@@ -1295,164 +1170,32 @@ var NgClass = function () {
      * @param {?} _renderer
      */
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-        _classCallCheck(this, NgClass);
-
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
         this._ngEl = _ngEl;
         this._renderer = _renderer;
         this._initialClasses = [];
     }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-
-
-    _createClass(NgClass, [{
-        key: 'ngDoCheck',
-
-        /**
-         * @return {?}
-         */
-        value: function ngDoCheck() {
-            if (this._iterableDiffer) {
-                var /** @type {?} */iterableChanges = this._iterableDiffer.diff( /** @type {?} */this._rawClass);
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
-                }
-            } else if (this._keyValueDiffer) {
-                var /** @type {?} */keyValueChanges = this._keyValueDiffer.diff( /** @type {?} */this._rawClass);
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
-                }
-            }
-        }
-        /**
-         * @param {?} rawClassVal
-         * @return {?}
-         */
-
-    }, {
-        key: '_cleanupClasses',
-        value: function _cleanupClasses(rawClassVal) {
-            this._applyClasses(rawClassVal, true);
-            this._applyInitialClasses(false);
-        }
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-
-    }, {
-        key: '_applyKeyValueChanges',
-        value: function _applyKeyValueChanges(changes) {
-            var _this5 = this;
-
-            changes.forEachAddedItem(function (record) {
-                return _this5._toggleClass(record.key, record.currentValue);
-            });
-            changes.forEachChangedItem(function (record) {
-                return _this5._toggleClass(record.key, record.currentValue);
-            });
-            changes.forEachRemovedItem(function (record) {
-                if (record.previousValue) {
-                    _this5._toggleClass(record.key, false);
-                }
-            });
-        }
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-
-    }, {
-        key: '_applyIterableChanges',
-        value: function _applyIterableChanges(changes) {
-            var _this6 = this;
-
-            changes.forEachAddedItem(function (record) {
-                if (typeof record.item === 'string') {
-                    _this6._toggleClass(record.item, true);
-                } else {
-                    throw new Error('NgClass can only toggle CSS classes expressed as strings, got ' + ɵstringify(record.item));
-                }
-            });
-            changes.forEachRemovedItem(function (record) {
-                return _this6._toggleClass(record.item, false);
-            });
-        }
-        /**
-         * @param {?} isCleanup
-         * @return {?}
-         */
-
-    }, {
-        key: '_applyInitialClasses',
-        value: function _applyInitialClasses(isCleanup) {
-            var _this7 = this;
-
-            this._initialClasses.forEach(function (klass) {
-                return _this7._toggleClass(klass, !isCleanup);
-            });
-        }
-        /**
-         * @param {?} rawClassVal
-         * @param {?} isCleanup
-         * @return {?}
-         */
-
-    }, {
-        key: '_applyClasses',
-        value: function _applyClasses(rawClassVal, isCleanup) {
-            var _this8 = this;
-
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) {
-                        return _this8._toggleClass(klass, !isCleanup);
-                    });
-                } else {
-                    Object.keys(rawClassVal).forEach(function (klass) {
-                        if (rawClassVal[klass] != null) _this8._toggleClass(klass, !isCleanup);
-                    });
-                }
-            }
-        }
-        /**
-         * @param {?} klass
-         * @param {?} enabled
-         * @return {?}
-         */
-
-    }, {
-        key: '_toggleClass',
-        value: function _toggleClass(klass, enabled) {
-            var _this9 = this;
-
-            klass = klass.trim();
-            if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) {
-                    _this9._renderer.setElementClass(_this9._ngEl.nativeElement, klass, !!enabled);
-                });
-            }
-        }
-    }, {
-        key: 'klass',
-        set: function set(v) {
-            this._applyInitialClasses(true);
-            this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
-            this._applyInitialClasses(false);
-            this._applyClasses(this._rawClass, false);
-        }
+    Object.defineProperty(NgClass.prototype, "klass", {
         /**
          * @param {?} v
          * @return {?}
          */
-
-    }, {
-        key: 'ngClass',
-        set: function set(v) {
+        set: function (v) {
+            this._applyInitialClasses(true);
+            this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
+            this._applyInitialClasses(false);
+            this._applyClasses(this._rawClass, false);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgClass.prototype, "ngClass", {
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        set: function (v) {
             this._cleanupClasses(this._rawClass);
             this._iterableDiffer = null;
             this._keyValueDiffer = null;
@@ -1460,26 +1203,125 @@ var NgClass = function () {
             if (this._rawClass) {
                 if (ɵisListLikeIterable(this._rawClass)) {
                     this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-                } else {
+                }
+                else {
                     this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
                 }
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    NgClass.prototype.ngDoCheck = function () {
+        if (this._iterableDiffer) {
+            var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
+            if (iterableChanges) {
+                this._applyIterableChanges(iterableChanges);
+            }
         }
-    }]);
-
+        else if (this._keyValueDiffer) {
+            var /** @type {?} */ keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
+            if (keyValueChanges) {
+                this._applyKeyValueChanges(keyValueChanges);
+            }
+        }
+    };
+    /**
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    NgClass.prototype._cleanupClasses = function (rawClassVal) {
+        this._applyClasses(rawClassVal, true);
+        this._applyInitialClasses(false);
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgClass.prototype._applyKeyValueChanges = function (changes) {
+        var _this = this;
+        changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+        changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+        changes.forEachRemovedItem(function (record) {
+            if (record.previousValue) {
+                _this._toggleClass(record.key, false);
+            }
+        });
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgClass.prototype._applyIterableChanges = function (changes) {
+        var _this = this;
+        changes.forEachAddedItem(function (record) {
+            if (typeof record.item === 'string') {
+                _this._toggleClass(record.item, true);
+            }
+            else {
+                throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + ɵstringify(record.item));
+            }
+        });
+        changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
+    };
+    /**
+     * @param {?} isCleanup
+     * @return {?}
+     */
+    NgClass.prototype._applyInitialClasses = function (isCleanup) {
+        var _this = this;
+        this._initialClasses.forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
+    };
+    /**
+     * @param {?} rawClassVal
+     * @param {?} isCleanup
+     * @return {?}
+     */
+    NgClass.prototype._applyClasses = function (rawClassVal, isCleanup) {
+        var _this = this;
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                ((rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
+            }
+            else {
+                Object.keys(rawClassVal).forEach(function (klass) {
+                    if (rawClassVal[klass] != null)
+                        _this._toggleClass(klass, !isCleanup);
+                });
+            }
+        }
+    };
+    /**
+     * @param {?} klass
+     * @param {?} enabled
+     * @return {?}
+     */
+    NgClass.prototype._toggleClass = function (klass, enabled) {
+        var _this = this;
+        klass = klass.trim();
+        if (klass) {
+            klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
+        }
+    };
     return NgClass;
-}();
-
-NgClass.decorators = [{ type: Directive, args: [{ selector: '[ngClass]' }] }];
+}());
+NgClass.decorators = [
+    { type: Directive, args: [{ selector: '[ngClass]' },] },
+];
 /** @nocollapse */
-NgClass.ctorParameters = function () {
-    return [{ type: IterableDiffers }, { type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer }];
-};
+NgClass.ctorParameters = function () { return [
+    { type: IterableDiffers, },
+    { type: KeyValueDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 NgClass.propDecorators = {
-    'klass': [{ type: Input, args: ['class'] }],
-    'ngClass': [{ type: Input }]
+    'klass': [{ type: Input, args: ['class',] },],
+    'ngClass': [{ type: Input },],
 };
-
 /**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
@@ -1537,14 +1379,11 @@ NgClass.propDecorators = {
  *
  * \@experimental
  */
-
-var NgComponentOutlet = function () {
+var NgComponentOutlet = (function () {
     /**
      * @param {?} _viewContainerRef
      */
     function NgComponentOutlet(_viewContainerRef) {
-        _classCallCheck(this, NgComponentOutlet);
-
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
         this._moduleRef = null;
@@ -1553,113 +1392,98 @@ var NgComponentOutlet = function () {
      * @param {?} changes
      * @return {?}
      */
-
-
-    _createClass(NgComponentOutlet, [{
-        key: 'ngOnChanges',
-        value: function ngOnChanges(changes) {
-            if (this._componentRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-            }
-            this._viewContainerRef.clear();
-            this._componentRef = null;
-            if (this.ngComponentOutlet) {
-                var /** @type {?} */injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-                if (changes.ngComponentOutletNgModuleFactory) {
-                    if (this._moduleRef) this._moduleRef.destroy();
-                    if (this.ngComponentOutletNgModuleFactory) {
-                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
-                    } else {
-                        this._moduleRef = null;
-                    }
-                }
-                if (this._moduleRef) {
-                    injector = this._moduleRef.injector;
-                }
-                var /** @type {?} */componentFactory = injector.get(ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
-                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
-            }
+    NgComponentOutlet.prototype.ngOnChanges = function (changes) {
+        if (this._componentRef) {
+            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
         }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'ngOnDestroy',
-        value: function ngOnDestroy() {
-            if (this._moduleRef) this._moduleRef.destroy();
+        this._viewContainerRef.clear();
+        this._componentRef = null;
+        if (this.ngComponentOutlet) {
+            var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            if (((changes)).ngComponentOutletNgModuleFactory) {
+                if (this._moduleRef)
+                    this._moduleRef.destroy();
+                if (this.ngComponentOutletNgModuleFactory) {
+                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
+                }
+                else {
+                    this._moduleRef = null;
+                }
+            }
+            if (this._moduleRef) {
+                injector = this._moduleRef.injector;
+            }
+            var /** @type {?} */ componentFactory = injector.get(ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
+            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
         }
-    }]);
-
+    };
+    /**
+     * @return {?}
+     */
+    NgComponentOutlet.prototype.ngOnDestroy = function () {
+        if (this._moduleRef)
+            this._moduleRef.destroy();
+    };
     return NgComponentOutlet;
-}();
-
-NgComponentOutlet.decorators = [{ type: Directive, args: [{ selector: '[ngComponentOutlet]' }] }];
+}());
+NgComponentOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+];
 /** @nocollapse */
-NgComponentOutlet.ctorParameters = function () {
-    return [{ type: ViewContainerRef }];
-};
+NgComponentOutlet.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+]; };
 NgComponentOutlet.propDecorators = {
-    'ngComponentOutlet': [{ type: Input }],
-    'ngComponentOutletInjector': [{ type: Input }],
-    'ngComponentOutletContent': [{ type: Input }],
-    'ngComponentOutletNgModuleFactory': [{ type: Input }]
+    'ngComponentOutlet': [{ type: Input },],
+    'ngComponentOutletInjector': [{ type: Input },],
+    'ngComponentOutletContent': [{ type: Input },],
+    'ngComponentOutletNgModuleFactory': [{ type: Input },],
 };
-
-var NgForOfRow = function () {
+var NgForOfRow = (function () {
     /**
      * @param {?} $implicit
      * @param {?} index
      * @param {?} count
      */
     function NgForOfRow($implicit, index, count) {
-        _classCallCheck(this, NgForOfRow);
-
         this.$implicit = $implicit;
         this.index = index;
         this.count = count;
     }
-    /**
-     * @return {?}
-     */
-
-
-    _createClass(NgForOfRow, [{
-        key: 'first',
-        get: function get() {
-            return this.index === 0;
-        }
+    Object.defineProperty(NgForOfRow.prototype, "first", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'last',
-        get: function get() {
-            return this.index === this.count - 1;
-        }
+        get: function () { return this.index === 0; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForOfRow.prototype, "last", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'even',
-        get: function get() {
-            return this.index % 2 === 0;
-        }
+        get: function () { return this.index === this.count - 1; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForOfRow.prototype, "even", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'odd',
-        get: function get() {
-            return !this.even;
-        }
-    }]);
-
+        get: function () { return this.index % 2 === 0; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForOfRow.prototype, "odd", {
+        /**
+         * @return {?}
+         */
+        get: function () { return !this.even; },
+        enumerable: true,
+        configurable: true
+    });
     return NgForOfRow;
-}();
+}());
 /**
  * The `NgForOf` directive instantiates a template once per item from an iterable. The context
  * for each instantiated template inherits from the outer context with the given loop variable
@@ -1723,183 +1547,166 @@ var NgForOfRow = function () {
  *
  * \@stable
  */
-
-
-var NgForOf = function () {
+var NgForOf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} _template
      * @param {?} _differs
      */
     function NgForOf(_viewContainer, _template, _differs) {
-        _classCallCheck(this, NgForOf);
-
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
         this._differ = null;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-
-
-    _createClass(NgForOf, [{
-        key: 'ngOnChanges',
-
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-        value: function ngOnChanges(changes) {
-            if ('ngForOf' in changes) {
-                // React on ngForOf changes only once all inputs have been initialized
-                var /** @type {?} */value = changes['ngForOf'].currentValue;
-                if (!this._differ && value) {
-                    try {
-                        this._differ = this._differs.find(value).create(this.ngForTrackBy);
-                    } catch (e) {
-                        throw new Error('Cannot find a differ supporting object \'' + value + '\' of type \'' + getTypeNameForDebugging(value) + '\'. NgFor only supports binding to Iterables such as Arrays.');
-                    }
-                }
-            }
-        }
+    Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
         /**
          * @return {?}
          */
-
-    }, {
-        key: 'ngDoCheck',
-        value: function ngDoCheck() {
-            if (this._differ) {
-                var /** @type {?} */changes = this._differ.diff(this.ngForOf);
-                if (changes) this._applyChanges(changes);
-            }
-        }
+        get: function () { return this._trackByFn; },
         /**
-         * @param {?} changes
+         * @param {?} fn
          * @return {?}
          */
-
-    }, {
-        key: '_applyChanges',
-        value: function _applyChanges(changes) {
-            var _this10 = this;
-
-            var /** @type {?} */insertTuples = [];
-            changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
-                if (item.previousIndex == null) {
-                    var /** @type {?} */view = _this10._viewContainer.createEmbeddedView(_this10._template, new NgForOfRow(null, null, null), currentIndex);
-                    var /** @type {?} */tuple = new RecordViewTuple(item, view);
-                    insertTuples.push(tuple);
-                } else if (currentIndex == null) {
-                    _this10._viewContainer.remove(adjustedPreviousIndex);
-                } else {
-                    var /** @type {?} */_view = _this10._viewContainer.get(adjustedPreviousIndex);
-                    _this10._viewContainer.move(_view, currentIndex);
-                    var /** @type {?} */_tuple = new RecordViewTuple(item, /** @type {?} */_view);
-                    insertTuples.push(_tuple);
-                }
-            });
-            for (var /** @type {?} */i = 0; i < insertTuples.length; i++) {
-                this._perViewChange(insertTuples[i].view, insertTuples[i].record);
-            }
-            for (var /** @type {?} */_i = 0, /** @type {?} */ilen = this._viewContainer.length; _i < ilen; _i++) {
-                var /** @type {?} */viewRef = this._viewContainer.get(_i);
-                viewRef.context.index = _i;
-                viewRef.context.count = ilen;
-            }
-            changes.forEachIdentityChange(function (record) {
-                var /** @type {?} */viewRef = _this10._viewContainer.get(record.currentIndex);
-                viewRef.context.$implicit = record.item;
-            });
-        }
-        /**
-         * @param {?} view
-         * @param {?} record
-         * @return {?}
-         */
-
-    }, {
-        key: '_perViewChange',
-        value: function _perViewChange(view, record) {
-            view.context.$implicit = record.item;
-        }
-    }, {
-        key: 'ngForTrackBy',
-        set: function set(fn) {
+        set: function (fn) {
             if (isDevMode() && fn != null && typeof fn !== 'function') {
                 // TODO(vicb): use a log service once there is a public one available
-                if (console && console.warn) {
-                    console.warn('trackBy must be a function, but received ' + JSON.stringify(fn) + '. ' + 'See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.');
+                if ((console) && (console.warn)) {
+                    console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
+                        "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
                 }
             }
             this._trackByFn = fn;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-            return this._trackByFn;
-        }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
         /**
          * @param {?} value
          * @return {?}
          */
-
-    }, {
-        key: 'ngForTemplate',
-        set: function set(value) {
+        set: function (value) {
             // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
             // The current type is too restrictive; a template that just uses index, for example,
             // should be acceptable.
             if (value) {
                 this._template = value;
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgForOf.prototype.ngOnChanges = function (changes) {
+        if ('ngForOf' in changes) {
+            // React on ngForOf changes only once all inputs have been initialized
+            var /** @type {?} */ value = changes['ngForOf'].currentValue;
+            if (!this._differ && value) {
+                try {
+                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
+                }
+                catch (e) {
+                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                }
+            }
         }
-    }]);
-
+    };
+    /**
+     * @return {?}
+     */
+    NgForOf.prototype.ngDoCheck = function () {
+        if (this._differ) {
+            var /** @type {?} */ changes = this._differ.diff(this.ngForOf);
+            if (changes)
+                this._applyChanges(changes);
+        }
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgForOf.prototype._applyChanges = function (changes) {
+        var _this = this;
+        var /** @type {?} */ insertTuples = [];
+        changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
+            if (item.previousIndex == null) {
+                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfRow(null, null, null), currentIndex);
+                var /** @type {?} */ tuple = new RecordViewTuple(item, view);
+                insertTuples.push(tuple);
+            }
+            else if (currentIndex == null) {
+                _this._viewContainer.remove(adjustedPreviousIndex);
+            }
+            else {
+                var /** @type {?} */ view = _this._viewContainer.get(adjustedPreviousIndex);
+                _this._viewContainer.move(view, currentIndex);
+                var /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
+                insertTuples.push(tuple);
+            }
+        });
+        for (var /** @type {?} */ i = 0; i < insertTuples.length; i++) {
+            this._perViewChange(insertTuples[i].view, insertTuples[i].record);
+        }
+        for (var /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
+            var /** @type {?} */ viewRef = (this._viewContainer.get(i));
+            viewRef.context.index = i;
+            viewRef.context.count = ilen;
+        }
+        changes.forEachIdentityChange(function (record) {
+            var /** @type {?} */ viewRef = (_this._viewContainer.get(record.currentIndex));
+            viewRef.context.$implicit = record.item;
+        });
+    };
+    /**
+     * @param {?} view
+     * @param {?} record
+     * @return {?}
+     */
+    NgForOf.prototype._perViewChange = function (view, record) {
+        view.context.$implicit = record.item;
+    };
     return NgForOf;
-}();
-
-NgForOf.decorators = [{ type: Directive, args: [{ selector: '[ngFor][ngForOf]' }] }];
+}());
+NgForOf.decorators = [
+    { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
+];
 /** @nocollapse */
-NgForOf.ctorParameters = function () {
-    return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: IterableDiffers }];
-};
+NgForOf.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: IterableDiffers, },
+]; };
 NgForOf.propDecorators = {
-    'ngForOf': [{ type: Input }],
-    'ngForTrackBy': [{ type: Input }],
-    'ngForTemplate': [{ type: Input }]
+    'ngForOf': [{ type: Input },],
+    'ngForTrackBy': [{ type: Input },],
+    'ngForTemplate': [{ type: Input },],
 };
-
-var RecordViewTuple =
-/**
- * @param {?} record
- * @param {?} view
- */
-function RecordViewTuple(record, view) {
-    _classCallCheck(this, RecordViewTuple);
-
-    this.record = record;
-    this.view = view;
-};
+var RecordViewTuple = (function () {
+    /**
+     * @param {?} record
+     * @param {?} view
+     */
+    function RecordViewTuple(record, view) {
+        this.record = record;
+        this.view = view;
+    }
+    return RecordViewTuple;
+}());
 /**
  * @deprecated from v4.0.0 - Use NgForOf instead.
  */
-
-
-var /** @type {?} */NgFor = NgForOf;
+var /** @type {?} */ NgFor = NgForOf;
 /**
  * @param {?} type
  * @return {?}
  */
 function getTypeNameForDebugging(type) {
-    return type['name'] || (typeof type === 'undefined' ? 'undefined' : _typeof(type));
+    return type['name'] || typeof type;
 }
-
 /**
  * Conditionally includes a template based on the value of an `expression`.
  *
@@ -1990,15 +1797,12 @@ function getTypeNameForDebugging(type) {
  *
  * \@stable
  */
-
-var NgIf = function () {
+var NgIf = (function () {
     /**
      * @param {?} _viewContainer
      * @param {?} templateRef
      */
     function NgIf(_viewContainer, templateRef) {
-        _classCallCheck(this, NgIf);
-
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
         this._thenTemplateRef = null;
@@ -2007,97 +1811,96 @@ var NgIf = function () {
         this._elseViewRef = null;
         this._thenTemplateRef = templateRef;
     }
-    /**
-     * @param {?} condition
-     * @return {?}
-     */
-
-
-    _createClass(NgIf, [{
-        key: '_updateView',
-
+    Object.defineProperty(NgIf.prototype, "ngIf", {
         /**
+         * @param {?} condition
          * @return {?}
          */
-        value: function _updateView() {
-            if (this._context.$implicit) {
-                if (!this._thenViewRef) {
-                    this._viewContainer.clear();
-                    this._elseViewRef = null;
-                    if (this._thenTemplateRef) {
-                        this._thenViewRef = this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
-                    }
-                }
-            } else {
-                if (!this._elseViewRef) {
-                    this._viewContainer.clear();
-                    this._thenViewRef = null;
-                    if (this._elseTemplateRef) {
-                        this._elseViewRef = this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
-                    }
-                }
-            }
-        }
-    }, {
-        key: 'ngIf',
-        set: function set(condition) {
+        set: function (condition) {
             this._context.$implicit = condition;
             this._updateView();
-        }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgIf.prototype, "ngIfThen", {
         /**
          * @param {?} templateRef
          * @return {?}
          */
-
-    }, {
-        key: 'ngIfThen',
-        set: function set(templateRef) {
+        set: function (templateRef) {
             this._thenTemplateRef = templateRef;
             this._thenViewRef = null; // clear previous view if any.
             this._updateView();
-        }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgIf.prototype, "ngIfElse", {
         /**
          * @param {?} templateRef
          * @return {?}
          */
-
-    }, {
-        key: 'ngIfElse',
-        set: function set(templateRef) {
+        set: function (templateRef) {
             this._elseTemplateRef = templateRef;
             this._elseViewRef = null; // clear previous view if any.
             this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    NgIf.prototype._updateView = function () {
+        if (this._context.$implicit) {
+            if (!this._thenViewRef) {
+                this._viewContainer.clear();
+                this._elseViewRef = null;
+                if (this._thenTemplateRef) {
+                    this._thenViewRef =
+                        this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
+                }
+            }
         }
-    }]);
-
+        else {
+            if (!this._elseViewRef) {
+                this._viewContainer.clear();
+                this._thenViewRef = null;
+                if (this._elseTemplateRef) {
+                    this._elseViewRef =
+                        this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
+                }
+            }
+        }
+    };
     return NgIf;
-}();
-
-NgIf.decorators = [{ type: Directive, args: [{ selector: '[ngIf]' }] }];
+}());
+NgIf.decorators = [
+    { type: Directive, args: [{ selector: '[ngIf]' },] },
+];
 /** @nocollapse */
-NgIf.ctorParameters = function () {
-    return [{ type: ViewContainerRef }, { type: TemplateRef }];
-};
+NgIf.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+]; };
 NgIf.propDecorators = {
-    'ngIf': [{ type: Input }],
-    'ngIfThen': [{ type: Input }],
-    'ngIfElse': [{ type: Input }]
+    'ngIf': [{ type: Input },],
+    'ngIfThen': [{ type: Input },],
+    'ngIfElse': [{ type: Input },],
 };
-
-var NgIfContext = function NgIfContext() {
-    _classCallCheck(this, NgIfContext);
-
-    this.$implicit = null;
-};
-
-var SwitchView = function () {
+var NgIfContext = (function () {
+    function NgIfContext() {
+        this.$implicit = null;
+    }
+    return NgIfContext;
+}());
+var SwitchView = (function () {
     /**
      * @param {?} _viewContainerRef
      * @param {?} _templateRef
      */
     function SwitchView(_viewContainerRef, _templateRef) {
-        _classCallCheck(this, SwitchView);
-
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
         this._created = false;
@@ -2105,42 +1908,31 @@ var SwitchView = function () {
     /**
      * @return {?}
      */
-
-
-    _createClass(SwitchView, [{
-        key: 'create',
-        value: function create() {
-            this._created = true;
-            this._viewContainerRef.createEmbeddedView(this._templateRef);
+    SwitchView.prototype.create = function () {
+        this._created = true;
+        this._viewContainerRef.createEmbeddedView(this._templateRef);
+    };
+    /**
+     * @return {?}
+     */
+    SwitchView.prototype.destroy = function () {
+        this._created = false;
+        this._viewContainerRef.clear();
+    };
+    /**
+     * @param {?} created
+     * @return {?}
+     */
+    SwitchView.prototype.enforceState = function (created) {
+        if (created && !this._created) {
+            this.create();
         }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: 'destroy',
-        value: function destroy() {
-            this._created = false;
-            this._viewContainerRef.clear();
+        else if (!created && this._created) {
+            this.destroy();
         }
-        /**
-         * @param {?} created
-         * @return {?}
-         */
-
-    }, {
-        key: 'enforceState',
-        value: function enforceState(created) {
-            if (created && !this._created) {
-                this.create();
-            } else if (!created && this._created) {
-                this.destroy();
-            }
-        }
-    }]);
-
+    };
     return SwitchView;
-}();
+}());
 /**
  * \@ngModule CommonModule
  *
@@ -2182,102 +1974,81 @@ var SwitchView = function () {
  *
  * \@stable
  */
-
-
-var NgSwitch = function () {
+var NgSwitch = (function () {
     function NgSwitch() {
-        _classCallCheck(this, NgSwitch);
-
         this._defaultUsed = false;
         this._caseCount = 0;
         this._lastCaseCheckIndex = 0;
         this._lastCasesMatched = false;
     }
-    /**
-     * @param {?} newValue
-     * @return {?}
-     */
-
-
-    _createClass(NgSwitch, [{
-        key: '_addCase',
-
+    Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
         /**
-         * \@internal
+         * @param {?} newValue
          * @return {?}
          */
-        value: function _addCase() {
-            return this._caseCount++;
-        }
-        /**
-         * \@internal
-         * @param {?} view
-         * @return {?}
-         */
-
-    }, {
-        key: '_addDefault',
-        value: function _addDefault(view) {
-            if (!this._defaultViews) {
-                this._defaultViews = [];
-            }
-            this._defaultViews.push(view);
-        }
-        /**
-         * \@internal
-         * @param {?} value
-         * @return {?}
-         */
-
-    }, {
-        key: '_matchCase',
-        value: function _matchCase(value) {
-            var /** @type {?} */matched = value == this._ngSwitch;
-            this._lastCasesMatched = this._lastCasesMatched || matched;
-            this._lastCaseCheckIndex++;
-            if (this._lastCaseCheckIndex === this._caseCount) {
-                this._updateDefaultCases(!this._lastCasesMatched);
-                this._lastCaseCheckIndex = 0;
-                this._lastCasesMatched = false;
-            }
-            return matched;
-        }
-        /**
-         * @param {?} useDefault
-         * @return {?}
-         */
-
-    }, {
-        key: '_updateDefaultCases',
-        value: function _updateDefaultCases(useDefault) {
-            if (this._defaultViews && useDefault !== this._defaultUsed) {
-                this._defaultUsed = useDefault;
-                for (var /** @type {?} */i = 0; i < this._defaultViews.length; i++) {
-                    var /** @type {?} */defaultView = this._defaultViews[i];
-                    defaultView.enforceState(useDefault);
-                }
-            }
-        }
-    }, {
-        key: 'ngSwitch',
-        set: function set(newValue) {
+        set: function (newValue) {
             this._ngSwitch = newValue;
             if (this._caseCount === 0) {
                 this._updateDefaultCases(true);
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * \@internal
+     * @return {?}
+     */
+    NgSwitch.prototype._addCase = function () { return this._caseCount++; };
+    /**
+     * \@internal
+     * @param {?} view
+     * @return {?}
+     */
+    NgSwitch.prototype._addDefault = function (view) {
+        if (!this._defaultViews) {
+            this._defaultViews = [];
         }
-    }]);
-
+        this._defaultViews.push(view);
+    };
+    /**
+     * \@internal
+     * @param {?} value
+     * @return {?}
+     */
+    NgSwitch.prototype._matchCase = function (value) {
+        var /** @type {?} */ matched = value == this._ngSwitch;
+        this._lastCasesMatched = this._lastCasesMatched || matched;
+        this._lastCaseCheckIndex++;
+        if (this._lastCaseCheckIndex === this._caseCount) {
+            this._updateDefaultCases(!this._lastCasesMatched);
+            this._lastCaseCheckIndex = 0;
+            this._lastCasesMatched = false;
+        }
+        return matched;
+    };
+    /**
+     * @param {?} useDefault
+     * @return {?}
+     */
+    NgSwitch.prototype._updateDefaultCases = function (useDefault) {
+        if (this._defaultViews && useDefault !== this._defaultUsed) {
+            this._defaultUsed = useDefault;
+            for (var /** @type {?} */ i = 0; i < this._defaultViews.length; i++) {
+                var /** @type {?} */ defaultView = this._defaultViews[i];
+                defaultView.enforceState(useDefault);
+            }
+        }
+    };
     return NgSwitch;
-}();
-
-NgSwitch.decorators = [{ type: Directive, args: [{ selector: '[ngSwitch]' }] }];
+}());
+NgSwitch.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitch]' },] },
+];
 /** @nocollapse */
-NgSwitch.ctorParameters = function () {
-    return [];
-};
+NgSwitch.ctorParameters = function () { return []; };
 NgSwitch.propDecorators = {
-    'ngSwitch': [{ type: Input }]
+    'ngSwitch': [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2303,16 +2074,13 @@ NgSwitch.propDecorators = {
  *
  * \@stable
  */
-
-var NgSwitchCase = function () {
+var NgSwitchCase = (function () {
     /**
      * @param {?} viewContainer
      * @param {?} templateRef
      * @param {?} ngSwitch
      */
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
-        _classCallCheck(this, NgSwitchCase);
-
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
         this._view = new SwitchView(viewContainer, templateRef);
@@ -2320,25 +2088,20 @@ var NgSwitchCase = function () {
     /**
      * @return {?}
      */
-
-
-    _createClass(NgSwitchCase, [{
-        key: 'ngDoCheck',
-        value: function ngDoCheck() {
-            this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
-        }
-    }]);
-
+    NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
     return NgSwitchCase;
-}();
-
-NgSwitchCase.decorators = [{ type: Directive, args: [{ selector: '[ngSwitchCase]' }] }];
+}());
+NgSwitchCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
+];
 /** @nocollapse */
-NgSwitchCase.ctorParameters = function () {
-    return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{ type: Host }] }];
-};
+NgSwitchCase.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+]; };
 NgSwitchCase.propDecorators = {
-    'ngSwitchCase': [{ type: Input }]
+    'ngSwitchCase': [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2363,25 +2126,26 @@ NgSwitchCase.propDecorators = {
  *
  * \@stable
  */
-
-var NgSwitchDefault =
-/**
- * @param {?} viewContainer
- * @param {?} templateRef
- * @param {?} ngSwitch
- */
-function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
-    _classCallCheck(this, NgSwitchDefault);
-
-    ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
-};
-
-NgSwitchDefault.decorators = [{ type: Directive, args: [{ selector: '[ngSwitchDefault]' }] }];
+var NgSwitchDefault = (function () {
+    /**
+     * @param {?} viewContainer
+     * @param {?} templateRef
+     * @param {?} ngSwitch
+     */
+    function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
+        ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
+    }
+    return NgSwitchDefault;
+}());
+NgSwitchDefault.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+];
 /** @nocollapse */
-NgSwitchDefault.ctorParameters = function () {
-    return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{ type: Host }] }];
-};
-
+NgSwitchDefault.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+    { type: TemplateRef, },
+    { type: NgSwitch, decorators: [{ type: Host },] },
+]; };
 /**
  * \@ngModule CommonModule
  *
@@ -2413,86 +2177,69 @@ NgSwitchDefault.ctorParameters = function () {
  *
  * \@experimental
  */
-
-var NgPlural = function () {
+var NgPlural = (function () {
     /**
      * @param {?} _localization
      */
     function NgPlural(_localization) {
-        _classCallCheck(this, NgPlural);
-
         this._localization = _localization;
         this._caseViews = {};
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-
-
-    _createClass(NgPlural, [{
-        key: 'addCase',
-
+    Object.defineProperty(NgPlural.prototype, "ngPlural", {
         /**
          * @param {?} value
-         * @param {?} switchView
          * @return {?}
          */
-        value: function addCase(value, switchView) {
-            this._caseViews[value] = switchView;
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: '_updateView',
-        value: function _updateView() {
-            this._clearViews();
-            var /** @type {?} */cases = Object.keys(this._caseViews);
-            var /** @type {?} */key = getPluralCategory(this._switchValue, cases, this._localization);
-            this._activateView(this._caseViews[key]);
-        }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: '_clearViews',
-        value: function _clearViews() {
-            if (this._activeView) this._activeView.destroy();
-        }
-        /**
-         * @param {?} view
-         * @return {?}
-         */
-
-    }, {
-        key: '_activateView',
-        value: function _activateView(view) {
-            if (view) {
-                this._activeView = view;
-                this._activeView.create();
-            }
-        }
-    }, {
-        key: 'ngPlural',
-        set: function set(value) {
+        set: function (value) {
             this._switchValue = value;
             this._updateView();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} value
+     * @param {?} switchView
+     * @return {?}
+     */
+    NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
+    /**
+     * @return {?}
+     */
+    NgPlural.prototype._updateView = function () {
+        this._clearViews();
+        var /** @type {?} */ cases = Object.keys(this._caseViews);
+        var /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
+        this._activateView(this._caseViews[key]);
+    };
+    /**
+     * @return {?}
+     */
+    NgPlural.prototype._clearViews = function () {
+        if (this._activeView)
+            this._activeView.destroy();
+    };
+    /**
+     * @param {?} view
+     * @return {?}
+     */
+    NgPlural.prototype._activateView = function (view) {
+        if (view) {
+            this._activeView = view;
+            this._activeView.create();
         }
-    }]);
-
+    };
     return NgPlural;
-}();
-
-NgPlural.decorators = [{ type: Directive, args: [{ selector: '[ngPlural]' }] }];
+}());
+NgPlural.decorators = [
+    { type: Directive, args: [{ selector: '[ngPlural]' },] },
+];
 /** @nocollapse */
-NgPlural.ctorParameters = function () {
-    return [{ type: NgLocalization }];
-};
+NgPlural.ctorParameters = function () { return [
+    { type: NgLocalization, },
+]; };
 NgPlural.propDecorators = {
-    'ngPlural': [{ type: Input }]
+    'ngPlural': [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2512,28 +2259,30 @@ NgPlural.propDecorators = {
  *
  * \@experimental
  */
-
-var NgPluralCase =
-/**
- * @param {?} value
- * @param {?} template
- * @param {?} viewContainer
- * @param {?} ngPlural
- */
-function NgPluralCase(value, template, viewContainer, ngPlural) {
-    _classCallCheck(this, NgPluralCase);
-
-    this.value = value;
-    var isANumber = !isNaN(Number(value));
-    ngPlural.addCase(isANumber ? '=' + value : value, new SwitchView(viewContainer, template));
-};
-
-NgPluralCase.decorators = [{ type: Directive, args: [{ selector: '[ngPluralCase]' }] }];
+var NgPluralCase = (function () {
+    /**
+     * @param {?} value
+     * @param {?} template
+     * @param {?} viewContainer
+     * @param {?} ngPlural
+     */
+    function NgPluralCase(value, template, viewContainer, ngPlural) {
+        this.value = value;
+        var isANumber = !isNaN(Number(value));
+        ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
+    }
+    return NgPluralCase;
+}());
+NgPluralCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
+];
 /** @nocollapse */
-NgPluralCase.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase'] }] }, { type: TemplateRef }, { type: ViewContainerRef }, { type: NgPlural, decorators: [{ type: Host }] }];
-};
-
+NgPluralCase.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
+    { type: TemplateRef, },
+    { type: ViewContainerRef, },
+    { type: NgPlural, decorators: [{ type: Host },] },
+]; };
 /**
  * \@ngModule CommonModule
  *
@@ -2556,99 +2305,76 @@ NgPluralCase.ctorParameters = function () {
  *
  * \@stable
  */
-
-var NgStyle = function () {
+var NgStyle = (function () {
     /**
      * @param {?} _differs
      * @param {?} _ngEl
      * @param {?} _renderer
      */
     function NgStyle(_differs, _ngEl, _renderer) {
-        _classCallCheck(this, NgStyle);
-
         this._differs = _differs;
         this._ngEl = _ngEl;
         this._renderer = _renderer;
     }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-
-
-    _createClass(NgStyle, [{
-        key: 'ngDoCheck',
-
+    Object.defineProperty(NgStyle.prototype, "ngStyle", {
         /**
+         * @param {?} v
          * @return {?}
          */
-        value: function ngDoCheck() {
-            if (this._differ) {
-                var /** @type {?} */changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        }
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-
-    }, {
-        key: '_applyChanges',
-        value: function _applyChanges(changes) {
-            var _this11 = this;
-
-            changes.forEachRemovedItem(function (record) {
-                return _this11._setStyle(record.key, null);
-            });
-            changes.forEachAddedItem(function (record) {
-                return _this11._setStyle(record.key, record.currentValue);
-            });
-            changes.forEachChangedItem(function (record) {
-                return _this11._setStyle(record.key, record.currentValue);
-            });
-        }
-        /**
-         * @param {?} nameAndUnit
-         * @param {?} value
-         * @return {?}
-         */
-
-    }, {
-        key: '_setStyle',
-        value: function _setStyle(nameAndUnit, value) {
-            var _nameAndUnit$split = nameAndUnit.split('.'),
-                _nameAndUnit$split2 = _slicedToArray(_nameAndUnit$split, 2),
-                name = _nameAndUnit$split2[0],
-                unit = _nameAndUnit$split2[1];
-
-            value = value != null && unit ? '' + value + unit : value;
-            this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */value);
-        }
-    }, {
-        key: 'ngStyle',
-        set: function set(v) {
+        set: function (v) {
             this._ngStyle = v;
             if (!this._differ && v) {
                 this._differ = this._differs.find(v).create();
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    NgStyle.prototype.ngDoCheck = function () {
+        if (this._differ) {
+            var /** @type {?} */ changes = this._differ.diff(this._ngStyle);
+            if (changes) {
+                this._applyChanges(changes);
+            }
         }
-    }]);
-
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgStyle.prototype._applyChanges = function (changes) {
+        var _this = this;
+        changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+        changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+    };
+    /**
+     * @param {?} nameAndUnit
+     * @param {?} value
+     * @return {?}
+     */
+    NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+        var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
+        value = value != null && unit ? "" + value + unit : value;
+        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+    };
     return NgStyle;
-}();
-
-NgStyle.decorators = [{ type: Directive, args: [{ selector: '[ngStyle]' }] }];
+}());
+NgStyle.decorators = [
+    { type: Directive, args: [{ selector: '[ngStyle]' },] },
+];
 /** @nocollapse */
-NgStyle.ctorParameters = function () {
-    return [{ type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer }];
-};
+NgStyle.ctorParameters = function () { return [
+    { type: KeyValueDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 NgStyle.propDecorators = {
-    'ngStyle': [{ type: Input }]
+    'ngStyle': [{ type: Input },],
 };
-
 /**
  * \@ngModule CommonModule
  *
@@ -2673,158 +2399,122 @@ NgStyle.propDecorators = {
  *
  * \@experimental
  */
-
-var NgTemplateOutlet = function () {
+var NgTemplateOutlet = (function () {
     /**
      * @param {?} _viewContainerRef
      */
     function NgTemplateOutlet(_viewContainerRef) {
-        _classCallCheck(this, NgTemplateOutlet);
-
         this._viewContainerRef = _viewContainerRef;
     }
-    /**
-     * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-     * @param {?} context
-     * @return {?}
-     */
-
-
-    _createClass(NgTemplateOutlet, [{
-        key: 'ngOnChanges',
-
+    Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
         /**
-         * @param {?} changes
+         * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
+         * @param {?} context
          * @return {?}
          */
-        value: function ngOnChanges(changes) {
-            if (this._viewRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
-            }
-            if (this.ngTemplateOutlet) {
-                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
-            }
+        set: function (context) { this.ngTemplateOutletContext = context; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
+        if (this._viewRef) {
+            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
         }
-    }, {
-        key: 'ngOutletContext',
-        set: function set(context) {
-            this.ngTemplateOutletContext = context;
+        if (this.ngTemplateOutlet) {
+            this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
         }
-    }]);
-
+    };
     return NgTemplateOutlet;
-}();
-
-NgTemplateOutlet.decorators = [{ type: Directive, args: [{ selector: '[ngTemplateOutlet]' }] }];
+}());
+NgTemplateOutlet.decorators = [
+    { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+];
 /** @nocollapse */
-NgTemplateOutlet.ctorParameters = function () {
-    return [{ type: ViewContainerRef }];
-};
+NgTemplateOutlet.ctorParameters = function () { return [
+    { type: ViewContainerRef, },
+]; };
 NgTemplateOutlet.propDecorators = {
-    'ngTemplateOutletContext': [{ type: Input }],
-    'ngTemplateOutlet': [{ type: Input }],
-    'ngOutletContext': [{ type: Input }]
+    'ngTemplateOutletContext': [{ type: Input },],
+    'ngTemplateOutlet': [{ type: Input },],
+    'ngOutletContext': [{ type: Input },],
 };
-
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-var /** @type {?} */COMMON_DIRECTIVES = [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase];
-
+var /** @type {?} */ COMMON_DIRECTIVES = [
+    NgClass,
+    NgComponentOutlet,
+    NgForOf,
+    NgIf,
+    NgTemplateOutlet,
+    NgStyle,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    NgPlural,
+    NgPluralCase,
+];
 /**
  * @param {?} type
  * @param {?} value
  * @return {?}
  */
 function invalidPipeArgumentError(type, value) {
-    return Error('InvalidPipeArgument: \'' + value + '\' for pipe \'' + ɵstringify(type) + '\'');
+    return Error("InvalidPipeArgument: '" + value + "' for pipe '" + ɵstringify(type) + "'");
 }
-
-var ObservableStrategy = function () {
+var ObservableStrategy = (function () {
     function ObservableStrategy() {
-        _classCallCheck(this, ObservableStrategy);
     }
-
-    _createClass(ObservableStrategy, [{
-        key: 'createSubscription',
-
-        /**
-         * @param {?} async
-         * @param {?} updateLatestValue
-         * @return {?}
-         */
-        value: function createSubscription(async, updateLatestValue) {
-            return async.subscribe({ next: updateLatestValue, error: function error(e) {
-                    throw e;
-                } });
-        }
-        /**
-         * @param {?} subscription
-         * @return {?}
-         */
-
-    }, {
-        key: 'dispose',
-        value: function dispose(subscription) {
-            subscription.unsubscribe();
-        }
-        /**
-         * @param {?} subscription
-         * @return {?}
-         */
-
-    }, {
-        key: 'onDestroy',
-        value: function onDestroy(subscription) {
-            subscription.unsubscribe();
-        }
-    }]);
-
+    /**
+     * @param {?} async
+     * @param {?} updateLatestValue
+     * @return {?}
+     */
+    ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+    };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
-}();
-
-var PromiseStrategy = function () {
+}());
+var PromiseStrategy = (function () {
     function PromiseStrategy() {
-        _classCallCheck(this, PromiseStrategy);
     }
-
-    _createClass(PromiseStrategy, [{
-        key: 'createSubscription',
-
-        /**
-         * @param {?} async
-         * @param {?} updateLatestValue
-         * @return {?}
-         */
-        value: function createSubscription(async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) {
-                throw e;
-            });
-        }
-        /**
-         * @param {?} subscription
-         * @return {?}
-         */
-
-    }, {
-        key: 'dispose',
-        value: function dispose(subscription) {}
-        /**
-         * @param {?} subscription
-         * @return {?}
-         */
-
-    }, {
-        key: 'onDestroy',
-        value: function onDestroy(subscription) {}
-    }]);
-
+    /**
+     * @param {?} async
+     * @param {?} updateLatestValue
+     * @return {?}
+     */
+    PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        return async.then(updateLatestValue, function (e) { throw e; });
+    };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    PromiseStrategy.prototype.dispose = function (subscription) { };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    PromiseStrategy.prototype.onDestroy = function (subscription) { };
     return PromiseStrategy;
-}();
-
-var /** @type {?} */_promiseStrategy = new PromiseStrategy();
-var /** @type {?} */_observableStrategy = new ObservableStrategy();
+}());
+var /** @type {?} */ _promiseStrategy = new PromiseStrategy();
+var /** @type {?} */ _observableStrategy = new ObservableStrategy();
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Unwraps a value from an asynchronous primitive.
@@ -2850,14 +2540,11 @@ var /** @type {?} */_observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-
-var AsyncPipe = function () {
+var AsyncPipe = (function () {
     /**
      * @param {?} _ref
      */
     function AsyncPipe(_ref) {
-        _classCallCheck(this, AsyncPipe);
-
         this._ref = _ref;
         this._latestValue = null;
         this._latestReturnedValue = null;
@@ -2868,110 +2555,86 @@ var AsyncPipe = function () {
     /**
      * @return {?}
      */
-
-
-    _createClass(AsyncPipe, [{
-        key: 'ngOnDestroy',
-        value: function ngOnDestroy() {
-            if (this._subscription) {
-                this._dispose();
-            }
+    AsyncPipe.prototype.ngOnDestroy = function () {
+        if (this._subscription) {
+            this._dispose();
         }
-        /**
-         * @param {?} obj
-         * @return {?}
-         */
-
-    }, {
-        key: 'transform',
-        value: function transform(obj) {
-            if (!this._obj) {
-                if (obj) {
-                    this._subscribe(obj);
-                }
-                this._latestReturnedValue = this._latestValue;
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform( /** @type {?} */obj);
-            }
-            if (this._latestValue === this._latestReturnedValue) {
-                return this._latestReturnedValue;
+    };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    AsyncPipe.prototype.transform = function (obj) {
+        if (!this._obj) {
+            if (obj) {
+                this._subscribe(obj);
             }
             this._latestReturnedValue = this._latestValue;
-            return WrappedValue.wrap(this._latestValue);
+            return this._latestValue;
         }
-        /**
-         * @param {?} obj
-         * @return {?}
-         */
-
-    }, {
-        key: '_subscribe',
-        value: function _subscribe(obj) {
-            var _this12 = this;
-
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) {
-                return _this12._updateLatestValue(obj, value);
-            });
+        if (obj !== this._obj) {
+            this._dispose();
+            return this.transform(/** @type {?} */ (obj));
         }
-        /**
-         * @param {?} obj
-         * @return {?}
-         */
-
-    }, {
-        key: '_selectStrategy',
-        value: function _selectStrategy(obj) {
-            if (ɵisPromise(obj)) {
-                return _promiseStrategy;
-            }
-            if (ɵisObservable(obj)) {
-                return _observableStrategy;
-            }
-            throw invalidPipeArgumentError(AsyncPipe, obj);
+        if (this._latestValue === this._latestReturnedValue) {
+            return this._latestReturnedValue;
         }
-        /**
-         * @return {?}
-         */
-
-    }, {
-        key: '_dispose',
-        value: function _dispose() {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
+        this._latestReturnedValue = this._latestValue;
+        return WrappedValue.wrap(this._latestValue);
+    };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    AsyncPipe.prototype._subscribe = function (obj) {
+        var _this = this;
+        this._obj = obj;
+        this._strategy = this._selectStrategy(obj);
+        this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+    };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    AsyncPipe.prototype._selectStrategy = function (obj) {
+        if (ɵisPromise(obj)) {
+            return _promiseStrategy;
         }
-        /**
-         * @param {?} async
-         * @param {?} value
-         * @return {?}
-         */
-
-    }, {
-        key: '_updateLatestValue',
-        value: function _updateLatestValue(async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
-            }
+        if (ɵisObservable(obj)) {
+            return _observableStrategy;
         }
-    }]);
-
+        throw invalidPipeArgumentError(AsyncPipe, obj);
+    };
+    /**
+     * @return {?}
+     */
+    AsyncPipe.prototype._dispose = function () {
+        this._strategy.dispose(this._subscription);
+        this._latestValue = null;
+        this._latestReturnedValue = null;
+        this._subscription = null;
+        this._obj = null;
+    };
+    /**
+     * @param {?} async
+     * @param {?} value
+     * @return {?}
+     */
+    AsyncPipe.prototype._updateLatestValue = function (async, value) {
+        if (async === this._obj) {
+            this._latestValue = value;
+            this._ref.markForCheck();
+        }
+    };
     return AsyncPipe;
-}();
-
-AsyncPipe.decorators = [{ type: Pipe, args: [{ name: 'async', pure: false }] }];
+}());
+AsyncPipe.decorators = [
+    { type: Pipe, args: [{ name: 'async', pure: false },] },
+];
 /** @nocollapse */
-AsyncPipe.ctorParameters = function () {
-    return [{ type: ChangeDetectorRef }];
-};
-
+AsyncPipe.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+]; };
 /**
  * Transforms text to lowercase.
  *
@@ -2979,36 +2642,28 @@ AsyncPipe.ctorParameters = function () {
  *
  * \@stable
  */
-
-var LowerCasePipe = function () {
+var LowerCasePipe = (function () {
     function LowerCasePipe() {
-        _classCallCheck(this, LowerCasePipe);
     }
-
-    _createClass(LowerCasePipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        value: function transform(value) {
-            if (!value) return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    LowerCasePipe.prototype.transform = function (value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(LowerCasePipe, value);
         }
-    }]);
-
+        return value.toLowerCase();
+    };
     return LowerCasePipe;
-}();
-
-LowerCasePipe.decorators = [{ type: Pipe, args: [{ name: 'lowercase' }] }];
+}());
+LowerCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'lowercase' },] },
+];
 /** @nocollapse */
-LowerCasePipe.ctorParameters = function () {
-    return [];
-};
+LowerCasePipe.ctorParameters = function () { return []; };
 /**
  * Helper method to transform a single word to titlecase.
  *
@@ -3017,7 +2672,8 @@ LowerCasePipe.ctorParameters = function () {
  * @return {?}
  */
 function titleCaseWord(word) {
-    if (!word) return word;
+    if (!word)
+        return word;
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
 }
 /**
@@ -3025,74 +2681,55 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-
-var TitleCasePipe = function () {
+var TitleCasePipe = (function () {
     function TitleCasePipe() {
-        _classCallCheck(this, TitleCasePipe);
     }
-
-    _createClass(TitleCasePipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        value: function transform(value) {
-            if (!value) return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(TitleCasePipe, value);
-            }
-            return value.split(/\b/g).map(function (word) {
-                return titleCaseWord(word);
-            }).join('');
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    TitleCasePipe.prototype.transform = function (value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(TitleCasePipe, value);
         }
-    }]);
-
+        return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
+    };
     return TitleCasePipe;
-}();
-
-TitleCasePipe.decorators = [{ type: Pipe, args: [{ name: 'titlecase' }] }];
+}());
+TitleCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'titlecase' },] },
+];
 /** @nocollapse */
-TitleCasePipe.ctorParameters = function () {
-    return [];
-};
+TitleCasePipe.ctorParameters = function () { return []; };
 /**
  * Transforms text to uppercase.
  *
  * \@stable
  */
-
-var UpperCasePipe = function () {
+var UpperCasePipe = (function () {
     function UpperCasePipe() {
-        _classCallCheck(this, UpperCasePipe);
     }
-
-    _createClass(UpperCasePipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        value: function transform(value) {
-            if (!value) return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    UpperCasePipe.prototype.transform = function (value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(UpperCasePipe, value);
         }
-    }]);
-
+        return value.toUpperCase();
+    };
     return UpperCasePipe;
-}();
-
-UpperCasePipe.decorators = [{ type: Pipe, args: [{ name: 'uppercase' }] }];
+}());
+UpperCasePipe.decorators = [
+    { type: Pipe, args: [{ name: 'uppercase' },] },
+];
 /** @nocollapse */
-UpperCasePipe.ctorParameters = function () {
-    return [];
-};
-
+UpperCasePipe.ctorParameters = function () { return []; };
 var NumberFormatStyle = {};
 NumberFormatStyle.Decimal = 0;
 NumberFormatStyle.Percent = 1;
@@ -3100,61 +2737,58 @@ NumberFormatStyle.Currency = 2;
 NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
 NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
 NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
-
-var NumberFormatter = function () {
+var NumberFormatter = (function () {
     function NumberFormatter() {
-        _classCallCheck(this, NumberFormatter);
     }
-
-    _createClass(NumberFormatter, null, [{
-        key: 'format',
-
-        /**
-         * @param {?} num
-         * @param {?} locale
-         * @param {?} style
-         * @param {?=} __3
-         * @return {?}
-         */
-        value: function format(num, locale, style) {
-            var _ref2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {},
-                minimumIntegerDigits = _ref2.minimumIntegerDigits,
-                minimumFractionDigits = _ref2.minimumFractionDigits,
-                maximumFractionDigits = _ref2.maximumFractionDigits,
-                currency = _ref2.currency,
-                _ref2$currencyAsSymbo = _ref2.currencyAsSymbol,
-                currencyAsSymbol = _ref2$currencyAsSymbo === undefined ? false : _ref2$currencyAsSymbo;
-
-            var /** @type {?} */options = {
-                minimumIntegerDigits: minimumIntegerDigits,
-                minimumFractionDigits: minimumFractionDigits,
-                maximumFractionDigits: maximumFractionDigits,
-                style: NumberFormatStyle[style].toLowerCase()
-            };
-            if (style == NumberFormatStyle.Currency) {
-                options.currency = currency;
-                options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
-            }
-            return new Intl.NumberFormat(locale, options).format(num);
+    /**
+     * @param {?} num
+     * @param {?} locale
+     * @param {?} style
+     * @param {?=} __3
+     * @return {?}
+     */
+    NumberFormatter.format = function (num, locale, style, _a) {
+        var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+        var /** @type {?} */ options = {
+            minimumIntegerDigits: minimumIntegerDigits,
+            minimumFractionDigits: minimumFractionDigits,
+            maximumFractionDigits: maximumFractionDigits,
+            style: NumberFormatStyle[style].toLowerCase()
+        };
+        if (style == NumberFormatStyle.Currency) {
+            options.currency = currency;
+            options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
-    }]);
-
+        return new Intl.NumberFormat(locale, options).format(num);
+    };
     return NumberFormatter;
-}();
-
-var /** @type {?} */DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-var /** @type {?} */PATTERN_ALIASES = {
+}());
+var /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+var /** @type {?} */ PATTERN_ALIASES = {
     // Keys are quoted so they do not get renamed during closure compilation.
-    'yMMMdjms': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1), digitCondition('hour', 1), digitCondition('minute', 1), digitCondition('second', 1)])),
-    'yMdjm': datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1), digitCondition('hour', 1), digitCondition('minute', 1)])),
-    'yMMMMEEEEd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4), digitCondition('day', 1)])),
+    'yMMMdjms': datePartGetterFactory(combine([
+        digitCondition('year', 1),
+        nameCondition('month', 3),
+        digitCondition('day', 1),
+        digitCondition('hour', 1),
+        digitCondition('minute', 1),
+        digitCondition('second', 1),
+    ])),
+    'yMdjm': datePartGetterFactory(combine([
+        digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+        digitCondition('hour', 1), digitCondition('minute', 1)
+    ])),
+    'yMMMMEEEEd': datePartGetterFactory(combine([
+        digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
+        digitCondition('day', 1)
+    ])),
     'yMMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
     'yMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
     'yMd': datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
     'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
     'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
 };
-var /** @type {?} */DATE_FORMATS = {
+var /** @type {?} */ DATE_FORMATS = {
     // Keys are quoted so they do not get renamed.
     'yyyy': datePartGetterFactory(digitCondition('year', 4)),
     'yy': datePartGetterFactory(digitCondition('year', 2)),
@@ -3203,7 +2837,7 @@ var /** @type {?} */DATE_FORMATS = {
  */
 function digitModifier(inner) {
     return function (date, locale) {
-        var /** @type {?} */result = inner(date, locale);
+        var /** @type {?} */ result = inner(date, locale);
         return result.length == 1 ? '0' + result : result;
     };
 }
@@ -3212,18 +2846,14 @@ function digitModifier(inner) {
  * @return {?}
  */
 function hourClockExtractor(inner) {
-    return function (date, locale) {
-        return inner(date, locale).split(' ')[1];
-    };
+    return function (date, locale) { return inner(date, locale).split(' ')[1]; };
 }
 /**
  * @param {?} inner
  * @return {?}
  */
 function hourExtractor(inner) {
-    return function (date, locale) {
-        return inner(date, locale).split(' ')[0];
-    };
+    return function (date, locale) { return inner(date, locale).split(' ')[0]; };
 }
 /**
  * @param {?} date
@@ -3240,9 +2870,9 @@ function intlDateFormat(date, locale, options) {
  */
 function timeZoneGetter(timezone) {
     // To workaround `Intl` API restriction for single timezone let format with 24 hours
-    var /** @type {?} */options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+    var /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
     return function (date, locale) {
-        var /** @type {?} */result = intlDateFormat(date, locale, options);
+        var /** @type {?} */ result = intlDateFormat(date, locale, options);
         // Then extract first 3 letters that related to hours
         return result ? result.substring(3) : '';
     };
@@ -3262,7 +2892,7 @@ function hour12Modify(options, value) {
  * @return {?}
  */
 function digitCondition(prop, len) {
-    var /** @type {?} */result = {};
+    var /** @type {?} */ result = {};
     result[prop] = len === 2 ? '2-digit' : 'numeric';
     return result;
 }
@@ -3272,10 +2902,11 @@ function digitCondition(prop, len) {
  * @return {?}
  */
 function nameCondition(prop, len) {
-    var /** @type {?} */result = {};
+    var /** @type {?} */ result = {};
     if (len < 4) {
         result[prop] = len > 1 ? 'short' : 'narrow';
-    } else {
+    }
+    else {
         result[prop] = 'long';
     }
     return result;
@@ -3285,18 +2916,16 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return Object.assign.apply(Object, [{}].concat(_toConsumableArray(options)));
+    return ((Object)).assign.apply(((Object)), [{}].concat(options));
 }
 /**
  * @param {?} ret
  * @return {?}
  */
 function datePartGetterFactory(ret) {
-    return function (date, locale) {
-        return intlDateFormat(date, locale, ret);
-    };
+    return function (date, locale) { return intlDateFormat(date, locale, ret); };
 }
-var /** @type {?} */DATE_FORMATTER_CACHE = new Map();
+var /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
 /**
  * @param {?} format
  * @param {?} date
@@ -3304,20 +2933,22 @@ var /** @type {?} */DATE_FORMATTER_CACHE = new Map();
  * @return {?}
  */
 function dateFormatter(format, date, locale) {
-    var /** @type {?} */fn = PATTERN_ALIASES[format];
-    if (fn) return fn(date, locale);
-    var /** @type {?} */cacheKey = format;
-    var /** @type {?} */parts = DATE_FORMATTER_CACHE.get(cacheKey);
+    var /** @type {?} */ fn = PATTERN_ALIASES[format];
+    if (fn)
+        return fn(date, locale);
+    var /** @type {?} */ cacheKey = format;
+    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
     if (!parts) {
         parts = [];
-        var /** @type {?} */match = void 0;
+        var /** @type {?} */ match = void 0;
         DATE_FORMATS_SPLIT.exec(format);
         while (format) {
             match = DATE_FORMATS_SPLIT.exec(format);
             if (match) {
                 parts = parts.concat(match.slice(1));
                 format = parts.pop();
-            } else {
+            }
+            else {
                 parts.push(format);
                 format = null;
             }
@@ -3325,7 +2956,7 @@ function dateFormatter(format, date, locale) {
         DATE_FORMATTER_CACHE.set(cacheKey, parts);
     }
     return parts.reduce(function (text, part) {
-        var /** @type {?} */fn = DATE_FORMATS[part];
+        var /** @type {?} */ fn = DATE_FORMATS[part];
         return text + (fn ? fn(date, locale) : partToTime(part));
     }, '');
 }
@@ -3336,30 +2967,21 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-
-var DateFormatter = function () {
+var DateFormatter = (function () {
     function DateFormatter() {
-        _classCallCheck(this, DateFormatter);
     }
-
-    _createClass(DateFormatter, null, [{
-        key: 'format',
-
-        /**
-         * @param {?} date
-         * @param {?} locale
-         * @param {?} pattern
-         * @return {?}
-         */
-        value: function format(date, locale, pattern) {
-            return dateFormatter(pattern, date, locale);
-        }
-    }]);
-
+    /**
+     * @param {?} date
+     * @param {?} locale
+     * @param {?} pattern
+     * @return {?}
+     */
+    DateFormatter.format = function (date, locale, pattern) {
+        return dateFormatter(pattern, date, locale);
+    };
     return DateFormatter;
-}();
-
-var /** @type {?} */_NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+}());
+var /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 /**
  * @param {?} pipe
  * @param {?} locale
@@ -3370,19 +2992,19 @@ var /** @type {?} */_NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
  * @param {?=} currencyAsSymbol
  * @return {?}
  */
-function formatNumber(pipe, locale, value, style, digits) {
-    var currency = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-    var currencyAsSymbol = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
-
-    if (value == null) return null;
+function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
+    if (currency === void 0) { currency = null; }
+    if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+    if (value == null)
+        return null;
     // Convert strings to numbers
     value = typeof value === 'string' && isNumeric(value) ? +value : value;
     if (typeof value !== 'number') {
         throw invalidPipeArgumentError(pipe, value);
     }
-    var /** @type {?} */minInt = void 0;
-    var /** @type {?} */minFraction = void 0;
-    var /** @type {?} */maxFraction = void 0;
+    var /** @type {?} */ minInt;
+    var /** @type {?} */ minFraction;
+    var /** @type {?} */ maxFraction;
     if (style !== NumberFormatStyle.Currency) {
         // rely on Intl default for currency
         minInt = 1;
@@ -3390,9 +3012,9 @@ function formatNumber(pipe, locale, value, style, digits) {
         maxFraction = 3;
     }
     if (digits) {
-        var /** @type {?} */parts = digits.match(_NUMBER_FORMAT_REGEXP);
+        var /** @type {?} */ parts = digits.match(_NUMBER_FORMAT_REGEXP);
         if (parts === null) {
-            throw new Error(digits + ' is not a valid digit info for number pipes');
+            throw new Error(digits + " is not a valid digit info for number pipes");
         }
         if (parts[1] != null) {
             minInt = parseIntAutoRadix(parts[1]);
@@ -3404,12 +3026,12 @@ function formatNumber(pipe, locale, value, style, digits) {
             maxFraction = parseIntAutoRadix(parts[5]);
         }
     }
-    return NumberFormatter.format( /** @type {?} */value, locale, style, {
+    return NumberFormatter.format(/** @type {?} */ (value), locale, style, {
         minimumIntegerDigits: minInt,
         minimumFractionDigits: minFraction,
         maximumFractionDigits: maxFraction,
         currency: currency,
-        currencyAsSymbol: currencyAsSymbol
+        currencyAsSymbol: currencyAsSymbol,
     });
 }
 /**
@@ -3439,14 +3061,11 @@ function formatNumber(pipe, locale, value, style, digits) {
  *
  * \@stable
  */
-
-var DecimalPipe = function () {
+var DecimalPipe = (function () {
     /**
      * @param {?} _locale
      */
     function DecimalPipe(_locale) {
-        _classCallCheck(this, DecimalPipe);
-
         this._locale = _locale;
     }
     /**
@@ -3454,25 +3073,19 @@ var DecimalPipe = function () {
      * @param {?=} digits
      * @return {?}
      */
-
-
-    _createClass(DecimalPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-            return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
-        }
-    }]);
-
+    DecimalPipe.prototype.transform = function (value, digits) {
+        if (digits === void 0) { digits = null; }
+        return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+    };
     return DecimalPipe;
-}();
-
-DecimalPipe.decorators = [{ type: Pipe, args: [{ name: 'number' }] }];
+}());
+DecimalPipe.decorators = [
+    { type: Pipe, args: [{ name: 'number' },] },
+];
 /** @nocollapse */
-DecimalPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
+DecimalPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as a percentage according to locale rules.
@@ -3493,14 +3106,11 @@ DecimalPipe.ctorParameters = function () {
  *
  * \@stable
  */
-
-var PercentPipe = function () {
+var PercentPipe = (function () {
     /**
      * @param {?} _locale
      */
     function PercentPipe(_locale) {
-        _classCallCheck(this, PercentPipe);
-
         this._locale = _locale;
     }
     /**
@@ -3508,25 +3118,19 @@ var PercentPipe = function () {
      * @param {?=} digits
      * @return {?}
      */
-
-
-    _createClass(PercentPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-            return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
-        }
-    }]);
-
+    PercentPipe.prototype.transform = function (value, digits) {
+        if (digits === void 0) { digits = null; }
+        return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+    };
     return PercentPipe;
-}();
-
-PercentPipe.decorators = [{ type: Pipe, args: [{ name: 'percent' }] }];
+}());
+PercentPipe.decorators = [
+    { type: Pipe, args: [{ name: 'percent' },] },
+];
 /** @nocollapse */
-PercentPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
+PercentPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as currency using locale rules.
@@ -3551,14 +3155,11 @@ PercentPipe.ctorParameters = function () {
  *
  * \@stable
  */
-
-var CurrencyPipe = function () {
+var CurrencyPipe = (function () {
     /**
      * @param {?} _locale
      */
     function CurrencyPipe(_locale) {
-        _classCallCheck(this, CurrencyPipe);
-
         this._locale = _locale;
     }
     /**
@@ -3568,33 +3169,27 @@ var CurrencyPipe = function () {
      * @param {?=} digits
      * @return {?}
      */
-
-
-    _createClass(CurrencyPipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var currencyCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'USD';
-            var symbolDisplay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-            var digits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-            return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-        }
-    }]);
-
+    CurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+        if (currencyCode === void 0) { currencyCode = 'USD'; }
+        if (symbolDisplay === void 0) { symbolDisplay = false; }
+        if (digits === void 0) { digits = null; }
+        return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+    };
     return CurrencyPipe;
-}();
-
-CurrencyPipe.decorators = [{ type: Pipe, args: [{ name: 'currency' }] }];
+}());
+CurrencyPipe.decorators = [
+    { type: Pipe, args: [{ name: 'currency' },] },
+];
 /** @nocollapse */
-CurrencyPipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
+CurrencyPipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 /**
  * @param {?} text
  * @return {?}
  */
 function parseIntAutoRadix(text) {
-    var /** @type {?} */result = parseInt(text);
+    var /** @type {?} */ result = parseInt(text);
     if (isNaN(result)) {
         throw new Error('Invalid integer literal when parsing ' + text);
     }
@@ -3607,8 +3202,7 @@ function parseIntAutoRadix(text) {
 function isNumeric(value) {
     return !isNaN(value - parseFloat(value));
 }
-
-var /** @type {?} */ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+var /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a date according to locale rules.
@@ -3678,14 +3272,11 @@ var /** @type {?} */ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::
  *
  * \@stable
  */
-
-var DatePipe = function () {
+var DatePipe = (function () {
     /**
      * @param {?} _locale
      */
     function DatePipe(_locale) {
-        _classCallCheck(this, DatePipe);
-
         this._locale = _locale;
     }
     /**
@@ -3693,61 +3284,50 @@ var DatePipe = function () {
      * @param {?=} pattern
      * @return {?}
      */
-
-
-    _createClass(DatePipe, [{
-        key: 'transform',
-        value: function transform(value) {
-            var pattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mediumDate';
-
-            var /** @type {?} */date = void 0;
-            if (isBlank(value) || value !== value) return null;
-            if (typeof value === 'string') {
-                value = value.trim();
-            }
-            if (isDate(value)) {
-                date = value;
-            } else if (isNumeric(value)) {
-                date = new Date(parseFloat(value));
-            } else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-                /**
-                * For ISO Strings without time the day, month and year must be extracted from the ISO String
-                * before Date creation to avoid time offset and errors in the new Date.
-                * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-                * date, some browsers (e.g. IE 9) will throw an invalid Date error
-                * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-                * is applied
-                * Note: ISO months are 0 for January, 1 for February, ...
-                */
-                var _value$split$map = value.split('-').map(function (val) {
-                    return parseInt(val, 10);
-                }),
-                    _value$split$map2 = _slicedToArray(_value$split$map, 3),
-                    y = _value$split$map2[0],
-                    m = _value$split$map2[1],
-                    d = _value$split$map2[2];
-
-                date = new Date(y, m - 1, d);
-            } else {
-                date = new Date(value);
-            }
-            if (!isDate(date)) {
-                var /** @type {?} */match = void 0;
-                if (typeof value === 'string' && (match = value.match(ISO8601_DATE_REGEX))) {
-                    date = isoStringToDate(match);
-                } else {
-                    throw invalidPipeArgumentError(DatePipe, value);
-                }
-            }
-            return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
+    DatePipe.prototype.transform = function (value, pattern) {
+        if (pattern === void 0) { pattern = 'mediumDate'; }
+        var /** @type {?} */ date;
+        if (isBlank(value) || value !== value)
+            return null;
+        if (typeof value === 'string') {
+            value = value.trim();
         }
-    }]);
-
+        if (isDate(value)) {
+            date = value;
+        }
+        else if (isNumeric(value)) {
+            date = new Date(parseFloat(value));
+        }
+        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            /**
+            * For ISO Strings without time the day, month and year must be extracted from the ISO String
+            * before Date creation to avoid time offset and errors in the new Date.
+            * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+            * date, some browsers (e.g. IE 9) will throw an invalid Date error
+            * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+            * is applied
+            * Note: ISO months are 0 for January, 1 for February, ...
+            */
+            var _a = value.split('-').map(function (val) { return parseInt(val, 10); }), y = _a[0], m = _a[1], d = _a[2];
+            date = new Date(y, m - 1, d);
+        }
+        else {
+            date = new Date(value);
+        }
+        if (!isDate(date)) {
+            var /** @type {?} */ match = void 0;
+            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                date = isoStringToDate(match);
+            }
+            else {
+                throw invalidPipeArgumentError(DatePipe, value);
+            }
+        }
+        return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
+    };
     return DatePipe;
-}();
+}());
 /** @internal */
-
-
 DatePipe._ALIASES = {
     'medium': 'yMMMdjms',
     'short': 'yMdjm',
@@ -3758,11 +3338,13 @@ DatePipe._ALIASES = {
     'mediumTime': 'jms',
     'shortTime': 'jm'
 };
-DatePipe.decorators = [{ type: Pipe, args: [{ name: 'date', pure: true }] }];
+DatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
 /** @nocollapse */
-DatePipe.ctorParameters = function () {
-    return [{ type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID] }] }];
-};
+DatePipe.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+]; };
 /**
  * @param {?} obj
  * @return {?}
@@ -3782,20 +3364,20 @@ function isDate(obj) {
  * @return {?}
  */
 function isoStringToDate(match) {
-    var /** @type {?} */date = new Date(0);
-    var /** @type {?} */tzHour = 0;
-    var /** @type {?} */tzMin = 0;
-    var /** @type {?} */dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-    var /** @type {?} */timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    var /** @type {?} */ date = new Date(0);
+    var /** @type {?} */ tzHour = 0;
+    var /** @type {?} */ tzMin = 0;
+    var /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+    var /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
     if (match[9]) {
         tzHour = toInt(match[9] + match[10]);
         tzMin = toInt(match[9] + match[11]);
     }
     dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
-    var /** @type {?} */h = toInt(match[4] || '0') - tzHour;
-    var /** @type {?} */m = toInt(match[5] || '0') - tzMin;
-    var /** @type {?} */s = toInt(match[6] || '0');
-    var /** @type {?} */ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    var /** @type {?} */ h = toInt(match[4] || '0') - tzHour;
+    var /** @type {?} */ m = toInt(match[5] || '0') - tzMin;
+    var /** @type {?} */ s = toInt(match[6] || '0');
+    var /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
     timeSetter.call(date, h, m, s, ms);
     return date;
 }
@@ -3806,8 +3388,7 @@ function isoStringToDate(match) {
 function toInt(str) {
     return parseInt(str, 10);
 }
-
-var /** @type {?} */_INTERPOLATION_REGEXP = /#/g;
+var /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
@@ -3825,14 +3406,11 @@ var /** @type {?} */_INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-
-var I18nPluralPipe = function () {
+var I18nPluralPipe = (function () {
     /**
      * @param {?} _localization
      */
     function I18nPluralPipe(_localization) {
-        _classCallCheck(this, I18nPluralPipe);
-
         this._localization = _localization;
     }
     /**
@@ -3840,29 +3418,24 @@ var I18nPluralPipe = function () {
      * @param {?} pluralMap
      * @return {?}
      */
-
-
-    _createClass(I18nPluralPipe, [{
-        key: 'transform',
-        value: function transform(value, pluralMap) {
-            if (value == null) return '';
-            if ((typeof pluralMap === 'undefined' ? 'undefined' : _typeof(pluralMap)) !== 'object' || pluralMap === null) {
-                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
-            }
-            var /** @type {?} */key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
-            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+    I18nPluralPipe.prototype.transform = function (value, pluralMap) {
+        if (value == null)
+            return '';
+        if (typeof pluralMap !== 'object' || pluralMap === null) {
+            throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
-    }]);
-
+        var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+        return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+    };
     return I18nPluralPipe;
-}();
-
-I18nPluralPipe.decorators = [{ type: Pipe, args: [{ name: 'i18nPlural', pure: true }] }];
+}());
+I18nPluralPipe.decorators = [
+    { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+];
 /** @nocollapse */
-I18nPluralPipe.ctorParameters = function () {
-    return [{ type: NgLocalization }];
-};
-
+I18nPluralPipe.ctorParameters = function () { return [
+    { type: NgLocalization, },
+]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Generic selector that displays the string that matches the current value.
@@ -3880,44 +3453,35 @@ I18nPluralPipe.ctorParameters = function () {
  *
  *  \@experimental
  */
-
-var I18nSelectPipe = function () {
+var I18nSelectPipe = (function () {
     function I18nSelectPipe() {
-        _classCallCheck(this, I18nSelectPipe);
     }
-
-    _createClass(I18nSelectPipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @param {?} mapping
-         * @return {?}
-         */
-        value: function transform(value, mapping) {
-            if (value == null) return '';
-            if ((typeof mapping === 'undefined' ? 'undefined' : _typeof(mapping)) !== 'object' || typeof value !== 'string') {
-                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
-            }
-            if (mapping.hasOwnProperty(value)) {
-                return mapping[value];
-            }
-            if (mapping.hasOwnProperty('other')) {
-                return mapping['other'];
-            }
+    /**
+     * @param {?} value
+     * @param {?} mapping
+     * @return {?}
+     */
+    I18nSelectPipe.prototype.transform = function (value, mapping) {
+        if (value == null)
             return '';
+        if (typeof mapping !== 'object' || typeof value !== 'string') {
+            throw invalidPipeArgumentError(I18nSelectPipe, mapping);
         }
-    }]);
-
+        if (mapping.hasOwnProperty(value)) {
+            return mapping[value];
+        }
+        if (mapping.hasOwnProperty('other')) {
+            return mapping['other'];
+        }
+        return '';
+    };
     return I18nSelectPipe;
-}();
-
-I18nSelectPipe.decorators = [{ type: Pipe, args: [{ name: 'i18nSelect', pure: true }] }];
+}());
+I18nSelectPipe.decorators = [
+    { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+];
 /** @nocollapse */
-I18nSelectPipe.ctorParameters = function () {
-    return [];
-};
-
+I18nSelectPipe.ctorParameters = function () { return []; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Converts value into JSON string.
@@ -3931,33 +3495,21 @@ I18nSelectPipe.ctorParameters = function () {
  *
  * \@stable
  */
-
-var JsonPipe = function () {
+var JsonPipe = (function () {
     function JsonPipe() {
-        _classCallCheck(this, JsonPipe);
     }
-
-    _createClass(JsonPipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        value: function transform(value) {
-            return JSON.stringify(value, null, 2);
-        }
-    }]);
-
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
     return JsonPipe;
-}();
-
-JsonPipe.decorators = [{ type: Pipe, args: [{ name: 'json', pure: false }] }];
+}());
+JsonPipe.decorators = [
+    { type: Pipe, args: [{ name: 'json', pure: false },] },
+];
 /** @nocollapse */
-JsonPipe.ctorParameters = function () {
-    return [];
-};
-
+JsonPipe.ctorParameters = function () { return []; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
@@ -4002,74 +3554,73 @@ JsonPipe.ctorParameters = function () {
  *
  * \@stable
  */
-
-var SlicePipe = function () {
+var SlicePipe = (function () {
     function SlicePipe() {
-        _classCallCheck(this, SlicePipe);
     }
-
-    _createClass(SlicePipe, [{
-        key: 'transform',
-
-        /**
-         * @param {?} value
-         * @param {?} start
-         * @param {?=} end
-         * @return {?}
-         */
-        value: function transform(value, start, end) {
-            if (value == null) return value;
-            if (!this.supports(value)) {
-                throw invalidPipeArgumentError(SlicePipe, value);
-            }
-            return value.slice(start, end);
+    /**
+     * @param {?} value
+     * @param {?} start
+     * @param {?=} end
+     * @return {?}
+     */
+    SlicePipe.prototype.transform = function (value, start, end) {
+        if (value == null)
+            return value;
+        if (!this.supports(value)) {
+            throw invalidPipeArgumentError(SlicePipe, value);
         }
-        /**
-         * @param {?} obj
-         * @return {?}
-         */
-
-    }, {
-        key: 'supports',
-        value: function supports(obj) {
-            return typeof obj === 'string' || Array.isArray(obj);
-        }
-    }]);
-
+        return value.slice(start, end);
+    };
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
     return SlicePipe;
-}();
-
-SlicePipe.decorators = [{ type: Pipe, args: [{ name: 'slice', pure: false }] }];
+}());
+SlicePipe.decorators = [
+    { type: Pipe, args: [{ name: 'slice', pure: false },] },
+];
 /** @nocollapse */
-SlicePipe.ctorParameters = function () {
-    return [];
-};
-
+SlicePipe.ctorParameters = function () { return []; };
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-var /** @type {?} */COMMON_PIPES = [AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe];
-
+var /** @type {?} */ COMMON_PIPES = [
+    AsyncPipe,
+    UpperCasePipe,
+    LowerCasePipe,
+    JsonPipe,
+    SlicePipe,
+    DecimalPipe,
+    PercentPipe,
+    TitleCasePipe,
+    CurrencyPipe,
+    DatePipe,
+    I18nPluralPipe,
+    I18nSelectPipe,
+];
 /**
  * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
  * \@stable
  */
-
-var CommonModule = function CommonModule() {
-    _classCallCheck(this, CommonModule);
-};
-
-CommonModule.decorators = [{ type: NgModule, args: [{
-        declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-        exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-        providers: [{ provide: NgLocalization, useClass: NgLocaleLocalization }]
-    }] }];
+var CommonModule = (function () {
+    function CommonModule() {
+    }
+    return CommonModule;
+}());
+CommonModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                providers: [
+                    { provide: NgLocalization, useClass: NgLocaleLocalization },
+                ],
+            },] },
+];
 /** @nocollapse */
-CommonModule.ctorParameters = function () {
-    return [];
-};
-
+CommonModule.ctorParameters = function () { return []; };
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -4083,10 +3634,10 @@ CommonModule.ctorParameters = function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */var /** @type {?} */PLATFORM_BROWSER_ID = 'browser';
-var /** @type {?} */PLATFORM_SERVER_ID = 'server';
-var /** @type {?} */PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
-var /** @type {?} */PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
+ */ var /** @type {?} */ PLATFORM_BROWSER_ID = 'browser';
+var /** @type {?} */ PLATFORM_SERVER_ID = 'server';
+var /** @type {?} */ PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
+var /** @type {?} */ PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
  * \@experimental
@@ -4123,10 +3674,8 @@ function isPlatformWorkerApp(platformId) {
 function isPlatformWorkerUi(platformId) {
     return platformId === PLATFORM_WORKER_UI_ID;
 }
-
 /**
  * @stable
  */
-var /** @type {?} */VERSION = new Version('4.0.0-rc.2-5ad5301');
-
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-6c8638c');
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };
