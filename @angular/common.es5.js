@@ -4,11 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-f093501
+ * @license Angular v4.0.0-rc.3-13686bb
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
@@ -1393,28 +1393,25 @@ var NgComponentOutlet = (function () {
      * @return {?}
      */
     NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-        if (this._componentRef) {
-            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-        }
         this._viewContainerRef.clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
-            var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-            if (((changes)).ngComponentOutletNgModuleFactory) {
+            var /** @type {?} */ elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            if (changes['ngComponentOutletNgModuleFactory']) {
                 if (this._moduleRef)
                     this._moduleRef.destroy();
                 if (this.ngComponentOutletNgModuleFactory) {
-                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
+                    var /** @type {?} */ parentModule = elInjector.get(NgModuleRef);
+                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
                 else {
                     this._moduleRef = null;
                 }
             }
-            if (this._moduleRef) {
-                injector = this._moduleRef.injector;
-            }
-            var /** @type {?} */ componentFactory = injector.get(ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
-            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
+            var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+                elInjector.get(ComponentFactoryResolver);
+            var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
     };
     /**
@@ -3677,5 +3674,5 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-f093501');
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-13686bb');
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };

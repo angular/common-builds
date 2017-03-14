@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-f093501
+ * @license Angular v4.0.0-rc.3-13686bb
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1398,28 +1398,25 @@
          * @return {?}
          */
         NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-            if (this._componentRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-            }
             this._viewContainerRef.clear();
             this._componentRef = null;
             if (this.ngComponentOutlet) {
-                var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-                if (((changes)).ngComponentOutletNgModuleFactory) {
+                var /** @type {?} */ elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+                if (changes['ngComponentOutletNgModuleFactory']) {
                     if (this._moduleRef)
                         this._moduleRef.destroy();
                     if (this.ngComponentOutletNgModuleFactory) {
-                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
+                        var /** @type {?} */ parentModule = elInjector.get(_angular_core.NgModuleRef);
+                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                     }
                     else {
                         this._moduleRef = null;
                     }
                 }
-                if (this._moduleRef) {
-                    injector = this._moduleRef.injector;
-                }
-                var /** @type {?} */ componentFactory = injector.get(_angular_core.ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
-                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
+                var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+                    elInjector.get(_angular_core.ComponentFactoryResolver);
+                var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
             }
         };
         /**
@@ -3682,7 +3679,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-f093501');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-13686bb');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
