@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-8850098
+ * @license Angular v4.0.0-rc.3-eedca09
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3682,7 +3682,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-8850098');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-eedca09');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
