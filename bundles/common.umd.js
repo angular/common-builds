@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-4f7d62a
+ * @license Angular v4.0.0-rc.3-5c0ea20
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -243,7 +243,9 @@
          */
         function Location(platformStrategy) {
             var _this = this;
-            /** @internal */
+            /**
+             * \@internal
+             */
             this._subject = new _angular_core.EventEmitter();
             this._platformStrategy = platformStrategy;
             var browserBaseHref = this._platformStrategy.getBaseHref();
@@ -389,7 +391,9 @@
     Location.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     Location.ctorParameters = function () { return [
         { type: LocationStrategy, },
     ]; };
@@ -514,7 +518,9 @@
     HashLocationStrategy.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     HashLocationStrategy.ctorParameters = function () { return [
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
@@ -628,7 +634,9 @@
     PathLocationStrategy.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     PathLocationStrategy.ctorParameters = function () { return [
         { type: PlatformLocation, },
         { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
@@ -714,7 +722,9 @@
     NgLocaleLocalization.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgLocaleLocalization.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ]; };
@@ -1316,7 +1326,9 @@
     NgClass.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngClass]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgClass.ctorParameters = function () { return [
         { type: _angular_core.IterableDiffers, },
         { type: _angular_core.KeyValueDiffers, },
@@ -1431,7 +1443,9 @@
     NgComponentOutlet.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngComponentOutlet]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgComponentOutlet.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
     ]; };
@@ -1689,7 +1703,9 @@
     NgForOf.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgForOf.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -1894,7 +1910,9 @@
     NgIf.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngIf]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgIf.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -2064,7 +2082,9 @@
     NgSwitch.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgSwitch.ctorParameters = function () { return []; };
     NgSwitch.propDecorators = {
         'ngSwitch': [{ type: _angular_core.Input },],
@@ -2113,7 +2133,9 @@
     NgSwitchCase.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitchCase]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgSwitchCase.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -2159,7 +2181,9 @@
     NgSwitchDefault.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgSwitchDefault.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
         { type: _angular_core.TemplateRef, },
@@ -2253,7 +2277,9 @@
     NgPlural.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngPlural]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgPlural.ctorParameters = function () { return [
         { type: NgLocalization, },
     ]; };
@@ -2295,7 +2321,9 @@
     NgPluralCase.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngPluralCase]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgPluralCase.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
         { type: _angular_core.TemplateRef, },
@@ -2385,7 +2413,9 @@
     NgStyle.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgStyle.ctorParameters = function () { return [
         { type: _angular_core.KeyValueDiffers, },
         { type: _angular_core.ElementRef, },
@@ -2452,7 +2482,9 @@
     NgTemplateOutlet.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgTemplateOutlet.ctorParameters = function () { return [
         { type: _angular_core.ViewContainerRef, },
     ]; };
@@ -2650,7 +2682,9 @@
     AsyncPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'async', pure: false },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     AsyncPipe.ctorParameters = function () { return [
         { type: _angular_core.ChangeDetectorRef, },
     ]; };
@@ -2681,7 +2715,9 @@
     LowerCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     LowerCasePipe.ctorParameters = function () { return []; };
     /**
      * Helper method to transform a single word to titlecase.
@@ -2720,7 +2756,9 @@
     TitleCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     TitleCasePipe.ctorParameters = function () { return []; };
     /**
      * Transforms text to uppercase.
@@ -2747,7 +2785,9 @@
     UpperCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     UpperCasePipe.ctorParameters = function () { return []; };
     var NumberFormatStyle = {};
     NumberFormatStyle.Decimal = 0;
@@ -3101,7 +3141,9 @@
     DecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     DecimalPipe.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ]; };
@@ -3146,7 +3188,9 @@
     PercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     PercentPipe.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ]; };
@@ -3199,7 +3243,9 @@
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     CurrencyPipe.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ]; };
@@ -3346,7 +3392,9 @@
         };
         return DatePipe;
     }());
-    /** @internal */
+    /**
+     * \@internal
+     */
     DatePipe._ALIASES = {
         'medium': 'yMMMdjms',
         'short': 'yMdjm',
@@ -3360,7 +3408,9 @@
     DatePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     DatePipe.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
     ]; };
@@ -3451,7 +3501,9 @@
     I18nPluralPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nPlural', pure: true },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     I18nPluralPipe.ctorParameters = function () { return [
         { type: NgLocalization, },
     ]; };
@@ -3499,7 +3551,9 @@
     I18nSelectPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     I18nSelectPipe.ctorParameters = function () { return []; };
     /**
      * \@ngModule CommonModule
@@ -3527,7 +3581,9 @@
     JsonPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     JsonPipe.ctorParameters = function () { return []; };
     /**
      * \@ngModule CommonModule
@@ -3600,7 +3656,9 @@
     SlicePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     SlicePipe.ctorParameters = function () { return []; };
     /**
      * A collection of Angular pipes that are likely to be used in each and every application.
@@ -3638,7 +3696,9 @@
                     ],
                 },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     CommonModule.ctorParameters = function () { return []; };
     /**
      * @license
@@ -3696,7 +3756,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-4f7d62a');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-5c0ea20');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;

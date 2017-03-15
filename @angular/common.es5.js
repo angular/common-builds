@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-4f7d62a
+ * @license Angular v4.0.0-rc.3-5c0ea20
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -238,7 +238,9 @@ var Location = (function () {
      */
     function Location(platformStrategy) {
         var _this = this;
-        /** @internal */
+        /**
+         * \@internal
+         */
         this._subject = new EventEmitter();
         this._platformStrategy = platformStrategy;
         var browserBaseHref = this._platformStrategy.getBaseHref();
@@ -384,7 +386,9 @@ var Location = (function () {
 Location.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 Location.ctorParameters = function () { return [
     { type: LocationStrategy, },
 ]; };
@@ -509,7 +513,9 @@ var HashLocationStrategy = (function (_super) {
 HashLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 HashLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
@@ -623,7 +629,9 @@ var PathLocationStrategy = (function (_super) {
 PathLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 PathLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
@@ -709,7 +717,9 @@ var NgLocaleLocalization = (function (_super) {
 NgLocaleLocalization.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgLocaleLocalization.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -1311,7 +1321,9 @@ var NgClass = (function () {
 NgClass.decorators = [
     { type: Directive, args: [{ selector: '[ngClass]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgClass.ctorParameters = function () { return [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },
@@ -1426,7 +1438,9 @@ var NgComponentOutlet = (function () {
 NgComponentOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgComponentOutlet.ctorParameters = function () { return [
     { type: ViewContainerRef, },
 ]; };
@@ -1684,7 +1698,9 @@ var NgForOf = (function () {
 NgForOf.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgForOf.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
@@ -1889,7 +1905,9 @@ var NgIf = (function () {
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgIf.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
@@ -2059,7 +2077,9 @@ var NgSwitch = (function () {
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgSwitch.ctorParameters = function () { return []; };
 NgSwitch.propDecorators = {
     'ngSwitch': [{ type: Input },],
@@ -2108,7 +2128,9 @@ var NgSwitchCase = (function () {
 NgSwitchCase.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgSwitchCase.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
@@ -2154,7 +2176,9 @@ var NgSwitchDefault = (function () {
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgSwitchDefault.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
@@ -2248,7 +2272,9 @@ var NgPlural = (function () {
 NgPlural.decorators = [
     { type: Directive, args: [{ selector: '[ngPlural]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgPlural.ctorParameters = function () { return [
     { type: NgLocalization, },
 ]; };
@@ -2290,7 +2316,9 @@ var NgPluralCase = (function () {
 NgPluralCase.decorators = [
     { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgPluralCase.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
     { type: TemplateRef, },
@@ -2380,7 +2408,9 @@ var NgStyle = (function () {
 NgStyle.decorators = [
     { type: Directive, args: [{ selector: '[ngStyle]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgStyle.ctorParameters = function () { return [
     { type: KeyValueDiffers, },
     { type: ElementRef, },
@@ -2447,7 +2477,9 @@ var NgTemplateOutlet = (function () {
 NgTemplateOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 NgTemplateOutlet.ctorParameters = function () { return [
     { type: ViewContainerRef, },
 ]; };
@@ -2645,7 +2677,9 @@ var AsyncPipe = (function () {
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 AsyncPipe.ctorParameters = function () { return [
     { type: ChangeDetectorRef, },
 ]; };
@@ -2676,7 +2710,9 @@ var LowerCasePipe = (function () {
 LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 LowerCasePipe.ctorParameters = function () { return []; };
 /**
  * Helper method to transform a single word to titlecase.
@@ -2715,7 +2751,9 @@ var TitleCasePipe = (function () {
 TitleCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'titlecase' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 TitleCasePipe.ctorParameters = function () { return []; };
 /**
  * Transforms text to uppercase.
@@ -2742,7 +2780,9 @@ var UpperCasePipe = (function () {
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 UpperCasePipe.ctorParameters = function () { return []; };
 var NumberFormatStyle = {};
 NumberFormatStyle.Decimal = 0;
@@ -3096,7 +3136,9 @@ var DecimalPipe = (function () {
 DecimalPipe.decorators = [
     { type: Pipe, args: [{ name: 'number' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 DecimalPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3141,7 +3183,9 @@ var PercentPipe = (function () {
 PercentPipe.decorators = [
     { type: Pipe, args: [{ name: 'percent' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 PercentPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3194,7 +3238,9 @@ var CurrencyPipe = (function () {
 CurrencyPipe.decorators = [
     { type: Pipe, args: [{ name: 'currency' },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 CurrencyPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3341,7 +3387,9 @@ var DatePipe = (function () {
     };
     return DatePipe;
 }());
-/** @internal */
+/**
+ * \@internal
+ */
 DatePipe._ALIASES = {
     'medium': 'yMMMdjms',
     'short': 'yMdjm',
@@ -3355,7 +3403,9 @@ DatePipe._ALIASES = {
 DatePipe.decorators = [
     { type: Pipe, args: [{ name: 'date', pure: true },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 DatePipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3446,7 +3496,9 @@ var I18nPluralPipe = (function () {
 I18nPluralPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 I18nPluralPipe.ctorParameters = function () { return [
     { type: NgLocalization, },
 ]; };
@@ -3494,7 +3546,9 @@ var I18nSelectPipe = (function () {
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 I18nSelectPipe.ctorParameters = function () { return []; };
 /**
  * \@ngModule CommonModule
@@ -3522,7 +3576,9 @@ var JsonPipe = (function () {
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 JsonPipe.ctorParameters = function () { return []; };
 /**
  * \@ngModule CommonModule
@@ -3595,7 +3651,9 @@ var SlicePipe = (function () {
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 SlicePipe.ctorParameters = function () { return []; };
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -3633,7 +3691,9 @@ CommonModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */
+/**
+ * @nocollapse
+ */
 CommonModule.ctorParameters = function () { return []; };
 /**
  * @license
@@ -3691,5 +3751,5 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-4f7d62a');
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-5c0ea20');
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
