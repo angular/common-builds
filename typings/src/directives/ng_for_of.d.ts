@@ -6,11 +6,15 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, IterableDiffers, NgIterable, OnChanges, SimpleChanges, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
-export declare class NgForOfRow<T> {
+/**
+ * @stable
+ */
+export declare class NgForOfContext<T> {
     $implicit: T;
+    ngForOf: NgIterable<T>;
     index: number;
     count: number;
-    constructor($implicit: T, index: number, count: number);
+    constructor($implicit: T, ngForOf: NgIterable<T>, index: number, count: number);
     readonly first: boolean;
     readonly last: boolean;
     readonly even: boolean;
@@ -25,13 +29,21 @@ export declare class NgForOfRow<T> {
  *
  * `NgForOf` provides several exported values that can be aliased to local variables:
  *
- * * `index` will be set to the current loop iteration for each template context.
- * * `first` will be set to a boolean value indicating whether the item is the first one in the
- *   iteration.
- * * `last` will be set to a boolean value indicating whether the item is the last one in the
- *   iteration.
- * * `even` will be set to a boolean value indicating whether this item has an even index.
- * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+ * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
+ * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
+ * more complex then a property access, for example when using the async pipe (`userStreams |
+ * async`).
+ * - `index: number`: The index of the current item in the iterable.
+ * - `first: boolean`: True when the item is the first item in the iterable.
+ * - `last: boolean`: True when the item is the last item in the iterable.
+ * - `even: boolean`: True when the item has an even index in the iterable.
+ * - `odd: boolean`: True when the item has an odd index in the iterable.
+ *
+ * ```
+ * <li *ngFor="let user of userObservable | async as users; indexes as i; first as isFirst">
+ *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+ * </li>
+ * ```
  *
  * ### Change Propagation
  *
@@ -87,8 +99,8 @@ export declare class NgForOf<T> implements DoCheck, OnChanges {
     ngForTrackBy: TrackByFunction<T>;
     private _differ;
     private _trackByFn;
-    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfRow<T>>, _differs: IterableDiffers);
-    ngForTemplate: TemplateRef<NgForOfRow<T>>;
+    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers);
+    ngForTemplate: TemplateRef<NgForOfContext<T>>;
     ngOnChanges(changes: SimpleChanges): void;
     ngDoCheck(): void;
     private _applyChanges(changes);

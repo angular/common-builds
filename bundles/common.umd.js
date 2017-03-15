@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-5fe2d8f
+ * @license Angular v4.0.0-rc.3-c10c060
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1441,18 +1441,23 @@
         'ngComponentOutletContent': [{ type: _angular_core.Input },],
         'ngComponentOutletNgModuleFactory': [{ type: _angular_core.Input },],
     };
-    var NgForOfRow = (function () {
+    /**
+     * \@stable
+     */
+    var NgForOfContext = (function () {
         /**
          * @param {?} $implicit
+         * @param {?} ngForOf
          * @param {?} index
          * @param {?} count
          */
-        function NgForOfRow($implicit, index, count) {
+        function NgForOfContext($implicit, ngForOf, index, count) {
             this.$implicit = $implicit;
+            this.ngForOf = ngForOf;
             this.index = index;
             this.count = count;
         }
-        Object.defineProperty(NgForOfRow.prototype, "first", {
+        Object.defineProperty(NgForOfContext.prototype, "first", {
             /**
              * @return {?}
              */
@@ -1460,7 +1465,7 @@
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(NgForOfRow.prototype, "last", {
+        Object.defineProperty(NgForOfContext.prototype, "last", {
             /**
              * @return {?}
              */
@@ -1468,7 +1473,7 @@
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(NgForOfRow.prototype, "even", {
+        Object.defineProperty(NgForOfContext.prototype, "even", {
             /**
              * @return {?}
              */
@@ -1476,7 +1481,7 @@
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(NgForOfRow.prototype, "odd", {
+        Object.defineProperty(NgForOfContext.prototype, "odd", {
             /**
              * @return {?}
              */
@@ -1484,7 +1489,7 @@
             enumerable: true,
             configurable: true
         });
-        return NgForOfRow;
+        return NgForOfContext;
     }());
     /**
      * The `NgForOf` directive instantiates a template once per item from an iterable. The context
@@ -1495,13 +1500,21 @@
      *
      * `NgForOf` provides several exported values that can be aliased to local variables:
      *
-     * * `index` will be set to the current loop iteration for each template context.
-     * * `first` will be set to a boolean value indicating whether the item is the first one in the
-     *   iteration.
-     * * `last` will be set to a boolean value indicating whether the item is the last one in the
-     *   iteration.
-     * * `even` will be set to a boolean value indicating whether this item has an even index.
-     * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+     * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
+     * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
+     * more complex then a property access, for example when using the async pipe (`userStreams |
+     * async`).
+     * - `index: number`: The index of the current item in the iterable.
+     * - `first: boolean`: True when the item is the first item in the iterable.
+     * - `last: boolean`: True when the item is the last item in the iterable.
+     * - `even: boolean`: True when the item has an even index in the iterable.
+     * - `odd: boolean`: True when the item has an odd index in the iterable.
+     *
+     * ```
+     * <li *ngFor="let user of userObservable | async as users; indexes as i; first as isFirst">
+     *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+     * </li>
+     * ```
      *
      * ### Change Propagation
      *
@@ -1636,7 +1649,7 @@
             var /** @type {?} */ insertTuples = [];
             changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
                 if (item.previousIndex == null) {
-                    var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfRow(null, null, null), currentIndex);
+                    var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this.ngForOf, null, null), currentIndex);
                     var /** @type {?} */ tuple = new RecordViewTuple(item, view);
                     insertTuples.push(tuple);
                 }
@@ -1761,7 +1774,7 @@
      * A better way to do this is to use `ngIf` and store the result of the condition in a local
      * variable as shown in the the example below:
      *
-     * {\@example common/ngIf/ts/module.ts region='NgIfLet'}
+     * {\@example common/ngIf/ts/module.ts region='NgIfAs'}
      *
      * Notice that:
      *  - We use only one `async` pipe and hence only one subscription gets created.
@@ -1793,7 +1806,7 @@
      *
      * Form with storing the value locally:
      * ```
-     * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+     * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
      * <ng-template #elseBlock>...</ng-template>
      * ```
      *
@@ -1819,7 +1832,7 @@
              * @return {?}
              */
             set: function (condition) {
-                this._context.$implicit = condition;
+                this._context.$implicit = this._context.ngIf = condition;
                 this._updateView();
             },
             enumerable: true,
@@ -1891,9 +1904,13 @@
         'ngIfThen': [{ type: _angular_core.Input },],
         'ngIfElse': [{ type: _angular_core.Input },],
     };
+    /**
+     * \@stable
+     */
     var NgIfContext = (function () {
         function NgIfContext() {
             this.$implicit = null;
+            this.ngIf = null;
         }
         return NgIfContext;
     }());
@@ -3679,7 +3696,7 @@
     /**
      * @stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-5fe2d8f');
+    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-c10c060');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
@@ -3687,7 +3704,9 @@
     exports.NgClass = NgClass;
     exports.NgFor = NgFor;
     exports.NgForOf = NgForOf;
+    exports.NgForOfContext = NgForOfContext;
     exports.NgIf = NgIf;
+    exports.NgIfContext = NgIfContext;
     exports.NgPlural = NgPlural;
     exports.NgPluralCase = NgPluralCase;
     exports.NgStyle = NgStyle;
@@ -3724,9 +3743,7 @@
     exports.HashLocationStrategy = HashLocationStrategy;
     exports.PathLocationStrategy = PathLocationStrategy;
     exports.Location = Location;
-    exports.ɵc = COMMON_DIRECTIVES;
-    exports.ɵa = NgForOfRow;
-    exports.ɵb = NgIfContext;
-    exports.ɵd = COMMON_PIPES;
+    exports.ɵa = COMMON_DIRECTIVES;
+    exports.ɵb = COMMON_PIPES;
 
 }));

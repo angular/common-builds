@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-5fe2d8f
+ * @license Angular v4.0.0-rc.3-c10c060
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1385,14 +1385,19 @@ NgComponentOutlet.propDecorators = {
     'ngComponentOutletNgModuleFactory': [{ type: Input },],
 };
 
-class NgForOfRow {
+/**
+ * \@stable
+ */
+class NgForOfContext {
     /**
      * @param {?} $implicit
+     * @param {?} ngForOf
      * @param {?} index
      * @param {?} count
      */
-    constructor($implicit, index, count) {
+    constructor($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
+        this.ngForOf = ngForOf;
         this.index = index;
         this.count = count;
     }
@@ -1422,13 +1427,21 @@ class NgForOfRow {
  *
  * `NgForOf` provides several exported values that can be aliased to local variables:
  *
- * * `index` will be set to the current loop iteration for each template context.
- * * `first` will be set to a boolean value indicating whether the item is the first one in the
- *   iteration.
- * * `last` will be set to a boolean value indicating whether the item is the last one in the
- *   iteration.
- * * `even` will be set to a boolean value indicating whether this item has an even index.
- * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+ * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
+ * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
+ * more complex then a property access, for example when using the async pipe (`userStreams |
+ * async`).
+ * - `index: number`: The index of the current item in the iterable.
+ * - `first: boolean`: True when the item is the first item in the iterable.
+ * - `last: boolean`: True when the item is the last item in the iterable.
+ * - `even: boolean`: True when the item has an even index in the iterable.
+ * - `odd: boolean`: True when the item has an odd index in the iterable.
+ *
+ * ```
+ * <li *ngFor="let user of userObservable | async as users; indexes as i; first as isFirst">
+ *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+ * </li>
+ * ```
  *
  * ### Change Propagation
  *
@@ -1554,7 +1567,7 @@ class NgForOf {
         const /** @type {?} */ insertTuples = [];
         changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
-                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfRow(null, null, null), currentIndex);
+                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(null, this.ngForOf, null, null), currentIndex);
                 const /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -1678,7 +1691,7 @@ function getTypeNameForDebugging(type) {
  * A better way to do this is to use `ngIf` and store the result of the condition in a local
  * variable as shown in the the example below:
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfLet'}
+ * {\@example common/ngIf/ts/module.ts region='NgIfAs'}
  *
  * Notice that:
  *  - We use only one `async` pipe and hence only one subscription gets created.
@@ -1710,7 +1723,7 @@ function getTypeNameForDebugging(type) {
  *
  * Form with storing the value locally:
  * ```
- * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+ * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
@@ -1735,7 +1748,7 @@ class NgIf {
      * @return {?}
      */
     set ngIf(condition) {
-        this._context.$implicit = condition;
+        this._context.$implicit = this._context.ngIf = condition;
         this._updateView();
     }
     /**
@@ -1795,9 +1808,13 @@ NgIf.propDecorators = {
     'ngIfThen': [{ type: Input },],
     'ngIfElse': [{ type: Input },],
 };
+/**
+ * \@stable
+ */
 class NgIfContext {
     constructor() {
         this.$implicit = null;
+        this.ngIf = null;
     }
 }
 
@@ -3527,6 +3544,6 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-5fe2d8f');
+const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-c10c060');
 
-export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };
+export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
