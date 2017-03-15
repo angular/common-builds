@@ -58,7 +58,7 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  * A better way to do this is to use `ngIf` and store the result of the condition in a local
  * variable as shown in the the example below:
  *
- * {@example common/ngIf/ts/module.ts region='NgIfLet'}
+ * {@example common/ngIf/ts/module.ts region='NgIfAs'}
  *
  * Notice that:
  *  - We use only one `async` pipe and hence only one subscription gets created.
@@ -90,7 +90,7 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  *
  * Form with storing the value locally:
  * ```
- * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+ * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
@@ -109,6 +109,10 @@ export declare class NgIf {
     ngIfElse: TemplateRef<NgIfContext>;
     private _updateView();
 }
+/**
+ * @stable
+ */
 export declare class NgIfContext {
     $implicit: any;
+    ngIf: any;
 }

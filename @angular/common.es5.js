@@ -4,11 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.0.0-rc.3-423bfb0
+ * @license Angular v4.0.0-rc.3-ec548ad
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
@@ -1393,28 +1393,25 @@ var NgComponentOutlet = (function () {
      * @return {?}
      */
     NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-        if (this._componentRef) {
-            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
-        }
         this._viewContainerRef.clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
-            var /** @type {?} */ injector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-            if (((changes)).ngComponentOutletNgModuleFactory) {
+            var /** @type {?} */ elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            if (changes['ngComponentOutletNgModuleFactory']) {
                 if (this._moduleRef)
                     this._moduleRef.destroy();
                 if (this.ngComponentOutletNgModuleFactory) {
-                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(injector);
+                    var /** @type {?} */ parentModule = elInjector.get(NgModuleRef);
+                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
                 else {
                     this._moduleRef = null;
                 }
             }
-            if (this._moduleRef) {
-                injector = this._moduleRef.injector;
-            }
-            var /** @type {?} */ componentFactory = injector.get(ComponentFactoryResolver).resolveComponentFactory(this.ngComponentOutlet);
-            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, injector, this.ngComponentOutletContent);
+            var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+                elInjector.get(ComponentFactoryResolver);
+            var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
     };
     /**
@@ -1439,18 +1436,23 @@ NgComponentOutlet.propDecorators = {
     'ngComponentOutletContent': [{ type: Input },],
     'ngComponentOutletNgModuleFactory': [{ type: Input },],
 };
-var NgForOfRow = (function () {
+/**
+ * \@stable
+ */
+var NgForOfContext = (function () {
     /**
      * @param {?} $implicit
+     * @param {?} ngForOf
      * @param {?} index
      * @param {?} count
      */
-    function NgForOfRow($implicit, index, count) {
+    function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
+        this.ngForOf = ngForOf;
         this.index = index;
         this.count = count;
     }
-    Object.defineProperty(NgForOfRow.prototype, "first", {
+    Object.defineProperty(NgForOfContext.prototype, "first", {
         /**
          * @return {?}
          */
@@ -1458,7 +1460,7 @@ var NgForOfRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForOfRow.prototype, "last", {
+    Object.defineProperty(NgForOfContext.prototype, "last", {
         /**
          * @return {?}
          */
@@ -1466,7 +1468,7 @@ var NgForOfRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForOfRow.prototype, "even", {
+    Object.defineProperty(NgForOfContext.prototype, "even", {
         /**
          * @return {?}
          */
@@ -1474,7 +1476,7 @@ var NgForOfRow = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(NgForOfRow.prototype, "odd", {
+    Object.defineProperty(NgForOfContext.prototype, "odd", {
         /**
          * @return {?}
          */
@@ -1482,7 +1484,7 @@ var NgForOfRow = (function () {
         enumerable: true,
         configurable: true
     });
-    return NgForOfRow;
+    return NgForOfContext;
 }());
 /**
  * The `NgForOf` directive instantiates a template once per item from an iterable. The context
@@ -1493,13 +1495,21 @@ var NgForOfRow = (function () {
  *
  * `NgForOf` provides several exported values that can be aliased to local variables:
  *
- * * `index` will be set to the current loop iteration for each template context.
- * * `first` will be set to a boolean value indicating whether the item is the first one in the
- *   iteration.
- * * `last` will be set to a boolean value indicating whether the item is the last one in the
- *   iteration.
- * * `even` will be set to a boolean value indicating whether this item has an even index.
- * * `odd` will be set to a boolean value indicating whether this item has an odd index.
+ * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
+ * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
+ * more complex then a property access, for example when using the async pipe (`userStreams |
+ * async`).
+ * - `index: number`: The index of the current item in the iterable.
+ * - `first: boolean`: True when the item is the first item in the iterable.
+ * - `last: boolean`: True when the item is the last item in the iterable.
+ * - `even: boolean`: True when the item has an even index in the iterable.
+ * - `odd: boolean`: True when the item has an odd index in the iterable.
+ *
+ * ```
+ * <li *ngFor="let user of userObservable | async as users; indexes as i; first as isFirst">
+ *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+ * </li>
+ * ```
  *
  * ### Change Propagation
  *
@@ -1634,7 +1644,7 @@ var NgForOf = (function () {
         var /** @type {?} */ insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfRow(null, null, null), currentIndex);
+                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this.ngForOf, null, null), currentIndex);
                 var /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -1759,7 +1769,7 @@ function getTypeNameForDebugging(type) {
  * A better way to do this is to use `ngIf` and store the result of the condition in a local
  * variable as shown in the the example below:
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfLet'}
+ * {\@example common/ngIf/ts/module.ts region='NgIfAs'}
  *
  * Notice that:
  *  - We use only one `async` pipe and hence only one subscription gets created.
@@ -1791,7 +1801,7 @@ function getTypeNameForDebugging(type) {
  *
  * Form with storing the value locally:
  * ```
- * <div *ngIf="condition; else elseBlock; let value">{{value}}</div>
+ * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
@@ -1817,7 +1827,7 @@ var NgIf = (function () {
          * @return {?}
          */
         set: function (condition) {
-            this._context.$implicit = condition;
+            this._context.$implicit = this._context.ngIf = condition;
             this._updateView();
         },
         enumerable: true,
@@ -1889,9 +1899,13 @@ NgIf.propDecorators = {
     'ngIfThen': [{ type: Input },],
     'ngIfElse': [{ type: Input },],
 };
+/**
+ * \@stable
+ */
 var NgIfContext = (function () {
     function NgIfContext() {
         this.$implicit = null;
+        this.ngIf = null;
     }
     return NgIfContext;
 }());
@@ -3677,5 +3691,5 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-423bfb0');
-export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgIf, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵc, NgForOfRow as ɵa, NgIfContext as ɵb, COMMON_PIPES as ɵd };
+var /** @type {?} */ VERSION = new Version('4.0.0-rc.3-ec548ad');
+export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
