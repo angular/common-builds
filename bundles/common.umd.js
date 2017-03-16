@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-992aa17
+ * @license Angular v4.0.0-rc.3-492153a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -114,10 +114,10 @@
         return PlatformLocation;
     }());
     /**
-     * @whatItDoes indicates when a location is initialized
-     * @experimental
+     * \@whatItDoes indicates when a location is initialized
+     * \@experimental
      */
-    var /** @type {?} */ LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialized');
+    var LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialized');
     /**
      * `LocationStrategy` is responsible for representing and reading route state
      * from the browser's URL. Angular provides two strategies:
@@ -195,27 +195,27 @@
     }());
     /**
      * The `APP_BASE_HREF` token represents the base href to be used with the
-     * {@link PathLocationStrategy}.
+     * {\@link PathLocationStrategy}.
      *
-     * If you're using {@link PathLocationStrategy}, you must provide a provider to a string
+     * If you're using {\@link PathLocationStrategy}, you must provide a provider to a string
      * representing the URL prefix that should be preserved when generating and recognizing
      * URLs.
      *
      * ### Example
      *
      * ```typescript
-     * import {Component, NgModule} from '@angular/core';
-     * import {APP_BASE_HREF} from '@angular/common';
+     * import {Component, NgModule} from '\@angular/core';
+     * import {APP_BASE_HREF} from '\@angular/common';
      *
-     * @NgModule({
+     * \@NgModule({
      *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
      * })
      * class AppModule {}
      * ```
      *
-     * @stable
+     * \@stable
      */
-    var /** @type {?} */ APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
+    var APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
     /**
      * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
      * \@description
@@ -1730,7 +1730,7 @@
     /**
      * @deprecated from v4.0.0 - Use NgForOf instead.
      */
-    var /** @type {?} */ NgFor = NgForOf;
+    var NgFor = NgForOf;
     /**
      * @param {?} type
      * @return {?}
@@ -3707,13 +3707,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */ var /** @type {?} */ PLATFORM_BROWSER_ID = 'browser';
+    var PLATFORM_BROWSER_ID = 'browser';
     var /** @type {?} */ PLATFORM_SERVER_ID = 'server';
     var /** @type {?} */ PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
     var /** @type {?} */ PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -3754,9 +3748,9 @@
         return platformId === PLATFORM_WORKER_UI_ID;
     }
     /**
-     * @stable
+     * \@stable
      */
-    var /** @type {?} */ VERSION = new _angular_core.Version('4.0.0-rc.3-992aa17');
+    var VERSION = new _angular_core.Version('4.0.0-rc.3-492153a');
 
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
