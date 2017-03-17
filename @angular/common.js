@@ -1,10 +1,17 @@
 /**
- * @license Angular v4.0.0-rc.5-5c5c2ae
+ * @license Angular v4.0.0-rc.5-bcc29ff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, LOCALE_ID, NgModule, ɵstringify, ɵisListLikeIterable, Directive, Renderer, ElementRef, KeyValueDiffers, IterableDiffers, Input, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisObservable, ɵisPromise, WrappedValue, Pipe, ChangeDetectorRef, Version } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
@@ -95,6 +102,13 @@ class PlatformLocation {
  */
 const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * `LocationStrategy` is responsible for representing and reading route state
  * from the browser's URL. Angular provides two strategies:
@@ -191,6 +205,13 @@ class LocationStrategy {
  */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -381,6 +402,13 @@ function _stripIndexHtml(url) {
 }
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@whatItDoes Use URL hash for storing application location data.
  * \@description
  * `HashLocationStrategy` is a {\@link LocationStrategy} used to configure the
@@ -490,6 +518,13 @@ HashLocationStrategy.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ];
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@whatItDoes Use URL for storing application location data.
  * \@description
@@ -603,6 +638,21 @@ PathLocationStrategy.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ];
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@experimental
  * @abstract
@@ -1107,6 +1157,13 @@ function getPluralCase(locale, nLike) {
 }
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  *
  * \@whatItDoes Adds and removes CSS classes on an HTML element.
@@ -1284,6 +1341,13 @@ NgClass.propDecorators = {
 };
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
  *
@@ -1399,6 +1463,13 @@ NgComponentOutlet.propDecorators = {
     'ngComponentOutletNgModuleFactory': [{ type: Input },],
 };
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@stable
  */
@@ -1656,6 +1727,13 @@ function getTypeNameForDebugging(type) {
 }
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Conditionally includes a template based on the value of an `expression`.
  *
  * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
@@ -1836,6 +1914,13 @@ class NgIfContext {
     }
 }
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 class SwitchView {
     /**
      * @param {?} _viewContainerRef
@@ -2087,6 +2172,13 @@ NgSwitchDefault.ctorParameters = () => [
 ];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  *
  * \@whatItDoes Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
@@ -2223,6 +2315,13 @@ NgPluralCase.ctorParameters = () => [
 ];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  *
  * \@whatItDoes Update an HTML element styles.
@@ -2312,6 +2411,13 @@ NgStyle.propDecorators = {
 };
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  *
  * \@whatItDoes Inserts an embedded view from a prepared `TemplateRef`
@@ -2377,10 +2483,17 @@ NgTemplateOutlet.propDecorators = {
 };
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-const /** @type {?} */ COMMON_DIRECTIVES = [
+const COMMON_DIRECTIVES = [
     NgClass,
     NgComponentOutlet,
     NgForOf,
@@ -2393,7 +2506,17 @@ const /** @type {?} */ COMMON_DIRECTIVES = [
     NgPlural,
     NgPluralCase,
 ];
+/**
+ * A colletion of deprecated directives that are no longer part of the core module.
+ */
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * @param {?} type
  * @param {?} value
@@ -2403,6 +2526,13 @@ function invalidPipeArgumentError(type, value) {
     return Error(`InvalidPipeArgument: '${value}' for pipe '${ɵstringify(type)}'`);
 }
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 class ObservableStrategy {
     /**
      * @param {?} async
@@ -2443,8 +2573,8 @@ class PromiseStrategy {
      */
     onDestroy(subscription) { }
 }
-const /** @type {?} */ _promiseStrategy = new PromiseStrategy();
-const /** @type {?} */ _observableStrategy = new ObservableStrategy();
+const _promiseStrategy = new PromiseStrategy();
+const _observableStrategy = new ObservableStrategy();
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Unwraps a value from an asynchronous primitive.
@@ -2567,6 +2697,13 @@ AsyncPipe.ctorParameters = () => [
 ];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Transforms text to lowercase.
  *
  * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
@@ -2688,8 +2825,8 @@ class NumberFormatter {
         return new Intl.NumberFormat(locale, options).format(num);
     }
 }
-const /** @type {?} */ DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-const /** @type {?} */ PATTERN_ALIASES = {
+const DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+const PATTERN_ALIASES = {
     // Keys are quoted so they do not get renamed during closure compilation.
     'yMMMdjms': datePartGetterFactory(combine([
         digitCondition('year', 1),
@@ -2713,7 +2850,7 @@ const /** @type {?} */ PATTERN_ALIASES = {
     'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
     'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
 };
-const /** @type {?} */ DATE_FORMATS = {
+const DATE_FORMATS = {
     // Keys are quoted so they do not get renamed.
     'yyyy': datePartGetterFactory(digitCondition('year', 4)),
     'yy': datePartGetterFactory(digitCondition('year', 2)),
@@ -2850,7 +2987,7 @@ function combine(options) {
 function datePartGetterFactory(ret) {
     return (date, locale) => intlDateFormat(date, locale, ret);
 }
-const /** @type {?} */ DATE_FORMATTER_CACHE = new Map();
+const DATE_FORMATTER_CACHE = new Map();
 /**
  * @param {?} format
  * @param {?} date
@@ -2904,7 +3041,14 @@ class DateFormatter {
     }
 }
 
-const /** @type {?} */ _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 /**
  * @param {?} pipe
  * @param {?} locale
@@ -3122,7 +3266,14 @@ function isNumeric(value) {
     return !isNaN(value - parseFloat(value));
 }
 
-const /** @type {?} */ ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a date according to locale rules.
@@ -3311,7 +3462,14 @@ function toInt(str) {
     return parseInt(str, 10);
 }
 
-const /** @type {?} */ _INTERPOLATION_REGEXP = /#/g;
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
@@ -3362,6 +3520,13 @@ I18nPluralPipe.ctorParameters = () => [
 ];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  * \@whatItDoes Generic selector that displays the string that matches the current value.
  * \@howToUse `expression | i18nSelect:mapping`
@@ -3408,6 +3573,13 @@ I18nSelectPipe.decorators = [
 I18nSelectPipe.ctorParameters = () => [];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@ngModule CommonModule
  * \@whatItDoes Converts value into JSON string.
  * \@howToUse `expression | json`
@@ -3435,6 +3607,13 @@ JsonPipe.decorators = [
  */
 JsonPipe.ctorParameters = () => [];
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
@@ -3509,9 +3688,21 @@ SlicePipe.decorators = [
 SlicePipe.ctorParameters = () => [];
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * This module provides a set of common Pipes.
+ */
+/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-const /** @type {?} */ COMMON_PIPES = [
+const COMMON_PIPES = [
     AsyncPipe,
     UpperCasePipe,
     LowerCasePipe,
@@ -3526,6 +3717,13 @@ const /** @type {?} */ COMMON_PIPES = [
     I18nSelectPipe,
 ];
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
@@ -3555,9 +3753,9 @@ CommonModule.ctorParameters = () => [];
  * found in the LICENSE file at https://angular.io/license
  */
 const PLATFORM_BROWSER_ID = 'browser';
-const /** @type {?} */ PLATFORM_SERVER_ID = 'server';
-const /** @type {?} */ PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
-const /** @type {?} */ PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
+const PLATFORM_SERVER_ID = 'server';
+const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
+const PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
  * \@experimental
@@ -3596,9 +3794,53 @@ function isPlatformWorkerUi(platformId) {
 }
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-const VERSION = new Version('4.0.0-rc.5-5c5c2ae');
+const VERSION = new Version('4.0.0-rc.5-bcc29ff');
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+
+// This file only reexports content of the `src` folder. Keep it that way.
+
+/**
+ * Generated bundle index. Do not edit.
+ */
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
 //# sourceMappingURL=common.js.map
