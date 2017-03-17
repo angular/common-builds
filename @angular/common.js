@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.3-480a407
+ * @license Angular v4.0.0-rc.4-fcaca45
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -90,10 +90,10 @@ class PlatformLocation {
     back() { }
 }
 /**
- * @whatItDoes indicates when a location is initialized
- * @experimental
+ * \@whatItDoes indicates when a location is initialized
+ * \@experimental
  */
-const /** @type {?} */ LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
+const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
 /**
  * `LocationStrategy` is responsible for representing and reading route state
@@ -169,27 +169,27 @@ class LocationStrategy {
 }
 /**
  * The `APP_BASE_HREF` token represents the base href to be used with the
- * {@link PathLocationStrategy}.
+ * {\@link PathLocationStrategy}.
  *
- * If you're using {@link PathLocationStrategy}, you must provide a provider to a string
+ * If you're using {\@link PathLocationStrategy}, you must provide a provider to a string
  * representing the URL prefix that should be preserved when generating and recognizing
  * URLs.
  *
  * ### Example
  *
  * ```typescript
- * import {Component, NgModule} from '@angular/core';
- * import {APP_BASE_HREF} from '@angular/common';
+ * import {Component, NgModule} from '\@angular/core';
+ * import {APP_BASE_HREF} from '\@angular/common';
  *
- * @NgModule({
+ * \@NgModule({
  *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
  * })
  * class AppModule {}
  * ```
  *
- * @stable
+ * \@stable
  */
-const /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
+const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
@@ -1646,7 +1646,7 @@ class RecordViewTuple {
 /**
  * @deprecated from v4.0.0 - Use NgForOf instead.
  */
-const /** @type {?} */ NgFor = NgForOf;
+const NgFor = NgForOf;
 /**
  * @param {?} type
  * @return {?}
@@ -3554,13 +3554,7 @@ CommonModule.ctorParameters = () => [];
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */ const /** @type {?} */ PLATFORM_BROWSER_ID = 'browser';
+const PLATFORM_BROWSER_ID = 'browser';
 const /** @type {?} */ PLATFORM_SERVER_ID = 'server';
 const /** @type {?} */ PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 const /** @type {?} */ PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -3602,8 +3596,9 @@ function isPlatformWorkerUi(platformId) {
 }
 
 /**
- * @stable
+ * \@stable
  */
-const /** @type {?} */ VERSION = new Version('4.0.0-rc.3-480a407');
+const VERSION = new Version('4.0.0-rc.4-fcaca45');
 
 export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
+//# sourceMappingURL=common.js.map
