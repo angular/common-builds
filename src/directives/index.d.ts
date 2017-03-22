@@ -21,6 +21,6 @@ export { NgClass, NgComponentOutlet, NgFor, NgForOf, NgForOfContext, NgIf, NgIfC
  */
 export declare const COMMON_DIRECTIVES: Provider[];
 /**
- * A colletion of deprecated directives that are no longer part of the core module.
+ * A collection of deprecated directives that are no longer part of the core module.
  */
 export declare const COMMON_DEPRECATED_DIRECTIVES: Provider[];
