@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.0.0-rc.5-c584997
+ * @license Angular v4.0.0-rc.5-ea49a95
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2507,7 +2507,7 @@ const COMMON_DIRECTIVES = [
     NgPluralCase,
 ];
 /**
- * A colletion of deprecated directives that are no longer part of the core module.
+ * A collection of deprecated directives that are no longer part of the core module.
  */
 
 /**
@@ -3808,7 +3808,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.0.0-rc.5-c584997');
+const VERSION = new Version('4.0.0-rc.5-ea49a95');
 
 /**
  * @license
