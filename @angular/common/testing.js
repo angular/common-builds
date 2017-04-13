@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-beta.0-f4b5784
+ * @license Angular v4.1.0-beta.1-c664486
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -89,7 +89,7 @@ class SpyLocation {
             this._subject.emit({ 'url': this.path(), 'pop': true });
         }
     }
-    subscribe(onNext, onThrow = null, onReturn = null) {
+    subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     }
     normalize(url) { return null; }

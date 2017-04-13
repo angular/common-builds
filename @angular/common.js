@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-beta.0-f4b5784
+ * @license Angular v4.1.0-beta.1-c664486
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -58,17 +58,20 @@ class PlatformLocation {
      */
     onHashChange(fn) { }
     /**
+     * @abstract
      * @return {?}
      */
-    get pathname() { return null; }
+    pathname() { }
     /**
+     * @abstract
      * @return {?}
      */
-    get search() { return null; }
+    search() { }
     /**
+     * @abstract
      * @return {?}
      */
-    get hash() { return null; }
+    hash() { }
     /**
      * @abstract
      * @param {?} state
@@ -329,7 +332,7 @@ class Location {
      * @param {?=} onReturn
      * @return {?}
      */
-    subscribe(onNext, onThrow = null, onReturn = null) {
+    subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     }
     /**
@@ -1652,7 +1655,7 @@ class NgForOf {
         const /** @type {?} */ insertTuples = [];
         changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
-                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(null, this.ngForOf, null, null), currentIndex);
+                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(/** @type {?} */ ((null)), this.ngForOf, -1, -1), currentIndex);
                 const /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -1660,7 +1663,7 @@ class NgForOf {
                 this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                const /** @type {?} */ view = this._viewContainer.get(adjustedPreviousIndex);
+                const /** @type {?} */ view = ((this._viewContainer.get(adjustedPreviousIndex)));
                 this._viewContainer.move(view, currentIndex);
                 const /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
                 insertTuples.push(tuple);
@@ -2610,7 +2613,7 @@ class AsyncPipe {
         this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
-        this._strategy = null;
+        this._strategy = ((null));
     }
     /**
      * @return {?}
@@ -2668,7 +2671,7 @@ class AsyncPipe {
      * @return {?}
      */
     _dispose() {
-        this._strategy.dispose(this._subscription);
+        this._strategy.dispose(/** @type {?} */ ((this._subscription)));
         this._latestValue = null;
         this._latestReturnedValue = null;
         this._subscription = null;
@@ -2819,7 +2822,7 @@ class NumberFormatter {
             style: NumberFormatStyle[style].toLowerCase()
         };
         if (style == NumberFormatStyle.Currency) {
-            options.currency = currency;
+            options.currency = typeof currency == 'string' ? currency : undefined;
             options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
         return new Intl.NumberFormat(locale, options).format(num);
@@ -3004,15 +3007,16 @@ function dateFormatter(format, date, locale) {
         parts = [];
         let /** @type {?} */ match;
         DATE_FORMATS_SPLIT.exec(format);
-        while (format) {
-            match = DATE_FORMATS_SPLIT.exec(format);
+        let /** @type {?} */ _format = format;
+        while (_format) {
+            match = DATE_FORMATS_SPLIT.exec(_format);
             if (match) {
                 parts = parts.concat(match.slice(1));
-                format = parts.pop();
+                _format = ((parts.pop()));
             }
             else {
-                parts.push(format);
-                format = null;
+                parts.push(_format);
+                _format = null;
             }
         }
         DATE_FORMATTER_CACHE.set(cacheKey, parts);
@@ -3054,7 +3058,7 @@ const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
  * @param {?} locale
  * @param {?} value
  * @param {?} style
- * @param {?} digits
+ * @param {?=} digits
  * @param {?=} currency
  * @param {?=} currencyAsSymbol
  * @return {?}
@@ -3067,9 +3071,9 @@ function formatNumber(pipe, locale, value, style, digits, currency = null, curre
     if (typeof value !== 'number') {
         throw invalidPipeArgumentError(pipe, value);
     }
-    let /** @type {?} */ minInt;
-    let /** @type {?} */ minFraction;
-    let /** @type {?} */ maxFraction;
+    let /** @type {?} */ minInt = undefined;
+    let /** @type {?} */ minFraction = undefined;
+    let /** @type {?} */ maxFraction = undefined;
     if (style !== NumberFormatStyle.Currency) {
         // rely on Intl default for currency
         minInt = 1;
@@ -3138,7 +3142,7 @@ class DecimalPipe {
      * @param {?=} digits
      * @return {?}
      */
-    transform(value, digits = null) {
+    transform(value, digits) {
         return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     }
 }
@@ -3183,7 +3187,7 @@ class PercentPipe {
      * @param {?=} digits
      * @return {?}
      */
-    transform(value, digits = null) {
+    transform(value, digits) {
         return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     }
 }
@@ -3234,7 +3238,7 @@ class CurrencyPipe {
      * @param {?=} digits
      * @return {?}
      */
-    transform(value, currencyCode = 'USD', symbolDisplay = false, digits = null) {
+    transform(value, currencyCode = 'USD', symbolDisplay = false, digits) {
         return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     }
 }
@@ -3808,7 +3812,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.1.0-beta.0-f4b5784');
+const VERSION = new Version('4.1.0-beta.1-c664486');
 
 /**
  * @license

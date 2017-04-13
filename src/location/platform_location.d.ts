@@ -36,9 +36,9 @@ export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
     abstract onPopState(fn: LocationChangeListener): void;
     abstract onHashChange(fn: LocationChangeListener): void;
-    readonly pathname: string;
-    readonly search: string;
-    readonly hash: string;
+    readonly abstract pathname: string;
+    readonly abstract search: string;
+    readonly abstract hash: string;
     abstract replaceState(state: any, title: string, url: string): void;
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
