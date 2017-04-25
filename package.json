@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "4.1.0-rc.0-64ef69f",
+  "version": "4.1.0-rc.0-ff0f53c",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
   "module": "./@angular/common.es5.js",
@@ -9,7 +9,7 @@
   "author": "angular",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "4.1.0-rc.0-64ef69f"
+    "@angular/core": "4.1.0-rc.0-ff0f53c"
   },
   "repository": {
     "type": "git",
