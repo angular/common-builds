@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-a4de214
+ * @license Angular v4.1.0-270d694
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1363,9 +1363,6 @@ NgClass.propDecorators = {
  *
  * * `ngComponentOutletInjector`: Optional custom {\@link Injector} that will be used as parent for
  * the Component. Defaults to the injector of the current view container.
- *
- * * `ngComponentOutletProviders`: Optional injectable objects ({\@link Provider}) that are visible
- * to the component.
  *
  * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
  * section of the component, if exists.
@@ -3812,7 +3809,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.1.0-a4de214');
+const VERSION = new Version('4.1.0-270d694');
 
 /**
  * @license
