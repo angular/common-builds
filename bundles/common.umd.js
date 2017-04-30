@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-8d300ff
+ * @license Angular v4.1.0-f74dafc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -15,7 +15,7 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.1.0-8d300ff
+ * @license Angular v4.1.0-f74dafc
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3948,7 +3948,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.1.0-8d300ff');
+var VERSION = new _angular_core.Version('4.1.0-f74dafc');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
