@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.1.0-b9723f9
+ * @license Angular v4.1.1-5f6d0f2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -15,7 +15,7 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
- * @license Angular v4.1.0-b9723f9
+ * @license Angular v4.1.1-5f6d0f2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -33,22 +33,18 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
  * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
  * agnostic.
  * This means that we can have different implementation of `PlatformLocation` for the different
- * platforms
- * that angular supports. For example, the default `PlatformLocation` is {\@link
- * BrowserPlatformLocation},
- * however when you run your app in a WebWorker you use {\@link WebWorkerPlatformLocation}.
+ * platforms that angular supports. For example, `\@angular/platform-browser` provides an
+ * implementation specific to the browser environment, while `\@angular/platform-webworker` provides
+ * one suitable for use with web workers.
  *
  * The `PlatformLocation` class is used directly by all implementations of {\@link LocationStrategy}
- * when
- * they need to interact with the DOM apis like pushState, popState, etc...
+ * when they need to interact with the DOM apis like pushState, popState, etc...
  *
  * {\@link LocationStrategy} in turn is used by the {\@link Location} service which is used directly
- * by
- * the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
+ * by the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
  * Router} /
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
- * class
- * they are all platform independent.
+ * class they are all platform independent.
  *
  * \@stable
  * @abstract
@@ -1409,9 +1405,6 @@ NgClass.propDecorators = {
  *
  * * `ngComponentOutletInjector`: Optional custom {\@link Injector} that will be used as parent for
  * the Component. Defaults to the injector of the current view container.
- *
- * * `ngComponentOutletProviders`: Optional injectable objects ({\@link Provider}) that are visible
- * to the component.
  *
  * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
  * section of the component, if exists.
@@ -3951,7 +3944,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.1.0-b9723f9');
+var VERSION = new _angular_core.Version('4.1.1-5f6d0f2');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
