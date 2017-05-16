@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-beta.1-af99cf2
+ * @license Angular v4.2.0-beta.1-9a7f5d5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3367,14 +3367,14 @@ class DatePipe {
         }
         else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
             /**
-            * For ISO Strings without time the day, month and year must be extracted from the ISO String
-            * before Date creation to avoid time offset and errors in the new Date.
-            * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-            * date, some browsers (e.g. IE 9) will throw an invalid Date error
-            * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-            * is applied
-            * Note: ISO months are 0 for January, 1 for February, ...
-            */
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
             const [y, m, d] = value.split('-').map((val) => parseInt(val, 10));
             date = new Date(y, m - 1, d);
         }
@@ -3805,7 +3805,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.2.0-beta.1-af99cf2');
+const VERSION = new Version('4.2.0-beta.1-9a7f5d5');
 
 /**
  * @license

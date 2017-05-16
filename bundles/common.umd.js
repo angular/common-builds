@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-beta.1-af99cf2
+ * @license Angular v4.2.0-beta.1-9a7f5d5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -9,13 +9,18 @@
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}),global.ng.core));
 }(this, (function (exports,_angular_core) { 'use strict';
 
-var __extends = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /**
- * @license Angular v4.2.0-beta.1-af99cf2
+ * @license Angular v4.2.0-beta.1-9a7f5d5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3500,14 +3505,14 @@ var DatePipe = (function () {
         }
         else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
             /**
-            * For ISO Strings without time the day, month and year must be extracted from the ISO String
-            * before Date creation to avoid time offset and errors in the new Date.
-            * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-            * date, some browsers (e.g. IE 9) will throw an invalid Date error
-            * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-            * is applied
-            * Note: ISO months are 0 for January, 1 for February, ...
-            */
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
             var _a = value.split('-').map(function (val) { return parseInt(val, 10); }), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
@@ -3944,7 +3949,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.2.0-beta.1-af99cf2');
+var VERSION = new _angular_core.Version('4.2.0-beta.1-9a7f5d5');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
