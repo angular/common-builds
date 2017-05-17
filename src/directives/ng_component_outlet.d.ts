@@ -47,7 +47,7 @@ import { Injector, NgModuleFactory, OnChanges, OnDestroy, SimpleChanges, Type, V
  *                                   ngModuleFactory: moduleFactory;">
  * </ng-container>
  * ```
- * # Example
+ * ## Example
  *
  * {@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
  *
