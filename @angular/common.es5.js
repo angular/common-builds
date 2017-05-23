@@ -1,15 +1,6 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.2.0-rc.0-1651a8f
+ * @license Angular v4.2.0-rc.0-fa809ec
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -443,7 +434,7 @@ function _stripIndexHtml(url) {
  * \@stable
  */
 var HashLocationStrategy = (function (_super) {
-    __extends(HashLocationStrategy, _super);
+    tslib_1.__extends(HashLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
@@ -572,7 +563,7 @@ HashLocationStrategy.ctorParameters = function () { return [
  * \@stable
  */
 var PathLocationStrategy = (function (_super) {
-    __extends(PathLocationStrategy, _super);
+    tslib_1.__extends(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
@@ -721,7 +712,7 @@ function getPluralCategory(value, cases, ngLocalization) {
  * \@experimental
  */
 var NgLocaleLocalization = (function (_super) {
-    __extends(NgLocaleLocalization, _super);
+    tslib_1.__extends(NgLocaleLocalization, _super);
     /**
      * @param {?} locale
      */
@@ -3939,7 +3930,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.2.0-rc.0-1651a8f');
+var VERSION = new Version('4.2.0-rc.0-fa809ec');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
