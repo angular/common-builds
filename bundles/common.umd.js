@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-rc.0-5f723cb
+ * @license Angular v4.2.0-rc.0-cd5bc64
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.2.0-rc.0-5f723cb
+ * @license Angular v4.2.0-rc.0-cd5bc64
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3264,7 +3264,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  * details see your native internationalization library.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -3310,7 +3310,7 @@ DecimalPipe.ctorParameters = function () { return [
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -3360,7 +3360,7 @@ PercentPipe.ctorParameters = function () { return [
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -3965,7 +3965,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.2.0-rc.0-5f723cb');
+var VERSION = new _angular_core.Version('4.2.0-rc.0-cd5bc64');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
