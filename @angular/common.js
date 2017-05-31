@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.0-rc.1-1408357
+ * @license Angular v4.2.0-rc.1-c20f60b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -369,11 +369,18 @@ class Location {
         return start + '/' + end;
     }
     /**
-     * If url has a trailing slash, remove it, otherwise return url as is.
+     * If url has a trailing slash, remove it, otherwise return url as is. This
+     * method looks for the first occurence of either #, ?, or the end of the
+     * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
-    static stripTrailingSlash(url) { return url.replace(/\/$/, ''); }
+    static stripTrailingSlash(url) {
+        const /** @type {?} */ match = url.match(/#|\?|$/);
+        const /** @type {?} */ pathEndIdx = match && match.index || url.length;
+        const /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+        return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+    }
 }
 Location.decorators = [
     { type: Injectable },
@@ -3772,7 +3779,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.2.0-rc.1-1408357');
+const VERSION = new Version('4.2.0-rc.1-c20f60b');
 
 /**
  * @license

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.2.0-rc.1-1408357
+ * @license Angular v4.2.0-rc.1-c20f60b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -378,11 +378,18 @@ var Location = (function () {
         return start + '/' + end;
     };
     /**
-     * If url has a trailing slash, remove it, otherwise return url as is.
+     * If url has a trailing slash, remove it, otherwise return url as is. This
+     * method looks for the first occurence of either #, ?, or the end of the
+     * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
-    Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
+    Location.stripTrailingSlash = function (url) {
+        var /** @type {?} */ match = url.match(/#|\?|$/);
+        var /** @type {?} */ pathEndIdx = match && match.index || url.length;
+        var /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+        return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+    };
     return Location;
 }());
 Location.decorators = [
@@ -3897,7 +3904,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.2.0-rc.1-1408357');
+var VERSION = new Version('4.2.0-rc.1-c20f60b');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
