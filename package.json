@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "4.2.2-9315ab8",
+  "version": "4.2.2-f58211d",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
   "module": "./@angular/common.es5.js",
@@ -12,7 +12,7 @@
     "tslib": "^1.7.1"
   },
   "peerDependencies": {
-    "@angular/core": "4.2.2-9315ab8"
+    "@angular/core": "4.2.2-f58211d"
   },
   "repository": {
     "type": "git",
