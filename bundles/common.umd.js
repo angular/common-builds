@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.2-f194f18
+ * @license Angular v4.2.2-c59c390
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.2.2-f194f18
+ * @license Angular v4.2.2-c59c390
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2921,11 +2921,12 @@ var NumberFormatter = (function () {
      * @param {?} num
      * @param {?} locale
      * @param {?} style
-     * @param {?=} __3
+     * @param {?=} opts
      * @return {?}
      */
-    NumberFormatter.format = function (num, locale, style, _a) {
-        var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+    NumberFormatter.format = function (num, locale, style, opts) {
+        if (opts === void 0) { opts = {}; }
+        var minimumIntegerDigits = opts.minimumIntegerDigits, minimumFractionDigits = opts.minimumFractionDigits, maximumFractionDigits = opts.maximumFractionDigits, currency = opts.currency, _a = opts.currencyAsSymbol, currencyAsSymbol = _a === void 0 ? false : _a;
         var /** @type {?} */ options = {
             minimumIntegerDigits: minimumIntegerDigits,
             minimumFractionDigits: minimumFractionDigits,
@@ -3939,7 +3940,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.2.2-f194f18');
+var VERSION = new _angular_core.Version('4.2.2-c59c390');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
