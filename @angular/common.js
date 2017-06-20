@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.2.2-c59c390
+ * @license Angular v4.2.2-009651e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2778,11 +2778,10 @@ class NumberFormatter {
      * @param {?} num
      * @param {?} locale
      * @param {?} style
-     * @param {?=} opts
+     * @param {?=} __3
      * @return {?}
      */
-    static format(num, locale, style, opts = {}) {
-        const { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = opts;
+    static format(num, locale, style, { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = {}) {
         const /** @type {?} */ options = {
             minimumIntegerDigits,
             minimumFractionDigits,
@@ -3780,7 +3779,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.2.2-c59c390');
+const VERSION = new Version('4.2.2-009651e');
 
 /**
  * @license

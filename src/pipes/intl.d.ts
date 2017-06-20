@@ -11,7 +11,7 @@ export declare enum NumberFormatStyle {
     Currency = 2,
 }
 export declare class NumberFormatter {
-    static format(num: number, locale: string, style: NumberFormatStyle, opts?: {
+    static format(num: number, locale: string, style: NumberFormatStyle, {minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol}?: {
         minimumIntegerDigits?: number;
         minimumFractionDigits?: number;
         maximumFractionDigits?: number;
