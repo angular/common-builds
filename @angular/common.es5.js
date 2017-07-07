@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-beta.1-cb16e9c
+ * @license Angular v4.3.0-beta.1-e1174f3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3059,7 +3059,7 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return ((Object)).assign.apply(((Object)), [{}].concat(options));
+    return options.reduce(function (merged, opt) { return (Object.assign({}, merged, opt)); }, {});
 }
 /**
  * @param {?} ret
@@ -3905,7 +3905,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.3.0-beta.1-cb16e9c');
+var VERSION = new Version('4.3.0-beta.1-e1174f3');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
