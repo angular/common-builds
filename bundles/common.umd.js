@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-11db3bd
+ * @license Angular v4.3.0-beta.1-6bae73c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.0-beta.1-11db3bd
+ * @license Angular v4.3.0-beta.1-6bae73c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3094,7 +3094,7 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return ((Object)).assign.apply(((Object)), [{}].concat(options));
+    return options.reduce(function (merged, opt) { return (Object.assign({}, merged, opt)); }, {});
 }
 /**
  * @param {?} ret
@@ -3940,7 +3940,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.0-beta.1-11db3bd');
+var VERSION = new _angular_core.Version('4.3.0-beta.1-6bae73c');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
