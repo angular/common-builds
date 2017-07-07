@@ -45,16 +45,17 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
      * Requests returned through this API will no longer be in the list of open requests,
      * and thus will not match twice.
      */
-    expectOne(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean)): TestRequest;
+    expectOne(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean), description?: string): TestRequest;
     /**
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
      */
-    expectNone(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean)): void;
+    expectNone(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean), description?: string): void;
     /**
      * Validate that there are no outstanding requests.
      */
     verify(opts?: {
         ignoreCancelled?: boolean;
     }): void;
+    private descriptionFromMatcher(matcher);
 }

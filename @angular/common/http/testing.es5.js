@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-37797e2
+ * @license Angular v4.3.0-beta.1-c81ad9d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -33,51 +33,59 @@ var HttpTestingController = (function () {
     /**
      * @abstract
      * @param {?} url
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectOne = function (url) { };
+    HttpTestingController.prototype.expectOne = function (url, description) { };
     /**
      * @abstract
      * @param {?} params
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectOne = function (params) { };
+    HttpTestingController.prototype.expectOne = function (params, description) { };
     /**
      * @abstract
      * @param {?} matchFn
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectOne = function (matchFn) { };
+    HttpTestingController.prototype.expectOne = function (matchFn, description) { };
     /**
      * @abstract
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectOne = function (match) { };
+    HttpTestingController.prototype.expectOne = function (match, description) { };
     /**
      * @abstract
      * @param {?} url
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectNone = function (url) { };
+    HttpTestingController.prototype.expectNone = function (url, description) { };
     /**
      * @abstract
      * @param {?} params
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectNone = function (params) { };
+    HttpTestingController.prototype.expectNone = function (params, description) { };
     /**
      * @abstract
      * @param {?} matchFn
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectNone = function (matchFn) { };
+    HttpTestingController.prototype.expectNone = function (matchFn, description) { };
     /**
      * @abstract
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    HttpTestingController.prototype.expectNone = function (match) { };
+    HttpTestingController.prototype.expectNone = function (match, description) { };
     /**
      * @abstract
      * @param {?=} opts
@@ -133,7 +141,7 @@ var TestRequest = (function () {
         if (this.cancelled) {
             throw new Error("Cannot flush a cancelled request.");
         }
-        var /** @type {?} */ url = this.request.url;
+        var /** @type {?} */ url = this.request.urlWithParams;
         var /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
         var /** @type {?} */ statusText = opts.statusText;
@@ -178,7 +186,7 @@ var TestRequest = (function () {
             headers: headers,
             status: opts.status || 0,
             statusText: opts.statusText || '',
-            url: this.request.url,
+            url: this.request.urlWithParams,
         }));
     };
     /**
@@ -339,14 +347,14 @@ var HttpClientTestingBackend = (function () {
      */
     HttpClientTestingBackend.prototype._match = function (match) {
         if (typeof match === 'string') {
-            return this.open.filter(function (testReq) { return testReq.request.url === match; });
+            return this.open.filter(function (testReq) { return testReq.request.urlWithParams === match; });
         }
         else if (typeof match === 'function') {
             return this.open.filter(function (testReq) { return match(testReq.request); });
         }
         else {
             return this.open.filter(function (testReq) { return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.url === match.url); });
+                (!match.url || testReq.request.urlWithParams === match.url); });
         }
     };
     /**
@@ -373,15 +381,17 @@ var HttpClientTestingBackend = (function () {
      * Requests returned through this API will no longer be in the list of open requests,
      * and thus will not match twice.
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.expectOne = function (match) {
+    HttpClientTestingBackend.prototype.expectOne = function (match, description) {
+        description = description || this.descriptionFromMatcher(match);
         var /** @type {?} */ matches = this.match(match);
         if (matches.length > 1) {
-            throw new Error("Expected one matching request, found " + matches.length + " requests.");
+            throw new Error("Expected one matching request for criteria \"" + description + "\", found " + matches.length + " requests.");
         }
         if (matches.length === 0) {
-            throw new Error("Expected one matching request, found none.");
+            throw new Error("Expected one matching request for criteria \"" + description + "\", found none.");
         }
         return matches[0];
     };
@@ -389,12 +399,14 @@ var HttpClientTestingBackend = (function () {
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.expectNone = function (match) {
+    HttpClientTestingBackend.prototype.expectNone = function (match, description) {
+        description = description || this.descriptionFromMatcher(match);
         var /** @type {?} */ matches = this.match(match);
         if (matches.length > 0) {
-            throw new Error("Expected zero matching requests, found " + matches.length + ".");
+            throw new Error("Expected zero matching requests for criteria \"" + description + "\", found " + matches.length + ".");
         }
     };
     /**
@@ -411,9 +423,30 @@ var HttpClientTestingBackend = (function () {
             open = open.filter(function (testReq) { return !testReq.cancelled; });
         }
         if (open.length > 0) {
-            // Show the URLs of open requests in the error, for convenience.
-            var /** @type {?} */ urls = open.map(function (testReq) { return testReq.request.url.split('?')[0]; }).join(', ');
-            throw new Error("Expected no open requests, found " + open.length + ": " + urls);
+            // Show the methods and URLs of open requests in the error, for convenience.
+            var /** @type {?} */ requests = open.map(function (testReq) {
+                var /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
+                var /** @type {?} */ method = testReq.request.method;
+                return method + " " + url;
+            }).join(', ');
+            throw new Error("Expected no open requests, found " + open.length + ": " + requests);
+        }
+    };
+    /**
+     * @param {?} matcher
+     * @return {?}
+     */
+    HttpClientTestingBackend.prototype.descriptionFromMatcher = function (matcher) {
+        if (typeof matcher === 'string') {
+            return "Match URL: " + matcher;
+        }
+        else if (typeof matcher === 'object') {
+            var /** @type {?} */ method = matcher.method || '(any)';
+            var /** @type {?} */ url = matcher.url || '(any)';
+            return "Match method: " + method + ", URL: " + url;
+        }
+        else {
+            return "Match by function: " + matcher.name;
         }
     };
     return HttpClientTestingBackend;

@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { HttpHeaders } from './headers';
+import { HttpParams } from './params';
 /**
  * An outgoing HTTP request with an optional typed body.
  *
@@ -17,7 +18,7 @@ import { HttpHeaders } from './headers';
  * @experimental
  */
 export declare class HttpRequest<T> {
-    url: string;
+    readonly url: string;
     /**
      * The request body, or `null` if one isn't set.
      *
@@ -52,21 +53,32 @@ export declare class HttpRequest<T> {
      * The outgoing HTTP request method.
      */
     readonly method: string;
+    /**
+     * Outgoing URL parameters.
+     */
+    readonly params: HttpParams;
+    /**
+     * The outgoing URL with all URL parameters set.
+     */
+    readonly urlWithParams: string;
     constructor(method: 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS', url: string, init?: {
         headers?: HttpHeaders;
         reportProgress?: boolean;
+        params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     });
     constructor(method: 'POST' | 'PUT' | 'PATCH', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
         reportProgress?: boolean;
+        params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
         reportProgress?: boolean;
+        params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     });
@@ -86,12 +98,23 @@ export declare class HttpRequest<T> {
     clone(update: {
         headers?: HttpHeaders;
         reportProgress?: boolean;
+        params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        body?: T | null;
+        method?: string;
+        url?: string;
+        setHeaders?: {
+            [name: string]: string | string[];
+        };
+        setParams?: {
+            [param: string]: string;
+        };
     }): HttpRequest<T>;
     clone<V>(update: {
         headers?: HttpHeaders;
         reportProgress?: boolean;
+        params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         body?: V | null;
@@ -99,6 +122,9 @@ export declare class HttpRequest<T> {
         url?: string;
         setHeaders?: {
             [name: string]: string | string[];
+        };
+        setParams?: {
+            [param: string]: string;
         };
     }): HttpRequest<V>;
 }

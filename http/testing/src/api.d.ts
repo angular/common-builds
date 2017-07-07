@@ -27,14 +27,14 @@ export declare abstract class HttpTestingController {
      * Search for requests that match the given parameter, without any expectations.
      */
     abstract match(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean)): TestRequest[];
-    abstract expectOne(url: string): TestRequest;
-    abstract expectOne(params: RequestMatch): TestRequest;
-    abstract expectOne(matchFn: ((req: HttpRequest<any>) => boolean)): TestRequest;
-    abstract expectOne(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean)): TestRequest;
-    abstract expectNone(url: string): void;
-    abstract expectNone(params: RequestMatch): void;
-    abstract expectNone(matchFn: ((req: HttpRequest<any>) => boolean)): void;
-    abstract expectNone(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean)): void;
+    abstract expectOne(url: string, description?: string): TestRequest;
+    abstract expectOne(params: RequestMatch, description?: string): TestRequest;
+    abstract expectOne(matchFn: ((req: HttpRequest<any>) => boolean), description?: string): TestRequest;
+    abstract expectOne(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean), description?: string): TestRequest;
+    abstract expectNone(url: string, description?: string): void;
+    abstract expectNone(params: RequestMatch, description?: string): void;
+    abstract expectNone(matchFn: ((req: HttpRequest<any>) => boolean), description?: string): void;
+    abstract expectNone(match: string | RequestMatch | ((req: HttpRequest<any>) => boolean), description?: string): void;
     abstract verify(opts?: {
         ignoreCancelled?: boolean;
     }): void;

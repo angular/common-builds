@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-37797e2
+ * @license Angular v4.3.0-beta.1-c81ad9d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -41,6 +41,223 @@ class HttpBackend {
      * @return {?}
      */
     handle(req) { }
+}
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values.
+ *
+ * \@experimental
+ */
+class HttpUrlEncodingCodec {
+    /**
+     * @param {?} k
+     * @return {?}
+     */
+    encodeKey(k) { return standardEncoding(k); }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    encodeValue(v) { return standardEncoding(v); }
+    /**
+     * @param {?} k
+     * @return {?}
+     */
+    decodeKey(k) { return decodeURIComponent(k); }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    decodeValue(v) { return decodeURIComponent(v); }
+}
+/**
+ * @param {?} rawParams
+ * @param {?} codec
+ * @return {?}
+ */
+function paramParser(rawParams, codec) {
+    const /** @type {?} */ map$$1 = new Map();
+    if (rawParams.length > 0) {
+        const /** @type {?} */ params = rawParams.split('&');
+        params.forEach((param) => {
+            const /** @type {?} */ eqIdx = param.indexOf('=');
+            const [key, val] = eqIdx == -1 ?
+                [codec.decodeKey(param), ''] :
+                [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))];
+            const /** @type {?} */ list = map$$1.get(key) || [];
+            list.push(val);
+            map$$1.set(key, list);
+        });
+    }
+    return map$$1;
+}
+/**
+ * @param {?} v
+ * @return {?}
+ */
+function standardEncoding(v) {
+    return encodeURIComponent(v)
+        .replace(/%40/gi, '@')
+        .replace(/%3A/gi, ':')
+        .replace(/%24/gi, '$')
+        .replace(/%2C/gi, ',')
+        .replace(/%3B/gi, ';')
+        .replace(/%2B/gi, '+')
+        .replace(/%3D/gi, '=')
+        .replace(/%3F/gi, '?')
+        .replace(/%2F/gi, '/');
+}
+/**
+ * An HTTP request/response body that represents serialized parameters,
+ * per the MIME type `application/x-www-form-urlencoded`.
+ *
+ * This class is immuatable - all mutation operations return a new instance.
+ *
+ * \@experimental
+ */
+class HttpParams {
+    /**
+     * @param {?=} options
+     */
+    constructor(options = {}) {
+        this.updates = null;
+        this.cloneFrom = null;
+        this.encoder = options.encoder || new HttpUrlEncodingCodec();
+        this.map = !!options.fromString ? paramParser(options.fromString, this.encoder) : null;
+    }
+    /**
+     * Check whether the body has one or more values for the given parameter name.
+     * @param {?} param
+     * @return {?}
+     */
+    has(param) {
+        this.init();
+        return ((this.map)).has(param);
+    }
+    /**
+     * Get the first value for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    get(param) {
+        this.init();
+        const /** @type {?} */ res = ((this.map)).get(param);
+        return !!res ? res[0] : null;
+    }
+    /**
+     * Get all values for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    getAll(param) {
+        this.init();
+        return ((this.map)).get(param) || null;
+    }
+    /**
+     * Get all the parameter names for this body.
+     * @return {?}
+     */
+    keys() {
+        this.init();
+        return Array.from(/** @type {?} */ ((this.map)).keys());
+    }
+    /**
+     * Construct a new body with an appended value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    append(param, value) { return this.clone({ param, value, op: 'a' }); }
+    /**
+     * Construct a new body with a new value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    set(param, value) { return this.clone({ param, value, op: 's' }); }
+    /**
+     * Construct a new body with either the given value for the given parameter
+     * removed, if a value is given, or all values for the given parameter removed
+     * if not.
+     * @param {?} param
+     * @param {?=} value
+     * @return {?}
+     */
+    delete(param, value) { return this.clone({ param, value, op: 'd' }); }
+    /**
+     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+     * separated by `&`s.
+     * @return {?}
+     */
+    toString() {
+        this.init();
+        return this.keys()
+            .map(key => {
+            const /** @type {?} */ eKey = this.encoder.encodeKey(key);
+            return ((((this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value))
+                .join('&');
+        })
+            .join('&');
+    }
+    /**
+     * @param {?} update
+     * @return {?}
+     */
+    clone(update) {
+        const /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
+        clone.cloneFrom = this.cloneFrom || this;
+        clone.updates = (this.updates || []).concat([update]);
+        return clone;
+    }
+    /**
+     * @return {?}
+     */
+    init() {
+        if (this.map === null) {
+            this.map = new Map();
+        }
+        if (this.cloneFrom !== null) {
+            this.cloneFrom.init();
+            this.cloneFrom.keys().forEach(key => ((this.map)).set(key, /** @type {?} */ ((((((this.cloneFrom)).map)).get(key))))); /** @type {?} */
+            ((this.updates)).forEach(update => {
+                switch (update.op) {
+                    case 'a':
+                    case 's':
+                        const /** @type {?} */ base = (update.op === 'a' ? ((this.map)).get(update.param) : undefined) || [];
+                        base.push(/** @type {?} */ ((update.value))); /** @type {?} */
+                        ((this.map)).set(update.param, base);
+                        break;
+                    case 'd':
+                        if (update.value !== undefined) {
+                            let /** @type {?} */ base = ((this.map)).get(update.param) || [];
+                            const /** @type {?} */ idx = base.indexOf(update.value);
+                            if (idx !== -1) {
+                                base.splice(idx, 1);
+                            }
+                            if (base.length > 0) {
+                                ((this.map)).set(update.param, base);
+                            }
+                            else {
+                                ((this.map)).delete(update.param);
+                            }
+                        }
+                        else {
+                            ((this.map)).delete(update.param);
+                            break;
+                        }
+                }
+            });
+            this.cloneFrom = null;
+        }
+    }
 }
 
 /**
@@ -329,13 +546,6 @@ function isFormData(value) {
     return typeof FormData !== 'undefined' && value instanceof FormData;
 }
 /**
- * @param {?} value
- * @return {?}
- */
-function isUrlEncodedBody(value) {
-    return typeof value === 'object' && value['__HttpUrlEncodedBody'];
-}
-/**
  * An outgoing HTTP request with an optional typed body.
  *
  * `HttpRequest` represents an outgoing request, including URL, method,
@@ -408,10 +618,39 @@ class HttpRequest {
             if (!!options.headers) {
                 this.headers = options.headers;
             }
+            if (!!options.params) {
+                this.params = options.params;
+            }
         }
         // If no headers have been passed in, construct a new HttpHeaders instance.
         if (!this.headers) {
             this.headers = new HttpHeaders();
+        }
+        // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
+        if (!this.params) {
+            this.params = new HttpParams();
+            this.urlWithParams = url;
+        }
+        else {
+            // Encode the parameters to a string in preparation for inclusion in the URL.
+            const params = this.params.toString();
+            if (params.length === 0) {
+                // No parameters, the visible URL is just the URL given at creation time.
+                this.urlWithParams = url;
+            }
+            else {
+                // Does the URL already have query parameters? Look for '?'.
+                const qIdx = url.indexOf('?');
+                // There are 3 cases to handle:
+                // 1) No existing parameters -> append '?' followed by params.
+                // 2) '?' exists and is followed by existing query string ->
+                //    append '&' followed by params.
+                // 3) '?' exists at the end of the url -> append params directly.
+                // This basically amounts to determining the character, if any, with
+                // which to join the URL and parameters.
+                const sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
+                this.urlWithParams = url + sep + params;
+            }
         }
     }
     /**
@@ -430,9 +669,8 @@ class HttpRequest {
             typeof this.body === 'string') {
             return this.body;
         }
-        // Check whether the body is an instance of HttpUrlEncodedBody, avoiding any direct
-        // references to the class in order to permit it being tree-shaken.
-        if (isUrlEncodedBody(this.body)) {
+        // Check whether the body is an instance of HttpUrlEncodedParams.
+        if (this.body instanceof HttpParams) {
             return this.body.toString();
         }
         // Check whether the body is an object or array, and serialize with JSON if so.
@@ -473,9 +711,8 @@ class HttpRequest {
         if (typeof this.body === 'string') {
             return 'text/plain';
         }
-        // `HttpUrlEncodedBody` is detected specially so as to allow it to be
-        // tree-shaken.
-        if (isUrlEncodedBody(this.body)) {
+        // `HttpUrlEncodedParams` has its own content-type.
+        if (this.body instanceof HttpParams) {
             return 'application/x-www-form-urlencoded;charset=UTF-8';
         }
         // Arrays, objects, and numbers will be encoded as JSON.
@@ -505,9 +742,10 @@ class HttpRequest {
         // `false` and `undefined` in the update args.
         const /** @type {?} */ withCredentials = (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
         const /** @type {?} */ reportProgress = (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
-        // Headers may need to be cloned later if they're sealed, but being
-        // appended to.
+        // Headers and params may be appended to if `setHeaders` or
+        // `setParams` are used.
         let /** @type {?} */ headers = update.headers || this.headers;
+        let /** @type {?} */ params = update.params || this.params;
         // Check whether the caller has asked to add headers.
         if (update.setHeaders !== undefined) {
             // Set every requested header.
@@ -515,9 +753,15 @@ class HttpRequest {
                 Object.keys(update.setHeaders)
                     .reduce((headers, name) => headers.set(name, /** @type {?} */ ((update.setHeaders))[name]), headers);
         }
+        // Check whether the caller has asked to set params.
+        if (update.setParams) {
+            // Set every requested param.
+            params = Object.keys(update.setParams)
+                .reduce((params, param) => params.set(param, /** @type {?} */ ((update.setParams))[param]), params);
+        }
         // Finally, construct the new HttpRequest using the pieces from above.
         return new HttpRequest(method, url, body, {
-            headers, reportProgress, responseType, withCredentials,
+            params, headers, reportProgress, responseType, withCredentials,
         });
     }
 }
@@ -696,6 +940,7 @@ function addBody(options, body) {
         body,
         headers: options.headers,
         observe: options.observe,
+        params: options.params,
         responseType: options.responseType,
         withCredentials: options.withCredentials,
     };
@@ -761,6 +1006,7 @@ class HttpClient {
             // provided.
             req = new HttpRequest(first, /** @type {?} */ ((url)), options.body || null, {
                 headers: options.headers,
+                params: options.params,
                 // By default, JSON is assumed to be returned for all calls.
                 responseType: options.responseType || 'json',
                 withCredentials: options.withCredentials,
@@ -869,10 +1115,12 @@ class HttpClient {
      * rejected by the configured backend.
      * @template T
      * @param {?} url
+     * @param {?} callbackParam
      * @return {?}
      */
-    jsonp(url) {
+    jsonp(url, callbackParam) {
         return this.request('JSONP', url, {
+            params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
             observe: 'body',
             responseType: 'json',
         });
@@ -1041,7 +1289,7 @@ class JsonpClientBackend {
             // callback placeholder in the URL with the name. Care has to be taken here to ensure
             // a trailing &, if matched, gets inserted back into the URL in the correct place.
             const /** @type {?} */ callback = this.nextCallback();
-            const /** @type {?} */ url = req.url.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
+            const /** @type {?} */ url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
             // Construct the <script> tag and point it at the URL.
             const /** @type {?} */ node = this.document.createElement('script');
             node.src = url;
@@ -1278,7 +1526,7 @@ class HttpXhrBackend {
         return new Observable((observer) => {
             // Start by setting up the XHR object with request method, URL, and withCredentials flag.
             const /** @type {?} */ xhr = this.xhrFactory.build();
-            xhr.open(req.method, req.url);
+            xhr.open(req.method, req.urlWithParams);
             if (!!req.withCredentials) {
                 xhr.withCredentials = true;
             }
@@ -1597,234 +1845,10 @@ HttpClientJsonpModule.ctorParameters = () => [];
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * A `HttpUrlParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values.
- *
- * \@experimental
- */
-class HttpStandardUrlParameterCodec {
-    /**
-     * @param {?} k
-     * @return {?}
-     */
-    encodeKey(k) { return standardEncoding(k); }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    encodeValue(v) { return standardEncoding(v); }
-    /**
-     * @param {?} k
-     * @return {?}
-     */
-    decodeKey(k) { return decodeURIComponent(k); }
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    decodeValue(v) { return decodeURIComponent(v); }
-}
-/**
- * @param {?} rawParams
- * @param {?} codec
- * @return {?}
- */
-function paramParser(rawParams, codec) {
-    const /** @type {?} */ map$$1 = new Map();
-    if (rawParams.length > 0) {
-        const /** @type {?} */ params = rawParams.split('&');
-        params.forEach((param) => {
-            const /** @type {?} */ eqIdx = param.indexOf('=');
-            const [key, val] = eqIdx == -1 ?
-                [codec.decodeKey(param), ''] :
-                [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))];
-            const /** @type {?} */ list = map$$1.get(key) || [];
-            list.push(val);
-            map$$1.set(key, list);
-        });
-    }
-    return map$$1;
-}
-/**
- * @param {?} v
- * @return {?}
- */
-function standardEncoding(v) {
-    return encodeURIComponent(v)
-        .replace(/%40/gi, '@')
-        .replace(/%3A/gi, ':')
-        .replace(/%24/gi, '$')
-        .replace(/%2C/gi, ',')
-        .replace(/%3B/gi, ';')
-        .replace(/%2B/gi, '+')
-        .replace(/%3D/gi, '=')
-        .replace(/%3F/gi, '?')
-        .replace(/%2F/gi, '/');
-}
-/**
- * An HTTP request/response body that represents serialized parameters in urlencoded form,
- * per the MIME type `application/x-www-form-urlencoded`.
- *
- * This class is immuatable - all mutation operations return a new instance.
- *
- * \@experimental
- */
-class HttpUrlEncodedBody {
-    /**
-     * @param {?=} options
-     */
-    constructor(options = {}) {
-        this.updates = null;
-        this.cloneFrom = null;
-        this['__HttpUrlEncodedBody'] = true;
-        this.encoder = options.encoder || new HttpStandardUrlParameterCodec();
-        this.map = !!options.fromString ? paramParser(options.fromString, this.encoder) : null;
-    }
-    /**
-     * Check whether the body has one or more values for the given parameter name.
-     * @param {?} param
-     * @return {?}
-     */
-    has(param) {
-        this.init();
-        return ((this.map)).has(param);
-    }
-    /**
-     * Get the first value for the given parameter name, or `null` if it's not present.
-     * @param {?} param
-     * @return {?}
-     */
-    get(param) {
-        this.init();
-        const /** @type {?} */ res = ((this.map)).get(param);
-        return !!res ? res[0] : null;
-    }
-    /**
-     * Get all values for the given parameter name, or `null` if it's not present.
-     * @param {?} param
-     * @return {?}
-     */
-    getAll(param) {
-        this.init();
-        return ((this.map)).get(param) || null;
-    }
-    /**
-     * Get all the parameter names for this body.
-     * @return {?}
-     */
-    params() {
-        this.init();
-        return Array.from(/** @type {?} */ ((this.map)).keys());
-    }
-    /**
-     * Construct a new body with an appended value for the given parameter name.
-     * @param {?} param
-     * @param {?} value
-     * @return {?}
-     */
-    append(param, value) {
-        return this.clone({ param, value, op: 'a' });
-    }
-    /**
-     * Construct a new body with a new value for the given parameter name.
-     * @param {?} param
-     * @param {?} value
-     * @return {?}
-     */
-    set(param, value) {
-        return this.clone({ param, value, op: 's' });
-    }
-    /**
-     * Construct a new body with either the given value for the given parameter
-     * removed, if a value is given, or all values for the given parameter removed
-     * if not.
-     * @param {?} param
-     * @param {?=} value
-     * @return {?}
-     */
-    delete(param, value) {
-        return this.clone({ param, value, op: 'd' });
-    }
-    /**
-     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
-     * separated by `&`s.
-     * @return {?}
-     */
-    toString() {
-        this.init();
-        return this.params()
-            .map(key => {
-            const /** @type {?} */ eKey = this.encoder.encodeKey(key);
-            return ((((this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value))
-                .join('&');
-        })
-            .join('&');
-    }
-    /**
-     * @param {?} update
-     * @return {?}
-     */
-    clone(update) {
-        const /** @type {?} */ clone = new HttpUrlEncodedBody({ encoder: this.encoder });
-        clone.cloneFrom = this.cloneFrom || this;
-        clone.updates = (this.updates || []).concat([update]);
-        return clone;
-    }
-    /**
-     * @return {?}
-     */
-    init() {
-        if (this.map === null) {
-            this.map = new Map();
-        }
-        if (this.cloneFrom !== null) {
-            this.cloneFrom.init();
-            this.cloneFrom.params().forEach(key => ((this.map)).set(key, /** @type {?} */ ((((((this.cloneFrom)).map)).get(key))))); /** @type {?} */
-            ((this.updates)).forEach(update => {
-                switch (update.op) {
-                    case 'a':
-                    case 's':
-                        const /** @type {?} */ base = (update.op === 'a' ? ((this.map)).get(update.param) : undefined) || [];
-                        base.push(/** @type {?} */ ((update.value))); /** @type {?} */
-                        ((this.map)).set(update.param, base);
-                        break;
-                    case 'd':
-                        if (update.value !== undefined) {
-                            let /** @type {?} */ base = ((this.map)).get(update.param) || [];
-                            const /** @type {?} */ idx = base.indexOf(update.value);
-                            if (idx !== -1) {
-                                base.splice(idx, 1);
-                            }
-                            if (base.length > 0) {
-                                ((this.map)).set(update.param, base);
-                            }
-                            else {
-                                ((this.map)).delete(update.param);
-                            }
-                        }
-                        else {
-                            ((this.map)).delete(update.param);
-                            break;
-                        }
-                }
-            });
-            this.cloneFrom = null;
-        }
-    }
-}
-
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, interceptingHandler as ɵinterceptingHandler, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpStandardUrlParameterCodec, HttpUrlEncodedBody, HttpXhrBackend, XhrFactory, JsonpCallbackContext as ɵa, jsonpCallbackContext as ɵb, BrowserXhr as ɵc };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, JsonpCallbackContext as ɵa, jsonpCallbackContext as ɵb, BrowserXhr as ɵc };
 //# sourceMappingURL=http.js.map

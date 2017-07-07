@@ -8,44 +8,44 @@
 /**
  * A codec for encoding and decoding parameters in URLs.
  *
- * Used by `HttpUrlEncodedBody`.
+ * Used by `HttpParams`.
  *
  *  @experimental
  **/
-export interface HttpUrlParameterCodec {
+export interface HttpParameterCodec {
     encodeKey(key: string): string;
     encodeValue(value: string): string;
     decodeKey(key: string): string;
     decodeValue(value: string): string;
 }
 /**
- * A `HttpUrlParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
  * @experimental
  */
-export declare class HttpStandardUrlParameterCodec implements HttpUrlParameterCodec {
+export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
     encodeKey(k: string): string;
     encodeValue(v: string): string;
     decodeKey(k: string): string;
     decodeValue(v: string): string;
 }
 /**
- * An HTTP request/response body that represents serialized parameters in urlencoded form,
+ * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
  *
  * This class is immuatable - all mutation operations return a new instance.
  *
  * @experimental
  */
-export declare class HttpUrlEncodedBody {
+export declare class HttpParams {
     private map;
     private encoder;
     private updates;
     private cloneFrom;
     constructor(options?: {
         fromString?: string;
-        encoder?: HttpUrlParameterCodec;
+        encoder?: HttpParameterCodec;
     });
     /**
      * Check whether the body has one or more values for the given parameter name.
@@ -62,21 +62,21 @@ export declare class HttpUrlEncodedBody {
     /**
      * Get all the parameter names for this body.
      */
-    params(): string[];
+    keys(): string[];
     /**
      * Construct a new body with an appended value for the given parameter name.
      */
-    append(param: string, value: string): HttpUrlEncodedBody;
+    append(param: string, value: string): HttpParams;
     /**
      * Construct a new body with a new value for the given parameter name.
      */
-    set(param: string, value: string): HttpUrlEncodedBody;
+    set(param: string, value: string): HttpParams;
     /**
      * Construct a new body with either the given value for the given parameter
      * removed, if a value is given, or all values for the given parameter removed
      * if not.
      */
-    delete(param: string, value?: string): HttpUrlEncodedBody;
+    delete(param: string, value?: string): HttpParams;
     /**
      * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
      * separated by `&`s.

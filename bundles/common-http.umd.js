@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-37797e2
+ * @license Angular v4.3.0-beta.1-c81ad9d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,tslib_1,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.0-beta.1-37797e2
+ * @license Angular v4.3.0-beta.1-c81ad9d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -50,6 +50,229 @@ var HttpBackend = (function () {
      */
     HttpBackend.prototype.handle = function (req) { };
     return HttpBackend;
+}());
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values.
+ *
+ * \@experimental
+ */
+var HttpUrlEncodingCodec = (function () {
+    function HttpUrlEncodingCodec() {
+    }
+    /**
+     * @param {?} k
+     * @return {?}
+     */
+    HttpUrlEncodingCodec.prototype.encodeKey = function (k) { return standardEncoding(k); };
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    HttpUrlEncodingCodec.prototype.encodeValue = function (v) { return standardEncoding(v); };
+    /**
+     * @param {?} k
+     * @return {?}
+     */
+    HttpUrlEncodingCodec.prototype.decodeKey = function (k) { return decodeURIComponent(k); };
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    HttpUrlEncodingCodec.prototype.decodeValue = function (v) { return decodeURIComponent(v); };
+    return HttpUrlEncodingCodec;
+}());
+/**
+ * @param {?} rawParams
+ * @param {?} codec
+ * @return {?}
+ */
+function paramParser(rawParams, codec) {
+    var /** @type {?} */ map$$1 = new Map();
+    if (rawParams.length > 0) {
+        var /** @type {?} */ params = rawParams.split('&');
+        params.forEach(function (param) {
+            var /** @type {?} */ eqIdx = param.indexOf('=');
+            var _a = eqIdx == -1 ?
+                [codec.decodeKey(param), ''] :
+                [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))], key = _a[0], val = _a[1];
+            var /** @type {?} */ list = map$$1.get(key) || [];
+            list.push(val);
+            map$$1.set(key, list);
+        });
+    }
+    return map$$1;
+}
+/**
+ * @param {?} v
+ * @return {?}
+ */
+function standardEncoding(v) {
+    return encodeURIComponent(v)
+        .replace(/%40/gi, '@')
+        .replace(/%3A/gi, ':')
+        .replace(/%24/gi, '$')
+        .replace(/%2C/gi, ',')
+        .replace(/%3B/gi, ';')
+        .replace(/%2B/gi, '+')
+        .replace(/%3D/gi, '=')
+        .replace(/%3F/gi, '?')
+        .replace(/%2F/gi, '/');
+}
+/**
+ * An HTTP request/response body that represents serialized parameters,
+ * per the MIME type `application/x-www-form-urlencoded`.
+ *
+ * This class is immuatable - all mutation operations return a new instance.
+ *
+ * \@experimental
+ */
+var HttpParams = (function () {
+    /**
+     * @param {?=} options
+     */
+    function HttpParams(options) {
+        if (options === void 0) { options = {}; }
+        this.updates = null;
+        this.cloneFrom = null;
+        this.encoder = options.encoder || new HttpUrlEncodingCodec();
+        this.map = !!options.fromString ? paramParser(options.fromString, this.encoder) : null;
+    }
+    /**
+     * Check whether the body has one or more values for the given parameter name.
+     * @param {?} param
+     * @return {?}
+     */
+    HttpParams.prototype.has = function (param) {
+        this.init();
+        return ((this.map)).has(param);
+    };
+    /**
+     * Get the first value for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    HttpParams.prototype.get = function (param) {
+        this.init();
+        var /** @type {?} */ res = ((this.map)).get(param);
+        return !!res ? res[0] : null;
+    };
+    /**
+     * Get all values for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    HttpParams.prototype.getAll = function (param) {
+        this.init();
+        return ((this.map)).get(param) || null;
+    };
+    /**
+     * Get all the parameter names for this body.
+     * @return {?}
+     */
+    HttpParams.prototype.keys = function () {
+        this.init();
+        return Array.from(/** @type {?} */ ((this.map)).keys());
+    };
+    /**
+     * Construct a new body with an appended value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+    /**
+     * Construct a new body with a new value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+    /**
+     * Construct a new body with either the given value for the given parameter
+     * removed, if a value is given, or all values for the given parameter removed
+     * if not.
+     * @param {?} param
+     * @param {?=} value
+     * @return {?}
+     */
+    HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+    /**
+     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+     * separated by `&`s.
+     * @return {?}
+     */
+    HttpParams.prototype.toString = function () {
+        var _this = this;
+        this.init();
+        return this.keys()
+            .map(function (key) {
+            var /** @type {?} */ eKey = _this.encoder.encodeKey(key);
+            return ((((_this.map)).get(key))).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); })
+                .join('&');
+        })
+            .join('&');
+    };
+    /**
+     * @param {?} update
+     * @return {?}
+     */
+    HttpParams.prototype.clone = function (update) {
+        var /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
+        clone.cloneFrom = this.cloneFrom || this;
+        clone.updates = (this.updates || []).concat([update]);
+        return clone;
+    };
+    /**
+     * @return {?}
+     */
+    HttpParams.prototype.init = function () {
+        var _this = this;
+        if (this.map === null) {
+            this.map = new Map();
+        }
+        if (this.cloneFrom !== null) {
+            this.cloneFrom.init();
+            this.cloneFrom.keys().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+            ((this.updates)).forEach(function (update) {
+                switch (update.op) {
+                    case 'a':
+                    case 's':
+                        var /** @type {?} */ base = (update.op === 'a' ? ((_this.map)).get(update.param) : undefined) || [];
+                        base.push(/** @type {?} */ ((update.value))); /** @type {?} */
+                        ((_this.map)).set(update.param, base);
+                        break;
+                    case 'd':
+                        if (update.value !== undefined) {
+                            var /** @type {?} */ base_1 = ((_this.map)).get(update.param) || [];
+                            var /** @type {?} */ idx = base_1.indexOf(update.value);
+                            if (idx !== -1) {
+                                base_1.splice(idx, 1);
+                            }
+                            if (base_1.length > 0) {
+                                ((_this.map)).set(update.param, base_1);
+                            }
+                            else {
+                                ((_this.map)).delete(update.param);
+                            }
+                        }
+                        else {
+                            ((_this.map)).delete(update.param);
+                            break;
+                        }
+                }
+            });
+            this.cloneFrom = null;
+        }
+    };
+    return HttpParams;
 }());
 /**
  * @license
@@ -341,13 +564,6 @@ function isFormData(value) {
     return typeof FormData !== 'undefined' && value instanceof FormData;
 }
 /**
- * @param {?} value
- * @return {?}
- */
-function isUrlEncodedBody(value) {
-    return typeof value === 'object' && value['__HttpUrlEncodedBody'];
-}
-/**
  * An outgoing HTTP request with an optional typed body.
  *
  * `HttpRequest` represents an outgoing request, including URL, method,
@@ -420,10 +636,39 @@ var HttpRequest = (function () {
             if (!!options.headers) {
                 this.headers = options.headers;
             }
+            if (!!options.params) {
+                this.params = options.params;
+            }
         }
         // If no headers have been passed in, construct a new HttpHeaders instance.
         if (!this.headers) {
             this.headers = new HttpHeaders();
+        }
+        // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
+        if (!this.params) {
+            this.params = new HttpParams();
+            this.urlWithParams = url;
+        }
+        else {
+            // Encode the parameters to a string in preparation for inclusion in the URL.
+            var params = this.params.toString();
+            if (params.length === 0) {
+                // No parameters, the visible URL is just the URL given at creation time.
+                this.urlWithParams = url;
+            }
+            else {
+                // Does the URL already have query parameters? Look for '?'.
+                var qIdx = url.indexOf('?');
+                // There are 3 cases to handle:
+                // 1) No existing parameters -> append '?' followed by params.
+                // 2) '?' exists and is followed by existing query string ->
+                //    append '&' followed by params.
+                // 3) '?' exists at the end of the url -> append params directly.
+                // This basically amounts to determining the character, if any, with
+                // which to join the URL and parameters.
+                var sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
+                this.urlWithParams = url + sep + params;
+            }
         }
     }
     /**
@@ -442,9 +687,8 @@ var HttpRequest = (function () {
             typeof this.body === 'string') {
             return this.body;
         }
-        // Check whether the body is an instance of HttpUrlEncodedBody, avoiding any direct
-        // references to the class in order to permit it being tree-shaken.
-        if (isUrlEncodedBody(this.body)) {
+        // Check whether the body is an instance of HttpUrlEncodedParams.
+        if (this.body instanceof HttpParams) {
             return this.body.toString();
         }
         // Check whether the body is an object or array, and serialize with JSON if so.
@@ -485,9 +729,8 @@ var HttpRequest = (function () {
         if (typeof this.body === 'string') {
             return 'text/plain';
         }
-        // `HttpUrlEncodedBody` is detected specially so as to allow it to be
-        // tree-shaken.
-        if (isUrlEncodedBody(this.body)) {
+        // `HttpUrlEncodedParams` has its own content-type.
+        if (this.body instanceof HttpParams) {
             return 'application/x-www-form-urlencoded;charset=UTF-8';
         }
         // Arrays, objects, and numbers will be encoded as JSON.
@@ -518,9 +761,10 @@ var HttpRequest = (function () {
         // `false` and `undefined` in the update args.
         var /** @type {?} */ withCredentials = (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
         var /** @type {?} */ reportProgress = (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
-        // Headers may need to be cloned later if they're sealed, but being
-        // appended to.
+        // Headers and params may be appended to if `setHeaders` or
+        // `setParams` are used.
         var /** @type {?} */ headers = update.headers || this.headers;
+        var /** @type {?} */ params = update.params || this.params;
         // Check whether the caller has asked to add headers.
         if (update.setHeaders !== undefined) {
             // Set every requested header.
@@ -528,9 +772,15 @@ var HttpRequest = (function () {
                 Object.keys(update.setHeaders)
                     .reduce(function (headers, name) { return headers.set(name, /** @type {?} */ ((update.setHeaders))[name]); }, headers);
         }
+        // Check whether the caller has asked to set params.
+        if (update.setParams) {
+            // Set every requested param.
+            params = Object.keys(update.setParams)
+                .reduce(function (params, param) { return params.set(param, /** @type {?} */ ((update.setParams))[param]); }, params);
+        }
         // Finally, construct the new HttpRequest using the pieces from above.
         return new HttpRequest(method, url, body, {
-            headers: headers, reportProgress: reportProgress, responseType: responseType, withCredentials: withCredentials,
+            params: params, headers: headers, reportProgress: reportProgress, responseType: responseType, withCredentials: withCredentials,
         });
     };
     return HttpRequest;
@@ -725,6 +975,7 @@ function addBody(options, body) {
         body: body,
         headers: options.headers,
         observe: options.observe,
+        params: options.params,
         responseType: options.responseType,
         withCredentials: options.withCredentials,
     };
@@ -792,6 +1043,7 @@ var HttpClient = (function () {
             // provided.
             req = new HttpRequest(first, /** @type {?} */ ((url)), options.body || null, {
                 headers: options.headers,
+                params: options.params,
                 // By default, JSON is assumed to be returned for all calls.
                 responseType: options.responseType || 'json',
                 withCredentials: options.withCredentials,
@@ -903,10 +1155,12 @@ var HttpClient = (function () {
      * rejected by the configured backend.
      * @template T
      * @param {?} url
+     * @param {?} callbackParam
      * @return {?}
      */
-    HttpClient.prototype.jsonp = function (url) {
+    HttpClient.prototype.jsonp = function (url, callbackParam) {
         return this.request('JSONP', url, {
+            params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
             observe: 'body',
             responseType: 'json',
         });
@@ -1083,7 +1337,7 @@ var JsonpClientBackend = (function () {
             // callback placeholder in the URL with the name. Care has to be taken here to ensure
             // a trailing &, if matched, gets inserted back into the URL in the correct place.
             var /** @type {?} */ callback = _this.nextCallback();
-            var /** @type {?} */ url = req.url.replace(/=JSONP_CALLBACK(&|$)/, "=" + callback + "$1");
+            var /** @type {?} */ url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, "=" + callback + "$1");
             // Construct the <script> tag and point it at the URL.
             var /** @type {?} */ node = _this.document.createElement('script');
             node.src = url;
@@ -1327,7 +1581,7 @@ var HttpXhrBackend = (function () {
         return new rxjs_Observable.Observable(function (observer) {
             // Start by setting up the XHR object with request method, URL, and withCredentials flag.
             var /** @type {?} */ xhr = _this.xhrFactory.build();
-            xhr.open(req.method, req.url);
+            xhr.open(req.method, req.urlWithParams);
             if (!!req.withCredentials) {
                 xhr.withCredentials = true;
             }
@@ -1645,236 +1899,6 @@ HttpClientJsonpModule.decorators = [
  * @nocollapse
  */
 HttpClientJsonpModule.ctorParameters = function () { return []; };
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * A `HttpUrlParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values.
- *
- * \@experimental
- */
-var HttpStandardUrlParameterCodec = (function () {
-    function HttpStandardUrlParameterCodec() {
-    }
-    /**
-     * @param {?} k
-     * @return {?}
-     */
-    HttpStandardUrlParameterCodec.prototype.encodeKey = function (k) { return standardEncoding(k); };
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    HttpStandardUrlParameterCodec.prototype.encodeValue = function (v) { return standardEncoding(v); };
-    /**
-     * @param {?} k
-     * @return {?}
-     */
-    HttpStandardUrlParameterCodec.prototype.decodeKey = function (k) { return decodeURIComponent(k); };
-    /**
-     * @param {?} v
-     * @return {?}
-     */
-    HttpStandardUrlParameterCodec.prototype.decodeValue = function (v) { return decodeURIComponent(v); };
-    return HttpStandardUrlParameterCodec;
-}());
-/**
- * @param {?} rawParams
- * @param {?} codec
- * @return {?}
- */
-function paramParser(rawParams, codec) {
-    var /** @type {?} */ map$$1 = new Map();
-    if (rawParams.length > 0) {
-        var /** @type {?} */ params = rawParams.split('&');
-        params.forEach(function (param) {
-            var /** @type {?} */ eqIdx = param.indexOf('=');
-            var _a = eqIdx == -1 ?
-                [codec.decodeKey(param), ''] :
-                [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))], key = _a[0], val = _a[1];
-            var /** @type {?} */ list = map$$1.get(key) || [];
-            list.push(val);
-            map$$1.set(key, list);
-        });
-    }
-    return map$$1;
-}
-/**
- * @param {?} v
- * @return {?}
- */
-function standardEncoding(v) {
-    return encodeURIComponent(v)
-        .replace(/%40/gi, '@')
-        .replace(/%3A/gi, ':')
-        .replace(/%24/gi, '$')
-        .replace(/%2C/gi, ',')
-        .replace(/%3B/gi, ';')
-        .replace(/%2B/gi, '+')
-        .replace(/%3D/gi, '=')
-        .replace(/%3F/gi, '?')
-        .replace(/%2F/gi, '/');
-}
-/**
- * An HTTP request/response body that represents serialized parameters in urlencoded form,
- * per the MIME type `application/x-www-form-urlencoded`.
- *
- * This class is immuatable - all mutation operations return a new instance.
- *
- * \@experimental
- */
-var HttpUrlEncodedBody = (function () {
-    /**
-     * @param {?=} options
-     */
-    function HttpUrlEncodedBody(options) {
-        if (options === void 0) { options = {}; }
-        this.updates = null;
-        this.cloneFrom = null;
-        this['__HttpUrlEncodedBody'] = true;
-        this.encoder = options.encoder || new HttpStandardUrlParameterCodec();
-        this.map = !!options.fromString ? paramParser(options.fromString, this.encoder) : null;
-    }
-    /**
-     * Check whether the body has one or more values for the given parameter name.
-     * @param {?} param
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.has = function (param) {
-        this.init();
-        return ((this.map)).has(param);
-    };
-    /**
-     * Get the first value for the given parameter name, or `null` if it's not present.
-     * @param {?} param
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.get = function (param) {
-        this.init();
-        var /** @type {?} */ res = ((this.map)).get(param);
-        return !!res ? res[0] : null;
-    };
-    /**
-     * Get all values for the given parameter name, or `null` if it's not present.
-     * @param {?} param
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.getAll = function (param) {
-        this.init();
-        return ((this.map)).get(param) || null;
-    };
-    /**
-     * Get all the parameter names for this body.
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.params = function () {
-        this.init();
-        return Array.from(/** @type {?} */ ((this.map)).keys());
-    };
-    /**
-     * Construct a new body with an appended value for the given parameter name.
-     * @param {?} param
-     * @param {?} value
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.append = function (param, value) {
-        return this.clone({ param: param, value: value, op: 'a' });
-    };
-    /**
-     * Construct a new body with a new value for the given parameter name.
-     * @param {?} param
-     * @param {?} value
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.set = function (param, value) {
-        return this.clone({ param: param, value: value, op: 's' });
-    };
-    /**
-     * Construct a new body with either the given value for the given parameter
-     * removed, if a value is given, or all values for the given parameter removed
-     * if not.
-     * @param {?} param
-     * @param {?=} value
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.delete = function (param, value) {
-        return this.clone({ param: param, value: value, op: 'd' });
-    };
-    /**
-     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
-     * separated by `&`s.
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.toString = function () {
-        var _this = this;
-        this.init();
-        return this.params()
-            .map(function (key) {
-            var /** @type {?} */ eKey = _this.encoder.encodeKey(key);
-            return ((((_this.map)).get(key))).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); })
-                .join('&');
-        })
-            .join('&');
-    };
-    /**
-     * @param {?} update
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.clone = function (update) {
-        var /** @type {?} */ clone = new HttpUrlEncodedBody({ encoder: this.encoder });
-        clone.cloneFrom = this.cloneFrom || this;
-        clone.updates = (this.updates || []).concat([update]);
-        return clone;
-    };
-    /**
-     * @return {?}
-     */
-    HttpUrlEncodedBody.prototype.init = function () {
-        var _this = this;
-        if (this.map === null) {
-            this.map = new Map();
-        }
-        if (this.cloneFrom !== null) {
-            this.cloneFrom.init();
-            this.cloneFrom.params().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
-            ((this.updates)).forEach(function (update) {
-                switch (update.op) {
-                    case 'a':
-                    case 's':
-                        var /** @type {?} */ base = (update.op === 'a' ? ((_this.map)).get(update.param) : undefined) || [];
-                        base.push(/** @type {?} */ ((update.value))); /** @type {?} */
-                        ((_this.map)).set(update.param, base);
-                        break;
-                    case 'd':
-                        if (update.value !== undefined) {
-                            var /** @type {?} */ base_1 = ((_this.map)).get(update.param) || [];
-                            var /** @type {?} */ idx = base_1.indexOf(update.value);
-                            if (idx !== -1) {
-                                base_1.splice(idx, 1);
-                            }
-                            if (base_1.length > 0) {
-                                ((_this.map)).set(update.param, base_1);
-                            }
-                            else {
-                                ((_this.map)).delete(update.param);
-                            }
-                        }
-                        else {
-                            ((_this.map)).delete(update.param);
-                            break;
-                        }
-                }
-            });
-            this.cloneFrom = null;
-        }
-    };
-    return HttpUrlEncodedBody;
-}());
 
 exports.HttpBackend = HttpBackend;
 exports.HttpHandler = HttpHandler;
@@ -1886,14 +1910,14 @@ exports.JsonpInterceptor = JsonpInterceptor;
 exports.HttpClientJsonpModule = HttpClientJsonpModule;
 exports.HttpClientModule = HttpClientModule;
 exports.ɵinterceptingHandler = interceptingHandler;
+exports.HttpParams = HttpParams;
+exports.HttpUrlEncodingCodec = HttpUrlEncodingCodec;
 exports.HttpRequest = HttpRequest;
 exports.HttpErrorResponse = HttpErrorResponse;
 exports.HttpEventType = HttpEventType;
 exports.HttpHeaderResponse = HttpHeaderResponse;
 exports.HttpResponse = HttpResponse;
 exports.HttpResponseBase = HttpResponseBase;
-exports.HttpStandardUrlParameterCodec = HttpStandardUrlParameterCodec;
-exports.HttpUrlEncodedBody = HttpUrlEncodedBody;
 exports.HttpXhrBackend = HttpXhrBackend;
 exports.XhrFactory = XhrFactory;
 exports.ɵa = JsonpCallbackContext;

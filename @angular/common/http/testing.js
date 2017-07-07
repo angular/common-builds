@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-37797e2
+ * @license Angular v4.3.0-beta.1-c81ad9d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -32,51 +32,59 @@ class HttpTestingController {
     /**
      * @abstract
      * @param {?} url
+     * @param {?=} description
      * @return {?}
      */
-    expectOne(url) { }
+    expectOne(url, description) { }
     /**
      * @abstract
      * @param {?} params
+     * @param {?=} description
      * @return {?}
      */
-    expectOne(params) { }
+    expectOne(params, description) { }
     /**
      * @abstract
      * @param {?} matchFn
+     * @param {?=} description
      * @return {?}
      */
-    expectOne(matchFn) { }
+    expectOne(matchFn, description) { }
     /**
      * @abstract
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    expectOne(match) { }
+    expectOne(match, description) { }
     /**
      * @abstract
      * @param {?} url
+     * @param {?=} description
      * @return {?}
      */
-    expectNone(url) { }
+    expectNone(url, description) { }
     /**
      * @abstract
      * @param {?} params
+     * @param {?=} description
      * @return {?}
      */
-    expectNone(params) { }
+    expectNone(params, description) { }
     /**
      * @abstract
      * @param {?} matchFn
+     * @param {?=} description
      * @return {?}
      */
-    expectNone(matchFn) { }
+    expectNone(matchFn, description) { }
     /**
      * @abstract
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    expectNone(match) { }
+    expectNone(match, description) { }
     /**
      * @abstract
      * @param {?=} opts
@@ -127,7 +135,7 @@ class TestRequest {
         if (this.cancelled) {
             throw new Error(`Cannot flush a cancelled request.`);
         }
-        const /** @type {?} */ url = this.request.url;
+        const /** @type {?} */ url = this.request.urlWithParams;
         const /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
         let /** @type {?} */ statusText = opts.statusText;
@@ -171,7 +179,7 @@ class TestRequest {
             headers,
             status: opts.status || 0,
             statusText: opts.statusText || '',
-            url: this.request.url,
+            url: this.request.urlWithParams,
         }));
     }
     /**
@@ -330,14 +338,14 @@ class HttpClientTestingBackend {
      */
     _match(match) {
         if (typeof match === 'string') {
-            return this.open.filter(testReq => testReq.request.url === match);
+            return this.open.filter(testReq => testReq.request.urlWithParams === match);
         }
         else if (typeof match === 'function') {
             return this.open.filter(testReq => match(testReq.request));
         }
         else {
             return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.url === match.url));
+                (!match.url || testReq.request.urlWithParams === match.url));
         }
     }
     /**
@@ -363,15 +371,17 @@ class HttpClientTestingBackend {
      * Requests returned through this API will no longer be in the list of open requests,
      * and thus will not match twice.
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    expectOne(match) {
+    expectOne(match, description) {
+        description = description || this.descriptionFromMatcher(match);
         const /** @type {?} */ matches = this.match(match);
         if (matches.length > 1) {
-            throw new Error(`Expected one matching request, found ${matches.length} requests.`);
+            throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
         }
         if (matches.length === 0) {
-            throw new Error(`Expected one matching request, found none.`);
+            throw new Error(`Expected one matching request for criteria "${description}", found none.`);
         }
         return matches[0];
     }
@@ -379,12 +389,14 @@ class HttpClientTestingBackend {
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
      * @param {?} match
+     * @param {?=} description
      * @return {?}
      */
-    expectNone(match) {
+    expectNone(match, description) {
+        description = description || this.descriptionFromMatcher(match);
         const /** @type {?} */ matches = this.match(match);
         if (matches.length > 0) {
-            throw new Error(`Expected zero matching requests, found ${matches.length}.`);
+            throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
         }
     }
     /**
@@ -400,9 +412,30 @@ class HttpClientTestingBackend {
             open = open.filter(testReq => !testReq.cancelled);
         }
         if (open.length > 0) {
-            // Show the URLs of open requests in the error, for convenience.
-            const /** @type {?} */ urls = open.map(testReq => testReq.request.url.split('?')[0]).join(', ');
-            throw new Error(`Expected no open requests, found ${open.length}: ${urls}`);
+            // Show the methods and URLs of open requests in the error, for convenience.
+            const /** @type {?} */ requests = open.map(testReq => {
+                const /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
+                const /** @type {?} */ method = testReq.request.method;
+                return `${method} ${url}`;
+            }).join(', ');
+            throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
+        }
+    }
+    /**
+     * @param {?} matcher
+     * @return {?}
+     */
+    descriptionFromMatcher(matcher) {
+        if (typeof matcher === 'string') {
+            return `Match URL: ${matcher}`;
+        }
+        else if (typeof matcher === 'object') {
+            const /** @type {?} */ method = matcher.method || '(any)';
+            const /** @type {?} */ url = matcher.url || '(any)';
+            return `Match method: ${method}, URL: ${url}`;
+        }
+        else {
+            return `Match by function: ${matcher.name}`;
         }
     }
 }
