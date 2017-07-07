@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-72747e5
+ * @license Angular v4.3.0-beta.1-37797e2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.0-beta.1-72747e5
+ * @license Angular v4.3.0-beta.1-37797e2
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3885,6 +3885,22 @@ CommonModule.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A DI Token representing the main rendering context. In a browser this is the DOM Document.
+ *
+ * Note: Document might not be available in the Application Context when Application and Rendering
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
+ *
+ * \@stable
+ */
+var DOCUMENT = new _angular_core.InjectionToken('DocumentToken');
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var PLATFORM_BROWSER_ID = 'browser';
 var PLATFORM_SERVER_ID = 'server';
 var PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
@@ -3940,7 +3956,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.0-beta.1-72747e5');
+var VERSION = new _angular_core.Version('4.3.0-beta.1-37797e2');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
@@ -3959,6 +3975,7 @@ exports.NgSwitchCase = NgSwitchCase;
 exports.NgSwitchDefault = NgSwitchDefault;
 exports.NgTemplateOutlet = NgTemplateOutlet;
 exports.NgComponentOutlet = NgComponentOutlet;
+exports.DOCUMENT = DOCUMENT;
 exports.AsyncPipe = AsyncPipe;
 exports.DatePipe = DatePipe;
 exports.I18nPluralPipe = I18nPluralPipe;
