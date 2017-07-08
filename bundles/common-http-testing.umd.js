@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-c723d42
+ * @license Angular v4.3.0-beta.1-09f1609
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.0-beta.1-c723d42
+ * @license Angular v4.3.0-beta.1-09f1609
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -436,7 +436,8 @@ var HttpClientTestingBackend = (function () {
                 var /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
                 var /** @type {?} */ method = testReq.request.method;
                 return method + " " + url;
-            }).join(', ');
+            })
+                .join(', ');
             throw new Error("Expected no open requests, found " + open.length + ": " + requests);
         }
     };
