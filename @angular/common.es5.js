@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-rc.0-df06e8b
+ * @license Angular v4.3.0-rc.0-1b1a6ba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3921,7 +3921,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.3.0-rc.0-df06e8b');
+var VERSION = new Version('4.3.0-rc.0-1b1a6ba');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
