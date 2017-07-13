@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-f0beb4d
+ * @license Angular v4.3.0-rc.0-4f1e4ff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,tslib_1,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.0-rc.0-f0beb4d
+ * @license Angular v4.3.0-rc.0-4f1e4ff
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -711,9 +711,9 @@ var HttpRequest = (function () {
         if (this.body === null) {
             return null;
         }
-        // FormData instances are URL encoded on the wire.
+        // FormData bodies rely on the browser's content type assignment.
         if (isFormData(this.body)) {
-            return 'multipart/form-data';
+            return null;
         }
         // Blobs usually have their own content type. If it doesn't, then
         // no type can be inferred.
