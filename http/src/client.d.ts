@@ -34,6 +34,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -47,6 +48,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -60,6 +62,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -73,6 +76,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         params?: HttpParams;
         observe: 'events';
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -86,6 +90,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -99,6 +104,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -110,6 +116,7 @@ export declare class HttpClient {
     request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
+        reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams;
         responseType?: 'json';
@@ -123,6 +130,7 @@ export declare class HttpClient {
     request<R>(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
+        reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams;
         responseType?: 'json';
@@ -138,6 +146,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -151,6 +160,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -164,6 +174,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -175,6 +186,7 @@ export declare class HttpClient {
     request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
+        reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams;
         responseType?: 'json';
@@ -188,6 +200,7 @@ export declare class HttpClient {
     request<R>(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
+        reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams;
         responseType?: 'json';
@@ -204,6 +217,7 @@ export declare class HttpClient {
         observe?: 'body';
         params?: HttpParams;
         responseType?: 'json';
+        reportProgress?: boolean;
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
@@ -217,6 +231,7 @@ export declare class HttpClient {
         observe?: 'body';
         params?: HttpParams;
         responseType?: 'json';
+        reportProgress?: boolean;
         withCredentials?: boolean;
     }): Observable<R>;
     /**
@@ -230,6 +245,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         params?: HttpParams;
         observe?: HttpObserve;
+        reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     }): Observable<any>;
@@ -242,6 +258,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -254,6 +271,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -266,6 +284,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -278,6 +297,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -290,6 +310,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -302,6 +323,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -314,6 +336,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -326,6 +349,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -338,6 +362,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -350,6 +375,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -362,6 +388,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -374,6 +401,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -386,6 +414,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -398,6 +427,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -410,6 +440,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -422,6 +453,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -434,6 +466,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -446,6 +479,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -458,6 +492,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -470,6 +505,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -482,6 +518,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -494,6 +531,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -506,6 +544,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -518,6 +557,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -530,6 +570,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -542,6 +583,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -554,6 +596,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -566,6 +609,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -578,6 +622,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -590,6 +635,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -602,6 +648,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -609,6 +656,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -621,6 +669,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -633,6 +682,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -645,6 +695,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -657,6 +708,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -669,6 +721,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -681,6 +734,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -693,6 +747,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -705,6 +760,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -717,6 +773,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -729,6 +786,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -741,6 +799,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -753,6 +812,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -765,6 +825,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -789,6 +850,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -801,6 +863,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -813,6 +876,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -825,6 +889,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -837,6 +902,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -849,6 +915,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -861,6 +928,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -873,6 +941,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -885,6 +954,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -897,6 +967,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -909,6 +980,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -921,6 +993,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -933,6 +1006,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -945,6 +1019,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -957,6 +1032,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -969,6 +1045,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -981,6 +1058,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -993,6 +1071,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -1005,6 +1084,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -1017,6 +1097,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -1029,6 +1110,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -1041,6 +1123,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -1053,6 +1136,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -1065,6 +1149,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -1077,6 +1162,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -1089,6 +1175,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -1101,6 +1188,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -1113,6 +1201,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -1125,6 +1214,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -1137,6 +1227,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -1149,6 +1240,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -1161,6 +1253,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -1173,6 +1266,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -1185,6 +1279,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -1197,6 +1292,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -1209,6 +1305,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -1221,6 +1318,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -1233,6 +1331,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
@@ -1245,6 +1344,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -1257,6 +1357,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -1269,6 +1370,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -1281,6 +1383,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -1293,6 +1396,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -1305,6 +1409,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -1317,6 +1422,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
@@ -1329,6 +1435,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
@@ -1341,6 +1448,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
@@ -1353,6 +1461,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
@@ -1365,6 +1474,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
@@ -1377,6 +1487,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
@@ -1389,6 +1500,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
@@ -1401,6 +1513,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'events';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
@@ -1424,6 +1537,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
@@ -1436,6 +1550,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
@@ -1448,6 +1563,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
@@ -1460,6 +1576,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
@@ -1472,6 +1589,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe: 'response';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
@@ -1484,6 +1602,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<Object>;
@@ -1496,6 +1615,7 @@ export declare class HttpClient {
         headers?: HttpHeaders;
         observe?: 'body';
         params?: HttpParams;
+        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;

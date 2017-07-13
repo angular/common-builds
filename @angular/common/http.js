@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-ddb766e
+ * @license Angular v4.3.0-rc.0-9f28e83
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -957,6 +957,7 @@ function addBody(options, body) {
         headers: options.headers,
         observe: options.observe,
         params: options.params,
+        reportProgress: options.reportProgress,
         responseType: options.responseType,
         withCredentials: options.withCredentials,
     };
@@ -1027,6 +1028,7 @@ class HttpClient {
             req = new HttpRequest(first, /** @type {?} */ ((url)), options.body || null, {
                 headers: options.headers,
                 params: options.params,
+                reportProgress: options.reportProgress,
                 // By default, JSON is assumed to be returned for all calls.
                 responseType: options.responseType || 'json',
                 withCredentials: options.withCredentials,
