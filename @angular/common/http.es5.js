@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-rc.0-bc3b2ac
+ * @license Angular v4.3.0-rc.0-ce0f4f0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -708,9 +708,9 @@ var HttpRequest = (function () {
         if (this.body === null) {
             return null;
         }
-        // FormData instances are URL encoded on the wire.
+        // FormData bodies rely on the browser's content type assignment.
         if (isFormData(this.body)) {
-            return 'multipart/form-data';
+            return null;
         }
         // Blobs usually have their own content type. If it doesn't, then
         // no type can be inferred.
