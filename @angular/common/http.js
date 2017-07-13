@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-4f1e4ff
+ * @license Angular v4.3.0-rc.0-bc3b2ac
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -693,9 +693,9 @@ class HttpRequest {
         if (this.body === null) {
             return null;
         }
-        // FormData bodies rely on the browser's content type assignment.
+        // FormData instances are URL encoded on the wire.
         if (isFormData(this.body)) {
-            return null;
+            return 'multipart/form-data';
         }
         // Blobs usually have their own content type. If it doesn't, then
         // no type can be inferred.
