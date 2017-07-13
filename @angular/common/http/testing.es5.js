@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-ce0f4f0
+ * @license Angular v4.3.0-rc.0-db96c96
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -31,6 +31,11 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.match = function (match) { };
     /**
+     * Expect that a single request has been made which matches the given URL, and return its
+     * mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
      * @abstract
      * @param {?} url
      * @param {?=} description
@@ -38,6 +43,11 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectOne = function (url, description) { };
     /**
+     * Expect that a single request has been made which matches the given parameters, and return
+     * its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
      * @abstract
      * @param {?} params
      * @param {?=} description
@@ -45,6 +55,11 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectOne = function (params, description) { };
     /**
+     * Expect that a single request has been made which matches the given predicate function, and
+     * return its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
      * @abstract
      * @param {?} matchFn
      * @param {?=} description
@@ -52,6 +67,11 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectOne = function (matchFn, description) { };
     /**
+     * Expect that a single request has been made which matches the given condition, and return
+     * its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
      * @abstract
      * @param {?} match
      * @param {?=} description
@@ -59,6 +79,10 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectOne = function (match, description) { };
     /**
+     * Expect that no requests have been made which match the given URL.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
      * @abstract
      * @param {?} url
      * @param {?=} description
@@ -66,6 +90,10 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectNone = function (url, description) { };
     /**
+     * Expect that no requests have been made which match the given parameters.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
      * @abstract
      * @param {?} params
      * @param {?=} description
@@ -73,6 +101,10 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectNone = function (params, description) { };
     /**
+     * Expect that no requests have been made which match the given predicate function.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
      * @abstract
      * @param {?} matchFn
      * @param {?=} description
@@ -80,6 +112,10 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectNone = function (matchFn, description) { };
     /**
+     * Expect that no requests have been made which match the given condition.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
      * @abstract
      * @param {?} match
      * @param {?=} description
@@ -87,6 +123,13 @@ var HttpTestingController = (function () {
      */
     HttpTestingController.prototype.expectNone = function (match, description) { };
     /**
+     * Verify that no unmatched requests are outstanding.
+     *
+     * If any requests are outstanding, fail with an error message indicating which requests were not
+     * handled.
+     *
+     * If `ignoreCancelled` is not set (the default), `verify()` will also fail if cancelled requests
+     * were not explicitly matched.
      * @abstract
      * @param {?=} opts
      * @return {?}
@@ -132,6 +175,10 @@ var TestRequest = (function () {
         configurable: true
     });
     /**
+     * Resolve the request by returning a body plus additional HTTP information (such as response
+     * headers) if provided.
+     *
+     * Both successful and unsuccessful responses can be delivered via `flush()`.
      * @param {?} body
      * @param {?=} opts
      * @return {?}
@@ -168,6 +215,7 @@ var TestRequest = (function () {
         }
     };
     /**
+     * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
      * @param {?} error
      * @param {?=} opts
      * @return {?}
@@ -190,6 +238,8 @@ var TestRequest = (function () {
         }));
     };
     /**
+     * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
+     * request.
      * @param {?} event
      * @return {?}
      */
@@ -336,7 +386,7 @@ var HttpClientTestingBackend = (function () {
         return new Observable(function (observer) {
             var /** @type {?} */ testReq = new TestRequest(req, observer);
             _this.open.push(testReq);
-            observer.next({ type: HttpEventType.Sent });
+            observer.next(/** @type {?} */ ({ type: HttpEventType.Sent }));
             return function () { testReq._cancelled = true; };
         });
     };

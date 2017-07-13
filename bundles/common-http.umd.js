@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-ce0f4f0
+ * @license Angular v4.3.0-rc.0-db96c96
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,tslib_1,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.0-rc.0-ce0f4f0
+ * @license Angular v4.3.0-rc.0-db96c96
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -22,6 +22,15 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
+ * `HttpResponse`.
+ *
+ * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
+ * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
+ * `HttpBackend`.
+ *
+ * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
+ *
  * \@experimental
  * @abstract
  */
@@ -37,6 +46,13 @@ var HttpHandler = (function () {
     return HttpHandler;
 }());
 /**
+ * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
+ *
+ * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
+ *
+ * When injected, `HttpBackend` dispatches requests directly to the backend, without going
+ * through the interceptor chain.
+ *
  * \@experimental
  * @abstract
  */
@@ -981,7 +997,11 @@ function addBody(options, body) {
     };
 }
 /**
- * The main API for making outgoing HTTP requests.
+ * Perform HTTP requests.
+ *
+ * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
+ * Each request method has multiple signatures, and the return type varies according to which
+ * signature is called (mainly the values of `observe` and `responseType`).
  *
  * \@experimental
  */
@@ -1112,7 +1132,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * DELETE request to be executed on the server. See {\@link HttpClient#request} for
+     * DELETE request to be executed on the server. See the individual overloads for
      * details of `delete()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
@@ -1124,7 +1144,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * GET request to be executed on the server. See {\@link HttpClient#request} for
+     * GET request to be executed on the server. See the individual overloads for
      * details of `get()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
@@ -1136,7 +1156,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * HEAD request to be executed on the server. See {\@link HttpClient#request} for
+     * HEAD request to be executed on the server. See the individual overloads for
      * details of `head()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
@@ -1167,7 +1187,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * OPTIONS request to be executed on the server. See {\@link HttpClient#request} for
+     * OPTIONS request to be executed on the server. See the individual overloads for
      * details of `options()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
@@ -1179,7 +1199,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * PATCH request to be executed on the server. See {\@link HttpClient#request} for
+     * PATCH request to be executed on the server. See the individual overloads for
      * details of `patch()`'s return type based on the provided options.
      * @param {?} url
      * @param {?} body
@@ -1192,7 +1212,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * POST request to be executed on the server. See {\@link HttpClient#request} for
+     * POST request to be executed on the server. See the individual overloads for
      * details of `post()`'s return type based on the provided options.
      * @param {?} url
      * @param {?} body
@@ -1205,7 +1225,7 @@ var HttpClient = (function () {
     };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * POST request to be executed on the server. See {\@link HttpClient#request} for
+     * POST request to be executed on the server. See the individual overloads for
      * details of `post()`'s return type based on the provided options.
      * @param {?} url
      * @param {?} body
