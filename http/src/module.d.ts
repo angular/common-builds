@@ -38,7 +38,7 @@ export declare function jsonpCallbackContext(): Object;
  *
  * @experimental
  */
-export declare class HttpXsrfModule {
+export declare class HttpClientXsrfModule {
     /**
      * Disable the default XSRF protection.
      */

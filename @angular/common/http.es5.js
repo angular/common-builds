@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-rc.0-f7686d4
+ * @license Angular v4.3.0-rc.0-3ecc5e5
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2011,16 +2011,16 @@ function jsonpCallbackContext() {
  *
  * \@experimental
  */
-var HttpXsrfModule = (function () {
-    function HttpXsrfModule() {
+var HttpClientXsrfModule = (function () {
+    function HttpClientXsrfModule() {
     }
     /**
      * Disable the default XSRF protection.
      * @return {?}
      */
-    HttpXsrfModule.disable = function () {
+    HttpClientXsrfModule.disable = function () {
         return {
-            ngModule: HttpXsrfModule,
+            ngModule: HttpClientXsrfModule,
             providers: [
                 { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
             ],
@@ -2032,19 +2032,19 @@ var HttpXsrfModule = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpXsrfModule.withOptions = function (options) {
+    HttpClientXsrfModule.withOptions = function (options) {
         if (options === void 0) { options = {}; }
         return {
-            ngModule: HttpXsrfModule,
+            ngModule: HttpClientXsrfModule,
             providers: [
                 options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
                 options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
             ],
         };
     };
-    return HttpXsrfModule;
+    return HttpClientXsrfModule;
 }());
-HttpXsrfModule.decorators = [
+HttpClientXsrfModule.decorators = [
     { type: NgModule, args: [{
                 providers: [
                     HttpXsrfInterceptor,
@@ -2058,7 +2058,7 @@ HttpXsrfModule.decorators = [
 /**
  * @nocollapse
  */
-HttpXsrfModule.ctorParameters = function () { return []; };
+HttpClientXsrfModule.ctorParameters = function () { return []; };
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
@@ -2075,7 +2075,7 @@ var HttpClientModule = (function () {
 HttpClientModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
-                    HttpXsrfModule.withOptions({
+                    HttpClientXsrfModule.withOptions({
                         cookieName: 'XSRF-TOKEN',
                         headerName: 'X-XSRF-TOKEN',
                     }),
@@ -2136,5 +2136,5 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
 /**
  * Generated bundle index. Do not edit.
  */
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
 //# sourceMappingURL=http.es5.js.map
