@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-rc.0-3d85f72
+ * @license Angular v4.3.0-rc.0-dd04f09
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.0-rc.0-3d85f72
+ * @license Angular v4.3.0-rc.0-dd04f09
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1182,6 +1182,28 @@ function getPluralCase(locale, nLike) {
         default:
             return Plural.Other;
     }
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cookieStr
+ * @param {?} name
+ * @return {?}
+ */
+function parseCookieValue(cookieStr, name) {
+    name = encodeURIComponent(name);
+    for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
+        var cookie = _a[_i];
+        var /** @type {?} */ eqIndex = cookie.indexOf('=');
+        var _b = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], cookieName = _b[0], cookieValue = _b[1];
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
 }
 /**
  * @license
@@ -3956,10 +3978,11 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.0-rc.0-3d85f72');
+var VERSION = new _angular_core.Version('4.3.0-rc.0-dd04f09');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
+exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
 exports.NgClass = NgClass;
 exports.NgFor = NgFor;

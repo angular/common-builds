@@ -1,15 +1,15 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-rc.0-3d85f72
+ * @license Angular v4.3.0-rc.0-dd04f09
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Inject, Injectable, InjectionToken, NgModule, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, NgModule, Optional, PLATFORM_ID } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { concatMap } from 'rxjs/operator/concatMap';
 import { filter } from 'rxjs/operator/filter';
 import { map } from 'rxjs/operator/map';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 /**
  * @license
@@ -1283,6 +1283,26 @@ var HttpInterceptorHandler = (function () {
  * \@experimental
  */
 var HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
+var NoopInterceptor = (function () {
+    function NoopInterceptor() {
+    }
+    /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    NoopInterceptor.prototype.intercept = function (req, next) {
+        return next.handle(req);
+    };
+    return NoopInterceptor;
+}());
+NoopInterceptor.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+NoopInterceptor.ctorParameters = function () { return []; };
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1824,6 +1844,128 @@ HttpXhrBackend.ctorParameters = function () { return [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+var XSRF_COOKIE_NAME = new InjectionToken('XSRF_COOKIE_NAME');
+var XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
+/**
+ * Retrieves the current XSRF token to use with the next outgoing request.
+ *
+ * \@experimental
+ * @abstract
+ */
+var HttpXsrfTokenExtractor = (function () {
+    function HttpXsrfTokenExtractor() {
+    }
+    /**
+     * Get the XSRF token to use with an outgoing request.
+     *
+     * Will be called for every request, so the token may change between requests.
+     * @abstract
+     * @return {?}
+     */
+    HttpXsrfTokenExtractor.prototype.getToken = function () { };
+    return HttpXsrfTokenExtractor;
+}());
+/**
+ * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
+ */
+var HttpXsrfCookieExtractor = (function () {
+    /**
+     * @param {?} doc
+     * @param {?} platform
+     * @param {?} cookieName
+     */
+    function HttpXsrfCookieExtractor(doc, platform, cookieName) {
+        this.doc = doc;
+        this.platform = platform;
+        this.cookieName = cookieName;
+        this.lastCookieString = '';
+        this.lastToken = null;
+        /**
+         * \@internal for testing
+         */
+        this.parseCount = 0;
+    }
+    /**
+     * @return {?}
+     */
+    HttpXsrfCookieExtractor.prototype.getToken = function () {
+        if (this.platform === 'server') {
+            return null;
+        }
+        var /** @type {?} */ cookieString = this.doc.cookie || '';
+        if (cookieString !== this.lastCookieString) {
+            this.parseCount++;
+            this.lastToken = ɵparseCookieValue(cookieString, this.cookieName);
+            this.lastCookieString = cookieString;
+        }
+        return this.lastToken;
+    };
+    return HttpXsrfCookieExtractor;
+}());
+HttpXsrfCookieExtractor.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+HttpXsrfCookieExtractor.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] },] },
+]; };
+/**
+ * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
+ */
+var HttpXsrfInterceptor = (function () {
+    /**
+     * @param {?} tokenService
+     * @param {?} headerName
+     */
+    function HttpXsrfInterceptor(tokenService, headerName) {
+        this.tokenService = tokenService;
+        this.headerName = headerName;
+    }
+    /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    HttpXsrfInterceptor.prototype.intercept = function (req, next) {
+        var /** @type {?} */ lcUrl = req.url.toLowerCase();
+        // Skip both non-mutating requests and absolute URLs.
+        // Non-mutating requests don't require a token, and absolute URLs require special handling
+        // anyway as the cookie set
+        // on our origin is not the same as the token expected by another origin.
+        if (req.method === 'GET' || req.method === 'HEAD' || lcUrl.startsWith('http://') ||
+            lcUrl.startsWith('https://')) {
+            return next.handle(req);
+        }
+        var /** @type {?} */ token = this.tokenService.getToken();
+        // Be careful not to overwrite an existing header of the same name.
+        if (token !== null && !req.headers.has(this.headerName)) {
+            req = req.clone({ headers: req.headers.set(this.headerName, token) });
+        }
+        return next.handle(req);
+    };
+    return HttpXsrfInterceptor;
+}());
+HttpXsrfInterceptor.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+HttpXsrfInterceptor.ctorParameters = function () { return [
+    { type: HttpXsrfTokenExtractor, },
+    { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
+]; };
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
  * to a request before passing it to the given `HttpBackend`.
@@ -1858,6 +2000,66 @@ function jsonpCallbackContext() {
     return {};
 }
 /**
+ * `NgModule` which adds XSRF protection support to outgoing requests.
+ *
+ * Provided the server supports a cookie-based XSRF protection system, this
+ * module can be used directly to configure XSRF protection with the correct
+ * cookie and header names.
+ *
+ * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
+ * the header name and `XSRF-TOKEN` for the cookie name.
+ *
+ * \@experimental
+ */
+var HttpXsrfModule = (function () {
+    function HttpXsrfModule() {
+    }
+    /**
+     * Disable the default XSRF protection.
+     * @return {?}
+     */
+    HttpXsrfModule.disable = function () {
+        return {
+            ngModule: HttpXsrfModule,
+            providers: [
+                { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
+            ],
+        };
+    };
+    /**
+     * Configure XSRF protection to use the given cookie name or header name,
+     * or the default names (as described above) if not provided.
+     * @param {?=} options
+     * @return {?}
+     */
+    HttpXsrfModule.withOptions = function (options) {
+        if (options === void 0) { options = {}; }
+        return {
+            ngModule: HttpXsrfModule,
+            providers: [
+                options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
+                options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
+            ],
+        };
+    };
+    return HttpXsrfModule;
+}());
+HttpXsrfModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    HttpXsrfInterceptor,
+                    { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                    { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                    { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                    { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                ],
+            },] },
+];
+/**
+ * @nocollapse
+ */
+HttpXsrfModule.ctorParameters = function () { return []; };
+/**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
  * Interceptors can be added to the chain behind `HttpClient` by binding them
@@ -1872,6 +2074,12 @@ var HttpClientModule = (function () {
 }());
 HttpClientModule.decorators = [
     { type: NgModule, args: [{
+                imports: [
+                    HttpXsrfModule.withOptions({
+                        cookieName: 'XSRF-TOKEN',
+                        headerName: 'X-XSRF-TOKEN',
+                    }),
+                ],
                 providers: [
                     HttpClient,
                     // HttpHandler is the backend + interceptors and is constructed
@@ -1928,5 +2136,5 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
 /**
  * Generated bundle index. Do not edit.
  */
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, JsonpCallbackContext as ɵa, jsonpCallbackContext as ɵb, BrowserXhr as ɵc };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
 //# sourceMappingURL=http.es5.js.map

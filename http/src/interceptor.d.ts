@@ -58,3 +58,6 @@ export declare class HttpInterceptorHandler implements HttpHandler {
  * @experimental
  */
 export declare const HTTP_INTERCEPTORS: InjectionToken<HttpInterceptor[]>;
+export declare class NoopInterceptor implements HttpInterceptor {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+}

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v4.3.0-rc.0-3d85f72
+ * @license Angular v4.3.0-rc.0-dd04f09
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1147,6 +1147,28 @@ function getPluralCase(locale, nLike) {
         default:
             return Plural.Other;
     }
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cookieStr
+ * @param {?} name
+ * @return {?}
+ */
+function parseCookieValue(cookieStr, name) {
+    name = encodeURIComponent(name);
+    for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
+        var cookie = _a[_i];
+        var /** @type {?} */ eqIndex = cookie.indexOf('=');
+        var _b = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], cookieName = _b[0], cookieValue = _b[1];
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
 }
 /**
  * @license
@@ -3921,7 +3943,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('4.3.0-rc.0-3d85f72');
+var VERSION = new Version('4.3.0-rc.0-dd04f09');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3950,5 +3972,5 @@ var VERSION = new Version('4.3.0-rc.0-3d85f72');
 /**
  * Generated bundle index. Do not edit.
  */
-export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
+export { NgLocaleLocalization, NgLocalization, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
 //# sourceMappingURL=common.es5.js.map

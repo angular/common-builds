@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { ModuleWithProviders } from '@angular/core';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
 /**
@@ -18,6 +26,32 @@ export declare function interceptingHandler(backend: HttpBackend, interceptors?:
  * @experimental
  */
 export declare function jsonpCallbackContext(): Object;
+/**
+ * `NgModule` which adds XSRF protection support to outgoing requests.
+ *
+ * Provided the server supports a cookie-based XSRF protection system, this
+ * module can be used directly to configure XSRF protection with the correct
+ * cookie and header names.
+ *
+ * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
+ * the header name and `XSRF-TOKEN` for the cookie name.
+ *
+ * @experimental
+ */
+export declare class HttpXsrfModule {
+    /**
+     * Disable the default XSRF protection.
+     */
+    static disable(): ModuleWithProviders;
+    /**
+     * Configure XSRF protection to use the given cookie name or header name,
+     * or the default names (as described above) if not provided.
+     */
+    static withOptions(options?: {
+        cookieName?: string;
+        headerName?: string;
+    }): ModuleWithProviders;
+}
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
