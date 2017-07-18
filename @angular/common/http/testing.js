@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-256bc8a
+ * @license Angular v4.3.0-5c62e30
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -199,13 +199,12 @@ class TestRequest {
         if (statusText === undefined) {
             throw new Error('statusText is required when setting a custom status.');
         }
-        const /** @type {?} */ res = { body, headers, status, statusText, url };
         if (status >= 200 && status < 300) {
-            this.observer.next(new HttpResponse(res));
+            this.observer.next(new HttpResponse({ body, headers, status, statusText, url }));
             this.observer.complete();
         }
         else {
-            this.observer.error(new HttpErrorResponse(res));
+            this.observer.error(new HttpErrorResponse({ error: body, headers, status, statusText, url }));
         }
     }
     /**
