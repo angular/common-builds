@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-17b7bc3
+ * @license Angular v4.3.0-f19bd5f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -205,12 +205,13 @@ var TestRequest = (function () {
         if (statusText === undefined) {
             throw new Error('statusText is required when setting a custom status.');
         }
+        var /** @type {?} */ res = { body: body, headers: headers, status: status, statusText: statusText, url: url };
         if (status >= 200 && status < 300) {
-            this.observer.next(new HttpResponse({ body: body, headers: headers, status: status, statusText: statusText, url: url }));
+            this.observer.next(new HttpResponse(res));
             this.observer.complete();
         }
         else {
-            this.observer.error(new HttpErrorResponse({ error: body, headers: headers, status: status, statusText: statusText, url: url }));
+            this.observer.error(new HttpErrorResponse(res));
         }
     };
     /**
