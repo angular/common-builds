@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.0-abee785
+ * @license Angular v5.0.0-beta.0-b7a6f52
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -12,11 +12,8 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
@@ -32,12 +29,6 @@ import { Observable } from 'rxjs/Observable';
  * @abstract
  */
 class HttpHandler {
-    /**
-     * @abstract
-     * @param {?} req
-     * @return {?}
-     */
-    handle(req) { }
 }
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
@@ -51,21 +42,25 @@ class HttpHandler {
  * @abstract
  */
 class HttpBackend {
-    /**
-     * @abstract
-     * @param {?} req
-     * @return {?}
-     */
-    handle(req) { }
 }
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
+/**
+ * A codec for encoding and decoding parameters in URLs.
+ *
+ * Used by `HttpParams`.
+ *
+ *  \@experimental
+ *
+ * @record
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ function HttpParameterCodec() { }
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
@@ -277,11 +272,16 @@ class HttpParams {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ * @record
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
@@ -308,14 +308,14 @@ class HttpHeaders {
             this.lazyInit = () => {
                 this.headers = new Map();
                 headers.split('\n').forEach(line => {
-                    const index = line.indexOf(':');
+                    const /** @type {?} */ index = line.indexOf(':');
                     if (index > 0) {
-                        const name = line.slice(0, index);
-                        const key = name.toLowerCase();
-                        const value = line.slice(index + 1).trim();
+                        const /** @type {?} */ name = line.slice(0, index);
+                        const /** @type {?} */ key = name.toLowerCase();
+                        const /** @type {?} */ value = line.slice(index + 1).trim();
                         this.maybeSetNormalizedName(name, key);
                         if (this.headers.has(key)) {
-                            this.headers.get(key).push(value);
+                            ((this.headers.get(key))).push(value);
                         }
                         else {
                             this.headers.set(key, [value]);
@@ -328,8 +328,8 @@ class HttpHeaders {
             this.lazyInit = () => {
                 this.headers = new Map();
                 Object.keys(headers).forEach(name => {
-                    let values = headers[name];
-                    const key = name.toLowerCase();
+                    let /** @type {?} */ values = headers[name];
+                    const /** @type {?} */ key = name.toLowerCase();
                     if (typeof values === 'string') {
                         values = [values];
                     }
@@ -508,6 +508,10 @@ class HttpHeaders {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -609,17 +613,17 @@ class HttpRequest {
         this.method = method.toUpperCase();
         // Next, need to figure out which argument holds the HttpRequestInit
         // options, if any.
-        let options;
+        let /** @type {?} */ options;
         // Check whether a body argument is expected. The only valid way to omit
         // the body argument is to use a known no-body method like GET.
         if (mightHaveBody(this.method) || !!fourth) {
             // Body is the third argument, options are the fourth.
-            this.body = third || null;
+            this.body = (third) || null;
             options = fourth;
         }
         else {
             // No body required, options are the third argument. The body stays null.
-            options = third;
+            options = (third);
         }
         // If options have been passed, interpret them.
         if (options) {
@@ -649,14 +653,14 @@ class HttpRequest {
         }
         else {
             // Encode the parameters to a string in preparation for inclusion in the URL.
-            const params = this.params.toString();
+            const /** @type {?} */ params = this.params.toString();
             if (params.length === 0) {
                 // No parameters, the visible URL is just the URL given at creation time.
                 this.urlWithParams = url;
             }
             else {
                 // Does the URL already have query parameters? Look for '?'.
-                const qIdx = url.indexOf('?');
+                const /** @type {?} */ qIdx = url.indexOf('?');
                 // There are 3 cases to handle:
                 // 1) No existing parameters -> append '?' followed by params.
                 // 2) '?' exists and is followed by existing query string ->
@@ -664,7 +668,7 @@ class HttpRequest {
                 // 3) '?' exists at the end of the url -> append params directly.
                 // This basically amounts to determining the character, if any, with
                 // which to join the URL and parameters.
-                const sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
+                const /** @type {?} */ sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
                 this.urlWithParams = url + sep + params;
             }
         }
@@ -783,6 +787,10 @@ class HttpRequest {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -802,6 +810,56 @@ HttpEventType[HttpEventType.ResponseHeader] = "ResponseHeader";
 HttpEventType[HttpEventType.DownloadProgress] = "DownloadProgress";
 HttpEventType[HttpEventType.Response] = "Response";
 HttpEventType[HttpEventType.User] = "User";
+/**
+ * Base interface for progress events.
+ *
+ * \@experimental
+ * @record
+ */
+function HttpProgressEvent() { }
+/**
+ * A download progress event.
+ *
+ * \@experimental
+ * @record
+ */
+function HttpDownloadProgressEvent() { }
+/**
+ * An upload progress event.
+ *
+ * \@experimental
+ * @record
+ */
+
+/**
+ * An event indicating that the request was sent to the server. Useful
+ * when a request may be retried multiple times, to distinguish between
+ * retries on the final event stream.
+ *
+ * \@experimental
+ * @record
+ */
+function HttpSentEvent() { }
+/**
+ * A user-defined event.
+ *
+ * Grouping all custom events under this type ensures they will be handled
+ * and forwarded by all implementations of interceptors.
+ *
+ * \@experimental
+ * @record
+ */
+function HttpUserEvent() { }
+/**
+ * An error that represents a failed attempt to JSON.parse text coming back
+ * from the server.
+ *
+ * It bundles the Error object with the actual response body that failed to parse.
+ *
+ * \@experimental
+ * @record
+ */
+
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
@@ -936,6 +994,10 @@ class HttpErrorResponse extends HttpResponseBase {
     }
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1198,13 +1260,15 @@ class HttpClient {
 HttpClient.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClient.ctorParameters = () => [
     { type: HttpHandler, },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1212,6 +1276,19 @@ HttpClient.ctorParameters = () => [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * Intercepts `HttpRequest` and handles them.
+ *
+ * Most interceptors will transform the outgoing request before passing it to the
+ * next interceptor in the chain, by calling `next.handle(transformedReq)`.
+ *
+ * In rare cases, interceptors may wish to completely handle a request themselves,
+ * and not delegate to the remainder of the chain. This behavior is allowed.
+ *
+ * \@experimental
+ * @record
+ */
+function HttpInterceptor() { }
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
@@ -1254,11 +1331,13 @@ class NoopInterceptor {
 NoopInterceptor.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NoopInterceptor.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1439,9 +1518,7 @@ class JsonpClientBackend {
 JsonpClientBackend.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 JsonpClientBackend.ctorParameters = () => [
     { type: JsonpCallbackContext, },
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
@@ -1475,13 +1552,15 @@ class JsonpInterceptor {
 JsonpInterceptor.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 JsonpInterceptor.ctorParameters = () => [
     { type: JsonpClientBackend, },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1512,11 +1591,6 @@ function getResponseUrl(xhr) {
  * @abstract
  */
 class XhrFactory {
-    /**
-     * @abstract
-     * @return {?}
-     */
-    build() { }
 }
 /**
  * A factory for \@{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
@@ -1533,9 +1607,7 @@ class BrowserXhr {
 BrowserXhr.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 BrowserXhr.ctorParameters = () => [];
 /**
  * An `HttpBackend` which uses the XMLHttpRequest API to send
@@ -1775,13 +1847,15 @@ class HttpXhrBackend {
 HttpXhrBackend.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpXhrBackend.ctorParameters = () => [
     { type: XhrFactory, },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1798,14 +1872,6 @@ const XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
  * @abstract
  */
 class HttpXsrfTokenExtractor {
-    /**
-     * Get the XSRF token to use with an outgoing request.
-     *
-     * Will be called for every request, so the token may change between requests.
-     * @abstract
-     * @return {?}
-     */
-    getToken() { }
 }
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
@@ -1846,9 +1912,7 @@ class HttpXsrfCookieExtractor {
 HttpXsrfCookieExtractor.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpXsrfCookieExtractor.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
     { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
@@ -1892,14 +1956,16 @@ class HttpXsrfInterceptor {
 HttpXsrfInterceptor.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpXsrfInterceptor.ctorParameters = () => [
     { type: HttpXsrfTokenExtractor, },
     { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1991,9 +2057,7 @@ HttpClientXsrfModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClientXsrfModule.ctorParameters = () => [];
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
@@ -2029,9 +2093,7 @@ HttpClientModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClientModule.ctorParameters = () => [];
 /**
  * `NgModule` which enables JSONP support in `HttpClient`.
@@ -2052,11 +2114,13 @@ HttpClientJsonpModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClientJsonpModule.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2066,8 +2130,12 @@ HttpClientJsonpModule.ctorParameters = () => [];
  */
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, HttpInterceptor, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParameterCodec, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpResponseBase, HttpSentEvent, HttpUserEvent, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
 //# sourceMappingURL=http.js.map

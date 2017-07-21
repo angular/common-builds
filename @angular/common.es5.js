@@ -1,10 +1,14 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.0-abee785
+ * @license Angular v5.0.0-beta.0-b7a6f52
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -38,64 +42,6 @@ import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, Elem
 var PlatformLocation = (function () {
     function PlatformLocation() {
     }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    PlatformLocation.prototype.onPopState = function (fn) { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    PlatformLocation.prototype.onHashChange = function (fn) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.pathname = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.search = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.hash = function () { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    PlatformLocation.prototype.replaceState = function (state, title, url) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    PlatformLocation.prototype.pushState = function (state, title, url) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.forward = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.back = function () { };
     return PlatformLocation;
 }());
 /**
@@ -103,6 +49,22 @@ var PlatformLocation = (function () {
  * \@experimental
  */
 var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
+/**
+ * A serializable version of the event from onPopState or onHashChange
+ *
+ * \@experimental
+ * @record
+ */
+function LocationChangeEvent() { }
+/**
+ * \@experimental
+ * @record
+ */
+function LocationChangeListener() { }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -132,57 +94,6 @@ var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 var LocationStrategy = (function () {
     function LocationStrategy() {
     }
-    /**
-     * @abstract
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    LocationStrategy.prototype.path = function (includeHash) { };
-    /**
-     * @abstract
-     * @param {?} internal
-     * @return {?}
-     */
-    LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.forward = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.back = function () { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    LocationStrategy.prototype.onPopState = function (fn) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.getBaseHref = function () { };
     return LocationStrategy;
 }());
 /**
@@ -209,12 +120,21 @@ var LocationStrategy = (function () {
  */
 var APP_BASE_HREF = new InjectionToken('appBaseHref');
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * \@experimental
+ * @record
+ */
+function PopStateEvent() { }
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -247,7 +167,7 @@ var Location = (function () {
          */
         this._subject = new EventEmitter();
         this._platformStrategy = platformStrategy;
-        var browserBaseHref = this._platformStrategy.getBaseHref();
+        var /** @type {?} */ browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState(function (ev) {
             _this._subject.emit({
@@ -395,9 +315,7 @@ var Location = (function () {
 Location.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Location.ctorParameters = function () { return [
     { type: LocationStrategy, },
 ]; };
@@ -416,6 +334,10 @@ function _stripBaseHref(baseHref, url) {
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -529,13 +451,15 @@ var HashLocationStrategy = (function (_super) {
 HashLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HashLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -652,19 +576,25 @@ var PathLocationStrategy = (function (_super) {
 PathLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 PathLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -680,12 +610,6 @@ PathLocationStrategy.ctorParameters = function () { return [
 var NgLocalization = (function () {
     function NgLocalization() {
     }
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgLocalization.prototype.getPluralCategory = function (value) { };
     return NgLocalization;
 }());
 /**
@@ -754,9 +678,7 @@ var NgLocaleLocalization = (function (_super) {
 NgLocaleLocalization.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgLocaleLocalization.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -1149,6 +1071,10 @@ function getPluralCase(locale, nLike) {
     }
 }
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -1158,7 +1084,10 @@ function getPluralCase(locale, nLike) {
  * @param {?} name
  * @return {?}
  */
-function parseCookieValue(cookieStr, name) {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
         var cookie = _a[_i];
@@ -1170,6 +1099,10 @@ function parseCookieValue(cookieStr, name) {
     }
     return null;
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1354,9 +1287,7 @@ var NgClass = (function () {
 NgClass.decorators = [
     { type: Directive, args: [{ selector: '[ngClass]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgClass.ctorParameters = function () { return [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },
@@ -1364,9 +1295,13 @@ NgClass.ctorParameters = function () { return [
     { type: Renderer, },
 ]; };
 NgClass.propDecorators = {
-    'klass': [{ type: Input, args: ['class',] },],
-    'ngClass': [{ type: Input },],
+    "klass": [{ type: Input, args: ['class',] },],
+    "ngClass": [{ type: Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1475,18 +1410,20 @@ var NgComponentOutlet = (function () {
 NgComponentOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgComponentOutlet.ctorParameters = function () { return [
     { type: ViewContainerRef, },
 ]; };
 NgComponentOutlet.propDecorators = {
-    'ngComponentOutlet': [{ type: Input },],
-    'ngComponentOutletInjector': [{ type: Input },],
-    'ngComponentOutletContent': [{ type: Input },],
-    'ngComponentOutletNgModuleFactory': [{ type: Input },],
+    "ngComponentOutlet": [{ type: Input },],
+    "ngComponentOutletInjector": [{ type: Input },],
+    "ngComponentOutletContent": [{ type: Input },],
+    "ngComponentOutletNgModuleFactory": [{ type: Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1742,18 +1679,16 @@ var NgForOf = (function () {
 NgForOf.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgForOf.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: IterableDiffers, },
 ]; };
 NgForOf.propDecorators = {
-    'ngForOf': [{ type: Input },],
-    'ngForTrackBy': [{ type: Input },],
-    'ngForTemplate': [{ type: Input },],
+    "ngForOf": [{ type: Input },],
+    "ngForTrackBy": [{ type: Input },],
+    "ngForTemplate": [{ type: Input },],
 };
 var RecordViewTuple = (function () {
     /**
@@ -1777,6 +1712,10 @@ var NgFor = NgForOf;
 function getTypeNameForDebugging(type) {
     return type['name'] || typeof type;
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1956,17 +1895,15 @@ var NgIf = (function () {
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgIf.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
 ]; };
 NgIf.propDecorators = {
-    'ngIf': [{ type: Input },],
-    'ngIfThen': [{ type: Input },],
-    'ngIfElse': [{ type: Input },],
+    "ngIf": [{ type: Input },],
+    "ngIfThen": [{ type: Input },],
+    "ngIfElse": [{ type: Input },],
 };
 /**
  * \@stable
@@ -1978,6 +1915,10 @@ var NgIfContext = (function () {
     }
     return NgIfContext;
 }());
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2135,12 +2076,10 @@ var NgSwitch = (function () {
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitch.ctorParameters = function () { return []; };
 NgSwitch.propDecorators = {
-    'ngSwitch': [{ type: Input },],
+    "ngSwitch": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2186,16 +2125,14 @@ var NgSwitchCase = (function () {
 NgSwitchCase.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitchCase.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ]; };
 NgSwitchCase.propDecorators = {
-    'ngSwitchCase': [{ type: Input },],
+    "ngSwitchCase": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2234,14 +2171,16 @@ var NgSwitchDefault = (function () {
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitchDefault.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2337,14 +2276,12 @@ var NgPlural = (function () {
 NgPlural.decorators = [
     { type: Directive, args: [{ selector: '[ngPlural]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgPlural.ctorParameters = function () { return [
     { type: NgLocalization, },
 ]; };
 NgPlural.propDecorators = {
-    'ngPlural': [{ type: Input },],
+    "ngPlural": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2373,7 +2310,7 @@ var NgPluralCase = (function () {
      */
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
-        var isANumber = !isNaN(Number(value));
+        var /** @type {?} */ isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
     return NgPluralCase;
@@ -2381,15 +2318,17 @@ var NgPluralCase = (function () {
 NgPluralCase.decorators = [
     { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgPluralCase.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
     { type: TemplateRef, },
     { type: ViewContainerRef, },
     { type: NgPlural, decorators: [{ type: Host },] },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2480,17 +2419,19 @@ var NgStyle = (function () {
 NgStyle.decorators = [
     { type: Directive, args: [{ selector: '[ngStyle]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgStyle.ctorParameters = function () { return [
     { type: KeyValueDiffers, },
     { type: ElementRef, },
     { type: Renderer, },
 ]; };
 NgStyle.propDecorators = {
-    'ngStyle': [{ type: Input },],
+    "ngStyle": [{ type: Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2556,23 +2497,18 @@ var NgTemplateOutlet = (function () {
 NgTemplateOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgTemplateOutlet.ctorParameters = function () { return [
     { type: ViewContainerRef, },
 ]; };
 NgTemplateOutlet.propDecorators = {
-    'ngTemplateOutletContext': [{ type: Input },],
-    'ngTemplateOutlet': [{ type: Input },],
-    'ngOutletContext': [{ type: Input },],
+    "ngTemplateOutletContext": [{ type: Input },],
+    "ngTemplateOutlet": [{ type: Input },],
+    "ngOutletContext": [{ type: Input },],
 };
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -2595,6 +2531,10 @@ var COMMON_DIRECTIVES = [
  * A collection of deprecated directives that are no longer part of the core module.
  */
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -2609,6 +2549,10 @@ var COMMON_DIRECTIVES = [
 function invalidPipeArgumentError(type, value) {
     return Error("InvalidPipeArgument: '" + value + "' for pipe '" + ɵstringify(type) + "'");
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2780,12 +2724,14 @@ var AsyncPipe = (function () {
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 AsyncPipe.ctorParameters = function () { return [
     { type: ChangeDetectorRef, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2820,9 +2766,7 @@ var LowerCasePipe = (function () {
 LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 LowerCasePipe.ctorParameters = function () { return []; };
 /**
  * Helper method to transform a single word to titlecase.
@@ -2861,9 +2805,7 @@ var TitleCasePipe = (function () {
 TitleCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'titlecase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 TitleCasePipe.ctorParameters = function () { return []; };
 /**
  * Transforms text to uppercase.
@@ -2890,10 +2832,12 @@ var UpperCasePipe = (function () {
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 UpperCasePipe.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NumberFormatStyle = {};
 NumberFormatStyle.Decimal = 0;
 NumberFormatStyle.Percent = 1;
@@ -3148,6 +3092,10 @@ var DateFormatter = (function () {
     return DateFormatter;
 }());
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3254,9 +3202,7 @@ var DecimalPipe = (function () {
 DecimalPipe.decorators = [
     { type: Pipe, args: [{ name: 'number' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 DecimalPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3300,9 +3246,7 @@ var PercentPipe = (function () {
 PercentPipe.decorators = [
     { type: Pipe, args: [{ name: 'percent' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 PercentPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3354,9 +3298,7 @@ var CurrencyPipe = (function () {
 CurrencyPipe.decorators = [
     { type: Pipe, args: [{ name: 'currency' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CurrencyPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3378,6 +3320,10 @@ function parseIntAutoRadix(text) {
 function isNumeric(value) {
     return !isNaN(value - parseFloat(value));
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3526,9 +3472,7 @@ DatePipe._ALIASES = {
 DatePipe.decorators = [
     { type: Pipe, args: [{ name: 'date', pure: true },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 DatePipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
@@ -3575,6 +3519,10 @@ function isoStringToDate(match) {
 function toInt(str) {
     return parseInt(str, 10);
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3626,12 +3574,14 @@ var I18nPluralPipe = (function () {
 I18nPluralPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 I18nPluralPipe.ctorParameters = function () { return [
     { type: NgLocalization, },
 ]; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3683,10 +3633,12 @@ var I18nSelectPipe = (function () {
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 I18nSelectPipe.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3720,10 +3672,12 @@ var JsonPipe = (function () {
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 JsonPipe.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3802,10 +3756,12 @@ var SlicePipe = (function () {
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 SlicePipe.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3836,6 +3792,10 @@ var COMMON_PIPES = [
     I18nSelectPipe,
 ];
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3861,10 +3821,12 @@ CommonModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CommonModule.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3882,13 +3844,20 @@ CommonModule.ctorParameters = function () { return []; };
  */
 var DOCUMENT = new InjectionToken('DocumentToken');
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var PLATFORM_BROWSER_ID = 'browser';
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ var PLATFORM_BROWSER_ID = 'browser';
 var PLATFORM_SERVER_ID = 'server';
 var PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 var PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -3929,6 +3898,10 @@ function isPlatformWorkerUi(platformId) {
     return platformId === PLATFORM_WORKER_UI_ID;
 }
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3943,7 +3916,11 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.0-abee785');
+var VERSION = new Version('5.0.0-beta.0-b7a6f52');
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3955,6 +3932,10 @@ var VERSION = new Version('5.0.0-beta.0-abee785');
  * @module
  * @description
  * Entry point for all public APIs of the common package.
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -3970,7 +3951,11 @@ var VERSION = new Version('5.0.0-beta.0-abee785');
  */
 // This file only reexports content of the `src` folder. Keep it that way.
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * Generated bundle index. Do not edit.
  */
-export { NgLocaleLocalization, NgLocalization, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
+export { NgLocaleLocalization, NgLocalization, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
 //# sourceMappingURL=common.es5.js.map

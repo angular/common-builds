@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.0-abee785
+ * @license Angular v5.0.0-beta.0-b7a6f52
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -8,12 +8,16 @@ import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
+/**
+ * Defines a matcher for requests based on URL, method, or both.
+ *
+ * \@experimental
+ * @record
+ */
+function RequestMatch() { }
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
@@ -22,120 +26,12 @@ import { Observable } from 'rxjs/Observable';
  * @abstract
  */
 class HttpTestingController {
-    /**
-     * Search for requests that match the given parameter, without any expectations.
-     * @abstract
-     * @param {?} match
-     * @return {?}
-     */
-    match(match) { }
-    /**
-     * Expect that a single request has been made which matches the given URL, and return its
-     * mock.
-     *
-     * If no such request has been made, or more than one such request has been made, fail with an
-     * error message including the given request description, if any.
-     * @abstract
-     * @param {?} url
-     * @param {?=} description
-     * @return {?}
-     */
-    expectOne(url, description) { }
-    /**
-     * Expect that a single request has been made which matches the given parameters, and return
-     * its mock.
-     *
-     * If no such request has been made, or more than one such request has been made, fail with an
-     * error message including the given request description, if any.
-     * @abstract
-     * @param {?} params
-     * @param {?=} description
-     * @return {?}
-     */
-    expectOne(params, description) { }
-    /**
-     * Expect that a single request has been made which matches the given predicate function, and
-     * return its mock.
-     *
-     * If no such request has been made, or more than one such request has been made, fail with an
-     * error message including the given request description, if any.
-     * @abstract
-     * @param {?} matchFn
-     * @param {?=} description
-     * @return {?}
-     */
-    expectOne(matchFn, description) { }
-    /**
-     * Expect that a single request has been made which matches the given condition, and return
-     * its mock.
-     *
-     * If no such request has been made, or more than one such request has been made, fail with an
-     * error message including the given request description, if any.
-     * @abstract
-     * @param {?} match
-     * @param {?=} description
-     * @return {?}
-     */
-    expectOne(match, description) { }
-    /**
-     * Expect that no requests have been made which match the given URL.
-     *
-     * If a matching request has been made, fail with an error message including the given request
-     * description, if any.
-     * @abstract
-     * @param {?} url
-     * @param {?=} description
-     * @return {?}
-     */
-    expectNone(url, description) { }
-    /**
-     * Expect that no requests have been made which match the given parameters.
-     *
-     * If a matching request has been made, fail with an error message including the given request
-     * description, if any.
-     * @abstract
-     * @param {?} params
-     * @param {?=} description
-     * @return {?}
-     */
-    expectNone(params, description) { }
-    /**
-     * Expect that no requests have been made which match the given predicate function.
-     *
-     * If a matching request has been made, fail with an error message including the given request
-     * description, if any.
-     * @abstract
-     * @param {?} matchFn
-     * @param {?=} description
-     * @return {?}
-     */
-    expectNone(matchFn, description) { }
-    /**
-     * Expect that no requests have been made which match the given condition.
-     *
-     * If a matching request has been made, fail with an error message including the given request
-     * description, if any.
-     * @abstract
-     * @param {?} match
-     * @param {?=} description
-     * @return {?}
-     */
-    expectNone(match, description) { }
-    /**
-     * Verify that no unmatched requests are outstanding.
-     *
-     * If any requests are outstanding, fail with an error message indicating which requests were not
-     * handled.
-     *
-     * If `ignoreCancelled` is not set (the default), `verify()` will also fail if cancelled requests
-     * were not explicitly matched.
-     * @abstract
-     * @param {?=} opts
-     * @return {?}
-     */
-    verify(opts) { }
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -343,6 +239,10 @@ function _maybeConvertBody(responseType, body) {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -492,11 +392,13 @@ class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClientTestingBackend.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -525,11 +427,13 @@ HttpClientTestingModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HttpClientTestingModule.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -539,8 +443,12 @@ HttpClientTestingModule.ctorParameters = () => [];
  */
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { HttpTestingController, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
+export { HttpTestingController, RequestMatch, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
 //# sourceMappingURL=testing.js.map
