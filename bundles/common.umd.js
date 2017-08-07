@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.2-5b7432b
+ * @license Angular v5.0.0-beta.2-685cc26
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.2-5b7432b
+ * @license Angular v5.0.0-beta.2-685cc26
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2520,11 +2520,65 @@ var NgTemplateOutlet = (function () {
      * @return {?}
      */
     NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
-        if (this._viewRef) {
-            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+        var /** @type {?} */ recreateView = this._shouldRecreateView(changes);
+        if (recreateView) {
+            if (this._viewRef) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+            }
+            if (this.ngTemplateOutlet) {
+                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+            }
         }
-        if (this.ngTemplateOutlet) {
-            this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+        else {
+            if (this._viewRef && this.ngTemplateOutletContext) {
+                this._updateExistingContext(this.ngTemplateOutletContext);
+            }
+        }
+    };
+    /**
+     * We need to re-create existing embedded view if:
+     * - templateRef has changed
+     * - context has changes
+     *
+     * To mark context object as changed when the corresponding object
+     * shape changes (new properties are added or existing properties are removed).
+     * In other words we consider context with the same properties as "the same" even
+     * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     * @param {?} changes
+     * @return {?}
+     */
+    NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
+        var /** @type {?} */ ctxChange = changes['ngTemplateOutletContext'];
+        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
+    };
+    /**
+     * @param {?} ctxChange
+     * @return {?}
+     */
+    NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
+        var /** @type {?} */ prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+        var /** @type {?} */ currCtxKeys = Object.keys(ctxChange.currentValue || {});
+        if (prevCtxKeys.length === currCtxKeys.length) {
+            for (var _i = 0, currCtxKeys_1 = currCtxKeys; _i < currCtxKeys_1.length; _i++) {
+                var propName = currCtxKeys_1[_i];
+                if (prevCtxKeys.indexOf(propName) === -1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    /**
+     * @param {?} ctx
+     * @return {?}
+     */
+    NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
+        for (var _i = 0, _a = Object.keys(ctx); _i < _a.length; _i++) {
+            var propName = _a[_i];
+            ((this._viewRef.context))[propName] = ((this.ngTemplateOutletContext))[propName];
         }
     };
     return NgTemplateOutlet;
@@ -3951,7 +4005,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.2-5b7432b');
+var VERSION = new _angular_core.Version('5.0.0-beta.2-685cc26');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
