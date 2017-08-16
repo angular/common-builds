@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.3-0a73e8d
+ * @license Angular v5.0.0-beta.3-64b4be9
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2372,7 +2372,7 @@ NgStyle.propDecorators = {
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@stable
+ * \@experimental
  */
 class NgTemplateOutlet {
     /**
@@ -2412,7 +2412,7 @@ class NgTemplateOutlet {
      * - templateRef has changed
      * - context has changes
      *
-     * We mark context object as changed when the corresponding object
+     * To mark context object as changed when the corresponding object
      * shape changes (new properties are added or existing properties are removed).
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
@@ -3844,7 +3844,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.3-0a73e8d');
+const VERSION = new Version('5.0.0-beta.3-64b4be9');
 
 /**
  * @fileoverview added by tsickle
