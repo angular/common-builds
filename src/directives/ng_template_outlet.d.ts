@@ -28,7 +28,7 @@ import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angula
  *
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * @experimental
+ * @stable
  */
 export declare class NgTemplateOutlet implements OnChanges {
     private _viewContainerRef;
@@ -46,7 +46,7 @@ export declare class NgTemplateOutlet implements OnChanges {
      * - templateRef has changed
      * - context has changes
      *
-     * To mark context object as changed when the corresponding object
+     * We mark context object as changed when the corresponding object
      * shape changes (new properties are added or existing properties are removed).
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
