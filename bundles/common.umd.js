@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-3a50098
+ * @license Angular v5.0.0-beta.4-0cc77b4
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.4-3a50098
+ * @license Angular v5.0.0-beta.4-0cc77b4
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3913,6 +3913,28 @@ CommonModule.decorators = [
 /** @nocollapse */
 CommonModule.ctorParameters = function () { return []; };
 /**
+ * I18N pipes are being changed to move away from using the JS Intl API.
+ *
+ * The former pipes relying on the Intl API will be moved to this module while the `CommonModule`
+ * will contain the new pipes that do not rely on Intl.
+ *
+ * As a first step this module is created empty to ease the migration.
+ *
+ * see https://github.com/angular/angular/pull/18284
+ *
+ * @deprecated from v5
+ */
+var DeprecatedI18NPipesModule = (function () {
+    function DeprecatedI18NPipesModule() {
+    }
+    return DeprecatedI18NPipesModule;
+}());
+DeprecatedI18NPipesModule.decorators = [
+    { type: _angular_core.NgModule, args: [{ declarations: [], exports: [] },] },
+];
+/** @nocollapse */
+DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
+/**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
@@ -4005,12 +4027,13 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.4-3a50098');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-0cc77b4');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
 exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
+exports.DeprecatedI18NPipesModule = DeprecatedI18NPipesModule;
 exports.NgClass = NgClass;
 exports.NgFor = NgFor;
 exports.NgForOf = NgForOf;
