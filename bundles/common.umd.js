@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.5-7e94405
+ * @license Angular v4.3.5-f9b2905
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.5-7e94405
+ * @license Angular v4.3.5-f9b2905
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3901,6 +3901,30 @@ CommonModule.decorators = [
  */
 CommonModule.ctorParameters = function () { return []; };
 /**
+ * I18N pipes are being changed to move away from using the JS Intl API.
+ *
+ * The former pipes relying on the Intl API will be moved to this module while the `CommonModule`
+ * will contain the new pipes that do not rely on Intl.
+ *
+ * As a first step this module is created empty to ease the migration.
+ *
+ * see https://github.com/angular/angular/pull/18284
+ *
+ * @deprecated from v5
+ */
+var DeprecatedI18NPipesModule = (function () {
+    function DeprecatedI18NPipesModule() {
+    }
+    return DeprecatedI18NPipesModule;
+}());
+DeprecatedI18NPipesModule.decorators = [
+    { type: _angular_core.NgModule, args: [{ declarations: [], exports: [] },] },
+];
+/**
+ * @nocollapse
+ */
+DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3978,12 +4002,13 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.5-7e94405');
+var VERSION = new _angular_core.Version('4.3.5-f9b2905');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
 exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
+exports.DeprecatedI18NPipesModule = DeprecatedI18NPipesModule;
 exports.NgClass = NgClass;
 exports.NgFor = NgFor;
 exports.NgForOf = NgForOf;
