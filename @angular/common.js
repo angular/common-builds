@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-f2a2a6b
+ * @license Angular v5.0.0-beta.4-e228f2c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2382,12 +2382,6 @@ class NgTemplateOutlet {
         this._viewContainerRef = _viewContainerRef;
     }
     /**
-     * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-     * @param {?} context
-     * @return {?}
-     */
-    set ngOutletContext(context) { this.ngTemplateOutletContext = context; }
-    /**
      * @param {?} changes
      * @return {?}
      */
@@ -2462,7 +2456,6 @@ NgTemplateOutlet.ctorParameters = () => [
 NgTemplateOutlet.propDecorators = {
     "ngTemplateOutletContext": [{ type: Input },],
     "ngTemplateOutlet": [{ type: Input },],
-    "ngOutletContext": [{ type: Input },],
 };
 
 /**
@@ -3863,7 +3856,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.4-f2a2a6b');
+const VERSION = new Version('5.0.0-beta.4-e228f2c');
 
 /**
  * @fileoverview added by tsickle
