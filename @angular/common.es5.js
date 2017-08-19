@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.4-e228f2c
+ * @license Angular v5.0.0-beta.4-7062811
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3981,7 +3981,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.4-e228f2c');
+var VERSION = new Version('5.0.0-beta.4-7062811');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
