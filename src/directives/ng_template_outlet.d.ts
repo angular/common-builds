@@ -36,10 +36,6 @@ export declare class NgTemplateOutlet implements OnChanges {
     ngTemplateOutletContext: Object;
     ngTemplateOutlet: TemplateRef<any>;
     constructor(_viewContainerRef: ViewContainerRef);
-    /**
-     * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-     */
-    ngOutletContext: Object;
     ngOnChanges(changes: SimpleChanges): void;
     /**
      * We need to re-create existing embedded view if:

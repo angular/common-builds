@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-f2a2a6b
+ * @license Angular v5.0.0-beta.4-e228f2c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.4-f2a2a6b
+ * @license Angular v5.0.0-beta.4-e228f2c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2505,16 +2505,6 @@ var NgTemplateOutlet = (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
-    Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
-        /**
-         * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-         * @param {?} context
-         * @return {?}
-         */
-        set: function (context) { this.ngTemplateOutletContext = context; },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @param {?} changes
      * @return {?}
@@ -2593,7 +2583,6 @@ NgTemplateOutlet.ctorParameters = function () { return [
 NgTemplateOutlet.propDecorators = {
     "ngTemplateOutletContext": [{ type: _angular_core.Input },],
     "ngTemplateOutlet": [{ type: _angular_core.Input },],
-    "ngOutletContext": [{ type: _angular_core.Input },],
 };
 /**
  * @fileoverview added by tsickle
@@ -4027,7 +4016,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.4-f2a2a6b');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-e228f2c');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;

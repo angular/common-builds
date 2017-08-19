@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.4-f2a2a6b
+ * @license Angular v5.0.0-beta.4-e228f2c
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2470,16 +2470,6 @@ var NgTemplateOutlet = (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
-    Object.defineProperty(NgTemplateOutlet.prototype, "ngOutletContext", {
-        /**
-         * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-         * @param {?} context
-         * @return {?}
-         */
-        set: function (context) { this.ngTemplateOutletContext = context; },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @param {?} changes
      * @return {?}
@@ -2558,7 +2548,6 @@ NgTemplateOutlet.ctorParameters = function () { return [
 NgTemplateOutlet.propDecorators = {
     "ngTemplateOutletContext": [{ type: Input },],
     "ngTemplateOutlet": [{ type: Input },],
-    "ngOutletContext": [{ type: Input },],
 };
 /**
  * @fileoverview added by tsickle
@@ -3992,7 +3981,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.4-f2a2a6b');
+var VERSION = new Version('5.0.0-beta.4-e228f2c');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
