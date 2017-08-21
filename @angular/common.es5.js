@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.4-e228f2c
+ * @license Angular v5.0.0-beta.4-55d151a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1279,7 +1279,14 @@ var NgClass = (function () {
         var _this = this;
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
+            klass.split(/\s+/g).forEach(function (klass) {
+                if (enabled) {
+                    _this._renderer.addClass(_this._ngEl.nativeElement, klass);
+                }
+                else {
+                    _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
+                }
+            });
         }
     };
     return NgClass;
@@ -1292,7 +1299,7 @@ NgClass.ctorParameters = function () { return [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ]; };
 NgClass.propDecorators = {
     "klass": [{ type: Input, args: ['class',] },],
@@ -2412,7 +2419,7 @@ var NgStyle = (function () {
     NgStyle.prototype._setStyle = function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
     return NgStyle;
 }());
@@ -2423,7 +2430,7 @@ NgStyle.decorators = [
 NgStyle.ctorParameters = function () { return [
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ]; };
 NgStyle.propDecorators = {
     "ngStyle": [{ type: Input },],
@@ -3981,7 +3988,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.4-e228f2c');
+var VERSION = new Version('5.0.0-beta.4-55d151a');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc

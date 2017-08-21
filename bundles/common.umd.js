@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-e228f2c
+ * @license Angular v5.0.0-beta.4-55d151a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.4-e228f2c
+ * @license Angular v5.0.0-beta.4-55d151a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1314,7 +1314,14 @@ var NgClass = (function () {
         var _this = this;
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(function (klass) { _this._renderer.setElementClass(_this._ngEl.nativeElement, klass, !!enabled); });
+            klass.split(/\s+/g).forEach(function (klass) {
+                if (enabled) {
+                    _this._renderer.addClass(_this._ngEl.nativeElement, klass);
+                }
+                else {
+                    _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
+                }
+            });
         }
     };
     return NgClass;
@@ -1327,7 +1334,7 @@ NgClass.ctorParameters = function () { return [
     { type: _angular_core.IterableDiffers, },
     { type: _angular_core.KeyValueDiffers, },
     { type: _angular_core.ElementRef, },
-    { type: _angular_core.Renderer, },
+    { type: _angular_core.Renderer2, },
 ]; };
 NgClass.propDecorators = {
     "klass": [{ type: _angular_core.Input, args: ['class',] },],
@@ -2447,7 +2454,7 @@ var NgStyle = (function () {
     NgStyle.prototype._setStyle = function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
     return NgStyle;
 }());
@@ -2458,7 +2465,7 @@ NgStyle.decorators = [
 NgStyle.ctorParameters = function () { return [
     { type: _angular_core.KeyValueDiffers, },
     { type: _angular_core.ElementRef, },
-    { type: _angular_core.Renderer, },
+    { type: _angular_core.Renderer2, },
 ]; };
 NgStyle.propDecorators = {
     "ngStyle": [{ type: _angular_core.Input },],
@@ -4016,7 +4023,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.4-e228f2c');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-55d151a');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
