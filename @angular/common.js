@@ -1,9 +1,9 @@
 /**
- * @license Angular v5.0.0-beta.4-5a1b9a3
+ * @license Angular v5.0.0-beta.4-55d151a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -1247,7 +1247,14 @@ class NgClass {
     _toggleClass(klass, enabled) {
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(klass => { this._renderer.setElementClass(this._ngEl.nativeElement, klass, !!enabled); });
+            klass.split(/\s+/g).forEach(klass => {
+                if (enabled) {
+                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+                }
+                else {
+                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                }
+            });
         }
     }
 }
@@ -1259,7 +1266,7 @@ NgClass.ctorParameters = () => [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 NgClass.propDecorators = {
     "klass": [{ type: Input, args: ['class',] },],
@@ -2323,7 +2330,7 @@ class NgStyle {
     _setStyle(nameAndUnit, value) {
         const [name, unit] = nameAndUnit.split('.');
         value = value != null && unit ? `${value}${unit}` : value;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     }
 }
 NgStyle.decorators = [
@@ -2333,7 +2340,7 @@ NgStyle.decorators = [
 NgStyle.ctorParameters = () => [
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 NgStyle.propDecorators = {
     "ngStyle": [{ type: Input },],
@@ -3856,7 +3863,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.4-5a1b9a3');
+const VERSION = new Version('5.0.0-beta.4-55d151a');
 
 /**
  * @fileoverview added by tsickle
