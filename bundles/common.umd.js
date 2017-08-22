@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.4-55d151a
+ * @license Angular v5.0.0-beta.4-ec56760
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.4-55d151a
+ * @license Angular v5.0.0-beta.4-ec56760
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1744,10 +1744,6 @@ var RecordViewTuple = (function () {
     return RecordViewTuple;
 }());
 /**
- * @deprecated from v4.0.0 - Use NgForOf instead.
- */
-var NgFor = NgForOf;
-/**
  * @param {?} type
  * @return {?}
  */
@@ -2612,9 +2608,6 @@ var COMMON_DIRECTIVES = [
     NgPlural,
     NgPluralCase,
 ];
-/**
- * A collection of deprecated directives that are no longer part of the core module.
- */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4023,7 +4016,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.4-55d151a');
+var VERSION = new _angular_core.Version('5.0.0-beta.4-ec56760');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
@@ -4031,7 +4024,6 @@ exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
 exports.DeprecatedI18NPipesModule = DeprecatedI18NPipesModule;
 exports.NgClass = NgClass;
-exports.NgFor = NgFor;
 exports.NgForOf = NgForOf;
 exports.NgForOfContext = NgForOfContext;
 exports.NgIf = NgIf;
