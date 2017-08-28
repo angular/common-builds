@@ -1,10 +1,14 @@
 /**
- * @license Angular v4.2.0-beta.0-4874765
+ * @license Angular v5.0.0-beta.4-d64c935
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -36,71 +40,29 @@ import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, Elem
  * @abstract
  */
 class PlatformLocation {
-    /**
-     * @abstract
-     * @return {?}
-     */
-    getBaseHrefFromDOM() { }
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) { }
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    onHashChange(fn) { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    pathname() { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    search() { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    hash() { }
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    replaceState(state, title, url) { }
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    pushState(state, title, url) { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    forward() { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    back() { }
 }
 /**
  * \@whatItDoes indicates when a location is initialized
  * \@experimental
  */
 const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
+/**
+ * A serializable version of the event from onPopState or onHashChange
+ *
+ * \@experimental
+ * @record
+ */
+function LocationChangeEvent() { }
+/**
+ * \@experimental
+ * @record
+ */
+function LocationChangeListener() { }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -128,57 +90,6 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * @abstract
  */
 class LocationStrategy {
-    /**
-     * @abstract
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    path(includeHash) { }
-    /**
-     * @abstract
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) { }
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    pushState(state, title, url, queryParams) { }
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    replaceState(state, title, url, queryParams) { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    forward() { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    back() { }
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) { }
-    /**
-     * @abstract
-     * @return {?}
-     */
-    getBaseHref() { }
 }
 /**
  * The `APP_BASE_HREF` token represents the base href to be used with the
@@ -205,12 +116,21 @@ class LocationStrategy {
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * \@experimental
+ * @record
+ */
+function PopStateEvent() { }
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -242,7 +162,7 @@ class Location {
          */
         this._subject = new EventEmitter();
         this._platformStrategy = platformStrategy;
-        const browserBaseHref = this._platformStrategy.getBaseHref();
+        const /** @type {?} */ browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState((ev) => {
             this._subject.emit({
@@ -369,18 +289,23 @@ class Location {
         return start + '/' + end;
     }
     /**
-     * If url has a trailing slash, remove it, otherwise return url as is.
+     * If url has a trailing slash, remove it, otherwise return url as is. This
+     * method looks for the first occurence of either #, ?, or the end of the
+     * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
-    static stripTrailingSlash(url) { return url.replace(/\/$/, ''); }
+    static stripTrailingSlash(url) {
+        const /** @type {?} */ match = url.match(/#|\?|$/);
+        const /** @type {?} */ pathEndIdx = match && match.index || url.length;
+        const /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+        return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+    }
 }
 Location.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Location.ctorParameters = () => [
     { type: LocationStrategy, },
 ];
@@ -400,6 +325,10 @@ function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -509,14 +438,16 @@ class HashLocationStrategy extends LocationStrategy {
 HashLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 HashLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -629,14 +560,16 @@ class PathLocationStrategy extends LocationStrategy {
 PathLocationStrategy.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 PathLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -645,6 +578,980 @@ PathLocationStrategy.ctorParameters = () => [
  * found in the LICENSE file at https://angular.io/license
  */
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+let Plural = {};
+Plural.Zero = 0;
+Plural.One = 1;
+Plural.Two = 2;
+Plural.Few = 3;
+Plural.Many = 4;
+Plural.Other = 5;
+Plural[Plural.Zero] = "Zero";
+Plural[Plural.One] = "One";
+Plural[Plural.Two] = "Two";
+Plural[Plural.Few] = "Few";
+Plural[Plural.Many] = "Many";
+Plural[Plural.Other] = "Other";
+/**
+ * \@experimental i18n support is experimental.
+ */
+const LOCALE_DATA = {};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * \@experimental
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ const AVAILABLE_LOCALES = [
+    'af', 'af-NA', 'agq',
+    'ak', 'am', 'ar',
+    'ar-AE', 'ar-BH', 'ar-DJ',
+    'ar-DZ', 'ar-EG', 'ar-EH',
+    'ar-ER', 'ar-IL', 'ar-IQ',
+    'ar-JO', 'ar-KM', 'ar-KW',
+    'ar-LB', 'ar-LY', 'ar-MA',
+    'ar-MR', 'ar-OM', 'ar-PS',
+    'ar-QA', 'ar-SA', 'ar-SD',
+    'ar-SO', 'ar-SS', 'ar-SY',
+    'ar-TD', 'ar-TN', 'ar-YE',
+    'as', 'asa', 'ast',
+    'az', 'az-Cyrl', 'az-Latn',
+    'bas', 'be', 'bem',
+    'bez', 'bg', 'bm',
+    'bn', 'bn-IN', 'bo',
+    'bo-IN', 'br', 'brx',
+    'bs', 'bs-Cyrl', 'bs-Latn',
+    'ca', 'ca-AD', 'ca-ES-VALENCIA',
+    'ca-FR', 'ca-IT', 'ce',
+    'cgg', 'chr', 'ckb',
+    'ckb-IR', 'cs', 'cu',
+    'cy', 'da', 'da-GL',
+    'dav', 'de', 'de-AT',
+    'de-BE', 'de-CH', 'de-IT',
+    'de-LI', 'de-LU', 'dje',
+    'dsb', 'dua', 'dyo',
+    'dz', 'ebu', 'ee',
+    'ee-TG', 'el', 'el-CY',
+    'en', 'en-001', 'en-150',
+    'en-AG', 'en-AI', 'en-AS',
+    'en-AT', 'en-AU', 'en-BB',
+    'en-BE', 'en-BI', 'en-BM',
+    'en-BS', 'en-BW', 'en-BZ',
+    'en-CA', 'en-CC', 'en-CH',
+    'en-CK', 'en-CM', 'en-CX',
+    'en-CY', 'en-DE', 'en-DG',
+    'en-DK', 'en-DM', 'en-ER',
+    'en-FI', 'en-FJ', 'en-FK',
+    'en-FM', 'en-GB', 'en-GD',
+    'en-GG', 'en-GH', 'en-GI',
+    'en-GM', 'en-GU', 'en-GY',
+    'en-HK', 'en-IE', 'en-IL',
+    'en-IM', 'en-IN', 'en-IO',
+    'en-JE', 'en-JM', 'en-KE',
+    'en-KI', 'en-KN', 'en-KY',
+    'en-LC', 'en-LR', 'en-LS',
+    'en-MG', 'en-MH', 'en-MO',
+    'en-MP', 'en-MS', 'en-MT',
+    'en-MU', 'en-MW', 'en-MY',
+    'en-NA', 'en-NF', 'en-NG',
+    'en-NL', 'en-NR', 'en-NU',
+    'en-NZ', 'en-PG', 'en-PH',
+    'en-PK', 'en-PN', 'en-PR',
+    'en-PW', 'en-RW', 'en-SB',
+    'en-SC', 'en-SD', 'en-SE',
+    'en-SG', 'en-SH', 'en-SI',
+    'en-SL', 'en-SS', 'en-SX',
+    'en-SZ', 'en-TC', 'en-TK',
+    'en-TO', 'en-TT', 'en-TV',
+    'en-TZ', 'en-UG', 'en-UM',
+    'en-US-POSIX', 'en-VC', 'en-VG',
+    'en-VI', 'en-VU', 'en-WS',
+    'en-ZA', 'en-ZM', 'en-ZW',
+    'eo', 'es', 'es-419',
+    'es-AR', 'es-BO', 'es-BR',
+    'es-BZ', 'es-CL', 'es-CO',
+    'es-CR', 'es-CU', 'es-DO',
+    'es-EA', 'es-EC', 'es-GQ',
+    'es-GT', 'es-HN', 'es-IC',
+    'es-MX', 'es-NI', 'es-PA',
+    'es-PE', 'es-PH', 'es-PR',
+    'es-PY', 'es-SV', 'es-US',
+    'es-UY', 'es-VE', 'et',
+    'eu', 'ewo', 'fa',
+    'fa-AF', 'ff', 'ff-CM',
+    'ff-GN', 'ff-MR', 'fi',
+    'fil', 'fo', 'fo-DK',
+    'fr', 'fr-BE', 'fr-BF',
+    'fr-BI', 'fr-BJ', 'fr-BL',
+    'fr-CA', 'fr-CD', 'fr-CF',
+    'fr-CG', 'fr-CH', 'fr-CI',
+    'fr-CM', 'fr-DJ', 'fr-DZ',
+    'fr-GA', 'fr-GF', 'fr-GN',
+    'fr-GP', 'fr-GQ', 'fr-HT',
+    'fr-KM', 'fr-LU', 'fr-MA',
+    'fr-MC', 'fr-MF', 'fr-MG',
+    'fr-ML', 'fr-MQ', 'fr-MR',
+    'fr-MU', 'fr-NC', 'fr-NE',
+    'fr-PF', 'fr-PM', 'fr-RE',
+    'fr-RW', 'fr-SC', 'fr-SN',
+    'fr-SY', 'fr-TD', 'fr-TG',
+    'fr-TN', 'fr-VU', 'fr-WF',
+    'fr-YT', 'fur', 'fy',
+    'ga', 'gd', 'gl',
+    'gsw', 'gsw-FR', 'gsw-LI',
+    'gu', 'guz', 'gv',
+    'ha', 'ha-GH', 'ha-NE',
+    'haw', 'he', 'hi',
+    'hr', 'hr-BA', 'hsb',
+    'hu', 'hy', 'id',
+    'ig', 'ii', 'is',
+    'it', 'it-CH', 'it-SM',
+    'it-VA', 'ja', 'jgo',
+    'jmc', 'ka', 'kab',
+    'kam', 'kde', 'kea',
+    'khq', 'ki', 'kk',
+    'kkj', 'kl', 'kln',
+    'km', 'kn', 'ko',
+    'ko-KP', 'kok', 'ks',
+    'ksb', 'ksf', 'ksh',
+    'kw', 'ky', 'lag',
+    'lb', 'lg', 'lkt',
+    'ln', 'ln-AO', 'ln-CF',
+    'ln-CG', 'lo', 'lrc',
+    'lrc-IQ', 'lt', 'lu',
+    'luo', 'luy', 'lv',
+    'mas', 'mas-TZ', 'mer',
+    'mfe', 'mg', 'mgh',
+    'mgo', 'mk', 'ml',
+    'mn', 'mr', 'ms',
+    'ms-BN', 'ms-SG', 'mt',
+    'mua', 'my', 'mzn',
+    'naq', 'nb', 'nb-SJ',
+    'nd', 'nds', 'nds-NL',
+    'ne', 'ne-IN', 'nl',
+    'nl-AW', 'nl-BE', 'nl-BQ',
+    'nl-CW', 'nl-SR', 'nl-SX',
+    'nmg', 'nn', 'nnh',
+    'nus', 'nyn', 'om',
+    'om-KE', 'or', 'os',
+    'os-RU', 'pa', 'pa-Arab',
+    'pa-Guru', 'pl', 'prg',
+    'ps', 'pt', 'pt-AO',
+    'pt-CH', 'pt-CV', 'pt-GQ',
+    'pt-GW', 'pt-LU', 'pt-MO',
+    'pt-MZ', 'pt-PT', 'pt-ST',
+    'pt-TL', 'qu', 'qu-BO',
+    'qu-EC', 'rm', 'rn',
+    'ro', 'ro-MD', 'rof',
+    'root', 'ru', 'ru-BY',
+    'ru-KG', 'ru-KZ', 'ru-MD',
+    'ru-UA', 'rw', 'rwk',
+    'sah', 'saq', 'sbp',
+    'se', 'se-FI', 'se-SE',
+    'seh', 'ses', 'sg',
+    'shi', 'shi-Latn', 'shi-Tfng',
+    'si', 'sk', 'sl',
+    'smn', 'sn', 'so',
+    'so-DJ', 'so-ET', 'so-KE',
+    'sq', 'sq-MK', 'sq-XK',
+    'sr', 'sr-Cyrl', 'sr-Cyrl-BA',
+    'sr-Cyrl-ME', 'sr-Cyrl-XK', 'sr-Latn',
+    'sr-Latn-BA', 'sr-Latn-ME', 'sr-Latn-XK',
+    'sv', 'sv-AX', 'sv-FI',
+    'sw', 'sw-CD', 'sw-KE',
+    'sw-UG', 'ta', 'ta-LK',
+    'ta-MY', 'ta-SG', 'te',
+    'teo', 'teo-KE', 'th',
+    'ti', 'ti-ER', 'tk',
+    'to', 'tr', 'tr-CY',
+    'twq', 'tzm', 'ug',
+    'uk', 'ur', 'ur-IN',
+    'uz', 'uz-Arab', 'uz-Cyrl',
+    'uz-Latn', 'vai', 'vai-Latn',
+    'vai-Vaii', 'vi', 'vo',
+    'vun', 'wae', 'xog',
+    'yav', 'yi', 'yo',
+    'yo-BJ', 'yue', 'zgh',
+    'zh', 'zh-Hans', 'zh-Hans-HK',
+    'zh-Hans-MO', 'zh-Hans-SG', 'zh-Hant',
+    'zh-Hant-HK', 'zh-Hant-MO', 'zu'
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * \@experimental
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ const CURRENCIES = {
+    'AOA': [, 'Kz'],
+    'ARS': [, '$'],
+    'AUD': ['A$', '$'],
+    'BAM': [, 'KM'],
+    'BBD': [, '$'],
+    'BDT': [, '৳'],
+    'BMD': [, '$'],
+    'BND': [, '$'],
+    'BOB': [, 'Bs'],
+    'BRL': ['R$'],
+    'BSD': [, '$'],
+    'BWP': [, 'P'],
+    'BYN': [, 'р.'],
+    'BZD': [, '$'],
+    'CAD': ['CA$', '$'],
+    'CLP': [, '$'],
+    'CNY': ['CN¥', '¥'],
+    'COP': [, '$'],
+    'CRC': [, '₡'],
+    'CUC': [, '$'],
+    'CUP': [, '$'],
+    'CZK': [, 'Kč'],
+    'DKK': [, 'kr'],
+    'DOP': [, '$'],
+    'EGP': [, 'E£'],
+    'ESP': [, '₧'],
+    'EUR': ['€'],
+    'FJD': [, '$'],
+    'FKP': [, '£'],
+    'GBP': ['£'],
+    'GEL': [, '₾'],
+    'GIP': [, '£'],
+    'GNF': [, 'FG'],
+    'GTQ': [, 'Q'],
+    'GYD': [, '$'],
+    'HKD': ['HK$', '$'],
+    'HNL': [, 'L'],
+    'HRK': [, 'kn'],
+    'HUF': [, 'Ft'],
+    'IDR': [, 'Rp'],
+    'ILS': ['₪'],
+    'INR': ['₹'],
+    'ISK': [, 'kr'],
+    'JMD': [, '$'],
+    'JPY': ['¥'],
+    'KHR': [, '៛'],
+    'KMF': [, 'CF'],
+    'KPW': [, '₩'],
+    'KRW': ['₩'],
+    'KYD': [, '$'],
+    'KZT': [, '₸'],
+    'LAK': [, '₭'],
+    'LBP': [, 'L£'],
+    'LKR': [, 'Rs'],
+    'LRD': [, '$'],
+    'LTL': [, 'Lt'],
+    'LVL': [, 'Ls'],
+    'MGA': [, 'Ar'],
+    'MMK': [, 'K'],
+    'MNT': [, '₮'],
+    'MUR': [, 'Rs'],
+    'MXN': ['MX$', '$'],
+    'MYR': [, 'RM'],
+    'NAD': [, '$'],
+    'NGN': [, '₦'],
+    'NIO': [, 'C$'],
+    'NOK': [, 'kr'],
+    'NPR': [, 'Rs'],
+    'NZD': ['NZ$', '$'],
+    'PHP': [, '₱'],
+    'PKR': [, 'Rs'],
+    'PLN': [, 'zł'],
+    'PYG': [, '₲'],
+    'RON': [, 'lei'],
+    'RUB': [, '₽'],
+    'RUR': [, 'р.'],
+    'RWF': [, 'RF'],
+    'SBD': [, '$'],
+    'SEK': [, 'kr'],
+    'SGD': [, '$'],
+    'SHP': [, '£'],
+    'SRD': [, '$'],
+    'SSP': [, '£'],
+    'STD': [, 'Db'],
+    'SYP': [, '£'],
+    'THB': [, '฿'],
+    'TOP': [, 'T$'],
+    'TRY': [, '₺'],
+    'TTD': [, '$'],
+    'TWD': ['NT$', '$'],
+    'UAH': [, '₴'],
+    'USD': ['$'],
+    'UYU': [, '$'],
+    'VEF': [, 'Bs'],
+    'VND': ['₫'],
+    'XAF': ['FCFA'],
+    'XCD': ['EC$', '$'],
+    'XOF': ['CFA'],
+    'XPF': ['CFPF'],
+    'ZAR': [, 'R'],
+    'ZMW': [, 'ZK'],
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+var localeEn = [
+    'en',
+    [
+        ['a', 'p'],
+        ['AM', 'PM'],
+    ],
+    [
+        ['AM', 'PM'],
+        ,
+    ],
+    [
+        ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    ],
+    ,
+    [
+        ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ]
+    ],
+    ,
+    [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
+    ['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
+    [
+        '{1}, {0}',
+        ,
+        '{1} \'at\' {0}',
+    ],
+    ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
+    function (n) {
+        let /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
+        if (i === 1 && v === 0)
+            return Plural.One;
+        return Plural.Other;
+    }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+let NumberFormatStyle = {};
+NumberFormatStyle.Decimal = 0;
+NumberFormatStyle.Percent = 1;
+NumberFormatStyle.Currency = 2;
+NumberFormatStyle.Scientific = 3;
+NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
+NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
+NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
+NumberFormatStyle[NumberFormatStyle.Scientific] = "Scientific";
+let FormStyle = {};
+FormStyle.Format = 0;
+FormStyle.Standalone = 1;
+FormStyle[FormStyle.Format] = "Format";
+FormStyle[FormStyle.Standalone] = "Standalone";
+let TranslationWidth = {};
+TranslationWidth.Narrow = 0;
+TranslationWidth.Abbreviated = 1;
+TranslationWidth.Wide = 2;
+TranslationWidth.Short = 3;
+TranslationWidth[TranslationWidth.Narrow] = "Narrow";
+TranslationWidth[TranslationWidth.Abbreviated] = "Abbreviated";
+TranslationWidth[TranslationWidth.Wide] = "Wide";
+TranslationWidth[TranslationWidth.Short] = "Short";
+let FormatWidth = {};
+FormatWidth.Short = 0;
+FormatWidth.Medium = 1;
+FormatWidth.Long = 2;
+FormatWidth.Full = 3;
+FormatWidth[FormatWidth.Short] = "Short";
+FormatWidth[FormatWidth.Medium] = "Medium";
+FormatWidth[FormatWidth.Long] = "Long";
+FormatWidth[FormatWidth.Full] = "Full";
+let NumberSymbol = {};
+NumberSymbol.Decimal = 0;
+NumberSymbol.Group = 1;
+NumberSymbol.List = 2;
+NumberSymbol.PercentSign = 3;
+NumberSymbol.PlusSign = 4;
+NumberSymbol.MinusSign = 5;
+NumberSymbol.Exponential = 6;
+NumberSymbol.SuperscriptingExponent = 7;
+NumberSymbol.PerMille = 8;
+NumberSymbol.Infinity = 9;
+NumberSymbol.NaN = 10;
+NumberSymbol.TimeSeparator = 11;
+NumberSymbol.CurrencyDecimal = 12;
+NumberSymbol.CurrencyGroup = 13;
+NumberSymbol[NumberSymbol.Decimal] = "Decimal";
+NumberSymbol[NumberSymbol.Group] = "Group";
+NumberSymbol[NumberSymbol.List] = "List";
+NumberSymbol[NumberSymbol.PercentSign] = "PercentSign";
+NumberSymbol[NumberSymbol.PlusSign] = "PlusSign";
+NumberSymbol[NumberSymbol.MinusSign] = "MinusSign";
+NumberSymbol[NumberSymbol.Exponential] = "Exponential";
+NumberSymbol[NumberSymbol.SuperscriptingExponent] = "SuperscriptingExponent";
+NumberSymbol[NumberSymbol.PerMille] = "PerMille";
+NumberSymbol[NumberSymbol.Infinity] = "Infinity";
+NumberSymbol[NumberSymbol.NaN] = "NaN";
+NumberSymbol[NumberSymbol.TimeSeparator] = "TimeSeparator";
+NumberSymbol[NumberSymbol.CurrencyDecimal] = "CurrencyDecimal";
+NumberSymbol[NumberSymbol.CurrencyGroup] = "CurrencyGroup";
+let WeekDay = {};
+WeekDay.Sunday = 0;
+WeekDay.Monday = 1;
+WeekDay.Tuesday = 2;
+WeekDay.Wednesday = 3;
+WeekDay.Thursday = 4;
+WeekDay.Friday = 5;
+WeekDay.Saturday = 6;
+WeekDay[WeekDay.Sunday] = "Sunday";
+WeekDay[WeekDay.Monday] = "Monday";
+WeekDay[WeekDay.Tuesday] = "Tuesday";
+WeekDay[WeekDay.Wednesday] = "Wednesday";
+WeekDay[WeekDay.Thursday] = "Thursday";
+WeekDay[WeekDay.Friday] = "Friday";
+WeekDay[WeekDay.Saturday] = "Saturday";
+let LocaleDataIndex = {};
+LocaleDataIndex.LocaleId = 0;
+LocaleDataIndex.DayPeriodsFormat = 1;
+LocaleDataIndex.DayPeriodsStandalone = 2;
+LocaleDataIndex.DaysFormat = 3;
+LocaleDataIndex.DaysStandalone = 4;
+LocaleDataIndex.MonthsFormat = 5;
+LocaleDataIndex.MonthsStandalone = 6;
+LocaleDataIndex.Eras = 7;
+LocaleDataIndex.FirstDayOfWeek = 8;
+LocaleDataIndex.WeekendRange = 9;
+LocaleDataIndex.DateFormat = 10;
+LocaleDataIndex.TimeFormat = 11;
+LocaleDataIndex.DateTimeFormat = 12;
+LocaleDataIndex.NumberSymbols = 13;
+LocaleDataIndex.NumberFormats = 14;
+LocaleDataIndex.CurrencySymbol = 15;
+LocaleDataIndex.CurrencyName = 16;
+LocaleDataIndex.PluralCase = 17;
+LocaleDataIndex.ExtraData = 18;
+LocaleDataIndex[LocaleDataIndex.LocaleId] = "LocaleId";
+LocaleDataIndex[LocaleDataIndex.DayPeriodsFormat] = "DayPeriodsFormat";
+LocaleDataIndex[LocaleDataIndex.DayPeriodsStandalone] = "DayPeriodsStandalone";
+LocaleDataIndex[LocaleDataIndex.DaysFormat] = "DaysFormat";
+LocaleDataIndex[LocaleDataIndex.DaysStandalone] = "DaysStandalone";
+LocaleDataIndex[LocaleDataIndex.MonthsFormat] = "MonthsFormat";
+LocaleDataIndex[LocaleDataIndex.MonthsStandalone] = "MonthsStandalone";
+LocaleDataIndex[LocaleDataIndex.Eras] = "Eras";
+LocaleDataIndex[LocaleDataIndex.FirstDayOfWeek] = "FirstDayOfWeek";
+LocaleDataIndex[LocaleDataIndex.WeekendRange] = "WeekendRange";
+LocaleDataIndex[LocaleDataIndex.DateFormat] = "DateFormat";
+LocaleDataIndex[LocaleDataIndex.TimeFormat] = "TimeFormat";
+LocaleDataIndex[LocaleDataIndex.DateTimeFormat] = "DateTimeFormat";
+LocaleDataIndex[LocaleDataIndex.NumberSymbols] = "NumberSymbols";
+LocaleDataIndex[LocaleDataIndex.NumberFormats] = "NumberFormats";
+LocaleDataIndex[LocaleDataIndex.CurrencySymbol] = "CurrencySymbol";
+LocaleDataIndex[LocaleDataIndex.CurrencyName] = "CurrencyName";
+LocaleDataIndex[LocaleDataIndex.PluralCase] = "PluralCase";
+LocaleDataIndex[LocaleDataIndex.ExtraData] = "ExtraData";
+let ExtraLocaleDataIndex = {};
+ExtraLocaleDataIndex.ExtraDayPeriodFormats = 0;
+ExtraLocaleDataIndex.ExtraDayPeriodStandalone = 1;
+ExtraLocaleDataIndex.ExtraDayPeriodsRules = 2;
+ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodFormats] = "ExtraDayPeriodFormats";
+ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodStandalone] = "ExtraDayPeriodStandalone";
+ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodsRules] = "ExtraDayPeriodsRules";
+/**
+ * The locale id for the chosen locale (e.g `en-GB`).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleId(locale) {
+    return findLocaleData(locale)[LocaleDataIndex.LocaleId];
+}
+/**
+ * Periods of the day (e.g. `[AM, PM]` for en-US).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} formStyle
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleDayPeriods(locale, formStyle, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ amPmData = ([data[LocaleDataIndex.DayPeriodsFormat], data[LocaleDataIndex.DayPeriodsStandalone]]);
+    const /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
+    return getLastDefinedValue(amPm, width);
+}
+/**
+ * Days of the week for the Gregorian calendar (e.g. `[Sunday, Monday, ... Saturday]` for en-US).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} formStyle
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleDayNames(locale, formStyle, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ daysData = ([data[LocaleDataIndex.DaysFormat], data[LocaleDataIndex.DaysStandalone]]);
+    const /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
+    return getLastDefinedValue(days, width);
+}
+/**
+ * Months of the year for the Gregorian calendar (e.g. `[January, February, ...]` for en-US).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} formStyle
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleMonthNames(locale, formStyle, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ monthsData = ([data[LocaleDataIndex.MonthsFormat], data[LocaleDataIndex.MonthsStandalone]]);
+    const /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
+    return getLastDefinedValue(months, width);
+}
+/**
+ * Eras for the Gregorian calendar (e.g. AD/BC).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleEraNames(locale, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ erasData = (data[LocaleDataIndex.Eras]);
+    return getLastDefinedValue(erasData, width);
+}
+/**
+ * First day of the week for this locale, based on english days (Sunday = 0, Monday = 1, ...).
+ * For example in french the value would be 1 because the first day of the week is Monday.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleFirstDayOfWeek(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.FirstDayOfWeek];
+}
+/**
+ * Range of days in the week that represent the week-end for this locale, based on english days
+ * (Sunday = 0, Monday = 1, ...).
+ * For example in english the value would be [6,0] for Saturday to Sunday.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleWeekEndRange(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.WeekendRange];
+}
+/**
+ * Date format that depends on the locale.
+ *
+ * There are four basic date formats:
+ * - `full` should contain long-weekday (EEEE), year (y), long-month (MMMM), day (d).
+ *
+ *  For example, English uses `EEEE, MMMM d, y`, corresponding to a date like
+ *  "Tuesday, September 14, 1999".
+ *
+ * - `long` should contain year, long-month, day.
+ *
+ *  For example, `MMMM d, y`, corresponding to a date like "September 14, 1999".
+ *
+ * - `medium` should contain year, abbreviated-month (MMM), day.
+ *
+ *  For example, `MMM d, y`, corresponding to a date like "Sep 14, 1999".
+ *  For languages that do not use abbreviated months, use the numeric month (MM/M). For example,
+ *  `y/MM/dd`, corresponding to a date like "1999/09/14".
+ *
+ * - `short` should contain year, numeric-month (MM/M), and day.
+ *
+ *  For example, `M/d/yy`, corresponding to a date like "9/14/99".
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleDateFormat(locale, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.DateFormat][width];
+}
+/**
+ * Time format that depends on the locale.
+ *
+ * The standard formats include four basic time formats:
+ * - `full` should contain hour (h/H), minute (mm), second (ss), and zone (zzzz).
+ * - `long` should contain hour, minute, second, and zone (z)
+ * - `medium` should contain hour, minute, second.
+ * - `short` should contain hour, minute.
+ *
+ * Note: The patterns depend on whether the main country using your language uses 12-hour time or
+ * not:
+ * - For 12-hour time, use a pattern like `hh:mm a` using h to mean a 12-hour clock cycle running
+ * 1 through 12 (midnight plus 1 minute is 12:01), or using K to mean a 12-hour clock cycle
+ * running 0 through 11 (midnight plus 1 minute is 0:01).
+ * - For 24-hour time, use a pattern like `HH:mm` using H to mean a 24-hour clock cycle running 0
+ * through 23 (midnight plus 1 minute is 0:01), or using k to mean a 24-hour clock cycle running
+ * 1 through 24 (midnight plus 1 minute is 24:01).
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleTimeFormat(locale, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.TimeFormat][width];
+}
+/**
+ * Date-time format that depends on the locale.
+ *
+ * The date-time pattern shows how to combine separate patterns for date (represented by {1})
+ * and time (represented by {0}) into a single pattern. It usually doesn't need to be changed.
+ * What you want to pay attention to are:
+ * - possibly removing a space for languages that don't use it, such as many East Asian languages
+ * - possibly adding a comma, other punctuation, or a combining word
+ *
+ * For example:
+ * - English uses `{1} 'at' {0}` or `{1}, {0}` (depending on date style), while Japanese uses
+ *  `{1}{0}`.
+ * - An English formatted date-time using the combining pattern `{1}, {0}` could be
+ *  `Dec 10, 2010, 3:59:49 PM`. Notice the comma and space between the date portion and the time
+ *  portion.
+ *
+ * There are four formats (`full`, `long`, `medium`, `short`); the determination of which to use
+ * is normally based on the date style. For example, if the date has a full month and weekday
+ * name, the full combining pattern will be used to combine that with a time. If the date has
+ * numeric month, the short version of the combining pattern will be used to combine that with a
+ * time. English uses `{1} 'at' {0}` for full and long styles, and `{1}, {0}` for medium and short
+ * styles.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleDateTimeFormat(locale, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ dateTimeFormatData = (data[LocaleDataIndex.DateTimeFormat]);
+    return getLastDefinedValue(dateTimeFormatData, width);
+}
+/**
+ * Number symbol that can be used to replace placeholders in number formats.
+ * See {\@link NumberSymbol} for more information.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} symbol
+ * @return {?}
+ */
+function getLocaleNumberSymbol(locale, symbol) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    const /** @type {?} */ res = data[LocaleDataIndex.NumberSymbols][symbol];
+    if (typeof res === 'undefined') {
+        if (symbol === NumberSymbol.CurrencyDecimal) {
+            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+        }
+        else if (symbol === NumberSymbol.CurrencyGroup) {
+            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+        }
+    }
+    return res;
+}
+/**
+ * Number format that depends on the locale.
+ *
+ * Numbers are formatted using patterns, like `#,###.00`. For example, the pattern `#,###.00`
+ * when used to format the number 12345.678 could result in "12'345,67". That would happen if the
+ * grouping separator for your language is an apostrophe, and the decimal separator is a comma.
+ *
+ * <b>Important:</b> The characters `.` `,` `0` `#` (and others below) are special placeholders;
+ * they stand for the decimal separator, and so on, and are NOT real characters.
+ * You must NOT "translate" the placeholders; for example, don't change `.` to `,` even though in
+ * your language the decimal point is written with a comma. The symbols should be replaced by the
+ * local equivalents, using the Number Symbols for your language.
+ *
+ * Here are the special characters used in number patterns:
+ *
+ * | Symbol | Meaning |
+ * |--------|---------|
+ * | . | Replaced automatically by the character used for the decimal point. |
+ * | , | Replaced by the "grouping" (thousands) separator. |
+ * | 0 | Replaced by a digit (or zero if there aren't enough digits). |
+ * | # | Replaced by a digit (or nothing if there aren't enough). |
+ * | ¤ | This will be replaced by a currency symbol, such as $ or USD. |
+ * | % | This marks a percent format. The % symbol may change position, but must be retained. |
+ * | E | This marks a scientific format. The E symbol may change position, but must be retained. |
+ * | ' | Special characters used as literal characters are quoted with ASCII single quotes. |
+ *
+ * You can find more information
+ * [on the CLDR website](http://cldr.unicode.org/translation/number-patterns)
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} type
+ * @return {?}
+ */
+function getLocaleNumberFormat(locale, type) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.NumberFormats][type];
+}
+/**
+ * The symbol used to represent the currency for the main country using this locale (e.g. $ for
+ * the locale en-US).
+ * The symbol will be `null` if the main country cannot be determined.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleCurrencySymbol(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.CurrencySymbol] || null;
+}
+/**
+ * The name of the currency for the main country using this locale (e.g. USD for the locale
+ * en-US).
+ * The name will be `null` if the main country cannot be determined.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleCurrencyName(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.CurrencyName] || null;
+}
+/**
+ * The locale plural function used by ICU expressions to determine the plural case to use.
+ * See {\@link NgPlural} for more information.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocalePluralCase(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    return data[LocaleDataIndex.PluralCase];
+}
+/**
+ * @param {?} data
+ * @return {?}
+ */
+function checkFullData(data) {
+    if (!data[LocaleDataIndex.ExtraData]) {
+        throw new Error(`Missing extra locale data for the locale "${data[LocaleDataIndex.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+    }
+}
+/**
+ * Rules used to determine which day period to use (See `dayPeriods` below).
+ * The rules can either be an array or a single value. If it's an array, consider it as "from"
+ * and "to". If it's a single value then it means that the period is only valid at this exact
+ * value.
+ * There is always the same number of rules as the number of day periods, which means that the
+ * first rule is applied to the first day period and so on.
+ * You should fallback to AM/PM when there are no rules available.
+ *
+ * Note: this is only available if you load the full locale data.
+ * See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * data.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleExtraDayPeriodRules(locale) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    checkFullData(data);
+    const /** @type {?} */ rules = data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodsRules] || [];
+    return rules.map((rule) => {
+        if (typeof rule === 'string') {
+            return extractTime(rule);
+        }
+        return [extractTime(rule[0]), extractTime(rule[1])];
+    });
+}
+/**
+ * Day Periods indicate roughly how the day is broken up in different languages (e.g. morning,
+ * noon, afternoon, midnight, ...).
+ * You should use the function {\@link getLocaleExtraDayPeriodRules} to determine which period to
+ * use.
+ * You should fallback to AM/PM when there are no day periods available.
+ *
+ * Note: this is only available if you load the full locale data.
+ * See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * data.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @param {?} formStyle
+ * @param {?} width
+ * @return {?}
+ */
+function getLocaleExtraDayPeriods(locale, formStyle, width) {
+    const /** @type {?} */ data = findLocaleData(locale);
+    checkFullData(data);
+    const /** @type {?} */ dayPeriodsData = ([
+        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodFormats],
+        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodStandalone]
+    ]);
+    const /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
+    return getLastDefinedValue(dayPeriods, width) || [];
+}
+/**
+ * Returns the first value that is defined in an array, going backwards.
+ *
+ * To avoid repeating the same data (e.g. when "format" and "standalone" are the same) we only
+ * add the first one to the locale data arrays, the other ones are only defined when different.
+ * We use this function to retrieve the first defined value.
+ *
+ * \@experimental i18n support is experimental.
+ * @template T
+ * @param {?} data
+ * @param {?} index
+ * @return {?}
+ */
+function getLastDefinedValue(data, index) {
+    for (let /** @type {?} */ i = index; i > -1; i--) {
+        if (typeof data[i] !== 'undefined') {
+            return data[i];
+        }
+    }
+    throw new Error('Locale data API: locale data undefined');
+}
+/**
+ * Extract the hours and minutes from a string like "15:45"
+ * @param {?} time
+ * @return {?}
+ */
+function extractTime(time) {
+    const [h, m] = time.split(':');
+    return { hours: +h, minutes: +m };
+}
+/**
+ * Finds the locale data for a locale id
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} locale
+ * @return {?}
+ */
+function findLocaleData(locale) {
+    const /** @type {?} */ normalizedLocale = getNormalizedLocale(locale);
+    if (normalizedLocale === 'en') {
+        return LOCALE_DATA['en'] || localeEn;
+    }
+    const /** @type {?} */ match = LOCALE_DATA[toCamelCase(normalizedLocale)];
+    if (match) {
+        return match;
+    }
+    throw new Error(`Missing locale data for the locale "${locale}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+}
+const NORMALIZED_LOCALES = {};
+/**
+ * Returns the closest matching locale that exists or throw
+ * e.g.: "en-US" will return "en", and "fr_ca" will return "fr-CA"
+ * Rules for locale id equivalences are defined in
+ * http://cldr.unicode.org/index/cldr-spec/language-tag-equivalences
+ * and in https://tools.ietf.org/html/rfc4647#section-3.4
+ * @param {?} locale
+ * @return {?}
+ */
+function getNormalizedLocale(locale) {
+    if (NORMALIZED_LOCALES[locale]) {
+        return NORMALIZED_LOCALES[locale];
+    }
+    const /** @type {?} */ normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
+    const /** @type {?} */ match = AVAILABLE_LOCALES.find((l) => l.toLowerCase() === normalizedLocale);
+    if (match) {
+        NORMALIZED_LOCALES[locale] = match;
+        return match;
+    }
+    const /** @type {?} */ parentLocale = normalizedLocale.split('-')[0];
+    if (AVAILABLE_LOCALES.find((l) => l.toLowerCase() === parentLocale)) {
+        NORMALIZED_LOCALES[locale] = parentLocale;
+        return parentLocale;
+    }
+    throw new Error(`"${locale}" is not a valid LOCALE_ID value. See https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json for a list of valid locales`);
+}
+/**
+ * @param {?} str
+ * @return {?}
+ */
+function toCamelCase(str) {
+    return str.replace(/-+([a-z0-9A-Z])/g, (...m) => m[1].toUpperCase());
+}
+/**
+ * Return the currency symbol for a given currency code, or the code if no symbol available
+ * (e.g.: $, US$, or USD)
+ *
+ * \@internal
+ * @param {?} code
+ * @param {?} format
+ * @return {?}
+ */
+function findCurrencySymbol(code, format) {
+    const /** @type {?} */ currency = CURRENCIES[code] || {};
+    const /** @type {?} */ symbol = currency[0] || code;
+    return format === 'wide' ? symbol : currency[1] || symbol;
+}
+/**
+ * Register global data to be used internally by Angular. See the
+ * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} data
+ * @param {?=} extraData
+ * @return {?}
+ */
+function registerLocaleData(data, extraData) {
+    const /** @type {?} */ localeId = toCamelCase(data[LocaleDataIndex.LocaleId]);
+    LOCALE_DATA[localeId] = data;
+    if (extraData) {
+        LOCALE_DATA[localeId][LocaleDataIndex.ExtraData] = extraData;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -657,12 +1564,6 @@ PathLocationStrategy.ctorParameters = () => [
  * @abstract
  */
 class NgLocalization {
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    getPluralCategory(value) { }
 }
 /**
  * Returns the plural category for a given value.
@@ -673,14 +1574,15 @@ class NgLocalization {
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
+ * @param {?=} locale
  * @return {?}
  */
-function getPluralCategory(value, cases, ngLocalization) {
+function getPluralCategory(value, cases, ngLocalization, locale) {
     let /** @type {?} */ key = `=${value}`;
     if (cases.indexOf(key) > -1) {
         return key;
     }
-    key = ngLocalization.getPluralCategory(value);
+    key = ngLocalization.getPluralCategory(value, locale);
     if (cases.indexOf(key) > -1) {
         return key;
     }
@@ -704,10 +1606,11 @@ class NgLocaleLocalization extends NgLocalization {
     }
     /**
      * @param {?} value
+     * @param {?=} locale
      * @return {?}
      */
-    getPluralCategory(value) {
-        const /** @type {?} */ plural = getPluralCase(this.locale, value);
+    getPluralCategory(value, locale) {
+        const /** @type {?} */ plural = getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
             case Plural.Zero:
                 return 'zero';
@@ -727,434 +1630,44 @@ class NgLocaleLocalization extends NgLocalization {
 NgLocaleLocalization.decorators = [
     { type: Injectable },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgLocaleLocalization.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ];
-let Plural = {};
-Plural.Zero = 0;
-Plural.One = 1;
-Plural.Two = 2;
-Plural.Few = 3;
-Plural.Many = 4;
-Plural.Other = 5;
-Plural[Plural.Zero] = "Zero";
-Plural[Plural.One] = "One";
-Plural[Plural.Two] = "Two";
-Plural[Plural.Few] = "Few";
-Plural[Plural.Many] = "Many";
-Plural[Plural.Other] = "Other";
+
 /**
- * Returns the plural case based on the locale
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
  *
- * \@experimental
- * @param {?} locale
- * @param {?} nLike
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cookieStr
+ * @param {?} name
  * @return {?}
  */
-function getPluralCase(locale, nLike) {
-    // TODO(vicb): lazy compute
-    if (typeof nLike === 'string') {
-        nLike = parseInt(/** @type {?} */ (nLike), 10);
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ function parseCookieValue(cookieStr, name) {
+    name = encodeURIComponent(name);
+    for (const /** @type {?} */ cookie of cookieStr.split(';')) {
+        const /** @type {?} */ eqIndex = cookie.indexOf('=');
+        const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
     }
-    const /** @type {?} */ n = (nLike);
-    const /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
-    const /** @type {?} */ i = Math.floor(Math.abs(n));
-    const /** @type {?} */ v = nDecimal.length;
-    const /** @type {?} */ f = parseInt(nDecimal, 10);
-    const /** @type {?} */ t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-    const /** @type {?} */ lang = locale.split('-')[0].toLowerCase();
-    switch (lang) {
-        case 'af':
-        case 'asa':
-        case 'az':
-        case 'bem':
-        case 'bez':
-        case 'bg':
-        case 'brx':
-        case 'ce':
-        case 'cgg':
-        case 'chr':
-        case 'ckb':
-        case 'ee':
-        case 'el':
-        case 'eo':
-        case 'es':
-        case 'eu':
-        case 'fo':
-        case 'fur':
-        case 'gsw':
-        case 'ha':
-        case 'haw':
-        case 'hu':
-        case 'jgo':
-        case 'jmc':
-        case 'ka':
-        case 'kk':
-        case 'kkj':
-        case 'kl':
-        case 'ks':
-        case 'ksb':
-        case 'ky':
-        case 'lb':
-        case 'lg':
-        case 'mas':
-        case 'mgo':
-        case 'ml':
-        case 'mn':
-        case 'nb':
-        case 'nd':
-        case 'ne':
-        case 'nn':
-        case 'nnh':
-        case 'nyn':
-        case 'om':
-        case 'or':
-        case 'os':
-        case 'ps':
-        case 'rm':
-        case 'rof':
-        case 'rwk':
-        case 'saq':
-        case 'seh':
-        case 'sn':
-        case 'so':
-        case 'sq':
-        case 'ta':
-        case 'te':
-        case 'teo':
-        case 'tk':
-        case 'tr':
-        case 'ug':
-        case 'uz':
-        case 'vo':
-        case 'vun':
-        case 'wae':
-        case 'xog':
-            if (n === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'agq':
-        case 'bas':
-        case 'cu':
-        case 'dav':
-        case 'dje':
-        case 'dua':
-        case 'dyo':
-        case 'ebu':
-        case 'ewo':
-        case 'guz':
-        case 'kam':
-        case 'khq':
-        case 'ki':
-        case 'kln':
-        case 'kok':
-        case 'ksf':
-        case 'lrc':
-        case 'lu':
-        case 'luo':
-        case 'luy':
-        case 'mer':
-        case 'mfe':
-        case 'mgh':
-        case 'mua':
-        case 'mzn':
-        case 'nmg':
-        case 'nus':
-        case 'qu':
-        case 'rn':
-        case 'rw':
-        case 'sbp':
-        case 'twq':
-        case 'vai':
-        case 'yav':
-        case 'yue':
-        case 'zgh':
-        case 'ak':
-        case 'ln':
-        case 'mg':
-        case 'pa':
-        case 'ti':
-            if (n === Math.floor(n) && n >= 0 && n <= 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'am':
-        case 'as':
-        case 'bn':
-        case 'fa':
-        case 'gu':
-        case 'hi':
-        case 'kn':
-        case 'mr':
-        case 'zu':
-            if (i === 0 || n === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'ar':
-            if (n === 0)
-                return Plural.Zero;
-            if (n === 1)
-                return Plural.One;
-            if (n === 2)
-                return Plural.Two;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 3 && n % 100 <= 10)
-                return Plural.Few;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 99)
-                return Plural.Many;
-            return Plural.Other;
-        case 'ast':
-        case 'ca':
-        case 'de':
-        case 'en':
-        case 'et':
-        case 'fi':
-        case 'fy':
-        case 'gl':
-        case 'it':
-        case 'nl':
-        case 'sv':
-        case 'sw':
-        case 'ur':
-        case 'yi':
-            if (i === 1 && v === 0)
-                return Plural.One;
-            return Plural.Other;
-        case 'be':
-            if (n % 10 === 1 && !(n % 100 === 11))
-                return Plural.One;
-            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 4 &&
-                !(n % 100 >= 12 && n % 100 <= 14))
-                return Plural.Few;
-            if (n % 10 === 0 || n % 10 === Math.floor(n % 10) && n % 10 >= 5 && n % 10 <= 9 ||
-                n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 14)
-                return Plural.Many;
-            return Plural.Other;
-        case 'br':
-            if (n % 10 === 1 && !(n % 100 === 11 || n % 100 === 71 || n % 100 === 91))
-                return Plural.One;
-            if (n % 10 === 2 && !(n % 100 === 12 || n % 100 === 72 || n % 100 === 92))
-                return Plural.Two;
-            if (n % 10 === Math.floor(n % 10) && (n % 10 >= 3 && n % 10 <= 4 || n % 10 === 9) &&
-                !(n % 100 >= 10 && n % 100 <= 19 || n % 100 >= 70 && n % 100 <= 79 ||
-                    n % 100 >= 90 && n % 100 <= 99))
-                return Plural.Few;
-            if (!(n === 0) && n % 1e6 === 0)
-                return Plural.Many;
-            return Plural.Other;
-        case 'bs':
-        case 'hr':
-        case 'sr':
-            if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
-                return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                !(i % 100 >= 12 && i % 100 <= 14) ||
-                f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
-                    !(f % 100 >= 12 && f % 100 <= 14))
-                return Plural.Few;
-            return Plural.Other;
-        case 'cs':
-        case 'sk':
-            if (i === 1 && v === 0)
-                return Plural.One;
-            if (i === Math.floor(i) && i >= 2 && i <= 4 && v === 0)
-                return Plural.Few;
-            if (!(v === 0))
-                return Plural.Many;
-            return Plural.Other;
-        case 'cy':
-            if (n === 0)
-                return Plural.Zero;
-            if (n === 1)
-                return Plural.One;
-            if (n === 2)
-                return Plural.Two;
-            if (n === 3)
-                return Plural.Few;
-            if (n === 6)
-                return Plural.Many;
-            return Plural.Other;
-        case 'da':
-            if (n === 1 || !(t === 0) && (i === 0 || i === 1))
-                return Plural.One;
-            return Plural.Other;
-        case 'dsb':
-        case 'hsb':
-            if (v === 0 && i % 100 === 1 || f % 100 === 1)
-                return Plural.One;
-            if (v === 0 && i % 100 === 2 || f % 100 === 2)
-                return Plural.Two;
-            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
-                f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
-                return Plural.Few;
-            return Plural.Other;
-        case 'ff':
-        case 'fr':
-        case 'hy':
-        case 'kab':
-            if (i === 0 || i === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'fil':
-            if (v === 0 && (i === 1 || i === 2 || i === 3) ||
-                v === 0 && !(i % 10 === 4 || i % 10 === 6 || i % 10 === 9) ||
-                !(v === 0) && !(f % 10 === 4 || f % 10 === 6 || f % 10 === 9))
-                return Plural.One;
-            return Plural.Other;
-        case 'ga':
-            if (n === 1)
-                return Plural.One;
-            if (n === 2)
-                return Plural.Two;
-            if (n === Math.floor(n) && n >= 3 && n <= 6)
-                return Plural.Few;
-            if (n === Math.floor(n) && n >= 7 && n <= 10)
-                return Plural.Many;
-            return Plural.Other;
-        case 'gd':
-            if (n === 1 || n === 11)
-                return Plural.One;
-            if (n === 2 || n === 12)
-                return Plural.Two;
-            if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
-                return Plural.Few;
-            return Plural.Other;
-        case 'gv':
-            if (v === 0 && i % 10 === 1)
-                return Plural.One;
-            if (v === 0 && i % 10 === 2)
-                return Plural.Two;
-            if (v === 0 &&
-                (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
-                return Plural.Few;
-            if (!(v === 0))
-                return Plural.Many;
-            return Plural.Other;
-        case 'he':
-            if (i === 1 && v === 0)
-                return Plural.One;
-            if (i === 2 && v === 0)
-                return Plural.Two;
-            if (v === 0 && !(n >= 0 && n <= 10) && n % 10 === 0)
-                return Plural.Many;
-            return Plural.Other;
-        case 'is':
-            if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
-                return Plural.One;
-            return Plural.Other;
-        case 'ksh':
-            if (n === 0)
-                return Plural.Zero;
-            if (n === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'kw':
-        case 'naq':
-        case 'se':
-        case 'smn':
-            if (n === 1)
-                return Plural.One;
-            if (n === 2)
-                return Plural.Two;
-            return Plural.Other;
-        case 'lag':
-            if (n === 0)
-                return Plural.Zero;
-            if ((i === 0 || i === 1) && !(n === 0))
-                return Plural.One;
-            return Plural.Other;
-        case 'lt':
-            if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
-                return Plural.One;
-            if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
-                !(n % 100 >= 11 && n % 100 <= 19))
-                return Plural.Few;
-            if (!(f === 0))
-                return Plural.Many;
-            return Plural.Other;
-        case 'lv':
-        case 'prg':
-            if (n % 10 === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19 ||
-                v === 2 && f % 100 === Math.floor(f % 100) && f % 100 >= 11 && f % 100 <= 19)
-                return Plural.Zero;
-            if (n % 10 === 1 && !(n % 100 === 11) || v === 2 && f % 10 === 1 && !(f % 100 === 11) ||
-                !(v === 2) && f % 10 === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'mk':
-            if (v === 0 && i % 10 === 1 || f % 10 === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'mt':
-            if (n === 1)
-                return Plural.One;
-            if (n === 0 || n % 100 === Math.floor(n % 100) && n % 100 >= 2 && n % 100 <= 10)
-                return Plural.Few;
-            if (n % 100 === Math.floor(n % 100) && n % 100 >= 11 && n % 100 <= 19)
-                return Plural.Many;
-            return Plural.Other;
-        case 'pl':
-            if (i === 1 && v === 0)
-                return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                !(i % 100 >= 12 && i % 100 <= 14))
-                return Plural.Few;
-            if (v === 0 && !(i === 1) && i % 10 === Math.floor(i % 10) && i % 10 >= 0 && i % 10 <= 1 ||
-                v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 12 && i % 100 <= 14)
-                return Plural.Many;
-            return Plural.Other;
-        case 'pt':
-            if (n === Math.floor(n) && n >= 0 && n <= 2 && !(n === 2))
-                return Plural.One;
-            return Plural.Other;
-        case 'ro':
-            if (i === 1 && v === 0)
-                return Plural.One;
-            if (!(v === 0) || n === 0 ||
-                !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
-                return Plural.Few;
-            return Plural.Other;
-        case 'ru':
-        case 'uk':
-            if (v === 0 && i % 10 === 1 && !(i % 100 === 11))
-                return Plural.One;
-            if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-                !(i % 100 >= 12 && i % 100 <= 14))
-                return Plural.Few;
-            if (v === 0 && i % 10 === 0 ||
-                v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 ||
-                v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)
-                return Plural.Many;
-            return Plural.Other;
-        case 'shi':
-            if (i === 0 || n === 1)
-                return Plural.One;
-            if (n === Math.floor(n) && n >= 2 && n <= 10)
-                return Plural.Few;
-            return Plural.Other;
-        case 'si':
-            if (n === 0 || n === 1 || i === 0 && f === 1)
-                return Plural.One;
-            return Plural.Other;
-        case 'sl':
-            if (v === 0 && i % 100 === 1)
-                return Plural.One;
-            if (v === 0 && i % 100 === 2)
-                return Plural.Two;
-            if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 || !(v === 0))
-                return Plural.Few;
-            return Plural.Other;
-        case 'tzm':
-            if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99)
-                return Plural.One;
-            return Plural.Other;
-        default:
-            return Plural.Other;
-    }
+    return null;
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1318,27 +1831,36 @@ class NgClass {
     _toggleClass(klass, enabled) {
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(klass => { this._renderer.setElementClass(this._ngEl.nativeElement, klass, !!enabled); });
+            klass.split(/\s+/g).forEach(klass => {
+                if (enabled) {
+                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+                }
+                else {
+                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                }
+            });
         }
     }
 }
 NgClass.decorators = [
     { type: Directive, args: [{ selector: '[ngClass]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgClass.ctorParameters = () => [
     { type: IterableDiffers, },
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 NgClass.propDecorators = {
-    'klass': [{ type: Input, args: ['class',] },],
-    'ngClass': [{ type: Input },],
+    "klass": [{ type: Input, args: ['class',] },],
+    "ngClass": [{ type: Input },],
 };
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1387,7 +1909,7 @@ NgClass.propDecorators = {
  *                                   ngModuleFactory: moduleFactory;">
  * </ng-container>
  * ```
- * # Example
+ * ## Example
  *
  * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
  *
@@ -1446,19 +1968,21 @@ class NgComponentOutlet {
 NgComponentOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgComponentOutlet.ctorParameters = () => [
     { type: ViewContainerRef, },
 ];
 NgComponentOutlet.propDecorators = {
-    'ngComponentOutlet': [{ type: Input },],
-    'ngComponentOutletInjector': [{ type: Input },],
-    'ngComponentOutletContent': [{ type: Input },],
-    'ngComponentOutletNgModuleFactory': [{ type: Input },],
+    "ngComponentOutlet": [{ type: Input },],
+    "ngComponentOutletInjector": [{ type: Input },],
+    "ngComponentOutletContent": [{ type: Input },],
+    "ngComponentOutletNgModuleFactory": [{ type: Input },],
 };
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1687,18 +2211,16 @@ class NgForOf {
 NgForOf.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgForOf.ctorParameters = () => [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: IterableDiffers, },
 ];
 NgForOf.propDecorators = {
-    'ngForOf': [{ type: Input },],
-    'ngForTrackBy': [{ type: Input },],
-    'ngForTemplate': [{ type: Input },],
+    "ngForOf": [{ type: Input },],
+    "ngForTrackBy": [{ type: Input },],
+    "ngForTemplate": [{ type: Input },],
 };
 class RecordViewTuple {
     /**
@@ -1711,10 +2233,6 @@ class RecordViewTuple {
     }
 }
 /**
- * @deprecated from v4.0.0 - Use NgForOf instead.
- */
-const NgFor = NgForOf;
-/**
  * @param {?} type
  * @return {?}
  */
@@ -1722,6 +2240,10 @@ function getTypeNameForDebugging(type) {
     return type['name'] || typeof type;
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1737,13 +2259,13 @@ function getTypeNameForDebugging(type) {
  *  - `then` template is the inline template of `ngIf` unless bound to a different value.
  *  - `else` template is blank unless it is bound.
  *
- * # Most common usage
+ * ## Most common usage
  *
  * The most common usage of the `ngIf` directive is to conditionally show the inline template as
  * seen in this example:
  * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
  *
- * # Showing an alternative template using `else`
+ * ## Showing an alternative template using `else`
  *
  * If it is necessary to display a template when the `expression` is falsy use the `else` template
  * binding as shown. Note that the `else` binding points to a `<ng-template>` labeled `#elseBlock`.
@@ -1752,7 +2274,7 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
  *
- * # Using non-inlined `then` template
+ * ## Using non-inlined `then` template
  *
  * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
  * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
@@ -1760,12 +2282,12 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
  *
- * # Storing conditional result in a variable
+ * ## Storing conditional result in a variable
  *
  * A common pattern is that we need to show a set of properties from the same object. If the
  * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
  * dereferencing a `null` value. This is especially the case when waiting on async data such as
- * when using the `async` pipe as shown in folowing example:
+ * when using the `async` pipe as shown in following example:
  *
  * ```
  * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
@@ -1888,17 +2410,15 @@ class NgIf {
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgIf.ctorParameters = () => [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
 ];
 NgIf.propDecorators = {
-    'ngIf': [{ type: Input },],
-    'ngIfThen': [{ type: Input },],
-    'ngIfElse': [{ type: Input },],
+    "ngIf": [{ type: Input },],
+    "ngIfThen": [{ type: Input },],
+    "ngIfElse": [{ type: Input },],
 };
 /**
  * \@stable
@@ -1910,6 +2430,10 @@ class NgIfContext {
     }
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2061,12 +2585,10 @@ class NgSwitch {
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitch.ctorParameters = () => [];
 NgSwitch.propDecorators = {
-    'ngSwitch': [{ type: Input },],
+    "ngSwitch": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2111,16 +2633,14 @@ class NgSwitchCase {
 NgSwitchCase.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitchCase.ctorParameters = () => [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ];
 NgSwitchCase.propDecorators = {
-    'ngSwitchCase': [{ type: Input },],
+    "ngSwitchCase": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2158,15 +2678,17 @@ class NgSwitchDefault {
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgSwitchDefault.ctorParameters = () => [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2257,14 +2779,12 @@ class NgPlural {
 NgPlural.decorators = [
     { type: Directive, args: [{ selector: '[ngPlural]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgPlural.ctorParameters = () => [
     { type: NgLocalization, },
 ];
 NgPlural.propDecorators = {
-    'ngPlural': [{ type: Input },],
+    "ngPlural": [{ type: Input },],
 };
 /**
  * \@ngModule CommonModule
@@ -2293,16 +2813,14 @@ class NgPluralCase {
      */
     constructor(value, template, viewContainer, ngPlural) {
         this.value = value;
-        const isANumber = !isNaN(Number(value));
+        const /** @type {?} */ isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
 }
 NgPluralCase.decorators = [
     { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgPluralCase.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
     { type: TemplateRef, },
@@ -2310,6 +2828,10 @@ NgPluralCase.ctorParameters = () => [
     { type: NgPlural, decorators: [{ type: Host },] },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2388,24 +2910,26 @@ class NgStyle {
     _setStyle(nameAndUnit, value) {
         const [name, unit] = nameAndUnit.split('.');
         value = value != null && unit ? `${value}${unit}` : value;
-        this._renderer.setElementStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     }
 }
 NgStyle.decorators = [
     { type: Directive, args: [{ selector: '[ngStyle]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgStyle.ctorParameters = () => [
     { type: KeyValueDiffers, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 NgStyle.propDecorators = {
-    'ngStyle': [{ type: Input },],
+    "ngStyle": [{ type: Input },],
 };
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2431,11 +2955,11 @@ NgStyle.propDecorators = {
  *
  * Note: using the key `$implicit` in the context object will set it's value as default.
  *
- * # Example
+ * ## Example
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@experimental
+ * \@stable
  */
 class NgTemplateOutlet {
     /**
@@ -2445,45 +2969,85 @@ class NgTemplateOutlet {
         this._viewContainerRef = _viewContainerRef;
     }
     /**
-     * @deprecated v4.0.0 - Renamed to ngTemplateOutletContext.
-     * @param {?} context
-     * @return {?}
-     */
-    set ngOutletContext(context) { this.ngTemplateOutletContext = context; }
-    /**
      * @param {?} changes
      * @return {?}
      */
     ngOnChanges(changes) {
-        if (this._viewRef) {
-            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+        const /** @type {?} */ recreateView = this._shouldRecreateView(changes);
+        if (recreateView) {
+            if (this._viewRef) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+            }
+            if (this.ngTemplateOutlet) {
+                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+            }
         }
-        if (this.ngTemplateOutlet) {
-            this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+        else {
+            if (this._viewRef && this.ngTemplateOutletContext) {
+                this._updateExistingContext(this.ngTemplateOutletContext);
+            }
+        }
+    }
+    /**
+     * We need to re-create existing embedded view if:
+     * - templateRef has changed
+     * - context has changes
+     *
+     * We mark context object as changed when the corresponding object
+     * shape changes (new properties are added or existing properties are removed).
+     * In other words we consider context with the same properties as "the same" even
+     * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     * @param {?} changes
+     * @return {?}
+     */
+    _shouldRecreateView(changes) {
+        const /** @type {?} */ ctxChange = changes['ngTemplateOutletContext'];
+        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
+    }
+    /**
+     * @param {?} ctxChange
+     * @return {?}
+     */
+    _hasContextShapeChanged(ctxChange) {
+        const /** @type {?} */ prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+        const /** @type {?} */ currCtxKeys = Object.keys(ctxChange.currentValue || {});
+        if (prevCtxKeys.length === currCtxKeys.length) {
+            for (let /** @type {?} */ propName of currCtxKeys) {
+                if (prevCtxKeys.indexOf(propName) === -1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    /**
+     * @param {?} ctx
+     * @return {?}
+     */
+    _updateExistingContext(ctx) {
+        for (let /** @type {?} */ propName of Object.keys(ctx)) {
+            ((this._viewRef.context))[propName] = ((this.ngTemplateOutletContext))[propName];
         }
     }
 }
 NgTemplateOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NgTemplateOutlet.ctorParameters = () => [
     { type: ViewContainerRef, },
 ];
 NgTemplateOutlet.propDecorators = {
-    'ngTemplateOutletContext': [{ type: Input },],
-    'ngTemplateOutlet': [{ type: Input },],
-    'ngOutletContext': [{ type: Input },],
+    "ngTemplateOutletContext": [{ type: Input },],
+    "ngTemplateOutlet": [{ type: Input },],
 };
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -2502,10 +3066,644 @@ const COMMON_DIRECTIVES = [
     NgPlural,
     NgPluralCase,
 ];
-/**
- * A collection of deprecated directives that are no longer part of the core module.
- */
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const NAMED_FORMATS = {};
+const DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+let ZoneWidth = {};
+ZoneWidth.Short = 0;
+ZoneWidth.ShortGMT = 1;
+ZoneWidth.Long = 2;
+ZoneWidth.Extended = 3;
+ZoneWidth[ZoneWidth.Short] = "Short";
+ZoneWidth[ZoneWidth.ShortGMT] = "ShortGMT";
+ZoneWidth[ZoneWidth.Long] = "Long";
+ZoneWidth[ZoneWidth.Extended] = "Extended";
+let DateType = {};
+DateType.FullYear = 0;
+DateType.Month = 1;
+DateType.Date = 2;
+DateType.Hours = 3;
+DateType.Minutes = 4;
+DateType.Seconds = 5;
+DateType.Milliseconds = 6;
+DateType.Day = 7;
+DateType[DateType.FullYear] = "FullYear";
+DateType[DateType.Month] = "Month";
+DateType[DateType.Date] = "Date";
+DateType[DateType.Hours] = "Hours";
+DateType[DateType.Minutes] = "Minutes";
+DateType[DateType.Seconds] = "Seconds";
+DateType[DateType.Milliseconds] = "Milliseconds";
+DateType[DateType.Day] = "Day";
+let TranslationType = {};
+TranslationType.DayPeriods = 0;
+TranslationType.Days = 1;
+TranslationType.Months = 2;
+TranslationType.Eras = 3;
+TranslationType[TranslationType.DayPeriods] = "DayPeriods";
+TranslationType[TranslationType.Days] = "Days";
+TranslationType[TranslationType.Months] = "Months";
+TranslationType[TranslationType.Eras] = "Eras";
+/**
+ * Transforms a date to a locale string based on a pattern and a timezone
+ *
+ * \@internal
+ * @param {?} date
+ * @param {?} format
+ * @param {?} locale
+ * @param {?=} timezone
+ * @return {?}
+ */
+function formatDate(date, format, locale, timezone) {
+    const /** @type {?} */ namedFormat = getNamedFormat(locale, format);
+    format = namedFormat || format;
+    let /** @type {?} */ parts = [];
+    let /** @type {?} */ match;
+    while (format) {
+        match = DATE_FORMATS_SPLIT.exec(format);
+        if (match) {
+            parts = parts.concat(match.slice(1));
+            const /** @type {?} */ part = parts.pop();
+            if (!part) {
+                break;
+            }
+            format = part;
+        }
+        else {
+            parts.push(format);
+            break;
+        }
+    }
+    let /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
+    if (timezone) {
+        dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+        date = convertTimezoneToLocal(date, timezone, true);
+    }
+    let /** @type {?} */ text = '';
+    parts.forEach(value => {
+        const /** @type {?} */ dateFormatter = getDateFormatter(value);
+        text += dateFormatter ?
+            dateFormatter(date, locale, dateTimezoneOffset) :
+            value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+    });
+    return text;
+}
+/**
+ * @param {?} locale
+ * @param {?} format
+ * @return {?}
+ */
+function getNamedFormat(locale, format) {
+    const /** @type {?} */ localeId = getLocaleId(locale);
+    NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
+    if (NAMED_FORMATS[localeId][format]) {
+        return NAMED_FORMATS[localeId][format];
+    }
+    let /** @type {?} */ formatValue = '';
+    switch (format) {
+        case 'shortDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Full);
+            break;
+        case 'shortTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
+            break;
+        case 'short':
+            const /** @type {?} */ shortTime = getNamedFormat(locale, 'shortTime');
+            const /** @type {?} */ shortDate = getNamedFormat(locale, 'shortDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
+            break;
+        case 'medium':
+            const /** @type {?} */ mediumTime = getNamedFormat(locale, 'mediumTime');
+            const /** @type {?} */ mediumDate = getNamedFormat(locale, 'mediumDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
+            break;
+        case 'long':
+            const /** @type {?} */ longTime = getNamedFormat(locale, 'longTime');
+            const /** @type {?} */ longDate = getNamedFormat(locale, 'longDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
+            break;
+        case 'full':
+            const /** @type {?} */ fullTime = getNamedFormat(locale, 'fullTime');
+            const /** @type {?} */ fullDate = getNamedFormat(locale, 'fullDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
+            break;
+    }
+    if (formatValue) {
+        NAMED_FORMATS[localeId][format] = formatValue;
+    }
+    return formatValue;
+}
+/**
+ * @param {?} str
+ * @param {?} opt_values
+ * @return {?}
+ */
+function formatDateTime(str, opt_values) {
+    if (opt_values) {
+        str = str.replace(/\{([^}]+)}/g, function (match, key) {
+            return (opt_values != null && key in opt_values) ? opt_values[key] : match;
+        });
+    }
+    return str;
+}
+/**
+ * @param {?} num
+ * @param {?} digits
+ * @param {?=} minusSign
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function padNumber(num, digits, minusSign = '-', trim, negWrap) {
+    let /** @type {?} */ neg = '';
+    if (num < 0 || (negWrap && num <= 0)) {
+        if (negWrap) {
+            num = -num + 1;
+        }
+        else {
+            num = -num;
+            neg = minusSign;
+        }
+    }
+    let /** @type {?} */ strNum = '' + num;
+    while (strNum.length < digits)
+        strNum = '0' + strNum;
+    if (trim) {
+        strNum = strNum.substr(strNum.length - digits);
+    }
+    return neg + strNum;
+}
+/**
+ * Returns a date formatter that transforms a date into its locale digit representation
+ * @param {?} name
+ * @param {?} size
+ * @param {?=} offset
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
+    return function (date, locale) {
+        let /** @type {?} */ part = getDatePart(name, date, size);
+        if (offset > 0 || part > -offset) {
+            part += offset;
+        }
+        if (name === DateType.Hours && part === 0 && offset === -12) {
+            part = 12;
+        }
+        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
+    };
+}
+/**
+ * @param {?} name
+ * @param {?} date
+ * @param {?} size
+ * @return {?}
+ */
+function getDatePart(name, date, size) {
+    switch (name) {
+        case DateType.FullYear:
+            return date.getFullYear();
+        case DateType.Month:
+            return date.getMonth();
+        case DateType.Date:
+            return date.getDate();
+        case DateType.Hours:
+            return date.getHours();
+        case DateType.Minutes:
+            return date.getMinutes();
+        case DateType.Seconds:
+            return date.getSeconds();
+        case DateType.Milliseconds:
+            const /** @type {?} */ div = size === 1 ? 100 : (size === 2 ? 10 : 1);
+            return Math.round(date.getMilliseconds() / div);
+        case DateType.Day:
+            return date.getDay();
+        default:
+            throw new Error(`Unknown DateType value "${name}".`);
+    }
+}
+/**
+ * Returns a date formatter that transforms a date into its locale string representation
+ * @param {?} name
+ * @param {?} width
+ * @param {?=} form
+ * @param {?=} extended
+ * @return {?}
+ */
+function dateStrGetter(name, width, form = FormStyle.Format, extended = false) {
+    return function (date, locale) {
+        return getDateTranslation(date, locale, name, width, form, extended);
+    };
+}
+/**
+ * Returns the locale translation of a date for a given form, type and width
+ * @param {?} date
+ * @param {?} locale
+ * @param {?} name
+ * @param {?} width
+ * @param {?} form
+ * @param {?} extended
+ * @return {?}
+ */
+function getDateTranslation(date, locale, name, width, form, extended) {
+    switch (name) {
+        case TranslationType.Months:
+            return getLocaleMonthNames(locale, form, width)[date.getMonth()];
+        case TranslationType.Days:
+            return getLocaleDayNames(locale, form, width)[date.getDay()];
+        case TranslationType.DayPeriods:
+            const /** @type {?} */ currentHours = date.getHours();
+            const /** @type {?} */ currentMinutes = date.getMinutes();
+            if (extended) {
+                const /** @type {?} */ rules = getLocaleExtraDayPeriodRules(locale);
+                const /** @type {?} */ dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
+                let /** @type {?} */ result;
+                rules.forEach((rule, index) => {
+                    if (Array.isArray(rule)) {
+                        // morning, afternoon, evening, night
+                        const { hours: hoursFrom, minutes: minutesFrom } = rule[0];
+                        const { hours: hoursTo, minutes: minutesTo } = rule[1];
+                        if (currentHours >= hoursFrom && currentMinutes >= minutesFrom &&
+                            (currentHours < hoursTo ||
+                                (currentHours === hoursTo && currentMinutes < minutesTo))) {
+                            result = dayPeriods[index];
+                        }
+                    }
+                    else {
+                        const { hours, minutes } = rule;
+                        if (hours === currentHours && minutes === currentMinutes) {
+                            result = dayPeriods[index];
+                        }
+                    }
+                });
+                if (result) {
+                    return result;
+                }
+            }
+            // if no rules for the day periods, we use am/pm by default
+            return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours < 12 ? 0 : 1];
+        case TranslationType.Eras:
+            return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
+    }
+}
+/**
+ * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
+ * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
+ * extended = +04:30)
+ * @param {?} width
+ * @return {?}
+ */
+function timeZoneGetter(width) {
+    return function (date, locale, offset) {
+        const /** @type {?} */ zone = -1 * offset;
+        const /** @type {?} */ minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        const /** @type {?} */ hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
+        switch (width) {
+            case ZoneWidth.Short:
+                return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.ShortGMT:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 1, minusSign);
+            case ZoneWidth.Long:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.Extended:
+                if (offset === 0) {
+                    return 'Z';
+                }
+                else {
+                    return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                        padNumber(Math.abs(zone % 60), 2, minusSign);
+                }
+            default:
+                throw new Error(`Unknown zone width "${width}"`);
+        }
+    };
+}
+const JANUARY = 0;
+const THURSDAY = 4;
+/**
+ * @param {?} year
+ * @return {?}
+ */
+function getFirstThursdayOfYear(year) {
+    const /** @type {?} */ firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
+    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+}
+/**
+ * @param {?} datetime
+ * @return {?}
+ */
+function getThursdayThisWeek(datetime) {
+    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+}
+/**
+ * @param {?} size
+ * @param {?=} monthBased
+ * @return {?}
+ */
+function weekGetter(size, monthBased = false) {
+    return function (date, locale) {
+        let /** @type {?} */ result;
+        if (monthBased) {
+            const /** @type {?} */ nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
+            const /** @type {?} */ today = date.getDate();
+            result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
+        }
+        else {
+            const /** @type {?} */ firstThurs = getFirstThursdayOfYear(date.getFullYear());
+            const /** @type {?} */ thisThurs = getThursdayThisWeek(date);
+            const /** @type {?} */ diff = thisThurs.getTime() - firstThurs.getTime();
+            result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
+        }
+        return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    };
+}
+const DATE_FORMATS = {};
+/**
+ * @param {?} format
+ * @return {?}
+ */
+function getDateFormatter(format) {
+    if (DATE_FORMATS[format]) {
+        return DATE_FORMATS[format];
+    }
+    let /** @type {?} */ formatter;
+    switch (format) {
+        // Era name (AD/BC)
+        case 'G':
+        case 'GG':
+        case 'GGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Abbreviated);
+            break;
+        case 'GGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Wide);
+            break;
+        case 'GGGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Narrow);
+            break;
+        // 1 digit representation of the year, e.g. (AD 1 => 1, AD 199 => 199)
+        case 'y':
+            formatter = dateGetter(DateType.FullYear, 1, 0, false, true);
+            break;
+        // 2 digit representation of the year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yy':
+            formatter = dateGetter(DateType.FullYear, 2, 0, true, true);
+            break;
+        // 3 digit representation of the year, padded (000-999). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yyy':
+            formatter = dateGetter(DateType.FullYear, 3, 0, false, true);
+            break;
+        // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
+        case 'yyyy':
+            formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+            break;
+        // Month of the year (1-12), numeric
+        case 'M':
+        case 'L':
+            formatter = dateGetter(DateType.Month, 1, 1);
+            break;
+        case 'MM':
+        case 'LL':
+            formatter = dateGetter(DateType.Month, 2, 1);
+            break;
+        // Month of the year (January, ...), string, format
+        case 'MMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated);
+            break;
+        case 'MMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Wide);
+            break;
+        case 'MMMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Narrow);
+            break;
+        // Month of the year (January, ...), string, standalone
+        case 'LLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated, FormStyle.Standalone);
+            break;
+        case 'LLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Wide, FormStyle.Standalone);
+            break;
+        case 'LLLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Narrow, FormStyle.Standalone);
+            break;
+        // Week of the year (1, ... 52)
+        case 'w':
+            formatter = weekGetter(1);
+            break;
+        case 'ww':
+            formatter = weekGetter(2);
+            break;
+        // Week of the month (1, ...)
+        case 'W':
+            formatter = weekGetter(1, true);
+            break;
+        // Day of the month (1-31)
+        case 'd':
+            formatter = dateGetter(DateType.Date, 1);
+            break;
+        case 'dd':
+            formatter = dateGetter(DateType.Date, 2);
+            break;
+        // Day of the Week
+        case 'E':
+        case 'EE':
+        case 'EEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated);
+            break;
+        case 'EEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide);
+            break;
+        case 'EEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Narrow);
+            break;
+        case 'EEEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short);
+            break;
+        // Generic period of the day (am-pm)
+        case 'a':
+        case 'aa':
+        case 'aaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated);
+            break;
+        case 'aaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide);
+            break;
+        case 'aaaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow);
+            break;
+        // Extended period of the day (midnight, at night, ...), standalone
+        case 'b':
+        case 'bb':
+        case 'bbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Standalone, true);
+            break;
+        case 'bbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Standalone, true);
+            break;
+        case 'bbbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Standalone, true);
+            break;
+        // Extended period of the day (midnight, night, ...), standalone
+        case 'B':
+        case 'BB':
+        case 'BBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Format, true);
+            break;
+        case 'BBBB':
+            formatter =
+                dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Format, true);
+            break;
+        case 'BBBBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Format, true);
+            break;
+        // Hour in AM/PM, (1-12)
+        case 'h':
+            formatter = dateGetter(DateType.Hours, 1, -12);
+            break;
+        case 'hh':
+            formatter = dateGetter(DateType.Hours, 2, -12);
+            break;
+        // Hour of the day (0-23)
+        case 'H':
+            formatter = dateGetter(DateType.Hours, 1);
+            break;
+        // Hour in day, padded (00-23)
+        case 'HH':
+            formatter = dateGetter(DateType.Hours, 2);
+            break;
+        // Minute of the hour (0-59)
+        case 'm':
+            formatter = dateGetter(DateType.Minutes, 1);
+            break;
+        case 'mm':
+            formatter = dateGetter(DateType.Minutes, 2);
+            break;
+        // Second of the minute (0-59)
+        case 's':
+            formatter = dateGetter(DateType.Seconds, 1);
+            break;
+        case 'ss':
+            formatter = dateGetter(DateType.Seconds, 2);
+            break;
+        // Fractional second padded (0-9)
+        case 'S':
+            formatter = dateGetter(DateType.Milliseconds, 1);
+            break;
+        case 'SS':
+            formatter = dateGetter(DateType.Milliseconds, 2);
+            break;
+        // = millisecond
+        case 'SSS':
+            formatter = dateGetter(DateType.Milliseconds, 3);
+            break;
+        // Timezone ISO8601 short format (-0430)
+        case 'Z':
+        case 'ZZ':
+        case 'ZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Short);
+            break;
+        // Timezone ISO8601 extended format (-04:30)
+        case 'ZZZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Extended);
+            break;
+        // Timezone GMT short format (GMT+4)
+        case 'O':
+        case 'OO':
+        case 'OOO':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'z':
+        case 'zz':
+        case 'zzz':
+            formatter = timeZoneGetter(ZoneWidth.ShortGMT);
+            break;
+        // Timezone GMT long format (GMT+0430)
+        case 'OOOO':
+        case 'ZZZZ':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'zzzz':
+            formatter = timeZoneGetter(ZoneWidth.Long);
+            break;
+        default:
+            return null;
+    }
+    DATE_FORMATS[format] = formatter;
+    return formatter;
+}
+/**
+ * @param {?} timezone
+ * @param {?} fallback
+ * @return {?}
+ */
+function timezoneToOffset(timezone, fallback) {
+    // Support: IE 9-11 only, Edge 13-15+
+    // IE/Edge do not "understand" colon (`:`) in timezone
+    timezone = timezone.replace(/:/g, '');
+    const /** @type {?} */ requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+}
+/**
+ * @param {?} date
+ * @param {?} minutes
+ * @return {?}
+ */
+function addDateMinutes(date, minutes) {
+    date = new Date(date.getTime());
+    date.setMinutes(date.getMinutes() + minutes);
+    return date;
+}
+/**
+ * @param {?} date
+ * @param {?} timezone
+ * @param {?} reverse
+ * @return {?}
+ */
+function convertTimezoneToLocal(date, timezone, reverse) {
+    const /** @type {?} */ reverseValue = reverse ? -1 : 1;
+    const /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
+    const /** @type {?} */ timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+    return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2522,6 +3720,1071 @@ function invalidPipeArgumentError(type, value) {
     return Error(`InvalidPipeArgument: '${value}' for pipe '${ɵstringify(type)}'`);
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+class DatePipe {
+    /**
+     * @param {?} locale
+     */
+    constructor(locale) {
+        this.locale = locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} format
+     * @param {?=} timezone
+     * @param {?=} locale
+     * @return {?}
+     */
+    transform(value, format = 'mediumDate', timezone, locale) {
+        if (value == null || value === '' || value !== value)
+            return null;
+        if (typeof value === 'string') {
+            value = value.trim();
+        }
+        let /** @type {?} */ date;
+        if (isDate$1(value)) {
+            date = value;
+        }
+        else if (!isNaN(value - parseFloat(value))) {
+            date = new Date(parseFloat(value));
+        }
+        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            /**
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
+            const [y, m, d] = value.split('-').map((val) => +val);
+            date = new Date(y, m - 1, d);
+        }
+        else {
+            date = new Date(value);
+        }
+        if (!isDate$1(date)) {
+            let /** @type {?} */ match;
+            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                date = isoStringToDate(match);
+            }
+            else {
+                throw invalidPipeArgumentError(DatePipe, value);
+            }
+        }
+        return formatDate(date, format, locale || this.locale, timezone);
+    }
+}
+DatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DatePipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * \@internal
+ * @param {?} match
+ * @return {?}
+ */
+function isoStringToDate(match) {
+    const /** @type {?} */ date = new Date(0);
+    let /** @type {?} */ tzHour = 0;
+    let /** @type {?} */ tzMin = 0;
+    const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+    const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    if (match[9]) {
+        tzHour = +(match[9] + match[10]);
+        tzMin = +(match[9] + match[11]);
+    }
+    dateSetter.call(date, +(match[1]), +(match[2]) - 1, +(match[3]));
+    const /** @type {?} */ h = +(match[4] || '0') - tzHour;
+    const /** @type {?} */ m = +(match[5] || '0') - tzMin;
+    const /** @type {?} */ s = +(match[6] || '0');
+    const /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    timeSetter.call(date, h, m, s, ms);
+    return date;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isDate$1(value) {
+    return value instanceof Date && !isNaN(value.valueOf());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+class NumberFormatter {
+    /**
+     * @param {?} num
+     * @param {?} locale
+     * @param {?} style
+     * @param {?=} opts
+     * @return {?}
+     */
+    static format(num, locale, style, opts = {}) {
+        const { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = opts;
+        const /** @type {?} */ options = {
+            minimumIntegerDigits,
+            minimumFractionDigits,
+            maximumFractionDigits,
+            style: NumberFormatStyle[style].toLowerCase()
+        };
+        if (style == NumberFormatStyle.Currency) {
+            options.currency = typeof currency == 'string' ? currency : undefined;
+            options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
+        }
+        return new Intl.NumberFormat(locale, options).format(num);
+    }
+}
+const DATE_FORMATS_SPLIT$1 = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+const PATTERN_ALIASES = {
+    // Keys are quoted so they do not get renamed during closure compilation.
+    'yMMMdjms': datePartGetterFactory(combine([
+        digitCondition('year', 1),
+        nameCondition('month', 3),
+        digitCondition('day', 1),
+        digitCondition('hour', 1),
+        digitCondition('minute', 1),
+        digitCondition('second', 1),
+    ])),
+    'yMdjm': datePartGetterFactory(combine([
+        digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
+        digitCondition('hour', 1), digitCondition('minute', 1)
+    ])),
+    'yMMMMEEEEd': datePartGetterFactory(combine([
+        digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
+        digitCondition('day', 1)
+    ])),
+    'yMMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
+    'yMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
+    'yMd': datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
+    'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
+    'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
+};
+const DATE_FORMATS$1 = {
+    // Keys are quoted so they do not get renamed.
+    'yyyy': datePartGetterFactory(digitCondition('year', 4)),
+    'yy': datePartGetterFactory(digitCondition('year', 2)),
+    'y': datePartGetterFactory(digitCondition('year', 1)),
+    'MMMM': datePartGetterFactory(nameCondition('month', 4)),
+    'MMM': datePartGetterFactory(nameCondition('month', 3)),
+    'MM': datePartGetterFactory(digitCondition('month', 2)),
+    'M': datePartGetterFactory(digitCondition('month', 1)),
+    'LLLL': datePartGetterFactory(nameCondition('month', 4)),
+    'L': datePartGetterFactory(nameCondition('month', 1)),
+    'dd': datePartGetterFactory(digitCondition('day', 2)),
+    'd': datePartGetterFactory(digitCondition('day', 1)),
+    'HH': digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
+    'H': hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
+    'hh': digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
+    'h': hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+    'jj': datePartGetterFactory(digitCondition('hour', 2)),
+    'j': datePartGetterFactory(digitCondition('hour', 1)),
+    'mm': digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
+    'm': datePartGetterFactory(digitCondition('minute', 1)),
+    'ss': digitModifier(datePartGetterFactory(digitCondition('second', 2))),
+    's': datePartGetterFactory(digitCondition('second', 1)),
+    // while ISO 8601 requires fractions to be prefixed with `.` or `,`
+    // we can be just safely rely on using `sss` since we currently don't support single or two digit
+    // fractions
+    'sss': datePartGetterFactory(digitCondition('second', 3)),
+    'EEEE': datePartGetterFactory(nameCondition('weekday', 4)),
+    'EEE': datePartGetterFactory(nameCondition('weekday', 3)),
+    'EE': datePartGetterFactory(nameCondition('weekday', 2)),
+    'E': datePartGetterFactory(nameCondition('weekday', 1)),
+    'a': hourClockExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
+    'Z': timeZoneGetter$1('short'),
+    'z': timeZoneGetter$1('long'),
+    'ww': datePartGetterFactory({}),
+    // first Thursday of the year. not support ?
+    'w': datePartGetterFactory({}),
+    // of the year not support ?
+    'G': datePartGetterFactory(nameCondition('era', 1)),
+    'GG': datePartGetterFactory(nameCondition('era', 2)),
+    'GGG': datePartGetterFactory(nameCondition('era', 3)),
+    'GGGG': datePartGetterFactory(nameCondition('era', 4))
+};
+/**
+ * @param {?} inner
+ * @return {?}
+ */
+function digitModifier(inner) {
+    return function (date, locale) {
+        const /** @type {?} */ result = inner(date, locale);
+        return result.length == 1 ? '0' + result : result;
+    };
+}
+/**
+ * @param {?} inner
+ * @return {?}
+ */
+function hourClockExtractor(inner) {
+    return function (date, locale) { return inner(date, locale).split(' ')[1]; };
+}
+/**
+ * @param {?} inner
+ * @return {?}
+ */
+function hourExtractor(inner) {
+    return function (date, locale) { return inner(date, locale).split(' ')[0]; };
+}
+/**
+ * @param {?} date
+ * @param {?} locale
+ * @param {?} options
+ * @return {?}
+ */
+function intlDateFormat(date, locale, options) {
+    return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
+}
+/**
+ * @param {?} timezone
+ * @return {?}
+ */
+function timeZoneGetter$1(timezone) {
+    // To workaround `Intl` API restriction for single timezone let format with 24 hours
+    const /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+    return function (date, locale) {
+        const /** @type {?} */ result = intlDateFormat(date, locale, options);
+        // Then extract first 3 letters that related to hours
+        return result ? result.substring(3) : '';
+    };
+}
+/**
+ * @param {?} options
+ * @param {?} value
+ * @return {?}
+ */
+function hour12Modify(options, value) {
+    options.hour12 = value;
+    return options;
+}
+/**
+ * @param {?} prop
+ * @param {?} len
+ * @return {?}
+ */
+function digitCondition(prop, len) {
+    const /** @type {?} */ result = {};
+    result[prop] = len === 2 ? '2-digit' : 'numeric';
+    return result;
+}
+/**
+ * @param {?} prop
+ * @param {?} len
+ * @return {?}
+ */
+function nameCondition(prop, len) {
+    const /** @type {?} */ result = {};
+    if (len < 4) {
+        result[prop] = len > 1 ? 'short' : 'narrow';
+    }
+    else {
+        result[prop] = 'long';
+    }
+    return result;
+}
+/**
+ * @param {?} options
+ * @return {?}
+ */
+function combine(options) {
+    return options.reduce((merged, opt) => (Object.assign({}, merged, opt)), {});
+}
+/**
+ * @param {?} ret
+ * @return {?}
+ */
+function datePartGetterFactory(ret) {
+    return (date, locale) => intlDateFormat(date, locale, ret);
+}
+const DATE_FORMATTER_CACHE = new Map();
+/**
+ * @param {?} format
+ * @param {?} date
+ * @param {?} locale
+ * @return {?}
+ */
+function dateFormatter(format, date, locale) {
+    const /** @type {?} */ fn = PATTERN_ALIASES[format];
+    if (fn)
+        return fn(date, locale);
+    const /** @type {?} */ cacheKey = format;
+    let /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
+    if (!parts) {
+        parts = [];
+        let /** @type {?} */ match;
+        DATE_FORMATS_SPLIT$1.exec(format);
+        let /** @type {?} */ _format = format;
+        while (_format) {
+            match = DATE_FORMATS_SPLIT$1.exec(_format);
+            if (match) {
+                parts = parts.concat(match.slice(1));
+                _format = ((parts.pop()));
+            }
+            else {
+                parts.push(_format);
+                _format = null;
+            }
+        }
+        DATE_FORMATTER_CACHE.set(cacheKey, parts);
+    }
+    return parts.reduce((text, part) => {
+        const /** @type {?} */ fn = DATE_FORMATS$1[part];
+        return text + (fn ? fn(date, locale) : partToTime(part));
+    }, '');
+}
+/**
+ * @param {?} part
+ * @return {?}
+ */
+function partToTime(part) {
+    return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+}
+class DateFormatter {
+    /**
+     * @param {?} date
+     * @param {?} locale
+     * @param {?} pattern
+     * @return {?}
+     */
+    static format(date, locale, pattern) {
+        return dateFormatter(pattern, date, locale);
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+* @license
+* Copyright Google Inc. All Rights Reserved.
+*
+* Use of this source code is governed by an MIT-style license that can be
+* found in the LICENSE file at https://angular.io/license
+  */
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a date according to locale rules.
+ * \@howToUse `date_expression | date[:format]`
+ * \@description
+ *
+ * Where:
+ * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+ * (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. The format can be predefined as
+ *   shown below or custom as shown in the table.
+ *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
+ *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
+ *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
+ *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
+ *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
+ *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
+ *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
+ *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
+ *
+ *
+ *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
+ *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
+ *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
+ *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
+ *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
+ *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
+ *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
+ *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
+ *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
+ *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
+ *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
+ *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
+ *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
+ *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
+ *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
+ *
+ * In javascript, only the components specified will be respected (not the ordering,
+ * punctuations, ...) and details of the formatting will be dependent on the locale.
+ *
+ * Timezone of the formatted text will be the local system timezone of the end-user's machine.
+ *
+ * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+ * applied and the formatted text will have the same day, month and year of the expression.
+ *
+ * WARNINGS:
+ * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+ *   Instead users should treat the date as an immutable object and change the reference when the
+ *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+ *   which would be an expensive operation).
+ * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
+ *   browsers.
+ *
+ * ### Examples
+ *
+ * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+ * in the _local_ time and locale is 'en-US':
+ *
+ * ```
+ *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
+ *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+ *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+ *     {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * ```
+ *
+ * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+ *
+ * \@stable
+ */
+class DeprecatedDatePipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} pattern
+     * @return {?}
+     */
+    transform(value, pattern = 'mediumDate') {
+        if (value == null || value === '' || value !== value)
+            return null;
+        let /** @type {?} */ date;
+        if (typeof value === 'string') {
+            value = value.trim();
+        }
+        if (isDate(value)) {
+            date = value;
+        }
+        else if (!isNaN(value - parseFloat(value))) {
+            date = new Date(parseFloat(value));
+        }
+        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            /**
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the
+             * timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
+            const [y, m, d] = value.split('-').map((val) => parseInt(val, 10));
+            date = new Date(y, m - 1, d);
+        }
+        else {
+            date = new Date(value);
+        }
+        if (!isDate(date)) {
+            let /** @type {?} */ match;
+            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                date = isoStringToDate(match);
+            }
+            else {
+                throw invalidPipeArgumentError(DeprecatedDatePipe, value);
+            }
+        }
+        return DateFormatter.format(date, this._locale, DeprecatedDatePipe._ALIASES[pattern] || pattern);
+    }
+}
+/**
+ * \@internal
+ */
+DeprecatedDatePipe._ALIASES = {
+    'medium': 'yMMMdjms',
+    'short': 'yMdjm',
+    'fullDate': 'yMMMMEEEEd',
+    'longDate': 'yMMMMd',
+    'mediumDate': 'yMMMd',
+    'shortDate': 'yMd',
+    'mediumTime': 'jms',
+    'shortTime': 'jm'
+};
+DeprecatedDatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DeprecatedDatePipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isDate(value) {
+    return value instanceof Date && !isNaN(value.valueOf());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+const MAX_DIGITS = 22;
+const DECIMAL_SEP = '.';
+const ZERO_CHAR = '0';
+const PATTERN_SEP = ';';
+const GROUP_SEP = ',';
+const DIGIT_CHAR = '#';
+const CURRENCY_CHAR = '¤';
+const PERCENT_CHAR = '%';
+/**
+ * Transform a number to a locale string based on a style and a format
+ *
+ * \@internal
+ * @param {?} value
+ * @param {?} locale
+ * @param {?} style
+ * @param {?=} digitsInfo
+ * @param {?=} currency
+ * @return {?}
+ */
+function formatNumber$1(value, locale, style, digitsInfo, currency = null) {
+    const /** @type {?} */ res = { str: null };
+    const /** @type {?} */ format = getLocaleNumberFormat(locale, style);
+    let /** @type {?} */ num;
+    // Convert strings to numbers
+    if (typeof value === 'string' && !isNaN(+value - parseFloat(value))) {
+        num = +value;
+    }
+    else if (typeof value !== 'number') {
+        res.error = `${value} is not a number`;
+        return res;
+    }
+    else {
+        num = value;
+    }
+    if (style === NumberFormatStyle.Percent) {
+        num = num * 100;
+    }
+    const /** @type {?} */ numStr = Math.abs(num) + '';
+    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    let /** @type {?} */ formattedText = '';
+    let /** @type {?} */ isZero = false;
+    if (!isFinite(num)) {
+        formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
+    }
+    else {
+        const /** @type {?} */ parsedNumber = parseNumber(numStr);
+        let /** @type {?} */ minInt = pattern.minInt;
+        let /** @type {?} */ minFraction = pattern.minFrac;
+        let /** @type {?} */ maxFraction = pattern.maxFrac;
+        if (digitsInfo) {
+            const /** @type {?} */ parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                res.error = `${digitsInfo} is not a valid digit info`;
+                return res;
+            }
+            const /** @type {?} */ minIntPart = parts[1];
+            const /** @type {?} */ minFractionPart = parts[3];
+            const /** @type {?} */ maxFractionPart = parts[5];
+            if (minIntPart != null) {
+                minInt = parseIntAutoRadix(minIntPart);
+            }
+            if (minFractionPart != null) {
+                minFraction = parseIntAutoRadix(minFractionPart);
+            }
+            if (maxFractionPart != null) {
+                maxFraction = parseIntAutoRadix(maxFractionPart);
+            }
+            else if (minFractionPart != null && minFraction > maxFraction) {
+                maxFraction = minFraction;
+            }
+        }
+        roundNumber(parsedNumber, minFraction, maxFraction);
+        let /** @type {?} */ digits = parsedNumber.digits;
+        let /** @type {?} */ integerLen = parsedNumber.integerLen;
+        const /** @type {?} */ exponent = parsedNumber.exponent;
+        let /** @type {?} */ decimals = [];
+        isZero = digits.every(d => !d);
+        // pad zeros for small numbers
+        for (; integerLen < minInt; integerLen++) {
+            digits.unshift(0);
+        }
+        // pad zeros for small numbers
+        for (; integerLen < 0; integerLen++) {
+            digits.unshift(0);
+        }
+        // extract decimals digits
+        if (integerLen > 0) {
+            decimals = digits.splice(integerLen, digits.length);
+        }
+        else {
+            decimals = digits;
+            digits = [0];
+        }
+        // format the integer digits with grouping separators
+        const /** @type {?} */ groups = [];
+        if (digits.length >= pattern.lgSize) {
+            groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
+        }
+        while (digits.length > pattern.gSize) {
+            groups.unshift(digits.splice(-pattern.gSize, digits.length).join(''));
+        }
+        if (digits.length) {
+            groups.unshift(digits.join(''));
+        }
+        const /** @type {?} */ groupSymbol = currency ? NumberSymbol.CurrencyGroup : NumberSymbol.Group;
+        formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
+        // append the decimal digits
+        if (decimals.length) {
+            const /** @type {?} */ decimalSymbol = currency ? NumberSymbol.CurrencyDecimal : NumberSymbol.Decimal;
+            formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
+        }
+        if (exponent) {
+            formattedText += getLocaleNumberSymbol(locale, NumberSymbol.Exponential) + '+' + exponent;
+        }
+    }
+    if (num < 0 && !isZero) {
+        formattedText = pattern.negPre + formattedText + pattern.negSuf;
+    }
+    else {
+        formattedText = pattern.posPre + formattedText + pattern.posSuf;
+    }
+    if (style === NumberFormatStyle.Currency && currency !== null) {
+        res.str = formattedText
+            .replace(CURRENCY_CHAR, currency)
+            .replace(CURRENCY_CHAR, '');
+        return res;
+    }
+    if (style === NumberFormatStyle.Percent) {
+        res.str = formattedText.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
+        return res;
+    }
+    res.str = formattedText;
+    return res;
+}
+/**
+ * @param {?} format
+ * @param {?=} minusSign
+ * @return {?}
+ */
+function parseNumberFormat(format, minusSign = '-') {
+    const /** @type {?} */ p = {
+        minInt: 1,
+        minFrac: 0,
+        maxFrac: 0,
+        posPre: '',
+        posSuf: '',
+        negPre: '',
+        negSuf: '',
+        gSize: 0,
+        lgSize: 0
+    };
+    const /** @type {?} */ patternParts = format.split(PATTERN_SEP);
+    const /** @type {?} */ positive = patternParts[0];
+    const /** @type {?} */ negative = patternParts[1];
+    const /** @type {?} */ positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
+        positive.split(DECIMAL_SEP) :
+        [
+            positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
+            positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
+        ], /** @type {?} */ integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
+    p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
+    for (let /** @type {?} */ i = 0; i < fraction.length; i++) {
+        const /** @type {?} */ ch = fraction.charAt(i);
+        if (ch === ZERO_CHAR) {
+            p.minFrac = p.maxFrac = i + 1;
+        }
+        else if (ch === DIGIT_CHAR) {
+            p.maxFrac = i + 1;
+        }
+        else {
+            p.posSuf += ch;
+        }
+    }
+    const /** @type {?} */ groups = integer.split(GROUP_SEP);
+    p.gSize = groups[1] ? groups[1].length : 0;
+    p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
+    if (negative) {
+        const /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */ pos = negative.indexOf(DIGIT_CHAR);
+        p.negPre = negative.substr(0, pos).replace(/'/g, '');
+        p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
+    }
+    else {
+        p.negPre = minusSign + p.posPre;
+        p.negSuf = p.posSuf;
+    }
+    return p;
+}
+/**
+ * Parse a number (as a string)
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} numStr
+ * @return {?}
+ */
+function parseNumber(numStr) {
+    let /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
+    let /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
+    // Decimal point?
+    if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
+        numStr = numStr.replace(DECIMAL_SEP, '');
+    }
+    // Exponential form?
+    if ((i = numStr.search(/e/i)) > 0) {
+        // Work out the exponent.
+        if (integerLen < 0)
+            integerLen = i;
+        integerLen += +numStr.slice(i + 1);
+        numStr = numStr.substring(0, i);
+    }
+    else if (integerLen < 0) {
+        // There was no decimal point or exponent so it is an integer.
+        integerLen = numStr.length;
+    }
+    // Count the number of leading zeros.
+    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+    }
+    if (i === (zeros = numStr.length)) {
+        // The digits are all zero.
+        digits = [0];
+        integerLen = 1;
+    }
+    else {
+        // Count the number of trailing zeros
+        zeros--;
+        while (numStr.charAt(zeros) === ZERO_CHAR)
+            zeros--;
+        // Trailing zeros are insignificant so ignore them
+        integerLen -= i;
+        digits = [];
+        // Convert string to array of digits without leading/trailing zeros.
+        for (j = 0; i <= zeros; i++, j++) {
+            digits[j] = +numStr.charAt(i);
+        }
+    }
+    // If the number overflows the maximum allowed digits then use an exponent.
+    if (integerLen > MAX_DIGITS) {
+        digits = digits.splice(0, MAX_DIGITS - 1);
+        exponent = integerLen - 1;
+        integerLen = 1;
+    }
+    return { digits, exponent, integerLen };
+}
+/**
+ * Round the parsed number to the specified number of decimal places
+ * This function changes the parsedNumber in-place
+ * @param {?} parsedNumber
+ * @param {?} minFrac
+ * @param {?} maxFrac
+ * @return {?}
+ */
+function roundNumber(parsedNumber, minFrac, maxFrac) {
+    if (minFrac > maxFrac) {
+        throw new Error(`The minimum number of digits after fraction (${minFrac}) is higher than the maximum (${maxFrac}).`);
+    }
+    let /** @type {?} */ digits = parsedNumber.digits;
+    let /** @type {?} */ fractionLen = digits.length - parsedNumber.integerLen;
+    const /** @type {?} */ fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
+    // The index of the digit to where rounding is to occur
+    let /** @type {?} */ roundAt = fractionSize + parsedNumber.integerLen;
+    let /** @type {?} */ digit = digits[roundAt];
+    if (roundAt > 0) {
+        // Drop fractional digits beyond `roundAt`
+        digits.splice(Math.max(parsedNumber.integerLen, roundAt));
+        // Set non-fractional digits beyond `roundAt` to 0
+        for (let /** @type {?} */ j = roundAt; j < digits.length; j++) {
+            digits[j] = 0;
+        }
+    }
+    else {
+        // We rounded to zero so reset the parsedNumber
+        fractionLen = Math.max(0, fractionLen);
+        parsedNumber.integerLen = 1;
+        digits.length = Math.max(1, roundAt = fractionSize + 1);
+        digits[0] = 0;
+        for (let /** @type {?} */ i = 1; i < roundAt; i++)
+            digits[i] = 0;
+    }
+    if (digit >= 5) {
+        if (roundAt - 1 < 0) {
+            for (let /** @type {?} */ k = 0; k > roundAt; k--) {
+                digits.unshift(0);
+                parsedNumber.integerLen++;
+            }
+            digits.unshift(1);
+            parsedNumber.integerLen++;
+        }
+        else {
+            digits[roundAt - 1]++;
+        }
+    }
+    // Pad out with zeros to get the required fraction length
+    for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
+        digits.push(0);
+    // Do any carrying, e.g. a digit was rounded up to 10
+    const /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
+        d = d + carry;
+        digits[i] = d % 10;
+        return Math.floor(d / 10);
+    }, 0);
+    if (carry) {
+        digits.unshift(carry);
+        parsedNumber.integerLen++;
+    }
+}
+/**
+ * \@internal
+ * @param {?} text
+ * @return {?}
+ */
+function parseIntAutoRadix(text) {
+    const /** @type {?} */ result = parseInt(text);
+    if (isNaN(result)) {
+        throw new Error('Invalid integer literal when parsing ' + text);
+    }
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @param {?} pipe
+ * @param {?} locale
+ * @param {?} value
+ * @param {?} style
+ * @param {?=} digits
+ * @param {?=} currency
+ * @param {?=} currencyAsSymbol
+ * @return {?}
+ */
+function formatNumber$$1(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
+    if (value == null)
+        return null;
+    // Convert strings to numbers
+    value = typeof value === 'string' && !isNaN(+value - parseFloat(value)) ? +value : value;
+    if (typeof value !== 'number') {
+        throw invalidPipeArgumentError(pipe, value);
+    }
+    let /** @type {?} */ minInt;
+    let /** @type {?} */ minFraction;
+    let /** @type {?} */ maxFraction;
+    if (style !== NumberFormatStyle.Currency) {
+        // rely on Intl default for currency
+        minInt = 1;
+        minFraction = 0;
+        maxFraction = 3;
+    }
+    if (digits) {
+        const /** @type {?} */ parts = digits.match(NUMBER_FORMAT_REGEXP);
+        if (parts === null) {
+            throw new Error(`${digits} is not a valid digit info for number pipes`);
+        }
+        if (parts[1] != null) {
+            minInt = parseIntAutoRadix(parts[1]);
+        }
+        if (parts[3] != null) {
+            minFraction = parseIntAutoRadix(parts[3]);
+        }
+        if (parts[5] != null) {
+            maxFraction = parseIntAutoRadix(parts[5]);
+        }
+    }
+    return NumberFormatter.format(/** @type {?} */ (value), locale, style, {
+        minimumIntegerDigits: minInt,
+        minimumFractionDigits: minFraction,
+        maximumFractionDigits: maxFraction,
+        currency: currency,
+        currencyAsSymbol: currencyAsSymbol,
+    });
+}
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number according to locale rules.
+ * \@howToUse `number_expression | number[:digitInfo]`
+ *
+ * Formats a number as text. Group sizing and separator and other locale-specific
+ * configurations are based on the active locale.
+ *
+ * where `expression` is a number:
+ *  - `digitInfo` is a `string` which has a following format: <br>
+ *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+ *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+ *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+ *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
+ *
+ * For more information on the acceptable range for each of these numbers and other
+ * details see your native internationalization library.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+ *
+ * \@stable
+ */
+class DeprecatedDecimalPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+    transform(value, digits) {
+        return formatNumber$$1(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+    }
+}
+DeprecatedDecimalPipe.decorators = [
+    { type: Pipe, args: [{ name: 'number' },] },
+];
+/** @nocollapse */
+DeprecatedDecimalPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as a percentage according to locale rules.
+ * \@howToUse `number_expression | percent[:digitInfo]`
+ *
+ * \@description
+ *
+ * Formats a number as percentage.
+ *
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ *
+ * \@stable
+ */
+class DeprecatedPercentPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+    transform(value, digits) {
+        return formatNumber$$1(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+    }
+}
+DeprecatedPercentPipe.decorators = [
+    { type: Pipe, args: [{ name: 'percent' },] },
+];
+/** @nocollapse */
+DeprecatedPercentPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as currency using locale rules.
+ * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
+ * \@description
+ *
+ * Use `currency` to format a number as currency.
+ *
+ * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+ *    as `USD` for the US dollar and `EUR` for the euro.
+ * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
+ *   - `true`: use symbol (e.g. `$`).
+ *   - `false`(default): use code (e.g. `USD`).
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *
+ * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ *
+ * \@stable
+ */
+class DeprecatedCurrencyPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} currencyCode
+     * @param {?=} symbolDisplay
+     * @param {?=} digits
+     * @return {?}
+     */
+    transform(value, currencyCode = 'USD', symbolDisplay = false, digits) {
+        return formatNumber$$1(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+    }
+}
+DeprecatedCurrencyPipe.decorators = [
+    { type: Pipe, args: [{ name: 'currency' },] },
+];
+/** @nocollapse */
+DeprecatedCurrencyPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * A collection of deprecated i18n pipes that require intl api
+ *
+ * @deprecated
+ */
+const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2685,13 +4948,15 @@ class AsyncPipe {
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef, },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2723,9 +4988,7 @@ class LowerCasePipe {
 LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 LowerCasePipe.ctorParameters = () => [];
 /**
  * Helper method to transform a single word to titlecase.
@@ -2761,9 +5024,7 @@ class TitleCasePipe {
 TitleCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'titlecase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 TitleCasePipe.ctorParameters = () => [];
 /**
  * Transforms text to uppercase.
@@ -2787,678 +5048,13 @@ class UpperCasePipe {
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 UpperCasePipe.ctorParameters = () => [];
 
-let NumberFormatStyle = {};
-NumberFormatStyle.Decimal = 0;
-NumberFormatStyle.Percent = 1;
-NumberFormatStyle.Currency = 2;
-NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
-NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
-NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
-class NumberFormatter {
-    /**
-     * @param {?} num
-     * @param {?} locale
-     * @param {?} style
-     * @param {?=} __3
-     * @return {?}
-     */
-    static format(num, locale, style, { minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, currency, currencyAsSymbol = false } = {}) {
-        const /** @type {?} */ options = {
-            minimumIntegerDigits,
-            minimumFractionDigits,
-            maximumFractionDigits,
-            style: NumberFormatStyle[style].toLowerCase()
-        };
-        if (style == NumberFormatStyle.Currency) {
-            options.currency = typeof currency == 'string' ? currency : undefined;
-            options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
-        }
-        return new Intl.NumberFormat(locale, options).format(num);
-    }
-}
-const DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
-const PATTERN_ALIASES = {
-    // Keys are quoted so they do not get renamed during closure compilation.
-    'yMMMdjms': datePartGetterFactory(combine([
-        digitCondition('year', 1),
-        nameCondition('month', 3),
-        digitCondition('day', 1),
-        digitCondition('hour', 1),
-        digitCondition('minute', 1),
-        digitCondition('second', 1),
-    ])),
-    'yMdjm': datePartGetterFactory(combine([
-        digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1),
-        digitCondition('hour', 1), digitCondition('minute', 1)
-    ])),
-    'yMMMMEEEEd': datePartGetterFactory(combine([
-        digitCondition('year', 1), nameCondition('month', 4), nameCondition('weekday', 4),
-        digitCondition('day', 1)
-    ])),
-    'yMMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 4), digitCondition('day', 1)])),
-    'yMMMd': datePartGetterFactory(combine([digitCondition('year', 1), nameCondition('month', 3), digitCondition('day', 1)])),
-    'yMd': datePartGetterFactory(combine([digitCondition('year', 1), digitCondition('month', 1), digitCondition('day', 1)])),
-    'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
-    'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
-};
-const DATE_FORMATS = {
-    // Keys are quoted so they do not get renamed.
-    'yyyy': datePartGetterFactory(digitCondition('year', 4)),
-    'yy': datePartGetterFactory(digitCondition('year', 2)),
-    'y': datePartGetterFactory(digitCondition('year', 1)),
-    'MMMM': datePartGetterFactory(nameCondition('month', 4)),
-    'MMM': datePartGetterFactory(nameCondition('month', 3)),
-    'MM': datePartGetterFactory(digitCondition('month', 2)),
-    'M': datePartGetterFactory(digitCondition('month', 1)),
-    'LLLL': datePartGetterFactory(nameCondition('month', 4)),
-    'L': datePartGetterFactory(nameCondition('month', 1)),
-    'dd': datePartGetterFactory(digitCondition('day', 2)),
-    'd': datePartGetterFactory(digitCondition('day', 1)),
-    'HH': digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), false)))),
-    'H': hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), false))),
-    'hh': digitModifier(hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 2), true)))),
-    'h': hourExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-    'jj': datePartGetterFactory(digitCondition('hour', 2)),
-    'j': datePartGetterFactory(digitCondition('hour', 1)),
-    'mm': digitModifier(datePartGetterFactory(digitCondition('minute', 2))),
-    'm': datePartGetterFactory(digitCondition('minute', 1)),
-    'ss': digitModifier(datePartGetterFactory(digitCondition('second', 2))),
-    's': datePartGetterFactory(digitCondition('second', 1)),
-    // while ISO 8601 requires fractions to be prefixed with `.` or `,`
-    // we can be just safely rely on using `sss` since we currently don't support single or two digit
-    // fractions
-    'sss': datePartGetterFactory(digitCondition('second', 3)),
-    'EEEE': datePartGetterFactory(nameCondition('weekday', 4)),
-    'EEE': datePartGetterFactory(nameCondition('weekday', 3)),
-    'EE': datePartGetterFactory(nameCondition('weekday', 2)),
-    'E': datePartGetterFactory(nameCondition('weekday', 1)),
-    'a': hourClockExtractor(datePartGetterFactory(hour12Modify(digitCondition('hour', 1), true))),
-    'Z': timeZoneGetter('short'),
-    'z': timeZoneGetter('long'),
-    'ww': datePartGetterFactory({}),
-    // first Thursday of the year. not support ?
-    'w': datePartGetterFactory({}),
-    // of the year not support ?
-    'G': datePartGetterFactory(nameCondition('era', 1)),
-    'GG': datePartGetterFactory(nameCondition('era', 2)),
-    'GGG': datePartGetterFactory(nameCondition('era', 3)),
-    'GGGG': datePartGetterFactory(nameCondition('era', 4))
-};
 /**
- * @param {?} inner
- * @return {?}
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
  */
-function digitModifier(inner) {
-    return function (date, locale) {
-        const /** @type {?} */ result = inner(date, locale);
-        return result.length == 1 ? '0' + result : result;
-    };
-}
-/**
- * @param {?} inner
- * @return {?}
- */
-function hourClockExtractor(inner) {
-    return function (date, locale) { return inner(date, locale).split(' ')[1]; };
-}
-/**
- * @param {?} inner
- * @return {?}
- */
-function hourExtractor(inner) {
-    return function (date, locale) { return inner(date, locale).split(' ')[0]; };
-}
-/**
- * @param {?} date
- * @param {?} locale
- * @param {?} options
- * @return {?}
- */
-function intlDateFormat(date, locale, options) {
-    return new Intl.DateTimeFormat(locale, options).format(date).replace(/[\u200e\u200f]/g, '');
-}
-/**
- * @param {?} timezone
- * @return {?}
- */
-function timeZoneGetter(timezone) {
-    // To workaround `Intl` API restriction for single timezone let format with 24 hours
-    const /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
-    return function (date, locale) {
-        const /** @type {?} */ result = intlDateFormat(date, locale, options);
-        // Then extract first 3 letters that related to hours
-        return result ? result.substring(3) : '';
-    };
-}
-/**
- * @param {?} options
- * @param {?} value
- * @return {?}
- */
-function hour12Modify(options, value) {
-    options.hour12 = value;
-    return options;
-}
-/**
- * @param {?} prop
- * @param {?} len
- * @return {?}
- */
-function digitCondition(prop, len) {
-    const /** @type {?} */ result = {};
-    result[prop] = len === 2 ? '2-digit' : 'numeric';
-    return result;
-}
-/**
- * @param {?} prop
- * @param {?} len
- * @return {?}
- */
-function nameCondition(prop, len) {
-    const /** @type {?} */ result = {};
-    if (len < 4) {
-        result[prop] = len > 1 ? 'short' : 'narrow';
-    }
-    else {
-        result[prop] = 'long';
-    }
-    return result;
-}
-/**
- * @param {?} options
- * @return {?}
- */
-function combine(options) {
-    return ((Object)).assign({}, ...options);
-}
-/**
- * @param {?} ret
- * @return {?}
- */
-function datePartGetterFactory(ret) {
-    return (date, locale) => intlDateFormat(date, locale, ret);
-}
-const DATE_FORMATTER_CACHE = new Map();
-/**
- * @param {?} format
- * @param {?} date
- * @param {?} locale
- * @return {?}
- */
-function dateFormatter(format, date, locale) {
-    const /** @type {?} */ fn = PATTERN_ALIASES[format];
-    if (fn)
-        return fn(date, locale);
-    const /** @type {?} */ cacheKey = format;
-    let /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
-    if (!parts) {
-        parts = [];
-        let /** @type {?} */ match;
-        DATE_FORMATS_SPLIT.exec(format);
-        let /** @type {?} */ _format = format;
-        while (_format) {
-            match = DATE_FORMATS_SPLIT.exec(_format);
-            if (match) {
-                parts = parts.concat(match.slice(1));
-                _format = ((parts.pop()));
-            }
-            else {
-                parts.push(_format);
-                _format = null;
-            }
-        }
-        DATE_FORMATTER_CACHE.set(cacheKey, parts);
-    }
-    return parts.reduce((text, part) => {
-        const /** @type {?} */ fn = DATE_FORMATS[part];
-        return text + (fn ? fn(date, locale) : partToTime(part));
-    }, '');
-}
-/**
- * @param {?} part
- * @return {?}
- */
-function partToTime(part) {
-    return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-}
-class DateFormatter {
-    /**
-     * @param {?} date
-     * @param {?} locale
-     * @param {?} pattern
-     * @return {?}
-     */
-    static format(date, locale, pattern) {
-        return dateFormatter(pattern, date, locale);
-    }
-}
-
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-const _NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
-/**
- * @param {?} pipe
- * @param {?} locale
- * @param {?} value
- * @param {?} style
- * @param {?=} digits
- * @param {?=} currency
- * @param {?=} currencyAsSymbol
- * @return {?}
- */
-function formatNumber(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
-    if (value == null)
-        return null;
-    // Convert strings to numbers
-    value = typeof value === 'string' && isNumeric(value) ? +value : value;
-    if (typeof value !== 'number') {
-        throw invalidPipeArgumentError(pipe, value);
-    }
-    let /** @type {?} */ minInt = undefined;
-    let /** @type {?} */ minFraction = undefined;
-    let /** @type {?} */ maxFraction = undefined;
-    if (style !== NumberFormatStyle.Currency) {
-        // rely on Intl default for currency
-        minInt = 1;
-        minFraction = 0;
-        maxFraction = 3;
-    }
-    if (digits) {
-        const /** @type {?} */ parts = digits.match(_NUMBER_FORMAT_REGEXP);
-        if (parts === null) {
-            throw new Error(`${digits} is not a valid digit info for number pipes`);
-        }
-        if (parts[1] != null) {
-            minInt = parseIntAutoRadix(parts[1]);
-        }
-        if (parts[3] != null) {
-            minFraction = parseIntAutoRadix(parts[3]);
-        }
-        if (parts[5] != null) {
-            maxFraction = parseIntAutoRadix(parts[5]);
-        }
-    }
-    return NumberFormatter.format(/** @type {?} */ (value), locale, style, {
-        minimumIntegerDigits: minInt,
-        minimumFractionDigits: minFraction,
-        maximumFractionDigits: maxFraction,
-        currency: currency,
-        currencyAsSymbol: currencyAsSymbol,
-    });
-}
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo]`
- *
- * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the active locale.
- *
- * where `expression` is a number:
- *  - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
- *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
- *
- * For more information on the acceptable range for each of these numbers and other
- * details see your native internationalization library.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
- *
- * \@stable
- */
-class DecimalPipe {
-    /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} digits
-     * @return {?}
-     */
-    transform(value, digits) {
-        return formatNumber(DecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
-    }
-}
-DecimalPipe.decorators = [
-    { type: Pipe, args: [{ name: 'number' },] },
-];
-/**
- * @nocollapse
- */
-DecimalPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-];
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo]`
- *
- * \@description
- *
- * Formats a number as percentage.
- *
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
- *
- * \@stable
- */
-class PercentPipe {
-    /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} digits
-     * @return {?}
-     */
-    transform(value, digits) {
-        return formatNumber(PercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
-    }
-}
-PercentPipe.decorators = [
-    { type: Pipe, args: [{ name: 'percent' },] },
-];
-/**
- * @nocollapse
- */
-PercentPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-];
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
- * \@description
- *
- * Use `currency` to format a number as currency.
- *
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
- *   - `true`: use symbol (e.g. `$`).
- *   - `false`(default): use code (e.g. `USD`).
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
- *
- * ### Example
- *
- * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
- *
- * \@stable
- */
-class CurrencyPipe {
-    /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} currencyCode
-     * @param {?=} symbolDisplay
-     * @param {?=} digits
-     * @return {?}
-     */
-    transform(value, currencyCode = 'USD', symbolDisplay = false, digits) {
-        return formatNumber(CurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-    }
-}
-CurrencyPipe.decorators = [
-    { type: Pipe, args: [{ name: 'currency' },] },
-];
-/**
- * @nocollapse
- */
-CurrencyPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-];
-/**
- * @param {?} text
- * @return {?}
- */
-function parseIntAutoRadix(text) {
-    const /** @type {?} */ result = parseInt(text);
-    if (isNaN(result)) {
-        throw new Error('Invalid integer literal when parsing ' + text);
-    }
-    return result;
-}
-/**
- * @param {?} value
- * @return {?}
- */
-function isNumeric(value) {
-    return !isNaN(value - parseFloat(value));
-}
-
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
- * \@howToUse `date_expression | date[:format]`
- * \@description
- *
- * Where:
- * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
- * (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. The format can be predefined as
- *   shown below or custom as shown in the table.
- *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
- *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
- *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
- *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
- *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
- *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
- *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
- *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
- *
- *
- *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
- *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
- *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
- *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
- *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
- *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
- *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
- *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
- *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
- *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
- *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
- *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
- *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
- *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
- *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
- *
- * In javascript, only the components specified will be respected (not the ordering,
- * punctuations, ...) and details of the formatting will be dependent on the locale.
- *
- * Timezone of the formatted text will be the local system timezone of the end-user's machine.
- *
- * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
- * applied and the formatted text will have the same day, month and year of the expression.
- *
- * WARNINGS:
- * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
- *   Instead users should treat the date as an immutable object and change the reference when the
- *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
- *   which would be an expensive operation).
- * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
- *   browsers.
- *
- * ### Examples
- *
- * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
- * in the _local_ time and locale is 'en-US':
- *
- * ```
- *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
- *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
- *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- *     {{ dateObj | date:'mmss' }}        // output is '43:11'
- * ```
- *
- * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
- *
- * \@stable
- */
-class DatePipe {
-    /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} pattern
-     * @return {?}
-     */
-    transform(value, pattern = 'mediumDate') {
-        let /** @type {?} */ date;
-        if (isBlank(value) || value !== value)
-            return null;
-        if (typeof value === 'string') {
-            value = value.trim();
-        }
-        if (isDate(value)) {
-            date = value;
-        }
-        else if (isNumeric(value)) {
-            date = new Date(parseFloat(value));
-        }
-        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-            /**
-            * For ISO Strings without time the day, month and year must be extracted from the ISO String
-            * before Date creation to avoid time offset and errors in the new Date.
-            * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-            * date, some browsers (e.g. IE 9) will throw an invalid Date error
-            * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-            * is applied
-            * Note: ISO months are 0 for January, 1 for February, ...
-            */
-            const [y, m, d] = value.split('-').map((val) => parseInt(val, 10));
-            date = new Date(y, m - 1, d);
-        }
-        else {
-            date = new Date(value);
-        }
-        if (!isDate(date)) {
-            let /** @type {?} */ match;
-            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-                date = isoStringToDate(match);
-            }
-            else {
-                throw invalidPipeArgumentError(DatePipe, value);
-            }
-        }
-        return DateFormatter.format(date, this._locale, DatePipe._ALIASES[pattern] || pattern);
-    }
-}
-/**
- * \@internal
- */
-DatePipe._ALIASES = {
-    'medium': 'yMMMdjms',
-    'short': 'yMdjm',
-    'fullDate': 'yMMMMEEEEd',
-    'longDate': 'yMMMMd',
-    'mediumDate': 'yMMMd',
-    'shortDate': 'yMd',
-    'mediumTime': 'jms',
-    'shortTime': 'jm'
-};
-DatePipe.decorators = [
-    { type: Pipe, args: [{ name: 'date', pure: true },] },
-];
-/**
- * @nocollapse
- */
-DatePipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-];
-/**
- * @param {?} obj
- * @return {?}
- */
-function isBlank(obj) {
-    return obj == null || obj === '';
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isDate(obj) {
-    return obj instanceof Date && !isNaN(obj.valueOf());
-}
-/**
- * @param {?} match
- * @return {?}
- */
-function isoStringToDate(match) {
-    const /** @type {?} */ date = new Date(0);
-    let /** @type {?} */ tzHour = 0;
-    let /** @type {?} */ tzMin = 0;
-    const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-    const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
-    if (match[9]) {
-        tzHour = toInt(match[9] + match[10]);
-        tzMin = toInt(match[9] + match[11]);
-    }
-    dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
-    const /** @type {?} */ h = toInt(match[4] || '0') - tzHour;
-    const /** @type {?} */ m = toInt(match[5] || '0') - tzMin;
-    const /** @type {?} */ s = toInt(match[6] || '0');
-    const /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
-    timeSetter.call(date, h, m, s, ms);
-    return date;
-}
-/**
- * @param {?} str
- * @return {?}
- */
-function toInt(str) {
-    return parseInt(str, 10);
-}
-
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3470,13 +5066,15 @@ const _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
- * \@howToUse `expression | i18nPlural:mapping`
+ * \@howToUse `expression | i18nPlural:mapping[:locale]`
  * \@description
  *
  *  Where:
  *  - `expression` is a number.
  *  - `mapping` is an object that mimics the ICU format, see
  *    http://userguide.icu-project.org/formatparse/messages
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
  *
  *  ## Example
  *
@@ -3494,28 +5092,31 @@ class I18nPluralPipe {
     /**
      * @param {?} value
      * @param {?} pluralMap
+     * @param {?=} locale
      * @return {?}
      */
-    transform(value, pluralMap) {
+    transform(value, pluralMap, locale) {
         if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
             throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
-        const /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization);
+        const /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     }
 }
 I18nPluralPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization, },
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3564,11 +5165,13 @@ class I18nSelectPipe {
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 I18nSelectPipe.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3599,11 +5202,209 @@ class JsonPipe {
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 JsonPipe.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number according to locale rules.
+ * \@howToUse `number_expression | number[:digitInfo[:locale]]`
+ *
+ * Formats a number as text. Group sizing and separator and other locale-specific
+ * configurations are based on the active locale.
+ *
+ * where `expression` is a number:
+ *  - `digitInfo` is a `string` which has a following format: <br>
+ *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+ *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+ *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+ *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
+ *
+ * For more information on the acceptable range for each of these numbers and other
+ * details see your native internationalization library.
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+ *
+ * \@stable
+ */
+class DecimalPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    transform(value, digits, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        const { str, error } = formatNumber$1(value, locale, NumberFormatStyle.Decimal, digits);
+        if (error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error);
+        }
+        return str;
+    }
+}
+DecimalPipe.decorators = [
+    { type: Pipe, args: [{ name: 'number' },] },
+];
+/** @nocollapse */
+DecimalPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as a percentage according to locale rules.
+ * \@howToUse `number_expression | percent[:digitInfo[:locale]]`
+ *
+ * \@description
+ *
+ * Formats a number as percentage.
+ *
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ *
+ * \@stable
+ */
+class PercentPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    transform(value, digits, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        const { str, error } = formatNumber$1(value, locale, NumberFormatStyle.Percent, digits);
+        if (error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error);
+        }
+        return str;
+    }
+}
+PercentPipe.decorators = [
+    { type: Pipe, args: [{ name: 'percent' },] },
+];
+/** @nocollapse */
+PercentPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as currency using locale rules.
+ * \@howToUse `number_expression | currency[:currencyCode[:display[:digitInfo[:locale]]]]`
+ * \@description
+ *
+ * Use `currency` to format a number as currency.
+ *
+ * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+ *    as `USD` for the US dollar and `EUR` for the euro.
+ * - `display` indicates whether to show the currency symbol or the code.
+ *   - `code`(default): use code (e.g. `USD`).
+ *   - `symbol`: use symbol (e.g. `$`).
+ *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
+ *   - boolean (deprecated from v5): `true` for symbol and false for `code`
+ *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+ *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
+ * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
+ *
+ * ### Example
+ *
+ * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ *
+ * \@stable
+ */
+class CurrencyPipe {
+    /**
+     * @param {?} _locale
+     */
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} currencyCode
+     * @param {?=} display
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    transform(value, currencyCode, display = 'symbol', digits, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        if (typeof display === 'boolean') {
+            if ((console) && (console.warn)) {
+                console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
+            }
+            display = display ? 'symbol' : 'code';
+        }
+        let /** @type {?} */ currency = currencyCode || 'USD';
+        if (display !== 'code') {
+            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+        }
+        const { str, error } = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency);
+        if (error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error);
+        }
+        return str;
+    }
+}
+CurrencyPipe.decorators = [
+    { type: Pipe, args: [{ name: 'currency' },] },
+];
+/** @nocollapse */
+CurrencyPipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isEmpty(value) {
+    return value == null || value === '' || value !== value;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3679,11 +5480,13 @@ class SlicePipe {
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 SlicePipe.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3715,6 +5518,10 @@ const COMMON_PIPES = [
 ];
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3737,11 +5544,25 @@ CommonModule.decorators = [
                 ],
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CommonModule.ctorParameters = () => [];
+/**
+ * A module that contains the deprecated i18n pipes.
+ *
+ * @deprecated from v5
+ */
+class DeprecatedI18NPipesModule {
+}
+DeprecatedI18NPipesModule.decorators = [
+    { type: NgModule, args: [{ declarations: [COMMON_DEPRECATED_I18N_PIPES], exports: [COMMON_DEPRECATED_I18N_PIPES] },] },
+];
+/** @nocollapse */
+DeprecatedI18NPipesModule.ctorParameters = () => [];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3749,7 +5570,31 @@ CommonModule.ctorParameters = () => [];
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const PLATFORM_BROWSER_ID = 'browser';
+/**
+ * A DI Token representing the main rendering context. In a browser this is the DOM Document.
+ *
+ * Note: Document might not be available in the Application Context when Application and Rendering
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
+ *
+ * \@stable
+ */
+const DOCUMENT = new InjectionToken('DocumentToken');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ const PLATFORM_BROWSER_ID = 'browser';
 const PLATFORM_SERVER_ID = 'server';
 const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 const PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -3791,6 +5636,10 @@ function isPlatformWorkerUi(platformId) {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3805,8 +5654,12 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.2.0-beta.0-4874765');
+const VERSION = new Version('5.0.0-beta.4-d64c935');
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3820,6 +5673,10 @@ const VERSION = new Version('4.2.0-beta.0-4874765');
  * Entry point for all public APIs of the common package.
  */
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3836,8 +5693,12 @@ const VERSION = new Version('4.2.0-beta.0-4874765');
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { NgLocaleLocalization, NgLocalization, CommonModule, NgClass, NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵa, COMMON_PIPES as ɵb };
+export { NgLocaleLocalization, NgLocalization, Plural, LOCALE_DATA, findLocaleData, registerLocaleData, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, AVAILABLE_LOCALES, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵc, COMMON_PIPES as ɵb };
 //# sourceMappingURL=common.js.map

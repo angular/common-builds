@@ -106,12 +106,4 @@ export declare class NgForOf<T> implements DoCheck, OnChanges {
     private _applyChanges(changes);
     private _perViewChange(view, record);
 }
-/**
- * @deprecated from v4.0.0 - Use NgForOf<any> instead.
- */
-export declare type NgFor = NgForOf<any>;
-/**
- * @deprecated from v4.0.0 - Use NgForOf instead.
- */
-export declare const NgFor: typeof NgForOf;
 export declare function getTypeNameForDebugging(type: any): string;
