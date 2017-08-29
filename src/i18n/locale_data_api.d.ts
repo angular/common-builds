@@ -1,4 +1,3 @@
-import { Plural } from './locale_data';
 /**
  * The different format styles that can be used to represent numbers.
  * Used by the function {@link getLocaleNumberFormat}.
@@ -10,6 +9,15 @@ export declare enum NumberFormatStyle {
     Percent = 1,
     Currency = 2,
     Scientific = 3,
+}
+/** @experimental */
+export declare enum Plural {
+    Zero = 0,
+    One = 1,
+    Two = 2,
+    Few = 3,
+    Many = 4,
+    Other = 5,
 }
 /**
  * Some languages use two different forms of strings (standalone and format) depending on the
@@ -338,10 +346,3 @@ export declare type Time = {
  * @experimental i18n support is experimental.
  */
 export declare function findLocaleData(locale: string): any;
-/**
- * Register global data to be used internally by Angular. See the
- * {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
- *
- * @experimental i18n support is experimental.
- */
-export declare function registerLocaleData(data: any, extraData?: any): void;

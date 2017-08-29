@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.5-72c7b6e
+ * @license Angular v5.0.0-beta.5-4878936
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.5-72c7b6e
+ * @license Angular v5.0.0-beta.5-4878936
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -631,211 +631,6 @@ PathLocationStrategy.ctorParameters = function () { return [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var Plural = {};
-Plural.Zero = 0;
-Plural.One = 1;
-Plural.Two = 2;
-Plural.Few = 3;
-Plural.Many = 4;
-Plural.Other = 5;
-Plural[Plural.Zero] = "Zero";
-Plural[Plural.One] = "One";
-Plural[Plural.Two] = "Two";
-Plural[Plural.Few] = "Few";
-Plural[Plural.Many] = "Many";
-Plural[Plural.Other] = "Other";
-/**
- * \@experimental i18n support is experimental.
- */
-var LOCALE_DATA = {};
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * \@experimental
- */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ var AVAILABLE_LOCALES = [
-    'af', 'af-NA', 'agq',
-    'ak', 'am', 'ar',
-    'ar-AE', 'ar-BH', 'ar-DJ',
-    'ar-DZ', 'ar-EG', 'ar-EH',
-    'ar-ER', 'ar-IL', 'ar-IQ',
-    'ar-JO', 'ar-KM', 'ar-KW',
-    'ar-LB', 'ar-LY', 'ar-MA',
-    'ar-MR', 'ar-OM', 'ar-PS',
-    'ar-QA', 'ar-SA', 'ar-SD',
-    'ar-SO', 'ar-SS', 'ar-SY',
-    'ar-TD', 'ar-TN', 'ar-YE',
-    'as', 'asa', 'ast',
-    'az', 'az-Cyrl', 'az-Latn',
-    'bas', 'be', 'bem',
-    'bez', 'bg', 'bm',
-    'bn', 'bn-IN', 'bo',
-    'bo-IN', 'br', 'brx',
-    'bs', 'bs-Cyrl', 'bs-Latn',
-    'ca', 'ca-AD', 'ca-ES-VALENCIA',
-    'ca-FR', 'ca-IT', 'ce',
-    'cgg', 'chr', 'ckb',
-    'ckb-IR', 'cs', 'cu',
-    'cy', 'da', 'da-GL',
-    'dav', 'de', 'de-AT',
-    'de-BE', 'de-CH', 'de-IT',
-    'de-LI', 'de-LU', 'dje',
-    'dsb', 'dua', 'dyo',
-    'dz', 'ebu', 'ee',
-    'ee-TG', 'el', 'el-CY',
-    'en', 'en-001', 'en-150',
-    'en-AG', 'en-AI', 'en-AS',
-    'en-AT', 'en-AU', 'en-BB',
-    'en-BE', 'en-BI', 'en-BM',
-    'en-BS', 'en-BW', 'en-BZ',
-    'en-CA', 'en-CC', 'en-CH',
-    'en-CK', 'en-CM', 'en-CX',
-    'en-CY', 'en-DE', 'en-DG',
-    'en-DK', 'en-DM', 'en-ER',
-    'en-FI', 'en-FJ', 'en-FK',
-    'en-FM', 'en-GB', 'en-GD',
-    'en-GG', 'en-GH', 'en-GI',
-    'en-GM', 'en-GU', 'en-GY',
-    'en-HK', 'en-IE', 'en-IL',
-    'en-IM', 'en-IN', 'en-IO',
-    'en-JE', 'en-JM', 'en-KE',
-    'en-KI', 'en-KN', 'en-KY',
-    'en-LC', 'en-LR', 'en-LS',
-    'en-MG', 'en-MH', 'en-MO',
-    'en-MP', 'en-MS', 'en-MT',
-    'en-MU', 'en-MW', 'en-MY',
-    'en-NA', 'en-NF', 'en-NG',
-    'en-NL', 'en-NR', 'en-NU',
-    'en-NZ', 'en-PG', 'en-PH',
-    'en-PK', 'en-PN', 'en-PR',
-    'en-PW', 'en-RW', 'en-SB',
-    'en-SC', 'en-SD', 'en-SE',
-    'en-SG', 'en-SH', 'en-SI',
-    'en-SL', 'en-SS', 'en-SX',
-    'en-SZ', 'en-TC', 'en-TK',
-    'en-TO', 'en-TT', 'en-TV',
-    'en-TZ', 'en-UG', 'en-UM',
-    'en-US-POSIX', 'en-VC', 'en-VG',
-    'en-VI', 'en-VU', 'en-WS',
-    'en-ZA', 'en-ZM', 'en-ZW',
-    'eo', 'es', 'es-419',
-    'es-AR', 'es-BO', 'es-BR',
-    'es-BZ', 'es-CL', 'es-CO',
-    'es-CR', 'es-CU', 'es-DO',
-    'es-EA', 'es-EC', 'es-GQ',
-    'es-GT', 'es-HN', 'es-IC',
-    'es-MX', 'es-NI', 'es-PA',
-    'es-PE', 'es-PH', 'es-PR',
-    'es-PY', 'es-SV', 'es-US',
-    'es-UY', 'es-VE', 'et',
-    'eu', 'ewo', 'fa',
-    'fa-AF', 'ff', 'ff-CM',
-    'ff-GN', 'ff-MR', 'fi',
-    'fil', 'fo', 'fo-DK',
-    'fr', 'fr-BE', 'fr-BF',
-    'fr-BI', 'fr-BJ', 'fr-BL',
-    'fr-CA', 'fr-CD', 'fr-CF',
-    'fr-CG', 'fr-CH', 'fr-CI',
-    'fr-CM', 'fr-DJ', 'fr-DZ',
-    'fr-GA', 'fr-GF', 'fr-GN',
-    'fr-GP', 'fr-GQ', 'fr-HT',
-    'fr-KM', 'fr-LU', 'fr-MA',
-    'fr-MC', 'fr-MF', 'fr-MG',
-    'fr-ML', 'fr-MQ', 'fr-MR',
-    'fr-MU', 'fr-NC', 'fr-NE',
-    'fr-PF', 'fr-PM', 'fr-RE',
-    'fr-RW', 'fr-SC', 'fr-SN',
-    'fr-SY', 'fr-TD', 'fr-TG',
-    'fr-TN', 'fr-VU', 'fr-WF',
-    'fr-YT', 'fur', 'fy',
-    'ga', 'gd', 'gl',
-    'gsw', 'gsw-FR', 'gsw-LI',
-    'gu', 'guz', 'gv',
-    'ha', 'ha-GH', 'ha-NE',
-    'haw', 'he', 'hi',
-    'hr', 'hr-BA', 'hsb',
-    'hu', 'hy', 'id',
-    'ig', 'ii', 'is',
-    'it', 'it-CH', 'it-SM',
-    'it-VA', 'ja', 'jgo',
-    'jmc', 'ka', 'kab',
-    'kam', 'kde', 'kea',
-    'khq', 'ki', 'kk',
-    'kkj', 'kl', 'kln',
-    'km', 'kn', 'ko',
-    'ko-KP', 'kok', 'ks',
-    'ksb', 'ksf', 'ksh',
-    'kw', 'ky', 'lag',
-    'lb', 'lg', 'lkt',
-    'ln', 'ln-AO', 'ln-CF',
-    'ln-CG', 'lo', 'lrc',
-    'lrc-IQ', 'lt', 'lu',
-    'luo', 'luy', 'lv',
-    'mas', 'mas-TZ', 'mer',
-    'mfe', 'mg', 'mgh',
-    'mgo', 'mk', 'ml',
-    'mn', 'mr', 'ms',
-    'ms-BN', 'ms-SG', 'mt',
-    'mua', 'my', 'mzn',
-    'naq', 'nb', 'nb-SJ',
-    'nd', 'nds', 'nds-NL',
-    'ne', 'ne-IN', 'nl',
-    'nl-AW', 'nl-BE', 'nl-BQ',
-    'nl-CW', 'nl-SR', 'nl-SX',
-    'nmg', 'nn', 'nnh',
-    'nus', 'nyn', 'om',
-    'om-KE', 'or', 'os',
-    'os-RU', 'pa', 'pa-Arab',
-    'pa-Guru', 'pl', 'prg',
-    'ps', 'pt', 'pt-AO',
-    'pt-CH', 'pt-CV', 'pt-GQ',
-    'pt-GW', 'pt-LU', 'pt-MO',
-    'pt-MZ', 'pt-PT', 'pt-ST',
-    'pt-TL', 'qu', 'qu-BO',
-    'qu-EC', 'rm', 'rn',
-    'ro', 'ro-MD', 'rof',
-    'root', 'ru', 'ru-BY',
-    'ru-KG', 'ru-KZ', 'ru-MD',
-    'ru-UA', 'rw', 'rwk',
-    'sah', 'saq', 'sbp',
-    'se', 'se-FI', 'se-SE',
-    'seh', 'ses', 'sg',
-    'shi', 'shi-Latn', 'shi-Tfng',
-    'si', 'sk', 'sl',
-    'smn', 'sn', 'so',
-    'so-DJ', 'so-ET', 'so-KE',
-    'sq', 'sq-MK', 'sq-XK',
-    'sr', 'sr-Cyrl', 'sr-Cyrl-BA',
-    'sr-Cyrl-ME', 'sr-Cyrl-XK', 'sr-Latn',
-    'sr-Latn-BA', 'sr-Latn-ME', 'sr-Latn-XK',
-    'sv', 'sv-AX', 'sv-FI',
-    'sw', 'sw-CD', 'sw-KE',
-    'sw-UG', 'ta', 'ta-LK',
-    'ta-MY', 'ta-SG', 'te',
-    'teo', 'teo-KE', 'th',
-    'ti', 'ti-ER', 'tk',
-    'to', 'tr', 'tr-CY',
-    'twq', 'tzm', 'ug',
-    'uk', 'ur', 'ur-IN',
-    'uz', 'uz-Arab', 'uz-Cyrl',
-    'uz-Latn', 'vai', 'vai-Latn',
-    'vai-Vaii', 'vi', 'vo',
-    'vun', 'wae', 'xog',
-    'yav', 'yi', 'yo',
-    'yo-BJ', 'yue', 'zgh',
-    'zh', 'zh-Hans', 'zh-Hans-HK',
-    'zh-Hans-MO', 'zh-Hans-SG', 'zh-Hant',
-    'zh-Hant-HK', 'zh-Hant-MO', 'zu'
-];
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 /**
  * \@experimental
  */
@@ -996,10 +791,37 @@ var localeEn = [
     function (n) {
         var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
         if (i === 1 && v === 0)
-            return Plural.One;
-        return Plural.Other;
+            return 1;
+        return 5;
     }
 ];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * \@experimental i18n support is experimental.
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */ var LOCALE_DATA = {};
+/**
+ * Register global data to be used internally by Angular. See the
+ * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} data
+ * @param {?=} extraData
+ * @return {?}
+ */
+function registerLocaleData(data, extraData) {
+    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase();
+    LOCALE_DATA[localeId] = data;
+    if (extraData) {
+        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
+    }
+}
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1020,6 +842,19 @@ NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
 NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
 NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
 NumberFormatStyle[NumberFormatStyle.Scientific] = "Scientific";
+var Plural = {};
+Plural.Zero = 0;
+Plural.One = 1;
+Plural.Two = 2;
+Plural.Few = 3;
+Plural.Many = 4;
+Plural.Other = 5;
+Plural[Plural.Zero] = "Zero";
+Plural[Plural.One] = "One";
+Plural[Plural.Two] = "Two";
+Plural[Plural.Few] = "Few";
+Plural[Plural.Many] = "Many";
+Plural[Plural.Other] = "Other";
 var FormStyle = {};
 FormStyle.Format = 0;
 FormStyle.Standalone = 1;
@@ -1087,52 +922,6 @@ WeekDay[WeekDay.Wednesday] = "Wednesday";
 WeekDay[WeekDay.Thursday] = "Thursday";
 WeekDay[WeekDay.Friday] = "Friday";
 WeekDay[WeekDay.Saturday] = "Saturday";
-var LocaleDataIndex = {};
-LocaleDataIndex.LocaleId = 0;
-LocaleDataIndex.DayPeriodsFormat = 1;
-LocaleDataIndex.DayPeriodsStandalone = 2;
-LocaleDataIndex.DaysFormat = 3;
-LocaleDataIndex.DaysStandalone = 4;
-LocaleDataIndex.MonthsFormat = 5;
-LocaleDataIndex.MonthsStandalone = 6;
-LocaleDataIndex.Eras = 7;
-LocaleDataIndex.FirstDayOfWeek = 8;
-LocaleDataIndex.WeekendRange = 9;
-LocaleDataIndex.DateFormat = 10;
-LocaleDataIndex.TimeFormat = 11;
-LocaleDataIndex.DateTimeFormat = 12;
-LocaleDataIndex.NumberSymbols = 13;
-LocaleDataIndex.NumberFormats = 14;
-LocaleDataIndex.CurrencySymbol = 15;
-LocaleDataIndex.CurrencyName = 16;
-LocaleDataIndex.PluralCase = 17;
-LocaleDataIndex.ExtraData = 18;
-LocaleDataIndex[LocaleDataIndex.LocaleId] = "LocaleId";
-LocaleDataIndex[LocaleDataIndex.DayPeriodsFormat] = "DayPeriodsFormat";
-LocaleDataIndex[LocaleDataIndex.DayPeriodsStandalone] = "DayPeriodsStandalone";
-LocaleDataIndex[LocaleDataIndex.DaysFormat] = "DaysFormat";
-LocaleDataIndex[LocaleDataIndex.DaysStandalone] = "DaysStandalone";
-LocaleDataIndex[LocaleDataIndex.MonthsFormat] = "MonthsFormat";
-LocaleDataIndex[LocaleDataIndex.MonthsStandalone] = "MonthsStandalone";
-LocaleDataIndex[LocaleDataIndex.Eras] = "Eras";
-LocaleDataIndex[LocaleDataIndex.FirstDayOfWeek] = "FirstDayOfWeek";
-LocaleDataIndex[LocaleDataIndex.WeekendRange] = "WeekendRange";
-LocaleDataIndex[LocaleDataIndex.DateFormat] = "DateFormat";
-LocaleDataIndex[LocaleDataIndex.TimeFormat] = "TimeFormat";
-LocaleDataIndex[LocaleDataIndex.DateTimeFormat] = "DateTimeFormat";
-LocaleDataIndex[LocaleDataIndex.NumberSymbols] = "NumberSymbols";
-LocaleDataIndex[LocaleDataIndex.NumberFormats] = "NumberFormats";
-LocaleDataIndex[LocaleDataIndex.CurrencySymbol] = "CurrencySymbol";
-LocaleDataIndex[LocaleDataIndex.CurrencyName] = "CurrencyName";
-LocaleDataIndex[LocaleDataIndex.PluralCase] = "PluralCase";
-LocaleDataIndex[LocaleDataIndex.ExtraData] = "ExtraData";
-var ExtraLocaleDataIndex = {};
-ExtraLocaleDataIndex.ExtraDayPeriodFormats = 0;
-ExtraLocaleDataIndex.ExtraDayPeriodStandalone = 1;
-ExtraLocaleDataIndex.ExtraDayPeriodsRules = 2;
-ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodFormats] = "ExtraDayPeriodFormats";
-ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodStandalone] = "ExtraDayPeriodStandalone";
-ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodsRules] = "ExtraDayPeriodsRules";
 /**
  * The locale id for the chosen locale (e.g `en-GB`).
  *
@@ -1141,7 +930,7 @@ ExtraLocaleDataIndex[ExtraLocaleDataIndex.ExtraDayPeriodsRules] = "ExtraDayPerio
  * @return {?}
  */
 function getLocaleId(locale) {
-    return findLocaleData(locale)[LocaleDataIndex.LocaleId];
+    return findLocaleData(locale)[0 /* LocaleId */];
 }
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
@@ -1154,7 +943,7 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ amPmData = ([data[LocaleDataIndex.DayPeriodsFormat], data[LocaleDataIndex.DayPeriodsStandalone]]);
+    var /** @type {?} */ amPmData = ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
     var /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
@@ -1169,7 +958,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  */
 function getLocaleDayNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ daysData = ([data[LocaleDataIndex.DaysFormat], data[LocaleDataIndex.DaysStandalone]]);
+    var /** @type {?} */ daysData = ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
     var /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
@@ -1184,7 +973,7 @@ function getLocaleDayNames(locale, formStyle, width) {
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ monthsData = ([data[LocaleDataIndex.MonthsFormat], data[LocaleDataIndex.MonthsStandalone]]);
+    var /** @type {?} */ monthsData = ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
     var /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
@@ -1198,7 +987,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
  */
 function getLocaleEraNames(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ erasData = (data[LocaleDataIndex.Eras]);
+    var /** @type {?} */ erasData = (data[7 /* Eras */]);
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -1211,7 +1000,7 @@ function getLocaleEraNames(locale, width) {
  */
 function getLocaleFirstDayOfWeek(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.FirstDayOfWeek];
+    return data[8 /* FirstDayOfWeek */];
 }
 /**
  * Range of days in the week that represent the week-end for this locale, based on english days
@@ -1224,7 +1013,7 @@ function getLocaleFirstDayOfWeek(locale) {
  */
 function getLocaleWeekEndRange(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.WeekendRange];
+    return data[9 /* WeekendRange */];
 }
 /**
  * Date format that depends on the locale.
@@ -1256,7 +1045,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.DateFormat][width];
+    return data[10 /* DateFormat */][width];
 }
 /**
  * Time format that depends on the locale.
@@ -1283,7 +1072,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.TimeFormat][width];
+    return data[11 /* TimeFormat */][width];
 }
 /**
  * Date-time format that depends on the locale.
@@ -1315,7 +1104,7 @@ function getLocaleTimeFormat(locale, width) {
  */
 function getLocaleDateTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ dateTimeFormatData = (data[LocaleDataIndex.DateTimeFormat]);
+    var /** @type {?} */ dateTimeFormatData = (data[12 /* DateTimeFormat */]);
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1329,13 +1118,13 @@ function getLocaleDateTimeFormat(locale, width) {
  */
 function getLocaleNumberSymbol(locale, symbol) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ res = data[LocaleDataIndex.NumberSymbols][symbol];
+    var /** @type {?} */ res = data[13 /* NumberSymbols */][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
     }
     return res;
@@ -1376,7 +1165,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  */
 function getLocaleNumberFormat(locale, type) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.NumberFormats][type];
+    return data[14 /* NumberFormats */][type];
 }
 /**
  * The symbol used to represent the currency for the main country using this locale (e.g. $ for
@@ -1389,7 +1178,7 @@ function getLocaleNumberFormat(locale, type) {
  */
 function getLocaleCurrencySymbol(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencySymbol] || null;
+    return data[15 /* CurrencySymbol */] || null;
 }
 /**
  * The name of the currency for the main country using this locale (e.g. USD for the locale
@@ -1402,7 +1191,7 @@ function getLocaleCurrencySymbol(locale) {
  */
 function getLocaleCurrencyName(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencyName] || null;
+    return data[16 /* CurrencyName */] || null;
 }
 /**
  * The locale plural function used by ICU expressions to determine the plural case to use.
@@ -1414,15 +1203,15 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocalePluralCase(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.PluralCase];
+    return data[17 /* PluralCase */];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[LocaleDataIndex.ExtraData]) {
-        throw new Error("Missing extra locale data for the locale \"" + data[LocaleDataIndex.LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
+    if (!data[18 /* ExtraData */]) {
+        throw new Error("Missing extra locale data for the locale \"" + data[0 /* LocaleId */] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
 /**
@@ -1445,7 +1234,7 @@ function checkFullData(data) {
 function getLocaleExtraDayPeriodRules(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ rules = data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodsRules] || [];
+    var /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map(function (rule) {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1474,8 +1263,8 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
     var /** @type {?} */ dayPeriodsData = ([
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodFormats],
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodStandalone]
+        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]);
     var /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
@@ -1518,55 +1307,21 @@ function extractTime(time) {
  * @return {?}
  */
 function findLocaleData(locale) {
-    var /** @type {?} */ normalizedLocale = getNormalizedLocale(locale);
-    if (normalizedLocale === 'en') {
-        return LOCALE_DATA['en'] || localeEn;
-    }
-    var /** @type {?} */ match = LOCALE_DATA[toCamelCase(normalizedLocale)];
-    if (match) {
-        return match;
-    }
-    throw new Error("Missing locale data for the locale \"" + locale + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
-}
-var NORMALIZED_LOCALES = {};
-/**
- * Returns the closest matching locale that exists or throw
- * e.g.: "en-US" will return "en", and "fr_ca" will return "fr-CA"
- * Rules for locale id equivalences are defined in
- * http://cldr.unicode.org/index/cldr-spec/language-tag-equivalences
- * and in https://tools.ietf.org/html/rfc4647#section-3.4
- * @param {?} locale
- * @return {?}
- */
-function getNormalizedLocale(locale) {
-    if (NORMALIZED_LOCALES[locale]) {
-        return NORMALIZED_LOCALES[locale];
-    }
     var /** @type {?} */ normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
-    var /** @type {?} */ match = AVAILABLE_LOCALES.find(function (l) { return l.toLowerCase() === normalizedLocale; });
+    var /** @type {?} */ match = LOCALE_DATA[normalizedLocale];
     if (match) {
-        NORMALIZED_LOCALES[locale] = match;
         return match;
     }
+    // let's try to find a parent locale
     var /** @type {?} */ parentLocale = normalizedLocale.split('-')[0];
-    if (AVAILABLE_LOCALES.find(function (l) { return l.toLowerCase() === parentLocale; })) {
-        NORMALIZED_LOCALES[locale] = parentLocale;
-        return parentLocale;
+    match = LOCALE_DATA[parentLocale];
+    if (match) {
+        return match;
     }
-    throw new Error("\"" + locale + "\" is not a valid LOCALE_ID value. See https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json for a list of valid locales");
-}
-/**
- * @param {?} str
- * @return {?}
- */
-function toCamelCase(str) {
-    return str.replace(/-+([a-z0-9A-Z])/g, function () {
-        var m = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            m[_i] = arguments[_i];
-        }
-        return m[1].toUpperCase();
-    });
+    if (parentLocale === 'en') {
+        return localeEn;
+    }
+    throw new Error("Missing locale data for the locale \"" + locale + "\".");
 }
 /**
  * Return the currency symbol for a given currency code, or the code if no symbol available
@@ -1581,22 +1336,6 @@ function findCurrencySymbol(code, format) {
     var /** @type {?} */ currency = CURRENCIES[code] || {};
     var /** @type {?} */ symbol = currency[0] || code;
     return format === 'wide' ? symbol : currency[1] || symbol;
-}
-/**
- * Register global data to be used internally by Angular. See the
- * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
- *
- * \@experimental i18n support is experimental.
- * @param {?} data
- * @param {?=} extraData
- * @return {?}
- */
-function registerLocaleData(data, extraData) {
-    var /** @type {?} */ localeId = toCamelCase(data[LocaleDataIndex.LocaleId]);
-    LOCALE_DATA[localeId] = data;
-    if (extraData) {
-        LOCALE_DATA[localeId][LocaleDataIndex.ExtraData] = extraData;
-    }
 }
 /**
  * @fileoverview added by tsickle
@@ -5825,14 +5564,12 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.5-72c7b6e');
+var VERSION = new _angular_core.Version('5.0.0-beta.5-4878936');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
-exports.Plural = Plural;
-exports.LOCALE_DATA = LOCALE_DATA;
-exports.findLocaleData = findLocaleData;
 exports.registerLocaleData = registerLocaleData;
+exports.Plural = Plural;
 exports.NumberFormatStyle = NumberFormatStyle;
 exports.FormStyle = FormStyle;
 exports.TranslationWidth = TranslationWidth;
@@ -5856,7 +5593,6 @@ exports.getLocaleNumberSymbol = getLocaleNumberSymbol;
 exports.getLocaleNumberFormat = getLocaleNumberFormat;
 exports.getLocaleCurrencyName = getLocaleCurrencyName;
 exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
-exports.AVAILABLE_LOCALES = AVAILABLE_LOCALES;
 exports.CURRENCIES = CURRENCIES;
 exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
@@ -5910,9 +5646,10 @@ exports.HashLocationStrategy = HashLocationStrategy;
 exports.PathLocationStrategy = PathLocationStrategy;
 exports.PopStateEvent = PopStateEvent;
 exports.Location = Location;
-exports.ɵa = COMMON_DIRECTIVES;
-exports.ɵc = COMMON_DEPRECATED_I18N_PIPES;
-exports.ɵb = COMMON_PIPES;
+exports.ɵc = COMMON_DIRECTIVES;
+exports.ɵb = findLocaleData;
+exports.ɵe = COMMON_DEPRECATED_I18N_PIPES;
+exports.ɵd = COMMON_PIPES;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
