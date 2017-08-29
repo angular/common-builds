@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.5-2e714f9
+ * @license Angular v5.0.0-beta.5-72c7b6e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 /**
  * Defines a matcher for requests based on URL, method, or both.
  *
- * \@experimental
+ * \@stable
  * @record
  */
 function RequestMatch() { }
@@ -21,7 +21,7 @@ function RequestMatch() { }
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@experimental
+ * \@stable
  * @abstract
  */
 var HttpTestingController = (function () {
@@ -46,7 +46,7 @@ var HttpTestingController = (function () {
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@experimental
+ * \@stable
  */
 var TestRequest = (function () {
     /**
@@ -266,7 +266,7 @@ function _maybeConvertBody(responseType, body) {
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
  *
- * \@experimental
+ * \@stable
  */
 var HttpClientTestingBackend = (function () {
     function HttpClientTestingBackend() {
@@ -422,7 +422,7 @@ HttpClientTestingBackend.ctorParameters = function () { return []; };
  *
  * Inject `HttpTestingController` to expect and flush requests in your tests.
  *
- * \@experimental
+ * \@stable
  */
 var HttpClientTestingModule = (function () {
     function HttpClientTestingModule() {

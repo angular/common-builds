@@ -10,7 +10,7 @@
  *
  * Used by `HttpParams`.
  *
- *  @experimental
+ * @stable
  **/
 export interface HttpParameterCodec {
     encodeKey(key: string): string;
@@ -22,7 +22,7 @@ export interface HttpParameterCodec {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * @experimental
+ * @stable
  */
 export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
     encodeKey(k: string): string;
@@ -34,9 +34,9 @@ export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
  *
- * This class is immuatable - all mutation operations return a new instance.
+ * This class is immutable - all mutation operations return a new instance.
  *
- * @experimental
+ * @stable
  */
 export declare class HttpParams {
     private map;
