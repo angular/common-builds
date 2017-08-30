@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.6-8821723
+ * @license Angular v4.3.6-a203a95
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,tslib_1,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.6-8821723
+ * @license Angular v4.3.6-a203a95
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1643,13 +1643,7 @@ var HttpXhrBackend = (function () {
             }
             // Set the responseType if one was requested.
             if (req.responseType) {
-                var /** @type {?} */ responseType = req.responseType.toLowerCase();
-                // JSON responses need to be processed as text. This is because if the server
-                // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
-                // xhr.response will be null, and xhr.responseText cannot be accessed to
-                // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
-                // is parsed by first requesting text and then applying JSON.parse.
-                xhr.responseType = (((responseType !== 'json') ? responseType : 'text'));
+                xhr.responseType = (req.responseType.toLowerCase());
             }
             // Serialize the request body if one is present. If not, this will be set to null.
             var /** @type {?} */ reqBody = req.serializeBody();
@@ -1689,6 +1683,11 @@ var HttpXhrBackend = (function () {
                 if (status !== 204) {
                     // Use XMLHttpRequest.response if set, responseText otherwise.
                     body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
+                    // Strip a common XSSI prefix from string responses.
+                    // TODO: determine if this behavior should be optional and moved to an interceptor.
+                    if (typeof body === 'string') {
+                        body = body.replace(XSSI_PREFIX, '');
+                    }
                 }
                 // Normalize another potential bug (this one comes from CORS).
                 if (status === 0) {
@@ -1701,9 +1700,8 @@ var HttpXhrBackend = (function () {
                 var /** @type {?} */ ok = status >= 200 && status < 300;
                 // Check whether the body needs to be parsed as JSON (in many cases the browser
                 // will have done that already).
-                if (ok && req.responseType === 'json' && typeof body === 'string') {
+                if (ok && typeof body === 'string' && req.responseType === 'json') {
                     // Attempt the parse. If it fails, a parse error should be delivered to the user.
-                    body = body.replace(XSSI_PREFIX, '');
                     try {
                         body = JSON.parse(body);
                     }
