@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.5-452a7ae
+ * @license Angular v5.0.0-beta.5-4ec5e28
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1089,7 +1089,7 @@ function getLocaleNumberSymbol(locale, symbol) {
             return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Group];
         }
     }
     return res;
@@ -3984,17 +3984,10 @@ var DateFormatter = (function () {
  *
  * ### Examples
  *
- * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+ * Assuming `dateObj` is (year: 2010, month: 9, day: 3, hour: 12 PM, minute: 05, second: 08)
  * in the _local_ time and locale is 'en-US':
  *
- * ```
- *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
- *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
- *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- *     {{ dateObj | date:'mmss' }}        // output is '43:11'
- * ```
- *
- * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+ * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
  * \@stable
  */
@@ -4496,7 +4489,7 @@ function formatNumber$$1(pipe, locale, value, style, digits, currency, currencyA
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+ * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
  * \@stable
  */
@@ -4540,7 +4533,7 @@ DeprecatedDecimalPipe.ctorParameters = function () { return [
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
  * \@stable
  */
@@ -4588,7 +4581,7 @@ DeprecatedPercentPipe.ctorParameters = function () { return [
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
  * \@stable
  */
@@ -5157,7 +5150,7 @@ DecimalPipe.ctorParameters = function () { return [
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
  * \@stable
  */
@@ -5216,7 +5209,7 @@ PercentPipe.ctorParameters = function () { return [
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
  * \@stable
  */
@@ -5529,7 +5522,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.5-452a7ae');
+var VERSION = new Version('5.0.0-beta.5-4ec5e28');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
