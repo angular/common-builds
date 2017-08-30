@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.5-24faaf4
+ * @license Angular v5.0.0-beta.5-fdd5010
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -769,7 +769,7 @@ var localeEn = [
  * @return {?}
  */
 function registerLocaleData(data, extraData) {
-    const /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase();
+    const /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
         LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
@@ -5398,7 +5398,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.5-24faaf4');
+const VERSION = new Version('5.0.0-beta.5-fdd5010');
 
 /**
  * @fileoverview added by tsickle

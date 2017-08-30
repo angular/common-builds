@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.5-24faaf4
+ * @license Angular v5.0.0-beta.5-fdd5010
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -781,7 +781,7 @@ var localeEn = [
  * @return {?}
  */
 function registerLocaleData(data, extraData) {
-    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase();
+    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
         LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
@@ -5529,7 +5529,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.5-24faaf4');
+var VERSION = new Version('5.0.0-beta.5-fdd5010');
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
