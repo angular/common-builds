@@ -12,6 +12,6 @@ export { DeprecatedCurrencyPipe, DeprecatedDatePipe, DeprecatedDecimalPipe, Depr
 /**
  * A collection of deprecated i18n pipes that require intl api
  *
- * @deprecated
+ * @deprecated from v5
  */
 export declare const COMMON_DEPRECATED_I18N_PIPES: Provider[];
