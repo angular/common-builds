@@ -1,6 +1,5 @@
-import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -9,8 +8,10 @@ import { of } from 'rxjs/observable/of';
 import { concatMap } from 'rxjs/operator/concatMap';
 import { filter } from 'rxjs/operator/filter';
 import { map } from 'rxjs/operator/map';
+import { __extends } from 'tslib';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -49,6 +50,7 @@ var HttpBackend = (function () {
     }
     return HttpBackend;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -89,10 +91,10 @@ var HttpHeaders = (function () {
                 headers.split('\n').forEach(function (line) {
                     var /** @type {?} */ index = line.indexOf(':');
                     if (index > 0) {
-                        var /** @type {?} */ name = line.slice(0, index);
-                        var /** @type {?} */ key = name.toLowerCase();
+                        var /** @type {?} */ name_1 = line.slice(0, index);
+                        var /** @type {?} */ key = name_1.toLowerCase();
                         var /** @type {?} */ value = line.slice(index + 1).trim();
-                        _this.maybeSetNormalizedName(name, key);
+                        _this.maybeSetNormalizedName(name_1, key);
                         if (_this.headers.has(key)) {
                             ((_this.headers.get(key))).push(value);
                         }
@@ -289,6 +291,7 @@ var HttpHeaders = (function () {
     };
     return HttpHeaders;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -504,7 +507,7 @@ var HttpParams = (function () {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+            this.cloneFrom.keys().forEach(function (key) { /** @type {?} */ return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
             ((this.updates)).forEach(function (update) {
                 switch (update.op) {
                     case 'a':
@@ -538,6 +541,7 @@ var HttpParams = (function () {
     };
     return HttpParams;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -818,6 +822,7 @@ var HttpRequest = (function () {
     };
     return HttpRequest;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -829,13 +834,33 @@ var HttpRequest = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var HttpEventType = {};
-HttpEventType.Sent = 0;
-HttpEventType.UploadProgress = 1;
-HttpEventType.ResponseHeader = 2;
-HttpEventType.DownloadProgress = 3;
-HttpEventType.Response = 4;
-HttpEventType.User = 5;
+/** @enum {number} */
+var HttpEventType = {
+    /**
+     * The request was sent out over the wire.
+     */
+    Sent: 0,
+    /**
+     * An upload progress event was received.
+     */
+    UploadProgress: 1,
+    /**
+     * The response status code and headers were received.
+     */
+    ResponseHeader: 2,
+    /**
+     * A download progress event was received.
+     */
+    DownloadProgress: 3,
+    /**
+     * The full response including the body was received.
+     */
+    Response: 4,
+    /**
+     * A custom event from an interceptor or a backend.
+     */
+    User: 5,
+};
 HttpEventType[HttpEventType.Sent] = "Sent";
 HttpEventType[HttpEventType.UploadProgress] = "UploadProgress";
 HttpEventType[HttpEventType.ResponseHeader] = "ResponseHeader";
@@ -862,6 +887,7 @@ function HttpDownloadProgressEvent() { }
  * \@stable
  * @record
  */
+
 /**
  * An event indicating that the request was sent to the server. Useful
  * when a request may be retried multiple times, to distinguish between
@@ -890,6 +916,7 @@ function HttpUserEvent() { }
  * \@stable
  * @record
  */
+
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
@@ -930,7 +957,7 @@ var HttpResponseBase = (function () {
  * \@stable
  */
 var HttpHeaderResponse = (function (_super) {
-    tslib_1.__extends(HttpHeaderResponse, _super);
+    __extends(HttpHeaderResponse, _super);
     /**
      * Create a new `HttpHeaderResponse` with the given parameters.
      * @param {?=} init
@@ -970,7 +997,7 @@ var HttpHeaderResponse = (function (_super) {
  * \@stable
  */
 var HttpResponse = (function (_super) {
-    tslib_1.__extends(HttpResponse, _super);
+    __extends(HttpResponse, _super);
     /**
      * Construct a new `HttpResponse`.
      * @param {?=} init
@@ -1012,7 +1039,7 @@ var HttpResponse = (function (_super) {
  * \@stable
  */
 var HttpErrorResponse = (function (_super) {
-    tslib_1.__extends(HttpErrorResponse, _super);
+    __extends(HttpErrorResponse, _super);
     /**
      * @param {?} init
      */
@@ -1040,6 +1067,7 @@ var HttpErrorResponse = (function (_super) {
     }
     return HttpErrorResponse;
 }(HttpResponseBase));
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1341,6 +1369,7 @@ HttpClient.decorators = [
 HttpClient.ctorParameters = function () { return [
     { type: HttpHandler, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1413,6 +1442,7 @@ NoopInterceptor.decorators = [
 ];
 /** @nocollapse */
 NoopInterceptor.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1641,6 +1671,7 @@ JsonpInterceptor.decorators = [
 JsonpInterceptor.ctorParameters = function () { return [
     { type: JsonpClientBackend, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1944,6 +1975,7 @@ HttpXhrBackend.decorators = [
 HttpXhrBackend.ctorParameters = function () { return [
     { type: XhrFactory, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2058,6 +2090,7 @@ HttpXsrfInterceptor.ctorParameters = function () { return [
     { type: HttpXsrfTokenExtractor, },
     { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2223,6 +2256,7 @@ HttpClientJsonpModule.decorators = [
 ];
 /** @nocollapse */
 HttpClientJsonpModule.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2234,6 +2268,7 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2241,5 +2276,6 @@ HttpClientJsonpModule.ctorParameters = function () { return []; };
 /**
  * Generated bundle index. Do not edit.
  */
+
 export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, HttpInterceptor, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParameterCodec, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpResponseBase, HttpSentEvent, HttpUserEvent, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
-//# sourceMappingURL=http.es5.js.map
+//# sourceMappingURL=index.js.map

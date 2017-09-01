@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -25,8 +25,11 @@ function RequestMatch() { }
  * \@stable
  * @abstract
  */
-class HttpTestingController {
-}
+var HttpTestingController = (function () {
+    function HttpTestingController() {
+    }
+    return HttpTestingController;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -47,12 +50,12 @@ class HttpTestingController {
  *
  * \@stable
  */
-class TestRequest {
+var TestRequest = (function () {
     /**
      * @param {?} request
      * @param {?} observer
      */
-    constructor(request, observer) {
+    function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
         /**
@@ -60,11 +63,15 @@ class TestRequest {
          */
         this._cancelled = false;
     }
-    /**
-     * Whether the request was cancelled after it was sent.
-     * @return {?}
-     */
-    get cancelled() { return this._cancelled; }
+    Object.defineProperty(TestRequest.prototype, "cancelled", {
+        /**
+         * Whether the request was cancelled after it was sent.
+         * @return {?}
+         */
+        get: function () { return this._cancelled; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response
      * headers) if provided.
@@ -74,15 +81,16 @@ class TestRequest {
      * @param {?=} opts
      * @return {?}
      */
-    flush(body, opts = {}) {
+    TestRequest.prototype.flush = function (body, opts) {
+        if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
-            throw new Error(`Cannot flush a cancelled request.`);
+            throw new Error("Cannot flush a cancelled request.");
         }
-        const /** @type {?} */ url = this.request.urlWithParams;
-        const /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        var /** @type {?} */ url = this.request.urlWithParams;
+        var /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
-        let /** @type {?} */ statusText = opts.statusText;
-        let /** @type {?} */ status = opts.status !== undefined ? opts.status : 200;
+        var /** @type {?} */ statusText = opts.statusText;
+        var /** @type {?} */ status = opts.status !== undefined ? opts.status : 200;
         if (opts.status === undefined) {
             if (body === null) {
                 status = 204;
@@ -96,48 +104,50 @@ class TestRequest {
             throw new Error('statusText is required when setting a custom status.');
         }
         if (status >= 200 && status < 300) {
-            this.observer.next(new HttpResponse({ body, headers, status, statusText, url }));
+            this.observer.next(new HttpResponse({ body: body, headers: headers, status: status, statusText: statusText, url: url }));
             this.observer.complete();
         }
         else {
-            this.observer.error(new HttpErrorResponse({ error: body, headers, status, statusText, url }));
+            this.observer.error(new HttpErrorResponse({ error: body, headers: headers, status: status, statusText: statusText, url: url }));
         }
-    }
+    };
     /**
      * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
      * @param {?} error
      * @param {?=} opts
      * @return {?}
      */
-    error(error, opts = {}) {
+    TestRequest.prototype.error = function (error, opts) {
+        if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
-            throw new Error(`Cannot return an error for a cancelled request.`);
+            throw new Error("Cannot return an error for a cancelled request.");
         }
         if (opts.status && opts.status >= 200 && opts.status < 300) {
-            throw new Error(`error() called with a successful status.`);
+            throw new Error("error() called with a successful status.");
         }
-        const /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        var /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         this.observer.error(new HttpErrorResponse({
-            error,
-            headers,
+            error: error,
+            headers: headers,
             status: opts.status || 0,
             statusText: opts.statusText || '',
             url: this.request.urlWithParams,
         }));
-    }
+    };
     /**
      * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
      * request.
      * @param {?} event
      * @return {?}
      */
-    event(event) {
+    TestRequest.prototype.event = function (event) {
         if (this.cancelled) {
-            throw new Error(`Cannot send events to a cancelled request.`);
+            throw new Error("Cannot send events to a cancelled request.");
         }
         this.observer.next(event);
-    }
-}
+    };
+    return TestRequest;
+}());
 /**
  * Helper function to convert a response body to an ArrayBuffer.
  * @param {?} body
@@ -175,18 +185,19 @@ function _toBlob(body) {
  * @param {?=} format
  * @return {?}
  */
-function _toJsonBody(body, format = 'JSON') {
+function _toJsonBody(body, format) {
+    if (format === void 0) { format = 'JSON'; }
     if (typeof ArrayBuffer !== 'undefined' && body instanceof ArrayBuffer) {
-        throw new Error(`Automatic conversion to ${format} is not supported for ArrayBuffers.`);
+        throw new Error("Automatic conversion to " + format + " is not supported for ArrayBuffers.");
     }
     if (typeof Blob !== 'undefined' && body instanceof Blob) {
-        throw new Error(`Automatic conversion to ${format} is not supported for Blobs.`);
+        throw new Error("Automatic conversion to " + format + " is not supported for Blobs.");
     }
     if (typeof body === 'string' || typeof body === 'number' || typeof body === 'object' ||
         Array.isArray(body)) {
         return body;
     }
-    throw new Error(`Automatic conversion to ${format} is not supported for response type.`);
+    throw new Error("Automatic conversion to " + format + " is not supported for response type.");
 }
 /**
  * Helper function to convert a response body to a string.
@@ -234,7 +245,7 @@ function _maybeConvertBody(responseType, body) {
             }
             return _toTextBody(body);
         default:
-            throw new Error(`Unsupported responseType: ${responseType}`);
+            throw new Error("Unsupported responseType: " + responseType);
     }
 }
 
@@ -260,8 +271,8 @@ function _maybeConvertBody(responseType, body) {
  *
  * \@stable
  */
-class HttpClientTestingBackend {
-    constructor() {
+var HttpClientTestingBackend = (function () {
+    function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
          */
@@ -272,47 +283,49 @@ class HttpClientTestingBackend {
      * @param {?} req
      * @return {?}
      */
-    handle(req) {
-        return new Observable((observer) => {
-            const /** @type {?} */ testReq = new TestRequest(req, observer);
-            this.open.push(testReq);
+    HttpClientTestingBackend.prototype.handle = function (req) {
+        var _this = this;
+        return new Observable(function (observer) {
+            var /** @type {?} */ testReq = new TestRequest(req, observer);
+            _this.open.push(testReq);
             observer.next(/** @type {?} */ ({ type: HttpEventType.Sent }));
-            return () => { testReq._cancelled = true; };
+            return function () { testReq._cancelled = true; };
         });
-    }
+    };
     /**
      * Helper function to search for requests in the list of open requests.
      * @param {?} match
      * @return {?}
      */
-    _match(match) {
+    HttpClientTestingBackend.prototype._match = function (match) {
         if (typeof match === 'string') {
-            return this.open.filter(testReq => testReq.request.urlWithParams === match);
+            return this.open.filter(function (testReq) { return testReq.request.urlWithParams === match; });
         }
         else if (typeof match === 'function') {
-            return this.open.filter(testReq => match(testReq.request));
+            return this.open.filter(function (testReq) { return match(testReq.request); });
         }
         else {
-            return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.urlWithParams === match.url));
+            return this.open.filter(function (testReq) { return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                (!match.url || testReq.request.urlWithParams === match.url); });
         }
-    }
+    };
     /**
      * Search for requests in the list of open requests, and return all that match
      * without asserting anything about the number of matches.
      * @param {?} match
      * @return {?}
      */
-    match(match) {
-        const /** @type {?} */ results = this._match(match);
-        results.forEach(result => {
-            const /** @type {?} */ index = this.open.indexOf(result);
+    HttpClientTestingBackend.prototype.match = function (match) {
+        var _this = this;
+        var /** @type {?} */ results = this._match(match);
+        results.forEach(function (result) {
+            var /** @type {?} */ index = _this.open.indexOf(result);
             if (index !== -1) {
-                this.open.splice(index, 1);
+                _this.open.splice(index, 1);
             }
         });
         return results;
-    }
+    };
     /**
      * Expect that a single outstanding request matches the given matcher, and return
      * it.
@@ -323,17 +336,17 @@ class HttpClientTestingBackend {
      * @param {?=} description
      * @return {?}
      */
-    expectOne(match, description) {
+    HttpClientTestingBackend.prototype.expectOne = function (match, description) {
         description = description || this.descriptionFromMatcher(match);
-        const /** @type {?} */ matches = this.match(match);
+        var /** @type {?} */ matches = this.match(match);
         if (matches.length > 1) {
-            throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
+            throw new Error("Expected one matching request for criteria \"" + description + "\", found " + matches.length + " requests.");
         }
         if (matches.length === 0) {
-            throw new Error(`Expected one matching request for criteria "${description}", found none.`);
+            throw new Error("Expected one matching request for criteria \"" + description + "\", found none.");
         }
         return matches[0];
-    }
+    };
     /**
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
@@ -341,59 +354,61 @@ class HttpClientTestingBackend {
      * @param {?=} description
      * @return {?}
      */
-    expectNone(match, description) {
+    HttpClientTestingBackend.prototype.expectNone = function (match, description) {
         description = description || this.descriptionFromMatcher(match);
-        const /** @type {?} */ matches = this.match(match);
+        var /** @type {?} */ matches = this.match(match);
         if (matches.length > 0) {
-            throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
+            throw new Error("Expected zero matching requests for criteria \"" + description + "\", found " + matches.length + ".");
         }
-    }
+    };
     /**
      * Validate that there are no outstanding requests.
      * @param {?=} opts
      * @return {?}
      */
-    verify(opts = {}) {
-        let /** @type {?} */ open = this.open;
+    HttpClientTestingBackend.prototype.verify = function (opts) {
+        if (opts === void 0) { opts = {}; }
+        var /** @type {?} */ open = this.open;
         // It's possible that some requests may be cancelled, and this is expected.
         // The user can ask to ignore open requests which have been cancelled.
         if (opts.ignoreCancelled) {
-            open = open.filter(testReq => !testReq.cancelled);
+            open = open.filter(function (testReq) { return !testReq.cancelled; });
         }
         if (open.length > 0) {
             // Show the methods and URLs of open requests in the error, for convenience.
-            const /** @type {?} */ requests = open.map(testReq => {
-                const /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
-                const /** @type {?} */ method = testReq.request.method;
-                return `${method} ${url}`;
+            var /** @type {?} */ requests = open.map(function (testReq) {
+                var /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
+                var /** @type {?} */ method = testReq.request.method;
+                return method + " " + url;
             })
                 .join(', ');
-            throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
+            throw new Error("Expected no open requests, found " + open.length + ": " + requests);
         }
-    }
+    };
     /**
      * @param {?} matcher
      * @return {?}
      */
-    descriptionFromMatcher(matcher) {
+    HttpClientTestingBackend.prototype.descriptionFromMatcher = function (matcher) {
         if (typeof matcher === 'string') {
-            return `Match URL: ${matcher}`;
+            return "Match URL: " + matcher;
         }
         else if (typeof matcher === 'object') {
-            const /** @type {?} */ method = matcher.method || '(any)';
-            const /** @type {?} */ url = matcher.url || '(any)';
-            return `Match method: ${method}, URL: ${url}`;
+            var /** @type {?} */ method = matcher.method || '(any)';
+            var /** @type {?} */ url = matcher.url || '(any)';
+            return "Match method: " + method + ", URL: " + url;
         }
         else {
-            return `Match by function: ${matcher.name}`;
+            return "Match by function: " + matcher.name;
         }
-    }
-}
+    };
+    return HttpClientTestingBackend;
+}());
 HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-HttpClientTestingBackend.ctorParameters = () => [];
+HttpClientTestingBackend.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -413,8 +428,11 @@ HttpClientTestingBackend.ctorParameters = () => [];
  *
  * \@stable
  */
-class HttpClientTestingModule {
-}
+var HttpClientTestingModule = (function () {
+    function HttpClientTestingModule() {
+    }
+    return HttpClientTestingModule;
+}());
 HttpClientTestingModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
@@ -428,7 +446,7 @@ HttpClientTestingModule.decorators = [
             },] },
 ];
 /** @nocollapse */
-HttpClientTestingModule.ctorParameters = () => [];
+HttpClientTestingModule.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -451,4 +469,4 @@ HttpClientTestingModule.ctorParameters = () => [];
  */
 
 export { HttpTestingController, RequestMatch, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
-//# sourceMappingURL=testing.js.map
+//# sourceMappingURL=index.js.map

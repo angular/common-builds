@@ -1,10 +1,11 @@
-import * as tslib_1 from "tslib";
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+import { __assign, __extends } from 'tslib';
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -61,6 +62,7 @@ function LocationChangeEvent() { }
  * @record
  */
 function LocationChangeListener() { }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -119,6 +121,7 @@ var LocationStrategy = (function () {
  * \@stable
  */
 var APP_BASE_HREF = new InjectionToken('appBaseHref');
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -334,6 +337,7 @@ function _stripBaseHref(baseHref, url) {
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -363,7 +367,7 @@ function _stripIndexHtml(url) {
  * \@stable
  */
 var HashLocationStrategy = (function (_super) {
-    tslib_1.__extends(HashLocationStrategy, _super);
+    __extends(HashLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
@@ -456,6 +460,7 @@ HashLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -494,7 +499,7 @@ HashLocationStrategy.ctorParameters = function () { return [
  * \@stable
  */
 var PathLocationStrategy = (function (_super) {
-    tslib_1.__extends(PathLocationStrategy, _super);
+    __extends(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
@@ -581,6 +586,7 @@ PathLocationStrategy.ctorParameters = function () { return [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -592,6 +598,7 @@ PathLocationStrategy.ctorParameters = function () { return [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -705,6 +712,7 @@ PathLocationStrategy.ctorParameters = function () { return [
     'ZAR': [, 'R'],
     'ZMW': [, 'ZK'],
 };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -760,6 +768,7 @@ var localeEn = [
         return 5;
     }
 ];
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -781,12 +790,41 @@ var localeEn = [
  * @return {?}
  */
 function registerLocaleData(data, extraData) {
-    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
+    var /** @type {?} */ localeId = data[LocaleDataIndex.LocaleId].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
-        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
+        LOCALE_DATA[localeId][LocaleDataIndex.ExtraData] = extraData;
     }
 }
+/** @enum {number} */
+var LocaleDataIndex = {
+    LocaleId: 0,
+    DayPeriodsFormat: 1,
+    DayPeriodsStandalone: 2,
+    DaysFormat: 3,
+    DaysStandalone: 4,
+    MonthsFormat: 5,
+    MonthsStandalone: 6,
+    Eras: 7,
+    FirstDayOfWeek: 8,
+    WeekendRange: 9,
+    DateFormat: 10,
+    TimeFormat: 11,
+    DateTimeFormat: 12,
+    NumberSymbols: 13,
+    NumberFormats: 14,
+    CurrencySymbol: 15,
+    CurrencyName: 16,
+    PluralCase: 17,
+    ExtraData: 18,
+};
+/** @enum {number} */
+var ExtraLocaleDataIndex = {
+    ExtraDayPeriodFormats: 0,
+    ExtraDayPeriodStandalone: 1,
+    ExtraDayPeriodsRules: 2,
+};
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -798,66 +836,78 @@ function registerLocaleData(data, extraData) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NumberFormatStyle = {};
-NumberFormatStyle.Decimal = 0;
-NumberFormatStyle.Percent = 1;
-NumberFormatStyle.Currency = 2;
-NumberFormatStyle.Scientific = 3;
+/** @enum {number} */
+var NumberFormatStyle = {
+    Decimal: 0,
+    Percent: 1,
+    Currency: 2,
+    Scientific: 3,
+};
 NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
 NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
 NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
 NumberFormatStyle[NumberFormatStyle.Scientific] = "Scientific";
-var Plural = {};
-Plural.Zero = 0;
-Plural.One = 1;
-Plural.Two = 2;
-Plural.Few = 3;
-Plural.Many = 4;
-Plural.Other = 5;
+/** @enum {number} */
+var Plural = {
+    Zero: 0,
+    One: 1,
+    Two: 2,
+    Few: 3,
+    Many: 4,
+    Other: 5,
+};
 Plural[Plural.Zero] = "Zero";
 Plural[Plural.One] = "One";
 Plural[Plural.Two] = "Two";
 Plural[Plural.Few] = "Few";
 Plural[Plural.Many] = "Many";
 Plural[Plural.Other] = "Other";
-var FormStyle = {};
-FormStyle.Format = 0;
-FormStyle.Standalone = 1;
+/** @enum {number} */
+var FormStyle = {
+    Format: 0,
+    Standalone: 1,
+};
 FormStyle[FormStyle.Format] = "Format";
 FormStyle[FormStyle.Standalone] = "Standalone";
-var TranslationWidth = {};
-TranslationWidth.Narrow = 0;
-TranslationWidth.Abbreviated = 1;
-TranslationWidth.Wide = 2;
-TranslationWidth.Short = 3;
+/** @enum {number} */
+var TranslationWidth = {
+    Narrow: 0,
+    Abbreviated: 1,
+    Wide: 2,
+    Short: 3,
+};
 TranslationWidth[TranslationWidth.Narrow] = "Narrow";
 TranslationWidth[TranslationWidth.Abbreviated] = "Abbreviated";
 TranslationWidth[TranslationWidth.Wide] = "Wide";
 TranslationWidth[TranslationWidth.Short] = "Short";
-var FormatWidth = {};
-FormatWidth.Short = 0;
-FormatWidth.Medium = 1;
-FormatWidth.Long = 2;
-FormatWidth.Full = 3;
+/** @enum {number} */
+var FormatWidth = {
+    Short: 0,
+    Medium: 1,
+    Long: 2,
+    Full: 3,
+};
 FormatWidth[FormatWidth.Short] = "Short";
 FormatWidth[FormatWidth.Medium] = "Medium";
 FormatWidth[FormatWidth.Long] = "Long";
 FormatWidth[FormatWidth.Full] = "Full";
-var NumberSymbol = {};
-NumberSymbol.Decimal = 0;
-NumberSymbol.Group = 1;
-NumberSymbol.List = 2;
-NumberSymbol.PercentSign = 3;
-NumberSymbol.PlusSign = 4;
-NumberSymbol.MinusSign = 5;
-NumberSymbol.Exponential = 6;
-NumberSymbol.SuperscriptingExponent = 7;
-NumberSymbol.PerMille = 8;
-NumberSymbol.Infinity = 9;
-NumberSymbol.NaN = 10;
-NumberSymbol.TimeSeparator = 11;
-NumberSymbol.CurrencyDecimal = 12;
-NumberSymbol.CurrencyGroup = 13;
+/** @enum {number} */
+var NumberSymbol = {
+    Decimal: 0,
+    Group: 1,
+    List: 2,
+    PercentSign: 3,
+    PlusSign: 4,
+    MinusSign: 5,
+    Exponential: 6,
+    SuperscriptingExponent: 7,
+    PerMille: 8,
+    Infinity: 9,
+    NaN: 10,
+    TimeSeparator: 11,
+    CurrencyDecimal: 12,
+    CurrencyGroup: 13,
+};
 NumberSymbol[NumberSymbol.Decimal] = "Decimal";
 NumberSymbol[NumberSymbol.Group] = "Group";
 NumberSymbol[NumberSymbol.List] = "List";
@@ -872,14 +922,16 @@ NumberSymbol[NumberSymbol.NaN] = "NaN";
 NumberSymbol[NumberSymbol.TimeSeparator] = "TimeSeparator";
 NumberSymbol[NumberSymbol.CurrencyDecimal] = "CurrencyDecimal";
 NumberSymbol[NumberSymbol.CurrencyGroup] = "CurrencyGroup";
-var WeekDay = {};
-WeekDay.Sunday = 0;
-WeekDay.Monday = 1;
-WeekDay.Tuesday = 2;
-WeekDay.Wednesday = 3;
-WeekDay.Thursday = 4;
-WeekDay.Friday = 5;
-WeekDay.Saturday = 6;
+/** @enum {number} */
+var WeekDay = {
+    Sunday: 0,
+    Monday: 1,
+    Tuesday: 2,
+    Wednesday: 3,
+    Thursday: 4,
+    Friday: 5,
+    Saturday: 6,
+};
 WeekDay[WeekDay.Sunday] = "Sunday";
 WeekDay[WeekDay.Monday] = "Monday";
 WeekDay[WeekDay.Tuesday] = "Tuesday";
@@ -895,7 +947,7 @@ WeekDay[WeekDay.Saturday] = "Saturday";
  * @return {?}
  */
 function getLocaleId(locale) {
-    return findLocaleData(locale)[0 /* LocaleId */];
+    return findLocaleData(locale)[LocaleDataIndex.LocaleId];
 }
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
@@ -908,7 +960,7 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ amPmData = ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
+    var /** @type {?} */ amPmData = ([data[LocaleDataIndex.DayPeriodsFormat], data[LocaleDataIndex.DayPeriodsStandalone]]);
     var /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
@@ -923,7 +975,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  */
 function getLocaleDayNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ daysData = ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
+    var /** @type {?} */ daysData = ([data[LocaleDataIndex.DaysFormat], data[LocaleDataIndex.DaysStandalone]]);
     var /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
@@ -938,7 +990,7 @@ function getLocaleDayNames(locale, formStyle, width) {
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ monthsData = ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
+    var /** @type {?} */ monthsData = ([data[LocaleDataIndex.MonthsFormat], data[LocaleDataIndex.MonthsStandalone]]);
     var /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
@@ -952,7 +1004,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
  */
 function getLocaleEraNames(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ erasData = (data[7 /* Eras */]);
+    var /** @type {?} */ erasData = (data[LocaleDataIndex.Eras]);
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -965,7 +1017,7 @@ function getLocaleEraNames(locale, width) {
  */
 function getLocaleFirstDayOfWeek(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[8 /* FirstDayOfWeek */];
+    return data[LocaleDataIndex.FirstDayOfWeek];
 }
 /**
  * Range of days in the week that represent the week-end for this locale, based on english days
@@ -978,7 +1030,7 @@ function getLocaleFirstDayOfWeek(locale) {
  */
 function getLocaleWeekEndRange(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[9 /* WeekendRange */];
+    return data[LocaleDataIndex.WeekendRange];
 }
 /**
  * Date format that depends on the locale.
@@ -1010,7 +1062,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[10 /* DateFormat */][width];
+    return data[LocaleDataIndex.DateFormat][width];
 }
 /**
  * Time format that depends on the locale.
@@ -1037,7 +1089,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[11 /* TimeFormat */][width];
+    return data[LocaleDataIndex.TimeFormat][width];
 }
 /**
  * Date-time format that depends on the locale.
@@ -1069,7 +1121,7 @@ function getLocaleTimeFormat(locale, width) {
  */
 function getLocaleDateTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ dateTimeFormatData = (data[12 /* DateTimeFormat */]);
+    var /** @type {?} */ dateTimeFormatData = (data[LocaleDataIndex.DateTimeFormat]);
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1083,13 +1135,13 @@ function getLocaleDateTimeFormat(locale, width) {
  */
 function getLocaleNumberSymbol(locale, symbol) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ res = data[13 /* NumberSymbols */][symbol];
+    var /** @type {?} */ res = data[LocaleDataIndex.NumberSymbols][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
-            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
+            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[13 /* NumberSymbols */][NumberSymbol.Group];
+            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Group];
         }
     }
     return res;
@@ -1130,7 +1182,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  */
 function getLocaleNumberFormat(locale, type) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[14 /* NumberFormats */][type];
+    return data[LocaleDataIndex.NumberFormats][type];
 }
 /**
  * The symbol used to represent the currency for the main country using this locale (e.g. $ for
@@ -1143,7 +1195,7 @@ function getLocaleNumberFormat(locale, type) {
  */
 function getLocaleCurrencySymbol(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[15 /* CurrencySymbol */] || null;
+    return data[LocaleDataIndex.CurrencySymbol] || null;
 }
 /**
  * The name of the currency for the main country using this locale (e.g. USD for the locale
@@ -1156,7 +1208,7 @@ function getLocaleCurrencySymbol(locale) {
  */
 function getLocaleCurrencyName(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[16 /* CurrencyName */] || null;
+    return data[LocaleDataIndex.CurrencyName] || null;
 }
 /**
  * The locale plural function used by ICU expressions to determine the plural case to use.
@@ -1168,15 +1220,15 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocalePluralCase(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[17 /* PluralCase */];
+    return data[LocaleDataIndex.PluralCase];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[18 /* ExtraData */]) {
-        throw new Error("Missing extra locale data for the locale \"" + data[0 /* LocaleId */] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
+    if (!data[LocaleDataIndex.ExtraData]) {
+        throw new Error("Missing extra locale data for the locale \"" + data[LocaleDataIndex.LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
 /**
@@ -1199,7 +1251,7 @@ function checkFullData(data) {
 function getLocaleExtraDayPeriodRules(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
+    var /** @type {?} */ rules = data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodsRules] || [];
     return rules.map(function (rule) {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1228,8 +1280,8 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
     var /** @type {?} */ dayPeriodsData = ([
-        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
-        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
+        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodFormats],
+        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodStandalone]
     ]);
     var /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
@@ -1302,6 +1354,7 @@ function findCurrencySymbol(code, format) {
     var /** @type {?} */ symbol = currency[0] || code;
     return format === 'wide' ? symbol : currency[1] || symbol;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1358,7 +1411,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  * \@experimental
  */
 var NgLocaleLocalization = (function (_super) {
-    tslib_1.__extends(NgLocaleLocalization, _super);
+    __extends(NgLocaleLocalization, _super);
     /**
      * @param {?} locale
      * @param {?=} useV4Plurals
@@ -1778,6 +1831,7 @@ function getPluralCase(locale, nLike) {
             return Plural.Other;
     }
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1807,6 +1861,7 @@ function getPluralCase(locale, nLike) {
     }
     return null;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2013,6 +2068,7 @@ NgClass.propDecorators = {
     "klass": [{ type: Input, args: ['class',] },],
     "ngClass": [{ type: Input },],
 };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2135,6 +2191,7 @@ NgComponentOutlet.propDecorators = {
     "ngComponentOutletContent": [{ type: Input },],
     "ngComponentOutletNgModuleFactory": [{ type: Input },],
 };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2423,6 +2480,7 @@ var RecordViewTuple = (function () {
 function getTypeNameForDebugging(type) {
     return type['name'] || typeof type;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2626,6 +2684,7 @@ var NgIfContext = (function () {
     }
     return NgIfContext;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2888,6 +2947,7 @@ NgSwitchDefault.ctorParameters = function () { return [
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3036,6 +3096,7 @@ NgPluralCase.ctorParameters = function () { return [
     { type: ViewContainerRef, },
     { type: NgPlural, decorators: [{ type: Host },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3139,6 +3200,7 @@ NgStyle.ctorParameters = function () { return [
 NgStyle.propDecorators = {
     "ngStyle": [{ type: Input },],
 };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3260,6 +3322,7 @@ NgTemplateOutlet.propDecorators = {
     "ngTemplateOutletContext": [{ type: Input },],
     "ngTemplateOutlet": [{ type: Input },],
 };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3281,6 +3344,7 @@ var COMMON_DIRECTIVES = [
     NgPlural,
     NgPluralCase,
 ];
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3294,24 +3358,28 @@ var COMMON_DIRECTIVES = [
  */
 var NAMED_FORMATS = {};
 var DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
-var ZoneWidth = {};
-ZoneWidth.Short = 0;
-ZoneWidth.ShortGMT = 1;
-ZoneWidth.Long = 2;
-ZoneWidth.Extended = 3;
+/** @enum {number} */
+var ZoneWidth = {
+    Short: 0,
+    ShortGMT: 1,
+    Long: 2,
+    Extended: 3,
+};
 ZoneWidth[ZoneWidth.Short] = "Short";
 ZoneWidth[ZoneWidth.ShortGMT] = "ShortGMT";
 ZoneWidth[ZoneWidth.Long] = "Long";
 ZoneWidth[ZoneWidth.Extended] = "Extended";
-var DateType = {};
-DateType.FullYear = 0;
-DateType.Month = 1;
-DateType.Date = 2;
-DateType.Hours = 3;
-DateType.Minutes = 4;
-DateType.Seconds = 5;
-DateType.Milliseconds = 6;
-DateType.Day = 7;
+/** @enum {number} */
+var DateType = {
+    FullYear: 0,
+    Month: 1,
+    Date: 2,
+    Hours: 3,
+    Minutes: 4,
+    Seconds: 5,
+    Milliseconds: 6,
+    Day: 7,
+};
 DateType[DateType.FullYear] = "FullYear";
 DateType[DateType.Month] = "Month";
 DateType[DateType.Date] = "Date";
@@ -3320,11 +3388,13 @@ DateType[DateType.Minutes] = "Minutes";
 DateType[DateType.Seconds] = "Seconds";
 DateType[DateType.Milliseconds] = "Milliseconds";
 DateType[DateType.Day] = "Day";
-var TranslationType = {};
-TranslationType.DayPeriods = 0;
-TranslationType.Days = 1;
-TranslationType.Months = 2;
-TranslationType.Eras = 3;
+/** @enum {number} */
+var TranslationType = {
+    DayPeriods: 0,
+    Days: 1,
+    Months: 2,
+    Eras: 3,
+};
 TranslationType[TranslationType.DayPeriods] = "DayPeriods";
 TranslationType[TranslationType.Days] = "Days";
 TranslationType[TranslationType.Months] = "Months";
@@ -3920,6 +3990,7 @@ function convertTimezoneToLocal(date, timezone, reverse) {
     var /** @type {?} */ timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
     return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -3939,6 +4010,7 @@ function convertTimezoneToLocal(date, timezone, reverse) {
 function invalidPipeArgumentError(type, value) {
     return Error("InvalidPipeArgument: '" + value + "' for pipe '" + ɵstringify(type) + "'");
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4045,6 +4117,7 @@ function isoStringToDate(match) {
 function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4236,7 +4309,7 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return options.reduce(function (merged, opt) { return (Object.assign({}, merged, opt)); }, {});
+    return options.reduce(function (merged, opt) { return (__assign({}, merged, opt)); }, {});
 }
 /**
  * @param {?} ret
@@ -4302,6 +4375,7 @@ var DateFormatter = (function () {
     };
     return DateFormatter;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4458,6 +4532,7 @@ DeprecatedDatePipe.ctorParameters = function () { return [
 function isDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4787,6 +4862,7 @@ function parseIntAutoRadix(text) {
     }
     return result;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4808,7 +4884,7 @@ function parseIntAutoRadix(text) {
  * @param {?=} currencyAsSymbol
  * @return {?}
  */
-function formatNumber$$1(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
+function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
     if (value == null)
@@ -4890,7 +4966,7 @@ var DeprecatedDecimalPipe = (function () {
      * @return {?}
      */
     DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
-        return formatNumber$$1(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
     return DeprecatedDecimalPipe;
 }());
@@ -4934,7 +5010,7 @@ var DeprecatedPercentPipe = (function () {
      * @return {?}
      */
     DeprecatedPercentPipe.prototype.transform = function (value, digits) {
-        return formatNumber$$1(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
     return DeprecatedPercentPipe;
 }());
@@ -4986,7 +5062,7 @@ var DeprecatedCurrencyPipe = (function () {
     DeprecatedCurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
         if (currencyCode === void 0) { currencyCode = 'USD'; }
         if (symbolDisplay === void 0) { symbolDisplay = false; }
-        return formatNumber$$1(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
     return DeprecatedCurrencyPipe;
 }());
@@ -4997,6 +5073,7 @@ DeprecatedCurrencyPipe.decorators = [
 DeprecatedCurrencyPipe.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5007,6 +5084,7 @@ DeprecatedCurrencyPipe.ctorParameters = function () { return [
  * @deprecated from v5
  */
 var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5186,6 +5264,7 @@ AsyncPipe.decorators = [
 AsyncPipe.ctorParameters = function () { return [
     { type: ChangeDetectorRef, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5292,6 +5371,7 @@ UpperCasePipe.decorators = [
 ];
 /** @nocollapse */
 UpperCasePipe.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5354,6 +5434,7 @@ I18nPluralPipe.decorators = [
 I18nPluralPipe.ctorParameters = function () { return [
     { type: NgLocalization, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5411,6 +5492,7 @@ I18nSelectPipe.decorators = [
 ];
 /** @nocollapse */
 I18nSelectPipe.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5450,6 +5532,7 @@ JsonPipe.decorators = [
 ];
 /** @nocollapse */
 JsonPipe.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5649,6 +5732,7 @@ CurrencyPipe.ctorParameters = function () { return [
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5733,6 +5817,7 @@ SlicePipe.decorators = [
 ];
 /** @nocollapse */
 SlicePipe.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5766,6 +5851,7 @@ var COMMON_PIPES = [
     I18nPluralPipe,
     I18nSelectPipe,
 ];
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5817,6 +5903,7 @@ DeprecatedI18NPipesModule.decorators = [
 ];
 /** @nocollapse */
 DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5837,6 +5924,7 @@ DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
  * \@stable
  */
 var DOCUMENT = new InjectionToken('DocumentToken');
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5891,6 +5979,7 @@ function isPlatformWorkerApp(platformId) {
 function isPlatformWorkerUi(platformId) {
     return platformId === PLATFORM_WORKER_UI_ID;
 }
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5910,7 +5999,8 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.5-ee04217');
+var VERSION = new Version('5.0.0-beta.5-fd701b0');
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5927,6 +6017,7 @@ var VERSION = new Version('5.0.0-beta.5-ee04217');
  * @description
  * Entry point for all public APIs of the common package.
  */
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5941,9 +6032,11 @@ var VERSION = new Version('5.0.0-beta.5-ee04217');
 /**
  * @module
  * @description
- * Entry point for all public APIs of the common package.
+ * Entry point for all public APIs of this package.
  */
+
 // This file only reexports content of the `src` folder. Keep it that way.
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -5951,5 +6044,6 @@ var VERSION = new Version('5.0.0-beta.5-ee04217');
 /**
  * Generated bundle index. Do not edit.
  */
-export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵd, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
-//# sourceMappingURL=common.es5.js.map
+
+export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵd, LocaleDataIndex as ɵb, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
+//# sourceMappingURL=index.js.map

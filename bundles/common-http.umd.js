@@ -1,16 +1,16 @@
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('rxjs/observable/of'), require('rxjs/operator/concatMap'), require('rxjs/operator/filter'), require('rxjs/operator/map'), require('@angular/common'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'tslib', '@angular/core', 'rxjs/observable/of', 'rxjs/operator/concatMap', 'rxjs/operator/filter', 'rxjs/operator/map', '@angular/common', 'rxjs/Observable'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}),global.tslib_1,global.ng.core,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global._angular_common,global.Rx));
-}(this, (function (exports,tslib_1,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,_angular_common,rxjs_Observable) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/observable/of'), require('rxjs/operator/concatMap'), require('rxjs/operator/filter'), require('rxjs/operator/map'), require('tslib'), require('@angular/common'), require('rxjs/Observable')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/observable/of', 'rxjs/operator/concatMap', 'rxjs/operator/filter', 'rxjs/operator/map', 'tslib', '@angular/common', 'rxjs/Observable'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}),global.ng.core,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.tslib,global.ng.common,global.Rx));
+}(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.5-ee04217
+ * @license Angular v5.0.0-beta.5-fd701b0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -52,6 +52,7 @@ var HttpBackend = (function () {
     }
     return HttpBackend;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -92,10 +93,10 @@ var HttpHeaders = (function () {
                 headers.split('\n').forEach(function (line) {
                     var /** @type {?} */ index = line.indexOf(':');
                     if (index > 0) {
-                        var /** @type {?} */ name = line.slice(0, index);
-                        var /** @type {?} */ key = name.toLowerCase();
+                        var /** @type {?} */ name_1 = line.slice(0, index);
+                        var /** @type {?} */ key = name_1.toLowerCase();
                         var /** @type {?} */ value = line.slice(index + 1).trim();
-                        _this.maybeSetNormalizedName(name, key);
+                        _this.maybeSetNormalizedName(name_1, key);
                         if (_this.headers.has(key)) {
                             ((_this.headers.get(key))).push(value);
                         }
@@ -292,6 +293,7 @@ var HttpHeaders = (function () {
     };
     return HttpHeaders;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -507,7 +509,7 @@ var HttpParams = (function () {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+            this.cloneFrom.keys().forEach(function (key) { /** @type {?} */ return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
             ((this.updates)).forEach(function (update) {
                 switch (update.op) {
                     case 'a':
@@ -541,6 +543,7 @@ var HttpParams = (function () {
     };
     return HttpParams;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -821,6 +824,7 @@ var HttpRequest = (function () {
     };
     return HttpRequest;
 }());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -832,13 +836,33 @@ var HttpRequest = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var HttpEventType = {};
-HttpEventType.Sent = 0;
-HttpEventType.UploadProgress = 1;
-HttpEventType.ResponseHeader = 2;
-HttpEventType.DownloadProgress = 3;
-HttpEventType.Response = 4;
-HttpEventType.User = 5;
+/** @enum {number} */
+var HttpEventType = {
+    /**
+     * The request was sent out over the wire.
+     */
+    Sent: 0,
+    /**
+     * An upload progress event was received.
+     */
+    UploadProgress: 1,
+    /**
+     * The response status code and headers were received.
+     */
+    ResponseHeader: 2,
+    /**
+     * A download progress event was received.
+     */
+    DownloadProgress: 3,
+    /**
+     * The full response including the body was received.
+     */
+    Response: 4,
+    /**
+     * A custom event from an interceptor or a backend.
+     */
+    User: 5,
+};
 HttpEventType[HttpEventType.Sent] = "Sent";
 HttpEventType[HttpEventType.UploadProgress] = "UploadProgress";
 HttpEventType[HttpEventType.ResponseHeader] = "ResponseHeader";
@@ -865,6 +889,7 @@ function HttpDownloadProgressEvent() { }
  * \@stable
  * @record
  */
+
 /**
  * An event indicating that the request was sent to the server. Useful
  * when a request may be retried multiple times, to distinguish between
@@ -893,6 +918,7 @@ function HttpUserEvent() { }
  * \@stable
  * @record
  */
+
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
@@ -933,7 +959,7 @@ var HttpResponseBase = (function () {
  * \@stable
  */
 var HttpHeaderResponse = (function (_super) {
-    tslib_1.__extends(HttpHeaderResponse, _super);
+    tslib.__extends(HttpHeaderResponse, _super);
     /**
      * Create a new `HttpHeaderResponse` with the given parameters.
      * @param {?=} init
@@ -973,7 +999,7 @@ var HttpHeaderResponse = (function (_super) {
  * \@stable
  */
 var HttpResponse = (function (_super) {
-    tslib_1.__extends(HttpResponse, _super);
+    tslib.__extends(HttpResponse, _super);
     /**
      * Construct a new `HttpResponse`.
      * @param {?=} init
@@ -1015,7 +1041,7 @@ var HttpResponse = (function (_super) {
  * \@stable
  */
 var HttpErrorResponse = (function (_super) {
-    tslib_1.__extends(HttpErrorResponse, _super);
+    tslib.__extends(HttpErrorResponse, _super);
     /**
      * @param {?} init
      */
@@ -1043,6 +1069,7 @@ var HttpErrorResponse = (function (_super) {
     }
     return HttpErrorResponse;
 }(HttpResponseBase));
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1344,6 +1371,7 @@ HttpClient.decorators = [
 HttpClient.ctorParameters = function () { return [
     { type: HttpHandler, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1416,6 +1444,7 @@ NoopInterceptor.decorators = [
 ];
 /** @nocollapse */
 NoopInterceptor.ctorParameters = function () { return []; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1644,6 +1673,7 @@ JsonpInterceptor.decorators = [
 JsonpInterceptor.ctorParameters = function () { return [
     { type: JsonpClientBackend, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -1947,6 +1977,7 @@ HttpXhrBackend.decorators = [
 HttpXhrBackend.ctorParameters = function () { return [
     { type: XhrFactory, },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2061,6 +2092,7 @@ HttpXsrfInterceptor.ctorParameters = function () { return [
     { type: HttpXsrfTokenExtractor, },
     { type: undefined, decorators: [{ type: _angular_core.Inject, args: [XSRF_HEADER_NAME,] },] },
 ]; };
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
