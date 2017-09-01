@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.5-fd701b0
+ * @license Angular v5.0.0-beta.5-56238fe
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.0.0-beta.5-fd701b0
+ * @license Angular v5.0.0-beta.5-56238fe
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2349,7 +2349,6 @@ var NgForOfContext = (function () {
  * ### Syntax
  *
  * - `<li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>`
- * - `<li template="ngFor let item of items; index as i; trackBy: trackByFn">...</li>`
  *
  * With `<ng-template>` element:
  *
@@ -2600,7 +2599,6 @@ function getTypeNameForDebugging(type) {
  *
  * Simple form:
  * - `<div *ngIf="condition">...</div>`
- * - `<div template="ngIf condition">...</div>`
  * - `<ng-template [ngIf]="condition"><div>...</div></ng-template>`
  *
  * Form with an else block:
@@ -6041,7 +6039,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.5-fd701b0');
+var VERSION = new _angular_core.Version('5.0.0-beta.5-56238fe');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
