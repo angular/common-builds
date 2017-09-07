@@ -26,6 +26,6 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string): void;
     forward(): void;
     back(): void;
-    subscribe(onNext: (value: any) => void, onThrow?: (error: any) => void, onReturn?: () => void): Object;
+    subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): Object;
     normalize(url: string): string;
 }

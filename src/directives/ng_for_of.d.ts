@@ -40,7 +40,7 @@ export declare class NgForOfContext<T> {
  * - `odd: boolean`: True when the item has an odd index in the iterable.
  *
  * ```
- * <li *ngFor="let user of userObservable | async as users; indexes as i; first as isFirst">
+ * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
  * ```
@@ -73,8 +73,7 @@ export declare class NgForOfContext<T> {
  *
  * ### Syntax
  *
- * - `<li *ngFor="let item of items; let i = index; trackBy: trackByFn">...</li>`
- * - `<li template="ngFor let item of items; let i = index; trackBy: trackByFn">...</li>`
+ * - `<li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>`
  *
  * With `<ng-template>` element:
  *
@@ -106,12 +105,4 @@ export declare class NgForOf<T> implements DoCheck, OnChanges {
     private _applyChanges(changes);
     private _perViewChange(view, record);
 }
-/**
- * @deprecated from v4.0.0 - Use NgForOf<any> instead.
- */
-export declare type NgFor = NgForOf<any>;
-/**
- * @deprecated from v4.0.0 - Use NgForOf instead.
- */
-export declare const NgFor: typeof NgForOf;
 export declare function getTypeNameForDebugging(type: any): string;
