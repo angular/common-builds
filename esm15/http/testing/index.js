@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
  * \@stable
  * @record
  */
-function RequestMatch() { }
+
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
@@ -450,5 +450,5 @@ HttpClientTestingModule.ctorParameters = () => [];
  * Generated bundle index. Do not edit.
  */
 
-export { HttpTestingController, RequestMatch, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
+export { HttpTestingController, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
 //# sourceMappingURL=index.js.map

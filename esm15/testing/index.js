@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -31,7 +31,7 @@ class SpyLocation {
         /**
          * \@internal
          */
-        this._platformStrategy = ((null));
+        this._platformStrategy = /** @type {?} */ ((null));
     }
     /**
      * @param {?} url
@@ -149,7 +149,7 @@ class SpyLocation {
      * @param {?} url
      * @return {?}
      */
-    normalize(url) { return ((null)); }
+    normalize(url) { return /** @type {?} */ ((null)); }
 }
 SpyLocation.decorators = [
     { type: Injectable },

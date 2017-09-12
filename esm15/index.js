@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -52,12 +52,11 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * \@experimental
  * @record
  */
-function LocationChangeEvent() { }
+
 /**
  * \@experimental
  * @record
  */
-function LocationChangeListener() { }
 
 /**
  * @fileoverview added by tsickle
@@ -130,7 +129,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * \@experimental
  * @record
  */
-function PopStateEvent() { }
+
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -173,6 +172,7 @@ class Location {
         });
     }
     /**
+     * Returns the normalized URL path.
      * @param {?=} includeHash
      * @return {?}
      */
@@ -585,10 +585,7 @@ PathLocationStrategy.ctorParameters = () => [
 /**
  * \@experimental
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ const CURRENCIES = {
+const CURRENCIES = {
     'AOA': [, 'Kz'],
     'ARS': [, '$'],
     'AUD': ['A$', '$'],
@@ -755,10 +752,7 @@ var localeEn = [
 /**
  * \@experimental i18n support is experimental.
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ const LOCALE_DATA = {};
+const LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
  * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
@@ -769,40 +763,12 @@ var localeEn = [
  * @return {?}
  */
 function registerLocaleData(data, extraData) {
-    const /** @type {?} */ localeId = data[LocaleDataIndex.LocaleId].toLowerCase().replace(/_/g, '-');
+    const /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
-        LOCALE_DATA[localeId][LocaleDataIndex.ExtraData] = extraData;
+        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
     }
 }
-/** @enum {number} */
-const LocaleDataIndex = {
-    LocaleId: 0,
-    DayPeriodsFormat: 1,
-    DayPeriodsStandalone: 2,
-    DaysFormat: 3,
-    DaysStandalone: 4,
-    MonthsFormat: 5,
-    MonthsStandalone: 6,
-    Eras: 7,
-    FirstDayOfWeek: 8,
-    WeekendRange: 9,
-    DateFormat: 10,
-    TimeFormat: 11,
-    DateTimeFormat: 12,
-    NumberSymbols: 13,
-    NumberFormats: 14,
-    CurrencySymbol: 15,
-    CurrencyName: 16,
-    PluralCase: 17,
-    ExtraData: 18,
-};
-/** @enum {number} */
-const ExtraLocaleDataIndex = {
-    ExtraDayPeriodFormats: 0,
-    ExtraDayPeriodStandalone: 1,
-    ExtraDayPeriodsRules: 2,
-};
 
 /**
  * @fileoverview added by tsickle
@@ -926,7 +892,7 @@ WeekDay[WeekDay.Saturday] = "Saturday";
  * @return {?}
  */
 function getLocaleId(locale) {
-    return findLocaleData(locale)[LocaleDataIndex.LocaleId];
+    return findLocaleData(locale)[0 /* LocaleId */];
 }
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
@@ -939,7 +905,7 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ amPmData = ([data[LocaleDataIndex.DayPeriodsFormat], data[LocaleDataIndex.DayPeriodsStandalone]]);
+    const /** @type {?} */ amPmData = /** @type {?} */ ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
     const /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
@@ -954,7 +920,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  */
 function getLocaleDayNames(locale, formStyle, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ daysData = ([data[LocaleDataIndex.DaysFormat], data[LocaleDataIndex.DaysStandalone]]);
+    const /** @type {?} */ daysData = /** @type {?} */ ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
     const /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
@@ -969,7 +935,7 @@ function getLocaleDayNames(locale, formStyle, width) {
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ monthsData = ([data[LocaleDataIndex.MonthsFormat], data[LocaleDataIndex.MonthsStandalone]]);
+    const /** @type {?} */ monthsData = /** @type {?} */ ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
     const /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
@@ -983,7 +949,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
  */
 function getLocaleEraNames(locale, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ erasData = (data[LocaleDataIndex.Eras]);
+    const /** @type {?} */ erasData = /** @type {?} */ (data[7 /* Eras */]);
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -996,7 +962,7 @@ function getLocaleEraNames(locale, width) {
  */
 function getLocaleFirstDayOfWeek(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.FirstDayOfWeek];
+    return data[8 /* FirstDayOfWeek */];
 }
 /**
  * Range of days in the week that represent the week-end for this locale, based on english days
@@ -1009,7 +975,7 @@ function getLocaleFirstDayOfWeek(locale) {
  */
 function getLocaleWeekEndRange(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.WeekendRange];
+    return data[9 /* WeekendRange */];
 }
 /**
  * Date format that depends on the locale.
@@ -1041,7 +1007,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.DateFormat][width];
+    return data[10 /* DateFormat */][width];
 }
 /**
  * Time format that depends on the locale.
@@ -1068,7 +1034,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.TimeFormat][width];
+    return data[11 /* TimeFormat */][width];
 }
 /**
  * Date-time format that depends on the locale.
@@ -1100,7 +1066,7 @@ function getLocaleTimeFormat(locale, width) {
  */
 function getLocaleDateTimeFormat(locale, width) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ dateTimeFormatData = (data[LocaleDataIndex.DateTimeFormat]);
+    const /** @type {?} */ dateTimeFormatData = /** @type {?} */ (data[12 /* DateTimeFormat */]);
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1114,13 +1080,13 @@ function getLocaleDateTimeFormat(locale, width) {
  */
 function getLocaleNumberSymbol(locale, symbol) {
     const /** @type {?} */ data = findLocaleData(locale);
-    const /** @type {?} */ res = data[LocaleDataIndex.NumberSymbols][symbol];
+    const /** @type {?} */ res = data[13 /* NumberSymbols */][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Group];
+            return data[13 /* NumberSymbols */][NumberSymbol.Group];
         }
     }
     return res;
@@ -1161,7 +1127,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  */
 function getLocaleNumberFormat(locale, type) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.NumberFormats][type];
+    return data[14 /* NumberFormats */][type];
 }
 /**
  * The symbol used to represent the currency for the main country using this locale (e.g. $ for
@@ -1174,7 +1140,7 @@ function getLocaleNumberFormat(locale, type) {
  */
 function getLocaleCurrencySymbol(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencySymbol] || null;
+    return data[15 /* CurrencySymbol */] || null;
 }
 /**
  * The name of the currency for the main country using this locale (e.g. USD for the locale
@@ -1187,7 +1153,7 @@ function getLocaleCurrencySymbol(locale) {
  */
 function getLocaleCurrencyName(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencyName] || null;
+    return data[16 /* CurrencyName */] || null;
 }
 /**
  * The locale plural function used by ICU expressions to determine the plural case to use.
@@ -1199,15 +1165,15 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocalePluralCase(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.PluralCase];
+    return data[17 /* PluralCase */];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[LocaleDataIndex.ExtraData]) {
-        throw new Error(`Missing extra locale data for the locale "${data[LocaleDataIndex.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+    if (!data[18 /* ExtraData */]) {
+        throw new Error(`Missing extra locale data for the locale "${data[0 /* LocaleId */]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
     }
 }
 /**
@@ -1230,7 +1196,7 @@ function checkFullData(data) {
 function getLocaleExtraDayPeriodRules(locale) {
     const /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    const /** @type {?} */ rules = data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodsRules] || [];
+    const /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map((rule) => {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1258,9 +1224,9 @@ function getLocaleExtraDayPeriodRules(locale) {
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
     const /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    const /** @type {?} */ dayPeriodsData = ([
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodFormats],
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodStandalone]
+    const /** @type {?} */ dayPeriodsData = /** @type {?} */ ([
+        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]);
     const /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
@@ -1442,7 +1408,7 @@ function getPluralCase(locale, nLike) {
     if (typeof nLike === 'string') {
         nLike = parseInt(/** @type {?} */ (nLike), 10);
     }
-    const /** @type {?} */ n = (nLike);
+    const /** @type {?} */ n = /** @type {?} */ (nLike);
     const /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
     const /** @type {?} */ i = Math.floor(Math.abs(n));
     const /** @type {?} */ v = nDecimal.length;
@@ -1810,19 +1776,11 @@ function getPluralCase(locale, nLike) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  * @param {?} cookieStr
  * @param {?} name
  * @return {?}
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ function parseCookieValue(cookieStr, name) {
+function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (const /** @type {?} */ cookie of cookieStr.split(';')) {
         const /** @type {?} */ eqIndex = cookie.indexOf('=');
@@ -1983,7 +1941,7 @@ class NgClass {
     _applyClasses(rawClassVal, isCleanup) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((rawClassVal)).forEach((klass) => this._toggleClass(klass, !isCleanup));
+                (/** @type {?} */ (rawClassVal)).forEach((klass) => this._toggleClass(klass, !isCleanup));
             }
             else {
                 Object.keys(rawClassVal).forEach(klass => {
@@ -2282,7 +2240,7 @@ class NgForOf {
     set ngForTrackBy(fn) {
         if (isDevMode() && fn != null && typeof fn !== 'function') {
             // TODO(vicb): use a log service once there is a public one available
-            if ((console) && (console.warn)) {
+            if (/** @type {?} */ (console) && /** @type {?} */ (console.warn)) {
                 console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
                     `See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.`);
             }
@@ -2317,7 +2275,7 @@ class NgForOf {
                 try {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
-                catch (e) {
+                catch (/** @type {?} */ e) {
                     throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
                 }
             }
@@ -2349,7 +2307,7 @@ class NgForOf {
                 this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                const /** @type {?} */ view = ((this._viewContainer.get(adjustedPreviousIndex)));
+                const /** @type {?} */ view = /** @type {?} */ ((this._viewContainer.get(adjustedPreviousIndex)));
                 this._viewContainer.move(view, currentIndex);
                 const /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
                 insertTuples.push(tuple);
@@ -2359,12 +2317,12 @@ class NgForOf {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
         for (let /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
-            const /** @type {?} */ viewRef = (this._viewContainer.get(i));
+            const /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(i));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
         changes.forEachIdentityChange((record) => {
-            const /** @type {?} */ viewRef = (this._viewContainer.get(record.currentIndex));
+            const /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(record.currentIndex));
             viewRef.context.$implicit = record.item;
         });
     }
@@ -3197,7 +3155,7 @@ class NgTemplateOutlet {
      */
     _updateExistingContext(ctx) {
         for (let /** @type {?} */ propName of Object.keys(ctx)) {
-            ((this._viewRef.context))[propName] = ((this.ngTemplateOutletContext))[propName];
+            (/** @type {?} */ (this._viewRef.context))[propName] = (/** @type {?} */ (this.ngTemplateOutletContext))[propName];
         }
     }
 }
@@ -3536,6 +3494,7 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                         }
                     }
                     else {
+                        // noon or midnight
                         const { hours, minutes } = rule;
                         if (hours === currentHours && minutes === currentMinutes) {
                             result = dayPeriods[index];
@@ -3906,6 +3865,120 @@ function invalidPipeArgumentError(type, value) {
  * found in the LICENSE file at https://angular.io/license
  */
 const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a date according to locale rules.
+ * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
+ * \@description
+ *
+ * Where:
+ * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+ * (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. The format can be predefined as
+ *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+ *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
+ *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
+ *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
+ *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+ * 9:03:01 AM GMT+01:00`)
+ *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`)
+ *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`)
+ *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`)
+ *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`)
+ *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`)
+ *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`)
+ *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`)
+ *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`)
+ *  - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
+ *  abbreviations, but for general use, use a time zone offset, for example,
+ *  `'+0430'` (4 hours, 30 minutes east of the Greenwich meridian)
+ *  If not specified, the local system timezone of the end-user's browser will be used.
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
+ *
+ *
+ *  | Field Type         | Format      | Description                                                   | Example Value                                              |
+ *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | MMMM        | Wide                                                          | September                                                  |
+ *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | LLLL        | Wide                                                          | September                                                  |
+ *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                    | dd          | Numeric: 2 digits + zero padded                               | 1                                                          |
+ *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *
+ *
+ * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+ * applied and the formatted text will have the same day, month and year of the expression.
+ *
+ * WARNINGS:
+ * - this pipe has only access to en-US locale data by default. If you want to localize the dates
+ *   in another language, you will have to import data for other locales.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ *   data.
+ * - Fields suffixed with * are only available in the extra dataset.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
+ *   data.
+ * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+ *   Instead users should treat the date as an immutable object and change the reference when the
+ *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+ *   which would be an expensive operation).
+ *
+ * ### Examples
+ *
+ * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+ * in the _local_ time and locale is 'en-US':
+ *
+ * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+ *
+ * \@stable
+ */
 class DatePipe {
     /**
      * @param {?} locale
@@ -4093,8 +4166,10 @@ const DATE_FORMATS$1 = {
     'Z': timeZoneGetter$1('short'),
     'z': timeZoneGetter$1('long'),
     'ww': datePartGetterFactory({}),
+    // Week of year, padded (00-53). Week 01 is the week with the
     // first Thursday of the year. not support ?
     'w': datePartGetterFactory({}),
+    // Week of year (0-53). Week 1 is the week with the first Thursday
     // of the year not support ?
     'G': datePartGetterFactory(nameCondition('era', 1)),
     'GG': datePartGetterFactory(nameCondition('era', 2)),
@@ -4217,7 +4292,7 @@ function dateFormatter(format, date, locale) {
             match = DATE_FORMATS_SPLIT$1.exec(_format);
             if (match) {
                 parts = parts.concat(match.slice(1));
-                _format = ((parts.pop()));
+                _format = /** @type {?} */ ((parts.pop()));
             }
             else {
                 parts.push(_format);
@@ -4576,7 +4651,8 @@ function parseNumberFormat(format, minusSign = '-') {
         [
             positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
             positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
-        ], /** @type {?} */ integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
+        ], /** @type {?} */
+    integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
     p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
     for (let /** @type {?} */ i = 0; i < fraction.length; i++) {
         const /** @type {?} */ ch = fraction.charAt(i);
@@ -4594,7 +4670,8 @@ function parseNumberFormat(format, minusSign = '-') {
     p.gSize = groups[1] ? groups[1].length : 0;
     p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
     if (negative) {
-        const /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */ pos = negative.indexOf(DIGIT_CHAR);
+        const /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */
+        pos = negative.indexOf(DIGIT_CHAR);
         p.negPre = negative.substr(0, pos).replace(/'/g, '');
         p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
     }
@@ -4631,6 +4708,7 @@ function parseNumber(numStr) {
     }
     // Count the number of leading zeros.
     for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+        /* empty */
     }
     if (i === (zeros = numStr.length)) {
         // The digits are all zero.
@@ -4777,12 +4855,15 @@ function formatNumber(pipe, locale, value, style, digits, currency = null, curre
             throw new Error(`${digits} is not a valid digit info for number pipes`);
         }
         if (parts[1] != null) {
+            // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
         if (parts[3] != null) {
+            // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
         if (parts[5] != null) {
+            // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
     }
@@ -5036,7 +5117,7 @@ class AsyncPipe {
         this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
-        this._strategy = ((null));
+        this._strategy = /** @type {?} */ ((null));
     }
     /**
      * @return {?}
@@ -5537,7 +5618,7 @@ class CurrencyPipe {
             return null;
         locale = locale || this._locale;
         if (typeof display === 'boolean') {
-            if ((console) && (console.warn)) {
+            if (/** @type {?} */ (console) && /** @type {?} */ (console.warn)) {
                 console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
             }
             display = display ? 'symbol' : 'code';
@@ -5762,10 +5843,7 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ const PLATFORM_BROWSER_ID = 'browser';
+const PLATFORM_BROWSER_ID = 'browser';
 const PLATFORM_SERVER_ID = 'server';
 const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 const PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -5825,7 +5903,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.6-112e777');
+const VERSION = new Version('5.0.0-beta.6-ca5aeba');
 
 /**
  * @fileoverview added by tsickle
@@ -5871,5 +5949,5 @@ const VERSION = new Version('5.0.0-beta.6-112e777');
  * Generated bundle index. Do not edit.
  */
 
-export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵd, LocaleDataIndex as ɵb, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
+export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵd, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
 //# sourceMappingURL=index.js.map

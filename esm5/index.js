@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -56,12 +56,11 @@ var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * \@experimental
  * @record
  */
-function LocationChangeEvent() { }
+
 /**
  * \@experimental
  * @record
  */
-function LocationChangeListener() { }
 
 /**
  * @fileoverview added by tsickle
@@ -137,7 +136,7 @@ var APP_BASE_HREF = new InjectionToken('appBaseHref');
  * \@experimental
  * @record
  */
-function PopStateEvent() { }
+
 /**
  * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
@@ -160,9 +159,6 @@ function PopStateEvent() { }
  * \@stable
  */
 var Location = (function () {
-    /**
-     * @param {?} platformStrategy
-     */
     function Location(platformStrategy) {
         var _this = this;
         /**
@@ -181,32 +177,68 @@ var Location = (function () {
         });
     }
     /**
+     * Returns the normalized URL path.
+     */
+    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+    // removed.
+    /**
+     * Returns the normalized URL path.
      * @param {?=} includeHash
      * @return {?}
      */
-    Location.prototype.path = function (includeHash) {
+    Location.prototype.path = /**
+     * Returns the normalized URL path.
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         return this.normalize(this._platformStrategy.path(includeHash));
     };
+    /**
+     * Normalizes the given path and compares to the current normalized path.
+     */
     /**
      * Normalizes the given path and compares to the current normalized path.
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.isCurrentPathEqualTo = function (path, query) {
+    Location.prototype.isCurrentPathEqualTo = /**
+     * Normalizes the given path and compares to the current normalized path.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    function (path, query) {
         if (query === void 0) { query = ''; }
         return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
     };
     /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes.
+     */
+    /**
+     * Given a string representing a URL, returns the normalized URL path without leading or
+     * trailing slashes.
      * @param {?} url
      * @return {?}
      */
-    Location.prototype.normalize = function (url) {
+    Location.prototype.normalize = /**
+     * Given a string representing a URL, returns the normalized URL path without leading or
+     * trailing slashes.
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
         return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
     };
+    /**
+     * Given a string representing a URL, returns the platform-specific external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+     * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+     * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     */
     /**
      * Given a string representing a URL, returns the platform-specific external URL path.
      * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
@@ -215,12 +247,25 @@ var Location = (function () {
      * @param {?} url
      * @return {?}
      */
-    Location.prototype.prepareExternalUrl = function (url) {
+    Location.prototype.prepareExternalUrl = /**
+     * Given a string representing a URL, returns the platform-specific external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+     * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+     * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
         if (url && url[0] !== '/') {
             url = '/' + url;
         }
         return this._platformStrategy.prepareExternalUrl(url);
     };
+    // TODO: rename this method to pushState
+    /**
+     * Changes the browsers URL to the normalized version of the given URL, and pushes a
+     * new item onto the platform's history.
+     */
     /**
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
@@ -228,10 +273,21 @@ var Location = (function () {
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.go = function (path, query) {
+    Location.prototype.go = /**
+     * Changes the browsers URL to the normalized version of the given URL, and pushes a
+     * new item onto the platform's history.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    function (path, query) {
         if (query === void 0) { query = ''; }
         this._platformStrategy.pushState(null, '', path, query);
     };
+    /**
+     * Changes the browsers URL to the normalized version of the given URL, and replaces
+     * the top item on the platform's history stack.
+     */
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
@@ -239,20 +295,44 @@ var Location = (function () {
      * @param {?=} query
      * @return {?}
      */
-    Location.prototype.replaceState = function (path, query) {
+    Location.prototype.replaceState = /**
+     * Changes the browsers URL to the normalized version of the given URL, and replaces
+     * the top item on the platform's history stack.
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    function (path, query) {
         if (query === void 0) { query = ''; }
         this._platformStrategy.replaceState(null, '', path, query);
     };
     /**
      * Navigates forward in the platform's history.
+     */
+    /**
+     * Navigates forward in the platform's history.
      * @return {?}
      */
-    Location.prototype.forward = function () { this._platformStrategy.forward(); };
+    Location.prototype.forward = /**
+     * Navigates forward in the platform's history.
+     * @return {?}
+     */
+    function () { this._platformStrategy.forward(); };
+    /**
+     * Navigates back in the platform's history.
+     */
     /**
      * Navigates back in the platform's history.
      * @return {?}
      */
-    Location.prototype.back = function () { this._platformStrategy.back(); };
+    Location.prototype.back = /**
+     * Navigates back in the platform's history.
+     * @return {?}
+     */
+    function () { this._platformStrategy.back(); };
+    /**
+     * Subscribe to the platform's `popState` events.
+     */
     /**
      * Subscribe to the platform's `popState` events.
      * @param {?} onNext
@@ -260,7 +340,14 @@ var Location = (function () {
      * @param {?=} onReturn
      * @return {?}
      */
-    Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
+    Location.prototype.subscribe = /**
+     * Subscribe to the platform's `popState` events.
+     * @param {?} onNext
+     * @param {?=} onThrow
+     * @param {?=} onReturn
+     * @return {?}
+     */
+    function (onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     /**
@@ -269,7 +356,13 @@ var Location = (function () {
      * @param {?} params
      * @return {?}
      */
-    Location.normalizeQueryParams = function (params) {
+    Location.normalizeQueryParams = /**
+     * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
+     * is.
+     * @param {?} params
+     * @return {?}
+     */
+    function (params) {
         return params && params[0] !== '?' ? '?' + params : params;
     };
     /**
@@ -278,7 +371,13 @@ var Location = (function () {
      * @param {?} end
      * @return {?}
      */
-    Location.joinWithSlash = function (start, end) {
+    Location.joinWithSlash = /**
+     * Given 2 parts of a url, join them with a slash if needed.
+     * @param {?} start
+     * @param {?} end
+     * @return {?}
+     */
+    function (start, end) {
         if (start.length == 0) {
             return end;
         }
@@ -307,21 +406,28 @@ var Location = (function () {
      * @param {?} url
      * @return {?}
      */
-    Location.stripTrailingSlash = function (url) {
+    Location.stripTrailingSlash = /**
+     * If url has a trailing slash, remove it, otherwise return url as is. This
+     * method looks for the first occurence of either #, ?, or the end of the
+     * line as `/` characters after any of these should not be replaced.
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
         var /** @type {?} */ match = url.match(/#|\?|$/);
         var /** @type {?} */ pathEndIdx = match && match.index || url.length;
         var /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
         return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
     };
+    Location.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    Location.ctorParameters = function () { return [
+        { type: LocationStrategy, },
+    ]; };
     return Location;
 }());
-Location.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-Location.ctorParameters = function () { return [
-    { type: LocationStrategy, },
-]; };
 /**
  * @param {?} baseHref
  * @param {?} url
@@ -368,10 +474,6 @@ function _stripIndexHtml(url) {
  */
 var HashLocationStrategy = (function (_super) {
     __extends(HashLocationStrategy, _super);
-    /**
-     * @param {?} _platformLocation
-     * @param {?=} _baseHref
-     */
     function HashLocationStrategy(_platformLocation, _baseHref) {
         var _this = _super.call(this) || this;
         _this._platformLocation = _platformLocation;
@@ -385,19 +487,30 @@ var HashLocationStrategy = (function (_super) {
      * @param {?} fn
      * @return {?}
      */
-    HashLocationStrategy.prototype.onPopState = function (fn) {
+    HashLocationStrategy.prototype.onPopState = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
     };
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    HashLocationStrategy.prototype.getBaseHref = /**
+     * @return {?}
+     */
+    function () { return this._baseHref; };
     /**
      * @param {?=} includeHash
      * @return {?}
      */
-    HashLocationStrategy.prototype.path = function (includeHash) {
+    HashLocationStrategy.prototype.path = /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         // the hash value is always prefixed with a `#`
         // and if it is empty then it will stay empty
@@ -410,7 +523,11 @@ var HashLocationStrategy = (function (_super) {
      * @param {?} internal
      * @return {?}
      */
-    HashLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+    HashLocationStrategy.prototype.prepareExternalUrl = /**
+     * @param {?} internal
+     * @return {?}
+     */
+    function (internal) {
         var /** @type {?} */ url = Location.joinWithSlash(this._baseHref, internal);
         return url.length > 0 ? ('#' + url) : url;
     };
@@ -421,7 +538,14 @@ var HashLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
+    HashLocationStrategy.prototype.pushState = /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} path
+     * @param {?} queryParams
+     * @return {?}
+     */
+    function (state, title, path, queryParams) {
         var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
@@ -435,7 +559,14 @@ var HashLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
+    HashLocationStrategy.prototype.replaceState = /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} path
+     * @param {?} queryParams
+     * @return {?}
+     */
+    function (state, title, path, queryParams) {
         var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
@@ -445,21 +576,27 @@ var HashLocationStrategy = (function (_super) {
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+    HashLocationStrategy.prototype.forward = /**
+     * @return {?}
+     */
+    function () { this._platformLocation.forward(); };
     /**
      * @return {?}
      */
-    HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    HashLocationStrategy.prototype.back = /**
+     * @return {?}
+     */
+    function () { this._platformLocation.back(); };
+    HashLocationStrategy.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    HashLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation, },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+    ]; };
     return HashLocationStrategy;
 }(LocationStrategy));
-HashLocationStrategy.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-HashLocationStrategy.ctorParameters = function () { return [
-    { type: PlatformLocation, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -500,10 +637,6 @@ HashLocationStrategy.ctorParameters = function () { return [
  */
 var PathLocationStrategy = (function (_super) {
     __extends(PathLocationStrategy, _super);
-    /**
-     * @param {?} _platformLocation
-     * @param {?=} href
-     */
     function PathLocationStrategy(_platformLocation, href) {
         var _this = _super.call(this) || this;
         _this._platformLocation = _platformLocation;
@@ -520,26 +653,41 @@ var PathLocationStrategy = (function (_super) {
      * @param {?} fn
      * @return {?}
      */
-    PathLocationStrategy.prototype.onPopState = function (fn) {
+    PathLocationStrategy.prototype.onPopState = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
     };
     /**
      * @return {?}
      */
-    PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    PathLocationStrategy.prototype.getBaseHref = /**
+     * @return {?}
+     */
+    function () { return this._baseHref; };
     /**
      * @param {?} internal
      * @return {?}
      */
-    PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+    PathLocationStrategy.prototype.prepareExternalUrl = /**
+     * @param {?} internal
+     * @return {?}
+     */
+    function (internal) {
         return Location.joinWithSlash(this._baseHref, internal);
     };
     /**
      * @param {?=} includeHash
      * @return {?}
      */
-    PathLocationStrategy.prototype.path = function (includeHash) {
+    PathLocationStrategy.prototype.path = /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         var /** @type {?} */ pathname = this._platformLocation.pathname +
             Location.normalizeQueryParams(this._platformLocation.search);
@@ -553,7 +701,14 @@ var PathLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+    PathLocationStrategy.prototype.pushState = /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    function (state, title, url, queryParams) {
         var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.pushState(state, title, externalUrl);
     };
@@ -564,28 +719,41 @@ var PathLocationStrategy = (function (_super) {
      * @param {?} queryParams
      * @return {?}
      */
-    PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+    PathLocationStrategy.prototype.replaceState = /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    function (state, title, url, queryParams) {
         var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.replaceState(state, title, externalUrl);
     };
     /**
      * @return {?}
      */
-    PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
+    PathLocationStrategy.prototype.forward = /**
+     * @return {?}
+     */
+    function () { this._platformLocation.forward(); };
     /**
      * @return {?}
      */
-    PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    PathLocationStrategy.prototype.back = /**
+     * @return {?}
+     */
+    function () { this._platformLocation.back(); };
+    PathLocationStrategy.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    PathLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation, },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+    ]; };
     return PathLocationStrategy;
 }(LocationStrategy));
-PathLocationStrategy.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-PathLocationStrategy.ctorParameters = function () { return [
-    { type: PlatformLocation, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -606,10 +774,7 @@ PathLocationStrategy.ctorParameters = function () { return [
 /**
  * \@experimental
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ var CURRENCIES = {
+var CURRENCIES = {
     'AOA': [, 'Kz'],
     'ARS': [, '$'],
     'AUD': ['A$', '$'],
@@ -776,10 +941,7 @@ var localeEn = [
 /**
  * \@experimental i18n support is experimental.
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ var LOCALE_DATA = {};
+var LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
  * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
@@ -790,40 +952,12 @@ var localeEn = [
  * @return {?}
  */
 function registerLocaleData(data, extraData) {
-    var /** @type {?} */ localeId = data[LocaleDataIndex.LocaleId].toLowerCase().replace(/_/g, '-');
+    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
-        LOCALE_DATA[localeId][LocaleDataIndex.ExtraData] = extraData;
+        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
     }
 }
-/** @enum {number} */
-var LocaleDataIndex = {
-    LocaleId: 0,
-    DayPeriodsFormat: 1,
-    DayPeriodsStandalone: 2,
-    DaysFormat: 3,
-    DaysStandalone: 4,
-    MonthsFormat: 5,
-    MonthsStandalone: 6,
-    Eras: 7,
-    FirstDayOfWeek: 8,
-    WeekendRange: 9,
-    DateFormat: 10,
-    TimeFormat: 11,
-    DateTimeFormat: 12,
-    NumberSymbols: 13,
-    NumberFormats: 14,
-    CurrencySymbol: 15,
-    CurrencyName: 16,
-    PluralCase: 17,
-    ExtraData: 18,
-};
-/** @enum {number} */
-var ExtraLocaleDataIndex = {
-    ExtraDayPeriodFormats: 0,
-    ExtraDayPeriodStandalone: 1,
-    ExtraDayPeriodsRules: 2,
-};
 
 /**
  * @fileoverview added by tsickle
@@ -947,7 +1081,7 @@ WeekDay[WeekDay.Saturday] = "Saturday";
  * @return {?}
  */
 function getLocaleId(locale) {
-    return findLocaleData(locale)[LocaleDataIndex.LocaleId];
+    return findLocaleData(locale)[0 /* LocaleId */];
 }
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
@@ -960,7 +1094,7 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ amPmData = ([data[LocaleDataIndex.DayPeriodsFormat], data[LocaleDataIndex.DayPeriodsStandalone]]);
+    var /** @type {?} */ amPmData = /** @type {?} */ ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
     var /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
@@ -975,7 +1109,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  */
 function getLocaleDayNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ daysData = ([data[LocaleDataIndex.DaysFormat], data[LocaleDataIndex.DaysStandalone]]);
+    var /** @type {?} */ daysData = /** @type {?} */ ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
     var /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
@@ -990,7 +1124,7 @@ function getLocaleDayNames(locale, formStyle, width) {
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ monthsData = ([data[LocaleDataIndex.MonthsFormat], data[LocaleDataIndex.MonthsStandalone]]);
+    var /** @type {?} */ monthsData = /** @type {?} */ ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
     var /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
@@ -1004,7 +1138,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
  */
 function getLocaleEraNames(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ erasData = (data[LocaleDataIndex.Eras]);
+    var /** @type {?} */ erasData = /** @type {?} */ (data[7 /* Eras */]);
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -1017,7 +1151,7 @@ function getLocaleEraNames(locale, width) {
  */
 function getLocaleFirstDayOfWeek(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.FirstDayOfWeek];
+    return data[8 /* FirstDayOfWeek */];
 }
 /**
  * Range of days in the week that represent the week-end for this locale, based on english days
@@ -1030,7 +1164,7 @@ function getLocaleFirstDayOfWeek(locale) {
  */
 function getLocaleWeekEndRange(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.WeekendRange];
+    return data[9 /* WeekendRange */];
 }
 /**
  * Date format that depends on the locale.
@@ -1062,7 +1196,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.DateFormat][width];
+    return data[10 /* DateFormat */][width];
 }
 /**
  * Time format that depends on the locale.
@@ -1089,7 +1223,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.TimeFormat][width];
+    return data[11 /* TimeFormat */][width];
 }
 /**
  * Date-time format that depends on the locale.
@@ -1121,7 +1255,7 @@ function getLocaleTimeFormat(locale, width) {
  */
 function getLocaleDateTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ dateTimeFormatData = (data[LocaleDataIndex.DateTimeFormat]);
+    var /** @type {?} */ dateTimeFormatData = /** @type {?} */ (data[12 /* DateTimeFormat */]);
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1135,13 +1269,13 @@ function getLocaleDateTimeFormat(locale, width) {
  */
 function getLocaleNumberSymbol(locale, symbol) {
     var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ res = data[LocaleDataIndex.NumberSymbols][symbol];
+    var /** @type {?} */ res = data[13 /* NumberSymbols */][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[LocaleDataIndex.NumberSymbols][NumberSymbol.Group];
+            return data[13 /* NumberSymbols */][NumberSymbol.Group];
         }
     }
     return res;
@@ -1182,7 +1316,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  */
 function getLocaleNumberFormat(locale, type) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.NumberFormats][type];
+    return data[14 /* NumberFormats */][type];
 }
 /**
  * The symbol used to represent the currency for the main country using this locale (e.g. $ for
@@ -1195,7 +1329,7 @@ function getLocaleNumberFormat(locale, type) {
  */
 function getLocaleCurrencySymbol(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencySymbol] || null;
+    return data[15 /* CurrencySymbol */] || null;
 }
 /**
  * The name of the currency for the main country using this locale (e.g. USD for the locale
@@ -1208,7 +1342,7 @@ function getLocaleCurrencySymbol(locale) {
  */
 function getLocaleCurrencyName(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.CurrencyName] || null;
+    return data[16 /* CurrencyName */] || null;
 }
 /**
  * The locale plural function used by ICU expressions to determine the plural case to use.
@@ -1220,15 +1354,15 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocalePluralCase(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[LocaleDataIndex.PluralCase];
+    return data[17 /* PluralCase */];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[LocaleDataIndex.ExtraData]) {
-        throw new Error("Missing extra locale data for the locale \"" + data[LocaleDataIndex.LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
+    if (!data[18 /* ExtraData */]) {
+        throw new Error("Missing extra locale data for the locale \"" + data[0 /* LocaleId */] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
 /**
@@ -1251,7 +1385,7 @@ function checkFullData(data) {
 function getLocaleExtraDayPeriodRules(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ rules = data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodsRules] || [];
+    var /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map(function (rule) {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1279,9 +1413,9 @@ function getLocaleExtraDayPeriodRules(locale) {
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ dayPeriodsData = ([
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodFormats],
-        data[LocaleDataIndex.ExtraData][ExtraLocaleDataIndex.ExtraDayPeriodStandalone]
+    var /** @type {?} */ dayPeriodsData = /** @type {?} */ ([
+        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]);
     var /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
@@ -1412,10 +1546,6 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  */
 var NgLocaleLocalization = (function (_super) {
     __extends(NgLocaleLocalization, _super);
-    /**
-     * @param {?} locale
-     * @param {?=} useV4Plurals
-     */
     function NgLocaleLocalization(locale, useV4Plurals) {
         var _this = _super.call(this) || this;
         _this.locale = locale;
@@ -1427,7 +1557,12 @@ var NgLocaleLocalization = (function (_super) {
      * @param {?=} locale
      * @return {?}
      */
-    NgLocaleLocalization.prototype.getPluralCategory = function (value, locale) {
+    NgLocaleLocalization.prototype.getPluralCategory = /**
+     * @param {?} value
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, locale) {
         var /** @type {?} */ plural = this.useV4Plurals ? getPluralCase(locale || this.locale, value) :
             getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
@@ -1445,16 +1580,16 @@ var NgLocaleLocalization = (function (_super) {
                 return 'other';
         }
     };
+    NgLocaleLocalization.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    NgLocaleLocalization.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [USE_V4_PLURALS,] },] },
+    ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
-NgLocaleLocalization.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-NgLocaleLocalization.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [USE_V4_PLURALS,] },] },
-]; };
 /**
  * Returns the plural case based on the locale
  *
@@ -1469,7 +1604,7 @@ function getPluralCase(locale, nLike) {
     if (typeof nLike === 'string') {
         nLike = parseInt(/** @type {?} */ (nLike), 10);
     }
-    var /** @type {?} */ n = (nLike);
+    var /** @type {?} */ n = /** @type {?} */ (nLike);
     var /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
     var /** @type {?} */ i = Math.floor(Math.abs(n));
     var /** @type {?} */ v = nDecimal.length;
@@ -1837,19 +1972,11 @@ function getPluralCase(locale, nLike) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  * @param {?} cookieStr
  * @param {?} name
  * @return {?}
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ function parseCookieValue(cookieStr, name) {
+function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
         var cookie = _a[_i];
@@ -1902,12 +2029,6 @@ function getPluralCase(locale, nLike) {
  * \@stable
  */
 var NgClass = (function () {
-    /**
-     * @param {?} _iterableDiffers
-     * @param {?} _keyValueDiffers
-     * @param {?} _ngEl
-     * @param {?} _renderer
-     */
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
@@ -1916,11 +2037,11 @@ var NgClass = (function () {
         this._initialClasses = [];
     }
     Object.defineProperty(NgClass.prototype, "klass", {
-        /**
+        set: /**
          * @param {?} v
          * @return {?}
          */
-        set: function (v) {
+        function (v) {
             this._applyInitialClasses(true);
             this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
             this._applyInitialClasses(false);
@@ -1930,11 +2051,11 @@ var NgClass = (function () {
         configurable: true
     });
     Object.defineProperty(NgClass.prototype, "ngClass", {
-        /**
+        set: /**
          * @param {?} v
          * @return {?}
          */
-        set: function (v) {
+        function (v) {
             this._cleanupClasses(this._rawClass);
             this._iterableDiffer = null;
             this._keyValueDiffer = null;
@@ -1954,7 +2075,10 @@ var NgClass = (function () {
     /**
      * @return {?}
      */
-    NgClass.prototype.ngDoCheck = function () {
+    NgClass.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () {
         if (this._iterableDiffer) {
             var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
             if (iterableChanges) {
@@ -1972,7 +2096,11 @@ var NgClass = (function () {
      * @param {?} rawClassVal
      * @return {?}
      */
-    NgClass.prototype._cleanupClasses = function (rawClassVal) {
+    NgClass.prototype._cleanupClasses = /**
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    function (rawClassVal) {
         this._applyClasses(rawClassVal, true);
         this._applyInitialClasses(false);
     };
@@ -1980,7 +2108,11 @@ var NgClass = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgClass.prototype._applyKeyValueChanges = function (changes) {
+    NgClass.prototype._applyKeyValueChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var _this = this;
         changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
         changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
@@ -1994,7 +2126,11 @@ var NgClass = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgClass.prototype._applyIterableChanges = function (changes) {
+    NgClass.prototype._applyIterableChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var _this = this;
         changes.forEachAddedItem(function (record) {
             if (typeof record.item === 'string') {
@@ -2010,7 +2146,11 @@ var NgClass = (function () {
      * @param {?} isCleanup
      * @return {?}
      */
-    NgClass.prototype._applyInitialClasses = function (isCleanup) {
+    NgClass.prototype._applyInitialClasses = /**
+     * @param {?} isCleanup
+     * @return {?}
+     */
+    function (isCleanup) {
         var _this = this;
         this._initialClasses.forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
     };
@@ -2019,11 +2159,16 @@ var NgClass = (function () {
      * @param {?} isCleanup
      * @return {?}
      */
-    NgClass.prototype._applyClasses = function (rawClassVal, isCleanup) {
+    NgClass.prototype._applyClasses = /**
+     * @param {?} rawClassVal
+     * @param {?} isCleanup
+     * @return {?}
+     */
+    function (rawClassVal, isCleanup) {
         var _this = this;
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
+                (/** @type {?} */ (rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
             }
             else {
                 Object.keys(rawClassVal).forEach(function (klass) {
@@ -2038,7 +2183,12 @@ var NgClass = (function () {
      * @param {?} enabled
      * @return {?}
      */
-    NgClass.prototype._toggleClass = function (klass, enabled) {
+    NgClass.prototype._toggleClass = /**
+     * @param {?} klass
+     * @param {?} enabled
+     * @return {?}
+     */
+    function (klass, enabled) {
         var _this = this;
         klass = klass.trim();
         if (klass) {
@@ -2052,22 +2202,22 @@ var NgClass = (function () {
             });
         }
     };
+    NgClass.decorators = [
+        { type: Directive, args: [{ selector: '[ngClass]' },] },
+    ];
+    /** @nocollapse */
+    NgClass.ctorParameters = function () { return [
+        { type: IterableDiffers, },
+        { type: KeyValueDiffers, },
+        { type: ElementRef, },
+        { type: Renderer2, },
+    ]; };
+    NgClass.propDecorators = {
+        "klass": [{ type: Input, args: ['class',] },],
+        "ngClass": [{ type: Input },],
+    };
     return NgClass;
 }());
-NgClass.decorators = [
-    { type: Directive, args: [{ selector: '[ngClass]' },] },
-];
-/** @nocollapse */
-NgClass.ctorParameters = function () { return [
-    { type: IterableDiffers, },
-    { type: KeyValueDiffers, },
-    { type: ElementRef, },
-    { type: Renderer2, },
-]; };
-NgClass.propDecorators = {
-    "klass": [{ type: Input, args: ['class',] },],
-    "ngClass": [{ type: Input },],
-};
 
 /**
  * @fileoverview added by tsickle
@@ -2135,9 +2285,6 @@ NgClass.propDecorators = {
  * \@experimental
  */
 var NgComponentOutlet = (function () {
-    /**
-     * @param {?} _viewContainerRef
-     */
     function NgComponentOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
@@ -2147,7 +2294,11 @@ var NgComponentOutlet = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgComponentOutlet.prototype.ngOnChanges = function (changes) {
+    NgComponentOutlet.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         this._viewContainerRef.clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
@@ -2172,25 +2323,28 @@ var NgComponentOutlet = (function () {
     /**
      * @return {?}
      */
-    NgComponentOutlet.prototype.ngOnDestroy = function () {
+    NgComponentOutlet.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         if (this._moduleRef)
             this._moduleRef.destroy();
     };
+    NgComponentOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
+    ];
+    /** @nocollapse */
+    NgComponentOutlet.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+    ]; };
+    NgComponentOutlet.propDecorators = {
+        "ngComponentOutlet": [{ type: Input },],
+        "ngComponentOutletInjector": [{ type: Input },],
+        "ngComponentOutletContent": [{ type: Input },],
+        "ngComponentOutletNgModuleFactory": [{ type: Input },],
+    };
     return NgComponentOutlet;
 }());
-NgComponentOutlet.decorators = [
-    { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] },
-];
-/** @nocollapse */
-NgComponentOutlet.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-]; };
-NgComponentOutlet.propDecorators = {
-    "ngComponentOutlet": [{ type: Input },],
-    "ngComponentOutletInjector": [{ type: Input },],
-    "ngComponentOutletContent": [{ type: Input },],
-    "ngComponentOutletNgModuleFactory": [{ type: Input },],
-};
 
 /**
  * @fileoverview added by tsickle
@@ -2207,12 +2361,6 @@ NgComponentOutlet.propDecorators = {
  * \@stable
  */
 var NgForOfContext = (function () {
-    /**
-     * @param {?} $implicit
-     * @param {?} ngForOf
-     * @param {?} index
-     * @param {?} count
-     */
     function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
@@ -2220,34 +2368,34 @@ var NgForOfContext = (function () {
         this.count = count;
     }
     Object.defineProperty(NgForOfContext.prototype, "first", {
-        /**
+        get: /**
          * @return {?}
          */
-        get: function () { return this.index === 0; },
+        function () { return this.index === 0; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "last", {
-        /**
+        get: /**
          * @return {?}
          */
-        get: function () { return this.index === this.count - 1; },
+        function () { return this.index === this.count - 1; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "even", {
-        /**
+        get: /**
          * @return {?}
          */
-        get: function () { return this.index % 2 === 0; },
+        function () { return this.index % 2 === 0; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "odd", {
-        /**
+        get: /**
          * @return {?}
          */
-        get: function () { return !this.even; },
+        function () { return !this.even; },
         enumerable: true,
         configurable: true
     });
@@ -2324,11 +2472,6 @@ var NgForOfContext = (function () {
  * \@stable
  */
 var NgForOf = (function () {
-    /**
-     * @param {?} _viewContainer
-     * @param {?} _template
-     * @param {?} _differs
-     */
     function NgForOf(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
@@ -2336,18 +2479,18 @@ var NgForOf = (function () {
         this._differ = null;
     }
     Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
-        /**
+        get: /**
          * @return {?}
          */
-        get: function () { return this._trackByFn; },
-        /**
+        function () { return this._trackByFn; },
+        set: /**
          * @param {?} fn
          * @return {?}
          */
-        set: function (fn) {
+        function (fn) {
             if (isDevMode() && fn != null && typeof fn !== 'function') {
                 // TODO(vicb): use a log service once there is a public one available
-                if ((console) && (console.warn)) {
+                if (/** @type {?} */ (console) && /** @type {?} */ (console.warn)) {
                     console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
                         "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
                 }
@@ -2358,11 +2501,11 @@ var NgForOf = (function () {
         configurable: true
     });
     Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
-        /**
+        set: /**
          * @param {?} value
          * @return {?}
          */
-        set: function (value) {
+        function (value) {
             // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
             // The current type is too restrictive; a template that just uses index, for example,
             // should be acceptable.
@@ -2377,7 +2520,11 @@ var NgForOf = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgForOf.prototype.ngOnChanges = function (changes) {
+    NgForOf.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         if ('ngForOf' in changes) {
             // React on ngForOf changes only once all inputs have been initialized
             var /** @type {?} */ value = changes['ngForOf'].currentValue;
@@ -2385,7 +2532,7 @@ var NgForOf = (function () {
                 try {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
-                catch (e) {
+                catch (/** @type {?} */ e) {
                     throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                 }
             }
@@ -2394,7 +2541,10 @@ var NgForOf = (function () {
     /**
      * @return {?}
      */
-    NgForOf.prototype.ngDoCheck = function () {
+    NgForOf.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () {
         if (this._differ) {
             var /** @type {?} */ changes = this._differ.diff(this.ngForOf);
             if (changes)
@@ -2405,7 +2555,11 @@ var NgForOf = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgForOf.prototype._applyChanges = function (changes) {
+    NgForOf.prototype._applyChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var _this = this;
         var /** @type {?} */ insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
@@ -2418,7 +2572,7 @@ var NgForOf = (function () {
                 _this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                var /** @type {?} */ view = ((_this._viewContainer.get(adjustedPreviousIndex)));
+                var /** @type {?} */ view = /** @type {?} */ ((_this._viewContainer.get(adjustedPreviousIndex)));
                 _this._viewContainer.move(view, currentIndex);
                 var /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
                 insertTuples.push(tuple);
@@ -2428,12 +2582,12 @@ var NgForOf = (function () {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
         for (var /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
-            var /** @type {?} */ viewRef = (this._viewContainer.get(i));
+            var /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(i));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
         changes.forEachIdentityChange(function (record) {
-            var /** @type {?} */ viewRef = (_this._viewContainer.get(record.currentIndex));
+            var /** @type {?} */ viewRef = /** @type {?} */ (_this._viewContainer.get(record.currentIndex));
             viewRef.context.$implicit = record.item;
         });
     };
@@ -2442,30 +2596,31 @@ var NgForOf = (function () {
      * @param {?} record
      * @return {?}
      */
-    NgForOf.prototype._perViewChange = function (view, record) {
+    NgForOf.prototype._perViewChange = /**
+     * @param {?} view
+     * @param {?} record
+     * @return {?}
+     */
+    function (view, record) {
         view.context.$implicit = record.item;
+    };
+    NgForOf.decorators = [
+        { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
+    ];
+    /** @nocollapse */
+    NgForOf.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+        { type: IterableDiffers, },
+    ]; };
+    NgForOf.propDecorators = {
+        "ngForOf": [{ type: Input },],
+        "ngForTrackBy": [{ type: Input },],
+        "ngForTemplate": [{ type: Input },],
     };
     return NgForOf;
 }());
-NgForOf.decorators = [
-    { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
-];
-/** @nocollapse */
-NgForOf.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: IterableDiffers, },
-]; };
-NgForOf.propDecorators = {
-    "ngForOf": [{ type: Input },],
-    "ngForTrackBy": [{ type: Input },],
-    "ngForTemplate": [{ type: Input },],
-};
 var RecordViewTuple = (function () {
-    /**
-     * @param {?} record
-     * @param {?} view
-     */
     function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
@@ -2581,10 +2736,6 @@ function getTypeNameForDebugging(type) {
  * \@stable
  */
 var NgIf = (function () {
-    /**
-     * @param {?} _viewContainer
-     * @param {?} templateRef
-     */
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -2595,11 +2746,11 @@ var NgIf = (function () {
         this._thenTemplateRef = templateRef;
     }
     Object.defineProperty(NgIf.prototype, "ngIf", {
-        /**
+        set: /**
          * @param {?} condition
          * @return {?}
          */
-        set: function (condition) {
+        function (condition) {
             this._context.$implicit = this._context.ngIf = condition;
             this._updateView();
         },
@@ -2607,11 +2758,11 @@ var NgIf = (function () {
         configurable: true
     });
     Object.defineProperty(NgIf.prototype, "ngIfThen", {
-        /**
+        set: /**
          * @param {?} templateRef
          * @return {?}
          */
-        set: function (templateRef) {
+        function (templateRef) {
             this._thenTemplateRef = templateRef;
             this._thenViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2620,11 +2771,11 @@ var NgIf = (function () {
         configurable: true
     });
     Object.defineProperty(NgIf.prototype, "ngIfElse", {
-        /**
+        set: /**
          * @param {?} templateRef
          * @return {?}
          */
-        set: function (templateRef) {
+        function (templateRef) {
             this._elseTemplateRef = templateRef;
             this._elseViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2635,7 +2786,10 @@ var NgIf = (function () {
     /**
      * @return {?}
      */
-    NgIf.prototype._updateView = function () {
+    NgIf.prototype._updateView = /**
+     * @return {?}
+     */
+    function () {
         if (this._context.$implicit) {
             if (!this._thenViewRef) {
                 this._viewContainer.clear();
@@ -2657,21 +2811,21 @@ var NgIf = (function () {
             }
         }
     };
+    NgIf.decorators = [
+        { type: Directive, args: [{ selector: '[ngIf]' },] },
+    ];
+    /** @nocollapse */
+    NgIf.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+    ]; };
+    NgIf.propDecorators = {
+        "ngIf": [{ type: Input },],
+        "ngIfThen": [{ type: Input },],
+        "ngIfElse": [{ type: Input },],
+    };
     return NgIf;
 }());
-NgIf.decorators = [
-    { type: Directive, args: [{ selector: '[ngIf]' },] },
-];
-/** @nocollapse */
-NgIf.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-]; };
-NgIf.propDecorators = {
-    "ngIf": [{ type: Input },],
-    "ngIfThen": [{ type: Input },],
-    "ngIfElse": [{ type: Input },],
-};
 /**
  * \@stable
  */
@@ -2695,10 +2849,6 @@ var NgIfContext = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 var SwitchView = (function () {
-    /**
-     * @param {?} _viewContainerRef
-     * @param {?} _templateRef
-     */
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
@@ -2707,14 +2857,20 @@ var SwitchView = (function () {
     /**
      * @return {?}
      */
-    SwitchView.prototype.create = function () {
+    SwitchView.prototype.create = /**
+     * @return {?}
+     */
+    function () {
         this._created = true;
         this._viewContainerRef.createEmbeddedView(this._templateRef);
     };
     /**
      * @return {?}
      */
-    SwitchView.prototype.destroy = function () {
+    SwitchView.prototype.destroy = /**
+     * @return {?}
+     */
+    function () {
         this._created = false;
         this._viewContainerRef.clear();
     };
@@ -2722,7 +2878,11 @@ var SwitchView = (function () {
      * @param {?} created
      * @return {?}
      */
-    SwitchView.prototype.enforceState = function (created) {
+    SwitchView.prototype.enforceState = /**
+     * @param {?} created
+     * @return {?}
+     */
+    function (created) {
         if (created && !this._created) {
             this.create();
         }
@@ -2781,11 +2941,11 @@ var NgSwitch = (function () {
         this._lastCasesMatched = false;
     }
     Object.defineProperty(NgSwitch.prototype, "ngSwitch", {
-        /**
+        set: /**
          * @param {?} newValue
          * @return {?}
          */
-        set: function (newValue) {
+        function (newValue) {
             this._ngSwitch = newValue;
             if (this._caseCount === 0) {
                 this._updateDefaultCases(true);
@@ -2794,28 +2954,45 @@ var NgSwitch = (function () {
         enumerable: true,
         configurable: true
     });
+    /** @internal */
     /**
      * \@internal
      * @return {?}
      */
-    NgSwitch.prototype._addCase = function () { return this._caseCount++; };
+    NgSwitch.prototype._addCase = /**
+     * \@internal
+     * @return {?}
+     */
+    function () { return this._caseCount++; };
+    /** @internal */
     /**
      * \@internal
      * @param {?} view
      * @return {?}
      */
-    NgSwitch.prototype._addDefault = function (view) {
+    NgSwitch.prototype._addDefault = /**
+     * \@internal
+     * @param {?} view
+     * @return {?}
+     */
+    function (view) {
         if (!this._defaultViews) {
             this._defaultViews = [];
         }
         this._defaultViews.push(view);
     };
+    /** @internal */
     /**
      * \@internal
      * @param {?} value
      * @return {?}
      */
-    NgSwitch.prototype._matchCase = function (value) {
+    NgSwitch.prototype._matchCase = /**
+     * \@internal
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         var /** @type {?} */ matched = value == this._ngSwitch;
         this._lastCasesMatched = this._lastCasesMatched || matched;
         this._lastCaseCheckIndex++;
@@ -2830,7 +3007,11 @@ var NgSwitch = (function () {
      * @param {?} useDefault
      * @return {?}
      */
-    NgSwitch.prototype._updateDefaultCases = function (useDefault) {
+    NgSwitch.prototype._updateDefaultCases = /**
+     * @param {?} useDefault
+     * @return {?}
+     */
+    function (useDefault) {
         if (this._defaultViews && useDefault !== this._defaultUsed) {
             this._defaultUsed = useDefault;
             for (var /** @type {?} */ i = 0; i < this._defaultViews.length; i++) {
@@ -2839,16 +3020,16 @@ var NgSwitch = (function () {
             }
         }
     };
+    NgSwitch.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitch]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitch.ctorParameters = function () { return []; };
+    NgSwitch.propDecorators = {
+        "ngSwitch": [{ type: Input },],
+    };
     return NgSwitch;
 }());
-NgSwitch.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitch]' },] },
-];
-/** @nocollapse */
-NgSwitch.ctorParameters = function () { return []; };
-NgSwitch.propDecorators = {
-    "ngSwitch": [{ type: Input },],
-};
 /**
  * \@ngModule CommonModule
  *
@@ -2874,11 +3055,6 @@ NgSwitch.propDecorators = {
  * \@stable
  */
 var NgSwitchCase = (function () {
-    /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
-     */
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -2887,21 +3063,24 @@ var NgSwitchCase = (function () {
     /**
      * @return {?}
      */
-    NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
+    NgSwitchCase.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
+    NgSwitchCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitchCase.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+        { type: NgSwitch, decorators: [{ type: Host },] },
+    ]; };
+    NgSwitchCase.propDecorators = {
+        "ngSwitchCase": [{ type: Input },],
+    };
     return NgSwitchCase;
 }());
-NgSwitchCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
-];
-/** @nocollapse */
-NgSwitchCase.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: NgSwitch, decorators: [{ type: Host },] },
-]; };
-NgSwitchCase.propDecorators = {
-    "ngSwitchCase": [{ type: Input },],
-};
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
@@ -2926,25 +3105,20 @@ NgSwitchCase.propDecorators = {
  * \@stable
  */
 var NgSwitchDefault = (function () {
-    /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
-     */
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
+    NgSwitchDefault.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
+    ];
+    /** @nocollapse */
+    NgSwitchDefault.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+        { type: NgSwitch, decorators: [{ type: Host },] },
+    ]; };
     return NgSwitchDefault;
 }());
-NgSwitchDefault.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
-];
-/** @nocollapse */
-NgSwitchDefault.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: NgSwitch, decorators: [{ type: Host },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -2989,19 +3163,16 @@ NgSwitchDefault.ctorParameters = function () { return [
  * \@experimental
  */
 var NgPlural = (function () {
-    /**
-     * @param {?} _localization
-     */
     function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
     }
     Object.defineProperty(NgPlural.prototype, "ngPlural", {
-        /**
+        set: /**
          * @param {?} value
          * @return {?}
          */
-        set: function (value) {
+        function (value) {
             this._switchValue = value;
             this._updateView();
         },
@@ -3013,11 +3184,19 @@ var NgPlural = (function () {
      * @param {?} switchView
      * @return {?}
      */
-    NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
+    NgPlural.prototype.addCase = /**
+     * @param {?} value
+     * @param {?} switchView
+     * @return {?}
+     */
+    function (value, switchView) { this._caseViews[value] = switchView; };
     /**
      * @return {?}
      */
-    NgPlural.prototype._updateView = function () {
+    NgPlural.prototype._updateView = /**
+     * @return {?}
+     */
+    function () {
         this._clearViews();
         var /** @type {?} */ cases = Object.keys(this._caseViews);
         var /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
@@ -3026,7 +3205,10 @@ var NgPlural = (function () {
     /**
      * @return {?}
      */
-    NgPlural.prototype._clearViews = function () {
+    NgPlural.prototype._clearViews = /**
+     * @return {?}
+     */
+    function () {
         if (this._activeView)
             this._activeView.destroy();
     };
@@ -3034,24 +3216,28 @@ var NgPlural = (function () {
      * @param {?} view
      * @return {?}
      */
-    NgPlural.prototype._activateView = function (view) {
+    NgPlural.prototype._activateView = /**
+     * @param {?} view
+     * @return {?}
+     */
+    function (view) {
         if (view) {
             this._activeView = view;
             this._activeView.create();
         }
     };
+    NgPlural.decorators = [
+        { type: Directive, args: [{ selector: '[ngPlural]' },] },
+    ];
+    /** @nocollapse */
+    NgPlural.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
+    NgPlural.propDecorators = {
+        "ngPlural": [{ type: Input },],
+    };
     return NgPlural;
 }());
-NgPlural.decorators = [
-    { type: Directive, args: [{ selector: '[ngPlural]' },] },
-];
-/** @nocollapse */
-NgPlural.ctorParameters = function () { return [
-    { type: NgLocalization, },
-]; };
-NgPlural.propDecorators = {
-    "ngPlural": [{ type: Input },],
-};
 /**
  * \@ngModule CommonModule
  *
@@ -3071,29 +3257,23 @@ NgPlural.propDecorators = {
  * \@experimental
  */
 var NgPluralCase = (function () {
-    /**
-     * @param {?} value
-     * @param {?} template
-     * @param {?} viewContainer
-     * @param {?} ngPlural
-     */
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
         var /** @type {?} */ isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
+    NgPluralCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
+        { type: TemplateRef, },
+        { type: ViewContainerRef, },
+        { type: NgPlural, decorators: [{ type: Host },] },
+    ]; };
     return NgPluralCase;
 }());
-NgPluralCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
-];
-/** @nocollapse */
-NgPluralCase.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-    { type: NgPlural, decorators: [{ type: Host },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -3129,22 +3309,17 @@ NgPluralCase.ctorParameters = function () { return [
  * \@stable
  */
 var NgStyle = (function () {
-    /**
-     * @param {?} _differs
-     * @param {?} _ngEl
-     * @param {?} _renderer
-     */
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
         this._renderer = _renderer;
     }
     Object.defineProperty(NgStyle.prototype, "ngStyle", {
-        /**
+        set: /**
          * @param {?} v
          * @return {?}
          */
-        set: function (v) {
+        function (v) {
             this._ngStyle = v;
             if (!this._differ && v) {
                 this._differ = this._differs.find(v).create();
@@ -3156,7 +3331,10 @@ var NgStyle = (function () {
     /**
      * @return {?}
      */
-    NgStyle.prototype.ngDoCheck = function () {
+    NgStyle.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () {
         if (this._differ) {
             var /** @type {?} */ changes = this._differ.diff(this._ngStyle);
             if (changes) {
@@ -3168,7 +3346,11 @@ var NgStyle = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgStyle.prototype._applyChanges = function (changes) {
+    NgStyle.prototype._applyChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var _this = this;
         changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
         changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
@@ -3179,25 +3361,30 @@ var NgStyle = (function () {
      * @param {?} value
      * @return {?}
      */
-    NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+    NgStyle.prototype._setStyle = /**
+     * @param {?} nameAndUnit
+     * @param {?} value
+     * @return {?}
+     */
+    function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
         this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
+    NgStyle.decorators = [
+        { type: Directive, args: [{ selector: '[ngStyle]' },] },
+    ];
+    /** @nocollapse */
+    NgStyle.ctorParameters = function () { return [
+        { type: KeyValueDiffers, },
+        { type: ElementRef, },
+        { type: Renderer2, },
+    ]; };
+    NgStyle.propDecorators = {
+        "ngStyle": [{ type: Input },],
+    };
     return NgStyle;
 }());
-NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]' },] },
-];
-/** @nocollapse */
-NgStyle.ctorParameters = function () { return [
-    { type: KeyValueDiffers, },
-    { type: ElementRef, },
-    { type: Renderer2, },
-]; };
-NgStyle.propDecorators = {
-    "ngStyle": [{ type: Input },],
-};
 
 /**
  * @fileoverview added by tsickle
@@ -3235,9 +3422,6 @@ NgStyle.propDecorators = {
  * \@stable
  */
 var NgTemplateOutlet = (function () {
-    /**
-     * @param {?} _viewContainerRef
-     */
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
@@ -3245,7 +3429,11 @@ var NgTemplateOutlet = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
+    NgTemplateOutlet.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var /** @type {?} */ recreateView = this._shouldRecreateView(changes);
         if (recreateView) {
             if (this._viewRef) {
@@ -3273,7 +3461,19 @@ var NgTemplateOutlet = (function () {
      * @param {?} changes
      * @return {?}
      */
-    NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
+    NgTemplateOutlet.prototype._shouldRecreateView = /**
+     * We need to re-create existing embedded view if:
+     * - templateRef has changed
+     * - context has changes
+     *
+     * We mark context object as changed when the corresponding object
+     * shape changes (new properties are added or existing properties are removed).
+     * In other words we consider context with the same properties as "the same" even
+     * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         var /** @type {?} */ ctxChange = changes['ngTemplateOutletContext'];
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     };
@@ -3281,7 +3481,11 @@ var NgTemplateOutlet = (function () {
      * @param {?} ctxChange
      * @return {?}
      */
-    NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
+    NgTemplateOutlet.prototype._hasContextShapeChanged = /**
+     * @param {?} ctxChange
+     * @return {?}
+     */
+    function (ctxChange) {
         var /** @type {?} */ prevCtxKeys = Object.keys(ctxChange.previousValue || {});
         var /** @type {?} */ currCtxKeys = Object.keys(ctxChange.currentValue || {});
         if (prevCtxKeys.length === currCtxKeys.length) {
@@ -3301,25 +3505,29 @@ var NgTemplateOutlet = (function () {
      * @param {?} ctx
      * @return {?}
      */
-    NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
+    NgTemplateOutlet.prototype._updateExistingContext = /**
+     * @param {?} ctx
+     * @return {?}
+     */
+    function (ctx) {
         for (var _i = 0, _a = Object.keys(ctx); _i < _a.length; _i++) {
             var propName = _a[_i];
-            ((this._viewRef.context))[propName] = ((this.ngTemplateOutletContext))[propName];
+            (/** @type {?} */ (this._viewRef.context))[propName] = (/** @type {?} */ (this.ngTemplateOutletContext))[propName];
         }
+    };
+    NgTemplateOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
+    ];
+    /** @nocollapse */
+    NgTemplateOutlet.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+    ]; };
+    NgTemplateOutlet.propDecorators = {
+        "ngTemplateOutletContext": [{ type: Input },],
+        "ngTemplateOutlet": [{ type: Input },],
     };
     return NgTemplateOutlet;
 }());
-NgTemplateOutlet.decorators = [
-    { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-];
-/** @nocollapse */
-NgTemplateOutlet.ctorParameters = function () { return [
-    { type: ViewContainerRef, },
-]; };
-NgTemplateOutlet.propDecorators = {
-    "ngTemplateOutletContext": [{ type: Input },],
-    "ngTemplateOutlet": [{ type: Input },],
-};
 
 /**
  * @fileoverview added by tsickle
@@ -3650,6 +3858,7 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                         }
                     }
                     else {
+                        // noon or midnight
                         var hours = rule.hours, minutes = rule.minutes;
                         if (hours === currentHours_1 && minutes === currentMinutes_1) {
                             result_1 = dayPeriods_1[index];
@@ -4021,10 +4230,121 @@ function invalidPipeArgumentError(type, value) {
  * found in the LICENSE file at https://angular.io/license
  */
 var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a date according to locale rules.
+ * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
+ * \@description
+ *
+ * Where:
+ * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+ * (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. The format can be predefined as
+ *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+ *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
+ *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
+ *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
+ *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+ * 9:03:01 AM GMT+01:00`)
+ *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`)
+ *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`)
+ *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`)
+ *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`)
+ *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`)
+ *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`)
+ *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`)
+ *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`)
+ *  - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
+ *  abbreviations, but for general use, use a time zone offset, for example,
+ *  `'+0430'` (4 hours, 30 minutes east of the Greenwich meridian)
+ *  If not specified, the local system timezone of the end-user's browser will be used.
+ *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default)
+ *
+ *
+ *  | Field Type         | Format      | Description                                                   | Example Value                                              |
+ *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | MMMM        | Wide                                                          | September                                                  |
+ *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | LLLL        | Wide                                                          | September                                                  |
+ *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                    | dd          | Numeric: 2 digits + zero padded                               | 1                                                          |
+ *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *
+ *
+ * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+ * applied and the formatted text will have the same day, month and year of the expression.
+ *
+ * WARNINGS:
+ * - this pipe has only access to en-US locale data by default. If you want to localize the dates
+ *   in another language, you will have to import data for other locales.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ *   data.
+ * - Fields suffixed with * are only available in the extra dataset.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
+ *   data.
+ * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+ *   Instead users should treat the date as an immutable object and change the reference when the
+ *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+ *   which would be an expensive operation).
+ *
+ * ### Examples
+ *
+ * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+ * in the _local_ time and locale is 'en-US':
+ *
+ * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+ *
+ * \@stable
+ */
 var DatePipe = (function () {
-    /**
-     * @param {?} locale
-     */
     function DatePipe(locale) {
         this.locale = locale;
     }
@@ -4035,7 +4355,14 @@ var DatePipe = (function () {
      * @param {?=} locale
      * @return {?}
      */
-    DatePipe.prototype.transform = function (value, format, timezone, locale) {
+    DatePipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} format
+     * @param {?=} timezone
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, format, timezone, locale) {
         if (format === void 0) { format = 'mediumDate'; }
         if (value == null || value === '' || value !== value)
             return null;
@@ -4076,15 +4403,15 @@ var DatePipe = (function () {
         }
         return formatDate(date, format, locale || this.locale, timezone);
     };
+    DatePipe.decorators = [
+        { type: Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DatePipe;
 }());
-DatePipe.decorators = [
-    { type: Pipe, args: [{ name: 'date', pure: true },] },
-];
-/** @nocollapse */
-DatePipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * \@internal
  * @param {?} match
@@ -4137,7 +4464,14 @@ var NumberFormatter = (function () {
      * @param {?=} opts
      * @return {?}
      */
-    NumberFormatter.format = function (num, locale, style, opts) {
+    NumberFormatter.format = /**
+     * @param {?} num
+     * @param {?} locale
+     * @param {?} style
+     * @param {?=} opts
+     * @return {?}
+     */
+    function (num, locale, style, opts) {
         if (opts === void 0) { opts = {}; }
         var minimumIntegerDigits = opts.minimumIntegerDigits, minimumFractionDigits = opts.minimumFractionDigits, maximumFractionDigits = opts.maximumFractionDigits, currency = opts.currency, _a = opts.currencyAsSymbol, currencyAsSymbol = _a === void 0 ? false : _a;
         var /** @type {?} */ options = {
@@ -4214,8 +4548,10 @@ var DATE_FORMATS$1 = {
     'Z': timeZoneGetter$1('short'),
     'z': timeZoneGetter$1('long'),
     'ww': datePartGetterFactory({}),
+    // Week of year, padded (00-53). Week 01 is the week with the
     // first Thursday of the year. not support ?
     'w': datePartGetterFactory({}),
+    // Week of year (0-53). Week 1 is the week with the first Thursday
     // of the year not support ?
     'G': datePartGetterFactory(nameCondition('era', 1)),
     'GG': datePartGetterFactory(nameCondition('era', 2)),
@@ -4338,7 +4674,7 @@ function dateFormatter(format, date, locale) {
             match = DATE_FORMATS_SPLIT$1.exec(_format);
             if (match) {
                 parts = parts.concat(match.slice(1));
-                _format = ((parts.pop()));
+                _format = /** @type {?} */ ((parts.pop()));
             }
             else {
                 parts.push(_format);
@@ -4368,7 +4704,13 @@ var DateFormatter = (function () {
      * @param {?} pattern
      * @return {?}
      */
-    DateFormatter.format = function (date, locale, pattern) {
+    DateFormatter.format = /**
+     * @param {?} date
+     * @param {?} locale
+     * @param {?} pattern
+     * @return {?}
+     */
+    function (date, locale, pattern) {
         return dateFormatter(pattern, date, locale);
     };
     return DateFormatter;
@@ -4448,9 +4790,6 @@ var DateFormatter = (function () {
  * \@stable
  */
 var DeprecatedDatePipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function DeprecatedDatePipe(_locale) {
         this._locale = _locale;
     }
@@ -4459,7 +4798,12 @@ var DeprecatedDatePipe = (function () {
      * @param {?=} pattern
      * @return {?}
      */
-    DeprecatedDatePipe.prototype.transform = function (value, pattern) {
+    DeprecatedDatePipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} pattern
+     * @return {?}
+     */
+    function (value, pattern) {
         if (pattern === void 0) { pattern = 'mediumDate'; }
         if (value == null || value === '' || value !== value)
             return null;
@@ -4501,28 +4845,28 @@ var DeprecatedDatePipe = (function () {
         }
         return DateFormatter.format(date, this._locale, DeprecatedDatePipe._ALIASES[pattern] || pattern);
     };
+    /**
+     * \@internal
+     */
+    DeprecatedDatePipe._ALIASES = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+    DeprecatedDatePipe.decorators = [
+        { type: Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DeprecatedDatePipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DeprecatedDatePipe;
 }());
-/**
- * \@internal
- */
-DeprecatedDatePipe._ALIASES = {
-    'medium': 'yMMMdjms',
-    'short': 'yMdjm',
-    'fullDate': 'yMMMMEEEEd',
-    'longDate': 'yMMMMd',
-    'mediumDate': 'yMMMd',
-    'shortDate': 'yMd',
-    'mediumTime': 'jms',
-    'shortTime': 'jm'
-};
-DeprecatedDatePipe.decorators = [
-    { type: Pipe, args: [{ name: 'date', pure: true },] },
-];
-/** @nocollapse */
-DeprecatedDatePipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * @param {?} value
  * @return {?}
@@ -4704,7 +5048,8 @@ function parseNumberFormat(format, minusSign) {
         [
             positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
             positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
-        ], /** @type {?} */ integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
+        ], /** @type {?} */
+    integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
     p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
     for (var /** @type {?} */ i = 0; i < fraction.length; i++) {
         var /** @type {?} */ ch = fraction.charAt(i);
@@ -4722,7 +5067,8 @@ function parseNumberFormat(format, minusSign) {
     p.gSize = groups[1] ? groups[1].length : 0;
     p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
     if (negative) {
-        var /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */ pos = negative.indexOf(DIGIT_CHAR);
+        var /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */
+        pos = negative.indexOf(DIGIT_CHAR);
         p.negPre = negative.substr(0, pos).replace(/'/g, '');
         p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
     }
@@ -4759,6 +5105,7 @@ function parseNumber(numStr) {
     }
     // Count the number of leading zeros.
     for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+        /* empty */
     }
     if (i === (zeros = numStr.length)) {
         // The digits are all zero.
@@ -4907,12 +5254,15 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
         if (parts[1] != null) {
+            // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
         if (parts[3] != null) {
+            // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
         if (parts[5] != null) {
+            // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
     }
@@ -4952,9 +5302,6 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  * \@stable
  */
 var DeprecatedDecimalPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function DeprecatedDecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -4963,18 +5310,23 @@ var DeprecatedDecimalPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
+    DeprecatedDecimalPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+    function (value, digits) {
         return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
+    DeprecatedDecimalPipe.decorators = [
+        { type: Pipe, args: [{ name: 'number' },] },
+    ];
+    /** @nocollapse */
+    DeprecatedDecimalPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DeprecatedDecimalPipe;
 }());
-DeprecatedDecimalPipe.decorators = [
-    { type: Pipe, args: [{ name: 'number' },] },
-];
-/** @nocollapse */
-DeprecatedDecimalPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as a percentage according to locale rules.
@@ -4996,9 +5348,6 @@ DeprecatedDecimalPipe.ctorParameters = function () { return [
  * \@stable
  */
 var DeprecatedPercentPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function DeprecatedPercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -5007,18 +5356,23 @@ var DeprecatedPercentPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    DeprecatedPercentPipe.prototype.transform = function (value, digits) {
+    DeprecatedPercentPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} digits
+     * @return {?}
+     */
+    function (value, digits) {
         return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
+    DeprecatedPercentPipe.decorators = [
+        { type: Pipe, args: [{ name: 'percent' },] },
+    ];
+    /** @nocollapse */
+    DeprecatedPercentPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DeprecatedPercentPipe;
 }());
-DeprecatedPercentPipe.decorators = [
-    { type: Pipe, args: [{ name: 'percent' },] },
-];
-/** @nocollapse */
-DeprecatedPercentPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as currency using locale rules.
@@ -5044,9 +5398,6 @@ DeprecatedPercentPipe.ctorParameters = function () { return [
  * \@stable
  */
 var DeprecatedCurrencyPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function DeprecatedCurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -5057,20 +5408,27 @@ var DeprecatedCurrencyPipe = (function () {
      * @param {?=} digits
      * @return {?}
      */
-    DeprecatedCurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+    DeprecatedCurrencyPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} currencyCode
+     * @param {?=} symbolDisplay
+     * @param {?=} digits
+     * @return {?}
+     */
+    function (value, currencyCode, symbolDisplay, digits) {
         if (currencyCode === void 0) { currencyCode = 'USD'; }
         if (symbolDisplay === void 0) { symbolDisplay = false; }
         return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
+    DeprecatedCurrencyPipe.decorators = [
+        { type: Pipe, args: [{ name: 'currency' },] },
+    ];
+    /** @nocollapse */
+    DeprecatedCurrencyPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DeprecatedCurrencyPipe;
 }());
-DeprecatedCurrencyPipe.decorators = [
-    { type: Pipe, args: [{ name: 'currency' },] },
-];
-/** @nocollapse */
-DeprecatedCurrencyPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -5102,19 +5460,32 @@ var ObservableStrategy = (function () {
      * @param {?} updateLatestValue
      * @return {?}
      */
-    ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+    ObservableStrategy.prototype.createSubscription = /**
+     * @param {?} async
+     * @param {?} updateLatestValue
+     * @return {?}
+     */
+    function (async, updateLatestValue) {
         return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
     };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+    ObservableStrategy.prototype.dispose = /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    function (subscription) { subscription.unsubscribe(); };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+    ObservableStrategy.prototype.onDestroy = /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
 }());
 var PromiseStrategy = (function () {
@@ -5125,19 +5496,32 @@ var PromiseStrategy = (function () {
      * @param {?} updateLatestValue
      * @return {?}
      */
-    PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+    PromiseStrategy.prototype.createSubscription = /**
+     * @param {?} async
+     * @param {?} updateLatestValue
+     * @return {?}
+     */
+    function (async, updateLatestValue) {
         return async.then(updateLatestValue, function (e) { throw e; });
     };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    PromiseStrategy.prototype.dispose = function (subscription) { };
+    PromiseStrategy.prototype.dispose = /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    function (subscription) { };
     /**
      * @param {?} subscription
      * @return {?}
      */
-    PromiseStrategy.prototype.onDestroy = function (subscription) { };
+    PromiseStrategy.prototype.onDestroy = /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    function (subscription) { };
     return PromiseStrategy;
 }());
 var _promiseStrategy = new PromiseStrategy();
@@ -5168,21 +5552,21 @@ var _observableStrategy = new ObservableStrategy();
  * \@stable
  */
 var AsyncPipe = (function () {
-    /**
-     * @param {?} _ref
-     */
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
         this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
-        this._strategy = ((null));
+        this._strategy = /** @type {?} */ ((null));
     }
     /**
      * @return {?}
      */
-    AsyncPipe.prototype.ngOnDestroy = function () {
+    AsyncPipe.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         if (this._subscription) {
             this._dispose();
         }
@@ -5191,7 +5575,11 @@ var AsyncPipe = (function () {
      * @param {?} obj
      * @return {?}
      */
-    AsyncPipe.prototype.transform = function (obj) {
+    AsyncPipe.prototype.transform = /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function (obj) {
         if (!this._obj) {
             if (obj) {
                 this._subscribe(obj);
@@ -5213,7 +5601,11 @@ var AsyncPipe = (function () {
      * @param {?} obj
      * @return {?}
      */
-    AsyncPipe.prototype._subscribe = function (obj) {
+    AsyncPipe.prototype._subscribe = /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function (obj) {
         var _this = this;
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
@@ -5223,7 +5615,11 @@ var AsyncPipe = (function () {
      * @param {?} obj
      * @return {?}
      */
-    AsyncPipe.prototype._selectStrategy = function (obj) {
+    AsyncPipe.prototype._selectStrategy = /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function (obj) {
         if (ɵisPromise(obj)) {
             return _promiseStrategy;
         }
@@ -5235,7 +5631,10 @@ var AsyncPipe = (function () {
     /**
      * @return {?}
      */
-    AsyncPipe.prototype._dispose = function () {
+    AsyncPipe.prototype._dispose = /**
+     * @return {?}
+     */
+    function () {
         this._strategy.dispose(/** @type {?} */ ((this._subscription)));
         this._latestValue = null;
         this._latestReturnedValue = null;
@@ -5247,21 +5646,26 @@ var AsyncPipe = (function () {
      * @param {?} value
      * @return {?}
      */
-    AsyncPipe.prototype._updateLatestValue = function (async, value) {
+    AsyncPipe.prototype._updateLatestValue = /**
+     * @param {?} async
+     * @param {?} value
+     * @return {?}
+     */
+    function (async, value) {
         if (async === this._obj) {
             this._latestValue = value;
             this._ref.markForCheck();
         }
     };
+    AsyncPipe.decorators = [
+        { type: Pipe, args: [{ name: 'async', pure: false },] },
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = function () { return [
+        { type: ChangeDetectorRef, },
+    ]; };
     return AsyncPipe;
 }());
-AsyncPipe.decorators = [
-    { type: Pipe, args: [{ name: 'async', pure: false },] },
-];
-/** @nocollapse */
-AsyncPipe.ctorParameters = function () { return [
-    { type: ChangeDetectorRef, },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -5288,7 +5692,11 @@ var LowerCasePipe = (function () {
      * @param {?} value
      * @return {?}
      */
-    LowerCasePipe.prototype.transform = function (value) {
+    LowerCasePipe.prototype.transform = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
@@ -5296,13 +5704,13 @@ var LowerCasePipe = (function () {
         }
         return value.toLowerCase();
     };
+    LowerCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'lowercase' },] },
+    ];
+    /** @nocollapse */
+    LowerCasePipe.ctorParameters = function () { return []; };
     return LowerCasePipe;
 }());
-LowerCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'lowercase' },] },
-];
-/** @nocollapse */
-LowerCasePipe.ctorParameters = function () { return []; };
 /**
  * Helper method to transform a single word to titlecase.
  *
@@ -5327,7 +5735,11 @@ var TitleCasePipe = (function () {
      * @param {?} value
      * @return {?}
      */
-    TitleCasePipe.prototype.transform = function (value) {
+    TitleCasePipe.prototype.transform = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
@@ -5335,13 +5747,13 @@ var TitleCasePipe = (function () {
         }
         return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
     };
+    TitleCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'titlecase' },] },
+    ];
+    /** @nocollapse */
+    TitleCasePipe.ctorParameters = function () { return []; };
     return TitleCasePipe;
 }());
-TitleCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'titlecase' },] },
-];
-/** @nocollapse */
-TitleCasePipe.ctorParameters = function () { return []; };
 /**
  * Transforms text to uppercase.
  *
@@ -5354,7 +5766,11 @@ var UpperCasePipe = (function () {
      * @param {?} value
      * @return {?}
      */
-    UpperCasePipe.prototype.transform = function (value) {
+    UpperCasePipe.prototype.transform = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         if (!value)
             return value;
         if (typeof value !== 'string') {
@@ -5362,13 +5778,13 @@ var UpperCasePipe = (function () {
         }
         return value.toUpperCase();
     };
+    UpperCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'uppercase' },] },
+    ];
+    /** @nocollapse */
+    UpperCasePipe.ctorParameters = function () { return []; };
     return UpperCasePipe;
 }());
-UpperCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'uppercase' },] },
-];
-/** @nocollapse */
-UpperCasePipe.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -5402,9 +5818,6 @@ var _INTERPOLATION_REGEXP = /#/g;
  * \@experimental
  */
 var I18nPluralPipe = (function () {
-    /**
-     * @param {?} _localization
-     */
     function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
@@ -5414,7 +5827,13 @@ var I18nPluralPipe = (function () {
      * @param {?=} locale
      * @return {?}
      */
-    I18nPluralPipe.prototype.transform = function (value, pluralMap, locale) {
+    I18nPluralPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} pluralMap
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, pluralMap, locale) {
         if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
@@ -5423,15 +5842,15 @@ var I18nPluralPipe = (function () {
         var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
+    I18nPluralPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = function () { return [
+        { type: NgLocalization, },
+    ]; };
     return I18nPluralPipe;
 }());
-I18nPluralPipe.decorators = [
-    { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
-];
-/** @nocollapse */
-I18nPluralPipe.ctorParameters = function () { return [
-    { type: NgLocalization, },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -5469,7 +5888,12 @@ var I18nSelectPipe = (function () {
      * @param {?} mapping
      * @return {?}
      */
-    I18nSelectPipe.prototype.transform = function (value, mapping) {
+    I18nSelectPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} mapping
+     * @return {?}
+     */
+    function (value, mapping) {
         if (value == null)
             return '';
         if (typeof mapping !== 'object' || typeof value !== 'string') {
@@ -5483,13 +5907,13 @@ var I18nSelectPipe = (function () {
         }
         return '';
     };
+    I18nSelectPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
+    ];
+    /** @nocollapse */
+    I18nSelectPipe.ctorParameters = function () { return []; };
     return I18nSelectPipe;
 }());
-I18nSelectPipe.decorators = [
-    { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-];
-/** @nocollapse */
-I18nSelectPipe.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -5522,14 +5946,18 @@ var JsonPipe = (function () {
      * @param {?} value
      * @return {?}
      */
-    JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
+    JsonPipe.prototype.transform = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) { return JSON.stringify(value, null, 2); };
+    JsonPipe.decorators = [
+        { type: Pipe, args: [{ name: 'json', pure: false },] },
+    ];
+    /** @nocollapse */
+    JsonPipe.ctorParameters = function () { return []; };
     return JsonPipe;
 }());
-JsonPipe.decorators = [
-    { type: Pipe, args: [{ name: 'json', pure: false },] },
-];
-/** @nocollapse */
-JsonPipe.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -5569,9 +5997,6 @@ JsonPipe.ctorParameters = function () { return []; };
  * \@stable
  */
 var DecimalPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function DecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -5581,7 +6006,13 @@ var DecimalPipe = (function () {
      * @param {?=} locale
      * @return {?}
      */
-    DecimalPipe.prototype.transform = function (value, digits, locale) {
+    DecimalPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, digits, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
@@ -5591,15 +6022,15 @@ var DecimalPipe = (function () {
         }
         return str;
     };
+    DecimalPipe.decorators = [
+        { type: Pipe, args: [{ name: 'number' },] },
+    ];
+    /** @nocollapse */
+    DecimalPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return DecimalPipe;
 }());
-DecimalPipe.decorators = [
-    { type: Pipe, args: [{ name: 'number' },] },
-];
-/** @nocollapse */
-DecimalPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as a percentage according to locale rules.
@@ -5620,9 +6051,6 @@ DecimalPipe.ctorParameters = function () { return [
  * \@stable
  */
 var PercentPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function PercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -5632,7 +6060,13 @@ var PercentPipe = (function () {
      * @param {?=} locale
      * @return {?}
      */
-    PercentPipe.prototype.transform = function (value, digits, locale) {
+    PercentPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, digits, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
@@ -5642,15 +6076,15 @@ var PercentPipe = (function () {
         }
         return str;
     };
+    PercentPipe.decorators = [
+        { type: Pipe, args: [{ name: 'percent' },] },
+    ];
+    /** @nocollapse */
+    PercentPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return PercentPipe;
 }());
-PercentPipe.decorators = [
-    { type: Pipe, args: [{ name: 'percent' },] },
-];
-/** @nocollapse */
-PercentPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * \@ngModule CommonModule
  * \@whatItDoes Formats a number as currency using locale rules.
@@ -5679,9 +6113,6 @@ PercentPipe.ctorParameters = function () { return [
  * \@stable
  */
 var CurrencyPipe = (function () {
-    /**
-     * @param {?} _locale
-     */
     function CurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -5693,13 +6124,21 @@ var CurrencyPipe = (function () {
      * @param {?=} locale
      * @return {?}
      */
-    CurrencyPipe.prototype.transform = function (value, currencyCode, display, digits, locale) {
+    CurrencyPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} currencyCode
+     * @param {?=} display
+     * @param {?=} digits
+     * @param {?=} locale
+     * @return {?}
+     */
+    function (value, currencyCode, display, digits, locale) {
         if (display === void 0) { display = 'symbol'; }
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
         if (typeof display === 'boolean') {
-            if ((console) && (console.warn)) {
+            if (/** @type {?} */ (console) && /** @type {?} */ (console.warn)) {
                 console.warn("Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are \"code\", \"symbol\" or \"symbol-narrow\".");
             }
             display = display ? 'symbol' : 'code';
@@ -5714,15 +6153,15 @@ var CurrencyPipe = (function () {
         }
         return str;
     };
+    CurrencyPipe.decorators = [
+        { type: Pipe, args: [{ name: 'currency' },] },
+    ];
+    /** @nocollapse */
+    CurrencyPipe.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    ]; };
     return CurrencyPipe;
 }());
-CurrencyPipe.decorators = [
-    { type: Pipe, args: [{ name: 'currency' },] },
-];
-/** @nocollapse */
-CurrencyPipe.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-]; };
 /**
  * @param {?} value
  * @return {?}
@@ -5795,7 +6234,13 @@ var SlicePipe = (function () {
      * @param {?=} end
      * @return {?}
      */
-    SlicePipe.prototype.transform = function (value, start, end) {
+    SlicePipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} start
+     * @param {?=} end
+     * @return {?}
+     */
+    function (value, start, end) {
         if (value == null)
             return value;
         if (!this.supports(value)) {
@@ -5807,14 +6252,18 @@ var SlicePipe = (function () {
      * @param {?} obj
      * @return {?}
      */
-    SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+    SlicePipe.prototype.supports = /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+    SlicePipe.decorators = [
+        { type: Pipe, args: [{ name: 'slice', pure: false },] },
+    ];
+    /** @nocollapse */
+    SlicePipe.ctorParameters = function () { return []; };
     return SlicePipe;
 }());
-SlicePipe.decorators = [
-    { type: Pipe, args: [{ name: 'slice', pure: false },] },
-];
-/** @nocollapse */
-SlicePipe.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -5869,19 +6318,19 @@ var COMMON_PIPES = [
 var CommonModule = (function () {
     function CommonModule() {
     }
+    CommonModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
-CommonModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                providers: [
-                    { provide: NgLocalization, useClass: NgLocaleLocalization },
-                ],
-            },] },
-];
-/** @nocollapse */
-CommonModule.ctorParameters = function () { return []; };
 /**
  * A module that contains the deprecated i18n pipes.
  *
@@ -5890,17 +6339,17 @@ CommonModule.ctorParameters = function () { return []; };
 var DeprecatedI18NPipesModule = (function () {
     function DeprecatedI18NPipesModule() {
     }
+    DeprecatedI18NPipesModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [COMMON_DEPRECATED_I18N_PIPES],
+                    exports: [COMMON_DEPRECATED_I18N_PIPES],
+                    providers: [{ provide: USE_V4_PLURALS, useValue: true }],
+                },] },
+    ];
+    /** @nocollapse */
+    DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
     return DeprecatedI18NPipesModule;
 }());
-DeprecatedI18NPipesModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [COMMON_DEPRECATED_I18N_PIPES],
-                exports: [COMMON_DEPRECATED_I18N_PIPES],
-                providers: [{ provide: USE_V4_PLURALS, useValue: true }],
-            },] },
-];
-/** @nocollapse */
-DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -5934,10 +6383,7 @@ var DOCUMENT = new InjectionToken('DocumentToken');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ var PLATFORM_BROWSER_ID = 'browser';
+var PLATFORM_BROWSER_ID = 'browser';
 var PLATFORM_SERVER_ID = 'server';
 var PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 var PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
@@ -5997,7 +6443,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.6-112e777');
+var VERSION = new Version('5.0.0-beta.6-ca5aeba');
 
 /**
  * @fileoverview added by tsickle
@@ -6043,5 +6489,5 @@ var VERSION = new Version('5.0.0-beta.6-112e777');
  * Generated bundle index. Do not edit.
  */
 
-export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent, LocationChangeListener, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, PopStateEvent, Location, COMMON_DIRECTIVES as ɵd, LocaleDataIndex as ɵb, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
+export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵd, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -49,11 +49,6 @@ class HttpBackend {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  * @record
  */
 /**
@@ -88,7 +83,7 @@ class HttpHeaders {
                         const /** @type {?} */ value = line.slice(index + 1).trim();
                         this.maybeSetNormalizedName(name, key);
                         if (this.headers.has(key)) {
-                            ((this.headers.get(key))).push(value);
+                            /** @type {?} */ ((this.headers.get(key))).push(value);
                         }
                         else {
                             this.headers.set(key, [value]);
@@ -233,7 +228,7 @@ class HttpHeaders {
         switch (update.op) {
             case 'a':
             case 's':
-                let /** @type {?} */ value = ((update.value));
+                let /** @type {?} */ value = /** @type {?} */ ((update.value));
                 if (typeof value === 'string') {
                     value = [value];
                 }
@@ -246,7 +241,7 @@ class HttpHeaders {
                 this.headers.set(key, base);
                 break;
             case 'd':
-                const /** @type {?} */ toDelete = (update.value);
+                const /** @type {?} */ toDelete = /** @type {?} */ (update.value);
                 if (!toDelete) {
                     this.headers.delete(key);
                     this.normalizedNames.delete(key);
@@ -293,10 +288,7 @@ class HttpHeaders {
  *
  * @record
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ function HttpParameterCodec() { }
+
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
@@ -387,7 +379,7 @@ class HttpParams {
         else if (!!options.fromObject) {
             this.map = new Map();
             Object.keys(options.fromObject).forEach(key => {
-                const /** @type {?} */ value = ((options.fromObject))[key]; /** @type {?} */
+                const /** @type {?} */ value = (/** @type {?} */ (options.fromObject))[key]; /** @type {?} */
                 ((this.map)).set(key, Array.isArray(value) ? value : [value]);
             });
         }
@@ -402,7 +394,7 @@ class HttpParams {
      */
     has(param) {
         this.init();
-        return ((this.map)).has(param);
+        return /** @type {?} */ ((this.map)).has(param);
     }
     /**
      * Get the first value for the given parameter name, or `null` if it's not present.
@@ -411,7 +403,7 @@ class HttpParams {
      */
     get(param) {
         this.init();
-        const /** @type {?} */ res = ((this.map)).get(param);
+        const /** @type {?} */ res = /** @type {?} */ ((this.map)).get(param);
         return !!res ? res[0] : null;
     }
     /**
@@ -421,7 +413,7 @@ class HttpParams {
      */
     getAll(param) {
         this.init();
-        return ((this.map)).get(param) || null;
+        return /** @type {?} */ ((this.map)).get(param) || null;
     }
     /**
      * Get all the parameter names for this body.
@@ -464,8 +456,7 @@ class HttpParams {
         return this.keys()
             .map(key => {
             const /** @type {?} */ eKey = this.encoder.encodeKey(key);
-            return ((((this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value))
-                .join('&');
+            return /** @type {?} */ ((/** @type {?} */ ((this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value)).join('&');
         })
             .join('&');
     }
@@ -488,31 +479,31 @@ class HttpParams {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(key => ((this.map)).set(key, /** @type {?} */ ((((((this.cloneFrom)).map)).get(key))))); /** @type {?} */
+            this.cloneFrom.keys().forEach(key => /** @type {?} */ ((this.map)).set(key, /** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((this.cloneFrom)).map)).get(key))))); /** @type {?} */
             ((this.updates)).forEach(update => {
                 switch (update.op) {
                     case 'a':
                     case 's':
-                        const /** @type {?} */ base = (update.op === 'a' ? ((this.map)).get(update.param) : undefined) || [];
+                        const /** @type {?} */ base = (update.op === 'a' ? /** @type {?} */ ((this.map)).get(update.param) : undefined) || [];
                         base.push(/** @type {?} */ ((update.value))); /** @type {?} */
                         ((this.map)).set(update.param, base);
                         break;
                     case 'd':
                         if (update.value !== undefined) {
-                            let /** @type {?} */ base = ((this.map)).get(update.param) || [];
+                            let /** @type {?} */ base = /** @type {?} */ ((this.map)).get(update.param) || [];
                             const /** @type {?} */ idx = base.indexOf(update.value);
                             if (idx !== -1) {
                                 base.splice(idx, 1);
                             }
                             if (base.length > 0) {
-                                ((this.map)).set(update.param, base);
+                                /** @type {?} */ ((this.map)).set(update.param, base);
                             }
                             else {
-                                ((this.map)).delete(update.param);
+                                /** @type {?} */ ((this.map)).delete(update.param);
                             }
                         }
                         else {
-                            ((this.map)).delete(update.param);
+                            /** @type {?} */ ((this.map)).delete(update.param);
                             break;
                         }
                 }
@@ -633,12 +624,12 @@ class HttpRequest {
         // the body argument is to use a known no-body method like GET.
         if (mightHaveBody(this.method) || !!fourth) {
             // Body is the third argument, options are the fourth.
-            this.body = (third) || null;
+            this.body = /** @type {?} */ (third) || null;
             options = fourth;
         }
         else {
             // No body required, options are the third argument. The body stays null.
-            options = (third);
+            options = /** @type {?} */ (third);
         }
         // If options have been passed, interpret them.
         if (options) {
@@ -714,7 +705,7 @@ class HttpRequest {
             return JSON.stringify(this.body);
         }
         // Fall back on toString() for everything else.
-        return ((this.body)).toString();
+        return (/** @type {?} */ (this.body)).toString();
     }
     /**
      * Examine the body and attempt to infer an appropriate MIME type
@@ -815,28 +806,28 @@ class HttpRequest {
 /** @enum {number} */
 const HttpEventType = {
     /**
-     * The request was sent out over the wire.
-     */
+       * The request was sent out over the wire.
+       */
     Sent: 0,
     /**
-     * An upload progress event was received.
-     */
+       * An upload progress event was received.
+       */
     UploadProgress: 1,
     /**
-     * The response status code and headers were received.
-     */
+       * The response status code and headers were received.
+       */
     ResponseHeader: 2,
     /**
-     * A download progress event was received.
-     */
+       * A download progress event was received.
+       */
     DownloadProgress: 3,
     /**
-     * The full response including the body was received.
-     */
+       * The full response including the body was received.
+       */
     Response: 4,
     /**
-     * A custom event from an interceptor or a backend.
-     */
+       * A custom event from an interceptor or a backend.
+       */
     User: 5,
 };
 HttpEventType[HttpEventType.Sent] = "Sent";
@@ -851,14 +842,14 @@ HttpEventType[HttpEventType.User] = "User";
  * \@stable
  * @record
  */
-function HttpProgressEvent() { }
+
 /**
  * A download progress event.
  *
  * \@stable
  * @record
  */
-function HttpDownloadProgressEvent() { }
+
 /**
  * An upload progress event.
  *
@@ -874,7 +865,7 @@ function HttpDownloadProgressEvent() { }
  * \@stable
  * @record
  */
-function HttpSentEvent() { }
+
 /**
  * A user-defined event.
  *
@@ -884,7 +875,7 @@ function HttpSentEvent() { }
  * \@stable
  * @record
  */
-function HttpUserEvent() { }
+
 /**
  * An error that represents a failed attempt to JSON.parse text coming back
  * from the server.
@@ -1116,7 +1107,7 @@ class HttpClient {
         if (first instanceof HttpRequest) {
             // It is. The other arguments must be undefined (per the signatures) and can be
             // ignored.
-            req = (first);
+            req = /** @type {?} */ (first);
         }
         else {
             // It's a string, so it represents a URL. Construct a request based on it,
@@ -1344,7 +1335,7 @@ HttpClient.ctorParameters = () => [
  * \@stable
  * @record
  */
-function HttpInterceptor() { }
+
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
@@ -1658,7 +1649,7 @@ class BrowserXhr {
     /**
      * @return {?}
      */
-    build() { return ((new XMLHttpRequest())); }
+    build() { return /** @type {?} */ ((new XMLHttpRequest())); }
 }
 BrowserXhr.decorators = [
     { type: Injectable },
@@ -1719,7 +1710,7 @@ class HttpXhrBackend {
                 // xhr.response will be null, and xhr.responseText cannot be accessed to
                 // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
                 // is parsed by first requesting text and then applying JSON.parse.
-                xhr.responseType = (((responseType !== 'json') ? responseType : 'text'));
+                xhr.responseType = /** @type {?} */ (((responseType !== 'json') ? responseType : 'text'));
             }
             // Serialize the request body if one is present. If not, this will be set to null.
             const /** @type {?} */ reqBody = req.serializeBody();
@@ -1777,11 +1768,11 @@ class HttpXhrBackend {
                     try {
                         body = JSON.parse(body);
                     }
-                    catch (error) {
+                    catch (/** @type {?} */ error) {
                         // Even though the response status was 2xx, this is still an error.
                         ok = false;
                         // The parse error contains the text of the body that failed to parse.
-                        body = ({ error, text: body });
+                        body = /** @type {?} */ ({ error, text: body });
                     }
                 }
                 if (ok) {
@@ -2195,5 +2186,5 @@ HttpClientJsonpModule.ctorParameters = () => [];
  * Generated bundle index. Do not edit.
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, HttpInterceptor, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParameterCodec, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpResponseBase, HttpSentEvent, HttpUserEvent, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
 //# sourceMappingURL=index.js.map

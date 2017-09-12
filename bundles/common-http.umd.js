@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.6-112e777
+ * @license Angular v5.0.0-beta.6-ca5aeba
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -58,11 +58,6 @@ var HttpBackend = (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  * @record
  */
 /**
@@ -70,9 +65,6 @@ var HttpBackend = (function () {
  * \@stable
  */
 var HttpHeaders = (function () {
-    /**
-     * @param {?=} headers
-     */
     function HttpHeaders(headers) {
         var _this = this;
         /**
@@ -98,7 +90,7 @@ var HttpHeaders = (function () {
                         var /** @type {?} */ value = line.slice(index + 1).trim();
                         _this.maybeSetNormalizedName(name_1, key);
                         if (_this.headers.has(key)) {
-                            ((_this.headers.get(key))).push(value);
+                            /** @type {?} */ ((_this.headers.get(key))).push(value);
                         }
                         else {
                             _this.headers.set(key, [value]);
@@ -126,37 +118,68 @@ var HttpHeaders = (function () {
     }
     /**
      * Checks for existence of header by given name.
+     */
+    /**
+     * Checks for existence of header by given name.
      * @param {?} name
      * @return {?}
      */
-    HttpHeaders.prototype.has = function (name) {
+    HttpHeaders.prototype.has = /**
+     * Checks for existence of header by given name.
+     * @param {?} name
+     * @return {?}
+     */
+    function (name) {
         this.init();
         return this.headers.has(name.toLowerCase());
     };
     /**
      * Returns first header that matches given name.
+     */
+    /**
+     * Returns first header that matches given name.
      * @param {?} name
      * @return {?}
      */
-    HttpHeaders.prototype.get = function (name) {
+    HttpHeaders.prototype.get = /**
+     * Returns first header that matches given name.
+     * @param {?} name
+     * @return {?}
+     */
+    function (name) {
         this.init();
         var /** @type {?} */ values = this.headers.get(name.toLowerCase());
         return values && values.length > 0 ? values[0] : null;
     };
     /**
      * Returns the names of the headers
+     */
+    /**
+     * Returns the names of the headers
      * @return {?}
      */
-    HttpHeaders.prototype.keys = function () {
+    HttpHeaders.prototype.keys = /**
+     * Returns the names of the headers
+     * @return {?}
+     */
+    function () {
         this.init();
         return Array.from(this.normalizedNames.values());
     };
     /**
      * Returns list of header values for a given name.
+     */
+    /**
+     * Returns list of header values for a given name.
      * @param {?} name
      * @return {?}
      */
-    HttpHeaders.prototype.getAll = function (name) {
+    HttpHeaders.prototype.getAll = /**
+     * Returns list of header values for a given name.
+     * @param {?} name
+     * @return {?}
+     */
+    function (name) {
         this.init();
         return this.headers.get(name.toLowerCase()) || null;
     };
@@ -165,7 +188,12 @@ var HttpHeaders = (function () {
      * @param {?} value
      * @return {?}
      */
-    HttpHeaders.prototype.append = function (name, value) {
+    HttpHeaders.prototype.append = /**
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    function (name, value) {
         return this.clone({ name: name, value: value, op: 'a' });
     };
     /**
@@ -173,7 +201,12 @@ var HttpHeaders = (function () {
      * @param {?} value
      * @return {?}
      */
-    HttpHeaders.prototype.set = function (name, value) {
+    HttpHeaders.prototype.set = /**
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    function (name, value) {
         return this.clone({ name: name, value: value, op: 's' });
     };
     /**
@@ -181,7 +214,12 @@ var HttpHeaders = (function () {
      * @param {?=} value
      * @return {?}
      */
-    HttpHeaders.prototype.delete = function (name, value) {
+    HttpHeaders.prototype.delete = /**
+     * @param {?} name
+     * @param {?=} value
+     * @return {?}
+     */
+    function (name, value) {
         return this.clone({ name: name, value: value, op: 'd' });
     };
     /**
@@ -189,7 +227,12 @@ var HttpHeaders = (function () {
      * @param {?} lcName
      * @return {?}
      */
-    HttpHeaders.prototype.maybeSetNormalizedName = function (name, lcName) {
+    HttpHeaders.prototype.maybeSetNormalizedName = /**
+     * @param {?} name
+     * @param {?} lcName
+     * @return {?}
+     */
+    function (name, lcName) {
         if (!this.normalizedNames.has(lcName)) {
             this.normalizedNames.set(lcName, name);
         }
@@ -197,7 +240,10 @@ var HttpHeaders = (function () {
     /**
      * @return {?}
      */
-    HttpHeaders.prototype.init = function () {
+    HttpHeaders.prototype.init = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         if (!!this.lazyInit) {
             if (this.lazyInit instanceof HttpHeaders) {
@@ -217,7 +263,11 @@ var HttpHeaders = (function () {
      * @param {?} other
      * @return {?}
      */
-    HttpHeaders.prototype.copyFrom = function (other) {
+    HttpHeaders.prototype.copyFrom = /**
+     * @param {?} other
+     * @return {?}
+     */
+    function (other) {
         var _this = this;
         other.init();
         Array.from(other.headers.keys()).forEach(function (key) {
@@ -229,7 +279,11 @@ var HttpHeaders = (function () {
      * @param {?} update
      * @return {?}
      */
-    HttpHeaders.prototype.clone = function (update) {
+    HttpHeaders.prototype.clone = /**
+     * @param {?} update
+     * @return {?}
+     */
+    function (update) {
         var /** @type {?} */ clone = new HttpHeaders();
         clone.lazyInit =
             (!!this.lazyInit && this.lazyInit instanceof HttpHeaders) ? this.lazyInit : this;
@@ -240,12 +294,16 @@ var HttpHeaders = (function () {
      * @param {?} update
      * @return {?}
      */
-    HttpHeaders.prototype.applyUpdate = function (update) {
+    HttpHeaders.prototype.applyUpdate = /**
+     * @param {?} update
+     * @return {?}
+     */
+    function (update) {
         var /** @type {?} */ key = update.name.toLowerCase();
         switch (update.op) {
             case 'a':
             case 's':
-                var /** @type {?} */ value = ((update.value));
+                var /** @type {?} */ value = /** @type {?} */ ((update.value));
                 if (typeof value === 'string') {
                     value = [value];
                 }
@@ -258,7 +316,7 @@ var HttpHeaders = (function () {
                 this.headers.set(key, base);
                 break;
             case 'd':
-                var /** @type {?} */ toDelete_1 = (update.value);
+                var /** @type {?} */ toDelete_1 = /** @type {?} */ (update.value);
                 if (!toDelete_1) {
                     this.headers.delete(key);
                     this.normalizedNames.delete(key);
@@ -281,11 +339,19 @@ var HttpHeaders = (function () {
         }
     };
     /**
+     * @internal
+     */
+    /**
      * \@internal
      * @param {?} fn
      * @return {?}
      */
-    HttpHeaders.prototype.forEach = function (fn) {
+    HttpHeaders.prototype.forEach = /**
+     * \@internal
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
         var _this = this;
         this.init();
         Array.from(this.normalizedNames.keys())
@@ -307,10 +373,7 @@ var HttpHeaders = (function () {
  *
  * @record
  */
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */ function HttpParameterCodec() { }
+
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
@@ -324,22 +387,38 @@ var HttpUrlEncodingCodec = (function () {
      * @param {?} k
      * @return {?}
      */
-    HttpUrlEncodingCodec.prototype.encodeKey = function (k) { return standardEncoding(k); };
+    HttpUrlEncodingCodec.prototype.encodeKey = /**
+     * @param {?} k
+     * @return {?}
+     */
+    function (k) { return standardEncoding(k); };
     /**
      * @param {?} v
      * @return {?}
      */
-    HttpUrlEncodingCodec.prototype.encodeValue = function (v) { return standardEncoding(v); };
+    HttpUrlEncodingCodec.prototype.encodeValue = /**
+     * @param {?} v
+     * @return {?}
+     */
+    function (v) { return standardEncoding(v); };
     /**
      * @param {?} k
      * @return {?}
      */
-    HttpUrlEncodingCodec.prototype.decodeKey = function (k) { return decodeURIComponent(k); };
+    HttpUrlEncodingCodec.prototype.decodeKey = /**
+     * @param {?} k
+     * @return {?}
+     */
+    function (k) { return decodeURIComponent(k); };
     /**
      * @param {?} v
      * @return {?}
      */
-    HttpUrlEncodingCodec.prototype.decodeValue = function (v) { return decodeURIComponent(v); };
+    HttpUrlEncodingCodec.prototype.decodeValue = /**
+     * @param {?} v
+     * @return {?}
+     */
+    function (v) { return decodeURIComponent(v); };
     return HttpUrlEncodingCodec;
 }());
 /**
@@ -388,9 +467,6 @@ function standardEncoding(v) {
  * \@stable
  */
 var HttpParams = (function () {
-    /**
-     * @param {?=} options
-     */
     function HttpParams(options) {
         if (options === void 0) { options = {}; }
         var _this = this;
@@ -406,7 +482,7 @@ var HttpParams = (function () {
         else if (!!options.fromObject) {
             this.map = new Map();
             Object.keys(options.fromObject).forEach(function (key) {
-                var /** @type {?} */ value = ((options.fromObject))[key]; /** @type {?} */
+                var /** @type {?} */ value = (/** @type {?} */ (options.fromObject))[key]; /** @type {?} */
                 ((_this.map)).set(key, Array.isArray(value) ? value : [value]);
             });
         }
@@ -416,54 +492,108 @@ var HttpParams = (function () {
     }
     /**
      * Check whether the body has one or more values for the given parameter name.
+     */
+    /**
+     * Check whether the body has one or more values for the given parameter name.
      * @param {?} param
      * @return {?}
      */
-    HttpParams.prototype.has = function (param) {
+    HttpParams.prototype.has = /**
+     * Check whether the body has one or more values for the given parameter name.
+     * @param {?} param
+     * @return {?}
+     */
+    function (param) {
         this.init();
-        return ((this.map)).has(param);
+        return /** @type {?} */ ((this.map)).has(param);
     };
+    /**
+     * Get the first value for the given parameter name, or `null` if it's not present.
+     */
     /**
      * Get the first value for the given parameter name, or `null` if it's not present.
      * @param {?} param
      * @return {?}
      */
-    HttpParams.prototype.get = function (param) {
+    HttpParams.prototype.get = /**
+     * Get the first value for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    function (param) {
         this.init();
-        var /** @type {?} */ res = ((this.map)).get(param);
+        var /** @type {?} */ res = /** @type {?} */ ((this.map)).get(param);
         return !!res ? res[0] : null;
     };
+    /**
+     * Get all values for the given parameter name, or `null` if it's not present.
+     */
     /**
      * Get all values for the given parameter name, or `null` if it's not present.
      * @param {?} param
      * @return {?}
      */
-    HttpParams.prototype.getAll = function (param) {
+    HttpParams.prototype.getAll = /**
+     * Get all values for the given parameter name, or `null` if it's not present.
+     * @param {?} param
+     * @return {?}
+     */
+    function (param) {
         this.init();
-        return ((this.map)).get(param) || null;
+        return /** @type {?} */ ((this.map)).get(param) || null;
     };
+    /**
+     * Get all the parameter names for this body.
+     */
     /**
      * Get all the parameter names for this body.
      * @return {?}
      */
-    HttpParams.prototype.keys = function () {
+    HttpParams.prototype.keys = /**
+     * Get all the parameter names for this body.
+     * @return {?}
+     */
+    function () {
         this.init();
         return Array.from(/** @type {?} */ ((this.map)).keys());
     };
+    /**
+     * Construct a new body with an appended value for the given parameter name.
+     */
     /**
      * Construct a new body with an appended value for the given parameter name.
      * @param {?} param
      * @param {?} value
      * @return {?}
      */
-    HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+    HttpParams.prototype.append = /**
+     * Construct a new body with an appended value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+    /**
+     * Construct a new body with a new value for the given parameter name.
+     */
     /**
      * Construct a new body with a new value for the given parameter name.
      * @param {?} param
      * @param {?} value
      * @return {?}
      */
-    HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+    HttpParams.prototype.set = /**
+     * Construct a new body with a new value for the given parameter name.
+     * @param {?} param
+     * @param {?} value
+     * @return {?}
+     */
+    function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+    /**
+     * Construct a new body with either the given value for the given parameter
+     * removed, if a value is given, or all values for the given parameter removed
+     * if not.
+     */
     /**
      * Construct a new body with either the given value for the given parameter
      * removed, if a value is given, or all values for the given parameter removed
@@ -472,20 +602,36 @@ var HttpParams = (function () {
      * @param {?=} value
      * @return {?}
      */
-    HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+    HttpParams.prototype.delete = /**
+     * Construct a new body with either the given value for the given parameter
+     * removed, if a value is given, or all values for the given parameter removed
+     * if not.
+     * @param {?} param
+     * @param {?=} value
+     * @return {?}
+     */
+    function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+    /**
+     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+     * separated by `&`s.
+     */
     /**
      * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
      * separated by `&`s.
      * @return {?}
      */
-    HttpParams.prototype.toString = function () {
+    HttpParams.prototype.toString = /**
+     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+     * separated by `&`s.
+     * @return {?}
+     */
+    function () {
         var _this = this;
         this.init();
         return this.keys()
             .map(function (key) {
             var /** @type {?} */ eKey = _this.encoder.encodeKey(key);
-            return ((((_this.map)).get(key))).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); })
-                .join('&');
+            return /** @type {?} */ ((/** @type {?} */ ((_this.map)).get(key))).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); }).join('&');
         })
             .join('&');
     };
@@ -493,7 +639,11 @@ var HttpParams = (function () {
      * @param {?} update
      * @return {?}
      */
-    HttpParams.prototype.clone = function (update) {
+    HttpParams.prototype.clone = /**
+     * @param {?} update
+     * @return {?}
+     */
+    function (update) {
         var /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
         clone.cloneFrom = this.cloneFrom || this;
         clone.updates = (this.updates || []).concat([update]);
@@ -502,38 +652,41 @@ var HttpParams = (function () {
     /**
      * @return {?}
      */
-    HttpParams.prototype.init = function () {
+    HttpParams.prototype.init = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         if (this.map === null) {
             this.map = new Map();
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(function (key) { /** @type {?} */ return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+            this.cloneFrom.keys().forEach(function (key) { return /** @type {?} */ ((_this.map)).set(key, /** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
             ((this.updates)).forEach(function (update) {
                 switch (update.op) {
                     case 'a':
                     case 's':
-                        var /** @type {?} */ base = (update.op === 'a' ? ((_this.map)).get(update.param) : undefined) || [];
+                        var /** @type {?} */ base = (update.op === 'a' ? /** @type {?} */ ((_this.map)).get(update.param) : undefined) || [];
                         base.push(/** @type {?} */ ((update.value))); /** @type {?} */
                         ((_this.map)).set(update.param, base);
                         break;
                     case 'd':
                         if (update.value !== undefined) {
-                            var /** @type {?} */ base_1 = ((_this.map)).get(update.param) || [];
+                            var /** @type {?} */ base_1 = /** @type {?} */ ((_this.map)).get(update.param) || [];
                             var /** @type {?} */ idx = base_1.indexOf(update.value);
                             if (idx !== -1) {
                                 base_1.splice(idx, 1);
                             }
                             if (base_1.length > 0) {
-                                ((_this.map)).set(update.param, base_1);
+                                /** @type {?} */ ((_this.map)).set(update.param, base_1);
                             }
                             else {
-                                ((_this.map)).delete(update.param);
+                                /** @type {?} */ ((_this.map)).delete(update.param);
                             }
                         }
                         else {
-                            ((_this.map)).delete(update.param);
+                            /** @type {?} */ ((_this.map)).delete(update.param);
                             break;
                         }
                 }
@@ -613,12 +766,6 @@ function isFormData(value) {
  * \@stable
  */
 var HttpRequest = (function () {
-    /**
-     * @param {?} method
-     * @param {?} url
-     * @param {?=} third
-     * @param {?=} fourth
-     */
     function HttpRequest(method, url, third, fourth) {
         this.url = url;
         /**
@@ -655,12 +802,12 @@ var HttpRequest = (function () {
         // the body argument is to use a known no-body method like GET.
         if (mightHaveBody(this.method) || !!fourth) {
             // Body is the third argument, options are the fourth.
-            this.body = (third) || null;
+            this.body = /** @type {?} */ (third) || null;
             options = fourth;
         }
         else {
             // No body required, options are the third argument. The body stays null.
-            options = (third);
+            options = /** @type {?} */ (third);
         }
         // If options have been passed, interpret them.
         if (options) {
@@ -713,9 +860,18 @@ var HttpRequest = (function () {
     /**
      * Transform the free-form body into a serialized format suitable for
      * transmission to the server.
+     */
+    /**
+     * Transform the free-form body into a serialized format suitable for
+     * transmission to the server.
      * @return {?}
      */
-    HttpRequest.prototype.serializeBody = function () {
+    HttpRequest.prototype.serializeBody = /**
+     * Transform the free-form body into a serialized format suitable for
+     * transmission to the server.
+     * @return {?}
+     */
+    function () {
         // If no body is present, no need to serialize it.
         if (this.body === null) {
             return null;
@@ -736,8 +892,14 @@ var HttpRequest = (function () {
             return JSON.stringify(this.body);
         }
         // Fall back on toString() for everything else.
-        return ((this.body)).toString();
+        return (/** @type {?} */ (this.body)).toString();
     };
+    /**
+     * Examine the body and attempt to infer an appropriate MIME type
+     * for it.
+     *
+     * If no such type can be inferred, this method will return `null`.
+     */
     /**
      * Examine the body and attempt to infer an appropriate MIME type
      * for it.
@@ -745,7 +907,14 @@ var HttpRequest = (function () {
      * If no such type can be inferred, this method will return `null`.
      * @return {?}
      */
-    HttpRequest.prototype.detectContentTypeHeader = function () {
+    HttpRequest.prototype.detectContentTypeHeader = /**
+     * Examine the body and attempt to infer an appropriate MIME type
+     * for it.
+     *
+     * If no such type can be inferred, this method will return `null`.
+     * @return {?}
+     */
+    function () {
         // An empty body has no content type.
         if (this.body === null) {
             return null;
@@ -784,7 +953,11 @@ var HttpRequest = (function () {
      * @param {?=} update
      * @return {?}
      */
-    HttpRequest.prototype.clone = function (update) {
+    HttpRequest.prototype.clone = /**
+     * @param {?=} update
+     * @return {?}
+     */
+    function (update) {
         if (update === void 0) { update = {}; }
         // For method, url, and responseType, take the current value unless
         // it is overridden in the update hash.
@@ -839,28 +1012,28 @@ var HttpRequest = (function () {
 /** @enum {number} */
 var HttpEventType = {
     /**
-     * The request was sent out over the wire.
-     */
+       * The request was sent out over the wire.
+       */
     Sent: 0,
     /**
-     * An upload progress event was received.
-     */
+       * An upload progress event was received.
+       */
     UploadProgress: 1,
     /**
-     * The response status code and headers were received.
-     */
+       * The response status code and headers were received.
+       */
     ResponseHeader: 2,
     /**
-     * A download progress event was received.
-     */
+       * A download progress event was received.
+       */
     DownloadProgress: 3,
     /**
-     * The full response including the body was received.
-     */
+       * The full response including the body was received.
+       */
     Response: 4,
     /**
-     * A custom event from an interceptor or a backend.
-     */
+       * A custom event from an interceptor or a backend.
+       */
     User: 5,
 };
 HttpEventType[HttpEventType.Sent] = "Sent";
@@ -875,14 +1048,14 @@ HttpEventType[HttpEventType.User] = "User";
  * \@stable
  * @record
  */
-function HttpProgressEvent() { }
+
 /**
  * A download progress event.
  *
  * \@stable
  * @record
  */
-function HttpDownloadProgressEvent() { }
+
 /**
  * An upload progress event.
  *
@@ -898,7 +1071,7 @@ function HttpDownloadProgressEvent() { }
  * \@stable
  * @record
  */
-function HttpSentEvent() { }
+
 /**
  * A user-defined event.
  *
@@ -908,7 +1081,7 @@ function HttpSentEvent() { }
  * \@stable
  * @record
  */
-function HttpUserEvent() { }
+
 /**
  * An error that represents a failed attempt to JSON.parse text coming back
  * from the server.
@@ -931,9 +1104,6 @@ var HttpResponseBase = (function () {
      *
      * The single parameter accepted is an initialization hash. Any properties
      * of the response passed there will override the default values.
-     * @param {?} init
-     * @param {?=} defaultStatus
-     * @param {?=} defaultStatusText
      */
     function HttpResponseBase(init, defaultStatus, defaultStatusText) {
         if (defaultStatus === void 0) { defaultStatus = 200; }
@@ -962,7 +1132,6 @@ var HttpHeaderResponse = (function (_super) {
     tslib.__extends(HttpHeaderResponse, _super);
     /**
      * Create a new `HttpHeaderResponse` with the given parameters.
-     * @param {?=} init
      */
     function HttpHeaderResponse(init) {
         if (init === void 0) { init = {}; }
@@ -973,10 +1142,20 @@ var HttpHeaderResponse = (function (_super) {
     /**
      * Copy this `HttpHeaderResponse`, overriding its contents with the
      * given parameter hash.
+     */
+    /**
+     * Copy this `HttpHeaderResponse`, overriding its contents with the
+     * given parameter hash.
      * @param {?=} update
      * @return {?}
      */
-    HttpHeaderResponse.prototype.clone = function (update) {
+    HttpHeaderResponse.prototype.clone = /**
+     * Copy this `HttpHeaderResponse`, overriding its contents with the
+     * given parameter hash.
+     * @param {?=} update
+     * @return {?}
+     */
+    function (update) {
         if (update === void 0) { update = {}; }
         // Perform a straightforward initialization of the new HttpHeaderResponse,
         // overriding the current parameters with new ones if given.
@@ -1002,7 +1181,6 @@ var HttpResponse = (function (_super) {
     tslib.__extends(HttpResponse, _super);
     /**
      * Construct a new `HttpResponse`.
-     * @param {?=} init
      */
     function HttpResponse(init) {
         if (init === void 0) { init = {}; }
@@ -1015,7 +1193,11 @@ var HttpResponse = (function (_super) {
      * @param {?=} update
      * @return {?}
      */
-    HttpResponse.prototype.clone = function (update) {
+    HttpResponse.prototype.clone = /**
+     * @param {?=} update
+     * @return {?}
+     */
+    function (update) {
         if (update === void 0) { update = {}; }
         return new HttpResponse({
             body: (update.body !== undefined) ? update.body : this.body,
@@ -1042,9 +1224,6 @@ var HttpResponse = (function (_super) {
  */
 var HttpErrorResponse = (function (_super) {
     tslib.__extends(HttpErrorResponse, _super);
-    /**
-     * @param {?} init
-     */
     function HttpErrorResponse(init) {
         var _this = 
         // Initialize with a default status of 0 / Unknown Error.
@@ -1110,12 +1289,40 @@ function addBody(options, body) {
  * \@stable
  */
 var HttpClient = (function () {
-    /**
-     * @param {?} handler
-     */
     function HttpClient(handler) {
         this.handler = handler;
     }
+    /**
+     * Constructs an `Observable` for a particular HTTP request that, when subscribed,
+     * fires the request through the chain of registered interceptors and on to the
+     * server.
+     *
+     * This method can be called in one of two ways. Either an `HttpRequest`
+     * instance can be passed directly as the only parameter, or a method can be
+     * passed as the first parameter, a string URL as the second, and an
+     * options hash as the third.
+     *
+     * If a `HttpRequest` object is passed directly, an `Observable` of the
+     * raw `HttpEvent` stream will be returned.
+     *
+     * If a request is instead built by providing a URL, the options object
+     * determines the return type of `request()`. In addition to configuring
+     * request parameters such as the outgoing headers and/or the body, the options
+     * hash specifies two key pieces of information about the request: the
+     * `responseType` and what to `observe`.
+     *
+     * The `responseType` value determines how a successful response body will be
+     * parsed. If `responseType` is the default `json`, a type interface for the
+     * resulting object may be passed as a type parameter to `request()`.
+     *
+     * The `observe` value determines the return type of `request()`, based on what
+     * the consumer is interested in observing. A value of `events` will return an
+     * `Observable<HttpEvent>` representing the raw `HttpEvent` stream,
+     * including progress events by default. A value of `response` will return an
+     * `Observable<HttpResponse<T>>` where the `T` parameter of `HttpResponse`
+     * depends on the `responseType` and any optionally provided type parameter.
+     * A value of `body` will return an `Observable<T>` with the same `T` body type.
+     */
     /**
      * Constructs an `Observable` for a particular HTTP request that, when subscribed,
      * fires the request through the chain of registered interceptors and on to the
@@ -1151,7 +1358,42 @@ var HttpClient = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.request = function (first, url, options) {
+    HttpClient.prototype.request = /**
+     * Constructs an `Observable` for a particular HTTP request that, when subscribed,
+     * fires the request through the chain of registered interceptors and on to the
+     * server.
+     *
+     * This method can be called in one of two ways. Either an `HttpRequest`
+     * instance can be passed directly as the only parameter, or a method can be
+     * passed as the first parameter, a string URL as the second, and an
+     * options hash as the third.
+     *
+     * If a `HttpRequest` object is passed directly, an `Observable` of the
+     * raw `HttpEvent` stream will be returned.
+     *
+     * If a request is instead built by providing a URL, the options object
+     * determines the return type of `request()`. In addition to configuring
+     * request parameters such as the outgoing headers and/or the body, the options
+     * hash specifies two key pieces of information about the request: the
+     * `responseType` and what to `observe`.
+     *
+     * The `responseType` value determines how a successful response body will be
+     * parsed. If `responseType` is the default `json`, a type interface for the
+     * resulting object may be passed as a type parameter to `request()`.
+     *
+     * The `observe` value determines the return type of `request()`, based on what
+     * the consumer is interested in observing. A value of `events` will return an
+     * `Observable<HttpEvent>` representing the raw `HttpEvent` stream,
+     * including progress events by default. A value of `response` will return an
+     * `Observable<HttpResponse<T>>` where the `T` parameter of `HttpResponse`
+     * depends on the `responseType` and any optionally provided type parameter.
+     * A value of `body` will return an `Observable<T>` with the same `T` body type.
+     * @param {?} first
+     * @param {?=} url
+     * @param {?=} options
+     * @return {?}
+     */
+    function (first, url, options) {
         var _this = this;
         if (options === void 0) { options = {}; }
         var /** @type {?} */ req;
@@ -1159,7 +1401,7 @@ var HttpClient = (function () {
         if (first instanceof HttpRequest) {
             // It is. The other arguments must be undefined (per the signatures) and can be
             // ignored.
-            req = (first);
+            req = /** @type {?} */ (first);
         }
         else {
             // It's a string, so it represents a URL. Construct a request based on it,
@@ -1260,14 +1502,32 @@ var HttpClient = (function () {
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * DELETE request to be executed on the server. See the individual overloads for
      * details of `delete()`'s return type based on the provided options.
+     */
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * DELETE request to be executed on the server. See the individual overloads for
+     * details of `delete()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.delete = function (url, options) {
+    HttpClient.prototype.delete = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * DELETE request to be executed on the server. See the individual overloads for
+     * details of `delete()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, options) {
         if (options === void 0) { options = {}; }
         return this.request('DELETE', url, /** @type {?} */ (options));
     };
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * GET request to be executed on the server. See the individual overloads for
+     * details of `get()`'s return type based on the provided options.
+     */
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * GET request to be executed on the server. See the individual overloads for
@@ -1276,10 +1536,23 @@ var HttpClient = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.get = function (url, options) {
+    HttpClient.prototype.get = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * GET request to be executed on the server. See the individual overloads for
+     * details of `get()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, options) {
         if (options === void 0) { options = {}; }
         return this.request('GET', url, /** @type {?} */ (options));
     };
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * HEAD request to be executed on the server. See the individual overloads for
+     * details of `head()`'s return type based on the provided options.
+     */
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * HEAD request to be executed on the server. See the individual overloads for
@@ -1288,10 +1561,26 @@ var HttpClient = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.head = function (url, options) {
+    HttpClient.prototype.head = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * HEAD request to be executed on the server. See the individual overloads for
+     * details of `head()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, options) {
         if (options === void 0) { options = {}; }
         return this.request('HEAD', url, /** @type {?} */ (options));
     };
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause a request
+     * with the special method `JSONP` to be dispatched via the interceptor pipeline.
+     *
+     * A suitable interceptor must be installed (e.g. via the `HttpClientJsonpModule`).
+     * If no such interceptor is reached, then the `JSONP` request will likely be
+     * rejected by the configured backend.
+     */
     /**
      * Constructs an `Observable` which, when subscribed, will cause a request
      * with the special method `JSONP` to be dispatched via the interceptor pipeline.
@@ -1304,7 +1593,19 @@ var HttpClient = (function () {
      * @param {?} callbackParam
      * @return {?}
      */
-    HttpClient.prototype.jsonp = function (url, callbackParam) {
+    HttpClient.prototype.jsonp = /**
+     * Constructs an `Observable` which, when subscribed, will cause a request
+     * with the special method `JSONP` to be dispatched via the interceptor pipeline.
+     *
+     * A suitable interceptor must be installed (e.g. via the `HttpClientJsonpModule`).
+     * If no such interceptor is reached, then the `JSONP` request will likely be
+     * rejected by the configured backend.
+     * @template T
+     * @param {?} url
+     * @param {?} callbackParam
+     * @return {?}
+     */
+    function (url, callbackParam) {
         return this.request('JSONP', url, {
             params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
             observe: 'body',
@@ -1315,14 +1616,32 @@ var HttpClient = (function () {
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * OPTIONS request to be executed on the server. See the individual overloads for
      * details of `options()`'s return type based on the provided options.
+     */
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * OPTIONS request to be executed on the server. See the individual overloads for
+     * details of `options()`'s return type based on the provided options.
      * @param {?} url
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.options = function (url, options) {
+    HttpClient.prototype.options = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * OPTIONS request to be executed on the server. See the individual overloads for
+     * details of `options()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, options) {
         if (options === void 0) { options = {}; }
         return this.request('OPTIONS', url, /** @type {?} */ (options));
     };
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * PATCH request to be executed on the server. See the individual overloads for
+     * details of `patch()`'s return type based on the provided options.
+     */
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * PATCH request to be executed on the server. See the individual overloads for
@@ -1332,7 +1651,16 @@ var HttpClient = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.patch = function (url, body, options) {
+    HttpClient.prototype.patch = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * PATCH request to be executed on the server. See the individual overloads for
+     * details of `patch()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?} body
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, body, options) {
         if (options === void 0) { options = {}; }
         return this.request('PATCH', url, addBody(options, body));
     };
@@ -1340,15 +1668,7 @@ var HttpClient = (function () {
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * POST request to be executed on the server. See the individual overloads for
      * details of `post()`'s return type based on the provided options.
-     * @param {?} url
-     * @param {?} body
-     * @param {?=} options
-     * @return {?}
      */
-    HttpClient.prototype.post = function (url, body, options) {
-        if (options === void 0) { options = {}; }
-        return this.request('POST', url, addBody(options, body));
-    };
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
      * POST request to be executed on the server. See the individual overloads for
@@ -1358,19 +1678,55 @@ var HttpClient = (function () {
      * @param {?=} options
      * @return {?}
      */
-    HttpClient.prototype.put = function (url, body, options) {
+    HttpClient.prototype.post = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * POST request to be executed on the server. See the individual overloads for
+     * details of `post()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?} body
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, body, options) {
+        if (options === void 0) { options = {}; }
+        return this.request('POST', url, addBody(options, body));
+    };
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * POST request to be executed on the server. See the individual overloads for
+     * details of `post()`'s return type based on the provided options.
+     */
+    /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * POST request to be executed on the server. See the individual overloads for
+     * details of `post()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?} body
+     * @param {?=} options
+     * @return {?}
+     */
+    HttpClient.prototype.put = /**
+     * Constructs an `Observable` which, when subscribed, will cause the configured
+     * POST request to be executed on the server. See the individual overloads for
+     * details of `post()`'s return type based on the provided options.
+     * @param {?} url
+     * @param {?} body
+     * @param {?=} options
+     * @return {?}
+     */
+    function (url, body, options) {
         if (options === void 0) { options = {}; }
         return this.request('PUT', url, addBody(options, body));
     };
+    HttpClient.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpClient.ctorParameters = function () { return [
+        { type: HttpHandler, },
+    ]; };
     return HttpClient;
 }());
-HttpClient.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-HttpClient.ctorParameters = function () { return [
-    { type: HttpHandler, },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -1395,17 +1751,13 @@ HttpClient.ctorParameters = function () { return [
  * \@stable
  * @record
  */
-function HttpInterceptor() { }
+
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
  * \@stable
  */
 var HttpInterceptorHandler = (function () {
-    /**
-     * @param {?} next
-     * @param {?} interceptor
-     */
     function HttpInterceptorHandler(next, interceptor) {
         this.next = next;
         this.interceptor = interceptor;
@@ -1414,7 +1766,11 @@ var HttpInterceptorHandler = (function () {
      * @param {?} req
      * @return {?}
      */
-    HttpInterceptorHandler.prototype.handle = function (req) {
+    HttpInterceptorHandler.prototype.handle = /**
+     * @param {?} req
+     * @return {?}
+     */
+    function (req) {
         return this.interceptor.intercept(req, this.next);
     };
     return HttpInterceptorHandler;
@@ -1434,16 +1790,21 @@ var NoopInterceptor = (function () {
      * @param {?} next
      * @return {?}
      */
-    NoopInterceptor.prototype.intercept = function (req, next) {
+    NoopInterceptor.prototype.intercept = /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    function (req, next) {
         return next.handle(req);
     };
+    NoopInterceptor.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    NoopInterceptor.ctorParameters = function () { return []; };
     return NoopInterceptor;
 }());
-NoopInterceptor.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-NoopInterceptor.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -1488,10 +1849,6 @@ var JsonpCallbackContext = (function () {
  * \@stable
  */
 var JsonpClientBackend = (function () {
-    /**
-     * @param {?} callbackMap
-     * @param {?} document
-     */
     function JsonpClientBackend(callbackMap, document) {
         this.callbackMap = callbackMap;
         this.document = document;
@@ -1500,13 +1857,25 @@ var JsonpClientBackend = (function () {
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
      * @return {?}
      */
-    JsonpClientBackend.prototype.nextCallback = function () { return "ng_jsonp_callback_" + nextRequestId++; };
+    JsonpClientBackend.prototype.nextCallback = /**
+     * Get the name of the next callback method, by incrementing the global `nextRequestId`.
+     * @return {?}
+     */
+    function () { return "ng_jsonp_callback_" + nextRequestId++; };
+    /**
+     * Process a JSONP request and return an event stream of the results.
+     */
     /**
      * Process a JSONP request and return an event stream of the results.
      * @param {?} req
      * @return {?}
      */
-    JsonpClientBackend.prototype.handle = function (req) {
+    JsonpClientBackend.prototype.handle = /**
+     * Process a JSONP request and return an event stream of the results.
+     * @param {?} req
+     * @return {?}
+     */
+    function (req) {
         var _this = this;
         // Firstly, check both the method and response type. If either doesn't match
         // then the request was improperly routed here and cannot be handled.
@@ -1535,6 +1904,9 @@ var JsonpClientBackend = (function () {
             // Whether the request has been cancelled (and thus any other callbacks)
             // should be ignored.
             var /** @type {?} */ cancelled = false;
+            // Set the response callback in this.callbackMap (which will be the window
+            // object in the browser. The script being loaded via the <script> tag will
+            // eventually call this callback.
             // Set the response callback in this.callbackMap (which will be the window
             // object in the browser. The script being loaded via the <script> tag will
             // eventually call this callback.
@@ -1629,16 +2001,16 @@ var JsonpClientBackend = (function () {
             };
         });
     };
+    JsonpClientBackend.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    JsonpClientBackend.ctorParameters = function () { return [
+        { type: JsonpCallbackContext, },
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_common.DOCUMENT,] },] },
+    ]; };
     return JsonpClientBackend;
 }());
-JsonpClientBackend.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-JsonpClientBackend.ctorParameters = function () { return [
-    { type: JsonpCallbackContext, },
-    { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_common.DOCUMENT,] },] },
-]; };
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
@@ -1646,9 +2018,6 @@ JsonpClientBackend.ctorParameters = function () { return [
  * \@stable
  */
 var JsonpInterceptor = (function () {
-    /**
-     * @param {?} jsonp
-     */
     function JsonpInterceptor(jsonp) {
         this.jsonp = jsonp;
     }
@@ -1657,22 +2026,27 @@ var JsonpInterceptor = (function () {
      * @param {?} next
      * @return {?}
      */
-    JsonpInterceptor.prototype.intercept = function (req, next) {
+    JsonpInterceptor.prototype.intercept = /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    function (req, next) {
         if (req.method === 'JSONP') {
             return this.jsonp.handle(/** @type {?} */ (req));
         }
         // Fall through for normal HTTP requests.
         return next.handle(req);
     };
+    JsonpInterceptor.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    JsonpInterceptor.ctorParameters = function () { return [
+        { type: JsonpClientBackend, },
+    ]; };
     return JsonpInterceptor;
 }());
-JsonpInterceptor.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-JsonpInterceptor.ctorParameters = function () { return [
-    { type: JsonpClientBackend, },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -1723,14 +2097,17 @@ var BrowserXhr = (function () {
     /**
      * @return {?}
      */
-    BrowserXhr.prototype.build = function () { return ((new XMLHttpRequest())); };
+    BrowserXhr.prototype.build = /**
+     * @return {?}
+     */
+    function () { return /** @type {?} */ ((new XMLHttpRequest())); };
+    BrowserXhr.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    BrowserXhr.ctorParameters = function () { return []; };
     return BrowserXhr;
 }());
-BrowserXhr.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-BrowserXhr.ctorParameters = function () { return []; };
 /**
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
@@ -1738,18 +2115,23 @@ BrowserXhr.ctorParameters = function () { return []; };
  * \@stable
  */
 var HttpXhrBackend = (function () {
-    /**
-     * @param {?} xhrFactory
-     */
     function HttpXhrBackend(xhrFactory) {
         this.xhrFactory = xhrFactory;
     }
     /**
      * Process a request and return a stream of response events.
+     */
+    /**
+     * Process a request and return a stream of response events.
      * @param {?} req
      * @return {?}
      */
-    HttpXhrBackend.prototype.handle = function (req) {
+    HttpXhrBackend.prototype.handle = /**
+     * Process a request and return a stream of response events.
+     * @param {?} req
+     * @return {?}
+     */
+    function (req) {
         var _this = this;
         // Quick check to give a better error message when a user attempts to use
         // HttpClient.jsonp() without installing the JsonpClientModule
@@ -1786,7 +2168,7 @@ var HttpXhrBackend = (function () {
                 // xhr.response will be null, and xhr.responseText cannot be accessed to
                 // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
                 // is parsed by first requesting text and then applying JSON.parse.
-                xhr.responseType = (((responseType !== 'json') ? responseType : 'text'));
+                xhr.responseType = /** @type {?} */ (((responseType !== 'json') ? responseType : 'text'));
             }
             // Serialize the request body if one is present. If not, this will be set to null.
             var /** @type {?} */ reqBody = req.serializeBody();
@@ -1844,11 +2226,11 @@ var HttpXhrBackend = (function () {
                     try {
                         body = JSON.parse(body);
                     }
-                    catch (error) {
+                    catch (/** @type {?} */ error) {
                         // Even though the response status was 2xx, this is still an error.
                         ok = false;
                         // The parse error contains the text of the body that failed to parse.
-                        body = ({ error: error, text: body });
+                        body = /** @type {?} */ ({ error: error, text: body });
                     }
                 }
                 if (ok) {
@@ -1968,15 +2350,15 @@ var HttpXhrBackend = (function () {
             };
         });
     };
+    HttpXhrBackend.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpXhrBackend.ctorParameters = function () { return [
+        { type: XhrFactory, },
+    ]; };
     return HttpXhrBackend;
 }());
-HttpXhrBackend.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-HttpXhrBackend.ctorParameters = function () { return [
-    { type: XhrFactory, },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -2006,11 +2388,6 @@ var HttpXsrfTokenExtractor = (function () {
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
 var HttpXsrfCookieExtractor = (function () {
-    /**
-     * @param {?} doc
-     * @param {?} platform
-     * @param {?} cookieName
-     */
     function HttpXsrfCookieExtractor(doc, platform, cookieName) {
         this.doc = doc;
         this.platform = platform;
@@ -2025,7 +2402,10 @@ var HttpXsrfCookieExtractor = (function () {
     /**
      * @return {?}
      */
-    HttpXsrfCookieExtractor.prototype.getToken = function () {
+    HttpXsrfCookieExtractor.prototype.getToken = /**
+     * @return {?}
+     */
+    function () {
         if (this.platform === 'server') {
             return null;
         }
@@ -2037,25 +2417,21 @@ var HttpXsrfCookieExtractor = (function () {
         }
         return this.lastToken;
     };
+    HttpXsrfCookieExtractor.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpXsrfCookieExtractor.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_common.DOCUMENT,] },] },
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.PLATFORM_ID,] },] },
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [XSRF_COOKIE_NAME,] },] },
+    ]; };
     return HttpXsrfCookieExtractor;
 }());
-HttpXsrfCookieExtractor.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-HttpXsrfCookieExtractor.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_common.DOCUMENT,] },] },
-    { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.PLATFORM_ID,] },] },
-    { type: undefined, decorators: [{ type: _angular_core.Inject, args: [XSRF_COOKIE_NAME,] },] },
-]; };
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
 var HttpXsrfInterceptor = (function () {
-    /**
-     * @param {?} tokenService
-     * @param {?} headerName
-     */
     function HttpXsrfInterceptor(tokenService, headerName) {
         this.tokenService = tokenService;
         this.headerName = headerName;
@@ -2065,7 +2441,12 @@ var HttpXsrfInterceptor = (function () {
      * @param {?} next
      * @return {?}
      */
-    HttpXsrfInterceptor.prototype.intercept = function (req, next) {
+    HttpXsrfInterceptor.prototype.intercept = /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    function (req, next) {
         var /** @type {?} */ lcUrl = req.url.toLowerCase();
         // Skip both non-mutating requests and absolute URLs.
         // Non-mutating requests don't require a token, and absolute URLs require special handling
@@ -2082,16 +2463,16 @@ var HttpXsrfInterceptor = (function () {
         }
         return next.handle(req);
     };
+    HttpXsrfInterceptor.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpXsrfInterceptor.ctorParameters = function () { return [
+        { type: HttpXsrfTokenExtractor, },
+        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [XSRF_HEADER_NAME,] },] },
+    ]; };
     return HttpXsrfInterceptor;
 }());
-HttpXsrfInterceptor.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-HttpXsrfInterceptor.ctorParameters = function () { return [
-    { type: HttpXsrfTokenExtractor, },
-    { type: undefined, decorators: [{ type: _angular_core.Inject, args: [XSRF_HEADER_NAME,] },] },
-]; };
 
 /**
  * @fileoverview added by tsickle
@@ -2154,9 +2535,16 @@ var HttpClientXsrfModule = (function () {
     }
     /**
      * Disable the default XSRF protection.
+     */
+    /**
+     * Disable the default XSRF protection.
      * @return {?}
      */
-    HttpClientXsrfModule.disable = function () {
+    HttpClientXsrfModule.disable = /**
+     * Disable the default XSRF protection.
+     * @return {?}
+     */
+    function () {
         return {
             ngModule: HttpClientXsrfModule,
             providers: [
@@ -2167,10 +2555,20 @@ var HttpClientXsrfModule = (function () {
     /**
      * Configure XSRF protection to use the given cookie name or header name,
      * or the default names (as described above) if not provided.
+     */
+    /**
+     * Configure XSRF protection to use the given cookie name or header name,
+     * or the default names (as described above) if not provided.
      * @param {?=} options
      * @return {?}
      */
-    HttpClientXsrfModule.withOptions = function (options) {
+    HttpClientXsrfModule.withOptions = /**
+     * Configure XSRF protection to use the given cookie name or header name,
+     * or the default names (as described above) if not provided.
+     * @param {?=} options
+     * @return {?}
+     */
+    function (options) {
         if (options === void 0) { options = {}; }
         return {
             ngModule: HttpClientXsrfModule,
@@ -2180,21 +2578,21 @@ var HttpClientXsrfModule = (function () {
             ],
         };
     };
+    HttpClientXsrfModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    HttpClientXsrfModule.ctorParameters = function () { return []; };
     return HttpClientXsrfModule;
 }());
-HttpClientXsrfModule.decorators = [
-    { type: _angular_core.NgModule, args: [{
-                providers: [
-                    HttpXsrfInterceptor,
-                    { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
-                    { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
-                    { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
-                    { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-                ],
-            },] },
-];
-/** @nocollapse */
-HttpClientXsrfModule.ctorParameters = function () { return []; };
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
@@ -2206,34 +2604,34 @@ HttpClientXsrfModule.ctorParameters = function () { return []; };
 var HttpClientModule = (function () {
     function HttpClientModule() {
     }
+    HttpClientModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    providers: [
+                        HttpClient,
+                        // HttpHandler is the backend + interceptors and is constructed
+                        // using the interceptingHandler factory function.
+                        {
+                            provide: HttpHandler,
+                            useFactory: interceptingHandler,
+                            deps: [HttpBackend, [new _angular_core.Optional(), new _angular_core.Inject(HTTP_INTERCEPTORS)]],
+                        },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                        BrowserXhr,
+                        { provide: XhrFactory, useExisting: BrowserXhr },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    HttpClientModule.ctorParameters = function () { return []; };
     return HttpClientModule;
 }());
-HttpClientModule.decorators = [
-    { type: _angular_core.NgModule, args: [{
-                imports: [
-                    HttpClientXsrfModule.withOptions({
-                        cookieName: 'XSRF-TOKEN',
-                        headerName: 'X-XSRF-TOKEN',
-                    }),
-                ],
-                providers: [
-                    HttpClient,
-                    // HttpHandler is the backend + interceptors and is constructed
-                    // using the interceptingHandler factory function.
-                    {
-                        provide: HttpHandler,
-                        useFactory: interceptingHandler,
-                        deps: [HttpBackend, [new _angular_core.Optional(), new _angular_core.Inject(HTTP_INTERCEPTORS)]],
-                    },
-                    HttpXhrBackend,
-                    { provide: HttpBackend, useExisting: HttpXhrBackend },
-                    BrowserXhr,
-                    { provide: XhrFactory, useExisting: BrowserXhr },
-                ],
-            },] },
-];
-/** @nocollapse */
-HttpClientModule.ctorParameters = function () { return []; };
 /**
  * `NgModule` which enables JSONP support in `HttpClient`.
  *
@@ -2245,45 +2643,39 @@ HttpClientModule.ctorParameters = function () { return []; };
 var HttpClientJsonpModule = (function () {
     function HttpClientJsonpModule() {
     }
+    HttpClientJsonpModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    providers: [
+                        JsonpClientBackend,
+                        { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                        { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    HttpClientJsonpModule.ctorParameters = function () { return []; };
     return HttpClientJsonpModule;
 }());
-HttpClientJsonpModule.decorators = [
-    { type: _angular_core.NgModule, args: [{
-                providers: [
-                    JsonpClientBackend,
-                    { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
-                    { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-                ],
-            },] },
-];
-/** @nocollapse */
-HttpClientJsonpModule.ctorParameters = function () { return []; };
 
 exports.HttpBackend = HttpBackend;
 exports.HttpHandler = HttpHandler;
 exports.HttpClient = HttpClient;
 exports.HttpHeaders = HttpHeaders;
 exports.HTTP_INTERCEPTORS = HTTP_INTERCEPTORS;
-exports.HttpInterceptor = HttpInterceptor;
 exports.JsonpClientBackend = JsonpClientBackend;
 exports.JsonpInterceptor = JsonpInterceptor;
 exports.HttpClientJsonpModule = HttpClientJsonpModule;
 exports.HttpClientModule = HttpClientModule;
 exports.HttpClientXsrfModule = HttpClientXsrfModule;
 exports.ɵinterceptingHandler = interceptingHandler;
-exports.HttpParameterCodec = HttpParameterCodec;
 exports.HttpParams = HttpParams;
 exports.HttpUrlEncodingCodec = HttpUrlEncodingCodec;
 exports.HttpRequest = HttpRequest;
-exports.HttpDownloadProgressEvent = HttpDownloadProgressEvent;
 exports.HttpErrorResponse = HttpErrorResponse;
 exports.HttpEventType = HttpEventType;
 exports.HttpHeaderResponse = HttpHeaderResponse;
-exports.HttpProgressEvent = HttpProgressEvent;
 exports.HttpResponse = HttpResponse;
 exports.HttpResponseBase = HttpResponseBase;
-exports.HttpSentEvent = HttpSentEvent;
-exports.HttpUserEvent = HttpUserEvent;
 exports.HttpXhrBackend = HttpXhrBackend;
 exports.XhrFactory = XhrFactory;
 exports.HttpXsrfTokenExtractor = HttpXsrfTokenExtractor;
