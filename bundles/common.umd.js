@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-bf94f87
+ * @license Angular v5.0.0-beta.6-9b571a1
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.0.0-beta.6-bf94f87
+ * @license Angular v5.0.0-beta.6-9b571a1
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1545,7 +1545,7 @@ function findCurrencySymbol(code, format) {
 /**
  * @deprecated from v5
  */
-var USE_V4_PLURALS = new _angular_core.InjectionToken('UseV4Plurals');
+var DEPRECATED_PLURAL_FN = new _angular_core.InjectionToken('UseV4Plurals');
 /**
  * \@experimental
  * @abstract
@@ -1588,10 +1588,11 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  */
 var NgLocaleLocalization = (function (_super) {
     __extends(NgLocaleLocalization, _super);
-    function NgLocaleLocalization(locale, useV4Plurals) {
+    function NgLocaleLocalization(locale, /** @deprecated from v5 */
+        deprecatedPluralFn) {
         var _this = _super.call(this) || this;
         _this.locale = locale;
-        _this.useV4Plurals = useV4Plurals;
+        _this.deprecatedPluralFn = deprecatedPluralFn;
         return _this;
     }
     /**
@@ -1605,7 +1606,7 @@ var NgLocaleLocalization = (function (_super) {
      * @return {?}
      */
     function (value, locale) {
-        var /** @type {?} */ plural = this.useV4Plurals ? getPluralCase(locale || this.locale, value) :
+        var /** @type {?} */ plural = this.deprecatedPluralFn ? this.deprecatedPluralFn(locale || this.locale, value) :
             getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
             case Plural.Zero:
@@ -1628,7 +1629,7 @@ var NgLocaleLocalization = (function (_super) {
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [USE_V4_PLURALS,] },] },
+        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [DEPRECATED_PLURAL_FN,] },] },
     ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
@@ -6385,7 +6386,7 @@ var DeprecatedI18NPipesModule = (function () {
         { type: _angular_core.NgModule, args: [{
                     declarations: [COMMON_DEPRECATED_I18N_PIPES],
                     exports: [COMMON_DEPRECATED_I18N_PIPES],
-                    providers: [{ provide: USE_V4_PLURALS, useValue: true }],
+                    providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
                 },] },
     ];
     /** @nocollapse */
@@ -6485,7 +6486,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.6-bf94f87');
+var VERSION = new _angular_core.Version('5.0.0-beta.6-9b571a1');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
@@ -6564,11 +6565,12 @@ exports.APP_BASE_HREF = APP_BASE_HREF;
 exports.HashLocationStrategy = HashLocationStrategy;
 exports.PathLocationStrategy = PathLocationStrategy;
 exports.Location = Location;
-exports.ɵd = COMMON_DIRECTIVES;
-exports.ɵc = findLocaleData;
-exports.ɵa = USE_V4_PLURALS;
-exports.ɵf = COMMON_DEPRECATED_I18N_PIPES;
-exports.ɵe = COMMON_PIPES;
+exports.ɵe = COMMON_DIRECTIVES;
+exports.ɵd = findLocaleData;
+exports.ɵa = DEPRECATED_PLURAL_FN;
+exports.ɵb = getPluralCase;
+exports.ɵg = COMMON_DEPRECATED_I18N_PIPES;
+exports.ɵf = COMMON_PIPES;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

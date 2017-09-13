@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.6-bf94f87
+ * @license Angular v5.0.0-beta.6-9b571a1
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1314,7 +1314,7 @@ function findCurrencySymbol(code, format) {
 /**
  * @deprecated from v5
  */
-const USE_V4_PLURALS = new InjectionToken('UseV4Plurals');
+const DEPRECATED_PLURAL_FN = new InjectionToken('UseV4Plurals');
 /**
  * \@experimental
  * @abstract
@@ -1355,12 +1355,13 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
 class NgLocaleLocalization extends NgLocalization {
     /**
      * @param {?} locale
-     * @param {?=} useV4Plurals
+     * @param {?=} deprecatedPluralFn
      */
-    constructor(locale, useV4Plurals) {
+    constructor(locale, /** @deprecated from v5 */
+        deprecatedPluralFn) {
         super();
         this.locale = locale;
-        this.useV4Plurals = useV4Plurals;
+        this.deprecatedPluralFn = deprecatedPluralFn;
     }
     /**
      * @param {?} value
@@ -1368,7 +1369,7 @@ class NgLocaleLocalization extends NgLocalization {
      * @return {?}
      */
     getPluralCategory(value, locale) {
-        const /** @type {?} */ plural = this.useV4Plurals ? getPluralCase(locale || this.locale, value) :
+        const /** @type {?} */ plural = this.deprecatedPluralFn ? this.deprecatedPluralFn(locale || this.locale, value) :
             getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
             case Plural.Zero:
@@ -1392,7 +1393,7 @@ NgLocaleLocalization.decorators = [
 /** @nocollapse */
 NgLocaleLocalization.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [USE_V4_PLURALS,] },] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DEPRECATED_PLURAL_FN,] },] },
 ];
 /**
  * Returns the plural case based on the locale
@@ -5805,7 +5806,7 @@ DeprecatedI18NPipesModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [COMMON_DEPRECATED_I18N_PIPES],
                 exports: [COMMON_DEPRECATED_I18N_PIPES],
-                providers: [{ provide: USE_V4_PLURALS, useValue: true }],
+                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
             },] },
 ];
 /** @nocollapse */
@@ -5903,7 +5904,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.6-bf94f87');
+const VERSION = new Version('5.0.0-beta.6-9b571a1');
 
 /**
  * @fileoverview added by tsickle
@@ -5949,5 +5950,5 @@ const VERSION = new Version('5.0.0-beta.6-bf94f87');
  * Generated bundle index. Do not edit.
  */
 
-export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵd, findLocaleData as ɵc, USE_V4_PLURALS as ɵa, COMMON_DEPRECATED_I18N_PIPES as ɵf, COMMON_PIPES as ɵe };
+export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
 //# sourceMappingURL=index.js.map
