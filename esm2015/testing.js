@@ -1,10 +1,9 @@
 /**
- * @license Angular v5.0.0-beta.7-9d2236a
+ * @license Angular v5.0.0-beta.7-5751865
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { EventEmitter, Injectable } from '@angular/core';
-import { __extends } from 'tslib';
 import { LocationStrategy } from '@angular/common';
 
 /**
@@ -16,8 +15,8 @@ import { LocationStrategy } from '@angular/common';
  *
  * \@experimental
  */
-var SpyLocation = (function () {
-    function SpyLocation() {
+class SpyLocation {
+    constructor() {
         this.urlChanges = [];
         this._history = [new LocationState('', '')];
         this._historyIndex = 0;
@@ -38,190 +37,135 @@ var SpyLocation = (function () {
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.setInitialPath = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) { this._history[this._historyIndex].path = url; };
+    setInitialPath(url) { this._history[this._historyIndex].path = url; }
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.setBaseHref = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) { this._baseHref = url; };
+    setBaseHref(url) { this._baseHref = url; }
     /**
      * @return {?}
      */
-    SpyLocation.prototype.path = /**
-     * @return {?}
-     */
-    function () { return this._history[this._historyIndex].path; };
+    path() { return this._history[this._historyIndex].path; }
     /**
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    SpyLocation.prototype.isCurrentPathEqualTo = /**
-     * @param {?} path
-     * @param {?=} query
-     * @return {?}
-     */
-    function (path, query) {
-        if (query === void 0) { query = ''; }
-        var /** @type {?} */ givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
-        var /** @type {?} */ currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+    isCurrentPathEqualTo(path, query = '') {
+        const /** @type {?} */ givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+        const /** @type {?} */ currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
         return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
-    };
+    }
     /**
      * @param {?} pathname
      * @return {?}
      */
-    SpyLocation.prototype.simulateUrlPop = /**
-     * @param {?} pathname
-     * @return {?}
-     */
-    function (pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); };
+    simulateUrlPop(pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); }
     /**
      * @param {?} pathname
      * @return {?}
      */
-    SpyLocation.prototype.simulateHashChange = /**
-     * @param {?} pathname
-     * @return {?}
-     */
-    function (pathname) {
+    simulateHashChange(pathname) {
         // Because we don't prevent the native event, the browser will independently update the path
         this.setInitialPath(pathname);
         this.urlChanges.push('hash: ' + pathname);
         this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
-    };
+    }
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.prepareExternalUrl = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) {
+    prepareExternalUrl(url) {
         if (url.length > 0 && !url.startsWith('/')) {
             url = '/' + url;
         }
         return this._baseHref + url;
-    };
+    }
     /**
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    SpyLocation.prototype.go = /**
-     * @param {?} path
-     * @param {?=} query
-     * @return {?}
-     */
-    function (path, query) {
-        if (query === void 0) { query = ''; }
+    go(path, query = '') {
         path = this.prepareExternalUrl(path);
         if (this._historyIndex > 0) {
             this._history.splice(this._historyIndex + 1);
         }
         this._history.push(new LocationState(path, query));
         this._historyIndex = this._history.length - 1;
-        var /** @type {?} */ locationState = this._history[this._historyIndex - 1];
+        const /** @type {?} */ locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
             return;
         }
-        var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
         this._subject.emit({ 'url': url, 'pop': false });
-    };
+    }
     /**
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    SpyLocation.prototype.replaceState = /**
-     * @param {?} path
-     * @param {?=} query
-     * @return {?}
-     */
-    function (path, query) {
-        if (query === void 0) { query = ''; }
+    replaceState(path, query = '') {
         path = this.prepareExternalUrl(path);
-        var /** @type {?} */ history = this._history[this._historyIndex];
+        const /** @type {?} */ history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
             return;
         }
         history.path = path;
         history.query = query;
-        var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
-    };
+    }
     /**
      * @return {?}
      */
-    SpyLocation.prototype.forward = /**
-     * @return {?}
-     */
-    function () {
+    forward() {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
             this._subject.emit({ 'url': this.path(), 'pop': true });
         }
-    };
+    }
     /**
      * @return {?}
      */
-    SpyLocation.prototype.back = /**
-     * @return {?}
-     */
-    function () {
+    back() {
         if (this._historyIndex > 0) {
             this._historyIndex--;
             this._subject.emit({ 'url': this.path(), 'pop': true });
         }
-    };
+    }
     /**
      * @param {?} onNext
      * @param {?=} onThrow
      * @param {?=} onReturn
      * @return {?}
      */
-    SpyLocation.prototype.subscribe = /**
-     * @param {?} onNext
-     * @param {?=} onThrow
-     * @param {?=} onReturn
-     * @return {?}
-     */
-    function (onNext, onThrow, onReturn) {
+    subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-    };
+    }
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.normalize = /**
-     * @param {?} url
-     * @return {?}
+    normalize(url) { return /** @type {?} */ ((null)); }
+}
+SpyLocation.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+SpyLocation.ctorParameters = () => [];
+class LocationState {
+    /**
+     * @param {?} path
+     * @param {?} query
      */
-    function (url) { return /** @type {?} */ ((null)); };
-    SpyLocation.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    SpyLocation.ctorParameters = function () { return []; };
-    return SpyLocation;
-}());
-var LocationState = (function () {
-    function LocationState(path, query) {
+    constructor(path, query) {
         this.path = path;
         this.query = query;
     }
-    return LocationState;
-}());
+}
 
 /**
  * @fileoverview added by tsickle
@@ -240,58 +184,41 @@ var LocationState = (function () {
  *
  * \@stable
  */
-var MockLocationStrategy = (function (_super) {
-    __extends(MockLocationStrategy, _super);
-    function MockLocationStrategy() {
-        var _this = _super.call(this) || this;
-        _this.internalBaseHref = '/';
-        _this.internalPath = '/';
-        _this.internalTitle = '';
-        _this.urlChanges = [];
+class MockLocationStrategy extends LocationStrategy {
+    constructor() {
+        super();
+        this.internalBaseHref = '/';
+        this.internalPath = '/';
+        this.internalTitle = '';
+        this.urlChanges = [];
         /**
          * \@internal
          */
-        _this._subject = new EventEmitter();
-        return _this;
+        this._subject = new EventEmitter();
     }
     /**
      * @param {?} url
      * @return {?}
      */
-    MockLocationStrategy.prototype.simulatePopState = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) {
+    simulatePopState(url) {
         this.internalPath = url;
         this._subject.emit(new _MockPopStateEvent(this.path()));
-    };
+    }
     /**
      * @param {?=} includeHash
      * @return {?}
      */
-    MockLocationStrategy.prototype.path = /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    function (includeHash) {
-        if (includeHash === void 0) { includeHash = false; }
-        return this.internalPath;
-    };
+    path(includeHash = false) { return this.internalPath; }
     /**
      * @param {?} internal
      * @return {?}
      */
-    MockLocationStrategy.prototype.prepareExternalUrl = /**
-     * @param {?} internal
-     * @return {?}
-     */
-    function (internal) {
+    prepareExternalUrl(internal) {
         if (internal.startsWith('/') && this.internalBaseHref.endsWith('/')) {
             return this.internalBaseHref + internal.substring(1);
         }
         return this.internalBaseHref + internal;
-    };
+    }
     /**
      * @param {?} ctx
      * @param {?} title
@@ -299,20 +226,13 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} query
      * @return {?}
      */
-    MockLocationStrategy.prototype.pushState = /**
-     * @param {?} ctx
-     * @param {?} title
-     * @param {?} path
-     * @param {?} query
-     * @return {?}
-     */
-    function (ctx, title, path, query) {
+    pushState(ctx, title, path, query) {
         this.internalTitle = title;
-        var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
-        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
+        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push(externalUrl);
-    };
+    }
     /**
      * @param {?} ctx
      * @param {?} title
@@ -320,71 +240,52 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} query
      * @return {?}
      */
-    MockLocationStrategy.prototype.replaceState = /**
-     * @param {?} ctx
-     * @param {?} title
-     * @param {?} path
-     * @param {?} query
-     * @return {?}
-     */
-    function (ctx, title, path, query) {
+    replaceState(ctx, title, path, query) {
         this.internalTitle = title;
-        var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
-        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
+        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push('replace: ' + externalUrl);
-    };
+    }
     /**
      * @param {?} fn
      * @return {?}
      */
-    MockLocationStrategy.prototype.onPopState = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) { this._subject.subscribe({ next: fn }); };
+    onPopState(fn) { this._subject.subscribe({ next: fn }); }
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.getBaseHref = /**
-     * @return {?}
-     */
-    function () { return this.internalBaseHref; };
+    getBaseHref() { return this.internalBaseHref; }
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.back = /**
-     * @return {?}
-     */
-    function () {
+    back() {
         if (this.urlChanges.length > 0) {
             this.urlChanges.pop();
-            var /** @type {?} */ nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
+            const /** @type {?} */ nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
             this.simulatePopState(nextUrl);
         }
-    };
+    }
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.forward = /**
-     * @return {?}
+    forward() { throw 'not implemented'; }
+}
+MockLocationStrategy.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+MockLocationStrategy.ctorParameters = () => [];
+class _MockPopStateEvent {
+    /**
+     * @param {?} newUrl
      */
-    function () { throw 'not implemented'; };
-    MockLocationStrategy.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    MockLocationStrategy.ctorParameters = function () { return []; };
-    return MockLocationStrategy;
-}(LocationStrategy));
-var _MockPopStateEvent = (function () {
-    function _MockPopStateEvent(newUrl) {
+    constructor(newUrl) {
         this.newUrl = newUrl;
         this.pop = true;
         this.type = 'popstate';
     }
-    return _MockPopStateEvent;
-}());
+}
 
 /**
  * @fileoverview added by tsickle
@@ -431,4 +332,4 @@ var _MockPopStateEvent = (function () {
  */
 
 export { SpyLocation, MockLocationStrategy };
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=testing.js.map
