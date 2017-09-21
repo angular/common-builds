@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.4.3-e2e8ba6
+ * @license Angular v4.4.3-ae52851
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.4.3-e2e8ba6
+ * @license Angular v4.4.3-ae52851
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4002,7 +4002,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.4.3-e2e8ba6');
+var VERSION = new _angular_core.Version('4.4.3-ae52851');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
