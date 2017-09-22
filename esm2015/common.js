@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5795,6 +5795,7 @@ CommonModule.decorators = [
 ];
 /** @nocollapse */
 CommonModule.ctorParameters = () => [];
+const ɵ0 = getPluralCase;
 /**
  * A module that contains the deprecated i18n pipes.
  *
@@ -5806,7 +5807,7 @@ DeprecatedI18NPipesModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [COMMON_DEPRECATED_I18N_PIPES],
                 exports: [COMMON_DEPRECATED_I18N_PIPES],
-                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
+                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
             },] },
 ];
 /** @nocollapse */
@@ -5904,7 +5905,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.0.0-beta.7-4c73b52');
+const VERSION = new Version('5.0.0-beta.7-6e1896b');
 
 /**
  * @fileoverview added by tsickle

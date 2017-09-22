@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.0.0-beta.7-4c73b52
+ * @license Angular v5.0.0-beta.7-6e1896b
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6374,6 +6374,7 @@ var CommonModule = (function () {
     CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
+var ɵ0 = getPluralCase;
 /**
  * A module that contains the deprecated i18n pipes.
  *
@@ -6386,7 +6387,7 @@ var DeprecatedI18NPipesModule = (function () {
         { type: _angular_core.NgModule, args: [{
                     declarations: [COMMON_DEPRECATED_I18N_PIPES],
                     exports: [COMMON_DEPRECATED_I18N_PIPES],
-                    providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
+                    providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
                 },] },
     ];
     /** @nocollapse */
@@ -6486,7 +6487,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.7-4c73b52');
+var VERSION = new _angular_core.Version('5.0.0-beta.7-6e1896b');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
