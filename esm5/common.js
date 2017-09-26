@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-beta.7-f57b7df
+ * @license Angular v5.0.0-beta.7-2e1fec1
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6019,7 +6019,7 @@ var DecimalPipe = (function () {
         locale = locale || this._locale;
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Decimal, digits), str = _a.str, error = _a.error;
         if (error) {
-            throw invalidPipeArgumentError(CurrencyPipe, error);
+            throw invalidPipeArgumentError(DecimalPipe, error);
         }
         return str;
     };
@@ -6073,7 +6073,7 @@ var PercentPipe = (function () {
         locale = locale || this._locale;
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Percent, digits), str = _a.str, error = _a.error;
         if (error) {
-            throw invalidPipeArgumentError(CurrencyPipe, error);
+            throw invalidPipeArgumentError(PercentPipe, error);
         }
         return str;
     };
@@ -6445,7 +6445,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.0.0-beta.7-f57b7df');
+var VERSION = new Version('5.0.0-beta.7-2e1fec1');
 
 /**
  * @fileoverview added by tsickle
