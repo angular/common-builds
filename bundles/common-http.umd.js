@@ -1,16 +1,16 @@
 /**
- * @license Angular v5.0.0-beta.7-8dbe2af
+ * @license Angular v5.0.0-beta.7-82e4923
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/observable/of'), require('rxjs/operator/concatMap'), require('rxjs/operator/filter'), require('rxjs/operator/map'), require('tslib'), require('@angular/common'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/observable/of', 'rxjs/operator/concatMap', 'rxjs/operator/filter', 'rxjs/operator/map', 'tslib', '@angular/common', 'rxjs/Observable'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs/observable/of', 'rxjs/operator/concatMap', 'rxjs/operator/filter', 'rxjs/operator/map', 'tslib', '@angular/common', 'rxjs/Observable'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}),global.ng.core,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.tslib,global.ng.common,global.Rx));
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.7-8dbe2af
+ * @license Angular v5.0.0-beta.7-82e4923
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */

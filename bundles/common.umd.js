@@ -1,11 +1,11 @@
 /**
- * @license Angular v5.0.0-beta.7-8dbe2af
+ * @license Angular v5.0.0-beta.7-82e4923
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common', ['exports', '@angular/core'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = {}),global.ng.core));
 }(this, (function (exports,_angular_core) { 'use strict';
 
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.0.0-beta.7-8dbe2af
+ * @license Angular v5.0.0-beta.7-82e4923
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6487,7 +6487,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.0.0-beta.7-8dbe2af');
+var VERSION = new _angular_core.Version('5.0.0-beta.7-82e4923');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
