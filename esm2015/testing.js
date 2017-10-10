@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-rc.1-79deeac
+ * @license Angular v5.0.0-rc.1-d7eac7e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -61,9 +61,7 @@ class SpyLocation {
      * @param {?} pathname
      * @return {?}
      */
-    simulateUrlPop(pathname) {
-        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
-    }
+    simulateUrlPop(pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); }
     /**
      * @param {?} pathname
      * @return {?}

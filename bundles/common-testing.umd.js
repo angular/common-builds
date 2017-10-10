@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-rc.1-79deeac
+ * @license Angular v5.0.0-rc.1-d7eac7e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-rc.1-79deeac
+ * @license Angular v5.0.0-rc.1-d7eac7e
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -116,9 +116,7 @@ var SpyLocation = (function () {
      * @param {?} pathname
      * @return {?}
      */
-    function (pathname) {
-        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
-    };
+    function (pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); };
     /**
      * @param {?} pathname
      * @return {?}
