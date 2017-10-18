@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-rc.2-81173b0
+ * @license Angular v5.0.0-rc.2-b922743
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1778,6 +1778,16 @@ class HttpXhrBackend {
                         ok = false;
                         // The parse error contains the text of the body that failed to parse.
                         body = /** @type {?} */ ({ error, text: body });
+                    }
+                }
+                else if (!ok && req.responseType === 'json' && typeof body === 'string') {
+                    try {
+                        // Attempt to parse the body as JSON.
+                        body = JSON.parse(body);
+                    }
+                    catch (/** @type {?} */ error) {
+                        // Cannot be certain that the body was meant to be parsed as JSON.
+                        // Leave the body as a string.
                     }
                 }
                 if (ok) {

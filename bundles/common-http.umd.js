@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.0-rc.2-81173b0
+ * @license Angular v5.0.0-rc.2-b922743
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-rc.2-81173b0
+ * @license Angular v5.0.0-rc.2-b922743
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2236,6 +2236,16 @@ var HttpXhrBackend = (function () {
                         ok = false;
                         // The parse error contains the text of the body that failed to parse.
                         body = /** @type {?} */ ({ error: error, text: body });
+                    }
+                }
+                else if (!ok && req.responseType === 'json' && typeof body === 'string') {
+                    try {
+                        // Attempt to parse the body as JSON.
+                        body = JSON.parse(body);
+                    }
+                    catch (/** @type {?} */ error) {
+                        // Cannot be certain that the body was meant to be parsed as JSON.
+                        // Leave the body as a string.
                     }
                 }
                 if (ok) {
