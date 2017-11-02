@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-7186c9c
+ * @license Angular v5.1.0-beta.0-17ed14f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3921,7 +3921,7 @@ const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\
  *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
  *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
  *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
- *  |                    | dd          | Numeric: 2 digits + zero padded                               | 1                                                          |
+ *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
  *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
  *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
  *  |                    | EEEEE       | Narrow                                                        | T                                                          |
@@ -5905,7 +5905,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.1.0-beta.0-7186c9c');
+const VERSION = new Version('5.1.0-beta.0-17ed14f');
 
 /**
  * @fileoverview added by tsickle
