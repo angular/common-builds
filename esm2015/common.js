@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-6b74883
+ * @license Angular v5.1.0-beta.0-b489259
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5586,8 +5586,8 @@ PercentPipe.ctorParameters = () => [
  *   - `code`(default): use code (e.g. `USD`).
  *   - `symbol`: use symbol (e.g. `$`).
  *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
- *   - boolean (deprecated from v5): `true` for symbol and false for `code`
  *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+ *   - boolean (deprecated from v5): `true` for symbol and false for `code`
  *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
@@ -5905,7 +5905,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.1.0-beta.0-6b74883');
+const VERSION = new Version('5.1.0-beta.0-b489259');
 
 /**
  * @fileoverview added by tsickle
