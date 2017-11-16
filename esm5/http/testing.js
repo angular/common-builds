@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,6 +10,13 @@ import { Observable } from 'rxjs/Observable';
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Defines a matcher for requests based on URL, method, or both.
@@ -25,7 +32,7 @@ import { Observable } from 'rxjs/Observable';
  * \@stable
  * @abstract
  */
-var HttpTestingController = (function () {
+var HttpTestingController = /** @class */ (function () {
     function HttpTestingController() {
     }
     return HttpTestingController;
@@ -50,7 +57,7 @@ var HttpTestingController = (function () {
  *
  * \@stable
  */
-var TestRequest = (function () {
+var TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
@@ -304,7 +311,7 @@ function _maybeConvertBody(responseType, body) {
  *
  * \@stable
  */
-var HttpClientTestingBackend = (function () {
+var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
@@ -526,7 +533,7 @@ var HttpClientTestingBackend = (function () {
  *
  * \@stable
  */
-var HttpClientTestingModule = (function () {
+var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
     HttpClientTestingModule.decorators = [

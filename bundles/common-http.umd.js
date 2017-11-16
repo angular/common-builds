@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,13 +10,20 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
@@ -31,7 +38,7 @@
  * \@stable
  * @abstract
  */
-var HttpHandler = (function () {
+var HttpHandler = /** @class */ (function () {
     function HttpHandler() {
     }
     return HttpHandler;
@@ -47,7 +54,7 @@ var HttpHandler = (function () {
  * \@stable
  * @abstract
  */
-var HttpBackend = (function () {
+var HttpBackend = /** @class */ (function () {
     function HttpBackend() {
     }
     return HttpBackend;
@@ -58,13 +65,20 @@ var HttpBackend = (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @record
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
  * \@stable
  */
-var HttpHeaders = (function () {
+var HttpHeaders = /** @class */ (function () {
     function HttpHeaders(headers) {
         var _this = this;
         /**
@@ -365,6 +379,13 @@ var HttpHeaders = (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A codec for encoding and decoding parameters in URLs.
  *
  * Used by `HttpParams`.
@@ -380,7 +401,7 @@ var HttpHeaders = (function () {
  *
  * \@stable
  */
-var HttpUrlEncodingCodec = (function () {
+var HttpUrlEncodingCodec = /** @class */ (function () {
     function HttpUrlEncodingCodec() {
     }
     /**
@@ -471,7 +492,7 @@ function standardEncoding(v) {
  *
  * \@stable
  */
-var HttpParams = (function () {
+var HttpParams = /** @class */ (function () {
     function HttpParams(options) {
         if (options === void 0) { options = /** @type {?} */ ({}); }
         var _this = this;
@@ -667,7 +688,7 @@ var HttpParams = (function () {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(function (key) { return /** @type {?} */ ((_this.map)).set(key, /** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+            this.cloneFrom.keys().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
             ((this.updates)).forEach(function (update) {
                 switch (update.op) {
                     case 'a':
@@ -770,7 +791,7 @@ function isFormData(value) {
  *
  * \@stable
  */
-var HttpRequest = (function () {
+var HttpRequest = /** @class */ (function () {
     function HttpRequest(method, url, third, fourth) {
         this.url = url;
         /**
@@ -1103,7 +1124,7 @@ HttpEventType[HttpEventType.User] = "User";
  * \@stable
  * @abstract
  */
-var HttpResponseBase = (function () {
+var HttpResponseBase = /** @class */ (function () {
     /**
      * Super-constructor for all responses.
      *
@@ -1133,7 +1154,7 @@ var HttpResponseBase = (function () {
  *
  * \@stable
  */
-var HttpHeaderResponse = (function (_super) {
+var HttpHeaderResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpHeaderResponse, _super);
     /**
      * Create a new `HttpHeaderResponse` with the given parameters.
@@ -1182,7 +1203,7 @@ var HttpHeaderResponse = (function (_super) {
  *
  * \@stable
  */
-var HttpResponse = (function (_super) {
+var HttpResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpResponse, _super);
     /**
      * Construct a new `HttpResponse`.
@@ -1227,7 +1248,7 @@ var HttpResponse = (function (_super) {
  *
  * \@stable
  */
-var HttpErrorResponse = (function (_super) {
+var HttpErrorResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpErrorResponse, _super);
     function HttpErrorResponse(init) {
         var _this = 
@@ -1293,7 +1314,7 @@ function addBody(options, body) {
  *
  * \@stable
  */
-var HttpClient = (function () {
+var HttpClient = /** @class */ (function () {
     function HttpClient(handler) {
         this.handler = handler;
     }
@@ -1762,7 +1783,7 @@ var HttpClient = (function () {
  *
  * \@stable
  */
-var HttpInterceptorHandler = (function () {
+var HttpInterceptorHandler = /** @class */ (function () {
     function HttpInterceptorHandler(next, interceptor) {
         this.next = next;
         this.interceptor = interceptor;
@@ -1787,7 +1808,7 @@ var HttpInterceptorHandler = (function () {
  * \@stable
  */
 var HTTP_INTERCEPTORS = new _angular_core.InjectionToken('HTTP_INTERCEPTORS');
-var NoopInterceptor = (function () {
+var NoopInterceptor = /** @class */ (function () {
     function NoopInterceptor() {
     }
     /**
@@ -1842,7 +1863,7 @@ var JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response type.
  * \@stable
  * @abstract
  */
-var JsonpCallbackContext = (function () {
+var JsonpCallbackContext = /** @class */ (function () {
     function JsonpCallbackContext() {
     }
     return JsonpCallbackContext;
@@ -1853,7 +1874,7 @@ var JsonpCallbackContext = (function () {
  *
  * \@stable
  */
-var JsonpClientBackend = (function () {
+var JsonpClientBackend = /** @class */ (function () {
     function JsonpClientBackend(callbackMap, document) {
         this.callbackMap = callbackMap;
         this.document = document;
@@ -2022,7 +2043,7 @@ var JsonpClientBackend = (function () {
  *
  * \@stable
  */
-var JsonpInterceptor = (function () {
+var JsonpInterceptor = /** @class */ (function () {
     function JsonpInterceptor(jsonp) {
         this.jsonp = jsonp;
     }
@@ -2086,7 +2107,7 @@ function getResponseUrl(xhr) {
  * \@stable
  * @abstract
  */
-var XhrFactory = (function () {
+var XhrFactory = /** @class */ (function () {
     function XhrFactory() {
     }
     return XhrFactory;
@@ -2096,7 +2117,7 @@ var XhrFactory = (function () {
  *
  * \@stable
  */
-var BrowserXhr = (function () {
+var BrowserXhr = /** @class */ (function () {
     function BrowserXhr() {
     }
     /**
@@ -2119,7 +2140,7 @@ var BrowserXhr = (function () {
  *
  * \@stable
  */
-var HttpXhrBackend = (function () {
+var HttpXhrBackend = /** @class */ (function () {
     function HttpXhrBackend(xhrFactory) {
         this.xhrFactory = xhrFactory;
     }
@@ -2394,7 +2415,7 @@ var XSRF_HEADER_NAME = new _angular_core.InjectionToken('XSRF_HEADER_NAME');
  * \@stable
  * @abstract
  */
-var HttpXsrfTokenExtractor = (function () {
+var HttpXsrfTokenExtractor = /** @class */ (function () {
     function HttpXsrfTokenExtractor() {
     }
     return HttpXsrfTokenExtractor;
@@ -2402,7 +2423,7 @@ var HttpXsrfTokenExtractor = (function () {
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
-var HttpXsrfCookieExtractor = (function () {
+var HttpXsrfCookieExtractor = /** @class */ (function () {
     function HttpXsrfCookieExtractor(doc, platform, cookieName) {
         this.doc = doc;
         this.platform = platform;
@@ -2446,7 +2467,7 @@ var HttpXsrfCookieExtractor = (function () {
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
-var HttpXsrfInterceptor = (function () {
+var HttpXsrfInterceptor = /** @class */ (function () {
     function HttpXsrfInterceptor(tokenService, headerName) {
         this.tokenService = tokenService;
         this.headerName = headerName;
@@ -2545,7 +2566,7 @@ function jsonpCallbackContext() {
  *
  * \@stable
  */
-var HttpClientXsrfModule = (function () {
+var HttpClientXsrfModule = /** @class */ (function () {
     function HttpClientXsrfModule() {
     }
     /**
@@ -2616,7 +2637,7 @@ var HttpClientXsrfModule = (function () {
  *
  * \@stable
  */
-var HttpClientModule = (function () {
+var HttpClientModule = /** @class */ (function () {
     function HttpClientModule() {
     }
     HttpClientModule.decorators = [
@@ -2655,7 +2676,7 @@ var HttpClientModule = (function () {
  *
  * \@stable
  */
-var HttpClientJsonpModule = (function () {
+var HttpClientJsonpModule = /** @class */ (function () {
     function HttpClientJsonpModule() {
     }
     HttpClientJsonpModule.decorators = [

@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -82,7 +82,7 @@ var __assign = Object.assign || function __assign(t) {
  * \@stable
  * @abstract
  */
-var PlatformLocation = (function () {
+var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
     }
     return PlatformLocation;
@@ -134,7 +134,7 @@ var LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialize
  * \@stable
  * @abstract
  */
-var LocationStrategy = (function () {
+var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
     }
     return LocationStrategy;
@@ -200,7 +200,7 @@ var APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-var Location = (function () {
+var Location = /** @class */ (function () {
     function Location(platformStrategy) {
         var _this = this;
         /**
@@ -514,7 +514,7 @@ function _stripIndexHtml(url) {
  *
  * \@stable
  */
-var HashLocationStrategy = (function (_super) {
+var HashLocationStrategy = /** @class */ (function (_super) {
     __extends(HashLocationStrategy, _super);
     function HashLocationStrategy(_platformLocation, _baseHref) {
         var _this = _super.call(this) || this;
@@ -677,7 +677,7 @@ var HashLocationStrategy = (function (_super) {
  *
  * \@stable
  */
-var PathLocationStrategy = (function (_super) {
+var PathLocationStrategy = /** @class */ (function (_super) {
     __extends(PathLocationStrategy, _super);
     function PathLocationStrategy(_platformLocation, href) {
         var _this = _super.call(this) || this;
@@ -813,6 +813,15 @@ var PathLocationStrategy = (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
 /**
  * \@experimental
  */
@@ -979,6 +988,13 @@ var localeEn = [
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * \@experimental i18n support is experimental.
@@ -1550,7 +1566,7 @@ var DEPRECATED_PLURAL_FN = new _angular_core.InjectionToken('UseV4Plurals');
  * \@experimental
  * @abstract
  */
-var NgLocalization = (function () {
+var NgLocalization = /** @class */ (function () {
     function NgLocalization() {
     }
     return NgLocalization;
@@ -1586,7 +1602,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * \@experimental
  */
-var NgLocaleLocalization = (function (_super) {
+var NgLocaleLocalization = /** @class */ (function (_super) {
     __extends(NgLocaleLocalization, _super);
     function NgLocaleLocalization(locale, /** @deprecated from v5 */
         deprecatedPluralFn) {
@@ -2015,6 +2031,13 @@ function getPluralCase(locale, nLike) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @param {?} cookieStr
  * @param {?} name
  * @return {?}
@@ -2071,7 +2094,7 @@ function parseCookieValue(cookieStr, name) {
  *
  * \@stable
  */
-var NgClass = (function () {
+var NgClass = /** @class */ (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
@@ -2327,7 +2350,7 @@ var NgClass = (function () {
  *
  * \@experimental
  */
-var NgComponentOutlet = (function () {
+var NgComponentOutlet = /** @class */ (function () {
     function NgComponentOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
@@ -2403,7 +2426,7 @@ var NgComponentOutlet = (function () {
 /**
  * \@stable
  */
-var NgForOfContext = (function () {
+var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
@@ -2514,7 +2537,7 @@ var NgForOfContext = (function () {
  *
  * \@stable
  */
-var NgForOf = (function () {
+var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
@@ -2663,7 +2686,7 @@ var NgForOf = (function () {
     };
     return NgForOf;
 }());
-var RecordViewTuple = (function () {
+var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
@@ -2778,7 +2801,7 @@ function getTypeNameForDebugging(type) {
  *
  * \@stable
  */
-var NgIf = (function () {
+var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -2872,7 +2895,7 @@ var NgIf = (function () {
 /**
  * \@stable
  */
-var NgIfContext = (function () {
+var NgIfContext = /** @class */ (function () {
     function NgIfContext() {
         this.$implicit = null;
         this.ngIf = null;
@@ -2891,7 +2914,7 @@ var NgIfContext = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SwitchView = (function () {
+var SwitchView = /** @class */ (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
@@ -2976,7 +2999,7 @@ var SwitchView = (function () {
  *
  * \@stable
  */
-var NgSwitch = (function () {
+var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
         this._defaultUsed = false;
         this._caseCount = 0;
@@ -3097,7 +3120,7 @@ var NgSwitch = (function () {
  *
  * \@stable
  */
-var NgSwitchCase = (function () {
+var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -3147,7 +3170,7 @@ var NgSwitchCase = (function () {
  *
  * \@stable
  */
-var NgSwitchDefault = (function () {
+var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
@@ -3205,7 +3228,7 @@ var NgSwitchDefault = (function () {
  *
  * \@experimental
  */
-var NgPlural = (function () {
+var NgPlural = /** @class */ (function () {
     function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
@@ -3299,7 +3322,7 @@ var NgPlural = (function () {
  *
  * \@experimental
  */
-var NgPluralCase = (function () {
+var NgPluralCase = /** @class */ (function () {
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
         var /** @type {?} */ isANumber = !isNaN(Number(value));
@@ -3351,7 +3374,7 @@ var NgPluralCase = (function () {
  *
  * \@stable
  */
-var NgStyle = (function () {
+var NgStyle = /** @class */ (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
@@ -3464,7 +3487,7 @@ var NgStyle = (function () {
  *
  * \@stable
  */
-var NgTemplateOutlet = (function () {
+var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
@@ -3575,6 +3598,13 @@ var NgTemplateOutlet = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -4387,7 +4417,7 @@ var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\
  *
  * \@stable
  */
-var DatePipe = (function () {
+var DatePipe = /** @class */ (function () {
     function DatePipe(locale) {
         this.locale = locale;
     }
@@ -4497,7 +4527,7 @@ function isDate$1(value) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NumberFormatter = (function () {
+var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
     /**
@@ -4738,7 +4768,7 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-var DateFormatter = (function () {
+var DateFormatter = /** @class */ (function () {
     function DateFormatter() {
     }
     /**
@@ -4832,7 +4862,7 @@ var DateFormatter = (function () {
  *
  * \@stable
  */
-var DeprecatedDatePipe = (function () {
+var DeprecatedDatePipe = /** @class */ (function () {
     function DeprecatedDatePipe(_locale) {
         this._locale = _locale;
     }
@@ -5344,7 +5374,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * \@stable
  */
-var DeprecatedDecimalPipe = (function () {
+var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -5390,7 +5420,7 @@ var DeprecatedDecimalPipe = (function () {
  *
  * \@stable
  */
-var DeprecatedPercentPipe = (function () {
+var DeprecatedPercentPipe = /** @class */ (function () {
     function DeprecatedPercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -5440,7 +5470,7 @@ var DeprecatedPercentPipe = (function () {
  *
  * \@stable
  */
-var DeprecatedCurrencyPipe = (function () {
+var DeprecatedCurrencyPipe = /** @class */ (function () {
     function DeprecatedCurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -5478,6 +5508,13 @@ var DeprecatedCurrencyPipe = (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A collection of deprecated i18n pipes that require intl api
  *
  * @deprecated from v5
@@ -5495,7 +5532,7 @@ var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ObservableStrategy = (function () {
+var ObservableStrategy = /** @class */ (function () {
     function ObservableStrategy() {
     }
     /**
@@ -5531,7 +5568,7 @@ var ObservableStrategy = (function () {
     function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
 }());
-var PromiseStrategy = (function () {
+var PromiseStrategy = /** @class */ (function () {
     function PromiseStrategy() {
     }
     /**
@@ -5594,7 +5631,7 @@ var _observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-var AsyncPipe = (function () {
+var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
@@ -5728,7 +5765,7 @@ var AsyncPipe = (function () {
  *
  * \@stable
  */
-var LowerCasePipe = (function () {
+var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
     }
     /**
@@ -5771,7 +5808,7 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-var TitleCasePipe = (function () {
+var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
     }
     /**
@@ -5802,7 +5839,7 @@ var TitleCasePipe = (function () {
  *
  * \@stable
  */
-var UpperCasePipe = (function () {
+var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
     }
     /**
@@ -5860,7 +5897,7 @@ var _INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-var I18nPluralPipe = (function () {
+var I18nPluralPipe = /** @class */ (function () {
     function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
@@ -5923,7 +5960,7 @@ var I18nPluralPipe = (function () {
  *
  *  \@experimental
  */
-var I18nSelectPipe = (function () {
+var I18nSelectPipe = /** @class */ (function () {
     function I18nSelectPipe() {
     }
     /**
@@ -5982,7 +6019,7 @@ var I18nSelectPipe = (function () {
  *
  * \@stable
  */
-var JsonPipe = (function () {
+var JsonPipe = /** @class */ (function () {
     function JsonPipe() {
     }
     /**
@@ -6039,7 +6076,7 @@ var JsonPipe = (function () {
  *
  * \@stable
  */
-var DecimalPipe = (function () {
+var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -6093,7 +6130,7 @@ var DecimalPipe = (function () {
  *
  * \@stable
  */
-var PercentPipe = (function () {
+var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -6155,7 +6192,7 @@ var PercentPipe = (function () {
  *
  * \@stable
  */
-var CurrencyPipe = (function () {
+var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -6268,7 +6305,7 @@ function isEmpty(value) {
  *
  * \@stable
  */
-var SlicePipe = (function () {
+var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
     }
     /**
@@ -6358,7 +6395,7 @@ var COMMON_PIPES = [
  *
  * \@stable
  */
-var CommonModule = (function () {
+var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
     CommonModule.decorators = [
@@ -6380,7 +6417,7 @@ var ɵ0 = getPluralCase;
  *
  * @deprecated from v5
  */
-var DeprecatedI18NPipesModule = (function () {
+var DeprecatedI18NPipesModule = /** @class */ (function () {
     function DeprecatedI18NPipesModule() {
     }
     DeprecatedI18NPipesModule.decorators = [
@@ -6487,7 +6524,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.1.0-beta.0-f8658cd');
+var VERSION = new _angular_core.Version('5.1.0-beta.0-336041a');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;

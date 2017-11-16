@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.1.0-beta.0-f8658cd
+ * @license Angular v5.1.0-beta.0-336041a
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -45,11 +45,18 @@ function __extends(d, b) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A spy for {\@link Location} that allows tests to fire simulated location events.
  *
  * \@experimental
  */
-var SpyLocation = (function () {
+var SpyLocation = /** @class */ (function () {
     function SpyLocation() {
         this.urlChanges = [];
         this._history = [new LocationState('', '')];
@@ -250,7 +257,7 @@ var SpyLocation = (function () {
     SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
-var LocationState = (function () {
+var LocationState = /** @class */ (function () {
     function LocationState(path, query) {
         this.path = path;
         this.query = query;
@@ -275,7 +282,7 @@ var LocationState = (function () {
  *
  * \@stable
  */
-var MockLocationStrategy = (function (_super) {
+var MockLocationStrategy = /** @class */ (function (_super) {
     __extends(MockLocationStrategy, _super);
     function MockLocationStrategy() {
         var _this = _super.call(this) || this;
@@ -412,7 +419,7 @@ var MockLocationStrategy = (function (_super) {
     MockLocationStrategy.ctorParameters = function () { return []; };
     return MockLocationStrategy;
 }(_angular_common.LocationStrategy));
-var _MockPopStateEvent = (function () {
+var _MockPopStateEvent = /** @class */ (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;
         this.pop = true;
