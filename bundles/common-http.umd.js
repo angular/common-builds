@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.0.3-c7b211c
+ * @license Angular v5.0.3-647ca64
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.3-c7b211c
+ * @license Angular v5.0.3-647ca64
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -807,7 +807,7 @@ var HttpRequest = (function () {
         // the body argument is to use a known no-body method like GET.
         if (mightHaveBody(this.method) || !!fourth) {
             // Body is the third argument, options are the fourth.
-            this.body = /** @type {?} */ (third) || null;
+            this.body = (third !== undefined) ? /** @type {?} */ (third) : null;
             options = fourth;
         }
         else {
@@ -1191,7 +1191,7 @@ var HttpResponse = (function (_super) {
         if (init === void 0) { init = {}; }
         var _this = _super.call(this, init) || this;
         _this.type = HttpEventType.Response;
-        _this.body = init.body || null;
+        _this.body = init.body !== undefined ? init.body : null;
         return _this;
     }
     /**
@@ -1414,13 +1414,11 @@ var HttpClient = (function () {
             // provided.
             // Figure out the headers.
             var /** @type {?} */ headers = undefined;
-            if (!!options.headers !== undefined) {
-                if (options.headers instanceof HttpHeaders) {
-                    headers = options.headers;
-                }
-                else {
-                    headers = new HttpHeaders(options.headers);
-                }
+            if (options.headers instanceof HttpHeaders) {
+                headers = options.headers;
+            }
+            else {
+                headers = new HttpHeaders(options.headers);
             }
             // Sort out parameters.
             var /** @type {?} */ params = undefined;
@@ -1433,7 +1431,7 @@ var HttpClient = (function () {
                 }
             }
             // Construct the request.
-            req = new HttpRequest(first, /** @type {?} */ ((url)), options.body || null, {
+            req = new HttpRequest(first, /** @type {?} */ ((url)), (options.body !== undefined ? options.body : null), {
                 headers: headers,
                 params: params,
                 reportProgress: options.reportProgress,
@@ -2225,27 +2223,27 @@ var HttpXhrBackend = (function () {
                 var /** @type {?} */ ok = status >= 200 && status < 300;
                 // Check whether the body needs to be parsed as JSON (in many cases the browser
                 // will have done that already).
-                if (ok && req.responseType === 'json' && typeof body === 'string') {
-                    // Attempt the parse. If it fails, a parse error should be delivered to the user.
+                if (req.responseType === 'json' && typeof body === 'string') {
+                    // Save the original body, before attempting XSSI prefix stripping.
+                    var /** @type {?} */ originalBody = body;
                     body = body.replace(XSSI_PREFIX, '');
                     try {
-                        body = JSON.parse(body);
+                        // Attempt the parse. If it fails, a parse error should be delivered to the user.
+                        body = body !== '' ? JSON.parse(body) : null;
                     }
                     catch (/** @type {?} */ error) {
-                        // Even though the response status was 2xx, this is still an error.
-                        ok = false;
-                        // The parse error contains the text of the body that failed to parse.
-                        body = /** @type {?} */ ({ error: error, text: body });
-                    }
-                }
-                else if (!ok && req.responseType === 'json' && typeof body === 'string') {
-                    try {
-                        // Attempt to parse the body as JSON.
-                        body = JSON.parse(body);
-                    }
-                    catch (/** @type {?} */ error) {
-                        // Cannot be certain that the body was meant to be parsed as JSON.
-                        // Leave the body as a string.
+                        // Since the JSON.parse failed, it's reasonable to assume this might not have been a
+                        // JSON response. Restore the original body (including any XSSI prefix) to deliver
+                        // a better error response.
+                        body = originalBody;
+                        // If this was an error request to begin with, leave it as a string, it probably
+                        // just isn't JSON. Otherwise, deliver the parsing error to the user.
+                        if (ok) {
+                            // Even though the response status was 2xx, this is still an error.
+                            ok = false;
+                            // The parse error contains the text of the body that failed to parse.
+                            body = /** @type {?} */ ({ error: error, text: body });
+                        }
                     }
                 }
                 if (ok) {
