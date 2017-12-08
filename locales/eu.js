@@ -10,10 +10,13 @@
 export default [
     'eu',
     [
+        ['g', 'a'],
+        ['AM', 'PM'],
+    ],
+    [
         ['AM', 'PM'],
         ,
     ],
-    ,
     [
         ['I', 'A', 'A', 'A', 'O', 'O', 'L'], ['ig.', 'al.', 'ar.', 'az.', 'og.', 'or.', 'lr.'],
         ['igandea', 'astelehena', 'asteartea', 'asteazkena', 'osteguna', 'ostirala', 'larunbata'],
@@ -45,14 +48,17 @@ export default [
         ]
     ],
     [['K.a.', 'K.o.'], , ['K.a.', 'Kristo ondoren']], 1, [6, 0],
-    ['yy/M/d', 'y MMM d', 'y(\'e\')\'ko\' MMMM d', 'y(\'e\')\'ko\' MMMM d, EEEE'],
+    [
+        'yy/M/d', 'y MMM d', 'y(\'e\')\'ko\' MMMM\'ren\' d(\'a\')',
+        'y(\'e\')\'ko\' MMMM\'ren\' d(\'a\'), EEEE'
+    ],
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss (z)', 'HH:mm:ss (zzzz)'],
     [
         '{1} {0}',
         ,
         ,
     ],
-    [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
+    [',', '.', ';', '%', '+', '−', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '% #,##0', '#,##0.00 ¤', '#E0'], '€', 'euroa', function (n) {
         if (n === 1)
             return 1;

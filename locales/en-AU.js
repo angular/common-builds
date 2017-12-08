@@ -13,7 +13,7 @@ export default [
         ['am', 'pm'],
         ,
     ],
-    [['am', 'pm'], ['AM', 'PM'], ['am', 'pm']],
+    ,
     [
         ['Su.', 'M.', 'Tu.', 'W.', 'Th.', 'F.', 'Sa.'],
         ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
@@ -38,7 +38,7 @@ export default [
         ,
         '{1} \'at\' {0}',
     ],
-    ['.', ',', ';', '%', '+', '-', 'e', '×', '‰', '∞', 'NaN', ':'],
+    ['.', ',', ';', '%', '+', '-', 'e', '×', '‰', '∞', 'NaN', '.'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Australian Dollar',
     function (n) {
         var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;

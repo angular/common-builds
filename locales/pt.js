@@ -41,7 +41,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R$', 'Real brasileiro',
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'R$', 'Real brasileiro',
     function (n) {
         var i = Math.floor(Math.abs(n));
         if (i === Math.floor(i) && i >= 0 && i <= 1)

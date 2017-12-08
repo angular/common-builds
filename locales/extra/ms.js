@@ -9,8 +9,8 @@
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
-        ['pagi', 'pagi', 'tengah hari', 'petang', 'malam'],
-        ,
+        ['pagi', 'pagi', 'tengah hari', 'petang', 'malam'], ,
+        ['tengah malam', 'pagi', 'tengah hari', 'petang', 'malam']
     ],
     [
         ['pagi', 'pagi', 'tengah hari', 'petang', 'malam'],

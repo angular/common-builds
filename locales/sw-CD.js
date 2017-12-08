@@ -8,10 +8,14 @@
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
-    'sw-CD', [['am', 'pm'], ['AM', 'PM'], ['Asubuhi', 'Mchana']],
+    'sw-CD',
     [
         ['am', 'pm'],
         ['AM', 'PM'],
+    ],
+    [
+        ['AM', 'PM'],
+        ,
     ],
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'],

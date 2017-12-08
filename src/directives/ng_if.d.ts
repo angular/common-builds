@@ -107,6 +107,7 @@ export declare class NgIf {
     ngIfThen: TemplateRef<NgIfContext>;
     ngIfElse: TemplateRef<NgIfContext>;
     private _updateView();
+    static ngIfTypeGuard: <T>(v: T | null | undefined | false) => v is T;
 }
 /**
  * @stable

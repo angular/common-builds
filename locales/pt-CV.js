@@ -37,7 +37,7 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'Escudo cabo-verdiano',
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'escudo cabo-verdiano',
     function (n) {
         var i = Math.floor(Math.abs(n));
         if (i === Math.floor(i) && i >= 0 && i <= 1)

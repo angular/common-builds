@@ -9,7 +9,7 @@
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
-        ['午夜', '清晨', '上午', '中午', '下午', '晚上', '凌晨'],
+        ['午夜', '早上', '上午', '中午', '下午', '晚上', '凌晨'],
         ,
     ],
     ,

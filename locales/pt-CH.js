@@ -37,7 +37,7 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CHF', 'Franco suíço',
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CHF', 'franco suíço',
     function (n) {
         var i = Math.floor(Math.abs(n));
         if (i === Math.floor(i) && i >= 0 && i <= 1)
