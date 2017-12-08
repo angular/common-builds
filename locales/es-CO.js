@@ -25,7 +25,7 @@ export default [
         ['DO', 'LU', 'MA', 'MI', 'JU', 'VI', 'SA']
     ],
     [
-        ['e', 'f', 'm', 'a', 'm', 'j', 'j', 'a', 's', 'o', 'n', 'd'],
+        ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         [
             'ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sep.', 'oct.', 'nov.', 'dic.'
         ],
@@ -54,7 +54,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '$', 'peso colombiano', function (n) {
+    ['#,##0.###', '#,##0 %', '¤ #,##0.00', '#E0'], '$', 'peso colombiano', function (n) {
         if (n === 1)
             return 1;
         return 5;

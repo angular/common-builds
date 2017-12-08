@@ -41,7 +41,8 @@ export default [
         '{1}, {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], 'FCFA', 'franco CFA BEAC', function (n) {
+    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], 'FCFA', 'franco CFA de África Central',
+    function (n) {
         if (n === 1)
             return 1;
         return 5;

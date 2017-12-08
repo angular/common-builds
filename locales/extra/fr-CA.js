@@ -9,12 +9,13 @@
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
-        ['minuit', 'midi', 'mat.', 'après-midi', 'soir', 'nuit'],
-        ['minuit', 'midi', 'du mat.', 'après-midi', 'du soir', 'du matin'],
+        ['minuit', 'midi', 'mat.', 'après-midi', 'soir', 'mat.'],
+        ['minuit', 'midi', 'du mat.', 'après-midi', 'du soir', 'du mat.'],
         ['minuit', 'midi', 'du matin', 'de l’après-midi', 'du soir', 'du matin']
     ],
     [
-        ['minuit', 'midi', 'mat.', 'après-midi', 'soir', 'nuit'], ,
+        ['minuit', 'midi', 'mat.', 'après-midi', 'soir', 'mat.'],
+        ['minuit', 'midi', 'mat.', 'après-midi', 'soir', 'nuit'],
         ['minuit', 'midi', 'matin', 'après-midi', 'soir', 'nuit']
     ],
     [

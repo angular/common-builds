@@ -9,10 +9,13 @@
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
+        ['ponoć', 'podne', 'ujutro', 'popodne', 'navečer', 'noću'], ,
+        ['ponoć', 'podne', 'ujutro', 'poslije podne', 'navečer', 'noću']
+    ],
+    [
         ['ponoć', 'podne', 'ujutro', 'popodne', 'navečer', 'noću'],
         ,
     ],
-    ,
     [
         '00:00', '12:00', ['04:00', '12:00'], ['12:00', '18:00'], ['18:00', '21:00'],
         ['21:00', '04:00']

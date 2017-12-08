@@ -11,7 +11,7 @@ export default [
     'de',
     [
         ['vm.', 'nm.'],
-        ['vorm.', 'nachm.'],
+        ['AM', 'PM'],
     ],
     [
         ['vorm.', 'nachm.'],

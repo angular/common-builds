@@ -37,7 +37,7 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'US$', 'Dólar dos Estados Unidos',
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'US$', 'dólar dos Estados Unidos',
     function (n) {
         var i = Math.floor(Math.abs(n));
         if (i === Math.floor(i) && i >= 0 && i <= 1)

@@ -29,7 +29,7 @@ export default [
         ]
     ],
     ,
-    [['hY', 'Yŋ'], , ['Hafi Yesu Va Do ŋgɔ', 'Yesu Ŋɔli']], 1, [6, 0],
+    [['HYV', 'Yŋ'], , ['Hafi Yesu Va', 'Yesu ŋɔli']], 1, [6, 0],
     ['M/d/yy', 'MMM d \'lia\', y', 'MMMM d \'lia\' y', 'EEEE, MMMM d \'lia\' y'],
     ['a \'ga\' h:mm', 'a \'ga\' h:mm:ss', 'a \'ga\' h:mm:ss z', 'a \'ga\' h:mm:ss zzzz'],
     [

@@ -9,7 +9,7 @@
 // See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
-        ['miezul nopții', 'amiază', 'dimineață', 'după-amiază', 'seara', 'noaptea'],
+        ['miezul nopții', 'la amiază', 'dimineața', 'după-amiaza', 'seara', 'noaptea'],
         ['miezul nopții', 'amiază', 'dimineața', 'după-amiaza', 'seara', 'noaptea'],
         ['la miezul nopții', 'la amiază', 'dimineața', 'după-amiaza', 'seara', 'noaptea']
     ],

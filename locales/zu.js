@@ -13,7 +13,10 @@ export default [
         ['a', 'p'],
         ['AM', 'PM'],
     ],
-    ,
+    [
+        ['AM', 'PM'],
+        ,
+    ],
     [
         ['S', 'M', 'B', 'T', 'S', 'H', 'M'], ['Son', 'Mso', 'Bil', 'Tha', 'Sin', 'Hla', 'Mgq'],
         ['ISonto', 'UMsombuluko', 'ULwesibili', 'ULwesithathu', 'ULwesine', 'ULwesihlanu', 'UMgqibelo'],
@@ -24,8 +27,8 @@ export default [
         ['J', 'F', 'M', 'E', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mas', 'Eph', 'Mey', 'Jun', 'Jul', 'Aga', 'Sep', 'Okt', 'Nov', 'Dis'],
         [
-            'UMasingana', 'Februwari', 'Mashi', 'Ephreli', 'Meyi', 'Juni', 'Julayi', 'Agasti',
-            'Septhemba', 'Okthoba', 'Novemba', 'Disemba'
+            'Januwari', 'Februwari', 'Mashi', 'Ephreli', 'Meyi', 'Juni', 'Julayi', 'Agasti', 'Septhemba',
+            'Okthoba', 'Novemba', 'Disemba'
         ]
     ],
     [
