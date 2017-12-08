@@ -1,18 +1,19 @@
 {
   "name": "@angular/common",
-  "version": "5.0.0-beta.7-3215c4b",
+  "version": "5.1.0-5a0076f",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
-  "module": "./esm5/index.js",
-  "es2015": "./esm15/index.js",
-  "typings": "./index.d.ts",
+  "module": "./esm5/common.js",
+  "es2015": "./esm2015/common.js",
+  "typings": "./common.d.ts",
   "author": "angular",
   "license": "MIT",
   "dependencies": {
     "tslib": "^1.7.1"
   },
   "peerDependencies": {
-    "@angular/core": "5.0.0-beta.7-3215c4b"
+    "rxjs": "^5.5.0",
+    "@angular/core": "5.1.0-5a0076f"
   },
   "repository": {
     "type": "git",

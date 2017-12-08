@@ -1,3 +1,4 @@
+import { ISubscription } from 'rxjs/Subscription';
 import { LocationStrategy } from './location_strategy';
 /** @experimental */
 export interface PopStateEvent {
@@ -69,7 +70,7 @@ export declare class Location {
     /**
      * Subscribe to the platform's `popState` events.
      */
-    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): Object;
+    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): ISubscription;
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.

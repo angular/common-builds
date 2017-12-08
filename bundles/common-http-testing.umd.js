@@ -1,22 +1,29 @@
 /**
- * @license Angular v5.0.0-beta.7-3215c4b
+ * @license Angular v5.1.0-5a0076f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.Rx));
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.7-3215c4b
+ * @license Angular v5.1.0-5a0076f
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Defines a matcher for requests based on URL, method, or both.
@@ -32,7 +39,7 @@
  * \@stable
  * @abstract
  */
-var HttpTestingController = (function () {
+var HttpTestingController = /** @class */ (function () {
     function HttpTestingController() {
     }
     return HttpTestingController;
@@ -57,7 +64,7 @@ var HttpTestingController = (function () {
  *
  * \@stable
  */
-var TestRequest = (function () {
+var TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
@@ -311,7 +318,7 @@ function _maybeConvertBody(responseType, body) {
  *
  * \@stable
  */
-var HttpClientTestingBackend = (function () {
+var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
@@ -533,7 +540,7 @@ var HttpClientTestingBackend = (function () {
  *
  * \@stable
  */
-var HttpClientTestingModule = (function () {
+var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
     HttpClientTestingModule.decorators = [

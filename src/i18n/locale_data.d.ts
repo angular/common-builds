@@ -17,7 +17,7 @@ export declare const LOCALE_DATA: {
  *
  * @experimental i18n support is experimental.
  */
-export declare function registerLocaleData(data: any, extraData?: any): void;
+export declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
 /**
  * Index of each type of locale data from the locale data array
  */
