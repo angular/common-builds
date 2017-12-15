@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.1-49c45f3
+ * @license Angular v5.1.1-267ebf3
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3545,6 +3545,13 @@ function getDateTranslation(date, locale, name, width, form, extended) {
             return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours < 12 ? 0 : 1];
         case TranslationType.Eras:
             return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
+        default:
+            // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
+            // However Closure Compiler does not understand that and reports an error in typed mode.
+            // The `throw new Error` below works around the problem, and the unexpected: never variable
+            // makes sure tsc still checks this code is unreachable.
+            const /** @type {?} */ unexpected = name;
+            throw new Error(`unexpected translation type ${unexpected}`);
     }
 }
 /**
@@ -5947,7 +5954,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.1.1-49c45f3');
+const VERSION = new Version('5.1.1-267ebf3');
 
 /**
  * @fileoverview added by tsickle
