@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-beta.1-86a36ea
+ * @license Angular v5.2.0-beta.1-83c1383
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.0-beta.1-86a36ea
+ * @license Angular v5.2.0-beta.1-83c1383
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1580,8 +1580,6 @@ var NgLocalization = /** @class */ (function () {
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
- *
- * \@internal
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
@@ -6574,8 +6572,9 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.0-beta.1-86a36ea');
+var VERSION = new _angular_core.Version('5.2.0-beta.1-83c1383');
 
+exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
 exports.registerLocaleData = registerLocaleData;
