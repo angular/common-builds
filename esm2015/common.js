@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.2-0aa6341
+ * @license Angular v5.1.2-fa0e8ef
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4569,10 +4569,6 @@ function formatNumber$1(value, locale, style, digitsInfo, currency = null) {
     else {
         num = value;
     }
-    if (style === NumberFormatStyle.Percent) {
-        num = num * 100;
-    }
-    const /** @type {?} */ numStr = Math.abs(num) + '';
     const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
     let /** @type {?} */ formattedText = '';
     let /** @type {?} */ isZero = false;
@@ -4580,7 +4576,10 @@ function formatNumber$1(value, locale, style, digitsInfo, currency = null) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
-        const /** @type {?} */ parsedNumber = parseNumber(numStr);
+        let /** @type {?} */ parsedNumber = parseNumber(num);
+        if (style === NumberFormatStyle.Percent) {
+            parsedNumber = toPercent(parsedNumber);
+        }
         let /** @type {?} */ minInt = pattern.minInt;
         let /** @type {?} */ minFraction = pattern.minFrac;
         let /** @type {?} */ maxFraction = pattern.maxFrac;
@@ -4725,12 +4724,38 @@ function parseNumberFormat(format, minusSign = '-') {
     return p;
 }
 /**
- * Parse a number (as a string)
- * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} numStr
+ * @param {?} parsedNumber
  * @return {?}
  */
-function parseNumber(numStr) {
+function toPercent(parsedNumber) {
+    // if the number is 0, don't do anything
+    if (parsedNumber.digits[0] === 0) {
+        return parsedNumber;
+    }
+    // Getting the current number of decimals
+    const /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
+    if (parsedNumber.exponent) {
+        parsedNumber.exponent += 2;
+    }
+    else {
+        if (fractionLen === 0) {
+            parsedNumber.digits.push(0, 0);
+        }
+        else if (fractionLen === 1) {
+            parsedNumber.digits.push(0);
+        }
+        parsedNumber.integerLen += 2;
+    }
+    return parsedNumber;
+}
+/**
+ * Parses a number.
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} num
+ * @return {?}
+ */
+function parseNumber(num) {
+    let /** @type {?} */ numStr = Math.abs(num) + '';
     let /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
     let /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
     // Decimal point?
@@ -4830,11 +4855,24 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     // Pad out with zeros to get the required fraction length
     for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
         digits.push(0);
+    let /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
+    // Minimal length = nb of decimals required + current nb of integers
+    // Any number besides that is optional and can be removed if it's a trailing 0
+    const /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
     const /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
         d = d + carry;
-        digits[i] = d % 10;
-        return Math.floor(d / 10);
+        digits[i] = d < 10 ? d : d - 10; // d % 10
+        if (dropTrailingZeros) {
+            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
+            if (digits[i] === 0 && i >= minLen) {
+                digits.pop();
+            }
+            else {
+                dropTrailingZeros = false;
+            }
+        }
+        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
     }, 0);
     if (carry) {
         digits.unshift(carry);
@@ -5954,7 +5992,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.1.2-0aa6341');
+const VERSION = new Version('5.1.2-fa0e8ef');
 
 /**
  * @fileoverview added by tsickle
