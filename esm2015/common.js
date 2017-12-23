@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-beta.1-83c1383
+ * @license Angular v5.2.0-beta.1-83d207d
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -711,6 +711,16 @@ const CURRENCIES = {
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+/**
+ * @param {?} n
+ * @return {?}
+ */
+function converter(n) {
+    let /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
 var localeEn = [
     'en',
     [
@@ -745,13 +755,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
-    function (n) {
-        let /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
 ];
 
 /**
@@ -4117,13 +4121,6 @@ function isDate$1(value) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 class NumberFormatter {
     /**
      * @param {?} num
@@ -5829,11 +5826,6 @@ SlicePipe.ctorParameters = () => [];
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * This module provides a set of common Pipes.
- */
-/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
 const COMMON_PIPES = [
@@ -5983,14 +5975,9 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-const VERSION = new Version('5.2.0-beta.1-83c1383');
+const VERSION = new Version('5.2.0-beta.1-83d207d');
 
 /**
  * @fileoverview added by tsickle

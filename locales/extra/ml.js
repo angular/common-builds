@@ -5,8 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
         ['അ', 'ഉച്ച', 'പുലർച്ചെ', 'രാവിലെ', 'ഉച്ചയ്ക്ക്', 'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം', 'സന്ധ്യ', 'രാത്രി'],

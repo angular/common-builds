@@ -5,8 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     'tk', [['öň', 'soň'], ['go.öň', 'go.soň'], ['günortadan öň', 'günortadan soň']],
     [['öň', 'soň'], ['g.öň', 'g.soň'], ['günortadan öň', 'günortadan soň']],
