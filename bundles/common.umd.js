@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-rc.0-2fc4cf6
+ * @license Angular v5.2.0-rc.0-fecf768
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.0-rc.0-2fc4cf6
+ * @license Angular v5.2.0-rc.0-fecf768
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -823,7 +823,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
 /**
- * \@experimental
+ * \@internal
  */
 var CURRENCIES = {
     'AOA': [, 'Kz'],
@@ -1543,17 +1543,20 @@ function findLocaleData(locale) {
 }
 /**
  * Return the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: $, US$, or USD)
+ * (e.g.: format narrow = $, format wide = US$, code = USD)
  *
- * \@internal
+ * \@experimental i18n support is experimental.
  * @param {?} code
  * @param {?} format
  * @return {?}
  */
-function findCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || {};
-    var /** @type {?} */ symbol = currency[0] || code;
-    return format === 'wide' ? symbol : currency[1] || symbol;
+function getCurrencySymbol(code, format) {
+    var /** @type {?} */ currency = CURRENCIES[code] || [];
+    var /** @type {?} */ symbolNarrow = currency[1];
+    if (format === 'narrow' && typeof symbolNarrow === 'string') {
+        return symbolNarrow;
+    }
+    return currency[0] || code;
 }
 
 /**
@@ -6270,7 +6273,7 @@ var CurrencyPipe = /** @class */ (function () {
         }
         var /** @type {?} */ currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
         }
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
         if (error) {
@@ -6559,7 +6562,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.0-rc.0-2fc4cf6');
+var VERSION = new _angular_core.Version('5.2.0-rc.0-fecf768');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
@@ -6572,6 +6575,7 @@ exports.TranslationWidth = TranslationWidth;
 exports.FormatWidth = FormatWidth;
 exports.NumberSymbol = NumberSymbol;
 exports.WeekDay = WeekDay;
+exports.getCurrencySymbol = getCurrencySymbol;
 exports.getLocaleDayPeriods = getLocaleDayPeriods;
 exports.getLocaleDayNames = getLocaleDayNames;
 exports.getLocaleMonthNames = getLocaleMonthNames;
@@ -6589,7 +6593,6 @@ exports.getLocaleNumberSymbol = getLocaleNumberSymbol;
 exports.getLocaleNumberFormat = getLocaleNumberFormat;
 exports.getLocaleCurrencyName = getLocaleCurrencyName;
 exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
-exports.CURRENCIES = CURRENCIES;
 exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
 exports.DeprecatedI18NPipesModule = DeprecatedI18NPipesModule;

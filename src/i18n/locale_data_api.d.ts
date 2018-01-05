@@ -346,3 +346,10 @@ export declare type Time = {
  * @experimental i18n support is experimental.
  */
 export declare function findLocaleData(locale: string): any;
+/**
+ * Return the currency symbol for a given currency code, or the code if no symbol available
+ * (e.g.: format narrow = $, format wide = US$, code = USD)
+ *
+ * @experimental i18n support is experimental.
+ */
+export declare function getCurrencySymbol(code: string, format: 'wide' | 'narrow'): string;
