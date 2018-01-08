@@ -5,8 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
         ['𑄛𑄧𑄖𑄳𑄠𑄃𑄟𑄧𑄣𑄳𑄠𑄬', '𑄝𑄬𑄚𑄳𑄠𑄬', '𑄘𑄨𑄝𑄪𑄎𑄳𑄠', '𑄝𑄬𑄣𑄳𑄠𑄬', '𑄥𑄎𑄧𑄚𑄳𑄠', '𑄢𑄬𑄖𑄴'],

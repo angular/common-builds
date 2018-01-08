@@ -1,6 +1,6 @@
 /**
- * @license Angular v5.2.0-beta.0-057b357
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0-rc.0-d2808aa
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
@@ -781,7 +781,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
 /**
- * \@experimental
+ * \@internal
  */
 var CURRENCIES = {
     'AOA': [, 'Kz'],
@@ -900,6 +900,16 @@ var CURRENCIES = {
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+/**
+ * @param {?} n
+ * @return {?}
+ */
+function converter(n) {
+    var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
 var localeEn = [
     'en',
     [
@@ -934,13 +944,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
-    function (n) {
-        var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
 ];
 
 /**
@@ -1497,17 +1501,20 @@ function findLocaleData(locale) {
 }
 /**
  * Return the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: $, US$, or USD)
+ * (e.g.: format narrow = $, format wide = US$, code = USD)
  *
- * \@internal
+ * \@experimental i18n support is experimental.
  * @param {?} code
  * @param {?} format
  * @return {?}
  */
-function findCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || {};
-    var /** @type {?} */ symbol = currency[0] || code;
-    return format === 'wide' ? symbol : currency[1] || symbol;
+function getCurrencySymbol(code, format) {
+    var /** @type {?} */ currency = CURRENCIES[code] || [];
+    var /** @type {?} */ symbolNarrow = currency[1];
+    if (format === 'narrow' && typeof symbolNarrow === 'string') {
+        return symbolNarrow;
+    }
+    return currency[0] || code;
 }
 
 /**
@@ -1538,8 +1545,6 @@ var NgLocalization = /** @class */ (function () {
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
- *
- * \@internal
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
@@ -4490,13 +4495,6 @@ function isDate$1(value) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
@@ -4965,10 +4963,6 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
     else {
         num = value;
     }
-    if (style === NumberFormatStyle.Percent) {
-        num = num * 100;
-    }
-    var /** @type {?} */ numStr = Math.abs(num) + '';
     var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
     var /** @type {?} */ formattedText = '';
     var /** @type {?} */ isZero = false;
@@ -4976,7 +4970,10 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
-        var /** @type {?} */ parsedNumber = parseNumber(numStr);
+        var /** @type {?} */ parsedNumber = parseNumber(num);
+        if (style === NumberFormatStyle.Percent) {
+            parsedNumber = toPercent(parsedNumber);
+        }
         var /** @type {?} */ minInt = pattern.minInt;
         var /** @type {?} */ minFraction = pattern.minFrac;
         var /** @type {?} */ maxFraction = pattern.maxFrac;
@@ -5122,12 +5119,38 @@ function parseNumberFormat(format, minusSign) {
     return p;
 }
 /**
- * Parse a number (as a string)
- * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} numStr
+ * @param {?} parsedNumber
  * @return {?}
  */
-function parseNumber(numStr) {
+function toPercent(parsedNumber) {
+    // if the number is 0, don't do anything
+    if (parsedNumber.digits[0] === 0) {
+        return parsedNumber;
+    }
+    // Getting the current number of decimals
+    var /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
+    if (parsedNumber.exponent) {
+        parsedNumber.exponent += 2;
+    }
+    else {
+        if (fractionLen === 0) {
+            parsedNumber.digits.push(0, 0);
+        }
+        else if (fractionLen === 1) {
+            parsedNumber.digits.push(0);
+        }
+        parsedNumber.integerLen += 2;
+    }
+    return parsedNumber;
+}
+/**
+ * Parses a number.
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} num
+ * @return {?}
+ */
+function parseNumber(num) {
+    var /** @type {?} */ numStr = Math.abs(num) + '';
     var /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
     var /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
     // Decimal point?
@@ -5227,11 +5250,24 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     // Pad out with zeros to get the required fraction length
     for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
         digits.push(0);
+    var /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
+    // Minimal length = nb of decimals required + current nb of integers
+    // Any number besides that is optional and can be removed if it's a trailing 0
+    var /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
     var /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
         d = d + carry;
-        digits[i] = d % 10;
-        return Math.floor(d / 10);
+        digits[i] = d < 10 ? d : d - 10; // d % 10
+        if (dropTrailingZeros) {
+            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
+            if (digits[i] === 0 && i >= minLen) {
+                digits.pop();
+            }
+            else {
+                dropTrailingZeros = false;
+            }
+        }
+        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
     }, 0);
     if (carry) {
         digits.unshift(carry);
@@ -6195,7 +6231,7 @@ var CurrencyPipe = /** @class */ (function () {
         }
         var /** @type {?} */ currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
         }
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
         if (error) {
@@ -6325,11 +6361,6 @@ var SlicePipe = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @module
- * @description
- * This module provides a set of common Pipes.
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -6487,14 +6518,9 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-var VERSION = new Version('5.2.0-beta.0-057b357');
+var VERSION = new Version('5.2.0-rc.0-d2808aa');
 
 /**
  * @fileoverview added by tsickle
@@ -6540,5 +6566,5 @@ var VERSION = new Version('5.2.0-beta.0-057b357');
  * Generated bundle index. Do not edit.
  */
 
-export { NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, CURRENCIES, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
+export { registerLocaleData as ɵregisterLocaleData, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
 //# sourceMappingURL=common.js.map

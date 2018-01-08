@@ -5,8 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
 export default [
     [
         ['午夜', '清晨', '朝早', '中午', '下晝', '夜晚', '凌晨'],
