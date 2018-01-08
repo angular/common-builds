@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.1.3-4947454
+ * @license Angular v5.1.3-4f7c13d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.1.3-4947454
+ * @license Angular v5.1.3-4f7c13d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6577,7 +6577,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.1.3-4947454');
+var VERSION = new _angular_core.Version('5.1.3-4f7c13d');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
