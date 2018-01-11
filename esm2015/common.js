@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-c0080d7
+ * @license Angular v5.2.0-5eaaac3
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5980,7 +5980,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.2.0-c0080d7');
+const VERSION = new Version('5.2.0-5eaaac3');
 
 /**
  * @fileoverview added by tsickle
