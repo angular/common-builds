@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-f23896f
+ * @license Angular v5.2.0-8e9cd57
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.0-f23896f
+ * @license Angular v5.2.0-8e9cd57
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4460,6 +4460,7 @@ var DatePipe = /** @class */ (function () {
             value = value.trim();
         }
         var /** @type {?} */ date;
+        var /** @type {?} */ match;
         if (isDate$1(value)) {
             date = value;
         }
@@ -4479,17 +4480,14 @@ var DatePipe = /** @class */ (function () {
             var _a = value.split('-').map(function (val) { return +val; }), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
+        else if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+            date = isoStringToDate(match);
+        }
         else {
             date = new Date(value);
         }
         if (!isDate$1(date)) {
-            var /** @type {?} */ match = void 0;
-            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-                date = isoStringToDate(match);
-            }
-            else {
-                throw invalidPipeArgumentError(DatePipe, value);
-            }
+            throw invalidPipeArgumentError(DatePipe, value);
         }
         return formatDate(date, format, locale || this.locale, timezone);
     };
@@ -4511,8 +4509,10 @@ function isoStringToDate(match) {
     var /** @type {?} */ date = new Date(0);
     var /** @type {?} */ tzHour = 0;
     var /** @type {?} */ tzMin = 0;
+    // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
     var /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
     var /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    // if there is a timezone defined like "+01:00" or "+0100"
     if (match[9]) {
         tzHour = +(match[9] + match[10]);
         tzMin = +(match[9] + match[11]);
@@ -6562,7 +6562,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.0-f23896f');
+var VERSION = new _angular_core.Version('5.2.0-8e9cd57');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
