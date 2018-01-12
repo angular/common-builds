@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-bb62458
+ * @license Angular v5.2.0-05208b8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4048,6 +4048,7 @@ class DatePipe {
             value = value.trim();
         }
         let /** @type {?} */ date;
+        let /** @type {?} */ match;
         if (isDate$1(value)) {
             date = value;
         }
@@ -4067,17 +4068,14 @@ class DatePipe {
             const [y, m, d] = value.split('-').map((val) => +val);
             date = new Date(y, m - 1, d);
         }
+        else if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+            date = isoStringToDate(match);
+        }
         else {
             date = new Date(value);
         }
         if (!isDate$1(date)) {
-            let /** @type {?} */ match;
-            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-                date = isoStringToDate(match);
-            }
-            else {
-                throw invalidPipeArgumentError(DatePipe, value);
-            }
+            throw invalidPipeArgumentError(DatePipe, value);
         }
         return formatDate(date, format, locale || this.locale, timezone);
     }
@@ -4098,8 +4096,10 @@ function isoStringToDate(match) {
     const /** @type {?} */ date = new Date(0);
     let /** @type {?} */ tzHour = 0;
     let /** @type {?} */ tzMin = 0;
+    // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
     const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
     const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    // if there is a timezone defined like "+01:00" or "+0100"
     if (match[9]) {
         tzHour = +(match[9] + match[10]);
         tzMin = +(match[9] + match[11]);
@@ -5980,7 +5980,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.2.0-bb62458');
+const VERSION = new Version('5.2.0-05208b8');
 
 /**
  * @fileoverview added by tsickle
