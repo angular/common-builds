@@ -6,6 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Location } from '@angular/common';
+import { ISubscription } from 'rxjs/Subscription';
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
  *
@@ -26,6 +27,6 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string): void;
     forward(): void;
     back(): void;
-    subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): Object;
+    subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): ISubscription;
     normalize(url: string): string;
 }
