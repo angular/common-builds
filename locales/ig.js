@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'ig',
     [
@@ -13,7 +18,8 @@ export default [
     ],
     ,
     [
-        ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Ụka', 'Mọn', 'Tiu', 'Wen', 'Tọọ', 'Fraị', 'Sat'],
+        ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+        ['Ụka', 'Mọn', 'Tiu', 'Wen', 'Tọọ', 'Fraị', 'Sat'],
         ['Mbọsị Ụka', 'Mọnde', 'Tiuzdee', 'Wenezdee', 'Tọọzdee', 'Fraịdee', 'Satọdee'],
         ['Ụka', 'Mọn', 'Tiu', 'Wen', 'Tọọ', 'Fraị', 'Sat']
     ],
@@ -22,8 +28,8 @@ export default [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         ['Jen', 'Feb', 'Maa', 'Epr', 'Mee', 'Juu', 'Jul', 'Ọgọ', 'Sep', 'Ọkt', 'Nov', 'Dis'],
         [
-            'Jenụwarị', 'Febrụwarị', 'Maachị', 'Eprel', 'Mee', 'Juun', 'Julaị', 'Ọgọọst', 'Septemba',
-            'Ọktoba', 'Novemba', 'Disemba'
+            'Jenụwarị', 'Febrụwarị', 'Maachị', 'Eprel', 'Mee', 'Juun', 'Julaị',
+            'Ọgọọst', 'Septemba', 'Ọktoba', 'Novemba', 'Disemba'
         ]
     ],
     ,
@@ -36,7 +42,6 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₦', 'Naịra',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₦', 'Naịra', plural
 ];
 //# sourceMappingURL=ig.js.map

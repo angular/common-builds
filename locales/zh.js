@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'zh',
     [
@@ -21,10 +26,13 @@ export default [
     ,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
         [
-            '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月',
-            '十二月'
+            '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月',
+            '12月'
+        ],
+        [
+            '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月',
+            '十月', '十一月', '十二月'
         ]
     ],
     ,
@@ -40,7 +48,6 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '￥', '人民币',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '￥', '人民币', plural
 ];
 //# sourceMappingURL=zh.js.map

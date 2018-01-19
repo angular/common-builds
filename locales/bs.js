@@ -5,6 +5,19 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
+    if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
+        return 1;
+    if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
+        !(i % 100 >= 12 && i % 100 <= 14) ||
+        f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
+            !(f % 100 >= 12 && f % 100 <= 14))
+        return 3;
+    return 5;
+}
 export default [
     'bs',
     [
@@ -40,17 +53,7 @@ export default [
         '{1} \'u\' {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'KM', 'Bosanskohercegovačka konvertibilna marka',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
-        if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
-            return 1;
-        if (v === 0 && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 &&
-            !(i % 100 >= 12 && i % 100 <= 14) ||
-            f % 10 === Math.floor(f % 10) && f % 10 >= 2 && f % 10 <= 4 &&
-                !(f % 100 >= 12 && f % 100 <= 14))
-            return 3;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'KM',
+    'Bosanskohercegovačka konvertibilna marka', plural
 ];
 //# sourceMappingURL=bs.js.map
