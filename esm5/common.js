@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.1-af4eb00
+ * @license Angular v5.2.1-c828e56
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1221,7 +1221,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[10 /* DateFormat */][width];
+    return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
  * Time format that depends on the locale.
@@ -1248,7 +1248,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[11 /* TimeFormat */][width];
+    return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
  * Date-time format that depends on the locale.
@@ -6520,7 +6520,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1-af4eb00');
+var VERSION = new Version('5.2.1-c828e56');
 
 /**
  * @fileoverview added by tsickle
