@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.1-d7dbdc5
+ * @license Angular v5.2.1-c12ea3a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3403,7 +3403,12 @@ var NgStyle = /** @class */ (function () {
     function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
     };
     NgStyle.decorators = [
         { type: Directive, args: [{ selector: '[ngStyle]' },] },
@@ -6520,7 +6525,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1-d7dbdc5');
+var VERSION = new Version('5.2.1-c12ea3a');
 
 /**
  * @fileoverview added by tsickle
