@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'shi-Latn',
     [
@@ -22,8 +27,8 @@ export default [
         ['i', 'b', 'm', 'i', 'm', 'y', 'y', 'ɣ', 'c', 'k', 'n', 'd'],
         ['inn', 'bṛa', 'maṛ', 'ibr', 'may', 'yun', 'yul', 'ɣuc', 'cut', 'ktu', 'nuw', 'duj'],
         [
-            'innayr', 'bṛayṛ', 'maṛṣ', 'ibrir', 'mayyu', 'yunyu', 'yulyuz', 'ɣuct', 'cutanbir', 'ktubr',
-            'nuwanbir', 'dujanbir'
+            'innayr', 'bṛayṛ', 'maṛṣ', 'ibrir', 'mayyu', 'yunyu', 'yulyuz', 'ɣuct', 'cutanbir',
+            'ktubr', 'nuwanbir', 'dujanbir'
         ]
     ],
     ,
@@ -36,7 +41,6 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'MAD', 'adrim n lmɣrib',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'MAD', 'adrim n lmɣrib', plural
 ];
 //# sourceMappingURL=shi-Latn.js.map

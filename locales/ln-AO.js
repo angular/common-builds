@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === Math.floor(n) && n >= 0 && n <= 1)
+        return 1;
+    return 5;
+}
 export default [
     'ln-AO',
     [
@@ -15,8 +22,8 @@ export default [
     [
         ['e', 'y', 'm', 'm', 'm', 'm', 'p'], ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
         [
-            'eyenga', 'mokɔlɔ mwa yambo', 'mokɔlɔ mwa míbalé', 'mokɔlɔ mwa mísáto', 'mokɔlɔ ya mínéi',
-            'mokɔlɔ ya mítáno', 'mpɔ́sɔ'
+            'eyenga', 'mokɔlɔ mwa yambo', 'mokɔlɔ mwa míbalé', 'mokɔlɔ mwa mísáto',
+            'mokɔlɔ ya mínéi', 'mokɔlɔ ya mítáno', 'mpɔ́sɔ'
         ],
         ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps']
     ],
@@ -25,9 +32,10 @@ export default [
         ['y', 'f', 'm', 'a', 'm', 'y', 'y', 'a', 's', 'ɔ', 'n', 'd'],
         ['yan', 'fbl', 'msi', 'apl', 'mai', 'yun', 'yul', 'agt', 'stb', 'ɔtb', 'nvb', 'dsb'],
         [
-            'sánzá ya yambo', 'sánzá ya míbalé', 'sánzá ya mísáto', 'sánzá ya mínei', 'sánzá ya mítáno',
-            'sánzá ya motóbá', 'sánzá ya nsambo', 'sánzá ya mwambe', 'sánzá ya libwa', 'sánzá ya zómi',
-            'sánzá ya zómi na mɔ̌kɔ́', 'sánzá ya zómi na míbalé'
+            'sánzá ya yambo', 'sánzá ya míbalé', 'sánzá ya mísáto', 'sánzá ya mínei',
+            'sánzá ya mítáno', 'sánzá ya motóbá', 'sánzá ya nsambo', 'sánzá ya mwambe',
+            'sánzá ya libwa', 'sánzá ya zómi', 'sánzá ya zómi na mɔ̌kɔ́',
+            'sánzá ya zómi na míbalé'
         ]
     ],
     ,
@@ -40,11 +48,6 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza ya Angóla',
-    function (n) {
-        if (n === Math.floor(n) && n >= 0 && n <= 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza ya Angóla', plural
 ];
 //# sourceMappingURL=ln-AO.js.map

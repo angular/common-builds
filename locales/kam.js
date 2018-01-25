@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'kam',
     [
@@ -14,7 +19,10 @@ export default [
     ,
     [
         ['Y', 'W', 'E', 'A', 'A', 'A', 'A'], ['Wky', 'Wkw', 'Wkl', 'Wtũ', 'Wkn', 'Wtn', 'Wth'],
-        ['Wa kyumwa', 'Wa kwambĩlĩlya', 'Wa kelĩ', 'Wa katatũ', 'Wa kana', 'Wa katano', 'Wa thanthatũ'],
+        [
+            'Wa kyumwa', 'Wa kwambĩlĩlya', 'Wa kelĩ', 'Wa katatũ', 'Wa kana', 'Wa katano',
+            'Wa thanthatũ'
+        ],
         ['Wky', 'Wkw', 'Wkl', 'Wtũ', 'Wkn', 'Wtn', 'Wth']
     ],
     ,
@@ -37,7 +45,6 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Silingi ya Kenya',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Silingi ya Kenya', plural
 ];
 //# sourceMappingURL=kam.js.map

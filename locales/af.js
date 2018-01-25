@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
 export default [
     'af',
     [
@@ -36,10 +43,6 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'Suid-Afrikaanse rand', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'Suid-Afrikaanse rand', plural
 ];
 //# sourceMappingURL=af.js.map

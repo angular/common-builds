@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'dua',
     [
@@ -22,8 +27,8 @@ export default [
         ['d', 'ŋ', 's', 'd', 'e', 'e', 'm', 'd', 'n', 'm', 't', 'e'],
         ['di', 'ŋgɔn', 'sɔŋ', 'diɓ', 'emi', 'esɔ', 'mad', 'diŋ', 'nyɛt', 'may', 'tin', 'elá'],
         [
-            'dimɔ́di', 'ŋgɔndɛ', 'sɔŋɛ', 'diɓáɓá', 'emiasele', 'esɔpɛsɔpɛ', 'madiɓɛ́díɓɛ́', 'diŋgindi',
-            'nyɛtɛki', 'mayésɛ́', 'tiníní', 'eláŋgɛ́'
+            'dimɔ́di', 'ŋgɔndɛ', 'sɔŋɛ', 'diɓáɓá', 'emiasele', 'esɔpɛsɔpɛ',
+            'madiɓɛ́díɓɛ́', 'diŋgindi', 'nyɛtɛki', 'mayésɛ́', 'tiníní', 'eláŋgɛ́'
         ]
     ],
     ,
@@ -36,7 +41,6 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'XAF',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'XAF', plural
 ];
 //# sourceMappingURL=dua.js.map

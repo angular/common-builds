@@ -5,8 +5,17 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === Math.floor(i) && i >= 0 && i <= 1)
+        return 1;
+    return 5;
+}
 export default [
-    'pt-MZ', [['a.m.', 'p.m.'], , ['da manhã', 'da tarde']], [['a.m.', 'p.m.'], , ['manhã', 'tarde']],
+    'pt-MZ', [['a.m.', 'p.m.'], , ['da manhã', 'da tarde']],
+    [['a.m.', 'p.m.'], , ['manhã', 'tarde']],
     [
         ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
         ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'],
@@ -35,12 +44,6 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'MTn', 'Metical de Moçambique',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === Math.floor(i) && i >= 0 && i <= 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'MTn', 'Metical de Moçambique', plural
 ];
 //# sourceMappingURL=pt-MZ.js.map

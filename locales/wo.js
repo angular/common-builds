@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'wo',
     [
@@ -36,7 +41,6 @@ export default [
         '{1} \'ci\' {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Franc CFA bu Afrik Sowwu-jant',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Franc CFA bu Afrik Sowwu-jant', plural
 ];
 //# sourceMappingURL=wo.js.map

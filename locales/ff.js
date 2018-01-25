@@ -5,6 +5,14 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === 0 || i === 1)
+        return 1;
+    return 5;
+}
 export default [
     'ff',
     [
@@ -22,8 +30,8 @@ export default [
         ['s', 'c', 'm', 's', 'd', 'k', 'm', 'j', 's', 'y', 'j', 'b'],
         ['sii', 'col', 'mbo', 'see', 'duu', 'kor', 'mor', 'juk', 'slt', 'yar', 'jol', 'bow'],
         [
-            'siilo', 'colte', 'mbooy', 'seeɗto', 'duujal', 'korse', 'morso', 'juko', 'siilto', 'yarkomaa',
-            'jolal', 'bowte'
+            'siilo', 'colte', 'mbooy', 'seeɗto', 'duujal', 'korse', 'morso', 'juko', 'siilto',
+            'yarkomaa', 'jolal', 'bowte'
         ]
     ],
     ,
@@ -36,12 +44,6 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'Mbuuɗu Seefaa BCEAO',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === 0 || i === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'Mbuuɗu Seefaa BCEAO', plural
 ];
 //# sourceMappingURL=ff.js.map

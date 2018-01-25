@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'bas',
     [
@@ -14,7 +19,10 @@ export default [
     ,
     [
         ['n', 'n', 'u', 'ŋ', 'm', 'k', 'j'], ['nɔy', 'nja', 'uum', 'ŋge', 'mbɔ', 'kɔɔ', 'jon'],
-        ['ŋgwà nɔ̂y', 'ŋgwà njaŋgumba', 'ŋgwà ûm', 'ŋgwà ŋgê', 'ŋgwà mbɔk', 'ŋgwà kɔɔ', 'ŋgwà jôn'],
+        [
+            'ŋgwà nɔ̂y', 'ŋgwà njaŋgumba', 'ŋgwà ûm', 'ŋgwà ŋgê', 'ŋgwà mbɔk',
+            'ŋgwà kɔɔ', 'ŋgwà jôn'
+        ],
         ['nɔy', 'nja', 'uum', 'ŋge', 'mbɔ', 'kɔɔ', 'jon']
     ],
     ,
@@ -22,8 +30,8 @@ export default [
         ['k', 'm', 'm', 'm', 'm', 'h', 'n', 'h', 'd', 'b', 'm', 'l'],
         ['kɔn', 'mac', 'mat', 'mto', 'mpu', 'hil', 'nje', 'hik', 'dip', 'bio', 'may', 'liɓ'],
         [
-            'Kɔndɔŋ', 'Màcɛ̂l', 'Màtùmb', 'Màtop', 'M̀puyɛ', 'Hìlòndɛ̀', 'Njèbà', 'Hìkaŋ', 'Dìpɔ̀s', 'Bìòôm',
-            'Màyɛsèp', 'Lìbuy li ńyèe'
+            'Kɔndɔŋ', 'Màcɛ̂l', 'Màtùmb', 'Màtop', 'M̀puyɛ', 'Hìlòndɛ̀', 'Njèbà',
+            'Hìkaŋ', 'Dìpɔ̀s', 'Bìòôm', 'Màyɛsèp', 'Lìbuy li ńyèe'
         ]
     ],
     ,
@@ -36,7 +44,6 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'Frǎŋ CFA (BEAC)',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'Frǎŋ CFA (BEAC)', plural
 ];
 //# sourceMappingURL=bas.js.map

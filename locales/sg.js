@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'sg',
     [
@@ -14,7 +19,10 @@ export default [
     ,
     [
         ['K', 'S', 'T', 'S', 'K', 'P', 'Y'], ['Bk1', 'Bk2', 'Bk3', 'Bk4', 'Bk5', 'Lâp', 'Lây'],
-        ['Bikua-ôko', 'Bïkua-ûse', 'Bïkua-ptâ', 'Bïkua-usïö', 'Bïkua-okü', 'Lâpôsö', 'Lâyenga'],
+        [
+            'Bikua-ôko', 'Bïkua-ûse', 'Bïkua-ptâ', 'Bïkua-usïö', 'Bïkua-okü', 'Lâpôsö',
+            'Lâyenga'
+        ],
         ['Bk1', 'Bk2', 'Bk3', 'Bk4', 'Bk5', 'Lâp', 'Lây']
     ],
     ,
@@ -22,8 +30,8 @@ export default [
         ['N', 'F', 'M', 'N', 'B', 'F', 'L', 'K', 'M', 'N', 'N', 'K'],
         ['Nye', 'Ful', 'Mbä', 'Ngu', 'Bêl', 'Fön', 'Len', 'Kük', 'Mvu', 'Ngb', 'Nab', 'Kak'],
         [
-            'Nyenye', 'Fulundïgi', 'Mbängü', 'Ngubùe', 'Bêläwü', 'Föndo', 'Lengua', 'Kükürü', 'Mvuka',
-            'Ngberere', 'Nabändüru', 'Kakauka'
+            'Nyenye', 'Fulundïgi', 'Mbängü', 'Ngubùe', 'Bêläwü', 'Föndo', 'Lengua', 'Kükürü',
+            'Mvuka', 'Ngberere', 'Nabändüru', 'Kakauka'
         ]
     ],
     ,
@@ -36,7 +44,6 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00;¤-#,##0.00', '#E0'], 'FCFA', 'farânga CFA (BEAC)',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤#,##0.00;¤-#,##0.00', '#E0'], 'FCFA', 'farânga CFA (BEAC)', plural
 ];
 //# sourceMappingURL=sg.js.map

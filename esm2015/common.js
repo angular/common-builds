@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.1-5423882
+ * @license Angular v5.2.1-da9e57b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -715,7 +715,7 @@ const CURRENCIES = {
  * @param {?} n
  * @return {?}
  */
-function converter(n) {
+function plural(n) {
     let /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
         return 1;
@@ -755,7 +755,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', plural
 ];
 
 /**
@@ -5985,7 +5985,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('5.2.1-5423882');
+const VERSION = new Version('5.2.1-da9e57b');
 
 /**
  * @fileoverview added by tsickle
