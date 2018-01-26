@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-f9381e4
+ * @license Angular v6.0.0-beta.1-e608052
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -25,7 +25,7 @@ import { LocationStrategy } from '@angular/common';
 class SpyLocation {
     constructor() {
         this.urlChanges = [];
-        this._history = [new LocationState('', '')];
+        this._history = [new LocationState('', '', null)];
         this._historyIndex = 0;
         /**
          * \@internal
@@ -54,6 +54,10 @@ class SpyLocation {
      * @return {?}
      */
     path() { return this._history[this._historyIndex].path; }
+    /**
+     * @return {?}
+     */
+    state() { return this._history[this._historyIndex].state; }
     /**
      * @param {?} path
      * @param {?=} query
@@ -94,14 +98,15 @@ class SpyLocation {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    go(path, query = '') {
+    go(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
         if (this._historyIndex > 0) {
             this._history.splice(this._historyIndex + 1);
         }
-        this._history.push(new LocationState(path, query));
+        this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
         const /** @type {?} */ locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
@@ -114,9 +119,10 @@ class SpyLocation {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    replaceState(path, query = '') {
+    replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
         const /** @type {?} */ history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
@@ -124,6 +130,7 @@ class SpyLocation {
         }
         history.path = path;
         history.query = query;
+        history.state = state;
         const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     }
@@ -133,7 +140,7 @@ class SpyLocation {
     forward() {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     }
     /**
@@ -142,7 +149,7 @@ class SpyLocation {
     back() {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     }
     /**
@@ -169,10 +176,12 @@ class LocationState {
     /**
      * @param {?} path
      * @param {?} query
+     * @param {?} state
      */
-    constructor(path, query) {
+    constructor(path, query, state) {
         this.path = path;
         this.query = query;
+        this.state = state;
     }
 }
 

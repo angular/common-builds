@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-f9381e4
+ * @license Angular v6.0.0-beta.1-e608052
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v6.0.0-beta.1-f9381e4
+ * @license Angular v6.0.0-beta.1-e608052
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -59,7 +59,7 @@ function __extends(d, b) {
 var SpyLocation = /** @class */ (function () {
     function SpyLocation() {
         this.urlChanges = [];
-        this._history = [new LocationState('', '')];
+        this._history = [new LocationState('', '', null)];
         this._historyIndex = 0;
         /**
          * \@internal
@@ -99,6 +99,13 @@ var SpyLocation = /** @class */ (function () {
      * @return {?}
      */
     function () { return this._history[this._historyIndex].path; };
+    /**
+     * @return {?}
+     */
+    SpyLocation.prototype.state = /**
+     * @return {?}
+     */
+    function () { return this._history[this._historyIndex].state; };
     /**
      * @param {?} path
      * @param {?=} query
@@ -157,20 +164,23 @@ var SpyLocation = /** @class */ (function () {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
     SpyLocation.prototype.go = /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    function (path, query) {
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         if (this._historyIndex > 0) {
             this._history.splice(this._historyIndex + 1);
         }
-        this._history.push(new LocationState(path, query));
+        this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
         var /** @type {?} */ locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
@@ -183,15 +193,18 @@ var SpyLocation = /** @class */ (function () {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
     SpyLocation.prototype.replaceState = /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    function (path, query) {
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         var /** @type {?} */ history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
@@ -199,6 +212,7 @@ var SpyLocation = /** @class */ (function () {
         }
         history.path = path;
         history.query = query;
+        history.state = state;
         var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     };
@@ -211,7 +225,7 @@ var SpyLocation = /** @class */ (function () {
     function () {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     /**
@@ -223,7 +237,7 @@ var SpyLocation = /** @class */ (function () {
     function () {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     /**
@@ -258,9 +272,10 @@ var SpyLocation = /** @class */ (function () {
     return SpyLocation;
 }());
 var LocationState = /** @class */ (function () {
-    function LocationState(path, query) {
+    function LocationState(path, query, state) {
         this.path = path;
         this.query = query;
+        this.state = state;
     }
     return LocationState;
 }());
