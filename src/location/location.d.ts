@@ -3,7 +3,6 @@ import { LocationStrategy } from './location_strategy';
 /** @experimental */
 export interface PopStateEvent {
     pop?: boolean;
-    state?: any;
     type?: string;
     url?: string;
 }
@@ -54,12 +53,12 @@ export declare class Location {
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
      */
-    go(path: string, query?: string, state?: any): void;
+    go(path: string, query?: string): void;
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      */
-    replaceState(path: string, query?: string, state?: any): void;
+    replaceState(path: string, query?: string): void;
     /**
      * Navigates forward in the platform's history.
      */

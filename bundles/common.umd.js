@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-e608052
+ * @license Angular v6.0.0-beta.1-108fa15
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v6.0.0-beta.1-e608052
+ * @license Angular v6.0.0-beta.1-108fa15
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -214,7 +214,6 @@ var Location = /** @class */ (function () {
             _this._subject.emit({
                 'url': _this.path(true),
                 'pop': true,
-                'state': ev.state,
                 'type': ev.type,
             });
         });
@@ -314,7 +313,6 @@ var Location = /** @class */ (function () {
      * new item onto the platform's history.
      * @param {?} path
      * @param {?=} query
-     * @param {?=} state
      * @return {?}
      */
     Location.prototype.go = /**
@@ -322,13 +320,11 @@ var Location = /** @class */ (function () {
      * new item onto the platform's history.
      * @param {?} path
      * @param {?=} query
-     * @param {?=} state
      * @return {?}
      */
-    function (path, query, state) {
+    function (path, query) {
         if (query === void 0) { query = ''; }
-        if (state === void 0) { state = null; }
-        this._platformStrategy.pushState(state, '', path, query);
+        this._platformStrategy.pushState(null, '', path, query);
     };
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
@@ -339,7 +335,6 @@ var Location = /** @class */ (function () {
      * the top item on the platform's history stack.
      * @param {?} path
      * @param {?=} query
-     * @param {?=} state
      * @return {?}
      */
     Location.prototype.replaceState = /**
@@ -347,13 +342,11 @@ var Location = /** @class */ (function () {
      * the top item on the platform's history stack.
      * @param {?} path
      * @param {?=} query
-     * @param {?=} state
      * @return {?}
      */
-    function (path, query, state) {
+    function (path, query) {
         if (query === void 0) { query = ''; }
-        if (state === void 0) { state = null; }
-        this._platformStrategy.replaceState(state, '', path, query);
+        this._platformStrategy.replaceState(null, '', path, query);
     };
     /**
      * Navigates forward in the platform's history.
@@ -6574,7 +6567,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('6.0.0-beta.1-e608052');
+var VERSION = new _angular_core.Version('6.0.0-beta.1-108fa15');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
