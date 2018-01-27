@@ -19,13 +19,12 @@ export declare class SpyLocation implements Location {
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;
-    private state();
     isCurrentPathEqualTo(path: string, query?: string): boolean;
     simulateUrlPop(pathname: string): void;
     simulateHashChange(pathname: string): void;
     prepareExternalUrl(url: string): string;
-    go(path: string, query?: string, state?: any): void;
-    replaceState(path: string, query?: string, state?: any): void;
+    go(path: string, query?: string): void;
+    replaceState(path: string, query?: string): void;
     forward(): void;
     back(): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): ISubscription;
