@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-5bd93b1
+ * @license Angular v6.0.0-beta.1-c40ae7f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -167,6 +167,7 @@ class Location {
             this._subject.emit({
                 'url': this.path(true),
                 'pop': true,
+                'state': ev.state,
                 'type': ev.type,
             });
         });
@@ -216,20 +217,22 @@ class Location {
      * new item onto the platform's history.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    go(path, query = '') {
-        this._platformStrategy.pushState(null, '', path, query);
+    go(path, query = '', state = null) {
+        this._platformStrategy.pushState(state, '', path, query);
     }
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    replaceState(path, query = '') {
-        this._platformStrategy.replaceState(null, '', path, query);
+    replaceState(path, query = '', state = null) {
+        this._platformStrategy.replaceState(state, '', path, query);
     }
     /**
      * Navigates forward in the platform's history.
@@ -5985,7 +5988,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.1-5bd93b1');
+const VERSION = new Version('6.0.0-beta.1-c40ae7f');
 
 /**
  * @fileoverview added by tsickle
