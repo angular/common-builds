@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-c40ae7f
+ * @license Angular v6.0.0-beta.1-6e8bc31
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3121,7 +3121,7 @@ NgStyle.propDecorators = {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set it's value as default.
+ * Note: using the key `$implicit` in the context object will set its value as default.
  *
  * ## Example
  *
@@ -5988,7 +5988,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.1-c40ae7f');
+const VERSION = new Version('6.0.0-beta.1-6e8bc31');
 
 /**
  * @fileoverview added by tsickle

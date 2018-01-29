@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.1-c40ae7f
+ * @license Angular v6.0.0-beta.1-6e8bc31
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v6.0.0-beta.1-c40ae7f
+ * @license Angular v6.0.0-beta.1-6e8bc31
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3501,7 +3501,7 @@ var NgStyle = /** @class */ (function () {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set it's value as default.
+ * Note: using the key `$implicit` in the context object will set its value as default.
  *
  * ## Example
  *
@@ -6574,7 +6574,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('6.0.0-beta.1-c40ae7f');
+var VERSION = new _angular_core.Version('6.0.0-beta.1-6e8bc31');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
