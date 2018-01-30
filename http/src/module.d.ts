@@ -5,9 +5,27 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ModuleWithProviders } from '@angular/core';
+import { Injector, ModuleWithProviders } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
+import { HttpRequest } from './request';
+import { HttpEvent } from './response';
+/**
+ * An `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * to a request before passing it to the given `HttpBackend`.
+ *
+ * The interceptors are loaded lazily from the injector, to allow
+ * interceptors to themselves inject classes depending indirectly
+ * on `HttpInterceptingHandler` itself.
+ */
+export declare class HttpInterceptingHandler implements HttpHandler {
+    private backend;
+    private injector;
+    private chain;
+    constructor(backend: HttpBackend, injector: Injector);
+    handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+}
 /**
  * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
  * to a request before passing it to the given `HttpBackend`.

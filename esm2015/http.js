@@ -1,9 +1,9 @@
 /**
- * @license Angular v5.2.2-fad99cc
+ * @license Angular v5.2.2-ed2b717
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
-import { Inject, Injectable, InjectionToken, NgModule, Optional, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Injector, NgModule, PLATFORM_ID } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { concatMap } from 'rxjs/operator/concatMap';
 import { filter } from 'rxjs/operator/filter';
@@ -2057,6 +2057,44 @@ HttpXsrfInterceptor.ctorParameters = () => [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * An `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * to a request before passing it to the given `HttpBackend`.
+ *
+ * The interceptors are loaded lazily from the injector, to allow
+ * interceptors to themselves inject classes depending indirectly
+ * on `HttpInterceptingHandler` itself.
+ */
+class HttpInterceptingHandler {
+    /**
+     * @param {?} backend
+     * @param {?} injector
+     */
+    constructor(backend, injector) {
+        this.backend = backend;
+        this.injector = injector;
+        this.chain = null;
+    }
+    /**
+     * @param {?} req
+     * @return {?}
+     */
+    handle(req) {
+        if (this.chain === null) {
+            const /** @type {?} */ interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
+            this.chain = interceptors.reduceRight((next, interceptor) => new HttpInterceptorHandler(next, interceptor), this.backend);
+        }
+        return this.chain.handle(req);
+    }
+}
+HttpInterceptingHandler.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+HttpInterceptingHandler.ctorParameters = () => [
+    { type: HttpBackend, },
+    { type: Injector, },
+];
+/**
  * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
  * to a request before passing it to the given `HttpBackend`.
  *
@@ -2162,13 +2200,7 @@ HttpClientModule.decorators = [
                 ],
                 providers: [
                     HttpClient,
-                    // HttpHandler is the backend + interceptors and is constructed
-                    // using the interceptingHandler factory function.
-                    {
-                        provide: HttpHandler,
-                        useFactory: interceptingHandler,
-                        deps: [HttpBackend, [new Optional(), new Inject(HTTP_INTERCEPTORS)]],
-                    },
+                    { provide: HttpHandler, useClass: HttpInterceptingHandler },
                     HttpXhrBackend,
                     { provide: HttpBackend, useExisting: HttpXhrBackend },
                     BrowserXhr,
@@ -2220,5 +2252,5 @@ HttpClientJsonpModule.ctorParameters = () => [];
  * Generated bundle index. Do not edit.
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd, HttpXsrfCookieExtractor as ɵg, HttpXsrfInterceptor as ɵh, XSRF_COOKIE_NAME as ɵe, XSRF_HEADER_NAME as ɵf };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor, NoopInterceptor as ɵa, JsonpCallbackContext as ɵb, HttpInterceptingHandler as ɵc, jsonpCallbackContext as ɵd, BrowserXhr as ɵe, HttpXsrfCookieExtractor as ɵh, HttpXsrfInterceptor as ɵi, XSRF_COOKIE_NAME as ɵf, XSRF_HEADER_NAME as ɵg };
 //# sourceMappingURL=http.js.map

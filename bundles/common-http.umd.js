@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.2-fad99cc
+ * @license Angular v5.2.2-ed2b717
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.2.2-fad99cc
+ * @license Angular v5.2.2-ed2b717
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2520,6 +2520,45 @@ var HttpXsrfInterceptor = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * An `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * to a request before passing it to the given `HttpBackend`.
+ *
+ * The interceptors are loaded lazily from the injector, to allow
+ * interceptors to themselves inject classes depending indirectly
+ * on `HttpInterceptingHandler` itself.
+ */
+var HttpInterceptingHandler = /** @class */ (function () {
+    function HttpInterceptingHandler(backend, injector) {
+        this.backend = backend;
+        this.injector = injector;
+        this.chain = null;
+    }
+    /**
+     * @param {?} req
+     * @return {?}
+     */
+    HttpInterceptingHandler.prototype.handle = /**
+     * @param {?} req
+     * @return {?}
+     */
+    function (req) {
+        if (this.chain === null) {
+            var /** @type {?} */ interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
+            this.chain = interceptors.reduceRight(function (next, interceptor) { return new HttpInterceptorHandler(next, interceptor); }, this.backend);
+        }
+        return this.chain.handle(req);
+    };
+    HttpInterceptingHandler.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpInterceptingHandler.ctorParameters = function () { return [
+        { type: HttpBackend, },
+        { type: _angular_core.Injector, },
+    ]; };
+    return HttpInterceptingHandler;
+}());
+/**
  * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
  * to a request before passing it to the given `HttpBackend`.
  *
@@ -2648,13 +2687,7 @@ var HttpClientModule = /** @class */ (function () {
                     ],
                     providers: [
                         HttpClient,
-                        // HttpHandler is the backend + interceptors and is constructed
-                        // using the interceptingHandler factory function.
-                        {
-                            provide: HttpHandler,
-                            useFactory: interceptingHandler,
-                            deps: [HttpBackend, [new _angular_core.Optional(), new _angular_core.Inject(HTTP_INTERCEPTORS)]],
-                        },
+                        { provide: HttpHandler, useClass: HttpInterceptingHandler },
                         HttpXhrBackend,
                         { provide: HttpBackend, useExisting: HttpXhrBackend },
                         BrowserXhr,
@@ -2715,12 +2748,13 @@ exports.XhrFactory = XhrFactory;
 exports.HttpXsrfTokenExtractor = HttpXsrfTokenExtractor;
 exports.ɵa = NoopInterceptor;
 exports.ɵb = JsonpCallbackContext;
-exports.ɵc = jsonpCallbackContext;
-exports.ɵd = BrowserXhr;
-exports.ɵg = HttpXsrfCookieExtractor;
-exports.ɵh = HttpXsrfInterceptor;
-exports.ɵe = XSRF_COOKIE_NAME;
-exports.ɵf = XSRF_HEADER_NAME;
+exports.ɵc = HttpInterceptingHandler;
+exports.ɵd = jsonpCallbackContext;
+exports.ɵe = BrowserXhr;
+exports.ɵh = HttpXsrfCookieExtractor;
+exports.ɵi = HttpXsrfInterceptor;
+exports.ɵf = XSRF_COOKIE_NAME;
+exports.ɵg = XSRF_HEADER_NAME;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
