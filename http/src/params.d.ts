@@ -30,6 +30,20 @@ export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
     decodeKey(k: string): string;
     decodeValue(v: string): string;
 }
+/** Options used to construct an `HttpParams` instance. */
+export interface HttpParamsOptions {
+    /**
+     * String representation of the HTTP params in URL-query-string format. Mutually exclusive with
+     * `fromObject`.
+     */
+    fromString?: string;
+    /** Object map of the HTTP params. Mutally exclusive with `fromString`. */
+    fromObject?: {
+        [param: string]: string | string[];
+    };
+    /** Encoding codec used to parse and serialize the params. */
+    encoder?: HttpParameterCodec;
+}
 /**
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
@@ -43,13 +57,7 @@ export declare class HttpParams {
     private encoder;
     private updates;
     private cloneFrom;
-    constructor(options?: {
-        fromString?: string | undefined;
-        fromObject?: {
-            [param: string]: string | string[];
-        } | undefined;
-        encoder?: HttpParameterCodec | undefined;
-    });
+    constructor(options?: HttpParamsOptions);
     /**
      * Check whether the body has one or more values for the given parameter name.
      */
