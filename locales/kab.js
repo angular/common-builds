@@ -44,6 +44,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'DA', 'Adinar Azzayri', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'DA', 'Adinar Azzayri',
+    { 'DZD': ['DA'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=kab.js.map

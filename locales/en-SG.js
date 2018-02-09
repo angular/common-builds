@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Singapore Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Singapore Dollar',
+    { 'JPY': ['JP¥', '¥'], 'SGD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-SG.js.map

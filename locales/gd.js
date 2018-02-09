@@ -61,6 +61,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Punnd Sasannach', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Punnd Sasannach',
+    { 'JPY': ['JP¥', '¥'], 'RON': [, 'leu'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural
 ];
 //# sourceMappingURL=gd.js.map

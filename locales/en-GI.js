@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Gibraltar Pound', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Gibraltar Pound',
+    { 'GBP': ['GB£', '£'], 'GIP': ['£'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-GI.js.map

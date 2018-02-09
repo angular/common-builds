@@ -44,6 +44,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'UM', 'Ugiyya Muritani', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'UM', 'Ugiyya Muritani',
+    { 'JPY': ['JP¥', '¥'], 'MRO': ['UM'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ff-MR.js.map

@@ -43,6 +43,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'US$', 'Dola yase Amelika', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'US$', 'Dola yase Amelika',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=nd.js.map

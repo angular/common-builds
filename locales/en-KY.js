@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Cayman Islands Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Cayman Islands Dollar',
+    { 'JPY': ['JP¥', '¥'], 'KYD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-KY.js.map

@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rs', 'Pakistani Rupee', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rs', 'Pakistani Rupee',
+    { 'JPY': ['JP¥', '¥'], 'PKR': ['Rs'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-PK.js.map

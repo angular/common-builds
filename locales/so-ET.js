@@ -55,6 +55,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Birta Itoobbiya', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Birta Itoobbiya',
+    { 'ETB': ['Br'], 'JPY': ['JP¥', '¥'], 'SOS': ['S'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=so-ET.js.map

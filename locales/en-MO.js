@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'MOP$', 'Macanese Pataca', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'MOP$', 'Macanese Pataca',
+    { 'JPY': ['JP¥', '¥'], 'MOP': ['MOP$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-MO.js.map

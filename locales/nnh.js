@@ -42,6 +42,7 @@ export default [
     ['dd/MM/yy', 'd MMM, y', '\'lyɛ\'̌ʼ d \'na\' MMMM, y', 'EEEE , \'lyɛ\'̌ʼ d \'na\' MMMM, y'],
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', , '{1}, {0}', '{1},{0}'],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'FCFA', 'feláŋ CFA', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'FCFA', 'feláŋ CFA',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=nnh.js.map

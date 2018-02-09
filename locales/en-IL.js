@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₪', 'Israeli New Shekel', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₪', 'Israeli New Shekel',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-IL.js.map

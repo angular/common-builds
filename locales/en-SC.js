@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'SR', 'Seychellois Rupee', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'SR', 'Seychellois Rupee',
+    { 'JPY': ['JP¥', '¥'], 'SCR': ['SR'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-SC.js.map

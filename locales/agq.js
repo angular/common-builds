@@ -46,6 +46,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'FCFA', 'CFA Fàlâŋ BEAC', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'FCFA', 'CFA Fàlâŋ BEAC',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=agq.js.map

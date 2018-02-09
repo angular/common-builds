@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ar', 'Malagasy Ariary', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ar', 'Malagasy Ariary',
+    { 'JPY': ['JP¥', '¥'], 'MGA': ['Ar'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-MG.js.map

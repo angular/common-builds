@@ -45,6 +45,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Fraŋ CFA BEAC', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Fraŋ CFA BEAC',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=nmg.js.map

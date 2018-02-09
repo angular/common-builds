@@ -43,6 +43,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Laibhiya Dala', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Laibhiya Dala',
+    { 'JPY': ['JP¥', '¥'], 'LRD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=vai-Latn.js.map

@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'MK', 'Malawian Kwacha', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'MK', 'Malawian Kwacha',
+    { 'JPY': ['JP¥', '¥'], 'MWK': ['MK'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-MW.js.map

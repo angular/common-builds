@@ -41,6 +41,7 @@ export default [
         ,
     ],
     ['.', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'CFA', 'CFA Fraŋ (BCEAO)', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'CFA', 'CFA Fraŋ (BCEAO)',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=dje.js.map

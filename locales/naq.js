@@ -49,6 +49,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'ZAR', 'South African Randi', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'ZAR', 'South African Randi',
+    { 'JPY': ['JP¥', '¥'], 'NAD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=naq.js.map

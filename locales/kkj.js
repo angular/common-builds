@@ -49,6 +49,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'FCFA', 'Franc CFA', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'FCFA', 'Franc CFA',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=kkj.js.map

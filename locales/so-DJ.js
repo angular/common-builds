@@ -55,6 +55,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Fdj', 'Faran Jabbuuti', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Fdj', 'Faran Jabbuuti',
+    { 'DJF': ['Fdj'], 'JPY': ['JP¥', '¥'], 'SOS': ['S'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=so-DJ.js.map

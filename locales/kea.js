@@ -48,6 +48,8 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'Skudu Kabuverdianu', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'Skudu Kabuverdianu',
+    { 'AUD': ['AU$', '$'], 'CVE': ['​'], 'JPY': ['JP¥', '¥'], 'THB': ['฿'], 'USD': ['US$', '$'] },
+    plural
 ];
 //# sourceMappingURL=kea.js.map

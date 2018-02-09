@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Trinidad & Tobago Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'Trinidad & Tobago Dollar',
+    { 'JPY': ['JP¥', '¥'], 'TTD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-TT.js.map

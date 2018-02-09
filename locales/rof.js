@@ -44,6 +44,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'TSh', 'heleri sa Tanzania', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'TSh', 'heleri sa Tanzania',
+    { 'JPY': ['JP¥', '¥'], 'TZS': ['TSh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=rof.js.map

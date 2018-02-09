@@ -43,6 +43,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Itoophiyaa Birrii', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Itoophiyaa Birrii',
+    { 'ETB': ['Br'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=om.js.map

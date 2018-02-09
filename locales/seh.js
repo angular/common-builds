@@ -43,6 +43,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'MTn', 'Metical de Moçambique', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'MTn', 'Metical de Moçambique',
+    { 'JPY': ['JP¥', '¥'], 'MZN': ['MTn'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=seh.js.map

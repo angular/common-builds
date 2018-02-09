@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Malaysian Ringgit', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Malaysian Ringgit',
+    { 'JPY': ['JP¥', '¥'], 'MYR': ['RM'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-MY.js.map

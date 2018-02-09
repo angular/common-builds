@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'USh', 'Ugandan Shilling', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'USh', 'Ugandan Shilling',
+    { 'JPY': ['JP¥', '¥'], 'UGX': ['USh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-UG.js.map

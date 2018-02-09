@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'TSh', 'Tanzanian Shilling', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'TSh', 'Tanzanian Shilling',
+    { 'JPY': ['JP¥', '¥'], 'TZS': ['TSh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-TZ.js.map

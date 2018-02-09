@@ -57,6 +57,20 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'i-South African Rand', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'i-South African Rand', {
+        'BYN': [, 'P.'],
+        'DKK': [, 'Kr'],
+        'HRK': [, 'Kn'],
+        'ISK': [, 'Kr'],
+        'JPY': ['JP¥', '¥'],
+        'NOK': [, 'Kr'],
+        'PLN': [, 'Zł'],
+        'SEK': [, 'Kr'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$'],
+        'ZAR': ['R']
+    },
+    plural
 ];
 //# sourceMappingURL=zu.js.map

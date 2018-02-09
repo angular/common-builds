@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.3-5fc77c9
+ * @license Angular v6.0.0-beta.3-44154e7
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -788,126 +788,6 @@ var PathLocationStrategy = /** @class */ (function (_super) {
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
 /**
- * \@internal
- */
-var CURRENCIES = {
-    'AOA': [, 'Kz'],
-    'ARS': [, '$'],
-    'AUD': ['A$', '$'],
-    'BAM': [, 'KM'],
-    'BBD': [, '$'],
-    'BDT': [, '৳'],
-    'BMD': [, '$'],
-    'BND': [, '$'],
-    'BOB': [, 'Bs'],
-    'BRL': ['R$'],
-    'BSD': [, '$'],
-    'BWP': [, 'P'],
-    'BYN': [, 'р.'],
-    'BZD': [, '$'],
-    'CAD': ['CA$', '$'],
-    'CLP': [, '$'],
-    'CNY': ['CN¥', '¥'],
-    'COP': [, '$'],
-    'CRC': [, '₡'],
-    'CUC': [, '$'],
-    'CUP': [, '$'],
-    'CZK': [, 'Kč'],
-    'DKK': [, 'kr'],
-    'DOP': [, '$'],
-    'EGP': [, 'E£'],
-    'ESP': [, '₧'],
-    'EUR': ['€'],
-    'FJD': [, '$'],
-    'FKP': [, '£'],
-    'GBP': ['£'],
-    'GEL': [, '₾'],
-    'GIP': [, '£'],
-    'GNF': [, 'FG'],
-    'GTQ': [, 'Q'],
-    'GYD': [, '$'],
-    'HKD': ['HK$', '$'],
-    'HNL': [, 'L'],
-    'HRK': [, 'kn'],
-    'HUF': [, 'Ft'],
-    'IDR': [, 'Rp'],
-    'ILS': ['₪'],
-    'INR': ['₹'],
-    'ISK': [, 'kr'],
-    'JMD': [, '$'],
-    'JPY': ['¥'],
-    'KHR': [, '៛'],
-    'KMF': [, 'CF'],
-    'KPW': [, '₩'],
-    'KRW': ['₩'],
-    'KYD': [, '$'],
-    'KZT': [, '₸'],
-    'LAK': [, '₭'],
-    'LBP': [, 'L£'],
-    'LKR': [, 'Rs'],
-    'LRD': [, '$'],
-    'LTL': [, 'Lt'],
-    'LVL': [, 'Ls'],
-    'MGA': [, 'Ar'],
-    'MMK': [, 'K'],
-    'MNT': [, '₮'],
-    'MUR': [, 'Rs'],
-    'MXN': ['MX$', '$'],
-    'MYR': [, 'RM'],
-    'NAD': [, '$'],
-    'NGN': [, '₦'],
-    'NIO': [, 'C$'],
-    'NOK': [, 'kr'],
-    'NPR': [, 'Rs'],
-    'NZD': ['NZ$', '$'],
-    'PHP': [, '₱'],
-    'PKR': [, 'Rs'],
-    'PLN': [, 'zł'],
-    'PYG': [, '₲'],
-    'RON': [, 'lei'],
-    'RUB': [, '₽'],
-    'RUR': [, 'р.'],
-    'RWF': [, 'RF'],
-    'SBD': [, '$'],
-    'SEK': [, 'kr'],
-    'SGD': [, '$'],
-    'SHP': [, '£'],
-    'SRD': [, '$'],
-    'SSP': [, '£'],
-    'STD': [, 'Db'],
-    'SYP': [, '£'],
-    'THB': [, '฿'],
-    'TOP': [, 'T$'],
-    'TRY': [, '₺'],
-    'TTD': [, '$'],
-    'TWD': ['NT$', '$'],
-    'UAH': [, '₴'],
-    'USD': ['$'],
-    'UYU': [, '$'],
-    'VEF': [, 'Bs'],
-    'VND': ['₫'],
-    'XAF': ['FCFA'],
-    'XCD': ['EC$', '$'],
-    'XOF': ['CFA'],
-    'XPF': ['CFPF'],
-    'ZAR': [, 'R'],
-    'ZMW': [, 'ZK'],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
-/**
  * @param {?} n
  * @return {?}
  */
@@ -951,7 +831,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', {}, plural
 ];
 
 /**
@@ -987,9 +867,161 @@ function registerLocaleData(data, localeId, extraData) {
     localeId = localeId.toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
-        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
+        LOCALE_DATA[localeId][19 /* ExtraData */] = extraData;
     }
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@internal
+ */
+var CURRENCIES_EN = {
+    'ADP': [, , 0],
+    'AFN': [, , 0],
+    'ALL': [, , 0],
+    'AMD': [, , 0],
+    'AOA': [, 'Kz'],
+    'ARS': [, '$'],
+    'AUD': ['A$', '$'],
+    'BAM': [, 'KM'],
+    'BBD': [, '$'],
+    'BDT': [, '৳'],
+    'BHD': [, , 3],
+    'BIF': [, , 0],
+    'BMD': [, '$'],
+    'BND': [, '$'],
+    'BOB': [, 'Bs'],
+    'BRL': ['R$'],
+    'BSD': [, '$'],
+    'BWP': [, 'P'],
+    'BYN': [, 'р.', 2],
+    'BYR': [, , 0],
+    'BZD': [, '$'],
+    'CAD': ['CA$', '$', 2],
+    'CHF': [, , 2],
+    'CLF': [, , 4],
+    'CLP': [, '$', 0],
+    'CNY': ['CN¥', '¥'],
+    'COP': [, '$', 0],
+    'CRC': [, '₡', 2],
+    'CUC': [, '$'],
+    'CUP': [, '$'],
+    'CZK': [, 'Kč', 2],
+    'DJF': [, , 0],
+    'DKK': [, 'kr', 2],
+    'DOP': [, '$'],
+    'EGP': [, 'E£'],
+    'ESP': [, '₧', 0],
+    'EUR': ['€'],
+    'FJD': [, '$'],
+    'FKP': [, '£'],
+    'GBP': ['£'],
+    'GEL': [, '₾'],
+    'GIP': [, '£'],
+    'GNF': [, 'FG', 0],
+    'GTQ': [, 'Q'],
+    'GYD': [, '$', 0],
+    'HKD': ['HK$', '$'],
+    'HNL': [, 'L'],
+    'HRK': [, 'kn'],
+    'HUF': [, 'Ft', 2],
+    'IDR': [, 'Rp', 0],
+    'ILS': ['₪'],
+    'INR': ['₹'],
+    'IQD': [, , 0],
+    'IRR': [, , 0],
+    'ISK': [, 'kr', 0],
+    'ITL': [, , 0],
+    'JMD': [, '$'],
+    'JOD': [, , 3],
+    'JPY': ['¥', , 0],
+    'KHR': [, '៛'],
+    'KMF': [, 'CF', 0],
+    'KPW': [, '₩', 0],
+    'KRW': ['₩', , 0],
+    'KWD': [, , 3],
+    'KYD': [, '$'],
+    'KZT': [, '₸'],
+    'LAK': [, '₭', 0],
+    'LBP': [, 'L£', 0],
+    'LKR': [, 'Rs'],
+    'LRD': [, '$'],
+    'LTL': [, 'Lt'],
+    'LUF': [, , 0],
+    'LVL': [, 'Ls'],
+    'LYD': [, , 3],
+    'MGA': [, 'Ar', 0],
+    'MGF': [, , 0],
+    'MMK': [, 'K', 0],
+    'MNT': [, '₮', 0],
+    'MRO': [, , 0],
+    'MUR': [, 'Rs', 0],
+    'MXN': ['MX$', '$'],
+    'MYR': [, 'RM'],
+    'NAD': [, '$'],
+    'NGN': [, '₦'],
+    'NIO': [, 'C$'],
+    'NOK': [, 'kr', 2],
+    'NPR': [, 'Rs'],
+    'NZD': ['NZ$', '$'],
+    'OMR': [, , 3],
+    'PHP': [, '₱'],
+    'PKR': [, 'Rs', 0],
+    'PLN': [, 'zł'],
+    'PYG': [, '₲', 0],
+    'RON': [, 'lei'],
+    'RSD': [, , 0],
+    'RUB': [, '₽'],
+    'RUR': [, 'р.'],
+    'RWF': [, 'RF', 0],
+    'SBD': [, '$'],
+    'SEK': [, 'kr', 2],
+    'SGD': [, '$'],
+    'SHP': [, '£'],
+    'SLL': [, , 0],
+    'SOS': [, , 0],
+    'SRD': [, '$'],
+    'SSP': [, '£'],
+    'STD': [, 'Db', 0],
+    'SYP': [, '£', 0],
+    'THB': [, '฿'],
+    'TMM': [, , 0],
+    'TND': [, , 3],
+    'TOP': [, 'T$'],
+    'TRL': [, , 0],
+    'TRY': [, '₺'],
+    'TTD': [, '$'],
+    'TWD': ['NT$', '$', 2],
+    'TZS': [, , 0],
+    'UAH': [, '₴'],
+    'UGX': [, , 0],
+    'USD': ['$'],
+    'UYI': [, , 0],
+    'UYU': [, '$'],
+    'UZS': [, , 0],
+    'VEF': [, 'Bs'],
+    'VND': ['₫', , 0],
+    'VUV': [, , 0],
+    'XAF': ['FCFA', , 0],
+    'XCD': ['EC$', '$'],
+    'XOF': ['CFA', , 0],
+    'XPF': ['CFPF', , 0],
+    'YER': [, , 0],
+    'ZAR': [, 'R'],
+    'ZMK': [, , 0],
+    'ZMW': [, 'ZK'],
+    'ZWD': [, , 0]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -1377,6 +1409,15 @@ function getLocaleCurrencyName(locale) {
     return data[16 /* CurrencyName */] || null;
 }
 /**
+ * Returns the currency values for the locale
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleCurrencies(locale) {
+    var /** @type {?} */ data = findLocaleData(locale);
+    return data[17 /* Currencies */];
+}
+/**
  * The locale plural function used by ICU expressions to determine the plural case to use.
  * See {\@link NgPlural} for more information.
  *
@@ -1386,14 +1427,14 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocalePluralCase(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[17 /* PluralCase */];
+    return data[18 /* PluralCase */];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[18 /* ExtraData */]) {
+    if (!data[19 /* ExtraData */]) {
         throw new Error("Missing extra locale data for the locale \"" + data[0 /* LocaleId */] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
@@ -1417,7 +1458,7 @@ function checkFullData(data) {
 function getLocaleExtraDayPeriodRules(locale) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
+    var /** @type {?} */ rules = data[19 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map(function (rule) {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1446,8 +1487,8 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
     var /** @type {?} */ data = findLocaleData(locale);
     checkFullData(data);
     var /** @type {?} */ dayPeriodsData = /** @type {?} */ ([
-        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
-        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
+        data[19 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[19 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]);
     var /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
@@ -1507,21 +1548,42 @@ function findLocaleData(locale) {
     throw new Error("Missing locale data for the locale \"" + locale + "\".");
 }
 /**
- * Return the currency symbol for a given currency code, or the code if no symbol available
+ * Returns the currency symbol for a given currency code, or the code if no symbol available
  * (e.g.: format narrow = $, format wide = US$, code = USD)
+ * If no locale is provided, it uses the locale "en" by default
  *
  * \@experimental i18n support is experimental.
  * @param {?} code
  * @param {?} format
+ * @param {?=} locale
  * @return {?}
  */
-function getCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || [];
-    var /** @type {?} */ symbolNarrow = currency[1];
+function getCurrencySymbol(code, format, locale) {
+    if (locale === void 0) { locale = 'en'; }
+    var /** @type {?} */ currency = getLocaleCurrencies(locale)[code] || CURRENCIES_EN[code] || [];
+    var /** @type {?} */ symbolNarrow = currency[1 /* SymbolNarrow */];
     if (format === 'narrow' && typeof symbolNarrow === 'string') {
         return symbolNarrow;
     }
-    return currency[0] || code;
+    return currency[0 /* Symbol */] || code;
+}
+// Most currencies have cents, that's why the default is 2
+var DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
+/**
+ * Returns the number of decimal digits for the given currency.
+ * Its value depends upon the presence of cents in that particular currency.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} code
+ * @return {?}
+ */
+function getNbOfCurrencyDigits(code) {
+    var /** @type {?} */ digits;
+    var /** @type {?} */ currency = CURRENCIES_EN[code];
+    if (currency) {
+        digits = currency[2 /* NbOfDigits */];
+    }
+    return typeof digits === 'number' ? digits : DEFAULT_NB_OF_CURRENCY_DIGITS;
 }
 
 /**
@@ -4949,41 +5011,42 @@ var DIGIT_CHAR = '#';
 var CURRENCY_CHAR = '¤';
 var PERCENT_CHAR = '%';
 /**
- * Transform a number to a locale string based on a style and a format
- *
- * \@internal
+ * Transforms a string into a number (if needed)
  * @param {?} value
- * @param {?} locale
- * @param {?} style
- * @param {?=} digitsInfo
- * @param {?=} currency
  * @return {?}
  */
-function formatNumber$1(value, locale, style, digitsInfo, currency) {
-    if (currency === void 0) { currency = null; }
-    var /** @type {?} */ res = { str: null };
-    var /** @type {?} */ format = getLocaleNumberFormat(locale, style);
-    var /** @type {?} */ num;
+function strToNumber(value) {
     // Convert strings to numbers
     if (typeof value === 'string' && !isNaN(+value - parseFloat(value))) {
-        num = +value;
+        return +value;
     }
-    else if (typeof value !== 'number') {
-        res.error = value + " is not a number";
-        return res;
+    if (typeof value !== 'number') {
+        throw new Error(value + " is not a number");
     }
-    else {
-        num = value;
-    }
-    var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    return value;
+}
+/**
+ * Transforms a number to a locale string based on a style and a format
+ * @param {?} value
+ * @param {?} pattern
+ * @param {?} locale
+ * @param {?} groupSymbol
+ * @param {?} decimalSymbol
+ * @param {?=} digitsInfo
+ * @param {?=} isPercent
+ * @return {?}
+ */
+function formatNumber$1(value, pattern, locale, groupSymbol, decimalSymbol, digitsInfo, isPercent) {
+    if (isPercent === void 0) { isPercent = false; }
     var /** @type {?} */ formattedText = '';
     var /** @type {?} */ isZero = false;
+    var /** @type {?} */ num = strToNumber(value);
     if (!isFinite(num)) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
         var /** @type {?} */ parsedNumber = parseNumber(num);
-        if (style === NumberFormatStyle.Percent) {
+        if (isPercent) {
             parsedNumber = toPercent(parsedNumber);
         }
         var /** @type {?} */ minInt = pattern.minInt;
@@ -4992,8 +5055,7 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
         if (digitsInfo) {
             var /** @type {?} */ parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
             if (parts === null) {
-                res.error = digitsInfo + " is not a valid digit info";
-                return res;
+                throw new Error(digitsInfo + " is not a valid digit info");
             }
             var /** @type {?} */ minIntPart = parts[1];
             var /** @type {?} */ minFractionPart = parts[3];
@@ -5044,11 +5106,9 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
         if (digits.length) {
             groups.unshift(digits.join(''));
         }
-        var /** @type {?} */ groupSymbol = currency ? NumberSymbol.CurrencyGroup : NumberSymbol.Group;
         formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
         // append the decimal digits
         if (decimals.length) {
-            var /** @type {?} */ decimalSymbol = currency ? NumberSymbol.CurrencyDecimal : NumberSymbol.Decimal;
             formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
         }
         if (exponent) {
@@ -5061,18 +5121,57 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
     else {
         formattedText = pattern.posPre + formattedText + pattern.posSuf;
     }
-    if (style === NumberFormatStyle.Currency && currency !== null) {
-        res.str = formattedText
-            .replace(CURRENCY_CHAR, currency)
-            .replace(CURRENCY_CHAR, '');
-        return res;
-    }
-    if (style === NumberFormatStyle.Percent) {
-        res.str = formattedText.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
-        return res;
-    }
-    res.str = formattedText;
-    return res;
+    return formattedText;
+}
+/**
+ * Formats a currency to a locale string
+ *
+ * \@internal
+ * @param {?} value
+ * @param {?} locale
+ * @param {?} currency
+ * @param {?=} currencyCode
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
+    var /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
+    var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    pattern.minFrac = getNbOfCurrencyDigits(/** @type {?} */ ((currencyCode)));
+    pattern.maxFrac = pattern.minFrac;
+    var /** @type {?} */ res = formatNumber$1(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
+    return res
+        .replace(CURRENCY_CHAR, currency)
+        .replace(CURRENCY_CHAR, '');
+}
+/**
+ * Formats a percentage to a locale string
+ *
+ * \@internal
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatPercent(value, locale, digitsInfo) {
+    var /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
+    var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    var /** @type {?} */ res = formatNumber$1(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo, true);
+    return res.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
+}
+/**
+ * Formats a number to a locale string
+ *
+ * \@internal
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatDecimal(value, locale, digitsInfo) {
+    var /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
+    var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    return formatNumber$1(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
 }
 /**
  * @param {?} format
@@ -6100,25 +6199,26 @@ var DecimalPipe = /** @class */ (function () {
     }
     /**
      * @param {?} value
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
     DecimalPipe.prototype.transform = /**
      * @param {?} value
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
-    function (value, digits, locale) {
+    function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Decimal, digits), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(DecimalPipe, error);
+        try {
+            return formatDecimal(value, locale, digitsInfo);
         }
-        return str;
+        catch (/** @type {?} */ error) {
+            throw invalidPipeArgumentError(DecimalPipe, error.message);
+        }
     };
     DecimalPipe.decorators = [
         { type: Pipe, args: [{ name: 'number' },] },
@@ -6138,7 +6238,7 @@ var DecimalPipe = /** @class */ (function () {
  *
  * Formats a number as percentage.
  *
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ * - `digitInfo` See {\@link DecimalPipe} for a detailed description.
  *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
  * default)
  *
@@ -6154,25 +6254,26 @@ var PercentPipe = /** @class */ (function () {
     }
     /**
      * @param {?} value
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
     PercentPipe.prototype.transform = /**
      * @param {?} value
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
-    function (value, digits, locale) {
+    function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Percent, digits), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(PercentPipe, error);
+        try {
+            return formatPercent(value, locale, digitsInfo);
         }
-        return str;
+        catch (/** @type {?} */ error) {
+            throw invalidPipeArgumentError(PercentPipe, error.message);
+        }
     };
     PercentPipe.decorators = [
         { type: Pipe, args: [{ name: 'percent' },] },
@@ -6193,14 +6294,15 @@ var PercentPipe = /** @class */ (function () {
  *
  * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
  *    as `USD` for the US dollar and `EUR` for the euro.
- * - `display` indicates whether to show the currency symbol or the code.
+ * - `display` indicates whether to show the currency symbol, the code or a custom value
  *   - `code`: use code (e.g. `USD`).
  *   - `symbol`(default): use symbol (e.g. `$`).
  *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
  *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+ *   - `string`: use this value instead of a code or a symbol
  *   - boolean (deprecated from v5): `true` for symbol and false for `code`
  *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
+ * - `digitInfo` See {\@link DecimalPipe} for a detailed description.
  *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
  * default)
  *
@@ -6218,7 +6320,7 @@ var CurrencyPipe = /** @class */ (function () {
      * @param {?} value
      * @param {?=} currencyCode
      * @param {?=} display
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
@@ -6226,11 +6328,11 @@ var CurrencyPipe = /** @class */ (function () {
      * @param {?} value
      * @param {?=} currencyCode
      * @param {?=} display
-     * @param {?=} digits
+     * @param {?=} digitsInfo
      * @param {?=} locale
      * @return {?}
      */
-    function (value, currencyCode, display, digits, locale) {
+    function (value, currencyCode, display, digitsInfo, locale) {
         if (display === void 0) { display = 'symbol'; }
         if (isEmpty(value))
             return null;
@@ -6243,13 +6345,19 @@ var CurrencyPipe = /** @class */ (function () {
         }
         var /** @type {?} */ currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            if (display === 'symbol' || display === 'symbol-narrow') {
+                currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
+            }
+            else {
+                currency = display;
+            }
         }
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(CurrencyPipe, error);
+        try {
+            return formatCurrency(value, locale, currency, currencyCode, digitsInfo);
         }
-        return str;
+        catch (/** @type {?} */ error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error.message);
+        }
     };
     CurrencyPipe.decorators = [
         { type: Pipe, args: [{ name: 'currency' },] },
@@ -6532,7 +6640,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('6.0.0-beta.3-5fc77c9');
+var VERSION = new Version('6.0.0-beta.3-44154e7');
 
 /**
  * @fileoverview added by tsickle
@@ -6578,5 +6686,5 @@ var VERSION = new Version('6.0.0-beta.3-5fc77c9');
  * Generated bundle index. Do not edit.
  */
 
-export { registerLocaleData as ɵregisterLocaleData, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
+export { registerLocaleData as ɵregisterLocaleData, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNbOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
 //# sourceMappingURL=common.js.map

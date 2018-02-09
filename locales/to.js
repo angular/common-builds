@@ -38,6 +38,13 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'TF', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'T$', 'Paʻanga fakatonga', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'T$', 'Paʻanga fakatonga', {
+        'AUD': ['AUD$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'NZD': ['NZD$', '$'],
+        'TOP': ['T$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=to.js.map

@@ -44,6 +44,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'Frǎŋ CFA (BEAC)', plural
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'FCFA', 'Frǎŋ CFA (BEAC)',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=bas.js.map

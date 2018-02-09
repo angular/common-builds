@@ -44,6 +44,17 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'RSD', 'Srpski dinar', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'RSD', 'Srpski dinar', {
+        'AUD': [, '$'],
+        'BAM': ['KM'],
+        'BYN': [, 'r.'],
+        'GEL': [, 'ლ'],
+        'KRW': [, '₩'],
+        'NZD': [, '$'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$'],
+        'VND': [, '₫']
+    },
+    plural
 ];
 //# sourceMappingURL=sr-Latn.js.map

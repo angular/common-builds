@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Nfk', 'Eritrean Nakfa', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Nfk', 'Eritrean Nakfa',
+    { 'ERN': ['Nfk'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-ER.js.map

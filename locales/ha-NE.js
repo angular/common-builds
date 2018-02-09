@@ -43,6 +43,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Kuɗin Sefa na Afirka Ta Yamma', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Kuɗin Sefa na Afirka Ta Yamma',
+    { 'JPY': ['JP¥', '¥'], 'NGN': ['₦'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ha-NE.js.map

@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'Central African CFA Franc', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'Central African CFA Franc',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-CM.js.map

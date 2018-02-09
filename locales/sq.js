@@ -57,6 +57,7 @@ export default [
         '{1} \'në\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Lekë', 'Leku shqiptar', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Lekë', 'Leku shqiptar',
+    { 'ALL': ['Lekë'], 'JPY': ['JP¥', '¥'], 'THB': ['฿'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=sq.js.map

@@ -42,6 +42,7 @@ export default [
         ,
     ],
     ['.', '’', ';', '%', '+', '−', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'CHF', 'Schwiizer Franke', plural
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'CHF', 'Schwiizer Franke', { 'ATS': ['öS'] },
+    plural
 ];
 //# sourceMappingURL=gsw.js.map

@@ -44,6 +44,15 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Franco CFA (BEAC)', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Franco CFA (BEAC)', {
+        'AUD': ['AU$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'PTE': ['​'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt-GQ.js.map

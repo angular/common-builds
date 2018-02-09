@@ -50,6 +50,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₦', 'Naira ti Orílẹ́ède Nàìjíríà',
-    plural
+    { 'JPY': ['JP¥', '¥'], 'NGN': ['₦'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=yo.js.map

@@ -41,6 +41,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'seefa yati BCEAO', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'seefa yati BCEAO',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=dyo.js.map

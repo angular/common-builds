@@ -47,6 +47,6 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FBu', 'Burundian Franc', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FBu', 'Burundian Franc', { 'BIF': ['FBu'] }, plural
 ];
 //# sourceMappingURL=en-BI.js.map

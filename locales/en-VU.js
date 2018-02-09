@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'VT', 'Vanuatu Vatu', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'VT', 'Vanuatu Vatu',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'], 'VUV': ['VT'] }, plural
 ];
 //# sourceMappingURL=en-VU.js.map

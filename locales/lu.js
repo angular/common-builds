@@ -41,6 +41,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'FC', 'Nfalanga wa Kongu', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'FC', 'Nfalanga wa Kongu',
+    { 'CDF': ['FC'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=lu.js.map

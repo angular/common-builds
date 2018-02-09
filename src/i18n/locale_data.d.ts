@@ -39,8 +39,9 @@ export declare const enum LocaleDataIndex {
     NumberFormats = 14,
     CurrencySymbol = 15,
     CurrencyName = 16,
-    PluralCase = 17,
-    ExtraData = 18,
+    Currencies = 17,
+    PluralCase = 18,
+    ExtraData = 19,
 }
 /**
  * Index of each type of locale data from the extra locale data array
@@ -49,4 +50,12 @@ export declare const enum ExtraLocaleDataIndex {
     ExtraDayPeriodFormats = 0,
     ExtraDayPeriodStandalone = 1,
     ExtraDayPeriodsRules = 2,
+}
+/**
+ * Index of each value in currency data (used to describe CURRENCIES_EN in currencies.ts)
+ */
+export declare const enum CurrencyIndex {
+    Symbol = 0,
+    SymbolNarrow = 1,
+    NbOfDigits = 2,
 }

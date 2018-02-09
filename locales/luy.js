@@ -43,6 +43,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00;¤- #,##0.00', '#E0'], 'Ksh', 'Sirinji ya Kenya', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00;¤- #,##0.00', '#E0'], 'Ksh', 'Sirinji ya Kenya',
+    { 'JPY': ['JP¥', '¥'], 'KES': ['Ksh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=luy.js.map

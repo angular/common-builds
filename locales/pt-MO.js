@@ -44,6 +44,16 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'MOP$', 'Pataca de Macau', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'MOP$', 'Pataca de Macau', {
+        'AUD': ['AU$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'MOP': ['MOP$'],
+        'PTE': ['​'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt-MO.js.map

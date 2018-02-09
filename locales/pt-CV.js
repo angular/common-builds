@@ -44,6 +44,16 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'escudo cabo-verdiano', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '​', 'escudo cabo-verdiano', {
+        'AUD': ['AU$', '$'],
+        'CVE': ['​'],
+        'JPY': ['JP¥', '¥'],
+        'PTE': ['​PTE'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt-CV.js.map

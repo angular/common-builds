@@ -48,6 +48,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza ya Angóla', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza ya Angóla',
+    { 'AOA': ['Kz'], 'CDF': ['FC'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ln-AO.js.map

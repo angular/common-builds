@@ -47,6 +47,15 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'R$', 'Real brasileiro', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'R$', 'Real brasileiro', {
+        'AUD': ['AU$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'PTE': ['Esc.'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt.js.map

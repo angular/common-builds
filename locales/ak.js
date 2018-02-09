@@ -44,6 +44,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'GH₵', 'Ghana Sidi', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'GH₵', 'Ghana Sidi',
+    { 'GHS': ['GH₵'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ak.js.map

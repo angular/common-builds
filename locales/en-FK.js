@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Falkland Islands Pound', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Falkland Islands Pound',
+    { 'FKP': ['£'], 'GBP': ['GB£', '£'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-FK.js.map

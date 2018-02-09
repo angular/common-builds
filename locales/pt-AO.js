@@ -44,6 +44,16 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza angolano', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'Kz', 'Kwanza angolano', {
+        'AOA': ['Kz'],
+        'AUD': ['AU$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'PTE': ['​'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt-AO.js.map

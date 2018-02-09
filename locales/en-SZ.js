@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'E', 'Swazi Lilangeni', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'E', 'Swazi Lilangeni',
+    { 'JPY': ['JP¥', '¥'], 'SZL': ['E'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-SZ.js.map

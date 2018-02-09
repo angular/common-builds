@@ -48,6 +48,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FC', 'Falánga ya Kongó', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FC', 'Falánga ya Kongó',
+    { 'CDF': ['FC'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ln.js.map

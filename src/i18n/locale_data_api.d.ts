@@ -347,9 +347,17 @@ export declare type Time = {
  */
 export declare function findLocaleData(locale: string): any;
 /**
- * Return the currency symbol for a given currency code, or the code if no symbol available
+ * Returns the currency symbol for a given currency code, or the code if no symbol available
  * (e.g.: format narrow = $, format wide = US$, code = USD)
+ * If no locale is provided, it uses the locale "en" by default
  *
  * @experimental i18n support is experimental.
  */
-export declare function getCurrencySymbol(code: string, format: 'wide' | 'narrow'): string;
+export declare function getCurrencySymbol(code: string, format: 'wide' | 'narrow', locale?: string): string;
+/**
+ * Returns the number of decimal digits for the given currency.
+ * Its value depends upon the presence of cents in that particular currency.
+ *
+ * @experimental i18n support is experimental.
+ */
+export declare function getNbOfCurrencyDigits(code: string): number;

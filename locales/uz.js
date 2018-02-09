@@ -50,6 +50,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'son emas', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'soʻm', 'O‘zbekiston so‘mi', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'soʻm', 'O‘zbekiston so‘mi',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'], 'UZS': ['soʻm'] }, plural
 ];
 //# sourceMappingURL=uz.js.map

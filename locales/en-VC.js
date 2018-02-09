@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'East Caribbean Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'East Caribbean Dollar',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'], 'XCD': ['$'] }, plural
 ];
 //# sourceMappingURL=en-VC.js.map

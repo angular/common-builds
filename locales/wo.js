@@ -41,6 +41,7 @@ export default [
         '{1} \'ci\' {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Franc CFA bu Afrik Sowwu-jant', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Franc CFA bu Afrik Sowwu-jant',
+    { 'JPY': ['JP¥', '¥'] }, plural
 ];
 //# sourceMappingURL=wo.js.map

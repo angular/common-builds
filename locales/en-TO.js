@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'T$', 'Tongan Paʻanga', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'T$', 'Tongan Paʻanga',
+    { 'JPY': ['JP¥', '¥'], 'TOP': ['T$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-TO.js.map

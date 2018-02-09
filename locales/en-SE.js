@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', '×10^', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'Swedish Krona', plural
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'Swedish Krona',
+    { 'JPY': ['JP¥', '¥'], 'SEK': ['kr'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-SE.js.map

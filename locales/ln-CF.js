@@ -48,6 +48,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Falánga CFA BEAC', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Falánga CFA BEAC',
+    { 'CDF': ['FC'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ln-CF.js.map

@@ -44,6 +44,14 @@ export default [
         '{1} {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Ringgit Malaysia', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Ringgit Malaysia', {
+        'CAD': [, '$'],
+        'JPY': ['JP¥', '¥'],
+        'MXN': [, '$'],
+        'MYR': ['RM'],
+        'TWD': ['NT$'],
+        'USD': [, '$']
+    },
+    plural
 ];
 //# sourceMappingURL=ms.js.map

@@ -43,6 +43,15 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'Suid-Afrikaanse rand', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'Suid-Afrikaanse rand', {
+        'JPY': ['JP¥', '¥'],
+        'MXN': [, '$'],
+        'RON': [, 'leu'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$'],
+        'ZAR': ['R']
+    },
+    plural
 ];
 //# sourceMappingURL=af.js.map

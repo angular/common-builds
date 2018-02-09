@@ -41,6 +41,15 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', '.'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rp', 'Rupiah Indonesia', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rp', 'Rupiah Indonesia', {
+        'AUD': ['AU$', '$'],
+        'IDR': ['Rp'],
+        'INR': ['Rs', '₹'],
+        'JPY': ['JP¥', '¥'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=id.js.map

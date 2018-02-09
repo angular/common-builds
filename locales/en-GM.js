@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'D', 'Gambian Dalasi', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'D', 'Gambian Dalasi',
+    { 'GMD': ['D'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-GM.js.map

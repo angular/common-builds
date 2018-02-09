@@ -41,6 +41,7 @@ export default [
         ,
     ],
     ['.', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'Rs', 'roupi morisien', plural
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'Rs', 'roupi morisien',
+    { 'JPY': ['JP¥', '¥'], 'MUR': ['Rs'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=mfe.js.map

@@ -41,6 +41,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'TSh', 'Ihela ya Tansaniya', plural
+    ['#,##0.###', '#,##0%', '#,##0.00¤', '#E0'], 'TSh', 'Ihela ya Tansaniya',
+    { 'JPY': ['JP¥', '¥'], 'TZS': ['TSh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=sbp.js.map

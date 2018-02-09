@@ -44,6 +44,7 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'Mbuuɗu Seefaa BCEAO', plural
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'CFA', 'Mbuuɗu Seefaa BCEAO',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ff.js.map

@@ -45,6 +45,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'solai BEAC', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'solai BEAC',
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=mua.js.map

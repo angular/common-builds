@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₱', 'Philippine Piso', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₱', 'Philippine Piso',
+    { 'JPY': ['JP¥', '¥'], 'PHP': ['₱'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-PH.js.map

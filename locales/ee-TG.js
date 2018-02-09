@@ -43,6 +43,13 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'mnn', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'CFA', 'ɣetoɖofe afrikaga CFA franc BCEAO', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'CFA', 'ɣetoɖofe afrikaga CFA franc BCEAO', {
+        'AUD': ['AU$', '$'],
+        'GHS': ['GH₵'],
+        'JPY': ['JP¥', '¥'],
+        'THB': ['฿'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=ee-TG.js.map

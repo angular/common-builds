@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rs', 'Mauritian Rupee', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Rs', 'Mauritian Rupee',
+    { 'JPY': ['JP¥', '¥'], 'MUR': ['Rs'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-MU.js.map

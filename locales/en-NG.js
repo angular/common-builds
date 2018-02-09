@@ -47,6 +47,7 @@ export default [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₦', 'Nigerian Naira', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '₦', 'Nigerian Naira',
+    { 'JPY': ['JP¥', '¥'], 'NGN': ['₦'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=en-NG.js.map

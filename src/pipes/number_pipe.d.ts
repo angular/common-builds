@@ -35,7 +35,7 @@ import { PipeTransform } from '@angular/core';
 export declare class DecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    transform(value: any, digits?: string, locale?: string): string | null;
+    transform(value: any, digitsInfo?: string, locale?: string): string | null;
 }
 /**
  * @ngModule CommonModule
@@ -46,7 +46,7 @@ export declare class DecimalPipe implements PipeTransform {
  *
  * Formats a number as percentage.
  *
- * - `digitInfo` See {@link DecimalPipe} for detailed description.
+ * - `digitInfo` See {@link DecimalPipe} for a detailed description.
  *  - `locale` is a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
  * default)
  *
@@ -59,7 +59,7 @@ export declare class DecimalPipe implements PipeTransform {
 export declare class PercentPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    transform(value: any, digits?: string, locale?: string): string | null;
+    transform(value: any, digitsInfo?: string, locale?: string): string | null;
 }
 /**
  * @ngModule CommonModule
@@ -71,14 +71,15 @@ export declare class PercentPipe implements PipeTransform {
  *
  * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
  *    as `USD` for the US dollar and `EUR` for the euro.
- * - `display` indicates whether to show the currency symbol or the code.
+ * - `display` indicates whether to show the currency symbol, the code or a custom value
  *   - `code`: use code (e.g. `USD`).
  *   - `symbol`(default): use symbol (e.g. `$`).
  *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
  *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+ *   - `string`: use this value instead of a code or a symbol
  *   - boolean (deprecated from v5): `true` for symbol and false for `code`
  *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
- * - `digitInfo` See {@link DecimalPipe} for detailed description.
+ * - `digitInfo` See {@link DecimalPipe} for a detailed description.
  *  - `locale` is a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
  * default)
  *
@@ -91,5 +92,5 @@ export declare class PercentPipe implements PipeTransform {
 export declare class CurrencyPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | boolean, digits?: string, locale?: string): string | null;
+    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
 }
