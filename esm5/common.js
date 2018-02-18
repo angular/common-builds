@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-ac2b04a
+ * @license Angular v6.0.0-beta.4-c30d329
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2866,6 +2866,7 @@ var NgIf = /** @class */ (function () {
          * @return {?}
          */
         function (templateRef) {
+            assertTemplate('ngIfThen', templateRef);
             this._thenTemplateRef = templateRef;
             this._thenViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2879,6 +2880,7 @@ var NgIf = /** @class */ (function () {
          * @return {?}
          */
         function (templateRef) {
+            assertTemplate('ngIfElse', templateRef);
             this._elseTemplateRef = templateRef;
             this._elseViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2939,6 +2941,17 @@ var NgIfContext = /** @class */ (function () {
     }
     return NgIfContext;
 }());
+/**
+ * @param {?} property
+ * @param {?} templateRef
+ * @return {?}
+ */
+function assertTemplate(property, templateRef) {
+    var /** @type {?} */ isTemplateRef = templateRef.createEmbeddedView != null;
+    if (!isTemplateRef) {
+        throw new Error(property + " must be a TemplateRef, but received '" + ɵstringify(templateRef) + "'.");
+    }
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6640,7 +6653,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('6.0.0-beta.4-ac2b04a');
+var VERSION = new Version('6.0.0-beta.4-c30d329');
 
 /**
  * @fileoverview added by tsickle

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-ac2b04a
+ * @license Angular v6.0.0-beta.4-c30d329
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2592,6 +2592,7 @@ class NgIf {
      * @return {?}
      */
     set ngIfThen(templateRef) {
+        assertTemplate('ngIfThen', templateRef);
         this._thenTemplateRef = templateRef;
         this._thenViewRef = null; // clear previous view if any.
         this._updateView();
@@ -2601,6 +2602,7 @@ class NgIf {
      * @return {?}
      */
     set ngIfElse(templateRef) {
+        assertTemplate('ngIfElse', templateRef);
         this._elseTemplateRef = templateRef;
         this._elseViewRef = null; // clear previous view if any.
         this._updateView();
@@ -2651,6 +2653,17 @@ class NgIfContext {
     constructor() {
         this.$implicit = null;
         this.ngIf = null;
+    }
+}
+/**
+ * @param {?} property
+ * @param {?} templateRef
+ * @return {?}
+ */
+function assertTemplate(property, templateRef) {
+    const /** @type {?} */ isTemplateRef = templateRef.createEmbeddedView != null;
+    if (!isTemplateRef) {
+        throw new Error(`${property} must be a TemplateRef, but received '${ɵstringify(templateRef)}'.`);
     }
 }
 
@@ -6095,7 +6108,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.4-ac2b04a');
+const VERSION = new Version('6.0.0-beta.4-c30d329');
 
 /**
  * @fileoverview added by tsickle
