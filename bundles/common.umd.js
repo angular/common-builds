@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-a8b5465
+ * @license Angular v6.0.0-beta.4-8115edc
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v6.0.0-beta.4-a8b5465
+ * @license Angular v6.0.0-beta.4-8115edc
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2989,8 +2989,8 @@ var NgIfContext = /** @class */ (function () {
  * @return {?}
  */
 function assertTemplate(property, templateRef) {
-    var /** @type {?} */ isTemplateRef = templateRef.createEmbeddedView != null;
-    if (!isTemplateRef) {
+    var /** @type {?} */ isTemplateRefOrNull = !!(!templateRef || templateRef.createEmbeddedView);
+    if (!isTemplateRefOrNull) {
         throw new Error(property + " must be a TemplateRef, but received '" + _angular_core.ɵstringify(templateRef) + "'.");
     }
 }
@@ -6695,7 +6695,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('6.0.0-beta.4-a8b5465');
+var VERSION = new _angular_core.Version('6.0.0-beta.4-8115edc');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;

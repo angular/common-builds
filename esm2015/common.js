@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-a8b5465
+ * @license Angular v6.0.0-beta.4-8115edc
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2661,8 +2661,8 @@ class NgIfContext {
  * @return {?}
  */
 function assertTemplate(property, templateRef) {
-    const /** @type {?} */ isTemplateRef = templateRef.createEmbeddedView != null;
-    if (!isTemplateRef) {
+    const /** @type {?} */ isTemplateRefOrNull = !!(!templateRef || templateRef.createEmbeddedView);
+    if (!isTemplateRefOrNull) {
         throw new Error(`${property} must be a TemplateRef, but received '${ɵstringify(templateRef)}'.`);
     }
 }
@@ -6108,7 +6108,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.4-a8b5465');
+const VERSION = new Version('6.0.0-beta.4-8115edc');
 
 /**
  * @fileoverview added by tsickle
