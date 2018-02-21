@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-9e6268b
+ * @license Angular v6.0.0-beta.4-435f6ee
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v6.0.0-beta.4-9e6268b
+ * @license Angular v6.0.0-beta.4-435f6ee
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1987,7 +1987,7 @@ var JsonpClientBackend = /** @class */ (function () {
                     status: 200,
                     statusText: 'OK', url: url,
                 }));
-                // Complete the stream, the response is over.
+                // Complete the stream, the resposne is over.
                 observer.complete();
             };
             // onError() is the error callback, which runs if the script returned generates
