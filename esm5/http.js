@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.4-1c1cbba
+ * @license Angular v6.0.0-beta.4-9e6268b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1985,7 +1985,7 @@ var JsonpClientBackend = /** @class */ (function () {
                     status: 200,
                     statusText: 'OK', url: url,
                 }));
-                // Complete the stream, the resposne is over.
+                // Complete the stream, the response is over.
                 observer.complete();
             };
             // onError() is the error callback, which runs if the script returned generates
