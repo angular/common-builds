@@ -1,0 +1,27 @@
+declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
+    'AUD': string[];
+    'BMD': string[];
+    'BRL': string[];
+    'BSD': string[];
+    'BZD': string[];
+    'CAD': string[];
+    'DOP': string[];
+    'EGP': string[];
+    'GBP': string[];
+    'HKD': string[];
+    'HRK': string[];
+    'ILS': string[];
+    'INR': string[];
+    'JMD': string[];
+    'JPY': string[];
+    'KGS': string[];
+    'KRW': string[];
+    'MXN': string[];
+    'NZD': string[];
+    'THB': string[];
+    'TTD': string[];
+    'TWD': string[];
+    'USD': string[];
+    'XCD': string[];
+})[];
+export default _default;
