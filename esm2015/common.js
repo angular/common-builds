@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.5-094666d
+ * @license Angular v6.0.0-beta.5-4180912
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1383,13 +1383,1181 @@ const DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
  * @param {?} code
  * @return {?}
  */
-function getNbOfCurrencyDigits(code) {
+function getNumberOfCurrencyDigits(code) {
     let /** @type {?} */ digits;
     const /** @type {?} */ currency = CURRENCIES_EN[code];
     if (currency) {
         digits = currency[2 /* NbOfDigits */];
     }
     return typeof digits === 'number' ? digits : DEFAULT_NB_OF_CURRENCY_DIGITS;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+//    1        2       3         4          5          6          7          8  9     10      11
+const NAMED_FORMATS = {};
+const DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+/** @enum {number} */
+const ZoneWidth = {
+    Short: 0,
+    ShortGMT: 1,
+    Long: 2,
+    Extended: 3,
+};
+ZoneWidth[ZoneWidth.Short] = "Short";
+ZoneWidth[ZoneWidth.ShortGMT] = "ShortGMT";
+ZoneWidth[ZoneWidth.Long] = "Long";
+ZoneWidth[ZoneWidth.Extended] = "Extended";
+/** @enum {number} */
+const DateType = {
+    FullYear: 0,
+    Month: 1,
+    Date: 2,
+    Hours: 3,
+    Minutes: 4,
+    Seconds: 5,
+    Milliseconds: 6,
+    Day: 7,
+};
+DateType[DateType.FullYear] = "FullYear";
+DateType[DateType.Month] = "Month";
+DateType[DateType.Date] = "Date";
+DateType[DateType.Hours] = "Hours";
+DateType[DateType.Minutes] = "Minutes";
+DateType[DateType.Seconds] = "Seconds";
+DateType[DateType.Milliseconds] = "Milliseconds";
+DateType[DateType.Day] = "Day";
+/** @enum {number} */
+const TranslationType = {
+    DayPeriods: 0,
+    Days: 1,
+    Months: 2,
+    Eras: 3,
+};
+TranslationType[TranslationType.DayPeriods] = "DayPeriods";
+TranslationType[TranslationType.Days] = "Days";
+TranslationType[TranslationType.Months] = "Months";
+TranslationType[TranslationType.Eras] = "Eras";
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a date according to locale rules.
+ * \@description
+ *
+ * Where:
+ * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
+ *   (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. See {\@link DatePipe} for more
+ *   details.
+ * - `locale` is a `string` defining the locale to use.
+ * - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
+ *   abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+ *   If not specified, host system settings are used.
+ *
+ * See {\@link DatePipe} for more details.
+ *
+ * \@stable
+ * @param {?} value
+ * @param {?} format
+ * @param {?} locale
+ * @param {?=} timezone
+ * @return {?}
+ */
+function formatDate(value, format, locale, timezone) {
+    let /** @type {?} */ date = toDate(value);
+    const /** @type {?} */ namedFormat = getNamedFormat(locale, format);
+    format = namedFormat || format;
+    let /** @type {?} */ parts = [];
+    let /** @type {?} */ match;
+    while (format) {
+        match = DATE_FORMATS_SPLIT.exec(format);
+        if (match) {
+            parts = parts.concat(match.slice(1));
+            const /** @type {?} */ part = parts.pop();
+            if (!part) {
+                break;
+            }
+            format = part;
+        }
+        else {
+            parts.push(format);
+            break;
+        }
+    }
+    let /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
+    if (timezone) {
+        dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+        date = convertTimezoneToLocal(date, timezone, true);
+    }
+    let /** @type {?} */ text = '';
+    parts.forEach(value => {
+        const /** @type {?} */ dateFormatter = getDateFormatter(value);
+        text += dateFormatter ?
+            dateFormatter(date, locale, dateTimezoneOffset) :
+            value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+    });
+    return text;
+}
+/**
+ * @param {?} locale
+ * @param {?} format
+ * @return {?}
+ */
+function getNamedFormat(locale, format) {
+    const /** @type {?} */ localeId = getLocaleId(locale);
+    NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
+    if (NAMED_FORMATS[localeId][format]) {
+        return NAMED_FORMATS[localeId][format];
+    }
+    let /** @type {?} */ formatValue = '';
+    switch (format) {
+        case 'shortDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Full);
+            break;
+        case 'shortTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
+            break;
+        case 'short':
+            const /** @type {?} */ shortTime = getNamedFormat(locale, 'shortTime');
+            const /** @type {?} */ shortDate = getNamedFormat(locale, 'shortDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
+            break;
+        case 'medium':
+            const /** @type {?} */ mediumTime = getNamedFormat(locale, 'mediumTime');
+            const /** @type {?} */ mediumDate = getNamedFormat(locale, 'mediumDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
+            break;
+        case 'long':
+            const /** @type {?} */ longTime = getNamedFormat(locale, 'longTime');
+            const /** @type {?} */ longDate = getNamedFormat(locale, 'longDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
+            break;
+        case 'full':
+            const /** @type {?} */ fullTime = getNamedFormat(locale, 'fullTime');
+            const /** @type {?} */ fullDate = getNamedFormat(locale, 'fullDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
+            break;
+    }
+    if (formatValue) {
+        NAMED_FORMATS[localeId][format] = formatValue;
+    }
+    return formatValue;
+}
+/**
+ * @param {?} str
+ * @param {?} opt_values
+ * @return {?}
+ */
+function formatDateTime(str, opt_values) {
+    if (opt_values) {
+        str = str.replace(/\{([^}]+)}/g, function (match, key) {
+            return (opt_values != null && key in opt_values) ? opt_values[key] : match;
+        });
+    }
+    return str;
+}
+/**
+ * @param {?} num
+ * @param {?} digits
+ * @param {?=} minusSign
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function padNumber(num, digits, minusSign = '-', trim, negWrap) {
+    let /** @type {?} */ neg = '';
+    if (num < 0 || (negWrap && num <= 0)) {
+        if (negWrap) {
+            num = -num + 1;
+        }
+        else {
+            num = -num;
+            neg = minusSign;
+        }
+    }
+    let /** @type {?} */ strNum = String(num);
+    while (strNum.length < digits) {
+        strNum = '0' + strNum;
+    }
+    if (trim) {
+        strNum = strNum.substr(strNum.length - digits);
+    }
+    return neg + strNum;
+}
+/**
+ * Returns a date formatter that transforms a date into its locale digit representation
+ * @param {?} name
+ * @param {?} size
+ * @param {?=} offset
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
+    return function (date, locale) {
+        let /** @type {?} */ part = getDatePart(name, date, size);
+        if (offset > 0 || part > -offset) {
+            part += offset;
+        }
+        if (name === DateType.Hours && part === 0 && offset === -12) {
+            part = 12;
+        }
+        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
+    };
+}
+/**
+ * @param {?} name
+ * @param {?} date
+ * @param {?} size
+ * @return {?}
+ */
+function getDatePart(name, date, size) {
+    switch (name) {
+        case DateType.FullYear:
+            return date.getFullYear();
+        case DateType.Month:
+            return date.getMonth();
+        case DateType.Date:
+            return date.getDate();
+        case DateType.Hours:
+            return date.getHours();
+        case DateType.Minutes:
+            return date.getMinutes();
+        case DateType.Seconds:
+            return date.getSeconds();
+        case DateType.Milliseconds:
+            const /** @type {?} */ div = size === 1 ? 100 : (size === 2 ? 10 : 1);
+            return Math.round(date.getMilliseconds() / div);
+        case DateType.Day:
+            return date.getDay();
+        default:
+            throw new Error(`Unknown DateType value "${name}".`);
+    }
+}
+/**
+ * Returns a date formatter that transforms a date into its locale string representation
+ * @param {?} name
+ * @param {?} width
+ * @param {?=} form
+ * @param {?=} extended
+ * @return {?}
+ */
+function dateStrGetter(name, width, form = FormStyle.Format, extended = false) {
+    return function (date, locale) {
+        return getDateTranslation(date, locale, name, width, form, extended);
+    };
+}
+/**
+ * Returns the locale translation of a date for a given form, type and width
+ * @param {?} date
+ * @param {?} locale
+ * @param {?} name
+ * @param {?} width
+ * @param {?} form
+ * @param {?} extended
+ * @return {?}
+ */
+function getDateTranslation(date, locale, name, width, form, extended) {
+    switch (name) {
+        case TranslationType.Months:
+            return getLocaleMonthNames(locale, form, width)[date.getMonth()];
+        case TranslationType.Days:
+            return getLocaleDayNames(locale, form, width)[date.getDay()];
+        case TranslationType.DayPeriods:
+            const /** @type {?} */ currentHours = date.getHours();
+            const /** @type {?} */ currentMinutes = date.getMinutes();
+            if (extended) {
+                const /** @type {?} */ rules = getLocaleExtraDayPeriodRules(locale);
+                const /** @type {?} */ dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
+                let /** @type {?} */ result;
+                rules.forEach((rule, index) => {
+                    if (Array.isArray(rule)) {
+                        // morning, afternoon, evening, night
+                        const { hours: hoursFrom, minutes: minutesFrom } = rule[0];
+                        const { hours: hoursTo, minutes: minutesTo } = rule[1];
+                        if (currentHours >= hoursFrom && currentMinutes >= minutesFrom &&
+                            (currentHours < hoursTo ||
+                                (currentHours === hoursTo && currentMinutes < minutesTo))) {
+                            result = dayPeriods[index];
+                        }
+                    }
+                    else {
+                        // noon or midnight
+                        const { hours, minutes } = rule;
+                        if (hours === currentHours && minutes === currentMinutes) {
+                            result = dayPeriods[index];
+                        }
+                    }
+                });
+                if (result) {
+                    return result;
+                }
+            }
+            // if no rules for the day periods, we use am/pm by default
+            return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours < 12 ? 0 : 1];
+        case TranslationType.Eras:
+            return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
+        default:
+            // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
+            // However Closure Compiler does not understand that and reports an error in typed mode.
+            // The `throw new Error` below works around the problem, and the unexpected: never variable
+            // makes sure tsc still checks this code is unreachable.
+            const /** @type {?} */ unexpected = name;
+            throw new Error(`unexpected translation type ${unexpected}`);
+    }
+}
+/**
+ * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
+ * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
+ * extended = +04:30)
+ * @param {?} width
+ * @return {?}
+ */
+function timeZoneGetter(width) {
+    return function (date, locale, offset) {
+        const /** @type {?} */ zone = -1 * offset;
+        const /** @type {?} */ minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        const /** @type {?} */ hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
+        switch (width) {
+            case ZoneWidth.Short:
+                return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.ShortGMT:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 1, minusSign);
+            case ZoneWidth.Long:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.Extended:
+                if (offset === 0) {
+                    return 'Z';
+                }
+                else {
+                    return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                        padNumber(Math.abs(zone % 60), 2, minusSign);
+                }
+            default:
+                throw new Error(`Unknown zone width "${width}"`);
+        }
+    };
+}
+const JANUARY = 0;
+const THURSDAY = 4;
+/**
+ * @param {?} year
+ * @return {?}
+ */
+function getFirstThursdayOfYear(year) {
+    const /** @type {?} */ firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
+    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+}
+/**
+ * @param {?} datetime
+ * @return {?}
+ */
+function getThursdayThisWeek(datetime) {
+    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+}
+/**
+ * @param {?} size
+ * @param {?=} monthBased
+ * @return {?}
+ */
+function weekGetter(size, monthBased = false) {
+    return function (date, locale) {
+        let /** @type {?} */ result;
+        if (monthBased) {
+            const /** @type {?} */ nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
+            const /** @type {?} */ today = date.getDate();
+            result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
+        }
+        else {
+            const /** @type {?} */ firstThurs = getFirstThursdayOfYear(date.getFullYear());
+            const /** @type {?} */ thisThurs = getThursdayThisWeek(date);
+            const /** @type {?} */ diff = thisThurs.getTime() - firstThurs.getTime();
+            result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
+        }
+        return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    };
+}
+const DATE_FORMATS = {};
+/**
+ * @param {?} format
+ * @return {?}
+ */
+function getDateFormatter(format) {
+    if (DATE_FORMATS[format]) {
+        return DATE_FORMATS[format];
+    }
+    let /** @type {?} */ formatter;
+    switch (format) {
+        // Era name (AD/BC)
+        case 'G':
+        case 'GG':
+        case 'GGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Abbreviated);
+            break;
+        case 'GGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Wide);
+            break;
+        case 'GGGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Narrow);
+            break;
+        // 1 digit representation of the year, e.g. (AD 1 => 1, AD 199 => 199)
+        case 'y':
+            formatter = dateGetter(DateType.FullYear, 1, 0, false, true);
+            break;
+        // 2 digit representation of the year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yy':
+            formatter = dateGetter(DateType.FullYear, 2, 0, true, true);
+            break;
+        // 3 digit representation of the year, padded (000-999). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yyy':
+            formatter = dateGetter(DateType.FullYear, 3, 0, false, true);
+            break;
+        // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
+        case 'yyyy':
+            formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+            break;
+        // Month of the year (1-12), numeric
+        case 'M':
+        case 'L':
+            formatter = dateGetter(DateType.Month, 1, 1);
+            break;
+        case 'MM':
+        case 'LL':
+            formatter = dateGetter(DateType.Month, 2, 1);
+            break;
+        // Month of the year (January, ...), string, format
+        case 'MMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated);
+            break;
+        case 'MMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Wide);
+            break;
+        case 'MMMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Narrow);
+            break;
+        // Month of the year (January, ...), string, standalone
+        case 'LLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated, FormStyle.Standalone);
+            break;
+        case 'LLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Wide, FormStyle.Standalone);
+            break;
+        case 'LLLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Narrow, FormStyle.Standalone);
+            break;
+        // Week of the year (1, ... 52)
+        case 'w':
+            formatter = weekGetter(1);
+            break;
+        case 'ww':
+            formatter = weekGetter(2);
+            break;
+        // Week of the month (1, ...)
+        case 'W':
+            formatter = weekGetter(1, true);
+            break;
+        // Day of the month (1-31)
+        case 'd':
+            formatter = dateGetter(DateType.Date, 1);
+            break;
+        case 'dd':
+            formatter = dateGetter(DateType.Date, 2);
+            break;
+        // Day of the Week
+        case 'E':
+        case 'EE':
+        case 'EEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated);
+            break;
+        case 'EEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide);
+            break;
+        case 'EEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Narrow);
+            break;
+        case 'EEEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short);
+            break;
+        // Generic period of the day (am-pm)
+        case 'a':
+        case 'aa':
+        case 'aaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated);
+            break;
+        case 'aaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide);
+            break;
+        case 'aaaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow);
+            break;
+        // Extended period of the day (midnight, at night, ...), standalone
+        case 'b':
+        case 'bb':
+        case 'bbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Standalone, true);
+            break;
+        case 'bbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Standalone, true);
+            break;
+        case 'bbbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Standalone, true);
+            break;
+        // Extended period of the day (midnight, night, ...), standalone
+        case 'B':
+        case 'BB':
+        case 'BBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Format, true);
+            break;
+        case 'BBBB':
+            formatter =
+                dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Format, true);
+            break;
+        case 'BBBBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Format, true);
+            break;
+        // Hour in AM/PM, (1-12)
+        case 'h':
+            formatter = dateGetter(DateType.Hours, 1, -12);
+            break;
+        case 'hh':
+            formatter = dateGetter(DateType.Hours, 2, -12);
+            break;
+        // Hour of the day (0-23)
+        case 'H':
+            formatter = dateGetter(DateType.Hours, 1);
+            break;
+        // Hour in day, padded (00-23)
+        case 'HH':
+            formatter = dateGetter(DateType.Hours, 2);
+            break;
+        // Minute of the hour (0-59)
+        case 'm':
+            formatter = dateGetter(DateType.Minutes, 1);
+            break;
+        case 'mm':
+            formatter = dateGetter(DateType.Minutes, 2);
+            break;
+        // Second of the minute (0-59)
+        case 's':
+            formatter = dateGetter(DateType.Seconds, 1);
+            break;
+        case 'ss':
+            formatter = dateGetter(DateType.Seconds, 2);
+            break;
+        // Fractional second padded (0-9)
+        case 'S':
+            formatter = dateGetter(DateType.Milliseconds, 1);
+            break;
+        case 'SS':
+            formatter = dateGetter(DateType.Milliseconds, 2);
+            break;
+        // = millisecond
+        case 'SSS':
+            formatter = dateGetter(DateType.Milliseconds, 3);
+            break;
+        // Timezone ISO8601 short format (-0430)
+        case 'Z':
+        case 'ZZ':
+        case 'ZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Short);
+            break;
+        // Timezone ISO8601 extended format (-04:30)
+        case 'ZZZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Extended);
+            break;
+        // Timezone GMT short format (GMT+4)
+        case 'O':
+        case 'OO':
+        case 'OOO':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'z':
+        case 'zz':
+        case 'zzz':
+            formatter = timeZoneGetter(ZoneWidth.ShortGMT);
+            break;
+        // Timezone GMT long format (GMT+0430)
+        case 'OOOO':
+        case 'ZZZZ':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'zzzz':
+            formatter = timeZoneGetter(ZoneWidth.Long);
+            break;
+        default:
+            return null;
+    }
+    DATE_FORMATS[format] = formatter;
+    return formatter;
+}
+/**
+ * @param {?} timezone
+ * @param {?} fallback
+ * @return {?}
+ */
+function timezoneToOffset(timezone, fallback) {
+    // Support: IE 9-11 only, Edge 13-15+
+    // IE/Edge do not "understand" colon (`:`) in timezone
+    timezone = timezone.replace(/:/g, '');
+    const /** @type {?} */ requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+}
+/**
+ * @param {?} date
+ * @param {?} minutes
+ * @return {?}
+ */
+function addDateMinutes(date, minutes) {
+    date = new Date(date.getTime());
+    date.setMinutes(date.getMinutes() + minutes);
+    return date;
+}
+/**
+ * @param {?} date
+ * @param {?} timezone
+ * @param {?} reverse
+ * @return {?}
+ */
+function convertTimezoneToLocal(date, timezone, reverse) {
+    const /** @type {?} */ reverseValue = reverse ? -1 : 1;
+    const /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
+    const /** @type {?} */ timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+    return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
+}
+/**
+ * Converts a value to date.
+ *
+ * Supported input formats:
+ * - `Date`
+ * - number: timestamp
+ * - string: numeric (e.g. "1234"), ISO and date strings in a format supported by
+ *   [Date.parse()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse).
+ *   Note: ISO strings without time return a date without timeoffset.
+ *
+ * Throws if unable to convert to a date.
+ * @param {?} value
+ * @return {?}
+ */
+function toDate(value) {
+    if (isDate(value)) {
+        return value;
+    }
+    if (typeof value === 'number' && !isNaN(value)) {
+        return new Date(value);
+    }
+    if (typeof value === 'string') {
+        value = value.trim();
+        const /** @type {?} */ parsedNb = parseFloat(value);
+        // any string that only contains numbers, like "1234" but not like "1234hello"
+        if (!isNaN(/** @type {?} */ (value) - parsedNb)) {
+            return new Date(parsedNb);
+        }
+        if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            /* For ISO Strings without time the day, month and year must be extracted from the ISO String
+                  before Date creation to avoid time offset and errors in the new Date.
+                  If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+                  date, some browsers (e.g. IE 9) will throw an invalid Date error.
+                  If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+                  is applied.
+                  Note: ISO months are 0 for January, 1 for February, ... */
+            const [y, m, d] = value.split('-').map((val) => +val);
+            return new Date(y, m - 1, d);
+        }
+        let /** @type {?} */ match;
+        if (match = value.match(ISO8601_DATE_REGEX)) {
+            return isoStringToDate(match);
+        }
+    }
+    const /** @type {?} */ date = new Date(/** @type {?} */ (value));
+    if (!isDate(date)) {
+        throw new Error(`Unable to convert "${value}" into a date`);
+    }
+    return date;
+}
+/**
+ * Converts a date in ISO8601 to a Date.
+ * Used instead of `Date.parse` because of browser discrepancies.
+ * @param {?} match
+ * @return {?}
+ */
+function isoStringToDate(match) {
+    const /** @type {?} */ date = new Date(0);
+    let /** @type {?} */ tzHour = 0;
+    let /** @type {?} */ tzMin = 0;
+    // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
+    const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+    const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    // if there is a timezone defined like "+01:00" or "+0100"
+    if (match[9]) {
+        tzHour = Number(match[9] + match[10]);
+        tzMin = Number(match[9] + match[11]);
+    }
+    dateSetter.call(date, Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    const /** @type {?} */ h = Number(match[4] || 0) - tzHour;
+    const /** @type {?} */ m = Number(match[5] || 0) - tzMin;
+    const /** @type {?} */ s = Number(match[6] || 0);
+    const /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    timeSetter.call(date, h, m, s, ms);
+    return date;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isDate(value) {
+    return value instanceof Date && !isNaN(value.valueOf());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+const MAX_DIGITS = 22;
+const DECIMAL_SEP = '.';
+const ZERO_CHAR = '0';
+const PATTERN_SEP = ';';
+const GROUP_SEP = ',';
+const DIGIT_CHAR = '#';
+const CURRENCY_CHAR = '¤';
+const PERCENT_CHAR = '%';
+/**
+ * Transforms a number to a locale string based on a style and a format
+ * @param {?} value
+ * @param {?} pattern
+ * @param {?} locale
+ * @param {?} groupSymbol
+ * @param {?} decimalSymbol
+ * @param {?=} digitsInfo
+ * @param {?=} isPercent
+ * @return {?}
+ */
+function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimalSymbol, digitsInfo, isPercent = false) {
+    let /** @type {?} */ formattedText = '';
+    let /** @type {?} */ isZero = false;
+    if (!isFinite(value)) {
+        formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
+    }
+    else {
+        let /** @type {?} */ parsedNumber = parseNumber(value);
+        if (isPercent) {
+            parsedNumber = toPercent(parsedNumber);
+        }
+        let /** @type {?} */ minInt = pattern.minInt;
+        let /** @type {?} */ minFraction = pattern.minFrac;
+        let /** @type {?} */ maxFraction = pattern.maxFrac;
+        if (digitsInfo) {
+            const /** @type {?} */ parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                throw new Error(`${digitsInfo} is not a valid digit info`);
+            }
+            const /** @type {?} */ minIntPart = parts[1];
+            const /** @type {?} */ minFractionPart = parts[3];
+            const /** @type {?} */ maxFractionPart = parts[5];
+            if (minIntPart != null) {
+                minInt = parseIntAutoRadix(minIntPart);
+            }
+            if (minFractionPart != null) {
+                minFraction = parseIntAutoRadix(minFractionPart);
+            }
+            if (maxFractionPart != null) {
+                maxFraction = parseIntAutoRadix(maxFractionPart);
+            }
+            else if (minFractionPart != null && minFraction > maxFraction) {
+                maxFraction = minFraction;
+            }
+        }
+        roundNumber(parsedNumber, minFraction, maxFraction);
+        let /** @type {?} */ digits = parsedNumber.digits;
+        let /** @type {?} */ integerLen = parsedNumber.integerLen;
+        const /** @type {?} */ exponent = parsedNumber.exponent;
+        let /** @type {?} */ decimals = [];
+        isZero = digits.every(d => !d);
+        // pad zeros for small numbers
+        for (; integerLen < minInt; integerLen++) {
+            digits.unshift(0);
+        }
+        // pad zeros for small numbers
+        for (; integerLen < 0; integerLen++) {
+            digits.unshift(0);
+        }
+        // extract decimals digits
+        if (integerLen > 0) {
+            decimals = digits.splice(integerLen, digits.length);
+        }
+        else {
+            decimals = digits;
+            digits = [0];
+        }
+        // format the integer digits with grouping separators
+        const /** @type {?} */ groups = [];
+        if (digits.length >= pattern.lgSize) {
+            groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
+        }
+        while (digits.length > pattern.gSize) {
+            groups.unshift(digits.splice(-pattern.gSize, digits.length).join(''));
+        }
+        if (digits.length) {
+            groups.unshift(digits.join(''));
+        }
+        formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
+        // append the decimal digits
+        if (decimals.length) {
+            formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
+        }
+        if (exponent) {
+            formattedText += getLocaleNumberSymbol(locale, NumberSymbol.Exponential) + '+' + exponent;
+        }
+    }
+    if (value < 0 && !isZero) {
+        formattedText = pattern.negPre + formattedText + pattern.negSuf;
+    }
+    else {
+        formattedText = pattern.posPre + formattedText + pattern.posSuf;
+    }
+    return formattedText;
+}
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as currency using locale rules.
+ * \@description
+ *
+ * Use `currency` to format a number as currency.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `currency` is the string that represents the currency, it can be its symbol or its name.
+ * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+ *    as `USD` for the US dollar and `EUR` for the euro.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ * \@stable
+ * @param {?} value
+ * @param {?} locale
+ * @param {?} currency
+ * @param {?=} currencyCode
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
+    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
+    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    pattern.minFrac = getNumberOfCurrencyDigits(/** @type {?} */ ((currencyCode)));
+    pattern.maxFrac = pattern.minFrac;
+    const /** @type {?} */ res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
+    return res
+        .replace(CURRENCY_CHAR, currency)
+        .replace(CURRENCY_CHAR, '');
+}
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number as a percentage according to locale rules.
+ * \@description
+ *
+ * Formats a number as percentage.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ * \@stable
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatPercent(value, locale, digitsInfo) {
+    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
+    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    const /** @type {?} */ res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo, true);
+    return res.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
+}
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Formats a number according to locale rules.
+ * \@description
+ *
+ * Formats a number as text. Group sizing and separator and other locale-specific
+ * configurations are based on the locale.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ * \@stable
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatNumber(value, locale, digitsInfo) {
+    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
+    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    return formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
+}
+/**
+ * @param {?} format
+ * @param {?=} minusSign
+ * @return {?}
+ */
+function parseNumberFormat(format, minusSign = '-') {
+    const /** @type {?} */ p = {
+        minInt: 1,
+        minFrac: 0,
+        maxFrac: 0,
+        posPre: '',
+        posSuf: '',
+        negPre: '',
+        negSuf: '',
+        gSize: 0,
+        lgSize: 0
+    };
+    const /** @type {?} */ patternParts = format.split(PATTERN_SEP);
+    const /** @type {?} */ positive = patternParts[0];
+    const /** @type {?} */ negative = patternParts[1];
+    const /** @type {?} */ positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
+        positive.split(DECIMAL_SEP) :
+        [
+            positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
+            positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
+        ], /** @type {?} */
+    integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
+    p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
+    for (let /** @type {?} */ i = 0; i < fraction.length; i++) {
+        const /** @type {?} */ ch = fraction.charAt(i);
+        if (ch === ZERO_CHAR) {
+            p.minFrac = p.maxFrac = i + 1;
+        }
+        else if (ch === DIGIT_CHAR) {
+            p.maxFrac = i + 1;
+        }
+        else {
+            p.posSuf += ch;
+        }
+    }
+    const /** @type {?} */ groups = integer.split(GROUP_SEP);
+    p.gSize = groups[1] ? groups[1].length : 0;
+    p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
+    if (negative) {
+        const /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */
+        pos = negative.indexOf(DIGIT_CHAR);
+        p.negPre = negative.substr(0, pos).replace(/'/g, '');
+        p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
+    }
+    else {
+        p.negPre = minusSign + p.posPre;
+        p.negSuf = p.posSuf;
+    }
+    return p;
+}
+/**
+ * @param {?} parsedNumber
+ * @return {?}
+ */
+function toPercent(parsedNumber) {
+    // if the number is 0, don't do anything
+    if (parsedNumber.digits[0] === 0) {
+        return parsedNumber;
+    }
+    // Getting the current number of decimals
+    const /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
+    if (parsedNumber.exponent) {
+        parsedNumber.exponent += 2;
+    }
+    else {
+        if (fractionLen === 0) {
+            parsedNumber.digits.push(0, 0);
+        }
+        else if (fractionLen === 1) {
+            parsedNumber.digits.push(0);
+        }
+        parsedNumber.integerLen += 2;
+    }
+    return parsedNumber;
+}
+/**
+ * Parses a number.
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} num
+ * @return {?}
+ */
+function parseNumber(num) {
+    let /** @type {?} */ numStr = Math.abs(num) + '';
+    let /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
+    let /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
+    // Decimal point?
+    if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
+        numStr = numStr.replace(DECIMAL_SEP, '');
+    }
+    // Exponential form?
+    if ((i = numStr.search(/e/i)) > 0) {
+        // Work out the exponent.
+        if (integerLen < 0)
+            integerLen = i;
+        integerLen += +numStr.slice(i + 1);
+        numStr = numStr.substring(0, i);
+    }
+    else if (integerLen < 0) {
+        // There was no decimal point or exponent so it is an integer.
+        integerLen = numStr.length;
+    }
+    // Count the number of leading zeros.
+    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+        /* empty */
+    }
+    if (i === (zeros = numStr.length)) {
+        // The digits are all zero.
+        digits = [0];
+        integerLen = 1;
+    }
+    else {
+        // Count the number of trailing zeros
+        zeros--;
+        while (numStr.charAt(zeros) === ZERO_CHAR)
+            zeros--;
+        // Trailing zeros are insignificant so ignore them
+        integerLen -= i;
+        digits = [];
+        // Convert string to array of digits without leading/trailing zeros.
+        for (j = 0; i <= zeros; i++, j++) {
+            digits[j] = Number(numStr.charAt(i));
+        }
+    }
+    // If the number overflows the maximum allowed digits then use an exponent.
+    if (integerLen > MAX_DIGITS) {
+        digits = digits.splice(0, MAX_DIGITS - 1);
+        exponent = integerLen - 1;
+        integerLen = 1;
+    }
+    return { digits, exponent, integerLen };
+}
+/**
+ * Round the parsed number to the specified number of decimal places
+ * This function changes the parsedNumber in-place
+ * @param {?} parsedNumber
+ * @param {?} minFrac
+ * @param {?} maxFrac
+ * @return {?}
+ */
+function roundNumber(parsedNumber, minFrac, maxFrac) {
+    if (minFrac > maxFrac) {
+        throw new Error(`The minimum number of digits after fraction (${minFrac}) is higher than the maximum (${maxFrac}).`);
+    }
+    let /** @type {?} */ digits = parsedNumber.digits;
+    let /** @type {?} */ fractionLen = digits.length - parsedNumber.integerLen;
+    const /** @type {?} */ fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
+    // The index of the digit to where rounding is to occur
+    let /** @type {?} */ roundAt = fractionSize + parsedNumber.integerLen;
+    let /** @type {?} */ digit = digits[roundAt];
+    if (roundAt > 0) {
+        // Drop fractional digits beyond `roundAt`
+        digits.splice(Math.max(parsedNumber.integerLen, roundAt));
+        // Set non-fractional digits beyond `roundAt` to 0
+        for (let /** @type {?} */ j = roundAt; j < digits.length; j++) {
+            digits[j] = 0;
+        }
+    }
+    else {
+        // We rounded to zero so reset the parsedNumber
+        fractionLen = Math.max(0, fractionLen);
+        parsedNumber.integerLen = 1;
+        digits.length = Math.max(1, roundAt = fractionSize + 1);
+        digits[0] = 0;
+        for (let /** @type {?} */ i = 1; i < roundAt; i++)
+            digits[i] = 0;
+    }
+    if (digit >= 5) {
+        if (roundAt - 1 < 0) {
+            for (let /** @type {?} */ k = 0; k > roundAt; k--) {
+                digits.unshift(0);
+                parsedNumber.integerLen++;
+            }
+            digits.unshift(1);
+            parsedNumber.integerLen++;
+        }
+        else {
+            digits[roundAt - 1]++;
+        }
+    }
+    // Pad out with zeros to get the required fraction length
+    for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
+        digits.push(0);
+    let /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
+    // Minimal length = nb of decimals required + current nb of integers
+    // Any number besides that is optional and can be removed if it's a trailing 0
+    const /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
+    // Do any carrying, e.g. a digit was rounded up to 10
+    const /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
+        d = d + carry;
+        digits[i] = d < 10 ? d : d - 10; // d % 10
+        if (dropTrailingZeros) {
+            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
+            if (digits[i] === 0 && i >= minLen) {
+                digits.pop();
+            }
+            else {
+                dropTrailingZeros = false;
+            }
+        }
+        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
+    }, 0);
+    if (carry) {
+        digits.unshift(carry);
+        parsedNumber.integerLen++;
+    }
+}
+/**
+ * @param {?} text
+ * @return {?}
+ */
+function parseIntAutoRadix(text) {
+    const /** @type {?} */ result = parseInt(text);
+    if (isNaN(result)) {
+        throw new Error('Invalid integer literal when parsing ' + text);
+    }
+    return result;
 }
 
 /**
@@ -3327,653 +4495,6 @@ const COMMON_DIRECTIVES = [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const NAMED_FORMATS = {};
-const DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
-/** @enum {number} */
-const ZoneWidth = {
-    Short: 0,
-    ShortGMT: 1,
-    Long: 2,
-    Extended: 3,
-};
-ZoneWidth[ZoneWidth.Short] = "Short";
-ZoneWidth[ZoneWidth.ShortGMT] = "ShortGMT";
-ZoneWidth[ZoneWidth.Long] = "Long";
-ZoneWidth[ZoneWidth.Extended] = "Extended";
-/** @enum {number} */
-const DateType = {
-    FullYear: 0,
-    Month: 1,
-    Date: 2,
-    Hours: 3,
-    Minutes: 4,
-    Seconds: 5,
-    Milliseconds: 6,
-    Day: 7,
-};
-DateType[DateType.FullYear] = "FullYear";
-DateType[DateType.Month] = "Month";
-DateType[DateType.Date] = "Date";
-DateType[DateType.Hours] = "Hours";
-DateType[DateType.Minutes] = "Minutes";
-DateType[DateType.Seconds] = "Seconds";
-DateType[DateType.Milliseconds] = "Milliseconds";
-DateType[DateType.Day] = "Day";
-/** @enum {number} */
-const TranslationType = {
-    DayPeriods: 0,
-    Days: 1,
-    Months: 2,
-    Eras: 3,
-};
-TranslationType[TranslationType.DayPeriods] = "DayPeriods";
-TranslationType[TranslationType.Days] = "Days";
-TranslationType[TranslationType.Months] = "Months";
-TranslationType[TranslationType.Eras] = "Eras";
-/**
- * Transforms a date to a locale string based on a pattern and a timezone
- *
- * \@internal
- * @param {?} date
- * @param {?} format
- * @param {?} locale
- * @param {?=} timezone
- * @return {?}
- */
-function formatDate(date, format, locale, timezone) {
-    const /** @type {?} */ namedFormat = getNamedFormat(locale, format);
-    format = namedFormat || format;
-    let /** @type {?} */ parts = [];
-    let /** @type {?} */ match;
-    while (format) {
-        match = DATE_FORMATS_SPLIT.exec(format);
-        if (match) {
-            parts = parts.concat(match.slice(1));
-            const /** @type {?} */ part = parts.pop();
-            if (!part) {
-                break;
-            }
-            format = part;
-        }
-        else {
-            parts.push(format);
-            break;
-        }
-    }
-    let /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
-    if (timezone) {
-        dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
-        date = convertTimezoneToLocal(date, timezone, true);
-    }
-    let /** @type {?} */ text = '';
-    parts.forEach(value => {
-        const /** @type {?} */ dateFormatter = getDateFormatter(value);
-        text += dateFormatter ?
-            dateFormatter(date, locale, dateTimezoneOffset) :
-            value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-    });
-    return text;
-}
-/**
- * @param {?} locale
- * @param {?} format
- * @return {?}
- */
-function getNamedFormat(locale, format) {
-    const /** @type {?} */ localeId = getLocaleId(locale);
-    NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
-    if (NAMED_FORMATS[localeId][format]) {
-        return NAMED_FORMATS[localeId][format];
-    }
-    let /** @type {?} */ formatValue = '';
-    switch (format) {
-        case 'shortDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Short);
-            break;
-        case 'mediumDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Medium);
-            break;
-        case 'longDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Long);
-            break;
-        case 'fullDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Full);
-            break;
-        case 'shortTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Short);
-            break;
-        case 'mediumTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Medium);
-            break;
-        case 'longTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Long);
-            break;
-        case 'fullTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
-            break;
-        case 'short':
-            const /** @type {?} */ shortTime = getNamedFormat(locale, 'shortTime');
-            const /** @type {?} */ shortDate = getNamedFormat(locale, 'shortDate');
-            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
-            break;
-        case 'medium':
-            const /** @type {?} */ mediumTime = getNamedFormat(locale, 'mediumTime');
-            const /** @type {?} */ mediumDate = getNamedFormat(locale, 'mediumDate');
-            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
-            break;
-        case 'long':
-            const /** @type {?} */ longTime = getNamedFormat(locale, 'longTime');
-            const /** @type {?} */ longDate = getNamedFormat(locale, 'longDate');
-            formatValue =
-                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
-            break;
-        case 'full':
-            const /** @type {?} */ fullTime = getNamedFormat(locale, 'fullTime');
-            const /** @type {?} */ fullDate = getNamedFormat(locale, 'fullDate');
-            formatValue =
-                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
-            break;
-    }
-    if (formatValue) {
-        NAMED_FORMATS[localeId][format] = formatValue;
-    }
-    return formatValue;
-}
-/**
- * @param {?} str
- * @param {?} opt_values
- * @return {?}
- */
-function formatDateTime(str, opt_values) {
-    if (opt_values) {
-        str = str.replace(/\{([^}]+)}/g, function (match, key) {
-            return (opt_values != null && key in opt_values) ? opt_values[key] : match;
-        });
-    }
-    return str;
-}
-/**
- * @param {?} num
- * @param {?} digits
- * @param {?=} minusSign
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
- */
-function padNumber(num, digits, minusSign = '-', trim, negWrap) {
-    let /** @type {?} */ neg = '';
-    if (num < 0 || (negWrap && num <= 0)) {
-        if (negWrap) {
-            num = -num + 1;
-        }
-        else {
-            num = -num;
-            neg = minusSign;
-        }
-    }
-    let /** @type {?} */ strNum = '' + num;
-    while (strNum.length < digits)
-        strNum = '0' + strNum;
-    if (trim) {
-        strNum = strNum.substr(strNum.length - digits);
-    }
-    return neg + strNum;
-}
-/**
- * Returns a date formatter that transforms a date into its locale digit representation
- * @param {?} name
- * @param {?} size
- * @param {?=} offset
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
- */
-function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
-    return function (date, locale) {
-        let /** @type {?} */ part = getDatePart(name, date, size);
-        if (offset > 0 || part > -offset) {
-            part += offset;
-        }
-        if (name === DateType.Hours && part === 0 && offset === -12) {
-            part = 12;
-        }
-        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
-    };
-}
-/**
- * @param {?} name
- * @param {?} date
- * @param {?} size
- * @return {?}
- */
-function getDatePart(name, date, size) {
-    switch (name) {
-        case DateType.FullYear:
-            return date.getFullYear();
-        case DateType.Month:
-            return date.getMonth();
-        case DateType.Date:
-            return date.getDate();
-        case DateType.Hours:
-            return date.getHours();
-        case DateType.Minutes:
-            return date.getMinutes();
-        case DateType.Seconds:
-            return date.getSeconds();
-        case DateType.Milliseconds:
-            const /** @type {?} */ div = size === 1 ? 100 : (size === 2 ? 10 : 1);
-            return Math.round(date.getMilliseconds() / div);
-        case DateType.Day:
-            return date.getDay();
-        default:
-            throw new Error(`Unknown DateType value "${name}".`);
-    }
-}
-/**
- * Returns a date formatter that transforms a date into its locale string representation
- * @param {?} name
- * @param {?} width
- * @param {?=} form
- * @param {?=} extended
- * @return {?}
- */
-function dateStrGetter(name, width, form = FormStyle.Format, extended = false) {
-    return function (date, locale) {
-        return getDateTranslation(date, locale, name, width, form, extended);
-    };
-}
-/**
- * Returns the locale translation of a date for a given form, type and width
- * @param {?} date
- * @param {?} locale
- * @param {?} name
- * @param {?} width
- * @param {?} form
- * @param {?} extended
- * @return {?}
- */
-function getDateTranslation(date, locale, name, width, form, extended) {
-    switch (name) {
-        case TranslationType.Months:
-            return getLocaleMonthNames(locale, form, width)[date.getMonth()];
-        case TranslationType.Days:
-            return getLocaleDayNames(locale, form, width)[date.getDay()];
-        case TranslationType.DayPeriods:
-            const /** @type {?} */ currentHours = date.getHours();
-            const /** @type {?} */ currentMinutes = date.getMinutes();
-            if (extended) {
-                const /** @type {?} */ rules = getLocaleExtraDayPeriodRules(locale);
-                const /** @type {?} */ dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
-                let /** @type {?} */ result;
-                rules.forEach((rule, index) => {
-                    if (Array.isArray(rule)) {
-                        // morning, afternoon, evening, night
-                        const { hours: hoursFrom, minutes: minutesFrom } = rule[0];
-                        const { hours: hoursTo, minutes: minutesTo } = rule[1];
-                        if (currentHours >= hoursFrom && currentMinutes >= minutesFrom &&
-                            (currentHours < hoursTo ||
-                                (currentHours === hoursTo && currentMinutes < minutesTo))) {
-                            result = dayPeriods[index];
-                        }
-                    }
-                    else {
-                        // noon or midnight
-                        const { hours, minutes } = rule;
-                        if (hours === currentHours && minutes === currentMinutes) {
-                            result = dayPeriods[index];
-                        }
-                    }
-                });
-                if (result) {
-                    return result;
-                }
-            }
-            // if no rules for the day periods, we use am/pm by default
-            return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours < 12 ? 0 : 1];
-        case TranslationType.Eras:
-            return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
-        default:
-            // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
-            // However Closure Compiler does not understand that and reports an error in typed mode.
-            // The `throw new Error` below works around the problem, and the unexpected: never variable
-            // makes sure tsc still checks this code is unreachable.
-            const /** @type {?} */ unexpected = name;
-            throw new Error(`unexpected translation type ${unexpected}`);
-    }
-}
-/**
- * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
- * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
- * extended = +04:30)
- * @param {?} width
- * @return {?}
- */
-function timeZoneGetter(width) {
-    return function (date, locale, offset) {
-        const /** @type {?} */ zone = -1 * offset;
-        const /** @type {?} */ minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
-        const /** @type {?} */ hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
-        switch (width) {
-            case ZoneWidth.Short:
-                return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) +
-                    padNumber(Math.abs(zone % 60), 2, minusSign);
-            case ZoneWidth.ShortGMT:
-                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 1, minusSign);
-            case ZoneWidth.Long:
-                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
-                    padNumber(Math.abs(zone % 60), 2, minusSign);
-            case ZoneWidth.Extended:
-                if (offset === 0) {
-                    return 'Z';
-                }
-                else {
-                    return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
-                        padNumber(Math.abs(zone % 60), 2, minusSign);
-                }
-            default:
-                throw new Error(`Unknown zone width "${width}"`);
-        }
-    };
-}
-const JANUARY = 0;
-const THURSDAY = 4;
-/**
- * @param {?} year
- * @return {?}
- */
-function getFirstThursdayOfYear(year) {
-    const /** @type {?} */ firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
-}
-/**
- * @param {?} datetime
- * @return {?}
- */
-function getThursdayThisWeek(datetime) {
-    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
-}
-/**
- * @param {?} size
- * @param {?=} monthBased
- * @return {?}
- */
-function weekGetter(size, monthBased = false) {
-    return function (date, locale) {
-        let /** @type {?} */ result;
-        if (monthBased) {
-            const /** @type {?} */ nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
-            const /** @type {?} */ today = date.getDate();
-            result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
-        }
-        else {
-            const /** @type {?} */ firstThurs = getFirstThursdayOfYear(date.getFullYear());
-            const /** @type {?} */ thisThurs = getThursdayThisWeek(date);
-            const /** @type {?} */ diff = thisThurs.getTime() - firstThurs.getTime();
-            result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
-        }
-        return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    };
-}
-const DATE_FORMATS = {};
-/**
- * @param {?} format
- * @return {?}
- */
-function getDateFormatter(format) {
-    if (DATE_FORMATS[format]) {
-        return DATE_FORMATS[format];
-    }
-    let /** @type {?} */ formatter;
-    switch (format) {
-        // Era name (AD/BC)
-        case 'G':
-        case 'GG':
-        case 'GGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Abbreviated);
-            break;
-        case 'GGGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Wide);
-            break;
-        case 'GGGGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Narrow);
-            break;
-        // 1 digit representation of the year, e.g. (AD 1 => 1, AD 199 => 199)
-        case 'y':
-            formatter = dateGetter(DateType.FullYear, 1, 0, false, true);
-            break;
-        // 2 digit representation of the year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
-        case 'yy':
-            formatter = dateGetter(DateType.FullYear, 2, 0, true, true);
-            break;
-        // 3 digit representation of the year, padded (000-999). (e.g. AD 2001 => 01, AD 2010 => 10)
-        case 'yyy':
-            formatter = dateGetter(DateType.FullYear, 3, 0, false, true);
-            break;
-        // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
-        case 'yyyy':
-            formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
-            break;
-        // Month of the year (1-12), numeric
-        case 'M':
-        case 'L':
-            formatter = dateGetter(DateType.Month, 1, 1);
-            break;
-        case 'MM':
-        case 'LL':
-            formatter = dateGetter(DateType.Month, 2, 1);
-            break;
-        // Month of the year (January, ...), string, format
-        case 'MMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated);
-            break;
-        case 'MMMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Wide);
-            break;
-        case 'MMMMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Narrow);
-            break;
-        // Month of the year (January, ...), string, standalone
-        case 'LLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated, FormStyle.Standalone);
-            break;
-        case 'LLLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Wide, FormStyle.Standalone);
-            break;
-        case 'LLLLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Narrow, FormStyle.Standalone);
-            break;
-        // Week of the year (1, ... 52)
-        case 'w':
-            formatter = weekGetter(1);
-            break;
-        case 'ww':
-            formatter = weekGetter(2);
-            break;
-        // Week of the month (1, ...)
-        case 'W':
-            formatter = weekGetter(1, true);
-            break;
-        // Day of the month (1-31)
-        case 'd':
-            formatter = dateGetter(DateType.Date, 1);
-            break;
-        case 'dd':
-            formatter = dateGetter(DateType.Date, 2);
-            break;
-        // Day of the Week
-        case 'E':
-        case 'EE':
-        case 'EEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated);
-            break;
-        case 'EEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide);
-            break;
-        case 'EEEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Narrow);
-            break;
-        case 'EEEEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short);
-            break;
-        // Generic period of the day (am-pm)
-        case 'a':
-        case 'aa':
-        case 'aaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated);
-            break;
-        case 'aaaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide);
-            break;
-        case 'aaaaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow);
-            break;
-        // Extended period of the day (midnight, at night, ...), standalone
-        case 'b':
-        case 'bb':
-        case 'bbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Standalone, true);
-            break;
-        case 'bbbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Standalone, true);
-            break;
-        case 'bbbbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Standalone, true);
-            break;
-        // Extended period of the day (midnight, night, ...), standalone
-        case 'B':
-        case 'BB':
-        case 'BBB':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Format, true);
-            break;
-        case 'BBBB':
-            formatter =
-                dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Format, true);
-            break;
-        case 'BBBBB':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Format, true);
-            break;
-        // Hour in AM/PM, (1-12)
-        case 'h':
-            formatter = dateGetter(DateType.Hours, 1, -12);
-            break;
-        case 'hh':
-            formatter = dateGetter(DateType.Hours, 2, -12);
-            break;
-        // Hour of the day (0-23)
-        case 'H':
-            formatter = dateGetter(DateType.Hours, 1);
-            break;
-        // Hour in day, padded (00-23)
-        case 'HH':
-            formatter = dateGetter(DateType.Hours, 2);
-            break;
-        // Minute of the hour (0-59)
-        case 'm':
-            formatter = dateGetter(DateType.Minutes, 1);
-            break;
-        case 'mm':
-            formatter = dateGetter(DateType.Minutes, 2);
-            break;
-        // Second of the minute (0-59)
-        case 's':
-            formatter = dateGetter(DateType.Seconds, 1);
-            break;
-        case 'ss':
-            formatter = dateGetter(DateType.Seconds, 2);
-            break;
-        // Fractional second padded (0-9)
-        case 'S':
-            formatter = dateGetter(DateType.Milliseconds, 1);
-            break;
-        case 'SS':
-            formatter = dateGetter(DateType.Milliseconds, 2);
-            break;
-        // = millisecond
-        case 'SSS':
-            formatter = dateGetter(DateType.Milliseconds, 3);
-            break;
-        // Timezone ISO8601 short format (-0430)
-        case 'Z':
-        case 'ZZ':
-        case 'ZZZ':
-            formatter = timeZoneGetter(ZoneWidth.Short);
-            break;
-        // Timezone ISO8601 extended format (-04:30)
-        case 'ZZZZZ':
-            formatter = timeZoneGetter(ZoneWidth.Extended);
-            break;
-        // Timezone GMT short format (GMT+4)
-        case 'O':
-        case 'OO':
-        case 'OOO':
-        // Should be location, but fallback to format O instead because we don't have the data yet
-        case 'z':
-        case 'zz':
-        case 'zzz':
-            formatter = timeZoneGetter(ZoneWidth.ShortGMT);
-            break;
-        // Timezone GMT long format (GMT+0430)
-        case 'OOOO':
-        case 'ZZZZ':
-        // Should be location, but fallback to format O instead because we don't have the data yet
-        case 'zzzz':
-            formatter = timeZoneGetter(ZoneWidth.Long);
-            break;
-        default:
-            return null;
-    }
-    DATE_FORMATS[format] = formatter;
-    return formatter;
-}
-/**
- * @param {?} timezone
- * @param {?} fallback
- * @return {?}
- */
-function timezoneToOffset(timezone, fallback) {
-    // Support: IE 9-11 only, Edge 13-15+
-    // IE/Edge do not "understand" colon (`:`) in timezone
-    timezone = timezone.replace(/:/g, '');
-    const /** @type {?} */ requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
-    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
-}
-/**
- * @param {?} date
- * @param {?} minutes
- * @return {?}
- */
-function addDateMinutes(date, minutes) {
-    date = new Date(date.getTime());
-    date.setMinutes(date.getMinutes() + minutes);
-    return date;
-}
-/**
- * @param {?} date
- * @param {?} timezone
- * @param {?} reverse
- * @return {?}
- */
-function convertTimezoneToLocal(date, timezone, reverse) {
-    const /** @type {?} */ reverseValue = reverse ? -1 : 1;
-    const /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
-    const /** @type {?} */ timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
-    return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @param {?} type
  * @param {?} value
@@ -3981,225 +4502,6 @@ function convertTimezoneToLocal(date, timezone, reverse) {
  */
 function invalidPipeArgumentError(type, value) {
     return Error(`InvalidPipeArgument: '${value}' for pipe '${ɵstringify(type)}'`);
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
- * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
- * \@description
- *
- * Where:
- * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
- * (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. The format can be predefined as
- *   shown below (all examples are given for `en-US`) or custom as shown in the table.
- *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
- *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
- *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
- *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`)
- *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`)
- *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`)
- *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`)
- *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`)
- *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`)
- *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`)
- *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`)
- *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`)
- *  - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
- *  abbreviations, but for general use, use a time zone offset, for example,
- *  `'+0430'` (4 hours, 30 minutes east of the Greenwich meridian)
- *  If not specified, the local system timezone of the end-user's browser will be used.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
- *
- *
- *  | Field Type         | Format      | Description                                                   | Example Value                                              |
- *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
- *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
- *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
- *  |                    | GGGGG       | Narrow                                                        | A                                                          |
- *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
- *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
- *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
- *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
- *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
- *  |                    | MMMM        | Wide                                                          | September                                                  |
- *  |                    | MMMMM       | Narrow                                                        | S                                                          |
- *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
- *  |                    | LLLL        | Wide                                                          | September                                                  |
- *  |                    | LLLLL       | Narrow                                                        | S                                                          |
- *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
- *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
- *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
- *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
- *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
- *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
- *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
- *  |                    | EEEEE       | Narrow                                                        | T                                                          |
- *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
- *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
- *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
- *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
- *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
- *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | BBBBB       | Narrow                                                        | md                                                         |
- *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
- *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | bbbbb       | Narrow                                                        | md                                                         |
- *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
- *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
- *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
- *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
- *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
- *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
- *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
- *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
- *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
- *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
- *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
- *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
- *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
- *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
- *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
- *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
- *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
- *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
- *
- *
- * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
- * applied and the formatted text will have the same day, month and year of the expression.
- *
- * WARNINGS:
- * - this pipe has only access to en-US locale data by default. If you want to localize the dates
- *   in another language, you will have to import data for other locales.
- *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
- *   data.
- * - Fields suffixed with * are only available in the extra dataset.
- *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
- *   data.
- * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
- *   Instead users should treat the date as an immutable object and change the reference when the
- *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
- *   which would be an expensive operation).
- *
- * ### Examples
- *
- * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
- * in the _local_ time and locale is 'en-US':
- *
- * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
- *
- * \@stable
- */
-class DatePipe {
-    /**
-     * @param {?} locale
-     */
-    constructor(locale) {
-        this.locale = locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} format
-     * @param {?=} timezone
-     * @param {?=} locale
-     * @return {?}
-     */
-    transform(value, format = 'mediumDate', timezone, locale) {
-        if (value == null || value === '' || value !== value)
-            return null;
-        if (typeof value === 'string') {
-            value = value.trim();
-        }
-        let /** @type {?} */ date;
-        let /** @type {?} */ match;
-        if (isDate$1(value)) {
-            date = value;
-        }
-        else if (!isNaN(value - parseFloat(value))) {
-            date = new Date(parseFloat(value));
-        }
-        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-            /**
-             * For ISO Strings without time the day, month and year must be extracted from the ISO String
-             * before Date creation to avoid time offset and errors in the new Date.
-             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-             * date, some browsers (e.g. IE 9) will throw an invalid Date error
-             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-             * is applied
-             * Note: ISO months are 0 for January, 1 for February, ...
-             */
-            const [y, m, d] = value.split('-').map((val) => +val);
-            date = new Date(y, m - 1, d);
-        }
-        else if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-            date = isoStringToDate(match);
-        }
-        else {
-            date = new Date(value);
-        }
-        if (!isDate$1(date)) {
-            throw invalidPipeArgumentError(DatePipe, value);
-        }
-        return formatDate(date, format, locale || this.locale, timezone);
-    }
-}
-DatePipe.decorators = [
-    { type: Pipe, args: [{ name: 'date', pure: true },] },
-];
-/** @nocollapse */
-DatePipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-];
-/**
- * \@internal
- * @param {?} match
- * @return {?}
- */
-function isoStringToDate(match) {
-    const /** @type {?} */ date = new Date(0);
-    let /** @type {?} */ tzHour = 0;
-    let /** @type {?} */ tzMin = 0;
-    // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
-    const /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-    const /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
-    // if there is a timezone defined like "+01:00" or "+0100"
-    if (match[9]) {
-        tzHour = +(match[9] + match[10]);
-        tzMin = +(match[9] + match[11]);
-    }
-    dateSetter.call(date, +(match[1]), +(match[2]) - 1, +(match[3]));
-    const /** @type {?} */ h = +(match[4] || '0') - tzHour;
-    const /** @type {?} */ m = +(match[5] || '0') - tzMin;
-    const /** @type {?} */ s = +(match[6] || '0');
-    const /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
-    timeSetter.call(date, h, m, s, ms);
-    return date;
-}
-/**
- * @param {?} value
- * @return {?}
- */
-function isDate$1(value) {
-    return value instanceof Date && !isNaN(value.valueOf());
 }
 
 /**
@@ -4540,7 +4842,7 @@ class DeprecatedDatePipe {
         if (typeof value === 'string') {
             value = value.trim();
         }
-        if (isDate(value)) {
+        if (isDate$1(value)) {
             date = value;
         }
         else if (!isNaN(value - parseFloat(value))) {
@@ -4563,7 +4865,7 @@ class DeprecatedDatePipe {
         else {
             date = new Date(value);
         }
-        if (!isDate(date)) {
+        if (!isDate$1(date)) {
             let /** @type {?} */ match;
             if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
                 date = isoStringToDate(match);
@@ -4599,414 +4901,8 @@ DeprecatedDatePipe.ctorParameters = () => [
  * @param {?} value
  * @return {?}
  */
-function isDate(value) {
+function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
-const MAX_DIGITS = 22;
-const DECIMAL_SEP = '.';
-const ZERO_CHAR = '0';
-const PATTERN_SEP = ';';
-const GROUP_SEP = ',';
-const DIGIT_CHAR = '#';
-const CURRENCY_CHAR = '¤';
-const PERCENT_CHAR = '%';
-/**
- * Transforms a string into a number (if needed)
- * @param {?} value
- * @return {?}
- */
-function strToNumber(value) {
-    // Convert strings to numbers
-    if (typeof value === 'string' && !isNaN(+value - parseFloat(value))) {
-        return +value;
-    }
-    if (typeof value !== 'number') {
-        throw new Error(`${value} is not a number`);
-    }
-    return value;
-}
-/**
- * Transforms a number to a locale string based on a style and a format
- * @param {?} value
- * @param {?} pattern
- * @param {?} locale
- * @param {?} groupSymbol
- * @param {?} decimalSymbol
- * @param {?=} digitsInfo
- * @param {?=} isPercent
- * @return {?}
- */
-function formatNumber$1(value, pattern, locale, groupSymbol, decimalSymbol, digitsInfo, isPercent = false) {
-    let /** @type {?} */ formattedText = '';
-    let /** @type {?} */ isZero = false;
-    const /** @type {?} */ num = strToNumber(value);
-    if (!isFinite(num)) {
-        formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
-    }
-    else {
-        let /** @type {?} */ parsedNumber = parseNumber(num);
-        if (isPercent) {
-            parsedNumber = toPercent(parsedNumber);
-        }
-        let /** @type {?} */ minInt = pattern.minInt;
-        let /** @type {?} */ minFraction = pattern.minFrac;
-        let /** @type {?} */ maxFraction = pattern.maxFrac;
-        if (digitsInfo) {
-            const /** @type {?} */ parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
-            if (parts === null) {
-                throw new Error(`${digitsInfo} is not a valid digit info`);
-            }
-            const /** @type {?} */ minIntPart = parts[1];
-            const /** @type {?} */ minFractionPart = parts[3];
-            const /** @type {?} */ maxFractionPart = parts[5];
-            if (minIntPart != null) {
-                minInt = parseIntAutoRadix(minIntPart);
-            }
-            if (minFractionPart != null) {
-                minFraction = parseIntAutoRadix(minFractionPart);
-            }
-            if (maxFractionPart != null) {
-                maxFraction = parseIntAutoRadix(maxFractionPart);
-            }
-            else if (minFractionPart != null && minFraction > maxFraction) {
-                maxFraction = minFraction;
-            }
-        }
-        roundNumber(parsedNumber, minFraction, maxFraction);
-        let /** @type {?} */ digits = parsedNumber.digits;
-        let /** @type {?} */ integerLen = parsedNumber.integerLen;
-        const /** @type {?} */ exponent = parsedNumber.exponent;
-        let /** @type {?} */ decimals = [];
-        isZero = digits.every(d => !d);
-        // pad zeros for small numbers
-        for (; integerLen < minInt; integerLen++) {
-            digits.unshift(0);
-        }
-        // pad zeros for small numbers
-        for (; integerLen < 0; integerLen++) {
-            digits.unshift(0);
-        }
-        // extract decimals digits
-        if (integerLen > 0) {
-            decimals = digits.splice(integerLen, digits.length);
-        }
-        else {
-            decimals = digits;
-            digits = [0];
-        }
-        // format the integer digits with grouping separators
-        const /** @type {?} */ groups = [];
-        if (digits.length >= pattern.lgSize) {
-            groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
-        }
-        while (digits.length > pattern.gSize) {
-            groups.unshift(digits.splice(-pattern.gSize, digits.length).join(''));
-        }
-        if (digits.length) {
-            groups.unshift(digits.join(''));
-        }
-        formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
-        // append the decimal digits
-        if (decimals.length) {
-            formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
-        }
-        if (exponent) {
-            formattedText += getLocaleNumberSymbol(locale, NumberSymbol.Exponential) + '+' + exponent;
-        }
-    }
-    if (num < 0 && !isZero) {
-        formattedText = pattern.negPre + formattedText + pattern.negSuf;
-    }
-    else {
-        formattedText = pattern.posPre + formattedText + pattern.posSuf;
-    }
-    return formattedText;
-}
-/**
- * Formats a currency to a locale string
- *
- * \@internal
- * @param {?} value
- * @param {?} locale
- * @param {?} currency
- * @param {?=} currencyCode
- * @param {?=} digitsInfo
- * @return {?}
- */
-function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
-    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
-    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    pattern.minFrac = getNbOfCurrencyDigits(/** @type {?} */ ((currencyCode)));
-    pattern.maxFrac = pattern.minFrac;
-    const /** @type {?} */ res = formatNumber$1(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
-    return res
-        .replace(CURRENCY_CHAR, currency)
-        .replace(CURRENCY_CHAR, '');
-}
-/**
- * Formats a percentage to a locale string
- *
- * \@internal
- * @param {?} value
- * @param {?} locale
- * @param {?=} digitsInfo
- * @return {?}
- */
-function formatPercent(value, locale, digitsInfo) {
-    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
-    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    const /** @type {?} */ res = formatNumber$1(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo, true);
-    return res.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
-}
-/**
- * Formats a number to a locale string
- *
- * \@internal
- * @param {?} value
- * @param {?} locale
- * @param {?=} digitsInfo
- * @return {?}
- */
-function formatDecimal(value, locale, digitsInfo) {
-    const /** @type {?} */ format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
-    const /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    return formatNumber$1(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
-}
-/**
- * @param {?} format
- * @param {?=} minusSign
- * @return {?}
- */
-function parseNumberFormat(format, minusSign = '-') {
-    const /** @type {?} */ p = {
-        minInt: 1,
-        minFrac: 0,
-        maxFrac: 0,
-        posPre: '',
-        posSuf: '',
-        negPre: '',
-        negSuf: '',
-        gSize: 0,
-        lgSize: 0
-    };
-    const /** @type {?} */ patternParts = format.split(PATTERN_SEP);
-    const /** @type {?} */ positive = patternParts[0];
-    const /** @type {?} */ negative = patternParts[1];
-    const /** @type {?} */ positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
-        positive.split(DECIMAL_SEP) :
-        [
-            positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
-            positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
-        ], /** @type {?} */
-    integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
-    p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
-    for (let /** @type {?} */ i = 0; i < fraction.length; i++) {
-        const /** @type {?} */ ch = fraction.charAt(i);
-        if (ch === ZERO_CHAR) {
-            p.minFrac = p.maxFrac = i + 1;
-        }
-        else if (ch === DIGIT_CHAR) {
-            p.maxFrac = i + 1;
-        }
-        else {
-            p.posSuf += ch;
-        }
-    }
-    const /** @type {?} */ groups = integer.split(GROUP_SEP);
-    p.gSize = groups[1] ? groups[1].length : 0;
-    p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
-    if (negative) {
-        const /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */
-        pos = negative.indexOf(DIGIT_CHAR);
-        p.negPre = negative.substr(0, pos).replace(/'/g, '');
-        p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
-    }
-    else {
-        p.negPre = minusSign + p.posPre;
-        p.negSuf = p.posSuf;
-    }
-    return p;
-}
-/**
- * @param {?} parsedNumber
- * @return {?}
- */
-function toPercent(parsedNumber) {
-    // if the number is 0, don't do anything
-    if (parsedNumber.digits[0] === 0) {
-        return parsedNumber;
-    }
-    // Getting the current number of decimals
-    const /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
-    if (parsedNumber.exponent) {
-        parsedNumber.exponent += 2;
-    }
-    else {
-        if (fractionLen === 0) {
-            parsedNumber.digits.push(0, 0);
-        }
-        else if (fractionLen === 1) {
-            parsedNumber.digits.push(0);
-        }
-        parsedNumber.integerLen += 2;
-    }
-    return parsedNumber;
-}
-/**
- * Parses a number.
- * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} num
- * @return {?}
- */
-function parseNumber(num) {
-    let /** @type {?} */ numStr = Math.abs(num) + '';
-    let /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
-    let /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
-    // Decimal point?
-    if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
-        numStr = numStr.replace(DECIMAL_SEP, '');
-    }
-    // Exponential form?
-    if ((i = numStr.search(/e/i)) > 0) {
-        // Work out the exponent.
-        if (integerLen < 0)
-            integerLen = i;
-        integerLen += +numStr.slice(i + 1);
-        numStr = numStr.substring(0, i);
-    }
-    else if (integerLen < 0) {
-        // There was no decimal point or exponent so it is an integer.
-        integerLen = numStr.length;
-    }
-    // Count the number of leading zeros.
-    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
-        /* empty */
-    }
-    if (i === (zeros = numStr.length)) {
-        // The digits are all zero.
-        digits = [0];
-        integerLen = 1;
-    }
-    else {
-        // Count the number of trailing zeros
-        zeros--;
-        while (numStr.charAt(zeros) === ZERO_CHAR)
-            zeros--;
-        // Trailing zeros are insignificant so ignore them
-        integerLen -= i;
-        digits = [];
-        // Convert string to array of digits without leading/trailing zeros.
-        for (j = 0; i <= zeros; i++, j++) {
-            digits[j] = +numStr.charAt(i);
-        }
-    }
-    // If the number overflows the maximum allowed digits then use an exponent.
-    if (integerLen > MAX_DIGITS) {
-        digits = digits.splice(0, MAX_DIGITS - 1);
-        exponent = integerLen - 1;
-        integerLen = 1;
-    }
-    return { digits, exponent, integerLen };
-}
-/**
- * Round the parsed number to the specified number of decimal places
- * This function changes the parsedNumber in-place
- * @param {?} parsedNumber
- * @param {?} minFrac
- * @param {?} maxFrac
- * @return {?}
- */
-function roundNumber(parsedNumber, minFrac, maxFrac) {
-    if (minFrac > maxFrac) {
-        throw new Error(`The minimum number of digits after fraction (${minFrac}) is higher than the maximum (${maxFrac}).`);
-    }
-    let /** @type {?} */ digits = parsedNumber.digits;
-    let /** @type {?} */ fractionLen = digits.length - parsedNumber.integerLen;
-    const /** @type {?} */ fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
-    // The index of the digit to where rounding is to occur
-    let /** @type {?} */ roundAt = fractionSize + parsedNumber.integerLen;
-    let /** @type {?} */ digit = digits[roundAt];
-    if (roundAt > 0) {
-        // Drop fractional digits beyond `roundAt`
-        digits.splice(Math.max(parsedNumber.integerLen, roundAt));
-        // Set non-fractional digits beyond `roundAt` to 0
-        for (let /** @type {?} */ j = roundAt; j < digits.length; j++) {
-            digits[j] = 0;
-        }
-    }
-    else {
-        // We rounded to zero so reset the parsedNumber
-        fractionLen = Math.max(0, fractionLen);
-        parsedNumber.integerLen = 1;
-        digits.length = Math.max(1, roundAt = fractionSize + 1);
-        digits[0] = 0;
-        for (let /** @type {?} */ i = 1; i < roundAt; i++)
-            digits[i] = 0;
-    }
-    if (digit >= 5) {
-        if (roundAt - 1 < 0) {
-            for (let /** @type {?} */ k = 0; k > roundAt; k--) {
-                digits.unshift(0);
-                parsedNumber.integerLen++;
-            }
-            digits.unshift(1);
-            parsedNumber.integerLen++;
-        }
-        else {
-            digits[roundAt - 1]++;
-        }
-    }
-    // Pad out with zeros to get the required fraction length
-    for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
-        digits.push(0);
-    let /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
-    // Minimal length = nb of decimals required + current nb of integers
-    // Any number besides that is optional and can be removed if it's a trailing 0
-    const /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
-    // Do any carrying, e.g. a digit was rounded up to 10
-    const /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
-        d = d + carry;
-        digits[i] = d < 10 ? d : d - 10; // d % 10
-        if (dropTrailingZeros) {
-            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
-            if (digits[i] === 0 && i >= minLen) {
-                digits.pop();
-            }
-            else {
-                dropTrailingZeros = false;
-            }
-        }
-        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
-    }, 0);
-    if (carry) {
-        digits.unshift(carry);
-        parsedNumber.integerLen++;
-    }
-}
-/**
- * \@internal
- * @param {?} text
- * @return {?}
- */
-function parseIntAutoRadix(text) {
-    const /** @type {?} */ result = parseInt(text);
-    if (isNaN(result)) {
-        throw new Error('Invalid integer literal when parsing ' + text);
-    }
-    return result;
 }
 
 /**
@@ -5030,7 +4926,7 @@ function parseIntAutoRadix(text) {
  * @param {?=} currencyAsSymbol
  * @return {?}
  */
-function formatNumber(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
+function formatNumber$1(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
     if (value == null)
         return null;
     // Convert strings to numbers
@@ -5113,7 +5009,7 @@ class DeprecatedDecimalPipe {
      * @return {?}
      */
     transform(value, digits) {
-        return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        return formatNumber$1(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     }
 }
 DeprecatedDecimalPipe.decorators = [
@@ -5156,7 +5052,7 @@ class DeprecatedPercentPipe {
      * @return {?}
      */
     transform(value, digits) {
-        return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        return formatNumber$1(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     }
 }
 DeprecatedPercentPipe.decorators = [
@@ -5205,7 +5101,7 @@ class DeprecatedCurrencyPipe {
      * @return {?}
      */
     transform(value, currencyCode = 'USD', symbolDisplay = false, digits) {
-        return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        return formatNumber$1(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     }
 }
 DeprecatedCurrencyPipe.decorators = [
@@ -5515,6 +5411,163 @@ UpperCasePipe.ctorParameters = () => [];
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * \@ngModule CommonModule
+ * \@whatItDoes Uses the function {\@link formatDate} to format a date according to locale rules.
+ * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
+ * \@description
+ *
+ * Where:
+ * - `value` is a date object or a number (milliseconds since UTC epoch) or an ISO string
+ * (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. The format can be predefined as
+ *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+ *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
+ *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
+ *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`).
+ *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+ * 9:03:01 AM GMT+01:00`).
+ *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
+ *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
+ *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
+ *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
+ *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
+ *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
+ *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
+ *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
+ * - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
+ *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+ *  If not specified, the local system timezone of the end-user's browser will be used.
+ * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default).
+ *
+ *
+ *  | Field Type         | Format      | Description                                                   | Example Value                                              |
+ *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | MMMM        | Wide                                                          | September                                                  |
+ *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | LLLL        | Wide                                                          | September                                                  |
+ *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
+ *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *
+ *
+ * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
+ * applied and the formatted text will have the same day, month and year of the expression.
+ *
+ * WARNINGS:
+ * - this pipe has only access to en-US locale data by default. If you want to localize the dates
+ *   in another language, you will have to import data for other locales.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ *   data.
+ * - Fields suffixed with * are only available in the extra dataset.
+ *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
+ *   data.
+ * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
+ *   Instead users should treat the date as an immutable object and change the reference when the
+ *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
+ *   which would be an expensive operation).
+ *
+ * ### Examples
+ *
+ * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
+ * in the _local_ time and locale is 'en-US':
+ *
+ * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
+ *
+ * \@stable
+ */
+class DatePipe {
+    /**
+     * @param {?} locale
+     */
+    constructor(locale) {
+        this.locale = locale;
+    }
+    /**
+     * @param {?} value
+     * @param {?=} format
+     * @param {?=} timezone
+     * @param {?=} locale
+     * @return {?}
+     */
+    transform(value, format = 'mediumDate', timezone, locale) {
+        if (value == null || value === '' || value !== value)
+            return null;
+        try {
+            return formatDate(value, format, locale || this.locale, timezone);
+        }
+        catch (/** @type {?} */ error) {
+            throw invalidPipeArgumentError(DatePipe, error.message);
+        }
+    }
+}
+DatePipe.decorators = [
+    { type: Pipe, args: [{ name: 'date', pure: true },] },
+];
+/** @nocollapse */
+DatePipe.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 const _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
@@ -5671,23 +5724,22 @@ JsonPipe.ctorParameters = () => [];
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
+ * \@whatItDoes Uses the function {\@link formatNumber} to format a number according to locale rules.
  * \@howToUse `number_expression | number[:digitInfo[:locale]]`
+ * \@description
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the active locale.
+ * configurations are based on the locale.
  *
- * where `expression` is a number:
- *  - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+ * Where:
+ * - `value` is a number
+ * - `digitInfo` is a `string` which has a following format: <br>
+ *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
  *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
- *
- * For more information on the acceptable range for each of these numbers and other
- * details see your native internationalization library.
+ *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to `0`.
+ *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to `3`.
+ * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default).
  *
  * ### Example
  *
@@ -5713,7 +5765,8 @@ class DecimalPipe {
             return null;
         locale = locale || this._locale;
         try {
-            return formatDecimal(value, locale, digitsInfo);
+            const /** @type {?} */ num = strToNumber(value);
+            return formatNumber(num, locale, digitsInfo);
         }
         catch (/** @type {?} */ error) {
             throw invalidPipeArgumentError(DecimalPipe, error.message);
@@ -5729,16 +5782,18 @@ DecimalPipe.ctorParameters = () => [
 ];
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
+ * \@whatItDoes Uses the function {\@link formatPercent} to format a number as a percentage according
+ * to locale rules.
  * \@howToUse `number_expression | percent[:digitInfo[:locale]]`
- *
  * \@description
  *
  * Formats a number as percentage.
  *
- * - `digitInfo` See {\@link DecimalPipe} for a detailed description.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * Where:
+ * - `value` is a number.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default).
  *
  * ### Example
  *
@@ -5764,7 +5819,8 @@ class PercentPipe {
             return null;
         locale = locale || this._locale;
         try {
-            return formatPercent(value, locale, digitsInfo);
+            const /** @type {?} */ num = strToNumber(value);
+            return formatPercent(num, locale, digitsInfo);
         }
         catch (/** @type {?} */ error) {
             throw invalidPipeArgumentError(PercentPipe, error.message);
@@ -5780,25 +5836,28 @@ PercentPipe.ctorParameters = () => [
 ];
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
+ * \@whatItDoes Uses the functions {\@link getCurrencySymbol} and {\@link formatCurrency} to format a
+ * number as currency using locale rules.
  * \@howToUse `number_expression | currency[:currencyCode[:display[:digitInfo[:locale]]]]`
  * \@description
  *
  * Use `currency` to format a number as currency.
  *
+ * Where:
+ * - `value` is a number.
  * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
  *    as `USD` for the US dollar and `EUR` for the euro.
- * - `display` indicates whether to show the currency symbol, the code or a custom value
+ * - `display` indicates whether to show the currency symbol, the code or a custom value:
  *   - `code`: use code (e.g. `USD`).
  *   - `symbol`(default): use symbol (e.g. `$`).
  *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
  *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
- *   - `string`: use this value instead of a code or a symbol
- *   - boolean (deprecated from v5): `true` for symbol and false for `code`
+ *   - `string`: use this value instead of a code or a symbol.
+ *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
  *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
- * - `digitInfo` See {\@link DecimalPipe} for a detailed description.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+ * default).
  *
  * ### Example
  *
@@ -5841,7 +5900,8 @@ class CurrencyPipe {
             }
         }
         try {
-            return formatCurrency(value, locale, currency, currencyCode, digitsInfo);
+            const /** @type {?} */ num = strToNumber(value);
+            return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
         }
         catch (/** @type {?} */ error) {
             throw invalidPipeArgumentError(CurrencyPipe, error.message);
@@ -5861,6 +5921,21 @@ CurrencyPipe.ctorParameters = () => [
  */
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
+}
+/**
+ * Transforms a string into a number (if needed)
+ * @param {?} value
+ * @return {?}
+ */
+function strToNumber(value) {
+    // Convert strings to numbers
+    if (typeof value === 'string' && !isNaN(Number(value) - parseFloat(value))) {
+        return Number(value);
+    }
+    if (typeof value !== 'number') {
+        throw new Error(`${value} is not a number`);
+    }
+    return value;
 }
 
 /**
@@ -6108,7 +6183,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.5-094666d');
+const VERSION = new Version('6.0.0-beta.5-4180912');
 
 /**
  * @fileoverview added by tsickle
@@ -6154,5 +6229,5 @@ const VERSION = new Version('6.0.0-beta.5-094666d');
  * Generated bundle index. Do not edit.
  */
 
-export { registerLocaleData as ɵregisterLocaleData, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNbOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
+export { registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location, COMMON_DIRECTIVES as ɵe, findLocaleData as ɵd, DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb, COMMON_DEPRECATED_I18N_PIPES as ɵg, COMMON_PIPES as ɵf };
 //# sourceMappingURL=common.js.map

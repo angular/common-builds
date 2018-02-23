@@ -360,4 +360,4 @@ export declare function getCurrencySymbol(code: string, format: 'wide' | 'narrow
  *
  * @experimental i18n support is experimental.
  */
-export declare function getNbOfCurrencyDigits(code: string): number;
+export declare function getNumberOfCurrencyDigits(code: string): number;
