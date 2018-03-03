@@ -22,7 +22,7 @@ import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angula
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set it's value as default.
+ * Note: using the key `$implicit` in the context object will set its value as default.
  *
  * ## Example
  *

@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.0-2717a3e
+ * @license Angular v6.0.0-beta.6-371ec91
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.2.0-2717a3e
+ * @license Angular v6.0.0-beta.6-371ec91
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -270,26 +270,17 @@ function _toTextBody(body) {
  * @return {?}
  */
 function _maybeConvertBody(responseType, body) {
+    if (body === null) {
+        return null;
+    }
     switch (responseType) {
         case 'arraybuffer':
-            if (body === null) {
-                return null;
-            }
             return _toArrayBufferBody(body);
         case 'blob':
-            if (body === null) {
-                return null;
-            }
             return _toBlob(body);
         case 'json':
-            if (body === null) {
-                return 'null';
-            }
             return _toJsonBody(body);
         case 'text':
-            if (body === null) {
-                return null;
-            }
             return _toTextBody(body);
         default:
             throw new Error("Unsupported responseType: " + responseType);

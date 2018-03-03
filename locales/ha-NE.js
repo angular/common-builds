@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
 export default [
     'ha-NE',
     [
@@ -37,10 +44,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'CFA', 'Kuɗin Sefa na Afirka Ta Yamma',
-    function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    { 'JPY': ['JP¥', '¥'], 'NGN': ['₦'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ha-NE.js.map

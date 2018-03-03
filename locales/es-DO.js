@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
 export default [
     'es-DO',
     [
@@ -38,10 +45,34 @@ export default [
         '{1}, {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], 'RD$', 'peso dominicano', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], 'RD$', 'peso dominicano', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'CAD': [, '$'],
+        'CNY': [, '¥'],
+        'DOP': ['RD$', '$'],
+        'ESP': ['₧'],
+        'EUR': [, '€'],
+        'FKP': [, 'FK£'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [, '₪'],
+        'INR': [, '₹'],
+        'JPY': [, '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'RON': [, 'L'],
+        'SSP': [, 'SD£'],
+        'SYP': [, 'S£'],
+        'TWD': [, 'NT$'],
+        'USD': ['US$', '$'],
+        'VEF': [, 'BsF'],
+        'VND': [, '₫'],
+        'XAF': [],
+        'XCD': [, '$'],
+        'XOF': []
+    },
+    plural
 ];
 //# sourceMappingURL=es-DO.js.map

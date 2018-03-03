@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
 export default [
     'nn', [['f.m.', 'e.m.'], , ['formiddag', 'ettermiddag']],
     [
@@ -45,10 +52,27 @@ export default [
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', '\'kl\'. HH:mm:ss zzzz'],
     ['{1}, {0}', , '{1} \'kl\'. {0}', '{1} {0}'],
     [',', ' ', ';', '%', '+', '−', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'norske kroner', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'norske kroner', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'CAD': [, '$'],
+        'CNY': [, '¥'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [, '₪'],
+        'INR': [, '₹'],
+        'JPY': [, '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NOK': ['kr'],
+        'NZD': [, '$'],
+        'TWD': [, '$'],
+        'USD': [, '$'],
+        'VND': [, '₫'],
+        'XAF': [],
+        'XCD': [, '$'],
+        'XPF': []
+    },
+    plural
 ];
 //# sourceMappingURL=nn.js.map

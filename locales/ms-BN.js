@@ -5,6 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    return 5;
+}
 export default [
     'ms-BN',
     [
@@ -39,7 +44,15 @@ export default [
         '{1} {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '$', 'Dolar Brunei',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '$', 'Dolar Brunei', {
+        'BND': ['$'],
+        'CAD': [, '$'],
+        'JPY': ['JP¥', '¥'],
+        'MXN': [, '$'],
+        'MYR': ['RM'],
+        'TWD': ['NT$'],
+        'USD': [, '$']
+    },
+    plural
 ];
 //# sourceMappingURL=ms-BN.js.map

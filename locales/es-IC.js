@@ -5,6 +5,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
 export default [
     'es-IC',
     [
@@ -39,10 +46,28 @@ export default [
         '{1}, {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'euro', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'euro', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'CNY': [, '¥'],
+        'EGP': [],
+        'ESP': ['₧'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [, '₪'],
+        'INR': [, '₹'],
+        'JPY': [, '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': [, 'NT$'],
+        'USD': ['US$', '$'],
+        'XAF': [],
+        'XCD': [, '$'],
+        'XOF': []
+    },
+    plural
 ];
 //# sourceMappingURL=es-IC.js.map

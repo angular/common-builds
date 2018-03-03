@@ -5,6 +5,14 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === 0 || i === 1)
+        return 1;
+    return 5;
+}
 export default [
     'fr-SY',
     [
@@ -39,12 +47,53 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'LS', 'livre syrienne',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === 0 || i === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'LS', 'livre syrienne', {
+        'ARS': ['$AR', '$'],
+        'AUD': ['$AU', '$'],
+        'BEF': ['FB'],
+        'BMD': ['$BM', '$'],
+        'BND': ['$BN', '$'],
+        'BSD': ['$BS', '$'],
+        'BZD': ['$BZ', '$'],
+        'CAD': ['$CA', '$'],
+        'CLP': ['$CL', '$'],
+        'CNY': [, '¥'],
+        'COP': ['$CO', '$'],
+        'CYP': ['£CY'],
+        'EGP': [, '£E'],
+        'FJD': ['$FJ', '$'],
+        'FKP': ['£FK', '£'],
+        'FRF': ['F'],
+        'GBP': ['£GB', '£'],
+        'GIP': ['£GI', '£'],
+        'HKD': [, '$'],
+        'IEP': ['£IE'],
+        'ILP': ['£IL'],
+        'ITL': ['₤IT'],
+        'JPY': [, '¥'],
+        'KMF': [, 'FC'],
+        'LBP': ['£LB', '£L'],
+        'MTP': ['£MT'],
+        'MXN': ['$MX', '$'],
+        'NAD': ['$NA', '$'],
+        'NIO': [, '$C'],
+        'NZD': ['$NZ', '$'],
+        'RHD': ['$RH'],
+        'RON': [, 'L'],
+        'RWF': [, 'FR'],
+        'SBD': ['$SB', '$'],
+        'SGD': ['$SG', '$'],
+        'SRD': ['$SR', '$'],
+        'SYP': ['LS', '£'],
+        'TTD': ['$TT', '$'],
+        'TWD': [, 'NT$'],
+        'USD': ['$US', '$'],
+        'UYU': ['$UY', '$'],
+        'WST': ['WS$'],
+        'XCD': [, '$'],
+        'XPF': ['FCFP'],
+        'ZMW': [, 'Kw']
+    },
+    plural
 ];
 //# sourceMappingURL=fr-SY.js.map

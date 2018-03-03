@@ -1,2 +1,4 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number))[];
+declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
+    'JPY': string[];
+})[];
 export default _default;
