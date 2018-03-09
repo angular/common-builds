@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "6.0.0-beta.7-2fee5cc",
+  "version": "6.0.0-beta.7-489fec1",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
   "module": "./esm5/common.js",
@@ -9,12 +9,12 @@
   "author": "angular",
   "license": "MIT",
   "dependencies": {
-    "tslib": "^1.7.1"
+    "tslib": "^1.9.0"
   },
   "locales": "locales",
   "peerDependencies": {
     "rxjs": "^5.5.0",
-    "@angular/core": "6.0.0-beta.7-2fee5cc"
+    "@angular/core": "6.0.0-beta.7-489fec1"
   },
   "repository": {
     "type": "git",
