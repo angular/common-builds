@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.7-0bf6fa5
+ * @license Angular v6.0.0-beta.7-3f70aba
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2616,7 +2616,7 @@ class NgLocaleLocalization extends NgLocalization {
      * @param {?=} deprecatedPluralFn
      */
     constructor(locale, /** @deprecated from v5 */
-        deprecatedPluralFn) {
+    deprecatedPluralFn) {
         super();
         this.locale = locale;
         this.deprecatedPluralFn = deprecatedPluralFn;
@@ -6183,7 +6183,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.7-0bf6fa5');
+const VERSION = new Version('6.0.0-beta.7-3f70aba');
 
 /**
  * @fileoverview added by tsickle
