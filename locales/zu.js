@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,15 +6,25 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === 0 || n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'zu',
     [
         ['a', 'p'],
         ['AM', 'PM'],
     ],
-    ,
+    [
+        ['AM', 'PM'],
+        ,
+    ],
     [
         ['S', 'M', 'B', 'T', 'S', 'H', 'M'], ['Son', 'Mso', 'Bil', 'Tha', 'Sin', 'Hla', 'Mgq'],
         ['ISonto', 'UMsombuluko', 'ULwesibili', 'ULwesithathu', 'ULwesine', 'ULwesihlanu', 'UMgqibelo'],
@@ -24,8 +35,8 @@ export default [
         ['J', 'F', 'M', 'E', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mas', 'Eph', 'Mey', 'Jun', 'Jul', 'Aga', 'Sep', 'Okt', 'Nov', 'Dis'],
         [
-            'UMasingana', 'Februwari', 'Mashi', 'Ephreli', 'Meyi', 'Juni', 'Julayi', 'Agasti',
-            'Septhemba', 'Okthoba', 'Novemba', 'Disemba'
+            'Januwari', 'Februwari', 'Mashi', 'Ephreli', 'Meyi', 'Juni', 'Julayi', 'Agasti', 'Septhemba',
+            'Okthoba', 'Novemba', 'Disemba'
         ]
     ],
     [
@@ -48,12 +59,20 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'i-South African Rand',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === 0 || n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'R', 'i-South African Rand', {
+        'BYN': [, 'P.'],
+        'DKK': [, 'Kr'],
+        'HRK': [, 'Kn'],
+        'ISK': [, 'Kr'],
+        'JPY': ['JP¥', '¥'],
+        'NOK': [, 'Kr'],
+        'PLN': [, 'Zł'],
+        'SEK': [, 'Kr'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$'],
+        'ZAR': ['R']
+    },
+    plural
 ];
 //# sourceMappingURL=zu.js.map

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'kl',
     [
         ['AM', 'PM'],
@@ -37,17 +44,14 @@ export default [
         ,
     ],
     1, [6, 0], ['y-MM-dd', 'y MMM d', 'y MMMM d', 'y MMMM d, EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
+    ['HH.mm', 'HH.mm.ss', 'HH.mm.ss z', 'HH.mm.ss zzzz'],
     [
         '{1} {0}',
         ,
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '¤#,##0.00;¤-#,##0.00', '#E0'], 'kr.', 'DKK', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '¤#,##0.00;¤-#,##0.00', '#E0'], 'kr.', 'DKK',
+    { 'DKK': ['kr.', 'kr'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=kl.js.map

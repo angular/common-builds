@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'so-ET',
     [
         ['sn.', 'gn.'],
@@ -50,10 +57,7 @@ export default [
         ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Birta Itoobbiya', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Br', 'Birta Itoobbiya',
+    { 'ETB': ['Br'], 'JPY': ['JP¥', '¥'], 'SOS': ['S'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=so-ET.js.map

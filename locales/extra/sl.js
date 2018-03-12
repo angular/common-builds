@@ -1,3 +1,12 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,10 +16,10 @@
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+exports.default = [
     [
         ['24.00', '12.00', 'zj', 'd', 'p', 'zv', 'po'],
-        ['opoln.', 'opold.', 'zjut.', 'dop.', 'pop.', 'zveč.', 'noč'],
+        ['opoln.', 'opold.', 'zjut.', 'dop.', 'pop.', 'zveč.', 'ponoči'],
         ['opolnoči', 'opoldne', 'zjutraj', 'dopoldan', 'popoldan', 'zvečer', 'ponoči']
     ],
     [

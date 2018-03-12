@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,16 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+    if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
+        return 1;
+    return 5;
+}
+exports.default = [
     'is',
     [
         ['f.', 'e.'],
@@ -18,7 +26,8 @@ export default [
         ,
     ],
     [
-        ['S', 'M', 'Þ', 'M', 'F', 'F', 'L'], ['sun.', 'mán.', 'þri.', 'mið.', 'fim.', 'fös.', 'lau.'],
+        ['S', 'M', 'Þ', 'M', 'F', 'F', 'L'],
+        ['sun.', 'mán.', 'þri.', 'mið.', 'fim.', 'fös.', 'lau.'],
         [
             'sunnudagur', 'mánudagur', 'þriðjudagur', 'miðvikudagur', 'fimmtudagur', 'föstudagur',
             'laugardagur'
@@ -28,10 +37,13 @@ export default [
     ,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'Á', 'S', 'O', 'N', 'D'],
-        ['jan.', 'feb.', 'mar.', 'apr.', 'maí', 'jún.', 'júl.', 'ágú.', 'sep.', 'okt.', 'nóv.', 'des.'],
         [
-            'janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október',
-            'nóvember', 'desember'
+            'jan.', 'feb.', 'mar.', 'apr.', 'maí', 'jún.', 'júl.', 'ágú.', 'sep.', 'okt.', 'nóv.',
+            'des.'
+        ],
+        [
+            'janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september',
+            'október', 'nóvember', 'desember'
         ]
     ],
     ,
@@ -44,12 +56,21 @@ export default [
         '{1} \'kl\'. {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'ISK', 'íslensk króna',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-        if (t === 0 && i % 10 === 1 && !(i % 100 === 11) || !(t === 0))
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'ISK', 'íslensk króna', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'CAD': [, '$'],
+        'EUR': [, '€'],
+        'GBP': [, '£'],
+        'INR': [, '₹'],
+        'JPY': ['JP¥', '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'TWD': [, 'NT$'],
+        'USD': [, '$'],
+        'VND': [, '₫']
+    },
+    plural
 ];
 //# sourceMappingURL=is.js.map

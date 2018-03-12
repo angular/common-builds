@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'es-BZ',
     [
         ['a. m.', 'p. m.'],
@@ -28,16 +35,6 @@ export default [
         ['DO', 'LU', 'MA', 'MI', 'JU', 'VI', 'SA']
     ],
     [
-        ['e', 'f', 'm', 'a', 'm', 'j', 'j', 'a', 's', 'o', 'n', 'd'],
-        [
-            'ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sep.', 'oct.', 'nov.', 'dic.'
-        ],
-        [
-            'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre',
-            'octubre', 'noviembre', 'diciembre'
-        ]
-    ],
-    [
         ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         [
             'ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sep.', 'oct.', 'nov.', 'dic.'
@@ -47,6 +44,7 @@ export default [
             'octubre', 'noviembre', 'diciembre'
         ]
     ],
+    ,
     [['a. C.', 'd. C.'], , ['antes de Cristo', 'después de Cristo']], 0, [6, 0],
     ['d/M/yy', 'd MMM y', 'd \'de\' MMMM \'de\' y', 'EEEE, d \'de\' MMMM \'de\' y'],
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
@@ -56,10 +54,34 @@ export default [
         '{1}, {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], '$', 'dólar beliceño', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '¤#,##0.00', '#E0'], '$', 'dólar beliceño', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'BZD': ['$'],
+        'CAD': [, '$'],
+        'CNY': [, '¥'],
+        'ESP': ['₧'],
+        'EUR': [, '€'],
+        'FKP': [, 'FK£'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [, '₪'],
+        'INR': [, '₹'],
+        'JPY': [, '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'RON': [, 'L'],
+        'SSP': [, 'SD£'],
+        'SYP': [, 'S£'],
+        'TWD': [, 'NT$'],
+        'USD': [, '$'],
+        'VEF': [, 'BsF'],
+        'VND': [, '₫'],
+        'XAF': [],
+        'XCD': [, '$'],
+        'XOF': []
+    },
+    plural
 ];
 //# sourceMappingURL=es-BZ.js.map

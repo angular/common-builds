@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,13 +6,24 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
-    'sw-CD', [['am', 'pm'], ['AM', 'PM'], ['Asubuhi', 'Mchana']],
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
+exports.default = [
+    'sw-CD',
     [
         ['am', 'pm'],
         ['AM', 'PM'],
+    ],
+    [
+        ['AM', 'PM'],
+        ,
     ],
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -37,12 +49,15 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FC', 'Faranga ya Kongo',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FC', 'Faranga ya Kongo', {
+        'CDF': ['FC'],
+        'JPY': ['JP¥', '¥'],
+        'KES': ['Ksh'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'TZS': ['TSh'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=sw-CD.js.map

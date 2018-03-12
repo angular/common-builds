@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'mer',
     [
         ['RŨ', 'ŨG'],
@@ -24,8 +29,8 @@ export default [
         ['J', 'F', 'M', 'Ĩ', 'M', 'N', 'N', 'A', 'S', 'O', 'N', 'D'],
         ['JAN', 'FEB', 'MAC', 'ĨPU', 'MĨĨ', 'NJU', 'NJR', 'AGA', 'SPT', 'OKT', 'NOV', 'DEC'],
         [
-            'Januarĩ', 'Feburuarĩ', 'Machi', 'Ĩpurũ', 'Mĩĩ', 'Njuni', 'Njuraĩ', 'Agasti', 'Septemba',
-            'Oktũba', 'Novemba', 'Dicemba'
+            'Januarĩ', 'Feburuarĩ', 'Machi', 'Ĩpurũ', 'Mĩĩ', 'Njuni', 'Njuraĩ', 'Agasti',
+            'Septemba', 'Oktũba', 'Novemba', 'Dicemba'
         ]
     ],
     ,
@@ -39,6 +44,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Shilingi ya Kenya',
-    function (n) { return 5; }
+    { 'JPY': ['JP¥', '¥'], 'KES': ['Ksh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=mer.js.map

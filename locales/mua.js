@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'mua',
     [
         ['comme', 'lilli'],
@@ -16,7 +21,10 @@ export default [
     ,
     [
         ['Y', 'L', 'Z', 'O', 'A', 'G', 'E'], ['Cya', 'Cla', 'Czi', 'Cko', 'Cka', 'Cga', 'Cze'],
-        ['Com’yakke', 'Comlaaɗii', 'Comzyiiɗii', 'Comkolle', 'Comkaldǝɓlii', 'Comgaisuu', 'Comzyeɓsuu'],
+        [
+            'Com’yakke', 'Comlaaɗii', 'Comzyiiɗii', 'Comkolle', 'Comkaldǝɓlii', 'Comgaisuu',
+            'Comzyeɓsuu'
+        ],
         ['Cya', 'Cla', 'Czi', 'Cko', 'Cka', 'Cga', 'Cze']
     ],
     ,
@@ -24,8 +32,9 @@ export default [
         ['O', 'A', 'I', 'F', 'D', 'B', 'L', 'M', 'E', 'U', 'W', 'Y'],
         ['FLO', 'CLA', 'CKI', 'FMF', 'MAD', 'MBI', 'MLI', 'MAM', 'FDE', 'FMU', 'FGW', 'FYU'],
         [
-            'Fĩi Loo', 'Cokcwaklaŋne', 'Cokcwaklii', 'Fĩi Marfoo', 'Madǝǝuutǝbijaŋ', 'Mamǝŋgwãafahbii',
-            'Mamǝŋgwãalii', 'Madǝmbii', 'Fĩi Dǝɓlii', 'Fĩi Mundaŋ', 'Fĩi Gwahlle', 'Fĩi Yuru'
+            'Fĩi Loo', 'Cokcwaklaŋne', 'Cokcwaklii', 'Fĩi Marfoo', 'Madǝǝuutǝbijaŋ',
+            'Mamǝŋgwãafahbii', 'Mamǝŋgwãalii', 'Madǝmbii', 'Fĩi Dǝɓlii', 'Fĩi Mundaŋ',
+            'Fĩi Gwahlle', 'Fĩi Yuru'
         ]
     ],
     ,
@@ -39,6 +48,6 @@ export default [
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'solai BEAC',
-    function (n) { return 5; }
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=mua.js.map

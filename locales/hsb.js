@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,21 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
+    if (v === 0 && i % 100 === 1 || f % 100 === 1)
+        return 1;
+    if (v === 0 && i % 100 === 2 || f % 100 === 2)
+        return 2;
+    if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
+        f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
+        return 3;
+    return 5;
+}
+exports.default = [
     'hsb',
     [
         ['dop.', 'pop.'],
@@ -26,7 +39,8 @@ export default [
     [
         ['j', 'f', 'm', 'a', 'm', 'j', 'j', 'a', 's', 'o', 'n', 'd'],
         [
-            'jan.', 'feb.', 'měr.', 'apr.', 'mej.', 'jun.', 'jul.', 'awg.', 'sep.', 'okt.', 'now.', 'dec.'
+            'jan.', 'feb.', 'měr.', 'apr.', 'mej.', 'jun.', 'jul.', 'awg.', 'sep.', 'okt.', 'now.',
+            'dec.'
         ],
         [
             'januara', 'februara', 'měrca', 'apryla', 'meje', 'junija', 'julija', 'awgusta', 'septembra',
@@ -41,8 +55,8 @@ export default [
             'oktober', 'nowember', 'december'
         ]
     ],
-    [['př.Chr.n.', 'po Chr.n.'], , ['před Chrystowym narodźenjom', 'po Chrystowym narodźenju']], 1,
-    [6, 0], ['d.M.yy', 'd.M.y', 'd. MMMM y', 'EEEE, d. MMMM y'],
+    [['př.Chr.n.', 'po Chr.n.'], , ['před Chrystowym narodźenjom', 'po Chrystowym narodźenju']],
+    1, [6, 0], ['d.M.yy', 'd.M.y', 'd. MMMM y', 'EEEE, d. MMMM y'],
     ['H:mm \'hodź\'.', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'],
     [
         '{1} {0}',
@@ -51,16 +65,6 @@ export default [
     ],
     [',', '.', ';', '%', '+', '-', 'E', '·', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'euro',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
-        if (v === 0 && i % 100 === 1 || f % 100 === 1)
-            return 1;
-        if (v === 0 && i % 100 === 2 || f % 100 === 2)
-            return 2;
-        if (v === 0 && i % 100 === Math.floor(i % 100) && i % 100 >= 3 && i % 100 <= 4 ||
-            f % 100 === Math.floor(f % 100) && f % 100 >= 3 && f % 100 <= 4)
-            return 3;
-        return 5;
-    }
+    { 'AUD': [, '$'], 'PLN': ['zł'], 'THB': ['฿'] }, plural
 ];
 //# sourceMappingURL=hsb.js.map

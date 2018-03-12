@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,19 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    if (!(v === 0) || n === 0 ||
+        !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
+        return 3;
+    return 5;
+}
+exports.default = [
     'ro',
     [
         ['a.m.', 'p.m.'],
@@ -40,15 +51,25 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'RON', 'leu românesc',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        if (!(v === 0) || n === 0 ||
-            !(n === 1) && n % 100 === Math.floor(n % 100) && n % 100 >= 1 && n % 100 <= 19)
-            return 3;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'RON', 'leu românesc', {
+        'AUD': [, '$'],
+        'BRL': [, 'R$'],
+        'CAD': [, '$'],
+        'CNY': [, '¥'],
+        'EUR': [, '€'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [, '₪'],
+        'INR': [, '₹'],
+        'JPY': [, '¥'],
+        'KRW': [, '₩'],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'TWD': [, 'NT$'],
+        'USD': [, '$'],
+        'VND': [, '₫'],
+        'XCD': [, '$']
+    },
+    plural
 ];
 //# sourceMappingURL=ro.js.map

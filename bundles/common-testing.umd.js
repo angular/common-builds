@@ -1,11 +1,11 @@
 /**
- * @license Angular v5.0.0-beta.6-f2945c6
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-63cad11
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common/testing', ['exports', '@angular/core', '@angular/common'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.testing = {}),global.ng.core,global.ng.common));
 }(this, (function (exports,_angular_core,_angular_common) { 'use strict';
 
@@ -36,8 +36,8 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.0.0-beta.6-f2945c6
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-63cad11
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -45,14 +45,21 @@ function __extends(d, b) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A spy for {\@link Location} that allows tests to fire simulated location events.
  *
  * \@experimental
  */
-var SpyLocation = (function () {
+var SpyLocation = /** @class */ (function () {
     function SpyLocation() {
         this.urlChanges = [];
-        this._history = [new LocationState('', '')];
+        this._history = [new LocationState('', '', null)];
         this._historyIndex = 0;
         /**
          * \@internal
@@ -65,28 +72,51 @@ var SpyLocation = (function () {
         /**
          * \@internal
          */
-        this._platformStrategy = ((null));
+        this._platformStrategy = /** @type {?} */ ((null));
     }
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
+    SpyLocation.prototype.setInitialPath = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) { this._history[this._historyIndex].path = url; };
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };
+    SpyLocation.prototype.setBaseHref = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) { this._baseHref = url; };
     /**
      * @return {?}
      */
-    SpyLocation.prototype.path = function () { return this._history[this._historyIndex].path; };
+    SpyLocation.prototype.path = /**
+     * @return {?}
+     */
+    function () { return this._history[this._historyIndex].path; };
+    /**
+     * @return {?}
+     */
+    SpyLocation.prototype.state = /**
+     * @return {?}
+     */
+    function () { return this._history[this._historyIndex].state; };
     /**
      * @param {?} path
      * @param {?=} query
      * @return {?}
      */
-    SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
+    SpyLocation.prototype.isCurrentPathEqualTo = /**
+     * @param {?} path
+     * @param {?=} query
+     * @return {?}
+     */
+    function (path, query) {
         if (query === void 0) { query = ''; }
         var /** @type {?} */ givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
         var /** @type {?} */ currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
@@ -96,12 +126,22 @@ var SpyLocation = (function () {
      * @param {?} pathname
      * @return {?}
      */
-    SpyLocation.prototype.simulateUrlPop = function (pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); };
+    SpyLocation.prototype.simulateUrlPop = /**
+     * @param {?} pathname
+     * @return {?}
+     */
+    function (pathname) {
+        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
+    };
     /**
      * @param {?} pathname
      * @return {?}
      */
-    SpyLocation.prototype.simulateHashChange = function (pathname) {
+    SpyLocation.prototype.simulateHashChange = /**
+     * @param {?} pathname
+     * @return {?}
+     */
+    function (pathname) {
         // Because we don't prevent the native event, the browser will independently update the path
         this.setInitialPath(pathname);
         this.urlChanges.push('hash: ' + pathname);
@@ -111,7 +151,11 @@ var SpyLocation = (function () {
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.prepareExternalUrl = function (url) {
+    SpyLocation.prototype.prepareExternalUrl = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
         if (url.length > 0 && !url.startsWith('/')) {
             url = '/' + url;
         }
@@ -120,15 +164,23 @@ var SpyLocation = (function () {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    SpyLocation.prototype.go = function (path, query) {
+    SpyLocation.prototype.go = /**
+     * @param {?} path
+     * @param {?=} query
+     * @param {?=} state
+     * @return {?}
+     */
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         if (this._historyIndex > 0) {
             this._history.splice(this._historyIndex + 1);
         }
-        this._history.push(new LocationState(path, query));
+        this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
         var /** @type {?} */ locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
@@ -141,10 +193,18 @@ var SpyLocation = (function () {
     /**
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    SpyLocation.prototype.replaceState = function (path, query) {
+    SpyLocation.prototype.replaceState = /**
+     * @param {?} path
+     * @param {?=} query
+     * @param {?=} state
+     * @return {?}
+     */
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         var /** @type {?} */ history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
@@ -152,25 +212,32 @@ var SpyLocation = (function () {
         }
         history.path = path;
         history.query = query;
+        history.state = state;
         var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     };
     /**
      * @return {?}
      */
-    SpyLocation.prototype.forward = function () {
+    SpyLocation.prototype.forward = /**
+     * @return {?}
+     */
+    function () {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     /**
      * @return {?}
      */
-    SpyLocation.prototype.back = function () {
+    SpyLocation.prototype.back = /**
+     * @return {?}
+     */
+    function () {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     /**
@@ -179,29 +246,36 @@ var SpyLocation = (function () {
      * @param {?=} onReturn
      * @return {?}
      */
-    SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
+    SpyLocation.prototype.subscribe = /**
+     * @param {?} onNext
+     * @param {?=} onThrow
+     * @param {?=} onReturn
+     * @return {?}
+     */
+    function (onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     /**
      * @param {?} url
      * @return {?}
      */
-    SpyLocation.prototype.normalize = function (url) { return ((null)); };
+    SpyLocation.prototype.normalize = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) { return /** @type {?} */ ((null)); };
+    SpyLocation.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
-SpyLocation.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-SpyLocation.ctorParameters = function () { return []; };
-var LocationState = (function () {
-    /**
-     * @param {?} path
-     * @param {?} query
-     */
-    function LocationState(path, query) {
+var LocationState = /** @class */ (function () {
+    function LocationState(path, query, state) {
         this.path = path;
         this.query = query;
+        this.state = state;
     }
     return LocationState;
 }());
@@ -223,7 +297,7 @@ var LocationState = (function () {
  *
  * \@stable
  */
-var MockLocationStrategy = (function (_super) {
+var MockLocationStrategy = /** @class */ (function (_super) {
     __extends(MockLocationStrategy, _super);
     function MockLocationStrategy() {
         var _this = _super.call(this) || this;
@@ -241,7 +315,11 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} url
      * @return {?}
      */
-    MockLocationStrategy.prototype.simulatePopState = function (url) {
+    MockLocationStrategy.prototype.simulatePopState = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
         this.internalPath = url;
         this._subject.emit(new _MockPopStateEvent(this.path()));
     };
@@ -249,7 +327,11 @@ var MockLocationStrategy = (function (_super) {
      * @param {?=} includeHash
      * @return {?}
      */
-    MockLocationStrategy.prototype.path = function (includeHash) {
+    MockLocationStrategy.prototype.path = /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         return this.internalPath;
     };
@@ -257,7 +339,11 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} internal
      * @return {?}
      */
-    MockLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+    MockLocationStrategy.prototype.prepareExternalUrl = /**
+     * @param {?} internal
+     * @return {?}
+     */
+    function (internal) {
         if (internal.startsWith('/') && this.internalBaseHref.endsWith('/')) {
             return this.internalBaseHref + internal.substring(1);
         }
@@ -270,7 +356,14 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} query
      * @return {?}
      */
-    MockLocationStrategy.prototype.pushState = function (ctx, title, path, query) {
+    MockLocationStrategy.prototype.pushState = /**
+     * @param {?} ctx
+     * @param {?} title
+     * @param {?} path
+     * @param {?} query
+     * @return {?}
+     */
+    function (ctx, title, path, query) {
         this.internalTitle = title;
         var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
@@ -284,7 +377,14 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} query
      * @return {?}
      */
-    MockLocationStrategy.prototype.replaceState = function (ctx, title, path, query) {
+    MockLocationStrategy.prototype.replaceState = /**
+     * @param {?} ctx
+     * @param {?} title
+     * @param {?} path
+     * @param {?} query
+     * @return {?}
+     */
+    function (ctx, title, path, query) {
         this.internalTitle = title;
         var /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
@@ -295,15 +395,25 @@ var MockLocationStrategy = (function (_super) {
      * @param {?} fn
      * @return {?}
      */
-    MockLocationStrategy.prototype.onPopState = function (fn) { this._subject.subscribe({ next: fn }); };
+    MockLocationStrategy.prototype.onPopState = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) { this._subject.subscribe({ next: fn }); };
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.getBaseHref = function () { return this.internalBaseHref; };
+    MockLocationStrategy.prototype.getBaseHref = /**
+     * @return {?}
+     */
+    function () { return this.internalBaseHref; };
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.back = function () {
+    MockLocationStrategy.prototype.back = /**
+     * @return {?}
+     */
+    function () {
         if (this.urlChanges.length > 0) {
             this.urlChanges.pop();
             var /** @type {?} */ nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
@@ -313,18 +423,18 @@ var MockLocationStrategy = (function (_super) {
     /**
      * @return {?}
      */
-    MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
+    MockLocationStrategy.prototype.forward = /**
+     * @return {?}
+     */
+    function () { throw 'not implemented'; };
+    MockLocationStrategy.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    MockLocationStrategy.ctorParameters = function () { return []; };
     return MockLocationStrategy;
 }(_angular_common.LocationStrategy));
-MockLocationStrategy.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-MockLocationStrategy.ctorParameters = function () { return []; };
-var _MockPopStateEvent = (function () {
-    /**
-     * @param {?} newUrl
-     */
+var _MockPopStateEvent = /** @class */ (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;
         this.pop = true;

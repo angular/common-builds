@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,16 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === 0 || i === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'fr-MU',
     [
         ['AM', 'PM'],
@@ -41,12 +49,53 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'Rs', 'roupie mauricienne',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === 0 || i === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'Rs', 'roupie mauricienne', {
+        'ARS': ['$AR', '$'],
+        'AUD': ['$AU', '$'],
+        'BEF': ['FB'],
+        'BMD': ['$BM', '$'],
+        'BND': ['$BN', '$'],
+        'BSD': ['$BS', '$'],
+        'BZD': ['$BZ', '$'],
+        'CAD': ['$CA', '$'],
+        'CLP': ['$CL', '$'],
+        'CNY': [, '¥'],
+        'COP': ['$CO', '$'],
+        'CYP': ['£CY'],
+        'EGP': [, '£E'],
+        'FJD': ['$FJ', '$'],
+        'FKP': ['£FK', '£'],
+        'FRF': ['F'],
+        'GBP': ['£GB', '£'],
+        'GIP': ['£GI', '£'],
+        'HKD': [, '$'],
+        'IEP': ['£IE'],
+        'ILP': ['£IL'],
+        'ITL': ['₤IT'],
+        'JPY': [, '¥'],
+        'KMF': [, 'FC'],
+        'LBP': ['£LB', '£L'],
+        'MTP': ['£MT'],
+        'MUR': ['Rs'],
+        'MXN': ['$MX', '$'],
+        'NAD': ['$NA', '$'],
+        'NIO': [, '$C'],
+        'NZD': ['$NZ', '$'],
+        'RHD': ['$RH'],
+        'RON': [, 'L'],
+        'RWF': [, 'FR'],
+        'SBD': ['$SB', '$'],
+        'SGD': ['$SG', '$'],
+        'SRD': ['$SR', '$'],
+        'TTD': ['$TT', '$'],
+        'TWD': [, 'NT$'],
+        'USD': ['$US', '$'],
+        'UYU': ['$UY', '$'],
+        'WST': ['WS$'],
+        'XCD': [, '$'],
+        'XPF': ['FCFP'],
+        'ZMW': [, 'Kw']
+    },
+    plural
 ];
 //# sourceMappingURL=fr-MU.js.map

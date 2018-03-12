@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'ms',
     [
         ['a', 'p'],
@@ -36,12 +41,19 @@ export default [
     1, [6, 0], ['d/MM/yy', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
     ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
     [
+        '{1}, {0}',
+        ,
         '{1} {0}',
-        ,
-        ,
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Ringgit Malaysia',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Ringgit Malaysia', {
+        'CAD': [, '$'],
+        'JPY': ['JP¥', '¥'],
+        'MXN': [, '$'],
+        'MYR': ['RM'],
+        'TWD': ['NT$'],
+        'USD': [, '$']
+    },
+    plural
 ];
 //# sourceMappingURL=ms.js.map

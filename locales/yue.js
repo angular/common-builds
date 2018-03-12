@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'yue',
     [
         ['上午', '下午'],
@@ -16,14 +21,16 @@ export default [
     ,
     [
         ['日', '一', '二', '三', '四', '五', '六'],
-        ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
-        ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'], ,
         ['日', '一', '二', '三', '四', '五', '六']
     ],
     ,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        [
+            '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月',
+            '12月'
+        ],
     ],
     ,
     [
@@ -39,6 +46,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', '非數值', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'HK$', '港幣',
-    function (n) { return 5; }
+    { 'AUD': ['AU$', '$'], 'KRW': ['￦', '₩'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=yue.js.map

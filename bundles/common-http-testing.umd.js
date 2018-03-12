@@ -1,17 +1,17 @@
 /**
- * @license Angular v5.0.0-beta.6-f2945c6
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-63cad11
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.Rx));
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.6-f2945c6
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-63cad11
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -19,12 +19,19 @@
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Defines a matcher for requests based on URL, method, or both.
  *
  * \@stable
  * @record
  */
-function RequestMatch() { }
+
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
@@ -32,7 +39,7 @@ function RequestMatch() { }
  * \@stable
  * @abstract
  */
-var HttpTestingController = (function () {
+var HttpTestingController = /** @class */ (function () {
     function HttpTestingController() {
     }
     return HttpTestingController;
@@ -57,11 +64,7 @@ var HttpTestingController = (function () {
  *
  * \@stable
  */
-var TestRequest = (function () {
-    /**
-     * @param {?} request
-     * @param {?} observer
-     */
+var TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
@@ -73,12 +76,21 @@ var TestRequest = (function () {
     Object.defineProperty(TestRequest.prototype, "cancelled", {
         /**
          * Whether the request was cancelled after it was sent.
+         */
+        get: /**
+         * Whether the request was cancelled after it was sent.
          * @return {?}
          */
-        get: function () { return this._cancelled; },
+        function () { return this._cancelled; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * Resolve the request by returning a body plus additional HTTP information (such as response
+     * headers) if provided.
+     *
+     * Both successful and unsuccessful responses can be delivered via `flush()`.
+     */
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response
      * headers) if provided.
@@ -88,7 +100,16 @@ var TestRequest = (function () {
      * @param {?=} opts
      * @return {?}
      */
-    TestRequest.prototype.flush = function (body, opts) {
+    TestRequest.prototype.flush = /**
+     * Resolve the request by returning a body plus additional HTTP information (such as response
+     * headers) if provided.
+     *
+     * Both successful and unsuccessful responses can be delivered via `flush()`.
+     * @param {?} body
+     * @param {?=} opts
+     * @return {?}
+     */
+    function (body, opts) {
         if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
             throw new Error("Cannot flush a cancelled request.");
@@ -120,11 +141,20 @@ var TestRequest = (function () {
     };
     /**
      * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
+     */
+    /**
+     * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
      * @param {?} error
      * @param {?=} opts
      * @return {?}
      */
-    TestRequest.prototype.error = function (error, opts) {
+    TestRequest.prototype.error = /**
+     * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
+     * @param {?} error
+     * @param {?=} opts
+     * @return {?}
+     */
+    function (error, opts) {
         if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
             throw new Error("Cannot return an error for a cancelled request.");
@@ -144,10 +174,20 @@ var TestRequest = (function () {
     /**
      * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
      * request.
+     */
+    /**
+     * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
+     * request.
      * @param {?} event
      * @return {?}
      */
-    TestRequest.prototype.event = function (event) {
+    TestRequest.prototype.event = /**
+     * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
+     * request.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
         if (this.cancelled) {
             throw new Error("Cannot send events to a cancelled request.");
         }
@@ -230,26 +270,17 @@ function _toTextBody(body) {
  * @return {?}
  */
 function _maybeConvertBody(responseType, body) {
+    if (body === null) {
+        return null;
+    }
     switch (responseType) {
         case 'arraybuffer':
-            if (body === null) {
-                return null;
-            }
             return _toArrayBufferBody(body);
         case 'blob':
-            if (body === null) {
-                return null;
-            }
             return _toBlob(body);
         case 'json':
-            if (body === null) {
-                return 'null';
-            }
             return _toJsonBody(body);
         case 'text':
-            if (body === null) {
-                return null;
-            }
             return _toTextBody(body);
         default:
             throw new Error("Unsupported responseType: " + responseType);
@@ -278,7 +309,7 @@ function _maybeConvertBody(responseType, body) {
  *
  * \@stable
  */
-var HttpClientTestingBackend = (function () {
+var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
@@ -287,10 +318,18 @@ var HttpClientTestingBackend = (function () {
     }
     /**
      * Handle an incoming request by queueing it in the list of open requests.
+     */
+    /**
+     * Handle an incoming request by queueing it in the list of open requests.
      * @param {?} req
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.handle = function (req) {
+    HttpClientTestingBackend.prototype.handle = /**
+     * Handle an incoming request by queueing it in the list of open requests.
+     * @param {?} req
+     * @return {?}
+     */
+    function (req) {
         var _this = this;
         return new rxjs_Observable.Observable(function (observer) {
             var /** @type {?} */ testReq = new TestRequest(req, observer);
@@ -304,7 +343,12 @@ var HttpClientTestingBackend = (function () {
      * @param {?} match
      * @return {?}
      */
-    HttpClientTestingBackend.prototype._match = function (match) {
+    HttpClientTestingBackend.prototype._match = /**
+     * Helper function to search for requests in the list of open requests.
+     * @param {?} match
+     * @return {?}
+     */
+    function (match) {
         if (typeof match === 'string') {
             return this.open.filter(function (testReq) { return testReq.request.urlWithParams === match; });
         }
@@ -312,17 +356,29 @@ var HttpClientTestingBackend = (function () {
             return this.open.filter(function (testReq) { return match(testReq.request); });
         }
         else {
-            return this.open.filter(function (testReq) { return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.urlWithParams === match.url); });
+            return this.open.filter(function (testReq) {
+                return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                    (!match.url || testReq.request.urlWithParams === match.url);
+            });
         }
     };
+    /**
+     * Search for requests in the list of open requests, and return all that match
+     * without asserting anything about the number of matches.
+     */
     /**
      * Search for requests in the list of open requests, and return all that match
      * without asserting anything about the number of matches.
      * @param {?} match
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.match = function (match) {
+    HttpClientTestingBackend.prototype.match = /**
+     * Search for requests in the list of open requests, and return all that match
+     * without asserting anything about the number of matches.
+     * @param {?} match
+     * @return {?}
+     */
+    function (match) {
         var _this = this;
         var /** @type {?} */ results = this._match(match);
         results.forEach(function (result) {
@@ -339,11 +395,28 @@ var HttpClientTestingBackend = (function () {
      *
      * Requests returned through this API will no longer be in the list of open requests,
      * and thus will not match twice.
+     */
+    /**
+     * Expect that a single outstanding request matches the given matcher, and return
+     * it.
+     *
+     * Requests returned through this API will no longer be in the list of open requests,
+     * and thus will not match twice.
      * @param {?} match
      * @param {?=} description
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.expectOne = function (match, description) {
+    HttpClientTestingBackend.prototype.expectOne = /**
+     * Expect that a single outstanding request matches the given matcher, and return
+     * it.
+     *
+     * Requests returned through this API will no longer be in the list of open requests,
+     * and thus will not match twice.
+     * @param {?} match
+     * @param {?=} description
+     * @return {?}
+     */
+    function (match, description) {
         description = description || this.descriptionFromMatcher(match);
         var /** @type {?} */ matches = this.match(match);
         if (matches.length > 1) {
@@ -357,11 +430,22 @@ var HttpClientTestingBackend = (function () {
     /**
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
+     */
+    /**
+     * Expect that no outstanding requests match the given matcher, and throw an error
+     * if any do.
      * @param {?} match
      * @param {?=} description
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.expectNone = function (match, description) {
+    HttpClientTestingBackend.prototype.expectNone = /**
+     * Expect that no outstanding requests match the given matcher, and throw an error
+     * if any do.
+     * @param {?} match
+     * @param {?=} description
+     * @return {?}
+     */
+    function (match, description) {
         description = description || this.descriptionFromMatcher(match);
         var /** @type {?} */ matches = this.match(match);
         if (matches.length > 0) {
@@ -370,10 +454,18 @@ var HttpClientTestingBackend = (function () {
     };
     /**
      * Validate that there are no outstanding requests.
+     */
+    /**
+     * Validate that there are no outstanding requests.
      * @param {?=} opts
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.verify = function (opts) {
+    HttpClientTestingBackend.prototype.verify = /**
+     * Validate that there are no outstanding requests.
+     * @param {?=} opts
+     * @return {?}
+     */
+    function (opts) {
         if (opts === void 0) { opts = {}; }
         var /** @type {?} */ open = this.open;
         // It's possible that some requests may be cancelled, and this is expected.
@@ -396,7 +488,11 @@ var HttpClientTestingBackend = (function () {
      * @param {?} matcher
      * @return {?}
      */
-    HttpClientTestingBackend.prototype.descriptionFromMatcher = function (matcher) {
+    HttpClientTestingBackend.prototype.descriptionFromMatcher = /**
+     * @param {?} matcher
+     * @return {?}
+     */
+    function (matcher) {
         if (typeof matcher === 'string') {
             return "Match URL: " + matcher;
         }
@@ -409,13 +505,13 @@ var HttpClientTestingBackend = (function () {
             return "Match by function: " + matcher.name;
         }
     };
+    HttpClientTestingBackend.decorators = [
+        { type: _angular_core.Injectable },
+    ];
+    /** @nocollapse */
+    HttpClientTestingBackend.ctorParameters = function () { return []; };
     return HttpClientTestingBackend;
 }());
-HttpClientTestingBackend.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-HttpClientTestingBackend.ctorParameters = function () { return []; };
 
 /**
  * @fileoverview added by tsickle
@@ -435,28 +531,27 @@ HttpClientTestingBackend.ctorParameters = function () { return []; };
  *
  * \@stable
  */
-var HttpClientTestingModule = (function () {
+var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
+    HttpClientTestingModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    imports: [
+                        _angular_common_http.HttpClientModule,
+                    ],
+                    providers: [
+                        HttpClientTestingBackend,
+                        { provide: _angular_common_http.HttpBackend, useExisting: HttpClientTestingBackend },
+                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */
+    HttpClientTestingModule.ctorParameters = function () { return []; };
     return HttpClientTestingModule;
 }());
-HttpClientTestingModule.decorators = [
-    { type: _angular_core.NgModule, args: [{
-                imports: [
-                    _angular_common_http.HttpClientModule,
-                ],
-                providers: [
-                    HttpClientTestingBackend,
-                    { provide: _angular_common_http.HttpBackend, useExisting: HttpClientTestingBackend },
-                    { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-                ],
-            },] },
-];
-/** @nocollapse */
-HttpClientTestingModule.ctorParameters = function () { return []; };
 
 exports.HttpTestingController = HttpTestingController;
-exports.RequestMatch = RequestMatch;
 exports.HttpClientTestingModule = HttpClientTestingModule;
 exports.TestRequest = TestRequest;
 exports.ɵa = HttpClientTestingBackend;

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,19 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1 || n === 11)
+        return 1;
+    if (n === 2 || n === 12)
+        return 2;
+    if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
+        return 3;
+    return 5;
+}
+exports.default = [
     'gd',
     [
         ['m', 'f'],
@@ -53,14 +64,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'Punnd Sasannach',
-    function (n) {
-        if (n === 1 || n === 11)
-            return 1;
-        if (n === 2 || n === 12)
-            return 2;
-        if (n === Math.floor(n) && (n >= 3 && n <= 10 || n >= 13 && n <= 19))
-            return 3;
-        return 5;
-    }
+    { 'JPY': ['JP¥', '¥'], 'RON': [, 'leu'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural
 ];
 //# sourceMappingURL=gd.js.map

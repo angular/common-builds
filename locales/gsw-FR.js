@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'gsw-FR', [['vorm.', 'nam.'], , ['am Vormittag', 'am Namittag']],
     [['vorm.', 'nam.'], , ['Vormittag', 'Namittag']],
     [
@@ -37,10 +44,6 @@ export default [
         ,
     ],
     ['.', '’', ';', '%', '+', '−', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euro', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euro', { 'ATS': ['öS'] }, plural
 ];
 //# sourceMappingURL=gsw-FR.js.map

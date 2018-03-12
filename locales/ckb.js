@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'ckb',
     [
         ['ب.ن', 'د.ن'],
@@ -16,15 +23,20 @@ export default [
     ,
     [
         ['ی', 'د', 'س', 'چ', 'پ', 'ھ', 'ش'],
-        ['یەکشەممە', 'دووشەممە', 'سێشەممە', 'چوارشەممە', 'پێنجشەممە', 'ھەینی', 'شەممە'], ,
+        [
+            'یەکشەممە', 'دووشەممە', 'سێشەممە', 'چوارشەممە',
+            'پێنجشەممە', 'ھەینی', 'شەممە'
+        ],
+        ,
         ['١ش', '٢ش', '٣ش', '٤ش', '٥ش', 'ھ', 'ش']
     ],
     ,
     [
         ['ک', 'ش', 'ئ', 'ن', 'ئ', 'ح', 'ت', 'ئ', 'ئ', 'ت', 'ت', 'ک'],
         [
-            'کانوونی دووەم', 'شوبات', 'ئازار', 'نیسان', 'ئایار', 'حوزەیران', 'تەمووز', 'ئاب', 'ئەیلوول',
-            'تشرینی یەکەم', 'تشرینی دووەم', 'کانونی یەکەم'
+            'کانوونی دووەم', 'شوبات', 'ئازار', 'نیسان', 'ئایار',
+            'حوزەیران', 'تەمووز', 'ئاب', 'ئەیلوول', 'تشرینی یەکەم',
+            'تشرینی دووەم', 'کانونی یەکەم'
         ],
     ],
     ,
@@ -39,11 +51,8 @@ export default [
         ,
         ,
     ],
-    ['.', ',', ';', '%', '‎+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'IQD', 'IQD', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['.', ',', ';', '%', '\u200e+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'د.ع.\u200f', 'IQD',
+    { 'IQD': ['د.ع.\u200f'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=ckb.js.map

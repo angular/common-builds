@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'ko-KP', [['AM', 'PM'], , ['오전', '오후']], ,
     [
         ['일', '월', '화', '수', '목', '금', '토'], ,
@@ -16,7 +21,10 @@ export default [
     ],
     ,
     [
-        ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        [
+            '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
+            '12월'
+        ],
         ,
     ],
     ,
@@ -30,6 +38,7 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'KPW', '조선 민주주의 인민 공화국 원',
-    function (n) { return 5; }
+    { 'AUD': ['AU$', '$'], 'JPY': ['JP¥', '¥'], 'RON': [, 'L'], 'TWD': ['NT$'], 'USD': ['US$', '$'] },
+    plural
 ];
 //# sourceMappingURL=ko-KP.js.map

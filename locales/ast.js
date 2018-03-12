@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,16 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
+exports.default = [
     'ast', [['a', 'p'], ['AM', 'PM'], ['de la mañana', 'de la tarde']],
     [['a', 'p'], ['AM', 'PM'], ['mañana', 'tarde']],
     [
@@ -41,12 +49,18 @@ export default [
         '{1} \'a\' \'les\' {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'ND', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'euro',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'euro', {
+        'BYN': [],
+        'DKK': [],
+        'HRK': [],
+        'ISK': [],
+        'NOK': [],
+        'PLN': [],
+        'RUR': [],
+        'SEK': [],
+        'THB': ['฿'],
+        'TWD': ['NT$']
+    },
+    plural
 ];
 //# sourceMappingURL=ast.js.map

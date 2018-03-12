@@ -5,7 +5,4 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/** @experimental */
-export declare const CURRENCIES: {
-    [code: string]: (string | undefined)[];
-};
+export declare type CurrenciesSymbols = [string] | [string | undefined, string];

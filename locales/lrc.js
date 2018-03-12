@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'lrc',
     [
         ['AM', 'PM'],
@@ -23,8 +28,8 @@ export default [
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         [
-            'جانڤیە', 'فئڤریە', 'مارس', 'آڤریل', 'مئی', 'جوٙأن', 'جوٙلا', 'آگوست', 'سئپتامر', 'ئوکتوڤر',
-            'نوڤامر', 'دئسامر'
+            'جانڤیە', 'فئڤریە', 'مارس', 'آڤریل', 'مئی', 'جوٙأن',
+            'جوٙلا', 'آگوست', 'سئپتامر', 'ئوکتوڤر', 'نوڤامر', 'دئسامر'
         ],
     ],
     ,
@@ -41,6 +46,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'IRR', 'IRR',
-    function (n) { return 5; }
+    { 'IQD': ['د.ع.\u200f'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=lrc.js.map

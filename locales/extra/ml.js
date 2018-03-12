@@ -1,3 +1,12 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,13 +16,27 @@
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+exports.default = [
     [
-        ['അ', 'ഉച്ച', 'പുലർച്ചെ', 'രാവിലെ', 'ഉച്ചയ്', 'ഉച്ചതി', 'വൈ', 'സന്ധ്യ', 'രാത്രി'],
-        ['അർദ്ധരാത്രി', 'ഉച്ച', 'പുലർച്ചെ', 'രാവിലെ', 'ഉച്ചയ്ക്ക്', 'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം', 'സന്ധ്യ', 'രാത്രി'],
+        [
+            'അ', 'ഉച്ച', 'പുലർച്ചെ', 'രാവിലെ',
+            'ഉച്ചയ്ക്ക്', 'ഉച്ചതിരിഞ്ഞ്',
+            'വൈകുന്നേരം', 'സന്ധ്യ', 'രാത്രി'
+        ],
+        [
+            'അർദ്ധരാത്രി', 'ഉച്ച', 'പുലർച്ചെ',
+            'രാവിലെ', 'ഉച്ചയ്ക്ക്',
+            'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം',
+            'സന്ധ്യ', 'രാത്രി'
+        ],
     ],
     [
-        ['അർദ്ധരാത്രി', 'ഉച്ച', 'പുലർച്ചെ', 'രാവിലെ', 'ഉച്ചയ്ക്ക്', 'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം', 'സന്ധ്യ', 'രാത്രി'],
+        [
+            'അർദ്ധരാത്രി', 'ഉച്ച', 'പുലർച്ചെ',
+            'രാവിലെ', 'ഉച്ചയ്ക്ക്',
+            'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം',
+            'സന്ധ്യ', 'രാത്രി'
+        ],
         ,
     ],
     [

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,21 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
+    if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
+        return 1;
+    if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
+        !(n % 100 >= 11 && n % 100 <= 19))
+        return 3;
+    if (!(f === 0))
+        return 4;
+    return 5;
+}
+exports.default = [
     'lt',
     [
         ['pr. p.', 'pop.'],
@@ -17,8 +30,8 @@ export default [
     [
         ['S', 'P', 'A', 'T', 'K', 'P', 'Š'], ['sk', 'pr', 'an', 'tr', 'kt', 'pn', 'št'],
         [
-            'sekmadienis', 'pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis', 'penktadienis',
-            'šeštadienis'
+            'sekmadienis', 'pirmadienis', 'antradienis', 'trečiadienis', 'ketvirtadienis',
+            'penktadienis', 'šeštadienis'
         ],
         ['Sk', 'Pr', 'An', 'Tr', 'Kt', 'Pn', 'Št']
     ],
@@ -54,17 +67,35 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '−', '×10^', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euras',
-    function (n) {
-        var f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
-        if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
-            return 1;
-        if (n % 10 === Math.floor(n % 10) && n % 10 >= 2 && n % 10 <= 9 &&
-            !(n % 100 >= 11 && n % 100 <= 19))
-            return 3;
-        if (!(f === 0))
-            return 4;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euras', {
+        'AUD': [, '$'],
+        'BDT': [],
+        'BRL': [, 'R$'],
+        'BYN': [, 'Br'],
+        'CAD': [, '$'],
+        'CNY': [, '¥'],
+        'GBP': [, '£'],
+        'HKD': [, '$'],
+        'ILS': [],
+        'INR': [],
+        'JPY': [, '¥'],
+        'KHR': [],
+        'KRW': [, '₩'],
+        'LAK': [],
+        'MNT': [],
+        'MXN': [, '$'],
+        'NZD': [, '$'],
+        'PLN': [, 'zl'],
+        'PYG': [, 'Gs'],
+        'RUB': [, 'rb'],
+        'TWD': [, '$'],
+        'USD': [, '$'],
+        'VND': [],
+        'XAF': [],
+        'XCD': [, '$'],
+        'XOF': [],
+        'XPF': []
+    },
+    plural
 ];
 //# sourceMappingURL=lt.js.map

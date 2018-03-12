@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,25 +6,38 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    if (n === 2)
+        return 2;
+    return 5;
+}
+exports.default = [
     'se-SE', [['i.b.', 'e.b.'], , ['iđitbeaivet', 'eahketbeaivet']],
     [['i.b.', 'e.b.'], , ['iđitbeaivi', 'eahketbeaivi']],
     [
         ['S', 'V', 'M', 'G', 'D', 'B', 'L'], ['sotn', 'vuos', 'maŋ', 'gask', 'duor', 'bear', 'láv'],
         [
-            'sotnabeaivi', 'vuossárga', 'maŋŋebárga', 'gaskavahkku', 'duorasdat', 'bearjadat', 'lávvardat'
+            'sotnabeaivi', 'vuossárga', 'maŋŋebárga', 'gaskavahkku', 'duorasdat', 'bearjadat',
+            'lávvardat'
         ],
         ['sotn', 'vuos', 'maŋ', 'gask', 'duor', 'bear', 'láv']
     ],
     ,
     [
         ['O', 'G', 'N', 'C', 'M', 'G', 'S', 'B', 'Č', 'G', 'S', 'J'],
-        ['ođđj', 'guov', 'njuk', 'cuo', 'mies', 'geas', 'suoi', 'borg', 'čakč', 'golg', 'skáb', 'juov'],
         [
-            'ođđajagemánnu', 'guovvamánnu', 'njukčamánnu', 'cuoŋománnu', 'miessemánnu', 'geassemánnu',
-            'suoidnemánnu', 'borgemánnu', 'čakčamánnu', 'golggotmánnu', 'skábmamánnu', 'juovlamánnu'
+            'ođđj', 'guov', 'njuk', 'cuo', 'mies', 'geas', 'suoi', 'borg', 'čakč', 'golg', 'skáb',
+            'juov'
+        ],
+        [
+            'ođđajagemánnu', 'guovvamánnu', 'njukčamánnu', 'cuoŋománnu', 'miessemánnu',
+            'geassemánnu', 'suoidnemánnu', 'borgemánnu', 'čakčamánnu', 'golggotmánnu',
+            'skábmamánnu', 'juovlamánnu'
         ]
     ],
     ,
@@ -36,12 +50,14 @@ export default [
         ,
     ],
     [',', ' ', ';', '%', '+', '−', '·10^', '·', '‰', '∞', '¤¤¤', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'ruoŧŧa kruvdno', function (n) {
-        if (n === 1)
-            return 1;
-        if (n === 2)
-            return 2;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr', 'ruoŧŧa kruvdno', {
+        'DKK': ['Dkr', 'kr'],
+        'JPY': ['JP¥', '¥'],
+        'NOK': ['Nkr', 'kr'],
+        'SEK': ['kr'],
+        'THB': ['฿'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=se-SE.js.map

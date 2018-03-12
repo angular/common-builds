@@ -1,21 +1,26 @@
 {
   "name": "@angular/common",
-  "version": "5.0.0-beta.6-f2945c6",
+  "version": "6.0.0-beta.7-63cad11",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
-  "module": "./esm5/index.js",
-  "es2015": "./esm15/index.js",
-  "typings": "./index.d.ts",
+  "module": "./esm5/common.js",
+  "es2015": "./esm2015/common.js",
+  "typings": "./common.d.ts",
   "author": "angular",
   "license": "MIT",
   "dependencies": {
-    "tslib": "^1.7.1"
+    "tslib": "^1.9.0"
   },
+  "locales": "locales",
   "peerDependencies": {
-    "@angular/core": "5.0.0-beta.6-f2945c6"
+    "rxjs": "^5.5.0",
+    "@angular/core": "6.0.0-beta.7-63cad11"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/angular/angular.git"
+  },
+  "ng-update": {
+    "packageGroup": ["/core", "/compiler", "/common", "/animations", "/platform-browser", "/platform-browser-dynamic", "/forms", "/http", "/platform-server", "/platform-webworker", "/platform-webworker-dynamic", "/upgrade", "/router", "/compiler-cli", "/language-service", "/benchpress", "/service-worker"]
   }
 }

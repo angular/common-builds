@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    if (n === 1)
+        return 1;
+    return 5;
+}
+exports.default = [
     'tr-CY',
     [
         ['öö', 'ös'],
@@ -27,8 +34,8 @@ export default [
         ['O', 'Ş', 'M', 'N', 'M', 'H', 'T', 'A', 'E', 'E', 'K', 'A'],
         ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
         [
-            'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim',
-            'Kasım', 'Aralık'
+            'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül',
+            'Ekim', 'Kasım', 'Aralık'
         ]
     ],
     ,
@@ -41,10 +48,7 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '%#,##0', '¤#,##0.00', '#E0'], '€', 'Euro', function (n) {
-        if (n === 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '%#,##0', '¤#,##0.00', '#E0'], '€', 'Euro',
+    { 'AUD': ['AU$', '$'], 'RON': [, 'L'], 'THB': ['฿'], 'TRY': ['₺'], 'TWD': ['NT$'] }, plural
 ];
 //# sourceMappingURL=tr-CY.js.map

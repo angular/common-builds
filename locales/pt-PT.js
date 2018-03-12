@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,10 +6,18 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
-    'pt-PT', [['a.m.', 'p.m.'], , ['da manhã', 'da tarde']], [['a.m.', 'p.m.'], , ['manhã', 'tarde']],
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (i === Math.floor(i) && i >= 0 && i <= 1)
+        return 1;
+    return 5;
+}
+exports.default = [
+    'pt-PT', [['a.m.', 'p.m.'], , ['da manhã', 'da tarde']],
+    [['a.m.', 'p.m.'], , ['manhã', 'tarde']],
     [
         ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
         ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'],
@@ -37,12 +46,15 @@ export default [
         '{1} \'às\' {0}',
     ],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'Euro',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === Math.floor(i) && i >= 0 && i <= 1)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'euro', {
+        'AUD': ['AU$', '$'],
+        'JPY': ['JP¥', '¥'],
+        'PTE': ['​'],
+        'RON': [, 'L'],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$']
+    },
+    plural
 ];
 //# sourceMappingURL=pt-PT.js.map

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,13 +6,20 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
+exports.default = [
     'de-IT',
     [
         ['vm.', 'nm.'],
-        ['vorm.', 'nachm.'],
+        ['AM', 'PM'],
     ],
     [
         ['vorm.', 'nachm.'],
@@ -29,18 +37,21 @@ export default [
     ],
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-        ['Jän.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dez.'],
         [
-            'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober',
-            'November', 'Dezember'
+            'Jän.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.',
+            'Dez.'
+        ],
+        [
+            'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September',
+            'Oktober', 'November', 'Dezember'
         ]
     ],
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jän', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
         [
-            'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober',
-            'November', 'Dezember'
+            'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September',
+            'Oktober', 'November', 'Dezember'
         ]
     ],
     [
@@ -55,12 +66,23 @@ export default [
         '{1} \'um\' {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '·', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euro',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euro', {
+        'ATS': ['öS'],
+        'AUD': ['AU$', '$'],
+        'BGM': ['BGK'],
+        'BGO': ['BGJ'],
+        'CUC': [, 'Cub$'],
+        'DEM': ['DM'],
+        'FKP': [, 'Fl£'],
+        'GNF': [, 'F.G.'],
+        'KMF': [, 'FC'],
+        'RON': [, 'L'],
+        'RWF': [, 'F.Rw'],
+        'SYP': [],
+        'THB': ['฿'],
+        'TWD': ['NT$'],
+        'ZMW': [, 'K']
+    },
+    plural
 ];
 //# sourceMappingURL=de-IT.js.map

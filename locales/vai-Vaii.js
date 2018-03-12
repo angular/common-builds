@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'vai-Vaii',
     [
         ['AM', 'PM'],
@@ -16,13 +21,23 @@ export default [
     ,
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        ['ꕞꕌꔵ', 'ꗳꗡꘉ', 'ꕚꕞꕚ', 'ꕉꕞꕒ', 'ꕉꔤꕆꕢ', 'ꕉꔤꕀꕮ', 'ꔻꔬꔳ'],
+        [
+            'ꕞꕌꔵ', 'ꗳꗡꘉ', 'ꕚꕞꕚ', 'ꕉꕞꕒ', 'ꕉꔤꕆꕢ', 'ꕉꔤꕀꕮ',
+            'ꔻꔬꔳ'
+        ],
         ,
     ],
     ,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        ['ꖨꕪꖃ ꔞꕮ', 'ꕒꕡꖝꖕ', 'ꕾꖺ', 'ꖢꖕ', 'ꖑꕱ', '6', '7', 'ꗛꔕ', 'ꕢꕌ', 'ꕭꖃ', 'ꔞꘋꕔꕿ ꕸꖃꗏ', 'ꖨꕪꕱ ꗏꕮ'],
+        [
+            'ꖨꕪꖃ', 'ꕒꕡ', 'ꕾꖺ', 'ꖢꖕ', 'ꖑꕱ', 'ꖱꘋ', 'ꖱꕞ', 'ꗛꔕ', 'ꕢꕌ',
+            'ꕭꖃ', 'ꔞꘋ', 'ꖨꕪꕱ'
+        ],
+        [
+            'ꖨꕪꖃ ꔞꕮ', 'ꕒꕡꖝꖕ', 'ꕾꖺ', 'ꖢꖕ', 'ꖑꕱ', 'ꖱꘋ', 'ꖱꕞꔤ',
+            'ꗛꔕ', 'ꕢꕌ', 'ꕭꖃ', 'ꔞꘋꕔꕿ ꕸꖃꗏ', 'ꖨꕪꕱ ꗏꕮ'
+        ]
     ],
     ,
     [
@@ -38,6 +53,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'ꕞꔤꔫꕩ ꕜꕞꕌ',
-    function (n) { return 5; }
+    { 'JPY': ['JP¥', '¥'], 'LRD': ['$'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=vai-Vaii.js.map

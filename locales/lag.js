@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,18 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n));
+    if (n === 0)
+        return 0;
+    if ((i === 0 || i === 1) && !(n === 0))
+        return 1;
+    return 5;
+}
+exports.default = [
     'lag',
     [
         ['TOO', 'MUU'],
@@ -15,7 +25,8 @@ export default [
     ],
     ,
     [
-        ['P', 'T', 'E', 'O', 'A', 'I', 'M'], ['Píili', 'Táatu', 'Íne', 'Táano', 'Alh', 'Ijm', 'Móosi'],
+        ['P', 'T', 'E', 'O', 'A', 'I', 'M'],
+        ['Píili', 'Táatu', 'Íne', 'Táano', 'Alh', 'Ijm', 'Móosi'],
         ['Jumapíiri', 'Jumatátu', 'Jumaíne', 'Jumatáano', 'Alamíisi', 'Ijumáa', 'Jumamóosi'],
         ['Píili', 'Táatu', 'Íne', 'Táano', 'Alh', 'Ijm', 'Móosi']
     ],
@@ -23,12 +34,12 @@ export default [
     [
         ['F', 'N', 'K', 'I', 'I', 'I', 'M', 'V', 'S', 'I', 'S', 'S'],
         [
-            'Fúngatɨ', 'Naanɨ', 'Keenda', 'Ikúmi', 'Inyambala', 'Idwaata', 'Mʉʉnchɨ', 'Vɨɨrɨ', 'Saatʉ',
-            'Inyi', 'Saano', 'Sasatʉ'
+            'Fúngatɨ', 'Naanɨ', 'Keenda', 'Ikúmi', 'Inyambala', 'Idwaata', 'Mʉʉnchɨ', 'Vɨɨrɨ',
+            'Saatʉ', 'Inyi', 'Saano', 'Sasatʉ'
         ],
         [
-            'Kʉfúngatɨ', 'Kʉnaanɨ', 'Kʉkeenda', 'Kwiikumi', 'Kwiinyambála', 'Kwiidwaata', 'Kʉmʉʉnchɨ',
-            'Kʉvɨɨrɨ', 'Kʉsaatʉ', 'Kwiinyi', 'Kʉsaano', 'Kʉsasatʉ'
+            'Kʉfúngatɨ', 'Kʉnaanɨ', 'Kʉkeenda', 'Kwiikumi', 'Kwiinyambála', 'Kwiidwaata',
+            'Kʉmʉʉnchɨ', 'Kʉvɨɨrɨ', 'Kʉsaatʉ', 'Kwiinyi', 'Kʉsaano', 'Kʉsasatʉ'
         ]
     ],
     ,
@@ -42,13 +53,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'TSh', 'Shilíingi ya Taansanía',
-    function (n) {
-        var i = Math.floor(Math.abs(n));
-        if (n === 0)
-            return 0;
-        if ((i === 0 || i === 1) && !(n === 0))
-            return 1;
-        return 5;
-    }
+    { 'JPY': ['JP¥', '¥'], 'TZS': ['TSh'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=lag.js.map

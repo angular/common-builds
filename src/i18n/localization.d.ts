@@ -6,10 +6,11 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { InjectionToken } from '@angular/core';
+import { Plural } from './locale_data_api';
 /**
  * @deprecated from v5
  */
-export declare const USE_V4_PLURALS: InjectionToken<boolean>;
+export declare const DEPRECATED_PLURAL_FN: InjectionToken<boolean>;
 /**
  * @experimental
  */
@@ -17,13 +18,29 @@ export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any, locale?: string): string;
 }
 /**
+ * Returns the plural category for a given value.
+ * - "=value" when the case exists,
+ * - the plural category otherwise
+ */
+export declare function getPluralCategory(value: number, cases: string[], ngLocalization: NgLocalization, locale?: string): string;
+/**
  * Returns the plural case based on the locale
  *
  * @experimental
  */
 export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
-    protected useV4Plurals: boolean;
-    constructor(locale: string, useV4Plurals?: boolean);
+    /** @deprecated from v5 */
+    protected deprecatedPluralFn: ((locale: string, value: string | number) => Plural) | null | undefined;
+    constructor(locale: string, 
+        /** @deprecated from v5 */
+        deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
     getPluralCategory(value: any, locale?: string): string;
 }
+/**
+ * Returns the plural case based on the locale
+ *
+ * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
+ * @experimental
+ */
+export declare function getPluralCase(locale: string, nLike: number | string): Plural;

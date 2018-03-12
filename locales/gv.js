@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,23 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (v === 0 && i % 10 === 1)
+        return 1;
+    if (v === 0 && i % 10 === 2)
+        return 2;
+    if (v === 0 &&
+        (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
+        return 3;
+    if (!(v === 0))
+        return 4;
+    return 5;
+}
+exports.default = [
     'gv',
     [
         ['a.m.', 'p.m.'],
@@ -45,18 +60,6 @@ export default [
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '£', 'GBP',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (v === 0 && i % 10 === 1)
-            return 1;
-        if (v === 0 && i % 10 === 2)
-            return 2;
-        if (v === 0 &&
-            (i % 100 === 0 || i % 100 === 20 || i % 100 === 40 || i % 100 === 60 || i % 100 === 80))
-            return 3;
-        if (!(v === 0))
-            return 4;
-        return 5;
-    }
+    { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural
 ];
 //# sourceMappingURL=gv.js.map

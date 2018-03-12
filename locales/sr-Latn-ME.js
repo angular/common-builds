@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,13 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    return 5;
+}
+exports.default = [
     'sr-Latn-ME',
     [
         ['a', 'p'],
@@ -38,7 +43,17 @@ export default [
         ,
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'Evro',
-    function (n) { return 5; }
+    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'Evro', {
+        'AUD': [, '$'],
+        'BAM': ['KM'],
+        'BYN': [, 'r.'],
+        'GEL': [, 'ლ'],
+        'KRW': [, '₩'],
+        'NZD': [, '$'],
+        'TWD': ['NT$'],
+        'USD': ['US$', '$'],
+        'VND': [, '₫']
+    },
+    plural
 ];
 //# sourceMappingURL=sr-Latn-ME.js.map

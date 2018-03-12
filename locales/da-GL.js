@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -5,9 +6,16 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+function plural(n) {
+    var i = Math.floor(Math.abs(n)), t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+    if (n === 1 || !(t === 0) && (i === 0 || i === 1))
+        return 1;
+    return 5;
+}
+exports.default = [
     'da-GL',
     [
         ['a', 'p'],
@@ -41,19 +49,24 @@ export default [
         ['f.Kr.', 'e.Kr.'],
     ],
     1, [6, 0], ['dd/MM/y', 'd. MMM y', 'd. MMMM y', 'EEEE \'den\' d. MMMM y'],
-    ['h.mm a', 'h.mm.ss a', 'h.mm.ss a z', 'h.mm.ss a zzzz'],
+    ['HH.mm', 'HH.mm.ss', 'HH.mm.ss z', 'HH.mm.ss zzzz'],
     [
         '{1} {0}',
         ,
         '{1} \'kl\'. {0}',
     ],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', '.'],
-    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr.', 'dansk krone',
-    function (n) {
-        var i = Math.floor(Math.abs(n)), t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-        if (n === 1 || !(t === 0) && (i === 0 || i === 1))
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'kr.', 'dansk krone', {
+        'AUD': ['AU$', '$'],
+        'DKK': ['kr.'],
+        'ISK': [, 'kr.'],
+        'JPY': ['JP¥', '¥'],
+        'NOK': [, 'kr.'],
+        'RON': [, 'L'],
+        'SEK': [, 'kr.'],
+        'THB': ['฿'],
+        'TWD': ['NT$']
+    },
+    plural
 ];
 //# sourceMappingURL=da-GL.js.map

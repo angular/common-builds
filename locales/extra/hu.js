@@ -1,3 +1,12 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,15 +16,12 @@
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-export default [
+exports.default = [
     [
-        ['éjfél', 'dél', 'reggel', 'reggel', 'délután', 'délután', 'éjszaka', 'éjszaka'],
-        ['éjfél', 'dél', 'reggel', 'reggel', 'délután', 'este', 'éjszaka', 'éjszaka'],
+        ['éjfél', 'dél', 'reggel', 'de.', 'du.', 'este', 'éjjel', 'hajnal'], ,
+        ['éjfél', 'dél', 'reggel', 'délelőtt', 'délután', 'este', 'éjjel', 'hajnal']
     ],
-    [
-        ['éjfél', 'dél', 'reggel', 'délelőtt', 'délután', 'este', 'éjjel', 'hajnal'],
-        ,
-    ],
+    ,
     [
         '00:00', '12:00', ['06:00', '09:00'], ['09:00', '12:00'], ['12:00', '18:00'],
         ['18:00', '21:00'], ['21:00', '04:00'], ['04:00', '06:00']
