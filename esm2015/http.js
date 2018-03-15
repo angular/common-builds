@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -606,6 +606,7 @@ function isFormData(value) {
  * method should be used.
  *
  * \@stable
+ * @template T
  */
 class HttpRequest {
     /**
@@ -900,6 +901,7 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * \@stable
  * @record
+ * @template T
  */
 
 /**
@@ -982,6 +984,7 @@ class HttpHeaderResponse extends HttpResponseBase {
  * stream.
  *
  * \@stable
+ * @template T
  */
 class HttpResponse extends HttpResponseBase {
     /**

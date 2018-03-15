@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3681,6 +3681,7 @@ var NgComponentOutlet = /** @class */ (function () {
  */
 /**
  * \@stable
+ * @template T
  */
 var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
@@ -3792,6 +3793,7 @@ var NgForOfContext = /** @class */ (function () {
  * example.
  *
  * \@stable
+ * @template T
  */
 var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
@@ -3942,6 +3944,9 @@ var NgForOf = /** @class */ (function () {
     };
     return NgForOf;
 }());
+/**
+ * @template T
+ */
 var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
@@ -6770,7 +6775,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('6.0.0-beta.7-88b3198');
+var VERSION = new _angular_core.Version('6.0.0-beta.7-a011654');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.formatDate = formatDate;

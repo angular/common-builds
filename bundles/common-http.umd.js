@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -790,6 +790,7 @@ function isFormData(value) {
  * method should be used.
  *
  * \@stable
+ * @template T
  */
 var HttpRequest = /** @class */ (function () {
     function HttpRequest(method, url, third, fourth) {
@@ -1106,6 +1107,7 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * \@stable
  * @record
+ * @template T
  */
 
 /**
@@ -1202,6 +1204,7 @@ var HttpHeaderResponse = /** @class */ (function (_super) {
  * stream.
  *
  * \@stable
+ * @template T
  */
 var HttpResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpResponse, _super);

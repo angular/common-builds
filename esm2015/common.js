@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-beta.7-88b3198
+ * @license Angular v6.0.0-beta.7-a011654
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3386,6 +3386,7 @@ NgComponentOutlet.propDecorators = {
  */
 /**
  * \@stable
+ * @template T
  */
 class NgForOfContext {
     /**
@@ -3486,6 +3487,7 @@ class NgForOfContext {
  * example.
  *
  * \@stable
+ * @template T
  */
 class NgForOf {
     /**
@@ -3615,6 +3617,9 @@ NgForOf.propDecorators = {
     "ngForTrackBy": [{ type: Input },],
     "ngForTemplate": [{ type: Input },],
 };
+/**
+ * @template T
+ */
 class RecordViewTuple {
     /**
      * @param {?} record
@@ -6183,7 +6188,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-beta.7-88b3198');
+const VERSION = new Version('6.0.0-beta.7-a011654');
 
 /**
  * @fileoverview added by tsickle
