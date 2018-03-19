@@ -1,7 +1,9 @@
+import { ISubscription } from 'rxjs/Subscription';
 import { LocationStrategy } from './location_strategy';
 /** @experimental */
 export interface PopStateEvent {
     pop?: boolean;
+    state?: any;
     type?: string;
     url?: string;
 }
@@ -52,12 +54,12 @@ export declare class Location {
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
      */
-    go(path: string, query?: string): void;
+    go(path: string, query?: string, state?: any): void;
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      */
-    replaceState(path: string, query?: string): void;
+    replaceState(path: string, query?: string, state?: any): void;
     /**
      * Navigates forward in the platform's history.
      */
@@ -69,7 +71,7 @@ export declare class Location {
     /**
      * Subscribe to the platform's `popState` events.
      */
-    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): Object;
+    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): ISubscription;
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.

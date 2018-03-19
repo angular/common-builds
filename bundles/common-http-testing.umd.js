@@ -1,22 +1,29 @@
 /**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-a7d6efe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.Rx));
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v5.0.0-beta.6-3f585ba
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-beta.7-a7d6efe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Defines a matcher for requests based on URL, method, or both.
@@ -32,7 +39,7 @@
  * \@stable
  * @abstract
  */
-var HttpTestingController = (function () {
+var HttpTestingController = /** @class */ (function () {
     function HttpTestingController() {
     }
     return HttpTestingController;
@@ -57,7 +64,7 @@ var HttpTestingController = (function () {
  *
  * \@stable
  */
-var TestRequest = (function () {
+var TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
@@ -263,26 +270,17 @@ function _toTextBody(body) {
  * @return {?}
  */
 function _maybeConvertBody(responseType, body) {
+    if (body === null) {
+        return null;
+    }
     switch (responseType) {
         case 'arraybuffer':
-            if (body === null) {
-                return null;
-            }
             return _toArrayBufferBody(body);
         case 'blob':
-            if (body === null) {
-                return null;
-            }
             return _toBlob(body);
         case 'json':
-            if (body === null) {
-                return 'null';
-            }
             return _toJsonBody(body);
         case 'text':
-            if (body === null) {
-                return null;
-            }
             return _toTextBody(body);
         default:
             throw new Error("Unsupported responseType: " + responseType);
@@ -311,7 +309,7 @@ function _maybeConvertBody(responseType, body) {
  *
  * \@stable
  */
-var HttpClientTestingBackend = (function () {
+var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
@@ -533,7 +531,7 @@ var HttpClientTestingBackend = (function () {
  *
  * \@stable
  */
-var HttpClientTestingModule = (function () {
+var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
     HttpClientTestingModule.decorators = [
