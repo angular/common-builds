@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.9-7d9de17
+ * @license Angular v5.2.9-aca4735
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2393,6 +2393,7 @@ var NgComponentOutlet = /** @class */ (function () {
  */
 /**
  * \@stable
+ * @template T
  */
 var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
@@ -2504,6 +2505,7 @@ var NgForOfContext = /** @class */ (function () {
  * example.
  *
  * \@stable
+ * @template T
  */
 var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
@@ -2654,6 +2656,9 @@ var NgForOf = /** @class */ (function () {
     };
     return NgForOf;
 }());
+/**
+ * @template T
+ */
 var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
@@ -6525,7 +6530,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.9-7d9de17');
+var VERSION = new Version('5.2.9-aca4735');
 
 /**
  * @fileoverview added by tsickle

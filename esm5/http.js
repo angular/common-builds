@@ -1,5 +1,5 @@
 /**
- * @license Angular v5.2.9-7d9de17
+ * @license Angular v5.2.9-aca4735
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -788,6 +788,7 @@ function isFormData(value) {
  * method should be used.
  *
  * \@stable
+ * @template T
  */
 var HttpRequest = /** @class */ (function () {
     function HttpRequest(method, url, third, fourth) {
@@ -1104,6 +1105,7 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * \@stable
  * @record
+ * @template T
  */
 
 /**
@@ -1200,6 +1202,7 @@ var HttpHeaderResponse = /** @class */ (function (_super) {
  * stream.
  *
  * \@stable
+ * @template T
  */
 var HttpResponse = /** @class */ (function (_super) {
     __extends(HttpResponse, _super);
