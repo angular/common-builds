@@ -1,16 +1,13 @@
 /**
- * @license Angular v6.0.0-beta.7-2b3de63
+ * @license Angular v6.0.0-beta.7-4648597
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 import { Inject, Injectable, InjectionToken, Injector, NgModule, PLATFORM_ID } from '@angular/core';
-import { of } from 'rxjs/observable/of';
-import { concatMap } from 'rxjs/operator/concatMap';
-import { filter } from 'rxjs/operator/filter';
-import { map } from 'rxjs/operator/map';
+import { Observable, of } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs/operators';
 import { __extends } from 'tslib';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
 
 /**
  * @fileoverview added by tsickle
@@ -1466,7 +1463,7 @@ var HttpClient = /** @class */ (function () {
         // includes all interceptors) inside a concatMap(). This way, the handler runs
         // inside an Observable chain, which causes interceptors to be re-run on every
         // subscription (this also makes retries re-run the handler, including interceptors).
-        var /** @type {?} */ events$ = concatMap.call(of(req), function (req) { return _this.handler.handle(req); });
+        var /** @type {?} */ events$ = of(req).pipe(concatMap(function (req) { return _this.handler.handle(req); }));
         // If coming via the API signature which accepts a previously constructed HttpRequest,
         // the only option is to get the event stream. Otherwise, return the event stream if
         // that is what was requested.
@@ -1476,7 +1473,7 @@ var HttpClient = /** @class */ (function () {
         // The requested stream contains either the full response or the body. In either
         // case, the first step is to filter the event stream to extract a stream of
         // responses(s).
-        var /** @type {?} */ res$ = filter.call(events$, function (event) { return event instanceof HttpResponse; });
+        var /** @type {?} */ res$ = /** @type {?} */ (events$.pipe(filter(function (event) { return event instanceof HttpResponse; })));
         // Decide which stream to return.
         switch (options.observe || 'body') {
             case 'body':
@@ -1487,33 +1484,33 @@ var HttpClient = /** @class */ (function () {
                 // requested type.
                 switch (req.responseType) {
                     case 'arraybuffer':
-                        return map.call(res$, function (res) {
+                        return res$.pipe(map(function (res) {
                             // Validate that the body is an ArrayBuffer.
                             if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
                                 throw new Error('Response is not an ArrayBuffer.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'blob':
-                        return map.call(res$, function (res) {
+                        return res$.pipe(map(function (res) {
                             // Validate that the body is a Blob.
                             if (res.body !== null && !(res.body instanceof Blob)) {
                                 throw new Error('Response is not a Blob.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'text':
-                        return map.call(res$, function (res) {
+                        return res$.pipe(map(function (res) {
                             // Validate that the body is a string.
                             if (res.body !== null && typeof res.body !== 'string') {
                                 throw new Error('Response is not a string.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'json':
                     default:
                         // No validation needed for JSON responses, as they can be of any type.
-                        return map.call(res$, function (res) { return res.body; });
+                        return res$.pipe(map(function (res) { return res.body; }));
                 }
             case 'response':
                 // The response stream was requested directly, so return it.

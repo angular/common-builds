@@ -10,7 +10,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpHeaders } from './headers';
 import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse } from './response';
 const /** @type {?} */ XSSI_PREFIX = /^\)\]\}',?\n/;

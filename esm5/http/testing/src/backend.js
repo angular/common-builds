@@ -11,7 +11,7 @@
  */
 import { HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TestRequest } from './request';
 /**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
