@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { HttpBackend, HttpEvent, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpTestingController, RequestMatch } from './api';
 import { TestRequest } from './request';
 /**

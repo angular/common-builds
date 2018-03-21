@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observer } from 'rxjs/Observer';
+import { Observer } from 'rxjs';
 /**
  * A mock requests that was received and is ready to be answered.
  *

@@ -1,16 +1,16 @@
 /**
- * @license Angular v6.0.0-beta.7-63cad11
+ * @license Angular v6.0.0-rc.0-0f31b2d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/observable/of'), require('rxjs/operator/concatMap'), require('rxjs/operator/filter'), require('rxjs/operator/map'), require('tslib'), require('@angular/common'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs/observable/of', 'rxjs/operator/concatMap', 'rxjs/operator/filter', 'rxjs/operator/map', 'tslib', '@angular/common', 'rxjs/Observable'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}),global.ng.core,global.Rx.Observable,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.Rx.Observable.prototype,global.tslib,global.ng.common,global.Rx));
-}(this, (function (exports,_angular_core,rxjs_observable_of,rxjs_operator_concatMap,rxjs_operator_filter,rxjs_operator_map,tslib,_angular_common,rxjs_Observable) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('tslib'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', 'tslib', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}),global.ng.core,global.rxjs,global.rxjs.operators,global.tslib,global.ng.common));
+}(this, (function (exports,_angular_core,rxjs,rxjs_operators,tslib,_angular_common) { 'use strict';
 
 /**
- * @license Angular v6.0.0-beta.7-63cad11
+ * @license Angular v6.0.0-rc.0-0f31b2d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -790,6 +790,7 @@ function isFormData(value) {
  * method should be used.
  *
  * \@stable
+ * @template T
  */
 var HttpRequest = /** @class */ (function () {
     function HttpRequest(method, url, third, fourth) {
@@ -1106,6 +1107,7 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * \@stable
  * @record
+ * @template T
  */
 
 /**
@@ -1202,6 +1204,7 @@ var HttpHeaderResponse = /** @class */ (function (_super) {
  * stream.
  *
  * \@stable
+ * @template T
  */
 var HttpResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpResponse, _super);
@@ -1465,7 +1468,7 @@ var HttpClient = /** @class */ (function () {
         // includes all interceptors) inside a concatMap(). This way, the handler runs
         // inside an Observable chain, which causes interceptors to be re-run on every
         // subscription (this also makes retries re-run the handler, including interceptors).
-        var /** @type {?} */ events$ = rxjs_operator_concatMap.concatMap.call(rxjs_observable_of.of(req), function (req) { return _this.handler.handle(req); });
+        var /** @type {?} */ events$ = rxjs.of(req).pipe(rxjs_operators.concatMap(function (req) { return _this.handler.handle(req); }));
         // If coming via the API signature which accepts a previously constructed HttpRequest,
         // the only option is to get the event stream. Otherwise, return the event stream if
         // that is what was requested.
@@ -1475,7 +1478,7 @@ var HttpClient = /** @class */ (function () {
         // The requested stream contains either the full response or the body. In either
         // case, the first step is to filter the event stream to extract a stream of
         // responses(s).
-        var /** @type {?} */ res$ = rxjs_operator_filter.filter.call(events$, function (event) { return event instanceof HttpResponse; });
+        var /** @type {?} */ res$ = /** @type {?} */ (events$.pipe(rxjs_operators.filter(function (event) { return event instanceof HttpResponse; })));
         // Decide which stream to return.
         switch (options.observe || 'body') {
             case 'body':
@@ -1486,33 +1489,33 @@ var HttpClient = /** @class */ (function () {
                 // requested type.
                 switch (req.responseType) {
                     case 'arraybuffer':
-                        return rxjs_operator_map.map.call(res$, function (res) {
+                        return res$.pipe(rxjs_operators.map(function (res) {
                             // Validate that the body is an ArrayBuffer.
                             if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
                                 throw new Error('Response is not an ArrayBuffer.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'blob':
-                        return rxjs_operator_map.map.call(res$, function (res) {
+                        return res$.pipe(rxjs_operators.map(function (res) {
                             // Validate that the body is a Blob.
                             if (res.body !== null && !(res.body instanceof Blob)) {
                                 throw new Error('Response is not a Blob.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'text':
-                        return rxjs_operator_map.map.call(res$, function (res) {
+                        return res$.pipe(rxjs_operators.map(function (res) {
                             // Validate that the body is a string.
                             if (res.body !== null && typeof res.body !== 'string') {
                                 throw new Error('Response is not a string.');
                             }
                             return res.body;
-                        });
+                        }));
                     case 'json':
                     default:
                         // No validation needed for JSON responses, as they can be of any type.
-                        return rxjs_operator_map.map.call(res$, function (res) { return res.body; });
+                        return res$.pipe(rxjs_operators.map(function (res) { return res.body; }));
                 }
             case 'response':
                 // The response stream was requested directly, so return it.
@@ -1910,7 +1913,7 @@ var JsonpClientBackend = /** @class */ (function () {
             throw new Error(JSONP_ERR_WRONG_RESPONSE_TYPE);
         }
         // Everything else happens inside the Observable boundary.
-        return new rxjs_Observable.Observable(function (observer) {
+        return new rxjs.Observable(function (observer) {
             // The first step to make a request is to generate the callback name, and replace the
             // callback placeholder in the URL with the name. Care has to be taken here to ensure
             // a trailing &, if matched, gets inserted back into the URL in the correct place.
@@ -2163,7 +2166,7 @@ var HttpXhrBackend = /** @class */ (function () {
             throw new Error("Attempted to construct Jsonp request without JsonpClientModule installed.");
         }
         // Everything happens on Observable subscription.
-        return new rxjs_Observable.Observable(function (observer) {
+        return new rxjs.Observable(function (observer) {
             // Start by setting up the XHR object with request method, URL, and withCredentials flag.
             var /** @type {?} */ xhr = _this.xhrFactory.build();
             xhr.open(req.method, req.urlWithParams);

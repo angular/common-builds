@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 /**
  * @ngModule CommonModule
  * @whatItDoes Unwraps a value from an asynchronous primitive.

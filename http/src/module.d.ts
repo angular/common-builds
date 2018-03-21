@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injector, ModuleWithProviders } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
 import { HttpRequest } from './request';
