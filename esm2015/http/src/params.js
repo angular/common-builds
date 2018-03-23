@@ -107,29 +107,6 @@ function Update_tsickle_Closure_declarations() {
     Update.prototype.op;
 }
 /**
- * Options used to construct an `HttpParams` instance.
- * @record
- */
-export function HttpParamsOptions() { }
-function HttpParamsOptions_tsickle_Closure_declarations() {
-    /**
-     * String representation of the HTTP params in URL-query-string format. Mutually exclusive with
-     * `fromObject`.
-     * @type {?|undefined}
-     */
-    HttpParamsOptions.prototype.fromString;
-    /**
-     * Object map of the HTTP params. Mutally exclusive with `fromString`.
-     * @type {?|undefined}
-     */
-    HttpParamsOptions.prototype.fromObject;
-    /**
-     * Encoding codec used to parse and serialize the params.
-     * @type {?|undefined}
-     */
-    HttpParamsOptions.prototype.encoder;
-}
-/**
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
  *
@@ -240,7 +217,7 @@ export class HttpParams {
      * @return {?}
      */
     clone(update) {
-        const /** @type {?} */ clone = new HttpParams(/** @type {?} */ ({ encoder: this.encoder }));
+        const /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
         clone.cloneFrom = this.cloneFrom || this;
         clone.updates = (this.updates || []).concat([update]);
         return clone;
