@@ -114,7 +114,7 @@ export class HttpClient {
                     params = options.params;
                 }
                 else {
-                    params = new HttpParams({ fromObject: options.params });
+                    params = new HttpParams(/** @type {?} */ ({ fromObject: options.params }));
                 }
             }
             // Construct the request.

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.0-7b7757d
+ * @license Angular v6.0.0-rc.0-bf6a416
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -475,6 +475,11 @@ function standardEncoding(v) {
         .replace(/%2F/gi, '/');
 }
 /**
+ * Options used to construct an `HttpParams` instance.
+ * @record
+ */
+
+/**
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
  *
@@ -660,7 +665,7 @@ var HttpParams = /** @class */ (function () {
      * @return {?}
      */
     function (update) {
-        var /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
+        var /** @type {?} */ clone = new HttpParams(/** @type {?} */ ({ encoder: this.encoder }));
         clone.cloneFrom = this.cloneFrom || this;
         clone.updates = (this.updates || []).concat([update]);
         return clone;
@@ -1441,7 +1446,7 @@ var HttpClient = /** @class */ (function () {
                     params = options.params;
                 }
                 else {
-                    params = new HttpParams({ fromObject: options.params });
+                    params = new HttpParams(/** @type {?} */ ({ fromObject: options.params }));
                 }
             }
             // Construct the request.
