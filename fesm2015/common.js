@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.0-910a16a
+ * @license Angular v6.0.0-rc.0-0ebdb3d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -293,7 +293,7 @@ class Location {
     }
     /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
@@ -6192,7 +6192,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-rc.0-910a16a');
+const VERSION = new Version('6.0.0-rc.0-0ebdb3d');
 
 /**
  * @fileoverview added by tsickle
