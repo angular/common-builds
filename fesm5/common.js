@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.0-f739f75
+ * @license Angular v6.0.0-rc.0-ab348ee
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -408,14 +408,14 @@ var Location = /** @class */ (function () {
     };
     /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
     Location.stripTrailingSlash = /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
@@ -6737,7 +6737,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('6.0.0-rc.0-f739f75');
+var VERSION = new Version('6.0.0-rc.0-ab348ee');
 
 /**
  * @fileoverview added by tsickle
