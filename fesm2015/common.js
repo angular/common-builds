@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.1-5c8340a
+ * @license Angular v6.0.0-rc.1-f99cb5c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3116,17 +3116,18 @@ class NgClass {
      * @return {?}
      */
     set klass(v) {
-        this._applyInitialClasses(true);
+        this._removeClasses(this._initialClasses);
         this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
-        this._applyInitialClasses(false);
-        this._applyClasses(this._rawClass, false);
+        this._applyClasses(this._initialClasses);
+        this._applyClasses(this._rawClass);
     }
     /**
      * @param {?} v
      * @return {?}
      */
     set ngClass(v) {
-        this._cleanupClasses(this._rawClass);
+        this._removeClasses(this._rawClass);
+        this._applyClasses(this._initialClasses);
         this._iterableDiffer = null;
         this._keyValueDiffer = null;
         this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
@@ -3157,14 +3158,6 @@ class NgClass {
         }
     }
     /**
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _cleanupClasses(rawClassVal) {
-        this._applyClasses(rawClassVal, true);
-        this._applyInitialClasses(false);
-    }
-    /**
      * @param {?} changes
      * @return {?}
      */
@@ -3193,27 +3186,38 @@ class NgClass {
         changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
     }
     /**
-     * @param {?} isCleanup
-     * @return {?}
-     */
-    _applyInitialClasses(isCleanup) {
-        this._initialClasses.forEach(klass => this._toggleClass(klass, !isCleanup));
-    }
-    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
      * @param {?} rawClassVal
-     * @param {?} isCleanup
      * @return {?}
      */
-    _applyClasses(rawClassVal, isCleanup) {
+    _applyClasses(rawClassVal) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                (/** @type {?} */ (rawClassVal)).forEach((klass) => this._toggleClass(klass, !isCleanup));
+                (/** @type {?} */ (rawClassVal)).forEach((klass) => this._toggleClass(klass, true));
             }
             else {
-                Object.keys(rawClassVal).forEach(klass => {
-                    if (rawClassVal[klass] != null)
-                        this._toggleClass(klass, !isCleanup);
-                });
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, !!rawClassVal[klass]));
+            }
+        }
+    }
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    _removeClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                (/** @type {?} */ (rawClassVal)).forEach((klass) => this._toggleClass(klass, false));
+            }
+            else {
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, false));
             }
         }
     }
@@ -6192,7 +6196,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-const VERSION = new Version('6.0.0-rc.1-5c8340a');
+const VERSION = new Version('6.0.0-rc.1-f99cb5c');
 
 /**
  * @fileoverview added by tsickle
