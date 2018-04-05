@@ -41,12 +41,13 @@ export declare abstract class PlatformLocation {
     abstract back(): void;
 }
 /**
- * @whatItDoes indicates when a location is initialized
+ * @description Indicates when a location is initialized.
  * @experimental
  */
 export declare const LOCATION_INITIALIZED: InjectionToken<Promise<any>>;
 /**
- * A serializable version of the event from onPopState or onHashChange
+ * @description
+ * A serializable version of the event from `onPopState` or `onHashChange`
  *
  * @experimental
  */

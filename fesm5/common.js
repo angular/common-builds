@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.1-5db9ab1
+ * @license Angular v6.0.0-rc.1-8ea15b4
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -46,12 +46,13 @@ var PlatformLocation = /** @class */ (function () {
     return PlatformLocation;
 }());
 /**
- * \@whatItDoes indicates when a location is initialized
+ * \@description Indicates when a location is initialized.
  * \@experimental
  */
 var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 /**
- * A serializable version of the event from onPopState or onHashChange
+ * \@description
+ * A serializable version of the event from `onPopState` or `onHashChange`
  *
  * \@experimental
  * @record
@@ -138,8 +139,10 @@ var APP_BASE_HREF = new InjectionToken('appBaseHref');
  */
 
 /**
- * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
+ *
+ * A service that applications can use to interact with a browser's URL.
+ *
  * Depending on which {\@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
@@ -463,10 +466,9 @@ function _stripIndexHtml(url) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Use URL hash for storing application location data.
  * \@description
- * `HashLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * represent its state in the
  * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
  * of the browser's URL.
  *
@@ -617,10 +619,9 @@ var HashLocationStrategy = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Use URL for storing application location data.
  * \@description
- * `PathLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * represent its state in the
  * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
  * browser's URL.
  *
@@ -1644,8 +1645,9 @@ TranslationType[TranslationType.Months] = "Months";
 TranslationType[TranslationType.Eras] = "Eras";
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
  * \@description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
@@ -2460,8 +2462,9 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
  * \@description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *
@@ -2493,10 +2496,9 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
  * \@description
  *
- * Formats a number as percentage.
+ * Formats a number as a percentage according to locale rules.
  *
  * Where:
  * - `value` is a number.
@@ -2517,7 +2519,6 @@ function formatPercent(value, locale, digitsInfo) {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
  * \@description
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
@@ -3283,9 +3284,7 @@ function parseCookieValue(cookieStr, name) {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds and removes CSS classes on an HTML element.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <some-element [ngClass]="'first second'">...</some-element>
  *
@@ -3299,6 +3298,8 @@ function parseCookieValue(cookieStr, name) {
  * ```
  *
  * \@description
+ *
+ * Adds and removes CSS classes on an HTML element.
  *
  * The CSS classes are updated as follows, depending on the type of the expression evaluation:
  * - `string` - the CSS classes listed in the string (space delimited) are added,
@@ -4200,10 +4201,7 @@ var SwitchView = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <container-element [ngSwitch]="switch_expression">
  *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -4218,6 +4216,8 @@ var SwitchView = /** @class */ (function () {
  *     </container-element>
  * ```
  * \@description
+ *
+ * Adds / removes DOM sub-trees when the nest match expressions matches the switch expression.
  *
  * `NgSwitch` stamps out nested views when their match expression value matches the value of the
  * switch expression.
@@ -4338,17 +4338,17 @@ var NgSwitch = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
- *             given expression evaluate to respectively the same/different value as the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
  * </container-element>
  * ```
  * \@description
+ *
+ * Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
+ * given expression evaluate to respectively the same/different value as the switch
+ * expression.
  *
  * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
  * expression.
@@ -4388,11 +4388,7 @@ var NgSwitchCase = /** @class */ (function () {
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
- * match the
- *             switch expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -4401,6 +4397,9 @@ var NgSwitchCase = /** @class */ (function () {
  * ```
  *
  * \@description
+ *
+ * Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
+ * match the switch expression.
  *
  * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
  * expression.
@@ -4439,9 +4438,7 @@ var NgSwitchDefault = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
@@ -4451,6 +4448,8 @@ var NgSwitchDefault = /** @class */ (function () {
  * ```
  *
  * \@description
+ *
+ * Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
  *
  * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
  * that match the switch expression's pluralization category.
@@ -4546,10 +4545,12 @@ var NgPlural = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgPlural} when the
- *             given expression matches the plural expression according to CLDR rules.
+ * \@description
  *
- * \@howToUse
+ * Creates a view that will be added/removed from the parent {\@link NgPlural} when the
+ * given expression matches the plural expression according to CLDR rules.
+ *
+ * \@usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">...</ng-template>
@@ -4594,9 +4595,7 @@ var NgPluralCase = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Update an HTML element styles.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  *
@@ -4606,6 +4605,8 @@ var NgPluralCase = /** @class */ (function () {
  * ```
  *
  * \@description
+ *
+ * Update an HTML element styles.
  *
  * The styles are updated according to the value of the expression evaluation:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
@@ -4710,14 +4711,14 @@ var NgStyle = /** @class */ (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Inserts an embedded view from a prepared `TemplateRef`
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
  * ```
  *
  * \@description
+ *
+ * Inserts an embedded view from a prepared `TemplateRef`.
  *
  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
@@ -5167,9 +5168,9 @@ var DateFormatter = /** @class */ (function () {
   */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
- * \@howToUse `date_expression | date[:format]`
  * \@description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
@@ -5381,8 +5382,6 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo]`
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
@@ -5434,12 +5433,10 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo]`
  *
  * \@description
  *
- * Formats a number as percentage.
+ * Formats a number as percentage according to locale rules.
  *
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
@@ -5480,9 +5477,9 @@ var DeprecatedPercentPipe = /** @class */ (function () {
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
  * \@description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *
@@ -5640,9 +5637,10 @@ var _promiseStrategy = new PromiseStrategy();
 var _observableStrategy = new ObservableStrategy();
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Unwraps a value from an asynchronous primitive.
- * \@howToUse `observable_or_promise_expression | async`
  * \@description
+ *
+ * Unwraps a value from an asynchronous primitive.
+ *
  * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
  * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
@@ -5915,34 +5913,11 @@ var UpperCasePipe = /** @class */ (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Uses the function {\@link formatDate} to format a date according to locale rules.
- * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
  * \@description
  *
- * Where:
- * - `value` is a date object or a number (milliseconds since UTC epoch) or an ISO string
- * (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. The format can be predefined as
- *   shown below (all examples are given for `en-US`) or custom as shown in the table.
- *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
- *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
- *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`).
- *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`).
- *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
- *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
- *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
- *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
- *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
- *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
- *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
- *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
- * - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
- *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
- *  If not specified, the local system timezone of the end-user's browser will be used.
- * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default).
+ * Uses the function {\@link formatDate} to format a date according to locale rules.
  *
+ * The following tabled describes the formatting options.
  *
  *  | Field Type         | Format      | Description                                                   | Example Value                                              |
  *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
@@ -6031,17 +6006,80 @@ var DatePipe = /** @class */ (function () {
         this.locale = locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} format
-     * @param {?=} timezone
-     * @param {?=} locale
+     * @param value a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * @param format indicates which date/time components to include. The format can be predefined as
+     *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+     *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
+     *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
+     *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM
+     * GMT+1`).
+     *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+     * 9:03:01 AM GMT+01:00`).
+     *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
+     *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
+     *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
+     *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
+     *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
+     *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
+     *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
+     *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
+     * @param timezone to be used for formatting the time. It understands UTC/GMT and the continental
+     * US time zone
+     *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    /**
+     * @param {?} value a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * @param {?=} format indicates which date/time components to include. The format can be predefined as
+     *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+     *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
+     *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
+     *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM
+     * GMT+1`).
+     *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+     * 9:03:01 AM GMT+01:00`).
+     *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
+     *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
+     *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
+     *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
+     *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
+     *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
+     *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
+     *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
+     * @param {?=} timezone to be used for formatting the time. It understands UTC/GMT and the continental
+     * US time zone
+     *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     DatePipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} format
-     * @param {?=} timezone
-     * @param {?=} locale
+     * @param {?} value a date object or a number (milliseconds since UTC epoch) or an ISO string
+     * (https://www.w3.org/TR/NOTE-datetime).
+     * @param {?=} format indicates which date/time components to include. The format can be predefined as
+     *   shown below (all examples are given for `en-US`) or custom as shown in the table.
+     *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
+     *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
+     *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM
+     * GMT+1`).
+     *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
+     * 9:03:01 AM GMT+01:00`).
+     *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
+     *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
+     *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
+     *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
+     *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
+     *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
+     *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
+     *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
+     * @param {?=} timezone to be used for formatting the time. It understands UTC/GMT and the continental
+     * US time zone
+     *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, format, timezone, locale) {
@@ -6079,16 +6117,9 @@ var DatePipe = /** @class */ (function () {
 var _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
- * \@howToUse `expression | i18nPlural:mapping[:locale]`
  * \@description
  *
- *  Where:
- *  - `expression` is a number.
- *  - `mapping` is an object that mimics the ICU format, see
- *    http://userguide.icu-project.org/formatparse/messages
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * Maps a value to a string that pluralizes the value according to locale rules.
  *
  *  ## Example
  *
@@ -6101,15 +6132,26 @@ var I18nPluralPipe = /** @class */ (function () {
         this._localization = _localization;
     }
     /**
-     * @param {?} value
-     * @param {?} pluralMap
-     * @param {?=} locale
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    /**
+     * @param {?} value the number to be formatted
+     * @param {?} pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     I18nPluralPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} pluralMap
-     * @param {?=} locale
+     * @param {?} value the number to be formatted
+     * @param {?} pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, pluralMap, locale) {
@@ -6144,32 +6186,37 @@ var I18nPluralPipe = /** @class */ (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Generic selector that displays the string that matches the current value.
- * \@howToUse `expression | i18nSelect:mapping`
  * \@description
  *
- *  Where `mapping` is an object that indicates the text that should be displayed
- *  for different values of the provided `expression`.
- *  If none of the keys of the mapping match the value of the `expression`, then the content
- *  of the `other` key is returned when present, otherwise an empty string is returned.
+ * Generic selector that displays the string that matches the current value.
  *
- *  ## Example
+ * If none of the keys of the `mapping` match the `value`, then the content
+ * of the `other` key is returned when present, otherwise an empty string is returned.
+ *
+ * ## Example
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
- *  \@experimental
+ * \@experimental
  */
 var I18nSelectPipe = /** @class */ (function () {
     function I18nSelectPipe() {
     }
     /**
-     * @param {?} value
-     * @param {?} mapping
+     * @param value a string to be internationalized.
+     * @param mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
+     */
+    /**
+     * @param {?} value a string to be internationalized.
+     * @param {?} mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
      * @return {?}
      */
     I18nSelectPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} mapping
+     * @param {?} value a string to be internationalized.
+     * @param {?} mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
      * @return {?}
      */
     function (value, mapping) {
@@ -6207,8 +6254,6 @@ var I18nSelectPipe = /** @class */ (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Converts value into JSON string.
- * \@howToUse `expression | json`
  * \@description
  *
  * Converts value into string using `JSON.stringify`. Useful for debugging.
@@ -6251,22 +6296,12 @@ var JsonPipe = /** @class */ (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Uses the function {\@link formatNumber} to format a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo[:locale]]`
  * \@description
+ *
+ * Uses the function {\@link formatNumber} to format a number according to locale rules.
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the locale.
- *
- * Where:
- * - `value` is a number
- * - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
- *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to `3`.
- * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default).
  *
  * ### Example
  *
@@ -6279,15 +6314,41 @@ var DecimalPipe = /** @class */ (function () {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     * @param value a number to be formatted.
+     * @param digitsInfo a `string` which has a following format: <br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to
+     * `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to
+     * `3`.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    /**
+     * @param {?} value a number to be formatted.
+     * @param {?=} digitsInfo a `string` which has a following format: <br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to
+     * `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to
+     * `3`.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     DecimalPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     * @param {?} value a number to be formatted.
+     * @param {?=} digitsInfo a `string` which has a following format: <br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to
+     * `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to
+     * `3`.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, digitsInfo, locale) {
@@ -6313,18 +6374,10 @@ var DecimalPipe = /** @class */ (function () {
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Uses the function {\@link formatPercent} to format a number as a percentage according
- * to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo[:locale]]`
  * \@description
  *
- * Formats a number as percentage.
- *
- * Where:
- * - `value` is a number.
- * - `digitInfo` See {\@link DecimalPipe} for more details.
- * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default).
+ * Uses the function {\@link formatPercent} to format a number as a percentage according
+ * to locale rules.
  *
  * ### Example
  *
@@ -6337,15 +6390,26 @@ var PercentPipe = /** @class */ (function () {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     *
+     * @param value a number to be formatted as a percentage.
+     * @param digitsInfo see {@link DecimalPipe} for more details.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+   * default).
+     */
+    /**
+     *
+     * @param {?} value a number to be formatted as a percentage.
+     * @param {?=} digitsInfo see {\@link DecimalPipe} for more details.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     PercentPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     *
+     * @param {?} value a number to be formatted as a percentage.
+     * @param {?=} digitsInfo see {\@link DecimalPipe} for more details.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, digitsInfo, locale) {
@@ -6371,28 +6435,10 @@ var PercentPipe = /** @class */ (function () {
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Uses the functions {\@link getCurrencySymbol} and {\@link formatCurrency} to format a
- * number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:display[:digitInfo[:locale]]]]`
  * \@description
  *
- * Use `currency` to format a number as currency.
- *
- * Where:
- * - `value` is a number.
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `display` indicates whether to show the currency symbol, the code or a custom value:
- *   - `code`: use code (e.g. `USD`).
- *   - `symbol`(default): use symbol (e.g. `$`).
- *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
- *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
- *   - `string`: use this value instead of a code or a symbol.
- *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
- *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
- * - `digitInfo` See {\@link DecimalPipe} for more details.
- * - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default).
+ * Uses the functions {\@link getCurrencySymbol} and {\@link formatCurrency} to format a
+ * number as currency using locale rules.
  *
  * ### Example
  *
@@ -6405,19 +6451,54 @@ var CurrencyPipe = /** @class */ (function () {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
+     *
+     * @param value a number to be formatted as currency.
+     * @param currencyCodeis the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+     * such as `USD` for the US dollar and `EUR` for the euro.
+     * @param display indicates whether to show the currency symbol, the code or a custom value:
+     *   - `code`: use code (e.g. `USD`).
+     *   - `symbol`(default): use symbol (e.g. `$`).
+     *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
+     *     narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+     *   - `string`: use this value instead of a code or a symbol.
+     *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
+     *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
+     * @param digitsInfo see {@link DecimalPipe} for more details.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    /**
+     *
+     * @param {?} value a number to be formatted as currency.
      * @param {?=} currencyCode
-     * @param {?=} display
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     * @param {?=} display indicates whether to show the currency symbol, the code or a custom value:
+     *   - `code`: use code (e.g. `USD`).
+     *   - `symbol`(default): use symbol (e.g. `$`).
+     *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
+     *     narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+     *   - `string`: use this value instead of a code or a symbol.
+     *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
+     *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
+     * @param {?=} digitsInfo see {\@link DecimalPipe} for more details.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     CurrencyPipe.prototype.transform = /**
-     * @param {?} value
+     *
+     * @param {?} value a number to be formatted as currency.
      * @param {?=} currencyCode
-     * @param {?=} display
-     * @param {?=} digitsInfo
-     * @param {?=} locale
+     * @param {?=} display indicates whether to show the currency symbol, the code or a custom value:
+     *   - `code`: use code (e.g. `USD`).
+     *   - `symbol`(default): use symbol (e.g. `$`).
+     *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
+     *     narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
+     *   - `string`: use this value instead of a code or a symbol.
+     *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
+     *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
+     * @param {?=} digitsInfo see {\@link DecimalPipe} for more details.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, currencyCode, display, digitsInfo, locale) {
@@ -6493,32 +6574,19 @@ function strToNumber(value) {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
- * \@howToUse `array_or_string_expression | slice:start[:end]`
  * \@description
  *
- * Where the input expression is a `List` or `String`, and:
- * - `start`: The starting index of the subset to return.
- *   - **a positive integer**: return the item at `start` index and all items after
- *     in the list or string expression.
- *   - **a negative integer**: return the item at `start` index from the end and all items after
- *     in the list or string expression.
- *   - **if positive and greater than the size of the expression**: return an empty list or string.
- *   - **if negative and greater than the size of the expression**: return entire list or string.
- * - `end`: The ending index of the subset to return.
- *   - **omitted**: return all items until the end.
- *   - **if positive**: return all items before `end` index of the list or string.
- *   - **if negative**: return all items before `end` index from the end of the list or string.
+ * Creates a new `Array` or `String` containing a subset (slice) of the elements.
  *
  * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
  * and `String.prototype.slice()`.
  *
- * When operating on a [List], the returned list is always a copy even when all
+ * When operating on an `Array`, the returned `Array` is always a copy even when all
  * the elements are being returned.
  *
  * When operating on a blank value, the pipe returns the blank value.
  *
- * ## List Example
+ * ### List Example
  *
  * This `ngFor` example:
  *
@@ -6539,15 +6607,50 @@ var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
     }
     /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
+     * @param value a list or a string to be sliced.
+     * @param start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
+     */
+    /**
+     * @param {?} value a list or a string to be sliced.
+     * @param {?} start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param {?=} end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
      * @return {?}
      */
     SlicePipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
+     * @param {?} value a list or a string to be sliced.
+     * @param {?} start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param {?=} end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
      * @return {?}
      */
     function (value, start, end) {
@@ -6744,7 +6847,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new Version('6.0.0-rc.1-5db9ab1');
+var VERSION = new Version('6.0.0-rc.1-8ea15b4');
 
 /**
  * @fileoverview added by tsickle

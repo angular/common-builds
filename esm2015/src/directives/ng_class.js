@@ -13,9 +13,7 @@ import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Rendere
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds and removes CSS classes on an HTML element.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <some-element [ngClass]="'first second'">...</some-element>
  *
@@ -29,6 +27,8 @@ import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Rendere
  * ```
  *
  * \@description
+ *
+ * Adds and removes CSS classes on an HTML element.
  *
  * The CSS classes are updated as follows, depending on the type of the expression evaluation:
  * - `string` - the CSS classes listed in the string (space delimited) are added,

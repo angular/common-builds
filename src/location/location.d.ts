@@ -8,8 +8,10 @@ export interface PopStateEvent {
     url?: string;
 }
 /**
- * @whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * @description
+ *
+ * A service that applications can use to interact with a browser's URL.
+ *
  * Depending on which {@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *

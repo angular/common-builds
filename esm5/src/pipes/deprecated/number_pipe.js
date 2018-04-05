@@ -71,8 +71,6 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo]`
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
@@ -136,12 +134,10 @@ function DeprecatedDecimalPipe_tsickle_Closure_declarations() {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo]`
  *
  * \@description
  *
- * Formats a number as percentage.
+ * Formats a number as percentage according to locale rules.
  *
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
@@ -194,9 +190,9 @@ function DeprecatedPercentPipe_tsickle_Closure_declarations() {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
  * \@description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *

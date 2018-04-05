@@ -117,8 +117,9 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
  * \@description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *
@@ -150,10 +151,9 @@ export function formatCurrency(value, locale, currency, currencyCode, digitsInfo
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
  * \@description
  *
- * Formats a number as percentage.
+ * Formats a number as a percentage according to locale rules.
  *
  * Where:
  * - `value` is a number.
@@ -174,7 +174,6 @@ export function formatPercent(value, locale, digitsInfo) {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
  * \@description
  *
  * Formats a number as text. Group sizing and separator and other locale-specific

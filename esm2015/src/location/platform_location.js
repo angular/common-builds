@@ -96,12 +96,13 @@ function PlatformLocation_tsickle_Closure_declarations() {
     PlatformLocation.prototype.back = function () { };
 }
 /**
- * \@whatItDoes indicates when a location is initialized
+ * \@description Indicates when a location is initialized.
  * \@experimental
  */
 export const /** @type {?} */ LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 /**
- * A serializable version of the event from onPopState or onHashChange
+ * \@description
+ * A serializable version of the event from `onPopState` or `onHashChange`
  *
  * \@experimental
  * @record

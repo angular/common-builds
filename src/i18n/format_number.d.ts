@@ -1,8 +1,9 @@
 export declare const NUMBER_FORMAT_REGEXP: RegExp;
 /**
  * @ngModule CommonModule
- * @whatItDoes Formats a number as currency using locale rules.
  * @description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *
@@ -19,10 +20,9 @@ export declare const NUMBER_FORMAT_REGEXP: RegExp;
 export declare function formatCurrency(value: number, locale: string, currency: string, currencyCode?: string, digitsInfo?: string): string;
 /**
  * @ngModule CommonModule
- * @whatItDoes Formats a number as a percentage according to locale rules.
  * @description
  *
- * Formats a number as percentage.
+ * Formats a number as a percentage according to locale rules.
  *
  * Where:
  * - `value` is a number.
@@ -34,7 +34,6 @@ export declare function formatCurrency(value: number, locale: string, currency: 
 export declare function formatPercent(value: number, locale: string, digitsInfo?: string): string;
 /**
  * @ngModule CommonModule
- * @whatItDoes Formats a number according to locale rules.
  * @description
  *
  * Formats a number as text. Group sizing and separator and other locale-specific

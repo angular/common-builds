@@ -66,10 +66,7 @@ function SwitchView_tsickle_Closure_declarations() {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <container-element [ngSwitch]="switch_expression">
  *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -84,6 +81,8 @@ function SwitchView_tsickle_Closure_declarations() {
  *     </container-element>
  * ```
  * \@description
+ *
+ * Adds / removes DOM sub-trees when the nest match expressions matches the switch expression.
  *
  * `NgSwitch` stamps out nested views when their match expression value matches the value of the
  * switch expression.
@@ -228,17 +227,17 @@ function NgSwitch_tsickle_Closure_declarations() {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
- *             given expression evaluate to respectively the same/different value as the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
  * </container-element>
  * ```
  * \@description
+ *
+ * Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
+ * given expression evaluate to respectively the same/different value as the switch
+ * expression.
  *
  * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
  * expression.
@@ -296,11 +295,7 @@ function NgSwitchCase_tsickle_Closure_declarations() {
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
- * match the
- *             switch expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -309,6 +304,9 @@ function NgSwitchCase_tsickle_Closure_declarations() {
  * ```
  *
  * \@description
+ *
+ * Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
+ * match the switch expression.
  *
  * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
  * expression.

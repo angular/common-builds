@@ -13,9 +13,7 @@ import { Directive, ElementRef, Input, KeyValueDiffers, Renderer2 } from '@angul
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Update an HTML element styles.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  *
@@ -25,6 +23,8 @@ import { Directive, ElementRef, Input, KeyValueDiffers, Renderer2 } from '@angul
  * ```
  *
  * \@description
+ *
+ * Update an HTML element styles.
  *
  * The styles are updated according to the value of the expression evaluation:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),

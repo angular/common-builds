@@ -57,8 +57,9 @@ TranslationType[TranslationType.Months] = "Months";
 TranslationType[TranslationType.Eras] = "Eras";
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
  * \@description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
