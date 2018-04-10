@@ -19,6 +19,13 @@ export declare class LowerCasePipe implements PipeTransform {
 /**
  * Transforms text to titlecase.
  *
+ * The pipe splits up a text into words, capitalizes the first letter of each word and transforms
+ * the rest of the word into lowercase. In this case, whitespace characters (such as "space", "\t",
+ * "\n", etc) are used as word separators.
+ *
+ * ## Example
+ * {@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
+ *
  * @stable
  */
 export declare class TitleCasePipe implements PipeTransform {

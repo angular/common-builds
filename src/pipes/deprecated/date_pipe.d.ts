@@ -8,9 +8,9 @@
 import { PipeTransform } from '@angular/core';
 /**
  * @ngModule CommonModule
- * @whatItDoes Formats a date according to locale rules.
- * @howToUse `date_expression | date[:format]`
  * @description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string

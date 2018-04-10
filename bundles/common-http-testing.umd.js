@@ -1,17 +1,17 @@
 /**
- * @license Angular v5.1.0-5a0076f
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-rc.3-5992fe6
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.Rx));
-}(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.rxjs));
+}(this, (function (exports,_angular_common_http,_angular_core,rxjs) { 'use strict';
 
 /**
- * @license Angular v5.1.0-5a0076f
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-rc.3-5992fe6
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -270,26 +270,17 @@ function _toTextBody(body) {
  * @return {?}
  */
 function _maybeConvertBody(responseType, body) {
+    if (body === null) {
+        return null;
+    }
     switch (responseType) {
         case 'arraybuffer':
-            if (body === null) {
-                return null;
-            }
             return _toArrayBufferBody(body);
         case 'blob':
-            if (body === null) {
-                return null;
-            }
             return _toBlob(body);
         case 'json':
-            if (body === null) {
-                return 'null';
-            }
             return _toJsonBody(body);
         case 'text':
-            if (body === null) {
-                return null;
-            }
             return _toTextBody(body);
         default:
             throw new Error("Unsupported responseType: " + responseType);
@@ -340,7 +331,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
      */
     function (req) {
         var _this = this;
-        return new rxjs_Observable.Observable(function (observer) {
+        return new rxjs.Observable(function (observer) {
             var /** @type {?} */ testReq = new TestRequest(req, observer);
             _this.open.push(testReq);
             observer.next(/** @type {?} */ ({ type: _angular_common_http.HttpEventType.Sent }));

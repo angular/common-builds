@@ -9,9 +9,7 @@ import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Adds and removes CSS classes on an HTML element.
- *
- * @howToUse
+ * @usageNotes
  * ```
  *     <some-element [ngClass]="'first second'">...</some-element>
  *
@@ -25,6 +23,8 @@ import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from
  * ```
  *
  * @description
+ *
+ * Adds and removes CSS classes on an HTML element.
  *
  * The CSS classes are updated as follows, depending on the type of the expression evaluation:
  * - `string` - the CSS classes listed in the string (space delimited) are added,
@@ -49,10 +49,21 @@ export declare class NgClass implements DoCheck {
         [klass: string]: any;
     };
     ngDoCheck(): void;
-    private _cleanupClasses(rawClassVal);
     private _applyKeyValueChanges(changes);
     private _applyIterableChanges(changes);
-    private _applyInitialClasses(isCleanup);
-    private _applyClasses(rawClassVal, isCleanup);
+    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
+     */
+    private _applyClasses(rawClassVal);
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     */
+    private _removeClasses(rawClassVal);
     private _toggleClass(klass, enabled);
 }
