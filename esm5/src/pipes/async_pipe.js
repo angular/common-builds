@@ -121,7 +121,7 @@ var /** @type {?} */ _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@stable
+ *
  */
 var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {

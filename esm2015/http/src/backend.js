@@ -19,7 +19,7 @@
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 export class HttpHandler {
@@ -40,7 +40,7 @@ function HttpHandler_tsickle_Closure_declarations() {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 export class HttpBackend {

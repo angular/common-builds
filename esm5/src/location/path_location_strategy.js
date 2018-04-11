@@ -37,7 +37,7 @@ import { PlatformLocation } from './platform_location';
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 var PathLocationStrategy = /** @class */ (function (_super) {
     tslib_1.__extends(PathLocationStrategy, _super);

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-ee14579
+ * @license Angular v6.0.0-rc.3-0cb4f12
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, Elem
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
 class PlatformLocation {
@@ -86,7 +86,7 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  *
  * See these two classes for more.
  *
- * \@stable
+ *
  * @abstract
  */
 class LocationStrategy {
@@ -111,7 +111,7 @@ class LocationStrategy {
  * class AppModule {}
  * ```
  *
- * \@stable
+ *
  */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
@@ -152,7 +152,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * ### Example
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * \@stable
+ *
  */
 class Location {
     /**
@@ -356,7 +356,7 @@ function _stripIndexHtml(url) {
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 class HashLocationStrategy extends LocationStrategy {
     /**
@@ -483,7 +483,7 @@ HashLocationStrategy.ctorParameters = () => [
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 class PathLocationStrategy extends LocationStrategy {
     /**
@@ -1467,7 +1467,7 @@ TranslationType[TranslationType.Eras] = "Eras";
  *
  * See {\@link DatePipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} format
  * @param {?} locale
@@ -2274,7 +2274,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *    as `USD` for the US dollar and `EUR` for the euro.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?} currency
@@ -2303,7 +2303,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -2327,7 +2327,7 @@ function formatPercent(value, locale, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -3096,7 +3096,7 @@ function parseCookieValue(cookieStr, name) {
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- * \@stable
+ *
  */
 class NgClass {
     /**
@@ -3390,7 +3390,7 @@ NgComponentOutlet.propDecorators = {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@stable
+ *
  * @template T
  */
 class NgForOfContext {
@@ -3491,7 +3491,7 @@ class NgForOfContext {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- * \@stable
+ *
  * @template T
  */
 class NgForOf {
@@ -3741,7 +3741,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * \@stable
+ *
  */
 class NgIf {
     /**
@@ -3825,7 +3825,7 @@ NgIf.propDecorators = {
     "ngIfElse": [{ type: Input },],
 };
 /**
- * \@stable
+ *
  */
 class NgIfContext {
     constructor() {
@@ -3931,7 +3931,7 @@ class SwitchView {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- * \@stable
+ *
  */
 class NgSwitch {
     constructor() {
@@ -4026,7 +4026,7 @@ NgSwitch.propDecorators = {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 class NgSwitchCase {
     /**
@@ -4076,7 +4076,7 @@ NgSwitchCase.propDecorators = {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 class NgSwitchDefault {
     /**
@@ -4274,7 +4274,7 @@ NgPluralCase.ctorParameters = () => [
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * \@stable
+ *
  */
 class NgStyle {
     /**
@@ -4379,7 +4379,7 @@ NgStyle.propDecorators = {
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@stable
+ *
  */
 class NgTemplateOutlet {
     /**
@@ -4831,7 +4831,7 @@ class DateFormatter {
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- * \@stable
+ *
  */
 class DeprecatedDatePipe {
     /**
@@ -5002,7 +5002,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * \@stable
+ *
  */
 class DeprecatedDecimalPipe {
     /**
@@ -5043,7 +5043,7 @@ DeprecatedDecimalPipe.ctorParameters = () => [
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * \@stable
+ *
  */
 class DeprecatedPercentPipe {
     /**
@@ -5090,7 +5090,7 @@ DeprecatedPercentPipe.ctorParameters = () => [
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * \@stable
+ *
  */
 class DeprecatedCurrencyPipe {
     /**
@@ -5213,7 +5213,7 @@ const _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@stable
+ *
  */
 class AsyncPipe {
     /**
@@ -5325,7 +5325,7 @@ AsyncPipe.ctorParameters = () => [
  *
  * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
- * \@stable
+ *
  */
 class LowerCasePipe {
     /**
@@ -5365,7 +5365,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  * ## Example
  * {\@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
- * \@stable
+ *
  */
 class TitleCasePipe {
     /**
@@ -5389,7 +5389,7 @@ TitleCasePipe.ctorParameters = () => [];
 /**
  * Transforms text to uppercase.
  *
- * \@stable
+ *
  */
 class UpperCasePipe {
     /**
@@ -5510,7 +5510,7 @@ UpperCasePipe.ctorParameters = () => [];
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
  *
- * \@stable
+ *
  */
 class DatePipe {
     /**
@@ -5695,7 +5695,7 @@ I18nSelectPipe.ctorParameters = () => [];
  * ### Example
  * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * \@stable
+ *
  */
 class JsonPipe {
     /**
@@ -5734,7 +5734,7 @@ JsonPipe.ctorParameters = () => [];
  *
  * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
- * \@stable
+ *
  */
 class DecimalPipe {
     /**
@@ -5787,7 +5787,7 @@ DecimalPipe.ctorParameters = () => [
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
- * \@stable
+ *
  */
 class PercentPipe {
     /**
@@ -5835,7 +5835,7 @@ PercentPipe.ctorParameters = () => [
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
- * \@stable
+ *
  */
 class CurrencyPipe {
     /**
@@ -5959,7 +5959,7 @@ function strToNumber(value) {
  *
  * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
- * \@stable
+ *
  */
 class SlicePipe {
     /**
@@ -6041,7 +6041,7 @@ const COMMON_PIPES = [
 /**
  * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
- * \@stable
+ *
  */
 class CommonModule {
 }
@@ -6091,7 +6091,7 @@ DeprecatedI18NPipesModule.ctorParameters = () => [];
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- * \@stable
+ *
  */
 const DOCUMENT = new InjectionToken('DocumentToken');
 
@@ -6159,9 +6159,9 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@stable
+ *
  */
-const VERSION = new Version('6.0.0-rc.3-ee14579');
+const VERSION = new Version('6.0.0-rc.3-0cb4f12');
 
 /**
  * @fileoverview added by tsickle

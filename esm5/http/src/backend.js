@@ -19,7 +19,7 @@
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
@@ -32,7 +32,7 @@ var /**
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 HttpHandler = /** @class */ (function () {
@@ -50,7 +50,7 @@ HttpHandler = /** @class */ (function () {
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 export { HttpHandler };
@@ -70,7 +70,7 @@ function HttpHandler_tsickle_Closure_declarations() {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
@@ -81,7 +81,7 @@ var /**
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 HttpBackend = /** @class */ (function () {
@@ -97,7 +97,7 @@ HttpBackend = /** @class */ (function () {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 export { HttpBackend };

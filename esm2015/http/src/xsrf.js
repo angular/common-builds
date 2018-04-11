@@ -16,7 +16,7 @@ export const /** @type {?} */ XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 export class HttpXsrfTokenExtractor {

@@ -89,7 +89,7 @@ const /** @type {?} */ _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@stable
+ *
  */
 export class AsyncPipe {
     /**

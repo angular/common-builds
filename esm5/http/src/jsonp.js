@@ -30,7 +30,7 @@ export var /** @type {?} */ JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
@@ -38,7 +38,7 @@ var /**
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 JsonpCallbackContext = /** @class */ (function () {
@@ -51,7 +51,7 @@ JsonpCallbackContext = /** @class */ (function () {
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 export { JsonpCallbackContext };
@@ -59,7 +59,7 @@ export { JsonpCallbackContext };
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- * \@stable
+ *
  */
 var JsonpClientBackend = /** @class */ (function () {
     function JsonpClientBackend(callbackMap, document) {
@@ -242,7 +242,7 @@ function JsonpClientBackend_tsickle_Closure_declarations() {
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * \@stable
+ *
  */
 var JsonpInterceptor = /** @class */ (function () {
     function JsonpInterceptor(jsonp) {

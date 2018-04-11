@@ -90,7 +90,7 @@ function formatNumber(pipe, locale, value, style, digits, currency = null, curre
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * \@stable
+ *
  */
 export class DeprecatedDecimalPipe {
     /**
@@ -142,7 +142,7 @@ function DeprecatedDecimalPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * \@stable
+ *
  */
 export class DeprecatedPercentPipe {
     /**
@@ -200,7 +200,7 @@ function DeprecatedPercentPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * \@stable
+ *
  */
 export class DeprecatedCurrencyPipe {
     /**

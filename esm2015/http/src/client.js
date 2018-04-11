@@ -43,7 +43,7 @@ function addBody(options, body) {
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- * \@stable
+ *
  */
 export class HttpClient {
     /**

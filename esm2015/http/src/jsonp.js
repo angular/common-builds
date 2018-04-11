@@ -30,7 +30,7 @@ export const /** @type {?} */ JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests mu
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 export class JsonpCallbackContext {
@@ -39,7 +39,7 @@ export class JsonpCallbackContext {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- * \@stable
+ *
  */
 export class JsonpClientBackend {
     /**
@@ -208,7 +208,7 @@ function JsonpClientBackend_tsickle_Closure_declarations() {
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * \@stable
+ *
  */
 export class JsonpInterceptor {
     /**

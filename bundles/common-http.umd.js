@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-ee14579
+ * @license Angular v6.0.0-rc.3-0cb4f12
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs,rxjs_operators,tslib,_angular_common) { 'use strict';
 
 /**
- * @license Angular v6.0.0-rc.3-ee14579
+ * @license Angular v6.0.0-rc.3-0cb4f12
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -35,7 +35,7 @@
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 var HttpHandler = /** @class */ (function () {
@@ -51,7 +51,7 @@ var HttpHandler = /** @class */ (function () {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 var HttpBackend = /** @class */ (function () {
@@ -76,7 +76,7 @@ var HttpBackend = /** @class */ (function () {
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
- * \@stable
+ *
  */
 var HttpHeaders = /** @class */ (function () {
     function HttpHeaders(headers) {
@@ -390,7 +390,7 @@ var HttpHeaders = /** @class */ (function () {
  *
  * Used by `HttpParams`.
  *
- * \@stable
+ *
  *
  * @record
  */
@@ -399,7 +399,7 @@ var HttpHeaders = /** @class */ (function () {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 var HttpUrlEncodingCodec = /** @class */ (function () {
     function HttpUrlEncodingCodec() {
@@ -490,7 +490,7 @@ function standardEncoding(v) {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 var HttpParams = /** @class */ (function () {
     function HttpParams(options) {
@@ -789,7 +789,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 var HttpRequest = /** @class */ (function () {
@@ -1072,21 +1072,21 @@ HttpEventType[HttpEventType.User] = "User";
 /**
  * Base interface for progress events.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * A download progress event.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * An upload progress event.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -1095,7 +1095,7 @@ HttpEventType[HttpEventType.User] = "User";
  * when a request may be retried multiple times, to distinguish between
  * retries on the final event stream.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -1105,7 +1105,7 @@ HttpEventType[HttpEventType.User] = "User";
  * Grouping all custom events under this type ensures they will be handled
  * and forwarded by all implementations of interceptors.
  *
- * \@stable
+ *
  * @record
  * @template T
  */
@@ -1116,14 +1116,14 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * It bundles the Error object with the actual response body that failed to parse.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
- * \@stable
+ *
  * @abstract
  */
 var HttpResponseBase = /** @class */ (function () {
@@ -1154,7 +1154,7 @@ var HttpResponseBase = /** @class */ (function () {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
- * \@stable
+ *
  */
 var HttpHeaderResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpHeaderResponse, _super);
@@ -1203,7 +1203,7 @@ var HttpHeaderResponse = /** @class */ (function (_super) {
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
- * \@stable
+ *
  * @template T
  */
 var HttpResponse = /** @class */ (function (_super) {
@@ -1249,7 +1249,7 @@ var HttpResponse = /** @class */ (function (_super) {
  * will contain either a wrapped Error object or the error response returned
  * from the server.
  *
- * \@stable
+ *
  */
 var HttpErrorResponse = /** @class */ (function (_super) {
     tslib.__extends(HttpErrorResponse, _super);
@@ -1315,7 +1315,7 @@ function addBody(options, body) {
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- * \@stable
+ *
  */
 var HttpClient = /** @class */ (function () {
     function HttpClient(handler) {
@@ -1775,14 +1775,14 @@ var HttpClient = /** @class */ (function () {
  * In rare cases, interceptors may wish to completely handle a request themselves,
  * and not delegate to the remainder of the chain. This behavior is allowed.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
- * \@stable
+ *
  */
 var HttpInterceptorHandler = /** @class */ (function () {
     function HttpInterceptorHandler(next, interceptor) {
@@ -1806,7 +1806,7 @@ var HttpInterceptorHandler = /** @class */ (function () {
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
- * \@stable
+ *
  */
 var HTTP_INTERCEPTORS = new _angular_core.InjectionToken('HTTP_INTERCEPTORS');
 var NoopInterceptor = /** @class */ (function () {
@@ -1861,7 +1861,7 @@ var JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response type.
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 var JsonpCallbackContext = /** @class */ (function () {
@@ -1873,7 +1873,7 @@ var JsonpCallbackContext = /** @class */ (function () {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- * \@stable
+ *
  */
 var JsonpClientBackend = /** @class */ (function () {
     function JsonpClientBackend(callbackMap, document) {
@@ -2042,7 +2042,7 @@ var JsonpClientBackend = /** @class */ (function () {
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * \@stable
+ *
  */
 var JsonpInterceptor = /** @class */ (function () {
     function JsonpInterceptor(jsonp) {
@@ -2105,7 +2105,7 @@ function getResponseUrl(xhr) {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * \@stable
+ *
  * @abstract
  */
 var XhrFactory = /** @class */ (function () {
@@ -2116,7 +2116,7 @@ var XhrFactory = /** @class */ (function () {
 /**
  * A factory for \@{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
  *
- * \@stable
+ *
  */
 var BrowserXhr = /** @class */ (function () {
     function BrowserXhr() {
@@ -2139,7 +2139,7 @@ var BrowserXhr = /** @class */ (function () {
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- * \@stable
+ *
  */
 var HttpXhrBackend = /** @class */ (function () {
     function HttpXhrBackend(xhrFactory) {
@@ -2413,7 +2413,7 @@ var XSRF_HEADER_NAME = new _angular_core.InjectionToken('XSRF_HEADER_NAME');
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 var HttpXsrfTokenExtractor = /** @class */ (function () {
@@ -2567,7 +2567,7 @@ var HttpInterceptingHandler = /** @class */ (function () {
  *
  * Meant to be used as a factory function within `HttpClientModule`.
  *
- * \@stable
+ *
  * @param {?} backend
  * @param {?=} interceptors
  * @return {?}
@@ -2585,7 +2585,7 @@ function interceptingHandler(backend, interceptors) {
  * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
  * in test environments. In that case, callbacks are stored on an anonymous object instead.
  *
- * \@stable
+ *
  * @return {?}
  */
 function jsonpCallbackContext() {
@@ -2604,7 +2604,7 @@ function jsonpCallbackContext() {
  * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
  * the header name and `XSRF-TOKEN` for the cookie name.
  *
- * \@stable
+ *
  */
 var HttpClientXsrfModule = /** @class */ (function () {
     function HttpClientXsrfModule() {
@@ -2675,7 +2675,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
  * Interceptors can be added to the chain behind `HttpClient` by binding them
  * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
- * \@stable
+ *
  */
 var HttpClientModule = /** @class */ (function () {
     function HttpClientModule() {
@@ -2708,7 +2708,7 @@ var HttpClientModule = /** @class */ (function () {
  * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
  *
- * \@stable
+ *
  */
 var HttpClientJsonpModule = /** @class */ (function () {
     function HttpClientJsonpModule() {

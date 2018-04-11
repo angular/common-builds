@@ -16,7 +16,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
- * \@stable
+ *
  */
 export class LowerCasePipe {
     /**
@@ -65,7 +65,7 @@ const /** @type {?} */ unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\
  * ## Example
  * {\@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
- * \@stable
+ *
  */
 export class TitleCasePipe {
     /**
@@ -98,7 +98,7 @@ function TitleCasePipe_tsickle_Closure_declarations() {
 /**
  * Transforms text to uppercase.
  *
- * \@stable
+ *
  */
 export class UpperCasePipe {
     /**

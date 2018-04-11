@@ -26,7 +26,7 @@ import { InjectionToken } from '@angular/core';
  *
  * See these two classes for more.
  *
- * \@stable
+ *
  * @abstract
  */
 export class LocationStrategy {
@@ -104,7 +104,7 @@ function LocationStrategy_tsickle_Closure_declarations() {
  * class AppModule {}
  * ```
  *
- * \@stable
+ *
  */
 export const /** @type {?} */ APP_BASE_HREF = new InjectionToken('appBaseHref');
 //# sourceMappingURL=location_strategy.js.map

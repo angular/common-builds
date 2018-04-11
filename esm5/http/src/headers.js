@@ -23,11 +23,11 @@ function Update_tsickle_Closure_declarations() {
 }
 /**
  * Immutable set of Http headers, with lazy parsing.
- * \@stable
+ *
  */
 var /**
  * Immutable set of Http headers, with lazy parsing.
- * \@stable
+ *
  */
 HttpHeaders = /** @class */ (function () {
     function HttpHeaders(headers) {
@@ -326,7 +326,7 @@ HttpHeaders = /** @class */ (function () {
 }());
 /**
  * Immutable set of Http headers, with lazy parsing.
- * \@stable
+ *
  */
 export { HttpHeaders };
 function HttpHeaders_tsickle_Closure_declarations() {

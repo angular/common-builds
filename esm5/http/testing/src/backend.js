@@ -22,7 +22,7 @@ import { TestRequest } from './request';
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
  *
- * \@stable
+ *
  */
 var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {

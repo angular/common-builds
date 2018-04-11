@@ -19,7 +19,7 @@ import { Injectable, InjectionToken } from '@angular/core';
  * In rare cases, interceptors may wish to completely handle a request themselves,
  * and not delegate to the remainder of the chain. This behavior is allowed.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpInterceptor() { }
@@ -46,7 +46,7 @@ function HttpInterceptor_tsickle_Closure_declarations() {
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
- * \@stable
+ *
  */
 export class HttpInterceptorHandler {
     /**
@@ -75,7 +75,7 @@ function HttpInterceptorHandler_tsickle_Closure_declarations() {
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
- * \@stable
+ *
  */
 export const /** @type {?} */ HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 export class NoopInterceptor {

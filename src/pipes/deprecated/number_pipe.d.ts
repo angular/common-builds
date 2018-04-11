@@ -29,7 +29,7 @@ import { PipeTransform } from '@angular/core';
  *
  * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * @stable
+ *
  */
 export declare class DeprecatedDecimalPipe implements PipeTransform {
     private _locale;
@@ -52,7 +52,7 @@ export declare class DeprecatedDecimalPipe implements PipeTransform {
  *
  * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * @stable
+ *
  */
 export declare class DeprecatedPercentPipe implements PipeTransform {
     private _locale;
@@ -81,7 +81,7 @@ export declare class DeprecatedPercentPipe implements PipeTransform {
  *
  * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * @stable
+ *
  */
 export declare class DeprecatedCurrencyPipe implements PipeTransform {
     private _locale;

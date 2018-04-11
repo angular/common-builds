@@ -32,13 +32,13 @@ function getResponseUrl(xhr) {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * \@stable
+ *
  * @abstract
  */
 XhrFactory = /** @class */ (function () {
@@ -49,7 +49,7 @@ XhrFactory = /** @class */ (function () {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * \@stable
+ *
  * @abstract
  */
 export { XhrFactory };
@@ -63,7 +63,7 @@ function XhrFactory_tsickle_Closure_declarations() {
 /**
  * A factory for \@{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
  *
- * \@stable
+ *
  */
 var BrowserXhr = /** @class */ (function () {
     function BrowserXhr() {
@@ -111,7 +111,7 @@ function PartialResponse_tsickle_Closure_declarations() {
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- * \@stable
+ *
  */
 var HttpXhrBackend = /** @class */ (function () {
     function HttpXhrBackend(xhrFactory) {

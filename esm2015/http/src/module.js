@@ -75,7 +75,7 @@ function HttpInterceptingHandler_tsickle_Closure_declarations() {
  *
  * Meant to be used as a factory function within `HttpClientModule`.
  *
- * \@stable
+ *
  * @param {?} backend
  * @param {?=} interceptors
  * @return {?}
@@ -92,7 +92,7 @@ export function interceptingHandler(backend, interceptors = []) {
  * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
  * in test environments. In that case, callbacks are stored on an anonymous object instead.
  *
- * \@stable
+ *
  * @return {?}
  */
 export function jsonpCallbackContext() {
@@ -111,7 +111,7 @@ export function jsonpCallbackContext() {
  * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
  * the header name and `XSRF-TOKEN` for the cookie name.
  *
- * \@stable
+ *
  */
 export class HttpClientXsrfModule {
     /**
@@ -170,7 +170,7 @@ function HttpClientXsrfModule_tsickle_Closure_declarations() {
  * Interceptors can be added to the chain behind `HttpClient` by binding them
  * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
- * \@stable
+ *
  */
 export class HttpClientModule {
 }
@@ -209,7 +209,7 @@ function HttpClientModule_tsickle_Closure_declarations() {
  * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
  *
- * \@stable
+ *
  */
 export class HttpClientJsonpModule {
 }

@@ -26,7 +26,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
- * \@stable
+ *
  */
 export class DecimalPipe {
     /**
@@ -90,7 +90,7 @@ function DecimalPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
- * \@stable
+ *
  */
 export class PercentPipe {
     /**
@@ -149,7 +149,7 @@ function PercentPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
- * \@stable
+ *
  */
 export class CurrencyPipe {
     /**

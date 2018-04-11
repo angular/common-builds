@@ -31,7 +31,7 @@ import { Observable } from 'rxjs';
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * @stable
+ *
  */
 export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _ref;

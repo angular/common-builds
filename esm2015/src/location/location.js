@@ -47,7 +47,7 @@ function PopStateEvent_tsickle_Closure_declarations() {
  *
  * ### Example
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * \@stable
+ *
  */
 export class Location {
     /**

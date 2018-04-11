@@ -73,7 +73,7 @@ import { DateFormatter } from './intl';
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- * \@stable
+ *
  */
 export class DeprecatedDatePipe {
     /**

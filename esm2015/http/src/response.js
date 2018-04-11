@@ -47,7 +47,7 @@ HttpEventType[HttpEventType.User] = "User";
 /**
  * Base interface for progress events.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpProgressEvent() { }
@@ -72,7 +72,7 @@ function HttpProgressEvent_tsickle_Closure_declarations() {
 /**
  * A download progress event.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpDownloadProgressEvent() { }
@@ -90,7 +90,7 @@ function HttpDownloadProgressEvent_tsickle_Closure_declarations() {
 /**
  * An upload progress event.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpUploadProgressEvent() { }
@@ -103,7 +103,7 @@ function HttpUploadProgressEvent_tsickle_Closure_declarations() {
  * when a request may be retried multiple times, to distinguish between
  * retries on the final event stream.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpSentEvent() { }
@@ -117,7 +117,7 @@ function HttpSentEvent_tsickle_Closure_declarations() {
  * Grouping all custom events under this type ensures they will be handled
  * and forwarded by all implementations of interceptors.
  *
- * \@stable
+ *
  * @record
  * @template T
  */
@@ -132,7 +132,7 @@ function HttpUserEvent_tsickle_Closure_declarations() {
  *
  * It bundles the Error object with the actual response body that failed to parse.
  *
- * \@stable
+ *
  * @record
  */
 export function HttpJsonParseError() { }
@@ -145,7 +145,7 @@ function HttpJsonParseError_tsickle_Closure_declarations() {
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
- * \@stable
+ *
  * @abstract
  */
 export class HttpResponseBase {
@@ -210,7 +210,7 @@ function HttpResponseBase_tsickle_Closure_declarations() {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
- * \@stable
+ *
  */
 export class HttpHeaderResponse extends HttpResponseBase {
     /**
@@ -249,7 +249,7 @@ function HttpHeaderResponse_tsickle_Closure_declarations() {
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
- * \@stable
+ *
  * @template T
  */
 export class HttpResponse extends HttpResponseBase {
@@ -296,7 +296,7 @@ function HttpResponse_tsickle_Closure_declarations() {
  * will contain either a wrapped Error object or the error response returned
  * from the server.
  *
- * \@stable
+ *
  */
 export class HttpErrorResponse extends HttpResponseBase {
     /**

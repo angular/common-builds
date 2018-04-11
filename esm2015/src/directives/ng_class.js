@@ -36,7 +36,7 @@ import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Rendere
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- * \@stable
+ *
  */
 export class NgClass {
     /**

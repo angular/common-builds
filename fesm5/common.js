@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-ee14579
+ * @license Angular v6.0.0-rc.3-0cb4f12
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -37,7 +37,7 @@ import { __assign, __extends } from 'tslib';
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
 var PlatformLocation = /** @class */ (function () {
@@ -90,7 +90,7 @@ var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  *
  * See these two classes for more.
  *
- * \@stable
+ *
  * @abstract
  */
 var LocationStrategy = /** @class */ (function () {
@@ -118,7 +118,7 @@ var LocationStrategy = /** @class */ (function () {
  * class AppModule {}
  * ```
  *
- * \@stable
+ *
  */
 var APP_BASE_HREF = new InjectionToken('appBaseHref');
 
@@ -159,7 +159,7 @@ var APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * ### Example
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * \@stable
+ *
  */
 var Location = /** @class */ (function () {
     function Location(platformStrategy) {
@@ -479,7 +479,7 @@ function _stripIndexHtml(url) {
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 var HashLocationStrategy = /** @class */ (function (_super) {
     __extends(HashLocationStrategy, _super);
@@ -641,7 +641,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 var PathLocationStrategy = /** @class */ (function (_super) {
     __extends(PathLocationStrategy, _super);
@@ -1661,7 +1661,7 @@ TranslationType[TranslationType.Eras] = "Eras";
  *
  * See {\@link DatePipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} format
  * @param {?} locale
@@ -2476,7 +2476,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *    as `USD` for the US dollar and `EUR` for the euro.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?} currency
@@ -2505,7 +2505,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -2529,7 +2529,7 @@ function formatPercent(value, locale, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -3307,7 +3307,7 @@ function parseCookieValue(cookieStr, name) {
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- * \@stable
+ *
  */
 var NgClass = /** @class */ (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
@@ -3646,7 +3646,7 @@ var NgComponentOutlet = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@stable
+ *
  * @template T
  */
 var NgForOfContext = /** @class */ (function () {
@@ -3758,7 +3758,7 @@ var NgForOfContext = /** @class */ (function () {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- * \@stable
+ *
  * @template T
  */
 var NgForOf = /** @class */ (function () {
@@ -4026,7 +4026,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * \@stable
+ *
  */
 var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
@@ -4122,7 +4122,7 @@ var NgIf = /** @class */ (function () {
     return NgIf;
 }());
 /**
- * \@stable
+ *
  */
 var NgIfContext = /** @class */ (function () {
     function NgIfContext() {
@@ -4236,7 +4236,7 @@ var SwitchView = /** @class */ (function () {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- * \@stable
+ *
  */
 var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
@@ -4357,7 +4357,7 @@ var NgSwitch = /** @class */ (function () {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
@@ -4406,7 +4406,7 @@ var NgSwitchCase = /** @class */ (function () {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
@@ -4612,7 +4612,7 @@ var NgPluralCase = /** @class */ (function () {
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * \@stable
+ *
  */
 var NgStyle = /** @class */ (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
@@ -4730,7 +4730,7 @@ var NgStyle = /** @class */ (function () {
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@stable
+ *
  */
 var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
@@ -5226,7 +5226,7 @@ var DateFormatter = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedDatePipe = /** @class */ (function () {
     function DeprecatedDatePipe(_locale) {
@@ -5403,7 +5403,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
@@ -5447,7 +5447,7 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedPercentPipe = /** @class */ (function () {
     function DeprecatedPercentPipe(_locale) {
@@ -5497,7 +5497,7 @@ var DeprecatedPercentPipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedCurrencyPipe = /** @class */ (function () {
     function DeprecatedCurrencyPipe(_locale) {
@@ -5659,7 +5659,7 @@ var _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@stable
+ *
  */
 var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
@@ -5793,7 +5793,7 @@ var AsyncPipe = /** @class */ (function () {
  *
  * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
- * \@stable
+ *
  */
 var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
@@ -5840,7 +5840,7 @@ var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C
  * ## Example
  * {\@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
- * \@stable
+ *
  */
 var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
@@ -5871,7 +5871,7 @@ var TitleCasePipe = /** @class */ (function () {
 /**
  * Transforms text to uppercase.
  *
- * \@stable
+ *
  */
 var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
@@ -5999,7 +5999,7 @@ var UpperCasePipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
  *
- * \@stable
+ *
  */
 var DatePipe = /** @class */ (function () {
     function DatePipe(locale) {
@@ -6261,7 +6261,7 @@ var I18nSelectPipe = /** @class */ (function () {
  * ### Example
  * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * \@stable
+ *
  */
 var JsonPipe = /** @class */ (function () {
     function JsonPipe() {
@@ -6307,7 +6307,7 @@ var JsonPipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
- * \@stable
+ *
  */
 var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
@@ -6383,7 +6383,7 @@ var DecimalPipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
- * \@stable
+ *
  */
 var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
@@ -6444,7 +6444,7 @@ var PercentPipe = /** @class */ (function () {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
- * \@stable
+ *
  */
 var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {
@@ -6601,7 +6601,7 @@ function strToNumber(value) {
  *
  * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
- * \@stable
+ *
  */
 var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
@@ -6721,7 +6721,7 @@ var COMMON_PIPES = [
 /**
  * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
- * \@stable
+ *
  */
 var CommonModule = /** @class */ (function () {
     function CommonModule() {
@@ -6777,7 +6777,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- * \@stable
+ *
  */
 var DOCUMENT = new InjectionToken('DocumentToken');
 
@@ -6845,9 +6845,9 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@stable
+ *
  */
-var VERSION = new Version('6.0.0-rc.3-ee14579');
+var VERSION = new Version('6.0.0-rc.3-0cb4f12');
 
 /**
  * @fileoverview added by tsickle

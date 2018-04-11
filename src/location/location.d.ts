@@ -28,7 +28,7 @@ export interface PopStateEvent {
  *
  * ### Example
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * @stable
+ *
  */
 export declare class Location {
     constructor(platformStrategy: LocationStrategy);

@@ -32,7 +32,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@stable
+ *
  */
 export class NgTemplateOutlet {
     /**

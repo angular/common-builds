@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-ee14579
+ * @license Angular v6.0.0-rc.3-0cb4f12
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -200,7 +200,7 @@ class LocationState {
  * A mock implementation of {\@link LocationStrategy} that allows tests to fire simulated
  * location events.
  *
- * \@stable
+ *
  */
 class MockLocationStrategy extends LocationStrategy {
     constructor() {

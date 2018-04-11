@@ -93,7 +93,7 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * @stable
+ *
  */
 export declare class NgIf {
     private _viewContainer;
@@ -109,7 +109,7 @@ export declare class NgIf {
     private _updateView();
 }
 /**
- * @stable
+ *
  */
 export declare class NgIfContext {
     $implicit: any;

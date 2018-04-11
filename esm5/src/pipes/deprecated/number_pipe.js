@@ -92,7 +92,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
@@ -148,7 +148,7 @@ function DeprecatedDecimalPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedPercentPipe = /** @class */ (function () {
     function DeprecatedPercentPipe(_locale) {
@@ -210,7 +210,7 @@ function DeprecatedPercentPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * \@stable
+ *
  */
 var DeprecatedCurrencyPipe = /** @class */ (function () {
     function DeprecatedCurrencyPipe(_locale) {

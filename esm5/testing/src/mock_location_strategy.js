@@ -16,7 +16,7 @@ import { EventEmitter, Injectable } from '@angular/core';
  * A mock implementation of {\@link LocationStrategy} that allows tests to fire simulated
  * location events.
  *
- * \@stable
+ *
  */
 var MockLocationStrategy = /** @class */ (function (_super) {
     tslib_1.__extends(MockLocationStrategy, _super);
