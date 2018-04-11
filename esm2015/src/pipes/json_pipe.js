@@ -19,7 +19,7 @@ import { Pipe } from '@angular/core';
  * ### Example
  * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * \@stable
+ *
  */
 export class JsonPipe {
     /**

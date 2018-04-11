@@ -28,7 +28,7 @@ import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angula
  *
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * @stable
+ *
  */
 export declare class NgTemplateOutlet implements OnChanges {
     private _viewContainerRef;

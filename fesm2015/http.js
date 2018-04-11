@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-5992fe6
+ * @license Angular v6.0.0-rc.3-fb4513c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -29,7 +29,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- * \@stable
+ *
  * @abstract
  */
 class HttpHandler {
@@ -42,7 +42,7 @@ class HttpHandler {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- * \@stable
+ *
  * @abstract
  */
 class HttpBackend {
@@ -64,7 +64,7 @@ class HttpBackend {
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
- * \@stable
+ *
  */
 class HttpHeaders {
     /**
@@ -302,7 +302,7 @@ class HttpHeaders {
  *
  * Used by `HttpParams`.
  *
- * \@stable
+ *
  *
  * @record
  */
@@ -311,7 +311,7 @@ class HttpHeaders {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 class HttpUrlEncodingCodec {
     /**
@@ -383,7 +383,7 @@ function standardEncoding(v) {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 class HttpParams {
     /**
@@ -602,7 +602,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 class HttpRequest {
@@ -863,21 +863,21 @@ HttpEventType[HttpEventType.User] = "User";
 /**
  * Base interface for progress events.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * A download progress event.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * An upload progress event.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -886,7 +886,7 @@ HttpEventType[HttpEventType.User] = "User";
  * when a request may be retried multiple times, to distinguish between
  * retries on the final event stream.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -896,7 +896,7 @@ HttpEventType[HttpEventType.User] = "User";
  * Grouping all custom events under this type ensures they will be handled
  * and forwarded by all implementations of interceptors.
  *
- * \@stable
+ *
  * @record
  * @template T
  */
@@ -907,14 +907,14 @@ HttpEventType[HttpEventType.User] = "User";
  *
  * It bundles the Error object with the actual response body that failed to parse.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
- * \@stable
+ *
  * @abstract
  */
 class HttpResponseBase {
@@ -945,7 +945,7 @@ class HttpResponseBase {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
- * \@stable
+ *
  */
 class HttpHeaderResponse extends HttpResponseBase {
     /**
@@ -980,7 +980,7 @@ class HttpHeaderResponse extends HttpResponseBase {
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
- * \@stable
+ *
  * @template T
  */
 class HttpResponse extends HttpResponseBase {
@@ -1018,7 +1018,7 @@ class HttpResponse extends HttpResponseBase {
  * will contain either a wrapped Error object or the error response returned
  * from the server.
  *
- * \@stable
+ *
  */
 class HttpErrorResponse extends HttpResponseBase {
     /**
@@ -1083,7 +1083,7 @@ function addBody(options, body) {
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- * \@stable
+ *
  */
 class HttpClient {
     /**
@@ -1356,14 +1356,14 @@ HttpClient.ctorParameters = () => [
  * In rare cases, interceptors may wish to completely handle a request themselves,
  * and not delegate to the remainder of the chain. This behavior is allowed.
  *
- * \@stable
+ *
  * @record
  */
 
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
- * \@stable
+ *
  */
 class HttpInterceptorHandler {
     /**
@@ -1386,7 +1386,7 @@ class HttpInterceptorHandler {
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
- * \@stable
+ *
  */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 class NoopInterceptor {
@@ -1433,7 +1433,7 @@ const JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response typ
  *
  * In the browser, this should always be the `window` object.
  *
- * \@stable
+ *
  * @abstract
  */
 class JsonpCallbackContext {
@@ -1442,7 +1442,7 @@ class JsonpCallbackContext {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- * \@stable
+ *
  */
 class JsonpClientBackend {
     /**
@@ -1598,7 +1598,7 @@ JsonpClientBackend.ctorParameters = () => [
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * \@stable
+ *
  */
 class JsonpInterceptor {
     /**
@@ -1658,7 +1658,7 @@ function getResponseUrl(xhr) {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * \@stable
+ *
  * @abstract
  */
 class XhrFactory {
@@ -1666,7 +1666,7 @@ class XhrFactory {
 /**
  * A factory for \@{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
  *
- * \@stable
+ *
  */
 class BrowserXhr {
     constructor() { }
@@ -1684,7 +1684,7 @@ BrowserXhr.ctorParameters = () => [];
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- * \@stable
+ *
  */
 class HttpXhrBackend {
     /**
@@ -1951,7 +1951,7 @@ const XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 class HttpXsrfTokenExtractor {
@@ -2100,7 +2100,7 @@ HttpInterceptingHandler.ctorParameters = () => [
  *
  * Meant to be used as a factory function within `HttpClientModule`.
  *
- * \@stable
+ *
  * @param {?} backend
  * @param {?=} interceptors
  * @return {?}
@@ -2117,7 +2117,7 @@ function interceptingHandler(backend, interceptors = []) {
  * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
  * in test environments. In that case, callbacks are stored on an anonymous object instead.
  *
- * \@stable
+ *
  * @return {?}
  */
 function jsonpCallbackContext() {
@@ -2136,7 +2136,7 @@ function jsonpCallbackContext() {
  * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
  * the header name and `XSRF-TOKEN` for the cookie name.
  *
- * \@stable
+ *
  */
 class HttpClientXsrfModule {
     /**
@@ -2186,7 +2186,7 @@ HttpClientXsrfModule.ctorParameters = () => [];
  * Interceptors can be added to the chain behind `HttpClient` by binding them
  * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
- * \@stable
+ *
  */
 class HttpClientModule {
 }
@@ -2216,7 +2216,7 @@ HttpClientModule.ctorParameters = () => [];
  * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
  *
- * \@stable
+ *
  */
 class HttpClientJsonpModule {
 }

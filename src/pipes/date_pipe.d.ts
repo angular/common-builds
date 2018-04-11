@@ -94,7 +94,7 @@ import { PipeTransform } from '@angular/core';
  *
  * {@example common/pipes/ts/date_pipe.ts region='DatePipe'}
  *
- * @stable
+ *
  */
 export declare class DatePipe implements PipeTransform {
     private locale;

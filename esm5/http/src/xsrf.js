@@ -16,13 +16,13 @@ export var /** @type {?} */ XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_N
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 HttpXsrfTokenExtractor = /** @class */ (function () {
@@ -33,7 +33,7 @@ HttpXsrfTokenExtractor = /** @class */ (function () {
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * \@stable
+ *
  * @abstract
  */
 export { HttpXsrfTokenExtractor };

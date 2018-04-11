@@ -16,7 +16,7 @@ import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/ht
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
 var /**
  * A mock requests that was received and is ready to be answered.
@@ -24,7 +24,7 @@ var /**
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
 TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
@@ -163,7 +163,7 @@ TestRequest = /** @class */ (function () {
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
 export { TestRequest };
 function TestRequest_tsickle_Closure_declarations() {

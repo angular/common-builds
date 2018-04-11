@@ -11,7 +11,7 @@ import { PipeTransform } from '@angular/core';
  *
  * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
- * @stable
+ *
  */
 export declare class LowerCasePipe implements PipeTransform {
     transform(value: string): string;
@@ -26,7 +26,7 @@ export declare class LowerCasePipe implements PipeTransform {
  * ## Example
  * {@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
- * @stable
+ *
  */
 export declare class TitleCasePipe implements PipeTransform {
     transform(value: string): string;
@@ -34,7 +34,7 @@ export declare class TitleCasePipe implements PipeTransform {
 /**
  * Transforms text to uppercase.
  *
- * @stable
+ *
  */
 export declare class UpperCasePipe implements PipeTransform {
     transform(value: string): string;

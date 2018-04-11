@@ -73,7 +73,7 @@ TranslationType[TranslationType.Eras] = "Eras";
  *
  * See {\@link DatePipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} format
  * @param {?} locale

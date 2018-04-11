@@ -85,7 +85,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 var /**
@@ -96,7 +96,7 @@ var /**
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 HttpRequest = /** @class */ (function () {
@@ -339,7 +339,7 @@ HttpRequest = /** @class */ (function () {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 export { HttpRequest };

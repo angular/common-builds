@@ -97,7 +97,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef, ɵstringify as stringi
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * \@stable
+ *
  */
 var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
@@ -222,10 +222,10 @@ function NgIf_tsickle_Closure_declarations() {
     NgIf.prototype._viewContainer;
 }
 /**
- * \@stable
+ *
  */
 var /**
- * \@stable
+ *
  */
 NgIfContext = /** @class */ (function () {
     function NgIfContext() {
@@ -235,7 +235,7 @@ NgIfContext = /** @class */ (function () {
     return NgIfContext;
 }());
 /**
- * \@stable
+ *
  */
 export { NgIfContext };
 function NgIfContext_tsickle_Closure_declarations() {

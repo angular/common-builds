@@ -30,7 +30,7 @@ import { InjectionToken } from '@angular/core';
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
@@ -53,7 +53,7 @@ var /**
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
 PlatformLocation = /** @class */ (function () {
@@ -81,7 +81,7 @@ PlatformLocation = /** @class */ (function () {
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
 export { PlatformLocation };

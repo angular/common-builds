@@ -132,7 +132,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *    as `USD` for the US dollar and `EUR` for the euro.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?} currency
@@ -161,7 +161,7 @@ export function formatCurrency(value, locale, currency, currencyCode, digitsInfo
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -185,7 +185,7 @@ export function formatPercent(value, locale, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- * \@stable
+ *
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo

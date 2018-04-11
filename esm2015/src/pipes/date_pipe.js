@@ -100,7 +100,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
  *
- * \@stable
+ *
  */
 export class DatePipe {
     /**

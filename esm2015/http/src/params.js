@@ -14,7 +14,7 @@
  *
  * Used by `HttpParams`.
  *
- * \@stable
+ *
  *
  * @record
  */
@@ -33,7 +33,7 @@ function HttpParameterCodec_tsickle_Closure_declarations() {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 export class HttpUrlEncodingCodec {
     /**
@@ -135,7 +135,7 @@ function HttpParamsOptions_tsickle_Closure_declarations() {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 export class HttpParams {
     /**

@@ -97,7 +97,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef, ɵstringify as stringi
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * \@stable
+ *
  */
 export class NgIf {
     /**
@@ -209,7 +209,7 @@ function NgIf_tsickle_Closure_declarations() {
     NgIf.prototype._viewContainer;
 }
 /**
- * \@stable
+ *
  */
 export class NgIfContext {
     constructor() {

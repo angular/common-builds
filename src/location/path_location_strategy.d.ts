@@ -23,7 +23,7 @@ import { LocationChangeListener, PlatformLocation } from './platform_location';
  *
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * @stable
+ *
  */
 export declare class PathLocationStrategy extends LocationStrategy {
     private _platformLocation;

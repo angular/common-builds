@@ -85,7 +85,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- * \@stable
+ *
  * @template T
  */
 export class HttpRequest {

@@ -101,7 +101,7 @@ function SwitchView_tsickle_Closure_declarations() {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- * \@stable
+ *
  */
 var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
@@ -246,7 +246,7 @@ function NgSwitch_tsickle_Closure_declarations() {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
@@ -313,7 +313,7 @@ function NgSwitchCase_tsickle_Closure_declarations() {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
 var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {

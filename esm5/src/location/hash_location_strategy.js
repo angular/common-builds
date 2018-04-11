@@ -28,7 +28,7 @@ import { PlatformLocation } from './platform_location';
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
 var HashLocationStrategy = /** @class */ (function (_super) {
     tslib_1.__extends(HashLocationStrategy, _super);

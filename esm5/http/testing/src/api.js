@@ -12,7 +12,7 @@
 /**
  * Defines a matcher for requests based on URL, method, or both.
  *
- * \@stable
+ *
  * @record
  */
 export function RequestMatch() { }
@@ -26,14 +26,14 @@ function RequestMatch_tsickle_Closure_declarations() {
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@stable
+ *
  * @abstract
  */
 var /**
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@stable
+ *
  * @abstract
  */
 HttpTestingController = /** @class */ (function () {
@@ -45,7 +45,7 @@ HttpTestingController = /** @class */ (function () {
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@stable
+ *
  * @abstract
  */
 export { HttpTestingController };

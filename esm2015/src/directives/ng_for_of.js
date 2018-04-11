@@ -11,7 +11,7 @@
  */
 import { Directive, Input, IterableDiffers, TemplateRef, ViewContainerRef, isDevMode } from '@angular/core';
 /**
- * \@stable
+ *
  * @template T
  */
 export class NgForOfContext {
@@ -122,7 +122,7 @@ function NgForOfContext_tsickle_Closure_declarations() {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- * \@stable
+ *
  * @template T
  */
 export class NgForOf {

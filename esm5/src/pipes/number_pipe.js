@@ -26,7 +26,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
- * \@stable
+ *
  */
 var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
@@ -114,7 +114,7 @@ function DecimalPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
- * \@stable
+ *
  */
 var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
@@ -187,7 +187,7 @@ function PercentPipe_tsickle_Closure_declarations() {
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
- * \@stable
+ *
  */
 var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.3-5992fe6
+ * @license Angular v6.0.0-rc.3-fb4513c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -21,7 +21,7 @@ import { Observable } from 'rxjs';
 /**
  * Defines a matcher for requests based on URL, method, or both.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -29,7 +29,7 @@ import { Observable } from 'rxjs';
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@stable
+ *
  * @abstract
  */
 class HttpTestingController {
@@ -52,7 +52,7 @@ class HttpTestingController {
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
 class TestRequest {
     /**
@@ -256,7 +256,7 @@ function _maybeConvertBody(responseType, body) {
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
  *
- * \@stable
+ *
  */
 class HttpClientTestingBackend {
     constructor() {
@@ -409,7 +409,7 @@ HttpClientTestingBackend.ctorParameters = () => [];
  *
  * Inject `HttpTestingController` to expect and flush requests in your tests.
  *
- * \@stable
+ *
  */
 class HttpClientTestingModule {
 }

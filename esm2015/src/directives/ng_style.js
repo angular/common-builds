@@ -30,7 +30,7 @@ import { Directive, ElementRef, Input, KeyValueDiffers, Renderer2 } from '@angul
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * \@stable
+ *
  */
 export class NgStyle {
     /**

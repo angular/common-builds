@@ -23,7 +23,7 @@ import { LocationChangeListener } from './platform_location';
  *
  * See these two classes for more.
  *
- * @stable
+ *
  */
 export declare abstract class LocationStrategy {
     abstract path(includeHash?: boolean): string;
@@ -55,6 +55,6 @@ export declare abstract class LocationStrategy {
  * class AppModule {}
  * ```
  *
- * @stable
+ *
  */
 export declare const APP_BASE_HREF: InjectionToken<string>;

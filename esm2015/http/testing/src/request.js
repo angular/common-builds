@@ -16,7 +16,7 @@ import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/ht
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
 export class TestRequest {
     /**

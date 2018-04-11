@@ -14,7 +14,7 @@
  *
  * Used by `HttpParams`.
  *
- * \@stable
+ *
  *
  * @record
  */
@@ -33,13 +33,13 @@ function HttpParameterCodec_tsickle_Closure_declarations() {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 var /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 HttpUrlEncodingCodec = /** @class */ (function () {
     function HttpUrlEncodingCodec() {
@@ -86,7 +86,7 @@ HttpUrlEncodingCodec = /** @class */ (function () {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- * \@stable
+ *
  */
 export { HttpUrlEncodingCodec };
 /**
@@ -167,7 +167,7 @@ function HttpParamsOptions_tsickle_Closure_declarations() {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 var /**
  * An HTTP request/response body that represents serialized parameters,
@@ -175,7 +175,7 @@ var /**
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 HttpParams = /** @class */ (function () {
     function HttpParams(options) {
@@ -413,7 +413,7 @@ HttpParams = /** @class */ (function () {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- * \@stable
+ *
  */
 export { HttpParams };
 function HttpParams_tsickle_Closure_declarations() {
