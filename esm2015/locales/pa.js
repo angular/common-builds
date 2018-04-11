@@ -9,21 +9,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === Math.floor(n) && n >= 0 && n <= 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'pa',
-    [
-        ['ਸ.', 'ਸ਼.'],
-        ['ਪੂ.ਦੁ.', 'ਬਾ.ਦੁ.'],
-    ],
-    [
-        ['ਪੂ.ਦੁ.', 'ਬਾ.ਦੁ.'],
-        ,
-    ],
+    'pa', [['ਸ.', 'ਸ਼.'], ['ਪੂ.ਦੁ.', 'ਬਾ.ਦੁ.'], u],
+    [['ਪੂ.ਦੁ.', 'ਬਾ.ਦੁ.'], u, u],
     [
         ['ਐ', 'ਸੋ', 'ਮੰ', 'ਬੁੱ', 'ਵੀ', 'ਸ਼ੁੱ', 'ਸ਼'],
         [
@@ -39,7 +33,7 @@ exports.default = [
             'ਸ਼ਨਿੱ'
         ]
     ],
-    ,
+    u,
     [
         [
             'ਜ', 'ਫ਼', 'ਮਾ', 'ਅ', 'ਮ', 'ਜੂ', 'ਜੁ', 'ਅ', 'ਸ', 'ਅ', 'ਨ', 'ਦ'
@@ -54,18 +48,13 @@ exports.default = [
             'ਨਵੰਬਰ', 'ਦਸੰਬਰ'
         ]
     ],
-    ,
+    u,
     [
         ['ਈ.ਪੂ.', 'ਸੰਨ'], ['ਈ. ਪੂ.', 'ਸੰਨ'],
         ['ਈਸਵੀ ਪੂਰਵ', 'ਈਸਵੀ ਸੰਨ']
     ],
     0, [0, 0], ['d/M/yy', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} {0}',
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1}, {0}', u, '{1} {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##,##0%', '¤ #,##,##0.00', '[#E0]'], '₹',
     'ਭਾਰਤੀ ਰੁਪਇਆ',

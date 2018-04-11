@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (i === 0 || i === 1)
@@ -16,18 +17,13 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'fr-RW',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'fr-RW', [['AM', 'PM'], u, u], u,
     [
         ['D', 'L', 'M', 'M', 'J', 'V', 'S'], ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
         ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
         ['di', 'lu', 'ma', 'me', 'je', 've', 'sa']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         [
@@ -39,15 +35,9 @@ exports.default = [
             'octobre', 'novembre', 'décembre'
         ]
     ],
-    ,
-    [['av. J.-C.', 'ap. J.-C.'], , ['avant Jésus-Christ', 'après Jésus-Christ']], 1, [6, 0],
+    u, [['av. J.-C.', 'ap. J.-C.'], u, ['avant Jésus-Christ', 'après Jésus-Christ']], 1, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        '{1} \'à\' {0}',
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', '{1} \'à\' {0}', u, u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'RF', 'franc rwandais', {
         'ARS': ['$AR', '$'],
@@ -59,41 +49,41 @@ exports.default = [
         'BZD': ['$BZ', '$'],
         'CAD': ['$CA', '$'],
         'CLP': ['$CL', '$'],
-        'CNY': [, '¥'],
+        'CNY': [u, '¥'],
         'COP': ['$CO', '$'],
         'CYP': ['£CY'],
-        'EGP': [, '£E'],
+        'EGP': [u, '£E'],
         'FJD': ['$FJ', '$'],
         'FKP': ['£FK', '£'],
         'FRF': ['F'],
         'GBP': ['£GB', '£'],
         'GIP': ['£GI', '£'],
-        'HKD': [, '$'],
+        'HKD': [u, '$'],
         'IEP': ['£IE'],
         'ILP': ['£IL'],
         'ITL': ['₤IT'],
-        'JPY': [, '¥'],
-        'KMF': [, 'FC'],
+        'JPY': [u, '¥'],
+        'KMF': [u, 'FC'],
         'LBP': ['£LB', '£L'],
         'MTP': ['£MT'],
         'MXN': ['$MX', '$'],
         'NAD': ['$NA', '$'],
-        'NIO': [, '$C'],
+        'NIO': [u, '$C'],
         'NZD': ['$NZ', '$'],
         'RHD': ['$RH'],
-        'RON': [, 'L'],
+        'RON': [u, 'L'],
         'RWF': ['RF', 'FR'],
         'SBD': ['$SB', '$'],
         'SGD': ['$SG', '$'],
         'SRD': ['$SR', '$'],
         'TTD': ['$TT', '$'],
-        'TWD': [, 'NT$'],
+        'TWD': [u, 'NT$'],
         'USD': ['$US', '$'],
         'UYU': ['$UY', '$'],
         'WST': ['WS$'],
-        'XCD': [, '$'],
+        'XCD': [u, '$'],
         'XPF': ['FCFP'],
-        'ZMW': [, 'Kw']
+        'ZMW': [u, 'Kw']
     },
     plural
 ];

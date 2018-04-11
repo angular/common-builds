@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
     if (v === 0 && i % 100 === 1 || f % 100 === 1)
@@ -21,21 +22,14 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'dsb',
-    [
-        ['dop.', 'wótp.'],
-        ['dopołdnja', 'wótpołdnja'],
-    ],
-    [
-        ['dopołdnja', 'wótpołdnja'],
-        ,
-    ],
+    'dsb', [['dop.', 'wótp.'], ['dopołdnja', 'wótpołdnja'], u],
+    [['dopołdnja', 'wótpołdnja'], u, u],
     [
         ['n', 'p', 'w', 's', 's', 'p', 's'], ['nje', 'pón', 'wał', 'srj', 'stw', 'pět', 'sob'],
         ['njeźela', 'pónjeźele', 'wałtora', 'srjoda', 'stwórtk', 'pětk', 'sobota'],
         ['nj', 'pó', 'wa', 'sr', 'st', 'pě', 'so']
     ],
-    ,
+    u,
     [
         ['j', 'f', 'm', 'a', 'm', 'j', 'j', 'a', 's', 'o', 'n', 'd'],
         [
@@ -55,16 +49,11 @@ exports.default = [
             'oktober', 'nowember', 'december'
         ]
     ],
-    [['pś.Chr.n.', 'pó Chr.n.'], , ['pśed Kristusowym naroźenim', 'pó Kristusowem naroźenju']],
+    [['pś.Chr.n.', 'pó Chr.n.'], u, ['pśed Kristusowym naroźenim', 'pó Kristusowem naroźenju']],
     1, [6, 0], ['d.M.yy', 'd.M.y', 'd. MMMM y', 'EEEE, d. MMMM y'],
-    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '·', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'euro',
-    { 'AUD': [, '$'], 'PLN': ['zł'], 'THB': ['฿'] }, plural
+    { 'AUD': [u, '$'], 'PLN': ['zł'], 'THB': ['฿'] }, plural
 ];
 //# sourceMappingURL=dsb.js.map

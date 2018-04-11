@@ -7,19 +7,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 exports.default = [
     [
         ['nửa đêm', 'tr', 'sáng', 'chiều', 'tối', 'đêm'],
-        ['nửa đêm', 'TR', 'sáng', 'chiều', 'tối', 'đêm'],
+        ['nửa đêm', 'TR', 'sáng', 'chiều', 'tối', 'đêm'], u
     ],
     [
         ['nửa đêm', 'trưa', 'sáng', 'chiều', 'tối', 'đêm'],

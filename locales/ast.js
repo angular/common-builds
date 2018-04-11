@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
@@ -23,7 +24,7 @@ exports.default = [
         ['domingu', 'llunes', 'martes', 'miércoles', 'xueves', 'vienres', 'sábadu'],
         ['do', 'll', 'ma', 'mi', 'xu', 'vi', 'sá']
     ],
-    ,
+    u,
     [
         ['X', 'F', 'M', 'A', 'M', 'X', 'X', 'A', 'S', 'O', 'P', 'A'],
         ['xin', 'feb', 'mar', 'abr', 'may', 'xun', 'xnt', 'ago', 'set', 'och', 'pay', 'avi'],
@@ -40,14 +41,10 @@ exports.default = [
             'ochobre', 'payares', 'avientu'
         ]
     ],
-    [['e.C.', 'd.C.'], , ['enantes de Cristu', 'después de Cristu']], 1, [6, 0],
+    [['e.C.', 'd.C.'], u, ['enantes de Cristu', 'después de Cristu']], 1, [6, 0],
     ['d/M/yy', 'd MMM y', 'd MMMM \'de\' y', 'EEEE, d MMMM \'de\' y'],
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        '{1}, {0}',
-        '{1} \'a\' \'les\' {0}',
-    ],
+    ['{1} {0}', '{1}, {0}', '{1} \'a\' \'les\' {0}', u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'ND', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'euro', {
         'BYN': [],

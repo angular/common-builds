@@ -9,18 +9,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'saq',
-    [
-        ['Tesiran', 'Teipa'],
-        ,
-    ],
-    ,
+    'saq', [['Tesiran', 'Teipa'], u, u], u,
     [
         ['A', 'K', 'O', 'I', 'I', 'S', 'K'], ['Are', 'Kun', 'Ong', 'Ine', 'Ile', 'Sap', 'Kwe'],
         [
@@ -29,7 +25,7 @@ exports.default = [
         ],
         ['Are', 'Kun', 'Ong', 'Ine', 'Ile', 'Sap', 'Kwe']
     ],
-    ,
+    u,
     [
         ['O', 'W', 'O', 'O', 'I', 'I', 'S', 'I', 'S', 'T', 'T', 'T'],
         ['Obo', 'Waa', 'Oku', 'Ong', 'Ime', 'Ile', 'Sap', 'Isi', 'Saa', 'Tom', 'Tob', 'Tow'],
@@ -39,15 +35,9 @@ exports.default = [
             'Lapa le tomon obo', 'Lapa le tomon waare'
         ]
     ],
-    ,
-    [['KK', 'BK'], , ['Kabla ya Christo', 'Baada ya Christo']], 0, [6, 0],
+    u, [['KK', 'BK'], u, ['Kabla ya Christo', 'Baada ya Christo']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Njilingi eel Kenya',
     { 'JPY': ['JP¥', '¥'], 'KES': ['Ksh'], 'USD': ['US$', '$'] }, plural

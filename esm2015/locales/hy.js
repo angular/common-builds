@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (i === 0 || i === 1)
@@ -16,15 +17,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'hy',
-    [
-        ['ա', 'հ'],
-        ['ԿԱ', 'ԿՀ'],
-    ],
-    [
-        ['ԿԱ', 'ԿՀ'],
-        ,
-    ],
+    'hy', [['ա', 'հ'], ['ԿԱ', 'ԿՀ'], u], [['ԿԱ', 'ԿՀ'], u, u],
     [
         ['Կ', 'Ե', 'Ե', 'Չ', 'Հ', 'Ո', 'Շ'],
         ['կիր', 'երկ', 'երք', 'չրք', 'հնգ', 'ուր', 'շբթ'],
@@ -34,7 +27,7 @@ exports.default = [
         ],
         ['կր', 'եկ', 'եք', 'չք', 'հգ', 'ու', 'շբ']
     ],
-    ,
+    u,
     [
         ['Հ', 'Փ', 'Մ', 'Ա', 'Մ', 'Հ', 'Հ', 'Օ', 'Ս', 'Հ', 'Ն', 'Դ'],
         [
@@ -59,14 +52,9 @@ exports.default = [
             'նոյեմբեր', 'դեկտեմբեր'
         ]
     ],
-    [['մ.թ.ա.', 'մ.թ.'], , ['Քրիստոսից առաջ', 'Քրիստոսից հետո']], 1,
+    [['մ.թ.ա.', 'մ.թ.'], u, ['Քրիստոսից առաջ', 'Քրիստոսից հետո']], 1,
     [6, 0], ['dd.MM.yy', 'dd MMM, y թ.', 'dd MMMM, y թ.', 'y թ. MMMM d, EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1}, {0}', u, u, u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'ՈչԹ', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '֏', 'հայկական դրամ',
     { 'AMD': ['֏'], 'JPY': ['JP¥', '¥'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural

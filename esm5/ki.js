@@ -9,22 +9,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'ki',
-    [
-        ['Kiroko', 'Hwaĩ-inĩ'],
-        ,
-    ],
-    ,
+    'ki', [['Kiroko', 'Hwaĩ-inĩ'], u, u], u,
     [
         ['K', 'N', 'N', 'N', 'A', 'N', 'N'], ['KMA', 'NTT', 'NMN', 'NMT', 'ART', 'NMA', 'NMM'],
         ['Kiumia', 'Njumatatũ', 'Njumaine', 'Njumatana', 'Aramithi', 'Njumaa', 'Njumamothi'],
         ['KMA', 'NTT', 'NMN', 'NMT', 'ART', 'NMA', 'NMM']
     ],
-    ,
+    u,
     [
         ['J', 'K', 'G', 'K', 'G', 'G', 'M', 'K', 'K', 'I', 'I', 'D'],
         ['JEN', 'WKR', 'WGT', 'WKN', 'WTN', 'WTD', 'WMJ', 'WNN', 'WKD', 'WIK', 'WMW', 'DIT'],
@@ -34,15 +30,9 @@ exports.default = [
             'Mwere wa ikũmi', 'Mwere wa ikũmi na ũmwe', 'Ndithemba'
         ]
     ],
-    ,
-    [['MK', 'TK'], , ['Mbere ya Kristo', 'Thutha wa Kristo']], 0, [6, 0],
+    u, [['MK', 'TK'], u, ['Mbere ya Kristo', 'Thutha wa Kristo']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Ciringi ya Kenya',
     { 'JPY': ['JP¥', '¥'], 'KES': ['Ksh'], 'USD': ['US$', '$'] }, plural

@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length, f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
     if (v === 0 && i % 10 === 1 && !(i % 100 === 11) || f % 10 === 1 && !(f % 100 === 11))
@@ -21,12 +22,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'sr-Cyrl-ME',
-    [
-        ['a', 'p'],
-        ['прије подне', 'по подне'],
-    ],
-    ,
+    'sr-Cyrl-ME', [['a', 'p'], ['прије подне', 'по подне'], u], u,
     [
         ['н', 'п', 'у', 'с', 'ч', 'п', 'с'],
         ['нед.', 'пон.', 'ут.', 'ср.', 'чет.', 'пет.', 'суб.'],
@@ -36,7 +32,7 @@ exports.default = [
         ],
         ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су']
     ],
-    ,
+    u,
     [
         ['ј', 'ф', 'м', 'а', 'м', 'ј', 'ј', 'а', 'с', 'о', 'н', 'д'],
         [
@@ -48,28 +44,23 @@ exports.default = [
             'август', 'септембар', 'октобар', 'новембар', 'децембар'
         ]
     ],
-    ,
+    u,
     [
         ['п.н.е.', 'н.е.'], ['п. н. е.', 'н. е.'],
         ['прије нове ере', 'нове ере']
     ],
     1, [6, 0], ['d.M.yy.', 'dd.MM.y.', 'dd. MMMM y.', 'EEEE, dd. MMMM y.'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '€', 'Евро', {
-        'AUD': [, '$'],
+        'AUD': [u, '$'],
         'BAM': ['КМ', 'KM'],
-        'GEL': [, 'ლ'],
-        'KRW': [, '₩'],
-        'NZD': [, '$'],
+        'GEL': [u, 'ლ'],
+        'KRW': [u, '₩'],
+        'NZD': [u, '$'],
         'TWD': ['NT$'],
         'USD': ['US$', '$'],
-        'VND': [, '₫']
+        'VND': [u, '₫']
     },
     plural
 ];

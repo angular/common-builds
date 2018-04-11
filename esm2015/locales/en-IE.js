@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
@@ -16,17 +17,13 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'en-IE', [['a', 'p'], ['AM', 'PM'], ['a.m.', 'p.m.']],
-    [
-        ['AM', 'PM'],
-        ,
-    ],
+    'en-IE', [['a', 'p'], ['AM', 'PM'], ['a.m.', 'p.m.']], [['AM', 'PM'], u, u],
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -35,15 +32,9 @@ exports.default = [
             'October', 'November', 'December'
         ]
     ],
-    ,
-    [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
+    u, [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} \'at\' {0}',
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1}, {0}', u, '{1} \'at\' {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '€', 'Euro',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

@@ -9,24 +9,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'xog',
-    [
-        ['Munkyo', 'Eigulo'],
-        ,
-    ],
-    ,
+    'xog', [['Munkyo', 'Eigulo'], u, u], u,
     [
         ['S', 'B', 'B', 'S', 'K', 'K', 'M'], ['Sabi', 'Bala', 'Kubi', 'Kusa', 'Kuna', 'Kuta', 'Muka'],
         ['Sabiiti', 'Balaza', 'Owokubili', 'Owokusatu', 'Olokuna', 'Olokutaanu', 'Olomukaaga'],
         ['Sabi', 'Bala', 'Kubi', 'Kusa', 'Kuna', 'Kuta', 'Muka']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mar', 'Apu', 'Maa', 'Juu', 'Jul', 'Agu', 'Seb', 'Oki', 'Nov', 'Des'],
@@ -35,15 +31,9 @@ exports.default = [
             'Sebuttemba', 'Okitobba', 'Novemba', 'Desemba'
         ]
     ],
-    ,
-    [['AZ', 'AF'], , ['Kulisto nga azilawo', 'Kulisto nga affile']], 1, [6, 0],
+    u, [['AZ', 'AF'], u, ['Kulisto nga azilawo', 'Kulisto nga affile']], 1, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'USh', 'Silingi eya Yuganda',
     { 'JPY': ['JP¥', '¥'], 'UGX': ['USh'], 'USD': ['US$', '$'] }, plural

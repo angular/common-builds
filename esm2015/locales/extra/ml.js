@@ -7,15 +7,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 exports.default = [
     [
         [
@@ -29,6 +23,7 @@ exports.default = [
             'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം',
             'സന്ധ്യ', 'രാത്രി'
         ],
+        u
     ],
     [
         [
@@ -37,7 +32,7 @@ exports.default = [
             'ഉച്ചതിരിഞ്ഞ്', 'വൈകുന്നേരം',
             'സന്ധ്യ', 'രാത്രി'
         ],
-        ,
+        u, u
     ],
     [
         '00:00', '12:00', ['03:00', '06:00'], ['06:00', '12:00'], ['12:00', '14:00'],

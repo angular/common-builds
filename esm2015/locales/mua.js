@@ -9,16 +9,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'mua',
-    [
-        ['comme', 'lilli'],
-        ,
-    ],
-    ,
+    'mua', [['comme', 'lilli'], u, u], u,
     [
         ['Y', 'L', 'Z', 'O', 'A', 'G', 'E'], ['Cya', 'Cla', 'Czi', 'Cko', 'Cka', 'Cga', 'Cze'],
         [
@@ -27,7 +23,7 @@ exports.default = [
         ],
         ['Cya', 'Cla', 'Czi', 'Cko', 'Cka', 'Cga', 'Cze']
     ],
-    ,
+    u,
     [
         ['O', 'A', 'I', 'F', 'D', 'B', 'L', 'M', 'E', 'U', 'W', 'Y'],
         ['FLO', 'CLA', 'CKI', 'FMF', 'MAD', 'MBI', 'MLI', 'MAM', 'FDE', 'FMU', 'FGW', 'FYU'],
@@ -37,15 +33,9 @@ exports.default = [
             'Fĩi Gwahlle', 'Fĩi Yuru'
         ]
     ],
-    ,
-    [['KK', 'PK'], , ['KǝPel Kristu', 'Pel Kristu']], 1, [6, 0],
+    u, [['KK', 'PK'], u, ['KǝPel Kristu', 'Pel Kristu']], 1, [6, 0],
     ['d/M/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'FCFA', 'solai BEAC',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

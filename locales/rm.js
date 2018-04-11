@@ -9,24 +9,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'rm',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'rm', [['AM', 'PM'], u, u], u,
     [
         ['D', 'G', 'M', 'M', 'G', 'V', 'S'], ['du', 'gli', 'ma', 'me', 'gie', 've', 'so'],
         ['dumengia', 'glindesdi', 'mardi', 'mesemna', 'gievgia', 'venderdi', 'sonda'],
         ['du', 'gli', 'ma', 'me', 'gie', 've', 'so']
     ],
-    ,
+    u,
     [
         ['S', 'F', 'M', 'A', 'M', 'Z', 'F', 'A', 'S', 'O', 'N', 'D'],
         [
@@ -38,15 +34,9 @@ exports.default = [
             'october', 'november', 'december'
         ]
     ],
-    ,
-    [['av. Cr.', 's. Cr.'], , ['avant Cristus', 'suenter Cristus']], 1, [6, 0],
+    u, [['av. Cr.', 's. Cr.'], u, ['avant Cristus', 'suenter Cristus']], 1, [6, 0],
     ['dd-MM-yy', 'dd-MM-y', 'd \'da\' MMMM y', 'EEEE, \'ils\' d \'da\' MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', '’', ';', '%', '+', '−', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'CHF', 'franc svizzer',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

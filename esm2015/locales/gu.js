@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (i === 0 || n === 1)
@@ -16,12 +17,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'gu',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'gu', [['AM', 'PM'], u, u], u,
     [
         ['ર', 'સો', 'મં', 'બુ', 'ગુ', 'શુ', 'શ'],
         [
@@ -34,7 +30,7 @@ exports.default = [
         ],
         ['ર', 'સો', 'મં', 'બુ', 'ગુ', 'શુ', 'શ']
     ],
-    ,
+    u,
     [
         [
             'જા', 'ફે', 'મા', 'એ', 'મે', 'જૂ', 'જુ', 'ઑ', 'સ', 'ઑ', 'ન',
@@ -52,23 +48,19 @@ exports.default = [
             'ડિસેમ્બર'
         ]
     ],
-    ,
+    u,
     [
         ['ઇ સ પુ', 'ઇસ'], ['ઈ.સ.પૂર્વે', 'ઈ.સ.'],
         ['ઈસવીસન પૂર્વે', 'ઇસવીસન']
     ],
     0, [0, 0], ['d/M/yy', 'd MMM, y', 'd MMMM, y', 'EEEE, d MMMM, y'],
     ['hh:mm a', 'hh:mm:ss a', 'hh:mm:ss a z', 'hh:mm:ss a zzzz'],
-    [
-        '{1} {0}',
-        ,
-        '{1} એ {0} વાગ્યે',
-    ],
+    ['{1} {0}', u, '{1} એ {0} વાગ્યે', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##,##0%', '¤#,##,##0.00', '[#E0]'], '₹',
     'ભારતીય રૂપિયા', {
         'JPY': ['JP¥', '¥'],
-        'MUR': [, 'રૂ.'],
+        'MUR': [u, 'રૂ.'],
         'THB': ['฿'],
         'TWD': ['NT$'],
         'USD': ['US$', '$']

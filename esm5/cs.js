@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
@@ -20,18 +21,13 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'cs',
-    [
-        ['dop.', 'odp.'],
-        ,
-    ],
-    ,
+    'cs', [['dop.', 'odp.'], u, u], u,
     [
         ['N', 'P', 'Ú', 'S', 'Č', 'P', 'S'], ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
         ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'],
         ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so']
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         ['led', 'úno', 'bře', 'dub', 'kvě', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'],
@@ -53,24 +49,19 @@ exports.default = [
         ['před naším letopočtem', 'našeho letopočtu']
     ],
     1, [6, 0], ['dd.MM.yy', 'd. M. y', 'd. MMMM y', 'EEEE d. MMMM y'],
-    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'Kč', 'česká koruna', {
         'AUD': ['AU$', '$'],
         'CSK': ['Kčs'],
         'CZK': ['Kč'],
-        'ILS': [, '₪'],
-        'INR': [, '₹'],
+        'ILS': [u, '₪'],
+        'INR': [u, '₹'],
         'JPY': ['JP¥', '¥'],
-        'RON': [, 'L'],
+        'RON': [u, 'L'],
         'TWD': ['NT$'],
         'USD': ['US$', '$'],
-        'VND': [, '₫'],
+        'VND': [u, '₫'],
         'XEU': ['ECU']
     },
     plural

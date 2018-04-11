@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (n === 0)
@@ -18,19 +19,14 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'lag',
-    [
-        ['TOO', 'MUU'],
-        ,
-    ],
-    ,
+    'lag', [['TOO', 'MUU'], u, u], u,
     [
         ['P', 'T', 'E', 'O', 'A', 'I', 'M'],
         ['Píili', 'Táatu', 'Íne', 'Táano', 'Alh', 'Ijm', 'Móosi'],
         ['Jumapíiri', 'Jumatátu', 'Jumaíne', 'Jumatáano', 'Alamíisi', 'Ijumáa', 'Jumamóosi'],
         ['Píili', 'Táatu', 'Íne', 'Táano', 'Alh', 'Ijm', 'Móosi']
     ],
-    ,
+    u,
     [
         ['F', 'N', 'K', 'I', 'I', 'I', 'M', 'V', 'S', 'I', 'S', 'S'],
         [
@@ -42,15 +38,9 @@ exports.default = [
             'Kʉmʉʉnchɨ', 'Kʉvɨɨrɨ', 'Kʉsaatʉ', 'Kwiinyi', 'Kʉsaano', 'Kʉsasatʉ'
         ]
     ],
-    ,
-    [['KSA', 'KA'], , ['Kɨrɨsitʉ sɨ anavyaal', 'Kɨrɨsitʉ akavyaalwe']], 1, [6, 0],
+    u, [['KSA', 'KA'], u, ['Kɨrɨsitʉ sɨ anavyaal', 'Kɨrɨsitʉ akavyaalwe']], 1, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'TSh', 'Shilíingi ya Taansanía',
     { 'JPY': ['JP¥', '¥'], 'TZS': ['TSh'], 'USD': ['US$', '$'] }, plural

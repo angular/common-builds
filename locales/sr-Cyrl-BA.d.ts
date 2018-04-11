@@ -1,11 +1,2 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
-    'AUD': string[];
-    'BAM': string[];
-    'GEL': string[];
-    'KRW': string[];
-    'NZD': string[];
-    'TWD': string[];
-    'USD': string[];
-    'VND': string[];
-})[];
+declare const _default: any[];
 export default _default;

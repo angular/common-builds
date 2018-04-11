@@ -9,17 +9,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'to', [['AM', 'PM'], , ['hengihengi', 'efiafi']], [['AM', 'PM'], , ['HH', 'EA']],
+    'to', [['AM', 'PM'], u, ['hengihengi', 'efiafi']], [['AM', 'PM'], u, ['HH', 'EA']],
     [
         ['S', 'M', 'T', 'P', 'T', 'F', 'T'], ['Sāp', 'Mōn', 'Tūs', 'Pul', 'Tuʻa', 'Fal', 'Tok'],
         ['Sāpate', 'Mōnite', 'Tūsite', 'Pulelulu', 'Tuʻapulelulu', 'Falaite', 'Tokonaki'],
         ['Sāp', 'Mōn', 'Tūs', 'Pul', 'Tuʻa', 'Fal', 'Tok']
     ],
-    ,
+    u,
     [
         ['S', 'F', 'M', 'E', 'M', 'S', 'S', 'A', 'S', 'O', 'N', 'T'],
         [
@@ -30,15 +31,9 @@ exports.default = [
             'Sepitema', 'ʻOkatopa', 'Nōvema', 'Tīsema'
         ]
     ],
-    ,
-    [['KM', 'TS'], , ['ki muʻa', 'taʻu ʻo Sīsū']], 1, [6, 0],
+    u, [['KM', 'TS'], u, ['ki muʻa', 'taʻu ʻo Sīsū']], 1, [6, 0],
     ['d/M/yy', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1} {0}',
-        '{1}, {0}',
-        ,
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1} {0}', '{1}, {0}', u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'TF', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'T$', 'Paʻanga fakatonga', {
         'AUD': ['AUD$', '$'],

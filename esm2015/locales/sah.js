@@ -9,16 +9,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'sah',
-    [
-        ['ЭИ', 'ЭК'],
-        ,
-    ],
-    ,
+    'sah', [['ЭИ', 'ЭК'], u, u], u,
     [
         ['Б', 'Б', 'О', 'С', 'Ч', 'Б', 'С'],
         ['бс', 'бн', 'оп', 'сэ', 'чп', 'бэ', 'сб'],
@@ -28,7 +24,7 @@ exports.default = [
         ],
         ['бс', 'бн', 'оп', 'сэ', 'чп', 'бэ', 'сб']
     ],
-    ,
+    u,
     [
         ['Т', 'О', 'К', 'М', 'Ы', 'Б', 'О', 'А', 'Б', 'А', 'С', 'А'],
         [
@@ -53,17 +49,9 @@ exports.default = [
             'балаҕан ыйа', 'алтынньы', 'сэтинньи', 'ахсынньы'
         ]
     ],
-    [
-        ['б. э. и.', 'б. э'],
-        ,
-    ],
-    1, [6, 0], ['yy/M/d', 'y, MMM d', 'y, MMMM d', 'y \'сыл\' MMMM d \'күнэ\', EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    [['б. э. и.', 'б. э'], u, u], 1, [6, 0],
+    ['yy/M/d', 'y, MMM d', 'y, MMMM d', 'y \'сыл\' MMMM d \'күнэ\', EEEE'],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'чыыһыла буотах', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '₽', 'Арассыыйа солкуобайа',
     { 'JPY': ['JP¥', '¥'], 'RUB': ['₽'], 'USD': ['US$', '$'] }, plural

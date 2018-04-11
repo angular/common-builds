@@ -9,19 +9,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'vi',
-    [
-        ['s', 'c'],
-        ['SA', 'CH'],
-    ],
-    [
-        ['SA', 'CH'],
-        ,
-    ],
+    'vi', [['s', 'c'], ['SA', 'CH'], u], [['SA', 'CH'], u, u],
     [
         ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
         ['CN', 'Th 2', 'Th 3', 'Th 4', 'Th 5', 'Th 6', 'Th 7'],
@@ -31,7 +24,7 @@ exports.default = [
         ],
         ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         [
@@ -54,17 +47,9 @@ exports.default = [
             'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
         ]
     ],
-    [
-        ['tr. CN', 'sau CN'],
-        ['Trước CN', 'sau CN'],
-    ],
-    1, [6, 0], ['dd/MM/y', 'd MMM, y', 'd MMMM, y', 'EEEE, d MMMM, y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{0}, {1}',
-        ,
-        '{0} {1}',
-    ],
+    [['tr. CN', 'sau CN'], ['Trước CN', 'sau CN'], u], 1, [6, 0],
+    ['dd/MM/y', 'd MMM, y', 'd MMMM, y', 'EEEE, d MMMM, y'],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{0}, {1}', u, '{0} {1}', u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], '₫', 'Đồng Việt Nam',
     { 'AUD': ['AU$', '$'], 'JPY': ['JP¥', '¥'], 'THB': ['฿'], 'TWD': ['NT$'], 'USD': ['US$', '$'] },

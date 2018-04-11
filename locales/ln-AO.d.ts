@@ -1,7 +1,2 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
-    'AOA': string[];
-    'CDF': string[];
-    'JPY': string[];
-    'USD': string[];
-})[];
+declare const _default: any[];
 export default _default;

@@ -9,21 +9,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'az',
-    [
-        ['a', 'p'],
-        ['AM', 'PM'],
-    ],
-    [
-        ['AM', 'PM'],
-        ,
-    ],
+    'az', [['a', 'p'], ['AM', 'PM'], u], [['AM', 'PM'], u, u],
     [
         ['7', '1', '2', '3', '4', '5', '6'], ['B.', 'B.E.', 'Ç.A.', 'Ç.', 'C.A.', 'C.', 'Ş.'],
         [
@@ -32,7 +25,7 @@ exports.default = [
         ],
         ['B.', 'B.E.', 'Ç.A.', 'Ç.', 'C.A.', 'C.', 'Ş.']
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'],
@@ -49,20 +42,15 @@ exports.default = [
             'Noyabr', 'Dekabr'
         ]
     ],
-    [['e.ə.', 'y.e.'], , ['eramızdan əvvəl', 'yeni era']], 1, [6, 0],
+    [['e.ə.', 'y.e.'], u, ['eramızdan əvvəl', 'yeni era']], 1, [6, 0],
     ['dd.MM.yy', 'd MMM y', 'd MMMM y', 'd MMMM y, EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '₼', 'Azərbaycan Manatı', {
         'AZN': ['₼'],
         'JPY': ['JP¥', '¥'],
-        'RON': [, 'ley'],
-        'SYP': [, 'S£'],
+        'RON': [u, 'ley'],
+        'SYP': [u, 'S£'],
         'THB': ['฿'],
         'TWD': ['NT$'],
         'USD': ['US$', '$']

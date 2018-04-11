@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
@@ -17,21 +18,13 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'se-FI',
-    [
-        ['i', 'e'],
-        ['ib', 'eb'],
-    ],
-    [
-        ['ib', 'eb'],
-        ,
-    ],
+    'se-FI', [['i', 'e'], ['ib', 'eb'], u], [['ib', 'eb'], u, u],
     [
         ['S', 'M', 'D', 'G', 'D', 'B', 'L'], ['so', 'má', 'di', 'ga', 'du', 'be', 'lá'],
         ['sotnabeaivi', 'mánnodat', 'disdat', 'gaskavahkku', 'duorastat', 'bearjadat', 'lávvordat'],
         ['so', 'má', 'di', 'ga', 'du', 'be', 'lá']
     ],
-    ,
+    u,
     [
         ['O', 'G', 'N', 'C', 'M', 'G', 'S', 'B', 'Č', 'G', 'S', 'J'],
         [
@@ -44,15 +37,9 @@ exports.default = [
             'skábmamánnu', 'juovlamánnu'
         ]
     ],
-    ,
-    [['oKr.', 'mKr.'], , ['ovdal Kristusa', 'maŋŋel Kristusa']], 1, [6, 0],
+    u, [['oKr.', 'mKr.'], u, ['ovdal Kristusa', 'maŋŋel Kristusa']], 1, [6, 0],
     ['dd.MM.y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '−', '·10^', '·', '‰', '∞', '¤¤¤', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'euro', {
         'DKK': ['Dkr', 'kr'],

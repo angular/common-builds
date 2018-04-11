@@ -9,16 +9,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'bo-IN',
-    [
-        ['སྔ་དྲོ་', 'ཕྱི་དྲོ་'],
-        ,
-    ],
-    ,
+    'bo-IN', [['སྔ་དྲོ་', 'ཕྱི་དྲོ་'], u, u], u,
     [
         ['ཉི', 'ཟླ', 'མིག', 'ལྷག', 'ཕུར', 'སངས', 'སྤེན'],
         [
@@ -36,7 +32,7 @@ exports.default = [
             'ཕུར་བུ་', 'པ་སངས་', 'སྤེན་པ་'
         ]
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         [
@@ -71,21 +67,12 @@ exports.default = [
             'ཟླ་བ་བཅུ་གཉིས་པ་'
         ]
     ],
-    [
-        ['སྤྱི་ལོ་སྔོན་', 'སྤྱི་ལོ་'],
-        ,
-    ],
-    0, [0, 0],
+    [['སྤྱི་ལོ་སྔོན་', 'སྤྱི་ལོ་'], u, u], 0, [0, 0],
     [
         'y-MM-dd', 'y ལོའི་MMMཚེས་d',
         'སྤྱི་ལོ་y MMMMའི་ཚེས་d', 'y MMMMའི་ཚེས་d, EEEE'
     ],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '₹', 'རྒྱ་གར་སྒོར་',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

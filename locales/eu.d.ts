@@ -1,4 +1,4 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
+declare const _default: (string | number | any[] | ((n: number) => number) | {
     'ESP': string[];
     'JPY': string[];
     'THB': string[];

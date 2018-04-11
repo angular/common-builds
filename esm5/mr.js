@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (i === 0 || n === 1)
@@ -16,15 +17,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'mr',
-    [
-        ['स', 'सं'],
-        ['म.पू.', 'म.उ.'],
-    ],
-    [
-        ['म.पू.', 'म.उ.'],
-        ,
-    ],
+    'mr', [['स', 'सं'], ['म.पू.', 'म.उ.'], u], [['म.पू.', 'म.उ.'], u, u],
     [
         ['र', 'सो', 'मं', 'बु', 'गु', 'शु', 'श'],
         [
@@ -37,7 +30,7 @@ exports.default = [
         ],
         ['र', 'सो', 'मं', 'बु', 'गु', 'शु', 'श']
     ],
-    ,
+    u,
     [
         [
             'जा', 'फे', 'मा', 'ए', 'मे', 'जू', 'जु', 'ऑ', 'स', 'ऑ',
@@ -55,18 +48,14 @@ exports.default = [
             'डिसेंबर'
         ]
     ],
-    ,
+    u,
     [
-        ['इ. स. पू.', 'इ. स.'], ,
+        ['इ. स. पू.', 'इ. स.'], u,
         ['ईसवीसनपूर्व', 'ईसवीसन']
     ],
     0, [0, 0], ['d/M/yy', 'd MMM, y', 'd MMMM, y', 'EEEE, d MMMM, y'],
     ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} रोजी {0}',
-    ],
+    ['{1}, {0}', u, '{1} रोजी {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##0%', '¤#,##0.00', '[#E0]'], '₹', 'भारतीय रुपया',
     { 'JPY': ['JP¥', '¥'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural

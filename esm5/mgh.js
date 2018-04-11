@@ -9,22 +9,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'mgh',
-    [
-        ['wichishu', 'mchochil’l'],
-        ,
-    ],
-    ,
+    'mgh', [['wichishu', 'mchochil’l'], u, u], u,
     [
         ['S', 'J', 'J', 'J', 'A', 'I', 'J'], ['Sab', 'Jtt', 'Jnn', 'Jtn', 'Ara', 'Iju', 'Jmo'],
         ['Sabato', 'Jumatatu', 'Jumanne', 'Jumatano', 'Arahamisi', 'Ijumaa', 'Jumamosi'],
         ['Sab', 'Jtt', 'Jnn', 'Jtn', 'Ara', 'Iju', 'Jmo']
     ],
-    ,
+    u,
     [
         ['K', 'U', 'R', 'C', 'T', 'M', 'S', 'N', 'T', 'K', 'M', 'Y'],
         ['Kwa', 'Una', 'Rar', 'Che', 'Tha', 'Moc', 'Sab', 'Nan', 'Tis', 'Kum', 'Moj', 'Yel'],
@@ -34,15 +30,9 @@ exports.default = [
             'Mweri wo tisa', 'Mweri wo kumi', 'Mweri wo kumi na moja', 'Mweri wo kumi na yel’li'
         ]
     ],
-    ,
-    [['HY', 'YY'], , ['Hinapiya yesu', 'Yopia yesu']], 0, [6, 0],
+    u, [['HY', 'YY'], u, ['Hinapiya yesu', 'Yopia yesu']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], 'MTn', 'MZN',
     { 'JPY': ['JP¥', '¥'], 'MZN': ['MTn'], 'USD': ['US$', '$'] }, plural

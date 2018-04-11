@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
@@ -20,15 +21,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'he',
-    [
-        ['לפנה״צ', 'אחה״צ'],
-        ,
-    ],
-    [
-        ['לפנה״צ', 'אחה״צ'],
-        ['AM', 'PM'],
-    ],
+    'he', [['לפנה״צ', 'אחה״צ'], u, u], [['לפנה״צ', 'אחה״צ'], ['AM', 'PM'], u],
     [
         ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'],
         [
@@ -41,7 +34,7 @@ exports.default = [
         ],
         ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳']
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         [
@@ -53,15 +46,9 @@ exports.default = [
             'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
         ]
     ],
-    ,
-    [['לפנה״ס', 'לספירה'], , ['לפני הספירה', 'לספירה']], 0, [5, 6],
+    u, [['לפנה״ס', 'לספירה'], u, ['לפני הספירה', 'לספירה']], 0, [5, 6],
     ['d.M.y', 'd בMMM y', 'd בMMMM y', 'EEEE, d בMMMM y'],
-    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} בשעה {0}',
-    ],
+    ['H:mm', 'H:mm:ss', 'H:mm:ss z', 'H:mm:ss zzzz'], ['{1}, {0}', u, '{1} בשעה {0}', u],
     ['.', ',', ';', '%', '\u200e+', '\u200e-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '\u200f#,##0.00 ¤;\u200f-#,##0.00 ¤', '#E0'], '₪', 'שקל חדש',
     { 'CNY': ['\u200eCN¥\u200e', '¥'], 'ILP': ['ל״י'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural

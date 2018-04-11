@@ -1,19 +1,19 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
+declare const _default: (string | number | any[] | ((n: number) => number) | {
     'ATS': string[];
     'AUD': string[];
     'BGM': string[];
     'BGO': string[];
-    'CUC': string[];
+    'CUC': any[];
     'DEM': string[];
     'EUR': any[];
-    'FKP': string[];
-    'GNF': string[];
-    'KMF': string[];
-    'RON': string[];
-    'RWF': string[];
+    'FKP': any[];
+    'GNF': any[];
+    'KMF': any[];
+    'RON': any[];
+    'RWF': any[];
     'SYP': any[];
     'THB': string[];
     'TWD': string[];
-    'ZMW': string[];
+    'ZMW': any[];
 })[];
 export default _default;

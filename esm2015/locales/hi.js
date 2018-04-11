@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var i = Math.floor(Math.abs(n));
     if (i === 0 || n === 1)
@@ -16,12 +17,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'hi',
-    [
-        ['पू', 'अ'],
-        ['पूर्वाह्न', 'अपराह्न'],
-    ],
-    ,
+    'hi', [['पू', 'अ'], ['पूर्वाह्न', 'अपराह्न'], u], u,
     [
         ['र', 'सो', 'मं', 'बु', 'गु', 'शु', 'श'],
         [
@@ -34,7 +30,7 @@ exports.default = [
         ],
         ['र', 'सो', 'मं', 'बु', 'गु', 'शु', 'श']
     ],
-    ,
+    u,
     [
         [
             'ज', 'फ़', 'मा', 'अ', 'म', 'जू', 'जु', 'अ', 'सि', 'अ', 'न',
@@ -50,21 +46,16 @@ exports.default = [
             'अक्तूबर', 'नवंबर', 'दिसंबर'
         ]
     ],
-    ,
+    u,
     [
-        ['ईसा-पूर्व', 'ईस्वी'], ,
+        ['ईसा-पूर्व', 'ईस्वी'], u,
         ['ईसा-पूर्व', 'ईसवी सन']
     ],
     0, [0, 0], ['d/M/yy', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} को {0}',
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1}, {0}', u, '{1} को {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##,##0%', '¤#,##,##0.00', '[#E0]'], '₹',
     'भारतीय रुपया',
-    { 'JPY': ['JP¥', '¥'], 'RON': [, 'लेई'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural
+    { 'JPY': ['JP¥', '¥'], 'RON': [u, 'लेई'], 'THB': ['฿'], 'TWD': ['NT$'] }, plural
 ];
 //# sourceMappingURL=hi.js.map

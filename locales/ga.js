@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
@@ -21,15 +22,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'ga',
-    [
-        ['a', 'p'],
-        ['r.n.', 'i.n.'],
-    ],
-    [
-        ['a', 'p'],
-        ['a.m.', 'p.m.'],
-    ],
+    'ga', [['a', 'p'], ['r.n.', 'i.n.'], u], [['a', 'p'], ['a.m.', 'p.m.'], u],
     [
         ['D', 'L', 'M', 'C', 'D', 'A', 'S'],
         ['Domh', 'Luan', 'Máirt', 'Céad', 'Déar', 'Aoine', 'Sath'],
@@ -39,7 +32,7 @@ exports.default = [
         ],
         ['Do', 'Lu', 'Má', 'Cé', 'Dé', 'Ao', 'Sa']
     ],
-    ,
+    u,
     [
         ['E', 'F', 'M', 'A', 'B', 'M', 'I', 'L', 'M', 'D', 'S', 'N'],
         [
@@ -51,15 +44,9 @@ exports.default = [
             'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'
         ]
     ],
-    ,
-    [['RC', 'AD'], , ['Roimh Chríost', 'Anno Domini']], 0, [6, 0],
+    u, [['RC', 'AD'], u, ['Roimh Chríost', 'Anno Domini']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '€', 'Euro', { 'THB': ['฿'], 'TWD': ['NT$'] },
     plural

@@ -9,23 +9,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'lkt',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'lkt', [['AM', 'PM'], u, u], u,
     [
         ['A', 'W', 'N', 'Y', 'T', 'Z', 'O'],
         [
             'Aŋpétuwakȟaŋ', 'Aŋpétuwaŋži', 'Aŋpétunuŋpa', 'Aŋpétuyamni', 'Aŋpétutopa',
             'Aŋpétuzaptaŋ', 'Owáŋgyužažapi'
         ],
-        ,
+        u, u
     ],
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -33,7 +29,7 @@ exports.default = [
             'Aŋpétuwakȟaŋ', 'Aŋpétuwaŋži', 'Aŋpétunuŋpa', 'Aŋpétuyamni', 'Aŋpétutopa',
             'Aŋpétuzaptaŋ', 'Owáŋgyužažapi'
         ],
-        ,
+        u, u
     ],
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -42,19 +38,10 @@ exports.default = [
             'Čhaŋwápetȟo Wí', 'Wípazukȟa-wašté Wí', 'Čhaŋpȟásapa Wí', 'Wasútȟuŋ Wí',
             'Čhaŋwápeǧi Wí', 'Čhaŋwápe-kasná Wí', 'Waníyetu Wí', 'Tȟahékapšuŋ Wí'
         ],
+        u
     ],
-    ,
-    [
-        ['BCE', 'CE'],
-        ,
-    ],
-    0, [6, 0], ['y-MM-dd', 'y MMM d', 'y MMMM d', 'y MMMM d, EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    u, [['BCE', 'CE'], u, u], 0, [6, 0], ['y-MM-dd', 'y MMM d', 'y MMMM d', 'y MMMM d, EEEE'],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '$', 'USD', { 'JPY': ['JP¥', '¥'] }, plural
 ];

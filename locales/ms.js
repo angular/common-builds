@@ -9,22 +9,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'ms',
-    [
-        ['a', 'p'],
-        ['PG', 'PTG'],
-    ],
-    ,
+    'ms', [['a', 'p'], ['PG', 'PTG'], u], u,
     [
         ['A', 'I', 'S', 'R', 'K', 'J', 'S'], ['Ahd', 'Isn', 'Sel', 'Rab', 'Kha', 'Jum', 'Sab'],
         ['Ahad', 'Isnin', 'Selasa', 'Rabu', 'Khamis', 'Jumaat', 'Sabtu'],
         ['Ah', 'Is', 'Se', 'Ra', 'Kh', 'Ju', 'Sa']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'O', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul', 'Ogo', 'Sep', 'Okt', 'Nov', 'Dis'],
@@ -33,26 +29,16 @@ exports.default = [
             'November', 'Disember'
         ]
     ],
-    ,
-    [
-        ['S.M.', 'TM'],
-        ,
-    ],
-    1, [6, 0], ['d/MM/yy', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} {0}',
-    ],
+    u, [['S.M.', 'TM'], u, u], 1, [6, 0], ['d/MM/yy', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1}, {0}', u, '{1} {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'RM', 'Ringgit Malaysia', {
-        'CAD': [, '$'],
+        'CAD': [u, '$'],
         'JPY': ['JP¥', '¥'],
-        'MXN': [, '$'],
+        'MXN': [u, '$'],
         'MYR': ['RM'],
         'TWD': ['NT$'],
-        'USD': [, '$']
+        'USD': [u, '$']
     },
     plural
 ];

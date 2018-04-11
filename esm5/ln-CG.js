@@ -9,18 +9,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === Math.floor(n) && n >= 0 && n <= 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'ln-CG',
-    [
-        ['ntɔ́ngɔ́', 'mpókwa'],
-        ,
-    ],
-    ,
+    'ln-CG', [['ntɔ́ngɔ́', 'mpókwa'], u, u], u,
     [
         ['e', 'y', 'm', 'm', 'm', 'm', 'p'], ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
         [
@@ -29,7 +25,7 @@ exports.default = [
         ],
         ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps']
     ],
-    ,
+    u,
     [
         ['y', 'f', 'm', 'a', 'm', 'y', 'y', 'a', 's', 'ɔ', 'n', 'd'],
         ['yan', 'fbl', 'msi', 'apl', 'mai', 'yun', 'yul', 'agt', 'stb', 'ɔtb', 'nvb', 'dsb'],
@@ -40,15 +36,9 @@ exports.default = [
             'sánzá ya zómi na míbalé'
         ]
     ],
-    ,
-    [['libóso ya', 'nsima ya Y'], , ['Yambo ya Yézu Krís', 'Nsima ya Yézu Krís']], 1, [6, 0],
+    u, [['libóso ya', 'nsima ya Y'], u, ['Yambo ya Yézu Krís', 'Nsima ya Yézu Krís']], 1, [6, 0],
     ['d/M/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'Falánga CFA BEAC',
     { 'CDF': ['FC'], 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

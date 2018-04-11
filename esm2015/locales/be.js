@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n % 10 === 1 && !(n % 100 === 11))
         return 1;
@@ -21,15 +22,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'be',
-    [
-        ['am', 'pm'],
-        ['AM', 'PM'],
-    ],
-    [
-        ['AM', 'PM'],
-        ,
-    ],
+    'be', [['am', 'pm'], ['AM', 'PM'], u], [['AM', 'PM'], u, u],
     [
         ['н', 'п', 'а', 'с', 'ч', 'п', 'с'],
         ['нд', 'пн', 'аў', 'ср', 'чц', 'пт', 'сб'],
@@ -39,7 +32,7 @@ exports.default = [
         ],
         ['нд', 'пн', 'аў', 'ср', 'чц', 'пт', 'сб']
     ],
-    ,
+    u,
     [
         ['с', 'л', 'с', 'к', 'м', 'ч', 'л', 'ж', 'в', 'к', 'л', 'с'],
         [
@@ -65,44 +58,39 @@ exports.default = [
         ]
     ],
     [
-        ['да н.э.', 'н.э.'], ,
+        ['да н.э.', 'н.э.'], u,
         ['да нараджэння Хрыстова', 'ад нараджэння Хрыстова']
     ],
     1, [6, 0], ['d.MM.yy', 'd.MM.y', 'd MMMM y \'г\'.', 'EEEE, d MMMM y \'г\'.'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss, zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} \'у\' {0}',
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss, zzzz'], ['{1}, {0}', u, '{1} \'у\' {0}', u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], 'Br', 'беларускі рубель', {
         'AUD': ['A$'],
-        'BBD': [, 'Bds$'],
-        'BMD': [, 'BD$'],
-        'BRL': [, 'R$'],
-        'BSD': [, 'B$'],
+        'BBD': [u, 'Bds$'],
+        'BMD': [u, 'BD$'],
+        'BRL': [u, 'R$'],
+        'BSD': [u, 'B$'],
         'BYN': ['Br'],
-        'BZD': [, 'BZ$'],
-        'CAD': [, 'CA$'],
-        'CUC': [, 'CUC$'],
-        'CUP': [, '$MN'],
-        'DOP': [, 'RD$'],
-        'FJD': [, 'FJ$'],
-        'FKP': [, 'FK£'],
-        'GYD': [, 'G$'],
-        'ISK': [, 'Íkr'],
-        'JMD': [, 'J$'],
-        'KYD': [, 'CI$'],
-        'LRD': [, 'L$'],
+        'BZD': [u, 'BZ$'],
+        'CAD': [u, 'CA$'],
+        'CUC': [u, 'CUC$'],
+        'CUP': [u, '$MN'],
+        'DOP': [u, 'RD$'],
+        'FJD': [u, 'FJ$'],
+        'FKP': [u, 'FK£'],
+        'GYD': [u, 'G$'],
+        'ISK': [u, 'Íkr'],
+        'JMD': [u, 'J$'],
+        'KYD': [u, 'CI$'],
+        'LRD': [u, 'L$'],
         'MXN': ['MX$'],
-        'NAD': [, 'N$'],
-        'NZD': [, 'NZ$'],
+        'NAD': [u, 'N$'],
+        'NZD': [u, 'NZ$'],
         'RUB': ['₽', 'руб.'],
-        'SBD': [, 'SI$'],
-        'SGD': [, 'S$'],
-        'TTD': [, 'TT$'],
-        'UYU': [, '$U'],
+        'SBD': [u, 'SI$'],
+        'SGD': [u, 'S$'],
+        'TTD': [u, 'TT$'],
+        'UYU': [u, '$U'],
         'XCD': ['EC$']
     },
     plural

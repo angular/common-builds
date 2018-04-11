@@ -9,16 +9,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'yav',
-    [
-        ['kiɛmɛ́ɛm', 'kisɛ́ndɛ'],
-        ,
-    ],
-    ,
+    'yav', [['kiɛmɛ́ɛm', 'kisɛ́ndɛ'], u, u], u,
     [
         ['s', 'm', 'm', 'e', 'k', 'f', 's'], ['sd', 'md', 'mw', 'et', 'kl', 'fl', 'ss'],
         [
@@ -27,7 +23,7 @@ exports.default = [
         ],
         ['sd', 'md', 'mw', 'et', 'kl', 'fl', 'ss']
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         ['o.1', 'o.2', 'o.3', 'o.4', 'o.5', 'o.6', 'o.7', 'o.8', 'o.9', 'o.10', 'o.11', 'o.12'],
@@ -38,15 +34,9 @@ exports.default = [
             'makandikɛ', 'pilɔndɔ́'
         ]
     ],
-    ,
-    [['k.Y.', '+J.C.'], , ['katikupíen Yésuse', 'ékélémkúnupíén n']], 1, [6, 0],
+    u, [['k.Y.', '+J.C.'], u, ['katikupíen Yésuse', 'ékélémkúnupíén n']], 1, [6, 0],
     ['d/M/y', 'd MMM y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'], 'FCFA', 'XAF',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
@@ -19,12 +20,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'mt',
-    [
-        ['am', 'pm'],
-        ['AM', 'PM'],
-    ],
-    ,
+    'mt', [['am', 'pm'], ['AM', 'PM'], u], u,
     [
         ['Ħd', 'T', 'Tl', 'Er', 'Ħm', 'Ġm', 'Sb'],
         ['Ħad', 'Tne', 'Tli', 'Erb', 'Ħam', 'Ġim', 'Sib'],
@@ -53,14 +49,9 @@ exports.default = [
             'Ottubru', 'Novembru', 'Diċembru'
         ]
     ],
-    [['QK', 'WK'], , ['Qabel Kristu', 'Wara Kristu']], 0, [6, 0],
+    [['QK', 'WK'], u, ['Qabel Kristu', 'Wara Kristu']], 0, [6, 0],
     ['dd/MM/y', 'dd MMM y', 'd \'ta\'’ MMMM y', 'EEEE, d \'ta\'’ MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '€', 'ewro',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

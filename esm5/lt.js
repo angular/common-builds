@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     var f = parseInt(n.toString().replace(/^[^.]*\.?/, ''), 10) || 0;
     if (n % 10 === 1 && !(n % 100 >= 11 && n % 100 <= 19))
@@ -21,12 +22,7 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'lt',
-    [
-        ['pr. p.', 'pop.'],
-        ['priešpiet', 'popiet'],
-    ],
-    ,
+    'lt', [['pr. p.', 'pop.'], ['priešpiet', 'popiet'], u], u,
     [
         ['S', 'P', 'A', 'T', 'K', 'P', 'Š'], ['sk', 'pr', 'an', 'tr', 'kt', 'pn', 'št'],
         [
@@ -35,7 +31,7 @@ exports.default = [
         ],
         ['Sk', 'Pr', 'An', 'Tr', 'Kt', 'Pn', 'Št']
     ],
-    ,
+    u,
     [
         ['S', 'V', 'K', 'B', 'G', 'B', 'L', 'R', 'R', 'S', 'L', 'G'],
         [
@@ -58,41 +54,36 @@ exports.default = [
             'rugsėjis', 'spalis', 'lapkritis', 'gruodis'
         ]
     ],
-    [['pr. Kr.', 'po Kr.'], , ['prieš Kristų', 'po Kristaus']], 1, [6, 0],
-    ['y-MM-dd', , 'y \'m\'. MMMM d \'d\'.', 'y \'m\'. MMMM d \'d\'., EEEE'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    [['pr. Kr.', 'po Kr.'], u, ['prieš Kristų', 'po Kristaus']], 1, [6, 0],
+    ['y-MM-dd', u, 'y \'m\'. MMMM d \'d\'.', 'y \'m\'. MMMM d \'d\'., EEEE'],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '−', '×10^', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euras', {
-        'AUD': [, '$'],
+        'AUD': [u, '$'],
         'BDT': [],
-        'BRL': [, 'R$'],
-        'BYN': [, 'Br'],
-        'CAD': [, '$'],
-        'CNY': [, '¥'],
-        'GBP': [, '£'],
-        'HKD': [, '$'],
+        'BRL': [u, 'R$'],
+        'BYN': [u, 'Br'],
+        'CAD': [u, '$'],
+        'CNY': [u, '¥'],
+        'GBP': [u, '£'],
+        'HKD': [u, '$'],
         'ILS': [],
         'INR': [],
-        'JPY': [, '¥'],
+        'JPY': [u, '¥'],
         'KHR': [],
-        'KRW': [, '₩'],
+        'KRW': [u, '₩'],
         'LAK': [],
         'MNT': [],
-        'MXN': [, '$'],
-        'NZD': [, '$'],
-        'PLN': [, 'zl'],
-        'PYG': [, 'Gs'],
-        'RUB': [, 'rb'],
-        'TWD': [, '$'],
-        'USD': [, '$'],
+        'MXN': [u, '$'],
+        'NZD': [u, '$'],
+        'PLN': [u, 'zl'],
+        'PYG': [u, 'Gs'],
+        'RUB': [u, 'rb'],
+        'TWD': [u, '$'],
+        'USD': [u, '$'],
         'VND': [],
         'XAF': [],
-        'XCD': [, '$'],
+        'XCD': [u, '$'],
         'XOF': [],
         'XPF': []
     },

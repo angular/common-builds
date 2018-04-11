@@ -1,10 +1,2 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
-    'JPY': string[];
-    'KES': string[];
-    'THB': string[];
-    'TWD': string[];
-    'TZS': string[];
-    'UGX': string[];
-    'USD': string[];
-})[];
+declare const _default: any[];
 export default _default;

@@ -9,24 +9,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'ha',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'ha', [['AM', 'PM'], u, u], u,
     [
         ['L', 'L', 'T', 'L', 'A', 'J', 'A'], ['Lah', 'Lit', 'Tal', 'Lar', 'Alh', 'Jum', 'Asa'],
         ['Lahadi', 'Litinin', 'Talata', 'Laraba', 'Alhamis', 'Jummaʼa', 'Asabar'],
         ['Lh', 'Li', 'Ta', 'Lr', 'Al', 'Ju', 'As']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'Y', 'Y', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Fab', 'Mar', 'Afi', 'May', 'Yun', 'Yul', 'Agu', 'Sat', 'Okt', 'Nuw', 'Dis'],
@@ -35,15 +31,9 @@ exports.default = [
             'Oktoba', 'Nuwamba', 'Disamba'
         ]
     ],
-    ,
-    [['KHAI', 'BHAI'], , ['Kafin haihuwar annab', 'Bayan haihuwar annab']], 1, [6, 0],
+    u, [['KHAI', 'BHAI'], u, ['Kafin haihuwar annab', 'Bayan haihuwar annab']], 1, [6, 0],
     ['d/M/yy', 'd MMM, y', 'd MMMM, y', 'EEEE, d MMMM, y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'], '₦', 'Naira',
     { 'JPY': ['JP¥', '¥'], 'NGN': ['₦'], 'USD': ['US$', '$'] }, plural

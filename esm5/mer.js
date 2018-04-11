@@ -9,22 +9,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'mer',
-    [
-        ['RŨ', 'ŨG'],
-        ,
-    ],
-    ,
+    'mer', [['RŨ', 'ŨG'], u, u], u,
     [
         ['K', 'M', 'W', 'W', 'W', 'W', 'J'], ['KIU', 'MRA', 'WAI', 'WET', 'WEN', 'WTN', 'JUM'],
         ['Kiumia', 'Muramuko', 'Wairi', 'Wethatu', 'Wena', 'Wetano', 'Jumamosi'],
         ['KIU', 'MRA', 'WAI', 'WET', 'WEN', 'WTN', 'JUM']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'Ĩ', 'M', 'N', 'N', 'A', 'S', 'O', 'N', 'D'],
         ['JAN', 'FEB', 'MAC', 'ĨPU', 'MĨĨ', 'NJU', 'NJR', 'AGA', 'SPT', 'OKT', 'NOV', 'DEC'],
@@ -33,15 +29,9 @@ exports.default = [
             'Septemba', 'Oktũba', 'Novemba', 'Dicemba'
         ]
     ],
-    ,
-    [['MK', 'NK'], , ['Mbere ya Kristũ', 'Nyuma ya Kristũ']], 0, [6, 0],
+    u, [['MK', 'NK'], u, ['Mbere ya Kristũ', 'Nyuma ya Kristũ']], 0, [6, 0],
     ['dd/MM/y', 'd MMM y', 'd MMMM y', 'EEEE, d MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], 'Ksh', 'Shilingi ya Kenya',
     { 'JPY': ['JP¥', '¥'], 'KES': ['Ksh'], 'USD': ['US$', '$'] }, plural

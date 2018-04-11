@@ -9,18 +9,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 1)
         return 1;
     return 5;
 }
 exports.default = [
-    'ks',
-    [
-        ['AM', 'PM'],
-        ,
-    ],
-    ,
+    'ks', [['AM', 'PM'], u, u], u,
     [
         ['ا', 'ژ', 'ب', 'ب', 'ب', 'ج', 'ب'],
         [
@@ -36,23 +32,18 @@ exports.default = [
             'برٛٮ۪سوار', 'جُمہ', 'بٹوار'
         ]
     ],
-    ,
+    u,
     [
         ['ج', 'ف', 'م', 'ا', 'م', 'ج', 'ج', 'ا', 'س', 'س', 'ا', 'ن'],
         [
             'جنؤری', 'فرؤری', 'مارٕچ', 'اپریل', 'میٔ', 'جوٗن',
             'جوٗلایی', 'اگست', 'ستمبر', 'اکتوٗبر', 'نومبر', 'دسمبر'
         ],
+        u
     ],
-    ,
-    [['بی سی', 'اے ڈی'], , ['قبٕل مسیٖح', 'عیٖسوی سنہٕ']], 0, [0, 0],
+    u, [['بی سی', 'اے ڈی'], u, ['قبٕل مسیٖح', 'عیٖسوی سنہٕ']], 0, [0, 0],
     ['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '\u200e+', '\u200e-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##,##0%', '¤ #,##,##0.00', '#E0'], '₹', 'ہِندُستٲنۍ رۄپَے',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

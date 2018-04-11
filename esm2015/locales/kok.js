@@ -9,29 +9,25 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     return 5;
 }
 exports.default = [
-    'kok',
-    [
-        ['म.पू.', 'म.नं.'],
-        ,
-    ],
-    ,
+    'kok', [['म.पू.', 'म.नं.'], u, u], u,
     [
         ['आ', 'सो', 'मं', 'बु', 'गु', 'शु', 'शे'],
         [
             'आयतार', 'सोमार', 'मंगळार', 'बुधवार',
             'गुरुवार', 'शुक्रार', 'शेनवार'
         ],
-        ,
+        u,
         [
             'आय', 'सोम', 'मंगळ', 'बुध', 'गुरु', 'शुक्र',
             'शेन'
         ]
     ],
-    ,
+    u,
     [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         [
@@ -40,19 +36,11 @@ exports.default = [
             'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर',
             'डिसेंबर'
         ],
+        u
     ],
-    ,
-    [
-        ['क्रिस्तपूर्व', 'क्रिस्तशखा'],
-        ,
-    ],
-    0, [0, 0], ['d-M-yy', 'dd-MM-y', 'd MMMM y', 'EEEE d MMMM y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    u, [['क्रिस्तपूर्व', 'क्रिस्तशखा'], u, u], 0, [0, 0],
+    ['d-M-yy', 'dd-MM-y', 'd MMMM y', 'EEEE d MMMM y'],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1} {0}', u, u, u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
     ['#,##,##0.###', '#,##,##0%', '¤ #,##,##0.00', '#E0'], '₹', 'INR',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

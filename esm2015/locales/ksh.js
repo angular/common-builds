@@ -9,6 +9,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 function plural(n) {
     if (n === 0)
         return 0;
@@ -17,14 +18,14 @@ function plural(n) {
     return 5;
 }
 exports.default = [
-    'ksh', [['v.M.', 'n.M.'], , ['Uhr vörmiddaachs', 'Uhr nommendaachs']],
-    [['v.M.', 'n.M.'], , ['Vörmeddaach', 'Nommendaach']],
+    'ksh', [['v.M.', 'n.M.'], u, ['Uhr vörmiddaachs', 'Uhr nommendaachs']],
+    [['v.M.', 'n.M.'], u, ['Vörmeddaach', 'Nommendaach']],
     [
         ['S', 'M', 'D', 'M', 'D', 'F', 'S'], ['Su.', 'Mo.', 'Di.', 'Me.', 'Du.', 'Fr.', 'Sa.'],
         ['Sunndaach', 'Mohndaach', 'Dinnsdaach', 'Metwoch', 'Dunnersdaach', 'Friidaach', 'Samsdaach'],
         ['Su', 'Mo', 'Di', 'Me', 'Du', 'Fr', 'Sa']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'O', 'S', 'O', 'N', 'D'],
         ['Jan', 'Fäb', 'Mäz', 'Apr', 'Mai', 'Jun', 'Jul', 'Ouj', 'Säp', 'Okt', 'Nov', 'Dez'],
@@ -46,12 +47,7 @@ exports.default = [
     ],
     [['vC', 'nC'], ['v. Chr.', 'n. Chr.'], ['vür Krestos', 'noh Krestos']], 1, [6, 0],
     ['d. M. y', 'd. MMM. y', 'd. MMMM y', 'EEEE, \'dä\' d. MMMM y'],
-    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-    [
-        '{1} {0}',
-        ,
-        ,
-    ],
+    ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'], ['{1} {0}', u, u, u],
     [',', ' ', ';', '%', '+', '−', '×10^', '×', '‰', '∞', '¤¤¤', ':'],
     ['#,##0.###', '#,##0 %', '#,##0.00 ¤', '#E0'], '€', 'Euro',
     { 'JPY': ['JP¥', '¥'], 'USD': ['US$', '$'] }, plural

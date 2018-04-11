@@ -7,19 +7,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+var u = undefined;
 exports.default = [
     [
         ['እኩለ ሌሊት', 'ቀ', 'ጥዋት1', 'ከሰዓት1', 'ማታ1', 'ሌሊት1'],
-        ['እኩለ ሌሊት', 'ቀትር', 'ጥዋት1', 'ከሰዓት1', 'ማታ1', 'ሌሊት1'],
+        ['እኩለ ሌሊት', 'ቀትር', 'ጥዋት1', 'ከሰዓት1', 'ማታ1', 'ሌሊት1'], u
     ],
     [
         [
@@ -30,6 +24,7 @@ exports.default = [
             'እኩለ ሌሊት', 'ቀትር', 'ጥዋት1', 'ከሰዓት በኋላ', 'ማታ',
             'ሌሊት'
         ],
+        u
     ],
     [
         '00:00', '12:00', ['06:00', '12:00'], ['12:00', '18:00'], ['18:00', '24:00'],
