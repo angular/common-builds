@@ -1,0 +1,22 @@
+declare const _default: (string | number | any[] | ((n: number) => number) | {
+    'AUD': any[];
+    'BRL': any[];
+    'CAD': any[];
+    'CNY': any[];
+    'GBP': any[];
+    'HKD': any[];
+    'ILS': any[];
+    'INR': any[];
+    'JPY': any[];
+    'KRW': any[];
+    'MXN': any[];
+    'NOK': string[];
+    'NZD': any[];
+    'TWD': any[];
+    'USD': any[];
+    'VND': any[];
+    'XAF': any[];
+    'XCD': any[];
+    'XPF': any[];
+})[];
+export default _default;
