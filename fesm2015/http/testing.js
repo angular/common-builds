@@ -1,8 +1,9 @@
 /**
- * @license Angular v6.0.0-rc.5-60e5507
+ * @license Angular v6.0.0-rc.5+73.sha-ace6440
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
+
 import { HttpBackend, HttpClientModule, HttpErrorResponse, HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -388,7 +389,7 @@ class HttpClientTestingBackend {
     }
 }
 HttpClientTestingBackend.decorators = [
-    { type: Injectable },
+    { type: Injectable }
 ];
 /** @nocollapse */
 HttpClientTestingBackend.ctorParameters = () => [];
@@ -423,7 +424,7 @@ HttpClientTestingModule.decorators = [
                     { provide: HttpBackend, useExisting: HttpClientTestingBackend },
                     { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
                 ],
-            },] },
+            },] }
 ];
 /** @nocollapse */
 HttpClientTestingModule.ctorParameters = () => [];
@@ -445,8 +446,16 @@ HttpClientTestingModule.ctorParameters = () => [];
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { HttpTestingController, HttpClientTestingModule, TestRequest, HttpClientTestingBackend as ɵa };
-//# sourceMappingURL=testing.js.map
+export { HttpClientTestingBackend as ɵangular_packages_common_http_testing_testing_a, HttpTestingController, HttpClientTestingModule, TestRequest };
+//# sourceMappingURL=http__testing.js.map
