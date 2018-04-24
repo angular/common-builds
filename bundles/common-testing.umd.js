@@ -1,24 +1,15 @@
 /**
- * @license Angular v4.0.0-rc.5-ea49a95
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v6.0.0-rc.5+76.sha-b1d03fe
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
+
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.testing = global.ng.common.testing || {}),global.ng.core,global.ng.common));
-}(this, (function (exports,_angular_core,_angular_common) { 'use strict';
+	typeof define === 'function' && define.amd ? define('@angular/common/testing', ['exports', '@angular/core', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.testing = {}),global.ng.core,global.ng.common));
+}(this, (function (exports,core,common) { 'use strict';
 
-var __extends = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-/**
- * @license Angular v4.0.0-rc.5-ea49a95
- * (c) 2010-2017 Google, Inc. https://angular.io/
- * License: MIT
- */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -31,13 +22,13 @@ var __extends = (undefined && undefined.__extends) || function (d, b) {
  *
  * @experimental
  */
-var SpyLocation = (function () {
+var SpyLocation = /** @class */ (function () {
     function SpyLocation() {
         this.urlChanges = [];
-        this._history = [new LocationState('', '')];
+        this._history = [new LocationState('', '', null)];
         this._historyIndex = 0;
         /** @internal */
-        this._subject = new _angular_core.EventEmitter();
+        this._subject = new core.EventEmitter();
         /** @internal */
         this._baseHref = '';
         /** @internal */
@@ -46,13 +37,16 @@ var SpyLocation = (function () {
     SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
     SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };
     SpyLocation.prototype.path = function () { return this._history[this._historyIndex].path; };
+    SpyLocation.prototype.state = function () { return this._history[this._historyIndex].state; };
     SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
         if (query === void 0) { query = ''; }
         var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
         var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
         return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
     };
-    SpyLocation.prototype.simulateUrlPop = function (pathname) { this._subject.emit({ 'url': pathname, 'pop': true }); };
+    SpyLocation.prototype.simulateUrlPop = function (pathname) {
+        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
+    };
     SpyLocation.prototype.simulateHashChange = function (pathname) {
         // Because we don't prevent the native event, the browser will independently update the path
         this.setInitialPath(pathname);
@@ -65,13 +59,14 @@ var SpyLocation = (function () {
         }
         return this._baseHref + url;
     };
-    SpyLocation.prototype.go = function (path, query) {
+    SpyLocation.prototype.go = function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         if (this._historyIndex > 0) {
             this._history.splice(this._historyIndex + 1);
         }
-        this._history.push(new LocationState(path, query));
+        this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
         var locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
@@ -81,8 +76,9 @@ var SpyLocation = (function () {
         this.urlChanges.push(url);
         this._subject.emit({ 'url': url, 'pop': false });
     };
-    SpyLocation.prototype.replaceState = function (path, query) {
+    SpyLocation.prototype.replaceState = function (path, query, state) {
         if (query === void 0) { query = ''; }
+        if (state === void 0) { state = null; }
         path = this.prepareExternalUrl(path);
         var history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
@@ -90,41 +86,68 @@ var SpyLocation = (function () {
         }
         history.path = path;
         history.query = query;
+        history.state = state;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     };
     SpyLocation.prototype.forward = function () {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     SpyLocation.prototype.back = function () {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
         }
     };
     SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
-        if (onThrow === void 0) { onThrow = null; }
-        if (onReturn === void 0) { onReturn = null; }
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
+    SpyLocation.decorators = [
+        { type: core.Injectable }
+    ];
+    /** @nocollapse */
+    SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
-SpyLocation.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-SpyLocation.ctorParameters = function () { return []; };
-var LocationState = (function () {
-    function LocationState(path, query) {
+var LocationState = /** @class */ (function () {
+    function LocationState(path, query, state) {
         this.path = path;
         this.query = query;
+        this.state = state;
     }
     return LocationState;
 }());
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -136,9 +159,9 @@ var LocationState = (function () {
  * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
  * location events.
  *
- * @stable
+ *
  */
-var MockLocationStrategy = (function (_super) {
+var MockLocationStrategy = /** @class */ (function (_super) {
     __extends(MockLocationStrategy, _super);
     function MockLocationStrategy() {
         var _this = _super.call(this) || this;
@@ -147,7 +170,7 @@ var MockLocationStrategy = (function (_super) {
         _this.internalTitle = '';
         _this.urlChanges = [];
         /** @internal */
-        _this._subject = new _angular_core.EventEmitter();
+        _this._subject = new core.EventEmitter();
         return _this;
     }
     MockLocationStrategy.prototype.simulatePopState = function (url) {
@@ -188,14 +211,14 @@ var MockLocationStrategy = (function (_super) {
         }
     };
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
+    MockLocationStrategy.decorators = [
+        { type: core.Injectable }
+    ];
+    /** @nocollapse */
+    MockLocationStrategy.ctorParameters = function () { return []; };
     return MockLocationStrategy;
-}(_angular_common.LocationStrategy));
-MockLocationStrategy.decorators = [
-    { type: _angular_core.Injectable },
-];
-/** @nocollapse */
-MockLocationStrategy.ctorParameters = function () { return []; };
-var _MockPopStateEvent = (function () {
+}(common.LocationStrategy));
+var _MockPopStateEvent = /** @class */ (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;
         this.pop = true;
@@ -203,6 +226,36 @@ var _MockPopStateEvent = (function () {
     }
     return _MockPopStateEvent;
 }());
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+// This file only reexports content of the `src` folder. Keep it that way.
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
 
 exports.SpyLocation = SpyLocation;
 exports.MockLocationStrategy = MockLocationStrategy;

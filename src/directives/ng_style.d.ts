@@ -5,13 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
+import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Update an HTML element styles.
- *
- * @howToUse
+ * @usageNotes
  * ```
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  *
@@ -22,11 +20,13 @@ import { DoCheck, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
  *
  * @description
  *
+ * Update an HTML element styles.
+ *
  * The styles are updated according to the value of the expression evaluation:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * @stable
+ *
  */
 export declare class NgStyle implements DoCheck {
     private _differs;
@@ -34,7 +34,7 @@ export declare class NgStyle implements DoCheck {
     private _renderer;
     private _ngStyle;
     private _differ;
-    constructor(_differs: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer);
+    constructor(_differs: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     ngStyle: {
         [key: string]: string;
     };

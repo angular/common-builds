@@ -6,17 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
-import { NgLocalization } from '../localization';
+import { NgLocalization } from '../i18n/localization';
 /**
  * @ngModule CommonModule
- * @whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
- * @howToUse `expression | i18nPlural:mapping`
  * @description
  *
- *  Where:
- *  - `expression` is a number.
- *  - `mapping` is an object that mimics the ICU format, see
- *    http://userguide.icu-project.org/formatparse/messages
+ * Maps a value to a string that pluralizes the value according to locale rules.
  *
  *  ## Example
  *
@@ -27,7 +22,14 @@ import { NgLocalization } from '../localization';
 export declare class I18nPluralPipe implements PipeTransform {
     private _localization;
     constructor(_localization: NgLocalization);
+    /**
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
     transform(value: number, pluralMap: {
         [count: string]: string;
-    }): string;
+    }, locale?: string): string;
 }
