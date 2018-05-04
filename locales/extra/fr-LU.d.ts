@@ -1,2 +1,3 @@
-declare const _default: any[][];
+/// <amd-module name="@angular/common/locales/extra/fr-LU" />
+declare const _default: ((string[] | undefined)[] | (string | string[])[])[];
 export default _default;

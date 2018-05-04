@@ -1,14 +1,11 @@
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
  * Generated bundle index. Do not edit.
  */
-export { ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, ɵPLATFORM_BROWSER_ID, ɵPLATFORM_SERVER_ID, ɵPLATFORM_WORKER_APP_ID, ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location } from './public_api';
-export { COMMON_DIRECTIVES as ɵe } from './src/directives/index';
-export { findLocaleData as ɵd } from './src/i18n/locale_data_api';
-export { DEPRECATED_PLURAL_FN as ɵa, getPluralCase as ɵb } from './src/i18n/localization';
-export { COMMON_DEPRECATED_I18N_PIPES as ɵg } from './src/pipes/deprecated/index';
-export { COMMON_PIPES as ɵf } from './src/pipes/index';
-//# sourceMappingURL=common.js.map
+export * from './index';
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_e } from './src/directives/index';
+export { findLocaleData as ɵangular_packages_common_common_d } from './src/i18n/locale_data_api';
+export { DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b } from './src/i18n/localization';
+export { COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_g } from './src/pipes/deprecated/index';
+export { COMMON_PIPES as ɵangular_packages_common_common_f } from './src/pipes/index';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tbW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvY29tbW9uL2NvbW1vbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILGNBQWMsU0FBUyxDQUFDO0FBRXhCLE9BQU8sRUFBQyxpQkFBaUIsSUFBSSxpQ0FBaUMsRUFBQyxNQUFNLHdCQUF3QixDQUFDO0FBRTlGLE9BQU8sRUFBQyxjQUFjLElBQUksaUNBQWlDLEVBQUMsTUFBTSw0QkFBNEIsQ0FBQztBQUMvRixPQUFPLEVBQUMsb0JBQW9CLElBQUksaUNBQWlDLEVBQUMsYUFBYSxJQUFJLGlDQUFpQyxFQUFDLE1BQU0seUJBQXlCLENBQUM7QUFDckosT0FBTyxFQUFDLDRCQUE0QixJQUFJLGlDQUFpQyxFQUFDLE1BQU0sOEJBQThCLENBQUM7QUFDL0csT0FBTyxFQUFDLFlBQVksSUFBSSxpQ0FBaUMsRUFBQyxNQUFNLG1CQUFtQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBHZW5lcmF0ZWQgYnVuZGxlIGluZGV4LiBEbyBub3QgZWRpdC5cbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2luZGV4JztcblxuZXhwb3J0IHtDT01NT05fRElSRUNUSVZFUyBhcyDJtWFuZ3VsYXJfcGFja2FnZXNfY29tbW9uX2NvbW1vbl9lfSBmcm9tICcuL3NyYy9kaXJlY3RpdmVzL2luZGV4JztcbmV4cG9ydCB7TG9jYWxlRGF0YUluZGV4IGFzIMm1YW5ndWxhcl9wYWNrYWdlc19jb21tb25fY29tbW9uX2N9IGZyb20gJy4vc3JjL2kxOG4vbG9jYWxlX2RhdGEnO1xuZXhwb3J0IHtmaW5kTG9jYWxlRGF0YSBhcyDJtWFuZ3VsYXJfcGFja2FnZXNfY29tbW9uX2NvbW1vbl9kfSBmcm9tICcuL3NyYy9pMThuL2xvY2FsZV9kYXRhX2FwaSc7XG5leHBvcnQge0RFUFJFQ0FURURfUExVUkFMX0ZOIGFzIMm1YW5ndWxhcl9wYWNrYWdlc19jb21tb25fY29tbW9uX2EsZ2V0UGx1cmFsQ2FzZSBhcyDJtWFuZ3VsYXJfcGFja2FnZXNfY29tbW9uX2NvbW1vbl9ifSBmcm9tICcuL3NyYy9pMThuL2xvY2FsaXphdGlvbic7XG5leHBvcnQge0NPTU1PTl9ERVBSRUNBVEVEX0kxOE5fUElQRVMgYXMgybVhbmd1bGFyX3BhY2thZ2VzX2NvbW1vbl9jb21tb25fZ30gZnJvbSAnLi9zcmMvcGlwZXMvZGVwcmVjYXRlZC9pbmRleCc7XG5leHBvcnQge0NPTU1PTl9QSVBFUyBhcyDJtWFuZ3VsYXJfcGFja2FnZXNfY29tbW9uX2NvbW1vbl9mfSBmcm9tICcuL3NyYy9waXBlcy9pbmRleCc7Il19
