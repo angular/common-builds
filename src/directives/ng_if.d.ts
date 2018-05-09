@@ -93,7 +93,7 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * @stable
+ *
  */
 export declare class NgIf {
     private _viewContainer;
@@ -104,13 +104,12 @@ export declare class NgIf {
     private _elseViewRef;
     constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext>);
     ngIf: any;
-    ngIfThen: TemplateRef<NgIfContext>;
-    ngIfElse: TemplateRef<NgIfContext>;
+    ngIfThen: TemplateRef<NgIfContext> | null;
+    ngIfElse: TemplateRef<NgIfContext> | null;
     private _updateView();
-    static ngIfTypeGuard: <T>(v: T | null | undefined | false) => v is T;
 }
 /**
- * @stable
+ *
  */
 export declare class NgIfContext {
     $implicit: any;

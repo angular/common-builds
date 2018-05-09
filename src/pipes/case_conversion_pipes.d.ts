@@ -11,7 +11,7 @@ import { PipeTransform } from '@angular/core';
  *
  * {@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
  *
- * @stable
+ *
  */
 export declare class LowerCasePipe implements PipeTransform {
     transform(value: string): string;
@@ -19,7 +19,14 @@ export declare class LowerCasePipe implements PipeTransform {
 /**
  * Transforms text to titlecase.
  *
- * @stable
+ * The pipe splits up a text into words, capitalizes the first letter of each word and transforms
+ * the rest of the word into lowercase. In this case, whitespace characters (such as "space", "\t",
+ * "\n", etc) are used as word separators.
+ *
+ * ## Example
+ * {@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
+ *
+ *
  */
 export declare class TitleCasePipe implements PipeTransform {
     transform(value: string): string;
@@ -27,7 +34,7 @@ export declare class TitleCasePipe implements PipeTransform {
 /**
  * Transforms text to uppercase.
  *
- * @stable
+ *
  */
 export declare class UpperCasePipe implements PipeTransform {
     transform(value: string): string;
