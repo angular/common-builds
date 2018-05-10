@@ -6,9 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, IterableDiffers, NgIterable, OnChanges, SimpleChanges, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
-/**
- *
- */
 export declare class NgForOfContext<T> {
     $implicit: T;
     ngForOf: NgIterable<T>;

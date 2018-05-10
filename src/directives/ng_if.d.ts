@@ -108,9 +108,6 @@ export declare class NgIf {
     ngIfElse: TemplateRef<NgIfContext> | null;
     private _updateView();
 }
-/**
- *
- */
 export declare class NgIfContext {
     $implicit: any;
     ngIf: any;
