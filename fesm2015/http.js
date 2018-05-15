@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+184.sha-e5e5c24
+ * @license Angular v6.0.0-rc.5+185.sha-5cf82f8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1403,8 +1403,6 @@ class NoopInterceptor {
 NoopInterceptor.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-NoopInterceptor.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -2179,8 +2177,6 @@ HttpClientXsrfModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientXsrfModule.ctorParameters = () => [];
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
@@ -2209,8 +2205,6 @@ HttpClientModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientModule.ctorParameters = () => [];
 /**
  * `NgModule` which enables JSONP support in `HttpClient`.
  *
@@ -2230,8 +2224,6 @@ HttpClientJsonpModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientJsonpModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle

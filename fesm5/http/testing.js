@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+184.sha-e5e5c24
+ * @license Angular v6.0.0-rc.5+185.sha-5cf82f8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -420,8 +420,6 @@ var HttpClientTestingBackend = /** @class */ (function () {
     HttpClientTestingBackend.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
-    HttpClientTestingBackend.ctorParameters = function () { return []; };
     return HttpClientTestingBackend;
 }());
 
@@ -454,8 +452,6 @@ var HttpClientTestingModule = /** @class */ (function () {
                     ],
                 },] }
     ];
-    /** @nocollapse */
-    HttpClientTestingModule.ctorParameters = function () { return []; };
     return HttpClientTestingModule;
 }());
 

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+184.sha-e5e5c24
+ * @license Angular v6.0.0-rc.5+185.sha-5cf82f8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1669,7 +1669,7 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                             result_1 = dayPeriods_1[index];
                         }
                     }
-                    else {
+                    else { // noon or midnight
                         // noon or midnight
                         var hours = rule.hours, minutes = rule.minutes;
                         if (hours === currentHours_1 && minutes === currentMinutes_1) {
@@ -2192,6 +2192,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     var res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
     return res
         .replace(CURRENCY_CHAR, currency)
+        // if we have 2 time the currency character, the second one is ignored
         .replace(CURRENCY_CHAR, '');
 }
 /**
@@ -2328,7 +2329,7 @@ function parseNumber(num) {
         integerLen = numStr.length;
     }
     // Count the number of leading zeros.
-    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) { /* empty */
         /* empty */
     }
     if (i === (zeros = numStr.length)) {
@@ -3763,7 +3764,6 @@ var NgSwitch = /** @class */ (function () {
         { type: Directive, args: [{ selector: '[ngSwitch]' },] }
     ];
     /** @nocollapse */
-    NgSwitch.ctorParameters = function () { return []; };
     NgSwitch.propDecorators = {
         "ngSwitch": [{ type: Input },],
     };
@@ -4583,15 +4583,15 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
         if (parts === null) {
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
-        if (parts[1] != null) {
+        if (parts[1] != null) { // min integer digits
             // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
-        if (parts[3] != null) {
+        if (parts[3] != null) { // min fraction digits
             // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
-        if (parts[5] != null) {
+        if (parts[5] != null) { // max fraction digits
             // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
@@ -4889,8 +4889,6 @@ var LowerCasePipe = /** @class */ (function () {
     LowerCasePipe.decorators = [
         { type: Pipe, args: [{ name: 'lowercase' },] }
     ];
-    /** @nocollapse */
-    LowerCasePipe.ctorParameters = function () { return []; };
     return LowerCasePipe;
 }());
 //
@@ -4928,8 +4926,6 @@ var TitleCasePipe = /** @class */ (function () {
     TitleCasePipe.decorators = [
         { type: Pipe, args: [{ name: 'titlecase' },] }
     ];
-    /** @nocollapse */
-    TitleCasePipe.ctorParameters = function () { return []; };
     return TitleCasePipe;
 }());
 /**
@@ -4951,8 +4947,6 @@ var UpperCasePipe = /** @class */ (function () {
     UpperCasePipe.decorators = [
         { type: Pipe, args: [{ name: 'uppercase' },] }
     ];
-    /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
     return UpperCasePipe;
 }());
 
@@ -5276,8 +5270,6 @@ var I18nSelectPipe = /** @class */ (function () {
     I18nSelectPipe.decorators = [
         { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
     ];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () { return []; };
     return I18nSelectPipe;
 }());
 
@@ -5306,8 +5298,6 @@ var JsonPipe = /** @class */ (function () {
     JsonPipe.decorators = [
         { type: Pipe, args: [{ name: 'json', pure: false },] }
     ];
-    /** @nocollapse */
-    JsonPipe.ctorParameters = function () { return []; };
     return JsonPipe;
 }());
 
@@ -5673,8 +5663,6 @@ var SlicePipe = /** @class */ (function () {
     SlicePipe.decorators = [
         { type: Pipe, args: [{ name: 'slice', pure: false },] }
     ];
-    /** @nocollapse */
-    SlicePipe.ctorParameters = function () { return []; };
     return SlicePipe;
 }());
 
@@ -5729,8 +5717,6 @@ var CommonModule = /** @class */ (function () {
                     ],
                 },] }
     ];
-    /** @nocollapse */
-    CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
 var ɵ0 = getPluralCase;
@@ -5749,8 +5735,6 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
                     providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
                 },] }
     ];
-    /** @nocollapse */
-    DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
     return DeprecatedI18NPipesModule;
 }());
 
@@ -5818,7 +5802,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.0.0-rc.5+184.sha-e5e5c24');
+var VERSION = new Version('6.0.0-rc.5+185.sha-5cf82f8');
 
 /**
  * @license
