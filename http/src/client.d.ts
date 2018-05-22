@@ -4,9 +4,6 @@ import { HttpHeaders } from './headers';
 import { HttpParams } from './params';
 import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
-/**
- *
- */
 export declare type HttpObserve = 'body' | 'events' | 'response';
 /**
  * Perform HTTP requests.

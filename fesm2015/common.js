@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+78.sha-e1c4930
+ * @license Angular v6.0.0-rc.5+215.sha-23a98b9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1701,7 +1701,7 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                             result = dayPeriods[index];
                         }
                     }
-                    else {
+                    else { // noon or midnight
                         // noon or midnight
                         const { hours, minutes } = rule;
                         if (hours === currentHours && minutes === currentMinutes) {
@@ -2279,6 +2279,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     const /** @type {?} */ res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
     return res
         .replace(CURRENCY_CHAR, currency)
+        // if we have 2 time the currency character, the second one is ignored
         .replace(CURRENCY_CHAR, '');
 }
 /**
@@ -2434,7 +2435,7 @@ function parseNumber(num) {
         integerLen = numStr.length;
     }
     // Count the number of leading zeros.
-    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
+    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) { /* empty */
         /* empty */
     }
     if (i === (zeros = numStr.length)) {
@@ -3379,7 +3380,6 @@ NgComponentOutlet.propDecorators = {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- *
  * @template T
  */
 class NgForOfContext {
@@ -3813,9 +3813,6 @@ NgIf.propDecorators = {
     "ngIfThen": [{ type: Input },],
     "ngIfElse": [{ type: Input },],
 };
-/**
- *
- */
 class NgIfContext {
     constructor() {
         this.$implicit = null;
@@ -3989,7 +3986,6 @@ NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]' },] }
 ];
 /** @nocollapse */
-NgSwitch.ctorParameters = () => [];
 NgSwitch.propDecorators = {
     "ngSwitch": [{ type: Input },],
 };
@@ -4947,15 +4943,15 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
         if (parts === null) {
             throw new Error(`${digits} is not a valid digit info for number pipes`);
         }
-        if (parts[1] != null) {
+        if (parts[1] != null) { // min integer digits
             // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
-        if (parts[3] != null) {
+        if (parts[3] != null) { // min fraction digits
             // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
-        if (parts[5] != null) {
+        if (parts[5] != null) { // max fraction digits
             // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
@@ -5333,8 +5329,6 @@ class LowerCasePipe {
 LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] }
 ];
-/** @nocollapse */
-LowerCasePipe.ctorParameters = () => [];
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
@@ -5373,8 +5367,6 @@ class TitleCasePipe {
 TitleCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'titlecase' },] }
 ];
-/** @nocollapse */
-TitleCasePipe.ctorParameters = () => [];
 /**
  * Transforms text to uppercase.
  *
@@ -5397,8 +5389,6 @@ class UpperCasePipe {
 UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] }
 ];
-/** @nocollapse */
-UpperCasePipe.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -5661,8 +5651,6 @@ class I18nSelectPipe {
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
 ];
-/** @nocollapse */
-I18nSelectPipe.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -5696,8 +5684,6 @@ class JsonPipe {
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] }
 ];
-/** @nocollapse */
-JsonPipe.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -5984,8 +5970,6 @@ class SlicePipe {
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] }
 ];
-/** @nocollapse */
-SlicePipe.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -6043,8 +6027,6 @@ CommonModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-CommonModule.ctorParameters = () => [];
 const ɵ0 = getPluralCase;
 /**
  * A module that contains the deprecated i18n pipes.
@@ -6060,8 +6042,6 @@ DeprecatedI18NPipesModule.decorators = [
                 providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
             },] }
 ];
-/** @nocollapse */
-DeprecatedI18NPipesModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -6147,10 +6127,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- *
- */
-const VERSION = new Version('6.0.0-rc.5+78.sha-e1c4930');
+const VERSION = new Version('6.0.0-rc.5+215.sha-23a98b9');
 
 /**
  * @fileoverview added by tsickle
