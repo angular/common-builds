@@ -1,13 +1,17 @@
+import { SubscriptionLike } from 'rxjs';
 import { LocationStrategy } from './location_strategy';
 /** @experimental */
 export interface PopStateEvent {
     pop?: boolean;
+    state?: any;
     type?: string;
     url?: string;
 }
 /**
- * @whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * @description
+ *
+ * A service that applications can use to interact with a browser's URL.
+ *
  * Depending on which {@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
@@ -24,7 +28,7 @@ export interface PopStateEvent {
  *
  * ### Example
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * @stable
+ *
  */
 export declare class Location {
     constructor(platformStrategy: LocationStrategy);
@@ -52,12 +56,12 @@ export declare class Location {
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
      */
-    go(path: string, query?: string): void;
+    go(path: string, query?: string, state?: any): void;
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      */
-    replaceState(path: string, query?: string): void;
+    replaceState(path: string, query?: string, state?: any): void;
     /**
      * Navigates forward in the platform's history.
      */
@@ -69,7 +73,7 @@ export declare class Location {
     /**
      * Subscribe to the platform's `popState` events.
      */
-    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): Object;
+    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.
@@ -81,7 +85,7 @@ export declare class Location {
     static joinWithSlash(start: string, end: string): string;
     /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      */
     static stripTrailingSlash(url: string): string;

@@ -6,12 +6,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 /**
  * @ngModule CommonModule
- * @whatItDoes Unwraps a value from an asynchronous primitive.
- * @howToUse `observable_or_promise_expression | async`
  * @description
+ *
+ * Unwraps a value from an asynchronous primitive.
+ *
  * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
  * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
@@ -30,7 +31,7 @@ import { Observable } from 'rxjs/Observable';
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * @stable
+ *
  */
 export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _ref;
@@ -43,8 +44,8 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     ngOnDestroy(): void;
     transform<T>(obj: null): null;
     transform<T>(obj: undefined): undefined;
-    transform<T>(obj: Observable<T>): T | null;
-    transform<T>(obj: Promise<T>): T | null;
+    transform<T>(obj: Observable<T> | null | undefined): T | null;
+    transform<T>(obj: Promise<T> | null | undefined): T | null;
     private _subscribe(obj);
     private _selectStrategy(obj);
     private _dispose();

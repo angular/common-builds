@@ -1,2 +1,3 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number))[];
+/// <amd-module name="@angular/common/locales/en-US-POSIX" />
+declare const _default: ({} | undefined)[];
 export default _default;

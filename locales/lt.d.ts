@@ -1,2 +1,31 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number))[];
+/// <amd-module name="@angular/common/locales/lt" />
+declare const _default: (string | number | (string[] | undefined)[] | number[] | (string | undefined)[] | ((n: number) => number) | {
+    'AUD': (string | undefined)[];
+    'BDT': never[];
+    'BRL': (string | undefined)[];
+    'BYN': (string | undefined)[];
+    'CAD': (string | undefined)[];
+    'CNY': (string | undefined)[];
+    'GBP': (string | undefined)[];
+    'HKD': (string | undefined)[];
+    'ILS': never[];
+    'INR': never[];
+    'JPY': (string | undefined)[];
+    'KHR': never[];
+    'KRW': (string | undefined)[];
+    'LAK': never[];
+    'MNT': never[];
+    'MXN': (string | undefined)[];
+    'NZD': (string | undefined)[];
+    'PLN': (string | undefined)[];
+    'PYG': (string | undefined)[];
+    'RUB': (string | undefined)[];
+    'TWD': (string | undefined)[];
+    'USD': (string | undefined)[];
+    'VND': never[];
+    'XAF': never[];
+    'XCD': (string | undefined)[];
+    'XOF': never[];
+    'XPF': never[];
+} | undefined)[];
 export default _default;

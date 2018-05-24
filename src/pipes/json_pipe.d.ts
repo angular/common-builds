@@ -8,8 +8,6 @@
 import { PipeTransform } from '@angular/core';
 /**
  * @ngModule CommonModule
- * @whatItDoes Converts value into JSON string.
- * @howToUse `expression | json`
  * @description
  *
  * Converts value into string using `JSON.stringify`. Useful for debugging.
@@ -17,7 +15,7 @@ import { PipeTransform } from '@angular/core';
  * ### Example
  * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * @stable
+ *
  */
 export declare class JsonPipe implements PipeTransform {
     transform(value: any): string;
