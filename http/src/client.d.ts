@@ -1,12 +1,9 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpHandler } from './backend';
 import { HttpHeaders } from './headers';
 import { HttpParams } from './params';
 import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
-/**
- * @stable
- */
 export declare type HttpObserve = 'body' | 'events' | 'response';
 /**
  * Perform HTTP requests.
@@ -15,7 +12,7 @@ export declare type HttpObserve = 'body' | 'events' | 'response';
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- * @stable
+ *
  */
 export declare class HttpClient {
     private handler;

@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
 import { HttpRequest } from './request';
@@ -9,7 +9,7 @@ export declare const XSRF_HEADER_NAME: InjectionToken<string>;
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- * @stable
+ *
  */
 export declare abstract class HttpXsrfTokenExtractor {
     /**

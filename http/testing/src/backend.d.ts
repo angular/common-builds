@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { HttpBackend, HttpEvent, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpTestingController, RequestMatch } from './api';
 import { TestRequest } from './request';
 /**
@@ -18,7 +18,7 @@ import { TestRequest } from './request';
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
  *
- * @stable
+ *
  */
 export declare class HttpClientTestingBackend implements HttpBackend, HttpTestingController {
     /**
