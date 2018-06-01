@@ -8,7 +8,6 @@
 import { Injector, ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpBackend, HttpHandler } from './backend';
-import { HttpInterceptor } from './interceptor';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
 /**
@@ -26,15 +25,6 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
-/**
- * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
- * to a request before passing it to the given `HttpBackend`.
- *
- * Meant to be used as a factory function within `HttpClientModule`.
- *
- *
- */
-export declare function interceptingHandler(backend: HttpBackend, interceptors?: HttpInterceptor[] | null): HttpHandler;
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
