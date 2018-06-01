@@ -293,16 +293,9 @@ HttpClient.decorators = [
 ];
 /** @nocollapse */
 HttpClient.ctorParameters = () => [
-    { type: HttpHandler, },
+    { type: HttpHandler }
 ];
 function HttpClient_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    HttpClient.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    HttpClient.ctorParameters;
     /** @type {?} */
     HttpClient.prototype.handler;
 }

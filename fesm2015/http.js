@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+49.sha-2991b1b
+ * @license Angular v6.0.3+50.sha-d69ba73
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1334,7 +1334,7 @@ HttpClient.decorators = [
 ];
 /** @nocollapse */
 HttpClient.ctorParameters = () => [
-    { type: HttpHandler, },
+    { type: HttpHandler }
 ];
 
 /**
@@ -1403,8 +1403,6 @@ class NoopInterceptor {
 NoopInterceptor.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-NoopInterceptor.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -1592,8 +1590,8 @@ JsonpClientBackend.decorators = [
 ];
 /** @nocollapse */
 JsonpClientBackend.ctorParameters = () => [
-    { type: JsonpCallbackContext, },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: JsonpCallbackContext },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
@@ -1626,7 +1624,7 @@ JsonpInterceptor.decorators = [
 ];
 /** @nocollapse */
 JsonpInterceptor.ctorParameters = () => [
-    { type: JsonpClientBackend, },
+    { type: JsonpClientBackend }
 ];
 
 /**
@@ -1933,7 +1931,7 @@ HttpXhrBackend.decorators = [
 ];
 /** @nocollapse */
 HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory, },
+    { type: XhrFactory }
 ];
 
 /**
@@ -1998,9 +1996,9 @@ HttpXsrfCookieExtractor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfCookieExtractor.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
 ];
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
@@ -2042,8 +2040,8 @@ HttpXsrfInterceptor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfInterceptor.ctorParameters = () => [
-    { type: HttpXsrfTokenExtractor, },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
+    { type: HttpXsrfTokenExtractor },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
 ];
 
 /**
@@ -2092,8 +2090,8 @@ HttpInterceptingHandler.decorators = [
 ];
 /** @nocollapse */
 HttpInterceptingHandler.ctorParameters = () => [
-    { type: HttpBackend, },
-    { type: Injector, },
+    { type: HttpBackend },
+    { type: Injector }
 ];
 /**
  * Factory function that determines where to store JSONP callbacks.
@@ -2162,8 +2160,6 @@ HttpClientXsrfModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientXsrfModule.ctorParameters = () => [];
 /**
  * `NgModule` which provides the `HttpClient` and associated services.
  *
@@ -2192,8 +2188,6 @@ HttpClientModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientModule.ctorParameters = () => [];
 /**
  * `NgModule` which enables JSONP support in `HttpClient`.
  *
@@ -2213,8 +2207,6 @@ HttpClientJsonpModule.decorators = [
                 ],
             },] }
 ];
-/** @nocollapse */
-HttpClientJsonpModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle

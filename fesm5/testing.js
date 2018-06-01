@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+49.sha-2991b1b
+ * @license Angular v6.0.3+50.sha-d69ba73
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -107,8 +107,6 @@ var SpyLocation = /** @class */ (function () {
     SpyLocation.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
-    SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
 var LocationState = /** @class */ (function () {
@@ -206,6 +204,11 @@ var _MockPopStateEvent = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common/testing package.
+ */
 
 /**
  * @license
@@ -213,6 +216,11 @@ var _MockPopStateEvent = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
  */
 
 // This file only reexports content of the `src` folder. Keep it that way.
@@ -224,6 +232,10 @@ var _MockPopStateEvent = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// This file is not used to build this module. It is only used during editing
+// by the TypeScript language service and during build for verification. `ngc`
+// replaces this file with production index.ts when it rewrites private symbol
+// names.
 
 /**
  * Generated bundle index. Do not edit.

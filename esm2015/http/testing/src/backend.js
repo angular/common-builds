@@ -156,16 +156,7 @@ export class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
-HttpClientTestingBackend.ctorParameters = () => [];
 function HttpClientTestingBackend_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    HttpClientTestingBackend.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    HttpClientTestingBackend.ctorParameters;
     /**
      * List of pending requests which have not yet been expected.
      * @type {?}

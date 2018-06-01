@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+49.sha-2991b1b
+ * @license Angular v6.0.3+50.sha-d69ba73
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -232,30 +232,14 @@ var Location = /** @class */ (function () {
      */
     // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
     // removed.
-    /**
-       * Returns the normalized URL path.
-       */
-    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-    // removed.
-    Location.prototype.path = /**
-       * Returns the normalized URL path.
-       */
-    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-    // removed.
-    function (includeHash) {
+    Location.prototype.path = function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         return this.normalize(this._platformStrategy.path(includeHash));
     };
     /**
      * Normalizes the given path and compares to the current normalized path.
      */
-    /**
-       * Normalizes the given path and compares to the current normalized path.
-       */
-    Location.prototype.isCurrentPathEqualTo = /**
-       * Normalizes the given path and compares to the current normalized path.
-       */
-    function (path, query) {
+    Location.prototype.isCurrentPathEqualTo = function (path, query) {
         if (query === void 0) { query = ''; }
         return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
     };
@@ -263,15 +247,7 @@ var Location = /** @class */ (function () {
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes.
      */
-    /**
-       * Given a string representing a URL, returns the normalized URL path without leading or
-       * trailing slashes.
-       */
-    Location.prototype.normalize = /**
-       * Given a string representing a URL, returns the normalized URL path without leading or
-       * trailing slashes.
-       */
-    function (url) {
+    Location.prototype.normalize = function (url) {
         return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
     };
     /**
@@ -280,19 +256,7 @@ var Location = /** @class */ (function () {
      * before normalizing. This method will also add a hash if `HashLocationStrategy` is
      * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
      */
-    /**
-       * Given a string representing a URL, returns the platform-specific external URL path.
-       * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-       * before normalizing. This method will also add a hash if `HashLocationStrategy` is
-       * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-       */
-    Location.prototype.prepareExternalUrl = /**
-       * Given a string representing a URL, returns the platform-specific external URL path.
-       * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-       * before normalizing. This method will also add a hash if `HashLocationStrategy` is
-       * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-       */
-    function (url) {
+    Location.prototype.prepareExternalUrl = function (url) {
         if (url && url[0] !== '/') {
             url = '/' + url;
         }
@@ -303,18 +267,7 @@ var Location = /** @class */ (function () {
      * Changes the browsers URL to the normalized version of the given URL, and pushes a
      * new item onto the platform's history.
      */
-    // TODO: rename this method to pushState
-    /**
-       * Changes the browsers URL to the normalized version of the given URL, and pushes a
-       * new item onto the platform's history.
-       */
-    Location.prototype.go = 
-    // TODO: rename this method to pushState
-    /**
-       * Changes the browsers URL to the normalized version of the given URL, and pushes a
-       * new item onto the platform's history.
-       */
-    function (path, query, state) {
+    Location.prototype.go = function (path, query, state) {
         if (query === void 0) { query = ''; }
         if (state === void 0) { state = null; }
         this._platformStrategy.pushState(state, '', path, query);
@@ -323,15 +276,7 @@ var Location = /** @class */ (function () {
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      */
-    /**
-       * Changes the browsers URL to the normalized version of the given URL, and replaces
-       * the top item on the platform's history stack.
-       */
-    Location.prototype.replaceState = /**
-       * Changes the browsers URL to the normalized version of the given URL, and replaces
-       * the top item on the platform's history stack.
-       */
-    function (path, query, state) {
+    Location.prototype.replaceState = function (path, query, state) {
         if (query === void 0) { query = ''; }
         if (state === void 0) { state = null; }
         this._platformStrategy.replaceState(state, '', path, query);
@@ -339,60 +284,28 @@ var Location = /** @class */ (function () {
     /**
      * Navigates forward in the platform's history.
      */
-    /**
-       * Navigates forward in the platform's history.
-       */
-    Location.prototype.forward = /**
-       * Navigates forward in the platform's history.
-       */
-    function () { this._platformStrategy.forward(); };
+    Location.prototype.forward = function () { this._platformStrategy.forward(); };
     /**
      * Navigates back in the platform's history.
      */
-    /**
-       * Navigates back in the platform's history.
-       */
-    Location.prototype.back = /**
-       * Navigates back in the platform's history.
-       */
-    function () { this._platformStrategy.back(); };
+    Location.prototype.back = function () { this._platformStrategy.back(); };
     /**
      * Subscribe to the platform's `popState` events.
      */
-    /**
-       * Subscribe to the platform's `popState` events.
-       */
-    Location.prototype.subscribe = /**
-       * Subscribe to the platform's `popState` events.
-       */
-    function (onNext, onThrow, onReturn) {
+    Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.
      */
-    /**
-       * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-       * is.
-       */
-    Location.normalizeQueryParams = /**
-       * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-       * is.
-       */
-    function (params) {
+    Location.normalizeQueryParams = function (params) {
         return params && params[0] !== '?' ? '?' + params : params;
     };
     /**
      * Given 2 parts of a url, join them with a slash if needed.
      */
-    /**
-       * Given 2 parts of a url, join them with a slash if needed.
-       */
-    Location.joinWithSlash = /**
-       * Given 2 parts of a url, join them with a slash if needed.
-       */
-    function (start, end) {
+    Location.joinWithSlash = function (start, end) {
         if (start.length == 0) {
             return end;
         }
@@ -419,17 +332,7 @@ var Location = /** @class */ (function () {
      * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      */
-    /**
-       * If url has a trailing slash, remove it, otherwise return url as is. This
-       * method looks for the first occurrence of either #, ?, or the end of the
-       * line as `/` characters after any of these should not be replaced.
-       */
-    Location.stripTrailingSlash = /**
-       * If url has a trailing slash, remove it, otherwise return url as is. This
-       * method looks for the first occurrence of either #, ?, or the end of the
-       * line as `/` characters after any of these should not be replaced.
-       */
-    function (url) {
+    Location.stripTrailingSlash = function (url) {
         var match = url.match(/#|\?|$/);
         var pathEndIdx = match && match.index || url.length;
         var droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
@@ -440,7 +343,7 @@ var Location = /** @class */ (function () {
     ];
     /** @nocollapse */
     Location.ctorParameters = function () { return [
-        { type: LocationStrategy, },
+        { type: LocationStrategy }
     ]; };
     return Location;
 }());
@@ -524,8 +427,8 @@ var HashLocationStrategy = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     HashLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [APP_BASE_HREF,] },] },
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [APP_BASE_HREF,] }] }
     ]; };
     return HashLocationStrategy;
 }(LocationStrategy));
@@ -606,8 +509,8 @@ var PathLocationStrategy = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     PathLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [APP_BASE_HREF,] },] },
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [APP_BASE_HREF,] }] }
     ]; };
     return PathLocationStrategy;
 }(LocationStrategy));
@@ -849,19 +752,7 @@ var CURRENCIES_EN = {
  *
  * @experimental i18n support is experimental.
  */
-/**
- * The different format styles that can be used to represent numbers.
- * Used by the function {@link getLocaleNumberFormat}.
- *
- * @experimental i18n support is experimental.
- */
 
-/**
- * The different format styles that can be used to represent numbers.
- * Used by the function {@link getLocaleNumberFormat}.
- *
- * @experimental i18n support is experimental.
- */
 (function (NumberFormatStyle) {
     NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
     NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
@@ -869,9 +760,7 @@ var CURRENCIES_EN = {
     NumberFormatStyle[NumberFormatStyle["Scientific"] = 3] = "Scientific";
 })(exports.NumberFormatStyle || (exports.NumberFormatStyle = {}));
 /** @experimental */
-/** @experimental */
 
-/** @experimental */
 (function (Plural) {
     Plural[Plural["Zero"] = 0] = "Zero";
     Plural[Plural["One"] = 1] = "One";
@@ -889,25 +778,7 @@ var CURRENCIES_EN = {
  *
  * @experimental i18n support is experimental.
  */
-/**
- * Some languages use two different forms of strings (standalone and format) depending on the
- * context.
- * Typically the standalone version is the nominative form of the word, and the format version is in
- * the genitive.
- * See [the CLDR website](http://cldr.unicode.org/translation/date-time) for more information.
- *
- * @experimental i18n support is experimental.
- */
 
-/**
- * Some languages use two different forms of strings (standalone and format) depending on the
- * context.
- * Typically the standalone version is the nominative form of the word, and the format version is in
- * the genitive.
- * See [the CLDR website](http://cldr.unicode.org/translation/date-time) for more information.
- *
- * @experimental i18n support is experimental.
- */
 (function (FormStyle) {
     FormStyle[FormStyle["Format"] = 0] = "Format";
     FormStyle[FormStyle["Standalone"] = 1] = "Standalone";
@@ -924,31 +795,7 @@ var CURRENCIES_EN = {
  *
  * @experimental i18n support is experimental.
  */
-/**
- * Multiple widths are available for translations: narrow (1 character), abbreviated (3 characters),
- * wide (full length), and short (2 characters, only for days).
- *
- * For example the day `Sunday` will be:
- * - Narrow: `S`
- * - Short: `Su`
- * - Abbreviated: `Sun`
- * - Wide: `Sunday`
- *
- * @experimental i18n support is experimental.
- */
 
-/**
- * Multiple widths are available for translations: narrow (1 character), abbreviated (3 characters),
- * wide (full length), and short (2 characters, only for days).
- *
- * For example the day `Sunday` will be:
- * - Narrow: `S`
- * - Short: `Su`
- * - Abbreviated: `Sun`
- * - Wide: `Sunday`
- *
- * @experimental i18n support is experimental.
- */
 (function (TranslationWidth) {
     TranslationWidth[TranslationWidth["Narrow"] = 0] = "Narrow";
     TranslationWidth[TranslationWidth["Abbreviated"] = 1] = "Abbreviated";
@@ -968,33 +815,7 @@ var CURRENCIES_EN = {
  *
  * @experimental i18n support is experimental.
  */
-/**
- * Multiple widths are available for formats: short (minimal amount of data), medium (small amount
- * of data), long (complete amount of data), full (complete amount of data and extra information).
- *
- * For example the date-time formats for the english locale will be:
- *  - `'short'`: `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
- *  - `'medium'`: `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
- *  - `'long'`: `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
- *  - `'full'`: `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`)
- *
- * @experimental i18n support is experimental.
- */
 
-/**
- * Multiple widths are available for formats: short (minimal amount of data), medium (small amount
- * of data), long (complete amount of data), full (complete amount of data and extra information).
- *
- * For example the date-time formats for the english locale will be:
- *  - `'short'`: `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
- *  - `'medium'`: `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
- *  - `'long'`: `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
- *  - `'full'`: `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`)
- *
- * @experimental i18n support is experimental.
- */
 (function (FormatWidth) {
     FormatWidth[FormatWidth["Short"] = 0] = "Short";
     FormatWidth[FormatWidth["Medium"] = 1] = "Medium";
@@ -1023,51 +844,7 @@ var CURRENCIES_EN = {
  *
  * @experimental i18n support is experimental.
  */
-/**
- * Number symbol that can be used to replace placeholders in number patterns.
- * The placeholders are based on english values:
- *
- * | Name                   | Example for en-US | Meaning                                     |
- * |------------------------|-------------------|---------------------------------------------|
- * | decimal                | 2,345`.`67        | decimal separator                           |
- * | group                  | 2`,`345.67        | grouping separator, typically for thousands |
- * | plusSign               | `+`23             | the plus sign used with numbers             |
- * | minusSign              | `-`23             | the minus sign used with numbers            |
- * | percentSign            | 23.4`%`           | the percent sign (out of 100)               |
- * | perMille               | 234`‰`            | the permille sign (out of 1000)             |
- * | exponential            | 1.2`E`3           | used in computers for 1.2×10³.              |
- * | superscriptingExponent | 1.2`×`103         | human-readable format of exponential        |
- * | infinity               | `∞`               | used in +∞ and -∞.                          |
- * | nan                    | `NaN`             | "not a number".                             |
- * | timeSeparator          | 10`:`52           | symbol used between time units              |
- * | currencyDecimal        | $2,345`.`67       | decimal separator, fallback to "decimal"    |
- * | currencyGroup          | $2`,`345.67       | grouping separator, fallback to "group"     |
- *
- * @experimental i18n support is experimental.
- */
 
-/**
- * Number symbol that can be used to replace placeholders in number patterns.
- * The placeholders are based on english values:
- *
- * | Name                   | Example for en-US | Meaning                                     |
- * |------------------------|-------------------|---------------------------------------------|
- * | decimal                | 2,345`.`67        | decimal separator                           |
- * | group                  | 2`,`345.67        | grouping separator, typically for thousands |
- * | plusSign               | `+`23             | the plus sign used with numbers             |
- * | minusSign              | `-`23             | the minus sign used with numbers            |
- * | percentSign            | 23.4`%`           | the percent sign (out of 100)               |
- * | perMille               | 234`‰`            | the permille sign (out of 1000)             |
- * | exponential            | 1.2`E`3           | used in computers for 1.2×10³.              |
- * | superscriptingExponent | 1.2`×`103         | human-readable format of exponential        |
- * | infinity               | `∞`               | used in +∞ and -∞.                          |
- * | nan                    | `NaN`             | "not a number".                             |
- * | timeSeparator          | 10`:`52           | symbol used between time units              |
- * | currencyDecimal        | $2,345`.`67       | decimal separator, fallback to "decimal"    |
- * | currencyGroup          | $2`,`345.67       | grouping separator, fallback to "group"     |
- *
- * @experimental i18n support is experimental.
- */
 (function (NumberSymbol) {
     NumberSymbol[NumberSymbol["Decimal"] = 0] = "Decimal";
     NumberSymbol[NumberSymbol["Group"] = 1] = "Group";
@@ -1089,17 +866,7 @@ var CURRENCIES_EN = {
  *
  * @experimental
  */
-/**
- * The value for each day of the week, based on the en-US locale
- *
- * @experimental
- */
 
-/**
- * The value for each day of the week, based on the en-US locale
- *
- * @experimental
- */
 (function (WeekDay) {
     WeekDay[WeekDay["Sunday"] = 0] = "Sunday";
     WeekDay[WeekDay["Monday"] = 1] = "Monday";
@@ -1749,7 +1516,6 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                         }
                     }
                     else {
-                        // noon or midnight
                         var hours = rule.hours, minutes = rule.minutes;
                         if (hours === currentHours_1 && minutes === currentMinutes_1) {
                             result_1 = dayPeriods_1[index];
@@ -2092,12 +1858,12 @@ function toDate(value) {
         }
         if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
             /* For ISO Strings without time the day, month and year must be extracted from the ISO String
-                  before Date creation to avoid time offset and errors in the new Date.
-                  If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-                  date, some browsers (e.g. IE 9) will throw an invalid Date error.
-                  If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-                  is applied.
-                  Note: ISO months are 0 for January, 1 for February, ... */
+            before Date creation to avoid time offset and errors in the new Date.
+            If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+            date, some browsers (e.g. IE 9) will throw an invalid Date error.
+            If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+            is applied.
+            Note: ISO months are 0 for January, 1 for February, ... */
             var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], m = _a[1], d = _a[2];
             return new Date(y, m - 1, d);
         }
@@ -2266,7 +2032,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
 function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     var format = getLocaleNumberFormat(locale, exports.NumberFormatStyle.Currency);
     var pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, exports.NumberSymbol.MinusSign));
-    pattern.minFrac = getNumberOfCurrencyDigits((currencyCode));
+    pattern.minFrac = getNumberOfCurrencyDigits(currencyCode);
     pattern.maxFrac = pattern.minFrac;
     var res = formatNumberToLocaleString(value, pattern, locale, exports.NumberSymbol.CurrencyGroup, exports.NumberSymbol.CurrencyDecimal, digitsInfo);
     return res
@@ -2408,7 +2174,6 @@ function parseNumber(num) {
     }
     // Count the number of leading zeros.
     for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
-        /* empty */
     }
     if (i === (zeros = numStr.length)) {
         // The digits are all zero.
@@ -2560,7 +2325,8 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  */
 var NgLocaleLocalization = /** @class */ (function (_super) {
     __extends(NgLocaleLocalization, _super);
-    function NgLocaleLocalization(locale, /** @deprecated from v5 */
+    function NgLocaleLocalization(locale, 
+    /** @deprecated from v5 */
     deprecatedPluralFn) {
         var _this = _super.call(this) || this;
         _this.locale = locale;
@@ -2590,8 +2356,8 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEPRECATED_PLURAL_FN,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEPRECATED_PLURAL_FN,] }] }
     ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
@@ -3115,23 +2881,7 @@ var NgClass = /** @class */ (function () {
      * For argument of type Map CSS class name in the map's key is toggled based on the value (added
      * for truthy and removed for falsy).
      */
-    /**
-       * Applies a collection of CSS classes to the DOM element.
-       *
-       * For argument of type Set and Array CSS class names contained in those collections are always
-       * added.
-       * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-       * for truthy and removed for falsy).
-       */
-    NgClass.prototype._applyClasses = /**
-       * Applies a collection of CSS classes to the DOM element.
-       *
-       * For argument of type Set and Array CSS class names contained in those collections are always
-       * added.
-       * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-       * for truthy and removed for falsy).
-       */
-    function (rawClassVal) {
+    NgClass.prototype._applyClasses = function (rawClassVal) {
         var _this = this;
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
@@ -3146,15 +2896,7 @@ var NgClass = /** @class */ (function () {
      * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
      * purposes.
      */
-    /**
-       * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-       * purposes.
-       */
-    NgClass.prototype._removeClasses = /**
-       * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-       * purposes.
-       */
-    function (rawClassVal) {
+    NgClass.prototype._removeClasses = function (rawClassVal) {
         var _this = this;
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
@@ -3184,14 +2926,14 @@ var NgClass = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgClass.ctorParameters = function () { return [
-        { type: core.IterableDiffers, },
-        { type: core.KeyValueDiffers, },
-        { type: core.ElementRef, },
-        { type: core.Renderer2, },
+        { type: core.IterableDiffers },
+        { type: core.KeyValueDiffers },
+        { type: core.ElementRef },
+        { type: core.Renderer2 }
     ]; };
     NgClass.propDecorators = {
-        "klass": [{ type: core.Input, args: ['class',] },],
-        "ngClass": [{ type: core.Input },],
+        klass: [{ type: core.Input, args: ['class',] }],
+        ngClass: [{ type: core.Input }]
     };
     return NgClass;
 }());
@@ -3295,13 +3037,13 @@ var NgComponentOutlet = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgComponentOutlet.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
+        { type: core.ViewContainerRef }
     ]; };
     NgComponentOutlet.propDecorators = {
-        "ngComponentOutlet": [{ type: core.Input },],
-        "ngComponentOutletInjector": [{ type: core.Input },],
-        "ngComponentOutletContent": [{ type: core.Input },],
-        "ngComponentOutletNgModuleFactory": [{ type: core.Input },],
+        ngComponentOutlet: [{ type: core.Input }],
+        ngComponentOutletInjector: [{ type: core.Input }],
+        ngComponentOutletContent: [{ type: core.Input }],
+        ngComponentOutletNgModuleFactory: [{ type: core.Input }]
     };
     return NgComponentOutlet;
 }());
@@ -3472,7 +3214,7 @@ var NgForOf = /** @class */ (function () {
         var insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext((null), _this.ngForOf, -1, -1), currentIndex);
+                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this.ngForOf, -1, -1), currentIndex);
                 var tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -3480,7 +3222,7 @@ var NgForOf = /** @class */ (function () {
                 _this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                var view = (_this._viewContainer.get(adjustedPreviousIndex));
+                var view = _this._viewContainer.get(adjustedPreviousIndex);
                 _this._viewContainer.move(view, currentIndex);
                 var tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
@@ -3507,14 +3249,14 @@ var NgForOf = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgForOf.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
-        { type: core.TemplateRef, },
-        { type: core.IterableDiffers, },
+        { type: core.ViewContainerRef },
+        { type: core.TemplateRef },
+        { type: core.IterableDiffers }
     ]; };
     NgForOf.propDecorators = {
-        "ngForOf": [{ type: core.Input },],
-        "ngForTrackBy": [{ type: core.Input },],
-        "ngForTemplate": [{ type: core.Input },],
+        ngForOf: [{ type: core.Input }],
+        ngForTrackBy: [{ type: core.Input }],
+        ngForTemplate: [{ type: core.Input }]
     };
     return NgForOf;
 }());
@@ -3690,13 +3432,13 @@ var NgIf = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgIf.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
-        { type: core.TemplateRef, },
+        { type: core.ViewContainerRef },
+        { type: core.TemplateRef }
     ]; };
     NgIf.propDecorators = {
-        "ngIf": [{ type: core.Input },],
-        "ngIfThen": [{ type: core.Input },],
-        "ngIfElse": [{ type: core.Input },],
+        ngIf: [{ type: core.Input }],
+        ngIfThen: [{ type: core.Input }],
+        ngIfElse: [{ type: core.Input }]
     };
     return NgIf;
 }());
@@ -3803,22 +3545,16 @@ var NgSwitch = /** @class */ (function () {
         configurable: true
     });
     /** @internal */
+    NgSwitch.prototype._addCase = function () { return this._caseCount++; };
     /** @internal */
-    NgSwitch.prototype._addCase = /** @internal */
-    function () { return this._caseCount++; };
-    /** @internal */
-    /** @internal */
-    NgSwitch.prototype._addDefault = /** @internal */
-    function (view) {
+    NgSwitch.prototype._addDefault = function (view) {
         if (!this._defaultViews) {
             this._defaultViews = [];
         }
         this._defaultViews.push(view);
     };
     /** @internal */
-    /** @internal */
-    NgSwitch.prototype._matchCase = /** @internal */
-    function (value) {
+    NgSwitch.prototype._matchCase = function (value) {
         var matched = value == this._ngSwitch;
         this._lastCasesMatched = this._lastCasesMatched || matched;
         this._lastCaseCheckIndex++;
@@ -3841,10 +3577,8 @@ var NgSwitch = /** @class */ (function () {
     NgSwitch.decorators = [
         { type: core.Directive, args: [{ selector: '[ngSwitch]' },] }
     ];
-    /** @nocollapse */
-    NgSwitch.ctorParameters = function () { return []; };
     NgSwitch.propDecorators = {
-        "ngSwitch": [{ type: core.Input },],
+        ngSwitch: [{ type: core.Input }]
     };
     return NgSwitch;
 }());
@@ -3884,12 +3618,12 @@ var NgSwitchCase = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
-        { type: core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: core.Host },] },
+        { type: core.ViewContainerRef },
+        { type: core.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: core.Host }] }
     ]; };
     NgSwitchCase.propDecorators = {
-        "ngSwitchCase": [{ type: core.Input },],
+        ngSwitchCase: [{ type: core.Input }]
     };
     return NgSwitchCase;
 }());
@@ -3924,9 +3658,9 @@ var NgSwitchDefault = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgSwitchDefault.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
-        { type: core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: core.Host },] },
+        { type: core.ViewContainerRef },
+        { type: core.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: core.Host }] }
     ]; };
     return NgSwitchDefault;
 }());
@@ -4004,10 +3738,10 @@ var NgPlural = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgPlural.ctorParameters = function () { return [
-        { type: NgLocalization, },
+        { type: NgLocalization }
     ]; };
     NgPlural.propDecorators = {
-        "ngPlural": [{ type: core.Input },],
+        ngPlural: [{ type: core.Input }]
     };
     return NgPlural;
 }());
@@ -4042,10 +3776,10 @@ var NgPluralCase = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgPluralCase.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['ngPluralCase',] },] },
-        { type: core.TemplateRef, },
-        { type: core.ViewContainerRef, },
-        { type: NgPlural, decorators: [{ type: core.Host },] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['ngPluralCase',] }] },
+        { type: core.TemplateRef },
+        { type: core.ViewContainerRef },
+        { type: NgPlural, decorators: [{ type: core.Host }] }
     ]; };
     return NgPluralCase;
 }());
@@ -4124,12 +3858,12 @@ var NgStyle = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgStyle.ctorParameters = function () { return [
-        { type: core.KeyValueDiffers, },
-        { type: core.ElementRef, },
-        { type: core.Renderer2, },
+        { type: core.KeyValueDiffers },
+        { type: core.ElementRef },
+        { type: core.Renderer2 }
     ]; };
     NgStyle.propDecorators = {
-        "ngStyle": [{ type: core.Input },],
+        ngStyle: [{ type: core.Input }]
     };
     return NgStyle;
 }());
@@ -4195,27 +3929,7 @@ var NgTemplateOutlet = /** @class */ (function () {
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
      */
-    /**
-       * We need to re-create existing embedded view if:
-       * - templateRef has changed
-       * - context has changes
-       *
-       * We mark context object as changed when the corresponding object
-       * shape changes (new properties are added or existing properties are removed).
-       * In other words we consider context with the same properties as "the same" even
-       * if object reference changes (see https://github.com/angular/angular/issues/13407).
-       */
-    NgTemplateOutlet.prototype._shouldRecreateView = /**
-       * We need to re-create existing embedded view if:
-       * - templateRef has changed
-       * - context has changes
-       *
-       * We mark context object as changed when the corresponding object
-       * shape changes (new properties are added or existing properties are removed).
-       * In other words we consider context with the same properties as "the same" even
-       * if object reference changes (see https://github.com/angular/angular/issues/13407).
-       */
-    function (changes) {
+    NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
         var ctxChange = changes['ngTemplateOutletContext'];
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     };
@@ -4266,11 +3980,11 @@ var NgTemplateOutlet = /** @class */ (function () {
     ];
     /** @nocollapse */
     NgTemplateOutlet.ctorParameters = function () { return [
-        { type: core.ViewContainerRef, },
+        { type: core.ViewContainerRef }
     ]; };
     NgTemplateOutlet.propDecorators = {
-        "ngTemplateOutletContext": [{ type: core.Input },],
-        "ngTemplateOutlet": [{ type: core.Input },],
+        ngTemplateOutletContext: [{ type: core.Input }],
+        ngTemplateOutlet: [{ type: core.Input }]
     };
     return NgTemplateOutlet;
 }());
@@ -4311,6 +4025,13 @@ function invalidPipeArgumentError(type, value) {
     return Error("InvalidPipeArgument: '" + value + "' for pipe '" + core.ɵstringify(type) + "'");
 }
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
@@ -4391,10 +4112,8 @@ var DATE_FORMATS$1 = {
     'Z': timeZoneGetter$1('short'),
     'z': timeZoneGetter$1('long'),
     'ww': datePartGetterFactory({}),
-    // Week of year, padded (00-53). Week 01 is the week with the
     // first Thursday of the year. not support ?
     'w': datePartGetterFactory({}),
-    // Week of year (0-53). Week 1 is the week with the first Thursday
     // of the year not support ?
     'G': datePartGetterFactory(nameCondition('era', 1)),
     'GG': datePartGetterFactory(nameCondition('era', 2)),
@@ -4466,7 +4185,7 @@ function dateFormatter(format, date, locale) {
             match = DATE_FORMATS_SPLIT$1.exec(_format);
             if (match) {
                 parts = parts.concat(match.slice(1));
-                _format = (parts.pop());
+                _format = parts.pop();
             }
             else {
                 parts.push(_format);
@@ -4581,15 +4300,15 @@ var DeprecatedDatePipe = /** @class */ (function () {
         }
         else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
             /**
-                   * For ISO Strings without time the day, month and year must be extracted from the ISO String
-                   * before Date creation to avoid time offset and errors in the new Date.
-                   * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-                   * date, some browsers (e.g. IE 9) will throw an invalid Date error
-                   * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the
-                   * timeoffset
-                   * is applied
-                   * Note: ISO months are 0 for January, 1 for February, ...
-                   */
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the
+             * timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
             var _a = __read(value.split('-').map(function (val) { return parseInt(val, 10); }), 3), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
@@ -4623,7 +4342,7 @@ var DeprecatedDatePipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DeprecatedDatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedDatePipe;
 }());
@@ -4663,15 +4382,12 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
         if (parts[1] != null) {
-            // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
         if (parts[3] != null) {
-            // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
         if (parts[5] != null) {
-            // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
     }
@@ -4720,7 +4436,7 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DeprecatedDecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedDecimalPipe;
 }());
@@ -4754,7 +4470,7 @@ var DeprecatedPercentPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DeprecatedPercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedPercentPipe;
 }());
@@ -4796,7 +4512,7 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DeprecatedCurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedCurrencyPipe;
 }());
@@ -4918,7 +4634,7 @@ var AsyncPipe = /** @class */ (function () {
         throw invalidPipeArgumentError(AsyncPipe, obj);
     };
     AsyncPipe.prototype._dispose = function () {
-        this._strategy.dispose((this._subscription));
+        this._strategy.dispose(this._subscription);
         this._latestValue = null;
         this._latestReturnedValue = null;
         this._subscription = null;
@@ -4935,7 +4651,7 @@ var AsyncPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     AsyncPipe.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef, },
+        { type: core.ChangeDetectorRef }
     ]; };
     return AsyncPipe;
 }());
@@ -4968,8 +4684,6 @@ var LowerCasePipe = /** @class */ (function () {
     LowerCasePipe.decorators = [
         { type: core.Pipe, args: [{ name: 'lowercase' },] }
     ];
-    /** @nocollapse */
-    LowerCasePipe.ctorParameters = function () { return []; };
     return LowerCasePipe;
 }());
 //
@@ -5007,8 +4721,6 @@ var TitleCasePipe = /** @class */ (function () {
     TitleCasePipe.decorators = [
         { type: core.Pipe, args: [{ name: 'titlecase' },] }
     ];
-    /** @nocollapse */
-    TitleCasePipe.ctorParameters = function () { return []; };
     return TitleCasePipe;
 }());
 /**
@@ -5030,8 +4742,6 @@ var UpperCasePipe = /** @class */ (function () {
     UpperCasePipe.decorators = [
         { type: core.Pipe, args: [{ name: 'uppercase' },] }
     ];
-    /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
     return UpperCasePipe;
 }());
 
@@ -5163,57 +4873,7 @@ var DatePipe = /** @class */ (function () {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    /**
-       * @param value a date object or a number (milliseconds since UTC epoch) or an ISO string
-       * (https://www.w3.org/TR/NOTE-datetime).
-       * @param format indicates which date/time components to include. The format can be predefined as
-       *   shown below (all examples are given for `en-US`) or custom as shown in the table.
-       *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
-       *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
-       *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM
-       * GMT+1`).
-       *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
-       * 9:03:01 AM GMT+01:00`).
-       *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
-       *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
-       *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
-       *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
-       *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
-       *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
-       *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
-       *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
-       * @param timezone to be used for formatting the time. It understands UTC/GMT and the continental
-       * US time zone
-       *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    DatePipe.prototype.transform = /**
-       * @param value a date object or a number (milliseconds since UTC epoch) or an ISO string
-       * (https://www.w3.org/TR/NOTE-datetime).
-       * @param format indicates which date/time components to include. The format can be predefined as
-       *   shown below (all examples are given for `en-US`) or custom as shown in the table.
-       *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`).
-       *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`).
-       *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM
-       * GMT+1`).
-       *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
-       * 9:03:01 AM GMT+01:00`).
-       *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`).
-       *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`).
-       *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`).
-       *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`).
-       *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`).
-       *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`).
-       *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`).
-       *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`).
-       * @param timezone to be used for formatting the time. It understands UTC/GMT and the continental
-       * US time zone
-       *  abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    function (value, format, timezone, locale) {
+    DatePipe.prototype.transform = function (value, format, timezone, locale) {
         if (format === void 0) { format = 'mediumDate'; }
         if (value == null || value === '' || value !== value)
             return null;
@@ -5229,7 +4889,7 @@ var DatePipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DatePipe;
 }());
@@ -5265,21 +4925,7 @@ var I18nPluralPipe = /** @class */ (function () {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    /**
-       * @param value the number to be formatted
-       * @param pluralMap an object that mimics the ICU format, see
-       * http://userguide.icu-project.org/formatparse/messages.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    I18nPluralPipe.prototype.transform = /**
-       * @param value the number to be formatted
-       * @param pluralMap an object that mimics the ICU format, see
-       * http://userguide.icu-project.org/formatparse/messages.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    function (value, pluralMap, locale) {
+    I18nPluralPipe.prototype.transform = function (value, pluralMap, locale) {
         if (value == null)
             return '';
         if (typeof pluralMap !== 'object' || pluralMap === null) {
@@ -5293,7 +4939,7 @@ var I18nPluralPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     I18nPluralPipe.ctorParameters = function () { return [
-        { type: NgLocalization, },
+        { type: NgLocalization }
     ]; };
     return I18nPluralPipe;
 }());
@@ -5328,17 +4974,7 @@ var I18nSelectPipe = /** @class */ (function () {
      * @param mapping an object that indicates the text that should be displayed
      * for different values of the provided `value`.
      */
-    /**
-       * @param value a string to be internationalized.
-       * @param mapping an object that indicates the text that should be displayed
-       * for different values of the provided `value`.
-       */
-    I18nSelectPipe.prototype.transform = /**
-       * @param value a string to be internationalized.
-       * @param mapping an object that indicates the text that should be displayed
-       * for different values of the provided `value`.
-       */
-    function (value, mapping) {
+    I18nSelectPipe.prototype.transform = function (value, mapping) {
         if (value == null)
             return '';
         if (typeof mapping !== 'object' || typeof value !== 'string') {
@@ -5355,8 +4991,6 @@ var I18nSelectPipe = /** @class */ (function () {
     I18nSelectPipe.decorators = [
         { type: core.Pipe, args: [{ name: 'i18nSelect', pure: true },] }
     ];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () { return []; };
     return I18nSelectPipe;
 }());
 
@@ -5385,8 +5019,6 @@ var JsonPipe = /** @class */ (function () {
     JsonPipe.decorators = [
         { type: core.Pipe, args: [{ name: 'json', pure: false },] }
     ];
-    /** @nocollapse */
-    JsonPipe.ctorParameters = function () { return []; };
     return JsonPipe;
 }());
 
@@ -5428,31 +5060,7 @@ var DecimalPipe = /** @class */ (function () {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    /**
-       * @param value a number to be formatted.
-       * @param digitsInfo a `string` which has a following format: <br>
-       * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-       *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
-       *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to
-       * `0`.
-       *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to
-       * `3`.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    DecimalPipe.prototype.transform = /**
-       * @param value a number to be formatted.
-       * @param digitsInfo a `string` which has a following format: <br>
-       * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-       *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
-       *   - `minFractionDigits` is the minimum number of digits after the decimal point. Defaults to
-       * `0`.
-       *   - `maxFractionDigits` is the maximum number of digits after the decimal point. Defaults to
-       * `3`.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    function (value, digitsInfo, locale) {
+    DecimalPipe.prototype.transform = function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
@@ -5469,7 +5077,7 @@ var DecimalPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     DecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return DecimalPipe;
 }());
@@ -5497,21 +5105,7 @@ var PercentPipe = /** @class */ (function () {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
    * default).
      */
-    /**
-       *
-       * @param value a number to be formatted as a percentage.
-       * @param digitsInfo see {@link DecimalPipe} for more details.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-     * default).
-       */
-    PercentPipe.prototype.transform = /**
-       *
-       * @param value a number to be formatted as a percentage.
-       * @param digitsInfo see {@link DecimalPipe} for more details.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-     * default).
-       */
-    function (value, digitsInfo, locale) {
+    PercentPipe.prototype.transform = function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
@@ -5528,7 +5122,7 @@ var PercentPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     PercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return PercentPipe;
 }());
@@ -5566,41 +5160,7 @@ var CurrencyPipe = /** @class */ (function () {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    /**
-       *
-       * @param value a number to be formatted as currency.
-       * @param currencyCodeis the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-       * such as `USD` for the US dollar and `EUR` for the euro.
-       * @param display indicates whether to show the currency symbol, the code or a custom value:
-       *   - `code`: use code (e.g. `USD`).
-       *   - `symbol`(default): use symbol (e.g. `$`).
-       *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
-       *     narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
-       *   - `string`: use this value instead of a code or a symbol.
-       *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
-       *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
-       * @param digitsInfo see {@link DecimalPipe} for more details.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    CurrencyPipe.prototype.transform = /**
-       *
-       * @param value a number to be formatted as currency.
-       * @param currencyCodeis the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-       * such as `USD` for the US dollar and `EUR` for the euro.
-       * @param display indicates whether to show the currency symbol, the code or a custom value:
-       *   - `code`: use code (e.g. `USD`).
-       *   - `symbol`(default): use symbol (e.g. `$`).
-       *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
-       *     narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
-       *   - `string`: use this value instead of a code or a symbol.
-       *   - boolean (deprecated from v5): `true` for symbol and false for `code`.
-       *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
-       * @param digitsInfo see {@link DecimalPipe} for more details.
-       * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-       * default).
-       */
-    function (value, currencyCode, display, digitsInfo, locale) {
+    CurrencyPipe.prototype.transform = function (value, currencyCode, display, digitsInfo, locale) {
         if (display === void 0) { display = 'symbol'; }
         if (isEmpty(value))
             return null;
@@ -5633,7 +5193,7 @@ var CurrencyPipe = /** @class */ (function () {
     ];
     /** @nocollapse */
     CurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.LOCALE_ID,] }] }
     ]; };
     return CurrencyPipe;
 }());
@@ -5710,37 +5270,7 @@ var SlicePipe = /** @class */ (function () {
      *   - **if positive**: return all items before `end` index of the list or string.
      *   - **if negative**: return all items before `end` index from the end of the list or string.
      */
-    /**
-       * @param value a list or a string to be sliced.
-       * @param start the starting index of the subset to return:
-       *   - **a positive integer**: return the item at `start` index and all items after
-       *     in the list or string expression.
-       *   - **a negative integer**: return the item at `start` index from the end and all items after
-       *     in the list or string expression.
-       *   - **if positive and greater than the size of the expression**: return an empty list or
-       * string.
-       *   - **if negative and greater than the size of the expression**: return entire list or string.
-       * @param end the ending index of the subset to return:
-       *   - **omitted**: return all items until the end.
-       *   - **if positive**: return all items before `end` index of the list or string.
-       *   - **if negative**: return all items before `end` index from the end of the list or string.
-       */
-    SlicePipe.prototype.transform = /**
-       * @param value a list or a string to be sliced.
-       * @param start the starting index of the subset to return:
-       *   - **a positive integer**: return the item at `start` index and all items after
-       *     in the list or string expression.
-       *   - **a negative integer**: return the item at `start` index from the end and all items after
-       *     in the list or string expression.
-       *   - **if positive and greater than the size of the expression**: return an empty list or
-       * string.
-       *   - **if negative and greater than the size of the expression**: return entire list or string.
-       * @param end the ending index of the subset to return:
-       *   - **omitted**: return all items until the end.
-       *   - **if positive**: return all items before `end` index of the list or string.
-       *   - **if negative**: return all items before `end` index from the end of the list or string.
-       */
-    function (value, start, end) {
+    SlicePipe.prototype.transform = function (value, start, end) {
         if (value == null)
             return value;
         if (!this.supports(value)) {
@@ -5752,8 +5282,6 @@ var SlicePipe = /** @class */ (function () {
     SlicePipe.decorators = [
         { type: core.Pipe, args: [{ name: 'slice', pure: false },] }
     ];
-    /** @nocollapse */
-    SlicePipe.ctorParameters = function () { return []; };
     return SlicePipe;
 }());
 
@@ -5763,6 +5291,11 @@ var SlicePipe = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * This module provides a set of common Pipes.
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -5808,8 +5341,6 @@ var CommonModule = /** @class */ (function () {
                     ],
                 },] }
     ];
-    /** @nocollapse */
-    CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
 var ɵ0 = getPluralCase;
@@ -5828,8 +5359,6 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
                     providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
                 },] }
     ];
-    /** @nocollapse */
-    DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
     return DeprecatedI18NPipesModule;
 }());
 
@@ -5897,7 +5426,12 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new core.Version('6.0.3+49.sha-2991b1b');
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+var VERSION = new core.Version('6.0.3+50.sha-d69ba73');
 
 /**
  * @license
@@ -5906,6 +5440,11 @@ var VERSION = new core.Version('6.0.3+49.sha-2991b1b');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
 
 /**
  * @license
@@ -5913,6 +5452,11 @@ var VERSION = new core.Version('6.0.3+49.sha-2991b1b');
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
  */
 
 // This file only reexports content of the `src` folder. Keep it that way.
@@ -5924,6 +5468,10 @@ var VERSION = new core.Version('6.0.3+49.sha-2991b1b');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// This file is not used to build this module. It is only used during editing
+// by the TypeScript language service and during build for verification. `ngc`
+// replaces this file with production index.ts when it rewrites private symbol
+// names.
 
 /**
  * Generated bundle index. Do not edit.
