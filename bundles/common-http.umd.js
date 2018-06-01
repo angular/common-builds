@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.3+48.sha-b18cf21
+ * @license Angular v6.0.3+49.sha-2991b1b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2157,21 +2157,6 @@ var HttpInterceptingHandler = /** @class */ (function () {
     return HttpInterceptingHandler;
 }());
 /**
- * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
- * to a request before passing it to the given `HttpBackend`.
- *
- * Meant to be used as a factory function within `HttpClientModule`.
- *
- *
- */
-function interceptingHandler(backend, interceptors) {
-    if (interceptors === void 0) { interceptors = []; }
-    if (!interceptors) {
-        return backend;
-    }
-    return interceptors.reduceRight(function (next, interceptor) { return new HttpInterceptorHandler(next, interceptor); }, backend);
-}
-/**
  * Factory function that determines where to store JSONP callbacks.
  *
  * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
@@ -2334,13 +2319,12 @@ var HttpClientJsonpModule = /** @class */ (function () {
 
 exports.ɵangular_packages_common_http_http_a = NoopInterceptor;
 exports.ɵangular_packages_common_http_http_b = JsonpCallbackContext;
-exports.ɵangular_packages_common_http_http_c = HttpInterceptingHandler;
-exports.ɵangular_packages_common_http_http_d = jsonpCallbackContext;
-exports.ɵangular_packages_common_http_http_e = BrowserXhr;
-exports.ɵangular_packages_common_http_http_h = HttpXsrfCookieExtractor;
-exports.ɵangular_packages_common_http_http_i = HttpXsrfInterceptor;
-exports.ɵangular_packages_common_http_http_f = XSRF_COOKIE_NAME;
-exports.ɵangular_packages_common_http_http_g = XSRF_HEADER_NAME;
+exports.ɵangular_packages_common_http_http_c = jsonpCallbackContext;
+exports.ɵangular_packages_common_http_http_d = BrowserXhr;
+exports.ɵangular_packages_common_http_http_g = HttpXsrfCookieExtractor;
+exports.ɵangular_packages_common_http_http_h = HttpXsrfInterceptor;
+exports.ɵangular_packages_common_http_http_e = XSRF_COOKIE_NAME;
+exports.ɵangular_packages_common_http_http_f = XSRF_HEADER_NAME;
 exports.HttpBackend = HttpBackend;
 exports.HttpHandler = HttpHandler;
 exports.HttpClient = HttpClient;
@@ -2351,7 +2335,7 @@ exports.JsonpInterceptor = JsonpInterceptor;
 exports.HttpClientJsonpModule = HttpClientJsonpModule;
 exports.HttpClientModule = HttpClientModule;
 exports.HttpClientXsrfModule = HttpClientXsrfModule;
-exports.ɵinterceptingHandler = interceptingHandler;
+exports.ɵHttpInterceptingHandler = HttpInterceptingHandler;
 exports.HttpParams = HttpParams;
 exports.HttpUrlEncodingCodec = HttpUrlEncodingCodec;
 exports.HttpRequest = HttpRequest;
