@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+294.sha-60aa943
+ * @license Angular v6.0.0-rc.5+295.sha-f69ac67
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1334,7 +1334,7 @@ HttpClient.decorators = [
 ];
 /** @nocollapse */
 HttpClient.ctorParameters = () => [
-    { type: HttpHandler, },
+    { type: HttpHandler }
 ];
 
 /**
@@ -1590,8 +1590,8 @@ JsonpClientBackend.decorators = [
 ];
 /** @nocollapse */
 JsonpClientBackend.ctorParameters = () => [
-    { type: JsonpCallbackContext, },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: JsonpCallbackContext },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
@@ -1624,7 +1624,7 @@ JsonpInterceptor.decorators = [
 ];
 /** @nocollapse */
 JsonpInterceptor.ctorParameters = () => [
-    { type: JsonpClientBackend, },
+    { type: JsonpClientBackend }
 ];
 
 /**
@@ -1931,7 +1931,7 @@ HttpXhrBackend.decorators = [
 ];
 /** @nocollapse */
 HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory, },
+    { type: XhrFactory }
 ];
 
 /**
@@ -1996,9 +1996,9 @@ HttpXsrfCookieExtractor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfCookieExtractor.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
 ];
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
@@ -2040,8 +2040,8 @@ HttpXsrfInterceptor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfInterceptor.ctorParameters = () => [
-    { type: HttpXsrfTokenExtractor, },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
+    { type: HttpXsrfTokenExtractor },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
 ];
 
 /**
@@ -2090,8 +2090,8 @@ HttpInterceptingHandler.decorators = [
 ];
 /** @nocollapse */
 HttpInterceptingHandler.ctorParameters = () => [
-    { type: HttpBackend, },
-    { type: Injector, },
+    { type: HttpBackend },
+    { type: Injector }
 ];
 /**
  * Factory function that determines where to store JSONP callbacks.

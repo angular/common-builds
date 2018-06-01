@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+294.sha-60aa943
+ * @license Angular v6.0.0-rc.5+295.sha-f69ac67
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -314,7 +314,7 @@ Location.decorators = [
 ];
 /** @nocollapse */
 Location.ctorParameters = () => [
-    { type: LocationStrategy, },
+    { type: LocationStrategy }
 ];
 /**
  * @param {?} baseHref
@@ -446,8 +446,8 @@ HashLocationStrategy.decorators = [
 ];
 /** @nocollapse */
 HashLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+    { type: PlatformLocation },
+    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
 
 /**
@@ -567,8 +567,8 @@ PathLocationStrategy.decorators = [
 ];
 /** @nocollapse */
 PathLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },
+    { type: PlatformLocation },
+    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
 
 /**
@@ -2641,8 +2641,8 @@ NgLocaleLocalization.decorators = [
 ];
 /** @nocollapse */
 NgLocaleLocalization.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DEPRECATED_PLURAL_FN,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DEPRECATED_PLURAL_FN,] }] }
 ];
 /**
  * Returns the plural case based on the locale
@@ -3236,14 +3236,14 @@ NgClass.decorators = [
 ];
 /** @nocollapse */
 NgClass.ctorParameters = () => [
-    { type: IterableDiffers, },
-    { type: KeyValueDiffers, },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: IterableDiffers },
+    { type: KeyValueDiffers },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 NgClass.propDecorators = {
-    "klass": [{ type: Input, args: ['class',] },],
-    "ngClass": [{ type: Input },],
+    klass: [{ type: Input, args: ['class',] }],
+    ngClass: [{ type: Input }]
 };
 
 /**
@@ -3359,13 +3359,13 @@ NgComponentOutlet.decorators = [
 ];
 /** @nocollapse */
 NgComponentOutlet.ctorParameters = () => [
-    { type: ViewContainerRef, },
+    { type: ViewContainerRef }
 ];
 NgComponentOutlet.propDecorators = {
-    "ngComponentOutlet": [{ type: Input },],
-    "ngComponentOutletInjector": [{ type: Input },],
-    "ngComponentOutletContent": [{ type: Input },],
-    "ngComponentOutletNgModuleFactory": [{ type: Input },],
+    ngComponentOutlet: [{ type: Input }],
+    ngComponentOutletInjector: [{ type: Input }],
+    ngComponentOutletContent: [{ type: Input }],
+    ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
 
 /**
@@ -3602,14 +3602,14 @@ NgForOf.decorators = [
 ];
 /** @nocollapse */
 NgForOf.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: IterableDiffers, },
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: IterableDiffers }
 ];
 NgForOf.propDecorators = {
-    "ngForOf": [{ type: Input },],
-    "ngForTrackBy": [{ type: Input },],
-    "ngForTemplate": [{ type: Input },],
+    ngForOf: [{ type: Input }],
+    ngForTrackBy: [{ type: Input }],
+    ngForTemplate: [{ type: Input }]
 };
 /**
  * @template T
@@ -3805,13 +3805,13 @@ NgIf.decorators = [
 ];
 /** @nocollapse */
 NgIf.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
+    { type: ViewContainerRef },
+    { type: TemplateRef }
 ];
 NgIf.propDecorators = {
-    "ngIf": [{ type: Input },],
-    "ngIfThen": [{ type: Input },],
-    "ngIfElse": [{ type: Input },],
+    ngIf: [{ type: Input }],
+    ngIfThen: [{ type: Input }],
+    ngIfElse: [{ type: Input }]
 };
 class NgIfContext {
     constructor() {
@@ -3985,9 +3985,8 @@ class NgSwitch {
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]' },] }
 ];
-/** @nocollapse */
 NgSwitch.propDecorators = {
-    "ngSwitch": [{ type: Input },],
+    ngSwitch: [{ type: Input }]
 };
 /**
  * \@ngModule CommonModule
@@ -4034,12 +4033,12 @@ NgSwitchCase.decorators = [
 ];
 /** @nocollapse */
 NgSwitchCase.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: NgSwitch, decorators: [{ type: Host },] },
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: NgSwitch, decorators: [{ type: Host }] }
 ];
 NgSwitchCase.propDecorators = {
-    "ngSwitchCase": [{ type: Input },],
+    ngSwitchCase: [{ type: Input }]
 };
 /**
  * \@ngModule CommonModule
@@ -4078,9 +4077,9 @@ NgSwitchDefault.decorators = [
 ];
 /** @nocollapse */
 NgSwitchDefault.ctorParameters = () => [
-    { type: ViewContainerRef, },
-    { type: TemplateRef, },
-    { type: NgSwitch, decorators: [{ type: Host },] },
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: NgSwitch, decorators: [{ type: Host }] }
 ];
 
 /**
@@ -4179,10 +4178,10 @@ NgPlural.decorators = [
 ];
 /** @nocollapse */
 NgPlural.ctorParameters = () => [
-    { type: NgLocalization, },
+    { type: NgLocalization }
 ];
 NgPlural.propDecorators = {
-    "ngPlural": [{ type: Input },],
+    ngPlural: [{ type: Input }]
 };
 /**
  * \@ngModule CommonModule
@@ -4222,10 +4221,10 @@ NgPluralCase.decorators = [
 ];
 /** @nocollapse */
 NgPluralCase.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-    { type: NgPlural, decorators: [{ type: Host },] },
+    { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
+    { type: TemplateRef },
+    { type: ViewContainerRef },
+    { type: NgPlural, decorators: [{ type: Host }] }
 ];
 
 /**
@@ -4323,12 +4322,12 @@ NgStyle.decorators = [
 ];
 /** @nocollapse */
 NgStyle.ctorParameters = () => [
-    { type: KeyValueDiffers, },
-    { type: ElementRef, },
-    { type: Renderer2, },
+    { type: KeyValueDiffers },
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 NgStyle.propDecorators = {
-    "ngStyle": [{ type: Input },],
+    ngStyle: [{ type: Input }]
 };
 
 /**
@@ -4443,11 +4442,11 @@ NgTemplateOutlet.decorators = [
 ];
 /** @nocollapse */
 NgTemplateOutlet.ctorParameters = () => [
-    { type: ViewContainerRef, },
+    { type: ViewContainerRef }
 ];
 NgTemplateOutlet.propDecorators = {
-    "ngTemplateOutletContext": [{ type: Input },],
-    "ngTemplateOutlet": [{ type: Input },],
+    ngTemplateOutletContext: [{ type: Input }],
+    ngTemplateOutlet: [{ type: Input }]
 };
 
 /**
@@ -4890,7 +4889,7 @@ DeprecatedDatePipe.decorators = [
 ];
 /** @nocollapse */
 DeprecatedDatePipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * @param {?} value
@@ -5010,7 +5009,7 @@ DeprecatedDecimalPipe.decorators = [
 ];
 /** @nocollapse */
 DeprecatedDecimalPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * \@ngModule CommonModule
@@ -5051,7 +5050,7 @@ DeprecatedPercentPipe.decorators = [
 ];
 /** @nocollapse */
 DeprecatedPercentPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * \@ngModule CommonModule
@@ -5100,7 +5099,7 @@ DeprecatedCurrencyPipe.decorators = [
 ];
 /** @nocollapse */
 DeprecatedCurrencyPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 
 /**
@@ -5291,7 +5290,7 @@ AsyncPipe.decorators = [
 ];
 /** @nocollapse */
 AsyncPipe.ctorParameters = () => [
-    { type: ChangeDetectorRef, },
+    { type: ChangeDetectorRef }
 ];
 
 /**
@@ -5540,7 +5539,7 @@ DatePipe.decorators = [
 ];
 /** @nocollapse */
 DatePipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 
 /**
@@ -5597,7 +5596,7 @@ I18nPluralPipe.decorators = [
 ];
 /** @nocollapse */
 I18nPluralPipe.ctorParameters = () => [
-    { type: NgLocalization, },
+    { type: NgLocalization }
 ];
 
 /**
@@ -5749,7 +5748,7 @@ DecimalPipe.decorators = [
 ];
 /** @nocollapse */
 DecimalPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * \@ngModule CommonModule
@@ -5797,7 +5796,7 @@ PercentPipe.decorators = [
 ];
 /** @nocollapse */
 PercentPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * \@ngModule CommonModule
@@ -5869,7 +5868,7 @@ CurrencyPipe.decorators = [
 ];
 /** @nocollapse */
 CurrencyPipe.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [LOCALE_ID,] },] },
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /**
  * @param {?} value
@@ -6127,7 +6126,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.0.0-rc.5+294.sha-60aa943');
+const VERSION = new Version('6.0.0-rc.5+295.sha-f69ac67');
 
 /**
  * @fileoverview added by tsickle
