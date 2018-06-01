@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+288.sha-7e3f8f7
+ * @license Angular v6.0.0-rc.5+297.sha-6948ef1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1334,7 +1334,7 @@ HttpClient.decorators = [
 ];
 /** @nocollapse */
 HttpClient.ctorParameters = () => [
-    { type: HttpHandler, },
+    { type: HttpHandler }
 ];
 
 /**
@@ -1590,8 +1590,8 @@ JsonpClientBackend.decorators = [
 ];
 /** @nocollapse */
 JsonpClientBackend.ctorParameters = () => [
-    { type: JsonpCallbackContext, },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: JsonpCallbackContext },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
@@ -1624,7 +1624,7 @@ JsonpInterceptor.decorators = [
 ];
 /** @nocollapse */
 JsonpInterceptor.ctorParameters = () => [
-    { type: JsonpClientBackend, },
+    { type: JsonpClientBackend }
 ];
 
 /**
@@ -1931,7 +1931,7 @@ HttpXhrBackend.decorators = [
 ];
 /** @nocollapse */
 HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory, },
+    { type: XhrFactory }
 ];
 
 /**
@@ -1996,9 +1996,9 @@ HttpXsrfCookieExtractor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfCookieExtractor.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
 ];
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
@@ -2040,8 +2040,8 @@ HttpXsrfInterceptor.decorators = [
 ];
 /** @nocollapse */
 HttpXsrfInterceptor.ctorParameters = () => [
-    { type: HttpXsrfTokenExtractor, },
-    { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
+    { type: HttpXsrfTokenExtractor },
+    { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
 ];
 
 /**
@@ -2090,26 +2090,9 @@ HttpInterceptingHandler.decorators = [
 ];
 /** @nocollapse */
 HttpInterceptingHandler.ctorParameters = () => [
-    { type: HttpBackend, },
-    { type: Injector, },
+    { type: HttpBackend },
+    { type: Injector }
 ];
-/**
- * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
- * to a request before passing it to the given `HttpBackend`.
- *
- * Meant to be used as a factory function within `HttpClientModule`.
- *
- *
- * @param {?} backend
- * @param {?=} interceptors
- * @return {?}
- */
-function interceptingHandler(backend, interceptors = []) {
-    if (!interceptors) {
-        return backend;
-    }
-    return interceptors.reduceRight((next, interceptor) => new HttpInterceptorHandler(next, interceptor), backend);
-}
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
@@ -2257,5 +2240,5 @@ HttpClientJsonpModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, HttpInterceptingHandler as ɵangular_packages_common_http_http_c, jsonpCallbackContext as ɵangular_packages_common_http_http_d, BrowserXhr as ɵangular_packages_common_http_http_e, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_h, HttpXsrfInterceptor as ɵangular_packages_common_http_http_i, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_f, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_g, HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, interceptingHandler as ɵinterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor };
+export { NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, BrowserXhr as ɵangular_packages_common_http_http_d, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_g, HttpXsrfInterceptor as ɵangular_packages_common_http_http_h, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_e, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_f, HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpInterceptingHandler as ɵHttpInterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor };
 //# sourceMappingURL=http.js.map

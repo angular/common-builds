@@ -55,16 +55,9 @@ I18nPluralPipe.decorators = [
 ];
 /** @nocollapse */
 I18nPluralPipe.ctorParameters = () => [
-    { type: NgLocalization, },
+    { type: NgLocalization }
 ];
 function I18nPluralPipe_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    I18nPluralPipe.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    I18nPluralPipe.ctorParameters;
     /** @type {?} */
     I18nPluralPipe.prototype._localization;
 }

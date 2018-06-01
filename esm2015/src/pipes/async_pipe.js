@@ -182,16 +182,9 @@ AsyncPipe.decorators = [
 ];
 /** @nocollapse */
 AsyncPipe.ctorParameters = () => [
-    { type: ChangeDetectorRef, },
+    { type: ChangeDetectorRef }
 ];
 function AsyncPipe_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    AsyncPipe.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    AsyncPipe.ctorParameters;
     /** @type {?} */
     AsyncPipe.prototype._latestValue;
     /** @type {?} */

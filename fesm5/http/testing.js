@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+288.sha-7e3f8f7
+ * @license Angular v6.0.0-rc.5+297.sha-6948ef1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -47,18 +47,15 @@ var TestRequest = /** @class */ (function () {
         this.request = request;
         this.observer = observer;
         /**
-           * @internal set by `HttpClientTestingBackend`
-           */
+         * @internal set by `HttpClientTestingBackend`
+         */
         this._cancelled = false;
     }
     Object.defineProperty(TestRequest.prototype, "cancelled", {
         /**
          * Whether the request was cancelled after it was sent.
          */
-        get: /**
-           * Whether the request was cancelled after it was sent.
-           */
-        function () { return this._cancelled; },
+        get: function () { return this._cancelled; },
         enumerable: true,
         configurable: true
     });
@@ -68,19 +65,7 @@ var TestRequest = /** @class */ (function () {
      *
      * Both successful and unsuccessful responses can be delivered via `flush()`.
      */
-    /**
-       * Resolve the request by returning a body plus additional HTTP information (such as response
-       * headers) if provided.
-       *
-       * Both successful and unsuccessful responses can be delivered via `flush()`.
-       */
-    TestRequest.prototype.flush = /**
-       * Resolve the request by returning a body plus additional HTTP information (such as response
-       * headers) if provided.
-       *
-       * Both successful and unsuccessful responses can be delivered via `flush()`.
-       */
-    function (body, opts) {
+    TestRequest.prototype.flush = function (body, opts) {
         if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
             throw new Error("Cannot flush a cancelled request.");
@@ -113,13 +98,7 @@ var TestRequest = /** @class */ (function () {
     /**
      * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
      */
-    /**
-       * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
-       */
-    TestRequest.prototype.error = /**
-       * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
-       */
-    function (error, opts) {
+    TestRequest.prototype.error = function (error, opts) {
         if (opts === void 0) { opts = {}; }
         if (this.cancelled) {
             throw new Error("Cannot return an error for a cancelled request.");
@@ -140,15 +119,7 @@ var TestRequest = /** @class */ (function () {
      * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
      * request.
      */
-    /**
-       * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
-       * request.
-       */
-    TestRequest.prototype.event = /**
-       * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
-       * request.
-       */
-    function (event) {
+    TestRequest.prototype.event = function (event) {
         if (this.cancelled) {
             throw new Error("Cannot send events to a cancelled request.");
         }
@@ -257,20 +228,14 @@ function _maybeConvertBody(responseType, body) {
 var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
-           * List of pending requests which have not yet been expected.
-           */
+         * List of pending requests which have not yet been expected.
+         */
         this.open = [];
     }
     /**
      * Handle an incoming request by queueing it in the list of open requests.
      */
-    /**
-       * Handle an incoming request by queueing it in the list of open requests.
-       */
-    HttpClientTestingBackend.prototype.handle = /**
-       * Handle an incoming request by queueing it in the list of open requests.
-       */
-    function (req) {
+    HttpClientTestingBackend.prototype.handle = function (req) {
         var _this = this;
         return new Observable(function (observer) {
             var testReq = new TestRequest(req, observer);
@@ -282,13 +247,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
     /**
      * Helper function to search for requests in the list of open requests.
      */
-    /**
-       * Helper function to search for requests in the list of open requests.
-       */
-    HttpClientTestingBackend.prototype._match = /**
-       * Helper function to search for requests in the list of open requests.
-       */
-    function (match) {
+    HttpClientTestingBackend.prototype._match = function (match) {
         if (typeof match === 'string') {
             return this.open.filter(function (testReq) { return testReq.request.urlWithParams === match; });
         }
@@ -296,25 +255,15 @@ var HttpClientTestingBackend = /** @class */ (function () {
             return this.open.filter(function (testReq) { return match(testReq.request); });
         }
         else {
-            return this.open.filter(function (testReq) {
-                return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                    (!match.url || testReq.request.urlWithParams === match.url);
-            });
+            return this.open.filter(function (testReq) { return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                (!match.url || testReq.request.urlWithParams === match.url); });
         }
     };
     /**
      * Search for requests in the list of open requests, and return all that match
      * without asserting anything about the number of matches.
      */
-    /**
-       * Search for requests in the list of open requests, and return all that match
-       * without asserting anything about the number of matches.
-       */
-    HttpClientTestingBackend.prototype.match = /**
-       * Search for requests in the list of open requests, and return all that match
-       * without asserting anything about the number of matches.
-       */
-    function (match) {
+    HttpClientTestingBackend.prototype.match = function (match) {
         var _this = this;
         var results = this._match(match);
         results.forEach(function (result) {
@@ -332,21 +281,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
      * Requests returned through this API will no longer be in the list of open requests,
      * and thus will not match twice.
      */
-    /**
-       * Expect that a single outstanding request matches the given matcher, and return
-       * it.
-       *
-       * Requests returned through this API will no longer be in the list of open requests,
-       * and thus will not match twice.
-       */
-    HttpClientTestingBackend.prototype.expectOne = /**
-       * Expect that a single outstanding request matches the given matcher, and return
-       * it.
-       *
-       * Requests returned through this API will no longer be in the list of open requests,
-       * and thus will not match twice.
-       */
-    function (match, description) {
+    HttpClientTestingBackend.prototype.expectOne = function (match, description) {
         description = description || this.descriptionFromMatcher(match);
         var matches = this.match(match);
         if (matches.length > 1) {
@@ -361,15 +296,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
      * Expect that no outstanding requests match the given matcher, and throw an error
      * if any do.
      */
-    /**
-       * Expect that no outstanding requests match the given matcher, and throw an error
-       * if any do.
-       */
-    HttpClientTestingBackend.prototype.expectNone = /**
-       * Expect that no outstanding requests match the given matcher, and throw an error
-       * if any do.
-       */
-    function (match, description) {
+    HttpClientTestingBackend.prototype.expectNone = function (match, description) {
         description = description || this.descriptionFromMatcher(match);
         var matches = this.match(match);
         if (matches.length > 0) {
@@ -379,13 +306,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
     /**
      * Validate that there are no outstanding requests.
      */
-    /**
-       * Validate that there are no outstanding requests.
-       */
-    HttpClientTestingBackend.prototype.verify = /**
-       * Validate that there are no outstanding requests.
-       */
-    function (opts) {
+    HttpClientTestingBackend.prototype.verify = function (opts) {
         if (opts === void 0) { opts = {}; }
         var open = this.open;
         // It's possible that some requests may be cancelled, and this is expected.
