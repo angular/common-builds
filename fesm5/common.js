@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+303.sha-5794506
+ * @license Angular v6.0.0-rc.5+309.sha-08a18b8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3081,8 +3081,17 @@ var NgForOf = /** @class */ (function () {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
+        this._ngForOfDirty = true;
         this._differ = null;
     }
+    Object.defineProperty(NgForOf.prototype, "ngForOf", {
+        set: function (ngForOf) {
+            this._ngForOf = ngForOf;
+            this._ngForOfDirty = true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
         get: function () { return this._trackByFn; },
         set: function (fn) {
@@ -3110,10 +3119,11 @@ var NgForOf = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    NgForOf.prototype.ngOnChanges = function (changes) {
-        if ('ngForOf' in changes) {
+    NgForOf.prototype.ngDoCheck = function () {
+        if (this._ngForOfDirty) {
+            this._ngForOfDirty = false;
             // React on ngForOf changes only once all inputs have been initialized
-            var value = changes['ngForOf'].currentValue;
+            var value = this._ngForOf;
             if (!this._differ && value) {
                 try {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
@@ -3123,10 +3133,8 @@ var NgForOf = /** @class */ (function () {
                 }
             }
         }
-    };
-    NgForOf.prototype.ngDoCheck = function () {
         if (this._differ) {
-            var changes = this._differ.diff(this.ngForOf);
+            var changes = this._differ.diff(this._ngForOf);
             if (changes)
                 this._applyChanges(changes);
         }
@@ -3136,7 +3144,7 @@ var NgForOf = /** @class */ (function () {
         var insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this.ngForOf, -1, -1), currentIndex);
+                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this._ngForOf, -1, -1), currentIndex);
                 var tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -5353,7 +5361,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new Version('6.0.0-rc.5+303.sha-5794506');
+var VERSION = new Version('6.0.0-rc.5+309.sha-08a18b8');
 
 /**
  * @license

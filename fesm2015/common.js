@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+303.sha-5794506
+ * @license Angular v6.0.0-rc.5+309.sha-08a18b8
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3493,7 +3493,16 @@ class NgForOf {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
+        this._ngForOfDirty = true;
         this._differ = null;
+    }
+    /**
+     * @param {?} ngForOf
+     * @return {?}
+     */
+    set ngForOf(ngForOf) {
+        this._ngForOf = ngForOf;
+        this._ngForOfDirty = true;
     }
     /**
      * @param {?} fn
@@ -3526,13 +3535,13 @@ class NgForOf {
         }
     }
     /**
-     * @param {?} changes
      * @return {?}
      */
-    ngOnChanges(changes) {
-        if ('ngForOf' in changes) {
+    ngDoCheck() {
+        if (this._ngForOfDirty) {
+            this._ngForOfDirty = false;
             // React on ngForOf changes only once all inputs have been initialized
-            const /** @type {?} */ value = changes['ngForOf'].currentValue;
+            const /** @type {?} */ value = this._ngForOf;
             if (!this._differ && value) {
                 try {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
@@ -3542,13 +3551,8 @@ class NgForOf {
                 }
             }
         }
-    }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() {
         if (this._differ) {
-            const /** @type {?} */ changes = this._differ.diff(this.ngForOf);
+            const /** @type {?} */ changes = this._differ.diff(this._ngForOf);
             if (changes)
                 this._applyChanges(changes);
         }
@@ -3561,7 +3565,7 @@ class NgForOf {
         const /** @type {?} */ insertTuples = [];
         changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
-                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(/** @type {?} */ ((null)), this.ngForOf, -1, -1), currentIndex);
+                const /** @type {?} */ view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(/** @type {?} */ ((null)), this._ngForOf, -1, -1), currentIndex);
                 const /** @type {?} */ tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -6126,7 +6130,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.0.0-rc.5+303.sha-5794506');
+const VERSION = new Version('6.0.0-rc.5+309.sha-08a18b8');
 
 /**
  * @fileoverview added by tsickle
