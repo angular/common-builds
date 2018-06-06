@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+318.sha-20c463e
+ * @license Angular v6.0.0-rc.5+322.sha-86b13cc
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5361,7 +5361,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new Version('6.0.0-rc.5+318.sha-20c463e');
+var VERSION = new Version('6.0.0-rc.5+322.sha-86b13cc');
 
 /**
  * @license
