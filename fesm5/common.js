@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.0-beta.0+26.sha-1b253e1
+ * @license Angular v6.1.0-beta.0+27.sha-49c5234
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, defineInjectable, inject, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 import { __assign, __extends, __read, __values } from 'tslib';
 
 /**
@@ -5361,7 +5361,152 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new Version('6.1.0-beta.0+26.sha-1b253e1');
+var VERSION = new Version('6.1.0-beta.0+27.sha-49c5234');
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @whatItDoes Manages the scroll position.
+ */
+var ViewportScroller = /** @class */ (function () {
+    function ViewportScroller() {
+    }
+    // De-sugared tree-shakable injection
+    // See #23917
+    /** @nocollapse */
+    ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: function () { return new BrowserViewportScroller(inject(DOCUMENT), window); } });
+    return ViewportScroller;
+}());
+/**
+ * @whatItDoes Manages the scroll position.
+ */
+var BrowserViewportScroller = /** @class */ (function () {
+    function BrowserViewportScroller(document, window) {
+        this.document = document;
+        this.window = window;
+        this.offset = function () { return [0, 0]; };
+    }
+    /**
+     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     *
+     * * When given a number, the service will always use the number.
+     * * When given a function, the service will invoke the function every time it restores scroll
+     * position.
+     */
+    BrowserViewportScroller.prototype.setOffset = function (offset) {
+        if (Array.isArray(offset)) {
+            this.offset = function () { return offset; };
+        }
+        else {
+            this.offset = offset;
+        }
+    };
+    /**
+     * @whatItDoes Returns the current scroll position.
+     */
+    BrowserViewportScroller.prototype.getScrollPosition = function () {
+        if (this.supportScrollRestoration()) {
+            return [this.window.scrollX, this.window.scrollY];
+        }
+        else {
+            return [0, 0];
+        }
+    };
+    /**
+     * @whatItDoes Sets the scroll position.
+     */
+    BrowserViewportScroller.prototype.scrollToPosition = function (position) {
+        if (this.supportScrollRestoration()) {
+            this.window.scrollTo(position[0], position[1]);
+        }
+    };
+    /**
+     * @whatItDoes Scrolls to the provided anchor.
+     */
+    BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
+        if (this.supportScrollRestoration()) {
+            var elSelectedById = this.document.querySelector("#" + anchor);
+            if (elSelectedById) {
+                this.scrollToElement(elSelectedById);
+                return;
+            }
+            var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
+            if (elSelectedByName) {
+                this.scrollToElement(elSelectedByName);
+                return;
+            }
+        }
+    };
+    /**
+     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     */
+    BrowserViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) {
+        if (this.supportScrollRestoration()) {
+            var history_1 = this.window.history;
+            if (history_1 && history_1.scrollRestoration) {
+                history_1.scrollRestoration = scrollRestoration;
+            }
+        }
+    };
+    BrowserViewportScroller.prototype.scrollToElement = function (el) {
+        var rect = el.getBoundingClientRect();
+        var left = rect.left + this.window.pageXOffset;
+        var top = rect.top + this.window.pageYOffset;
+        var offset = this.offset();
+        this.window.scrollTo(left - offset[0], top - offset[1]);
+    };
+    /**
+     * We only support scroll restoration when we can get a hold of window.
+     * This means that we do not support this behavior when running in a web worker.
+     *
+     * Lifting this restriction right now would require more changes in the dom adapter.
+     * Since webworkers aren't widely used, we will lift it once RouterScroller is
+     * battle-tested.
+     */
+    BrowserViewportScroller.prototype.supportScrollRestoration = function () {
+        try {
+            return !!this.window && !!this.window.scrollTo;
+        }
+        catch (e) {
+            return false;
+        }
+    };
+    return BrowserViewportScroller;
+}());
+/**
+ * @whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * live in @angular/common as it will be used by both platform-server and platform-webworker.
+ */
+var NullViewportScroller = /** @class */ (function () {
+    function NullViewportScroller() {
+    }
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.setOffset = function (offset) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.getScrollPosition = function () { return [0, 0]; };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.scrollToPosition = function (position) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.scrollToAnchor = function (anchor) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
+    return NullViewportScroller;
+}());
 
 /**
  * @license
@@ -5407,5 +5552,5 @@ var VERSION = new Version('6.1.0-beta.0+26.sha-1b253e1');
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_e, findLocaleData as ɵangular_packages_common_common_d, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_f, registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_e, findLocaleData as ɵangular_packages_common_common_d, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_f, registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map
