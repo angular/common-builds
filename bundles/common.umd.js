@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.0+23.sha-1135563
+ * @license Angular v6.1.0-beta.0+27.sha-49c5234
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5458,7 +5458,152 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.0+23.sha-1135563');
+var VERSION = new core.Version('6.1.0-beta.0+27.sha-49c5234');
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @whatItDoes Manages the scroll position.
+ */
+var ViewportScroller = /** @class */ (function () {
+    function ViewportScroller() {
+    }
+    // De-sugared tree-shakable injection
+    // See #23917
+    /** @nocollapse */
+    ViewportScroller.ngInjectableDef = core.defineInjectable({ providedIn: 'root', factory: function () { return new BrowserViewportScroller(core.inject(DOCUMENT), window); } });
+    return ViewportScroller;
+}());
+/**
+ * @whatItDoes Manages the scroll position.
+ */
+var BrowserViewportScroller = /** @class */ (function () {
+    function BrowserViewportScroller(document, window) {
+        this.document = document;
+        this.window = window;
+        this.offset = function () { return [0, 0]; };
+    }
+    /**
+     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     *
+     * * When given a number, the service will always use the number.
+     * * When given a function, the service will invoke the function every time it restores scroll
+     * position.
+     */
+    BrowserViewportScroller.prototype.setOffset = function (offset) {
+        if (Array.isArray(offset)) {
+            this.offset = function () { return offset; };
+        }
+        else {
+            this.offset = offset;
+        }
+    };
+    /**
+     * @whatItDoes Returns the current scroll position.
+     */
+    BrowserViewportScroller.prototype.getScrollPosition = function () {
+        if (this.supportScrollRestoration()) {
+            return [this.window.scrollX, this.window.scrollY];
+        }
+        else {
+            return [0, 0];
+        }
+    };
+    /**
+     * @whatItDoes Sets the scroll position.
+     */
+    BrowserViewportScroller.prototype.scrollToPosition = function (position) {
+        if (this.supportScrollRestoration()) {
+            this.window.scrollTo(position[0], position[1]);
+        }
+    };
+    /**
+     * @whatItDoes Scrolls to the provided anchor.
+     */
+    BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
+        if (this.supportScrollRestoration()) {
+            var elSelectedById = this.document.querySelector("#" + anchor);
+            if (elSelectedById) {
+                this.scrollToElement(elSelectedById);
+                return;
+            }
+            var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
+            if (elSelectedByName) {
+                this.scrollToElement(elSelectedByName);
+                return;
+            }
+        }
+    };
+    /**
+     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     */
+    BrowserViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) {
+        if (this.supportScrollRestoration()) {
+            var history_1 = this.window.history;
+            if (history_1 && history_1.scrollRestoration) {
+                history_1.scrollRestoration = scrollRestoration;
+            }
+        }
+    };
+    BrowserViewportScroller.prototype.scrollToElement = function (el) {
+        var rect = el.getBoundingClientRect();
+        var left = rect.left + this.window.pageXOffset;
+        var top = rect.top + this.window.pageYOffset;
+        var offset = this.offset();
+        this.window.scrollTo(left - offset[0], top - offset[1]);
+    };
+    /**
+     * We only support scroll restoration when we can get a hold of window.
+     * This means that we do not support this behavior when running in a web worker.
+     *
+     * Lifting this restriction right now would require more changes in the dom adapter.
+     * Since webworkers aren't widely used, we will lift it once RouterScroller is
+     * battle-tested.
+     */
+    BrowserViewportScroller.prototype.supportScrollRestoration = function () {
+        try {
+            return !!this.window && !!this.window.scrollTo;
+        }
+        catch (e) {
+            return false;
+        }
+    };
+    return BrowserViewportScroller;
+}());
+/**
+ * @whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * live in @angular/common as it will be used by both platform-server and platform-webworker.
+ */
+var NullViewportScroller = /** @class */ (function () {
+    function NullViewportScroller() {
+    }
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.setOffset = function (offset) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.getScrollPosition = function () { return [0, 0]; };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.scrollToPosition = function (position) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.scrollToAnchor = function (anchor) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    NullViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
+    return NullViewportScroller;
+}());
 
 /**
  * @license
@@ -5569,6 +5714,8 @@ exports.isPlatformServer = isPlatformServer;
 exports.isPlatformWorkerApp = isPlatformWorkerApp;
 exports.isPlatformWorkerUi = isPlatformWorkerUi;
 exports.VERSION = VERSION;
+exports.ViewportScroller = ViewportScroller;
+exports.ɵNullViewportScroller = NullViewportScroller;
 exports.PlatformLocation = PlatformLocation;
 exports.LOCATION_INITIALIZED = LOCATION_INITIALIZED;
 exports.LocationStrategy = LocationStrategy;
