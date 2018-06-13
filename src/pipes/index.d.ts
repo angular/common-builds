@@ -16,10 +16,11 @@ import { DatePipe } from './date_pipe';
 import { I18nPluralPipe } from './i18n_plural_pipe';
 import { I18nSelectPipe } from './i18n_select_pipe';
 import { JsonPipe } from './json_pipe';
+import { KeyValue, KeyValuePipe } from './keyvalue_pipe';
 import { CurrencyPipe, DecimalPipe, PercentPipe } from './number_pipe';
 import { SlicePipe } from './slice_pipe';
-export { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe };
+export { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, KeyValue, KeyValuePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe };
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-export declare const COMMON_PIPES: (typeof AsyncPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof SlicePipe)[];
+export declare const COMMON_PIPES: (typeof AsyncPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof SlicePipe)[];

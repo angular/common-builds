@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.0+43.sha-70ef061
+ * @license Angular v6.1.0-beta.0+55.sha-a577c9e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -4800,6 +4800,91 @@ JsonPipe = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+function makeKeyValuePair(key, value) {
+    return { key: key, value: value };
+}
+/**
+ * @ngModule CommonModule
+ * @description
+ *
+ * Transforms Object or Map into an array of key value pairs.
+ *
+ * The output array will be ordered by keys.
+ * By default the comparator will be by Unicode point value.
+ * You can optionally pass a compareFn if your keys are complex types.
+ *
+ * ## Examples
+ *
+ * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * pipe.
+ *
+ * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ */
+let KeyValuePipe = class KeyValuePipe {
+    constructor(differs) {
+        this.differs = differs;
+    }
+    transform(input, compareFn = defaultComparator) {
+        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+            return null;
+        }
+        if (!this.differ) {
+            // make a differ for whatever type we've been passed in
+            this.differ = this.differs.find(input).create();
+        }
+        const differChanges = this.differ.diff(input);
+        if (differChanges) {
+            this.keyValues = [];
+            differChanges.forEachItem((r) => {
+                this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+            });
+            this.keyValues.sort(compareFn);
+        }
+        return this.keyValues;
+    }
+};
+KeyValuePipe = __decorate([
+    Pipe({ name: 'keyvalue', pure: false }),
+    __metadata("design:paramtypes", [KeyValueDiffers])
+], KeyValuePipe);
+function defaultComparator(keyValueA, keyValueB) {
+    const a = keyValueA.key;
+    const b = keyValueB.key;
+    // if same exit with 0;
+    if (a === b)
+        return 0;
+    // make sure that undefined are at the end of the sort.
+    if (a === undefined)
+        return 1;
+    if (b === undefined)
+        return -1;
+    // make sure that nulls are at the end of the sort.
+    if (a === null)
+        return 1;
+    if (b === null)
+        return -1;
+    if (typeof a == 'string' && typeof b == 'string') {
+        return a < b ? -1 : 1;
+    }
+    if (typeof a == 'number' && typeof b == 'number') {
+        return a - b;
+    }
+    if (typeof a == 'boolean' && typeof b == 'boolean') {
+        return a < b ? -1 : 1;
+    }
+    // `a` and `b` are of different types. Compare their string values.
+    const aString = String(a);
+    const bString = String(b);
+    return aString == bString ? 0 : aString < bString ? -1 : 1;
+}
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * @ngModule CommonModule
  * @description
@@ -5075,6 +5160,7 @@ const COMMON_PIPES = [
     DatePipe,
     I18nPluralPipe,
     I18nSelectPipe,
+    KeyValuePipe,
 ];
 
 /**
@@ -5186,7 +5272,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-const VERSION = new Version('6.1.0-beta.0+43.sha-70ef061');
+const VERSION = new Version('6.1.0-beta.0+55.sha-a577c9e');
 
 /**
  * @license
@@ -5366,5 +5452,5 @@ class NullViewportScroller {
 // replaces this file with production index.ts when it rewrites private symbol
 // names.
 
-export { registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map
