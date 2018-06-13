@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.0+43.sha-70ef061
+ * @license Angular v6.1.0-beta.0+55.sha-a577c9e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5038,6 +5038,97 @@ var JsonPipe = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+function makeKeyValuePair(key, value) {
+    return { key: key, value: value };
+}
+/**
+ * @ngModule CommonModule
+ * @description
+ *
+ * Transforms Object or Map into an array of key value pairs.
+ *
+ * The output array will be ordered by keys.
+ * By default the comparator will be by Unicode point value.
+ * You can optionally pass a compareFn if your keys are complex types.
+ *
+ * ## Examples
+ *
+ * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * pipe.
+ *
+ * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ */
+var KeyValuePipe = /** @class */ (function () {
+    function KeyValuePipe(differs) {
+        this.differs = differs;
+    }
+    KeyValuePipe.prototype.transform = function (input, compareFn) {
+        var _this = this;
+        if (compareFn === void 0) { compareFn = defaultComparator; }
+        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+            return null;
+        }
+        if (!this.differ) {
+            // make a differ for whatever type we've been passed in
+            this.differ = this.differs.find(input).create();
+        }
+        var differChanges = this.differ.diff(input);
+        if (differChanges) {
+            this.keyValues = [];
+            differChanges.forEachItem(function (r) {
+                _this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+            });
+            this.keyValues.sort(compareFn);
+        }
+        return this.keyValues;
+    };
+    KeyValuePipe.decorators = [
+        { type: core.Pipe, args: [{ name: 'keyvalue', pure: false },] }
+    ];
+    /** @nocollapse */
+    KeyValuePipe.ctorParameters = function () { return [
+        { type: core.KeyValueDiffers }
+    ]; };
+    return KeyValuePipe;
+}());
+function defaultComparator(keyValueA, keyValueB) {
+    var a = keyValueA.key;
+    var b = keyValueB.key;
+    // if same exit with 0;
+    if (a === b)
+        return 0;
+    // make sure that undefined are at the end of the sort.
+    if (a === undefined)
+        return 1;
+    if (b === undefined)
+        return -1;
+    // make sure that nulls are at the end of the sort.
+    if (a === null)
+        return 1;
+    if (b === null)
+        return -1;
+    if (typeof a == 'string' && typeof b == 'string') {
+        return a < b ? -1 : 1;
+    }
+    if (typeof a == 'number' && typeof b == 'number') {
+        return a - b;
+    }
+    if (typeof a == 'boolean' && typeof b == 'boolean') {
+        return a < b ? -1 : 1;
+    }
+    // `a` and `b` are of different types. Compare their string values.
+    var aString = String(a);
+    var bString = String(b);
+    return aString == bString ? 0 : aString < bString ? -1 : 1;
+}
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * @ngModule CommonModule
  * @description
@@ -5322,6 +5413,7 @@ var COMMON_PIPES = [
     DatePipe,
     I18nPluralPipe,
     I18nSelectPipe,
+    KeyValuePipe,
 ];
 
 /**
@@ -5440,7 +5532,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.0+43.sha-70ef061');
+var VERSION = new core.Version('6.1.0-beta.0+55.sha-a577c9e');
 
 /**
  * @license
@@ -5693,6 +5785,7 @@ exports.PercentPipe = PercentPipe;
 exports.SlicePipe = SlicePipe;
 exports.UpperCasePipe = UpperCasePipe;
 exports.TitleCasePipe = TitleCasePipe;
+exports.KeyValuePipe = KeyValuePipe;
 exports.DeprecatedDatePipe = DeprecatedDatePipe;
 exports.DeprecatedCurrencyPipe = DeprecatedCurrencyPipe;
 exports.DeprecatedDecimalPipe = DeprecatedDecimalPipe;
