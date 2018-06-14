@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.0+30.sha-29eb24b
+ * @license Angular v6.1.0-beta.1+15.sha-e6516b0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -577,7 +577,7 @@ var localeEn = [
 var LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
- * {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
+ * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
  * @experimental i18n support is experimental.
  */
@@ -1141,7 +1141,7 @@ function checkFullData(data) {
  * You should fallback to AM/PM when there are no rules available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -1165,7 +1165,7 @@ function getLocaleExtraDayPeriodRules(locale) {
  * You should fallback to AM/PM when there are no day periods available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -4849,10 +4849,10 @@ var UpperCasePipe = /** @class */ (function () {
  * WARNINGS:
  * - this pipe has only access to en-US locale data by default. If you want to localize the dates
  *   in another language, you will have to import data for other locales.
- *   See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ *   See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  *   data.
  * - Fields suffixed with * are only available in the extra dataset.
- *   See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
+ *   See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import extra locale
  *   data.
  * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
  *   Instead users should treat the date as an immutable object and change the reference when the
@@ -5047,6 +5047,94 @@ var JsonPipe = /** @class */ (function () {
     ], JsonPipe);
     return JsonPipe;
 }());
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+function makeKeyValuePair(key, value) {
+    return { key: key, value: value };
+}
+/**
+ * @ngModule CommonModule
+ * @description
+ *
+ * Transforms Object or Map into an array of key value pairs.
+ *
+ * The output array will be ordered by keys.
+ * By default the comparator will be by Unicode point value.
+ * You can optionally pass a compareFn if your keys are complex types.
+ *
+ * ## Examples
+ *
+ * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * pipe.
+ *
+ * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ */
+var KeyValuePipe = /** @class */ (function () {
+    function KeyValuePipe(differs) {
+        this.differs = differs;
+    }
+    KeyValuePipe.prototype.transform = function (input, compareFn) {
+        var _this = this;
+        if (compareFn === void 0) { compareFn = defaultComparator; }
+        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+            return null;
+        }
+        if (!this.differ) {
+            // make a differ for whatever type we've been passed in
+            this.differ = this.differs.find(input).create();
+        }
+        var differChanges = this.differ.diff(input);
+        if (differChanges) {
+            this.keyValues = [];
+            differChanges.forEachItem(function (r) {
+                _this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+            });
+            this.keyValues.sort(compareFn);
+        }
+        return this.keyValues;
+    };
+    KeyValuePipe = __decorate([
+        core.Pipe({ name: 'keyvalue', pure: false }),
+        __metadata("design:paramtypes", [core.KeyValueDiffers])
+    ], KeyValuePipe);
+    return KeyValuePipe;
+}());
+function defaultComparator(keyValueA, keyValueB) {
+    var a = keyValueA.key;
+    var b = keyValueB.key;
+    // if same exit with 0;
+    if (a === b)
+        return 0;
+    // make sure that undefined are at the end of the sort.
+    if (a === undefined)
+        return 1;
+    if (b === undefined)
+        return -1;
+    // make sure that nulls are at the end of the sort.
+    if (a === null)
+        return 1;
+    if (b === null)
+        return -1;
+    if (typeof a == 'string' && typeof b == 'string') {
+        return a < b ? -1 : 1;
+    }
+    if (typeof a == 'number' && typeof b == 'number') {
+        return a - b;
+    }
+    if (typeof a == 'boolean' && typeof b == 'boolean') {
+        return a < b ? -1 : 1;
+    }
+    // `a` and `b` are of different types. Compare their string values.
+    var aString = String(a);
+    var bString = String(b);
+    return aString == bString ? 0 : aString < bString ? -1 : 1;
+}
 
 /**
  * @license
@@ -5341,6 +5429,7 @@ var COMMON_PIPES = [
     DatePipe,
     I18nPluralPipe,
     I18nSelectPipe,
+    KeyValuePipe,
 ];
 
 /**
@@ -5458,7 +5547,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.0+30.sha-29eb24b');
+var VERSION = new core.Version('6.1.0-beta.1+15.sha-e6516b0');
 
 /**
  * @license
@@ -5701,6 +5790,7 @@ exports.PercentPipe = PercentPipe;
 exports.SlicePipe = SlicePipe;
 exports.UpperCasePipe = UpperCasePipe;
 exports.TitleCasePipe = TitleCasePipe;
+exports.KeyValuePipe = KeyValuePipe;
 exports.DeprecatedDatePipe = DeprecatedDatePipe;
 exports.DeprecatedCurrencyPipe = DeprecatedCurrencyPipe;
 exports.DeprecatedDecimalPipe = DeprecatedDecimalPipe;
