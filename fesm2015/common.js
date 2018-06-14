@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.1+1.sha-03f93b3
+ * @license Angular v6.1.0-beta.1+22.sha-39af314
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -466,7 +466,7 @@ var localeEn = [
 const LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
- * {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
+ * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
  * @experimental i18n support is experimental.
  */
@@ -1030,7 +1030,7 @@ function checkFullData(data) {
  * You should fallback to AM/PM when there are no rules available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -1054,7 +1054,7 @@ function getLocaleExtraDayPeriodRules(locale) {
  * You should fallback to AM/PM when there are no day periods available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -4606,10 +4606,10 @@ var UpperCasePipe_1;
  * WARNINGS:
  * - this pipe has only access to en-US locale data by default. If you want to localize the dates
  *   in another language, you will have to import data for other locales.
- *   See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ *   See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  *   data.
  * - Fields suffixed with * are only available in the extra dataset.
- *   See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
+ *   See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import extra locale
  *   data.
  * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
  *   Instead users should treat the date as an immutable object and change the reference when the
@@ -5272,7 +5272,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-const VERSION = new Version('6.1.0-beta.1+1.sha-03f93b3');
+const VERSION = new Version('6.1.0-beta.1+22.sha-39af314');
 
 /**
  * @license

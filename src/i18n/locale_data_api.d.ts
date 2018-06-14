@@ -311,7 +311,7 @@ export declare function getLocalePluralCase(locale: string): (value: number) => 
  * You should fallback to AM/PM when there are no rules available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -325,7 +325,7 @@ export declare function getLocaleExtraDayPeriodRules(locale: string): (Time | [T
  * You should fallback to AM/PM when there are no day periods available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
