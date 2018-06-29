@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+18.sha-87ddbdf
+ * @license Angular v6.1.0-beta.3+19.sha-ff84c5c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3586,6 +3586,7 @@ class NgForOf {
             const /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(i));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
+            viewRef.context.ngForOf = this._ngForOf;
         }
         changes.forEachIdentityChange((record) => {
             const /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(record.currentIndex));
@@ -6342,7 +6343,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.1.0-beta.3+18.sha-87ddbdf');
+const VERSION = new Version('6.1.0-beta.3+19.sha-ff84c5c');
 
 /**
  * @fileoverview added by tsickle

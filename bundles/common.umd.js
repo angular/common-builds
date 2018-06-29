@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+18.sha-87ddbdf
+ * @license Angular v6.1.0-beta.3+19.sha-ff84c5c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3244,6 +3244,7 @@ var NgForOf = /** @class */ (function () {
             var viewRef = this._viewContainer.get(i);
             viewRef.context.index = i;
             viewRef.context.count = ilen;
+            viewRef.context.ngForOf = this._ngForOf;
         }
         changes.forEachIdentityChange(function (record) {
             var viewRef = _this._viewContainer.get(record.currentIndex);
@@ -5636,7 +5637,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.3+18.sha-87ddbdf');
+var VERSION = new core.Version('6.1.0-beta.3+19.sha-ff84c5c');
 
 /**
  * @license
