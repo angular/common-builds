@@ -32,7 +32,7 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
     /**
      * Helper function to search for requests in the list of open requests.
      */
-    private _match(match);
+    private _match;
     /**
      * Search for requests in the list of open requests, and return all that match
      * without asserting anything about the number of matches.
@@ -57,5 +57,5 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
     verify(opts?: {
         ignoreCancelled?: boolean;
     }): void;
-    private descriptionFromMatcher(matcher);
+    private descriptionFromMatcher;
 }

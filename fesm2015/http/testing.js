@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+28.sha-0922228
+ * @license Angular v6.1.0-beta.3+30.sha-e3064d5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -38,7 +38,7 @@ class HttpTestingController {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -86,11 +86,15 @@ class TestRequest {
         if (this.cancelled) {
             throw new Error(`Cannot flush a cancelled request.`);
         }
-        const /** @type {?} */ url = this.request.urlWithParams;
-        const /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        /** @type {?} */
+        const url = this.request.urlWithParams;
+        /** @type {?} */
+        const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
-        let /** @type {?} */ statusText = opts.statusText;
-        let /** @type {?} */ status = opts.status !== undefined ? opts.status : 200;
+        /** @type {?} */
+        let statusText = opts.statusText;
+        /** @type {?} */
+        let status = opts.status !== undefined ? opts.status : 200;
         if (opts.status === undefined) {
             if (body === null) {
                 status = 204;
@@ -124,7 +128,8 @@ class TestRequest {
         if (opts.status && opts.status >= 200 && opts.status < 300) {
             throw new Error(`error() called with a successful status.`);
         }
-        const /** @type {?} */ headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        /** @type {?} */
+        const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         this.observer.error(new HttpErrorResponse({
             error,
             headers,
@@ -239,7 +244,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -273,7 +278,8 @@ class HttpClientTestingBackend {
      */
     handle(req) {
         return new Observable((observer) => {
-            const /** @type {?} */ testReq = new TestRequest(req, observer);
+            /** @type {?} */
+            const testReq = new TestRequest(req, observer);
             this.open.push(testReq);
             observer.next(/** @type {?} */ ({ type: HttpEventType.Sent }));
             return () => { testReq._cancelled = true; };
@@ -303,9 +309,11 @@ class HttpClientTestingBackend {
      * @return {?}
      */
     match(match) {
-        const /** @type {?} */ results = this._match(match);
+        /** @type {?} */
+        const results = this._match(match);
         results.forEach(result => {
-            const /** @type {?} */ index = this.open.indexOf(result);
+            /** @type {?} */
+            const index = this.open.indexOf(result);
             if (index !== -1) {
                 this.open.splice(index, 1);
             }
@@ -324,7 +332,8 @@ class HttpClientTestingBackend {
      */
     expectOne(match, description) {
         description = description || this.descriptionFromMatcher(match);
-        const /** @type {?} */ matches = this.match(match);
+        /** @type {?} */
+        const matches = this.match(match);
         if (matches.length > 1) {
             throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
         }
@@ -342,7 +351,8 @@ class HttpClientTestingBackend {
      */
     expectNone(match, description) {
         description = description || this.descriptionFromMatcher(match);
-        const /** @type {?} */ matches = this.match(match);
+        /** @type {?} */
+        const matches = this.match(match);
         if (matches.length > 0) {
             throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
         }
@@ -353,17 +363,20 @@ class HttpClientTestingBackend {
      * @return {?}
      */
     verify(opts = {}) {
-        let /** @type {?} */ open = this.open;
+        /** @type {?} */
+        let open = this.open;
         // It's possible that some requests may be cancelled, and this is expected.
         // The user can ask to ignore open requests which have been cancelled.
         if (opts.ignoreCancelled) {
             open = open.filter(testReq => !testReq.cancelled);
         }
         if (open.length > 0) {
-            // Show the methods and URLs of open requests in the error, for convenience.
-            const /** @type {?} */ requests = open.map(testReq => {
-                const /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
-                const /** @type {?} */ method = testReq.request.method;
+            /** @type {?} */
+            const requests = open.map(testReq => {
+                /** @type {?} */
+                const url = testReq.request.urlWithParams.split('?')[0];
+                /** @type {?} */
+                const method = testReq.request.method;
                 return `${method} ${url}`;
             })
                 .join(', ');
@@ -379,8 +392,10 @@ class HttpClientTestingBackend {
             return `Match URL: ${matcher}`;
         }
         else if (typeof matcher === 'object') {
-            const /** @type {?} */ method = matcher.method || '(any)';
-            const /** @type {?} */ url = matcher.url || '(any)';
+            /** @type {?} */
+            const method = matcher.method || '(any)';
+            /** @type {?} */
+            const url = matcher.url || '(any)';
             return `Match method: ${method}, URL: ${url}`;
         }
         else {
@@ -394,7 +409,7 @@ HttpClientTestingBackend.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -427,7 +442,7 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -439,7 +454,7 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license

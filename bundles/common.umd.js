@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+28.sha-0922228
+ * @license Angular v6.1.0-beta.3+30.sha-e3064d5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2744,12 +2744,13 @@ function getPluralCase(locale, nLike) {
  * found in the LICENSE file at https://angular.io/license
  */
 function parseCookieValue(cookieStr, name) {
+    var e_1, _a;
     name = encodeURIComponent(name);
     try {
-        for (var _a = __values(cookieStr.split(';')), _b = _a.next(); !_b.done; _b = _a.next()) {
-            var cookie = _b.value;
+        for (var _b = __values(cookieStr.split(';')), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var cookie = _c.value;
             var eqIndex = cookie.indexOf('=');
-            var _c = __read(eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], 2), cookieName = _c[0], cookieValue = _c[1];
+            var _d = __read(eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], 2), cookieName = _d[0], cookieValue = _d[1];
             if (cookieName.trim() === name) {
                 return decodeURIComponent(cookieValue);
             }
@@ -2758,12 +2759,11 @@ function parseCookieValue(cookieStr, name) {
     catch (e_1_1) { e_1 = { error: e_1_1 }; }
     finally {
         try {
-            if (_b && !_b.done && (_d = _a.return)) _d.call(_a);
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
         }
         finally { if (e_1) throw e_1.error; }
     }
     return null;
-    var e_1, _d;
 }
 
 /**
@@ -3944,6 +3944,7 @@ var NgTemplateOutlet = /** @class */ (function () {
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     };
     NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
+        var e_1, _a;
         var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
         var currCtxKeys = Object.keys(ctxChange.currentValue || {});
         if (prevCtxKeys.length === currCtxKeys.length) {
@@ -3967,23 +3968,22 @@ var NgTemplateOutlet = /** @class */ (function () {
         else {
             return true;
         }
-        var e_1, _a;
     };
     NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
+        var e_2, _a;
         try {
-            for (var _a = __values(Object.keys(ctx)), _b = _a.next(); !_b.done; _b = _a.next()) {
-                var propName = _b.value;
+            for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var propName = _c.value;
                 this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
         finally {
             try {
-                if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
             finally { if (e_2) throw e_2.error; }
         }
-        var e_2, _c;
     };
     NgTemplateOutlet.decorators = [
         { type: core.Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
@@ -5637,7 +5637,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new core.Version('6.1.0-beta.3+28.sha-0922228');
+var VERSION = new core.Version('6.1.0-beta.3+30.sha-e3064d5');
 
 /**
  * @license
