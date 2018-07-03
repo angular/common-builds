@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+28.sha-0922228
+ * @license Angular v6.1.0-beta.3+30.sha-e3064d5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1676,6 +1676,7 @@ HttpXsrfInterceptor = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+var HttpClientXsrfModule_1;
 /**
  * An injectable `HttpHandler` that applies multiple interceptors
  * to a request before passing it to the given `HttpBackend`.
@@ -1832,7 +1833,6 @@ HttpClientJsonpModule = __decorate([
         ],
     })
 ], HttpClientJsonpModule);
-var HttpClientXsrfModule_1;
 
 /**
  * @license

@@ -35,7 +35,7 @@ export declare enum HttpEventType {
     /**
      * A custom event from an interceptor or a backend.
      */
-    User = 5,
+    User = 5
 }
 /**
  * Base interface for progress events.

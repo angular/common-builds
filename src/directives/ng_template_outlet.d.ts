@@ -47,7 +47,7 @@ export declare class NgTemplateOutlet implements OnChanges {
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
      */
-    private _shouldRecreateView(changes);
-    private _hasContextShapeChanged(ctxChange);
-    private _updateExistingContext(ctx);
+    private _shouldRecreateView;
+    private _hasContextShapeChanged;
+    private _updateExistingContext;
 }

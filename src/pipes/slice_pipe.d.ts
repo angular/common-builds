@@ -54,5 +54,5 @@ export declare class SlicePipe implements PipeTransform {
      *   - **if negative**: return all items before `end` index from the end of the list or string.
      */
     transform(value: any, start: number, end?: number): any;
-    private supports(obj);
+    private supports;
 }

@@ -1,4 +1,11 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @whatItDoes Manages the scroll position.
  */
 export declare abstract class ViewportScroller {
@@ -63,7 +70,7 @@ export declare class BrowserViewportScroller implements ViewportScroller {
      * @whatItDoes Disables automatic scroll restoration provided by the browser.
      */
     setHistoryScrollRestoration(scrollRestoration: 'auto' | 'manual'): void;
-    private scrollToElement(el);
+    private scrollToElement;
     /**
      * We only support scroll restoration when we can get a hold of window.
      * This means that we do not support this behavior when running in a web worker.
@@ -72,7 +79,7 @@ export declare class BrowserViewportScroller implements ViewportScroller {
      * Since webworkers aren't widely used, we will lift it once RouterScroller is
      * battle-tested.
      */
-    private supportScrollRestoration();
+    private supportScrollRestoration;
 }
 /**
  * @whatItDoes Provides an empty implementation of the viewport scroller. This will
