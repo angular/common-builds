@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+30.sha-e3064d5
+ * @license Angular v6.1.0-beta.3+29.sha-0c3738a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -9,7 +9,7 @@ import { LocationStrategy } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -65,10 +65,8 @@ class SpyLocation {
      * @return {?}
      */
     isCurrentPathEqualTo(path, query = '') {
-        /** @type {?} */
-        const givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
-        /** @type {?} */
-        const currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+        const /** @type {?} */ givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+        const /** @type {?} */ currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
         return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
     }
     /**
@@ -111,13 +109,11 @@ class SpyLocation {
         }
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
-        /** @type {?} */
-        const locationState = this._history[this._historyIndex - 1];
+        const /** @type {?} */ locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
             return;
         }
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
         this._subject.emit({ 'url': url, 'pop': false });
     }
@@ -129,16 +125,14 @@ class SpyLocation {
      */
     replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
-        /** @type {?} */
-        const history = this._history[this._historyIndex];
+        const /** @type {?} */ history = this._history[this._historyIndex];
         if (history.path == path && history.query == query) {
             return;
         }
         history.path = path;
         history.query = query;
         history.state = state;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     }
     /**
@@ -192,7 +186,7 @@ class LocationState {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -251,11 +245,9 @@ class MockLocationStrategy extends LocationStrategy {
      */
     pushState(ctx, title, path, query) {
         this.internalTitle = title;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url);
+        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push(externalUrl);
     }
     /**
@@ -267,11 +259,9 @@ class MockLocationStrategy extends LocationStrategy {
      */
     replaceState(ctx, title, path, query) {
         this.internalTitle = title;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const /** @type {?} */ url = path + (query.length > 0 ? ('?' + query) : '');
         this.internalPath = url;
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url);
+        const /** @type {?} */ externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push('replace: ' + externalUrl);
     }
     /**
@@ -289,8 +279,7 @@ class MockLocationStrategy extends LocationStrategy {
     back() {
         if (this.urlChanges.length > 0) {
             this.urlChanges.pop();
-            /** @type {?} */
-            const nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
+            const /** @type {?} */ nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
             this.simulatePopState(nextUrl);
         }
     }
@@ -317,7 +306,7 @@ class _MockPopStateEvent {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -329,7 +318,7 @@ class _MockPopStateEvent {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -348,7 +337,7 @@ class _MockPopStateEvent {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license

@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes} checked by tsc
  */
 /**
  * @license
@@ -24,7 +24,7 @@
  */
 export class HttpHandler {
 }
-if (false) {
+function HttpHandler_tsickle_Closure_declarations() {
     /**
      * @abstract
      * @param {?} req
@@ -45,7 +45,7 @@ if (false) {
  */
 export class HttpBackend {
 }
-if (false) {
+function HttpBackend_tsickle_Closure_declarations() {
     /**
      * @abstract
      * @param {?} req

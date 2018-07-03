@@ -93,6 +93,6 @@ export declare class HttpParams {
      * separated by `&`s.
      */
     toString(): string;
-    private clone;
-    private init;
+    private clone(update);
+    private init();
 }

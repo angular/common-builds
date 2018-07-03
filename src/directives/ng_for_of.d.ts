@@ -100,7 +100,7 @@ export declare class NgForOf<T> implements DoCheck {
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers);
     ngForTemplate: TemplateRef<NgForOfContext<T>>;
     ngDoCheck(): void;
-    private _applyChanges;
-    private _perViewChange;
+    private _applyChanges(changes);
+    private _perViewChange(view, record);
 }
 export declare function getTypeNameForDebugging(type: any): string;
