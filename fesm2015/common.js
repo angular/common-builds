@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+30.sha-e3064d5
+ * @license Angular v6.1.0-beta.3+29.sha-0c3738a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -102,7 +102,6 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var Location_1;
 /**
  * @description
  *
@@ -258,6 +257,7 @@ function _stripBaseHref(baseHref, url) {
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
+var Location_1;
 
 /**
  * @license
@@ -4030,7 +4030,6 @@ class DateFormatter {
 * Use of this source code is governed by an MIT-style license that can be
 * found in the LICENSE file at https://angular.io/license
   */
-var DeprecatedDatePipe_1;
 /**
  * @ngModule CommonModule
  * @description
@@ -4158,6 +4157,7 @@ DeprecatedDatePipe = DeprecatedDatePipe_1 = __decorate([
 function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
+var DeprecatedDatePipe_1;
 
 /**
  * @license
@@ -4166,9 +4166,6 @@ function isDate$1(value) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var DeprecatedDecimalPipe_1;
-var DeprecatedPercentPipe_1;
-var DeprecatedCurrencyPipe_1;
 function formatNumber$1(pipe, locale, value, style, digits, currency = null, currencyAsSymbol = false) {
     if (value == null)
         return null;
@@ -4315,6 +4312,9 @@ DeprecatedCurrencyPipe = DeprecatedCurrencyPipe_1 = __decorate([
     __param(0, Inject(LOCALE_ID)),
     __metadata("design:paramtypes", [String])
 ], DeprecatedCurrencyPipe);
+var DeprecatedDecimalPipe_1;
+var DeprecatedPercentPipe_1;
+var DeprecatedCurrencyPipe_1;
 
 /**
  * @license
@@ -4337,7 +4337,6 @@ const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPi
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var AsyncPipe_1;
 class ObservableStrategy {
     createSubscription(async, updateLatestValue) {
         return async.subscribe({ next: updateLatestValue, error: (e) => { throw e; } });
@@ -4444,6 +4443,7 @@ AsyncPipe = AsyncPipe_1 = __decorate([
     Pipe({ name: 'async', pure: false }),
     __metadata("design:paramtypes", [ChangeDetectorRef])
 ], AsyncPipe);
+var AsyncPipe_1;
 
 /**
  * @license
@@ -4452,9 +4452,6 @@ AsyncPipe = AsyncPipe_1 = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var LowerCasePipe_1;
-var TitleCasePipe_1;
-var UpperCasePipe_1;
 /**
  * Transforms text to all lower case.
  *
@@ -4547,6 +4544,9 @@ let UpperCasePipe = UpperCasePipe_1 = class UpperCasePipe {
 UpperCasePipe = UpperCasePipe_1 = __decorate([
     Pipe({ name: 'uppercase' })
 ], UpperCasePipe);
+var LowerCasePipe_1;
+var TitleCasePipe_1;
+var UpperCasePipe_1;
 
 /**
  * @license
@@ -4555,7 +4555,6 @@ UpperCasePipe = UpperCasePipe_1 = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var DatePipe_1;
 // clang-format off
 /**
  * @ngModule CommonModule
@@ -4728,6 +4727,7 @@ DatePipe = DatePipe_1 = __decorate([
     __param(0, Inject(LOCALE_ID)),
     __metadata("design:paramtypes", [String])
 ], DatePipe);
+var DatePipe_1;
 
 /**
  * @license
@@ -4736,7 +4736,6 @@ DatePipe = DatePipe_1 = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var I18nPluralPipe_1;
 const _INTERPOLATION_REGEXP = /#/g;
 /**
  * @ngModule CommonModule
@@ -4775,6 +4774,7 @@ I18nPluralPipe = I18nPluralPipe_1 = __decorate([
     Pipe({ name: 'i18nPlural', pure: true }),
     __metadata("design:paramtypes", [NgLocalization])
 ], I18nPluralPipe);
+var I18nPluralPipe_1;
 
 /**
  * @license
@@ -4783,7 +4783,6 @@ I18nPluralPipe = I18nPluralPipe_1 = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var I18nSelectPipe_1;
 /**
  * @ngModule CommonModule
  * @description
@@ -4823,6 +4822,7 @@ let I18nSelectPipe = I18nSelectPipe_1 = class I18nSelectPipe {
 I18nSelectPipe = I18nSelectPipe_1 = __decorate([
     Pipe({ name: 'i18nSelect', pure: true })
 ], I18nSelectPipe);
+var I18nSelectPipe_1;
 
 /**
  * @license
@@ -4948,9 +4948,6 @@ function defaultComparator(keyValueA, keyValueB) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var DecimalPipe_1;
-var PercentPipe_1;
-var CurrencyPipe_1;
 /**
  * @ngModule CommonModule
  * @description
@@ -5167,6 +5164,9 @@ function strToNumber(value) {
     }
     return value;
 }
+var DecimalPipe_1;
+var PercentPipe_1;
+var CurrencyPipe_1;
 
 /**
  * @license
@@ -5175,7 +5175,6 @@ function strToNumber(value) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SlicePipe_1;
 /**
  * @ngModule CommonModule
  * @description
@@ -5236,6 +5235,7 @@ let SlicePipe = SlicePipe_1 = class SlicePipe {
 SlicePipe = SlicePipe_1 = __decorate([
     Pipe({ name: 'slice', pure: false })
 ], SlicePipe);
+var SlicePipe_1;
 
 /**
  * @license
@@ -5377,7 +5377,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-const VERSION = new Version('6.1.0-beta.3+30.sha-e3064d5');
+const VERSION = new Version('6.1.0-beta.3+29.sha-0c3738a');
 
 /**
  * @license

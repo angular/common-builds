@@ -1,13 +1,5 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-declare function plural(n: number): number;
-declare const _default: (string | number | (string[] | undefined)[] | number[] | (string | undefined)[] | typeof plural | {
+/// <amd-module name="@angular/common/locales/zh-Hans-MO" />
+declare const _default: (string | number | (string[] | undefined)[] | number[] | (string | undefined)[] | ((n: number) => number) | {
     'AUD': string[];
     'ILR': string[];
     'JPY': string[];
