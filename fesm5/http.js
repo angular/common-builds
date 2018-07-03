@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+29.sha-0c3738a
+ * @license Angular v6.1.0-beta.3+35.sha-b6af870
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1842,6 +1842,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
             ],
         };
     };
+    var HttpClientXsrfModule_1;
     HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
         NgModule({
             providers: [
@@ -1854,7 +1855,6 @@ var HttpClientXsrfModule = /** @class */ (function () {
         })
     ], HttpClientXsrfModule);
     return HttpClientXsrfModule;
-    var HttpClientXsrfModule_1;
 }());
 /**
  * An NgModule that provides the `HttpClient` and associated services.

@@ -1,4 +1,11 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Immutable set of Http headers, with lazy parsing.
  *
  */
@@ -42,9 +49,9 @@ export declare class HttpHeaders {
     append(name: string, value: string | string[]): HttpHeaders;
     set(name: string, value: string | string[]): HttpHeaders;
     delete(name: string, value?: string | string[]): HttpHeaders;
-    private maybeSetNormalizedName(name, lcName);
-    private init();
-    private copyFrom(other);
-    private clone(update);
-    private applyUpdate(update);
+    private maybeSetNormalizedName;
+    private init;
+    private copyFrom;
+    private clone;
+    private applyUpdate;
 }
