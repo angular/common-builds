@@ -63,7 +63,7 @@ export declare class NgSwitch {
     private _lastCasesMatched;
     private _ngSwitch;
     ngSwitch: any;
-    private _updateDefaultCases(useDefault);
+    private _updateDefaultCases;
 }
 /**
  * @ngModule CommonModule
