@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Observable } from 'rxjs';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpRequest } from './request';
@@ -28,7 +35,7 @@ export declare class JsonpClientBackend implements HttpBackend {
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
      */
-    private nextCallback();
+    private nextCallback;
     /**
      * Process a JSONP request and return an event stream of the results.
      */

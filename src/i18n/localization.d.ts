@@ -31,10 +31,10 @@ export declare function getPluralCategory(value: number, cases: string[], ngLoca
 export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
     /** @deprecated from v5 */
-    protected deprecatedPluralFn: ((locale: string, value: string | number) => Plural) | null | undefined;
+    protected deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined;
     constructor(locale: string, 
-        /** @deprecated from v5 */
-        deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
+    /** @deprecated from v5 */
+    deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
     getPluralCategory(value: any, locale?: string): string;
 }
 /**

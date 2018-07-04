@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+28.sha-0922228
+ * @license Angular v6.1.0-beta.3+35.sha-b6af870
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -260,12 +260,12 @@ var Location = /** @class */ (function () {
         var droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
         return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
     };
+    var Location_1;
     Location = Location_1 = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [LocationStrategy])
     ], Location);
     return Location;
-    var Location_1;
 }());
 function _stripBaseHref(baseHref, url) {
     return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
@@ -2656,12 +2656,13 @@ function getPluralCase(locale, nLike) {
  * found in the LICENSE file at https://angular.io/license
  */
 function parseCookieValue(cookieStr, name) {
+    var e_1, _a;
     name = encodeURIComponent(name);
     try {
-        for (var _a = __values(cookieStr.split(';')), _b = _a.next(); !_b.done; _b = _a.next()) {
-            var cookie = _b.value;
+        for (var _b = __values(cookieStr.split(';')), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var cookie = _c.value;
             var eqIndex = cookie.indexOf('=');
-            var _c = __read(eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], 2), cookieName = _c[0], cookieValue = _c[1];
+            var _d = __read(eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], 2), cookieName = _d[0], cookieValue = _d[1];
             if (cookieName.trim() === name) {
                 return decodeURIComponent(cookieValue);
             }
@@ -2670,12 +2671,11 @@ function parseCookieValue(cookieStr, name) {
     catch (e_1_1) { e_1 = { error: e_1_1 }; }
     finally {
         try {
-            if (_b && !_b.done && (_d = _a.return)) _d.call(_a);
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
         }
         finally { if (e_1) throw e_1.error; }
     }
     return null;
-    var e_1, _d;
 }
 
 /**
@@ -3866,6 +3866,7 @@ var NgTemplateOutlet = /** @class */ (function () {
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     };
     NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
+        var e_1, _a;
         var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
         var currCtxKeys = Object.keys(ctxChange.currentValue || {});
         if (prevCtxKeys.length === currCtxKeys.length) {
@@ -3889,23 +3890,22 @@ var NgTemplateOutlet = /** @class */ (function () {
         else {
             return true;
         }
-        var e_1, _a;
     };
     NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
+        var e_2, _a;
         try {
-            for (var _a = __values(Object.keys(ctx)), _b = _a.next(); !_b.done; _b = _a.next()) {
-                var propName = _b.value;
+            for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var propName = _c.value;
                 this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
         finally {
             try {
-                if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
             finally { if (e_2) throw e_2.error; }
         }
-        var e_2, _c;
     };
     __decorate([
         Input(),
@@ -4260,6 +4260,7 @@ var DeprecatedDatePipe = /** @class */ (function () {
         }
         return DateFormatter.format(date, this._locale, DeprecatedDatePipe_1._ALIASES[pattern] || pattern);
     };
+    var DeprecatedDatePipe_1;
     /** @internal */
     DeprecatedDatePipe._ALIASES = {
         'medium': 'yMMMdjms',
@@ -4277,7 +4278,6 @@ var DeprecatedDatePipe = /** @class */ (function () {
         __metadata("design:paramtypes", [String])
     ], DeprecatedDatePipe);
     return DeprecatedDatePipe;
-    var DeprecatedDatePipe_1;
 }());
 function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
@@ -4365,13 +4365,13 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
     DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
         return formatNumber$1(DeprecatedDecimalPipe_1, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
+    var DeprecatedDecimalPipe_1;
     DeprecatedDecimalPipe = DeprecatedDecimalPipe_1 = __decorate([
         Pipe({ name: 'number' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], DeprecatedDecimalPipe);
     return DeprecatedDecimalPipe;
-    var DeprecatedDecimalPipe_1;
 }());
 /**
  * @ngModule CommonModule
@@ -4399,13 +4399,13 @@ var DeprecatedPercentPipe = /** @class */ (function () {
     DeprecatedPercentPipe.prototype.transform = function (value, digits) {
         return formatNumber$1(DeprecatedPercentPipe_1, this._locale, value, NumberFormatStyle.Percent, digits);
     };
+    var DeprecatedPercentPipe_1;
     DeprecatedPercentPipe = DeprecatedPercentPipe_1 = __decorate([
         Pipe({ name: 'percent' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], DeprecatedPercentPipe);
     return DeprecatedPercentPipe;
-    var DeprecatedPercentPipe_1;
 }());
 /**
  * @ngModule CommonModule
@@ -4441,13 +4441,13 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
         if (symbolDisplay === void 0) { symbolDisplay = false; }
         return formatNumber$1(DeprecatedCurrencyPipe_1, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
+    var DeprecatedCurrencyPipe_1;
     DeprecatedCurrencyPipe = DeprecatedCurrencyPipe_1 = __decorate([
         Pipe({ name: 'currency' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], DeprecatedCurrencyPipe);
     return DeprecatedCurrencyPipe;
-    var DeprecatedCurrencyPipe_1;
 }());
 
 /**
@@ -4580,12 +4580,12 @@ var AsyncPipe = /** @class */ (function () {
             this._ref.markForCheck();
         }
     };
+    var AsyncPipe_1;
     AsyncPipe = AsyncPipe_1 = __decorate([
         Pipe({ name: 'async', pure: false }),
         __metadata("design:paramtypes", [ChangeDetectorRef])
     ], AsyncPipe);
     return AsyncPipe;
-    var AsyncPipe_1;
 }());
 
 /**
@@ -4624,11 +4624,11 @@ var LowerCasePipe = /** @class */ (function () {
         }
         return value.toLowerCase();
     };
+    var LowerCasePipe_1;
     LowerCasePipe = LowerCasePipe_1 = __decorate([
         Pipe({ name: 'lowercase' })
     ], LowerCasePipe);
     return LowerCasePipe;
-    var LowerCasePipe_1;
 }());
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
@@ -4670,11 +4670,11 @@ var TitleCasePipe = /** @class */ (function () {
         }
         return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
     };
+    var TitleCasePipe_1;
     TitleCasePipe = TitleCasePipe_1 = __decorate([
         Pipe({ name: 'titlecase' })
     ], TitleCasePipe);
     return TitleCasePipe;
-    var TitleCasePipe_1;
 }());
 /**
  * Transforms text to all upper case.
@@ -4696,11 +4696,11 @@ var UpperCasePipe = /** @class */ (function () {
         }
         return value.toUpperCase();
     };
+    var UpperCasePipe_1;
     UpperCasePipe = UpperCasePipe_1 = __decorate([
         Pipe({ name: 'uppercase' })
     ], UpperCasePipe);
     return UpperCasePipe;
-    var UpperCasePipe_1;
 }());
 
 /**
@@ -4878,13 +4878,13 @@ var DatePipe = /** @class */ (function () {
             throw invalidPipeArgumentError(DatePipe_1, error.message);
         }
     };
+    var DatePipe_1;
     DatePipe = DatePipe_1 = __decorate([
         Pipe({ name: 'date', pure: true }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], DatePipe);
     return DatePipe;
-    var DatePipe_1;
 }());
 
 /**
@@ -4928,12 +4928,12 @@ var I18nPluralPipe = /** @class */ (function () {
         var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
+    var I18nPluralPipe_1;
     I18nPluralPipe = I18nPluralPipe_1 = __decorate([
         Pipe({ name: 'i18nPlural', pure: true }),
         __metadata("design:paramtypes", [NgLocalization])
     ], I18nPluralPipe);
     return I18nPluralPipe;
-    var I18nPluralPipe_1;
 }());
 
 /**
@@ -4981,11 +4981,11 @@ var I18nSelectPipe = /** @class */ (function () {
         }
         return '';
     };
+    var I18nSelectPipe_1;
     I18nSelectPipe = I18nSelectPipe_1 = __decorate([
         Pipe({ name: 'i18nSelect', pure: true })
     ], I18nSelectPipe);
     return I18nSelectPipe;
-    var I18nSelectPipe_1;
 }());
 
 /**
@@ -5170,13 +5170,13 @@ var DecimalPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(DecimalPipe_1, error.message);
         }
     };
+    var DecimalPipe_1;
     DecimalPipe = DecimalPipe_1 = __decorate([
         Pipe({ name: 'number' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], DecimalPipe);
     return DecimalPipe;
-    var DecimalPipe_1;
 }());
 /**
  * @ngModule CommonModule
@@ -5231,13 +5231,13 @@ var PercentPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(PercentPipe_1, error.message);
         }
     };
+    var PercentPipe_1;
     PercentPipe = PercentPipe_1 = __decorate([
         Pipe({ name: 'percent' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], PercentPipe);
     return PercentPipe;
-    var PercentPipe_1;
 }());
 /**
  * @ngModule CommonModule
@@ -5320,13 +5320,13 @@ var CurrencyPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(CurrencyPipe_1, error.message);
         }
     };
+    var CurrencyPipe_1;
     CurrencyPipe = CurrencyPipe_1 = __decorate([
         Pipe({ name: 'currency' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
     ], CurrencyPipe);
     return CurrencyPipe;
-    var CurrencyPipe_1;
 }());
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
@@ -5411,11 +5411,11 @@ var SlicePipe = /** @class */ (function () {
         return value.slice(start, end);
     };
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+    var SlicePipe_1;
     SlicePipe = SlicePipe_1 = __decorate([
         Pipe({ name: 'slice', pure: false })
     ], SlicePipe);
     return SlicePipe;
-    var SlicePipe_1;
 }());
 
 /**
@@ -5564,7 +5564,7 @@ function isPlatformWorkerUi(platformId) {
  * @description
  * Entry point for all public APIs of the common package.
  */
-var VERSION = new Version('6.1.0-beta.3+28.sha-0922228');
+var VERSION = new Version('6.1.0-beta.3+35.sha-b6af870');
 
 /**
  * @license
