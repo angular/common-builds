@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.7+18.sha-25b532e
+ * @license Angular v6.0.7+20.sha-bc2bf18
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5752,12 +5752,27 @@ JsonPipe.decorators = [
  * separator, decimal-point character, and other locale-specific
  * configurations.
  *
+ * If no parameters are specified, the function rounds off to the nearest value using this
+ * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
+ * The behavior differs from that of the JavaScript ```Math.round()``` function.
+ * In the following case for example, the pipe rounds down where
+ * ```Math.round()``` rounds up:
+ *
+ * ```html
+ * -2.5 | number:'1.0-0'
+ * > -3
+ * Math.round(-2.5)
+ * > -2
+ * ```
+ *
  * @see `formatNumber()`
  *
  * \@usageNotes
  * The following code shows how the pipe transforms numbers
  * into text strings, according to various format specifications,
  * where the caller's default locale is `en-US`.
+ *
+ * ### Example
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
@@ -6217,7 +6232,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.0.7+18.sha-25b532e');
+const VERSION = new Version('6.0.7+20.sha-bc2bf18');
 
 /**
  * @fileoverview added by tsickle
