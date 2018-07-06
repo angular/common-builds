@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.0-beta.3+45.sha-fddd2af
+ * @license Angular v6.1.0-beta.3+47.sha-1e74ea9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Injector, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleFactory, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Type, Version, ViewContainerRef, WrappedValue, defineInjectable, inject, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
-import { __assign, __decorate, __extends, __metadata, __param, __read, __values } from 'tslib';
+import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
+import { __values, __read, __decorate, __extends, __param, __metadata, __assign } from 'tslib';
 
 /**
  * @license
@@ -3958,13 +3958,6 @@ function invalidPipeArgumentError(type, value) {
     return Error("InvalidPipeArgument: '" + value + "' for pipe '" + ɵstringify(type) + "'");
 }
 
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
@@ -5441,11 +5434,6 @@ var SlicePipe = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * This module provides a set of common Pipes.
- */
-/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
 var COMMON_PIPES = [
@@ -5574,12 +5562,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-var VERSION = new Version('6.1.0-beta.3+45.sha-fddd2af');
+var VERSION = new Version('6.1.0-beta.3+47.sha-1e74ea9');
 
 /**
  * @license
@@ -5733,11 +5716,6 @@ var NullViewportScroller = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
 
 /**
  * @license
@@ -5746,12 +5724,6 @@ var NullViewportScroller = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of this package.
- */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
@@ -5761,10 +5733,6 @@ var NullViewportScroller = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 export { registerLocaleData as ɵregisterLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map
