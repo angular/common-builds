@@ -867,7 +867,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a GET request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Construct a HEAD request which interprets the body as an `ArrayBuffer` and returns the full event stream.
      *
      * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
      */
@@ -1117,7 +1117,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a OPTIONS request which interprets the body as text and returns it.
+     * Construct an OPTIONS request which interprets the body as text and returns it.
      *
      * @return an `Observable` of the body as a `string`.
      */
@@ -1644,7 +1644,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a PATCH request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Construct a POST request which interprets the body as an `ArrayBuffer` and returns the full event stream.
      *
      * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
      */
