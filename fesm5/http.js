@@ -1,13 +1,13 @@
 /**
- * @license Angular v6.1.0-beta.3+45.sha-fddd2af
+ * @license Angular v6.1.0-beta.3+47.sha-1e74ea9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Inject, Injectable, InjectionToken, Injector, NgModule, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { __extends, __spread, __read } from 'tslib';
+import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
+import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
-import { __extends, __read, __spread } from 'tslib';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
@@ -1798,15 +1798,6 @@ var HttpInterceptingHandler = /** @class */ (function () {
     return HttpInterceptingHandler;
 }());
 /**
- * Constructs an `HttpHandler` that applies interceptors
- * to a request before passing it to the given `HttpBackend`.
- *
- * Use as a factory function within `HttpClientModule`.
- *
- *
- */
-
-/**
  * Factory function that determines where to store JSONP callbacks.
  *
  * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
@@ -1952,10 +1943,6 @@ var HttpClientJsonpModule = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
