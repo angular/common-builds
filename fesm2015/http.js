@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.0-beta.3+46.sha-f62876b
+ * @license Angular v6.1.0-beta.3+61.sha-3980640
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Inject, Injectable, InjectionToken, Injector, NgModule, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
+import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
@@ -52,16 +52,6 @@ class HttpBackend {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @record
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
@@ -305,23 +295,6 @@ class HttpHeaders {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * A codec for encoding and decoding parameters in URLs.
- *
- * Used by `HttpParams`.
- *
- *
- *
- * @record
- */
-
-/**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
@@ -390,11 +363,6 @@ function standardEncoding(v) {
         .replace(/%3F/gi, '?')
         .replace(/%2F/gi, '/');
 }
-/**
- * Options used to construct an `HttpParams` instance.
- * @record
- */
-
 /**
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
@@ -564,13 +532,6 @@ class HttpParams {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Determine whether the given HTTP method may include a body.
@@ -836,13 +797,6 @@ class HttpRequest {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @enum {number} */
 const HttpEventType = {
     /**
@@ -876,57 +830,6 @@ HttpEventType[HttpEventType.ResponseHeader] = 'ResponseHeader';
 HttpEventType[HttpEventType.DownloadProgress] = 'DownloadProgress';
 HttpEventType[HttpEventType.Response] = 'Response';
 HttpEventType[HttpEventType.User] = 'User';
-/**
- * Base interface for progress events.
- *
- *
- * @record
- */
-
-/**
- * A download progress event.
- *
- *
- * @record
- */
-
-/**
- * An upload progress event.
- *
- *
- * @record
- */
-
-/**
- * An event indicating that the request was sent to the server. Useful
- * when a request may be retried multiple times, to distinguish between
- * retries on the final event stream.
- *
- *
- * @record
- */
-
-/**
- * A user-defined event.
- *
- * Grouping all custom events under this type ensures they will be handled
- * and forwarded by all implementations of interceptors.
- *
- *
- * @record
- * @template T
- */
-
-/**
- * An error that represents a failed attempt to JSON.parse text coming back
- * from the server.
- *
- * It bundles the Error object with the actual response body that failed to parse.
- *
- *
- * @record
- */
-
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
@@ -1065,13 +968,6 @@ class HttpErrorResponse extends HttpResponseBase {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Construct an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
@@ -1350,26 +1246,6 @@ HttpClient.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Intercepts `HttpRequest` and handles them.
- *
- * Most interceptors will transform the outgoing request before passing it to the
- * next interceptor in the chain, by calling `next.handle(transformedReq)`.
- *
- * In rare cases, interceptors may wish to completely handle a request themselves,
- * and not delegate to the remainder of the chain. This behavior is allowed.
- *
- *
- * @record
- */
-
-/**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
  *
@@ -1415,13 +1291,6 @@ NoopInterceptor.decorators = [
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @type {?} */
 let nextRequestId = 0;
@@ -1623,13 +1492,6 @@ JsonpInterceptor.ctorParameters = () => [
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @type {?} */
 const XSSI_PREFIX = /^\)\]\}',?\n/;
@@ -1914,13 +1776,6 @@ HttpXhrBackend.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @type {?} */
 const XSRF_COOKIE_NAME = new InjectionToken('XSRF_COOKIE_NAME');
 /** @type {?} */
@@ -2030,13 +1885,6 @@ HttpXsrfInterceptor.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * An injectable `HttpHandler` that applies multiple interceptors
  * to a request before passing it to the given `HttpBackend`.
  *
@@ -2076,18 +1924,6 @@ HttpInterceptingHandler.ctorParameters = () => [
     { type: HttpBackend },
     { type: Injector }
 ];
-/**
- * Constructs an `HttpHandler` that applies interceptors
- * to a request before passing it to the given `HttpBackend`.
- *
- * Use as a factory function within `HttpClientModule`.
- *
- *
- * @param {?} backend
- * @param {?=} interceptors
- * @return {?}
- */
-
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
@@ -2216,29 +2052,11 @@ HttpClientJsonpModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
