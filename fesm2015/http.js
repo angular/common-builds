@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.7+20.sha-bc2bf18
+ * @license Angular v6.0.7+22.sha-2d1102f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1318,8 +1318,8 @@ class HttpClient {
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * POST request to be executed on the server. See the individual overloads for
-     * details of `post()`'s return type based on the provided options.
+     * PUT request to be executed on the server. See the individual overloads for
+     * details of `put()`'s return type based on the provided options.
      * @param {?} url
      * @param {?} body
      * @param {?=} options
