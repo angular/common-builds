@@ -1,12 +1,12 @@
 /**
- * @license Angular v6.1.0-beta.1+46.sha-a5799e6
+ * @license Angular v6.1.0-beta.3+80.sha-6c604bd
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __metadata, __param } from 'tslib';
-import { Inject, Injectable, InjectionToken, Injector, NgModule, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { __decorate, __param, __metadata } from 'tslib';
+import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
+import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
@@ -1053,8 +1053,8 @@ let HttpClient = class HttpClient {
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
-     * POST request to be executed on the server. See the individual overloads for
-     * details of `post()`'s return type based on the provided options.
+     * PUT request to be executed on the server. See the individual overloads for
+     * details of `put()`'s return type based on the provided options.
      */
     put(url, body, options = {}) {
         return this.request('PUT', url, addBody(options, body));
@@ -1676,13 +1676,15 @@ HttpXsrfInterceptor = __decorate([
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+var HttpClientXsrfModule_1;
 /**
- * An `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * An injectable `HttpHandler` that applies multiple interceptors
  * to a request before passing it to the given `HttpBackend`.
  *
  * The interceptors are loaded lazily from the injector, to allow
  * interceptors to themselves inject classes depending indirectly
  * on `HttpInterceptingHandler` itself.
+ * @see `HttpInterceptor`
  */
 let HttpInterceptingHandler = class HttpInterceptingHandler {
     constructor(backend, injector) {
@@ -1717,14 +1719,14 @@ function jsonpCallbackContext() {
     return {};
 }
 /**
- * `NgModule` which adds XSRF protection support to outgoing requests.
+ * An NgModule that adds XSRF protection support to outgoing requests.
  *
- * Provided the server supports a cookie-based XSRF protection system, this
- * module can be used directly to configure XSRF protection with the correct
+ * For a server that supports a cookie-based XSRF protection system,
+ * use directly to configure XSRF protection with the correct
  * cookie and header names.
  *
- * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
- * the header name and `XSRF-TOKEN` for the cookie name.
+ * If no names are supplied, the default cookie name is `XSRF-TOKEN`
+ * and the default header name is `X-XSRF-TOKEN`.
  *
  *
  */
@@ -1741,8 +1743,12 @@ let HttpClientXsrfModule = HttpClientXsrfModule_1 = class HttpClientXsrfModule {
         };
     }
     /**
-     * Configure XSRF protection to use the given cookie name or header name,
-     * or the default names (as described above) if not provided.
+     * Configure XSRF protection.
+     * @param options An object that can specify either or both
+     * cookie name or header name.
+     * - Cookie name default is `XSRF-TOKEN`.
+     * - Header name default is `X-XSRF-TOKEN`.
+     *
      */
     static withOptions(options = {}) {
         return {
@@ -1766,7 +1772,7 @@ HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
     })
 ], HttpClientXsrfModule);
 /**
- * `NgModule` which provides the `HttpClient` and associated services.
+ * An NgModule that provides the `HttpClient` and associated services.
  *
  * Interceptors can be added to the chain behind `HttpClient` by binding them
  * to the multiprovider for `HTTP_INTERCEPTORS`.
@@ -1777,12 +1783,18 @@ let HttpClientModule = class HttpClientModule {
 };
 HttpClientModule = __decorate([
     NgModule({
+        /**
+         * Optional configuration for XSRF protection.
+         */
         imports: [
             HttpClientXsrfModule.withOptions({
                 cookieName: 'XSRF-TOKEN',
                 headerName: 'X-XSRF-TOKEN',
             }),
         ],
+        /**
+         * The module provides `HttpClient` itself, and supporting services.
+         */
         providers: [
             HttpClient,
             { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -1794,7 +1806,7 @@ HttpClientModule = __decorate([
     })
 ], HttpClientModule);
 /**
- * `NgModule` which enables JSONP support in `HttpClient`.
+ * An NgModule that enables JSONP support in `HttpClient`.
  *
  * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
@@ -1812,7 +1824,6 @@ HttpClientJsonpModule = __decorate([
         ],
     })
 ], HttpClientJsonpModule);
-var HttpClientXsrfModule_1;
 
 /**
  * @license
@@ -1829,10 +1840,6 @@ var HttpClientXsrfModule_1;
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpInterceptingHandler as ɵHttpInterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor };
 //# sourceMappingURL=http.js.map
