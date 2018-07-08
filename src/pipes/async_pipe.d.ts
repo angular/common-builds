@@ -46,8 +46,8 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     transform<T>(obj: undefined): undefined;
     transform<T>(obj: Observable<T> | null | undefined): T | null;
     transform<T>(obj: Promise<T> | null | undefined): T | null;
-    private _subscribe(obj);
-    private _selectStrategy(obj);
-    private _dispose();
-    private _updateLatestValue(async, value);
+    private _subscribe;
+    private _selectStrategy;
+    private _dispose;
+    private _updateLatestValue;
 }
