@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+73.sha-49df4ef
+ * @license Angular v6.1.0-beta.3+75.sha-3a19f70
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5376,7 +5376,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.1.0-beta.3+73.sha-49df4ef');
+const VERSION = new Version('6.1.0-beta.3+75.sha-3a19f70');
 
 /**
  * @license
