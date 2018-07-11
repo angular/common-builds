@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+88.sha-b9e095a
+ * @license Angular v6.1.0-beta.3+89.sha-0b4d85e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1595,21 +1595,14 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
     return neg + strNum;
 }
 /**
- * Trim a fractional part to `digits` number of digits.
- * Right pads with "0" to fit the requested number of digits if needed.
- *
- * @param {?} num The fractional part value
- * @param {?} digits The width of the output
+ * @param {?} milliseconds
+ * @param {?} digits
  * @return {?}
  */
-function trimRPadFractional(num, digits) {
+function formatFractionalSeconds(milliseconds, digits) {
     /** @type {?} */
-    let strNum = String(num);
-    // Add padding at the end
-    while (strNum.length < digits) {
-        strNum = strNum + 0;
-    }
-    return strNum.substr(0, digits);
+    const strMs = padNumber(milliseconds, 3);
+    return strMs.substr(0, digits);
 }
 /**
  * Returns a date formatter that transforms a date into its locale digit representation
@@ -1633,7 +1626,7 @@ function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
             }
         }
         else if (name === DateType.FractionalSeconds) {
-            return trimRPadFractional(part, size);
+            return formatFractionalSeconds(part, size);
         }
         /** @type {?} */
         const localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
@@ -6304,7 +6297,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.0-beta.3+88.sha-b9e095a');
+const VERSION = new Version('6.1.0-beta.3+89.sha-0b4d85e');
 
 /**
  * @fileoverview added by tsickle
