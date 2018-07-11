@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+79.sha-8057664
+ * @license Angular v6.1.0-beta.3+80.sha-a527c69
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1388,7 +1388,7 @@ const DateType = {
     Hours: 3,
     Minutes: 4,
     Seconds: 5,
-    Milliseconds: 6,
+    FractionalSeconds: 6,
     Day: 7,
 };
 DateType[DateType.FullYear] = 'FullYear';
@@ -1397,7 +1397,7 @@ DateType[DateType.Date] = 'Date';
 DateType[DateType.Hours] = 'Hours';
 DateType[DateType.Minutes] = 'Minutes';
 DateType[DateType.Seconds] = 'Seconds';
-DateType[DateType.Milliseconds] = 'Milliseconds';
+DateType[DateType.FractionalSeconds] = 'FractionalSeconds';
 DateType[DateType.Day] = 'Day';
 /** @enum {number} */
 const TranslationType = {
@@ -1427,8 +1427,6 @@ TranslationType[TranslationType.Eras] = 'Eras';
  *   If not specified, host system settings are used.
  *
  * See {\@link DatePipe} for more details.
- *
- *
  * @param {?} value
  * @param {?} format
  * @param {?} locale
@@ -1597,6 +1595,23 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
     return neg + strNum;
 }
 /**
+ * Trim a fractional part to `digits` number of digits.
+ * Right pads with "0" to fit the requested number of digits if needed.
+ *
+ * @param {?} num The fractional part value
+ * @param {?} digits The width of the output
+ * @return {?}
+ */
+function trimRPadFractional(num, digits) {
+    /** @type {?} */
+    let strNum = String(num);
+    // Add padding at the end
+    while (strNum.length < digits) {
+        strNum = strNum + 0;
+    }
+    return strNum.substr(0, digits);
+}
+/**
  * Returns a date formatter that transforms a date into its locale digit representation
  * @param {?} name
  * @param {?} size
@@ -1608,24 +1623,30 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
 function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
     return function (date, locale) {
         /** @type {?} */
-        let part = getDatePart(name, date, size);
+        let part = getDatePart(name, date);
         if (offset > 0 || part > -offset) {
             part += offset;
         }
-        if (name === DateType.Hours && part === 0 && offset === -12) {
-            part = 12;
+        if (name === DateType.Hours) {
+            if (part === 0 && offset === -12) {
+                part = 12;
+            }
         }
-        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
+        else if (name === DateType.FractionalSeconds) {
+            return trimRPadFractional(part, size);
+        }
+        /** @type {?} */
+        const localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        return padNumber(part, size, localeMinus, trim, negWrap);
     };
 }
 /**
- * @param {?} name
+ * @param {?} part
  * @param {?} date
- * @param {?} size
  * @return {?}
  */
-function getDatePart(name, date, size) {
-    switch (name) {
+function getDatePart(part, date) {
+    switch (part) {
         case DateType.FullYear:
             return date.getFullYear();
         case DateType.Month:
@@ -1638,14 +1659,12 @@ function getDatePart(name, date, size) {
             return date.getMinutes();
         case DateType.Seconds:
             return date.getSeconds();
-        case DateType.Milliseconds:
-            /** @type {?} */
-            const div = size === 1 ? 100 : (size === 2 ? 10 : 1);
-            return Math.round(date.getMilliseconds() / div);
+        case DateType.FractionalSeconds:
+            return date.getMilliseconds();
         case DateType.Day:
             return date.getDay();
         default:
-            throw new Error(`Unknown DateType value "${name}".`);
+            throw new Error(`Unknown DateType value "${part}".`);
     }
 }
 /**
@@ -1977,16 +1996,15 @@ function getDateFormatter(format) {
         case 'ss':
             formatter = dateGetter(DateType.Seconds, 2);
             break;
-        // Fractional second padded (0-9)
+        // Fractional second
         case 'S':
-            formatter = dateGetter(DateType.Milliseconds, 1);
+            formatter = dateGetter(DateType.FractionalSeconds, 1);
             break;
         case 'SS':
-            formatter = dateGetter(DateType.Milliseconds, 2);
+            formatter = dateGetter(DateType.FractionalSeconds, 2);
             break;
-        // = millisecond
         case 'SSS':
-            formatter = dateGetter(DateType.Milliseconds, 3);
+            formatter = dateGetter(DateType.FractionalSeconds, 3);
             break;
         // Timezone ISO8601 short format (-0430)
         case 'Z':
@@ -6286,7 +6304,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.0-beta.3+79.sha-8057664');
+const VERSION = new Version('6.1.0-beta.3+80.sha-a527c69');
 
 /**
  * @fileoverview added by tsickle
