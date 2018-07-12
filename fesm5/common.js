@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.0-beta.3+87.sha-05e3e4d
+ * @license Angular v6.1.0-beta.3+94.sha-328971f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
-import { __values, __read, __decorate, __extends, __param, __metadata, __assign } from 'tslib';
+import { __decorate, __read, __values, __extends, __param, __metadata, __assign } from 'tslib';
 
 /**
  * @license
@@ -1349,20 +1349,9 @@ function padNumber(num, digits, minusSign, trim, negWrap) {
     }
     return neg + strNum;
 }
-/**
- * Trim a fractional part to `digits` number of digits.
- * Right pads with "0" to fit the requested number of digits if needed.
- *
- * @param num The fractional part value
- * @param digits The width of the output
- */
-function trimRPadFractional(num, digits) {
-    var strNum = String(num);
-    // Add padding at the end
-    while (strNum.length < digits) {
-        strNum = strNum + 0;
-    }
-    return strNum.substr(0, digits);
+function formatFractionalSeconds(milliseconds, digits) {
+    var strMs = padNumber(milliseconds, 3);
+    return strMs.substr(0, digits);
 }
 /**
  * Returns a date formatter that transforms a date into its locale digit representation
@@ -1382,7 +1371,7 @@ function dateGetter(name, size, offset, trim, negWrap) {
             }
         }
         else if (name === DateType.FractionalSeconds) {
-            return trimRPadFractional(part, size);
+            return formatFractionalSeconds(part, size);
         }
         var localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
         return padNumber(part, size, localeMinus, trim, negWrap);
@@ -5579,7 +5568,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.1.0-beta.3+87.sha-05e3e4d');
+var VERSION = new Version('6.1.0-beta.3+94.sha-328971f');
 
 /**
  * @license
