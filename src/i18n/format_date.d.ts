@@ -16,8 +16,6 @@ export declare const ISO8601_DATE_REGEX: RegExp;
  *   If not specified, host system settings are used.
  *
  * See {@link DatePipe} for more details.
- *
- *
  */
 export declare function formatDate(value: string | number | Date, format: string, locale: string, timezone?: string): string;
 /**

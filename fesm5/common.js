@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.0.7+21.sha-0437598
+ * @license Angular v6.0.8+4.sha-48415ed
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, Host, Inject, Injectable, InjectionToken, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, Optional, Pipe, Renderer2, TemplateRef, Version, ViewContainerRef, WrappedValue, isDevMode, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
-import { __assign, __extends, __read, __values } from 'tslib';
+import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version } from '@angular/core';
+import { __read, __extends, __values, __assign } from 'tslib';
 
 /**
  * @license
@@ -1204,7 +1204,7 @@ var DateType;
     DateType[DateType["Hours"] = 3] = "Hours";
     DateType[DateType["Minutes"] = 4] = "Minutes";
     DateType[DateType["Seconds"] = 5] = "Seconds";
-    DateType[DateType["Milliseconds"] = 6] = "Milliseconds";
+    DateType[DateType["FractionalSeconds"] = 6] = "FractionalSeconds";
     DateType[DateType["Day"] = 7] = "Day";
 })(DateType || (DateType = {}));
 var TranslationType;
@@ -1231,8 +1231,6 @@ var TranslationType;
  *   If not specified, host system settings are used.
  *
  * See {@link DatePipe} for more details.
- *
- *
  */
 function formatDate(value, format, locale, timezone) {
     var date = toDate(value);
@@ -1358,6 +1356,10 @@ function padNumber(num, digits, minusSign, trim, negWrap) {
     }
     return neg + strNum;
 }
+function formatFractionalSeconds(milliseconds, digits) {
+    var strMs = padNumber(milliseconds, 3);
+    return strMs.substr(0, digits);
+}
 /**
  * Returns a date formatter that transforms a date into its locale digit representation
  */
@@ -1366,18 +1368,24 @@ function dateGetter(name, size, offset, trim, negWrap) {
     if (trim === void 0) { trim = false; }
     if (negWrap === void 0) { negWrap = false; }
     return function (date, locale) {
-        var part = getDatePart(name, date, size);
+        var part = getDatePart(name, date);
         if (offset > 0 || part > -offset) {
             part += offset;
         }
-        if (name === DateType.Hours && part === 0 && offset === -12) {
-            part = 12;
+        if (name === DateType.Hours) {
+            if (part === 0 && offset === -12) {
+                part = 12;
+            }
         }
-        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
+        else if (name === DateType.FractionalSeconds) {
+            return formatFractionalSeconds(part, size);
+        }
+        var localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        return padNumber(part, size, localeMinus, trim, negWrap);
     };
 }
-function getDatePart(name, date, size) {
-    switch (name) {
+function getDatePart(part, date) {
+    switch (part) {
         case DateType.FullYear:
             return date.getFullYear();
         case DateType.Month:
@@ -1390,13 +1398,12 @@ function getDatePart(name, date, size) {
             return date.getMinutes();
         case DateType.Seconds:
             return date.getSeconds();
-        case DateType.Milliseconds:
-            var div = size === 1 ? 100 : (size === 2 ? 10 : 1);
-            return Math.round(date.getMilliseconds() / div);
+        case DateType.FractionalSeconds:
+            return date.getMilliseconds();
         case DateType.Day:
             return date.getDay();
         default:
-            throw new Error("Unknown DateType value \"" + name + "\".");
+            throw new Error("Unknown DateType value \"" + part + "\".");
     }
 }
 /**
@@ -1689,16 +1696,15 @@ function getDateFormatter(format) {
         case 'ss':
             formatter = dateGetter(DateType.Seconds, 2);
             break;
-        // Fractional second padded (0-9)
+        // Fractional second
         case 'S':
-            formatter = dateGetter(DateType.Milliseconds, 1);
+            formatter = dateGetter(DateType.FractionalSeconds, 1);
             break;
         case 'SS':
-            formatter = dateGetter(DateType.Milliseconds, 2);
+            formatter = dateGetter(DateType.FractionalSeconds, 2);
             break;
-        // = millisecond
         case 'SSS':
-            formatter = dateGetter(DateType.Milliseconds, 3);
+            formatter = dateGetter(DateType.FractionalSeconds, 3);
             break;
         // Timezone ISO8601 short format (-0430)
         case 'Z':
@@ -3947,13 +3953,6 @@ function invalidPipeArgumentError(type, value) {
     return Error("InvalidPipeArgument: '" + value + "' for pipe '" + ɵstringify(type) + "'");
 }
 
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
@@ -5334,11 +5333,6 @@ var SlicePipe = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * This module provides a set of common Pipes.
- */
-/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
 var COMMON_PIPES = [
@@ -5467,12 +5461,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-var VERSION = new Version('6.0.7+21.sha-0437598');
+var VERSION = new Version('6.0.8+4.sha-48415ed');
 
 /**
  * @license
@@ -5480,11 +5469,6 @@ var VERSION = new Version('6.0.7+21.sha-0437598');
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
  */
 
 /**
@@ -5494,12 +5478,6 @@ var VERSION = new Version('6.0.7+21.sha-0437598');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * Entry point for all public APIs of this package.
- */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
@@ -5509,10 +5487,6 @@ var VERSION = new Version('6.0.7+21.sha-0437598');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// This file is not used to build this module. It is only used during editing
-// by the TypeScript language service and during build for verification. `ngc`
-// replaces this file with production index.ts when it rewrites private symbol
-// names.
 
 /**
  * Generated bundle index. Do not edit.
