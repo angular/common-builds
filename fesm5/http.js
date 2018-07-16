@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.0-beta.3+129.sha-ae04929
+ * @license Angular v6.1.0-beta.3+130.sha-ee37256
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __extends, __spread, __read } from 'tslib';
-import { InjectionToken, Injector, defineInjectable, inject, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
+import { __spread, __read, __extends } from 'tslib';
+import { InjectionToken, Injector, defineInjectable, inject, PLATFORM_ID, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
