@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+86.sha-6b3f5dd
+ * @license Angular v6.1.0-beta.3+129.sha-acdb672
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1173,7 +1173,7 @@ var DateType;
     DateType[DateType["Hours"] = 3] = "Hours";
     DateType[DateType["Minutes"] = 4] = "Minutes";
     DateType[DateType["Seconds"] = 5] = "Seconds";
-    DateType[DateType["Milliseconds"] = 6] = "Milliseconds";
+    DateType[DateType["FractionalSeconds"] = 6] = "FractionalSeconds";
     DateType[DateType["Day"] = 7] = "Day";
 })(DateType || (DateType = {}));
 var TranslationType;
@@ -1200,8 +1200,6 @@ var TranslationType;
  *   If not specified, host system settings are used.
  *
  * See {@link DatePipe} for more details.
- *
- *
  */
 function formatDate(value, format, locale, timezone) {
     let date = toDate(value);
@@ -1326,23 +1324,33 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
     }
     return neg + strNum;
 }
+function formatFractionalSeconds(milliseconds, digits) {
+    const strMs = padNumber(milliseconds, 3);
+    return strMs.substr(0, digits);
+}
 /**
  * Returns a date formatter that transforms a date into its locale digit representation
  */
 function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
     return function (date, locale) {
-        let part = getDatePart(name, date, size);
+        let part = getDatePart(name, date);
         if (offset > 0 || part > -offset) {
             part += offset;
         }
-        if (name === DateType.Hours && part === 0 && offset === -12) {
-            part = 12;
+        if (name === DateType.Hours) {
+            if (part === 0 && offset === -12) {
+                part = 12;
+            }
         }
-        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
+        else if (name === DateType.FractionalSeconds) {
+            return formatFractionalSeconds(part, size);
+        }
+        const localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        return padNumber(part, size, localeMinus, trim, negWrap);
     };
 }
-function getDatePart(name, date, size) {
-    switch (name) {
+function getDatePart(part, date) {
+    switch (part) {
         case DateType.FullYear:
             return date.getFullYear();
         case DateType.Month:
@@ -1355,13 +1363,12 @@ function getDatePart(name, date, size) {
             return date.getMinutes();
         case DateType.Seconds:
             return date.getSeconds();
-        case DateType.Milliseconds:
-            const div = size === 1 ? 100 : (size === 2 ? 10 : 1);
-            return Math.round(date.getMilliseconds() / div);
+        case DateType.FractionalSeconds:
+            return date.getMilliseconds();
         case DateType.Day:
             return date.getDay();
         default:
-            throw new Error(`Unknown DateType value "${name}".`);
+            throw new Error(`Unknown DateType value "${part}".`);
     }
 }
 /**
@@ -1651,16 +1658,15 @@ function getDateFormatter(format) {
         case 'ss':
             formatter = dateGetter(DateType.Seconds, 2);
             break;
-        // Fractional second padded (0-9)
+        // Fractional second
         case 'S':
-            formatter = dateGetter(DateType.Milliseconds, 1);
+            formatter = dateGetter(DateType.FractionalSeconds, 1);
             break;
         case 'SS':
-            formatter = dateGetter(DateType.Milliseconds, 2);
+            formatter = dateGetter(DateType.FractionalSeconds, 2);
             break;
-        // = millisecond
         case 'SSS':
-            formatter = dateGetter(DateType.Milliseconds, 3);
+            formatter = dateGetter(DateType.FractionalSeconds, 3);
             break;
         // Timezone ISO8601 short format (-0430)
         case 'Z':
@@ -5376,7 +5382,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.1.0-beta.3+86.sha-6b3f5dd');
+const VERSION = new Version('6.1.0-beta.3+129.sha-acdb672');
 
 /**
  * @license
