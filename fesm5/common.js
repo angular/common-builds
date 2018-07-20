@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-rc.3+1.sha-2aab1c9
+ * @license Angular v6.1.0-rc.3+3.sha-270176b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5296,6 +5296,9 @@ var CurrencyPipe = /** @class */ (function () {
      * Default is `0`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
      * Default is `3`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -5562,7 +5565,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.1.0-rc.3+1.sha-2aab1c9');
+var VERSION = new Version('6.1.0-rc.3+3.sha-270176b');
 
 /**
  * @license
