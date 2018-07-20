@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.0.9+16.sha-422de27
+ * @license Angular v6.0.9+22.sha-740ab7c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version } from '@angular/core';
-import { __extends, __read, __values, __assign } from 'tslib';
+import { __read, __extends, __values, __assign } from 'tslib';
 
 /**
  * @license
@@ -5196,6 +5196,9 @@ var CurrencyPipe = /** @class */ (function () {
      * Default is `0`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
      * Default is `3`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -5461,7 +5464,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.0.9+16.sha-422de27');
+var VERSION = new Version('6.0.9+22.sha-740ab7c');
 
 /**
  * @license
