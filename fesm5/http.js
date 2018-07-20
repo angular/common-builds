@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.0-rc.3+17.sha-bb58138
+ * @license Angular v6.1.0-rc.3+41.sha-8620373
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
-import { InjectionToken, Injector, defineInjectable, inject, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
+import { InjectionToken, defineInjectable, inject, INJECTOR, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -1699,7 +1699,7 @@ var HttpInterceptingHandler = /** @class */ (function () {
         }
         return this.chain.handle(req);
     };
-    HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(inject(HttpBackend), inject(Injector)); }, providedIn: null });
+    HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(inject(HttpBackend), inject(INJECTOR)); }, providedIn: null });
     return HttpInterceptingHandler;
 }());
 /**
@@ -1789,7 +1789,12 @@ var HttpClientModule = /** @class */ (function () {
             { provide: HttpBackend, useExisting: HttpXhrBackend },
             BrowserXhr,
             { provide: XhrFactory, useExisting: BrowserXhr },
-        ], imports: [HttpClientXsrfModule] });
+        ], imports: [[
+                HttpClientXsrfModule.withOptions({
+                    cookieName: 'XSRF-TOKEN',
+                    headerName: 'X-XSRF-TOKEN',
+                }),
+            ]] });
     return HttpClientModule;
 }());
 /**

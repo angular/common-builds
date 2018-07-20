@@ -97,5 +97,5 @@ export declare class Location {
      * line as `/` characters after any of these should not be replaced.
      */
     static stripTrailingSlash(url: string): string;
-    static ngInjectableDef: i0.InjectableDef<Location>;
+    static ngInjectableDef: i0.ɵInjectableDef<Location>;
 }
