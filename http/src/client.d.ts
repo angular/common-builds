@@ -2106,5 +2106,5 @@ export declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
-    static ngInjectableDef: i0.InjectableDef<HttpClient>;
+    static ngInjectableDef: i0.ɵInjectableDef<HttpClient>;
 }

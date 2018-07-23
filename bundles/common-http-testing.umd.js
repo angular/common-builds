@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+142.sha-082c994
+ * @license Angular v6.1.0-rc.3+70.sha-8a7b0e9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
     (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.rxjs));
-}(this, (function (exports,i1,i0,rxjs) { 'use strict';
+}(this, (function (exports,http,i0,rxjs) { 'use strict';
 
     /**
      * @license
@@ -73,7 +73,7 @@
                 throw new Error("Cannot flush a cancelled request.");
             }
             var url = this.request.urlWithParams;
-            var headers = (opts.headers instanceof i1.HttpHeaders) ? opts.headers : new i1.HttpHeaders(opts.headers);
+            var headers = (opts.headers instanceof http.HttpHeaders) ? opts.headers : new http.HttpHeaders(opts.headers);
             body = _maybeConvertBody(this.request.responseType, body);
             var statusText = opts.statusText;
             var status = opts.status !== undefined ? opts.status : 200;
@@ -90,11 +90,11 @@
                 throw new Error('statusText is required when setting a custom status.');
             }
             if (status >= 200 && status < 300) {
-                this.observer.next(new i1.HttpResponse({ body: body, headers: headers, status: status, statusText: statusText, url: url }));
+                this.observer.next(new http.HttpResponse({ body: body, headers: headers, status: status, statusText: statusText, url: url }));
                 this.observer.complete();
             }
             else {
-                this.observer.error(new i1.HttpErrorResponse({ error: body, headers: headers, status: status, statusText: statusText, url: url }));
+                this.observer.error(new http.HttpErrorResponse({ error: body, headers: headers, status: status, statusText: statusText, url: url }));
             }
         };
         /**
@@ -108,8 +108,8 @@
             if (opts.status && opts.status >= 200 && opts.status < 300) {
                 throw new Error("error() called with a successful status.");
             }
-            var headers = (opts.headers instanceof i1.HttpHeaders) ? opts.headers : new i1.HttpHeaders(opts.headers);
-            this.observer.error(new i1.HttpErrorResponse({
+            var headers = (opts.headers instanceof http.HttpHeaders) ? opts.headers : new http.HttpHeaders(opts.headers);
+            this.observer.error(new http.HttpErrorResponse({
                 error: error,
                 headers: headers,
                 status: opts.status || 0,
@@ -235,7 +235,7 @@
             return new rxjs.Observable(function (observer) {
                 var testReq = new TestRequest(req, observer);
                 _this.open.push(testReq);
-                observer.next({ type: i1.HttpEventType.Sent });
+                observer.next({ type: http.HttpEventType.Sent });
                 return function () { testReq._cancelled = true; };
             });
         };
@@ -347,12 +347,14 @@
     var HttpClientTestingModule = /** @class */ (function () {
         function HttpClientTestingModule() {
         }
-        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule, bootstrap: [], declarations: [], imports: [i1.HttpClientModule], exports: [] });
+        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule, bootstrap: [], declarations: [], imports: [http.HttpClientModule], exports: [] });
         HttpClientTestingModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientTestingModule_Factory() { return new HttpClientTestingModule(); }, providers: [
                 HttpClientTestingBackend,
-                { provide: i1.HttpBackend, useExisting: HttpClientTestingBackend },
+                { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },
                 { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-            ], imports: [i1.HttpClientModule] });
+            ], imports: [[
+                    http.HttpClientModule,
+                ]] });
         return HttpClientTestingModule;
     }());
 

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+142.sha-082c994
+ * @license Angular v6.1.0-rc.3+70.sha-8a7b0e9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1742,7 +1742,7 @@
             }
             return this.chain.handle(req);
         };
-        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(i0.inject(HttpBackend), i0.inject(i0.Injector)); }, providedIn: null });
+        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(i0.inject(HttpBackend), i0.inject(i0.INJECTOR)); }, providedIn: null });
         return HttpInterceptingHandler;
     }());
     /**
@@ -1832,7 +1832,12 @@
                 { provide: HttpBackend, useExisting: HttpXhrBackend },
                 BrowserXhr,
                 { provide: XhrFactory, useExisting: BrowserXhr },
-            ], imports: [HttpClientXsrfModule] });
+            ], imports: [[
+                    HttpClientXsrfModule.withOptions({
+                        cookieName: 'XSRF-TOKEN',
+                        headerName: 'X-XSRF-TOKEN',
+                    }),
+                ]] });
         return HttpClientModule;
     }());
     /**

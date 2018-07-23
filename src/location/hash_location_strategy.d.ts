@@ -36,5 +36,5 @@ export declare class HashLocationStrategy extends LocationStrategy {
     replaceState(state: any, title: string, path: string, queryParams: string): void;
     forward(): void;
     back(): void;
-    static ngInjectableDef: i0.InjectableDef<HashLocationStrategy>;
+    static ngInjectableDef: i0.ɵInjectableDef<HashLocationStrategy>;
 }

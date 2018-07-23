@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.0-beta.3+142.sha-082c994
+ * @license Angular v6.1.0-rc.3+70.sha-8a7b0e9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injector, defineInjectable, inject, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
+import { InjectionToken, defineInjectable, inject, INJECTOR, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -1629,7 +1629,7 @@ class HttpInterceptingHandler {
         return this.chain.handle(req);
     }
 }
-HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(inject(HttpBackend), inject(Injector)); }, providedIn: null });
+HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(inject(HttpBackend), inject(INJECTOR)); }, providedIn: null });
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
@@ -1712,7 +1712,12 @@ HttpClientModule.ngInjectorDef = defineInjector({ factory: function HttpClientMo
         { provide: HttpBackend, useExisting: HttpXhrBackend },
         BrowserXhr,
         { provide: XhrFactory, useExisting: BrowserXhr },
-    ], imports: [HttpClientXsrfModule] });
+    ], imports: [[
+            HttpClientXsrfModule.withOptions({
+                cookieName: 'XSRF-TOKEN',
+                headerName: 'X-XSRF-TOKEN',
+            }),
+        ]] });
 /**
  * An NgModule that enables JSONP support in `HttpClient`.
  *

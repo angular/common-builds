@@ -103,6 +103,6 @@ export declare class NgForOf<T> implements DoCheck {
     ngDoCheck(): void;
     private _applyChanges;
     private _perViewChange;
-    static ngDirectiveDef: i0.ɵDirectiveDef<NgForOf, '[ngFor][ngForOf]'>;
+    static ngDirectiveDef: i0.ɵDirectiveDef<NgForOf<any>, '[ngFor][ngForOf]'>;
 }
 export declare function getTypeNameForDebugging(type: any): string;
