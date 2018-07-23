@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0-beta.3+122.sha-d76531d
+ * @license Angular v6.1.0-rc.3+44.sha-6b859da
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2868,7 +2868,7 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory() { return new NgComponentOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" } });
+        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory() { return new NgComponentOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵNgOnChangesFeature] });
         return NgComponentOutlet;
     }());
 
@@ -3350,7 +3350,7 @@
                 finally { if (e_2) throw e_2.error; }
             }
         };
-        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory() { return new NgTemplateOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" } });
+        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory() { return new NgTemplateOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵNgOnChangesFeature] });
         return NgTemplateOutlet;
     }());
 
@@ -3811,7 +3811,7 @@
                 this._ref.markForCheck();
             }
         };
-        AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory() { return new AsyncPipe(i0.ɵdirectiveInject(i0.ChangeDetectorRef)); }, pure: false });
+        AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory() { return new AsyncPipe(i0.ɵinjectChangeDetectorRef()); }, pure: false });
         return AsyncPipe;
     }());
 
@@ -4171,6 +4171,9 @@
          * Default is `0`.
          *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
          * Default is `3`.
+         * If not provided, the number will be formatted with the proper amount of digits,
+         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
          * @param locale A locale code for the locale format rules to use.
          * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
          * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -5004,6 +5007,23 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A collection of Angular directives that are likely to be used in each and every Angular
+     * application.
+     */
+    var COMMON_DIRECTIVES = [
+        NgClass,
+        NgComponentOutlet,
+        NgForOf,
+        NgIf,
+        NgTemplateOutlet,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgPlural,
+        NgPluralCase,
+    ];
 
     /**
      * @license
@@ -5012,6 +5032,12 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A collection of deprecated i18n pipes that require intl api
+     *
+     * @deprecated from v5
+     */
+    var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
 
     /**
      * @license
@@ -5020,6 +5046,24 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A collection of Angular pipes that are likely to be used in each and every application.
+     */
+    var COMMON_PIPES = [
+        AsyncPipe,
+        UpperCasePipe,
+        LowerCasePipe,
+        JsonPipe,
+        SlicePipe,
+        DecimalPipe,
+        PercentPipe,
+        TitleCasePipe,
+        CurrencyPipe,
+        DatePipe,
+        I18nPluralPipe,
+        I18nSelectPipe,
+        KeyValuePipe,
+    ];
 
     // Note: This does not contain the location providers,
     // as they need some platform specific implementations to work.
@@ -5034,7 +5078,7 @@
         CommonModule.ngModuleDef = i0.ɵdefineNgModule({ type: CommonModule, bootstrap: [], declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], imports: [], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] });
         CommonModule.ngInjectorDef = i0.defineInjector({ factory: function CommonModule_Factory() { return new CommonModule(); }, providers: [
                 { provide: NgLocalization, useClass: NgLocaleLocalization },
-            ], imports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] });
+            ], imports: [[COMMON_DIRECTIVES, COMMON_PIPES]] });
         return CommonModule;
     }());
     /**
@@ -5046,7 +5090,7 @@
         function DeprecatedI18NPipesModule() {
         }
         DeprecatedI18NPipesModule.ngModuleDef = i0.ɵdefineNgModule({ type: DeprecatedI18NPipesModule, bootstrap: [], declarations: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe], imports: [], exports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
-        DeprecatedI18NPipesModule.ngInjectorDef = i0.defineInjector({ factory: function DeprecatedI18NPipesModule_Factory() { return new DeprecatedI18NPipesModule(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }], imports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
+        DeprecatedI18NPipesModule.ngInjectorDef = i0.defineInjector({ factory: function DeprecatedI18NPipesModule_Factory() { return new DeprecatedI18NPipesModule(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }], imports: [[COMMON_DEPRECATED_I18N_PIPES]] });
         return DeprecatedI18NPipesModule;
     }());
 
@@ -5114,7 +5158,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new i0.Version('6.1.0-beta.3+122.sha-d76531d');
+    var VERSION = new i0.Version('6.1.0-rc.3+44.sha-6b859da');
 
     /**
      * @license

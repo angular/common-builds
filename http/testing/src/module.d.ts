@@ -1,5 +1,4 @@
 import * as i0 from '@angular/core';
-import * as i1 from '@angular/common/http';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -15,6 +14,6 @@ import * as i1 from '@angular/common/http';
  *
  */
 export declare class HttpClientTestingModule {
-    static ngModuleDef: i0.ɵNgModuleDef<HttpClientTestingModule, [], [i1.HttpClientModule], []>;
+    static ngModuleDef: i0.ɵNgModuleDef<HttpClientTestingModule, never, [typeof HttpClientModule], never>;
     static ngInjectorDef: i0.ɵInjectorDef<HttpClientTestingModule>;
 }

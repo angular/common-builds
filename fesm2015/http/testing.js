@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.0-beta.3+122.sha-d76531d
+ * @license Angular v6.1.0-rc.3+44.sha-6b859da
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
 import { ɵdefineNgModule, defineInjector, defineInjectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -334,7 +334,9 @@ HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpC
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-    ], imports: [HttpClientModule] });
+    ], imports: [[
+            HttpClientModule,
+        ]] });
 
 /**
  * @license

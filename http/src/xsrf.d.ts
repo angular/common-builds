@@ -38,7 +38,7 @@ export declare class HttpXsrfCookieExtractor implements HttpXsrfTokenExtractor {
     private lastToken;
     constructor(doc: any, platform: string, cookieName: string);
     getToken(): string | null;
-    static ngInjectableDef: i0.InjectableDef<HttpXsrfCookieExtractor>;
+    static ngInjectableDef: i0.ɵInjectableDef<HttpXsrfCookieExtractor>;
 }
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
@@ -48,5 +48,5 @@ export declare class HttpXsrfInterceptor implements HttpInterceptor {
     private headerName;
     constructor(tokenService: HttpXsrfTokenExtractor, headerName: string);
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
-    static ngInjectableDef: i0.InjectableDef<HttpXsrfInterceptor>;
+    static ngInjectableDef: i0.ɵInjectableDef<HttpXsrfInterceptor>;
 }

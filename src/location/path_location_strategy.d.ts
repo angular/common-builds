@@ -45,5 +45,5 @@ export declare class PathLocationStrategy extends LocationStrategy {
     replaceState(state: any, title: string, url: string, queryParams: string): void;
     forward(): void;
     back(): void;
-    static ngInjectableDef: i0.InjectableDef<PathLocationStrategy>;
+    static ngInjectableDef: i0.ɵInjectableDef<PathLocationStrategy>;
 }
