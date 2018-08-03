@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.1
+ * @license Angular v6.1.1+2.sha-3f43dbb
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -302,25 +302,25 @@ class HttpHeaders {
  */
 class HttpUrlEncodingCodec {
     /**
-     * @param {?} k
+     * @param {?} key
      * @return {?}
      */
-    encodeKey(k) { return standardEncoding(k); }
+    encodeKey(key) { return standardEncoding(key); }
     /**
-     * @param {?} v
+     * @param {?} value
      * @return {?}
      */
-    encodeValue(v) { return standardEncoding(v); }
+    encodeValue(value) { return standardEncoding(value); }
     /**
-     * @param {?} k
+     * @param {?} key
      * @return {?}
      */
-    decodeKey(k) { return decodeURIComponent(k); }
+    decodeKey(key) { return decodeURIComponent(key); }
     /**
-     * @param {?} v
+     * @param {?} value
      * @return {?}
      */
-    decodeValue(v) { return decodeURIComponent(v); }
+    decodeValue(value) { return decodeURIComponent(value); }
 }
 /**
  * @param {?} rawParams

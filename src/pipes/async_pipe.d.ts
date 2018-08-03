@@ -18,8 +18,9 @@ import { Observable } from 'rxjs';
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
  * potential memory leaks.
  *
+ * @usageNotes
  *
- * ## Examples
+ * ### Examples
  *
  * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
  * promise.
@@ -30,7 +31,6 @@ import { Observable } from 'rxjs';
  * to the view. The Observable continuously updates the view with the current time.
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
- *
  *
  */
 export declare class AsyncPipe implements OnDestroy, PipeTransform {
