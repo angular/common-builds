@@ -13,7 +13,9 @@ import { NgLocalization } from '../i18n/localization';
  *
  * Maps a value to a string that pluralizes the value according to locale rules.
  *
- *  ## Example
+ * @usageNotes
+ *
+ * ### Example
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
