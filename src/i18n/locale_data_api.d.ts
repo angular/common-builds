@@ -1,4 +1,11 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * The different format styles that can be used to represent numbers.
  * Used by the function {@link getLocaleNumberFormat}.
  *
@@ -8,7 +15,7 @@ export declare enum NumberFormatStyle {
     Decimal = 0,
     Percent = 1,
     Currency = 2,
-    Scientific = 3,
+    Scientific = 3
 }
 /** @experimental */
 export declare enum Plural {
@@ -17,7 +24,7 @@ export declare enum Plural {
     Two = 2,
     Few = 3,
     Many = 4,
-    Other = 5,
+    Other = 5
 }
 /**
  * Some languages use two different forms of strings (standalone and format) depending on the
@@ -30,7 +37,7 @@ export declare enum Plural {
  */
 export declare enum FormStyle {
     Format = 0,
-    Standalone = 1,
+    Standalone = 1
 }
 /**
  * Multiple widths are available for translations: narrow (1 character), abbreviated (3 characters),
@@ -48,7 +55,7 @@ export declare enum TranslationWidth {
     Narrow = 0,
     Abbreviated = 1,
     Wide = 2,
-    Short = 3,
+    Short = 3
 }
 /**
  * Multiple widths are available for formats: short (minimal amount of data), medium (small amount
@@ -67,7 +74,7 @@ export declare enum FormatWidth {
     Short = 0,
     Medium = 1,
     Long = 2,
-    Full = 3,
+    Full = 3
 }
 /**
  * Number symbol that can be used to replace placeholders in number patterns.
@@ -105,7 +112,7 @@ export declare enum NumberSymbol {
     NaN = 10,
     TimeSeparator = 11,
     CurrencyDecimal = 12,
-    CurrencyGroup = 13,
+    CurrencyGroup = 13
 }
 /**
  * The value for each day of the week, based on the en-US locale
@@ -119,7 +126,7 @@ export declare enum WeekDay {
     Wednesday = 3,
     Thursday = 4,
     Friday = 5,
-    Saturday = 6,
+    Saturday = 6
 }
 /**
  * The locale id for the chosen locale (e.g `en-GB`).
@@ -311,7 +318,7 @@ export declare function getLocalePluralCase(locale: string): (value: number) => 
  * You should fallback to AM/PM when there are no rules available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.
@@ -325,7 +332,7 @@ export declare function getLocaleExtraDayPeriodRules(locale: string): (Time | [T
  * You should fallback to AM/PM when there are no day periods available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * @experimental i18n support is experimental.

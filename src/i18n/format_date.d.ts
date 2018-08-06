@@ -1,8 +1,16 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 export declare const ISO8601_DATE_REGEX: RegExp;
 /**
  * @ngModule CommonModule
- * @whatItDoes Formats a date according to locale rules.
  * @description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
@@ -15,8 +23,6 @@ export declare const ISO8601_DATE_REGEX: RegExp;
  *   If not specified, host system settings are used.
  *
  * See {@link DatePipe} for more details.
- *
- * @stable
  */
 export declare function formatDate(value: string | number | Date, format: string, locale: string, timezone?: string): string;
 /**

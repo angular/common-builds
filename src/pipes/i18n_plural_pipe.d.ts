@@ -9,18 +9,13 @@ import { PipeTransform } from '@angular/core';
 import { NgLocalization } from '../i18n/localization';
 /**
  * @ngModule CommonModule
- * @whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
- * @howToUse `expression | i18nPlural:mapping[:locale]`
  * @description
  *
- *  Where:
- *  - `expression` is a number.
- *  - `mapping` is an object that mimics the ICU format, see
- *    http://userguide.icu-project.org/formatparse/messages
- *  - `locale` is a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
- * default)
+ * Maps a value to a string that pluralizes the value according to locale rules.
  *
- *  ## Example
+ * @usageNotes
+ *
+ * ### Example
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
@@ -29,6 +24,13 @@ import { NgLocalization } from '../i18n/localization';
 export declare class I18nPluralPipe implements PipeTransform {
     private _localization;
     constructor(_localization: NgLocalization);
+    /**
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
     transform(value: number, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;

@@ -9,9 +9,7 @@ import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Update an HTML element styles.
- *
- * @howToUse
+ * @usageNotes
  * ```
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  *
@@ -22,11 +20,13 @@ import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
  *
  * @description
  *
+ * Update an HTML element styles.
+ *
  * The styles are updated according to the value of the expression evaluation:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * @stable
+ *
  */
 export declare class NgStyle implements DoCheck {
     private _differs;
@@ -39,6 +39,6 @@ export declare class NgStyle implements DoCheck {
         [key: string]: string;
     };
     ngDoCheck(): void;
-    private _applyChanges(changes);
-    private _setStyle(nameAndUnit, value);
+    private _applyChanges;
+    private _setStyle;
 }

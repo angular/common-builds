@@ -9,26 +9,25 @@ import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angula
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Inserts an embedded view from a prepared `TemplateRef`
- *
- * @howToUse
- * ```
- * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
- * ```
- *
  * @description
+ *
+ * Inserts an embedded view from a prepared `TemplateRef`.
  *
  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set its value as default.
+ * @usageNotes
+ * ```
+ * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+ * ```
  *
- * ## Example
+ * Using the key `$implicit` in the context object will set its value as default.
+ *
+ * ### Example
  *
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * @stable
  */
 export declare class NgTemplateOutlet implements OnChanges {
     private _viewContainerRef;
@@ -47,7 +46,7 @@ export declare class NgTemplateOutlet implements OnChanges {
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
      */
-    private _shouldRecreateView(changes);
-    private _hasContextShapeChanged(ctxChange);
-    private _updateExistingContext(ctx);
+    private _shouldRecreateView;
+    private _hasContextShapeChanged;
+    private _updateExistingContext;
 }

@@ -18,10 +18,7 @@ export declare class SwitchView {
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
- *             expression.
- *
- * @howToUse
+ * @usageNotes
  * ```
  *     <container-element [ngSwitch]="switch_expression">
  *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -36,6 +33,8 @@ export declare class SwitchView {
  *     </container-element>
  * ```
  * @description
+ *
+ * Adds / removes DOM sub-trees when the nest match expressions matches the switch expression.
  *
  * `NgSwitch` stamps out nested views when their match expression value matches the value of the
  * switch expression.
@@ -54,7 +53,7 @@ export declare class SwitchView {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- * @stable
+ *
  */
 export declare class NgSwitch {
     private _defaultViews;
@@ -64,22 +63,22 @@ export declare class NgSwitch {
     private _lastCasesMatched;
     private _ngSwitch;
     ngSwitch: any;
-    private _updateDefaultCases(useDefault);
+    private _updateDefaultCases;
 }
 /**
  * @ngModule CommonModule
  *
- * @whatItDoes Creates a view that will be added/removed from the parent {@link NgSwitch} when the
- *             given expression evaluate to respectively the same/different value as the switch
- *             expression.
- *
- * @howToUse
+ * @usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
  * </container-element>
  *```
  * @description
+ *
+ * Creates a view that will be added/removed from the parent {@link NgSwitch} when the
+ * given expression evaluate to respectively the same/different value as the switch
+ * expression.
  *
  * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
  * expression.
@@ -88,7 +87,7 @@ export declare class NgSwitch {
  *
  * See {@link NgSwitch} for more details and example.
  *
- * @stable
+ *
  */
 export declare class NgSwitchCase implements DoCheck {
     private ngSwitch;
@@ -99,11 +98,7 @@ export declare class NgSwitchCase implements DoCheck {
 }
 /**
  * @ngModule CommonModule
- * @whatItDoes Creates a view that is added to the parent {@link NgSwitch} when no case expressions
- * match the
- *             switch expression.
- *
- * @howToUse
+ * @usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -113,12 +108,15 @@ export declare class NgSwitchCase implements DoCheck {
  *
  * @description
  *
+ * Creates a view that is added to the parent {@link NgSwitch} when no case expressions
+ * match the switch expression.
+ *
  * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
  * expression.
  *
  * See {@link NgSwitch} for more details and example.
  *
- * @stable
+ *
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);

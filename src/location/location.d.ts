@@ -1,4 +1,11 @@
-import { ISubscription } from 'rxjs/Subscription';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { SubscriptionLike } from 'rxjs';
 import { LocationStrategy } from './location_strategy';
 /** @experimental */
 export interface PopStateEvent {
@@ -8,12 +15,16 @@ export interface PopStateEvent {
     url?: string;
 }
 /**
- * @whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * @description
+ *
+ * A service that applications can use to interact with a browser's URL.
+ *
  * Depending on which {@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
- * Note: it's better to use {@link Router#navigate} service to trigger route changes. Use
+ * @usageNotes
+ *
+ * It's better to use {@link Router#navigate} service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -25,8 +36,9 @@ export interface PopStateEvent {
  * - `/my/app/user/123/` **is not** normalized
  *
  * ### Example
+ *
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * @stable
+ *
  */
 export declare class Location {
     constructor(platformStrategy: LocationStrategy);
@@ -71,7 +83,7 @@ export declare class Location {
     /**
      * Subscribe to the platform's `popState` events.
      */
-    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): ISubscription;
+    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     /**
      * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
      * is.
@@ -83,7 +95,7 @@ export declare class Location {
     static joinWithSlash(start: string, end: string): string;
     /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      */
     static stripTrailingSlash(url: string): string;

@@ -1,11 +1,18 @@
-import { Observable } from 'rxjs/Observable';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { Observable } from 'rxjs';
 import { HttpBackend } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- * @stable
+ *
  */
 export declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
@@ -13,7 +20,7 @@ export declare abstract class XhrFactory {
 /**
  * A factory for @{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
  *
- * @stable
+ *
  */
 export declare class BrowserXhr implements XhrFactory {
     constructor();
@@ -23,7 +30,7 @@ export declare class BrowserXhr implements XhrFactory {
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- * @stable
+ *
  */
 export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;

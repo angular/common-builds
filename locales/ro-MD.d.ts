@@ -1,21 +1,30 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
-    'AUD': string[];
-    'BRL': string[];
-    'CAD': string[];
-    'CNY': string[];
-    'EUR': string[];
-    'GBP': string[];
-    'HKD': string[];
-    'ILS': string[];
-    'INR': string[];
-    'JPY': string[];
-    'KRW': string[];
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+declare function plural(n: number): number;
+declare const _default: (string | number | (string[] | undefined)[] | number[] | (string | undefined)[] | typeof plural | {
+    'AUD': (string | undefined)[];
+    'BRL': (string | undefined)[];
+    'CAD': (string | undefined)[];
+    'CNY': (string | undefined)[];
+    'EUR': (string | undefined)[];
+    'GBP': (string | undefined)[];
+    'HKD': (string | undefined)[];
+    'ILS': (string | undefined)[];
+    'INR': (string | undefined)[];
+    'JPY': (string | undefined)[];
+    'KRW': (string | undefined)[];
     'MDL': string[];
-    'MXN': string[];
-    'NZD': string[];
-    'TWD': string[];
-    'USD': string[];
-    'VND': string[];
-    'XCD': string[];
-})[];
+    'MXN': (string | undefined)[];
+    'NZD': (string | undefined)[];
+    'TWD': (string | undefined)[];
+    'USD': (string | undefined)[];
+    'VND': (string | undefined)[];
+    'XCD': (string | undefined)[];
+} | undefined)[];
 export default _default;

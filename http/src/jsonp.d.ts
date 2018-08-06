@@ -1,4 +1,11 @@
-import { Observable } from 'rxjs/Observable';
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { Observable } from 'rxjs';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
@@ -10,7 +17,7 @@ export declare const JSONP_ERR_WRONG_RESPONSE_TYPE = "JSONP requests must use Js
  *
  * In the browser, this should always be the `window` object.
  *
- * @stable
+ *
  */
 export declare abstract class JsonpCallbackContext {
     [key: string]: (data: any) => void;
@@ -19,7 +26,7 @@ export declare abstract class JsonpCallbackContext {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- * @stable
+ *
  */
 export declare class JsonpClientBackend implements HttpBackend {
     private callbackMap;
@@ -28,7 +35,7 @@ export declare class JsonpClientBackend implements HttpBackend {
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
      */
-    private nextCallback();
+    private nextCallback;
     /**
      * Process a JSONP request and return an event stream of the results.
      */
@@ -38,7 +45,7 @@ export declare class JsonpClientBackend implements HttpBackend {
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * @stable
+ *
  */
 export declare class JsonpInterceptor {
     private jsonp;

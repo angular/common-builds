@@ -1,34 +1,43 @@
-declare const _default: (string | number | string[] | string[][] | number[] | ((n: number) => number) | {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+declare function plural(n: number): number;
+declare const _default: (string | number | (string[] | undefined)[] | number[] | (string | undefined)[] | typeof plural | {
     'AUD': string[];
     'BEF': string[];
-    'BYN': string[];
+    'BYN': (string | undefined)[];
     'CAD': string[];
     'CYP': string[];
-    'EGP': string[];
+    'EGP': (string | undefined)[];
     'FRF': string[];
-    'GEL': any[];
+    'GEL': never[];
     'HKD': string[];
     'IEP': string[];
     'ILP': string[];
-    'ILS': string[];
-    'INR': string[];
+    'ILS': (string | undefined)[];
+    'INR': (string | undefined)[];
     'ITL': string[];
-    'KRW': string[];
-    'LBP': string[];
+    'KRW': (string | undefined)[];
+    'LBP': (string | undefined)[];
     'MTP': string[];
-    'MXN': string[];
+    'MXN': (string | undefined)[];
     'NZD': string[];
     'RHD': string[];
-    'RON': string[];
-    'RWF': string[];
+    'RON': (string | undefined)[];
+    'RWF': (string | undefined)[];
     'SGD': string[];
-    'TWD': string[];
+    'TWD': (string | undefined)[];
     'USD': string[];
-    'VND': string[];
+    'VND': (string | undefined)[];
     'WST': string[];
-    'XAF': any[];
-    'XCD': string[];
-    'XOF': any[];
-    'XPF': any[];
-})[];
+    'XAF': never[];
+    'XCD': (string | undefined)[];
+    'XOF': never[];
+    'XPF': never[];
+} | undefined)[];
 export default _default;
