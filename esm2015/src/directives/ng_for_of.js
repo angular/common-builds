@@ -178,7 +178,7 @@ export class NgForOf {
         view.context.$implicit = record.item;
     }
 }
-NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory() { return new NgForOf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
+NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory() { return new NgForOf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [i0.ɵPublicFeature] });
 class RecordViewTuple {
     constructor(record, view) {
         this.record = record;

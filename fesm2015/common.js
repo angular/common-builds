@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-beta.0+18.sha-26a15cc
+ * @license Angular v7.0.0-beta.0+22.sha-97b5cb2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, LOCALE_ID, Version, defineInjectable, inject, EventEmitter, ComponentFactoryResolver, NgModuleRef, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, isDevMode, WrappedValue, ɵisObservable, ɵisPromise, ɵdefineNgModule, defineInjector, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵdirectiveInject, ɵinjectElementRef, ɵinjectTemplateRef, ɵdefinePipe, ɵinjectChangeDetectorRef, ɵinjectAttribute } from '@angular/core';
+import { InjectionToken, LOCALE_ID, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, IterableDiffers, isDevMode, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, EventEmitter, WrappedValue, ɵisObservable, ɵisPromise, ɵdefineNgModule, defineInjector, ɵdefineDirective, ɵinjectViewContainerRef, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectTemplateRef, ɵdirectiveInject, ɵinjectElementRef, ɵinjectAttribute, ɵdefinePipe, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @license
@@ -2734,7 +2734,7 @@ class NgClass {
         }
     }
 }
-NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory() { return new NgClass(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" } });
+NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory() { return new NgClass(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [ɵPublicFeature] });
 
 /**
  * Instantiates a single {@link Component} type and inserts its Host View into current View.
@@ -2827,7 +2827,7 @@ class NgComponentOutlet {
             this._moduleRef.destroy();
     }
 }
-NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory() { return new NgComponentOutlet(ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵNgOnChangesFeature] });
+NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory() { return new NgComponentOutlet(ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵPublicFeature, ɵNgOnChangesFeature] });
 
 class NgForOfContext {
     constructor($implicit, ngForOf, index, count) {
@@ -3000,7 +3000,7 @@ class NgForOf {
         view.context.$implicit = record.item;
     }
 }
-NgForOf.ngDirectiveDef = ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory() { return new NgForOf(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
+NgForOf.ngDirectiveDef = ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory() { return new NgForOf(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [ɵPublicFeature] });
 class RecordViewTuple {
     constructor(record, view) {
         this.record = record;
@@ -3152,7 +3152,7 @@ class NgIf {
         }
     }
 }
-NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory() { return new NgIf(ɵinjectViewContainerRef(), ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
+NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory() { return new NgIf(ɵinjectViewContainerRef(), ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [ɵPublicFeature] });
 class NgIfContext {
     constructor() {
         this.$implicit = null;
@@ -3244,7 +3244,7 @@ class NgTemplateOutlet {
         }
     }
 }
-NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory() { return new NgTemplateOutlet(ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵNgOnChangesFeature] });
+NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory() { return new NgTemplateOutlet(ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵPublicFeature, ɵNgOnChangesFeature] });
 
 /**
  * @ngModule CommonModule
@@ -3304,7 +3304,7 @@ class NgStyle {
         }
     }
 }
-NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory() { return new NgStyle(ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" } });
+NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory() { return new NgStyle(ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [ɵPublicFeature] });
 
 class SwitchView {
     constructor(_viewContainerRef, _templateRef) {
@@ -3413,7 +3413,7 @@ class NgSwitch {
         }
     }
 }
-NgSwitch.ngDirectiveDef = ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory() { return new NgSwitch(); }, inputs: { ngSwitch: "ngSwitch" } });
+NgSwitch.ngDirectiveDef = ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory() { return new NgSwitch(); }, inputs: { ngSwitch: "ngSwitch" }, features: [ɵPublicFeature] });
 /**
  * @ngModule CommonModule
  *
@@ -3446,7 +3446,7 @@ class NgSwitchCase {
     }
     ngDoCheck() { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); }
 }
-NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory() { return new NgSwitchCase(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" } });
+NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory() { return new NgSwitchCase(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" }, features: [ɵPublicFeature] });
 /**
  * @ngModule CommonModule
  * @usageNotes
@@ -3474,7 +3474,7 @@ class NgSwitchDefault {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
 }
-NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory() { return new NgSwitchDefault(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(NgSwitch, 1)); } });
+NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory() { return new NgSwitchDefault(ɵinjectViewContainerRef(), ɵinjectTemplateRef(), ɵdirectiveInject(NgSwitch, 1)); }, features: [ɵPublicFeature] });
 
 /**
  * @ngModule CommonModule
@@ -3534,7 +3534,7 @@ class NgPlural {
         }
     }
 }
-NgPlural.ngDirectiveDef = ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory() { return new NgPlural(ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
+NgPlural.ngDirectiveDef = ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory() { return new NgPlural(ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" }, features: [ɵPublicFeature] });
 /**
  * @ngModule CommonModule
  *
@@ -3562,7 +3562,7 @@ class NgPluralCase {
         ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
 }
-NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory() { return new NgPluralCase(ɵinjectAttribute('ngPluralCase'), ɵinjectTemplateRef(), ɵinjectViewContainerRef(), ɵdirectiveInject(NgPlural, 1)); } });
+NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory() { return new NgPluralCase(ɵinjectAttribute('ngPluralCase'), ɵinjectTemplateRef(), ɵinjectViewContainerRef(), ɵdirectiveInject(NgPlural, 1)); }, features: [ɵPublicFeature] });
 
 /**
  * @license
@@ -4991,7 +4991,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('7.0.0-beta.0+18.sha-26a15cc');
+const VERSION = new Version('7.0.0-beta.0+22.sha-97b5cb2');
 
 /**
  * @license

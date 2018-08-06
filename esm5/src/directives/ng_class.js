@@ -156,7 +156,7 @@ var NgClass = /** @class */ (function () {
             });
         }
     };
-    NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory() { return new NgClass(i0.ɵdirectiveInject(IterableDiffers), i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" } });
+    NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory() { return new NgClass(i0.ɵdirectiveInject(IterableDiffers), i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [i0.ɵPublicFeature] });
     return NgClass;
 }());
 export { NgClass };

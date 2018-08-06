@@ -70,7 +70,7 @@ var NgPlural = /** @class */ (function () {
             this._activeView.create();
         }
     };
-    NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory() { return new NgPlural(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
+    NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory() { return new NgPlural(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" }, features: [i0.ɵPublicFeature] });
     return NgPlural;
 }());
 export { NgPlural };
@@ -100,7 +100,7 @@ var NgPluralCase = /** @class */ (function () {
         var isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
-    NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory() { return new NgPluralCase(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵinjectTemplateRef(), i0.ɵinjectViewContainerRef(), i0.ɵdirectiveInject(NgPlural, 1)); } });
+    NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory() { return new NgPluralCase(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵinjectTemplateRef(), i0.ɵinjectViewContainerRef(), i0.ɵdirectiveInject(NgPlural, 1)); }, features: [i0.ɵPublicFeature] });
     return NgPluralCase;
 }());
 export { NgPluralCase };

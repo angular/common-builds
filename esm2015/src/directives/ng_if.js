@@ -148,7 +148,7 @@ export class NgIf {
         }
     }
 }
-NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory() { return new NgIf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
+NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory() { return new NgIf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [i0.ɵPublicFeature] });
 export class NgIfContext {
     constructor() {
         this.$implicit = null;
