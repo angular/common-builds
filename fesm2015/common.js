@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0+100.sha-183757d
+ * @license Angular v7.0.0-beta.0+38.sha-16c03c0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -74,6 +74,8 @@ class LocationStrategy {
  * representing the URL prefix that should be preserved when generating and recognizing
  * URLs.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * ```typescript
@@ -102,7 +104,9 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * Depending on which {\@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
- * Note: it's better to use {\@link Router#navigate} service to trigger route changes. Use
+ * \@usageNotes
+ *
+ * It's better to use {\@link Router#navigate} service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -114,6 +118,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * - `/my/app/user/123/` **is not** normalized
  *
  * ### Example
+ *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
  */
@@ -313,6 +318,8 @@ function _stripIndexHtml(url) {
  * For instance, if you call `location.go('/foo')`, the browser's URL will become
  * `example.com#/foo`.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
@@ -434,6 +441,8 @@ HashLocationStrategy.ctorParameters = () => [
  * Similarly, if you add `<base href='/my/app'/>` to the document and call
  * `location.go('/foo')`, the browser's URL will become
  * `example.com/my/app/foo`.
+ *
+ * \@usageNotes
  *
  * ### Example
  *
@@ -3178,25 +3187,25 @@ class NgClass {
         this._initialClasses = [];
     }
     /**
-     * @param {?} v
+     * @param {?} value
      * @return {?}
      */
-    set klass(v) {
+    set klass(value) {
         this._removeClasses(this._initialClasses);
-        this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
+        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
         this._applyClasses(this._initialClasses);
         this._applyClasses(this._rawClass);
     }
     /**
-     * @param {?} v
+     * @param {?} value
      * @return {?}
      */
-    set ngClass(v) {
+    set ngClass(value) {
         this._removeClasses(this._rawClass);
         this._applyClasses(this._initialClasses);
         this._iterableDiffer = null;
         this._keyValueDiffer = null;
-        this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
+        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
         if (this._rawClass) {
             if (ɵisListLikeIterable(this._rawClass)) {
                 this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
@@ -3334,6 +3343,8 @@ NgClass.propDecorators = {
  * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
  * any existing component will get destroyed.
  *
+ * \@usageNotes
+ *
  * ### Fine tune control
  *
  * You can control the component creation process by using the following optional attributes:
@@ -3368,7 +3379,8 @@ NgClass.propDecorators = {
  *                                   ngModuleFactory: moduleFactory;">
  * </ng-container>
  * ```
- * ## Example
+ *
+ * ### A simple example
  *
  * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
  *
@@ -3483,6 +3495,8 @@ class NgForOfContext {
  * The `NgForOf` directive instantiates a template once per item from an iterable. The context
  * for each instantiated template inherits from the outer context with the given loop variable
  * set to the current item from the iterable.
+ *
+ * \@usageNotes
  *
  * ### Local Variables
  *
@@ -3724,13 +3738,16 @@ function getTypeNameForDebugging(type) {
  *  - `then` template is the inline template of `ngIf` unless bound to a different value.
  *  - `else` template is blank unless it is bound.
  *
- * ## Most common usage
+ *
+ * \@usageNotes
+ *
+ * ### Most common usage
  *
  * The most common usage of the `ngIf` directive is to conditionally show the inline template as
  * seen in this example:
  * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
  *
- * ## Showing an alternative template using `else`
+ * ### Showing an alternative template using `else`
  *
  * If it is necessary to display a template when the `expression` is falsy use the `else` template
  * binding as shown. Note that the `else` binding points to a `<ng-template>` labeled `#elseBlock`.
@@ -3739,7 +3756,7 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
  *
- * ## Using non-inlined `then` template
+ * ### Using non-inlined `then` template
  *
  * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
  * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
@@ -3747,7 +3764,7 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
  *
- * ## Storing conditional result in a variable
+ * ### Storing conditional result in a variable
  *
  * A common pattern is that we need to show a set of properties from the same object. If the
  * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
@@ -4330,13 +4347,13 @@ class NgStyle {
         this._renderer = _renderer;
     }
     /**
-     * @param {?} v
+     * @param {?} values
      * @return {?}
      */
-    set ngStyle(v) {
-        this._ngStyle = v;
-        if (!this._differ && v) {
-            this._differ = this._differs.find(v).create();
+    set ngStyle(values) {
+        this._ngStyle = values;
+        if (!this._differ && values) {
+            this._differ = this._differs.find(values).create();
         }
     }
     /**
@@ -4396,11 +4413,6 @@ NgStyle.propDecorators = {
 /**
  * \@ngModule CommonModule
  *
- * \@usageNotes
- * ```
- * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
- * ```
- *
  * \@description
  *
  * Inserts an embedded view from a prepared `TemplateRef`.
@@ -4409,12 +4421,16 @@ NgStyle.propDecorators = {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set its value as default.
+ * \@usageNotes
+ * ```
+ * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+ * ```
  *
- * ## Example
+ * Using the key `$implicit` in the context object will set its value as default.
+ *
+ * ### Example
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
- *
  *
  */
 class NgTemplateOutlet {
@@ -4858,6 +4874,8 @@ class DateFormatter$1 {
  * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
  *   browsers.
  *
+ * \@usageNotes
+ *
  * ### Examples
  *
  * Assuming `dateObj` is (year: 2010, month: 9, day: 3, hour: 12 PM, minute: 05, second: 08)
@@ -5021,10 +5039,11 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
- *
  *
  */
 class DeprecatedDecimalPipe {
@@ -5061,6 +5080,8 @@ DeprecatedDecimalPipe.ctorParameters = () => [
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+ *
+ * \@usageNotes
  *
  * ### Example
  *
@@ -5108,6 +5129,8 @@ DeprecatedPercentPipe.ctorParameters = () => [
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+ *
+ * \@usageNotes
  *
  * ### Example
  *
@@ -5211,8 +5234,9 @@ const _observableStrategy = new ObservableStrategy();
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
  * potential memory leaks.
  *
+ * \@usageNotes
  *
- * ## Examples
+ * ### Examples
  *
  * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
  * promise.
@@ -5223,7 +5247,6 @@ const _observableStrategy = new ObservableStrategy();
  * to the view. The Observable continuously updates the view with the current time.
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
- *
  *
  */
 class AsyncPipe {
@@ -5605,7 +5628,9 @@ const _INTERPOLATION_REGEXP = /#/g;
  *
  * Maps a value to a string that pluralizes the value according to locale rules.
  *
- *  ## Example
+ * \@usageNotes
+ *
+ * ### Example
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
@@ -5658,7 +5683,9 @@ I18nPluralPipe.ctorParameters = () => [
  * If none of the keys of the `mapping` match the `value`, then the content
  * of the `other` key is returned when present, otherwise an empty string is returned.
  *
- * ## Example
+ * \@usageNotes
+ *
+ * ### Example
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
@@ -5704,8 +5731,8 @@ I18nSelectPipe.decorators = [
  *
  * The following component uses a JSON pipe to convert an object
  * to JSON format, and displays the string in both formats for comparison.
- * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
+ * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
  */
 class JsonPipe {
@@ -5865,7 +5892,6 @@ function defaultComparator(keyValueA, keyValueB) {
  * ### Example
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
- *
  *
  */
 class DecimalPipe {
@@ -6106,6 +6132,8 @@ function strToNumber(value) {
  *
  * Creates a new `Array` or `String` containing a subset (slice) of the elements.
  *
+ * \@usageNotes
+ *
  * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
  * and `String.prototype.slice()`.
  *
@@ -6122,13 +6150,14 @@ function strToNumber(value) {
  *
  * produces the following:
  *
- *     <li>b</li>
- *     <li>c</li>
+ * ```html
+ * <li>b</li>
+ * <li>c</li>
+ * ```
  *
- * ## String Examples
+ * ### String Examples
  *
  * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
- *
  *
  */
 class SlicePipe {
@@ -6300,7 +6329,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.0+100.sha-183757d');
+const VERSION = new Version('7.0.0-beta.0+38.sha-16c03c0');
 
 /**
  * @fileoverview added by tsickle
