@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0+100.sha-183757d
+ * @license Angular v7.0.0-beta.0+38.sha-16c03c0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -241,10 +241,10 @@ class HttpHeaders {
  *
  */
 class HttpUrlEncodingCodec {
-    encodeKey(k) { return standardEncoding(k); }
-    encodeValue(v) { return standardEncoding(v); }
-    decodeKey(k) { return decodeURIComponent(k); }
-    decodeValue(v) { return decodeURIComponent(v); }
+    encodeKey(key) { return standardEncoding(key); }
+    encodeValue(value) { return standardEncoding(value); }
+    decodeKey(key) { return decodeURIComponent(key); }
+    decodeValue(value) { return decodeURIComponent(value); }
 }
 function paramParser(rawParams, codec) {
     const map$$1 = new Map();
