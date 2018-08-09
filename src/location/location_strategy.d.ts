@@ -43,6 +43,8 @@ export declare abstract class LocationStrategy {
  * representing the URL prefix that should be preserved when generating and recognizing
  * URLs.
  *
+ * @usageNotes
+ *
  * ### Example
  *
  * ```typescript

@@ -39,7 +39,6 @@ import { PipeTransform } from '@angular/core';
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
- *
  */
 export declare class DecimalPipe implements PipeTransform {
     private _locale;

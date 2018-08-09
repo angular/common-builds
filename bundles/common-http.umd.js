@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.0+66.sha-26adee9
+ * @license Angular v7.0.0-beta.1+40.sha-99b2e7e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -307,10 +307,10 @@
     var HttpUrlEncodingCodec = /** @class */ (function () {
         function HttpUrlEncodingCodec() {
         }
-        HttpUrlEncodingCodec.prototype.encodeKey = function (k) { return standardEncoding(k); };
-        HttpUrlEncodingCodec.prototype.encodeValue = function (v) { return standardEncoding(v); };
-        HttpUrlEncodingCodec.prototype.decodeKey = function (k) { return decodeURIComponent(k); };
-        HttpUrlEncodingCodec.prototype.decodeValue = function (v) { return decodeURIComponent(v); };
+        HttpUrlEncodingCodec.prototype.encodeKey = function (key) { return standardEncoding(key); };
+        HttpUrlEncodingCodec.prototype.encodeValue = function (value) { return standardEncoding(value); };
+        HttpUrlEncodingCodec.prototype.decodeKey = function (key) { return decodeURIComponent(key); };
+        HttpUrlEncodingCodec.prototype.decodeValue = function (value) { return decodeURIComponent(value); };
         return HttpUrlEncodingCodec;
     }());
     function paramParser(rawParams, codec) {
