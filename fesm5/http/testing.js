@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.1+12.sha-9c92a6f
+ * @license Angular v7.0.0-beta.1+18.sha-7058072
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -208,6 +208,13 @@ function _maybeConvertBody(responseType, body) {
 }
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
  * and as the `HttpTestingController`.
  *
@@ -331,10 +338,17 @@ var HttpClientTestingBackend = /** @class */ (function () {
             return "Match by function: " + matcher.name;
         }
     };
-    HttpClientTestingBackend.ngInjectableDef = defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory() { return new HttpClientTestingBackend(); }, providedIn: null });
+    HttpClientTestingBackend.ngInjectableDef = defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
     return HttpClientTestingBackend;
 }());
 
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
  *
@@ -346,7 +360,7 @@ var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
     HttpClientTestingModule.ngModuleDef = ɵdefineNgModule({ type: HttpClientTestingModule, bootstrap: [], declarations: [], imports: [HttpClientModule], exports: [] });
-    HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpClientTestingModule_Factory() { return new HttpClientTestingModule(); }, providers: [
+    HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
             HttpClientTestingBackend,
             { provide: HttpBackend, useExisting: HttpClientTestingBackend },
             { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
