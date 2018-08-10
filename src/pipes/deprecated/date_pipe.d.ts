@@ -59,6 +59,8 @@ import { PipeTransform } from '@angular/core';
  * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
  *   browsers.
  *
+ * @usageNotes
+ *
  * ### Examples
  *
  * Assuming `dateObj` is (year: 2010, month: 9, day: 3, hour: 12 PM, minute: 05, second: 08)

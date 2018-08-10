@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.0.0-rc.5+145.sha-741fa9e
+ * @license Angular v7.0.0-beta.1+25.sha-ca8c683
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -107,8 +107,6 @@ var SpyLocation = /** @class */ (function () {
     SpyLocation.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
-    SpyLocation.ctorParameters = function () { return []; };
     return SpyLocation;
 }());
 var LocationState = /** @class */ (function () {
@@ -214,7 +212,6 @@ var _MockPopStateEvent = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**
