@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.1+47.sha-a0a29fd
+ * @license Angular v7.0.0-beta.1+50.sha-be2cf4d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6329,7 +6329,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('7.0.0-beta.1+47.sha-a0a29fd');
+const VERSION = new Version('7.0.0-beta.1+50.sha-be2cf4d');
 
 /**
  * @fileoverview added by tsickle
