@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.1+10.sha-b64fed1
+ * @license Angular v7.0.0-beta.1+52.sha-1f11039
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -906,6 +906,13 @@
     }(HttpResponseBase));
 
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * Construct an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
      * the given `body`. Basically, this clones the object and adds the body.
      */
@@ -1145,10 +1152,17 @@
             if (options === void 0) { options = {}; }
             return this.request('PUT', url, addBody(options, body));
         };
-        HttpClient.ngInjectableDef = i0.defineInjectable({ token: HttpClient, factory: function HttpClient_Factory() { return new HttpClient(i0.inject(HttpHandler)); }, providedIn: null });
+        HttpClient.ngInjectableDef = i0.defineInjectable({ token: HttpClient, factory: function HttpClient_Factory(t) { return new (t || HttpClient)(i0.inject(HttpHandler)); }, providedIn: null });
         return HttpClient;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
      *
@@ -1177,10 +1191,17 @@
         NoopInterceptor.prototype.intercept = function (req, next) {
             return next.handle(req);
         };
-        NoopInterceptor.ngInjectableDef = i0.defineInjectable({ token: NoopInterceptor, factory: function NoopInterceptor_Factory() { return new NoopInterceptor(); }, providedIn: null });
+        NoopInterceptor.ngInjectableDef = i0.defineInjectable({ token: NoopInterceptor, factory: function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); }, providedIn: null });
         return NoopInterceptor;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     // Every request made through JSONP needs a callback name that's unique across the
     // whole page. Each request is assigned an id and the callback name is constructed
     // from that. The next id to be assigned is tracked in a global variable here that
@@ -1346,7 +1367,7 @@
                 };
             });
         };
-        JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory() { return new JsonpClientBackend(i0.inject(JsonpCallbackContext), i0.inject(common.DOCUMENT)); }, providedIn: null });
+        JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.inject(JsonpCallbackContext), i0.inject(common.DOCUMENT)); }, providedIn: null });
         return JsonpClientBackend;
     }());
     /**
@@ -1366,10 +1387,17 @@
             // Fall through for normal HTTP requests.
             return next.handle(req);
         };
-        JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory() { return new JsonpInterceptor(i0.inject(JsonpClientBackend)); }, providedIn: null });
+        JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(i0.inject(JsonpClientBackend)); }, providedIn: null });
         return JsonpInterceptor;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var XSSI_PREFIX = /^\)\]\}',?\n/;
     /**
      * Determine an appropriate URL for the response, by checking either
@@ -1403,7 +1431,7 @@
         function BrowserXhr() {
         }
         BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
-        BrowserXhr.ngInjectableDef = i0.defineInjectable({ token: BrowserXhr, factory: function BrowserXhr_Factory() { return new BrowserXhr(); }, providedIn: null });
+        BrowserXhr.ngInjectableDef = i0.defineInjectable({ token: BrowserXhr, factory: function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); }, providedIn: null });
         return BrowserXhr;
     }());
     /**
@@ -1648,10 +1676,17 @@
                 };
             });
         };
-        HttpXhrBackend.ngInjectableDef = i0.defineInjectable({ token: HttpXhrBackend, factory: function HttpXhrBackend_Factory() { return new HttpXhrBackend(i0.inject(XhrFactory)); }, providedIn: null });
+        HttpXhrBackend.ngInjectableDef = i0.defineInjectable({ token: HttpXhrBackend, factory: function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.inject(XhrFactory)); }, providedIn: null });
         return HttpXhrBackend;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var XSRF_COOKIE_NAME = new i0.InjectionToken('XSRF_COOKIE_NAME');
     var XSRF_HEADER_NAME = new i0.InjectionToken('XSRF_HEADER_NAME');
     /**
@@ -1691,7 +1726,7 @@
             }
             return this.lastToken;
         };
-        HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory() { return new HttpXsrfCookieExtractor(i0.inject(common.DOCUMENT), i0.inject(i0.PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
+        HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.inject(common.DOCUMENT), i0.inject(i0.PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
         return HttpXsrfCookieExtractor;
     }());
     /**
@@ -1719,10 +1754,17 @@
             }
             return next.handle(req);
         };
-        HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory() { return new HttpXsrfInterceptor(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
+        HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
         return HttpXsrfInterceptor;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * An injectable `HttpHandler` that applies multiple interceptors
      * to a request before passing it to the given `HttpBackend`.
@@ -1745,7 +1787,7 @@
             }
             return this.chain.handle(req);
         };
-        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory() { return new HttpInterceptingHandler(i0.inject(HttpBackend), i0.inject(i0.INJECTOR)); }, providedIn: null });
+        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(i0.INJECTOR)); }, providedIn: null });
         return HttpInterceptingHandler;
     }());
     /**
@@ -1807,7 +1849,7 @@
             };
         };
         HttpClientXsrfModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientXsrfModule, bootstrap: [], declarations: [], imports: [], exports: [] });
-        HttpClientXsrfModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientXsrfModule_Factory() { return new HttpClientXsrfModule(); }, providers: [
+        HttpClientXsrfModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
                 HttpXsrfInterceptor,
                 { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
                 { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -1828,7 +1870,7 @@
         function HttpClientModule() {
         }
         HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, bootstrap: [], declarations: [], imports: [HttpClientXsrfModule], exports: [] });
-        HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory() { return new HttpClientModule(); }, providers: [
+        HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
                 HttpClient,
                 { provide: HttpHandler, useClass: HttpInterceptingHandler },
                 HttpXhrBackend,
@@ -1855,7 +1897,7 @@
         function HttpClientJsonpModule() {
         }
         HttpClientJsonpModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientJsonpModule, bootstrap: [], declarations: [], imports: [], exports: [] });
-        HttpClientJsonpModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientJsonpModule_Factory() { return new HttpClientJsonpModule(); }, providers: [
+        HttpClientJsonpModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
                 JsonpClientBackend,
                 { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
                 { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },

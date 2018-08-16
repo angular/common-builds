@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.1+10.sha-b64fed1
+ * @license Angular v7.0.0-beta.1+52.sha-1f11039
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -175,6 +175,13 @@
     }
 
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * @description
      *
      * A service that applications can use to interact with a browser's URL.
@@ -328,7 +335,7 @@
             var droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
             return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
         };
-        Location.ngInjectableDef = i0.defineInjectable({ token: Location, factory: function Location_Factory() { return new Location(i0.inject(LocationStrategy)); }, providedIn: null });
+        Location.ngInjectableDef = i0.defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(i0.inject(LocationStrategy)); }, providedIn: null });
         return Location;
     }());
     function _stripBaseHref(baseHref, url) {
@@ -401,7 +408,7 @@
         };
         HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        HashLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: HashLocationStrategy, factory: function HashLocationStrategy_Factory() { return new HashLocationStrategy(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
+        HashLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: HashLocationStrategy, factory: function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
         return HashLocationStrategy;
     }(LocationStrategy));
 
@@ -471,7 +478,7 @@
         };
         PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        PathLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: PathLocationStrategy, factory: function PathLocationStrategy_Factory() { return new PathLocationStrategy(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
+        PathLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: PathLocationStrategy, factory: function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
         return PathLocationStrategy;
     }(LocationStrategy));
 
@@ -2236,7 +2243,7 @@
                     return 'other';
             }
         };
-        NgLocaleLocalization.ngInjectableDef = i0.defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory() { return new NgLocaleLocalization(i0.inject(i0.LOCALE_ID), i0.inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
+        NgLocaleLocalization.ngInjectableDef = i0.defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(i0.inject(i0.LOCALE_ID), i0.inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
         return NgLocaleLocalization;
     }(NgLocalization));
     /**
@@ -2644,6 +2651,13 @@
     }
 
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * @ngModule CommonModule
      *
      * @usageNotes
@@ -2792,10 +2806,17 @@
                 });
             }
         };
-        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory() { return new NgClass(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [i0.ɵPublicFeature] });
+        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [i0.ɵPublicFeature] });
         return NgClass;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * Instantiates a single {@link Component} type and inserts its Host View into current View.
      * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
@@ -2886,10 +2907,17 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory() { return new NgComponentOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
+        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵinjectViewContainerRef()); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
         return NgComponentOutlet;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     var NgForOfContext = /** @class */ (function () {
         function NgForOfContext($implicit, ngForOf, index, count) {
             this.$implicit = $implicit;
@@ -3090,7 +3118,7 @@
         NgForOf.prototype._perViewChange = function (view, record) {
             view.context.$implicit = record.item;
         };
-        NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory() { return new NgForOf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(i0.IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [i0.ɵPublicFeature] });
+        NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory(t) { return new (t || NgForOf)(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(i0.IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [i0.ɵPublicFeature] });
         return NgForOf;
     }());
     var RecordViewTuple = /** @class */ (function () {
@@ -3104,6 +3132,13 @@
         return type['name'] || typeof type;
     }
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * Conditionally includes a template based on the value of an `expression`.
      *
@@ -3256,7 +3291,7 @@
                 }
             }
         };
-        NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory() { return new NgIf(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [i0.ɵPublicFeature] });
+        NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef()); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [i0.ɵPublicFeature] });
         return NgIf;
     }());
     var NgIfContext = /** @class */ (function () {
@@ -3274,174 +3309,12 @@
     }
 
     /**
-     * @ngModule CommonModule
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
      *
-     * @description
-     *
-     * Inserts an embedded view from a prepared `TemplateRef`.
-     *
-     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
-     * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
-     * by the local template `let` declarations.
-     *
-     * @usageNotes
-     * ```
-     * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
-     * ```
-     *
-     * Using the key `$implicit` in the context object will set its value as default.
-     *
-     * ### Example
-     *
-     * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
-     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
      */
-    var NgTemplateOutlet = /** @class */ (function () {
-        function NgTemplateOutlet(_viewContainerRef) {
-            this._viewContainerRef = _viewContainerRef;
-        }
-        NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
-            var recreateView = this._shouldRecreateView(changes);
-            if (recreateView) {
-                if (this._viewRef) {
-                    this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
-                }
-                if (this.ngTemplateOutlet) {
-                    this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
-                }
-            }
-            else {
-                if (this._viewRef && this.ngTemplateOutletContext) {
-                    this._updateExistingContext(this.ngTemplateOutletContext);
-                }
-            }
-        };
-        /**
-         * We need to re-create existing embedded view if:
-         * - templateRef has changed
-         * - context has changes
-         *
-         * We mark context object as changed when the corresponding object
-         * shape changes (new properties are added or existing properties are removed).
-         * In other words we consider context with the same properties as "the same" even
-         * if object reference changes (see https://github.com/angular/angular/issues/13407).
-         */
-        NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
-            var ctxChange = changes['ngTemplateOutletContext'];
-            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-        };
-        NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
-            var e_1, _a;
-            var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-            var currCtxKeys = Object.keys(ctxChange.currentValue || {});
-            if (prevCtxKeys.length === currCtxKeys.length) {
-                try {
-                    for (var currCtxKeys_1 = __values(currCtxKeys), currCtxKeys_1_1 = currCtxKeys_1.next(); !currCtxKeys_1_1.done; currCtxKeys_1_1 = currCtxKeys_1.next()) {
-                        var propName = currCtxKeys_1_1.value;
-                        if (prevCtxKeys.indexOf(propName) === -1) {
-                            return true;
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (currCtxKeys_1_1 && !currCtxKeys_1_1.done && (_a = currCtxKeys_1.return)) _a.call(currCtxKeys_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                return false;
-            }
-            else {
-                return true;
-            }
-        };
-        NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
-            var e_2, _a;
-            try {
-                for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var propName = _c.value;
-                    this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-        };
-        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory() { return new NgTemplateOutlet(i0.ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
-        return NgTemplateOutlet;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     *
-     * @usageNotes
-     * ```
-     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
-     *
-     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
-     *
-     * <some-element [ngStyle]="objExp">...</some-element>
-     * ```
-     *
-     * @description
-     *
-     * Update an HTML element styles.
-     *
-     * The styles are updated according to the value of the expression evaluation:
-     * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
-     * - values are the values assigned to those properties (expressed in the given unit).
-     *
-     *
-     */
-    var NgStyle = /** @class */ (function () {
-        function NgStyle(_differs, _ngEl, _renderer) {
-            this._differs = _differs;
-            this._ngEl = _ngEl;
-            this._renderer = _renderer;
-        }
-        Object.defineProperty(NgStyle.prototype, "ngStyle", {
-            set: function (values) {
-                this._ngStyle = values;
-                if (!this._differ && values) {
-                    this._differ = this._differs.find(values).create();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        NgStyle.prototype.ngDoCheck = function () {
-            if (this._differ) {
-                var changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        };
-        NgStyle.prototype._applyChanges = function (changes) {
-            var _this = this;
-            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
-            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-        };
-        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
-            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
-            value = value != null && unit ? "" + value + unit : value;
-            if (value != null) {
-                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
-            }
-            else {
-                this._renderer.removeStyle(this._ngEl.nativeElement, name);
-            }
-        };
-        NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory() { return new NgStyle(i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [i0.ɵPublicFeature] });
-        return NgStyle;
-    }());
-
     var SwitchView = /** @class */ (function () {
         function SwitchView(_viewContainerRef, _templateRef) {
             this._viewContainerRef = _viewContainerRef;
@@ -3553,7 +3426,7 @@
                 }
             }
         };
-        NgSwitch.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory() { return new NgSwitch(); }, inputs: { ngSwitch: "ngSwitch" }, features: [i0.ɵPublicFeature] });
+        NgSwitch.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory(t) { return new (t || NgSwitch)(); }, inputs: { ngSwitch: "ngSwitch" }, features: [i0.ɵPublicFeature] });
         return NgSwitch;
     }());
     /**
@@ -3587,7 +3460,7 @@
             this._view = new SwitchView(viewContainer, templateRef);
         }
         NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-        NgSwitchCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory() { return new NgSwitchCase(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" }, features: [i0.ɵPublicFeature] });
+        NgSwitchCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" }, features: [i0.ɵPublicFeature] });
         return NgSwitchCase;
     }());
     /**
@@ -3616,10 +3489,17 @@
         function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
-        NgSwitchDefault.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory() { return new NgSwitchDefault(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(NgSwitch, 1)); }, features: [i0.ɵPublicFeature] });
+        NgSwitchDefault.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(i0.ɵinjectViewContainerRef(), i0.ɵinjectTemplateRef(), i0.ɵdirectiveInject(NgSwitch, 1)); }, features: [i0.ɵPublicFeature] });
         return NgSwitchDefault;
     }());
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * @ngModule CommonModule
      *
@@ -3681,7 +3561,7 @@
                 this._activeView.create();
             }
         };
-        NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory() { return new NgPlural(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" }, features: [i0.ɵPublicFeature] });
+        NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" }, features: [i0.ɵPublicFeature] });
         return NgPlural;
     }());
     /**
@@ -3710,9 +3590,203 @@
             var isANumber = !isNaN(Number(value));
             ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
         }
-        NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory() { return new NgPluralCase(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵinjectTemplateRef(), i0.ɵinjectViewContainerRef(), i0.ɵdirectiveInject(NgPlural, 1)); }, features: [i0.ɵPublicFeature] });
+        NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵinjectTemplateRef(), i0.ɵinjectViewContainerRef(), i0.ɵdirectiveInject(NgPlural, 1)); }, features: [i0.ɵPublicFeature] });
         return NgPluralCase;
     }());
+
+    /**
+     * @ngModule CommonModule
+     *
+     * @usageNotes
+     * ```
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     *
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     *
+     * <some-element [ngStyle]="objExp">...</some-element>
+     * ```
+     *
+     * @description
+     *
+     * Update an HTML element styles.
+     *
+     * The styles are updated according to the value of the expression evaluation:
+     * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
+     * - values are the values assigned to those properties (expressed in the given unit).
+     *
+     *
+     */
+    var NgStyle = /** @class */ (function () {
+        function NgStyle(_differs, _ngEl, _renderer) {
+            this._differs = _differs;
+            this._ngEl = _ngEl;
+            this._renderer = _renderer;
+        }
+        Object.defineProperty(NgStyle.prototype, "ngStyle", {
+            set: function (values) {
+                this._ngStyle = values;
+                if (!this._differ && values) {
+                    this._differ = this._differs.find(values).create();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        NgStyle.prototype.ngDoCheck = function () {
+            if (this._differ) {
+                var changes = this._differ.diff(this._ngStyle);
+                if (changes) {
+                    this._applyChanges(changes);
+                }
+            }
+        };
+        NgStyle.prototype._applyChanges = function (changes) {
+            var _this = this;
+            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        };
+        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
+            value = value != null && unit ? "" + value + unit : value;
+            if (value != null) {
+                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+            }
+            else {
+                this._renderer.removeStyle(this._ngEl.nativeElement, name);
+            }
+        };
+        NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [i0.ɵPublicFeature] });
+        return NgStyle;
+    }());
+
+    /**
+     * @ngModule CommonModule
+     *
+     * @description
+     *
+     * Inserts an embedded view from a prepared `TemplateRef`.
+     *
+     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+     * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+     * by the local template `let` declarations.
+     *
+     * @usageNotes
+     * ```
+     * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+     * ```
+     *
+     * Using the key `$implicit` in the context object will set its value as default.
+     *
+     * ### Example
+     *
+     * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+     *
+     */
+    var NgTemplateOutlet = /** @class */ (function () {
+        function NgTemplateOutlet(_viewContainerRef) {
+            this._viewContainerRef = _viewContainerRef;
+        }
+        NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
+            var recreateView = this._shouldRecreateView(changes);
+            if (recreateView) {
+                if (this._viewRef) {
+                    this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+                }
+                if (this.ngTemplateOutlet) {
+                    this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
+                }
+            }
+            else {
+                if (this._viewRef && this.ngTemplateOutletContext) {
+                    this._updateExistingContext(this.ngTemplateOutletContext);
+                }
+            }
+        };
+        /**
+         * We need to re-create existing embedded view if:
+         * - templateRef has changed
+         * - context has changes
+         *
+         * We mark context object as changed when the corresponding object
+         * shape changes (new properties are added or existing properties are removed).
+         * In other words we consider context with the same properties as "the same" even
+         * if object reference changes (see https://github.com/angular/angular/issues/13407).
+         */
+        NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
+            var ctxChange = changes['ngTemplateOutletContext'];
+            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
+        };
+        NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
+            var e_1, _a;
+            var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+            var currCtxKeys = Object.keys(ctxChange.currentValue || {});
+            if (prevCtxKeys.length === currCtxKeys.length) {
+                try {
+                    for (var currCtxKeys_1 = __values(currCtxKeys), currCtxKeys_1_1 = currCtxKeys_1.next(); !currCtxKeys_1_1.done; currCtxKeys_1_1 = currCtxKeys_1.next()) {
+                        var propName = currCtxKeys_1_1.value;
+                        if (prevCtxKeys.indexOf(propName) === -1) {
+                            return true;
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (currCtxKeys_1_1 && !currCtxKeys_1_1.done && (_a = currCtxKeys_1.return)) _a.call(currCtxKeys_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                return false;
+            }
+            else {
+                return true;
+            }
+        };
+        NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
+            var e_2, _a;
+            try {
+                for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var propName = _c.value;
+                    this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+        };
+        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵinjectViewContainerRef()); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
+        return NgTemplateOutlet;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A collection of Angular directives that are likely to be used in each and every Angular
+     * application.
+     */
+    var COMMON_DIRECTIVES = [
+        NgClass,
+        NgComponentOutlet,
+        NgForOf,
+        NgIf,
+        NgTemplateOutlet,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgPlural,
+        NgPluralCase,
+    ];
 
     /**
      * @license
@@ -3723,861 +3797,6 @@
      */
     function invalidPipeArgumentError(type, value) {
         return Error("InvalidPipeArgument: '" + value + "' for pipe '" + i0.ɵstringify(type) + "'");
-    }
-
-    var ObservableStrategy = /** @class */ (function () {
-        function ObservableStrategy() {
-        }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
-        };
-        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
-        return ObservableStrategy;
-    }());
-    var PromiseStrategy = /** @class */ (function () {
-        function PromiseStrategy() {
-        }
-        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) { throw e; });
-        };
-        PromiseStrategy.prototype.dispose = function (subscription) { };
-        PromiseStrategy.prototype.onDestroy = function (subscription) { };
-        return PromiseStrategy;
-    }());
-    var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Unwraps a value from an asynchronous primitive.
-     *
-     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
-     * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
-     * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
-     * potential memory leaks.
-     *
-     * @usageNotes
-     *
-     * ### Examples
-     *
-     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
-     * promise.
-     *
-     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
-     *
-     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
-     * to the view. The Observable continuously updates the view with the current time.
-     *
-     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
-     *
-     */
-    var AsyncPipe = /** @class */ (function () {
-        function AsyncPipe(_ref) {
-            this._ref = _ref;
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
-            this._strategy = null;
-        }
-        AsyncPipe.prototype.ngOnDestroy = function () {
-            if (this._subscription) {
-                this._dispose();
-            }
-        };
-        AsyncPipe.prototype.transform = function (obj) {
-            if (!this._obj) {
-                if (obj) {
-                    this._subscribe(obj);
-                }
-                this._latestReturnedValue = this._latestValue;
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform(obj);
-            }
-            if (this._latestValue === this._latestReturnedValue) {
-                return this._latestReturnedValue;
-            }
-            this._latestReturnedValue = this._latestValue;
-            return i0.WrappedValue.wrap(this._latestValue);
-        };
-        AsyncPipe.prototype._subscribe = function (obj) {
-            var _this = this;
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
-        };
-        AsyncPipe.prototype._selectStrategy = function (obj) {
-            if (i0.ɵisPromise(obj)) {
-                return _promiseStrategy;
-            }
-            if (i0.ɵisObservable(obj)) {
-                return _observableStrategy;
-            }
-            throw invalidPipeArgumentError(AsyncPipe, obj);
-        };
-        AsyncPipe.prototype._dispose = function () {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._latestReturnedValue = null;
-            this._subscription = null;
-            this._obj = null;
-        };
-        AsyncPipe.prototype._updateLatestValue = function (async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
-            }
-        };
-        AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory() { return new AsyncPipe(i0.ɵinjectChangeDetectorRef()); }, pure: false });
-        return AsyncPipe;
-    }());
-
-    /**
-     * Transforms text to all lower case.
-     *
-     * @see `UpperCasePipe`
-     * @see `TitleCasePipe`
-     * @usageNotes
-     *
-     * The following example defines a view that allows the user to enter
-     * text, and then uses the pipe to convert the input text to all lower case.
-     *
-     * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
-     *
-     *
-     */
-    var LowerCasePipe = /** @class */ (function () {
-        function LowerCasePipe() {
-        }
-        /**
-         * @param value The string to transform to lower case.
-         */
-        LowerCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
-        };
-        LowerCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory() { return new LowerCasePipe(); }, pure: true });
-        return LowerCasePipe;
-    }());
-    //
-    // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
-    // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
-    // (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
-    // transpilation of this functionality down to ES5 without external tool, the only solution is
-    // to use already transpiled form. Example can be found here -
-    // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
-    //
-    var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08BD\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312E\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FEA\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AE\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDF00-\uDF19]|\uD806[\uDCA0-\uDCDF\uDCFF\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE83\uDE86-\uDE89\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F\uDFE0\uDFE1]|\uD821[\uDC00-\uDFEC]|\uD822[\uDC00-\uDEF2]|\uD82C[\uDC00-\uDD1E\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D])\S*/g;
-    /**
-     * Transforms text to title case.
-     * Capitalizes the first letter of each word, and transforms the
-     * rest of the word to lower case.
-     * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
-     *
-     * @see `LowerCasePipe`
-     * @see `UpperCasePipe`
-     *
-     * @usageNotes
-     * The following example shows the result of transforming various strings into title case.
-     *
-     * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
-     *
-     *
-     */
-    var TitleCasePipe = /** @class */ (function () {
-        function TitleCasePipe() {
-        }
-        /**
-         * @param value The string to transform to title case.
-         */
-        TitleCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(TitleCasePipe, value);
-            }
-            return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
-        };
-        TitleCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory() { return new TitleCasePipe(); }, pure: true });
-        return TitleCasePipe;
-    }());
-    /**
-     * Transforms text to all upper case.
-     * @see `LowerCasePipe`
-     * @see `TitleCasePipe`
-     */
-    var UpperCasePipe = /** @class */ (function () {
-        function UpperCasePipe() {
-        }
-        /**
-         * @param value The string to transform to upper case.
-         */
-        UpperCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
-        };
-        UpperCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory() { return new UpperCasePipe(); }, pure: true });
-        return UpperCasePipe;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Converts a value into its JSON-format representation.  Useful for debugging.
-     *
-     * @usageNotes
-     *
-     * The following component uses a JSON pipe to convert an object
-     * to JSON format, and displays the string in both formats for comparison.
-     *
-     * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
-     *
-     */
-    var JsonPipe = /** @class */ (function () {
-        function JsonPipe() {
-        }
-        /**
-         * @param value A value of any type to convert into a JSON-format string.
-         */
-        JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
-        JsonPipe.ngPipeDef = i0.ɵdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory() { return new JsonPipe(); }, pure: false });
-        return JsonPipe;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Creates a new `Array` or `String` containing a subset (slice) of the elements.
-     *
-     * @usageNotes
-     *
-     * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
-     * and `String.prototype.slice()`.
-     *
-     * When operating on an `Array`, the returned `Array` is always a copy even when all
-     * the elements are being returned.
-     *
-     * When operating on a blank value, the pipe returns the blank value.
-     *
-     * ### List Example
-     *
-     * This `ngFor` example:
-     *
-     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
-     *
-     * produces the following:
-     *
-     * ```html
-     * <li>b</li>
-     * <li>c</li>
-     * ```
-     *
-     * ### String Examples
-     *
-     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
-     *
-     */
-    var SlicePipe = /** @class */ (function () {
-        function SlicePipe() {
-        }
-        /**
-         * @param value a list or a string to be sliced.
-         * @param start the starting index of the subset to return:
-         *   - **a positive integer**: return the item at `start` index and all items after
-         *     in the list or string expression.
-         *   - **a negative integer**: return the item at `start` index from the end and all items after
-         *     in the list or string expression.
-         *   - **if positive and greater than the size of the expression**: return an empty list or
-         * string.
-         *   - **if negative and greater than the size of the expression**: return entire list or string.
-         * @param end the ending index of the subset to return:
-         *   - **omitted**: return all items until the end.
-         *   - **if positive**: return all items before `end` index of the list or string.
-         *   - **if negative**: return all items before `end` index from the end of the list or string.
-         */
-        SlicePipe.prototype.transform = function (value, start, end) {
-            if (value == null)
-                return value;
-            if (!this.supports(value)) {
-                throw invalidPipeArgumentError(SlicePipe, value);
-            }
-            return value.slice(start, end);
-        };
-        SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
-        SlicePipe.ngPipeDef = i0.ɵdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory() { return new SlicePipe(); }, pure: false });
-        return SlicePipe;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Transforms a number into a string,
-     * formatted according to locale rules that determine group sizing and
-     * separator, decimal-point character, and other locale-specific
-     * configurations.
-     *
-     * If no parameters are specified, the function rounds off to the nearest value using this
-     * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
-     * The behavior differs from that of the JavaScript ```Math.round()``` function.
-     * In the following case for example, the pipe rounds down where
-     * ```Math.round()``` rounds up:
-     *
-     * ```html
-     * -2.5 | number:'1.0-0'
-     * > -3
-     * Math.round(-2.5)
-     * > -2
-     * ```
-     *
-     * @see `formatNumber()`
-     *
-     * @usageNotes
-     * The following code shows how the pipe transforms numbers
-     * into text strings, according to various format specifications,
-     * where the caller's default locale is `en-US`.
-     *
-     * ### Example
-     *
-     * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
-     *
-     */
-    var DecimalPipe = /** @class */ (function () {
-        function DecimalPipe(_locale) {
-            this._locale = _locale;
-        }
-        /**
-         * @param value The number to be formatted.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        DecimalPipe.prototype.transform = function (value, digitsInfo, locale) {
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            try {
-                var num = strToNumber(value);
-                return formatNumber(num, locale, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(DecimalPipe, error.message);
-            }
-        };
-        DecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory() { return new DecimalPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return DecimalPipe;
-    }());
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Transforms a number to a percentage
-     * string, formatted according to locale rules that determine group sizing and
-     * separator, decimal-point character, and other locale-specific
-     * configurations.
-     *
-     * @see `formatPercent()`
-     *
-     * @usageNotes
-     * The following code shows how the pipe transforms numbers
-     * into text strings, according to various format specifications,
-     * where the caller's default locale is `en-US`.
-     *
-     * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
-     *
-     *
-     */
-    var PercentPipe = /** @class */ (function () {
-        function PercentPipe(_locale) {
-            this._locale = _locale;
-        }
-        /**
-         *
-         * @param value The number to be formatted as a percentage.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        PercentPipe.prototype.transform = function (value, digitsInfo, locale) {
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            try {
-                var num = strToNumber(value);
-                return formatPercent(num, locale, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(PercentPipe, error.message);
-            }
-        };
-        PercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory() { return new PercentPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return PercentPipe;
-    }());
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Transforms a number to a currency string, formatted according to locale rules
-     * that determine group sizing and separator, decimal-point character,
-     * and other locale-specific configurations.
-     *
-     * @see `getCurrencySymbol()`
-     * @see `formatCurrency()`
-     *
-     * @usageNotes
-     * The following code shows how the pipe transforms numbers
-     * into text strings, according to various format specifications,
-     * where the caller's default locale is `en-US`.
-     *
-     * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
-     *
-     *
-     */
-    var CurrencyPipe = /** @class */ (function () {
-        function CurrencyPipe(_locale) {
-            this._locale = _locale;
-        }
-        /**
-         *
-         * @param value The number to be formatted as currency.
-         * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-         * such as `USD` for the US dollar and `EUR` for the euro.
-         * @param display The format for the currency indicator. One of the following:
-         *   - `code`: Show the code (such as `USD`).
-         *   - `symbol`(default): Show the symbol (such as `$`).
-         *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-         * currency.
-         * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-         * locale has no narrow symbol, uses the standard symbol for the locale.
-         *   - String: Use the given string value instead of a code or a symbol.
-         *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
-         *
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
-         * If not provided, the number will be formatted with the proper amount of digits,
-         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        CurrencyPipe.prototype.transform = function (value, currencyCode, display, digitsInfo, locale) {
-            if (display === void 0) { display = 'symbol'; }
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            if (typeof display === 'boolean') {
-                if (console && console.warn) {
-                    console.warn("Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are \"code\", \"symbol\" or \"symbol-narrow\".");
-                }
-                display = display ? 'symbol' : 'code';
-            }
-            var currency = currencyCode || 'USD';
-            if (display !== 'code') {
-                if (display === 'symbol' || display === 'symbol-narrow') {
-                    currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
-                }
-                else {
-                    currency = display;
-                }
-            }
-            try {
-                var num = strToNumber(value);
-                return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(CurrencyPipe, error.message);
-            }
-        };
-        CurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory() { return new CurrencyPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return CurrencyPipe;
-    }());
-    function isEmpty(value) {
-        return value == null || value === '' || value !== value;
-    }
-    /**
-     * Transforms a string into a number (if needed).
-     */
-    function strToNumber(value) {
-        // Convert strings to numbers
-        if (typeof value === 'string' && !isNaN(Number(value) - parseFloat(value))) {
-            return Number(value);
-        }
-        if (typeof value !== 'number') {
-            throw new Error(value + " is not a number");
-        }
-        return value;
-    }
-
-    // clang-format off
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Formats a date value according to locale rules.
-     *
-     * Only the `en-US` locale data comes with Angular. To localize dates
-     * in another language, you must import the corresponding locale data.
-     * See the [I18n guide](guide/i18n#i18n-pipes) for more information.
-     *
-     * @see `formatDate()`
-     *
-     *
-     * @usageNotes
-     *
-     * The result of this pipe is not reevaluated when the input is mutated. To avoid the need to
-     * reformat the date on every change-detection cycle, treat the date as an immutable object
-     * and change the reference when the pipe needs to run again.
-     *
-     * ### Pre-defined format options
-     *
-     * Examples are given in `en-US` locale.
-     *
-     * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
-     * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
-     * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
-     * GMT+1`).
-     * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
-     * 9:03:01 AM GMT+01:00`).
-     * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
-     * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
-     * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
-     * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
-     * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
-     * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
-     * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
-     * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
-     *
-     * ### Custom format options
-     *
-     * You can construct a format string using symbols to specify the components
-     * of a date-time value, as described in the following table.
-     * Format details depend on the locale.
-     * Fields marked with (*) are only available in the extra data set for the given locale.
-     *
-     *  | Field type         | Format      | Description                                                   | Example Value                                              |
-     *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
-     *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
-     *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
-     *  |                    | GGGGG       | Narrow                                                        | A                                                          |
-     *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
-     *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
-     *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
-     *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
-     *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | MMMM        | Wide                                                          | September                                                  |
-     *  |                    | MMMMM       | Narrow                                                        | S                                                          |
-     *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | LLLL        | Wide                                                          | September                                                  |
-     *  |                    | LLLLL       | Narrow                                                        | S                                                          |
-     *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
-     *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
-     *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
-     *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
-     *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
-     *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
-     *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
-     *  |                    | EEEEE       | Narrow                                                        | T                                                          |
-     *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
-     *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
-     *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
-     *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
-     *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
-     *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | BBBBB       | Narrow                                                        | md                                                         |
-     *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
-     *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | bbbbb       | Narrow                                                        | md                                                         |
-     *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
-     *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
-     *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
-     *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
-     *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
-     *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
-     *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
-     *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
-     *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
-     *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
-     *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
-     *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
-     *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
-     *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
-     *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
-     *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
-     *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
-     *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
-     *
-     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
-     *
-     * ### Format examples
-     *
-     * These examples transform a date into various formats,
-     * assuming that `dateObj` is a JavaScript `Date` object for
-     * year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11,
-     * given in the local time for the `en-US` locale.
-     *
-     * ```
-     * {{ dateObj | date }}               // output is 'Jun 15, 2015'
-     * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
-     * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
-     * {{ dateObj | date:'mmss' }}        // output is '43:11'
-     * ```
-     *
-     * ### Usage example
-     *
-     * The following component uses a date pipe to display the current date in different formats.
-     *
-     * ```
-     * @Component({
-     *  selector: 'date-pipe',
-     *  template: `<div>
-     *    <p>Today is {{today | date}}</p>
-     *    <p>Or if you prefer, {{today | date:'fullDate'}}</p>
-     *    <p>The time is {{today | date:'h:mm a z'}}</p>
-     *  </div>`
-     * })
-     * // Get the current date and time as a date-time value.
-     * export class DatePipeComponent {
-     *   today: number = Date.now();
-     * }
-     * ```
-     *
-     */
-    // clang-format on
-    var DatePipe = /** @class */ (function () {
-        function DatePipe(locale) {
-            this.locale = locale;
-        }
-        /**
-         * @param value The date expression: a `Date` object,  a number
-         * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
-         * @param format The date/time components to include, using predefined options or a
-         * custom format string.
-         * @param timezone A timezone offset (such as `'+0430'`), or a standard
-         * UTC/GMT or continental US timezone abbreviation. Default is
-         * the local system timezone of the end-user's machine.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         * @returns A date string in the desired format.
-         */
-        DatePipe.prototype.transform = function (value, format, timezone, locale) {
-            if (format === void 0) { format = 'mediumDate'; }
-            if (value == null || value === '' || value !== value)
-                return null;
-            try {
-                return formatDate(value, format, locale || this.locale, timezone);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(DatePipe, error.message);
-            }
-        };
-        DatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory() { return new DatePipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return DatePipe;
-    }());
-
-    var _INTERPOLATION_REGEXP = /#/g;
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Maps a value to a string that pluralizes the value according to locale rules.
-     *
-     * @usageNotes
-     *
-     * ### Example
-     *
-     * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
-     *
-     * @experimental
-     */
-    var I18nPluralPipe = /** @class */ (function () {
-        function I18nPluralPipe(_localization) {
-            this._localization = _localization;
-        }
-        /**
-         * @param value the number to be formatted
-         * @param pluralMap an object that mimics the ICU format, see
-         * http://userguide.icu-project.org/formatparse/messages.
-         * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-         * default).
-         */
-        I18nPluralPipe.prototype.transform = function (value, pluralMap, locale) {
-            if (value == null)
-                return '';
-            if (typeof pluralMap !== 'object' || pluralMap === null) {
-                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
-            }
-            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
-            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
-        };
-        I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory() { return new I18nPluralPipe(i0.ɵdirectiveInject(NgLocalization)); }, pure: true });
-        return I18nPluralPipe;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Generic selector that displays the string that matches the current value.
-     *
-     * If none of the keys of the `mapping` match the `value`, then the content
-     * of the `other` key is returned when present, otherwise an empty string is returned.
-     *
-     * @usageNotes
-     *
-     * ### Example
-     *
-     * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
-     *
-     * @experimental
-     */
-    var I18nSelectPipe = /** @class */ (function () {
-        function I18nSelectPipe() {
-        }
-        /**
-         * @param value a string to be internationalized.
-         * @param mapping an object that indicates the text that should be displayed
-         * for different values of the provided `value`.
-         */
-        I18nSelectPipe.prototype.transform = function (value, mapping) {
-            if (value == null)
-                return '';
-            if (typeof mapping !== 'object' || typeof value !== 'string') {
-                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
-            }
-            if (mapping.hasOwnProperty(value)) {
-                return mapping[value];
-            }
-            if (mapping.hasOwnProperty('other')) {
-                return mapping['other'];
-            }
-            return '';
-        };
-        I18nSelectPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory() { return new I18nSelectPipe(); }, pure: true });
-        return I18nSelectPipe;
-    }());
-
-    function makeKeyValuePair(key, value) {
-        return { key: key, value: value };
-    }
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Transforms Object or Map into an array of key value pairs.
-     *
-     * The output array will be ordered by keys.
-     * By default the comparator will be by Unicode point value.
-     * You can optionally pass a compareFn if your keys are complex types.
-     *
-     * ## Examples
-     *
-     * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
-     * pipe.
-     *
-     * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
-     */
-    var KeyValuePipe = /** @class */ (function () {
-        function KeyValuePipe(differs) {
-            this.differs = differs;
-        }
-        KeyValuePipe.prototype.transform = function (input, compareFn) {
-            var _this = this;
-            if (compareFn === void 0) { compareFn = defaultComparator; }
-            if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
-                return null;
-            }
-            if (!this.differ) {
-                // make a differ for whatever type we've been passed in
-                this.differ = this.differs.find(input).create();
-            }
-            var differChanges = this.differ.diff(input);
-            if (differChanges) {
-                this.keyValues = [];
-                differChanges.forEachItem(function (r) {
-                    _this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
-                });
-                this.keyValues.sort(compareFn);
-            }
-            return this.keyValues;
-        };
-        KeyValuePipe.ngPipeDef = i0.ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory() { return new KeyValuePipe(i0.ɵdirectiveInject(i0.KeyValueDiffers)); }, pure: false });
-        return KeyValuePipe;
-    }());
-    function defaultComparator(keyValueA, keyValueB) {
-        var a = keyValueA.key;
-        var b = keyValueB.key;
-        // if same exit with 0;
-        if (a === b)
-            return 0;
-        // make sure that undefined are at the end of the sort.
-        if (a === undefined)
-            return 1;
-        if (b === undefined)
-            return -1;
-        // make sure that nulls are at the end of the sort.
-        if (a === null)
-            return 1;
-        if (b === null)
-            return -1;
-        if (typeof a == 'string' && typeof b == 'string') {
-            return a < b ? -1 : 1;
-        }
-        if (typeof a == 'number' && typeof b == 'number') {
-            return a - b;
-        }
-        if (typeof a == 'boolean' && typeof b == 'boolean') {
-            return a < b ? -1 : 1;
-        }
-        // `a` and `b` are of different types. Compare their string values.
-        var aString = String(a);
-        var bString = String(b);
-        return aString == bString ? 0 : aString < bString ? -1 : 1;
     }
 
     var NumberFormatter = /** @class */ (function () {
@@ -4759,153 +3978,6 @@
         return DateFormatter;
     }());
 
-    function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
-        if (currency === void 0) { currency = null; }
-        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
-        if (value == null)
-            return null;
-        // Convert strings to numbers
-        value = typeof value === 'string' && !isNaN(+value - parseFloat(value)) ? +value : value;
-        if (typeof value !== 'number') {
-            throw invalidPipeArgumentError(pipe, value);
-        }
-        var minInt;
-        var minFraction;
-        var maxFraction;
-        if (style !== exports.NumberFormatStyle.Currency) {
-            // rely on Intl default for currency
-            minInt = 1;
-            minFraction = 0;
-            maxFraction = 3;
-        }
-        if (digits) {
-            var parts = digits.match(NUMBER_FORMAT_REGEXP);
-            if (parts === null) {
-                throw new Error(digits + " is not a valid digit info for number pipes");
-            }
-            if (parts[1] != null) { // min integer digits
-                minInt = parseIntAutoRadix(parts[1]);
-            }
-            if (parts[3] != null) { // min fraction digits
-                minFraction = parseIntAutoRadix(parts[3]);
-            }
-            if (parts[5] != null) { // max fraction digits
-                maxFraction = parseIntAutoRadix(parts[5]);
-            }
-        }
-        return NumberFormatter.format(value, locale, style, {
-            minimumIntegerDigits: minInt,
-            minimumFractionDigits: minFraction,
-            maximumFractionDigits: maxFraction,
-            currency: currency,
-            currencyAsSymbol: currencyAsSymbol,
-        });
-    }
-    /**
-     * @ngModule CommonModule
-     *
-     * Formats a number as text. Group sizing and separator and other locale-specific
-     * configurations are based on the active locale.
-     *
-     * where `expression` is a number:
-     *  - `digitInfo` is a `string` which has a following format: <br>
-     *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
-     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
-     *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
-     *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
-     *
-     * For more information on the acceptable range for each of these numbers and other
-     * details see your native internationalization library.
-     *
-     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
-     *
-     * @usageNotes
-     *
-     * ### Example
-     *
-     * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
-     *
-     */
-    var DeprecatedDecimalPipe = /** @class */ (function () {
-        function DeprecatedDecimalPipe(_locale) {
-            this._locale = _locale;
-        }
-        DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
-            return formatNumber$1(DeprecatedDecimalPipe, this._locale, value, exports.NumberFormatStyle.Decimal, digits);
-        };
-        DeprecatedDecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory() { return new DeprecatedDecimalPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return DeprecatedDecimalPipe;
-    }());
-    /**
-     * @ngModule CommonModule
-     *
-     * @description
-     *
-     * Formats a number as percentage according to locale rules.
-     *
-     * - `digitInfo` See {@link DecimalPipe} for detailed description.
-     *
-     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
-     *
-     * @usageNotes
-     *
-     * ### Example
-     *
-     * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
-     *
-     *
-     */
-    var DeprecatedPercentPipe = /** @class */ (function () {
-        function DeprecatedPercentPipe(_locale) {
-            this._locale = _locale;
-        }
-        DeprecatedPercentPipe.prototype.transform = function (value, digits) {
-            return formatNumber$1(DeprecatedPercentPipe, this._locale, value, exports.NumberFormatStyle.Percent, digits);
-        };
-        DeprecatedPercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory() { return new DeprecatedPercentPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return DeprecatedPercentPipe;
-    }());
-    /**
-     * @ngModule CommonModule
-     * @description
-     *
-     * Formats a number as currency using locale rules.
-     *
-     * Use `currency` to format a number as currency.
-     *
-     * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
-     *    as `USD` for the US dollar and `EUR` for the euro.
-     * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
-     *   - `true`: use symbol (e.g. `$`).
-     *   - `false`(default): use code (e.g. `USD`).
-     * - `digitInfo` See {@link DecimalPipe} for detailed description.
-     *
-     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
-     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
-     *
-     * @usageNotes
-     *
-     * ### Example
-     *
-     * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
-     *
-     *
-     */
-    var DeprecatedCurrencyPipe = /** @class */ (function () {
-        function DeprecatedCurrencyPipe(_locale) {
-            this._locale = _locale;
-        }
-        DeprecatedCurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
-            if (currencyCode === void 0) { currencyCode = 'USD'; }
-            if (symbolDisplay === void 0) { symbolDisplay = false; }
-            return formatNumber$1(DeprecatedCurrencyPipe, this._locale, value, exports.NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
-        };
-        DeprecatedCurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory() { return new DeprecatedCurrencyPipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
-        return DeprecatedCurrencyPipe;
-    }());
-
     /**
      * @ngModule CommonModule
      * @description
@@ -5027,7 +4099,7 @@
             'mediumTime': 'jms',
             'shortTime': 'jm'
         };
-        DeprecatedDatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory() { return new DeprecatedDatePipe(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        DeprecatedDatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
         return DeprecatedDatePipe;
     }());
     function isDate$1(value) {
@@ -5041,23 +4113,152 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
+        if (currency === void 0) { currency = null; }
+        if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
+        if (value == null)
+            return null;
+        // Convert strings to numbers
+        value = typeof value === 'string' && !isNaN(+value - parseFloat(value)) ? +value : value;
+        if (typeof value !== 'number') {
+            throw invalidPipeArgumentError(pipe, value);
+        }
+        var minInt;
+        var minFraction;
+        var maxFraction;
+        if (style !== exports.NumberFormatStyle.Currency) {
+            // rely on Intl default for currency
+            minInt = 1;
+            minFraction = 0;
+            maxFraction = 3;
+        }
+        if (digits) {
+            var parts = digits.match(NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                throw new Error(digits + " is not a valid digit info for number pipes");
+            }
+            if (parts[1] != null) { // min integer digits
+                minInt = parseIntAutoRadix(parts[1]);
+            }
+            if (parts[3] != null) { // min fraction digits
+                minFraction = parseIntAutoRadix(parts[3]);
+            }
+            if (parts[5] != null) { // max fraction digits
+                maxFraction = parseIntAutoRadix(parts[5]);
+            }
+        }
+        return NumberFormatter.format(value, locale, style, {
+            minimumIntegerDigits: minInt,
+            minimumFractionDigits: minFraction,
+            maximumFractionDigits: maxFraction,
+            currency: currency,
+            currencyAsSymbol: currencyAsSymbol,
+        });
+    }
     /**
-     * A collection of Angular directives that are likely to be used in each and every Angular
-     * application.
+     * @ngModule CommonModule
+     *
+     * Formats a number as text. Group sizing and separator and other locale-specific
+     * configurations are based on the active locale.
+     *
+     * where `expression` is a number:
+     *  - `digitInfo` is a `string` which has a following format: <br>
+     *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
+     *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
+     *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
+     *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
+     *
+     * For more information on the acceptable range for each of these numbers and other
+     * details see your native internationalization library.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+     *
+     * @usageNotes
+     *
+     * ### Example
+     *
+     * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
+     *
      */
-    var COMMON_DIRECTIVES = [
-        NgClass,
-        NgComponentOutlet,
-        NgForOf,
-        NgIf,
-        NgTemplateOutlet,
-        NgStyle,
-        NgSwitch,
-        NgSwitchCase,
-        NgSwitchDefault,
-        NgPlural,
-        NgPluralCase,
-    ];
+    var DeprecatedDecimalPipe = /** @class */ (function () {
+        function DeprecatedDecimalPipe(_locale) {
+            this._locale = _locale;
+        }
+        DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
+            return formatNumber$1(DeprecatedDecimalPipe, this._locale, value, exports.NumberFormatStyle.Decimal, digits);
+        };
+        DeprecatedDecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return DeprecatedDecimalPipe;
+    }());
+    /**
+     * @ngModule CommonModule
+     *
+     * @description
+     *
+     * Formats a number as percentage according to locale rules.
+     *
+     * - `digitInfo` See {@link DecimalPipe} for detailed description.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+     *
+     * @usageNotes
+     *
+     * ### Example
+     *
+     * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
+     *
+     *
+     */
+    var DeprecatedPercentPipe = /** @class */ (function () {
+        function DeprecatedPercentPipe(_locale) {
+            this._locale = _locale;
+        }
+        DeprecatedPercentPipe.prototype.transform = function (value, digits) {
+            return formatNumber$1(DeprecatedPercentPipe, this._locale, value, exports.NumberFormatStyle.Percent, digits);
+        };
+        DeprecatedPercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return DeprecatedPercentPipe;
+    }());
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Formats a number as currency using locale rules.
+     *
+     * Use `currency` to format a number as currency.
+     *
+     * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+     *    as `USD` for the US dollar and `EUR` for the euro.
+     * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
+     *   - `true`: use symbol (e.g. `$`).
+     *   - `false`(default): use code (e.g. `USD`).
+     * - `digitInfo` See {@link DecimalPipe} for detailed description.
+     *
+     * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
+     * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
+     *
+     * @usageNotes
+     *
+     * ### Example
+     *
+     * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
+     *
+     *
+     */
+    var DeprecatedCurrencyPipe = /** @class */ (function () {
+        function DeprecatedCurrencyPipe(_locale) {
+            this._locale = _locale;
+        }
+        DeprecatedCurrencyPipe.prototype.transform = function (value, currencyCode, symbolDisplay, digits) {
+            if (currencyCode === void 0) { currencyCode = 'USD'; }
+            if (symbolDisplay === void 0) { symbolDisplay = false; }
+            return formatNumber$1(DeprecatedCurrencyPipe, this._locale, value, exports.NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        };
+        DeprecatedCurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return DeprecatedCurrencyPipe;
+    }());
 
     /**
      * @license
@@ -5072,6 +4273,924 @@
      * @deprecated from v5
      */
     var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var ObservableStrategy = /** @class */ (function () {
+        function ObservableStrategy() {
+        }
+        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+        };
+        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
+        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+        return ObservableStrategy;
+    }());
+    var PromiseStrategy = /** @class */ (function () {
+        function PromiseStrategy() {
+        }
+        PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.then(updateLatestValue, function (e) { throw e; });
+        };
+        PromiseStrategy.prototype.dispose = function (subscription) { };
+        PromiseStrategy.prototype.onDestroy = function (subscription) { };
+        return PromiseStrategy;
+    }());
+    var _promiseStrategy = new PromiseStrategy();
+    var _observableStrategy = new ObservableStrategy();
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Unwraps a value from an asynchronous primitive.
+     *
+     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
+     * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
+     * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * potential memory leaks.
+     *
+     * @usageNotes
+     *
+     * ### Examples
+     *
+     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
+     * promise.
+     *
+     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
+     *
+     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
+     * to the view. The Observable continuously updates the view with the current time.
+     *
+     * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
+     *
+     */
+    var AsyncPipe = /** @class */ (function () {
+        function AsyncPipe(_ref) {
+            this._ref = _ref;
+            this._latestValue = null;
+            this._latestReturnedValue = null;
+            this._subscription = null;
+            this._obj = null;
+            this._strategy = null;
+        }
+        AsyncPipe.prototype.ngOnDestroy = function () {
+            if (this._subscription) {
+                this._dispose();
+            }
+        };
+        AsyncPipe.prototype.transform = function (obj) {
+            if (!this._obj) {
+                if (obj) {
+                    this._subscribe(obj);
+                }
+                this._latestReturnedValue = this._latestValue;
+                return this._latestValue;
+            }
+            if (obj !== this._obj) {
+                this._dispose();
+                return this.transform(obj);
+            }
+            if (this._latestValue === this._latestReturnedValue) {
+                return this._latestReturnedValue;
+            }
+            this._latestReturnedValue = this._latestValue;
+            return i0.WrappedValue.wrap(this._latestValue);
+        };
+        AsyncPipe.prototype._subscribe = function (obj) {
+            var _this = this;
+            this._obj = obj;
+            this._strategy = this._selectStrategy(obj);
+            this._subscription = this._strategy.createSubscription(obj, function (value) { return _this._updateLatestValue(obj, value); });
+        };
+        AsyncPipe.prototype._selectStrategy = function (obj) {
+            if (i0.ɵisPromise(obj)) {
+                return _promiseStrategy;
+            }
+            if (i0.ɵisObservable(obj)) {
+                return _observableStrategy;
+            }
+            throw invalidPipeArgumentError(AsyncPipe, obj);
+        };
+        AsyncPipe.prototype._dispose = function () {
+            this._strategy.dispose(this._subscription);
+            this._latestValue = null;
+            this._latestReturnedValue = null;
+            this._subscription = null;
+            this._obj = null;
+        };
+        AsyncPipe.prototype._updateLatestValue = function (async, value) {
+            if (async === this._obj) {
+                this._latestValue = value;
+                this._ref.markForCheck();
+            }
+        };
+        AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵinjectChangeDetectorRef()); }, pure: false });
+        return AsyncPipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Transforms text to all lower case.
+     *
+     * @see `UpperCasePipe`
+     * @see `TitleCasePipe`
+     * @usageNotes
+     *
+     * The following example defines a view that allows the user to enter
+     * text, and then uses the pipe to convert the input text to all lower case.
+     *
+     * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
+     *
+     *
+     */
+    var LowerCasePipe = /** @class */ (function () {
+        function LowerCasePipe() {
+        }
+        /**
+         * @param value The string to transform to lower case.
+         */
+        LowerCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
+        };
+        LowerCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, pure: true });
+        return LowerCasePipe;
+    }());
+    //
+    // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
+    // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
+    // (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
+    // transpilation of this functionality down to ES5 without external tool, the only solution is
+    // to use already transpiled form. Example can be found here -
+    // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
+    //
+    var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08BD\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312E\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FEA\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AE\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDF00-\uDF19]|\uD806[\uDCA0-\uDCDF\uDCFF\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE83\uDE86-\uDE89\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F\uDFE0\uDFE1]|\uD821[\uDC00-\uDFEC]|\uD822[\uDC00-\uDEF2]|\uD82C[\uDC00-\uDD1E\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D])\S*/g;
+    /**
+     * Transforms text to title case.
+     * Capitalizes the first letter of each word, and transforms the
+     * rest of the word to lower case.
+     * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
+     *
+     * @see `LowerCasePipe`
+     * @see `UpperCasePipe`
+     *
+     * @usageNotes
+     * The following example shows the result of transforming various strings into title case.
+     *
+     * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
+     *
+     *
+     */
+    var TitleCasePipe = /** @class */ (function () {
+        function TitleCasePipe() {
+        }
+        /**
+         * @param value The string to transform to title case.
+         */
+        TitleCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(TitleCasePipe, value);
+            }
+            return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
+        };
+        TitleCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, pure: true });
+        return TitleCasePipe;
+    }());
+    /**
+     * Transforms text to all upper case.
+     * @see `LowerCasePipe`
+     * @see `TitleCasePipe`
+     */
+    var UpperCasePipe = /** @class */ (function () {
+        function UpperCasePipe() {
+        }
+        /**
+         * @param value The string to transform to upper case.
+         */
+        UpperCasePipe.prototype.transform = function (value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
+        };
+        UpperCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, pure: true });
+        return UpperCasePipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    // clang-format off
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Formats a date value according to locale rules.
+     *
+     * Only the `en-US` locale data comes with Angular. To localize dates
+     * in another language, you must import the corresponding locale data.
+     * See the [I18n guide](guide/i18n#i18n-pipes) for more information.
+     *
+     * @see `formatDate()`
+     *
+     *
+     * @usageNotes
+     *
+     * The result of this pipe is not reevaluated when the input is mutated. To avoid the need to
+     * reformat the date on every change-detection cycle, treat the date as an immutable object
+     * and change the reference when the pipe needs to run again.
+     *
+     * ### Pre-defined format options
+     *
+     * Examples are given in `en-US` locale.
+     *
+     * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
+     * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
+     * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
+     * GMT+1`).
+     * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
+     * 9:03:01 AM GMT+01:00`).
+     * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
+     * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
+     * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
+     * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
+     * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
+     * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
+     * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
+     * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+     *
+     * ### Custom format options
+     *
+     * You can construct a format string using symbols to specify the components
+     * of a date-time value, as described in the following table.
+     * Format details depend on the locale.
+     * Fields marked with (*) are only available in the extra data set for the given locale.
+     *
+     *  | Field type         | Format      | Description                                                   | Example Value                                              |
+     *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+     *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+     *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+     *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+     *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+     *  |                    | MMMM        | Wide                                                          | September                                                  |
+     *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+     *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+     *  |                    | LLLL        | Wide                                                          | September                                                  |
+     *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+     *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+     *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+     *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+     *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+     *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
+     *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+     *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+     *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+     *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+     *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+     *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+     *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+     *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+     *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+     *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+     *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+     *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+     *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+     *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+     *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+     *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+     *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+     *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+     *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+     *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+     *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+     *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+     *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+     *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+     *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+     *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+     *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+     *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+     *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+     *
+     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
+     *
+     * ### Format examples
+     *
+     * These examples transform a date into various formats,
+     * assuming that `dateObj` is a JavaScript `Date` object for
+     * year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11,
+     * given in the local time for the `en-US` locale.
+     *
+     * ```
+     * {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     * {{ dateObj | date:'mmss' }}        // output is '43:11'
+     * ```
+     *
+     * ### Usage example
+     *
+     * The following component uses a date pipe to display the current date in different formats.
+     *
+     * ```
+     * @Component({
+     *  selector: 'date-pipe',
+     *  template: `<div>
+     *    <p>Today is {{today | date}}</p>
+     *    <p>Or if you prefer, {{today | date:'fullDate'}}</p>
+     *    <p>The time is {{today | date:'h:mm a z'}}</p>
+     *  </div>`
+     * })
+     * // Get the current date and time as a date-time value.
+     * export class DatePipeComponent {
+     *   today: number = Date.now();
+     * }
+     * ```
+     *
+     */
+    // clang-format on
+    var DatePipe = /** @class */ (function () {
+        function DatePipe(locale) {
+            this.locale = locale;
+        }
+        /**
+         * @param value The date expression: a `Date` object,  a number
+         * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+         * @param format The date/time components to include, using predefined options or a
+         * custom format string.
+         * @param timezone A timezone offset (such as `'+0430'`), or a standard
+         * UTC/GMT or continental US timezone abbreviation. Default is
+         * the local system timezone of the end-user's machine.
+         * @param locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @returns A date string in the desired format.
+         */
+        DatePipe.prototype.transform = function (value, format, timezone, locale) {
+            if (format === void 0) { format = 'mediumDate'; }
+            if (value == null || value === '' || value !== value)
+                return null;
+            try {
+                return formatDate(value, format, locale || this.locale, timezone);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(DatePipe, error.message);
+            }
+        };
+        DatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return DatePipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var _INTERPOLATION_REGEXP = /#/g;
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Maps a value to a string that pluralizes the value according to locale rules.
+     *
+     * @usageNotes
+     *
+     * ### Example
+     *
+     * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
+     *
+     * @experimental
+     */
+    var I18nPluralPipe = /** @class */ (function () {
+        function I18nPluralPipe(_localization) {
+            this._localization = _localization;
+        }
+        /**
+         * @param value the number to be formatted
+         * @param pluralMap an object that mimics the ICU format, see
+         * http://userguide.icu-project.org/formatparse/messages.
+         * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+         * default).
+         */
+        I18nPluralPipe.prototype.transform = function (value, pluralMap, locale) {
+            if (value == null)
+                return '';
+            if (typeof pluralMap !== 'object' || pluralMap === null) {
+                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
+            }
+            var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
+            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+        };
+        I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵdirectiveInject(NgLocalization)); }, pure: true });
+        return I18nPluralPipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Generic selector that displays the string that matches the current value.
+     *
+     * If none of the keys of the `mapping` match the `value`, then the content
+     * of the `other` key is returned when present, otherwise an empty string is returned.
+     *
+     * @usageNotes
+     *
+     * ### Example
+     *
+     * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+     *
+     * @experimental
+     */
+    var I18nSelectPipe = /** @class */ (function () {
+        function I18nSelectPipe() {
+        }
+        /**
+         * @param value a string to be internationalized.
+         * @param mapping an object that indicates the text that should be displayed
+         * for different values of the provided `value`.
+         */
+        I18nSelectPipe.prototype.transform = function (value, mapping) {
+            if (value == null)
+                return '';
+            if (typeof mapping !== 'object' || typeof value !== 'string') {
+                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
+            }
+            if (mapping.hasOwnProperty(value)) {
+                return mapping[value];
+            }
+            if (mapping.hasOwnProperty('other')) {
+                return mapping['other'];
+            }
+            return '';
+        };
+        I18nSelectPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
+        return I18nSelectPipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Converts a value into its JSON-format representation.  Useful for debugging.
+     *
+     * @usageNotes
+     *
+     * The following component uses a JSON pipe to convert an object
+     * to JSON format, and displays the string in both formats for comparison.
+     *
+     * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+     *
+     */
+    var JsonPipe = /** @class */ (function () {
+        function JsonPipe() {
+        }
+        /**
+         * @param value A value of any type to convert into a JSON-format string.
+         */
+        JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
+        JsonPipe.ngPipeDef = i0.ɵdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, pure: false });
+        return JsonPipe;
+    }());
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    function makeKeyValuePair(key, value) {
+        return { key: key, value: value };
+    }
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Transforms Object or Map into an array of key value pairs.
+     *
+     * The output array will be ordered by keys.
+     * By default the comparator will be by Unicode point value.
+     * You can optionally pass a compareFn if your keys are complex types.
+     *
+     * ## Examples
+     *
+     * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+     * pipe.
+     *
+     * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+     */
+    var KeyValuePipe = /** @class */ (function () {
+        function KeyValuePipe(differs) {
+            this.differs = differs;
+        }
+        KeyValuePipe.prototype.transform = function (input, compareFn) {
+            var _this = this;
+            if (compareFn === void 0) { compareFn = defaultComparator; }
+            if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+                return null;
+            }
+            if (!this.differ) {
+                // make a differ for whatever type we've been passed in
+                this.differ = this.differs.find(input).create();
+            }
+            var differChanges = this.differ.diff(input);
+            if (differChanges) {
+                this.keyValues = [];
+                differChanges.forEachItem(function (r) {
+                    _this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+                });
+                this.keyValues.sort(compareFn);
+            }
+            return this.keyValues;
+        };
+        KeyValuePipe.ngPipeDef = i0.ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵdirectiveInject(i0.KeyValueDiffers)); }, pure: false });
+        return KeyValuePipe;
+    }());
+    function defaultComparator(keyValueA, keyValueB) {
+        var a = keyValueA.key;
+        var b = keyValueB.key;
+        // if same exit with 0;
+        if (a === b)
+            return 0;
+        // make sure that undefined are at the end of the sort.
+        if (a === undefined)
+            return 1;
+        if (b === undefined)
+            return -1;
+        // make sure that nulls are at the end of the sort.
+        if (a === null)
+            return 1;
+        if (b === null)
+            return -1;
+        if (typeof a == 'string' && typeof b == 'string') {
+            return a < b ? -1 : 1;
+        }
+        if (typeof a == 'number' && typeof b == 'number') {
+            return a - b;
+        }
+        if (typeof a == 'boolean' && typeof b == 'boolean') {
+            return a < b ? -1 : 1;
+        }
+        // `a` and `b` are of different types. Compare their string values.
+        var aString = String(a);
+        var bString = String(b);
+        return aString == bString ? 0 : aString < bString ? -1 : 1;
+    }
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Transforms a number into a string,
+     * formatted according to locale rules that determine group sizing and
+     * separator, decimal-point character, and other locale-specific
+     * configurations.
+     *
+     * If no parameters are specified, the function rounds off to the nearest value using this
+     * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
+     * The behavior differs from that of the JavaScript ```Math.round()``` function.
+     * In the following case for example, the pipe rounds down where
+     * ```Math.round()``` rounds up:
+     *
+     * ```html
+     * -2.5 | number:'1.0-0'
+     * > -3
+     * Math.round(-2.5)
+     * > -2
+     * ```
+     *
+     * @see `formatNumber()`
+     *
+     * @usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * ### Example
+     *
+     * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
+     *
+     */
+    var DecimalPipe = /** @class */ (function () {
+        function DecimalPipe(_locale) {
+            this._locale = _locale;
+        }
+        /**
+         * @param value The number to be formatted.
+         * @param digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `0`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `3`.
+         * @param locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         */
+        DecimalPipe.prototype.transform = function (value, digitsInfo, locale) {
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            try {
+                var num = strToNumber(value);
+                return formatNumber(num, locale, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(DecimalPipe, error.message);
+            }
+        };
+        DecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return DecimalPipe;
+    }());
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Transforms a number to a percentage
+     * string, formatted according to locale rules that determine group sizing and
+     * separator, decimal-point character, and other locale-specific
+     * configurations.
+     *
+     * @see `formatPercent()`
+     *
+     * @usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
+     *
+     *
+     */
+    var PercentPipe = /** @class */ (function () {
+        function PercentPipe(_locale) {
+            this._locale = _locale;
+        }
+        /**
+         *
+         * @param value The number to be formatted as a percentage.
+         * @param digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `0`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `3`.
+         * @param locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         */
+        PercentPipe.prototype.transform = function (value, digitsInfo, locale) {
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            try {
+                var num = strToNumber(value);
+                return formatPercent(num, locale, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(PercentPipe, error.message);
+            }
+        };
+        PercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return PercentPipe;
+    }());
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Transforms a number to a currency string, formatted according to locale rules
+     * that determine group sizing and separator, decimal-point character,
+     * and other locale-specific configurations.
+     *
+     * @see `getCurrencySymbol()`
+     * @see `formatCurrency()`
+     *
+     * @usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
+     *
+     *
+     */
+    var CurrencyPipe = /** @class */ (function () {
+        function CurrencyPipe(_locale) {
+            this._locale = _locale;
+        }
+        /**
+         *
+         * @param value The number to be formatted as currency.
+         * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+         * such as `USD` for the US dollar and `EUR` for the euro.
+         * @param display The format for the currency indicator. One of the following:
+         *   - `code`: Show the code (such as `USD`).
+         *   - `symbol`(default): Show the symbol (such as `$`).
+         *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+         * currency.
+         * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+         * locale has no narrow symbol, uses the standard symbol for the locale.
+         *   - String: Use the given string value instead of a code or a symbol.
+         *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+         *
+         * @param digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `0`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `3`.
+         * If not provided, the number will be formatted with the proper amount of digits,
+         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+         * @param locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         */
+        CurrencyPipe.prototype.transform = function (value, currencyCode, display, digitsInfo, locale) {
+            if (display === void 0) { display = 'symbol'; }
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            if (typeof display === 'boolean') {
+                if (console && console.warn) {
+                    console.warn("Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are \"code\", \"symbol\" or \"symbol-narrow\".");
+                }
+                display = display ? 'symbol' : 'code';
+            }
+            var currency = currencyCode || 'USD';
+            if (display !== 'code') {
+                if (display === 'symbol' || display === 'symbol-narrow') {
+                    currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
+                }
+                else {
+                    currency = display;
+                }
+            }
+            try {
+                var num = strToNumber(value);
+                return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(CurrencyPipe, error.message);
+            }
+        };
+        CurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵdirectiveInject(i0.LOCALE_ID)); }, pure: true });
+        return CurrencyPipe;
+    }());
+    function isEmpty(value) {
+        return value == null || value === '' || value !== value;
+    }
+    /**
+     * Transforms a string into a number (if needed).
+     */
+    function strToNumber(value) {
+        // Convert strings to numbers
+        if (typeof value === 'string' && !isNaN(Number(value) - parseFloat(value))) {
+            return Number(value);
+        }
+        if (typeof value !== 'number') {
+            throw new Error(value + " is not a number");
+        }
+        return value;
+    }
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @ngModule CommonModule
+     * @description
+     *
+     * Creates a new `Array` or `String` containing a subset (slice) of the elements.
+     *
+     * @usageNotes
+     *
+     * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
+     * and `String.prototype.slice()`.
+     *
+     * When operating on an `Array`, the returned `Array` is always a copy even when all
+     * the elements are being returned.
+     *
+     * When operating on a blank value, the pipe returns the blank value.
+     *
+     * ### List Example
+     *
+     * This `ngFor` example:
+     *
+     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
+     *
+     * produces the following:
+     *
+     * ```html
+     * <li>b</li>
+     * <li>c</li>
+     * ```
+     *
+     * ### String Examples
+     *
+     * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
+     *
+     */
+    var SlicePipe = /** @class */ (function () {
+        function SlicePipe() {
+        }
+        /**
+         * @param value a list or a string to be sliced.
+         * @param start the starting index of the subset to return:
+         *   - **a positive integer**: return the item at `start` index and all items after
+         *     in the list or string expression.
+         *   - **a negative integer**: return the item at `start` index from the end and all items after
+         *     in the list or string expression.
+         *   - **if positive and greater than the size of the expression**: return an empty list or
+         * string.
+         *   - **if negative and greater than the size of the expression**: return entire list or string.
+         * @param end the ending index of the subset to return:
+         *   - **omitted**: return all items until the end.
+         *   - **if positive**: return all items before `end` index of the list or string.
+         *   - **if negative**: return all items before `end` index from the end of the list or string.
+         */
+        SlicePipe.prototype.transform = function (value, start, end) {
+            if (value == null)
+                return value;
+            if (!this.supports(value)) {
+                throw invalidPipeArgumentError(SlicePipe, value);
+            }
+            return value.slice(start, end);
+        };
+        SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+        SlicePipe.ngPipeDef = i0.ɵdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
+        return SlicePipe;
+    }());
 
     /**
      * @license
@@ -5099,6 +5218,13 @@
         KeyValuePipe,
     ];
 
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     // Note: This does not contain the location providers,
     // as they need some platform specific implementations to work.
     /**
@@ -5110,7 +5236,7 @@
         function CommonModule() {
         }
         CommonModule.ngModuleDef = i0.ɵdefineNgModule({ type: CommonModule, bootstrap: [], declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], imports: [], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] });
-        CommonModule.ngInjectorDef = i0.defineInjector({ factory: function CommonModule_Factory() { return new CommonModule(); }, providers: [
+        CommonModule.ngInjectorDef = i0.defineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
                 { provide: NgLocalization, useClass: NgLocaleLocalization },
             ], imports: [[COMMON_DIRECTIVES, COMMON_PIPES]] });
         return CommonModule;
@@ -5124,7 +5250,7 @@
         function DeprecatedI18NPipesModule() {
         }
         DeprecatedI18NPipesModule.ngModuleDef = i0.ɵdefineNgModule({ type: DeprecatedI18NPipesModule, bootstrap: [], declarations: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe], imports: [], exports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
-        DeprecatedI18NPipesModule.ngInjectorDef = i0.defineInjector({ factory: function DeprecatedI18NPipesModule_Factory() { return new DeprecatedI18NPipesModule(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }], imports: [[COMMON_DEPRECATED_I18N_PIPES]] });
+        DeprecatedI18NPipesModule.ngInjectorDef = i0.defineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }], imports: [[COMMON_DEPRECATED_I18N_PIPES]] });
         return DeprecatedI18NPipesModule;
     }());
 
@@ -5192,7 +5318,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new i0.Version('7.0.0-beta.1+10.sha-b64fed1');
+    var VERSION = new i0.Version('7.0.0-beta.1+52.sha-1f11039');
 
     /**
      * @license
