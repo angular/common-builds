@@ -1,10 +1,11 @@
 /**
- * @license Angular v7.0.0-beta.3+30.sha-3d41739
+ * @license Angular v7.0.0-beta.3+39.sha-9bcd8c2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
+import { __decorate } from 'tslib';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -338,9 +339,9 @@ var HttpClientTestingBackend = /** @class */ (function () {
             return "Match by function: " + matcher.name;
         }
     };
-    HttpClientTestingBackend.decorators = [
-        { type: Injectable }
-    ];
+    HttpClientTestingBackend = __decorate([
+        Injectable()
+    ], HttpClientTestingBackend);
     return HttpClientTestingBackend;
 }());
 
@@ -361,18 +362,18 @@ var HttpClientTestingBackend = /** @class */ (function () {
 var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
-    HttpClientTestingModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        HttpClientModule,
-                    ],
-                    providers: [
-                        HttpClientTestingBackend,
-                        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-                    ],
-                },] }
-    ];
+    HttpClientTestingModule = __decorate([
+        NgModule({
+            imports: [
+                HttpClientModule,
+            ],
+            providers: [
+                HttpClientTestingBackend,
+                { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+                { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+            ],
+        })
+    ], HttpClientTestingModule);
     return HttpClientTestingModule;
 }());
 

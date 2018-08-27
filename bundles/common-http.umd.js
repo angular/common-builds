@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.3+30.sha-3d41739
+ * @license Angular v7.0.0-beta.3+39.sha-9bcd8c2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -77,6 +77,21 @@
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
     }
 
     function __read(o, n) {
@@ -1152,13 +1167,10 @@
             if (options === void 0) { options = {}; }
             return this.request('PUT', url, addBody(options, body));
         };
-        HttpClient.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        HttpClient.ctorParameters = function () { return [
-            { type: HttpHandler }
-        ]; };
+        HttpClient = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [HttpHandler])
+        ], HttpClient);
         return HttpClient;
     }());
 
@@ -1197,9 +1209,9 @@
         NoopInterceptor.prototype.intercept = function (req, next) {
             return next.handle(req);
         };
-        NoopInterceptor.decorators = [
-            { type: core.Injectable }
-        ];
+        NoopInterceptor = __decorate([
+            core.Injectable()
+        ], NoopInterceptor);
         return NoopInterceptor;
     }());
 
@@ -1375,14 +1387,11 @@
                 };
             });
         };
-        JsonpClientBackend.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        JsonpClientBackend.ctorParameters = function () { return [
-            { type: JsonpCallbackContext },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
-        ]; };
+        JsonpClientBackend = __decorate([
+            core.Injectable(),
+            __param(1, core.Inject(common.DOCUMENT)),
+            __metadata("design:paramtypes", [JsonpCallbackContext, Object])
+        ], JsonpClientBackend);
         return JsonpClientBackend;
     }());
     /**
@@ -1402,13 +1411,10 @@
             // Fall through for normal HTTP requests.
             return next.handle(req);
         };
-        JsonpInterceptor.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        JsonpInterceptor.ctorParameters = function () { return [
-            { type: JsonpClientBackend }
-        ]; };
+        JsonpInterceptor = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [JsonpClientBackend])
+        ], JsonpInterceptor);
         return JsonpInterceptor;
     }());
 
@@ -1452,11 +1458,10 @@
         function BrowserXhr() {
         }
         BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
-        BrowserXhr.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        BrowserXhr.ctorParameters = function () { return []; };
+        BrowserXhr = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [])
+        ], BrowserXhr);
         return BrowserXhr;
     }());
     /**
@@ -1701,13 +1706,10 @@
                 };
             });
         };
-        HttpXhrBackend.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        HttpXhrBackend.ctorParameters = function () { return [
-            { type: XhrFactory }
-        ]; };
+        HttpXhrBackend = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [XhrFactory])
+        ], HttpXhrBackend);
         return HttpXhrBackend;
     }());
 
@@ -1757,15 +1759,12 @@
             }
             return this.lastToken;
         };
-        HttpXsrfCookieExtractor.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        HttpXsrfCookieExtractor.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
-            { type: String, decorators: [{ type: core.Inject, args: [XSRF_COOKIE_NAME,] }] }
-        ]; };
+        HttpXsrfCookieExtractor = __decorate([
+            core.Injectable(),
+            __param(0, core.Inject(common.DOCUMENT)), __param(1, core.Inject(core.PLATFORM_ID)),
+            __param(2, core.Inject(XSRF_COOKIE_NAME)),
+            __metadata("design:paramtypes", [Object, String, String])
+        ], HttpXsrfCookieExtractor);
         return HttpXsrfCookieExtractor;
     }());
     /**
@@ -1793,14 +1792,11 @@
             }
             return next.handle(req);
         };
-        HttpXsrfInterceptor.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        HttpXsrfInterceptor.ctorParameters = function () { return [
-            { type: HttpXsrfTokenExtractor },
-            { type: String, decorators: [{ type: core.Inject, args: [XSRF_HEADER_NAME,] }] }
-        ]; };
+        HttpXsrfInterceptor = __decorate([
+            core.Injectable(),
+            __param(1, core.Inject(XSRF_HEADER_NAME)),
+            __metadata("design:paramtypes", [HttpXsrfTokenExtractor, String])
+        ], HttpXsrfInterceptor);
         return HttpXsrfInterceptor;
     }());
 
@@ -1833,14 +1829,10 @@
             }
             return this.chain.handle(req);
         };
-        HttpInterceptingHandler.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        HttpInterceptingHandler.ctorParameters = function () { return [
-            { type: HttpBackend },
-            { type: core.Injector }
-        ]; };
+        HttpInterceptingHandler = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [HttpBackend, core.Injector])
+        ], HttpInterceptingHandler);
         return HttpInterceptingHandler;
     }());
     /**
@@ -1872,12 +1864,13 @@
     var HttpClientXsrfModule = /** @class */ (function () {
         function HttpClientXsrfModule() {
         }
+        HttpClientXsrfModule_1 = HttpClientXsrfModule;
         /**
          * Disable the default XSRF protection.
          */
         HttpClientXsrfModule.disable = function () {
             return {
-                ngModule: HttpClientXsrfModule,
+                ngModule: HttpClientXsrfModule_1,
                 providers: [
                     { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
                 ],
@@ -1894,24 +1887,25 @@
         HttpClientXsrfModule.withOptions = function (options) {
             if (options === void 0) { options = {}; }
             return {
-                ngModule: HttpClientXsrfModule,
+                ngModule: HttpClientXsrfModule_1,
                 providers: [
                     options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
                     options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
                 ],
             };
         };
-        HttpClientXsrfModule.decorators = [
-            { type: core.NgModule, args: [{
-                        providers: [
-                            HttpXsrfInterceptor,
-                            { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
-                            { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
-                            { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
-                            { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-                        ],
-                    },] }
-        ];
+        var HttpClientXsrfModule_1;
+        HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
+            core.NgModule({
+                providers: [
+                    HttpXsrfInterceptor,
+                    { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                    { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                    { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                    { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                ],
+            })
+        ], HttpClientXsrfModule);
         return HttpClientXsrfModule;
     }());
     /**
@@ -1925,30 +1919,30 @@
     var HttpClientModule = /** @class */ (function () {
         function HttpClientModule() {
         }
-        HttpClientModule.decorators = [
-            { type: core.NgModule, args: [{
-                        /**
-                         * Optional configuration for XSRF protection.
-                         */
-                        imports: [
-                            HttpClientXsrfModule.withOptions({
-                                cookieName: 'XSRF-TOKEN',
-                                headerName: 'X-XSRF-TOKEN',
-                            }),
-                        ],
-                        /**
-                         * The module provides `HttpClient` itself, and supporting services.
-                         */
-                        providers: [
-                            HttpClient,
-                            { provide: HttpHandler, useClass: HttpInterceptingHandler },
-                            HttpXhrBackend,
-                            { provide: HttpBackend, useExisting: HttpXhrBackend },
-                            BrowserXhr,
-                            { provide: XhrFactory, useExisting: BrowserXhr },
-                        ],
-                    },] }
-        ];
+        HttpClientModule = __decorate([
+            core.NgModule({
+                /**
+                 * Optional configuration for XSRF protection.
+                 */
+                imports: [
+                    HttpClientXsrfModule.withOptions({
+                        cookieName: 'XSRF-TOKEN',
+                        headerName: 'X-XSRF-TOKEN',
+                    }),
+                ],
+                /**
+                 * The module provides `HttpClient` itself, and supporting services.
+                 */
+                providers: [
+                    HttpClient,
+                    { provide: HttpHandler, useClass: HttpInterceptingHandler },
+                    HttpXhrBackend,
+                    { provide: HttpBackend, useExisting: HttpXhrBackend },
+                    BrowserXhr,
+                    { provide: XhrFactory, useExisting: BrowserXhr },
+                ],
+            })
+        ], HttpClientModule);
         return HttpClientModule;
     }());
     /**
@@ -1962,15 +1956,15 @@
     var HttpClientJsonpModule = /** @class */ (function () {
         function HttpClientJsonpModule() {
         }
-        HttpClientJsonpModule.decorators = [
-            { type: core.NgModule, args: [{
-                        providers: [
-                            JsonpClientBackend,
-                            { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
-                            { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-                        ],
-                    },] }
-        ];
+        HttpClientJsonpModule = __decorate([
+            core.NgModule({
+                providers: [
+                    JsonpClientBackend,
+                    { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                    { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                ],
+            })
+        ], HttpClientJsonpModule);
         return HttpClientJsonpModule;
     }());
 
