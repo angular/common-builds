@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.3+63.sha-c230173
+ * @license Angular v7.0.0-beta.3+67.sha-0024d68
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -798,7 +798,7 @@ class HttpRequest {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @enum {number} */
-const HttpEventType = {
+var HttpEventType = {
     /**
        * The request was sent out over the wire.
        */
@@ -1744,7 +1744,7 @@ class HttpXhrBackend {
                 }
             }
             // Fire the request, and notify the event stream that it was fired.
-            xhr.send(reqBody);
+            xhr.send(/** @type {?} */ ((reqBody)));
             observer.next({ type: HttpEventType.Sent });
             // This is the return from the Observable function, which is the
             // request cancellation handler.
