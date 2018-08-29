@@ -12,6 +12,8 @@ import { PipeTransform } from '@angular/core';
  *
  * Creates a new `Array` or `String` containing a subset (slice) of the elements.
  *
+ * @usageNotes
+ *
  * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
  * and `String.prototype.slice()`.
  *
@@ -28,13 +30,14 @@ import { PipeTransform } from '@angular/core';
  *
  * produces the following:
  *
- *     <li>b</li>
- *     <li>c</li>
+ * ```html
+ * <li>b</li>
+ * <li>c</li>
+ * ```
  *
- * ## String Examples
+ * ### String Examples
  *
  * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
- *
  *
  */
 export declare class SlicePipe implements PipeTransform {
@@ -54,5 +57,5 @@ export declare class SlicePipe implements PipeTransform {
      *   - **if negative**: return all items before `end` index from the end of the list or string.
      */
     transform(value: any, start: number, end?: number): any;
-    private supports(obj);
+    private supports;
 }

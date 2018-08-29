@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.0.0-rc.5+217.sha-5dafa1a
+ * @license Angular v7.0.0-beta.3+76.sha-693c387
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
+import { __extends, __decorate, __metadata } from 'tslib';
 import { EventEmitter, Injectable } from '@angular/core';
-import { __extends } from 'tslib';
 import { LocationStrategy } from '@angular/common';
 
 /**
@@ -104,9 +104,9 @@ var SpyLocation = /** @class */ (function () {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
-    SpyLocation.decorators = [
-        { type: Injectable }
-    ];
+    SpyLocation = __decorate([
+        Injectable()
+    ], SpyLocation);
     return SpyLocation;
 }());
 var LocationState = /** @class */ (function () {
@@ -181,11 +181,10 @@ var MockLocationStrategy = /** @class */ (function (_super) {
         }
     };
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
-    MockLocationStrategy.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    MockLocationStrategy.ctorParameters = function () { return []; };
+    MockLocationStrategy = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [])
+    ], MockLocationStrategy);
     return MockLocationStrategy;
 }(LocationStrategy));
 var _MockPopStateEvent = /** @class */ (function () {
@@ -212,7 +211,6 @@ var _MockPopStateEvent = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-
 // This file only reexports content of the `src` folder. Keep it that way.
 
 /**

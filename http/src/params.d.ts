@@ -25,10 +25,10 @@ export interface HttpParameterCodec {
  *
  */
 export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
-    encodeKey(k: string): string;
-    encodeValue(v: string): string;
-    decodeKey(k: string): string;
-    decodeValue(v: string): string;
+    encodeKey(key: string): string;
+    encodeValue(value: string): string;
+    decodeKey(key: string): string;
+    decodeValue(value: string): string;
 }
 /** Options used to construct an `HttpParams` instance. */
 export interface HttpParamsOptions {
@@ -93,6 +93,6 @@ export declare class HttpParams {
      * separated by `&`s.
      */
     toString(): string;
-    private clone(update);
-    private init();
+    private clone;
+    private init;
 }

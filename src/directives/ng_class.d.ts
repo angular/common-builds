@@ -49,8 +49,8 @@ export declare class NgClass implements DoCheck {
         [klass: string]: any;
     };
     ngDoCheck(): void;
-    private _applyKeyValueChanges(changes);
-    private _applyIterableChanges(changes);
+    private _applyKeyValueChanges;
+    private _applyIterableChanges;
     /**
      * Applies a collection of CSS classes to the DOM element.
      *
@@ -59,11 +59,11 @@ export declare class NgClass implements DoCheck {
      * For argument of type Map CSS class name in the map's key is toggled based on the value (added
      * for truthy and removed for falsy).
      */
-    private _applyClasses(rawClassVal);
+    private _applyClasses;
     /**
      * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
      * purposes.
      */
-    private _removeClasses(rawClassVal);
-    private _toggleClass(klass, enabled);
+    private _removeClasses;
+    private _toggleClass;
 }

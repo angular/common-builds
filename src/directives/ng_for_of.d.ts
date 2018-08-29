@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck, IterableDiffers, NgIterable, OnChanges, SimpleChanges, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+import { DoCheck, IterableDiffers, NgIterable, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
 export declare class NgForOfContext<T> {
     $implicit: T;
     ngForOf: NgIterable<T>;
@@ -21,6 +21,8 @@ export declare class NgForOfContext<T> {
  * The `NgForOf` directive instantiates a template once per item from an iterable. The context
  * for each instantiated template inherits from the outer context with the given loop variable
  * set to the current item from the iterable.
+ *
+ * @usageNotes
  *
  * ### Local Variables
  *
@@ -87,19 +89,20 @@ export declare class NgForOfContext<T> {
  *
  *
  */
-export declare class NgForOf<T> implements DoCheck, OnChanges {
+export declare class NgForOf<T> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
     ngForOf: NgIterable<T>;
     ngForTrackBy: TrackByFunction<T>;
+    private _ngForOf;
+    private _ngForOfDirty;
     private _differ;
     private _trackByFn;
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers);
     ngForTemplate: TemplateRef<NgForOfContext<T>>;
-    ngOnChanges(changes: SimpleChanges): void;
     ngDoCheck(): void;
-    private _applyChanges(changes);
-    private _perViewChange(view, record);
+    private _applyChanges;
+    private _perViewChange;
 }
 export declare function getTypeNameForDebugging(type: any): string;

@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { LocationStrategy } from './location_strategy';
 import { LocationChangeListener, PlatformLocation } from './platform_location';
 /**
@@ -9,6 +16,8 @@ import { LocationChangeListener, PlatformLocation } from './platform_location';
  *
  * For instance, if you call `location.go('/foo')`, the browser's URL will become
  * `example.com#/foo`.
+ *
+ * @usageNotes
  *
  * ### Example
  *
