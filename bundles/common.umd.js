@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.4
+ * @license Angular v7.0.0-beta.4+20.sha-00f1311
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2806,7 +2806,7 @@
                 });
             }
         };
-        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [i0.ɵPublicFeature] });
+        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵinjectRenderer2()); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [i0.ɵPublicFeature] });
         return NgClass;
     }());
 
@@ -3656,7 +3656,7 @@
                 this._renderer.removeStyle(this._ngEl.nativeElement, name);
             }
         };
-        NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [i0.ɵPublicFeature] });
+        NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵinjectElementRef(), i0.ɵinjectRenderer2()); }, inputs: { ngStyle: "ngStyle" }, features: [i0.ɵPublicFeature] });
         return NgStyle;
     }());
 
@@ -5318,7 +5318,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new i0.Version('7.0.0-beta.4');
+    var VERSION = new i0.Version('7.0.0-beta.4+20.sha-00f1311');
 
     /**
      * @license
