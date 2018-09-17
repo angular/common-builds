@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.0.0-beta.2+28.sha-21a1440
+ * @license Angular v7.0.0-beta.5+32.sha-47f4412
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, defineInjectable, inject, Version, ComponentFactoryResolver, NgModuleRef, IterableDiffers, isDevMode, WrappedValue, ɵisObservable, ɵisPromise, ɵstringify, LOCALE_ID, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵdefineNgModule, defineInjector, ɵdefineDirective, ɵinjectViewContainerRef, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectTemplateRef, ɵdirectiveInject, ɵinjectElementRef, ɵinjectAttribute, ɵdefinePipe, ɵinjectChangeDetectorRef } from '@angular/core';
-import { __read, __extends, __values, __assign } from 'tslib';
+import { InjectionToken, EventEmitter, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, IterableDiffers, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectRenderer2, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
  * @license
@@ -2810,7 +2810,7 @@ var NgClass = /** @class */ (function () {
             });
         }
     };
-    NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [ɵPublicFeature] });
+    NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵinjectRenderer2()); }, inputs: { klass: "class", ngClass: "ngClass" }, features: [ɵPublicFeature] });
     return NgClass;
 }());
 
@@ -3660,7 +3660,7 @@ var NgStyle = /** @class */ (function () {
             this._renderer.removeStyle(this._ngEl.nativeElement, name);
         }
     };
-    NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [ɵPublicFeature] });
+    NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(ɵdirectiveInject(KeyValueDiffers), ɵinjectElementRef(), ɵinjectRenderer2()); }, inputs: { ngStyle: "ngStyle" }, features: [ɵPublicFeature] });
     return NgStyle;
 }());
 
@@ -5322,7 +5322,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-beta.2+28.sha-21a1440');
+var VERSION = new Version('7.0.0-beta.5+32.sha-47f4412');
 
 /**
  * @license
