@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.2+28.sha-21a1440
+ * @license Angular v7.0.0-beta.5+32.sha-47f4412
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -783,7 +783,7 @@ const CURRENCIES_EN = {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @enum {number} */
-const NumberFormatStyle = {
+var NumberFormatStyle = {
     Decimal: 0,
     Percent: 1,
     Currency: 2,
@@ -794,7 +794,7 @@ NumberFormatStyle[NumberFormatStyle.Percent] = 'Percent';
 NumberFormatStyle[NumberFormatStyle.Currency] = 'Currency';
 NumberFormatStyle[NumberFormatStyle.Scientific] = 'Scientific';
 /** @enum {number} */
-const Plural = {
+var Plural = {
     Zero: 0,
     One: 1,
     Two: 2,
@@ -809,14 +809,14 @@ Plural[Plural.Few] = 'Few';
 Plural[Plural.Many] = 'Many';
 Plural[Plural.Other] = 'Other';
 /** @enum {number} */
-const FormStyle = {
+var FormStyle = {
     Format: 0,
     Standalone: 1,
 };
 FormStyle[FormStyle.Format] = 'Format';
 FormStyle[FormStyle.Standalone] = 'Standalone';
 /** @enum {number} */
-const TranslationWidth = {
+var TranslationWidth = {
     Narrow: 0,
     Abbreviated: 1,
     Wide: 2,
@@ -827,7 +827,7 @@ TranslationWidth[TranslationWidth.Abbreviated] = 'Abbreviated';
 TranslationWidth[TranslationWidth.Wide] = 'Wide';
 TranslationWidth[TranslationWidth.Short] = 'Short';
 /** @enum {number} */
-const FormatWidth = {
+var FormatWidth = {
     Short: 0,
     Medium: 1,
     Long: 2,
@@ -838,7 +838,7 @@ FormatWidth[FormatWidth.Medium] = 'Medium';
 FormatWidth[FormatWidth.Long] = 'Long';
 FormatWidth[FormatWidth.Full] = 'Full';
 /** @enum {number} */
-const NumberSymbol = {
+var NumberSymbol = {
     Decimal: 0,
     Group: 1,
     List: 2,
@@ -869,7 +869,7 @@ NumberSymbol[NumberSymbol.TimeSeparator] = 'TimeSeparator';
 NumberSymbol[NumberSymbol.CurrencyDecimal] = 'CurrencyDecimal';
 NumberSymbol[NumberSymbol.CurrencyGroup] = 'CurrencyGroup';
 /** @enum {number} */
-const WeekDay = {
+var WeekDay = {
     Sunday: 0,
     Monday: 1,
     Tuesday: 2,
@@ -1379,7 +1379,7 @@ const NAMED_FORMATS = {};
 /** @type {?} */
 const DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
 /** @enum {number} */
-const ZoneWidth = {
+var ZoneWidth = {
     Short: 0,
     ShortGMT: 1,
     Long: 2,
@@ -1390,7 +1390,7 @@ ZoneWidth[ZoneWidth.ShortGMT] = 'ShortGMT';
 ZoneWidth[ZoneWidth.Long] = 'Long';
 ZoneWidth[ZoneWidth.Extended] = 'Extended';
 /** @enum {number} */
-const DateType = {
+var DateType = {
     FullYear: 0,
     Month: 1,
     Date: 2,
@@ -1409,7 +1409,7 @@ DateType[DateType.Seconds] = 'Seconds';
 DateType[DateType.FractionalSeconds] = 'FractionalSeconds';
 DateType[DateType.Day] = 'Day';
 /** @enum {number} */
-const TranslationType = {
+var TranslationType = {
     DayPeriods: 0,
     Days: 1,
     Months: 2,
@@ -6329,7 +6329,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('7.0.0-beta.2+28.sha-21a1440');
+const VERSION = new Version('7.0.0-beta.5+32.sha-47f4412');
 
 /**
  * @fileoverview added by tsickle
