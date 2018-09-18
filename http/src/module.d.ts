@@ -61,7 +61,7 @@ export declare class HttpClientXsrfModule {
     /**
      * Disable the default XSRF protection.
      */
-    static disable(): ModuleWithProviders;
+    static disable(): ModuleWithProviders<HttpClientXsrfModule>;
     /**
      * Configure XSRF protection.
      * @param options An object that can specify either or both
@@ -73,7 +73,7 @@ export declare class HttpClientXsrfModule {
     static withOptions(options?: {
         cookieName?: string;
         headerName?: string;
-    }): ModuleWithProviders;
+    }): ModuleWithProviders<HttpClientXsrfModule>;
 }
 /**
  * An NgModule that provides the `HttpClient` and associated services.
