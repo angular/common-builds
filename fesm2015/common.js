@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.7+38.sha-71628f1
+ * @license Angular v6.1.7+39.sha-a41f331
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6223,8 +6223,15 @@ const COMMON_PIPES = [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
+ * Exports all the basic Angular directives and pipes,
+ * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
+ * Re-exported by `BrowserModule`, which is included automatically in the root
+ * `AppModule` when you create a new app with the CLI `new` command.
  *
+ * * The `providers` options configure the NgModule's injector to provide
+ * localization dependencies to members.
+ * * The `exports` options make the declared directives and pipes available for import
+ * by other NgModules.
  *
  */
 class CommonModule {
@@ -6329,7 +6336,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.7+38.sha-71628f1');
+const VERSION = new Version('6.1.7+39.sha-a41f331');
 
 /**
  * @fileoverview added by tsickle

@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.7+38.sha-71628f1
+ * @license Angular v6.1.7+39.sha-a41f331
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5510,8 +5510,15 @@
     // Note: This does not contain the location providers,
     // as they need some platform specific implementations to work.
     /**
-     * The module that includes all the basic Angular directives like {@link NgIf}, {@link NgForOf}, ...
+     * Exports all the basic Angular directives and pipes,
+     * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
+     * Re-exported by `BrowserModule`, which is included automatically in the root
+     * `AppModule` when you create a new app with the CLI `new` command.
      *
+     * * The `providers` options configure the NgModule's injector to provide
+     * localization dependencies to members.
+     * * The `exports` options make the declared directives and pipes available for import
+     * by other NgModules.
      *
      */
     var CommonModule = /** @class */ (function () {
@@ -5611,7 +5618,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new core.Version('6.1.7+38.sha-71628f1');
+    var VERSION = new core.Version('6.1.7+39.sha-a41f331');
 
     /**
      * @license
