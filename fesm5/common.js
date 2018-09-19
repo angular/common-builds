@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.7+42.sha-5099b79
+ * @license Angular v6.1.7+38.sha-71628f1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, EventEmitter, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectChangeDetectorRef, ɵinjectAttribute, ɵinjectTemplateRef } from '@angular/core';
+import { InjectionToken, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, WrappedValue, ɵisObservable, ɵisPromise, EventEmitter, KeyValueDiffers, ɵstringify, IterableDiffers, Renderer2, ɵisListLikeIterable, isDevMode, LOCALE_ID, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectChangeDetectorRef } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -5106,15 +5106,8 @@ var COMMON_PIPES = [
 // Note: This does not contain the location providers,
 // as they need some platform specific implementations to work.
 /**
- * Exports all the basic Angular directives and pipes,
- * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
- * Re-exported by `BrowserModule`, which is included automatically in the root
- * `AppModule` when you create a new app with the CLI `new` command.
+ * The module that includes all the basic Angular directives like {@link NgIf}, {@link NgForOf}, ...
  *
- * * The `providers` options configure the NgModule's injector to provide
- * localization dependencies to members.
- * * The `exports` options make the declared directives and pipes available for import
- * by other NgModules.
  *
  */
 var CommonModule = /** @class */ (function () {
@@ -5203,7 +5196,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.1.7+42.sha-5099b79');
+var VERSION = new Version('6.1.7+38.sha-71628f1');
 
 /**
  * @license

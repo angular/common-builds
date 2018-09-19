@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.7+42.sha-5099b79
+ * @license Angular v6.1.7+38.sha-71628f1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, defineInjectable, inject, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, Inject, Injectable, LOCALE_ID, Optional, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, EventEmitter, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { InjectionToken, Version, Pipe, Inject, Injectable, Optional, defineInjectable, inject, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, ElementRef, KeyValueDiffers, Renderer2, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, LOCALE_ID, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6159,15 +6159,8 @@ const COMMON_PIPES = [
 ];
 
 /**
- * Exports all the basic Angular directives and pipes,
- * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
- * Re-exported by `BrowserModule`, which is included automatically in the root
- * `AppModule` when you create a new app with the CLI `new` command.
+ * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
- * * The `providers` options configure the NgModule's injector to provide
- * localization dependencies to members.
- * * The `exports` options make the declared directives and pipes available for import
- * by other NgModules.
  *
  */
 class CommonModule {
@@ -6277,7 +6270,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.7+42.sha-5099b79');
+const VERSION = new Version('6.1.7+38.sha-71628f1');
 
 /**
  * @fileoverview added by tsickle
