@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.7+42.sha-5099b79
+ * @license Angular v6.1.7+38.sha-71628f1
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1940,7 +1940,7 @@ function jsonpCallbackContext() {
     return {};
 }
 /**
- * Configures XSRF protection support for outgoing requests.
+ * An NgModule that adds XSRF protection support to outgoing requests.
  *
  * For a server that supports a cookie-based XSRF protection system,
  * use directly to configure XSRF protection with the correct
@@ -1995,11 +1995,10 @@ HttpClientXsrfModule.decorators = [
             },] }
 ];
 /**
- * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
- * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
+ * An NgModule that provides the `HttpClient` and associated services.
  *
- * You can add interceptors to the chain behind `HttpClient` by binding them to the
- * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
+ * Interceptors can be added to the chain behind `HttpClient` by binding them
+ * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
  *
  */
@@ -2017,8 +2016,7 @@ HttpClientModule.decorators = [
                     }),
                 ],
                 /**
-                   * Configures the [dependency injector](guide/glossary#injector) where it is imported
-                   * with supporting services for HTTP communications.
+                   * The module provides `HttpClient` itself, and supporting services.
                    */
                 providers: [
                     HttpClient,
@@ -2031,13 +2029,10 @@ HttpClientModule.decorators = [
             },] }
 ];
 /**
- * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
- * with supporting services for JSONP.
- * Without this module, Jsonp requests reach the backend
- * with method JSONP, where they are rejected.
+ * An NgModule that enables JSONP support in `HttpClient`.
  *
- * You can add interceptors to the chain behind `HttpClient` by binding them to the
- * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
+ * Without this module, Jsonp requests will reach the backend
+ * with method JSONP, where they'll be rejected.
  *
  *
  */
