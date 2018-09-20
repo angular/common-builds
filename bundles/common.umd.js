@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.5+59.sha-d0e710d
+ * @license Angular v7.0.0-beta.6+10.sha-927323f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2874,6 +2874,7 @@
      * {@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
      *
      * @experimental
+     * @ngModule CommonModule
      */
     var NgComponentOutlet = /** @class */ (function () {
         function NgComponentOutlet(_viewContainerRef) {
@@ -3017,7 +3018,7 @@
      * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
      * example.
      *
-     *
+     * @ngModule CommonModule
      */
     var NgForOf = /** @class */ (function () {
         function NgForOf(_viewContainer, _template, _differs) {
@@ -3229,7 +3230,7 @@
      * <ng-template #elseBlock>...</ng-template>
      * ```
      *
-     *
+     * @ngModule CommonModule
      */
     var NgIf = /** @class */ (function () {
         function NgIf(_viewContainer, templateRef) {
@@ -4156,8 +4157,6 @@
         });
     }
     /**
-     * @ngModule CommonModule
-     *
      * Formats a number as text. Group sizing and separator and other locale-specific
      * configurations are based on the active locale.
      *
@@ -4180,6 +4179,7 @@
      *
      * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
      *
+     * @ngModule CommonModule
      */
     var DeprecatedDecimalPipe = /** @class */ (function () {
         function DeprecatedDecimalPipe(_locale) {
@@ -4412,7 +4412,7 @@
      *
      * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
      *
-     *
+     * @ngModule CommonModule
      */
     var LowerCasePipe = /** @class */ (function () {
         function LowerCasePipe() {
@@ -4454,7 +4454,7 @@
      *
      * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
      *
-     *
+     * @ngModule CommonModule
      */
     var TitleCasePipe = /** @class */ (function () {
         function TitleCasePipe() {
@@ -4477,6 +4477,8 @@
      * Transforms text to all upper case.
      * @see `LowerCasePipe`
      * @see `TitleCasePipe`
+     *
+     * @ngModule CommonModule
      */
     var UpperCasePipe = /** @class */ (function () {
         function UpperCasePipe() {
@@ -5325,7 +5327,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new i0.Version('7.0.0-beta.5+59.sha-d0e710d');
+    var VERSION = new i0.Version('7.0.0-beta.6+10.sha-927323f');
 
     /**
      * @license
