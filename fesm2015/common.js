@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.8+3.sha-c7a6adc
+ * @license Angular v6.1.8+8.sha-f0d7054
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2867,6 +2867,7 @@ NgClass = __decorate([
  * {@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * @experimental
+ * @ngModule CommonModule
  */
 let NgComponentOutlet = class NgComponentOutlet {
     constructor(_viewContainerRef) {
@@ -3011,7 +3012,7 @@ class NgForOfContext {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * @ngModule CommonModule
  */
 let NgForOf = class NgForOf {
     constructor(_viewContainer, _template, _differs) {
@@ -3227,7 +3228,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- *
+ * @ngModule CommonModule
  */
 let NgIf = class NgIf {
     constructor(_viewContainer, templateRef) {
@@ -4232,8 +4233,6 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
     });
 }
 /**
- * @ngModule CommonModule
- *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
  *
@@ -4256,6 +4255,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  *
  * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
+ * @ngModule CommonModule
  */
 let DeprecatedDecimalPipe = DeprecatedDecimalPipe_1 = class DeprecatedDecimalPipe {
     constructor(_locale) {
@@ -4492,7 +4492,7 @@ var LowerCasePipe_1, TitleCasePipe_1, UpperCasePipe_1;
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- *
+ * @ngModule CommonModule
  */
 let LowerCasePipe = LowerCasePipe_1 = class LowerCasePipe {
     /**
@@ -4533,7 +4533,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- *
+ * @ngModule CommonModule
  */
 let TitleCasePipe = TitleCasePipe_1 = class TitleCasePipe {
     /**
@@ -4555,6 +4555,8 @@ TitleCasePipe = TitleCasePipe_1 = __decorate([
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
+ *
+ * @ngModule CommonModule
  */
 let UpperCasePipe = UpperCasePipe_1 = class UpperCasePipe {
     /**
@@ -5420,7 +5422,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('6.1.8+3.sha-c7a6adc');
+const VERSION = new Version('6.1.8+8.sha-f0d7054');
 
 /**
  * @license
