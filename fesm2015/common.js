@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.8+3.sha-c7a6adc
+ * @license Angular v6.1.8+8.sha-f0d7054
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, defineInjectable, inject, Pipe, Inject, Injectable, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, LOCALE_ID, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { InjectionToken, Version, defineInjectable, inject, Pipe, Inject, Injectable, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, LOCALE_ID, EventEmitter, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3373,6 +3373,7 @@ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ng
  * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * \@experimental
+ * \@ngModule CommonModule
  */
 class NgComponentOutlet {
     /**
@@ -3539,7 +3540,7 @@ class NgForOfContext {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * \@ngModule CommonModule
  * @template T
  */
 class NgForOf {
@@ -3795,7 +3796,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- *
+ * \@ngModule CommonModule
  */
 class NgIf {
     /**
@@ -4678,7 +4679,7 @@ AsyncPipe.ngPipeDef = ɵdefinePipe({ name: "async", type: AsyncPipe, factory: fu
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 class LowerCasePipe {
     /**
@@ -4714,7 +4715,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 class TitleCasePipe {
     /**
@@ -4738,6 +4739,8 @@ TitleCasePipe.ngPipeDef = ɵdefinePipe({ name: "titlecase", type: TitleCasePipe,
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
+ *
+ * \@ngModule CommonModule
  */
 class UpperCasePipe {
     /**
@@ -5817,8 +5820,6 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
     });
 }
 /**
- * \@ngModule CommonModule
- *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
  *
@@ -5841,6 +5842,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
+ * \@ngModule CommonModule
  */
 class DeprecatedDecimalPipe {
     /**
@@ -6277,7 +6279,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.8+3.sha-c7a6adc');
+const VERSION = new Version('6.1.8+8.sha-f0d7054');
 
 /**
  * @fileoverview added by tsickle
