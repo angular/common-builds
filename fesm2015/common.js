@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.8+20.sha-37f3b92
+ * @license Angular v6.1.8+37.sha-cea7fbe
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, defineInjectable, inject, Inject, Injectable, Optional, Pipe, LOCALE_ID, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, ElementRef, KeyValueDiffers, Renderer2, TemplateRef, Attribute, Host, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { InjectionToken, Version, Inject, Injectable, Optional, Pipe, defineInjectable, inject, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, LOCALE_ID, EventEmitter, IterableDiffers, isDevMode, ɵisListLikeIterable, ɵstringify, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -5413,7 +5413,8 @@ function makeKeyValuePair(key, value) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * \@usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
@@ -6279,14 +6280,14 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.8+20.sha-37f3b92');
+const VERSION = new Version('6.1.8+37.sha-cea7fbe');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  * @abstract
  */
 class ViewportScroller {
@@ -6294,7 +6295,7 @@ class ViewportScroller {
 /** @nocollapse */
 ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 class BrowserViewportScroller {
     /**
@@ -6307,7 +6308,7 @@ class BrowserViewportScroller {
         this.offset = () => [0, 0];
     }
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -6324,7 +6325,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     getScrollPosition() {
@@ -6336,7 +6337,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
@@ -6346,7 +6347,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
@@ -6367,7 +6368,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -6414,35 +6415,35 @@ class BrowserViewportScroller {
     }
 }
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 class NullViewportScroller {
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     setOffset(offset) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     getScrollPosition() { return [0, 0]; }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     scrollToPosition(position) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     scrollToAnchor(anchor) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */
