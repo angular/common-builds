@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.6+37.sha-7f1cace
+ * @license Angular v7.0.0-beta.6+51.sha-b8422b4
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5070,7 +5070,8 @@ function makeKeyValuePair(key, value) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * @usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
@@ -5609,7 +5610,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-beta.6+37.sha-7f1cace');
+var VERSION = new Version('7.0.0-beta.6+51.sha-b8422b4');
 
 /**
  * @license
@@ -5619,7 +5620,7 @@ var VERSION = new Version('7.0.0-beta.6+37.sha-7f1cace');
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 var ViewportScroller = /** @class */ (function () {
     function ViewportScroller() {
@@ -5631,7 +5632,7 @@ var ViewportScroller = /** @class */ (function () {
     return ViewportScroller;
 }());
 /**
- * @whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 var BrowserViewportScroller = /** @class */ (function () {
     function BrowserViewportScroller(document, window) {
@@ -5640,7 +5641,7 @@ var BrowserViewportScroller = /** @class */ (function () {
         this.offset = function () { return [0, 0]; };
     }
     /**
-     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -5655,7 +5656,7 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      */
     BrowserViewportScroller.prototype.getScrollPosition = function () {
         if (this.supportScrollRestoration()) {
@@ -5666,7 +5667,7 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      */
     BrowserViewportScroller.prototype.scrollToPosition = function (position) {
         if (this.supportScrollRestoration()) {
@@ -5674,7 +5675,7 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      */
     BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
         if (this.supportScrollRestoration()) {
@@ -5691,7 +5692,7 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      */
     BrowserViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) {
         if (this.supportScrollRestoration()) {
@@ -5727,30 +5728,30 @@ var BrowserViewportScroller = /** @class */ (function () {
     return BrowserViewportScroller;
 }());
 /**
- * @whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in @angular/common as it will be used by both platform-server and platform-webworker.
  */
 var NullViewportScroller = /** @class */ (function () {
     function NullViewportScroller() {
     }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     NullViewportScroller.prototype.setOffset = function (offset) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     NullViewportScroller.prototype.getScrollPosition = function () { return [0, 0]; };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     NullViewportScroller.prototype.scrollToPosition = function (position) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     NullViewportScroller.prototype.scrollToAnchor = function (anchor) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     NullViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
     return NullViewportScroller;
