@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.0.0-beta.6+35.sha-82a14dc
+ * @license Angular v7.0.0-beta.6+58.sha-0c34471
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
-import { __decorate, __param, __metadata } from 'tslib';
+import { __decorate, __metadata, __param } from 'tslib';
 
 /**
  * @license
@@ -4906,7 +4906,8 @@ function makeKeyValuePair(key, value) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * @usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
@@ -5422,7 +5423,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('7.0.0-beta.6+35.sha-82a14dc');
+const VERSION = new Version('7.0.0-beta.6+58.sha-0c34471');
 
 /**
  * @license
@@ -5432,7 +5433,7 @@ const VERSION = new Version('7.0.0-beta.6+35.sha-82a14dc');
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 class ViewportScroller {
 }
@@ -5441,7 +5442,7 @@ class ViewportScroller {
 /** @nocollapse */
 ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
 /**
- * @whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 class BrowserViewportScroller {
     constructor(document, window) {
@@ -5450,7 +5451,7 @@ class BrowserViewportScroller {
         this.offset = () => [0, 0];
     }
     /**
-     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -5465,7 +5466,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * @whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      */
     getScrollPosition() {
         if (this.supportScrollRestoration()) {
@@ -5476,7 +5477,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * @whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      */
     scrollToPosition(position) {
         if (this.supportScrollRestoration()) {
@@ -5484,7 +5485,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * @whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      */
     scrollToAnchor(anchor) {
         if (this.supportScrollRestoration()) {
@@ -5501,7 +5502,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      */
     setHistoryScrollRestoration(scrollRestoration) {
         if (this.supportScrollRestoration()) {
@@ -5536,28 +5537,28 @@ class BrowserViewportScroller {
     }
 }
 /**
- * @whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in @angular/common as it will be used by both platform-server and platform-webworker.
  */
 class NullViewportScroller {
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     setOffset(offset) { }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     getScrollPosition() { return [0, 0]; }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     scrollToPosition(position) { }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     scrollToAnchor(anchor) { }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     setHistoryScrollRestoration(scrollRestoration) { }
 }
