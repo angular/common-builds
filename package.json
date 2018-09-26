@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "6.1.8+65.sha-159e8b4",
+  "version": "6.1.9",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
   "module": "./fesm5/common.js",
@@ -18,7 +18,7 @@
   "locales": "locales",
   "peerDependencies": {
     "rxjs": "^6.0.0",
-    "@angular/core": "6.1.8+65.sha-159e8b4"
+    "@angular/core": "6.1.9"
   },
   "repository": {
     "type": "git",
