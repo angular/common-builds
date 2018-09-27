@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-beta.7+1.sha-e1990a5
+ * @license Angular v7.0.0-beta.7+19.sha-ffc6e19
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Inject, Optional, Pipe, LOCALE_ID, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectRenderer2 } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Inject, Optional, Pipe, LOCALE_ID, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, ElementRef, KeyValueDiffers, Renderer2, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectRenderer2 } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6522,7 +6522,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('7.0.0-beta.7+1.sha-e1990a5');
+const VERSION = new Version('7.0.0-beta.7+19.sha-ffc6e19');
 
 /**
  * @fileoverview added by tsickle
