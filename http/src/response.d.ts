@@ -250,13 +250,13 @@ export declare class HttpResponse<T> extends HttpResponseBase {
  *
  */
 export declare class HttpErrorResponse extends HttpResponseBase implements Error {
-    readonly name: string;
+    readonly name = "HttpErrorResponse";
     readonly message: string;
     readonly error: any | null;
     /**
      * Errors are never okay, even when the status code is in the 2xx success range.
      */
-    readonly ok: boolean;
+    readonly ok = false;
     constructor(init: {
         error?: any;
         headers?: HttpHeaders;
