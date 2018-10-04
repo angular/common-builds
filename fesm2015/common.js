@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.0+27.sha-aaaa340
+ * @license Angular v7.0.0-rc.0+46.sha-fdaf573
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3100,6 +3100,15 @@ let NgForOf = class NgForOf {
     _perViewChange(view, record) {
         view.context.$implicit = record.item;
     }
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
+    }
 };
 __decorate([
     Input(),
@@ -3278,6 +3287,15 @@ let NgIf = class NgIf {
             }
         }
     }
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     */
+    static ngTemplateGuard_ngIf(dir, expr) { return true; }
 };
 __decorate([
     Input(),
@@ -5423,7 +5441,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const VERSION = new Version('7.0.0-rc.0+27.sha-aaaa340');
+const VERSION = new Version('7.0.0-rc.0+46.sha-fdaf573');
 
 /**
  * @license
