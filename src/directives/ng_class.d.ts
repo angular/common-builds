@@ -67,5 +67,5 @@ export declare class NgClass implements DoCheck {
      */
     private _removeClasses;
     private _toggleClass;
-    static ngDirectiveDef: i0.ɵDirectiveDef<NgClass, '[ngClass]'>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgClass, '[ngClass]', never, {'klass': 'class', 'ngClass': 'ngClass'}, {}, never>;
 }

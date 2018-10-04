@@ -111,7 +111,16 @@ export declare class NgIf {
     ngIfThen: TemplateRef<NgIfContext> | null;
     ngIfElse: TemplateRef<NgIfContext> | null;
     private _updateView;
-    static ngDirectiveDef: i0.ɵDirectiveDef<NgIf, '[ngIf]'>;
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     */
+    static ngTemplateGuard_ngIf<E>(dir: NgIf, expr: E): expr is NonNullable<E>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgIf, '[ngIf]', never, {'ngIf': 'ngIf', 'ngIfThen': 'ngIfThen', 'ngIfElse': 'ngIfElse'}, {}, never>;
 }
 export declare class NgIfContext {
     $implicit: any;

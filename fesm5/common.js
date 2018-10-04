@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.0+31.sha-532e536
+ * @license Angular v7.0.0-rc.0+45.sha-35bf952
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3123,6 +3123,15 @@ var NgForOf = /** @class */ (function () {
     NgForOf.prototype._perViewChange = function (view, record) {
         view.context.$implicit = record.item;
     };
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    NgForOf.ngTemplateContextGuard = function (dir, ctx) {
+        return true;
+    };
     NgForOf.ngDirectiveDef = ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory(t) { return new (t || NgForOf)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef), ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [ɵPublicFeature] });
     return NgForOf;
 }());
@@ -3296,6 +3305,15 @@ var NgIf = /** @class */ (function () {
             }
         }
     };
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     */
+    NgIf.ngTemplateGuard_ngIf = function (dir, expr) { return true; };
     NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [ɵPublicFeature] });
     return NgIf;
 }());
@@ -5332,7 +5350,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-rc.0+31.sha-532e536');
+var VERSION = new Version('7.0.0-rc.0+45.sha-35bf952');
 
 /**
  * @license
