@@ -15,6 +15,6 @@ import * as i1 from '@angular/common/http';
  *
  */
 export declare class HttpClientTestingModule {
-    static ngModuleDef: i0.ɵNgModuleDef<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
+    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
     static ngInjectorDef: i0.ɵInjectorDef<HttpClientTestingModule>;
 }

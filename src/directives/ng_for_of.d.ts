@@ -105,6 +105,13 @@ export declare class NgForOf<T> implements DoCheck {
     ngDoCheck(): void;
     private _applyChanges;
     private _perViewChange;
-    static ngDirectiveDef: i0.ɵDirectiveDef<NgForOf<any>, '[ngFor][ngForOf]'>;
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgForOf<any>, '[ngFor][ngForOf]', never, {'ngForOf': 'ngForOf', 'ngForTrackBy': 'ngForTrackBy', 'ngForTemplate': 'ngForTemplate'}, {}, never>;
 }
 export declare function getTypeNameForDebugging(type: any): string;

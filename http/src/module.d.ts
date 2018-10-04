@@ -76,7 +76,7 @@ export declare class HttpClientXsrfModule {
         cookieName?: string;
         headerName?: string;
     }): ModuleWithProviders<HttpClientXsrfModule>;
-    static ngModuleDef: i0.ɵNgModuleDef<HttpClientXsrfModule, never, never, never>;
+    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientXsrfModule, never, never, never>;
     static ngInjectorDef: i0.ɵInjectorDef<HttpClientXsrfModule>;
 }
 /**
@@ -89,7 +89,7 @@ export declare class HttpClientXsrfModule {
  *
  */
 export declare class HttpClientModule {
-    static ngModuleDef: i0.ɵNgModuleDef<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
+    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
     static ngInjectorDef: i0.ɵInjectorDef<HttpClientModule>;
 }
 /**
@@ -104,6 +104,6 @@ export declare class HttpClientModule {
  *
  */
 export declare class HttpClientJsonpModule {
-    static ngModuleDef: i0.ɵNgModuleDef<HttpClientJsonpModule, never, never, never>;
+    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientJsonpModule, never, never, never>;
     static ngInjectorDef: i0.ɵInjectorDef<HttpClientJsonpModule>;
 }

@@ -50,5 +50,5 @@ export declare class NgTemplateOutlet implements OnChanges {
     private _shouldRecreateView;
     private _hasContextShapeChanged;
     private _updateExistingContext;
-    static ngDirectiveDef: i0.ɵDirectiveDef<NgTemplateOutlet, '[ngTemplateOutlet]'>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgTemplateOutlet, '[ngTemplateOutlet]', never, {'ngTemplateOutletContext': 'ngTemplateOutletContext', 'ngTemplateOutlet': 'ngTemplateOutlet'}, {}, never>;
 }
