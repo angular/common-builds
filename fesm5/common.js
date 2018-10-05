@@ -1,11 +1,11 @@
 /**
- * @license Angular v6.1.9+67.sha-b35ab4f
+ * @license Angular v6.1.9+64.sha-2fe401d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
-import { __decorate, __metadata, __param, __read, __extends, __values, __assign } from 'tslib';
+import { __read, __decorate, __metadata, __param, __values, __extends, __assign } from 'tslib';
 
 /**
  * @license
@@ -5319,7 +5319,6 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
-     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param digitsInfo Decimal representation options, specified by a string
@@ -5611,7 +5610,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('6.1.9+67.sha-b35ab4f');
+var VERSION = new Version('6.1.9+64.sha-2fe401d');
 
 /**
  * @license
