@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-rc.0+59.sha-f543d71
+ * @license Angular v7.0.0-rc.0+62.sha-ccceff5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, TemplateRef, KeyValueDiffers, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, ElementRef, IterableDiffers, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectRenderer2, ɵinjectAttribute } from '@angular/core';
+import { InjectionToken, EventEmitter, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, TemplateRef, KeyValueDiffers, ElementRef, IterableDiffers, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectRenderer2, ɵinjectAttribute } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -5079,6 +5079,7 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param digitsInfo Decimal representation options, specified by a string
@@ -5350,7 +5351,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-rc.0+59.sha-f543d71');
+var VERSION = new Version('7.0.0-rc.0+62.sha-ccceff5');
 
 /**
  * @license
