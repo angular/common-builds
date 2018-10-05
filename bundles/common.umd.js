@@ -1,5 +1,5 @@
 /**
- * @license Angular v6.1.9+69.sha-8c6c2fc
+ * @license Angular v6.1.9+66.sha-39d979c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5330,7 +5330,6 @@
          * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
          * locale has no narrow symbol, uses the standard symbol for the locale.
          *   - String: Use the given string value instead of a code or a symbol.
-         * For example, an empty string will suppress the currency & symbol.
          *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
          *
          * @param digitsInfo Decimal representation options, specified by a string
@@ -5622,7 +5621,7 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var VERSION = new core.Version('6.1.9+69.sha-8c6c2fc');
+    var VERSION = new core.Version('6.1.9+66.sha-39d979c');
 
     /**
      * @license
