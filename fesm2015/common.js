@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.9+67.sha-b35ab4f
+ * @license Angular v6.1.9+64.sha-2fe401d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, defineInjectable, inject, Pipe, Inject, Injectable, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, LOCALE_ID, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { InjectionToken, Version, defineInjectable, inject, Inject, Injectable, Optional, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, LOCALE_ID, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -5042,7 +5042,6 @@ class CurrencyPipe {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
-     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param {?=} digitsInfo Decimal representation options, specified by a string
@@ -6281,7 +6280,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.9+67.sha-b35ab4f');
+const VERSION = new Version('6.1.9+64.sha-2fe401d');
 
 /**
  * @fileoverview added by tsickle
