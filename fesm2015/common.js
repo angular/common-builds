@@ -1,10 +1,10 @@
 /**
- * @license Angular v6.1.9+71.sha-3660ff8
+ * @license Angular v6.1.9+72.sha-623adbb
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Version, Inject, Injectable, Optional, defineInjectable, inject, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Pipe, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, LOCALE_ID, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵdefinePipe, ɵdirectiveInject, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectElementRef, ɵinjectChangeDetectorRef } from '@angular/core';
+import { InjectionToken, Version, defineInjectable, inject, Pipe, Inject, Injectable, LOCALE_ID, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, ElementRef, KeyValueDiffers, Renderer2, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, EventEmitter, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, NgModule, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectViewContainerRef, ɵNgOnChangesFeature, ɵinjectElementRef, ɵinjectAttribute, ɵinjectTemplateRef, ɵinjectChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6281,7 +6281,7 @@ function isPlatformWorkerUi(platformId) {
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('6.1.9+71.sha-3660ff8');
+const VERSION = new Version('6.1.9+72.sha-623adbb');
 
 /**
  * @fileoverview added by tsickle
