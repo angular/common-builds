@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.0+46.sha-fdaf573
+ * @license Angular v7.0.0-rc.0+63.sha-55d54c7
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5337,6 +5337,7 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param digitsInfo Decimal representation options, specified by a string
@@ -5628,7 +5629,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-rc.0+46.sha-fdaf573');
+var VERSION = new Version('7.0.0-rc.0+63.sha-55d54c7');
 
 /**
  * @license
