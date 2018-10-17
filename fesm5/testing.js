@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-rc.1+72.sha-9997ab5
+ * @license Angular v7.0.0-rc.1+74.sha-b49b274
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __extends, __decorate, __metadata } from 'tslib';
+import { __decorate, __extends, __metadata } from 'tslib';
 import { EventEmitter, Injectable } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 
