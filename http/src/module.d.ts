@@ -55,7 +55,7 @@ export declare function jsonpCallbackContext(): Object;
  * If no names are supplied, the default cookie name is `XSRF-TOKEN`
  * and the default header name is `X-XSRF-TOKEN`.
  *
- *
+ * @publicApi
  */
 export declare class HttpClientXsrfModule {
     /**
@@ -82,7 +82,7 @@ export declare class HttpClientXsrfModule {
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * @publicApi
  */
 export declare class HttpClientModule {
 }
@@ -95,7 +95,7 @@ export declare class HttpClientModule {
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * @publicApi
  */
 export declare class HttpClientJsonpModule {
 }

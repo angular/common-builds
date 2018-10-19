@@ -6,6 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, IterableDiffers, NgIterable, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+/**
+ * @publicApi
+ */
 export declare class NgForOfContext<T> {
     $implicit: T;
     ngForOf: NgIterable<T>;
@@ -88,6 +91,7 @@ export declare class NgForOfContext<T> {
  * example.
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 export declare class NgForOf<T> implements DoCheck {
     private _viewContainer;

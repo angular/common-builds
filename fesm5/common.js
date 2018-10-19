@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.1+118.sha-31022cb
+ * @license Angular v7.0.0-rc.1+137.sha-4c2ce4e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -34,7 +34,7 @@ import { __decorate, __metadata, __param, __read, __values, __extends, __assign 
  * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- *
+ * @publicApi
  */
 var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
@@ -42,8 +42,10 @@ var PlatformLocation = /** @class */ (function () {
     return PlatformLocation;
 }());
 /**
- * @description Indicates when a location is initialized.
- * @experimental
+ * @description
+ * Indicates when a location is initialized.
+ *
+ * @publicApi
  */
 var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
@@ -70,7 +72,7 @@ var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  *
  * See these two classes for more.
  *
- *
+ * @publicApi
  */
 var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
@@ -99,7 +101,7 @@ var LocationStrategy = /** @class */ (function () {
  * class AppModule {}
  * ```
  *
- *
+ * @publicApi
  */
 var APP_BASE_HREF = new InjectionToken('appBaseHref');
 
@@ -135,6 +137,7 @@ var APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
+ * @publicApi
  */
 var Location = /** @class */ (function () {
     function Location(platformStrategy) {
@@ -302,7 +305,7 @@ function _stripIndexHtml(url) {
  *
  * {@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- *
+ * @publicApi
  */
 var HashLocationStrategy = /** @class */ (function (_super) {
     __extends(HashLocationStrategy, _super);
@@ -389,7 +392,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
  *
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- *
+ * @publicApi
  */
 var PathLocationStrategy = /** @class */ (function (_super) {
     __extends(PathLocationStrategy, _super);
@@ -493,14 +496,14 @@ var localeEn = [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 // The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
 function registerLocaleData(data, localeId, extraData) {
@@ -673,7 +676,7 @@ var CURRENCIES_EN = {
  * The different format styles that can be used to represent numbers.
  * Used by the function {@link getLocaleNumberFormat}.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var NumberFormatStyle;
 (function (NumberFormatStyle) {
@@ -682,7 +685,7 @@ var NumberFormatStyle;
     NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
     NumberFormatStyle[NumberFormatStyle["Scientific"] = 3] = "Scientific";
 })(NumberFormatStyle || (NumberFormatStyle = {}));
-/** @experimental */
+/** @publicApi */
 var Plural;
 (function (Plural) {
     Plural[Plural["Zero"] = 0] = "Zero";
@@ -699,7 +702,7 @@ var Plural;
  * the genitive.
  * See [the CLDR website](http://cldr.unicode.org/translation/date-time) for more information.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var FormStyle;
 (function (FormStyle) {
@@ -716,7 +719,7 @@ var FormStyle;
  * - Abbreviated: `Sun`
  * - Wide: `Sunday`
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var TranslationWidth;
 (function (TranslationWidth) {
@@ -736,7 +739,7 @@ var TranslationWidth;
  *  - `'full'`: `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
  * 9:03:01 AM GMT+01:00`)
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var FormatWidth;
 (function (FormatWidth) {
@@ -765,7 +768,7 @@ var FormatWidth;
  * | currencyDecimal        | $2,345`.`67       | decimal separator, fallback to "decimal"    |
  * | currencyGroup          | $2`,`345.67       | grouping separator, fallback to "group"     |
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 var NumberSymbol;
 (function (NumberSymbol) {
@@ -787,7 +790,7 @@ var NumberSymbol;
 /**
  * The value for each day of the week, based on the en-US locale
  *
- * @experimental
+ * @publicApi
  */
 var WeekDay;
 (function (WeekDay) {
@@ -802,7 +805,7 @@ var WeekDay;
 /**
  * The locale id for the chosen locale (e.g `en-GB`).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleId(locale) {
     return findLocaleData(locale)[0 /* LocaleId */];
@@ -810,7 +813,7 @@ function getLocaleId(locale) {
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     var data = findLocaleData(locale);
@@ -821,7 +824,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
 /**
  * Days of the week for the Gregorian calendar (e.g. `[Sunday, Monday, ... Saturday]` for en-US).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleDayNames(locale, formStyle, width) {
     var data = findLocaleData(locale);
@@ -832,7 +835,7 @@ function getLocaleDayNames(locale, formStyle, width) {
 /**
  * Months of the year for the Gregorian calendar (e.g. `[January, February, ...]` for en-US).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     var data = findLocaleData(locale);
@@ -843,7 +846,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
 /**
  * Eras for the Gregorian calendar (e.g. AD/BC).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleEraNames(locale, width) {
     var data = findLocaleData(locale);
@@ -854,7 +857,7 @@ function getLocaleEraNames(locale, width) {
  * First day of the week for this locale, based on english days (Sunday = 0, Monday = 1, ...).
  * For example in french the value would be 1 because the first day of the week is Monday.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleFirstDayOfWeek(locale) {
     var data = findLocaleData(locale);
@@ -865,7 +868,7 @@ function getLocaleFirstDayOfWeek(locale) {
  * (Sunday = 0, Monday = 1, ...).
  * For example in english the value would be [6,0] for Saturday to Sunday.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleWeekEndRange(locale) {
     var data = findLocaleData(locale);
@@ -894,7 +897,7 @@ function getLocaleWeekEndRange(locale) {
  *
  *  For example, `M/d/yy`, corresponding to a date like "9/14/99".
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleDateFormat(locale, width) {
     var data = findLocaleData(locale);
@@ -918,7 +921,7 @@ function getLocaleDateFormat(locale, width) {
  * through 23 (midnight plus 1 minute is 0:01), or using k to mean a 24-hour clock cycle running
  * 1 through 24 (midnight plus 1 minute is 24:01).
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleTimeFormat(locale, width) {
     var data = findLocaleData(locale);
@@ -947,7 +950,7 @@ function getLocaleTimeFormat(locale, width) {
  * time. English uses `{1} 'at' {0}` for full and long styles, and `{1}, {0}` for medium and short
  * styles.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleDateTimeFormat(locale, width) {
     var data = findLocaleData(locale);
@@ -958,7 +961,7 @@ function getLocaleDateTimeFormat(locale, width) {
  * Number symbol that can be used to replace placeholders in number formats.
  * See {@link NumberSymbol} for more information.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleNumberSymbol(locale, symbol) {
     var data = findLocaleData(locale);
@@ -1002,7 +1005,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  * You can find more information
  * [on the CLDR website](http://cldr.unicode.org/translation/number-patterns)
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleNumberFormat(locale, type) {
     var data = findLocaleData(locale);
@@ -1013,7 +1016,7 @@ function getLocaleNumberFormat(locale, type) {
  * the locale en-US).
  * The symbol will be `null` if the main country cannot be determined.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleCurrencySymbol(locale) {
     var data = findLocaleData(locale);
@@ -1024,7 +1027,7 @@ function getLocaleCurrencySymbol(locale) {
  * en-US).
  * The name will be `null` if the main country cannot be determined.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleCurrencyName(locale) {
     var data = findLocaleData(locale);
@@ -1041,7 +1044,7 @@ function getLocaleCurrencies(locale) {
  * The locale plural function used by ICU expressions to determine the plural case to use.
  * See {@link NgPlural} for more information.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocalePluralCase(locale) {
     var data = findLocaleData(locale);
@@ -1065,7 +1068,7 @@ function checkFullData(data) {
  * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleExtraDayPeriodRules(locale) {
     var data = findLocaleData(locale);
@@ -1089,7 +1092,7 @@ function getLocaleExtraDayPeriodRules(locale) {
  * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
     var data = findLocaleData(locale);
@@ -1108,7 +1111,7 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
  * add the first one to the locale data arrays, the other ones are only defined when different.
  * We use this function to retrieve the first defined value.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getLastDefinedValue(data, index) {
     for (var i = index; i > -1; i--) {
@@ -1128,7 +1131,7 @@ function extractTime(time) {
 /**
  * Finds the locale data for a locale id
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function findLocaleData(locale) {
     var normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
@@ -1152,7 +1155,7 @@ function findLocaleData(locale) {
  * (e.g.: format narrow = $, format wide = US$, code = USD)
  * If no locale is provided, it uses the locale "en" by default
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getCurrencySymbol(code, format, locale) {
     if (locale === void 0) { locale = 'en'; }
@@ -1169,7 +1172,7 @@ var DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
  * Returns the number of decimal digits for the given currency.
  * Its value depends upon the presence of cents in that particular currency.
  *
- * @experimental i18n support is experimental.
+ * @publicApi
  */
 function getNumberOfCurrencyDigits(code) {
     var digits;
@@ -1233,6 +1236,8 @@ var TranslationType;
  *   If not specified, host system settings are used.
  *
  * See {@link DatePipe} for more details.
+ *
+ * @publicApi
  */
 function formatDate(value, format, locale, timezone) {
     var date = toDate(value);
@@ -1956,7 +1961,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *    as `USD` for the US dollar and `EUR` for the euro.
  * - `digitInfo` See {@link DecimalPipe} for more details.
  *
- *
+ * @publicApi
  */
 function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     var format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
@@ -1980,7 +1985,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {@link DecimalPipe} for more details.
  *
- *
+ * @publicApi
  */
 function formatPercent(value, locale, digitsInfo) {
     var format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
@@ -2000,7 +2005,7 @@ function formatPercent(value, locale, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {@link DecimalPipe} for more details.
  *
- *
+ * @publicApi
  */
 function formatNumber(value, locale, digitsInfo) {
     var format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
@@ -2222,7 +2227,7 @@ function parseIntAutoRadix(text) {
  */
 var DEPRECATED_PLURAL_FN = new InjectionToken('UseV4Plurals');
 /**
- * @experimental
+ * @publicApi
  */
 var NgLocalization = /** @class */ (function () {
     function NgLocalization() {
@@ -2251,7 +2256,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
 /**
  * Returns the plural case based on the locale
  *
- * @experimental
+ * @publicApi
  */
 var NgLocaleLocalization = /** @class */ (function (_super) {
     __extends(NgLocaleLocalization, _super);
@@ -2293,7 +2298,7 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
  * Returns the plural case based on the locale
  *
  * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
- * @experimental
+ * @publicApi
  */
 function getPluralCase(locale, nLike) {
     // TODO(vicb): lazy compute
@@ -2726,7 +2731,7 @@ function parseCookieValue(cookieStr, name) {
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- *
+ * @publicApi
  */
 var NgClass = /** @class */ (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
@@ -2930,7 +2935,7 @@ var NgClass = /** @class */ (function () {
  *
  * {@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
- * @experimental
+ * @publicApi
  * @ngModule CommonModule
  */
 var NgComponentOutlet = /** @class */ (function () {
@@ -2994,6 +2999,9 @@ var NgComponentOutlet = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @publicApi
  */
 var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
@@ -3095,6 +3103,7 @@ var NgForOfContext = /** @class */ (function () {
  * example.
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
@@ -3335,6 +3344,7 @@ function getTypeNameForDebugging(type) {
  * ```
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
@@ -3426,6 +3436,9 @@ var NgIf = /** @class */ (function () {
     ], NgIf);
     return NgIf;
 }());
+/**
+ * @publicApi
+ */
 var NgIfContext = /** @class */ (function () {
     function NgIfContext() {
         this.$implicit = null;
@@ -3509,7 +3522,7 @@ var SwitchView = /** @class */ (function () {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- *
+ * @publicApi
  */
 var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
@@ -3590,7 +3603,7 @@ var NgSwitch = /** @class */ (function () {
  *
  * See {@link NgSwitch} for more details and example.
  *
- *
+ * @publicApi
  */
 var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
@@ -3631,7 +3644,7 @@ var NgSwitchCase = /** @class */ (function () {
  *
  * See {@link NgSwitch} for more details and example.
  *
- *
+ * @publicApi
  */
 var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
@@ -3682,7 +3695,7 @@ var NgSwitchDefault = /** @class */ (function () {
  *
  * See http://cldr.unicode.org/index/cldr-spec/plural-rules
  *
- * @experimental
+ * @publicApi
  */
 var NgPlural = /** @class */ (function () {
     function NgPlural(_localization) {
@@ -3743,7 +3756,7 @@ var NgPlural = /** @class */ (function () {
  *
  * See {@link NgPlural} for more details and example.
  *
- * @experimental
+ * @publicApi
  */
 var NgPluralCase = /** @class */ (function () {
     function NgPluralCase(value, template, viewContainer, ngPlural) {
@@ -3788,7 +3801,7 @@ var NgPluralCase = /** @class */ (function () {
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- *
+ * @publicApi
  */
 var NgStyle = /** @class */ (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
@@ -3871,6 +3884,7 @@ var NgStyle = /** @class */ (function () {
  *
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
+ * @publicApi
  */
 var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
@@ -4247,7 +4261,7 @@ var DateFormatter = /** @class */ (function () {
  *
  * {@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- *
+ * @publicApi
  */
 var DeprecatedDatePipe = /** @class */ (function () {
     function DeprecatedDatePipe(_locale) {
@@ -4392,6 +4406,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
  * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
@@ -4427,7 +4442,7 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
  *
  * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- *
+ * @publicApi
  */
 var DeprecatedPercentPipe = /** @class */ (function () {
     function DeprecatedPercentPipe(_locale) {
@@ -4469,7 +4484,7 @@ var DeprecatedPercentPipe = /** @class */ (function () {
  *
  * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- *
+ * @publicApi
  */
 var DeprecatedCurrencyPipe = /** @class */ (function () {
     function DeprecatedCurrencyPipe(_locale) {
@@ -4558,6 +4573,7 @@ var _observableStrategy = new ObservableStrategy();
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
+ * @publicApi
  */
 var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
@@ -4648,6 +4664,7 @@ var AsyncPipe = /** @class */ (function () {
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
@@ -4694,6 +4711,7 @@ var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
@@ -4722,6 +4740,7 @@ var TitleCasePipe = /** @class */ (function () {
  * @see `TitleCasePipe`
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
@@ -4889,6 +4908,7 @@ var UpperCasePipe = /** @class */ (function () {
  * }
  * ```
  *
+ * @publicApi
  */
 // clang-format on
 var DatePipe = /** @class */ (function () {
@@ -4949,7 +4969,7 @@ var _INTERPOLATION_REGEXP = /#/g;
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
- * @experimental
+ * @publicApi
  */
 var I18nPluralPipe = /** @class */ (function () {
     function I18nPluralPipe(_localization) {
@@ -5002,7 +5022,7 @@ var I18nPluralPipe = /** @class */ (function () {
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
- * @experimental
+ * @publicApi
  */
 var I18nSelectPipe = /** @class */ (function () {
     function I18nSelectPipe() {
@@ -5054,6 +5074,7 @@ var I18nSelectPipe = /** @class */ (function () {
  *
  * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
+ * @publicApi
  */
 var JsonPipe = /** @class */ (function () {
     function JsonPipe() {
@@ -5095,6 +5116,8 @@ function makeKeyValuePair(key, value) {
  * pipe.
  *
  * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ *
+ * @publicApi
  */
 var KeyValuePipe = /** @class */ (function () {
     function KeyValuePipe(differs) {
@@ -5197,6 +5220,7 @@ function defaultComparator(keyValueA, keyValueB) {
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
+ * @publicApi
  */
 var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
@@ -5256,7 +5280,7 @@ var DecimalPipe = /** @class */ (function () {
  *
  * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
  *
- *
+ * @publicApi
  */
 var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
@@ -5317,7 +5341,7 @@ var PercentPipe = /** @class */ (function () {
  *
  * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
  *
- *
+ * @publicApi
  */
 var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {
@@ -5449,6 +5473,7 @@ function strToNumber(value) {
  *
  * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
+ * @publicApi
  */
 var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
@@ -5531,6 +5556,7 @@ var COMMON_PIPES = [
  * * The `exports` options make the declared directives and pipes available for import
  * by other NgModules.
  *
+ * @publicApi
  */
 var CommonModule = /** @class */ (function () {
     function CommonModule() {
@@ -5551,6 +5577,7 @@ var ɵ0 = getPluralCase;
  * A module that contains the deprecated i18n pipes.
  *
  * @deprecated from v5
+ * @publicApi
  */
 var DeprecatedI18NPipesModule = /** @class */ (function () {
     function DeprecatedI18NPipesModule() {
@@ -5578,7 +5605,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- *
+ * @publicApi
  */
 var DOCUMENT = new InjectionToken('DocumentToken');
 
@@ -5595,28 +5622,28 @@ var PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 var PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
- * @experimental
+ * @publicApi
  */
 function isPlatformBrowser(platformId) {
     return platformId === PLATFORM_BROWSER_ID;
 }
 /**
  * Returns whether a platform id represents a server platform.
- * @experimental
+ * @publicApi
  */
 function isPlatformServer(platformId) {
     return platformId === PLATFORM_SERVER_ID;
 }
 /**
  * Returns whether a platform id represents a web worker app platform.
- * @experimental
+ * @publicApi
  */
 function isPlatformWorkerApp(platformId) {
     return platformId === PLATFORM_WORKER_APP_ID;
 }
 /**
  * Returns whether a platform id represents a web worker UI platform.
- * @experimental
+ * @publicApi
  */
 function isPlatformWorkerUi(platformId) {
     return platformId === PLATFORM_WORKER_UI_ID;
@@ -5629,7 +5656,10 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0-rc.1+118.sha-31022cb');
+/**
+ * @publicApi
+ */
+var VERSION = new Version('7.0.0-rc.1+137.sha-4c2ce4e');
 
 /**
  * @license
@@ -5640,6 +5670,8 @@ var VERSION = new Version('7.0.0-rc.1+118.sha-31022cb');
  */
 /**
  * Manages the scroll position.
+ *
+ * @publicApi
  */
 var ViewportScroller = /** @class */ (function () {
     function ViewportScroller() {
