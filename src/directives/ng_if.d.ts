@@ -97,6 +97,7 @@ import { TemplateRef, ViewContainerRef } from '@angular/core';
  * ```
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 export declare class NgIf {
     private _viewContainer;
@@ -120,6 +121,9 @@ export declare class NgIf {
      */
     static ngTemplateGuard_ngIf<E>(dir: NgIf, expr: E): expr is NonNullable<E>;
 }
+/**
+ * @publicApi
+ */
 export declare class NgIfContext {
     $implicit: any;
     ngIf: any;

@@ -16,6 +16,7 @@
  * * The `exports` options make the declared directives and pipes available for import
  * by other NgModules.
  *
+ * @publicApi
  */
 export declare class CommonModule {
 }
@@ -23,6 +24,7 @@ export declare class CommonModule {
  * A module that contains the deprecated i18n pipes.
  *
  * @deprecated from v5
+ * @publicApi
  */
 export declare class DeprecatedI18NPipesModule {
 }
