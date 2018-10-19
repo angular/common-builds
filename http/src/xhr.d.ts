@@ -13,7 +13,7 @@ import { HttpEvent } from './response';
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- *
+ * @publicApi
  */
 export declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
@@ -32,7 +32,7 @@ export declare class BrowserXhr implements XhrFactory {
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- *
+ * @publicApi
  */
 export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;

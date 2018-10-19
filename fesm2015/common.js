@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0+32.sha-3f94759
+ * @license Angular v7.0.0+52.sha-778e1c2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, Inject, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, LOCALE_ID, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, NgModule, defineInjectable, inject, Version, Inject, Optional, Pipe, LOCALE_ID, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵPublicFeature, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -30,14 +30,16 @@ import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInje
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class PlatformLocation {
 }
 /** *
- * \@description Indicates when a location is initialized.
- * \@experimental
+ * \@description
+ * Indicates when a location is initialized.
+ *
+ * \@publicApi
   @type {?} */
 const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
@@ -61,7 +63,7 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  *
  * See these two classes for more.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class LocationStrategy {
@@ -88,7 +90,7 @@ class LocationStrategy {
  * class AppModule {}
  * ```
  *
- *
+ * \@publicApi
   @type {?} */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
@@ -117,6 +119,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
+ * \@publicApi
  */
 class Location {
     /**
@@ -328,7 +331,7 @@ function _stripIndexHtml(url) {
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- *
+ * \@publicApi
  */
 class HashLocationStrategy extends LocationStrategy {
     /**
@@ -460,7 +463,7 @@ HashLocationStrategy.ngInjectableDef = defineInjectable({ token: HashLocationStr
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- *
+ * \@publicApi
  */
 class PathLocationStrategy extends LocationStrategy {
     /**
@@ -620,14 +623,14 @@ var localeEn = [
  * found in the LICENSE file at https://angular.io/license
  */
 /** *
- * \@experimental i18n support is experimental.
+ * \@publicApi
   @type {?} */
 const LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} data
  * @param {?=} localeId
  * @param {?=} extraData
@@ -901,7 +904,7 @@ WeekDay[WeekDay.Saturday] = 'Saturday';
 /**
  * The locale id for the chosen locale (e.g `en-GB`).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -911,7 +914,7 @@ function getLocaleId(locale) {
 /**
  * Periods of the day (e.g. `[AM, PM]` for en-US).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} formStyle
  * @param {?} width
@@ -929,7 +932,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
 /**
  * Days of the week for the Gregorian calendar (e.g. `[Sunday, Monday, ... Saturday]` for en-US).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} formStyle
  * @param {?} width
@@ -947,7 +950,7 @@ function getLocaleDayNames(locale, formStyle, width) {
 /**
  * Months of the year for the Gregorian calendar (e.g. `[January, February, ...]` for en-US).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} formStyle
  * @param {?} width
@@ -965,7 +968,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
 /**
  * Eras for the Gregorian calendar (e.g. AD/BC).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} width
  * @return {?}
@@ -981,7 +984,7 @@ function getLocaleEraNames(locale, width) {
  * First day of the week for this locale, based on english days (Sunday = 0, Monday = 1, ...).
  * For example in french the value would be 1 because the first day of the week is Monday.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -995,7 +998,7 @@ function getLocaleFirstDayOfWeek(locale) {
  * (Sunday = 0, Monday = 1, ...).
  * For example in english the value would be [6,0] for Saturday to Sunday.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1027,7 +1030,7 @@ function getLocaleWeekEndRange(locale) {
  *
  *  For example, `M/d/yy`, corresponding to a date like "9/14/99".
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} width
  * @return {?}
@@ -1055,7 +1058,7 @@ function getLocaleDateFormat(locale, width) {
  * through 23 (midnight plus 1 minute is 0:01), or using k to mean a 24-hour clock cycle running
  * 1 through 24 (midnight plus 1 minute is 24:01).
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} width
  * @return {?}
@@ -1088,7 +1091,7 @@ function getLocaleTimeFormat(locale, width) {
  * time. English uses `{1} 'at' {0}` for full and long styles, and `{1}, {0}` for medium and short
  * styles.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} width
  * @return {?}
@@ -1104,7 +1107,7 @@ function getLocaleDateTimeFormat(locale, width) {
  * Number symbol that can be used to replace placeholders in number formats.
  * See {\@link NumberSymbol} for more information.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} symbol
  * @return {?}
@@ -1153,7 +1156,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  * You can find more information
  * [on the CLDR website](http://cldr.unicode.org/translation/number-patterns)
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} type
  * @return {?}
@@ -1168,7 +1171,7 @@ function getLocaleNumberFormat(locale, type) {
  * the locale en-US).
  * The symbol will be `null` if the main country cannot be determined.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1182,7 +1185,7 @@ function getLocaleCurrencySymbol(locale) {
  * en-US).
  * The name will be `null` if the main country cannot be determined.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1205,7 +1208,7 @@ function getLocaleCurrencies(locale) {
  * The locale plural function used by ICU expressions to determine the plural case to use.
  * See {\@link NgPlural} for more information.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1236,7 +1239,7 @@ function checkFullData(data) {
  * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1264,7 +1267,7 @@ function getLocaleExtraDayPeriodRules(locale) {
  * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @param {?} formStyle
  * @param {?} width
@@ -1290,7 +1293,7 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
  * add the first one to the locale data arrays, the other ones are only defined when different.
  * We use this function to retrieve the first defined value.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @template T
  * @param {?} data
  * @param {?} index
@@ -1316,7 +1319,7 @@ function extractTime(time) {
 /**
  * Finds the locale data for a locale id
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} locale
  * @return {?}
  */
@@ -1344,7 +1347,7 @@ function findLocaleData(locale) {
  * (e.g.: format narrow = $, format wide = US$, code = USD)
  * If no locale is provided, it uses the locale "en" by default
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} code
  * @param {?} format
  * @param {?=} locale
@@ -1366,7 +1369,7 @@ const DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
  * Returns the number of decimal digits for the given currency.
  * Its value depends upon the presence of cents in that particular currency.
  *
- * \@experimental i18n support is experimental.
+ * \@publicApi
  * @param {?} code
  * @return {?}
  */
@@ -1449,6 +1452,8 @@ TranslationType[TranslationType.Eras] = 'Eras';
  *   If not specified, host system settings are used.
  *
  * See {\@link DatePipe} for more details.
+ *
+ * \@publicApi
  * @param {?} value
  * @param {?} format
  * @param {?} locale
@@ -2328,7 +2333,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *    as `USD` for the US dollar and `EUR` for the euro.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- *
+ * \@publicApi
  * @param {?} value
  * @param {?} locale
  * @param {?} currency
@@ -2361,7 +2366,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- *
+ * \@publicApi
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -2388,7 +2393,7 @@ function formatPercent(value, locale, digitsInfo) {
  * - `locale` is a `string` defining the locale to use.
  * - `digitInfo` See {\@link DecimalPipe} for more details.
  *
- *
+ * \@publicApi
  * @param {?} value
  * @param {?} locale
  * @param {?=} digitsInfo
@@ -2668,7 +2673,7 @@ function parseIntAutoRadix(text) {
   @type {?} */
 const DEPRECATED_PLURAL_FN = new InjectionToken('UseV4Plurals');
 /**
- * \@experimental
+ * \@publicApi
  * @abstract
  */
 class NgLocalization {
@@ -2701,7 +2706,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
 /**
  * Returns the plural case based on the locale
  *
- * \@experimental
+ * \@publicApi
  */
 class NgLocaleLocalization extends NgLocalization {
     /**
@@ -2752,7 +2757,7 @@ NgLocaleLocalization.ngInjectableDef = defineInjectable({ token: NgLocaleLocaliz
  * Returns the plural case based on the locale
  *
  * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
- * \@experimental
+ * \@publicApi
  * @param {?} locale
  * @param {?} nLike
  * @return {?}
@@ -3198,7 +3203,7 @@ function parseCookieValue(cookieStr, name) {
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- *
+ * \@publicApi
  */
 class NgClass {
     /**
@@ -3427,7 +3432,7 @@ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ng
  *
  * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
- * \@experimental
+ * \@publicApi
  * \@ngModule CommonModule
  */
 class NgComponentOutlet {
@@ -3504,6 +3509,7 @@ NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, 
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * \@publicApi
  * @template T
  */
 class NgForOfContext {
@@ -3607,6 +3613,7 @@ class NgForOfContext {
  * example.
  *
  * \@ngModule CommonModule
+ * \@publicApi
  * @template T
  */
 class NgForOf {
@@ -3887,6 +3894,7 @@ function getTypeNameForDebugging(type) {
  * ```
  *
  * \@ngModule CommonModule
+ * \@publicApi
  */
 class NgIf {
     /**
@@ -3983,6 +3991,9 @@ NgIf.propDecorators = {
     ngIfElse: [{ type: Input }]
 };
 NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [ɵPublicFeature] });
+/**
+ * \@publicApi
+ */
 class NgIfContext {
     constructor() {
         this.$implicit = null;
@@ -4088,7 +4099,7 @@ class SwitchView {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- *
+ * \@publicApi
  */
 class NgSwitch {
     constructor() {
@@ -4184,7 +4195,7 @@ NgSwitch.ngDirectiveDef = ɵdefineDirective({ type: NgSwitch, selectors: [["", "
  *
  * See {\@link NgSwitch} for more details and example.
  *
- *
+ * \@publicApi
  */
 class NgSwitchCase {
     /**
@@ -4235,7 +4246,7 @@ NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors:
  *
  * See {\@link NgSwitch} for more details and example.
  *
- *
+ * \@publicApi
  */
 class NgSwitchDefault {
     /**
@@ -4298,7 +4309,7 @@ NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, sele
  *
  * See http://cldr.unicode.org/index/cldr-spec/plural-rules
  *
- * \@experimental
+ * \@publicApi
  */
 class NgPlural {
     /**
@@ -4380,7 +4391,7 @@ NgPlural.ngDirectiveDef = ɵdefineDirective({ type: NgPlural, selectors: [["", "
  *
  * See {\@link NgPlural} for more details and example.
  *
- * \@experimental
+ * \@publicApi
  */
 class NgPluralCase {
     /**
@@ -4439,7 +4450,7 @@ NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- *
+ * \@publicApi
  */
 class NgStyle {
     /**
@@ -4546,6 +4557,7 @@ NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ng
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
+ * \@publicApi
  */
 class NgTemplateOutlet {
     /**
@@ -5005,7 +5017,7 @@ class DateFormatter$1 {
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- *
+ * \@publicApi
  */
 class DeprecatedDatePipe {
     /**
@@ -5174,6 +5186,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
  * \@ngModule CommonModule
+ * \@publicApi
  */
 class DeprecatedDecimalPipe {
     /**
@@ -5217,7 +5230,7 @@ DeprecatedDecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: Deprecate
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- *
+ * \@publicApi
  */
 class DeprecatedPercentPipe {
     /**
@@ -5267,7 +5280,7 @@ DeprecatedPercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: Deprecat
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- *
+ * \@publicApi
  */
 class DeprecatedCurrencyPipe {
     /**
@@ -5376,6 +5389,7 @@ const _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
+ * \@publicApi
  */
 class AsyncPipe {
     /**
@@ -5496,6 +5510,7 @@ AsyncPipe.ngPipeDef = ɵdefinePipe({ name: "async", type: AsyncPipe, factory: fu
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
  * \@ngModule CommonModule
+ * \@publicApi
  */
 class LowerCasePipe {
     /**
@@ -5532,6 +5547,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
  * \@ngModule CommonModule
+ * \@publicApi
  */
 class TitleCasePipe {
     /**
@@ -5557,6 +5573,7 @@ TitleCasePipe.ngPipeDef = ɵdefinePipe({ name: "titlecase", type: TitleCasePipe,
  * @see `TitleCasePipe`
  *
  * \@ngModule CommonModule
+ * \@publicApi
  */
 class UpperCasePipe {
     /**
@@ -5724,6 +5741,7 @@ UpperCasePipe.ngPipeDef = ɵdefinePipe({ name: "uppercase", type: UpperCasePipe,
  * }
  * ```
  *
+ * \@publicApi
  */
 class DatePipe {
     /**
@@ -5790,7 +5808,7 @@ const _INTERPOLATION_REGEXP = /#/g;
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
- * \@experimental
+ * \@publicApi
  */
 class I18nPluralPipe {
     /**
@@ -5853,7 +5871,7 @@ I18nPluralPipe.ngPipeDef = ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPi
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
- * \@experimental
+ * \@publicApi
  */
 class I18nSelectPipe {
     /**
@@ -5906,6 +5924,7 @@ I18nSelectPipe.ngPipeDef = ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPi
  *
  * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
+ * \@publicApi
  */
 class JsonPipe {
     /**
@@ -5956,6 +5975,8 @@ function makeKeyValuePair(key, value) {
  * pipe.
  *
  * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ *
+ * \@publicApi
  */
 class KeyValuePipe {
     /**
@@ -6082,6 +6103,7 @@ function defaultComparator(keyValueA, keyValueB) {
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
+ * \@publicApi
  */
 class DecimalPipe {
     /**
@@ -6146,7 +6168,7 @@ DecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: DecimalPipe, factor
  *
  * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
  *
- *
+ * \@publicApi
  */
 class PercentPipe {
     /**
@@ -6212,7 +6234,7 @@ PercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: PercentPipe, facto
  *
  * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
  *
- *
+ * \@publicApi
  */
 class CurrencyPipe {
     /**
@@ -6359,6 +6381,7 @@ function strToNumber(value) {
  *
  * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
+ * \@publicApi
  */
 class SlicePipe {
     /**
@@ -6441,6 +6464,7 @@ const COMMON_PIPES = [
  * * The `exports` options make the declared directives and pipes available for import
  * by other NgModules.
  *
+ * \@publicApi
  */
 class CommonModule {
 }
@@ -6461,6 +6485,7 @@ CommonModule.ngInjectorDef = defineInjector({ factory: function CommonModule_Fac
  * A module that contains the deprecated i18n pipes.
  *
  * @deprecated from v5
+ * \@publicApi
  */
 class DeprecatedI18NPipesModule {
 }
@@ -6484,7 +6509,7 @@ DeprecatedI18NPipesModule.ngInjectorDef = defineInjector({ factory: function Dep
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- *
+ * \@publicApi
   @type {?} */
 const DOCUMENT = new InjectionToken('DocumentToken');
 
@@ -6509,7 +6534,7 @@ const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
 const PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
- * \@experimental
+ * \@publicApi
  * @param {?} platformId
  * @return {?}
  */
@@ -6518,7 +6543,7 @@ function isPlatformBrowser(platformId) {
 }
 /**
  * Returns whether a platform id represents a server platform.
- * \@experimental
+ * \@publicApi
  * @param {?} platformId
  * @return {?}
  */
@@ -6527,7 +6552,7 @@ function isPlatformServer(platformId) {
 }
 /**
  * Returns whether a platform id represents a web worker app platform.
- * \@experimental
+ * \@publicApi
  * @param {?} platformId
  * @return {?}
  */
@@ -6536,7 +6561,7 @@ function isPlatformWorkerApp(platformId) {
 }
 /**
  * Returns whether a platform id represents a web worker UI platform.
- * \@experimental
+ * \@publicApi
  * @param {?} platformId
  * @return {?}
  */
@@ -6548,8 +6573,10 @@ function isPlatformWorkerUi(platformId) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/** @type {?} */
-const VERSION = new Version('7.0.0+32.sha-3f94759');
+/** *
+ * \@publicApi
+  @type {?} */
+const VERSION = new Version('7.0.0+52.sha-778e1c2');
 
 /**
  * @fileoverview added by tsickle
@@ -6557,6 +6584,8 @@ const VERSION = new Version('7.0.0+32.sha-3f94759');
  */
 /**
  * Manages the scroll position.
+ *
+ * \@publicApi
  * @abstract
  */
 class ViewportScroller {

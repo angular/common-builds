@@ -40,6 +40,7 @@ import { PipeTransform } from '@angular/core';
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
+ * @publicApi
  */
 export declare class DecimalPipe implements PipeTransform {
     private _locale;
@@ -80,7 +81,7 @@ export declare class DecimalPipe implements PipeTransform {
  *
  * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
  *
- *
+ * @publicApi
  */
 export declare class PercentPipe implements PipeTransform {
     private _locale;
@@ -122,7 +123,7 @@ export declare class PercentPipe implements PipeTransform {
  *
  * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
  *
- *
+ * @publicApi
  */
 export declare class CurrencyPipe implements PipeTransform {
     private _locale;
