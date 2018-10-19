@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-rc.1+118.sha-31022cb
+ * @license Angular v7.0.0-rc.1+137.sha-4c2ce4e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Injectable, InjectionToken, Injector, NgModule, defineInjectable, Inject, inject, INJECTOR, ɵdefineNgModule, defineInjector, PLATFORM_ID } from '@angular/core';
+import { Injectable, InjectionToken, Injector, NgModule, defineInjectable, Inject, PLATFORM_ID, inject, INJECTOR, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -30,7 +30,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class HttpHandler {
@@ -43,7 +43,7 @@ class HttpHandler {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class HttpBackend {
@@ -56,6 +56,7 @@ class HttpBackend {
 /**
  * Immutable set of Http headers, with lazy parsing.
  *
+ * \@publicApi
  */
 class HttpHeaders {
     /**
@@ -298,7 +299,7 @@ class HttpHeaders {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- *
+ * \@publicApi
  */
 class HttpUrlEncodingCodec {
     /**
@@ -369,7 +370,7 @@ function standardEncoding(v) {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- *
+ * \@publicApi
  */
 class HttpParams {
     /**
@@ -588,7 +589,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- *
+ * \@publicApi
  * @template T
  */
 class HttpRequest {
@@ -833,7 +834,7 @@ HttpEventType[HttpEventType.User] = 'User';
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class HttpResponseBase {
@@ -864,7 +865,7 @@ class HttpResponseBase {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
- *
+ * \@publicApi
  */
 class HttpHeaderResponse extends HttpResponseBase {
     /**
@@ -899,7 +900,7 @@ class HttpHeaderResponse extends HttpResponseBase {
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
- *
+ * \@publicApi
  * @template T
  */
 class HttpResponse extends HttpResponseBase {
@@ -937,7 +938,7 @@ class HttpResponse extends HttpResponseBase {
  * will contain either a wrapped Error object or the error response returned
  * from the server.
  *
- *
+ * \@publicApi
  */
 class HttpErrorResponse extends HttpResponseBase {
     /**
@@ -1002,7 +1003,7 @@ function addBody(options, body) {
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- *
+ * \@publicApi
  */
 class HttpClient {
     /**
@@ -1275,7 +1276,7 @@ class HttpInterceptorHandler {
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
- *
+ * \@publicApi
   @type {?} */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 class NoopInterceptor {
@@ -1326,7 +1327,7 @@ class JsonpCallbackContext {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- *
+ * \@publicApi
  */
 class JsonpClientBackend {
     /**
@@ -1472,7 +1473,7 @@ JsonpClientBackend.ngInjectableDef = defineInjectable({ token: JsonpClientBacken
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- *
+ * \@publicApi
  */
 class JsonpInterceptor {
     /**
@@ -1534,7 +1535,7 @@ function getResponseUrl(xhr) {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class XhrFactory {
@@ -1561,7 +1562,7 @@ BrowserXhr.ngInjectableDef = defineInjectable({ token: BrowserXhr, factory: func
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- *
+ * \@publicApi
  */
 class HttpXhrBackend {
     /**
@@ -1813,7 +1814,7 @@ const XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class HttpXsrfTokenExtractor {
@@ -1989,7 +1990,7 @@ function jsonpCallbackContext() {
  * If no names are supplied, the default cookie name is `XSRF-TOKEN`
  * and the default header name is `X-XSRF-TOKEN`.
  *
- *
+ * \@publicApi
  */
 class HttpClientXsrfModule {
     /**
@@ -2049,7 +2050,7 @@ HttpClientXsrfModule.ngInjectorDef = defineInjector({ factory: function HttpClie
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * \@publicApi
  */
 class HttpClientModule {
 }
@@ -2101,7 +2102,7 @@ HttpClientModule.ngInjectorDef = defineInjector({ factory: function HttpClientMo
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * \@publicApi
  */
 class HttpClientJsonpModule {
 }
