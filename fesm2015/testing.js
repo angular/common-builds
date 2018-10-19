@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0+32.sha-3f94759
+ * @license Angular v7.0.0+52.sha-778e1c2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -14,7 +14,7 @@ import { LocationStrategy } from '@angular/common';
 /**
  * A spy for {\@link Location} that allows tests to fire simulated location events.
  *
- * \@experimental
+ * \@publicApi
  */
 class SpyLocation {
     constructor() {
@@ -191,7 +191,7 @@ class LocationState {
  * A mock implementation of {\@link LocationStrategy} that allows tests to fire simulated
  * location events.
  *
- *
+ * \@publicApi
  */
 class MockLocationStrategy extends LocationStrategy {
     constructor() {
