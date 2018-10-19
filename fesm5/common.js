@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.0.0+26.sha-5d90aed
+ * @license Angular v7.0.0+25.sha-658a18c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
-import { __values, __read, __decorate, __extends, __param, __metadata, __assign } from 'tslib';
+import { __values, __read, __decorate, __metadata, __extends, __param, __assign } from 'tslib';
 
 /**
  * @license
@@ -5628,7 +5628,7 @@ function isPlatformWorkerUi(platformId) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var VERSION = new Version('7.0.0+26.sha-5d90aed');
+var VERSION = new Version('7.0.0+25.sha-658a18c');
 
 /**
  * @license
