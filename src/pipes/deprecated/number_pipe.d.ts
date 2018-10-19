@@ -30,6 +30,7 @@ import { PipeTransform } from '@angular/core';
  * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
  * @ngModule CommonModule
+ * @publicApi
  */
 export declare class DeprecatedDecimalPipe implements PipeTransform {
     private _locale;
@@ -54,7 +55,7 @@ export declare class DeprecatedDecimalPipe implements PipeTransform {
  *
  * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- *
+ * @publicApi
  */
 export declare class DeprecatedPercentPipe implements PipeTransform {
     private _locale;
@@ -85,7 +86,7 @@ export declare class DeprecatedPercentPipe implements PipeTransform {
  *
  * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- *
+ * @publicApi
  */
 export declare class DeprecatedCurrencyPipe implements PipeTransform {
     private _locale;

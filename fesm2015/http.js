@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.0.0-rc.1+118.sha-31022cb
+ * @license Angular v7.0.0-rc.1+137.sha-4c2ce4e
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __metadata, __param } from 'tslib';
+import { __decorate, __param, __metadata } from 'tslib';
 import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
@@ -27,7 +27,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
  *
  * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
  *
- *
+ * @publicApi
  */
 class HttpHandler {
 }
@@ -39,7 +39,7 @@ class HttpHandler {
  * When injected, `HttpBackend` dispatches requests directly to the backend, without going
  * through the interceptor chain.
  *
- *
+ * @publicApi
  */
 class HttpBackend {
 }
@@ -54,6 +54,7 @@ class HttpBackend {
 /**
  * Immutable set of Http headers, with lazy parsing.
  *
+ * @publicApi
  */
 class HttpHeaders {
     constructor(headers) {
@@ -239,7 +240,7 @@ class HttpHeaders {
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
  * serialize and parse URL parameter keys and values.
  *
- *
+ * @publicApi
  */
 class HttpUrlEncodingCodec {
     encodeKey(key) { return standardEncoding(key); }
@@ -281,7 +282,7 @@ function standardEncoding(v) {
  *
  * This class is immutable - all mutation operations return a new instance.
  *
- *
+ * @publicApi
  */
 class HttpParams {
     constructor(options = {}) {
@@ -462,7 +463,7 @@ function isFormData(value) {
  * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
- *
+ * @publicApi
  */
 class HttpRequest {
     constructor(method, url, third, fourth) {
@@ -673,7 +674,7 @@ class HttpRequest {
 /**
  * Type enumeration for the different kinds of `HttpEvent`.
  *
- *
+ * @publicApi
  */
 var HttpEventType;
 (function (HttpEventType) {
@@ -705,7 +706,7 @@ var HttpEventType;
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
- *
+ * @publicApi
  */
 class HttpResponseBase {
     /**
@@ -732,7 +733,7 @@ class HttpResponseBase {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
- *
+ * @publicApi
  */
 class HttpHeaderResponse extends HttpResponseBase {
     /**
@@ -764,7 +765,7 @@ class HttpHeaderResponse extends HttpResponseBase {
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
- *
+ * @publicApi
  */
 class HttpResponse extends HttpResponseBase {
     /**
@@ -796,7 +797,7 @@ class HttpResponse extends HttpResponseBase {
  * will contain either a wrapped Error object or the error response returned
  * from the server.
  *
- *
+ * @publicApi
  */
 class HttpErrorResponse extends HttpResponseBase {
     constructor(init) {
@@ -850,7 +851,7 @@ function addBody(options, body) {
  * Each request method has multiple signatures, and the return type varies according to which
  * signature is called (mainly the values of `observe` and `responseType`).
  *
- *
+ * @publicApi
  */
 let HttpClient = class HttpClient {
     constructor(handler) {
@@ -1090,7 +1091,7 @@ class HttpInterceptorHandler {
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
- *
+ * @publicApi
  */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 let NoopInterceptor = class NoopInterceptor {
@@ -1134,7 +1135,7 @@ class JsonpCallbackContext {
  * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
- *
+ * @publicApi
  */
 let JsonpClientBackend = class JsonpClientBackend {
     constructor(callbackMap, document) {
@@ -1280,7 +1281,7 @@ JsonpClientBackend = __decorate([
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- *
+ * @publicApi
  */
 let JsonpInterceptor = class JsonpInterceptor {
     constructor(jsonp) {
@@ -1323,7 +1324,7 @@ function getResponseUrl(xhr) {
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
- *
+ * @publicApi
  */
 class XhrFactory {
 }
@@ -1344,7 +1345,7 @@ BrowserXhr = __decorate([
  * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
- *
+ * @publicApi
  */
 let HttpXhrBackend = class HttpXhrBackend {
     constructor(xhrFactory) {
@@ -1599,7 +1600,7 @@ const XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
- *
+ * @publicApi
  */
 class HttpXsrfTokenExtractor {
 }
@@ -1728,7 +1729,7 @@ function jsonpCallbackContext() {
  * If no names are supplied, the default cookie name is `XSRF-TOKEN`
  * and the default header name is `X-XSRF-TOKEN`.
  *
- *
+ * @publicApi
  */
 let HttpClientXsrfModule = HttpClientXsrfModule_1 = class HttpClientXsrfModule {
     /**
@@ -1778,7 +1779,7 @@ HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * @publicApi
  */
 let HttpClientModule = class HttpClientModule {
 };
@@ -1816,7 +1817,7 @@ HttpClientModule = __decorate([
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
- *
+ * @publicApi
  */
 let HttpClientJsonpModule = class HttpClientJsonpModule {
 };
