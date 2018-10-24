@@ -36,6 +36,7 @@ import * as i19 from './pipes/keyvalue_pipe';
  * * The `exports` options make the declared directives and pipes available for import
  * by other NgModules.
  *
+ * @publicApi
  */
 export declare class CommonModule {
     static ngModuleDef: i0.ɵNgModuleDefWithMeta<CommonModule, [typeof i3.NgClass, typeof i4.NgComponentOutlet, typeof i5.NgForOf, typeof i6.NgIf, typeof i7.NgTemplateOutlet, typeof i8.NgStyle, typeof i9.NgSwitch, typeof i9.NgSwitchCase, typeof i9.NgSwitchDefault, typeof i10.NgPlural, typeof i10.NgPluralCase, typeof i11.AsyncPipe, typeof i12.UpperCasePipe, typeof i12.LowerCasePipe, typeof i13.JsonPipe, typeof i14.SlicePipe, typeof i15.DecimalPipe, typeof i15.PercentPipe, typeof i12.TitleCasePipe, typeof i15.CurrencyPipe, typeof i16.DatePipe, typeof i17.I18nPluralPipe, typeof i18.I18nSelectPipe, typeof i19.KeyValuePipe], never, [typeof i3.NgClass, typeof i4.NgComponentOutlet, typeof i5.NgForOf, typeof i6.NgIf, typeof i7.NgTemplateOutlet, typeof i8.NgStyle, typeof i9.NgSwitch, typeof i9.NgSwitchCase, typeof i9.NgSwitchDefault, typeof i10.NgPlural, typeof i10.NgPluralCase, typeof i11.AsyncPipe, typeof i12.UpperCasePipe, typeof i12.LowerCasePipe, typeof i13.JsonPipe, typeof i14.SlicePipe, typeof i15.DecimalPipe, typeof i15.PercentPipe, typeof i12.TitleCasePipe, typeof i15.CurrencyPipe, typeof i16.DatePipe, typeof i17.I18nPluralPipe, typeof i18.I18nSelectPipe, typeof i19.KeyValuePipe]>;
@@ -45,6 +46,7 @@ export declare class CommonModule {
  * A module that contains the deprecated i18n pipes.
  *
  * @deprecated from v5
+ * @publicApi
  */
 export declare class DeprecatedI18NPipesModule {
     static ngModuleDef: i0.ɵNgModuleDefWithMeta<DeprecatedI18NPipesModule, [typeof i1.DeprecatedDecimalPipe, typeof i1.DeprecatedPercentPipe, typeof i1.DeprecatedCurrencyPipe, typeof i2.DeprecatedDatePipe], never, [typeof i1.DeprecatedDecimalPipe, typeof i1.DeprecatedPercentPipe, typeof i1.DeprecatedCurrencyPipe, typeof i2.DeprecatedDatePipe]>;

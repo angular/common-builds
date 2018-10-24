@@ -10,6 +10,8 @@ import { KeyValueDiffers, PipeTransform } from '@angular/core';
 /**
  * A key value pair.
  * Usually used to represent the key value pairs from a Map or Object.
+ *
+ * @publicApi
  */
 export interface KeyValue<K, V> {
     key: K;
@@ -32,6 +34,8 @@ export interface KeyValue<K, V> {
  * pipe.
  *
  * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ *
+ * @publicApi
  */
 export declare class KeyValuePipe implements PipeTransform {
     private readonly differs;

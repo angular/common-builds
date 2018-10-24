@@ -7,6 +7,8 @@
  */
 /**
  * Manages the scroll position.
+ *
+ * @publicApi
  */
 export declare abstract class ViewportScroller {
     /** @nocollapse */
