@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-rc.1+111.sha-5b4cf38
+ * @license Angular v7.0.0-rc.1+178.sha-ee0b857.with-local-changes
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- *
+ * \@publicApi
  * @abstract
  */
 class HttpTestingController {
@@ -32,7 +32,7 @@ class HttpTestingController {
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- *
+ * \@publicApi
  */
 class TestRequest {
     /**
@@ -388,7 +388,7 @@ HttpClientTestingBackend.decorators = [
  *
  * Inject `HttpTestingController` to expect and flush requests in your tests.
  *
- *
+ * \@publicApi
  */
 class HttpClientTestingModule {
 }
