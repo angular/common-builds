@@ -119,7 +119,7 @@ var NgSwitch = /** @class */ (function () {
             }
         }
     };
-    NgSwitch.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory(t) { return new (t || NgSwitch)(); }, inputs: { ngSwitch: "ngSwitch" }, features: [i0.ɵPublicFeature] });
+    NgSwitch.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory(t) { return new (t || NgSwitch)(); }, inputs: { ngSwitch: "ngSwitch" } });
     return NgSwitch;
 }());
 export { NgSwitch };
@@ -154,7 +154,7 @@ var NgSwitchCase = /** @class */ (function () {
         this._view = new SwitchView(viewContainer, templateRef);
     }
     NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-    NgSwitchCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" }, features: [i0.ɵPublicFeature] });
+    NgSwitchCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" } });
     return NgSwitchCase;
 }());
 export { NgSwitchCase };
@@ -184,7 +184,7 @@ var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
-    NgSwitchDefault.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(NgSwitch, 1)); }, features: [i0.ɵPublicFeature] });
+    NgSwitchDefault.ngDirectiveDef = i0.ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(NgSwitch, 1)); } });
     return NgSwitchDefault;
 }());
 export { NgSwitchDefault };

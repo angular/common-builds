@@ -108,7 +108,7 @@ var NgTemplateOutlet = /** @class */ (function () {
             finally { if (e_2) throw e_2.error; }
         }
     };
-    NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
+    NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵNgOnChangesFeature] });
     return NgTemplateOutlet;
 }());
 export { NgTemplateOutlet };

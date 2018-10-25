@@ -198,7 +198,7 @@ NgIf.propDecorators = {
     ngIfThen: [{ type: Input }],
     ngIfElse: [{ type: Input }]
 };
-NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [i0.ɵPublicFeature] });
+NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
 if (false) {
     /**
      * \@internal

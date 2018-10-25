@@ -283,7 +283,7 @@ NgForOf.propDecorators = {
     ngForTrackBy: [{ type: Input }],
     ngForTemplate: [{ type: Input }]
 };
-NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory(t) { return new (t || NgForOf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, features: [i0.ɵPublicFeature] });
+NgForOf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory(t) { return new (t || NgForOf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
 if (false) {
     /** @type {?} */
     NgForOf.prototype._ngForOf;

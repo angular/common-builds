@@ -70,7 +70,7 @@ var NgStyle = /** @class */ (function () {
             this._renderer.removeStyle(this._ngEl.nativeElement, name);
         }
     };
-    NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵdirectiveInject(ElementRef), i0.ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" }, features: [i0.ɵPublicFeature] });
+    NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵdirectiveInject(ElementRef), i0.ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" } });
     return NgStyle;
 }());
 export { NgStyle };

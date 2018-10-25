@@ -169,7 +169,7 @@ var NgIf = /** @class */ (function () {
      * strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     NgIf.ngTemplateGuard_ngIf = function (dir, expr) { return true; };
-    NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, features: [i0.ɵPublicFeature] });
+    NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
     return NgIf;
 }());
 export { NgIf };

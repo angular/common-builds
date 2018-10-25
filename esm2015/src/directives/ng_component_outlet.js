@@ -129,7 +129,7 @@ NgComponentOutlet.propDecorators = {
     ngComponentOutletContent: [{ type: Input }],
     ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
-NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵPublicFeature, i0.ɵNgOnChangesFeature] });
+NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵNgOnChangesFeature] });
 if (false) {
     /** @type {?} */
     NgComponentOutlet.prototype.ngComponentOutlet;

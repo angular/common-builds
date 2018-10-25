@@ -105,7 +105,7 @@ NgPlural.ctorParameters = () => [
 NgPlural.propDecorators = {
     ngPlural: [{ type: Input }]
 };
-NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" }, features: [i0.ɵPublicFeature] });
+NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(i0.ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
 if (false) {
     /** @type {?} */
     NgPlural.prototype._switchValue;
@@ -160,7 +160,7 @@ NgPluralCase.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: NgPlural, decorators: [{ type: Host }] }
 ];
-NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(NgPlural, 1)); }, features: [i0.ɵPublicFeature] });
+NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵdirectiveInject(TemplateRef), i0.ɵdirectiveInject(ViewContainerRef), i0.ɵdirectiveInject(NgPlural, 1)); } });
 if (false) {
     /** @type {?} */
     NgPluralCase.prototype.value;
