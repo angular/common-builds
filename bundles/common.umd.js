@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-beta.0+34.sha-c048358
+ * @license Angular v7.1.0-beta.0+35.sha-19fcfc3
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2811,7 +2811,7 @@
                 });
             }
         };
-        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵdirectiveInject(i0.ElementRef), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { klass: "class", ngClass: "ngClass" } });
+        NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(i0.IterableDiffers), i0.ɵdirectiveInject(i0.KeyValueDiffers), i0.ɵdirectiveInject(i0.ElementRef), i0.ɵdirectiveInject(i0.Renderer2)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
         return NgClass;
     }());
 
@@ -5377,7 +5377,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.1.0-beta.0+34.sha-c048358');
+    var VERSION = new i0.Version('7.1.0-beta.0+35.sha-19fcfc3');
 
     /**
      * @license
