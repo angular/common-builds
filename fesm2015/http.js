@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.0+8.sha-b0476f3
+ * @license Angular v7.1.0-beta.0+18.sha-aefa06f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { Injectable, InjectionToken, Injector, NgModule, defineInjectable, Inject, PLATFORM_ID, inject, INJECTOR, ɵdefineNgModule, defineInjector } from '@angular/core';
+import { Injectable, InjectionToken, Injector, NgModule, defineInjectable, Inject, PLATFORM_ID, inject, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -1964,7 +1964,7 @@ HttpInterceptingHandler.ctorParameters = () => [
     { type: HttpBackend },
     { type: Injector }
 ];
-HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(inject(HttpBackend), inject(INJECTOR)); }, providedIn: null });
+HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(inject(HttpBackend), inject(Injector)); }, providedIn: null });
 /**
  * Factory function that determines where to store JSONP callbacks.
  *

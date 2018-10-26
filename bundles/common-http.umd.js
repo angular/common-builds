@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-beta.0+8.sha-b0476f3
+ * @license Angular v7.1.0-beta.0+18.sha-aefa06f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1788,7 +1788,7 @@
             }
             return this.chain.handle(req);
         };
-        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(i0.INJECTOR)); }, providedIn: null });
+        HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(i0.Injector)); }, providedIn: null });
         return HttpInterceptingHandler;
     }());
     /**

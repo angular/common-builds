@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.1.0-beta.0+8.sha-b0476f3
+ * @license Angular v7.1.0-beta.0+18.sha-aefa06f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { __spread, __read, __extends } from 'tslib';
-import { InjectionToken, defineInjectable, inject, PLATFORM_ID, INJECTOR, ɵdefineNgModule, defineInjector } from '@angular/core';
+import { InjectionToken, Injector, defineInjectable, inject, PLATFORM_ID, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -1742,7 +1742,7 @@ var HttpInterceptingHandler = /** @class */ (function () {
         }
         return this.chain.handle(req);
     };
-    HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(inject(HttpBackend), inject(INJECTOR)); }, providedIn: null });
+    HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(inject(HttpBackend), inject(Injector)); }, providedIn: null });
     return HttpInterceptingHandler;
 }());
 /**
