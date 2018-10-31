@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.0+77.sha-d042c4a
+ * @license Angular v7.1.0-beta.0+78.sha-ec29fd3
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
+import { InjectionToken, EventEmitter, Version, defineInjectable, inject, ComponentFactoryResolver, NgModuleRef, ViewContainerRef, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ElementRef, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -5381,7 +5381,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.0-beta.0+77.sha-d042c4a');
+var VERSION = new Version('7.1.0-beta.0+78.sha-ec29fd3');
 
 /**
  * @license
