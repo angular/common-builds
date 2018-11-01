@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
-import { Injectable, NgModule, ɵdefineNgModule, defineInjector, defineInjectable } from '@angular/core';
+import { Injectable, NgModule, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, defineInjectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -386,6 +386,9 @@ HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
 HttpClientTestingBackend.ngInjectableDef = defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
+        type: Injectable
+    }], null, null);
 
 /**
  * @fileoverview added by tsickle
@@ -427,6 +430,19 @@ HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpC
     ], imports: [[
             HttpClientModule,
         ]] });
+/*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    HttpClientModule,
+                ],
+                providers: [
+                    HttpClientTestingBackend,
+                    { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+                    { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                ],
+            }]
+    }], null, null);
 
 /**
  * @fileoverview added by tsickle

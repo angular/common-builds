@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Version, defineInjectable, inject, TemplateRef, ViewContainerRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ɵstringify, LOCALE_ID, IterableDiffers, isDevMode, ComponentFactoryResolver, NgModuleRef, ElementRef, Renderer2, ɵisListLikeIterable, ɵdefineNgModule, defineInjector, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵinjectAttribute, ɵNgOnChangesFeature } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ElementRef, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, Inject, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, ɵdefinePipe, ɵdirectiveInject, Optional, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -270,6 +270,11 @@ var Location = /** @class */ (function () {
     Location.ngInjectableDef = defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(inject(LocationStrategy)); }, providedIn: null });
     return Location;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(Location, [{
+        type: Injectable
+    }], [{
+        type: LocationStrategy
+    }], null);
 function _stripBaseHref(baseHref, url) {
     return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
 }
@@ -343,6 +348,19 @@ var HashLocationStrategy = /** @class */ (function (_super) {
     HashLocationStrategy.ngInjectableDef = defineInjectable({ token: HashLocationStrategy, factory: function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(inject(PlatformLocation), inject(APP_BASE_HREF, 8)); }, providedIn: null });
     return HashLocationStrategy;
 }(LocationStrategy));
+/*@__PURE__*/ ɵsetClassMetadata(HashLocationStrategy, [{
+        type: Injectable
+    }], [{
+        type: PlatformLocation
+    }, {
+        type: undefined,
+        decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [APP_BASE_HREF]
+            }]
+    }], null);
 
 /**
  * @description
@@ -413,6 +431,19 @@ var PathLocationStrategy = /** @class */ (function (_super) {
     PathLocationStrategy.ngInjectableDef = defineInjectable({ token: PathLocationStrategy, factory: function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(inject(PlatformLocation), inject(APP_BASE_HREF, 8)); }, providedIn: null });
     return PathLocationStrategy;
 }(LocationStrategy));
+/*@__PURE__*/ ɵsetClassMetadata(PathLocationStrategy, [{
+        type: Injectable
+    }], [{
+        type: PlatformLocation
+    }, {
+        type: undefined,
+        decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [APP_BASE_HREF]
+            }]
+    }], null);
 
 /**
  * @license
@@ -2255,6 +2286,23 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
     NgLocaleLocalization.ngInjectableDef = defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(inject(LOCALE_ID), inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
     return NgLocaleLocalization;
 }(NgLocalization));
+/*@__PURE__*/ ɵsetClassMetadata(NgLocaleLocalization, [{
+        type: Injectable
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }, {
+        type: undefined,
+        decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [DEPRECATED_PLURAL_FN]
+            }]
+    }], null);
 /**
  * Returns the plural case based on the locale
  *
@@ -2818,6 +2866,23 @@ var NgClass = /** @class */ (function () {
     NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵdirectiveInject(ElementRef), ɵdirectiveInject(Renderer2)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
     return NgClass;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
+        type: Directive,
+        args: [{ selector: '[ngClass]' }]
+    }], [{
+        type: IterableDiffers
+    }, {
+        type: KeyValueDiffers
+    }, {
+        type: ElementRef
+    }, {
+        type: Renderer2
+    }], { klass: [{
+            type: Input,
+            args: ['class']
+        }], ngClass: [{
+            type: Input
+        }] });
 
 /**
  * @license
@@ -2920,6 +2985,20 @@ var NgComponentOutlet = /** @class */ (function () {
     NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵNgOnChangesFeature] });
     return NgComponentOutlet;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
+        type: Directive,
+        args: [{ selector: '[ngComponentOutlet]' }]
+    }], [{
+        type: ViewContainerRef
+    }], { ngComponentOutlet: [{
+            type: Input
+        }], ngComponentOutletInjector: [{
+            type: Input
+        }], ngComponentOutletContent: [{
+            type: Input
+        }], ngComponentOutletNgModuleFactory: [{
+            type: Input
+        }] });
 
 /**
  * @license
@@ -3144,6 +3223,22 @@ var NgForOf = /** @class */ (function () {
     NgForOf.ngDirectiveDef = ɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], factory: function NgForOf_Factory(t) { return new (t || NgForOf)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef), ɵdirectiveInject(IterableDiffers)); }, inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
     return NgForOf;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgForOf, [{
+        type: Directive,
+        args: [{ selector: '[ngFor][ngForOf]' }]
+    }], [{
+        type: ViewContainerRef
+    }, {
+        type: TemplateRef
+    }, {
+        type: IterableDiffers
+    }], { ngForOf: [{
+            type: Input
+        }], ngForTrackBy: [{
+            type: Input
+        }], ngForTemplate: [{
+            type: Input
+        }] });
 var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
@@ -3327,6 +3422,20 @@ var NgIf = /** @class */ (function () {
     NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], factory: function NgIf_Factory(t) { return new (t || NgIf)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef)); }, inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
     return NgIf;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgIf, [{
+        type: Directive,
+        args: [{ selector: '[ngIf]' }]
+    }], [{
+        type: ViewContainerRef
+    }, {
+        type: TemplateRef
+    }], { ngIf: [{
+            type: Input
+        }], ngIfThen: [{
+            type: Input
+        }], ngIfElse: [{
+            type: Input
+        }] });
 /**
  * @publicApi
  */
@@ -3465,6 +3574,12 @@ var NgSwitch = /** @class */ (function () {
     NgSwitch.ngDirectiveDef = ɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], factory: function NgSwitch_Factory(t) { return new (t || NgSwitch)(); }, inputs: { ngSwitch: "ngSwitch" } });
     return NgSwitch;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgSwitch, [{
+        type: Directive,
+        args: [{ selector: '[ngSwitch]' }]
+    }], null, { ngSwitch: [{
+            type: Input
+        }] });
 /**
  * @ngModule CommonModule
  *
@@ -3499,6 +3614,21 @@ var NgSwitchCase = /** @class */ (function () {
     NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], factory: function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef), ɵdirectiveInject(NgSwitch, 1)); }, inputs: { ngSwitchCase: "ngSwitchCase" } });
     return NgSwitchCase;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgSwitchCase, [{
+        type: Directive,
+        args: [{ selector: '[ngSwitchCase]' }]
+    }], [{
+        type: ViewContainerRef
+    }, {
+        type: TemplateRef
+    }, {
+        type: NgSwitch,
+        decorators: [{
+                type: Host
+            }]
+    }], { ngSwitchCase: [{
+            type: Input
+        }] });
 /**
  * @ngModule CommonModule
  * @usageNotes
@@ -3528,6 +3658,19 @@ var NgSwitchDefault = /** @class */ (function () {
     NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]], factory: function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(TemplateRef), ɵdirectiveInject(NgSwitch, 1)); } });
     return NgSwitchDefault;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgSwitchDefault, [{
+        type: Directive,
+        args: [{ selector: '[ngSwitchDefault]' }]
+    }], [{
+        type: ViewContainerRef
+    }, {
+        type: TemplateRef
+    }, {
+        type: NgSwitch,
+        decorators: [{
+                type: Host
+            }]
+    }], null);
 
 /**
  * @license
@@ -3600,6 +3743,14 @@ var NgPlural = /** @class */ (function () {
     NgPlural.ngDirectiveDef = ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(ɵdirectiveInject(NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
     return NgPlural;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgPlural, [{
+        type: Directive,
+        args: [{ selector: '[ngPlural]' }]
+    }], [{
+        type: NgLocalization
+    }], { ngPlural: [{
+            type: Input
+        }] });
 /**
  * @ngModule CommonModule
  *
@@ -3629,6 +3780,25 @@ var NgPluralCase = /** @class */ (function () {
     NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(ɵinjectAttribute('ngPluralCase'), ɵdirectiveInject(TemplateRef), ɵdirectiveInject(ViewContainerRef), ɵdirectiveInject(NgPlural, 1)); } });
     return NgPluralCase;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgPluralCase, [{
+        type: Directive,
+        args: [{ selector: '[ngPluralCase]' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Attribute,
+                args: ['ngPluralCase']
+            }]
+    }, {
+        type: TemplateRef
+    }, {
+        type: ViewContainerRef
+    }, {
+        type: NgPlural,
+        decorators: [{
+                type: Host
+            }]
+    }], null);
 
 /**
  * @ngModule CommonModule
@@ -3695,6 +3865,18 @@ var NgStyle = /** @class */ (function () {
     NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(ɵdirectiveInject(KeyValueDiffers), ɵdirectiveInject(ElementRef), ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" } });
     return NgStyle;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
+        type: Directive,
+        args: [{ selector: '[ngStyle]' }]
+    }], [{
+        type: KeyValueDiffers
+    }, {
+        type: ElementRef
+    }, {
+        type: Renderer2
+    }], { ngStyle: [{
+            type: Input
+        }] });
 
 /**
  * @ngModule CommonModule
@@ -3799,6 +3981,16 @@ var NgTemplateOutlet = /** @class */ (function () {
     NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵNgOnChangesFeature] });
     return NgTemplateOutlet;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
+        type: Directive,
+        args: [{ selector: '[ngTemplateOutlet]' }]
+    }], [{
+        type: ViewContainerRef
+    }], { ngTemplateOutletContext: [{
+            type: Input
+        }], ngTemplateOutlet: [{
+            type: Input
+        }] });
 
 /**
  * @license
@@ -4139,6 +4331,16 @@ var DeprecatedDatePipe = /** @class */ (function () {
     DeprecatedDatePipe.ngPipeDef = ɵdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedDatePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DeprecatedDatePipe, [{
+        type: Pipe,
+        args: [{ name: 'date', pure: true }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
@@ -4228,6 +4430,16 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
     DeprecatedDecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedDecimalPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DeprecatedDecimalPipe, [{
+        type: Pipe,
+        args: [{ name: 'number' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 /**
  * @ngModule CommonModule
  *
@@ -4258,6 +4470,16 @@ var DeprecatedPercentPipe = /** @class */ (function () {
     DeprecatedPercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedPercentPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DeprecatedPercentPipe, [{
+        type: Pipe,
+        args: [{ name: 'percent' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 /**
  * @ngModule CommonModule
  * @description
@@ -4296,6 +4518,16 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
     DeprecatedCurrencyPipe.ngPipeDef = ɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedCurrencyPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
+        type: Pipe,
+        args: [{ name: 'currency' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 
 /**
  * @license
@@ -4430,6 +4662,12 @@ var AsyncPipe = /** @class */ (function () {
     AsyncPipe.ngPipeDef = ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵdirectiveInject(ChangeDetectorRef)); }, pure: false });
     return AsyncPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
+        type: Pipe,
+        args: [{ name: 'async', pure: false }]
+    }], [{
+        type: ChangeDetectorRef
+    }], null);
 
 /**
  * @license
@@ -4470,6 +4708,10 @@ var LowerCasePipe = /** @class */ (function () {
     LowerCasePipe.ngPipeDef = ɵdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, pure: true });
     return LowerCasePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(LowerCasePipe, [{
+        type: Pipe,
+        args: [{ name: 'lowercase' }]
+    }], null, null);
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
@@ -4513,6 +4755,10 @@ var TitleCasePipe = /** @class */ (function () {
     TitleCasePipe.ngPipeDef = ɵdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, pure: true });
     return TitleCasePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(TitleCasePipe, [{
+        type: Pipe,
+        args: [{ name: 'titlecase' }]
+    }], null, null);
 /**
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
@@ -4538,6 +4784,10 @@ var UpperCasePipe = /** @class */ (function () {
     UpperCasePipe.ngPipeDef = ɵdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, pure: true });
     return UpperCasePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(UpperCasePipe, [{
+        type: Pipe,
+        args: [{ name: 'uppercase' }]
+    }], null, null);
 
 /**
  * @license
@@ -4717,6 +4967,16 @@ var DatePipe = /** @class */ (function () {
     DatePipe.ngPipeDef = ɵdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DatePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
+        type: Pipe,
+        args: [{ name: 'date', pure: true }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 
 /**
  * @license
@@ -4763,6 +5023,12 @@ var I18nPluralPipe = /** @class */ (function () {
     I18nPluralPipe.ngPipeDef = ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ɵdirectiveInject(NgLocalization)); }, pure: true });
     return I18nPluralPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
+        type: Pipe,
+        args: [{ name: 'i18nPlural', pure: true }]
+    }], [{
+        type: NgLocalization
+    }], null);
 
 /**
  * @license
@@ -4813,6 +5079,10 @@ var I18nSelectPipe = /** @class */ (function () {
     I18nSelectPipe.ngPipeDef = ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
     return I18nSelectPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(I18nSelectPipe, [{
+        type: Pipe,
+        args: [{ name: 'i18nSelect', pure: true }]
+    }], null, null);
 
 /**
  * @license
@@ -4846,6 +5116,10 @@ var JsonPipe = /** @class */ (function () {
     JsonPipe.ngPipeDef = ɵdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, pure: false });
     return JsonPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(JsonPipe, [{
+        type: Pipe,
+        args: [{ name: 'json', pure: false }]
+    }], null, null);
 
 /**
  * @license
@@ -4904,6 +5178,12 @@ var KeyValuePipe = /** @class */ (function () {
     KeyValuePipe.ngPipeDef = ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ɵdirectiveInject(KeyValueDiffers)); }, pure: false });
     return KeyValuePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
+        type: Pipe,
+        args: [{ name: 'keyvalue', pure: false }]
+    }], [{
+        type: KeyValueDiffers
+    }], null);
 function defaultComparator(keyValueA, keyValueB) {
     var a = keyValueA.key;
     var b = keyValueB.key;
@@ -5011,6 +5291,16 @@ var DecimalPipe = /** @class */ (function () {
     DecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return DecimalPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
+        type: Pipe,
+        args: [{ name: 'number' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 /**
  * @ngModule CommonModule
  * @description
@@ -5066,6 +5356,16 @@ var PercentPipe = /** @class */ (function () {
     PercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return PercentPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
+        type: Pipe,
+        args: [{ name: 'percent' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 /**
  * @ngModule CommonModule
  * @description
@@ -5153,6 +5453,16 @@ var CurrencyPipe = /** @class */ (function () {
     CurrencyPipe.ngPipeDef = ɵdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ɵdirectiveInject(LOCALE_ID)); }, pure: true });
     return CurrencyPipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
+        type: Pipe,
+        args: [{ name: 'currency' }]
+    }], [{
+        type: undefined,
+        decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }]
+    }], null);
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
 }
@@ -5242,6 +5552,10 @@ var SlicePipe = /** @class */ (function () {
     SlicePipe.ngPipeDef = ɵdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
     return SlicePipe;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(SlicePipe, [{
+        type: Pipe,
+        args: [{ name: 'slice', pure: false }]
+    }], null, null);
 
 /**
  * @license
@@ -5300,6 +5614,16 @@ var CommonModule = /** @class */ (function () {
         ], imports: [[COMMON_DIRECTIVES, COMMON_PIPES]] });
     return CommonModule;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(CommonModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                providers: [
+                    { provide: NgLocalization, useClass: NgLocaleLocalization },
+                ],
+            }]
+    }], null, null);
 /**
  * A module that contains the deprecated i18n pipes.
  *
@@ -5313,6 +5637,14 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
     DeprecatedI18NPipesModule.ngInjectorDef = defineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }], imports: [[COMMON_DEPRECATED_I18N_PIPES]] });
     return DeprecatedI18NPipesModule;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(DeprecatedI18NPipesModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [COMMON_DEPRECATED_I18N_PIPES],
+                exports: [COMMON_DEPRECATED_I18N_PIPES],
+                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
+            }]
+    }], null, null);
 
 /**
  * @license
@@ -5381,7 +5713,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.0-beta.1+6.sha-4e9f2e5');
+var VERSION = new Version('7.1.0-beta.1+14.sha-2e7b5c5');
 
 /**
  * @license

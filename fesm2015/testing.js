@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { EventEmitter, Injectable, defineInjectable } from '@angular/core';
+import { EventEmitter, Injectable, defineInjectable, ɵsetClassMetadata } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 
 /**
@@ -178,6 +178,9 @@ SpyLocation.decorators = [
     { type: Injectable },
 ];
 SpyLocation.ngInjectableDef = defineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(SpyLocation, [{
+        type: Injectable
+    }], null, null);
 class LocationState {
     /**
      * @param {?} path
@@ -306,6 +309,9 @@ MockLocationStrategy.decorators = [
 /** @nocollapse */
 MockLocationStrategy.ctorParameters = () => [];
 MockLocationStrategy.ngInjectableDef = defineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{
+        type: Injectable
+    }], [], null);
 class _MockPopStateEvent {
     /**
      * @param {?} newUrl

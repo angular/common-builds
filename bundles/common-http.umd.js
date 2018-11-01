@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1156,6 +1156,11 @@
         HttpClient.ngInjectableDef = i0.defineInjectable({ token: HttpClient, factory: function HttpClient_Factory(t) { return new (t || HttpClient)(i0.inject(HttpHandler)); }, providedIn: null });
         return HttpClient;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClient, [{
+            type: i0.Injectable
+        }], [{
+            type: HttpHandler
+        }], null);
 
     /**
      * @license
@@ -1195,6 +1200,9 @@
         NoopInterceptor.ngInjectableDef = i0.defineInjectable({ token: NoopInterceptor, factory: function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); }, providedIn: null });
         return NoopInterceptor;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(NoopInterceptor, [{
+            type: i0.Injectable
+        }], null, null);
 
     /**
      * @license
@@ -1371,6 +1379,17 @@
         JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.inject(JsonpCallbackContext), i0.inject(common.DOCUMENT)); }, providedIn: null });
         return JsonpClientBackend;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpClientBackend, [{
+            type: i0.Injectable
+        }], [{
+            type: JsonpCallbackContext
+        }, {
+            type: undefined,
+            decorators: [{
+                    type: i0.Inject,
+                    args: [common.DOCUMENT]
+                }]
+        }], null);
     /**
      * An `HttpInterceptor` which identifies requests with the method JSONP and
      * shifts them to the `JsonpClientBackend`.
@@ -1391,6 +1410,11 @@
         JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(i0.inject(JsonpClientBackend)); }, providedIn: null });
         return JsonpInterceptor;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpInterceptor, [{
+            type: i0.Injectable
+        }], [{
+            type: JsonpClientBackend
+        }], null);
 
     /**
      * @license
@@ -1435,6 +1459,9 @@
         BrowserXhr.ngInjectableDef = i0.defineInjectable({ token: BrowserXhr, factory: function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); }, providedIn: null });
         return BrowserXhr;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(BrowserXhr, [{
+            type: i0.Injectable
+        }], [], null);
     /**
      * An `HttpBackend` which uses the XMLHttpRequest API to send
      * requests to a backend server.
@@ -1680,6 +1707,11 @@
         HttpXhrBackend.ngInjectableDef = i0.defineInjectable({ token: HttpXhrBackend, factory: function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.inject(XhrFactory)); }, providedIn: null });
         return HttpXhrBackend;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXhrBackend, [{
+            type: i0.Injectable
+        }], [{
+            type: XhrFactory
+        }], null);
 
     /**
      * @license
@@ -1730,6 +1762,27 @@
         HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.inject(common.DOCUMENT), i0.inject(i0.PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
         return HttpXsrfCookieExtractor;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
+            type: i0.Injectable
+        }], [{
+            type: undefined,
+            decorators: [{
+                    type: i0.Inject,
+                    args: [common.DOCUMENT]
+                }]
+        }, {
+            type: undefined,
+            decorators: [{
+                    type: i0.Inject,
+                    args: [i0.PLATFORM_ID]
+                }]
+        }, {
+            type: undefined,
+            decorators: [{
+                    type: i0.Inject,
+                    args: [XSRF_COOKIE_NAME]
+                }]
+        }], null);
     /**
      * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
      */
@@ -1758,6 +1811,17 @@
         HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
         return HttpXsrfInterceptor;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfInterceptor, [{
+            type: i0.Injectable
+        }], [{
+            type: HttpXsrfTokenExtractor
+        }, {
+            type: undefined,
+            decorators: [{
+                    type: i0.Inject,
+                    args: [XSRF_HEADER_NAME]
+                }]
+        }], null);
 
     /**
      * @license
@@ -1791,6 +1855,13 @@
         HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(i0.Injector)); }, providedIn: null });
         return HttpInterceptingHandler;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
+            type: i0.Injectable
+        }], [{
+            type: HttpBackend
+        }, {
+            type: i0.Injector
+        }], null);
     /**
      * Factory function that determines where to store JSONP callbacks.
      *
@@ -1859,6 +1930,18 @@
             ], imports: [] });
         return HttpClientXsrfModule;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientXsrfModule, [{
+            type: i0.NgModule,
+            args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                }]
+        }], null, null);
     /**
      * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
      * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
@@ -1887,6 +1970,32 @@
                 ]] });
         return HttpClientModule;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientModule, [{
+            type: i0.NgModule,
+            args: [{
+                    /**
+                     * Optional configuration for XSRF protection.
+                     */
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    /**
+                     * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                     * with supporting services for HTTP communications.
+                     */
+                    providers: [
+                        HttpClient,
+                        { provide: HttpHandler, useClass: HttpInterceptingHandler },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                        BrowserXhr,
+                        { provide: XhrFactory, useExisting: BrowserXhr },
+                    ],
+                }]
+        }], null, null);
     /**
      * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
      * with supporting services for JSONP.
@@ -1909,6 +2018,16 @@
             ], imports: [] });
         return HttpClientJsonpModule;
     }());
+    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientJsonpModule, [{
+            type: i0.NgModule,
+            args: [{
+                    providers: [
+                        JsonpClientBackend,
+                        { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                        { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                    ],
+                }]
+        }], null, null);
 
     /**
      * @license

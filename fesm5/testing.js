@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.1+6.sha-4e9f2e5
+ * @license Angular v7.1.0-beta.1+14.sha-2e7b5c5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { EventEmitter, defineInjectable } from '@angular/core';
+import { EventEmitter, Injectable, defineInjectable, ɵsetClassMetadata } from '@angular/core';
 import { __extends } from 'tslib';
 import { LocationStrategy } from '@angular/common';
 
@@ -100,6 +100,9 @@ var SpyLocation = /** @class */ (function () {
     SpyLocation.ngInjectableDef = defineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
     return SpyLocation;
 }());
+/*@__PURE__*/ ɵsetClassMetadata(SpyLocation, [{
+        type: Injectable
+    }], null, null);
 var LocationState = /** @class */ (function () {
     function LocationState(path, query, state) {
         this.path = path;
@@ -168,6 +171,9 @@ var MockLocationStrategy = /** @class */ (function (_super) {
     MockLocationStrategy.ngInjectableDef = defineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
     return MockLocationStrategy;
 }(LocationStrategy));
+/*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{
+        type: Injectable
+    }], [], null);
 var _MockPopStateEvent = /** @class */ (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;
