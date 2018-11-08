@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0-beta.2+4.sha-19546c2
+ * @license Angular v7.1.0-beta.2+5.sha-0d972d9
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __param, __metadata, __extends, __spread, __read } from 'tslib';
+import { __decorate, __metadata, __param, __extends, __spread, __read } from 'tslib';
 import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
