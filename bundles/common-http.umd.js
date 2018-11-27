@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0+11.sha-f45aedc
+ * @license Angular v7.1.0+13.sha-d767e0b
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1619,10 +1619,12 @@
                 // Connection timeout, DNS error, offline, etc. These are actual errors, and are
                 // transmitted on the error channel.
                 var onError = function (error) {
+                    var url = partialFromXhr().url;
                     var res = new HttpErrorResponse({
                         error: error,
                         status: xhr.status || 0,
                         statusText: xhr.statusText || 'Unknown Error',
+                        url: url || undefined,
                     });
                     observer.error(res);
                 };
