@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0-rc.0+30.sha-4390e10.with-local-changes
+ * @license Angular v7.1.0+34.sha-39e426c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1682,11 +1682,13 @@ class HttpXhrBackend {
             };
             /** @type {?} */
             const onError = (error) => {
+                const { url } = partialFromXhr();
                 /** @type {?} */
                 const res = new HttpErrorResponse({
                     error,
                     status: xhr.status || 0,
                     statusText: xhr.statusText || 'Unknown Error',
+                    url: url || undefined,
                 });
                 observer.error(res);
             };
