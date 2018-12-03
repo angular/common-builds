@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0+103.sha-a1470c9
+ * @license Angular v7.1.0+105.sha-d847051
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6478,7 +6478,7 @@ class PercentPipe {
      *   - `minFractionDigits`: The minimum number of digits after the decimal point.
      * Default is `0`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
+     * Default is `0`.
      * @param {?=} locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -6908,7 +6908,7 @@ function isPlatformWorkerUi(platformId) {
 /** *
  * \@publicApi
   @type {?} */
-const VERSION = new Version('7.1.0+103.sha-a1470c9');
+const VERSION = new Version('7.1.0+105.sha-d847051');
 
 /**
  * @fileoverview added by tsickle

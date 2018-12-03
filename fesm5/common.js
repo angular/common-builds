@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.1.0+103.sha-a1470c9
+ * @license Angular v7.1.0+105.sha-d847051
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ElementRef, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, Inject, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, Optional, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ElementRef, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, Inject, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, ɵdefinePipe, ɵdirectiveInject, Optional, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -5336,7 +5336,7 @@ var PercentPipe = /** @class */ (function () {
      *   - `minFractionDigits`: The minimum number of digits after the decimal point.
      * Default is `0`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
+     * Default is `0`.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -5713,7 +5713,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.0+103.sha-a1470c9');
+var VERSION = new Version('7.1.0+105.sha-d847051');
 
 /**
  * @license
