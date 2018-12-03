@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.0+99.sha-01fd0cd
+ * @license Angular v7.1.0+109.sha-7d89cff
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5309,7 +5309,7 @@
          *   - `minFractionDigits`: The minimum number of digits after the decimal point.
          * Default is `0`.
          *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
+         * Default is `0`.
          * @param locale A locale code for the locale format rules to use.
          * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
          * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -5670,7 +5670,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.1.0+99.sha-01fd0cd');
+    var VERSION = new core.Version('7.1.0+109.sha-7d89cff');
 
     /**
      * @license
