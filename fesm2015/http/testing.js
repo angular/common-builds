@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+8.sha-9c7fb0d
+ * @license Angular v7.2.0-beta.2+6.sha-28ceca0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
@@ -24,7 +24,7 @@ class HttpTestingController {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * A mock requests that was received and is ready to be answered.
@@ -223,7 +223,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
@@ -253,7 +253,7 @@ class HttpClientTestingBackend {
             /** @type {?} */
             const testReq = new TestRequest(req, observer);
             this.open.push(testReq);
-            observer.next((/** @type {?} */ ({ type: HttpEventType.Sent })));
+            observer.next(/** @type {?} */ ({ type: HttpEventType.Sent }));
             return () => { testReq._cancelled = true; };
         });
     }
@@ -343,7 +343,6 @@ class HttpClientTestingBackend {
             open = open.filter(testReq => !testReq.cancelled);
         }
         if (open.length > 0) {
-            // Show the methods and URLs of open requests in the error, for convenience.
             /** @type {?} */
             const requests = open.map(testReq => {
                 /** @type {?} */
@@ -382,7 +381,7 @@ HttpClientTestingBackend.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
@@ -408,12 +407,12 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
