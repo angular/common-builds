@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+4.sha-042463f
+ * @license Angular v7.2.0-beta.2+8.sha-9c7fb0d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
@@ -24,7 +24,7 @@ class HttpTestingController {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A mock requests that was received and is ready to be answered.
@@ -223,7 +223,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -260,7 +260,7 @@ class HttpClientTestingBackend {
             /** @type {?} */
             const testReq = new TestRequest(req, observer);
             this.open.push(testReq);
-            observer.next(/** @type {?} */ ({ type: HttpEventType.Sent }));
+            observer.next((/** @type {?} */ ({ type: HttpEventType.Sent })));
             return () => { testReq._cancelled = true; };
         });
     }
@@ -350,6 +350,7 @@ class HttpClientTestingBackend {
             open = open.filter(testReq => !testReq.cancelled);
         }
         if (open.length > 0) {
+            // Show the methods and URLs of open requests in the error, for convenience.
             /** @type {?} */
             const requests = open.map(testReq => {
                 /** @type {?} */
@@ -392,7 +393,7 @@ HttpClientTestingBackend.ngInjectableDef = defineInjectable({ token: HttpClientT
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -446,12 +447,12 @@ HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpC
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 export { HttpTestingController, HttpClientTestingModule, TestRequest };
