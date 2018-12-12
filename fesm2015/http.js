@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+6.sha-28ceca0
+ * @license Angular v7.2.0-beta.2+9.sha-37c05bd
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -11,7 +11,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -51,7 +51,7 @@ class HttpBackend {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
@@ -90,7 +90,7 @@ class HttpHeaders {
                         const value = line.slice(index + 1).trim();
                         this.maybeSetNormalizedName(name, key);
                         if (this.headers.has(key)) {
-                            /** @type {?} */ ((this.headers.get(key))).push(value);
+                            (/** @type {?} */ (this.headers.get(key))).push(value);
                         }
                         else {
                             this.headers.set(key, [value]);
@@ -214,8 +214,8 @@ class HttpHeaders {
     copyFrom(other) {
         other.init();
         Array.from(other.headers.keys()).forEach(key => {
-            this.headers.set(key, /** @type {?} */ ((other.headers.get(key))));
-            this.normalizedNames.set(key, /** @type {?} */ ((other.normalizedNames.get(key))));
+            this.headers.set(key, (/** @type {?} */ (other.headers.get(key))));
+            this.normalizedNames.set(key, (/** @type {?} */ (other.normalizedNames.get(key))));
         });
     }
     /**
@@ -241,7 +241,7 @@ class HttpHeaders {
             case 'a':
             case 's':
                 /** @type {?} */
-                let value = /** @type {?} */ ((update.value));
+                let value = (/** @type {?} */ (update.value));
                 if (typeof value === 'string') {
                     value = [value];
                 }
@@ -256,7 +256,7 @@ class HttpHeaders {
                 break;
             case 'd':
                 /** @type {?} */
-                const toDelete = /** @type {?} */ (update.value);
+                const toDelete = (/** @type {?} */ (update.value));
                 if (!toDelete) {
                     this.headers.delete(key);
                     this.normalizedNames.delete(key);
@@ -287,13 +287,13 @@ class HttpHeaders {
     forEach(fn) {
         this.init();
         Array.from(this.normalizedNames.keys())
-            .forEach(key => fn(/** @type {?} */ ((this.normalizedNames.get(key))), /** @type {?} */ ((this.headers.get(key)))));
+            .forEach(key => fn((/** @type {?} */ (this.normalizedNames.get(key))), (/** @type {?} */ (this.headers.get(key)))));
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
@@ -376,7 +376,7 @@ class HttpParams {
     /**
      * @param {?=} options
      */
-    constructor(options = /** @type {?} */ ({})) {
+    constructor(options = (/** @type {?} */ ({}))) {
         this.updates = null;
         this.cloneFrom = null;
         this.encoder = options.encoder || new HttpUrlEncodingCodec();
@@ -390,8 +390,8 @@ class HttpParams {
             this.map = new Map();
             Object.keys(options.fromObject).forEach(key => {
                 /** @type {?} */
-                const value = (/** @type {?} */ (options.fromObject))[key]; /** @type {?} */
-                ((this.map)).set(key, Array.isArray(value) ? value : [value]);
+                const value = ((/** @type {?} */ (options.fromObject)))[key];
+                (/** @type {?} */ (this.map)).set(key, Array.isArray(value) ? value : [value]);
             });
         }
         else {
@@ -405,7 +405,7 @@ class HttpParams {
      */
     has(param) {
         this.init();
-        return /** @type {?} */ ((this.map)).has(param);
+        return (/** @type {?} */ (this.map)).has(param);
     }
     /**
      * Get the first value for the given parameter name, or `null` if it's not present.
@@ -415,7 +415,7 @@ class HttpParams {
     get(param) {
         this.init();
         /** @type {?} */
-        const res = /** @type {?} */ ((this.map)).get(param);
+        const res = (/** @type {?} */ (this.map)).get(param);
         return !!res ? res[0] : null;
     }
     /**
@@ -425,7 +425,7 @@ class HttpParams {
      */
     getAll(param) {
         this.init();
-        return /** @type {?} */ ((this.map)).get(param) || null;
+        return (/** @type {?} */ (this.map)).get(param) || null;
     }
     /**
      * Get all the parameter names for this body.
@@ -433,7 +433,7 @@ class HttpParams {
      */
     keys() {
         this.init();
-        return Array.from(/** @type {?} */ ((this.map)).keys());
+        return Array.from((/** @type {?} */ (this.map)).keys());
     }
     /**
      * Construct a new body with an appended value for the given parameter name.
@@ -469,7 +469,8 @@ class HttpParams {
             .map(key => {
             /** @type {?} */
             const eKey = this.encoder.encodeKey(key);
-            return /** @type {?} */ ((/** @type {?} */ ((this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value)).join('&');
+            return (/** @type {?} */ ((/** @type {?} */ (this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value))
+                .join('&');
         })
             .join('&');
     }
@@ -479,7 +480,7 @@ class HttpParams {
      */
     clone(update) {
         /** @type {?} */
-        const clone = new HttpParams(/** @type {?} */ ({ encoder: this.encoder }));
+        const clone = new HttpParams((/** @type {?} */ ({ encoder: this.encoder })));
         clone.cloneFrom = this.cloneFrom || this;
         clone.updates = (this.updates || []).concat([update]);
         return clone;
@@ -493,34 +494,34 @@ class HttpParams {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(key => /** @type {?} */ ((this.map)).set(key, /** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((this.cloneFrom)).map)).get(key))))); /** @type {?} */
-            ((this.updates)).forEach(update => {
+            this.cloneFrom.keys().forEach(key => (/** @type {?} */ (this.map)).set(key, (/** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ (this.cloneFrom)).map)).get(key)))));
+            (/** @type {?} */ (this.updates)).forEach(update => {
                 switch (update.op) {
                     case 'a':
                     case 's':
                         /** @type {?} */
-                        const base = (update.op === 'a' ? /** @type {?} */ ((this.map)).get(update.param) : undefined) || [];
-                        base.push(/** @type {?} */ ((update.value))); /** @type {?} */
-                        ((this.map)).set(update.param, base);
+                        const base = (update.op === 'a' ? (/** @type {?} */ (this.map)).get(update.param) : undefined) || [];
+                        base.push((/** @type {?} */ (update.value)));
+                        (/** @type {?} */ (this.map)).set(update.param, base);
                         break;
                     case 'd':
                         if (update.value !== undefined) {
                             /** @type {?} */
-                            let base = /** @type {?} */ ((this.map)).get(update.param) || [];
+                            let base = (/** @type {?} */ (this.map)).get(update.param) || [];
                             /** @type {?} */
                             const idx = base.indexOf(update.value);
                             if (idx !== -1) {
                                 base.splice(idx, 1);
                             }
                             if (base.length > 0) {
-                                /** @type {?} */ ((this.map)).set(update.param, base);
+                                (/** @type {?} */ (this.map)).set(update.param, base);
                             }
                             else {
-                                /** @type {?} */ ((this.map)).delete(update.param);
+                                (/** @type {?} */ (this.map)).delete(update.param);
                             }
                         }
                         else {
-                            /** @type {?} */ ((this.map)).delete(update.param);
+                            (/** @type {?} */ (this.map)).delete(update.param);
                             break;
                         }
                 }
@@ -532,7 +533,7 @@ class HttpParams {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * Determine whether the given HTTP method may include a body.
@@ -628,18 +629,20 @@ class HttpRequest {
          */
         this.responseType = 'json';
         this.method = method.toUpperCase();
+        // Next, need to figure out which argument holds the HttpRequestInit
+        // options, if any.
         /** @type {?} */
         let options;
         // Check whether a body argument is expected. The only valid way to omit
         // the body argument is to use a known no-body method like GET.
         if (mightHaveBody(this.method) || !!fourth) {
             // Body is the third argument, options are the fourth.
-            this.body = (third !== undefined) ? /** @type {?} */ (third) : null;
+            this.body = (third !== undefined) ? (/** @type {?} */ (third)) : null;
             options = fourth;
         }
         else {
             // No body required, options are the third argument. The body stays null.
-            options = /** @type {?} */ (third);
+            options = (/** @type {?} */ (third));
         }
         // If options have been passed, interpret them.
         if (options) {
@@ -668,6 +671,7 @@ class HttpRequest {
             this.urlWithParams = url;
         }
         else {
+            // Encode the parameters to a string in preparation for inclusion in the URL.
             /** @type {?} */
             const params = this.params.toString();
             if (params.length === 0) {
@@ -675,8 +679,16 @@ class HttpRequest {
                 this.urlWithParams = url;
             }
             else {
+                // Does the URL already have query parameters? Look for '?'.
                 /** @type {?} */
                 const qIdx = url.indexOf('?');
+                // There are 3 cases to handle:
+                // 1) No existing parameters -> append '?' followed by params.
+                // 2) '?' exists and is followed by existing query string ->
+                //    append '&' followed by params.
+                // 3) '?' exists at the end of the url -> append params directly.
+                // This basically amounts to determining the character, if any, with
+                // which to join the URL and parameters.
                 /** @type {?} */
                 const sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
                 this.urlWithParams = url + sep + params;
@@ -709,7 +721,7 @@ class HttpRequest {
             return JSON.stringify(this.body);
         }
         // Fall back on toString() for everything else.
-        return (/** @type {?} */ (this.body)).toString();
+        return ((/** @type {?} */ (this.body))).toString();
     }
     /**
      * Examine the body and attempt to infer an appropriate MIME type
@@ -758,18 +770,28 @@ class HttpRequest {
      * @return {?}
      */
     clone(update = {}) {
+        // For method, url, and responseType, take the current value unless
+        // it is overridden in the update hash.
         /** @type {?} */
         const method = update.method || this.method;
         /** @type {?} */
         const url = update.url || this.url;
         /** @type {?} */
         const responseType = update.responseType || this.responseType;
+        // The body is somewhat special - a `null` value in update.body means
+        // whatever current body is present is being overridden with an empty
+        // body, whereas an `undefined` value in update.body implies no
+        // override.
         /** @type {?} */
         const body = (update.body !== undefined) ? update.body : this.body;
+        // Carefully handle the boolean options to differentiate between
+        // `false` and `undefined` in the update args.
         /** @type {?} */
         const withCredentials = (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
         /** @type {?} */
         const reportProgress = (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
+        // Headers and params may be appended to if `setHeaders` or
+        // `setParams` are used.
         /** @type {?} */
         let headers = update.headers || this.headers;
         /** @type {?} */
@@ -779,13 +801,13 @@ class HttpRequest {
             // Set every requested header.
             headers =
                 Object.keys(update.setHeaders)
-                    .reduce((headers, name) => headers.set(name, /** @type {?} */ ((update.setHeaders))[name]), headers);
+                    .reduce((headers, name) => headers.set(name, (/** @type {?} */ (update.setHeaders))[name]), headers);
         }
         // Check whether the caller has asked to set params.
         if (update.setParams) {
             // Set every requested param.
             params = Object.keys(update.setParams)
-                .reduce((params, param) => params.set(param, /** @type {?} */ ((update.setParams))[param]), params);
+                .reduce((params, param) => params.set(param, (/** @type {?} */ (update.setParams))[param]), params);
         }
         // Finally, construct the new HttpRequest using the pieces from above.
         return new HttpRequest(method, url, body, {
@@ -796,33 +818,33 @@ class HttpRequest {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @enum {number} */
-var HttpEventType = {
+const HttpEventType = {
     /**
-       * The request was sent out over the wire.
-       */
+     * The request was sent out over the wire.
+     */
     Sent: 0,
     /**
-       * An upload progress event was received.
-       */
+     * An upload progress event was received.
+     */
     UploadProgress: 1,
     /**
-       * The response status code and headers were received.
-       */
+     * The response status code and headers were received.
+     */
     ResponseHeader: 2,
     /**
-       * A download progress event was received.
-       */
+     * A download progress event was received.
+     */
     DownloadProgress: 3,
     /**
-       * The full response including the body was received.
-       */
+     * The full response including the body was received.
+     */
     Response: 4,
     /**
-       * A custom event from an interceptor or a backend.
-       */
+     * A custom event from an interceptor or a backend.
+     */
     User: 5,
 };
 HttpEventType[HttpEventType.Sent] = 'Sent';
@@ -968,7 +990,7 @@ class HttpErrorResponse extends HttpResponseBase {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1054,9 +1076,13 @@ class HttpClient {
         if (first instanceof HttpRequest) {
             // It is. The other arguments must be undefined (per the signatures) and can be
             // ignored.
-            req = /** @type {?} */ (first);
+            req = (/** @type {?} */ (first));
         }
         else {
+            // It's a string, so it represents a URL. Construct a request based on it,
+            // and incorporate the remaining arguments (assuming GET unless a method is
+            // provided.
+            // Figure out the headers.
             /** @type {?} */
             let headers = undefined;
             if (options.headers instanceof HttpHeaders) {
@@ -1065,6 +1091,7 @@ class HttpClient {
             else {
                 headers = new HttpHeaders(options.headers);
             }
+            // Sort out parameters.
             /** @type {?} */
             let params = undefined;
             if (!!options.params) {
@@ -1072,11 +1099,11 @@ class HttpClient {
                     params = options.params;
                 }
                 else {
-                    params = new HttpParams(/** @type {?} */ ({ fromObject: options.params }));
+                    params = new HttpParams((/** @type {?} */ ({ fromObject: options.params })));
                 }
             }
             // Construct the request.
-            req = new HttpRequest(first, /** @type {?} */ ((url)), (options.body !== undefined ? options.body : null), {
+            req = new HttpRequest(first, (/** @type {?} */ (url)), (options.body !== undefined ? options.body : null), {
                 headers,
                 params,
                 reportProgress: options.reportProgress,
@@ -1085,6 +1112,10 @@ class HttpClient {
                 withCredentials: options.withCredentials,
             });
         }
+        // Start with an Observable.of() the initial request, and run the handler (which
+        // includes all interceptors) inside a concatMap(). This way, the handler runs
+        // inside an Observable chain, which causes interceptors to be re-run on every
+        // subscription (this also makes retries re-run the handler, including interceptors).
         /** @type {?} */
         const events$ = of(req).pipe(concatMap((req) => this.handler.handle(req)));
         // If coming via the API signature which accepts a previously constructed HttpRequest,
@@ -1093,8 +1124,11 @@ class HttpClient {
         if (first instanceof HttpRequest || options.observe === 'events') {
             return events$;
         }
+        // The requested stream contains either the full response or the body. In either
+        // case, the first step is to filter the event stream to extract a stream of
+        // responses(s).
         /** @type {?} */
-        const res$ = /** @type {?} */ (events$.pipe(filter((event) => event instanceof HttpResponse)));
+        const res$ = (/** @type {?} */ (events$.pipe(filter((event) => event instanceof HttpResponse))));
         // Decide which stream to return.
         switch (options.observe || 'body') {
             case 'body':
@@ -1150,7 +1184,7 @@ class HttpClient {
      * @return {?}
      */
     delete(url, options = {}) {
-        return this.request('DELETE', url, /** @type {?} */ (options));
+        return this.request('DELETE', url, (/** @type {?} */ (options)));
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
@@ -1161,7 +1195,7 @@ class HttpClient {
      * @return {?}
      */
     get(url, options = {}) {
-        return this.request('GET', url, /** @type {?} */ (options));
+        return this.request('GET', url, (/** @type {?} */ (options)));
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
@@ -1172,7 +1206,7 @@ class HttpClient {
      * @return {?}
      */
     head(url, options = {}) {
-        return this.request('HEAD', url, /** @type {?} */ (options));
+        return this.request('HEAD', url, (/** @type {?} */ (options)));
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause a request
@@ -1202,7 +1236,7 @@ class HttpClient {
      * @return {?}
      */
     options(url, options = {}) {
-        return this.request('OPTIONS', url, /** @type {?} */ (options));
+        return this.request('OPTIONS', url, (/** @type {?} */ (options)));
     }
     /**
      * Constructs an `Observable` which, when subscribed, will cause the configured
@@ -1277,12 +1311,13 @@ class HttpInterceptorHandler {
         return this.interceptor.intercept(req, this.next);
     }
 }
-/** *
+/**
  * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
  * \@publicApi
-  @type {?} */
+ * @type {?}
+ */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 class NoopInterceptor {
     /**
@@ -1304,7 +1339,7 @@ NoopInterceptor.ngInjectableDef = defineInjectable({ token: NoopInterceptor, fac
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1313,10 +1348,18 @@ NoopInterceptor.ngInjectableDef = defineInjectable({ token: NoopInterceptor, fac
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// Every request made through JSONP needs a callback name that's unique across the
+// whole page. Each request is assigned an id and the callback name is constructed
+// from that. The next id to be assigned is tracked in a global variable here that
+// is shared among all applications on the page.
 /** @type {?} */
 let nextRequestId = 0;
+// Error text given when a JSONP script is injected, but doesn't invoke the callback
+// passed in its URL.
 /** @type {?} */
 const JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
+// Error text given when a request is passed to the JsonpClientBackend that doesn't
+// have a request method JSONP.
 /** @type {?} */
 const JSONP_ERR_WRONG_METHOD = 'JSONP requests must use JSONP request method.';
 /** @type {?} */
@@ -1367,17 +1410,27 @@ class JsonpClientBackend {
         }
         // Everything else happens inside the Observable boundary.
         return new Observable((observer) => {
+            // The first step to make a request is to generate the callback name, and replace the
+            // callback placeholder in the URL with the name. Care has to be taken here to ensure
+            // a trailing &, if matched, gets inserted back into the URL in the correct place.
             /** @type {?} */
             const callback = this.nextCallback();
             /** @type {?} */
             const url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
+            // Construct the <script> tag and point it at the URL.
             /** @type {?} */
             const node = this.document.createElement('script');
             node.src = url;
+            // A JSONP request requires waiting for multiple callbacks. These variables
+            // are closed over and track state across those callbacks.
+            // The response object, if one has been received, or null otherwise.
             /** @type {?} */
             let body = null;
+            // Whether the response callback has been called.
             /** @type {?} */
             let finished = false;
+            // Whether the request has been cancelled (and thus any other callbacks)
+            // should be ignored.
             /** @type {?} */
             let cancelled = false;
             // Set the response callback in this.callbackMap (which will be the window
@@ -1394,6 +1447,9 @@ class JsonpClientBackend {
                 body = data;
                 finished = true;
             };
+            // cleanup() is a utility closure that removes the <script> from the page and
+            // the response callback from the window. This logic is used in both the
+            // success, error, and cancellation paths, so it's extracted out for convenience.
             /** @type {?} */
             const cleanup = () => {
                 // Remove the <script> tag if it's still on the page.
@@ -1404,6 +1460,10 @@ class JsonpClientBackend {
                 // browser).
                 delete this.callbackMap[callback];
             };
+            // onLoad() is the success callback which runs after the response callback
+            // if the JSONP script loads successfully. The event itself is unimportant.
+            // If something went wrong, onLoad() may run without the response callback
+            // having been invoked.
             /** @type {?} */
             const onLoad = (event) => {
                 // Do nothing if the request has been cancelled.
@@ -1434,6 +1494,9 @@ class JsonpClientBackend {
                 // Complete the stream, the response is over.
                 observer.complete();
             };
+            // onError() is the error callback, which runs if the script returned generates
+            // a Javascript error. It emits the error via the Observable error channel as
+            // a HttpErrorResponse.
             /** @type {?} */
             const onError = (error) => {
                 // If the request was already cancelled, no need to emit anything.
@@ -1508,7 +1571,7 @@ class JsonpInterceptor {
      */
     intercept(req, next) {
         if (req.method === 'JSONP') {
-            return this.jsonp.handle(/** @type {?} */ (req));
+            return this.jsonp.handle((/** @type {?} */ (req)));
         }
         // Fall through for normal HTTP requests.
         return next.handle(req);
@@ -1530,7 +1593,7 @@ JsonpInterceptor.ngInjectableDef = defineInjectable({ token: JsonpInterceptor, f
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1574,7 +1637,7 @@ class BrowserXhr {
     /**
      * @return {?}
      */
-    build() { return /** @type {?} */ ((new XMLHttpRequest())); }
+    build() { return (/** @type {?} */ ((new XMLHttpRequest()))); }
 }
 BrowserXhr.decorators = [
     { type: Injectable },
@@ -1611,6 +1674,7 @@ class HttpXhrBackend {
         }
         // Everything happens on Observable subscription.
         return new Observable((observer) => {
+            // Start by setting up the XHR object with request method, URL, and withCredentials flag.
             /** @type {?} */
             const xhr = this.xhrFactory.build();
             xhr.open(req.method, req.urlWithParams);
@@ -1641,32 +1705,50 @@ class HttpXhrBackend {
                 // xhr.response will be null, and xhr.responseText cannot be accessed to
                 // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
                 // is parsed by first requesting text and then applying JSON.parse.
-                xhr.responseType = /** @type {?} */ (((responseType !== 'json') ? responseType : 'text'));
+                xhr.responseType = (/** @type {?} */ (((responseType !== 'json') ? responseType : 'text')));
             }
+            // Serialize the request body if one is present. If not, this will be set to null.
             /** @type {?} */
             const reqBody = req.serializeBody();
+            // If progress events are enabled, response headers will be delivered
+            // in two events - the HttpHeaderResponse event and the full HttpResponse
+            // event. However, since response headers don't change in between these
+            // two events, it doesn't make sense to parse them twice. So headerResponse
+            // caches the data extracted from the response whenever it's first parsed,
+            // to ensure parsing isn't duplicated.
             /** @type {?} */
             let headerResponse = null;
+            // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
+            // state, and memoizes it into headerResponse.
             /** @type {?} */
             const partialFromXhr = () => {
                 if (headerResponse !== null) {
                     return headerResponse;
                 }
+                // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
                 /** @type {?} */
                 const status = xhr.status === 1223 ? 204 : xhr.status;
                 /** @type {?} */
                 const statusText = xhr.statusText || 'OK';
+                // Parse headers from XMLHttpRequest - this step is lazy.
                 /** @type {?} */
                 const headers = new HttpHeaders(xhr.getAllResponseHeaders());
+                // Read the response URL from the XMLHttpResponse instance and fall back on the
+                // request URL.
                 /** @type {?} */
                 const url = getResponseUrl(xhr) || req.url;
                 // Construct the HttpHeaderResponse and memoize it.
                 headerResponse = new HttpHeaderResponse({ headers, status, statusText, url });
                 return headerResponse;
             };
+            // Next, a few closures are defined for the various events which XMLHttpRequest can
+            // emit. This allows them to be unregistered as event listeners later.
+            // First up is the load event, which represents a response being fully available.
             /** @type {?} */
             const onLoad = () => {
+                // Read response state from the memoized partial data.
                 let { headers, status, statusText, url } = partialFromXhr();
+                // The body will be read out if present.
                 /** @type {?} */
                 let body = null;
                 if (status !== 204) {
@@ -1677,11 +1759,16 @@ class HttpXhrBackend {
                 if (status === 0) {
                     status = !!body ? 200 : 0;
                 }
+                // ok determines whether the response will be transmitted on the event or
+                // error channel. Unsuccessful status codes (not 2xx) will always be errors,
+                // but a successful status code can still result in an error if the user
+                // asked for JSON data and the body cannot be parsed as such.
                 /** @type {?} */
                 let ok = status >= 200 && status < 300;
                 // Check whether the body needs to be parsed as JSON (in many cases the browser
                 // will have done that already).
                 if (req.responseType === 'json' && typeof body === 'string') {
+                    // Save the original body, before attempting XSSI prefix stripping.
                     /** @type {?} */
                     const originalBody = body;
                     body = body.replace(XSSI_PREFIX, '');
@@ -1700,7 +1787,7 @@ class HttpXhrBackend {
                             // Even though the response status was 2xx, this is still an error.
                             ok = false;
                             // The parse error contains the text of the body that failed to parse.
-                            body = /** @type {?} */ ({ error, text: body });
+                            body = (/** @type {?} */ ({ error, text: body }));
                         }
                     }
                 }
@@ -1729,6 +1816,9 @@ class HttpXhrBackend {
                     }));
                 }
             };
+            // The onError callback is called when something goes wrong at the network level.
+            // Connection timeout, DNS error, offline, etc. These are actual errors, and are
+            // transmitted on the error channel.
             /** @type {?} */
             const onError = (error) => {
                 const { url } = partialFromXhr();
@@ -1741,8 +1831,14 @@ class HttpXhrBackend {
                 });
                 observer.error(res);
             };
+            // The sentHeaders flag tracks whether the HttpResponseHeaders event
+            // has been sent on the stream. This is necessary to track if progress
+            // is enabled since the event will be sent on only the first download
+            // progerss event.
             /** @type {?} */
             let sentHeaders = false;
+            // The download progress event handler, which is only registered if
+            // progress events are enabled.
             /** @type {?} */
             const onDownProgress = (event) => {
                 // Send the HttpResponseHeaders event if it hasn't been sent already.
@@ -1750,6 +1846,8 @@ class HttpXhrBackend {
                     observer.next(partialFromXhr());
                     sentHeaders = true;
                 }
+                // Start building the download progress event to deliver on the response
+                // event stream.
                 /** @type {?} */
                 let progressEvent = {
                     type: HttpEventType.DownloadProgress,
@@ -1768,8 +1866,12 @@ class HttpXhrBackend {
                 // Finally, fire the event.
                 observer.next(progressEvent);
             };
+            // The upload progress event handler, which is only registered if
+            // progress events are enabled.
             /** @type {?} */
             const onUpProgress = (event) => {
+                // Upload progress events are simpler. Begin building the progress
+                // event.
                 /** @type {?} */
                 let progress = {
                     type: HttpEventType.UploadProgress,
@@ -1796,7 +1898,7 @@ class HttpXhrBackend {
                 }
             }
             // Fire the request, and notify the event stream that it was fired.
-            xhr.send(/** @type {?} */ ((reqBody)));
+            xhr.send((/** @type {?} */ (reqBody)));
             observer.next({ type: HttpEventType.Sent });
             // This is the return from the Observable function, which is the
             // request cancellation handler.
@@ -1832,7 +1934,7 @@ HttpXhrBackend.ngInjectableDef = defineInjectable({ token: HttpXhrBackend, facto
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1981,7 +2083,7 @@ HttpXsrfInterceptor.ngInjectableDef = defineInjectable({ token: HttpXsrfIntercep
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2142,8 +2244,8 @@ class HttpClientModule {
 HttpClientModule.decorators = [
     { type: NgModule, args: [{
                 /**
-                   * Optional configuration for XSRF protection.
-                   */
+                 * Optional configuration for XSRF protection.
+                 */
                 imports: [
                     HttpClientXsrfModule.withOptions({
                         cookieName: 'XSRF-TOKEN',
@@ -2151,9 +2253,9 @@ HttpClientModule.decorators = [
                     }),
                 ],
                 /**
-                   * Configures the [dependency injector](guide/glossary#injector) where it is imported
-                   * with supporting services for HTTP communications.
-                   */
+                 * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                 * with supporting services for HTTP communications.
+                 */
                 providers: [
                     HttpClient,
                     { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -2245,12 +2347,12 @@ HttpClientJsonpModule.ngInjectorDef = defineInjector({ factory: function HttpCli
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 
 export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpInterceptingHandler as ɵHttpInterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor };
