@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+20.sha-f5e7208
+ * @license Angular v7.1.3+22.sha-fe8c6b0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5112,7 +5112,7 @@ function makeKeyValuePair(key, value) {
  * @usageNotes
  * ### Examples
  *
- * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
  * pipe.
  *
  * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -5659,7 +5659,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.3+20.sha-f5e7208');
+var VERSION = new Version('7.1.3+22.sha-fe8c6b0');
 
 /**
  * @license
