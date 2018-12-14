@@ -118,7 +118,7 @@ MockLocationStrategy.ctorParameters = () => [];
 MockLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
-    }], [], null);
+    }], function () { return []; }, null);
 if (false) {
     /** @type {?} */
     MockLocationStrategy.prototype.internalBaseHref;

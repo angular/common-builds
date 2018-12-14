@@ -139,13 +139,13 @@ export { DeprecatedDatePipe };
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 function isDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
