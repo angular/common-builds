@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+28.sha-cd1e206
+ * @license Angular v7.1.3+27.sha-453589f
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5660,7 +5660,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.3+28.sha-cd1e206');
+var VERSION = new Version('7.1.3+27.sha-453589f');
 
 /**
  * @license
