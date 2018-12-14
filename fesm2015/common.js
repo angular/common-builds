@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+25.sha-c220328
+ * @license Angular v7.1.3+28.sha-cd1e206
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5899,6 +5899,7 @@ class KeyValuePipe {
      */
     constructor(differs) {
         this.differs = differs;
+        this.keyValues = [];
     }
     /**
      * @template K, V
@@ -6466,7 +6467,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.1.3+25.sha-c220328');
+const VERSION = new Version('7.1.3+28.sha-cd1e206');
 
 /**
  * @fileoverview added by tsickle

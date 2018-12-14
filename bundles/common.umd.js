@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+25.sha-c220328
+ * @license Angular v7.1.3+28.sha-cd1e206
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5133,6 +5133,7 @@
     var KeyValuePipe = /** @class */ (function () {
         function KeyValuePipe(differs) {
             this.differs = differs;
+            this.keyValues = [];
         }
         KeyValuePipe.prototype.transform = function (input, compareFn) {
             var _this = this;
@@ -5670,7 +5671,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.1.3+25.sha-c220328');
+    var VERSION = new core.Version('7.1.3+28.sha-cd1e206');
 
     /**
      * @license
