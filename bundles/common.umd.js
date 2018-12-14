@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+21.sha-63d395c
+ * @license Angular v7.1.3+23.sha-9ac4a4d
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5123,7 +5123,7 @@
      * @usageNotes
      * ### Examples
      *
-     * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+     * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
      * pipe.
      *
      * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -5381,9 +5381,9 @@
          *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
          * Default is `1`.
          *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
+         * Default is `2`.
          *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
+         * Default is `2`.
          * If not provided, the number will be formatted with the proper amount of digits,
          * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
          * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
@@ -5670,7 +5670,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.1.3+21.sha-63d395c');
+    var VERSION = new core.Version('7.1.3+23.sha-9ac4a4d');
 
     /**
      * @license
