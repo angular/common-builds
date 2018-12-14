@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+27.sha-453589f
+ * @license Angular v7.1.3+29.sha-b224057
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1034,7 +1034,7 @@
         return data[15 /* CurrencySymbol */] || null;
     }
     /**
-     * The name of the currency for the main country using this locale (e.g. USD for the locale
+     * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
      * en-US).
      * The name will be `null` if the main country cannot be determined.
      *
@@ -5671,7 +5671,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.1.3+27.sha-453589f');
+    var VERSION = new core.Version('7.1.3+29.sha-b224057');
 
     /**
      * @license

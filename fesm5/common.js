@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.1.3+27.sha-453589f
+ * @license Angular v7.1.3+29.sha-b224057
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ComponentFactoryResolver, Injector, NgModuleFactory, NgModuleRef, Type, ViewContainerRef, TemplateRef, isDevMode, Host, Attribute, Pipe, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, NgModule, Version, defineInjectable, inject } from '@angular/core';
-import { __decorate, __metadata, __param, __read, __values, __extends, __assign } from 'tslib';
+import { __decorate, __metadata, __read, __param, __values, __extends, __assign } from 'tslib';
 
 /**
  * @license
@@ -1023,7 +1023,7 @@ function getLocaleCurrencySymbol(locale) {
     return data[15 /* CurrencySymbol */] || null;
 }
 /**
- * The name of the currency for the main country using this locale (e.g. USD for the locale
+ * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
  * en-US).
  * The name will be `null` if the main country cannot be determined.
  *
@@ -5660,7 +5660,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.1.3+27.sha-453589f');
+var VERSION = new Version('7.1.3+29.sha-b224057');
 
 /**
  * @license
