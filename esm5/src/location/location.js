@@ -169,9 +169,9 @@ var Location = /** @class */ (function () {
 export { Location };
 /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: LocationStrategy
-    }], null);
+    }]; }, null);
 function _stripBaseHref(baseHref, url) {
     return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
 }

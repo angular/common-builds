@@ -132,7 +132,7 @@ PathLocationStrategy.ctorParameters = () => [
 PathLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: PathLocationStrategy, factory: function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -142,7 +142,7 @@ PathLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: PathLocation
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     PathLocationStrategy.prototype._baseHref;

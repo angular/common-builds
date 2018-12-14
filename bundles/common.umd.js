@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+30.sha-c6ae729
+ * @license Angular v7.2.0-beta.2+41.sha-522919a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -343,9 +343,9 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
             type: i0.Injectable
-        }], [{
+        }], function () { return [{
             type: LocationStrategy
-        }], null);
+        }]; }, null);
     function _stripBaseHref(baseHref, url) {
         return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
     }
@@ -421,7 +421,7 @@
     }(LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(HashLocationStrategy, [{
             type: i0.Injectable
-        }], [{
+        }], function () { return [{
             type: PlatformLocation
         }, {
             type: undefined,
@@ -431,7 +431,7 @@
                     type: i0.Inject,
                     args: [APP_BASE_HREF]
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @description
@@ -504,7 +504,7 @@
     }(LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(PathLocationStrategy, [{
             type: i0.Injectable
-        }], [{
+        }], function () { return [{
             type: PlatformLocation
         }, {
             type: undefined,
@@ -514,7 +514,7 @@
                     type: i0.Inject,
                     args: [APP_BASE_HREF]
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -2284,7 +2284,7 @@
     }(NgLocalization));
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgLocaleLocalization, [{
             type: i0.Injectable
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
@@ -2298,7 +2298,7 @@
                     type: i0.Inject,
                     args: [DEPRECATED_PLURAL_FN]
                 }]
-        }], null);
+        }]; }, null);
     /**
      * Returns the plural case based on the locale
      *
@@ -2865,7 +2865,7 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgClass, [{
             type: i0.Directive,
             args: [{ selector: '[ngClass]' }]
-        }], [{
+        }], function () { return [{
             type: i0.IterableDiffers
         }, {
             type: i0.KeyValueDiffers
@@ -2873,7 +2873,7 @@
             type: i0.ElementRef
         }, {
             type: i0.Renderer2
-        }], { klass: [{
+        }]; }, { klass: [{
                 type: i0.Input,
                 args: ['class']
             }], ngClass: [{
@@ -2984,9 +2984,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgComponentOutlet, [{
             type: i0.Directive,
             args: [{ selector: '[ngComponentOutlet]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
-        }], { ngComponentOutlet: [{
+        }]; }, { ngComponentOutlet: [{
                 type: i0.Input
             }], ngComponentOutletInjector: [{
                 type: i0.Input
@@ -3222,13 +3222,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgForOf, [{
             type: i0.Directive,
             args: [{ selector: '[ngFor][ngForOf]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
         }, {
             type: i0.TemplateRef
         }, {
             type: i0.IterableDiffers
-        }], { ngForOf: [{
+        }]; }, { ngForOf: [{
                 type: i0.Input
             }], ngForTrackBy: [{
                 type: i0.Input
@@ -3421,11 +3421,11 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgIf, [{
             type: i0.Directive,
             args: [{ selector: '[ngIf]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
         }, {
             type: i0.TemplateRef
-        }], { ngIf: [{
+        }]; }, { ngIf: [{
                 type: i0.Input
             }], ngIfThen: [{
                 type: i0.Input
@@ -3613,7 +3613,7 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgSwitchCase, [{
             type: i0.Directive,
             args: [{ selector: '[ngSwitchCase]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
         }, {
             type: i0.TemplateRef
@@ -3622,7 +3622,7 @@
             decorators: [{
                     type: i0.Host
                 }]
-        }], { ngSwitchCase: [{
+        }]; }, { ngSwitchCase: [{
                 type: i0.Input
             }] });
     /**
@@ -3657,7 +3657,7 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgSwitchDefault, [{
             type: i0.Directive,
             args: [{ selector: '[ngSwitchDefault]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
         }, {
             type: i0.TemplateRef
@@ -3666,7 +3666,7 @@
             decorators: [{
                     type: i0.Host
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -3742,9 +3742,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgPlural, [{
             type: i0.Directive,
             args: [{ selector: '[ngPlural]' }]
-        }], [{
+        }], function () { return [{
             type: NgLocalization
-        }], { ngPlural: [{
+        }]; }, { ngPlural: [{
                 type: i0.Input
             }] });
     /**
@@ -3779,7 +3779,7 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgPluralCase, [{
             type: i0.Directive,
             args: [{ selector: '[ngPluralCase]' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Attribute,
@@ -3794,7 +3794,7 @@
             decorators: [{
                     type: i0.Host
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @ngModule CommonModule
@@ -3864,13 +3864,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyle, [{
             type: i0.Directive,
             args: [{ selector: '[ngStyle]' }]
-        }], [{
+        }], function () { return [{
             type: i0.KeyValueDiffers
         }, {
             type: i0.ElementRef
         }, {
             type: i0.Renderer2
-        }], { ngStyle: [{
+        }]; }, { ngStyle: [{
                 type: i0.Input
             }] });
 
@@ -3980,9 +3980,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgTemplateOutlet, [{
             type: i0.Directive,
             args: [{ selector: '[ngTemplateOutlet]' }]
-        }], [{
+        }], function () { return [{
             type: i0.ViewContainerRef
-        }], { ngTemplateOutletContext: [{
+        }]; }, { ngTemplateOutletContext: [{
                 type: i0.Input
             }], ngTemplateOutlet: [{
                 type: i0.Input
@@ -4330,13 +4330,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDatePipe, [{
             type: i0.Pipe,
             args: [{ name: 'date', pure: true }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     function isDate$1(value) {
         return value instanceof Date && !isNaN(value.valueOf());
     }
@@ -4429,13 +4429,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDecimalPipe, [{
             type: i0.Pipe,
             args: [{ name: 'number' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     /**
      * @ngModule CommonModule
      *
@@ -4469,13 +4469,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedPercentPipe, [{
             type: i0.Pipe,
             args: [{ name: 'percent' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     /**
      * @ngModule CommonModule
      * @description
@@ -4517,13 +4517,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
             type: i0.Pipe,
             args: [{ name: 'currency' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -4661,9 +4661,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
             type: i0.Pipe,
             args: [{ name: 'async', pure: false }]
-        }], [{
+        }], function () { return [{
             type: i0.ChangeDetectorRef
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -4966,13 +4966,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DatePipe, [{
             type: i0.Pipe,
             args: [{ name: 'date', pure: true }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -5022,9 +5022,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(I18nPluralPipe, [{
             type: i0.Pipe,
             args: [{ name: 'i18nPlural', pure: true }]
-        }], [{
+        }], function () { return [{
             type: NgLocalization
-        }], null);
+        }]; }, null);
 
     /**
      * @license
@@ -5140,7 +5140,7 @@
      * @usageNotes
      * ### Examples
      *
-     * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+     * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
      * pipe.
      *
      * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -5177,9 +5177,9 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
             type: i0.Pipe,
             args: [{ name: 'keyvalue', pure: false }]
-        }], [{
+        }], function () { return [{
             type: i0.KeyValueDiffers
-        }], null);
+        }]; }, null);
     function defaultComparator(keyValueA, keyValueB) {
         var a = keyValueA.key;
         var b = keyValueB.key;
@@ -5290,13 +5290,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
             type: i0.Pipe,
             args: [{ name: 'number' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     /**
      * @ngModule CommonModule
      * @description
@@ -5355,13 +5355,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
             type: i0.Pipe,
             args: [{ name: 'percent' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     /**
      * @ngModule CommonModule
      * @description
@@ -5408,9 +5408,9 @@
          *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
          * Default is `1`.
          *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
+         * Default is `2`.
          *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
+         * Default is `2`.
          * If not provided, the number will be formatted with the proper amount of digits,
          * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
          * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
@@ -5452,13 +5452,13 @@
     /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
             type: i0.Pipe,
             args: [{ name: 'currency' }]
-        }], [{
+        }], function () { return [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
                 }]
-        }], null);
+        }]; }, null);
     function isEmpty(value) {
         return value == null || value === '' || value !== value;
     }
@@ -5709,7 +5709,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.2.0-beta.2+30.sha-c6ae729');
+    var VERSION = new i0.Version('7.2.0-beta.2+41.sha-522919a');
 
     /**
      * @license

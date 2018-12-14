@@ -83,7 +83,7 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
 HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.inject(DOCUMENT), i0.inject(PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
@@ -101,7 +101,7 @@ HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfC
                 type: Inject,
                 args: [XSRF_COOKIE_NAME]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     HttpXsrfCookieExtractor.prototype.lastCookieString;
@@ -167,7 +167,7 @@ HttpXsrfInterceptor.ctorParameters = () => [
 HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: HttpXsrfTokenExtractor
     }, {
         type: undefined,
@@ -175,7 +175,7 @@ HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInter
                 type: Inject,
                 args: [XSRF_HEADER_NAME]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     HttpXsrfInterceptor.prototype.tokenService;

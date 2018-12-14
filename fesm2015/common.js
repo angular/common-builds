@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+30.sha-c6ae729
+ * @license Angular v7.2.0-beta.2+41.sha-522919a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -295,9 +295,9 @@ Location.ctorParameters = () => [
 Location.ngInjectableDef = defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(inject(LocationStrategy)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(Location, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: LocationStrategy
-    }], null);
+    }]; }, null);
 /**
  * @param {?} baseHref
  * @param {?} url
@@ -440,7 +440,7 @@ HashLocationStrategy.ctorParameters = () => [
 HashLocationStrategy.ngInjectableDef = defineInjectable({ token: HashLocationStrategy, factory: function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(inject(PlatformLocation), inject(APP_BASE_HREF, 8)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -450,7 +450,7 @@ HashLocationStrategy.ngInjectableDef = defineInjectable({ token: HashLocationStr
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -581,7 +581,7 @@ PathLocationStrategy.ctorParameters = () => [
 PathLocationStrategy.ngInjectableDef = defineInjectable({ token: PathLocationStrategy, factory: function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(inject(PlatformLocation), inject(APP_BASE_HREF, 8)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -591,7 +591,7 @@ PathLocationStrategy.ngInjectableDef = defineInjectable({ token: PathLocationStr
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -2832,7 +2832,7 @@ NgLocaleLocalization.ctorParameters = () => [
 NgLocaleLocalization.ngInjectableDef = defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(inject(LOCALE_ID), inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
@@ -2846,7 +2846,7 @@ NgLocaleLocalization.ngInjectableDef = defineInjectable({ token: NgLocaleLocaliz
                 type: Inject,
                 args: [DEPRECATED_PLURAL_FN]
             }]
-    }], null);
+    }]; }, null);
 /**
  * Returns the plural case based on the locale
  *
@@ -3462,7 +3462,7 @@ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ng
 /*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]
-    }], [{
+    }], function () { return [{
         type: IterableDiffers
     }, {
         type: KeyValueDiffers
@@ -3470,7 +3470,7 @@ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ng
         type: ElementRef
     }, {
         type: Renderer2
-    }], { klass: [{
+    }]; }, { klass: [{
             type: Input,
             args: ['class']
         }], ngClass: [{
@@ -3610,9 +3610,9 @@ NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, 
 /*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngComponentOutlet: [{
+    }]; }, { ngComponentOutlet: [{
             type: Input
         }], ngComponentOutletInjector: [{
             type: Input
@@ -3900,13 +3900,13 @@ NgForOf.ngDirectiveDef = ɵdefineDirective({ type: NgForOf, selectors: [["", "ng
 /*@__PURE__*/ ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
     }, {
         type: IterableDiffers
-    }], { ngForOf: [{
+    }]; }, { ngForOf: [{
             type: Input
         }], ngForTrackBy: [{
             type: Input
@@ -4136,11 +4136,11 @@ NgIf.ngDirectiveDef = ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", "
 /*@__PURE__*/ ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
-    }], { ngIf: [{
+    }]; }, { ngIf: [{
             type: Input
         }], ngIfThen: [{
             type: Input
@@ -4391,7 +4391,7 @@ NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors:
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
@@ -4400,7 +4400,7 @@ NgSwitchCase.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchCase, selectors:
         decorators: [{
                 type: Host
             }]
-    }], { ngSwitchCase: [{
+    }]; }, { ngSwitchCase: [{
             type: Input
         }] });
 /**
@@ -4448,7 +4448,7 @@ NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, sele
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
@@ -4457,7 +4457,7 @@ NgSwitchDefault.ngDirectiveDef = ɵdefineDirective({ type: NgSwitchDefault, sele
         decorators: [{
                 type: Host
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -4566,9 +4566,9 @@ NgPlural.ngDirectiveDef = ɵdefineDirective({ type: NgPlural, selectors: [["", "
 /*@__PURE__*/ ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
-    }], [{
+    }], function () { return [{
         type: NgLocalization
-    }], { ngPlural: [{
+    }]; }, { ngPlural: [{
             type: Input
         }] });
 /**
@@ -4619,7 +4619,7 @@ NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors:
 /*@__PURE__*/ ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Attribute,
@@ -4634,7 +4634,7 @@ NgPluralCase.ngDirectiveDef = ɵdefineDirective({ type: NgPluralCase, selectors:
         decorators: [{
                 type: Host
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -4743,13 +4743,13 @@ NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ng
 /*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]' }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
     }, {
         type: ElementRef
     }, {
         type: Renderer2
-    }], { ngStyle: [{
+    }]; }, { ngStyle: [{
             type: Input
         }] });
 
@@ -4879,9 +4879,9 @@ NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, se
 /*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngTemplateOutletContext: [{
+    }]; }, { ngTemplateOutletContext: [{
             type: Input
         }], ngTemplateOutlet: [{
             type: Input
@@ -5340,13 +5340,13 @@ DeprecatedDatePipe.ngPipeDef = ɵdefinePipe({ name: "date", type: DeprecatedDate
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @param {?} value
  * @return {?}
@@ -5473,13 +5473,13 @@ DeprecatedDecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: Deprecate
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * \@ngModule CommonModule
  *
@@ -5527,13 +5527,13 @@ DeprecatedPercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: Deprecat
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedPercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * \@ngModule CommonModule
  * \@description
@@ -5589,13 +5589,13 @@ DeprecatedCurrencyPipe.ngPipeDef = ɵdefinePipe({ name: "currency", type: Deprec
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -5777,9 +5777,9 @@ AsyncPipe.ngPipeDef = ɵdefinePipe({ name: "async", type: AsyncPipe, factory: fu
 /*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
-    }], [{
+    }], function () { return [{
         type: ChangeDetectorRef
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -6102,13 +6102,13 @@ DatePipe.ngPipeDef = ɵdefinePipe({ name: "date", type: DatePipe, factory: funct
 /*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -6174,9 +6174,9 @@ I18nPluralPipe.ngPipeDef = ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPi
 /*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
-    }], [{
+    }], function () { return [{
         type: NgLocalization
-    }], null);
+    }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -6312,7 +6312,7 @@ function makeKeyValuePair(key, value) {
  * \@usageNotes
  * ### Examples
  *
- * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
  * pipe.
  *
  * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -6363,9 +6363,9 @@ KeyValuePipe.ngPipeDef = ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, fa
 /*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
-    }], null);
+    }]; }, null);
 /**
  * @template K, V
  * @param {?} keyValueA
@@ -6501,13 +6501,13 @@ DecimalPipe.ngPipeDef = ɵdefinePipe({ name: "number", type: DecimalPipe, factor
 /*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * \@ngModule CommonModule
  * \@description
@@ -6577,13 +6577,13 @@ PercentPipe.ngPipeDef = ɵdefinePipe({ name: "percent", type: PercentPipe, facto
 /*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * \@ngModule CommonModule
  * \@description
@@ -6633,9 +6633,9 @@ class CurrencyPipe {
      *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
      * Default is `1`.
      *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
+     * Default is `2`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
+     * Default is `2`.
      * If not provided, the number will be formatted with the proper amount of digits,
      * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
      * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
@@ -6685,13 +6685,13 @@ CurrencyPipe.ngPipeDef = ɵdefinePipe({ name: "currency", type: CurrencyPipe, fa
 /*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @param {?} value
  * @return {?}
@@ -6981,7 +6981,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+30.sha-c6ae729');
+const VERSION = new Version('7.2.0-beta.2+41.sha-522919a');
 
 /**
  * @fileoverview added by tsickle

@@ -195,13 +195,13 @@ DatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DatePipe, factory: fu
 /*@__PURE__*/ i0.ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     DatePipe.prototype.locale;

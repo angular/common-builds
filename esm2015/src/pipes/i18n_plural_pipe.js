@@ -66,9 +66,9 @@ I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPlura
 /*@__PURE__*/ i0.ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
-    }], [{
+    }], function () { return [{
         type: NgLocalization
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     I18nPluralPipe.prototype._localization;

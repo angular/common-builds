@@ -126,9 +126,9 @@ NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet,
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngTemplateOutletContext: [{
+    }]; }, { ngTemplateOutletContext: [{
             type: Input
         }], ngTemplateOutlet: [{
             type: Input

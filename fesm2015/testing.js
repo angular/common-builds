@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+30.sha-c6ae729
+ * @license Angular v7.2.0-beta.2+41.sha-522919a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -311,7 +311,7 @@ MockLocationStrategy.ctorParameters = () => [];
 MockLocationStrategy.ngInjectableDef = defineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
-    }], [], null);
+    }], function () { return []; }, null);
 class _MockPopStateEvent {
     /**
      * @param {?} newUrl
