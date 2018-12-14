@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.2.0-beta.2+37.sha-a8ebc83
+ * @license Angular v7.2.0-beta.2+30.sha-c6ae729
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Inject, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, Pipe, LOCALE_ID, IterableDiffers, ɵisListLikeIterable, ɵstringify, isDevMode, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, ɵdefineDirective, ɵdirectiveInject, ɵNgOnChangesFeature, ɵinjectAttribute, ɵdefinePipe } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, Inject, Optional, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ElementRef, KeyValueDiffers, Renderer2, LOCALE_ID, IterableDiffers, ɵisListLikeIterable, ɵstringify, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, isDevMode, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, ɵdefinePipe, ɵdirectiveInject, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6312,7 +6312,7 @@ function makeKeyValuePair(key, value) {
  * \@usageNotes
  * ### Examples
  *
- * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
+ * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
  *
  * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -6981,7 +6981,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+37.sha-a8ebc83');
+const VERSION = new Version('7.2.0-beta.2+30.sha-c6ae729');
 
 /**
  * @fileoverview added by tsickle
