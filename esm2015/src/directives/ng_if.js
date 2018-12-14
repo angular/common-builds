@@ -202,11 +202,11 @@ NgIf.ngDirectiveDef = i0.ɵdefineDirective({ type: NgIf, selectors: [["", "ngIf"
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
-    }], { ngIf: [{
+    }]; }, { ngIf: [{
             type: Input
         }], ngIfThen: [{
             type: Input

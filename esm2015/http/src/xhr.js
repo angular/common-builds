@@ -66,7 +66,7 @@ BrowserXhr.ctorParameters = () => [];
 BrowserXhr.ngInjectableDef = i0.defineInjectable({ token: BrowserXhr, factory: function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
-    }], [], null);
+    }], function () { return []; }, null);
 /**
  * Tracks a response from the server that does not yet have a body.
  * @record
@@ -362,9 +362,9 @@ HttpXhrBackend.ctorParameters = () => [
 HttpXhrBackend.ngInjectableDef = i0.defineInjectable({ token: HttpXhrBackend, factory: function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.inject(XhrFactory)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: XhrFactory
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     HttpXhrBackend.prototype.xhrFactory;

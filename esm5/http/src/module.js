@@ -41,11 +41,11 @@ var HttpInterceptingHandler = /** @class */ (function () {
 export { HttpInterceptingHandler };
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: HttpBackend
     }, {
         type: Injector
-    }], null);
+    }]; }, null);
 /**
  * Constructs an `HttpHandler` that applies interceptors
  * to a request before passing it to the given `HttpBackend`.

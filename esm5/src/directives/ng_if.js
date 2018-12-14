@@ -176,11 +176,11 @@ export { NgIf };
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
-    }], { ngIf: [{
+    }]; }, { ngIf: [{
             type: Input
         }], ngIfThen: [{
             type: Input

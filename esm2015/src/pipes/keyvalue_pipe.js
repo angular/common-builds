@@ -99,9 +99,9 @@ KeyValuePipe.ngPipeDef = i0.ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe,
 /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     KeyValuePipe.prototype.differ;

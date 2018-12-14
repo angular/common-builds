@@ -107,13 +107,13 @@ NgStyle.ngDirectiveDef = i0.ɵdefineDirective({ type: NgStyle, selectors: [["", 
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]' }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
     }, {
         type: ElementRef
     }, {
         type: Renderer2
-    }], { ngStyle: [{
+    }]; }, { ngStyle: [{
             type: Input
         }] });
 if (false) {

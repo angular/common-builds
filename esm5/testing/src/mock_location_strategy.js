@@ -71,7 +71,7 @@ var MockLocationStrategy = /** @class */ (function (_super) {
 export { MockLocationStrategy };
 /*@__PURE__*/ i0.ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
-    }], [], null);
+    }], function () { return []; }, null);
 var _MockPopStateEvent = /** @class */ (function () {
     function _MockPopStateEvent(newUrl) {
         this.newUrl = newUrl;

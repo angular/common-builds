@@ -133,9 +133,9 @@ NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutle
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngComponentOutlet: [{
+    }]; }, { ngComponentOutlet: [{
             type: Input
         }], ngComponentOutletInjector: [{
             type: Input

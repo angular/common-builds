@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+36.sha-7fae911
+ * @license Angular v7.2.0-beta.2+39.sha-d0d351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -204,7 +204,7 @@
     }(common.LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(MockLocationStrategy, [{
             type: i0.Injectable
-        }], [], null);
+        }], function () { return []; }, null);
     var _MockPopStateEvent = /** @class */ (function () {
         function _MockPopStateEvent(newUrl) {
             this.newUrl = newUrl;

@@ -122,13 +122,13 @@ DeprecatedDecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: Deprec
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     DeprecatedDecimalPipe.prototype._locale;
@@ -180,13 +180,13 @@ DeprecatedPercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: Depre
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedPercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     DeprecatedPercentPipe.prototype._locale;
@@ -246,13 +246,13 @@ DeprecatedCurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: Dep
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 if (false) {
     /** @type {?} */
     DeprecatedCurrencyPipe.prototype._locale;

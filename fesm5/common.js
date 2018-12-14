@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+36.sha-7fae911
+ * @license Angular v7.2.0-beta.2+39.sha-d0d351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -272,9 +272,9 @@ var Location = /** @class */ (function () {
 }());
 /*@__PURE__*/ ɵsetClassMetadata(Location, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: LocationStrategy
-    }], null);
+    }]; }, null);
 function _stripBaseHref(baseHref, url) {
     return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
 }
@@ -350,7 +350,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
 }(LocationStrategy));
 /*@__PURE__*/ ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -360,7 +360,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @description
@@ -433,7 +433,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
 }(LocationStrategy));
 /*@__PURE__*/ ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -443,7 +443,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -2288,7 +2288,7 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
 }(NgLocalization));
 /*@__PURE__*/ ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
@@ -2302,7 +2302,7 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
                 type: Inject,
                 args: [DEPRECATED_PLURAL_FN]
             }]
-    }], null);
+    }]; }, null);
 /**
  * Returns the plural case based on the locale
  *
@@ -2869,7 +2869,7 @@ var NgClass = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]
-    }], [{
+    }], function () { return [{
         type: IterableDiffers
     }, {
         type: KeyValueDiffers
@@ -2877,7 +2877,7 @@ var NgClass = /** @class */ (function () {
         type: ElementRef
     }, {
         type: Renderer2
-    }], { klass: [{
+    }]; }, { klass: [{
             type: Input,
             args: ['class']
         }], ngClass: [{
@@ -2988,9 +2988,9 @@ var NgComponentOutlet = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngComponentOutlet: [{
+    }]; }, { ngComponentOutlet: [{
             type: Input
         }], ngComponentOutletInjector: [{
             type: Input
@@ -3226,13 +3226,13 @@ var NgForOf = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
     }, {
         type: IterableDiffers
-    }], { ngForOf: [{
+    }]; }, { ngForOf: [{
             type: Input
         }], ngForTrackBy: [{
             type: Input
@@ -3425,11 +3425,11 @@ var NgIf = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
-    }], { ngIf: [{
+    }]; }, { ngIf: [{
             type: Input
         }], ngIfThen: [{
             type: Input
@@ -3617,7 +3617,7 @@ var NgSwitchCase = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
@@ -3626,7 +3626,7 @@ var NgSwitchCase = /** @class */ (function () {
         decorators: [{
                 type: Host
             }]
-    }], { ngSwitchCase: [{
+    }]; }, { ngSwitchCase: [{
             type: Input
         }] });
 /**
@@ -3661,7 +3661,7 @@ var NgSwitchDefault = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
@@ -3670,7 +3670,7 @@ var NgSwitchDefault = /** @class */ (function () {
         decorators: [{
                 type: Host
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -3746,9 +3746,9 @@ var NgPlural = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
-    }], [{
+    }], function () { return [{
         type: NgLocalization
-    }], { ngPlural: [{
+    }]; }, { ngPlural: [{
             type: Input
         }] });
 /**
@@ -3783,7 +3783,7 @@ var NgPluralCase = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Attribute,
@@ -3798,7 +3798,7 @@ var NgPluralCase = /** @class */ (function () {
         decorators: [{
                 type: Host
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @ngModule CommonModule
@@ -3868,13 +3868,13 @@ var NgStyle = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]' }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
     }, {
         type: ElementRef
     }, {
         type: Renderer2
-    }], { ngStyle: [{
+    }]; }, { ngStyle: [{
             type: Input
         }] });
 
@@ -3984,9 +3984,9 @@ var NgTemplateOutlet = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
-    }], [{
+    }], function () { return [{
         type: ViewContainerRef
-    }], { ngTemplateOutletContext: [{
+    }]; }, { ngTemplateOutletContext: [{
             type: Input
         }], ngTemplateOutlet: [{
             type: Input
@@ -4334,13 +4334,13 @@ var DeprecatedDatePipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
@@ -4433,13 +4433,13 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @ngModule CommonModule
  *
@@ -4473,13 +4473,13 @@ var DeprecatedPercentPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedPercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @ngModule CommonModule
  * @description
@@ -4521,13 +4521,13 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -4665,9 +4665,9 @@ var AsyncPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
-    }], [{
+    }], function () { return [{
         type: ChangeDetectorRef
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -4970,13 +4970,13 @@ var DatePipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -5026,9 +5026,9 @@ var I18nPluralPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
-    }], [{
+    }], function () { return [{
         type: NgLocalization
-    }], null);
+    }]; }, null);
 
 /**
  * @license
@@ -5181,9 +5181,9 @@ var KeyValuePipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
-    }], [{
+    }], function () { return [{
         type: KeyValueDiffers
-    }], null);
+    }]; }, null);
 function defaultComparator(keyValueA, keyValueB) {
     var a = keyValueA.key;
     var b = keyValueB.key;
@@ -5294,13 +5294,13 @@ var DecimalPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @ngModule CommonModule
  * @description
@@ -5359,13 +5359,13 @@ var PercentPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 /**
  * @ngModule CommonModule
  * @description
@@ -5412,9 +5412,9 @@ var CurrencyPipe = /** @class */ (function () {
      *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
      * Default is `1`.
      *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
+     * Default is `2`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
+     * Default is `2`.
      * If not provided, the number will be formatted with the proper amount of digits,
      * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
      * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
@@ -5456,13 +5456,13 @@ var CurrencyPipe = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], [{
+    }], function () { return [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }], null);
+    }]; }, null);
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
 }
@@ -5713,7 +5713,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-beta.2+36.sha-7fae911');
+var VERSION = new Version('7.2.0-beta.2+39.sha-d0d351c');
 
 /**
  * @license
