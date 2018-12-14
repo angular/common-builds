@@ -60,11 +60,11 @@ HttpInterceptingHandler.ctorParameters = () => [
 HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(Injector)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: HttpBackend
     }, {
         type: Injector
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     HttpInterceptingHandler.prototype.chain;

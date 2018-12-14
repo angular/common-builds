@@ -202,9 +202,9 @@ AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory:
 /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
-    }], function () { return [{
+    }], [{
         type: ChangeDetectorRef
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     AsyncPipe.prototype._latestValue;

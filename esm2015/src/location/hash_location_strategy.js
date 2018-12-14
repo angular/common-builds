@@ -129,7 +129,7 @@ HashLocationStrategy.ctorParameters = () => [
 HashLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: HashLocationStrategy, factory: function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(i0.inject(PlatformLocation), i0.inject(APP_BASE_HREF, 8)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: PlatformLocation
     }, {
         type: undefined,
@@ -139,7 +139,7 @@ HashLocationStrategy.ngInjectableDef = i0.defineInjectable({ token: HashLocation
                 type: Inject,
                 args: [APP_BASE_HREF]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     HashLocationStrategy.prototype._baseHref;

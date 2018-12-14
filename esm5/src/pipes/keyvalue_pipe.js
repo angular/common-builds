@@ -61,9 +61,9 @@ export { KeyValuePipe };
 /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
-    }], function () { return [{
+    }], [{
         type: KeyValueDiffers
-    }]; }, null);
+    }], null);
 export function defaultComparator(keyValueA, keyValueB) {
     var a = keyValueA.key;
     var b = keyValueB.key;

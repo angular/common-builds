@@ -158,13 +158,13 @@ DeprecatedDatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DeprecatedD
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /**
      * \@internal

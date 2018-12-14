@@ -226,9 +226,9 @@ Location.ctorParameters = () => [
 Location.ngInjectableDef = i0.defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(i0.inject(LocationStrategy)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: LocationStrategy
-    }]; }, null);
+    }], null);
 if (false) {
     /**
      * \@internal

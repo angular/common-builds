@@ -97,13 +97,13 @@ DecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DecimalPipe, fac
 /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     DecimalPipe.prototype._locale;
@@ -177,13 +177,13 @@ PercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: PercentPipe, fa
 /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     PercentPipe.prototype._locale;
@@ -289,13 +289,13 @@ CurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: CurrencyPipe,
 /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     CurrencyPipe.prototype._locale;

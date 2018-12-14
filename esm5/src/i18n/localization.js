@@ -80,7 +80,7 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
 export { NgLocaleLocalization };
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
@@ -94,7 +94,7 @@ export { NgLocaleLocalization };
                 type: Inject,
                 args: [DEPRECATED_PLURAL_FN]
             }]
-    }]; }, null);
+    }], null);
 /**
  * Returns the plural case based on the locale
  *

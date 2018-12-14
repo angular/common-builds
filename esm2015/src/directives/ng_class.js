@@ -202,7 +202,7 @@ NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", 
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]
-    }], function () { return [{
+    }], [{
         type: IterableDiffers
     }, {
         type: KeyValueDiffers
@@ -210,7 +210,7 @@ NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", 
         type: ElementRef
     }, {
         type: Renderer2
-    }]; }, { klass: [{
+    }], { klass: [{
             type: Input,
             args: ['class']
         }], ngClass: [{

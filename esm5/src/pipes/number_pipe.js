@@ -83,13 +83,13 @@ export { DecimalPipe };
 /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 /**
  * @ngModule CommonModule
  * @description
@@ -149,13 +149,13 @@ export { PercentPipe };
 /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 /**
  * @ngModule CommonModule
  * @description
@@ -247,13 +247,13 @@ export { CurrencyPipe };
 /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
             }]
-    }]; }, null);
+    }], null);
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
 }

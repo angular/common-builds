@@ -163,7 +163,7 @@ export { NgClass };
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]
-    }], function () { return [{
+    }], [{
         type: IterableDiffers
     }, {
         type: KeyValueDiffers
@@ -171,7 +171,7 @@ export { NgClass };
         type: ElementRef
     }, {
         type: Renderer2
-    }]; }, { klass: [{
+    }], { klass: [{
             type: Input,
             args: ['class']
         }], ngClass: [{
