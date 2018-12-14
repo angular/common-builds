@@ -304,9 +304,9 @@ HttpClient.ctorParameters = () => [
 HttpClient.ngInjectableDef = i0.defineInjectable({ token: HttpClient, factory: function HttpClient_Factory(t) { return new (t || HttpClient)(i0.inject(HttpHandler)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClient, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: HttpHandler
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     HttpClient.prototype.handler;

@@ -109,9 +109,9 @@ NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [[""
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
-    }], function () { return [{
+    }], [{
         type: NgLocalization
-    }]; }, { ngPlural: [{
+    }], { ngPlural: [{
             type: Input
         }] });
 if (false) {
@@ -172,7 +172,7 @@ NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selecto
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
-    }], function () { return [{
+    }], [{
         type: undefined,
         decorators: [{
                 type: Attribute,
@@ -187,7 +187,7 @@ NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selecto
         decorators: [{
                 type: Host
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     NgPluralCase.prototype.value;

@@ -228,13 +228,13 @@ export { NgForOf };
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
-    }], function () { return [{
+    }], [{
         type: ViewContainerRef
     }, {
         type: TemplateRef
     }, {
         type: IterableDiffers
-    }]; }, { ngForOf: [{
+    }], { ngForOf: [{
             type: Input
         }], ngForTrackBy: [{
             type: Input

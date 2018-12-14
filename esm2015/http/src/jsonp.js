@@ -208,7 +208,7 @@ JsonpClientBackend.ctorParameters = () => [
 JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.inject(JsonpCallbackContext), i0.inject(DOCUMENT)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: JsonpCallbackContext
     }, {
         type: undefined,
@@ -216,7 +216,7 @@ JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBac
                 type: Inject,
                 args: [DOCUMENT]
             }]
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     JsonpClientBackend.prototype.callbackMap;
@@ -259,9 +259,9 @@ JsonpInterceptor.ctorParameters = () => [
 JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(i0.inject(JsonpClientBackend)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
-    }], function () { return [{
+    }], [{
         type: JsonpClientBackend
-    }]; }, null);
+    }], null);
 if (false) {
     /** @type {?} */
     JsonpInterceptor.prototype.jsonp;

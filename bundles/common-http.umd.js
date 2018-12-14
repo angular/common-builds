@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+39.sha-d0d351c
+ * @license Angular v7.2.0-beta.2+37.sha-a8ebc83
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1158,9 +1158,9 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClient, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: HttpHandler
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1381,7 +1381,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpClientBackend, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: JsonpCallbackContext
         }, {
             type: undefined,
@@ -1389,7 +1389,7 @@
                     type: i0.Inject,
                     args: [common.DOCUMENT]
                 }]
-        }]; }, null);
+        }], null);
     /**
      * An `HttpInterceptor` which identifies requests with the method JSONP and
      * shifts them to the `JsonpClientBackend`.
@@ -1412,9 +1412,9 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpInterceptor, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: JsonpClientBackend
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1461,7 +1461,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(BrowserXhr, [{
             type: i0.Injectable
-        }], function () { return []; }, null);
+        }], [], null);
     /**
      * An `HttpBackend` which uses the XMLHttpRequest API to send
      * requests to a backend server.
@@ -1711,9 +1711,9 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXhrBackend, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: XhrFactory
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1766,7 +1766,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: undefined,
             decorators: [{
                     type: i0.Inject,
@@ -1784,7 +1784,7 @@
                     type: i0.Inject,
                     args: [XSRF_COOKIE_NAME]
                 }]
-        }]; }, null);
+        }], null);
     /**
      * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
      */
@@ -1815,7 +1815,7 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfInterceptor, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: HttpXsrfTokenExtractor
         }, {
             type: undefined,
@@ -1823,7 +1823,7 @@
                     type: i0.Inject,
                     args: [XSRF_HEADER_NAME]
                 }]
-        }]; }, null);
+        }], null);
 
     /**
      * @license
@@ -1859,11 +1859,11 @@
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
             type: i0.Injectable
-        }], function () { return [{
+        }], [{
             type: HttpBackend
         }, {
             type: i0.Injector
-        }]; }, null);
+        }], null);
     /**
      * Factory function that determines where to store JSONP callbacks.
      *
