@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.1.3+22.sha-fe8c6b0
+ * @license Angular v7.1.3+21.sha-63d395c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5123,7 +5123,7 @@
      * @usageNotes
      * ### Examples
      *
-     * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
+     * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
      * pipe.
      *
      * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
@@ -5670,7 +5670,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.1.3+22.sha-fe8c6b0');
+    var VERSION = new core.Version('7.1.3+21.sha-63d395c');
 
     /**
      * @license
