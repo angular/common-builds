@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+39.sha-d0d351c
+ * @license Angular v7.2.0-beta.2+37.sha-a8ebc83
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5370,9 +5370,9 @@ var CurrencyPipe = /** @class */ (function () {
      *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
      * Default is `1`.
      *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `2`.
+     * Default is `0`.
      *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `2`.
+     * Default is `3`.
      * If not provided, the number will be formatted with the proper amount of digits,
      * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
      * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
@@ -5659,7 +5659,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-beta.2+39.sha-d0d351c');
+var VERSION = new Version('7.2.0-beta.2+37.sha-a8ebc83');
 
 /**
  * @license
