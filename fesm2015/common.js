@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+40.sha-650c5a0
+ * @license Angular v7.2.0-beta.2+52.sha-f8096d4
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1187,7 +1187,7 @@ function getLocaleCurrencySymbol(locale) {
     return data[15 /* CurrencySymbol */] || null;
 }
 /**
- * The name of the currency for the main country using this locale (e.g. USD for the locale
+ * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
  * en-US).
  * The name will be `null` if the main country cannot be determined.
  *
@@ -5899,6 +5899,7 @@ class KeyValuePipe {
      */
     constructor(differs) {
         this.differs = differs;
+        this.keyValues = [];
     }
     /**
      * @template K, V
@@ -6466,7 +6467,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+40.sha-650c5a0');
+const VERSION = new Version('7.2.0-beta.2+52.sha-f8096d4');
 
 /**
  * @fileoverview added by tsickle
