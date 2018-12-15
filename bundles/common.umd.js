@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+43.sha-f9545d1
+ * @license Angular v7.2.0-beta.2+51.sha-7dab458
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1034,7 +1034,7 @@
         return data[15 /* CurrencySymbol */] || null;
     }
     /**
-     * The name of the currency for the main country using this locale (e.g. USD for the locale
+     * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
      * en-US).
      * The name will be `null` if the main country cannot be determined.
      *
@@ -5133,6 +5133,7 @@
     var KeyValuePipe = /** @class */ (function () {
         function KeyValuePipe(differs) {
             this.differs = differs;
+            this.keyValues = [];
         }
         KeyValuePipe.prototype.transform = function (input, compareFn) {
             var _this = this;
@@ -5670,7 +5671,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.0-beta.2+43.sha-f9545d1');
+    var VERSION = new core.Version('7.2.0-beta.2+51.sha-7dab458');
 
     /**
      * @license
