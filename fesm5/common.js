@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.2.0-beta.2+43.sha-f9545d1
+ * @license Angular v7.2.0-beta.2+52.sha-f8096d4
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, Pipe, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, isDevMode, Inject, LOCALE_ID, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, Optional, ɵdefineDirective, ɵdirectiveInject, ɵNgOnChangesFeature, ɵinjectAttribute, ɵdefinePipe } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Version, NgModule, defineInjectable, inject, Pipe, ComponentFactoryResolver, Directive, Input, NgModuleRef, ViewContainerRef, Attribute, Host, TemplateRef, ChangeDetectorRef, WrappedValue, ɵisObservable, ɵisPromise, KeyValueDiffers, ElementRef, IterableDiffers, Renderer2, ɵisListLikeIterable, ɵstringify, Inject, LOCALE_ID, isDevMode, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, ɵdefinePipe, ɵdirectiveInject, Optional, ɵdefineDirective, ɵNgOnChangesFeature, ɵinjectAttribute } from '@angular/core';
 import { __values, __read, __extends, __assign } from 'tslib';
 
 /**
@@ -1027,7 +1027,7 @@ function getLocaleCurrencySymbol(locale) {
     return data[15 /* CurrencySymbol */] || null;
 }
 /**
- * The name of the currency for the main country using this locale (e.g. USD for the locale
+ * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
  * en-US).
  * The name will be `null` if the main country cannot be determined.
  *
@@ -5154,6 +5154,7 @@ function makeKeyValuePair(key, value) {
 var KeyValuePipe = /** @class */ (function () {
     function KeyValuePipe(differs) {
         this.differs = differs;
+        this.keyValues = [];
     }
     KeyValuePipe.prototype.transform = function (input, compareFn) {
         var _this = this;
@@ -5713,7 +5714,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-beta.2+43.sha-f9545d1');
+var VERSION = new Version('7.2.0-beta.2+52.sha-f8096d4');
 
 /**
  * @license
