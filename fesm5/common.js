@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+42.sha-0b78f54
+ * @license Angular v7.2.0-beta.2+44.sha-b39efdd
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5154,6 +5154,7 @@ function makeKeyValuePair(key, value) {
 var KeyValuePipe = /** @class */ (function () {
     function KeyValuePipe(differs) {
         this.differs = differs;
+        this.keyValues = [];
     }
     KeyValuePipe.prototype.transform = function (input, compareFn) {
         var _this = this;
@@ -5713,7 +5714,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0-beta.2+42.sha-0b78f54');
+var VERSION = new Version('7.2.0-beta.2+44.sha-b39efdd');
 
 /**
  * @license
