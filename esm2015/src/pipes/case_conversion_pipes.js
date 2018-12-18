@@ -3,7 +3,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 import * as i0 from "@angular/core";
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
