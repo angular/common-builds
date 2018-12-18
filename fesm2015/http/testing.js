@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+83.sha-b04bc5d
+ * @license Angular v7.2.0-beta.2+89.sha-69198ba
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
@@ -24,7 +24,7 @@ class HttpTestingController {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A mock requests that was received and is ready to be answered.
@@ -223,7 +223,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
@@ -259,6 +259,7 @@ class HttpClientTestingBackend {
     }
     /**
      * Helper function to search for requests in the list of open requests.
+     * @private
      * @param {?} match
      * @return {?}
      */
@@ -357,6 +358,7 @@ class HttpClientTestingBackend {
         }
     }
     /**
+     * @private
      * @param {?} matcher
      * @return {?}
      */
@@ -382,7 +384,7 @@ HttpClientTestingBackend.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
@@ -408,12 +410,12 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**

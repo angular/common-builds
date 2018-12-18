@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+83.sha-b04bc5d
+ * @license Angular v7.2.0-beta.2+89.sha-69198ba
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -11,7 +11,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -51,7 +51,7 @@ class HttpBackend {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Immutable set of Http headers, with lazy parsing.
@@ -180,6 +180,7 @@ class HttpHeaders {
         return this.clone({ name, value, op: 'd' });
     }
     /**
+     * @private
      * @param {?} name
      * @param {?} lcName
      * @return {?}
@@ -190,6 +191,7 @@ class HttpHeaders {
         }
     }
     /**
+     * @private
      * @return {?}
      */
     init() {
@@ -208,6 +210,7 @@ class HttpHeaders {
         }
     }
     /**
+     * @private
      * @param {?} other
      * @return {?}
      */
@@ -219,6 +222,7 @@ class HttpHeaders {
         });
     }
     /**
+     * @private
      * @param {?} update
      * @return {?}
      */
@@ -231,6 +235,7 @@ class HttpHeaders {
         return clone;
     }
     /**
+     * @private
      * @param {?} update
      * @return {?}
      */
@@ -293,7 +298,7 @@ class HttpHeaders {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
@@ -475,6 +480,7 @@ class HttpParams {
             .join('&');
     }
     /**
+     * @private
      * @param {?} update
      * @return {?}
      */
@@ -486,6 +492,7 @@ class HttpParams {
         return clone;
     }
     /**
+     * @private
      * @return {?}
      */
     init() {
@@ -533,7 +540,7 @@ class HttpParams {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Determine whether the given HTTP method may include a body.
@@ -818,7 +825,7 @@ class HttpRequest {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const HttpEventType = {
@@ -990,7 +997,7 @@ class HttpErrorResponse extends HttpResponseBase {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Construct an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
@@ -1278,7 +1285,7 @@ HttpClient.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
@@ -1326,7 +1333,7 @@ NoopInterceptor.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Every request made through JSONP needs a callback name that's unique across the
 // whole page. Each request is assigned an id and the callback name is constructed
@@ -1371,6 +1378,7 @@ class JsonpClientBackend {
     }
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
+     * @private
      * @return {?}
      */
     nextCallback() { return `ng_jsonp_callback_${nextRequestId++}`; }
@@ -1555,7 +1563,7 @@ JsonpInterceptor.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const XSSI_PREFIX = /^\)\]\}',?\n/;
@@ -1879,7 +1887,7 @@ HttpXhrBackend.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const XSRF_COOKIE_NAME = new InjectionToken('XSRF_COOKIE_NAME');
@@ -1987,7 +1995,7 @@ HttpXsrfInterceptor.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An injectable `HttpHandler` that applies multiple interceptors
@@ -2160,12 +2168,12 @@ HttpClientJsonpModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**

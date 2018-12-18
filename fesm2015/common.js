@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-beta.2+83.sha-b04bc5d
+ * @license Angular v7.2.0-beta.2+89.sha-69198ba
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { InjectionToken, EventEmitter, Injectable, Inject, Optional, LOCALE_ID, 
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * This class should not be used directly by an application developer. Instead, use
@@ -46,7 +46,7 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * `LocationStrategy` is responsible for representing and reading route state
@@ -98,7 +98,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -314,7 +314,7 @@ function _stripIndexHtml(url) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -431,7 +431,7 @@ HashLocationStrategy.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -551,12 +551,12 @@ PathLocationStrategy.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -607,7 +607,7 @@ var localeEn = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -646,7 +646,7 @@ function registerLocaleData(data, localeId, extraData) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -802,7 +802,7 @@ const CURRENCIES_EN = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const NumberFormatStyle = {
@@ -1394,7 +1394,7 @@ function getNumberOfCurrencyDigits(code) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
@@ -2214,7 +2214,7 @@ function isDate(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
@@ -2692,7 +2692,7 @@ function parseIntAutoRadix(text) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @deprecated from v5
@@ -3164,7 +3164,7 @@ function getPluralCase(locale, nLike) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3193,7 +3193,7 @@ function parseCookieValue(cookieStr, name) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -3286,6 +3286,7 @@ class NgClass {
         }
     }
     /**
+     * @private
      * @param {?} changes
      * @return {?}
      */
@@ -3299,6 +3300,7 @@ class NgClass {
         });
     }
     /**
+     * @private
      * @param {?} changes
      * @return {?}
      */
@@ -3320,6 +3322,7 @@ class NgClass {
      * added.
      * For argument of type Map CSS class name in the map's key is toggled based on the value (added
      * for truthy and removed for falsy).
+     * @private
      * @param {?} rawClassVal
      * @return {?}
      */
@@ -3336,6 +3339,7 @@ class NgClass {
     /**
      * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
      * purposes.
+     * @private
      * @param {?} rawClassVal
      * @return {?}
      */
@@ -3350,6 +3354,7 @@ class NgClass {
         }
     }
     /**
+     * @private
      * @param {?} klass
      * @param {?} enabled
      * @return {?}
@@ -3385,7 +3390,7 @@ NgClass.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
@@ -3508,7 +3513,7 @@ NgComponentOutlet.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
@@ -3695,6 +3700,7 @@ class NgForOf {
         }
     }
     /**
+     * @private
      * @param {?} changes
      * @return {?}
      */
@@ -3738,6 +3744,7 @@ class NgForOf {
         });
     }
     /**
+     * @private
      * @param {?} view
      * @param {?} record
      * @return {?}
@@ -3796,7 +3803,7 @@ function getTypeNameForDebugging(type) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Conditionally includes a template based on the value of an `expression`.
@@ -3934,6 +3941,7 @@ class NgIf {
         this._updateView();
     }
     /**
+     * @private
      * @return {?}
      */
     _updateView() {
@@ -4009,7 +4017,7 @@ function assertTemplate(property, templateRef) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SwitchView {
     /**
@@ -4139,6 +4147,7 @@ class NgSwitch {
         return matched;
     }
     /**
+     * @private
      * @param {?} useDefault
      * @return {?}
      */
@@ -4255,7 +4264,7 @@ NgSwitchDefault.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -4311,6 +4320,7 @@ class NgPlural {
      */
     addCase(value, switchView) { this._caseViews[value] = switchView; }
     /**
+     * @private
      * @return {?}
      */
     _updateView() {
@@ -4322,6 +4332,7 @@ class NgPlural {
         this._activateView(this._caseViews[key]);
     }
     /**
+     * @private
      * @return {?}
      */
     _clearViews() {
@@ -4329,6 +4340,7 @@ class NgPlural {
             this._activeView.destroy();
     }
     /**
+     * @private
      * @param {?} view
      * @return {?}
      */
@@ -4396,7 +4408,7 @@ NgPluralCase.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -4454,6 +4466,7 @@ class NgStyle {
         }
     }
     /**
+     * @private
      * @param {?} changes
      * @return {?}
      */
@@ -4463,6 +4476,7 @@ class NgStyle {
         changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
     }
     /**
+     * @private
      * @param {?} nameAndUnit
      * @param {?} value
      * @return {?}
@@ -4493,7 +4507,7 @@ NgStyle.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -4556,6 +4570,7 @@ class NgTemplateOutlet {
      * shape changes (new properties are added or existing properties are removed).
      * In other words we consider context with the same properties as "the same" even
      * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     * @private
      * @param {?} changes
      * @return {?}
      */
@@ -4565,6 +4580,7 @@ class NgTemplateOutlet {
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     }
     /**
+     * @private
      * @param {?} ctxChange
      * @return {?}
      */
@@ -4586,6 +4602,7 @@ class NgTemplateOutlet {
         }
     }
     /**
+     * @private
      * @param {?} ctx
      * @return {?}
      */
@@ -4609,7 +4626,7 @@ NgTemplateOutlet.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -4632,7 +4649,7 @@ const COMMON_DIRECTIVES = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} type
@@ -4645,7 +4662,7 @@ function invalidPipeArgumentError(type, value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NumberFormatter {
     /**
@@ -4907,7 +4924,7 @@ class DateFormatter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5059,7 +5076,7 @@ function isDate$1(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} pipe
@@ -5261,7 +5278,7 @@ DeprecatedCurrencyPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of deprecated i18n pipes that require intl api
@@ -5273,7 +5290,7 @@ const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPi
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ObservableStrategy {
     /**
@@ -5389,6 +5406,7 @@ class AsyncPipe {
         return WrappedValue.wrap(this._latestValue);
     }
     /**
+     * @private
      * @param {?} obj
      * @return {?}
      */
@@ -5398,6 +5416,7 @@ class AsyncPipe {
         this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
     }
     /**
+     * @private
      * @param {?} obj
      * @return {?}
      */
@@ -5411,6 +5430,7 @@ class AsyncPipe {
         throw invalidPipeArgumentError(AsyncPipe, obj);
     }
     /**
+     * @private
      * @return {?}
      */
     _dispose() {
@@ -5421,6 +5441,7 @@ class AsyncPipe {
         this._obj = null;
     }
     /**
+     * @private
      * @param {?} async
      * @param {?} value
      * @return {?}
@@ -5442,7 +5463,7 @@ AsyncPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Transforms text to all lower case.
@@ -5548,7 +5569,7 @@ UpperCasePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // clang-format off
 /**
@@ -5731,7 +5752,7 @@ DatePipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const _INTERPOLATION_REGEXP = /#/g;
@@ -5785,7 +5806,7 @@ I18nPluralPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5832,7 +5853,7 @@ I18nSelectPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5862,7 +5883,7 @@ JsonPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template K, V
@@ -5977,7 +5998,7 @@ function defaultComparator(keyValueA, keyValueB) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -6245,7 +6266,7 @@ function strToNumber(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -6308,6 +6329,7 @@ class SlicePipe {
         return value.slice(start, end);
     }
     /**
+     * @private
      * @param {?} obj
      * @return {?}
      */
@@ -6319,7 +6341,7 @@ SlicePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -6343,7 +6365,7 @@ const COMMON_PIPES = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Note: This does not contain the location providers,
 // as they need some platform specific implementations to work.
@@ -6390,7 +6412,7 @@ DeprecatedI18NPipesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
@@ -6405,7 +6427,7 @@ const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6461,17 +6483,17 @@ function isPlatformWorkerUi(platformId) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-beta.2+83.sha-b04bc5d');
+const VERSION = new Version('7.2.0-beta.2+89.sha-69198ba');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Manages the scroll position.
@@ -6573,6 +6595,7 @@ class BrowserViewportScroller {
         }
     }
     /**
+     * @private
      * @param {?} el
      * @return {?}
      */
@@ -6594,6 +6617,7 @@ class BrowserViewportScroller {
      * Lifting this restriction right now would require more changes in the dom adapter.
      * Since webworkers aren't widely used, we will lift it once RouterScroller is
      * battle-tested.
+     * @private
      * @return {?}
      */
     supportScrollRestoration() {
@@ -6643,17 +6667,17 @@ class NullViewportScroller {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
