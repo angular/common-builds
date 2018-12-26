@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+34.sha-d1de9ff
+ * @license Angular v7.2.0-rc.0+35.sha-c4f7727
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -7004,14 +7004,14 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-rc.0+34.sha-d1de9ff');
+const VERSION = new Version('7.2.0-rc.0+35.sha-c4f7727');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * Manages the scroll position.
+ * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
  * \@publicApi
  * @abstract
@@ -7023,7 +7023,7 @@ class ViewportScroller {
 /** @nocollapse */
 ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
 /**
- * Manages the scroll position.
+ * Manages the scroll position for a browser window.
  */
 class BrowserViewportScroller {
     /**
@@ -7037,11 +7037,9 @@ class BrowserViewportScroller {
     }
     /**
      * Configures the top offset used when scrolling to an anchor.
+     * @param {?} offset A position in screen coordinates (a tuple with x and y values)
+     * or a function that returns the top offset position.
      *
-     * * When given a number, the service will always use the number.
-     * * When given a function, the service will invoke the function every time it restores scroll
-     * position.
-     * @param {?} offset
      * @return {?}
      */
     setOffset(offset) {
@@ -7053,8 +7051,8 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * Returns the current scroll position.
-     * @return {?}
+     * Retrieves the current scroll position.
+     * @return {?} The position in screen coordinates.
      */
     getScrollPosition() {
         if (this.supportScrollRestoration()) {
@@ -7066,7 +7064,7 @@ class BrowserViewportScroller {
     }
     /**
      * Sets the scroll position.
-     * @param {?} position
+     * @param {?} position The new position in screen coordinates.
      * @return {?}
      */
     scrollToPosition(position) {
@@ -7075,8 +7073,8 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * Scrolls to the provided anchor.
-     * @param {?} anchor
+     * Scrolls to an anchor element.
+     * @param {?} anchor The ID of the anchor element.
      * @return {?}
      */
     scrollToAnchor(anchor) {

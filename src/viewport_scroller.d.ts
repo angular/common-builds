@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Manages the scroll position.
+ * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
  * @publicApi
  */
@@ -15,35 +15,35 @@ export declare abstract class ViewportScroller {
     static ngInjectableDef: never;
     /**
      * Configures the top offset used when scrolling to an anchor.
+     * @param offset A position in screen coordinates (a tuple with x and y values)
+     * or a function that returns the top offset position.
      *
-     * When given a tuple with two number, the service will always use the numbers.
-     * When given a function, the service will invoke the function every time it restores scroll
-     * position.
      */
     abstract setOffset(offset: [number, number] | (() => [number, number])): void;
     /**
-     * Returns the current scroll position.
+     * Retrieves the current scroll position.
+     * @returns A position in screen coordinates (a tuple with x and y values).
      */
     abstract getScrollPosition(): [number, number];
     /**
-     * Sets the scroll position.
+     * Scrolls to a specified position.
+     * @param position A position in screen coordinates (a tuple with x and y values).
      */
     abstract scrollToPosition(position: [number, number]): void;
     /**
-     * Scrolls to the provided anchor.
+     * Scrolls to an anchor element.
+     * @param anchor The ID of the anchor element.
      */
     abstract scrollToAnchor(anchor: string): void;
     /**
-     *
      * Disables automatic scroll restoration provided by the browser.
-     *
      * See also [window.history.scrollRestoration
-     * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration)
+     * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration).
      */
     abstract setHistoryScrollRestoration(scrollRestoration: 'auto' | 'manual'): void;
 }
 /**
- * Manages the scroll position.
+ * Manages the scroll position for a browser window.
  */
 export declare class BrowserViewportScroller implements ViewportScroller {
     private document;
@@ -52,22 +52,24 @@ export declare class BrowserViewportScroller implements ViewportScroller {
     constructor(document: any, window: any);
     /**
      * Configures the top offset used when scrolling to an anchor.
+     * @param offset A position in screen coordinates (a tuple with x and y values)
+     * or a function that returns the top offset position.
      *
-     * * When given a number, the service will always use the number.
-     * * When given a function, the service will invoke the function every time it restores scroll
-     * position.
      */
     setOffset(offset: [number, number] | (() => [number, number])): void;
     /**
-     * Returns the current scroll position.
+     * Retrieves the current scroll position.
+     * @returns The position in screen coordinates.
      */
     getScrollPosition(): [number, number];
     /**
      * Sets the scroll position.
+     * @param position The new position in screen coordinates.
      */
     scrollToPosition(position: [number, number]): void;
     /**
-     * Scrolls to the provided anchor.
+     * Scrolls to an anchor element.
+     * @param anchor The ID of the anchor element.
      */
     scrollToAnchor(anchor: string): void;
     /**
