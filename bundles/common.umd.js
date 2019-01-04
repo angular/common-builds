@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+28.sha-eea2b0f
+ * @license Angular v7.2.0-rc.0+61.sha-0bd9deb
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -5671,7 +5671,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.0-rc.0+28.sha-eea2b0f');
+    var VERSION = new core.Version('7.2.0-rc.0+61.sha-0bd9deb');
 
     /**
      * @license
@@ -5681,7 +5681,7 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * Manages the scroll position.
+     * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
      *
      * @publicApi
      */
@@ -5695,7 +5695,7 @@
         return ViewportScroller;
     }());
     /**
-     * Manages the scroll position.
+     * Manages the scroll position for a browser window.
      */
     var BrowserViewportScroller = /** @class */ (function () {
         function BrowserViewportScroller(document, window) {
@@ -5705,10 +5705,9 @@
         }
         /**
          * Configures the top offset used when scrolling to an anchor.
+         * @param offset A position in screen coordinates (a tuple with x and y values)
+         * or a function that returns the top offset position.
          *
-         * * When given a number, the service will always use the number.
-         * * When given a function, the service will invoke the function every time it restores scroll
-         * position.
          */
         BrowserViewportScroller.prototype.setOffset = function (offset) {
             if (Array.isArray(offset)) {
@@ -5719,7 +5718,8 @@
             }
         };
         /**
-         * Returns the current scroll position.
+         * Retrieves the current scroll position.
+         * @returns The position in screen coordinates.
          */
         BrowserViewportScroller.prototype.getScrollPosition = function () {
             if (this.supportScrollRestoration()) {
@@ -5731,6 +5731,7 @@
         };
         /**
          * Sets the scroll position.
+         * @param position The new position in screen coordinates.
          */
         BrowserViewportScroller.prototype.scrollToPosition = function (position) {
             if (this.supportScrollRestoration()) {
@@ -5738,7 +5739,8 @@
             }
         };
         /**
-         * Scrolls to the provided anchor.
+         * Scrolls to an anchor element.
+         * @param anchor The ID of the anchor element.
          */
         BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
             if (this.supportScrollRestoration()) {
