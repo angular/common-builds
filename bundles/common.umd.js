@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+64.sha-929334b
+ * @license Angular v7.2.0-rc.0+65.sha-b61dafa
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3160,7 +3160,7 @@
                     try {
                         this._differ = this._differs.find(value).create(this.ngForTrackBy);
                     }
-                    catch (e) {
+                    catch (_a) {
                         throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                     }
                 }
@@ -5710,7 +5710,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.2.0-rc.0+64.sha-929334b');
+    var VERSION = new i0.Version('7.2.0-rc.0+65.sha-b61dafa');
 
     /**
      * @license
@@ -5825,7 +5825,7 @@
             try {
                 return !!this.window && !!this.window.scrollTo;
             }
-            catch (e) {
+            catch (_a) {
                 return false;
             }
         };
