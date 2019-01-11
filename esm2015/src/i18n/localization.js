@@ -105,7 +105,7 @@ NgLocaleLocalization.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DEPRECATED_PLURAL_FN,] }] }
 ];
-NgLocaleLocalization.ngInjectableDef = i0.defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(i0.inject(LOCALE_ID), i0.inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
+/** @nocollapse */ NgLocaleLocalization.ngInjectableDef = i0.defineInjectable({ token: NgLocaleLocalization, factory: function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(i0.inject(LOCALE_ID), i0.inject(DEPRECATED_PLURAL_FN, 8)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
     }], function () { return [{

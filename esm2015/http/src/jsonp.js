@@ -206,7 +206,7 @@ JsonpClientBackend.ctorParameters = () => [
     { type: JsonpCallbackContext },
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
-JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.inject(JsonpCallbackContext), i0.inject(DOCUMENT)); }, providedIn: null });
+/** @nocollapse */ JsonpClientBackend.ngInjectableDef = i0.defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.inject(JsonpCallbackContext), i0.inject(DOCUMENT)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{
@@ -263,7 +263,7 @@ JsonpInterceptor.decorators = [
 JsonpInterceptor.ctorParameters = () => [
     { type: JsonpClientBackend }
 ];
-JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(i0.inject(JsonpClientBackend)); }, providedIn: null });
+/** @nocollapse */ JsonpInterceptor.ngInjectableDef = i0.defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(i0.inject(JsonpClientBackend)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
     }], function () { return [{

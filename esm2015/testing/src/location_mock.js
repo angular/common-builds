@@ -171,7 +171,7 @@ export class SpyLocation {
 SpyLocation.decorators = [
     { type: Injectable },
 ];
-SpyLocation.ngInjectableDef = i0.defineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
+/** @nocollapse */ SpyLocation.ngInjectableDef = i0.defineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
     }], null, null);

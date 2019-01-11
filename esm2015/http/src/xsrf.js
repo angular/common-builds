@@ -80,7 +80,7 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
 ];
-HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.inject(DOCUMENT), i0.inject(PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
+/** @nocollapse */ HttpXsrfCookieExtractor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.inject(DOCUMENT), i0.inject(PLATFORM_ID), i0.inject(XSRF_COOKIE_NAME)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{
@@ -179,7 +179,7 @@ HttpXsrfInterceptor.ctorParameters = () => [
     { type: HttpXsrfTokenExtractor },
     { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
 ];
-HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
+/** @nocollapse */ HttpXsrfInterceptor.ngInjectableDef = i0.defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(i0.inject(HttpXsrfTokenExtractor), i0.inject(XSRF_HEADER_NAME)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{
