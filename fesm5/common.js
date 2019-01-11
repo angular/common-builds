@@ -1,10 +1,10 @@
 /**
- * @license Angular v7.2.0+126.sha-df292c2
+ * @license Angular v7.2.0+132.sha-0c6fa1d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, defineInjectable, inject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, ɵdefineDirective, ɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵinjectAttribute, Attribute, ɵdefinePipe, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵdefineNgModule, defineInjector, NgModule, Version } from '@angular/core';
+import { InjectionToken, defineInjectable, inject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, ɵdefineDirective, ɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, ɵinjectAttribute, Attribute, ɵdefinePipe, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵdefineNgModule, defineInjector, NgModule, Version } from '@angular/core';
 import { __extends, __read, __values, __assign } from 'tslib';
 
 /**
@@ -2982,7 +2982,7 @@ var NgComponentOutlet = /** @class */ (function () {
         if (this._moduleRef)
             this._moduleRef.destroy();
     };
-    NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵNgOnChangesFeature] });
+    NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" } });
     return NgComponentOutlet;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
@@ -3905,6 +3905,18 @@ var NgStyle = /** @class */ (function () {
 var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
+        this._viewRef = null;
+        /**
+         * A context object to attach to the {@link EmbeddedViewRef}. This should be an
+         * object, the object's keys will be available for binding by the local template `let`
+         * declarations.
+         * Using the key `$implicit` in the context object will set its value as default.
+         */
+        this.ngTemplateOutletContext = null;
+        /**
+         * A string defining the template reference and optionally the context object for the template.
+         */
+        this.ngTemplateOutlet = null;
     }
     NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
         var recreateView = this._shouldRecreateView(changes);
@@ -3978,7 +3990,7 @@ var NgTemplateOutlet = /** @class */ (function () {
             finally { if (e_2) throw e_2.error; }
         }
     };
-    NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵNgOnChangesFeature] });
+    NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" } });
     return NgTemplateOutlet;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
@@ -5714,7 +5726,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0+126.sha-df292c2');
+var VERSION = new Version('7.2.0+132.sha-0c6fa1d');
 
 /**
  * @license

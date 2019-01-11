@@ -62,7 +62,7 @@ I18nPluralPipe.decorators = [
 I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization }
 ];
-I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵdirectiveInject(NgLocalization)); }, pure: true });
+/** @nocollapse */ I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵdirectiveInject(NgLocalization)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]

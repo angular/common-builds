@@ -22,7 +22,7 @@ export class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
+/** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
 if (false) {
     /**
      * @nocollapse

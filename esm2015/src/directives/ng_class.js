@@ -203,7 +203,7 @@ NgClass.propDecorators = {
     klass: [{ type: Input, args: ['class',] }],
     ngClass: [{ type: Input }]
 };
-NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(IterableDiffers), i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵdirectiveInject(ElementRef), i0.ɵdirectiveInject(Renderer2)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
+/** @nocollapse */ NgClass.ngDirectiveDef = i0.ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(i0.ɵdirectiveInject(IterableDiffers), i0.ɵdirectiveInject(KeyValueDiffers), i0.ɵdirectiveInject(ElementRef), i0.ɵdirectiveInject(Renderer2)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]

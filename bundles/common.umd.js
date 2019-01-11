@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0+126.sha-df292c2
+ * @license Angular v7.2.0+132.sha-0c6fa1d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2978,7 +2978,7 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵNgOnChangesFeature] });
+        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" } });
         return NgComponentOutlet;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgComponentOutlet, [{
@@ -3901,6 +3901,18 @@
     var NgTemplateOutlet = /** @class */ (function () {
         function NgTemplateOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
+            this._viewRef = null;
+            /**
+             * A context object to attach to the {@link EmbeddedViewRef}. This should be an
+             * object, the object's keys will be available for binding by the local template `let`
+             * declarations.
+             * Using the key `$implicit` in the context object will set its value as default.
+             */
+            this.ngTemplateOutletContext = null;
+            /**
+             * A string defining the template reference and optionally the context object for the template.
+             */
+            this.ngTemplateOutlet = null;
         }
         NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
             var recreateView = this._shouldRecreateView(changes);
@@ -3974,7 +3986,7 @@
                 finally { if (e_2) throw e_2.error; }
             }
         };
-        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵNgOnChangesFeature] });
+        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" } });
         return NgTemplateOutlet;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgTemplateOutlet, [{
@@ -5710,7 +5722,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('7.2.0+126.sha-df292c2');
+    var VERSION = new i0.Version('7.2.0+132.sha-0c6fa1d');
 
     /**
      * @license

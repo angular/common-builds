@@ -57,7 +57,7 @@ HttpInterceptingHandler.ctorParameters = () => [
     { type: HttpBackend },
     { type: Injector }
 ];
-HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(Injector)); }, providedIn: null });
+/** @nocollapse */ HttpInterceptingHandler.ngInjectableDef = i0.defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.inject(HttpBackend), i0.inject(Injector)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{
@@ -169,8 +169,8 @@ HttpClientXsrfModule.decorators = [
                 ],
             },] },
 ];
-HttpClientXsrfModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientXsrfModule, bootstrap: [], declarations: [], imports: [], exports: [] });
-HttpClientXsrfModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
+/** @nocollapse */ HttpClientXsrfModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientXsrfModule, bootstrap: [], declarations: [], imports: [], exports: [] });
+/** @nocollapse */ HttpClientXsrfModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
         HttpXsrfInterceptor,
         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
         { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -225,8 +225,8 @@ HttpClientModule.decorators = [
                 ],
             },] },
 ];
-HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, bootstrap: [], declarations: [], imports: [HttpClientXsrfModule], exports: [] });
-HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
+/** @nocollapse */ HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, bootstrap: [], declarations: [], imports: [HttpClientXsrfModule], exports: [] });
+/** @nocollapse */ HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
         HttpClient,
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
         HttpXhrBackend,
@@ -287,8 +287,8 @@ HttpClientJsonpModule.decorators = [
                 ],
             },] },
 ];
-HttpClientJsonpModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientJsonpModule, bootstrap: [], declarations: [], imports: [], exports: [] });
-HttpClientJsonpModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
+/** @nocollapse */ HttpClientJsonpModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientJsonpModule, bootstrap: [], declarations: [], imports: [], exports: [] });
+/** @nocollapse */ HttpClientJsonpModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
         JsonpClientBackend,
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
