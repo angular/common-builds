@@ -223,7 +223,7 @@ Location.decorators = [
 Location.ctorParameters = () => [
     { type: LocationStrategy }
 ];
-/** @nocollapse */ Location.ngInjectableDef = i0.defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(i0.inject(LocationStrategy)); }, providedIn: null });
+Location.ngInjectableDef = i0.defineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(i0.inject(LocationStrategy)); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
         type: Injectable
     }], function () { return [{

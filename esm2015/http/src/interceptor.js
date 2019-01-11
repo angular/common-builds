@@ -101,7 +101,7 @@ export class NoopInterceptor {
 NoopInterceptor.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */ NoopInterceptor.ngInjectableDef = i0.defineInjectable({ token: NoopInterceptor, factory: function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); }, providedIn: null });
+NoopInterceptor.ngInjectableDef = i0.defineInjectable({ token: NoopInterceptor, factory: function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
     }], null, null);

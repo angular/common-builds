@@ -170,7 +170,7 @@ export class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = i0.defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+HttpClientTestingBackend.ngInjectableDef = i0.defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
 /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null);
