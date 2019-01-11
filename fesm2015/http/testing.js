@@ -1,11 +1,11 @@
 /**
- * @license Angular v7.2.0+103.sha-885f1af
+ * @license Angular v7.2.0+104.sha-b78351c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 
-import { HttpErrorResponse, HttpHeaders, HttpResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
-import { Injectable, NgModule, ɵdefineNgModule, defineInjector, ɵsetClassMetadata, defineInjectable } from '@angular/core';
+import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
+import { defineInjectable, ɵsetClassMetadata, Injectable, NgModule, ɵdefineNgModule, defineInjector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
