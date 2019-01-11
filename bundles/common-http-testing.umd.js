@@ -1,14 +1,14 @@
 /**
- * @license Angular v7.2.0+101.sha-ad6569c
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v7.2.0+128.sha-091a8a6
+ * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
-    (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.rxjs));
-}(this, (function (exports,http,core,rxjs) { 'use strict';
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}), global.ng.common.http, global.ng.core, global.rxjs));
+}(this, function (exports, http, core, rxjs) { 'use strict';
 
     /**
      * @license
@@ -427,5 +427,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=common-http-testing.umd.js.map

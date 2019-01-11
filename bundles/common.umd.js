@@ -1,14 +1,14 @@
 /**
- * @license Angular v7.2.0+101.sha-ad6569c
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v7.2.0+128.sha-091a8a6
+ * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
     typeof define === 'function' && define.amd ? define('@angular/common', ['exports', '@angular/core'], factory) :
-    (factory((global.ng = global.ng || {}, global.ng.common = {}),global.ng.core));
-}(this, (function (exports,core) { 'use strict';
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = {}), global.ng.core));
+}(this, function (exports, core) { 'use strict';
 
     /**
      * @license
@@ -5671,7 +5671,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.0+101.sha-ad6569c');
+    var VERSION = new core.Version('7.2.0+128.sha-091a8a6');
 
     /**
      * @license
@@ -5858,13 +5858,13 @@
     exports.ɵangular_packages_common_common_g = COMMON_DEPRECATED_I18N_PIPES;
     exports.ɵangular_packages_common_common_f = COMMON_PIPES;
     exports.ɵregisterLocaleData = registerLocaleData;
+    exports.registerLocaleData = registerLocaleData;
     exports.formatDate = formatDate;
     exports.formatCurrency = formatCurrency;
     exports.formatNumber = formatNumber;
     exports.formatPercent = formatPercent;
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
-    exports.registerLocaleData = registerLocaleData;
     exports.getNumberOfCurrencyDigits = getNumberOfCurrencyDigits;
     exports.getCurrencySymbol = getCurrencySymbol;
     exports.getLocaleDayPeriods = getLocaleDayPeriods;
@@ -5939,5 +5939,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=common.umd.js.map
