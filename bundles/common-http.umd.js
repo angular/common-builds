@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+79.sha-d4b476f
+ * @license Angular v7.2.0-rc.0+82.sha-c18c46a
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -7,8 +7,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-    (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}),global.ng.core,global.rxjs,global.rxjs.operators,global.ng.common));
-}(this, (function (exports,core,rxjs,operators,common) { 'use strict';
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
+}(this, function (exports, core, rxjs, operators, common) { 'use strict';
 
     /**
      * @license
@@ -2028,5 +2028,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=common-http.umd.js.map
