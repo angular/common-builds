@@ -1,6 +1,6 @@
 /**
- * @license Angular v7.2.0+112.sha-7a9e3ad
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v7.2.0+139.sha-6eeb19c
+ * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -3889,6 +3889,18 @@ var NgStyle = /** @class */ (function () {
 var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
+        this._viewRef = null;
+        /**
+         * A context object to attach to the {@link EmbeddedViewRef}. This should be an
+         * object, the object's keys will be available for binding by the local template `let`
+         * declarations.
+         * Using the key `$implicit` in the context object will set its value as default.
+         */
+        this.ngTemplateOutletContext = null;
+        /**
+         * A string defining the template reference and optionally the context object for the template.
+         */
+        this.ngTemplateOutlet = null;
     }
     NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
         var recreateView = this._shouldRecreateView(changes);
@@ -3968,7 +3980,7 @@ var NgTemplateOutlet = /** @class */ (function () {
     ], NgTemplateOutlet.prototype, "ngTemplateOutletContext", void 0);
     __decorate([
         Input(),
-        __metadata("design:type", TemplateRef)
+        __metadata("design:type", Object)
     ], NgTemplateOutlet.prototype, "ngTemplateOutlet", void 0);
     NgTemplateOutlet = __decorate([
         Directive({ selector: '[ngTemplateOutlet]' }),
@@ -5660,7 +5672,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0+112.sha-7a9e3ad');
+var VERSION = new Version('7.2.0+139.sha-6eeb19c');
 
 /**
  * @license
