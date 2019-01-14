@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0+143.sha-da2880d
+ * @license Angular v7.2.0+146.sha-6fff74e
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3158,7 +3158,7 @@ var NgForOf = /** @class */ (function () {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
                 catch (_a) {
-                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeName(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                 }
             }
         }
@@ -3242,7 +3242,7 @@ var RecordViewTuple = /** @class */ (function () {
     }
     return RecordViewTuple;
 }());
-function getTypeNameForDebugging(type) {
+function getTypeName(type) {
     return type['name'] || typeof type;
 }
 
@@ -5672,7 +5672,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('7.2.0+143.sha-da2880d');
+var VERSION = new Version('7.2.0+146.sha-6fff74e');
 
 /**
  * @license

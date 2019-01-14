@@ -116,4 +116,3 @@ export declare class NgForOf<T> implements DoCheck {
      */
     static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
 }
-export declare function getTypeNameForDebugging(type: any): string;
