@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0+128.sha-091a8a6
+ * @license Angular v7.2.0+170.sha-f1fb62d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3688,7 +3688,7 @@ class NgForOf {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
                 catch (_a) {
-                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeName(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
                 }
             }
         }
@@ -3797,7 +3797,7 @@ class RecordViewTuple {
  * @param {?} type
  * @return {?}
  */
-function getTypeNameForDebugging(type) {
+function getTypeName(type) {
     return type['name'] || typeof type;
 }
 
@@ -4539,6 +4539,18 @@ class NgTemplateOutlet {
      */
     constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
+        this._viewRef = null;
+        /**
+         * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
+         * object, the object's keys will be available for binding by the local template `let`
+         * declarations.
+         * Using the key `$implicit` in the context object will set its value as default.
+         */
+        this.ngTemplateOutletContext = null;
+        /**
+         * A string defining the template reference and optionally the context object for the template.
+         */
+        this.ngTemplateOutlet = null;
     }
     /**
      * @param {?} changes
@@ -4608,7 +4620,7 @@ class NgTemplateOutlet {
      */
     _updateExistingContext(ctx) {
         for (let propName of Object.keys(ctx)) {
-            ((/** @type {?} */ (this._viewRef.context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
+            ((/** @type {?} */ ((/** @type {?} */ (this._viewRef)).context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
         }
     }
 }
@@ -6489,7 +6501,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0+128.sha-091a8a6');
+const VERSION = new Version('7.2.0+170.sha-f1fb62d');
 
 /**
  * @fileoverview added by tsickle

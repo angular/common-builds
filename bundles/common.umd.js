@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0+128.sha-091a8a6
+ * @license Angular v7.2.0+170.sha-f1fb62d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3169,7 +3169,7 @@
                         this._differ = this._differs.find(value).create(this.ngForTrackBy);
                     }
                     catch (_a) {
-                        throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                        throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeName(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
                     }
                 }
             }
@@ -3253,7 +3253,7 @@
         }
         return RecordViewTuple;
     }());
-    function getTypeNameForDebugging(type) {
+    function getTypeName(type) {
         return type['name'] || typeof type;
     }
 
@@ -3900,6 +3900,18 @@
     var NgTemplateOutlet = /** @class */ (function () {
         function NgTemplateOutlet(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
+            this._viewRef = null;
+            /**
+             * A context object to attach to the {@link EmbeddedViewRef}. This should be an
+             * object, the object's keys will be available for binding by the local template `let`
+             * declarations.
+             * Using the key `$implicit` in the context object will set its value as default.
+             */
+            this.ngTemplateOutletContext = null;
+            /**
+             * A string defining the template reference and optionally the context object for the template.
+             */
+            this.ngTemplateOutlet = null;
         }
         NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
             var recreateView = this._shouldRecreateView(changes);
@@ -3979,7 +3991,7 @@
         ], NgTemplateOutlet.prototype, "ngTemplateOutletContext", void 0);
         __decorate([
             core.Input(),
-            __metadata("design:type", core.TemplateRef)
+            __metadata("design:type", Object)
         ], NgTemplateOutlet.prototype, "ngTemplateOutlet", void 0);
         NgTemplateOutlet = __decorate([
             core.Directive({ selector: '[ngTemplateOutlet]' }),
@@ -5671,7 +5683,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.0+128.sha-091a8a6');
+    var VERSION = new core.Version('7.2.0+170.sha-f1fb62d');
 
     /**
      * @license
