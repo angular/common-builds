@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.0-rc.0+129.sha-35ec2dc
+ * @license Angular v7.2.0+98.sha-03293c4
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3687,7 +3687,7 @@ class NgForOf {
                 try {
                     this._differ = this._differs.find(value).create(this.ngForTrackBy);
                 }
-                catch (e) {
+                catch (_a) {
                     throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeNameForDebugging(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
                 }
             }
@@ -6519,7 +6519,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.0-rc.0+129.sha-35ec2dc');
+const VERSION = new Version('7.2.0+98.sha-03293c4');
 
 /**
  * @fileoverview added by tsickle
@@ -6652,7 +6652,7 @@ class BrowserViewportScroller {
         try {
             return !!this.window && !!this.window.scrollTo;
         }
-        catch (e) {
+        catch (_a) {
             return false;
         }
     }
