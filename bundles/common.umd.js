@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.1+16.sha-cf71668
+ * @license Angular v7.2.1+19.sha-7642308
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3828,21 +3828,35 @@
      * @ngModule CommonModule
      *
      * @usageNotes
+     *
+     * Set the font of the containing element to the result of an expression.
+     *
      * ```
      * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     * ```
      *
+     * Set the width of the containing element to a pixel value returned by an expression.
+     *
+     * ```
      * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     * ```
      *
+     * Set a collection of style values using an expression that returns key-value pairs.
+     *
+     * ```
      * <some-element [ngStyle]="objExp">...</some-element>
      * ```
      *
      * @description
      *
-     * Update an HTML element styles.
-     *
-     * The styles are updated according to the value of the expression evaluation:
-     * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
-     * - values are the values assigned to those properties (expressed in the given unit).
+     * An attribute directive that updates styles for the containing HTML element.
+     * Sets one or more style properties, specified as colon-separated key-value pairs.
+     * The key is a style name, with an optional `.<unit>` suffix
+     * (such as 'top.px', 'font-style.em').
+     * The value is an expression to be evaluated.
+     * The resulting non-null value, expressed in the given unit,
+     * is assigned to the given style property.
+     * If the result of evaluation is null, the corresponding style is removed.
      *
      * @publicApi
      */
@@ -3853,7 +3867,15 @@
             this._renderer = _renderer;
         }
         Object.defineProperty(NgStyle.prototype, "ngStyle", {
-            set: function (values) {
+            set: function (
+            /**
+             * A map of style properties, specified as colon-separated
+             * key-value pairs.
+             * * The key is a style name, with an optional `.<unit>` suffix
+             *    (such as 'top.px', 'font-style.em').
+             * * The value is an expression to be evaluated.
+             */
+            values) {
                 this._ngStyle = values;
                 if (!this._differ && values) {
                     this._differ = this._differs.find(values).create();
@@ -3862,6 +3884,9 @@
             enumerable: true,
             configurable: true
         });
+        /**
+         * Applies the new styles if needed.
+         */
         NgStyle.prototype.ngDoCheck = function () {
             if (this._differ) {
                 var changes = this._differ.diff(this._ngStyle);
@@ -5703,7 +5728,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.1+16.sha-cf71668');
+    var VERSION = new core.Version('7.2.1+19.sha-7642308');
 
     /**
      * @license
