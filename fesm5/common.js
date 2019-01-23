@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.1+10.sha-5430d2b
+ * @license Angular v8.0.0-beta.1+6.sha-583061d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, defineInjectable, inject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, ɵdefineDirective, ɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵinjectAttribute, Attribute, ɵdefinePipe, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵdefineNgModule, defineInjector, NgModule, Version } from '@angular/core';
+import { InjectionToken, defineInjectable, inject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, ɵdefineDirective, ɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, ɵinjectAttribute, Attribute, ɵdefinePipe, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵdefineNgModule, defineInjector, NgModule, Version } from '@angular/core';
 import { __extends, __read, __values, __assign } from 'tslib';
 
 /**
@@ -2982,7 +2982,7 @@ var NgComponentOutlet = /** @class */ (function () {
         if (this._moduleRef)
             this._moduleRef.destroy();
     };
-    NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵNgOnChangesFeature()] });
+    NgComponentOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" } });
     return NgComponentOutlet;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
@@ -4154,7 +4154,7 @@ var NgTemplateOutlet = /** @class */ (function () {
             finally { if (e_2) throw e_2.error; }
         }
     };
-    NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵNgOnChangesFeature()] });
+    NgTemplateOutlet.ngDirectiveDef = ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵdirectiveInject(ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" } });
     return NgTemplateOutlet;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
@@ -5890,7 +5890,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.1+10.sha-5430d2b');
+var VERSION = new Version('8.0.0-beta.1+6.sha-583061d');
 
 /**
  * @license

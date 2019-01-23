@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.1+10.sha-5430d2b
+ * @license Angular v8.0.0-beta.1+6.sha-583061d
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2978,7 +2978,7 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵNgOnChangesFeature()] });
+        NgComponentOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], factory: function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" } });
         return NgComponentOutlet;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgComponentOutlet, [{
@@ -4150,7 +4150,7 @@
                 finally { if (e_2) throw e_2.error; }
             }
         };
-        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵNgOnChangesFeature()] });
+        NgTemplateOutlet.ngDirectiveDef = i0.ɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], factory: function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵdirectiveInject(i0.ViewContainerRef)); }, inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" } });
         return NgTemplateOutlet;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgTemplateOutlet, [{
@@ -5886,7 +5886,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.1+10.sha-5430d2b');
+    var VERSION = new i0.Version('8.0.0-beta.1+6.sha-583061d');
 
     /**
      * @license
