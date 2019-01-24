@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.2+12.sha-bc10328
+ * @license Angular v7.2.2+15.sha-35f7ff0
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3044,15 +3044,61 @@
         return NgForOfContext;
     }());
     /**
-     * The `NgForOf` directive instantiates a template once per item from an iterable. The context
-     * for each instantiated template inherits from the outer context with the given loop variable
-     * set to the current item from the iterable.
+     * A [structural directive](guide/structural-directives) that renders
+     * a template for each item in a collection.
+     * The directive is placed on an element, which becomes the parent
+     * of the cloned templates.
+     *
+     * The `ngForOf` is generally used in the
+     * [shorthand form](guide/structural-directives#the-asterisk--prefix) `*ngFor`.
+     * In this form, the template to be rendered for each iteration is the content
+     * of an anchor element containing the directive.
+     *
+     * The following example shows the shorthand syntax with some options,
+     * contained in an `<li>` element.
+     *
+     * ```
+     * <li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>
+     * ```
+     *
+     * The shorthand form expands into a long form that uses the `ngForOf` selector
+     * on an `<ng-template>` element.
+     * The content of the `<ng-template>` element is the `<li>` element that held the
+     * short-form directive.
+     *
+     * Here is the expanded version of the short-form example.
+     *
+     * ```
+     * <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+     *   <li>...</li>
+     * </ng-template>
+     * ```
+     *
+     * Angular automatically expands the shorthand syntax as it compiles the template.
+     * The context for each embedded view is logically merged to the current component
+     * context according to its lexical position.
+     *
+     * When using the shorthand syntax, Angular allows only [one structural directive
+     * on an element](guide/structural-directives#one-structural-directive-per-host-element).
+     * If you want to iterate conditionally, for example,
+     * put the `*ngIf` on a container element that wraps the `*ngFor` element.
+     * For futher discussion, see
+     * [Structural Directives](guide/structural-directives#one-per-element).
      *
      * @usageNotes
      *
-     * ### Local Variables
+     * ### Local variables
      *
-     * `NgForOf` provides several exported values that can be aliased to local variables:
+     * `NgForOf` provides exported values that can be aliased to local variables.
+     * For example:
+     *
+     *  ```
+     * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+     *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+     * </li>
+     * ```
+     *
+     * The following exported values can be aliased to local variables:
      *
      * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
      * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
@@ -3064,55 +3110,33 @@
      * - `even: boolean`: True when the item has an even index in the iterable.
      * - `odd: boolean`: True when the item has an odd index in the iterable.
      *
-     * ```
-     * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
-     *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
-     * </li>
-     * ```
-     *
-     * ### Change Propagation
+     * ### Change propagation
      *
      * When the contents of the iterator changes, `NgForOf` makes the corresponding changes to the DOM:
      *
      * * When an item is added, a new instance of the template is added to the DOM.
      * * When an item is removed, its template instance is removed from the DOM.
      * * When items are reordered, their respective templates are reordered in the DOM.
-     * * Otherwise, the DOM element for that item will remain the same.
      *
      * Angular uses object identity to track insertions and deletions within the iterator and reproduce
      * those changes in the DOM. This has important implications for animations and any stateful
-     * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
+     * controls that are present, such as `<input>` elements that accept user input. Inserted rows can
      * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
      * such as user input.
+     * For more on animations, see [Transitions and Triggers](guide/transition-and-triggers).
      *
-     * It is possible for the identities of elements in the iterator to change while the data does not.
-     * This can happen, for example, if the iterator produced from an RPC to the server, and that
-     * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
-     * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
-     * elements were deleted and all new elements inserted). This is an expensive operation and should
-     * be avoided if possible.
+     * The identities of elements in the iterator can change while the data does not.
+     * This can happen, for example, if the iterator is produced from an RPC to the server, and that
+     * RPC is re-run. Even if the data hasn't changed, the second response produces objects with
+     * different identities, and Angular must tear down the entire DOM and rebuild it (as if all old
+     * elements were deleted and all new elements inserted).
      *
-     * To customize the default tracking algorithm, `NgForOf` supports `trackBy` option.
-     * `trackBy` takes a function which has two arguments: `index` and `item`.
+     * To avoid this expensive operation, you can customize the default tracking algorithm.
+     * by supplying the `trackBy` option to `NgForOf`.
+     * `trackBy` takes a function that has two arguments: `index` and `item`.
      * If `trackBy` is given, Angular tracks changes by the return value of the function.
      *
-     * ### Syntax
-     *
-     * - `<li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>`
-     *
-     * With `<ng-template>` element:
-     *
-     * ```
-     * <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
-     *   <li>...</li>
-     * </ng-template>
-     * ```
-     *
-     * ### Example
-     *
-     * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
-     * example.
-     *
+     * @see [Structural Directives](guide/structural-directives)
      * @ngModule CommonModule
      * @publicApi
      */
@@ -3216,9 +3240,9 @@
             view.context.$implicit = record.item;
         };
         /**
-         * Assert the correct type of the context for the template that `NgForOf` will render.
+         * Asserts the correct type of the context for the template that `NgForOf` will render.
          *
-         * The presence of this method is a signal to the Ivy template type check compiler that the
+         * The presence of this method is a signal to the Ivy template type-check compiler that the
          * `NgForOf` structural directive renders its template with a specific context type.
          */
         NgForOf.ngTemplateContextGuard = function (dir, ctx) {
@@ -3265,94 +3289,140 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * Conditionally includes a template based on the value of an `expression`.
+     * A structural directive that conditionally includes a template based on the value of
+     * an expression coerced to Boolean.
+     * When the expression evaluates to true, Angular renders the template
+     * provided in a `then` clause, and when  false or null,
+     * Angular renders the template provided in an optional `else` clause. The default
+     * template for the `else` clause is blank.
      *
-     * `ngIf` evaluates the `expression` and then renders the `then` or `else` template in its place
-     * when expression is truthy or falsy respectively. Typically the:
-     *  - `then` template is the inline template of `ngIf` unless bound to a different value.
-     *  - `else` template is blank unless it is bound.
+     * A [shorthand form](guide/structural-directives#the-asterisk--prefix) of the directive,
+     * `*ngIf="condition"`, is generally used, provided
+     * as an attribute of the anchor element for the inserted template.
+     * Angular expands this into a more explicit version, in which the anchor element
+     * is contained in an `<ng-template>` element.
      *
+     * Simple form with shorthand syntax:
+     *
+     * ```
+     * <div *ngIf="condition">Content to render when condition is true.</div>
+     * ```
+     *
+     * Simple form with expanded syntax:
+     *
+     * ```
+     * <ng-template [ngIf]="condition"><div>Content to render when condition is
+     * true.</div></ng-template>
+     * ```
+     *
+     * Form with an "else" block:
+     *
+     * ```
+     * <div *ngIf="condition; else elseBlock">Content to render when condition is true.</div>
+     * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+     * ```
+     *
+     * Shorthand form with "then" and "else" blocks:
+     *
+     * ```
+     * <div *ngIf="condition; then thenBlock else elseBlock"></div>
+     * <ng-template #thenBlock>Content to render when condition is true.</ng-template>
+     * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+     * ```
+     *
+     * Form with storing the value locally:
+     *
+     * ```
+     * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
+     * <ng-template #elseBlock>Content to render when value is null.</ng-template>
+     * ```
      *
      * @usageNotes
      *
-     * ### Most common usage
+     * The `*ngIf` directive is most commonly used to conditionally show an inline template,
+     * as seen in the following  example.
+     * The default `else` template is blank.
      *
-     * The most common usage of the `ngIf` directive is to conditionally show the inline template as
-     * seen in this example:
      * {@example common/ngIf/ts/module.ts region='NgIfSimple'}
      *
      * ### Showing an alternative template using `else`
      *
-     * If it is necessary to display a template when the `expression` is falsy use the `else` template
-     * binding as shown. Note that the `else` binding points to a `<ng-template>` labeled `#elseBlock`.
-     * The template can be defined anywhere in the component view but is typically placed right after
+     * To display a template when `expression` evaluates to false, use an `else` template
+     * binding as shown in the following example.
+     * The `else` binding points to an `<ng-template>`  element labeled `#elseBlock`.
+     * The template can be defined anywhere in the component view, but is typically placed right after
      * `ngIf` for readability.
      *
      * {@example common/ngIf/ts/module.ts region='NgIfElse'}
      *
-     * ### Using non-inlined `then` template
+     * ### Using an external `then` template
      *
-     * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
-     * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
-     * change at runtime as shown in this example.
+     * In the previous example, the then-clause template is specified inline, as the content of the
+     * tag that contains the `ngIf` directive. You can also specify a template that is defined
+     * externally, by referencing a labeled `<ng-template>` element. When you do this, you can
+     * change which template to use at runtime, as shown in the following example.
      *
      * {@example common/ngIf/ts/module.ts region='NgIfThenElse'}
      *
-     * ### Storing conditional result in a variable
+     * ### Storing a conditional result in a variable
      *
-     * A common pattern is that we need to show a set of properties from the same object. If the
-     * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
-     * dereferencing a `null` value. This is especially the case when waiting on async data such as
-     * when using the `async` pipe as shown in following example:
-     *
-     * ```
-     * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
-     * ```
-     *
-     * There are several inefficiencies in the above example:
-     *  - We create multiple subscriptions on `userStream`. One for each `async` pipe, or two in the
-     *    example above.
-     *  - We cannot display an alternative screen while waiting for the data to arrive asynchronously.
-     *  - We have to use the safe-traversal-operator `?.` to access properties, which is cumbersome.
-     *  - We have to place the `async` pipe in parenthesis.
-     *
-     * A better way to do this is to use `ngIf` and store the result of the condition in a local
-     * variable as shown in the the example below:
+     * You might want to show a set of properties from the same object. If you are waiting
+     * for asynchronous data, the object can be undefined.
+     * In this case, you can use `ngIf` and store the result of the condition in a local
+     * variable as shown in the the following example.
      *
      * {@example common/ngIf/ts/module.ts region='NgIfAs'}
      *
-     * Notice that:
-     *  - We use only one `async` pipe and hence only one subscription gets created.
-     *  - `ngIf` stores the result of the `userStream|async` in the local variable `user`.
-     *  - The local `user` can then be bound repeatedly in a more efficient way.
-     *  - No need to use the safe-traversal-operator `?.` to access properties as `ngIf` will only
-     *    display the data if `userStream` returns a value.
-     *  - We can display an alternative template while waiting for the data.
+     * This code uses only one `AsyncPipe`, so only one subscription is created.
+     * The conditional statement stores the result of `userStream|async` in the local variable `user`.
+     * You can then bind the local `user` repeatedly.
      *
-     * ### Syntax
+     * The conditional displays the data only if `userStream` returns a value,
+     * so you don't need to use the
+     * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+     * to guard against null values when accessing properties.
+     * You can display an alternative template while waiting for the data.
      *
-     * Simple form:
-     * - `<div *ngIf="condition">...</div>`
-     * - `<ng-template [ngIf]="condition"><div>...</div></ng-template>`
+     * ### Shorthand syntax
      *
-     * Form with an else block:
+     * The shorthand syntax `*ngIf` expands into two separate template specifications
+     * for the "then" and "else" clauses. For example, consider the following shorthand statement,
+     * that is meant to show a loading page while waiting for data to be loaded.
+     *
      * ```
-     * <div *ngIf="condition; else elseBlock">...</div>
-     * <ng-template #elseBlock>...</ng-template>
+     * <div class="hero-list" *ngIf="heroes else loading">
+     *  ...
+     * </div>
+     *
+     * <ng-template #loading>
+     *  <div>Loading...</div>
+     * </ng-template>
      * ```
      *
-     * Form with a `then` and `else` block:
+     * You can see that the "else" clause references the `<ng-template>`
+     * with the `#loading` label, and the template for the "then" clause
+     * is provided as the content of the anchor element.
+     *
+     * However, when Angular expands the shorthand syntax, it creates
+     * another `<ng-template>` tag, with `ngIf` and `ngIfElse` directives.
+     * The anchor element containing the template for the "then" clause becomes
+     * the content of this unlabeled `<ng-template>` tag.
+     *
      * ```
-     * <div *ngIf="condition; then thenBlock else elseBlock"></div>
-     * <ng-template #thenBlock>...</ng-template>
-     * <ng-template #elseBlock>...</ng-template>
+     * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+     *  <div class="hero-list">
+     *   ...
+     *  </div>
+     * </ng-template>
+     *
+     * <ng-template #loading>
+     *  <div>Loading...</div>
+     * </ng-template>
      * ```
      *
-     * Form with storing the value locally:
-     * ```
-     * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
-     * <ng-template #elseBlock>...</ng-template>
-     * ```
+     * The presence of the implicit template object has implications for the nesting of
+     * structural directives. For more on this subject, see
+     * [Structural Directives](https://angular.io/guide/structural-directives#one-per-element).
      *
      * @ngModule CommonModule
      * @publicApi
@@ -5728,7 +5798,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.2+12.sha-bc10328');
+    var VERSION = new core.Version('7.2.2+15.sha-35f7ff0');
 
     /**
      * @license
