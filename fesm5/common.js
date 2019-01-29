@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.1+86.sha-b87bf39
+ * @license Angular v8.0.0-beta.1+89.sha-ec414b4
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5836,7 +5836,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.1+86.sha-b87bf39');
+var VERSION = new Version('8.0.0-beta.1+89.sha-ec414b4');
 
 /**
  * @license
