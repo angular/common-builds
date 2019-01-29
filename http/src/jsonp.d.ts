@@ -1,15 +1,8 @@
-import * as i0 from '@angular/core';
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { Observable } from 'rxjs';
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
+import * as i0 from "@angular/core";
 export declare const JSONP_ERR_NO_CALLBACK = "JSONP injected script did not invoke callback.";
 export declare const JSONP_ERR_WRONG_METHOD = "JSONP requests must use JSONP request method.";
 export declare const JSONP_ERR_WRONG_RESPONSE_TYPE = "JSONP requests must use Json response type.";

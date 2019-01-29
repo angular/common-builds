@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, TemplateRef, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 export declare class SwitchView {
     private _viewContainerRef;
     private _templateRef;
@@ -93,7 +93,7 @@ export declare class NgSwitch {
     private _ngSwitch;
     ngSwitch: any;
     private _updateDefaultCases;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitch, '[ngSwitch]', never, {'ngSwitch': 'ngSwitch'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -140,7 +140,7 @@ export declare class NgSwitchCase implements DoCheck {
      * Performs case matching. For internal use only.
      */
     ngDoCheck(): void;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitchCase, '[ngSwitchCase]', never, {'ngSwitchCase': 'ngSwitchCase'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -158,5 +158,5 @@ export declare class NgSwitchCase implements DoCheck {
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitchDefault, '[ngSwitchDefault]', never, {}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
 }

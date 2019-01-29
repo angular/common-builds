@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, IterableDiffers, NgIterable, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @publicApi
  */
@@ -168,5 +168,5 @@ export declare class NgForOf<T> implements DoCheck {
      * `NgForOf` structural directive renders its template with a specific context type.
      */
     static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgForOf<any>, '[ngFor][ngForOf]', never, {'ngForOf': 'ngForOf', 'ngForTrackBy': 'ngForTrackBy', 'ngForTemplate': 'ngForTemplate'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgForOf<any>, "[ngFor][ngForOf]", never, { 'ngForOf': "ngForOf", 'ngForTrackBy': "ngForTrackBy", 'ngForTemplate': "ngForTemplate" }, {}, never>;
 }

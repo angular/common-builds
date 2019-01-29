@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
@@ -37,7 +37,7 @@ export declare class DeprecatedDecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, digits?: string): string | null;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedDecimalPipe, 'number'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedDecimalPipe, "number">;
 }
 /**
  * @ngModule CommonModule
@@ -63,7 +63,7 @@ export declare class DeprecatedPercentPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, digits?: string): string | null;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedPercentPipe, 'percent'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedPercentPipe, "percent">;
 }
 /**
  * @ngModule CommonModule
@@ -95,5 +95,5 @@ export declare class DeprecatedCurrencyPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, currencyCode?: string, symbolDisplay?: boolean, digits?: string): string | null;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedCurrencyPipe, 'currency'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedCurrencyPipe, "currency">;
 }

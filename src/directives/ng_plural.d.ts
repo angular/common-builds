@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -9,6 +8,7 @@ import * as i0 from '@angular/core';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { NgLocalization } from '../i18n/localization';
 import { SwitchView } from './ng_switch';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  *
@@ -51,7 +51,7 @@ export declare class NgPlural {
     private _updateView;
     private _clearViews;
     private _activateView;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgPlural, '[ngPlural]', never, {'ngPlural': 'ngPlural'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgPlural, "[ngPlural]", never, { 'ngPlural': "ngPlural" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -76,5 +76,5 @@ export declare class NgPlural {
 export declare class NgPluralCase {
     value: string;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef, ngPlural: NgPlural);
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgPluralCase, '[ngPluralCase]', never, {}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgPluralCase, "[ngPluralCase]", never, {}, {}, never>;
 }

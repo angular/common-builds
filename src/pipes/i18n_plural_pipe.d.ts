@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { PipeTransform } from '@angular/core';
 import { NgLocalization } from '../i18n/localization';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -35,5 +35,5 @@ export declare class I18nPluralPipe implements PipeTransform {
     transform(value: number, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<I18nPluralPipe, 'i18nPlural'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
 }

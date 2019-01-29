@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -33,5 +33,5 @@ export declare class I18nSelectPipe implements PipeTransform {
     transform(value: string | null | undefined, mapping: {
         [key: string]: string;
     }): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<I18nSelectPipe, 'i18nSelect'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<I18nSelectPipe, "i18nSelect">;
 }

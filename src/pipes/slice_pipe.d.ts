@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -60,5 +60,5 @@ export declare class SlicePipe implements PipeTransform {
      */
     transform(value: any, start: number, end?: number): any;
     private supports;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<SlicePipe, 'slice'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<SlicePipe, "slice">;
 }

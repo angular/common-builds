@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -10,6 +9,7 @@ import { HttpBackend, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpTestingController, RequestMatch } from './api';
 import { TestRequest } from './request';
+import * as i0 from "@angular/core";
 /**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
  * and as the `HttpTestingController`.

@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -27,5 +27,5 @@ export declare class JsonPipe implements PipeTransform {
      * @param value A value of any type to convert into a JSON-format string.
      */
     transform(value: any): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<JsonPipe, 'json'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<JsonPipe, "json">;
 }

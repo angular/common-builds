@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
 * @license
 * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
 * found in the LICENSE file at https://angular.io/license
   */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -75,5 +75,5 @@ export declare class DeprecatedDatePipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, pattern?: string): string | null;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedDatePipe, 'date'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<DeprecatedDatePipe, "date">;
 }

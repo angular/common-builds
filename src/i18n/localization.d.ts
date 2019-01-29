@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { InjectionToken } from '@angular/core';
 import { Plural } from './locale_data_api';
+import * as i0 from "@angular/core";
 /**
  * @deprecated from v5
  */

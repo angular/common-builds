@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { TemplateRef, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * A structural directive that conditionally includes a template based on the value of
  * an expression coerced to Boolean.
@@ -176,7 +176,7 @@ export declare class NgIf {
      * strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     static ngTemplateGuard_ngIf<E>(dir: NgIf, expr: E): expr is NonNullable<E>;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgIf, '[ngIf]', never, {'ngIf': 'ngIf', 'ngIfThen': 'ngIfThen', 'ngIfElse': 'ngIfElse'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
 }
 /**
  * @publicApi

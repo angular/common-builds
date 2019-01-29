@@ -1,17 +1,10 @@
-import * as i0 from '@angular/core';
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { Observable } from 'rxjs';
 import { HttpHandler } from './backend';
 import { HttpHeaders } from './headers';
 import { HttpParams } from './params';
 import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
+import * as i0 from "@angular/core";
 export declare type HttpObserve = 'body' | 'events' | 'response';
 /**
  * Perform HTTP requests.

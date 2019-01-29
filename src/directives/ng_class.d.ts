@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  *
@@ -67,5 +67,5 @@ export declare class NgClass implements DoCheck {
      */
     private _removeClasses;
     private _toggleClass;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgClass, '[ngClass]', never, {'klass': 'class', 'ngClass': 'ngClass'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
 }

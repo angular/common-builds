@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -12,6 +11,7 @@ import { HttpBackend, HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
+import * as i0 from "@angular/core";
 /**
  * An injectable `HttpHandler` that applies multiple interceptors
  * to a request before passing it to the given `HttpBackend`.

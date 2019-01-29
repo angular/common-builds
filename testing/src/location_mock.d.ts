@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { Location } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
+import * as i0 from "@angular/core";
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
  *

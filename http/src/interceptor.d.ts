@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -11,6 +10,7 @@ import { Observable } from 'rxjs';
 import { HttpHandler } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
+import * as i0 from "@angular/core";
 /**
  * Intercepts `HttpRequest` and handles them.
  *

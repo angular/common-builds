@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  *
@@ -60,5 +60,5 @@ export declare class NgTemplateOutlet implements OnChanges {
     private _shouldRecreateView;
     private _hasContextShapeChanged;
     private _updateExistingContext;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgTemplateOutlet, '[ngTemplateOutlet]', never, {'ngTemplateOutletContext': 'ngTemplateOutletContext', 'ngTemplateOutlet': 'ngTemplateOutlet'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgTemplateOutlet, "[ngTemplateOutlet]", never, { 'ngTemplateOutletContext': "ngTemplateOutletContext", 'ngTemplateOutlet': "ngTemplateOutlet" }, {}, never>;
 }

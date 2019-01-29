@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { KeyValueDiffers, PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * A key value pair.
  * Usually used to represent the key value pairs from a Map or Object.
@@ -50,6 +50,6 @@ export declare class KeyValuePipe implements PipeTransform {
         [key: number]: V;
     } | Map<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
     transform<K, V>(input: Map<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<KeyValuePipe, 'keyvalue'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<KeyValuePipe, "keyvalue">;
 }
 export declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;

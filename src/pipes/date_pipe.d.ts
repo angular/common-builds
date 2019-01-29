@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { PipeTransform } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -162,5 +162,5 @@ export declare class DatePipe implements PipeTransform {
      * @returns A date string in the desired format.
      */
     transform(value: any, format?: string, timezone?: string, locale?: string): string | null;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<DatePipe, 'date'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<DatePipe, "date">;
 }

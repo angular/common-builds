@@ -1,15 +1,8 @@
-import * as i0 from '@angular/core';
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { Observable } from 'rxjs';
 import { HttpBackend } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
+import * as i0 from "@angular/core";
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
  *

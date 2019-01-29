@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -7,6 +6,7 @@ import * as i0 from '@angular/core';
  * found in the LICENSE file at https://angular.io/license
  */
 import { Injector, NgModuleFactory, OnChanges, OnDestroy, SimpleChanges, Type, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * Instantiates a single {@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
@@ -77,5 +77,5 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgComponentOutlet, '[ngComponentOutlet]', never, {'ngComponentOutlet': 'ngComponentOutlet', 'ngComponentOutletInjector': 'ngComponentOutletInjector', 'ngComponentOutletContent': 'ngComponentOutletContent', 'ngComponentOutletNgModuleFactory': 'ngComponentOutletNgModuleFactory'}, {}, never>;
+    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgComponentOutlet, "[ngComponentOutlet]", never, { 'ngComponentOutlet': "ngComponentOutlet", 'ngComponentOutletInjector': "ngComponentOutletInjector", 'ngComponentOutletContent': "ngComponentOutletContent", 'ngComponentOutletNgModuleFactory': "ngComponentOutletNgModuleFactory" }, {}, never>;
 }

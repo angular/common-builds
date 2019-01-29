@@ -1,4 +1,3 @@
-import * as i0 from '@angular/core';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -8,6 +7,7 @@ import * as i0 from '@angular/core';
  */
 import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
  * @description
@@ -52,5 +52,5 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _selectStrategy;
     private _dispose;
     private _updateLatestValue;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<AsyncPipe, 'async'>;
+    static ngPipeDef: i0.ɵPipeDefWithMeta<AsyncPipe, "async">;
 }
