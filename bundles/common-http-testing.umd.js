@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.1+68.sha-6e16338
+ * @license Angular v8.0.0-beta.1+83.sha-e18a52e
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -364,7 +364,7 @@
     var HttpClientTestingModule = /** @class */ (function () {
         function HttpClientTestingModule() {
         }
-        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule, bootstrap: [], declarations: [], imports: [http.HttpClientModule], exports: [] });
+        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule, imports: [http.HttpClientModule] });
         HttpClientTestingModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
                 HttpClientTestingBackend,
                 { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },

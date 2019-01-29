@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.1+68.sha-6e16338
+ * @license Angular v8.0.0-beta.1+83.sha-e18a52e
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1922,7 +1922,7 @@
                 ],
             };
         };
-        HttpClientXsrfModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientXsrfModule, bootstrap: [], declarations: [], imports: [], exports: [] });
+        HttpClientXsrfModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientXsrfModule });
         HttpClientXsrfModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
                 HttpXsrfInterceptor,
                 { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
@@ -1956,7 +1956,7 @@
     var HttpClientModule = /** @class */ (function () {
         function HttpClientModule() {
         }
-        HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, bootstrap: [], declarations: [], imports: [HttpClientXsrfModule], exports: [] });
+        HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, imports: [HttpClientXsrfModule] });
         HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
                 HttpClient,
                 { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -2012,7 +2012,7 @@
     var HttpClientJsonpModule = /** @class */ (function () {
         function HttpClientJsonpModule() {
         }
-        HttpClientJsonpModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientJsonpModule, bootstrap: [], declarations: [], imports: [], exports: [] });
+        HttpClientJsonpModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientJsonpModule });
         HttpClientJsonpModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
                 JsonpClientBackend,
                 { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
