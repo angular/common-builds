@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.4+29.sha-1e58a21
+ * @license Angular v7.2.4+30.sha-bd9da26
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -58,11 +58,13 @@ var HttpBackend = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Immutable set of Http headers, with lazy parsing.
+ * `HttpHeaders` class represents the header configuration options for an HTTP request.
+ * Instances should be assumed immutable with lazy parsing.
  *
  * @publicApi
  */
 var HttpHeaders = /** @class */ (function () {
+    /**  Constructs a new HTTP header object with the given values.*/
     function HttpHeaders(headers) {
         var _this = this;
         /**
@@ -115,14 +117,22 @@ var HttpHeaders = /** @class */ (function () {
         }
     }
     /**
-     * Checks for existence of header by given name.
+     * Checks for existence of a header by a given name.
+     *
+     * @param name The header name to check for existence.
+     *
+     * @returns Whether the header exits.
      */
     HttpHeaders.prototype.has = function (name) {
         this.init();
         return this.headers.has(name.toLowerCase());
     };
     /**
-     * Returns first header that matches given name.
+     * Returns the first header value that matches a given name.
+     *
+     * @param name The header name to retrieve.
+     *
+     * @returns A string if the header exists, null otherwise
      */
     HttpHeaders.prototype.get = function (name) {
         this.init();
@@ -130,25 +140,56 @@ var HttpHeaders = /** @class */ (function () {
         return values && values.length > 0 ? values[0] : null;
     };
     /**
-     * Returns the names of the headers
+     * Returns the names of the headers.
+     *
+     * @returns A list of header names.
      */
     HttpHeaders.prototype.keys = function () {
         this.init();
         return Array.from(this.normalizedNames.values());
     };
     /**
-     * Returns list of header values for a given name.
+     * Returns a list of header values for a given header name.
+     *
+     * @param name The header name from which to retrieve the values.
+     *
+     * @returns A string of values if the header exists, null otherwise.
      */
     HttpHeaders.prototype.getAll = function (name) {
         this.init();
         return this.headers.get(name.toLowerCase()) || null;
     };
+    /**
+     * Appends a new header value to the existing set of
+     * header values.
+     *
+     * @param name The header name for which to append the values.
+     *
+     * @returns A clone of the HTTP header object with the value appended.
+     */
     HttpHeaders.prototype.append = function (name, value) {
         return this.clone({ name: name, value: value, op: 'a' });
     };
+    /**
+     * Sets a header value for a given name. If the header name already exists,
+     * its value is replaced with the given value.
+     *
+     * @param name The header name.
+     * @param value Provides the value to set or overide for a given name.
+     *
+     * @returns A clone of the HTTP header object with the newly set header value.
+     */
     HttpHeaders.prototype.set = function (name, value) {
         return this.clone({ name: name, value: value, op: 's' });
     };
+    /**
+     * Deletes all header values for a given name.
+     *
+     * @param name The header name.
+     * @param value The header values to delete for a given name.
+     *
+     * @returns A clone of the HTTP header object.
+     */
     HttpHeaders.prototype.delete = function (name, value) {
         return this.clone({ name: name, value: value, op: 'd' });
     };
