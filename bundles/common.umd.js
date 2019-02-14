@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.4+48.sha-73f9db5
+ * @license Angular v7.2.4+71.sha-ecef0dd
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -83,16 +83,15 @@
         return LocationStrategy;
     }());
     /**
-     * The `APP_BASE_HREF` token represents the base href to be used with the
-     * {@link PathLocationStrategy}.
-     *
-     * If you're using {@link PathLocationStrategy}, you must provide a provider to a string
-     * representing the URL prefix that should be preserved when generating and recognizing
-     * URLs.
+     * A predefined [DI token](guide/glossary#di-token) for the base href
+     * to be used with the `PathLocationStrategy`.
+     * The base href is the URL prefix that should be preserved when generating
+     * and recognizing URLs.
      *
      * @usageNotes
      *
-     * ### Example
+     * The following example shows how to use this token to configure the root app injector
+     * with a base href value, so that the DI framework can supply the dependency anywhere in the app.
      *
      * ```typescript
      * import {Component, NgModule} from '@angular/core';
@@ -5798,7 +5797,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.4+48.sha-73f9db5');
+    var VERSION = new core.Version('7.2.4+71.sha-ecef0dd');
 
     /**
      * @license
