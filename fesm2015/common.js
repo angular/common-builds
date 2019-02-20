@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.4+54.sha-81c3104
+ * @license Angular v8.0.0-beta.4+56.sha-a7e1c0c
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, defineInjectable, inject, ɵsetClassMetadata, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, ɵdefineDirective, ɵdirectiveInject, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵinjectAttribute, Pipe, ɵdefinePipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, ɵdefineNgModule, defineInjector, Version } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, defineInjectable, inject, ɵsetClassMetadata, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementStyling, ɵelementStylingMap, ɵelementStylingApply, Directive, Input, ɵdirectiveInject, ɵProvidersFeature, ɵInheritDefinitionFeature, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵinjectAttribute, Pipe, ɵdefinePipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, ɵdefineNgModule, defineInjector, Version } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3271,34 +3271,351 @@ function parseCookieValue(cookieStr, name) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
+ * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
  *
- * \@usageNotes
- * ```
- *     <some-element [ngClass]="'first second'">...</some-element>
+ * ngStyle and ngClass both accept various forms of input and behave differently than that
+ * of how [style] and [class] behave in Angular.
  *
- *     <some-element [ngClass]="['first', 'second']">...</some-element>
+ * The differences are:
+ *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
+ *    while [style] and [class] bindings do not (they check for identity changes)
+ *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
+ *  - ngClass supports arrays of class values and [class] only accepts map and string values
+ *  - ngClass allows for multiple className keys (space-separated) within an array or map
+ *     (as the * key) while [class] only accepts a simple key/value map object
  *
- *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+ * Having Angular understand and adapt to all the different forms of behavior is complicated
+ * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
+ * into something that the core-level [style] and [class] bindings understand.
  *
- *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+ * This [StylingDiffer] class handles this conversion by creating a new input value each time
+ * the inner representation of the binding value have changed.
  *
- *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
- * ```
+ * ## Why do we care about ngStyle/ngClass?
+ * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
+ * respect and understand the styling values emitted through ngStyle and ngClass (when they
+ * are present and used in a template).
  *
- * \@description
+ * Instead of having these directives manage styling on their own, they should be included
+ * into the Angular styling algorithm that exists for [style] and [class] bindings.
  *
- * Adds and removes CSS classes on an HTML element.
+ * Here's why:
  *
- * The CSS classes are updated as follows, depending on the type of the expression evaluation:
- * - `string` - the CSS classes listed in the string (space delimited) are added,
- * - `Array` - the CSS classes declared as Array elements are added,
- * - `Object` - keys are CSS classes that get added when the expression given in the value
- *              evaluates to a truthy value, otherwise they are removed.
+ * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
+ *   styles and classes would fall out of sync and be applied and updated at
+ *   inconsistent times
+ * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
+ *   (they will write over them given the right combination of events)
  *
- * \@publicApi
+ *   ```
+ *   <!-- if `w1` is updated then it will always override `w2`
+ *        if `w2` is updated then it will always override `w1`
+ *        if both are updated at the same time then `w1` wins -->
+ *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
+ *
+ *   <!-- if `w1` is updated then it will always lose to `w2`
+ *        if `w2` is updated then it will always override `w1`
+ *        if both are updated at the same time then `w2` wins -->
+ *   <div [style]="{width:w1}" [style.width]="w2">...</div>
+ *   ```
+ * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
+ *   expensive data structures which were evaluated each time CD runs
+ * @template T
  */
-class NgClass {
+class StylingDiffer {
+    /**
+     * @param {?} _name
+     * @param {?} _options
+     */
+    constructor(_name, _options) {
+        this._name = _name;
+        this._options = _options;
+        this.value = null;
+        this._lastSetValue = null;
+        this._lastSetValueType = 0 /* Null */;
+        this._lastSetValueIdentityChange = false;
+    }
+    /**
+     * Sets (updates) the styling value within the differ.
+     *
+     * Only when `hasValueChanged` is called then this new value will be evaluted
+     * and checked against the previous value.
+     *
+     * @param {?} value the new styling value provided from the ngClass/ngStyle binding
+     * @return {?}
+     */
+    setValue(value) {
+        if (Array.isArray(value)) {
+            this._lastSetValueType = 4 /* Array */;
+        }
+        else if (value instanceof Set) {
+            this._lastSetValueType = 8 /* Set */;
+        }
+        else if (value && typeof value === 'string') {
+            if (!(this._options & 4 /* AllowStringValue */)) {
+                throw new Error(this._name + ' string values are not allowed');
+            }
+            this._lastSetValueType = 1 /* String */;
+        }
+        else {
+            this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
+        }
+        this._lastSetValueIdentityChange = true;
+        this._lastSetValue = value || null;
+    }
+    /**
+     * Determines whether or not the value has changed.
+     *
+     * This function can be called right after `setValue()` is called, but it can also be
+     * called incase the existing value (if it's a collection) changes internally. If the
+     * value is indeed a collection it will do the necessary diffing work and produce a
+     * new object value as assign that to `value`.
+     *
+     * @return {?} whether or not the value has changed in some way.
+     */
+    hasValueChanged() {
+        /** @type {?} */
+        let valueHasChanged = this._lastSetValueIdentityChange;
+        if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
+            return false;
+        /** @type {?} */
+        let finalValue = null;
+        /** @type {?} */
+        const trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
+        /** @type {?} */
+        const parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
+        /** @type {?} */
+        const allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
+        switch (this._lastSetValueType) {
+            // case 1: [input]="string"
+            case 1 /* String */:
+                /** @type {?} */
+                const tokens = ((/** @type {?} */ (this._lastSetValue))).split(/\s+/g);
+                if (this._options & 16 /* ForceAsMap */) {
+                    finalValue = {};
+                    tokens.forEach((token, i) => ((/** @type {?} */ (finalValue)))[token] = true);
+                }
+                else {
+                    finalValue = tokens.reduce((str, token, i) => str + (i ? ' ' : '') + token);
+                }
+                break;
+            // case 2: [input]="{key:value}"
+            case 2 /* Map */:
+                /** @type {?} */
+                const map = (/** @type {?} */ (this._lastSetValue));
+                /** @type {?} */
+                const keys = Object.keys(map);
+                if (!valueHasChanged) {
+                    if (this.value) {
+                        // we know that the classExp value exists and that it is
+                        // a map (otherwise an identity change would have occurred)
+                        valueHasChanged = mapHasChanged(keys, (/** @type {?} */ (this.value)), map);
+                    }
+                    else {
+                        valueHasChanged = true;
+                    }
+                }
+                if (valueHasChanged) {
+                    finalValue =
+                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
+                }
+                break;
+            // case 3a: [input]="[str1, str2, ...]"
+            // case 3b: [input]="Set"
+            case 4 /* Array */:
+            case 8 /* Set */:
+                /** @type {?} */
+                const values = Array.from((/** @type {?} */ (this._lastSetValue)));
+                if (!valueHasChanged) {
+                    /** @type {?} */
+                    const keys = Object.keys((/** @type {?} */ (this.value)));
+                    valueHasChanged = !arrayEqualsArray(keys, values);
+                }
+                if (valueHasChanged) {
+                    finalValue =
+                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
+                }
+                break;
+            // case 4: [input]="null|undefined"
+            default:
+                finalValue = null;
+                break;
+        }
+        if (valueHasChanged) {
+            ((/** @type {?} */ (this))).value = (/** @type {?} */ (finalValue));
+        }
+        return valueHasChanged;
+    }
+}
+/**
+ * builds and returns a map based on the values input value
+ *
+ * If the `keys` param is provided then the `values` param is treated as a
+ * string map. Otherwise `values` is treated as a string array.
+ * @param {?} errorPrefix
+ * @param {?} trim
+ * @param {?} parseOutUnits
+ * @param {?} allowSubKeys
+ * @param {?} values
+ * @param {?=} keys
+ * @return {?}
+ */
+function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
+    /** @type {?} */
+    const map = {};
+    if (keys) {
+        // case 1: map
+        for (let i = 0; i < keys.length; i++) {
+            /** @type {?} */
+            let key = keys[i];
+            key = trim ? key.trim() : key;
+            /** @type {?} */
+            const value = ((/** @type {?} */ (values)))[key];
+            setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+        }
+    }
+    else {
+        // case 2: array
+        for (let i = 0; i < values.length; i++) {
+            /** @type {?} */
+            let value = ((/** @type {?} */ (values)))[i];
+            assertValidValue(errorPrefix, value);
+            value = trim ? value.trim() : value;
+            setMapValues(map, value, true, false, allowSubKeys);
+        }
+    }
+    return map;
+}
+/**
+ * @param {?} errorPrefix
+ * @param {?} value
+ * @return {?}
+ */
+function assertValidValue(errorPrefix, value) {
+    if (typeof value !== 'string') {
+        throw new Error(`${errorPrefix} can only toggle CSS classes expressed as strings, got ${value}`);
+    }
+}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @param {?} parseOutUnits
+ * @param {?} allowSubKeys
+ * @return {?}
+ */
+function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
+    if (allowSubKeys && key.indexOf(' ') > 0) {
+        /** @type {?} */
+        const innerKeys = key.split(/\s+/g);
+        for (let j = 0; j < innerKeys.length; j++) {
+            setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
+        }
+    }
+    else {
+        setIndividualMapValue(map, key, value, parseOutUnits);
+    }
+}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @param {?} parseOutUnits
+ * @return {?}
+ */
+function setIndividualMapValue(map, key, value, parseOutUnits) {
+    if (parseOutUnits) {
+        /** @type {?} */
+        const values = normalizeStyleKeyAndValue(key, value);
+        value = values.value;
+        key = values.key;
+    }
+    map[key] = value;
+}
+/**
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function normalizeStyleKeyAndValue(key, value) {
+    /** @type {?} */
+    const index = key.indexOf('.');
+    if (index > 0) {
+        /** @type {?} */
+        const unit = key.substr(index + 1);
+        key = key.substring(0, index);
+        if (value != null) { // we should not convert null values to string
+            value += unit;
+        }
+    }
+    return { key, value };
+}
+/**
+ * @param {?} keys
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function mapHasChanged(keys, a, b) {
+    /** @type {?} */
+    const oldKeys = Object.keys(a);
+    /** @type {?} */
+    const newKeys = keys;
+    // the keys are different which means the map changed
+    if (!arrayEqualsArray(oldKeys, newKeys)) {
+        return true;
+    }
+    for (let i = 0; i < newKeys.length; i++) {
+        /** @type {?} */
+        const key = newKeys[i];
+        if (a[key] !== b[key]) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function arrayEqualsArray(a, b) {
+    if (a && b) {
+        if (a.length !== b.length)
+            return false;
+        for (let i = 0; i < a.length; i++) {
+            if (b.indexOf(a[i]) === -1)
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Used as a token for an injected service within the NgClass directive.
+ *
+ * NgClass behaves differenly whether or not VE is being used or not. If
+ * present then the legacy ngClass diffing algorithm will be used as an
+ * injected service. Otherwise the new diffing algorithm (which delegates
+ * to the `[class]` binding) will be used. This toggle behavior is done so
+ * via the ivy_switch mechanism.
+ * @abstract
+ */
+class NgClassImpl {
+}
+class NgClassR2Impl {
     /**
      * @param {?} _iterableDiffers
      * @param {?} _keyValueDiffers
@@ -3313,10 +3630,14 @@ class NgClass {
         this._initialClasses = [];
     }
     /**
+     * @return {?}
+     */
+    getValue() { return null; }
+    /**
      * @param {?} value
      * @return {?}
      */
-    set klass(value) {
+    setClass(value) {
         this._removeClasses(this._initialClasses);
         this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
         this._applyClasses(this._initialClasses);
@@ -3326,7 +3647,7 @@ class NgClass {
      * @param {?} value
      * @return {?}
      */
-    set ngClass(value) {
+    setNgClass(value) {
         this._removeClasses(this._rawClass);
         this._applyClasses(this._initialClasses);
         this._iterableDiffer = null;
@@ -3344,7 +3665,7 @@ class NgClass {
     /**
      * @return {?}
      */
-    ngDoCheck() {
+    applyChanges() {
         if (this._iterableDiffer) {
             /** @type {?} */
             const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
@@ -3448,24 +3769,19 @@ class NgClass {
         }
     }
 }
-NgClass.decorators = [
-    { type: Directive, args: [{ selector: '[ngClass]' },] },
+NgClassR2Impl.decorators = [
+    { type: Injectable },
 ];
 /** @nocollapse */
-NgClass.ctorParameters = () => [
+NgClassR2Impl.ctorParameters = () => [
     { type: IterableDiffers },
     { type: KeyValueDiffers },
     { type: ElementRef },
     { type: Renderer2 }
 ];
-NgClass.propDecorators = {
-    klass: [{ type: Input, args: ['class',] }],
-    ngClass: [{ type: Input }]
-};
-/** @nocollapse */ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(ɵdirectiveInject(IterableDiffers), ɵdirectiveInject(KeyValueDiffers), ɵdirectiveInject(ElementRef), ɵdirectiveInject(Renderer2)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
-        type: Directive,
-        args: [{ selector: '[ngClass]' }]
+/** @nocollapse */ NgClassR2Impl.ngInjectableDef = defineInjectable({ token: NgClassR2Impl, factory: function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(inject(IterableDiffers), inject(KeyValueDiffers), inject(ElementRef), inject(Renderer2)); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(NgClassR2Impl, [{
+        type: Injectable
     }], function () { return [{
         type: IterableDiffers
     }, {
@@ -3474,11 +3790,203 @@ NgClass.propDecorators = {
         type: ElementRef
     }, {
         type: Renderer2
+    }]; }, null);
+class NgClassR3Impl {
+    constructor() {
+        this._value = null;
+        this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
+            2 /* AllowSubKeys */ |
+            4 /* AllowStringValue */ | 16 /* ForceAsMap */);
+        this._classStringDiffer = null;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._value; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setClass(value) {
+        // early exit incase the binding gets emitted as an empty value which
+        // means there is no reason to instantiate and diff the values...
+        if (!value && !this._classStringDiffer)
+            return;
+        this._classStringDiffer = this._classStringDiffer ||
+            new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
+        this._classStringDiffer.setValue(value);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setNgClass(value) {
+        this._ngClassDiffer.setValue(value);
+    }
+    /**
+     * @return {?}
+     */
+    applyChanges() {
+        /** @type {?} */
+        const classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
+        /** @type {?} */
+        const ngClassChanged = this._ngClassDiffer.hasValueChanged();
+        if (classChanged || ngClassChanged) {
+            /** @type {?} */
+            let value = this._ngClassDiffer.value;
+            if (this._classStringDiffer) {
+                /** @type {?} */
+                let classValue = this._classStringDiffer.value;
+                if (classValue) {
+                    value = value ? Object.assign({}, classValue, value) : classValue;
+                }
+            }
+            this._value = value;
+        }
+    }
+}
+NgClassR3Impl.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */ NgClassR3Impl.ngInjectableDef = defineInjectable({ token: NgClassR3Impl, factory: function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(NgClassR3Impl, [{
+        type: Injectable
+    }], null, null);
+/** @type {?} */
+const NgClassImplProvider__POST_R3__ = {
+    provide: NgClassImpl,
+    useClass: NgClassR3Impl
+};
+/** @type {?} */
+const NgClassImplProvider = NgClassImplProvider__POST_R3__;
+
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// used when the VE is not present (note the directive will
+// never be instantiated normally because it is apart of a
+// base class)
+/** @type {?} */
+const ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
+    type: (/** @type {?} */ (function () { })),
+    selectors: (/** @type {?} */ (null)),
+    factory: () => { },
+    hostBindings: function (rf, ctx, elIndex) {
+        if (rf & 1 /* Create */) {
+            ɵelementStyling(null, null, null, ctx);
+        }
+        if (rf & 2 /* Update */) {
+            ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
+            ɵelementStylingApply(elIndex, ctx);
+        }
+    }
+});
+/** @type {?} */
+const ngClassDirectiveDef = ngClassDirectiveDef__POST_R3__;
+/**
+ * Serves as the base non-VE container for NgClass.
+ *
+ * While this is a base class that NgClass extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[class]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * \@publicApi
+ */
+class NgClassBase {
+    /**
+     * @param {?} _delegate
+     */
+    constructor(_delegate) {
+        this._delegate = _delegate;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._delegate.getValue(); }
+}
+/** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+/**
+ * \@ngModule CommonModule
+ *
+ * \@usageNotes
+ * ```
+ *     <some-element [ngClass]="'first second'">...</some-element>
+ *
+ *     <some-element [ngClass]="['first', 'second']">...</some-element>
+ *
+ *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+ *
+ *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+ *
+ *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+ * ```
+ *
+ * \@description
+ *
+ * Adds and removes CSS classes on an HTML element.
+ *
+ * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+ * - `string` - the CSS classes listed in the string (space delimited) are added,
+ * - `Array` - the CSS classes declared as Array elements are added,
+ * - `Object` - keys are CSS classes that get added when the expression given in the value
+ *              evaluates to a truthy value, otherwise they are removed.
+ *
+ * \@publicApi
+ */
+class NgClass extends NgClassBase {
+    /**
+     * @param {?} delegate
+     */
+    constructor(delegate) { super(delegate); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set klass(value) { this._delegate.setClass(value); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set ngClass(value) {
+        this._delegate.setNgClass(value);
+    }
+    /**
+     * @return {?}
+     */
+    ngDoCheck() { this._delegate.applyChanges(); }
+}
+NgClass.decorators = [
+    { type: Directive, args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] },] },
+];
+/** @nocollapse */
+NgClass.ctorParameters = () => [
+    { type: NgClassImpl }
+];
+NgClass.propDecorators = {
+    klass: [{ type: Input, args: ['class',] }],
+    ngClass: [{ type: Input, args: ['ngClass',] }]
+};
+/** @nocollapse */ NgClass.ngDirectiveDef = ɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], factory: function NgClass_Factory(t) { return new (t || NgClass)(ɵdirectiveInject(NgClassImpl)); }, inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, features: [ɵProvidersFeature([NgClassImplProvider]), ɵInheritDefinitionFeature] });
+/*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
+        type: Directive,
+        args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] }]
+    }], function () { return [{
+        type: NgClassImpl
     }]; }, { klass: [{
             type: Input,
             args: ['class']
         }], ngClass: [{
-            type: Input
+            type: Input,
+            args: ['ngClass']
         }] });
 
 /**
@@ -4771,9 +5279,155 @@ NgPluralCase.ctorParameters = () => [
     }]; }, null);
 
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Used as a token for an injected service within the NgStyle directive.
+ *
+ * NgStyle behaves differenly whether or not VE is being used or not. If
+ * present then the legacy ngClass diffing algorithm will be used as an
+ * injected service. Otherwise the new diffing algorithm (which delegates
+ * to the `[style]` binding) will be used. This toggle behavior is done so
+ * via the ivy_switch mechanism.
+ * @abstract
+ */
+class NgStyleImpl {
+}
+class NgStyleR2Impl {
+    /**
+     * @param {?} _ngEl
+     * @param {?} _differs
+     * @param {?} _renderer
+     */
+    constructor(_ngEl, _differs, _renderer) {
+        this._ngEl = _ngEl;
+        this._differs = _differs;
+        this._renderer = _renderer;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return null; }
+    /**
+     * A map of style properties, specified as colon-separated
+     * key-value pairs.
+     * * The key is a style name, with an optional `.<unit>` suffix
+     *    (such as 'top.px', 'font-style.em').
+     * * The value is an expression to be evaluated.
+     * @param {?} values
+     * @return {?}
+     */
+    setNgStyle(values) {
+        this._ngStyle = values;
+        if (!this._differ && values) {
+            this._differ = this._differs.find(values).create();
+        }
+    }
+    /**
+     * Applies the new styles if needed.
+     * @return {?}
+     */
+    applyChanges() {
+        if (this._differ) {
+            /** @type {?} */
+            const changes = this._differ.diff(this._ngStyle);
+            if (changes) {
+                this._applyChanges(changes);
+            }
+        }
+    }
+    /**
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    _applyChanges(changes) {
+        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
+        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+    }
+    /**
+     * @private
+     * @param {?} nameAndUnit
+     * @param {?} value
+     * @return {?}
+     */
+    _setStyle(nameAndUnit, value) {
+        const [name, unit] = nameAndUnit.split('.');
+        value = value != null && unit ? `${value}${unit}` : value;
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
+    }
+}
+NgStyleR2Impl.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+NgStyleR2Impl.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyValueDiffers },
+    { type: Renderer2 }
+];
+/** @nocollapse */ NgStyleR2Impl.ngInjectableDef = defineInjectable({ token: NgStyleR2Impl, factory: function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(inject(ElementRef), inject(KeyValueDiffers), inject(Renderer2)); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(NgStyleR2Impl, [{
+        type: Injectable
+    }], function () { return [{
+        type: ElementRef
+    }, {
+        type: KeyValueDiffers
+    }, {
+        type: Renderer2
+    }]; }, null);
+class NgStyleR3Impl {
+    constructor() {
+        this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
+        this._value = null;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._value; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setNgStyle(value) { this._differ.setValue(value); }
+    /**
+     * @return {?}
+     */
+    applyChanges() {
+        if (this._differ.hasValueChanged()) {
+            this._value = this._differ.value;
+        }
+    }
+}
+NgStyleR3Impl.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */ NgStyleR3Impl.ngInjectableDef = defineInjectable({ token: NgStyleR3Impl, factory: function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); }, providedIn: null });
+/*@__PURE__*/ ɵsetClassMetadata(NgStyleR3Impl, [{
+        type: Injectable
+    }], null, null);
+/** @type {?} */
+const NgStyleImplProvider__POST_R3__ = {
+    provide: NgStyleImpl,
+    useClass: NgStyleR3Impl
+};
+/** @type {?} */
+const NgStyleImplProvider = NgStyleImplProvider__POST_R3__;
+
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -4781,6 +5435,53 @@ NgPluralCase.ctorParameters = () => [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// used when the VE is not present (note the directive will
+// never be instantiated normally because it is apart of a
+// base class)
+/** @type {?} */
+const ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
+    type: (/** @type {?} */ (function () { })),
+    selectors: (/** @type {?} */ (null)),
+    factory: () => { },
+    hostBindings: function (rf, ctx, elIndex) {
+        if (rf & 1 /* Create */) {
+            ɵelementStyling(null, null, null, ctx);
+        }
+        if (rf & 2 /* Update */) {
+            ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
+            ɵelementStylingApply(elIndex, ctx);
+        }
+    }
+});
+/** @type {?} */
+const ngStyleDirectiveDef = ngStyleDirectiveDef__POST_R3__;
+/**
+ * Serves as the base non-VE container for NgStyle.
+ *
+ * While this is a base class that NgStyle extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[style]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * \@publicApi
+ */
+class NgStyleBase {
+    /**
+     * @param {?} _delegate
+     */
+    constructor(_delegate) {
+        this._delegate = _delegate;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._delegate.getValue(); }
+}
+/** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
 /**
  * \@ngModule CommonModule
  *
@@ -4817,99 +5518,40 @@ NgPluralCase.ctorParameters = () => [
  *
  * \@publicApi
  */
-class NgStyle {
+class NgStyle extends NgStyleBase {
     /**
-     * @param {?} _differs
-     * @param {?} _ngEl
-     * @param {?} _renderer
+     * @param {?} delegate
      */
-    constructor(_differs, _ngEl, _renderer) {
-        this._differs = _differs;
-        this._ngEl = _ngEl;
-        this._renderer = _renderer;
-    }
+    constructor(delegate) { super(delegate); }
     /**
-     * @param {?} values
-     * @return {?}
-     */
-    set ngStyle(
-    /**
-     * A map of style properties, specified as colon-separated
-     * key-value pairs.
-     * * The key is a style name, with an optional `.<unit>` suffix
-     *    (such as 'top.px', 'font-style.em').
-     * * The value is an expression to be evaluated.
-     */
-    values) {
-        this._ngStyle = values;
-        if (!this._differ && values) {
-            this._differ = this._differs.find(values).create();
-        }
-    }
-    /**
-     * Applies the new styles if needed.
-     * @return {?}
-     */
-    ngDoCheck() {
-        if (this._differ) {
-            /** @type {?} */
-            const changes = this._differ.diff(this._ngStyle);
-            if (changes) {
-                this._applyChanges(changes);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyChanges(changes) {
-        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
-        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
-        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
-    }
-    /**
-     * @private
-     * @param {?} nameAndUnit
      * @param {?} value
      * @return {?}
      */
-    _setStyle(nameAndUnit, value) {
-        const [name, unit] = nameAndUnit.split('.');
-        value = value != null && unit ? `${value}${unit}` : value;
-        if (value != null) {
-            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
-        }
-        else {
-            this._renderer.removeStyle(this._ngEl.nativeElement, name);
-        }
-    }
+    set ngStyle(value) { this._delegate.setNgStyle(value); }
+    /**
+     * @return {?}
+     */
+    ngDoCheck() { this._delegate.applyChanges(); }
 }
 NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]' },] },
+    { type: Directive, args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] },] },
 ];
 /** @nocollapse */
 NgStyle.ctorParameters = () => [
-    { type: KeyValueDiffers },
-    { type: ElementRef },
-    { type: Renderer2 }
+    { type: NgStyleImpl }
 ];
 NgStyle.propDecorators = {
-    ngStyle: [{ type: Input }]
+    ngStyle: [{ type: Input, args: ['ngStyle',] }]
 };
-/** @nocollapse */ NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(ɵdirectiveInject(KeyValueDiffers), ɵdirectiveInject(ElementRef), ɵdirectiveInject(Renderer2)); }, inputs: { ngStyle: "ngStyle" } });
+/** @nocollapse */ NgStyle.ngDirectiveDef = ɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], factory: function NgStyle_Factory(t) { return new (t || NgStyle)(ɵdirectiveInject(NgStyleImpl)); }, inputs: { ngStyle: "ngStyle" }, features: [ɵProvidersFeature([NgStyleImplProvider]), ɵInheritDefinitionFeature] });
 /*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
         type: Directive,
-        args: [{ selector: '[ngStyle]' }]
+        args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] }]
     }], function () { return [{
-        type: KeyValueDiffers
-    }, {
-        type: ElementRef
-    }, {
-        type: Renderer2
+        type: NgStyleImpl
     }]; }, { ngStyle: [{
-            type: Input
+            type: Input,
+            args: ['ngStyle']
         }] });
 
 /**
@@ -7161,7 +7803,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.4+54.sha-81c3104');
+const VERSION = new Version('8.0.0-beta.4+56.sha-a7e1c0c');
 
 /**
  * @fileoverview added by tsickle
@@ -7350,5 +7992,5 @@ class NullViewportScroller {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map
