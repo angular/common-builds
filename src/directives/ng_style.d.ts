@@ -5,7 +5,33 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
+import { DoCheck } from '@angular/core';
+import { NgStyleImpl } from './ng_style_impl';
+export declare const ngStyleDirectiveDef__PRE_R3__: undefined;
+export declare const ngStyleDirectiveDef__POST_R3__: never;
+export declare const ngStyleDirectiveDef: undefined;
+/**
+ * Serves as the base non-VE container for NgStyle.
+ *
+ * While this is a base class that NgStyle extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[style]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * @publicApi
+ */
+export declare class NgStyleBase {
+    protected _delegate: NgStyleImpl;
+    static ngDirectiveDef: any;
+    constructor(_delegate: NgStyleImpl);
+    getValue(): {
+        [key: string]: any;
+    } | null;
+}
 /**
  * @ngModule CommonModule
  *
@@ -42,20 +68,10 @@ import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
  *
  * @publicApi
  */
-export declare class NgStyle implements DoCheck {
-    private _differs;
-    private _ngEl;
-    private _renderer;
-    private _ngStyle;
-    private _differ;
-    constructor(_differs: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
+export declare class NgStyle extends NgStyleBase implements DoCheck {
+    constructor(delegate: NgStyleImpl);
     ngStyle: {
-        [key: string]: string;
-    };
-    /**
-     * Applies the new styles if needed.
-     */
+        [klass: string]: any;
+    } | null;
     ngDoCheck(): void;
-    private _applyChanges;
-    private _setStyle;
 }

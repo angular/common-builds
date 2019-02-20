@@ -3,6 +3,8 @@
  */
 export * from './index';
 export { COMMON_DIRECTIVES as ɵangular_packages_common_common_e } from './src/directives/index';
+export { NgClassImplProvider as ɵangular_packages_common_common_j, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_i, NgClassR3Impl as ɵangular_packages_common_common_h } from './src/directives/ng_class_impl';
+export { NgStyleImplProvider as ɵangular_packages_common_common_m, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_l, NgStyleR3Impl as ɵangular_packages_common_common_k } from './src/directives/ng_style_impl';
 export { LocaleDataIndex as ɵangular_packages_common_common_c } from './src/i18n/locale_data';
 export { findLocaleData as ɵangular_packages_common_common_d } from './src/i18n/locale_data_api';
 export { DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b } from './src/i18n/localization';

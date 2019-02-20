@@ -5,7 +5,33 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from '@angular/core';
+import { DoCheck } from '@angular/core';
+import { NgClassImpl } from './ng_class_impl';
+export declare const ngClassDirectiveDef__PRE_R3__: undefined;
+export declare const ngClassDirectiveDef__POST_R3__: never;
+export declare const ngClassDirectiveDef: undefined;
+/**
+ * Serves as the base non-VE container for NgClass.
+ *
+ * While this is a base class that NgClass extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[class]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * @publicApi
+ */
+export declare class NgClassBase {
+    protected _delegate: NgClassImpl;
+    static ngDirectiveDef: any;
+    constructor(_delegate: NgClassImpl);
+    getValue(): {
+        [key: string]: any;
+    } | null;
+}
 /**
  * @ngModule CommonModule
  *
@@ -34,36 +60,11 @@ import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from
  *
  * @publicApi
  */
-export declare class NgClass implements DoCheck {
-    private _iterableDiffers;
-    private _keyValueDiffers;
-    private _ngEl;
-    private _renderer;
-    private _iterableDiffer;
-    private _keyValueDiffer;
-    private _initialClasses;
-    private _rawClass;
-    constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
+export declare class NgClass extends NgClassBase implements DoCheck {
+    constructor(delegate: NgClassImpl);
     klass: string;
     ngClass: string | string[] | Set<string> | {
         [klass: string]: any;
     };
     ngDoCheck(): void;
-    private _applyKeyValueChanges;
-    private _applyIterableChanges;
-    /**
-     * Applies a collection of CSS classes to the DOM element.
-     *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     */
-    private _applyClasses;
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     */
-    private _removeClasses;
-    private _toggleClass;
 }
