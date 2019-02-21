@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.5+9.sha-58436fd
+ * @license Angular v8.0.0-beta.5+10.sha-be121bb
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -95,6 +95,10 @@ class LocationStrategy {
  */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * \@description
  *
@@ -3593,13 +3597,6 @@ function arrayEqualsArray(a, b) {
 }
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -3861,11 +3858,8 @@ const NgClassImplProvider__POST_R3__ = {
 const NgClassImplProvider = NgClassImplProvider__POST_R3__;
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
@@ -5279,13 +5273,6 @@ NgPluralCase.ctorParameters = () => [
     }]; }, null);
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -5429,11 +5416,8 @@ const NgStyleImplProvider__POST_R3__ = {
 const NgStyleImplProvider = NgStyleImplProvider__POST_R3__;
 
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
@@ -6425,6 +6409,10 @@ DeprecatedCurrencyPipe.ctorParameters = () => [
  */
 const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ObservableStrategy {
     /**
      * @param {?} async
@@ -7803,7 +7791,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.5+9.sha-58436fd');
+const VERSION = new Version('8.0.0-beta.5+10.sha-be121bb');
 
 /**
  * @fileoverview added by tsickle

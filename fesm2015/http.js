@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.5+9.sha-58436fd
+ * @license Angular v8.0.0-beta.5+10.sha-be121bb
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1316,6 +1316,10 @@ HttpClient.ctorParameters = () => [
         type: HttpHandler
     }]; }, null);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
