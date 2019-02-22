@@ -13,11 +13,46 @@ import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
 export declare type HttpObserve = 'body' | 'events' | 'response';
 /**
- * Perform HTTP requests.
+ * Performs HTTP requests.
  *
  * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
- * Each request method has multiple signatures, and the return type varies according to which
- * signature is called (mainly the values of `observe` and `responseType`).
+ * Each request method has multiple signatures, and the return type varies based on
+ * the signature that is called (mainly the values of `observe` and `responseType`).
+ *
+ *
+ * @see [HTTP Guide](guide/http)
+ *
+ *
+ * @usageNotes
+ * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
+ *
+ * ### HTTP Request Example
+ *
+ * ```
+ *  // GET heroes whose name contains search term
+ * searchHeroes(term: string): observable<Hero[]>{
+ *
+ *  const params = new HttpParams({fromString: 'name=term'});
+ *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
+ * }
+ * ```
+ * ### JSONP Example
+ * ```
+ * requestJsonp(url, callback = 'callback') {
+ *  return this.httpClient.jsonp(this.heroesURL, callback);
+ * }
+ * ```
+ *
+ *
+ * ### PATCH Example
+ * ```
+ * // PATCH one of the heroes' name
+ * patchHero (id: number, heroName: string): Observable<{}> {
+ * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
+ *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
+ *    .pipe(catchError(this.handleError('patchHero')));
+ * }
+* ```
  *
  * @publicApi
  */
@@ -25,13 +60,21 @@ export declare class HttpClient {
     private handler;
     constructor(handler: HttpHandler);
     /**
-     * Send the given `HttpRequest` and return a stream of `HttpEvents`.
+     * Sends an `HTTPRequest` and returns a stream of `HTTPEvents`.
+     *
+     * @return An `Observable` of the response, with the response body as a stream of `HTTPEvents`.
      */
     request<R>(req: HttpRequest<any>): Observable<HttpEvent<R>>;
     /**
-     * Construct a request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a request that interprets the body as an `ArrayBuffer` and returns the response in an
+     * `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -47,9 +90,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a request which interprets the body as a `Blob` and returns it.
+     * Constructs a request that interprets the body as a blob and returns
+     * the response as a blob.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type `Blob`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -65,9 +113,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a request which interprets the body as text and returns it.
+     * Constructs a request that interprets the body as a text string and
+     * returns a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -83,9 +136,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a request that interprets the body as an `ArrayBuffer` and returns the
+     * the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as an array of `HTTPEvents` for the
+     * request.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -101,9 +160,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a request which interprets the body as an `Blob` and returns the full event stream.
+     * Constructs a request that interprets the body as a `Blob` and returns
+     * the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of of all `HttpEvents` for the request,
+     * with the response body of type `Blob`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -119,9 +184,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a request which interprets the body as text and returns the full event stream.
+     * Constructs a request which interprets the body as a text string and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HttpEvents` for the reques,
+     * with the response body of type string.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -137,9 +207,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a request which interprets the body as JSON and returns the full event stream.
+     * Constructs a request which interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the  request.
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     *  with the response body of type `Object`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -155,9 +230,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<any>>;
     /**
-     * Construct a request which interprets the body as JSON and returns the full event stream.
+     * Constructs a request which interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `R`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body of type `R`.
      */
     request<R>(method: string, url: string, options: {
         body?: any;
@@ -173,9 +253,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<R>>;
     /**
-     * Construct a request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a request which interprets the body as an `ArrayBuffer`
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body as an `ArrayBuffer`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -191,9 +276,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a request which interprets the body as a `Blob` and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of type `Blob`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -209,9 +298,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a request which interprets the body as text and returns the full response.
+     * Constructs a request which interprets the body as a text stream and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the HTTP response, with the response body of type string.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -227,9 +320,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a request which interprets the body as JSON and returns the full response.
+     * Constructs a request which interprets the body as a JSON object and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the full `HTTPResponse`,
+     * with the response body of type `Object`.
      */
     request(method: string, url: string, options: {
         body?: any;
@@ -245,9 +343,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a request which interprets the body as JSON and returns the full response.
+     * Constructs a request which interprets the body as a JSON object and returns
+     * the full `HTTPResponse` with the response body in the requested type.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `R`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return  An `Observable` of the full `HTTPResponse`, with the response body of type `R`.
      */
     request<R>(method: string, url: string, options: {
         body?: any;
@@ -263,9 +366,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<R>>;
     /**
-     * Construct a request which interprets the body as JSON and returns it.
+     * Constructs a request which interprets the body as a JSON object and returns the full
+     * `HTTPResponse` as a JSON object.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of type `Object`.
      */
     request(method: string, url: string, options?: {
         body?: any;
@@ -281,9 +389,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a request which interprets the body as JSON and returns it.
+     * Constructs a request which interprets the body as a JSON object
+     * with the response body of the requested type.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `R`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of type `R`.
      */
     request<R>(method: string, url: string, options?: {
         body?: any;
@@ -299,10 +412,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<R>;
     /**
-     * Construct a request in a manner where response type and requested `Observable` are not known
-     * statically.
+     * Constructs a request where response type and requested observable are not known statically.
      *
-     * @return an `Observable` of whatever was requested, typed to `any`.
+     * @param method  The HTTP method.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the reuested response, wuth body of type `any`.
      */
     request(method: string, url: string, options?: {
         body?: any;
@@ -318,9 +434,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<any>;
     /**
-     * Construct a DELETE request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
+     *  and returns the response as an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return  An `Observable` of the response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -335,9 +455,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a DELETE request which interprets the body as a `Blob` and returns it.
+     * Constructs a `DELETE` request that interprets the body as a `Blob` and returns
+     * the response as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response body as a `Blob`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -352,9 +476,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a DELETE request which interprets the body as text and returns it.
+     * Constructs a `DELETE` request that interprets the body as a text string and returns
+     * a string.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -369,9 +497,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a DELETE request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
+     *  and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HTTPEvents` for the request,
+     * with response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -386,9 +519,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a DELETE request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `DELETE` request that interprets the body as a `Blob`
+     *  and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all the `HTTPEvents` for the request, with the response body as a
+     * `Blob`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -403,9 +541,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a DELETE request which interprets the body as text and returns the full event stream.
+     * Constructs a `DELETE` request that interprets the body as a text string
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HTTPEvents` for the request, with the response
+     *  body of type string.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -420,9 +563,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `DELETE` request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HTTPEvents` for the request, with response body of
+     * type `Object`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -437,9 +585,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `DELETE`request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all the `HTTPEvents` for the request, with a response
+     * body in the requested type.
      */
     delete<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -454,9 +607,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a DELETE request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer` and returns
+     *  the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the full `HTTPResponse`, with the response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -471,9 +628,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a DELETE request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `DELETE` request that interprets the body as a `Blob` and returns the full
+     * `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of type `Blob`.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -488,9 +649,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a DELETE request which interprets the body as text and returns the full response.
+     * Constructs a `DELETE` request that interprets the body as a text stream and
+     *  returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the full `HTTPResponse`, with the response body of type string.
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -505,9 +670,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns the full response.
+     * Constructs a `DELETE` request the interprets the body as a JSON object and returns
+     * the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of type `Object`.
+     *
      */
     delete(url: string, options: {
         headers?: HttpHeaders | {
@@ -522,9 +692,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns the full response.
+     * Constructs a `DELETE` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with the response body of the requested type.
      */
     delete<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -539,9 +713,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns it.
+     * Constructs a `DELETE` request that interprets the body as a JSON object and
+     * returns the response body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type `Object`.
      */
     delete(url: string, options?: {
         headers?: HttpHeaders | {
@@ -556,9 +734,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a DELETE request which interprets the body as JSON and returns it.
+     * Constructs a DELETE request that interprets the body as a JSON object and returns
+     * the response in a given type.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with response body in the requested type.
      */
     delete<T>(url: string, options?: {
         headers?: HttpHeaders | {
@@ -573,9 +755,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a GET request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns the response in
+     *  an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -590,9 +776,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a GET request which interprets the body as a `Blob` and returns it.
+     * Constructs a `GET` request that interprets the body as a `Blob`
+     * and returns the response as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -607,9 +797,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a GET request which interprets the body as text and returns it.
+     * Constructs a `GET` request that interprets the body as a text string
+     * and returns the response as a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -624,9 +818,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a GET request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns
+     *  the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HttpEvents` for the request, with the response
+     * body as an `ArrayBuffer`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -641,9 +840,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a GET request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `GET` request that interprets the body as a `Blob` and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -658,9 +861,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a GET request which interprets the body as text and returns the full event stream.
+     * Constructs a `GET` request that interprets the body as a text string and returns
+     * the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -675,9 +882,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `GET` request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type `Object`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -692,9 +903,12 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `GET` request that interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with a response body in the requested type.
      */
     get<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -709,9 +923,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a GET request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -726,9 +945,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a GET request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `GET` request that interprets the body as a `Blob` and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     *  with the response body as a `Blob`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -743,9 +967,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a GET request which interprets the body as text and returns the full response.
+     * Constructs a `GET` request that interprets the body as a text stream and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body of type string.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -760,9 +989,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns the full response.
+     * Constructs a `GET` request that interprets the body as a JSON object and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the full `HttpResponse`,
+     * with the response body of type `Object`.
      */
     get(url: string, options: {
         headers?: HttpHeaders | {
@@ -777,9 +1011,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns the full response.
+     * Constructs a `GET` request that interprets the body as a JSON object and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the full `HTTPResponse` for the request,
+     * with a response body in the requested type.
      */
     get<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -794,9 +1033,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns it.
+     * Constructs a `GET` request that interprets the body as a JSON object and
+     * returns the response body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     *
+     * @return An `Observable` of the response body as a JSON object.
      */
     get(url: string, options?: {
         headers?: HttpHeaders | {
@@ -811,9 +1055,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a GET request which interprets the body as JSON and returns it.
+     * Constructs a `GET` request that interprets the body as a JSON object and returns
+     * the response body in a given type.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with a response body in the requested type.
      */
     get<T>(url: string, options?: {
         headers?: HttpHeaders | {
@@ -828,9 +1076,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a HEAD request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer` and
+     * returns the response as an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -844,6 +1096,15 @@ export declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
+    /**
+     * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
+     * the response as a `Blob`.
+     *
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return  An `Observable` of the response, with the response body as a `Blob`.
+     */
     head(url: string, options: {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
@@ -857,9 +1118,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a HEAD request which interprets the body as text and returns it.
+     * Constructs a `HEAD` request that interprets the body as a text string and returns the response
+     * as a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -874,9 +1139,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a HEAD request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `HEAD` request that interprets the body as an  `ArrayBuffer`
+     *  and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of tall `HttpEvents` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -891,9 +1161,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a HEAD request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `HEAD` request that interprets the body as a `Blob` and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body as a `Blob`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -908,9 +1183,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a HEAD request which interprets the body as text and returns the full event stream.
+     * Constructs a `HEAD` request that interprets the body as a text string
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all HttpEvents for the request, with the response body of type string.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -925,9 +1204,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `HEAD` request that interprets the body as a JSON object
+     * and returns the full HTTP event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of all `HTTPEvents` for the request, with a response body of
+     * type `Object`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -942,9 +1226,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `HEAD` request that interprets the body as a JSON object and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @return An `Observable` of all the `HTTPEvents` for the request
+     * , with a response body in the requested type.
+     *
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
      */
     head<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -959,9 +1248,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a HEAD request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer`
+     *  and returns the full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -976,9 +1270,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a HEAD request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
+     * the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body as a blob.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -993,9 +1292,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a HEAD request which interprets the body as text and returns the full response.
+     * Constructs a `HEAD` request that interprets the body as text stream
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body of type string.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -1010,9 +1314,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns the full response.
+     * Constructs a `HEAD` request that interprets the body as a JSON object and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body of type `Object`.
      */
     head(url: string, options: {
         headers?: HttpHeaders | {
@@ -1027,9 +1336,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns the full response.
+     * Constructs a `HEAD` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with a responmse body of the requested type.
      */
     head<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -1044,9 +1358,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns it.
+     * Constructs a `HEAD` request that interprets the body as a JSON object and
+     * returns the response body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the response, with the response body as a JSON object.
      */
     head(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1061,9 +1379,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a HEAD request which interprets the body as JSON and returns it.
+     * Constructs a `HEAD` request that interprets the body as a JSON object and returns
+     * the response in a given type.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with a response body of the given type.
      */
     head<T>(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1078,21 +1401,35 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a JSONP request for the given URL and name of the callback parameter.
+     * Constructs a `JSONP` request for the given URL and name of the callback parameter.
      *
-     * @return an `Observable` of the response object as an `Object`
+     * @param url The resource URL.
+     * @param callbackParam The callback function name.
+     *
+     * @return An `Observable` of the response object, with response body as an object.
      */
     jsonp(url: string, callbackParam: string): Observable<Object>;
     /**
-     * Construct a JSONP request for the given URL and name of the callback parameter.
+     * Constructs a `JSONP` request for the given URL and name of the callback parameter.
      *
-     * @return an `Observable` of the response object as type `T`.
+     * @param url The resource URL.
+     * @param callbackParam The callback function name.
+     *
+     * You must install a suitable interceptor, such as one provided by `HttpClientJsonpModule`.
+     * If no such interceptor is reached,
+     * then the `JSONP` request can be rejected by the configured backend.
+     *
+     * @return An `Observable` of the response object, with response body in the requested type.
      */
     jsonp<T>(url: string, callbackParam: string): Observable<T>;
     /**
-     * Make an OPTIONS request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs an `OPTIONS` request that interprets the body as an
+     * `ArrayBuffer` and returns the response as an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1107,9 +1444,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct an OPTIONS request which interprets the body as a `Blob` and returns it.
+     * Constructs an `OPTIONS` request that interprets the body as a `Blob` and returns
+     * the response as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1124,9 +1465,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct an OPTIONS request which interprets the body as text and returns it.
+     * Constructs an `OPTIONS` request that interprets the body as a text string and
+     * returns a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body of type string.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1141,9 +1486,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct an OPTIONS request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
+     *  and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return  An `Observable` of all `HttpEvents` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1158,9 +1508,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct an OPTIONS request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs an `OPTIONS` request that interprets the body as a `Blob` and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body as a `Blob`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1175,9 +1530,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct an OPTIONS request which interprets the body as text and returns the full event stream.
+     * Constructs an `OPTIONS` request that interprets the body as a text string
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPEvents` for the request,
+     * with the response body of type string.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1192,9 +1552,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns the full event stream.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HttpEvents` for the request with the response
+     * body of type `Object`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1209,9 +1574,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns the full event stream.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HttpEvents` for the request,
+     * with a response body in the requested type.
      */
     options<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -1226,9 +1596,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct an OPTIONS request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
+     *  and returns the full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1243,9 +1618,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct an OPTIONS request which interprets the body as a `Blob` and returns the full response.
+     * Constructs an `OPTIONS` request that interprets the body as a `Blob`
+     *  and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     *  with the response body as a `Blob`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1260,9 +1640,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct an OPTIONS request which interprets the body as text and returns the full response.
+     * Constructs an `OPTIONS` request that interprets the body as text stream
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     *  with the response body of type string.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1277,9 +1662,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns the full response.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     * with the response body of type `Object`.
      */
     options(url: string, options: {
         headers?: HttpHeaders | {
@@ -1294,9 +1684,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns the full response.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object and
+     * returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     * with a response body in the requested type.
      */
     options<T>(url: string, options: {
         headers?: HttpHeaders | {
@@ -1311,9 +1706,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns it.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object and returns the response
+     * body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as a JSON object.
      */
     options(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1328,9 +1727,13 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct an OPTIONS request which interprets the body as JSON and returns it.
+     * Constructs an `OPTIONS` request that interprets the body as a JSON object and returns the response
+     * in a given type.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url The endpoint URL.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HTTPResponse`, with a response body of the given type.
      */
     options<T>(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1345,9 +1748,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a PATCH request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and returns
+     * the response as an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1362,9 +1770,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a PATCH request which interprets the body as a `Blob` and returns it.
+     * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the response
+     * as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1379,9 +1792,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a PATCH request which interprets the body as text and returns it.
+     * Constructs a `PATCH` request that interprets the body as as a text string and
+     * returns the response as a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with a response body of type string.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1396,9 +1814,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a PATCH request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and
+     *  returns the the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPevents` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1413,9 +1837,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a PATCH request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `PATCH` request that interprets the body as a `Blob`
+     *  and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPevents` for the request, with the
+     * response body as `Blob`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1430,9 +1860,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a PATCH request which interprets the body as text and returns the full event stream.
+     * Constructs a `PATCH` request that interprets the body as a text string and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPevents`for the request, with a
+     * response body of type string.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1447,9 +1883,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPevents` for the request,
+     * with a response body of type `Object`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1464,9 +1906,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of all the `HTTPevents` for the request,
+     *  with a response body in the requested type.
      */
     patch<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1481,9 +1929,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a PATCH request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer`
+     *  and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return  An `Observable` of the `HttpResponse` for the request,
+     *  with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1498,9 +1952,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a PATCH request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the full
+     * `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return  An `Observable` of the `HttpResponse` for the request,
+     * with the response body as a `Blob`.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1515,9 +1975,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a PATCH request which interprets the body as text and returns the full response.
+     * Constructs a `PATCH` request that interprets the body as a text stream and returns the
+     * full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return  An `Observable` of the `HttpResponse` for the request,
+     * with a response body of type string.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1532,9 +1998,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns the full response.
+     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     * with a response body in the requested type.
      */
     patch(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1549,9 +2021,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns the full response.
+     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the `HttpResponse` for the request,
+     * with a response body in the given type.
      */
     patch<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1566,9 +2044,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns it.
+     * Constructs a `PATCH` request that interprets the body as a JSON object and
+     * returns the response body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as a JSON object.
      */
     patch(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -1583,9 +2066,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a PATCH request which interprets the body as JSON and returns it.
+     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * and returns the response in a given type.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to edit.
+     * @param options HTTP options.
+     *
+     * @return  An `Observable` of the `HttpResponse` for the request,
+     * with a response body in the given type.
      */
     patch<T>(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -1600,9 +2089,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a POST request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `POST` request that interprets the body as an as an `ArrayBuffer` and returns
+     * an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options.
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1617,9 +2111,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a POST request which interprets the body as a `Blob` and returns it.
+     * Constructs a `POST` request that interprets the body as a `Blob` and returns the
+     * response as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1634,9 +2133,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a POST request which interprets the body as text and returns it.
+     * Constructs a `POST` request that interprets the body as a text string and
+     * returns the response as a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with a response body of type string.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1651,9 +2155,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a POST request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1668,9 +2178,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a POST request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `POST` request that interprets the body as a `Blob`
+     * and returns the response in an observable of the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request, with the response body as `Blob`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1685,9 +2200,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a POST request which interprets the body as text and returns the full event stream.
+     * Constructs a `POST` request that interprets the body as a text string and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return  An `Observable` of all `HttpEvents` for the request,
+     * with a response body of type string.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1702,9 +2222,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns the full event stream.
+     * Constructs a POST request that interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return  An `Observable` of all `HttpEvents` for the request,
+     * with a response body of type `Object`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1719,9 +2244,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns the full event stream.
+     * Constructs a POST request that interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with a response body in the requested type.
      */
     post<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1736,9 +2266,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a POST request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a POST request that interprets the body as an `ArrayBuffer`
+     *  and returns the full `HTTPresponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return  An `Observable` of the `HTTPResponse` for the request, with the response body as an `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1753,9 +2288,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a POST request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `POST` request that interprets the body as a `Blob` and returns the full
+     * `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body as a `Blob`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1770,9 +2311,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a POST request which interprets the body as text and returns the full response.
+     * Constructs a `POST` request that interprets the body as a text stream and returns
+     * the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return  An `Observable` of the `HTTPResponse` for the request,
+     * with a response body of type string.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1787,9 +2334,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns the full response.
+     * Constructs a `POST` request that interprets the body as a JSON object
+     * and returns the full `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with a response body of type
+     * `Object`.
      */
     post(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1804,9 +2357,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns the full response.
+     * Constructs a `POST` request that interprets the body as a JSON object and returns the full
+     * `HTTPResponse`.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     *
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with a response body in the requested type.
      */
     post<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1821,9 +2380,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns it.
+     * Constructs a `POST` request that interprets the body as a
+     * JSON object and returns the response body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with the response body as a JSON object.
      */
     post(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -1838,9 +2402,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a POST request which interprets the body as JSON and returns it.
+     * Constructs a `POST` request that interprets the body as a JSON object
+     * and returns an observable of the response.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url The endpoint URL.
+     * @param body The content to replace with.
+     * @param options HTTP options
+     *
+     * @return  An `Observable` of the `HTTPResponse` for the request, with a response body in the requested type.
      */
     post<T>(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -1855,9 +2424,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Construct a PUT request which interprets the body as an `ArrayBuffer` and returns it.
+     * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and returns the
+     * response as an `ArrayBuffer`.
      *
-     * @return an `Observable` of the body as an `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1872,9 +2446,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
     /**
-     * Construct a PUT request which interprets the body as a `Blob` and returns it.
+     * Constructs a `PUT` request that interprets the body as a `Blob` and returns
+     * the response as a `Blob`.
      *
-     * @return an `Observable` of the body as a `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1889,9 +2468,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Construct a PUT request which interprets the body as text and returns it.
+     * Constructs a `PUT` request that interprets the body as a text string and
+     * returns the response as a string value.
      *
-     * @return an `Observable` of the body as a `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with a response body of type string.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1906,9 +2490,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<string>;
     /**
-     * Construct a PUT request which interprets the body as an `ArrayBuffer` and returns the full event stream.
+     * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and
+     * returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body as an `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1923,9 +2513,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Construct a PUT request which interprets the body as a `Blob` and returns the full event stream.
+     * Constructs a `PUT` request that interprets the body as a `Blob` and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1940,9 +2535,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
-     * Construct a PUT request which interprets the body as text and returns the full event stream.
+     * Constructs a `PUT` request that interprets the body as a text string and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all HttpEvents for the request, with a response body
+     * of type string.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1957,9 +2557,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `PUT` request that interprets the body as a JSON object and returns the full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request, with a response body of
+     * type `Object`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1974,9 +2579,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns the full event stream.
+     * Constructs a `PUT` request that interprets the body as a JSON object and returns the
+     * full event stream.
      *
-     * @return an `Observable` of all `HttpEvent`s for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of all `HttpEvents` for the request,
+     * with a response body in the requested type.
      */
     put<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -1987,9 +2598,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
     /**
-     * Construct a PUT request which interprets the body as an `ArrayBuffer` and returns the full response.
+     * Constructs a `PUT` request that interprets the body as an
+     * `ArrayBuffer` and returns an observable of the full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `ArrayBuffer`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with the response body as an `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -2004,9 +2620,15 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Construct a PUT request which interprets the body as a `Blob` and returns the full response.
+     * Constructs a `PUT` request that interprets the body as a `Blob` and returns the
+     * full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Blob`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -2021,9 +2643,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
-     * Construct a PUT request which interprets the body as text and returns the full response.
+     * Constructs a `PUT` request that interprets the body as a text stream and returns the
+     * full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `string`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with a response body of type string.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -2038,9 +2665,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns the full response.
+     * Constructs a `PUT` request that interprets the body as a JSON object and returns the full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with a response body
+     * of type 'Object`.
      */
     put(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -2055,9 +2687,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns the full response.
+     * Constructs a `PUT` request that interprets the body as a JSON object and returns the full HTTP response.
      *
-     * @return an `Observable` of the `HttpResponse` for the request, with a body type of `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request,
+     * with a response body in the requested type.
      */
     put<T>(url: string, body: any | null, options: {
         headers?: HttpHeaders | {
@@ -2072,9 +2709,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns it.
+     * Constructs a `PUT` request that interprets the body as a JSON object and returns the response
+     * body as a JSON object.
      *
-     * @return an `Observable` of the body as an `Object`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the response, with the response body as a JSON object.
      */
     put(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -2089,9 +2731,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Construct a PUT request which interprets the body as JSON and returns it.
+     * Constructs a `PUT` request that interprets the body as a JSON object
+     * and returns an observable of the response.
      *
-     * @return an `Observable` of the body as type `T`.
+     * @param url The endpoint URL.
+     * @param body The resources to add/update.
+     * @param options HTTP options
+     *
+     * @return An `Observable` of the `HTTPResponse` for the request, with a response body in the requested type.
      */
     put<T>(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
