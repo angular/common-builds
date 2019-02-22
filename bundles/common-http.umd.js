@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.5+26.sha-32ae84d.with-local-changes
+ * @license Angular v8.0.0-beta.5+27.sha-65d839d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -955,8 +955,8 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * Construct an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
-     * the given `body`. Basically, this clones the object and adds the body.
+     * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
+     * the given `body`. This function clones the object and adds the body.
      */
     function addBody(options, body) {
         return {
@@ -970,11 +970,46 @@
         };
     }
     /**
-     * Perform HTTP requests.
+     * Performs HTTP requests.
      *
      * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
-     * Each request method has multiple signatures, and the return type varies according to which
-     * signature is called (mainly the values of `observe` and `responseType`).
+     * Each request method has multiple signatures, and the return type varies based on
+     * the signature that is called (mainly the values of `observe` and `responseType`).
+     *
+     *
+     * @see [HTTP Guide](guide/http)
+     *
+     *
+     * @usageNotes
+     * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
+     *
+     * ### HTTP Request Example
+     *
+     * ```
+     *  // GET heroes whose name contains search term
+     * searchHeroes(term: string): observable<Hero[]>{
+     *
+     *  const params = new HttpParams({fromString: 'name=term'});
+     *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
+     * }
+     * ```
+     * ### JSONP Example
+     * ```
+     * requestJsonp(url, callback = 'callback') {
+     *  return this.httpClient.jsonp(this.heroesURL, callback);
+     * }
+     * ```
+     *
+     *
+     * ### PATCH Example
+     * ```
+     * // PATCH one of the heroes' name
+     * patchHero (id: number, heroName: string): Observable<{}> {
+     * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
+     *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
+     *    .pipe(catchError(this.handleError('patchHero')));
+     * }
+    * ```
      *
      * @publicApi
      */
@@ -983,41 +1018,36 @@
             this.handler = handler;
         }
         /**
-         * Constructs an `Observable` for a particular HTTP request that, when subscribed,
+         * Constructs an observable for a generic HTTP request that, when subscribed,
          * fires the request through the chain of registered interceptors and on to the
          * server.
          *
-         * This method can be called in one of two ways. Either an `HttpRequest`
-         * instance can be passed directly as the only parameter, or a method can be
-         * passed as the first parameter, a string URL as the second, and an
-         * options hash as the third.
+         * You can pass an `HttpRequest` directly as the only parameter. In this case,
+         * the call returns an observable of the raw `HttpEvent` stream.
          *
-         * If a `HttpRequest` object is passed directly, an `Observable` of the
-         * raw `HttpEvent` stream will be returned.
+         * Alternatively you can pass an HTTP method as the first parameter,
+         * a URL string as the second, and an options hash containing the request body as the third.
+         * See `addBody()`. In this case, the specified `responseType` and `observe` options determine the
+         * type of returned observable.
+         *   * The `responseType` value determines how a successful response body is parsed.
+         *   * If `responseType` is the default `json`, you can pass a type interface for the resulting
+         * object as a type parameter to the call.
          *
-         * If a request is instead built by providing a URL, the options object
-         * determines the return type of `request()`. In addition to configuring
-         * request parameters such as the outgoing headers and/or the body, the options
-         * hash specifies two key pieces of information about the request: the
-         * `responseType` and what to `observe`.
+         * The `observe` value determines the return type, according to what you are interested in
+         * observing.
+         *   * An `observe` value of events returns an observable of the raw `HttpEvent` stream, including
+         * progress events by default.
+         *   * An `observe` value of response returns an observable of `HttpResponse<T>`,
+         * where the `T` parameter depends on the `responseType` and any optionally provided type
+         * parameter.
+         *   * An `observe` value of body returns an observable of `<T>` with the same `T` body type.
          *
-         * The `responseType` value determines how a successful response body will be
-         * parsed. If `responseType` is the default `json`, a type interface for the
-         * resulting object may be passed as a type parameter to `request()`.
-         *
-         * The `observe` value determines the return type of `request()`, based on what
-         * the consumer is interested in observing. A value of `events` will return an
-         * `Observable<HttpEvent>` representing the raw `HttpEvent` stream,
-         * including progress events by default. A value of `response` will return an
-         * `Observable<HttpResponse<T>>` where the `T` parameter of `HttpResponse`
-         * depends on the `responseType` and any optionally provided type parameter.
-         * A value of `body` will return an `Observable<T>` with the same `T` body type.
          */
         HttpClient.prototype.request = function (first, url, options) {
             var _this = this;
             if (options === void 0) { options = {}; }
             var req;
-            // Firstly, check whether the primary argument is an instance of `HttpRequest`.
+            // First, check whether the primary argument is an instance of `HttpRequest`.
             if (first instanceof HttpRequest) {
                 // It is. The other arguments must be undefined (per the signatures) and can be
                 // ignored.
@@ -1025,7 +1055,7 @@
             }
             else {
                 // It's a string, so it represents a URL. Construct a request based on it,
-                // and incorporate the remaining arguments (assuming GET unless a method is
+                // and incorporate the remaining arguments (assuming `GET` unless a method is
                 // provided.
                 // Figure out the headers.
                 var headers = undefined;
@@ -1117,39 +1147,55 @@
             }
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * DELETE request to be executed on the server. See the individual overloads for
-         * details of `delete()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `DELETE` request to execute on the server. See the individual overloads for
+         * details on the return type.
+         *
+         * @param url     The endpoint URL.
+         * @param options The HTTP options to send with the request.
+         *
          */
         HttpClient.prototype.delete = function (url, options) {
             if (options === void 0) { options = {}; }
             return this.request('DELETE', url, options);
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * GET request to be executed on the server. See the individual overloads for
-         * details of `get()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `GET` request to execute on the server. See the individual overloads for
+         * details on the return type.
          */
         HttpClient.prototype.get = function (url, options) {
             if (options === void 0) { options = {}; }
             return this.request('GET', url, options);
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * HEAD request to be executed on the server. See the individual overloads for
-         * details of `head()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `HEAD` request to execute on the server. The `HEAD` method returns
+         * meta information about the resource without transferring the
+         * resource itself. See the individual overloads for
+         * details on the return type.
          */
         HttpClient.prototype.head = function (url, options) {
             if (options === void 0) { options = {}; }
             return this.request('HEAD', url, options);
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause a request
-         * with the special method `JSONP` to be dispatched via the interceptor pipeline.
+         * Constructs an `Observable` that, when subscribed, causes a request with the special method
+         * `JSONP` to be dispatched via the interceptor pipeline.
+         * The [JSONP pattern](https://en.wikipedia.org/wiki/JSONP) works around limitations of certain
+         * API endpoints that don't support newer,
+         * and preferable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protocol.
+         * JSONP treats the endpoint API as a JavaScript file and tricks the browser to process the
+         * requests even if the API endpoint is not located on the same domain (origin) as the client-side
+         * application making the request.
+         * The endpoint API must support JSONP callback for JSONP requests to work.
+         * The resource API returns the JSON response wrapped in a callback function.
+         * You can pass the callback function name as one of the query parameters.
+         * Note that JSONP requests can only be used with `GET` requests.
          *
-         * A suitable interceptor must be installed (e.g. via the `HttpClientJsonpModule`).
-         * If no such interceptor is reached, then the `JSONP` request will likely be
-         * rejected by the configured backend.
+         * @param url The resource URL.
+         * @param callbackParam The callback function name.
+         *
          */
         HttpClient.prototype.jsonp = function (url, callbackParam) {
             return this.request('JSONP', url, {
@@ -1159,36 +1205,40 @@
             });
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * OPTIONS request to be executed on the server. See the individual overloads for
-         * details of `options()`'s return type based on the provided options.
+         * Constructs an `Observable` that, when subscribed, causes the configured
+         * `OPTIONS` request to execute on the server. This method allows the client
+         * to determine the supported HTTP methods and other capabilites of an endpoint,
+         * without implying a resource action. See the individual overloads for
+         * details on the return type.
          */
         HttpClient.prototype.options = function (url, options) {
             if (options === void 0) { options = {}; }
             return this.request('OPTIONS', url, options);
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * PATCH request to be executed on the server. See the individual overloads for
-         * details of `patch()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `PATCH` request to execute on the server. See the individual overloads for
+         * details on the return type.
          */
         HttpClient.prototype.patch = function (url, body, options) {
             if (options === void 0) { options = {}; }
             return this.request('PATCH', url, addBody(options, body));
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * POST request to be executed on the server. See the individual overloads for
-         * details of `post()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `POST` request to execute on the server. The server responds with the location of
+         * the replaced resource. See the individual overloads for
+         * details on the return type.
          */
         HttpClient.prototype.post = function (url, body, options) {
             if (options === void 0) { options = {}; }
             return this.request('POST', url, addBody(options, body));
         };
         /**
-         * Constructs an `Observable` which, when subscribed, will cause the configured
-         * PUT request to be executed on the server. See the individual overloads for
-         * details of `put()`'s return type based on the provided options.
+         * Constructs an observable that, when subscribed, causes the configured
+         * `PUT` request to execute on the server. The `PUT` method replaces an existing resource
+         * with a new set of values.
+         * See the individual overloads for details on the return type.
          */
         HttpClient.prototype.put = function (url, body, options) {
             if (options === void 0) { options = {}; }
