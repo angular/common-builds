@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.6+66.sha-aa57bdb.with-local-changes
+ * @license Angular v8.0.0-beta.6+67.sha-04cf4ef.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4045,9 +4045,6 @@ NgClass.propDecorators = {
  * A more complete example with additional options:
  *
  * {\@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
- * A more complete example with ngModuleFactory:
- *
- * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * \@publicApi
  * \@ngModule CommonModule
@@ -7791,7 +7788,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.6+66.sha-aa57bdb.with-local-changes');
+const VERSION = new Version('8.0.0-beta.6+67.sha-04cf4ef.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

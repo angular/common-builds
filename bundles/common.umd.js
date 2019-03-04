@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.6+66.sha-aa57bdb.with-local-changes
+ * @license Angular v8.0.0-beta.6+67.sha-04cf4ef.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3311,10 +3311,6 @@
      * A more complete example with additional options:
      *
      * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
-
-     * A more complete example with ngModuleFactory:
-     *
-     * {@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
      *
      * @publicApi
      * @ngModule CommonModule
@@ -6353,7 +6349,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.6+66.sha-aa57bdb.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.6+67.sha-04cf4ef.with-local-changes');
 
     /**
      * @license
