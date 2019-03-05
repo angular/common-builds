@@ -57,10 +57,6 @@ import { Injector, NgModuleFactory, OnChanges, OnDestroy, SimpleChanges, Type, V
  * A more complete example with additional options:
  *
  * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
-
- * A more complete example with ngModuleFactory:
- *
- * {@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * @publicApi
  * @ngModule CommonModule
