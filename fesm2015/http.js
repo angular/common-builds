@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.6+85.sha-20a9dbe.with-local-changes
+ * @license Angular v8.0.0-beta.6+86.sha-881807d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1358,9 +1358,7 @@ HttpClient.ctorParameters = () => [
 /** @nocollapse */ HttpClient.ngInjectableDef = defineInjectable({ token: HttpClient, factory: function HttpClient_Factory(t) { return new (t || HttpClient)(inject(HttpHandler)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClient, [{
         type: Injectable
-    }], function () { return [{
-        type: HttpHandler
-    }]; }, null);
+    }], function () { return [{ type: HttpHandler }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -1620,15 +1618,10 @@ JsonpClientBackend.ctorParameters = () => [
 /** @nocollapse */ JsonpClientBackend.ngInjectableDef = defineInjectable({ token: JsonpClientBackend, factory: function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(inject(JsonpCallbackContext), inject(DOCUMENT)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
-    }], function () { return [{
-        type: JsonpCallbackContext
-    }, {
-        type: undefined,
-        decorators: [{
+    }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [DOCUMENT]
-            }]
-    }]; }, null);
+            }] }]; }, null);
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
@@ -1665,9 +1658,7 @@ JsonpInterceptor.ctorParameters = () => [
 /** @nocollapse */ JsonpInterceptor.ngInjectableDef = defineInjectable({ token: JsonpInterceptor, factory: function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(inject(JsonpClientBackend)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
-    }], function () { return [{
-        type: JsonpClientBackend
-    }]; }, null);
+    }], function () { return [{ type: JsonpClientBackend }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -2006,9 +1997,7 @@ HttpXhrBackend.ctorParameters = () => [
 /** @nocollapse */ HttpXhrBackend.ngInjectableDef = defineInjectable({ token: HttpXhrBackend, factory: function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(inject(XhrFactory)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
-    }], function () { return [{
-        type: XhrFactory
-    }]; }, null);
+    }], function () { return [{ type: XhrFactory }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -2082,25 +2071,16 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
 /** @nocollapse */ HttpXsrfCookieExtractor.ngInjectableDef = defineInjectable({ token: HttpXsrfCookieExtractor, factory: function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(inject(DOCUMENT), inject(PLATFORM_ID), inject(XSRF_COOKIE_NAME)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
-    }], function () { return [{
-        type: undefined,
-        decorators: [{
+    }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [DOCUMENT]
-            }]
-    }, {
-        type: undefined,
-        decorators: [{
+            }] }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [PLATFORM_ID]
-            }]
-    }, {
-        type: undefined,
-        decorators: [{
+            }] }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_COOKIE_NAME]
-            }]
-    }]; }, null);
+            }] }]; }, null);
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
@@ -2149,15 +2129,10 @@ HttpXsrfInterceptor.ctorParameters = () => [
 /** @nocollapse */ HttpXsrfInterceptor.ngInjectableDef = defineInjectable({ token: HttpXsrfInterceptor, factory: function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(inject(HttpXsrfTokenExtractor), inject(XSRF_HEADER_NAME)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
-    }], function () { return [{
-        type: HttpXsrfTokenExtractor
-    }, {
-        type: undefined,
-        decorators: [{
+    }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_HEADER_NAME]
-            }]
-    }]; }, null);
+            }] }]; }, null);
 
 /**
  * @fileoverview added by tsickle
@@ -2213,11 +2188,7 @@ HttpInterceptingHandler.ctorParameters = () => [
 /** @nocollapse */ HttpInterceptingHandler.ngInjectableDef = defineInjectable({ token: HttpInterceptingHandler, factory: function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(inject(HttpBackend), inject(Injector)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
-    }], function () { return [{
-        type: HttpBackend
-    }, {
-        type: Injector
-    }]; }, null);
+    }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null);
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
