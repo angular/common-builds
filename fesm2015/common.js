@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+8.sha-9a7f560.with-local-changes
+ * @license Angular v8.0.0-beta.8+11.sha-7b20cec.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, 
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * This class should not be used directly by an application developer. Instead, use
@@ -46,7 +46,7 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * `LocationStrategy` is responsible for representing and reading route state
@@ -97,7 +97,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -139,14 +139,18 @@ class Location {
         /** @type {?} */
         const browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this._platformStrategy.onPopState((ev) => {
+        this._platformStrategy.onPopState((/**
+         * @param {?} ev
+         * @return {?}
+         */
+        (ev) => {
             this._subject.emit({
                 'url': this.path(true),
                 'pop': true,
                 'state': ev.state,
                 'type': ev.type,
             });
-        });
+        }));
     }
     /**
      * Returns the normalized URL path.
@@ -313,7 +317,7 @@ function _stripIndexHtml(url) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -430,7 +434,7 @@ HashLocationStrategy.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@description
@@ -550,12 +554,12 @@ PathLocationStrategy.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -606,7 +610,7 @@ var localeEn = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -645,7 +649,7 @@ function registerLocaleData(data, localeId, extraData) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -801,7 +805,7 @@ const CURRENCIES_EN = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const NumberFormatStyle = {
@@ -1254,12 +1258,16 @@ function getLocaleExtraDayPeriodRules(locale) {
     checkFullData(data);
     /** @type {?} */
     const rules = data[19 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
-    return rules.map((rule) => {
+    return rules.map((/**
+     * @param {?} rule
+     * @return {?}
+     */
+    (rule) => {
         if (typeof rule === 'string') {
             return extractTime(rule);
         }
         return [extractTime(rule[0]), extractTime(rule[1])];
-    });
+    }));
 }
 /**
  * Day Periods indicate roughly how the day is broken up in different languages (e.g. morning,
@@ -1393,7 +1401,7 @@ function getNumberOfCurrencyDigits(code) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
@@ -1502,13 +1510,17 @@ function formatDate(value, format, locale, timezone) {
     }
     /** @type {?} */
     let text = '';
-    parts.forEach(value => {
+    parts.forEach((/**
+     * @param {?} value
+     * @return {?}
+     */
+    value => {
         /** @type {?} */
         const dateFormatter = getDateFormatter(value);
         text += dateFormatter ?
             dateFormatter(date, locale, dateTimezoneOffset) :
             value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-    });
+    }));
     return text;
 }
 /**
@@ -1593,9 +1605,14 @@ function getNamedFormat(locale, format) {
  */
 function formatDateTime(str, opt_values) {
     if (opt_values) {
-        str = str.replace(/\{([^}]+)}/g, function (match, key) {
+        str = str.replace(/\{([^}]+)}/g, (/**
+         * @param {?} match
+         * @param {?} key
+         * @return {?}
+         */
+        function (match, key) {
             return (opt_values != null && key in opt_values) ? opt_values[key] : match;
-        });
+        }));
     }
     return str;
 }
@@ -1649,7 +1666,12 @@ function formatFractionalSeconds(milliseconds, digits) {
  * @return {?}
  */
 function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
-    return function (date, locale) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) {
         /** @type {?} */
         let part = getDatePart(name, date);
         if (offset > 0 || part > -offset) {
@@ -1666,7 +1688,7 @@ function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
         /** @type {?} */
         const localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
         return padNumber(part, size, localeMinus, trim, negWrap);
-    };
+    });
 }
 /**
  * @param {?} part
@@ -1704,9 +1726,14 @@ function getDatePart(part, date) {
  * @return {?}
  */
 function dateStrGetter(name, width, form = FormStyle.Format, extended = false) {
-    return function (date, locale) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) {
         return getDateTranslation(date, locale, name, width, form, extended);
-    };
+    });
 }
 /**
  * Returns the locale translation of a date for a given form, type and width
@@ -1736,7 +1763,12 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                 const dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
                 /** @type {?} */
                 let result;
-                rules.forEach((rule, index) => {
+                rules.forEach((/**
+                 * @param {?} rule
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (rule, index) => {
                     if (Array.isArray(rule)) {
                         // morning, afternoon, evening, night
                         const { hours: hoursFrom, minutes: minutesFrom } = rule[0];
@@ -1754,7 +1786,7 @@ function getDateTranslation(date, locale, name, width, form, extended) {
                             result = dayPeriods[index];
                         }
                     }
-                });
+                }));
                 if (result) {
                     return result;
                 }
@@ -1781,7 +1813,13 @@ function getDateTranslation(date, locale, name, width, form, extended) {
  * @return {?}
  */
 function timeZoneGetter(width) {
-    return function (date, locale, offset) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @param {?} offset
+     * @return {?}
+     */
+    function (date, locale, offset) {
         /** @type {?} */
         const zone = -1 * offset;
         /** @type {?} */
@@ -1808,7 +1846,7 @@ function timeZoneGetter(width) {
             default:
                 throw new Error(`Unknown zone width "${width}"`);
         }
-    };
+    });
 }
 /** @type {?} */
 const JANUARY = 0;
@@ -1836,7 +1874,12 @@ function getThursdayThisWeek(datetime) {
  * @return {?}
  */
 function weekGetter(size, monthBased = false) {
-    return function (date, locale) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) {
         /** @type {?} */
         let result;
         if (monthBased) {
@@ -1856,7 +1899,7 @@ function weekGetter(size, monthBased = false) {
             result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
         }
         return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    };
+    });
 }
 /** @type {?} */
 const DATE_FORMATS = {};
@@ -2152,7 +2195,11 @@ function toDate(value) {
                   If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
                   is applied.
                   Note: ISO months are 0 for January, 1 for February, ... */
-            const [y, m, d] = value.split('-').map((val) => +val);
+            const [y, m, d] = value.split('-').map((/**
+             * @param {?} val
+             * @return {?}
+             */
+            (val) => +val));
             return new Date(y, m - 1, d);
         }
         /** @type {?} */
@@ -2213,7 +2260,7 @@ function isDate(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
@@ -2298,7 +2345,11 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
         const exponent = parsedNumber.exponent;
         /** @type {?} */
         let decimals = [];
-        isZero = digits.every(d => !d);
+        isZero = digits.every((/**
+         * @param {?} d
+         * @return {?}
+         */
+        d => !d));
         // pad zeros for small numbers
         for (; integerLen < minInt; integerLen++) {
             digits.unshift(0);
@@ -2657,7 +2708,14 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     const minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
     /** @type {?} */
-    const carry = digits.reduceRight(function (carry, d, i, digits) {
+    const carry = digits.reduceRight((/**
+     * @param {?} carry
+     * @param {?} d
+     * @param {?} i
+     * @param {?} digits
+     * @return {?}
+     */
+    function (carry, d, i, digits) {
         d = d + carry;
         digits[i] = d < 10 ? d : d - 10; // d % 10
         if (dropTrailingZeros) {
@@ -2670,7 +2728,7 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
             }
         }
         return d >= 10 ? 1 : 0; // Math.floor(d / 10);
-    }, 0);
+    }), 0);
     if (carry) {
         digits.unshift(carry);
         parsedNumber.integerLen++;
@@ -2691,7 +2749,7 @@ function parseIntAutoRadix(text) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @deprecated from v5
@@ -3163,7 +3221,7 @@ function getPluralCase(locale, nLike) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3192,7 +3250,7 @@ function parseCookieValue(cookieStr, name) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3324,10 +3382,21 @@ class StylingDiffer {
                 const tokens = ((/** @type {?} */ (this._lastSetValue))).split(/\s+/g);
                 if (this._options & 16 /* ForceAsMap */) {
                     finalValue = {};
-                    tokens.forEach((token, i) => ((/** @type {?} */ (finalValue)))[token] = true);
+                    tokens.forEach((/**
+                     * @param {?} token
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    (token, i) => ((/** @type {?} */ (finalValue)))[token] = true));
                 }
                 else {
-                    finalValue = tokens.reduce((str, token, i) => str + (i ? ' ' : '') + token);
+                    finalValue = tokens.reduce((/**
+                     * @param {?} str
+                     * @param {?} token
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    (str, token, i) => str + (i ? ' ' : '') + token));
                 }
                 break;
             // case 2: [input]="{key:value}"
@@ -3525,7 +3594,7 @@ function arrayEqualsArray(a, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used as a token for an injected service within the NgClass directive.
@@ -3611,13 +3680,25 @@ class NgClassR2Impl {
      * @return {?}
      */
     _applyKeyValueChanges(changes) {
-        changes.forEachAddedItem((record) => this._toggleClass(record.key, record.currentValue));
-        changes.forEachChangedItem((record) => this._toggleClass(record.key, record.currentValue));
-        changes.forEachRemovedItem((record) => {
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.key, record.currentValue)));
+        changes.forEachChangedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.key, record.currentValue)));
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => {
             if (record.previousValue) {
                 this._toggleClass(record.key, false);
             }
-        });
+        }));
     }
     /**
      * @private
@@ -3625,15 +3706,23 @@ class NgClassR2Impl {
      * @return {?}
      */
     _applyIterableChanges(changes) {
-        changes.forEachAddedItem((record) => {
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => {
             if (typeof record.item === 'string') {
                 this._toggleClass(record.item, true);
             }
             else {
                 throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
             }
-        });
-        changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
+        }));
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.item, false)));
     }
     /**
      * Applies a collection of CSS classes to the DOM element.
@@ -3649,10 +3738,18 @@ class NgClassR2Impl {
     _applyClasses(rawClassVal) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((klass) => this._toggleClass(klass, true));
+                ((/** @type {?} */ (rawClassVal))).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                (klass) => this._toggleClass(klass, true)));
             }
             else {
-                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, !!rawClassVal[klass]));
+                Object.keys(rawClassVal).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                klass => this._toggleClass(klass, !!rawClassVal[klass])));
             }
         }
     }
@@ -3666,10 +3763,18 @@ class NgClassR2Impl {
     _removeClasses(rawClassVal) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((klass) => this._toggleClass(klass, false));
+                ((/** @type {?} */ (rawClassVal))).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                (klass) => this._toggleClass(klass, false)));
             }
             else {
-                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, false));
+                Object.keys(rawClassVal).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                klass => this._toggleClass(klass, false)));
             }
         }
     }
@@ -3682,14 +3787,18 @@ class NgClassR2Impl {
     _toggleClass(klass, enabled) {
         klass = klass.trim();
         if (klass) {
-            klass.split(/\s+/g).forEach(klass => {
+            klass.split(/\s+/g).forEach((/**
+             * @param {?} klass
+             * @return {?}
+             */
+            klass => {
                 if (enabled) {
                     this._renderer.addClass(this._ngEl.nativeElement, klass);
                 }
                 else {
                     this._renderer.removeClass(this._ngEl.nativeElement, klass);
                 }
-            });
+            }));
         }
     }
 }
@@ -3778,7 +3887,7 @@ const NgClassImplProvider = NgClassImplProvider__PRE_R3__;
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*
  * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
@@ -3799,10 +3908,22 @@ const ngClassDirectiveDef__PRE_R3__ = undefined;
 // base class)
 /** @type {?} */
 const ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
-    type: (/** @type {?} */ (function () { })),
+    type: (/** @type {?} */ ((/**
+     * @return {?}
+     */
+    function () { }))),
     selectors: (/** @type {?} */ (null)),
-    factory: () => { },
-    hostBindings: function (rf, ctx, elIndex) {
+    factory: (/**
+     * @return {?}
+     */
+    () => { }),
+    hostBindings: (/**
+     * @param {?} rf
+     * @param {?} ctx
+     * @param {?} elIndex
+     * @return {?}
+     */
+    function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
             ɵelementStyling(null, null, null, ctx);
         }
@@ -3810,7 +3931,7 @@ const ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
             ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
             ɵelementStylingApply(elIndex, ctx);
         }
-    }
+    })
 });
 /** @type {?} */
 const ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
@@ -3905,7 +4026,7 @@ NgClass.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
@@ -4025,7 +4146,7 @@ NgComponentOutlet.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
@@ -4263,7 +4384,13 @@ class NgForOf {
     _applyChanges(changes) {
         /** @type {?} */
         const insertTuples = [];
-        changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
+        changes.forEachOperation((/**
+         * @param {?} item
+         * @param {?} adjustedPreviousIndex
+         * @param {?} currentIndex
+         * @return {?}
+         */
+        (item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
                 /** @type {?} */
                 const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), this._ngForOf, -1, -1), currentIndex);
@@ -4282,7 +4409,7 @@ class NgForOf {
                 const tuple = new RecordViewTuple(item, (/** @type {?} */ (view)));
                 insertTuples.push(tuple);
             }
-        });
+        }));
         for (let i = 0; i < insertTuples.length; i++) {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
@@ -4293,11 +4420,15 @@ class NgForOf {
             viewRef.context.count = ilen;
             viewRef.context.ngForOf = this._ngForOf;
         }
-        changes.forEachIdentityChange((record) => {
+        changes.forEachIdentityChange((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => {
             /** @type {?} */
             const viewRef = (/** @type {?} */ (this._viewContainer.get(record.currentIndex)));
             viewRef.context.$implicit = record.item;
-        });
+        }));
     }
     /**
      * @private
@@ -4359,7 +4490,7 @@ function getTypeName(type) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A structural directive that conditionally includes a template based on the value of
@@ -4622,7 +4753,7 @@ function assertTemplate(property, templateRef) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SwitchView {
     /**
@@ -4899,7 +5030,7 @@ NgSwitchDefault.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5043,7 +5174,7 @@ NgPluralCase.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used as a token for an injected service within the NgStyle directive.
@@ -5106,9 +5237,21 @@ class NgStyleR2Impl {
      * @return {?}
      */
     _applyChanges(changes) {
-        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
-        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
-        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, null)));
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, record.currentValue)));
+        changes.forEachChangedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, record.currentValue)));
     }
     /**
      * @private
@@ -5180,7 +5323,7 @@ const NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*
  * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
@@ -5201,10 +5344,22 @@ const ngStyleDirectiveDef__PRE_R3__ = undefined;
 // base class)
 /** @type {?} */
 const ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
-    type: (/** @type {?} */ (function () { })),
+    type: (/** @type {?} */ ((/**
+     * @return {?}
+     */
+    function () { }))),
     selectors: (/** @type {?} */ (null)),
-    factory: () => { },
-    hostBindings: function (rf, ctx, elIndex) {
+    factory: (/**
+     * @return {?}
+     */
+    () => { }),
+    hostBindings: (/**
+     * @param {?} rf
+     * @param {?} ctx
+     * @param {?} elIndex
+     * @return {?}
+     */
+    function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
             ɵelementStyling(null, null, null, ctx);
         }
@@ -5212,7 +5367,7 @@ const ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
             ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
             ɵelementStylingApply(elIndex, ctx);
         }
-    }
+    })
 });
 /** @type {?} */
 const ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
@@ -5307,7 +5462,7 @@ NgStyle.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5438,7 +5593,7 @@ NgTemplateOutlet.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -5461,7 +5616,7 @@ const COMMON_DIRECTIVES = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} type
@@ -5474,7 +5629,7 @@ function invalidPipeArgumentError(type, value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NumberFormatter {
     /**
@@ -5578,25 +5733,40 @@ const DATE_FORMATS$1 = {
  * @return {?}
  */
 function digitModifier(inner) {
-    return function (date, locale) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) {
         /** @type {?} */
         const result = inner(date, locale);
         return result.length == 1 ? '0' + result : result;
-    };
+    });
 }
 /**
  * @param {?} inner
  * @return {?}
  */
 function hourClockExtractor(inner) {
-    return function (date, locale) { return inner(date, locale).split(' ')[1]; };
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) { return inner(date, locale).split(' ')[1]; });
 }
 /**
  * @param {?} inner
  * @return {?}
  */
 function hourExtractor(inner) {
-    return function (date, locale) { return inner(date, locale).split(' ')[0]; };
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) { return inner(date, locale).split(' ')[0]; });
 }
 /**
  * @param {?} date
@@ -5615,12 +5785,17 @@ function timeZoneGetter$1(timezone) {
     // To workaround `Intl` API restriction for single timezone let format with 24 hours
     /** @type {?} */
     const options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
-    return function (date, locale) {
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    function (date, locale) {
         /** @type {?} */
         const result = intlDateFormat(date, locale, options);
         // Then extract first 3 letters that related to hours
         return result ? result.substring(3) : '';
-    };
+    });
 }
 /**
  * @param {?} options
@@ -5663,14 +5838,24 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return options.reduce((merged, opt) => (Object.assign({}, merged, opt)), {});
+    return options.reduce((/**
+     * @param {?} merged
+     * @param {?} opt
+     * @return {?}
+     */
+    (merged, opt) => (Object.assign({}, merged, opt))), {});
 }
 /**
  * @param {?} ret
  * @return {?}
  */
 function datePartGetterFactory(ret) {
-    return (date, locale) => intlDateFormat(date, locale, ret);
+    return (/**
+     * @param {?} date
+     * @param {?} locale
+     * @return {?}
+     */
+    (date, locale) => intlDateFormat(date, locale, ret));
 }
 /** @type {?} */
 const DATE_FORMATTER_CACHE = new Map();
@@ -5709,11 +5894,16 @@ function dateFormatter(format, date, locale) {
         }
         DATE_FORMATTER_CACHE.set(cacheKey, parts);
     }
-    return parts.reduce((text, part) => {
+    return parts.reduce((/**
+     * @param {?} text
+     * @param {?} part
+     * @return {?}
+     */
+    (text, part) => {
         /** @type {?} */
         const fn = DATE_FORMATS$1[part];
         return text + (fn ? fn(date, locale) : partToTime(part));
-    }, '');
+    }), '');
 }
 /**
  * @param {?} part
@@ -5736,7 +5926,7 @@ class DateFormatter {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -5839,7 +6029,11 @@ class DeprecatedDatePipe {
              * is applied
              * Note: ISO months are 0 for January, 1 for February, ...
              */
-            const [y, m, d] = value.split('-').map((val) => parseInt(val, 10));
+            const [y, m, d] = value.split('-').map((/**
+             * @param {?} val
+             * @return {?}
+             */
+            (val) => parseInt(val, 10)));
             date = new Date(y, m - 1, d);
         }
         else {
@@ -5888,7 +6082,7 @@ function isDate$1(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} pipe
@@ -6090,7 +6284,7 @@ DeprecatedCurrencyPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of deprecated i18n pipes that require intl api
@@ -6102,7 +6296,7 @@ const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPi
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ObservableStrategy {
     /**
@@ -6111,7 +6305,11 @@ class ObservableStrategy {
      * @return {?}
      */
     createSubscription(async, updateLatestValue) {
-        return async.subscribe({ next: updateLatestValue, error: (e) => { throw e; } });
+        return async.subscribe({ next: updateLatestValue, error: (/**
+             * @param {?} e
+             * @return {?}
+             */
+            (e) => { throw e; }) });
     }
     /**
      * @param {?} subscription
@@ -6131,7 +6329,11 @@ class PromiseStrategy {
      * @return {?}
      */
     createSubscription(async, updateLatestValue) {
-        return async.then(updateLatestValue, e => { throw e; });
+        return async.then(updateLatestValue, (/**
+         * @param {?} e
+         * @return {?}
+         */
+        e => { throw e; }));
     }
     /**
      * @param {?} subscription
@@ -6225,7 +6427,11 @@ class AsyncPipe {
     _subscribe(obj) {
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
+        this._subscription = this._strategy.createSubscription(obj, (/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => this._updateLatestValue(obj, value)));
     }
     /**
      * @private
@@ -6275,7 +6481,7 @@ AsyncPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Transforms text to all lower case.
@@ -6347,7 +6553,11 @@ class TitleCasePipe {
         if (typeof value !== 'string') {
             throw invalidPipeArgumentError(TitleCasePipe, value);
         }
-        return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
+        return value.replace(unicodeWordMatch, ((/**
+         * @param {?} txt
+         * @return {?}
+         */
+        txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase())));
     }
 }
 TitleCasePipe.decorators = [
@@ -6381,7 +6591,7 @@ UpperCasePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // clang-format off
 /**
@@ -6564,7 +6774,7 @@ DatePipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const _INTERPOLATION_REGEXP = /#/g;
@@ -6618,7 +6828,7 @@ I18nPluralPipe.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -6665,7 +6875,7 @@ I18nSelectPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -6695,7 +6905,7 @@ JsonPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template K, V
@@ -6752,9 +6962,13 @@ class KeyValuePipe {
         const differChanges = this.differ.diff((/** @type {?} */ (input)));
         if (differChanges) {
             this.keyValues = [];
-            differChanges.forEachItem((r) => {
+            differChanges.forEachItem((/**
+             * @param {?} r
+             * @return {?}
+             */
+            (r) => {
                 this.keyValues.push(makeKeyValuePair(r.key, (/** @type {?} */ (r.currentValue))));
-            });
+            }));
             this.keyValues.sort(compareFn);
         }
         return this.keyValues;
@@ -6810,7 +7024,7 @@ function defaultComparator(keyValueA, keyValueB) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -7078,7 +7292,7 @@ function strToNumber(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@ngModule CommonModule
@@ -7153,7 +7367,7 @@ SlicePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -7177,7 +7391,7 @@ const COMMON_PIPES = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Note: This does not contain the location providers,
 // as they need some platform specific implementations to work.
@@ -7224,7 +7438,7 @@ DeprecatedI18NPipesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
@@ -7239,7 +7453,7 @@ const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -7295,17 +7509,17 @@ function isPlatformWorkerUi(platformId) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.8+8.sha-9a7f560.with-local-changes');
+const VERSION = new Version('8.0.0-beta.8+11.sha-7b20cec.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -7318,7 +7532,10 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
+/** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: (/**
+     * @nocollapse @return {?}
+     */
+    () => new BrowserViewportScroller(inject(DOCUMENT), window)) });
 /**
  * Manages the scroll position for a browser window.
  */
@@ -7330,7 +7547,10 @@ class BrowserViewportScroller {
     constructor(document, window) {
         this.document = document;
         this.window = window;
-        this.offset = () => [0, 0];
+        this.offset = (/**
+         * @return {?}
+         */
+        () => [0, 0]);
     }
     /**
      * Configures the top offset used when scrolling to an anchor.
@@ -7341,7 +7561,10 @@ class BrowserViewportScroller {
      */
     setOffset(offset) {
         if (Array.isArray(offset)) {
-            this.offset = () => offset;
+            this.offset = (/**
+             * @return {?}
+             */
+            () => offset);
         }
         else {
             this.offset = offset;
@@ -7477,17 +7700,17 @@ class NullViewportScroller {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
