@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+1.sha-940fbf7.with-local-changes
+ * @license Angular v8.0.0-beta.8+9.sha-75748d6.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Controller to be injected into tests, that allows for mocking and flushing
@@ -24,7 +24,7 @@ class HttpTestingController {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A mock requests that was received and is ready to be answered.
@@ -223,7 +223,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A testing backend for `HttpClient` which both acts as an `HttpBackend`
@@ -249,13 +249,20 @@ class HttpClientTestingBackend {
      * @return {?}
      */
     handle(req) {
-        return new Observable((observer) => {
+        return new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             /** @type {?} */
             const testReq = new TestRequest(req, observer);
             this.open.push(testReq);
             observer.next((/** @type {?} */ ({ type: HttpEventType.Sent })));
-            return () => { testReq._cancelled = true; };
-        });
+            return (/**
+             * @return {?}
+             */
+            () => { testReq._cancelled = true; });
+        }));
     }
     /**
      * Helper function to search for requests in the list of open requests.
@@ -265,14 +272,26 @@ class HttpClientTestingBackend {
      */
     _match(match) {
         if (typeof match === 'string') {
-            return this.open.filter(testReq => testReq.request.urlWithParams === match);
+            return this.open.filter((/**
+             * @param {?} testReq
+             * @return {?}
+             */
+            testReq => testReq.request.urlWithParams === match));
         }
         else if (typeof match === 'function') {
-            return this.open.filter(testReq => match(testReq.request));
+            return this.open.filter((/**
+             * @param {?} testReq
+             * @return {?}
+             */
+            testReq => match(testReq.request)));
         }
         else {
-            return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.urlWithParams === match.url));
+            return this.open.filter((/**
+             * @param {?} testReq
+             * @return {?}
+             */
+            testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                (!match.url || testReq.request.urlWithParams === match.url)));
         }
     }
     /**
@@ -284,13 +303,17 @@ class HttpClientTestingBackend {
     match(match) {
         /** @type {?} */
         const results = this._match(match);
-        results.forEach(result => {
+        results.forEach((/**
+         * @param {?} result
+         * @return {?}
+         */
+        result => {
             /** @type {?} */
             const index = this.open.indexOf(result);
             if (index !== -1) {
                 this.open.splice(index, 1);
             }
-        });
+        }));
         return results;
     }
     /**
@@ -341,18 +364,26 @@ class HttpClientTestingBackend {
         // It's possible that some requests may be cancelled, and this is expected.
         // The user can ask to ignore open requests which have been cancelled.
         if (opts.ignoreCancelled) {
-            open = open.filter(testReq => !testReq.cancelled);
+            open = open.filter((/**
+             * @param {?} testReq
+             * @return {?}
+             */
+            testReq => !testReq.cancelled));
         }
         if (open.length > 0) {
             // Show the methods and URLs of open requests in the error, for convenience.
             /** @type {?} */
-            const requests = open.map(testReq => {
+            const requests = open.map((/**
+             * @param {?} testReq
+             * @return {?}
+             */
+            testReq => {
                 /** @type {?} */
                 const url = testReq.request.urlWithParams.split('?')[0];
                 /** @type {?} */
                 const method = testReq.request.method;
                 return `${method} ${url}`;
-            })
+            }))
                 .join(', ');
             throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
         }
@@ -384,7 +415,7 @@ HttpClientTestingBackend.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
@@ -410,12 +441,12 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
