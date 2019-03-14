@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.7+14.sha-8210bea.with-local-changes
+ * @license Angular v8.0.0-beta.8+18.sha-4b7ed54.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -11,7 +11,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -51,7 +51,7 @@ class HttpBackend {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * `HttpHeaders` class represents the header configuration options for an HTTP request.
@@ -78,9 +78,16 @@ class HttpHeaders {
             this.headers = new Map();
         }
         else if (typeof headers === 'string') {
-            this.lazyInit = () => {
+            this.lazyInit = (/**
+             * @return {?}
+             */
+            () => {
                 this.headers = new Map();
-                headers.split('\n').forEach(line => {
+                headers.split('\n').forEach((/**
+                 * @param {?} line
+                 * @return {?}
+                 */
+                line => {
                     /** @type {?} */
                     const index = line.indexOf(':');
                     if (index > 0) {
@@ -98,13 +105,20 @@ class HttpHeaders {
                             this.headers.set(key, [value]);
                         }
                     }
-                });
-            };
+                }));
+            });
         }
         else {
-            this.lazyInit = () => {
+            this.lazyInit = (/**
+             * @return {?}
+             */
+            () => {
                 this.headers = new Map();
-                Object.keys(headers).forEach(name => {
+                Object.keys(headers).forEach((/**
+                 * @param {?} name
+                 * @return {?}
+                 */
+                name => {
                     /** @type {?} */
                     let values = headers[name];
                     /** @type {?} */
@@ -116,8 +130,8 @@ class HttpHeaders {
                         this.headers.set(key, values);
                         this.maybeSetNormalizedName(name, key);
                     }
-                });
-            };
+                }));
+            });
         }
     }
     /**
@@ -224,7 +238,11 @@ class HttpHeaders {
             }
             this.lazyInit = null;
             if (!!this.lazyUpdate) {
-                this.lazyUpdate.forEach(update => this.applyUpdate(update));
+                this.lazyUpdate.forEach((/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => this.applyUpdate(update)));
                 this.lazyUpdate = null;
             }
         }
@@ -236,10 +254,14 @@ class HttpHeaders {
      */
     copyFrom(other) {
         other.init();
-        Array.from(other.headers.keys()).forEach(key => {
+        Array.from(other.headers.keys()).forEach((/**
+         * @param {?} key
+         * @return {?}
+         */
+        key => {
             this.headers.set(key, (/** @type {?} */ (other.headers.get(key))));
             this.normalizedNames.set(key, (/** @type {?} */ (other.normalizedNames.get(key))));
-        });
+        }));
     }
     /**
      * @private
@@ -292,7 +314,11 @@ class HttpHeaders {
                     if (!existing) {
                         return;
                     }
-                    existing = existing.filter(value => toDelete.indexOf(value) === -1);
+                    existing = existing.filter((/**
+                     * @param {?} value
+                     * @return {?}
+                     */
+                    value => toDelete.indexOf(value) === -1));
                     if (existing.length === 0) {
                         this.headers.delete(key);
                         this.normalizedNames.delete(key);
@@ -312,13 +338,17 @@ class HttpHeaders {
     forEach(fn) {
         this.init();
         Array.from(this.normalizedNames.keys())
-            .forEach(key => fn((/** @type {?} */ (this.normalizedNames.get(key))), (/** @type {?} */ (this.headers.get(key)))));
+            .forEach((/**
+         * @param {?} key
+         * @return {?}
+         */
+        key => fn((/** @type {?} */ (this.normalizedNames.get(key))), (/** @type {?} */ (this.headers.get(key))))));
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
@@ -359,7 +389,11 @@ function paramParser(rawParams, codec) {
     if (rawParams.length > 0) {
         /** @type {?} */
         const params = rawParams.split('&');
-        params.forEach((param) => {
+        params.forEach((/**
+         * @param {?} param
+         * @return {?}
+         */
+        (param) => {
             /** @type {?} */
             const eqIdx = param.indexOf('=');
             const [key, val] = eqIdx == -1 ?
@@ -369,7 +403,7 @@ function paramParser(rawParams, codec) {
             const list = map$$1.get(key) || [];
             list.push(val);
             map$$1.set(key, list);
-        });
+        }));
     }
     return map$$1;
 }
@@ -413,11 +447,15 @@ class HttpParams {
         }
         else if (!!options.fromObject) {
             this.map = new Map();
-            Object.keys(options.fromObject).forEach(key => {
+            Object.keys(options.fromObject).forEach((/**
+             * @param {?} key
+             * @return {?}
+             */
+            key => {
                 /** @type {?} */
                 const value = ((/** @type {?} */ (options.fromObject)))[key];
                 (/** @type {?} */ (this.map)).set(key, Array.isArray(value) ? value : [value]);
-            });
+            }));
         }
         else {
             this.map = null;
@@ -491,12 +529,20 @@ class HttpParams {
     toString() {
         this.init();
         return this.keys()
-            .map(key => {
+            .map((/**
+         * @param {?} key
+         * @return {?}
+         */
+        key => {
             /** @type {?} */
             const eKey = this.encoder.encodeKey(key);
-            return (/** @type {?} */ ((/** @type {?} */ (this.map)).get(key))).map(value => eKey + '=' + this.encoder.encodeValue(value))
+            return (/** @type {?} */ ((/** @type {?} */ (this.map)).get(key))).map((/**
+             * @param {?} value
+             * @return {?}
+             */
+            value => eKey + '=' + this.encoder.encodeValue(value)))
                 .join('&');
-        })
+        }))
             .join('&');
     }
     /**
@@ -521,8 +567,16 @@ class HttpParams {
         }
         if (this.cloneFrom !== null) {
             this.cloneFrom.init();
-            this.cloneFrom.keys().forEach(key => (/** @type {?} */ (this.map)).set(key, (/** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ (this.cloneFrom)).map)).get(key)))));
-            (/** @type {?} */ (this.updates)).forEach(update => {
+            this.cloneFrom.keys().forEach((/**
+             * @param {?} key
+             * @return {?}
+             */
+            key => (/** @type {?} */ (this.map)).set(key, (/** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ (this.cloneFrom)).map)).get(key))))));
+            (/** @type {?} */ (this.updates)).forEach((/**
+             * @param {?} update
+             * @return {?}
+             */
+            update => {
                 switch (update.op) {
                     case 'a':
                     case 's':
@@ -552,7 +606,7 @@ class HttpParams {
                             break;
                         }
                 }
-            });
+            }));
             this.cloneFrom = null;
         }
     }
@@ -560,7 +614,7 @@ class HttpParams {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Determine whether the given HTTP method may include a body.
@@ -828,13 +882,23 @@ class HttpRequest {
             // Set every requested header.
             headers =
                 Object.keys(update.setHeaders)
-                    .reduce((headers, name) => headers.set(name, (/** @type {?} */ (update.setHeaders))[name]), headers);
+                    .reduce((/**
+                 * @param {?} headers
+                 * @param {?} name
+                 * @return {?}
+                 */
+                (headers, name) => headers.set(name, (/** @type {?} */ (update.setHeaders))[name])), headers);
         }
         // Check whether the caller has asked to set params.
         if (update.setParams) {
             // Set every requested param.
             params = Object.keys(update.setParams)
-                .reduce((params, param) => params.set(param, (/** @type {?} */ (update.setParams))[param]), params);
+                .reduce((/**
+             * @param {?} params
+             * @param {?} param
+             * @return {?}
+             */
+            (params, param) => params.set(param, (/** @type {?} */ (update.setParams))[param])), params);
         }
         // Finally, construct the new HttpRequest using the pieces from above.
         return new HttpRequest(method, url, body, {
@@ -845,7 +909,7 @@ class HttpRequest {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const HttpEventType = {
@@ -1017,7 +1081,7 @@ class HttpErrorResponse extends HttpResponseBase {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
@@ -1167,7 +1231,11 @@ class HttpClient {
         // inside an Observable chain, which causes interceptors to be re-run on every
         // subscription (this also makes retries re-run the handler, including interceptors).
         /** @type {?} */
-        const events$ = of(req).pipe(concatMap((req) => this.handler.handle(req)));
+        const events$ = of(req).pipe(concatMap((/**
+         * @param {?} req
+         * @return {?}
+         */
+        (req) => this.handler.handle(req))));
         // If coming via the API signature which accepts a previously constructed HttpRequest,
         // the only option is to get the event stream. Otherwise, return the event stream if
         // that is what was requested.
@@ -1178,7 +1246,11 @@ class HttpClient {
         // case, the first step is to filter the event stream to extract a stream of
         // responses(s).
         /** @type {?} */
-        const res$ = (/** @type {?} */ (events$.pipe(filter((event) => event instanceof HttpResponse))));
+        const res$ = (/** @type {?} */ (events$.pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => event instanceof HttpResponse)))));
         // Decide which stream to return.
         switch (options.observe || 'body') {
             case 'body':
@@ -1189,33 +1261,49 @@ class HttpClient {
                 // requested type.
                 switch (req.responseType) {
                     case 'arraybuffer':
-                        return res$.pipe(map((res) => {
+                        return res$.pipe(map((/**
+                         * @param {?} res
+                         * @return {?}
+                         */
+                        (res) => {
                             // Validate that the body is an ArrayBuffer.
                             if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
                                 throw new Error('Response is not an ArrayBuffer.');
                             }
                             return res.body;
-                        }));
+                        })));
                     case 'blob':
-                        return res$.pipe(map((res) => {
+                        return res$.pipe(map((/**
+                         * @param {?} res
+                         * @return {?}
+                         */
+                        (res) => {
                             // Validate that the body is a Blob.
                             if (res.body !== null && !(res.body instanceof Blob)) {
                                 throw new Error('Response is not a Blob.');
                             }
                             return res.body;
-                        }));
+                        })));
                     case 'text':
-                        return res$.pipe(map((res) => {
+                        return res$.pipe(map((/**
+                         * @param {?} res
+                         * @return {?}
+                         */
+                        (res) => {
                             // Validate that the body is a string.
                             if (res.body !== null && typeof res.body !== 'string') {
                                 throw new Error('Response is not a string.');
                             }
                             return res.body;
-                        }));
+                        })));
                     case 'json':
                     default:
                         // No validation needed for JSON responses, as they can be of any type.
-                        return res$.pipe(map((res) => res.body));
+                        return res$.pipe(map((/**
+                         * @param {?} res
+                         * @return {?}
+                         */
+                        (res) => res.body)));
                 }
             case 'response':
                 // The response stream was requested directly, so return it.
@@ -1351,7 +1439,7 @@ HttpClient.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
@@ -1399,7 +1487,7 @@ NoopInterceptor.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Every request made through JSONP needs a callback name that's unique across the
 // whole page. Each request is assigned an id and the callback name is constructed
@@ -1463,7 +1551,11 @@ class JsonpClientBackend {
             throw new Error(JSONP_ERR_WRONG_RESPONSE_TYPE);
         }
         // Everything else happens inside the Observable boundary.
-        return new Observable((observer) => {
+        return new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             // The first step to make a request is to generate the callback name, and replace the
             // callback placeholder in the URL with the name. Care has to be taken here to ensure
             // a trailing &, if matched, gets inserted back into the URL in the correct place.
@@ -1490,7 +1582,11 @@ class JsonpClientBackend {
             // Set the response callback in this.callbackMap (which will be the window
             // object in the browser. The script being loaded via the <script> tag will
             // eventually call this callback.
-            this.callbackMap[callback] = (data) => {
+            this.callbackMap[callback] = (/**
+             * @param {?=} data
+             * @return {?}
+             */
+            (data) => {
                 // Data has been received from the JSONP script. Firstly, delete this callback.
                 delete this.callbackMap[callback];
                 // Next, make sure the request wasn't cancelled in the meantime.
@@ -1500,12 +1596,15 @@ class JsonpClientBackend {
                 // Set state to indicate data was received.
                 body = data;
                 finished = true;
-            };
+            });
             // cleanup() is a utility closure that removes the <script> from the page and
             // the response callback from the window. This logic is used in both the
             // success, error, and cancellation paths, so it's extracted out for convenience.
             /** @type {?} */
-            const cleanup = () => {
+            const cleanup = (/**
+             * @return {?}
+             */
+            () => {
                 // Remove the <script> tag if it's still on the page.
                 if (node.parentNode) {
                     node.parentNode.removeChild(node);
@@ -1513,13 +1612,17 @@ class JsonpClientBackend {
                 // Remove the response callback from the callbackMap (window object in the
                 // browser).
                 delete this.callbackMap[callback];
-            };
+            });
             // onLoad() is the success callback which runs after the response callback
             // if the JSONP script loads successfully. The event itself is unimportant.
             // If something went wrong, onLoad() may run without the response callback
             // having been invoked.
             /** @type {?} */
-            const onLoad = (event) => {
+            const onLoad = (/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => {
                 // Do nothing if the request has been cancelled.
                 if (cancelled) {
                     return;
@@ -1547,12 +1650,16 @@ class JsonpClientBackend {
                 }));
                 // Complete the stream, the response is over.
                 observer.complete();
-            };
+            });
             // onError() is the error callback, which runs if the script returned generates
             // a Javascript error. It emits the error via the Observable error channel as
             // a HttpErrorResponse.
             /** @type {?} */
-            const onError = (error) => {
+            const onError = (/**
+             * @param {?} error
+             * @return {?}
+             */
+            (error) => {
                 // If the request was already cancelled, no need to emit anything.
                 if (cancelled) {
                     return;
@@ -1564,7 +1671,7 @@ class JsonpClientBackend {
                     status: 0,
                     statusText: 'JSONP Error', url,
                 }));
-            };
+            });
             // Subscribe to both the success (load) and error events on the <script> tag,
             // and add it to the page.
             node.addEventListener('load', onLoad);
@@ -1573,7 +1680,10 @@ class JsonpClientBackend {
             // The request has now been successfully sent.
             observer.next({ type: HttpEventType.Sent });
             // Cancellation handler.
-            return () => {
+            return (/**
+             * @return {?}
+             */
+            () => {
                 // Track the cancellation so event listeners won't do anything even if already scheduled.
                 cancelled = true;
                 // Remove the event listeners so they won't run if the events later fire.
@@ -1581,8 +1691,8 @@ class JsonpClientBackend {
                 node.removeEventListener('error', onError);
                 // And finally, clean up the page.
                 cleanup();
-            };
-        });
+            });
+        }));
     }
 }
 JsonpClientBackend.decorators = [
@@ -1629,7 +1739,7 @@ JsonpInterceptor.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const XSSI_PREFIX = /^\)\]\}',?\n/;
@@ -1698,7 +1808,11 @@ class HttpXhrBackend {
             throw new Error(`Attempted to construct Jsonp request without JsonpClientModule installed.`);
         }
         // Everything happens on Observable subscription.
-        return new Observable((observer) => {
+        return new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        (observer) => {
             // Start by setting up the XHR object with request method, URL, and withCredentials flag.
             /** @type {?} */
             const xhr = this.xhrFactory.build();
@@ -1707,7 +1821,12 @@ class HttpXhrBackend {
                 xhr.withCredentials = true;
             }
             // Add all the requested headers.
-            req.headers.forEach((name, values) => xhr.setRequestHeader(name, values.join(',')));
+            req.headers.forEach((/**
+             * @param {?} name
+             * @param {?} values
+             * @return {?}
+             */
+            (name, values) => xhr.setRequestHeader(name, values.join(','))));
             // Add an Accept header if one isn't present already.
             if (!req.headers.has('Accept')) {
                 xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
@@ -1746,7 +1865,10 @@ class HttpXhrBackend {
             // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
             // state, and memoizes it into headerResponse.
             /** @type {?} */
-            const partialFromXhr = () => {
+            const partialFromXhr = (/**
+             * @return {?}
+             */
+            () => {
                 if (headerResponse !== null) {
                     return headerResponse;
                 }
@@ -1765,12 +1887,15 @@ class HttpXhrBackend {
                 // Construct the HttpHeaderResponse and memoize it.
                 headerResponse = new HttpHeaderResponse({ headers, status, statusText, url });
                 return headerResponse;
-            };
+            });
             // Next, a few closures are defined for the various events which XMLHttpRequest can
             // emit. This allows them to be unregistered as event listeners later.
             // First up is the load event, which represents a response being fully available.
             /** @type {?} */
-            const onLoad = () => {
+            const onLoad = (/**
+             * @return {?}
+             */
+            () => {
                 // Read response state from the memoized partial data.
                 let { headers, status, statusText, url } = partialFromXhr();
                 // The body will be read out if present.
@@ -1840,12 +1965,16 @@ class HttpXhrBackend {
                         url: url || undefined,
                     }));
                 }
-            };
+            });
             // The onError callback is called when something goes wrong at the network level.
             // Connection timeout, DNS error, offline, etc. These are actual errors, and are
             // transmitted on the error channel.
             /** @type {?} */
-            const onError = (error) => {
+            const onError = (/**
+             * @param {?} error
+             * @return {?}
+             */
+            (error) => {
                 const { url } = partialFromXhr();
                 /** @type {?} */
                 const res = new HttpErrorResponse({
@@ -1855,7 +1984,7 @@ class HttpXhrBackend {
                     url: url || undefined,
                 });
                 observer.error(res);
-            };
+            });
             // The sentHeaders flag tracks whether the HttpResponseHeaders event
             // has been sent on the stream. This is necessary to track if progress
             // is enabled since the event will be sent on only the first download
@@ -1865,7 +1994,11 @@ class HttpXhrBackend {
             // The download progress event handler, which is only registered if
             // progress events are enabled.
             /** @type {?} */
-            const onDownProgress = (event) => {
+            const onDownProgress = (/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => {
                 // Send the HttpResponseHeaders event if it hasn't been sent already.
                 if (!sentHeaders) {
                     observer.next(partialFromXhr());
@@ -1890,11 +2023,15 @@ class HttpXhrBackend {
                 }
                 // Finally, fire the event.
                 observer.next(progressEvent);
-            };
+            });
             // The upload progress event handler, which is only registered if
             // progress events are enabled.
             /** @type {?} */
-            const onUpProgress = (event) => {
+            const onUpProgress = (/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => {
                 // Upload progress events are simpler. Begin building the progress
                 // event.
                 /** @type {?} */
@@ -1909,7 +2046,7 @@ class HttpXhrBackend {
                 }
                 // Send the event.
                 observer.next(progress);
-            };
+            });
             // By default, register for load and error events.
             xhr.addEventListener('load', onLoad);
             xhr.addEventListener('error', onError);
@@ -1927,7 +2064,10 @@ class HttpXhrBackend {
             observer.next({ type: HttpEventType.Sent });
             // This is the return from the Observable function, which is the
             // request cancellation handler.
-            return () => {
+            return (/**
+             * @return {?}
+             */
+            () => {
                 // On a cancellation, remove all registered event listeners.
                 xhr.removeEventListener('error', onError);
                 xhr.removeEventListener('load', onLoad);
@@ -1939,8 +2079,8 @@ class HttpXhrBackend {
                 }
                 // Finally, abort the in-flight request.
                 xhr.abort();
-            };
-        });
+            });
+        }));
     }
 }
 HttpXhrBackend.decorators = [
@@ -1953,7 +2093,7 @@ HttpXhrBackend.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const XSRF_COOKIE_NAME = new InjectionToken('XSRF_COOKIE_NAME');
@@ -2061,7 +2201,7 @@ HttpXsrfInterceptor.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An injectable `HttpHandler` that applies multiple interceptors
@@ -2090,7 +2230,12 @@ class HttpInterceptingHandler {
         if (this.chain === null) {
             /** @type {?} */
             const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
-            this.chain = interceptors.reduceRight((next, interceptor) => new HttpInterceptorHandler(next, interceptor), this.backend);
+            this.chain = interceptors.reduceRight((/**
+             * @param {?} next
+             * @param {?} interceptor
+             * @return {?}
+             */
+            (next, interceptor) => new HttpInterceptorHandler(next, interceptor)), this.backend);
         }
         return this.chain.handle(req);
     }
@@ -2234,12 +2379,12 @@ HttpClientJsonpModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
