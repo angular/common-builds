@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+9.sha-75748d6.with-local-changes
+ * @license Angular v8.0.0-beta.8+33.sha-7c297e0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -385,7 +385,7 @@ class HttpUrlEncodingCodec {
  */
 function paramParser(rawParams, codec) {
     /** @type {?} */
-    const map$$1 = new Map();
+    const map = new Map();
     if (rawParams.length > 0) {
         /** @type {?} */
         const params = rawParams.split('&');
@@ -400,12 +400,12 @@ function paramParser(rawParams, codec) {
                 [codec.decodeKey(param), ''] :
                 [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))];
             /** @type {?} */
-            const list = map$$1.get(key) || [];
+            const list = map.get(key) || [];
             list.push(val);
-            map$$1.set(key, list);
+            map.set(key, list);
         }));
     }
-    return map$$1;
+    return map;
 }
 /**
  * @param {?} v
