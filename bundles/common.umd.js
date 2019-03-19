@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+80.sha-bc99b77.with-local-changes
+ * @license Angular v8.0.0-beta.8+82.sha-8714daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3134,11 +3134,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                i0.ɵelementStyling(null, null, null, ctx);
+                i0.ɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                i0.ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
-                i0.ɵelementStylingApply(elIndex, ctx);
+                i0.ɵelementHostStylingMap(ctx.getValue());
+                i0.ɵelementHostStylingApply();
             }
         }
     });
@@ -4338,11 +4338,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                i0.ɵelementStyling(null, null, null, ctx);
+                i0.ɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                i0.ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
-                i0.ɵelementStylingApply(elIndex, ctx);
+                i0.ɵelementHostStylingMap(null, ctx.getValue());
+                i0.ɵelementHostStylingApply();
             }
         }
     });
@@ -6243,7 +6243,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.8+80.sha-bc99b77.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.8+82.sha-8714daf.with-local-changes');
 
     /**
      * @license
