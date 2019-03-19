@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.8+80.sha-bc99b77.with-local-changes
+ * @license Angular v8.0.0-beta.8+82.sha-8714daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3178,11 +3178,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ɵelementStyling(null, null, null, ctx);
+                core.ɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
-                core.ɵelementStylingApply(elIndex, ctx);
+                core.ɵelementHostStylingMap(ctx.getValue());
+                core.ɵelementHostStylingApply();
             }
         }
     });
@@ -4428,11 +4428,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ɵelementStyling(null, null, null, ctx);
+                core.ɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
-                core.ɵelementStylingApply(elIndex, ctx);
+                core.ɵelementHostStylingMap(null, ctx.getValue());
+                core.ɵelementHostStylingApply();
             }
         }
     });
@@ -6335,7 +6335,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.8+80.sha-bc99b77.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.8+82.sha-8714daf.with-local-changes');
 
     /**
      * @license
