@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.8+79.sha-a3ec058.with-local-changes
+ * @license Angular v8.0.0-beta.8+83.sha-067657c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementStyling, ɵelementStylingMap, ɵelementStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementHostStyling, ɵelementHostStylingMap, ɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3167,11 +3167,11 @@ var ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementStyling(null, null, null, ctx);
+            ɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
-            ɵelementStylingApply(elIndex, ctx);
+            ɵelementHostStylingMap(ctx.getValue());
+            ɵelementHostStylingApply();
         }
     }
 });
@@ -4417,11 +4417,11 @@ var ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementStyling(null, null, null, ctx);
+            ɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
-            ɵelementStylingApply(elIndex, ctx);
+            ɵelementHostStylingMap(null, ctx.getValue());
+            ɵelementHostStylingApply();
         }
     }
 });
@@ -6324,7 +6324,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.8+79.sha-a3ec058.with-local-changes');
+var VERSION = new Version('8.0.0-beta.8+83.sha-067657c.with-local-changes');
 
 /**
  * @license

@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.8+79.sha-a3ec058.with-local-changes
+ * @license Angular v8.0.0-beta.8+83.sha-067657c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementStyling, ɵelementStylingMap, ɵelementStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementHostStyling, ɵelementHostStylingMap, ɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3925,11 +3925,11 @@ const ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
      */
     function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementStyling(null, null, null, ctx);
+            ɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementStylingMap(elIndex, ctx.getValue(), null, ctx);
-            ɵelementStylingApply(elIndex, ctx);
+            ɵelementHostStylingMap(ctx.getValue());
+            ɵelementHostStylingApply();
         }
     })
 });
@@ -5361,11 +5361,11 @@ const ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
      */
     function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementStyling(null, null, null, ctx);
+            ɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementStylingMap(elIndex, null, ctx.getValue(), ctx);
-            ɵelementStylingApply(elIndex, ctx);
+            ɵelementHostStylingMap(null, ctx.getValue());
+            ɵelementHostStylingApply();
         }
     })
 });
@@ -7515,7 +7515,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.8+79.sha-a3ec058.with-local-changes');
+const VERSION = new Version('8.0.0-beta.8+83.sha-067657c.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
