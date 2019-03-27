@@ -19,10 +19,8 @@ export interface HttpParameterCodec {
     decodeValue(value: string): string;
 }
 /**
- * A class that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values. If you pass URL query parameters
- * without encoding, the query parameters can get misinterpreted at the receiving end.
- * Use the `HttpParameterCodec` class to encode and decode the query-string values.
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values.
  *
  * @publicApi
  */
