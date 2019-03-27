@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+16.sha-b17d1a9.with-local-changes
+ * @license Angular v8.0.0-beta.10+12.sha-ac3ce0d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3423,10 +3423,8 @@ export declare interface HttpSentEvent {
 }
 
 /**
- * A class that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values. If you pass URL query parameters
- * without encoding, the query parameters can get misinterpreted at the receiving end.
- * Use the `HttpParameterCodec` class to encode and decode the query-string values.
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values.
  *
  * @publicApi
  */
