@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+12.sha-ac3ce0d.with-local-changes
+ * @license Angular v8.0.0-beta.10+17.sha-f8c7c3c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -351,8 +351,10 @@ class HttpHeaders {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values.
+ * A class that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values. If you pass URL query parameters
+ * without encoding, the query parameters can get misinterpreted at the receiving end.
+ * Use the `HttpParameterCodec` class to encode and decode the query-string values.
  *
  * \@publicApi
  */
