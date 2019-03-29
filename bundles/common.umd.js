@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.11+22.sha-cfa6ab1.with-local-changes
+ * @license Angular v7.2.11+24.sha-7671c73.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5945,7 +5945,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('7.2.11+22.sha-cfa6ab1.with-local-changes');
+    var VERSION = new core.Version('7.2.11+24.sha-7671c73.with-local-changes');
 
     /**
      * @license
@@ -5965,16 +5965,20 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = core.defineInjectable({ providedIn: 'root', factory: function () { return new BrowserViewportScroller(core.inject(DOCUMENT), window); } });
+        ViewportScroller.ngInjectableDef = core.defineInjectable({
+            providedIn: 'root',
+            factory: function () { return new BrowserViewportScroller(core.inject(DOCUMENT), window, core.inject(core.ErrorHandler)); }
+        });
         return ViewportScroller;
     }());
     /**
      * Manages the scroll position for a browser window.
      */
     var BrowserViewportScroller = /** @class */ (function () {
-        function BrowserViewportScroller(document, window) {
+        function BrowserViewportScroller(document, window, errorHandler) {
             this.document = document;
             this.window = window;
+            this.errorHandler = errorHandler;
             this.offset = function () { return [0, 0]; };
         }
         /**
@@ -6018,15 +6022,28 @@
          */
         BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
             if (this.supportScrollRestoration()) {
-                var elSelectedById = this.document.querySelector("#" + anchor);
-                if (elSelectedById) {
-                    this.scrollToElement(elSelectedById);
-                    return;
+                // Escape anything passed to `querySelector` as it can throw errors and stop the application
+                // from working if invalid values are passed.
+                if (this.window.CSS && this.window.CSS.escape) {
+                    anchor = this.window.CSS.escape(anchor);
                 }
-                var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
-                if (elSelectedByName) {
-                    this.scrollToElement(elSelectedByName);
-                    return;
+                else {
+                    anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
+                }
+                try {
+                    var elSelectedById = this.document.querySelector("#" + anchor);
+                    if (elSelectedById) {
+                        this.scrollToElement(elSelectedById);
+                        return;
+                    }
+                    var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
+                    if (elSelectedByName) {
+                        this.scrollToElement(elSelectedByName);
+                        return;
+                    }
+                }
+                catch (e) {
+                    this.errorHandler.handleError(e);
                 }
             }
         };

@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { ErrorHandler } from '@angular/core';
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
@@ -48,8 +49,9 @@ export declare abstract class ViewportScroller {
 export declare class BrowserViewportScroller implements ViewportScroller {
     private document;
     private window;
+    private errorHandler;
     private offset;
-    constructor(document: any, window: any);
+    constructor(document: any, window: any, errorHandler: ErrorHandler);
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @param offset A position in screen coordinates (a tuple with x and y values)
