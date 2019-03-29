@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+53.sha-303eae9.with-local-changes
+ * @license Angular v8.0.0-beta.10+55.sha-12c9bd2.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2551,7 +2551,6 @@ export declare class UpperCasePipe implements PipeTransform {
  * @publicApi
  */
 export declare const VERSION: Version;
-
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.

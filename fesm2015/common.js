@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.10+53.sha-303eae9.with-local-changes
+ * @license Angular v8.0.0-beta.10+55.sha-12c9bd2.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementHostStyling, ɵelementHostStylingMap, ɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementHostStyling, ɵelementHostStylingMap, ɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -7560,7 +7560,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.10+53.sha-303eae9.with-local-changes');
+const VERSION = new Version('8.0.0-beta.10+55.sha-12c9bd2.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -7577,10 +7577,13 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: (/**
+/** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({
+    providedIn: 'root',
+    factory: (/**
      * @nocollapse @return {?}
      */
-    () => new BrowserViewportScroller(inject(DOCUMENT), window)) });
+    () => new BrowserViewportScroller(inject(DOCUMENT), window, inject(ErrorHandler)))
+});
 /**
  * Manages the scroll position for a browser window.
  */
@@ -7588,10 +7591,12 @@ class BrowserViewportScroller {
     /**
      * @param {?} document
      * @param {?} window
+     * @param {?} errorHandler
      */
-    constructor(document, window) {
+    constructor(document, window, errorHandler) {
         this.document = document;
         this.window = window;
+        this.errorHandler = errorHandler;
         this.offset = (/**
          * @return {?}
          */
@@ -7644,17 +7649,30 @@ class BrowserViewportScroller {
      */
     scrollToAnchor(anchor) {
         if (this.supportScrollRestoration()) {
-            /** @type {?} */
-            const elSelectedById = this.document.querySelector(`#${anchor}`);
-            if (elSelectedById) {
-                this.scrollToElement(elSelectedById);
-                return;
+            // Escape anything passed to `querySelector` as it can throw errors and stop the application
+            // from working if invalid values are passed.
+            if (this.window.CSS && this.window.CSS.escape) {
+                anchor = this.window.CSS.escape(anchor);
             }
-            /** @type {?} */
-            const elSelectedByName = this.document.querySelector(`[name='${anchor}']`);
-            if (elSelectedByName) {
-                this.scrollToElement(elSelectedByName);
-                return;
+            else {
+                anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
+            }
+            try {
+                /** @type {?} */
+                const elSelectedById = this.document.querySelector(`#${anchor}`);
+                if (elSelectedById) {
+                    this.scrollToElement(elSelectedById);
+                    return;
+                }
+                /** @type {?} */
+                const elSelectedByName = this.document.querySelector(`[name='${anchor}']`);
+                if (elSelectedByName) {
+                    this.scrollToElement(elSelectedByName);
+                    return;
+                }
+            }
+            catch (e) {
+                this.errorHandler.handleError(e);
             }
         }
     }
