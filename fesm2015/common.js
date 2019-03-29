@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+47.sha-eb0e29b.with-local-changes
+ * @license Angular v8.0.0-beta.10+51.sha-22b89ea.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -878,9 +878,13 @@ FormStyle[FormStyle.Format] = 'Format';
 FormStyle[FormStyle.Standalone] = 'Standalone';
 /** @enum {number} */
 const TranslationWidth = {
+    /** 1 character for `en-US`. For example: 'S' */
     Narrow: 0,
+    /** 3 characters for `en-US`. For example: 'Sun' */
     Abbreviated: 1,
+    /** Full length for `en-US`. For example: "Sunday" */
     Wide: 2,
+    /** 2 characters for `en-US`, For example: "Su" */
     Short: 3,
 };
 TranslationWidth[TranslationWidth.Narrow] = 'Narrow';
@@ -889,9 +893,25 @@ TranslationWidth[TranslationWidth.Wide] = 'Wide';
 TranslationWidth[TranslationWidth.Short] = 'Short';
 /** @enum {number} */
 const FormatWidth = {
+    /**
+     * For `en-US`, 'M/d/yy, h:mm a'`
+     * (Example: `6/15/15, 9:03 AM`)
+     */
     Short: 0,
+    /**
+     * For `en-US`, `'MMM d, y, h:mm:ss a'`
+     * (Example: `Jun 15, 2015, 9:03:01 AM`)
+     */
     Medium: 1,
+    /**
+     * For `en-US`, `'MMMM d, y, h:mm:ss a z'`
+     * (Example: `June 15, 2015 at 9:03:01 AM GMT+1`)
+     */
     Long: 2,
+    /**
+     * For `en-US`, `'EEEE, MMMM d, y, h:mm:ss a zzzz'`
+     * (Example: `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00`)
+     */
     Full: 3,
 };
 FormatWidth[FormatWidth.Short] = 'Short';
@@ -900,19 +920,77 @@ FormatWidth[FormatWidth.Long] = 'Long';
 FormatWidth[FormatWidth.Full] = 'Full';
 /** @enum {number} */
 const NumberSymbol = {
+    /**
+     * Decimal separator.
+     * For `en-US`, the dot character.
+     * Example : 2,345`.`67
+     */
     Decimal: 0,
+    /**
+     * Grouping separator, typically for thousands.
+     * For `en-US`, the comma character.
+     * Example: 2`,`345.67
+     */
     Group: 1,
+    /**
+     * List-item separator.
+     * Example: "one, two, and three"
+     */
     List: 2,
+    /**
+     * Sign for percentage (out of 100).
+     * Example: 23.4%
+     */
     PercentSign: 3,
+    /**
+     * Sign for positive numbers.
+     * Example: +23
+     */
     PlusSign: 4,
+    /**
+     * Sign for negative numbers.
+     * Example: -23
+     */
     MinusSign: 5,
+    /**
+     * Computer notation for exponential value (n times a power of 10).
+     * Example: 1.2E3
+     */
     Exponential: 6,
+    /**
+     * Human-readable format of exponential.
+     * Example: 1.2x103
+     */
     SuperscriptingExponent: 7,
+    /**
+     * Sign for permille (out of 1000).
+     * Example: 23.4‰
+     */
     PerMille: 8,
+    /**
+     * Infinity, can be used with plus and minus.
+     * Example: ∞, +∞, -∞
+     */
     Infinity: 9,
+    /**
+     * Not a number.
+     * Example: NaN
+     */
     NaN: 10,
+    /**
+     * Symbol used between time units.
+     * Example: 10:52
+     */
     TimeSeparator: 11,
+    /**
+     * Decimal separator for currency values (fallback to `Decimal`).
+     * Example: $2,345.67
+     */
     CurrencyDecimal: 12,
+    /**
+     * Group separator for currency values (fallback to `Group`).
+     * Example: $2,345.67
+     */
     CurrencyGroup: 13,
 };
 NumberSymbol[NumberSymbol.Decimal] = 'Decimal';
@@ -947,23 +1025,27 @@ WeekDay[WeekDay.Thursday] = 'Thursday';
 WeekDay[WeekDay.Friday] = 'Friday';
 WeekDay[WeekDay.Saturday] = 'Saturday';
 /**
- * The locale id for the chosen locale (e.g `en-GB`).
+ * Retrieves the locale ID from the currently loaded locale.
+ * The loaded locale could be, for example, a global one rather than a regional one.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code, such as `fr-FR`.
+ * @return {?} The locale code. For example, `fr`.
  */
 function getLocaleId(locale) {
     return findLocaleData(locale)[0 /* LocaleId */];
 }
 /**
- * Periods of the day (e.g. `[AM, PM]` for en-US).
+ * Retrieves day period strings for the given locale.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} formStyle
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} formStyle The required grammatical form.
+ * @param {?} width The required character width.
+ * @return {?} An array of localized period strings. For example, `[AM, PM]` for `en-US`.
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     /** @type {?} */
@@ -975,13 +1057,16 @@ function getLocaleDayPeriods(locale, formStyle, width) {
     return getLastDefinedValue(amPm, width);
 }
 /**
- * Days of the week for the Gregorian calendar (e.g. `[Sunday, Monday, ... Saturday]` for en-US).
+ * Retrieves days of the week for the given locale, using the Gregorian calendar.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} formStyle
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} formStyle The required grammatical form.
+ * @param {?} width The required character width.
+ * @return {?} An array of localized name strings.
+ * For example,`[Sunday, Monday, ... Saturday]` for `en-US`.
  */
 function getLocaleDayNames(locale, formStyle, width) {
     /** @type {?} */
@@ -993,13 +1078,16 @@ function getLocaleDayNames(locale, formStyle, width) {
     return getLastDefinedValue(days, width);
 }
 /**
- * Months of the year for the Gregorian calendar (e.g. `[January, February, ...]` for en-US).
+ * Retrieves months of the year for the given locale, using the Gregorian calendar.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} formStyle
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} formStyle The required grammatical form.
+ * @param {?} width The required character width.
+ * @return {?} An array of localized name strings.
+ * For example,  `[January, February, ...]` for `en-US`.
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     /** @type {?} */
@@ -1011,12 +1099,14 @@ function getLocaleMonthNames(locale, formStyle, width) {
     return getLastDefinedValue(months, width);
 }
 /**
- * Eras for the Gregorian calendar (e.g. AD/BC).
+ * Retrieves Gregorian-calendar eras for the given locale.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} width The required character width.
+ * @return {?} An array of localized era strings.
+ * For example, `[AD, BC]` for `en-US`.
  */
 function getLocaleEraNames(locale, width) {
     /** @type {?} */
@@ -1026,12 +1116,15 @@ function getLocaleEraNames(locale, width) {
     return getLastDefinedValue(erasData, width);
 }
 /**
- * First day of the week for this locale, based on english days (Sunday = 0, Monday = 1, ...).
- * For example in french the value would be 1 because the first day of the week is Monday.
+ * Retrieves the first day of the week for the given locale.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} A day index number, using the 0-based week-day index for `en-US`
+ * (Sunday = 0, Monday = 1, ...).
+ * For example, for `fr-FR`, returns 1 to indicate that the first day is Monday.
  */
 function getLocaleFirstDayOfWeek(locale) {
     /** @type {?} */
@@ -1039,13 +1132,13 @@ function getLocaleFirstDayOfWeek(locale) {
     return data[8 /* FirstDayOfWeek */];
 }
 /**
- * Range of days in the week that represent the week-end for this locale, based on english days
- * (Sunday = 0, Monday = 1, ...).
- * For example in english the value would be [6,0] for Saturday to Sunday.
+ * Range of week days that are considered the week-end for the given locale.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The range of day values, `[startDay, endDay]`.
  */
 function getLocaleWeekEndRange(locale) {
     /** @type {?} */
@@ -1053,32 +1146,14 @@ function getLocaleWeekEndRange(locale) {
     return data[9 /* WeekendRange */];
 }
 /**
- * Date format that depends on the locale.
+ * Retrieves a localized date-value formating string.
  *
- * There are four basic date formats:
- * - `full` should contain long-weekday (EEEE), year (y), long-month (MMMM), day (d).
- *
- *  For example, English uses `EEEE, MMMM d, y`, corresponding to a date like
- *  "Tuesday, September 14, 1999".
- *
- * - `long` should contain year, long-month, day.
- *
- *  For example, `MMMM d, y`, corresponding to a date like "September 14, 1999".
- *
- * - `medium` should contain year, abbreviated-month (MMM), day.
- *
- *  For example, `MMM d, y`, corresponding to a date like "Sep 14, 1999".
- *  For languages that do not use abbreviated months, use the numeric month (MM/M). For example,
- *  `y/MM/dd`, corresponding to a date like "1999/09/14".
- *
- * - `short` should contain year, numeric-month (MM/M), and day.
- *
- *  For example, `M/d/yy`, corresponding to a date like "9/14/99".
+ * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} width The format type.
+ * @return {?} The localized formating string.
  */
 function getLocaleDateFormat(locale, width) {
     /** @type {?} */
@@ -1086,27 +1161,13 @@ function getLocaleDateFormat(locale, width) {
     return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
- * Time format that depends on the locale.
+ * Retrieves a localized time-value formatting string.
  *
- * The standard formats include four basic time formats:
- * - `full` should contain hour (h/H), minute (mm), second (ss), and zone (zzzz).
- * - `long` should contain hour, minute, second, and zone (z)
- * - `medium` should contain hour, minute, second.
- * - `short` should contain hour, minute.
- *
- * Note: The patterns depend on whether the main country using your language uses 12-hour time or
- * not:
- * - For 12-hour time, use a pattern like `hh:mm a` using h to mean a 12-hour clock cycle running
- * 1 through 12 (midnight plus 1 minute is 12:01), or using K to mean a 12-hour clock cycle
- * running 0 through 11 (midnight plus 1 minute is 0:01).
- * - For 24-hour time, use a pattern like `HH:mm` using H to mean a 24-hour clock cycle running 0
- * through 23 (midnight plus 1 minute is 0:01), or using k to mean a 24-hour clock cycle running
- * 1 through 24 (midnight plus 1 minute is 24:01).
- *
+ * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  * \@publicApi
- * @param {?} locale
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} width The format type.
+ * @return {?} The localized formatting string.
  */
 function getLocaleTimeFormat(locale, width) {
     /** @type {?} */
@@ -1114,32 +1175,14 @@ function getLocaleTimeFormat(locale, width) {
     return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
- * Date-time format that depends on the locale.
+ * Retrieves a localized date-time formatting string.
  *
- * The date-time pattern shows how to combine separate patterns for date (represented by {1})
- * and time (represented by {0}) into a single pattern. It usually doesn't need to be changed.
- * What you want to pay attention to are:
- * - possibly removing a space for languages that don't use it, such as many East Asian languages
- * - possibly adding a comma, other punctuation, or a combining word
- *
- * For example:
- * - English uses `{1} 'at' {0}` or `{1}, {0}` (depending on date style), while Japanese uses
- *  `{1}{0}`.
- * - An English formatted date-time using the combining pattern `{1}, {0}` could be
- *  `Dec 10, 2010, 3:59:49 PM`. Notice the comma and space between the date portion and the time
- *  portion.
- *
- * There are four formats (`full`, `long`, `medium`, `short`); the determination of which to use
- * is normally based on the date style. For example, if the date has a full month and weekday
- * name, the full combining pattern will be used to combine that with a time. If the date has
- * numeric month, the short version of the combining pattern will be used to combine that with a
- * time. English uses `{1} 'at' {0}` for full and long styles, and `{1}, {0}` for medium and short
- * styles.
+ * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} width The format type.
+ * @return {?} The localized formatting string.
  */
 function getLocaleDateTimeFormat(locale, width) {
     /** @type {?} */
@@ -1149,13 +1192,13 @@ function getLocaleDateTimeFormat(locale, width) {
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
- * Number symbol that can be used to replace placeholders in number formats.
- * See {\@link NumberSymbol} for more information.
+ * Retrieves a localized number symbol that can be used to replace placeholders in number formats.
+ * @see `NumberSymbol` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} symbol
- * @return {?}
+ * @param {?} locale The locale code.
+ * @param {?} symbol The symbol to localize.
+ * @return {?} The character for the localized symbol.
  */
 function getLocaleNumberSymbol(locale, symbol) {
     /** @type {?} */
@@ -1173,17 +1216,17 @@ function getLocaleNumberSymbol(locale, symbol) {
     return res;
 }
 /**
- * Number format that depends on the locale.
+ * Retrieves a number format for a given locale.
  *
  * Numbers are formatted using patterns, like `#,###.00`. For example, the pattern `#,###.00`
- * when used to format the number 12345.678 could result in "12'345,67". That would happen if the
+ * when used to format the number 12345.678 could result in "12'345,678". That would happen if the
  * grouping separator for your language is an apostrophe, and the decimal separator is a comma.
  *
- * <b>Important:</b> The characters `.` `,` `0` `#` (and others below) are special placeholders;
- * they stand for the decimal separator, and so on, and are NOT real characters.
- * You must NOT "translate" the placeholders; for example, don't change `.` to `,` even though in
+ * <b>Important:</b> The characters `.` `,` `0` `#` (and others below) are special placeholders
+ * that stand for the decimal separator, and so on, and are NOT real characters.
+ * You must NOT "translate" the placeholders. For example, don't change `.` to `,` even though in
  * your language the decimal point is written with a comma. The symbols should be replaced by the
- * local equivalents, using the Number Symbols for your language.
+ * local equivalents, using the appropriate `NumberSymbol` for your language.
  *
  * Here are the special characters used in number patterns:
  *
@@ -1193,18 +1236,17 @@ function getLocaleNumberSymbol(locale, symbol) {
  * | , | Replaced by the "grouping" (thousands) separator. |
  * | 0 | Replaced by a digit (or zero if there aren't enough digits). |
  * | # | Replaced by a digit (or nothing if there aren't enough). |
- * | ¤ | This will be replaced by a currency symbol, such as $ or USD. |
- * | % | This marks a percent format. The % symbol may change position, but must be retained. |
- * | E | This marks a scientific format. The E symbol may change position, but must be retained. |
+ * | ¤ | Replaced by a currency symbol, such as $ or USD. |
+ * | % | Marks a percent format. The % symbol may change position, but must be retained. |
+ * | E | Marks a scientific format. The E symbol may change position, but must be retained. |
  * | ' | Special characters used as literal characters are quoted with ASCII single quotes. |
  *
- * You can find more information
- * [on the CLDR website](http://cldr.unicode.org/translation/number-patterns)
+ * @see `NumberFormatStyle` / [CLDR website](http://cldr.unicode.org/translation/number-patterns) / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} type
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} type The type of numeric value to be formatted (such as `Decimal` or `Currency`.)
+ * @return {?} The localized format string.
  */
 function getLocaleNumberFormat(locale, type) {
     /** @type {?} */
@@ -1212,13 +1254,15 @@ function getLocaleNumberFormat(locale, type) {
     return data[14 /* NumberFormats */][type];
 }
 /**
- * The symbol used to represent the currency for the main country using this locale (e.g. $ for
- * the locale en-US).
- * The symbol will be `null` if the main country cannot be determined.
+ * Retrieves the symbol used to represent the currency for the main country
+ * corresponding to a given locale. For example, '$' for `en-US`.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The localized symbol character,
+ * or `null` if the main country cannot be determined.
  */
 function getLocaleCurrencySymbol(locale) {
     /** @type {?} */
@@ -1226,13 +1270,14 @@ function getLocaleCurrencySymbol(locale) {
     return data[15 /* CurrencySymbol */] || null;
 }
 /**
- * The name of the currency for the main country using this locale (e.g. 'US Dollar' for the locale
- * en-US).
- * The name will be `null` if the main country cannot be determined.
+ * Retrieves the name of the currency for the main country corresponding
+ * to a given locale. For example, 'US Dollar' for `en-US`.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The currency name,
+ * or `null` if the main country cannot be determined.
  */
 function getLocaleCurrencyName(locale) {
     /** @type {?} */
@@ -1240,9 +1285,10 @@ function getLocaleCurrencyName(locale) {
     return data[16 /* CurrencyName */] || null;
 }
 /**
- * Returns the currency values for the locale
- * @param {?} locale
- * @return {?}
+ * Retrieves the currency values for a given locale.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The currency values.
  */
 function getLocaleCurrencies(locale) {
     /** @type {?} */
@@ -1250,12 +1296,13 @@ function getLocaleCurrencies(locale) {
     return data[17 /* Currencies */];
 }
 /**
- * The locale plural function used by ICU expressions to determine the plural case to use.
- * See {\@link NgPlural} for more information.
+ * Retrieves the plural function used by ICU expressions to determine the plural case to use
+ * for a given locale.
+ * @see `NgPlural` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The plural function for the locale.
  */
 function getLocalePluralCase(locale) {
     /** @type {?} */
@@ -1272,21 +1319,25 @@ function checkFullData(data) {
     }
 }
 /**
- * Rules used to determine which day period to use (See `dayPeriods` below).
- * The rules can either be an array or a single value. If it's an array, consider it as "from"
- * and "to". If it's a single value then it means that the period is only valid at this exact
- * value.
- * There is always the same number of rules as the number of day periods, which means that the
- * first rule is applied to the first day period and so on.
- * You should fallback to AM/PM when there are no rules available.
+ * Retrieves locale-specific rules used to determine which day period to use
+ * when more than one period is defined for a locale.
  *
- * Note: this is only available if you load the full locale data.
- * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
- * data.
+ * There is a rule for each defined day period. The
+ * first rule is applied to the first day period and so on.
+ * Fall back to AM/PM when no rules are available.
+ *
+ * A rule can specify a period as time range, or as a single time value.
+ *
+ * This functionality is only available when you have loaded the full locale data.
+ * See the ["I18n guide"](guide/i18n#i18n-pipes).
+ *
+ * @see `getLocaleExtraDayPeriods()` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The rules for the locale, a single time value or array of *from-time, to-time*,
+ * or null if no periods are available.
+ *
  */
 function getLocaleExtraDayPeriodRules(locale) {
     /** @type {?} */
@@ -1306,21 +1357,20 @@ function getLocaleExtraDayPeriodRules(locale) {
     }));
 }
 /**
- * Day Periods indicate roughly how the day is broken up in different languages (e.g. morning,
- * noon, afternoon, midnight, ...).
- * You should use the function {\@link getLocaleExtraDayPeriodRules} to determine which period to
- * use.
- * You should fallback to AM/PM when there are no day periods available.
+ * Retrieves locale-specific day periods, which indicate roughly how a day is broken up
+ * in different languages.
+ * For example, for `en-US`, periods are morning, noon, afternoon, evening, and midnight.
  *
- * Note: this is only available if you load the full locale data.
- * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
- * data.
+ * This functionality is only available when you have loaded the full locale data.
+ * See the ["I18n guide"](guide/i18n#i18n-pipes).
+ *
+ * @see `getLocaleExtraDayPeriodRules()` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @param {?} formStyle
- * @param {?} width
- * @return {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} formStyle The required grammatical form.
+ * @param {?} width The required character width.
+ * @return {?} The translated day-period strings.
  */
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
     /** @type {?} */
@@ -1336,17 +1386,18 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
     return getLastDefinedValue(dayPeriods, width) || [];
 }
 /**
- * Returns the first value that is defined in an array, going backwards.
+ * Retrieves the first value that is defined in an array, going backwards from an index position.
  *
- * To avoid repeating the same data (e.g. when "format" and "standalone" are the same) we only
- * add the first one to the locale data arrays, the other ones are only defined when different.
- * We use this function to retrieve the first defined value.
+ * To avoid repeating the same data (as when the "format" and "standalone" forms are the same)
+ * add the first value to the locale data arrays, and add other values only if they are different.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
  * @template T
- * @param {?} data
- * @param {?} index
- * @return {?}
+ * @param {?} data The data array to retrieve from.
+ * @param {?} index A 0-based index into the array to start from.
+ * @return {?} The value immediately before the given index position.
  */
 function getLastDefinedValue(data, index) {
     for (let i = index; i > -1; i--) {
@@ -1357,7 +1408,7 @@ function getLastDefinedValue(data, index) {
     throw new Error('Locale data API: locale data undefined');
 }
 /**
- * Extract the hours and minutes from a string like "15:45"
+ * Extracts the hours and minutes from a string like "15:45"
  * @param {?} time
  * @return {?}
  */
@@ -1366,11 +1417,13 @@ function extractTime(time) {
     return { hours: +h, minutes: +m };
 }
 /**
- * Finds the locale data for a locale id
+ * Finds the locale data for a given locale.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} locale
- * @return {?}
+ * @param {?} locale The locale code.
+ * @return {?} The locale data.
  */
 function findLocaleData(locale) {
     /** @type {?} */
@@ -1393,15 +1446,19 @@ function findLocaleData(locale) {
     throw new Error(`Missing locale data for the locale "${locale}".`);
 }
 /**
- * Returns the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: format narrow = $, format wide = US$, code = USD)
- * If no locale is provided, it uses the locale "en" by default
+ * Retrieves the currency symbol for a given currency code.
+ *
+ * For example, for the default `en-US` locale, the code `USD` can
+ * be represented by the narrow symbol `$` or the wide symbol `US$`.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} code
- * @param {?} format
- * @param {?=} locale
- * @return {?}
+ * @param {?} code The currency code.
+ * @param {?} format The format, `wide` or `narrow`.
+ * @param {?=} locale A locale code for the locale format rules to use.
+ *
+ * @return {?} The symbol, or the currency code if no symbol is available.0
  */
 function getCurrencySymbol(code, format, locale = 'en') {
     /** @type {?} */
@@ -1417,12 +1474,14 @@ function getCurrencySymbol(code, format, locale = 'en') {
 /** @type {?} */
 const DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
 /**
- * Returns the number of decimal digits for the given currency.
- * Its value depends upon the presence of cents in that particular currency.
+ * Reports the number of decimal digits for a given currency.
+ * The value depends upon the presence of cents in that particular currency.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} code
- * @return {?}
+ * @param {?} code The currency code.
+ * @return {?} The number of decimal digits, typically 0 or 2.
  */
 function getNumberOfCurrencyDigits(code) {
     /** @type {?} */
@@ -1493,24 +1552,19 @@ TranslationType[TranslationType.Eras] = 'Eras';
  *
  * Formats a date according to locale rules.
  *
- * Where:
- * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
- *   (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. See {\@link DatePipe} for more
- *   details.
- * - `locale` is a `string` defining the locale to use.
- * - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
- *   abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
- *   If not specified, host system settings are used.
- *
- * See {\@link DatePipe} for more details.
+ * @see `DatePipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} value
- * @param {?} format
- * @param {?} locale
- * @param {?=} timezone
- * @return {?}
+ * @param {?} value The date to format, as a number (milliseconds since UTC epoch)
+ * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
+ * @param {?} format The date-time components to include. See `DatePipe` for details.
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?=} timezone The time zone. A time zone offset from GMT (such as `'+0430'`),
+ * or a standard UTC/GMT or continental US time zone abbreviation.
+ * If not specified, uses host system settings.
+ *
+ * @return {?} The formatted date string.
+ *
  */
 function formatDate(value, format, locale, timezone) {
     /** @type {?} */
@@ -2317,7 +2371,7 @@ const CURRENCY_CHAR = '¤';
 /** @type {?} */
 const PERCENT_CHAR = '%';
 /**
- * Transforms a number to a locale string based on a style and a format
+ * Transforms a number to a locale string based on a style and a format.
  * @param {?} value
  * @param {?} pattern
  * @param {?} locale
@@ -2437,23 +2491,19 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *
  * Formats a number as currency using locale rules.
  *
- * Use `currency` to format a number as currency.
- *
- * Where:
- * - `value` is a number.
- * - `locale` is a `string` defining the locale to use.
- * - `currency` is the string that represents the currency, it can be its symbol or its name.
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `digitInfo` See {\@link DecimalPipe} for more details.
+ * @see `formatNumber()` / `DecimalPipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} value
- * @param {?} locale
- * @param {?} currency
- * @param {?=} currencyCode
+ * @param {?} value The number to format.
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @param {?} currency A string containing the currency symbol or its name,
+ * such as "$" or "Canadian Dollar". Used in output string, but does not affect the operation
+ * of the function.
+ * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
+ * currency code to use in the result string, such as `USD` for the US dollar and `EUR` for the euro.
  * @param {?=} digitsInfo
- * @return {?}
+ * @return {?} The formatted currency value.
+ *
  */
 function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     /** @type {?} */
@@ -2475,16 +2525,14 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  *
  * Formats a number as a percentage according to locale rules.
  *
- * Where:
- * - `value` is a number.
- * - `locale` is a `string` defining the locale to use.
- * - `digitInfo` See {\@link DecimalPipe} for more details.
- *
+ * @see `formatNumber()` / `DecimalPipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  * \@publicApi
- * @param {?} value
- * @param {?} locale
+ *
+ * @param {?} value The number to format.
+ * @param {?} locale A locale code for the locale format rules to use.
  * @param {?=} digitsInfo
- * @return {?}
+ * @return {?} The formatted percentage value.
+ *
  */
 function formatPercent(value, locale, digitsInfo) {
     /** @type {?} */
@@ -2499,19 +2547,16 @@ function formatPercent(value, locale, digitsInfo) {
  * \@ngModule CommonModule
  * \@description
  *
- * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the locale.
+ * Formats a number as text, with group sizing, separator, and other
+ * parameters based on the locale.
  *
- * Where:
- * - `value` is a number.
- * - `locale` is a `string` defining the locale to use.
- * - `digitInfo` See {\@link DecimalPipe} for more details.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} value
- * @param {?} locale
+ * @param {?} value The number to format.
+ * @param {?} locale A locale code for the locale format rules to use.
  * @param {?=} digitsInfo
- * @return {?}
+ * @return {?} The formatted text string.
  */
 function formatNumber(value, locale, digitsInfo) {
     /** @type {?} */
@@ -7896,7 +7941,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.10+47.sha-eb0e29b.with-local-changes');
+const VERSION = new Version('8.0.0-beta.10+51.sha-22b89ea.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
