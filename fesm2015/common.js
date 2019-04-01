@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.2.11+46.sha-23f0a04.with-local-changes
+ * @license Angular v7.2.11+47.sha-39ecc7b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1511,7 +1511,7 @@ TranslationType[TranslationType.Eras] = 'Eras';
  * @see `DatePipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * \@publicApi
- * @param {?} value The date to format, as a number (milliseconds since UTC epoch)
+ * @param {?} value The date to format, as a Date, or a number (milliseconds since UTC epoch)
  * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
  * @param {?} format The date-time components to include. See `DatePipe` for details.
  * @param {?} locale A locale code for the locale format rules to use.
@@ -6656,7 +6656,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('7.2.11+46.sha-23f0a04.with-local-changes');
+const VERSION = new Version('7.2.11+47.sha-39ecc7b.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
