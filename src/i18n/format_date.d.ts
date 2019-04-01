@@ -12,7 +12,7 @@ export declare const ISO8601_DATE_REGEX: RegExp;
  *
  * Formats a date according to locale rules.
  *
- * @param value The date to format, as a number (milliseconds since UTC epoch)
+ * @param value The date to format, as a Date, or a number (milliseconds since UTC epoch)
  * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
  * @param format The date-time components to include. See `DatePipe` for details.
  * @param locale A locale code for the locale format rules to use.

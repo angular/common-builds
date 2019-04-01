@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+90.sha-7041e61.with-local-changes
+ * @license Angular v8.0.0-beta.10+91.sha-1f469cd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1344,7 +1344,7 @@
      *
      * Formats a date according to locale rules.
      *
-     * @param value The date to format, as a number (milliseconds since UTC epoch)
+     * @param value The date to format, as a Date, or a number (milliseconds since UTC epoch)
      * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
      * @param format The date-time components to include. See `DatePipe` for details.
      * @param locale A locale code for the locale format rules to use.
@@ -6391,7 +6391,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-beta.10+90.sha-7041e61.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-beta.10+91.sha-1f469cd.with-local-changes');
 
     /**
      * @license
