@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1993,7 +1993,7 @@
                 { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
                 { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
                 { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-            ], imports: [] });
+            ] });
         return HttpClientXsrfModule;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientXsrfModule, [{
@@ -2020,7 +2020,7 @@
     var HttpClientModule = /** @class */ (function () {
         function HttpClientModule() {
         }
-        HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule, imports: [HttpClientXsrfModule] });
+        HttpClientModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientModule });
         HttpClientModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
                 HttpClient,
                 { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -2036,6 +2036,7 @@
                 ]] });
         return HttpClientModule;
     }());
+    /*@__PURE__*/ i0.ɵsetNgModuleScope(HttpClientModule, { imports: [HttpClientXsrfModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientModule, [{
             type: i0.NgModule,
             args: [{
@@ -2081,7 +2082,7 @@
                 JsonpClientBackend,
                 { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
                 { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-            ], imports: [] });
+            ] });
         return HttpClientJsonpModule;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientJsonpModule, [{

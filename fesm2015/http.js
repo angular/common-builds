@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { Injectable, defineInjectable, inject, ɵsetClassMetadata, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule, ɵdefineNgModule, defineInjector } from '@angular/core';
+import { Injectable, defineInjectable, inject, ɵsetClassMetadata, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule, ɵdefineNgModule, defineInjector, ɵsetNgModuleScope } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
@@ -2413,7 +2413,7 @@ HttpClientXsrfModule.decorators = [
         { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
         { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
         { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-    ], imports: [] });
+    ] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientXsrfModule, [{
         type: NgModule,
         args: [{
@@ -2462,7 +2462,7 @@ HttpClientModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ HttpClientModule.ngModuleDef = ɵdefineNgModule({ type: HttpClientModule, imports: [HttpClientXsrfModule] });
+/** @nocollapse */ HttpClientModule.ngModuleDef = ɵdefineNgModule({ type: HttpClientModule });
 /** @nocollapse */ HttpClientModule.ngInjectorDef = defineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
         HttpClient,
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -2476,6 +2476,7 @@ HttpClientModule.decorators = [
                 headerName: 'X-XSRF-TOKEN',
             }),
         ]] });
+/*@__PURE__*/ ɵsetNgModuleScope(HttpClientModule, { imports: [HttpClientXsrfModule] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientModule, [{
         type: NgModule,
         args: [{
@@ -2529,7 +2530,7 @@ HttpClientJsonpModule.decorators = [
         JsonpClientBackend,
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-    ], imports: [] });
+    ] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientJsonpModule, [{
         type: NgModule,
         args: [{

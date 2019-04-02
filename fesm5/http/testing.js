@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
-import { defineInjectable, ɵsetClassMetadata, Injectable, ɵdefineNgModule, defineInjector, NgModule } from '@angular/core';
+import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
+import { defineInjectable, ɵsetClassMetadata, Injectable, ɵdefineNgModule, defineInjector, ɵsetNgModuleScope, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -364,7 +364,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
 var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
-    HttpClientTestingModule.ngModuleDef = ɵdefineNgModule({ type: HttpClientTestingModule, imports: [HttpClientModule] });
+    HttpClientTestingModule.ngModuleDef = ɵdefineNgModule({ type: HttpClientTestingModule });
     HttpClientTestingModule.ngInjectorDef = defineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
             HttpClientTestingBackend,
             { provide: HttpBackend, useExisting: HttpClientTestingBackend },
@@ -374,6 +374,7 @@ var HttpClientTestingModule = /** @class */ (function () {
             ]] });
     return HttpClientTestingModule;
 }());
+/*@__PURE__*/ ɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,
         args: [{

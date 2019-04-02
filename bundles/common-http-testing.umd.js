@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+117.sha-6b39c9c.with-local-changes
+ * @license Angular v8.0.0-beta.10+120.sha-60afe88.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -366,7 +366,7 @@
     var HttpClientTestingModule = /** @class */ (function () {
         function HttpClientTestingModule() {
         }
-        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule, imports: [http.HttpClientModule] });
+        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule });
         HttpClientTestingModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
                 HttpClientTestingBackend,
                 { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },
@@ -376,6 +376,7 @@
                 ]] });
         return HttpClientTestingModule;
     }());
+    /*@__PURE__*/ i0.ɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingModule, [{
             type: i0.NgModule,
             args: [{
