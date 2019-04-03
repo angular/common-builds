@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.10+122.sha-ddb935f.with-local-changes
+ * @license Angular v8.0.0-beta.10+124.sha-dc5577d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -104,12 +104,12 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * A service that applications can use to interact with a browser's URL.
  *
- * Depending on which {\@link LocationStrategy} is used, `Location` will either persist
+ * Depending on the {\@link LocationStrategy} used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
  * \@usageNotes
  *
- * It's better to use {\@link Router#navigate} service to trigger route changes. Use
+ * It's better to use the {\@link Router#navigate} service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -154,8 +154,10 @@ class Location {
     }
     /**
      * Returns the normalized URL path.
-     * @param {?=} includeHash
-     * @return {?}
+     *
+     * @param {?=} includeHash Whether path has an anchor fragment.
+     *
+     * @return {?} The normalized URL path.
      */
     // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
     // removed.
@@ -164,18 +166,23 @@ class Location {
     }
     /**
      * Normalizes the given path and compares to the current normalized path.
-     * @param {?} path
-     * @param {?=} query
-     * @return {?}
+     *
+     * @param {?} path The given URL path
+     * @param {?=} query Query parameters
+     *
+     * @return {?} `true` if the given URL path is equal to the current normalized path, `false`
+     * otherwise.
      */
     isCurrentPathEqualTo(path, query = '') {
         return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
     }
     /**
-     * Given a string representing a URL, returns the normalized URL path without leading or
+     * Given a string representing a URL, returns the URL path after stripping the
      * trailing slashes.
-     * @param {?} url
-     * @return {?}
+     *
+     * @param {?} url String representing a URL.
+     *
+     * @return {?} Normalized URL string.
      */
     normalize(url) {
         return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
@@ -183,10 +190,13 @@ class Location {
     /**
      * Given a string representing a URL, returns the platform-specific external URL path.
      * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-     * before normalizing. This method will also add a hash if `HashLocationStrategy` is
+     * before normalizing. This method also adds a hash if `HashLocationStrategy` is
      * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-     * @param {?} url
-     * @return {?}
+     *
+     *
+     * @param {?} url String representing a URL.
+     *
+     * @return {?} A normalized platform-specific URL.
      */
     prepareExternalUrl(url) {
         if (url && url[0] !== '/') {
@@ -196,22 +206,25 @@ class Location {
     }
     // TODO: rename this method to pushState
     /**
-     * Changes the browsers URL to the normalized version of the given URL, and pushes a
+     * Changes the browsers URL to a normalized version of the given URL, and pushes a
      * new item onto the platform's history.
-     * @param {?} path
-     * @param {?=} query
-     * @param {?=} state
+     *
+     * @param {?} path  URL path to normalizze
+     * @param {?=} query Query parameters
+     * @param {?=} state Location history state
+     *
      * @return {?}
      */
     go(path, query = '', state = null) {
         this._platformStrategy.pushState(state, '', path, query);
     }
     /**
-     * Changes the browsers URL to the normalized version of the given URL, and replaces
+     * Changes the browser's URL to a normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
-     * @param {?} path
-     * @param {?=} query
-     * @param {?=} state
+     *
+     * @param {?} path  URL path to normalizze
+     * @param {?=} query Query parameters
+     * @param {?=} state Location history state
      * @return {?}
      */
     replaceState(path, query = '', state = null) {
@@ -229,28 +242,34 @@ class Location {
     back() { this._platformStrategy.back(); }
     /**
      * Subscribe to the platform's `popState` events.
+     *
      * @param {?} onNext
      * @param {?=} onThrow
      * @param {?=} onReturn
-     * @return {?}
+     * @return {?} Subscribed events.
      */
     subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     }
     /**
-     * Given a string of url parameters, prepend with '?' if needed, otherwise return parameters as
-     * is.
-     * @param {?} params
-     * @return {?}
+     * Given a string of url parameters, prepend with `?` if needed, otherwise return the
+     * parameters as is.
+     *
+     * @param {?} params String of URL parameters
+     *
+     * @return {?} URL parameters prepended with `?` or the parameters as is.
      */
     static normalizeQueryParams(params) {
         return params && params[0] !== '?' ? '?' + params : params;
     }
     /**
-     * Given 2 parts of a url, join them with a slash if needed.
-     * @param {?} start
-     * @param {?} end
-     * @return {?}
+     * Given 2 parts of a URL, join them with a slash if needed.
+     *
+     * @param {?} start  URL string
+     * @param {?} end    URL string
+     *
+     *
+     * @return {?} Given URL strings joined with a slash, if needed.
      */
     static joinWithSlash(start, end) {
         if (start.length == 0) {
@@ -276,11 +295,14 @@ class Location {
         return start + '/' + end;
     }
     /**
-     * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurrence of either #, ?, or the end of the
-     * line as `/` characters after any of these should not be replaced.
-     * @param {?} url
-     * @return {?}
+     * If URL has a trailing slash, remove it, otherwise return the URL as is. The
+     * method looks for the first occurrence of either `#`, `?`, or the end of the
+     * line as `/` characters and removes the trailing slash if one exists.
+     *
+     * @param {?} url URL string
+     *
+     * @return {?} Returns a URL string after removing the trailing slash if one exists, otherwise
+     * returns the string as is.
      */
     static stripTrailingSlash(url) {
         /** @type {?} */
@@ -7943,7 +7965,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.10+122.sha-ddb935f.with-local-changes');
+const VERSION = new Version('8.0.0-beta.10+124.sha-dc5577d.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
