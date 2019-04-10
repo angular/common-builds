@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+45.sha-84be7c5.with-local-changes
+ * @license Angular v8.0.0-beta.11+64.sha-675f390.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3368,17 +3368,17 @@
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngClassDirectiveDef__POST_R3__ = core.ɵdefineDirective({
+    var ngClassDirectiveDef__POST_R3__ = core.ΔdefineDirective({
         type: function () { },
         selectors: null,
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ɵelementHostStyling();
+                core.ΔelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ɵelementHostStylingMap(ctx.getValue());
-                core.ɵelementHostStylingApply();
+                core.ΔelementHostStylingMap(ctx.getValue());
+                core.ΔelementHostStylingApply();
             }
         }
     });
@@ -4618,17 +4618,17 @@
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngStyleDirectiveDef__POST_R3__ = core.ɵdefineDirective({
+    var ngStyleDirectiveDef__POST_R3__ = core.ΔdefineDirective({
         type: function () { },
         selectors: null,
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ɵelementHostStyling();
+                core.ΔelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ɵelementHostStylingMap(null, ctx.getValue());
-                core.ɵelementHostStylingApply();
+                core.ΔelementHostStylingMap(null, ctx.getValue());
+                core.ΔelementHostStylingApply();
             }
         }
     });
@@ -6531,7 +6531,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.11+45.sha-84be7c5.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.11+64.sha-675f390.with-local-changes');
 
     /**
      * @license
@@ -6551,9 +6551,9 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = core.defineInjectable({
+        ViewportScroller.ngInjectableDef = core.ΔdefineInjectable({
             providedIn: 'root',
-            factory: function () { return new BrowserViewportScroller(core.inject(DOCUMENT), window, core.inject(core.ErrorHandler)); }
+            factory: function () { return new BrowserViewportScroller(core.Δinject(DOCUMENT), window, core.Δinject(core.ErrorHandler)); }
         });
         return ViewportScroller;
     }());

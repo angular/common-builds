@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.11+45.sha-84be7c5.with-local-changes
+ * @license Angular v8.0.0-beta.11+64.sha-675f390.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵdefineDirective, ɵelementHostStyling, ɵelementHostStylingMap, ɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, defineInjectable, inject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ΔdefineDirective, ΔelementHostStyling, ΔelementHostStylingMap, ΔelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ΔdefineInjectable, Δinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3345,17 +3345,17 @@ var ngClassDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
-var ngClassDirectiveDef__POST_R3__ = ɵdefineDirective({
+var ngClassDirectiveDef__POST_R3__ = ΔdefineDirective({
     type: function () { },
     selectors: null,
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementHostStyling();
+            ΔelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementHostStylingMap(ctx.getValue());
-            ɵelementHostStylingApply();
+            ΔelementHostStylingMap(ctx.getValue());
+            ΔelementHostStylingApply();
         }
     }
 });
@@ -4595,17 +4595,17 @@ var ngStyleDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
-var ngStyleDirectiveDef__POST_R3__ = ɵdefineDirective({
+var ngStyleDirectiveDef__POST_R3__ = ΔdefineDirective({
     type: function () { },
     selectors: null,
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ɵelementHostStyling();
+            ΔelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵelementHostStylingMap(null, ctx.getValue());
-            ɵelementHostStylingApply();
+            ΔelementHostStylingMap(null, ctx.getValue());
+            ΔelementHostStylingApply();
         }
     }
 });
@@ -6508,7 +6508,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.11+45.sha-84be7c5.with-local-changes');
+var VERSION = new Version('8.0.0-beta.11+64.sha-675f390.with-local-changes');
 
 /**
  * @license
@@ -6528,9 +6528,9 @@ var ViewportScroller = /** @class */ (function () {
     // De-sugared tree-shakable injection
     // See #23917
     /** @nocollapse */
-    ViewportScroller.ngInjectableDef = defineInjectable({
+    ViewportScroller.ngInjectableDef = ΔdefineInjectable({
         providedIn: 'root',
-        factory: function () { return new BrowserViewportScroller(inject(DOCUMENT), window, inject(ErrorHandler)); }
+        factory: function () { return new BrowserViewportScroller(Δinject(DOCUMENT), window, Δinject(ErrorHandler)); }
     });
     return ViewportScroller;
 }());
