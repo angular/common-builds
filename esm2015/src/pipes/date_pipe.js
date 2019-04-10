@@ -191,7 +191,7 @@ DatePipe.decorators = [
 DatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DatePipe.ngPipeDef = i0.ΔdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]

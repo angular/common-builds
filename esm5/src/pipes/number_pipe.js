@@ -76,7 +76,7 @@ var DecimalPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(DecimalPipe, error.message);
         }
     };
-    DecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DecimalPipe.ngPipeDef = i0.ΔdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DecimalPipe;
 }());
 export { DecimalPipe };
@@ -139,7 +139,7 @@ var PercentPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(PercentPipe, error.message);
         }
     };
-    PercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    PercentPipe.ngPipeDef = i0.ΔdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return PercentPipe;
 }());
 export { PercentPipe };
@@ -234,7 +234,7 @@ var CurrencyPipe = /** @class */ (function () {
             throw invalidPipeArgumentError(CurrencyPipe, error.message);
         }
     };
-    CurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    CurrencyPipe.ngPipeDef = i0.ΔdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return CurrencyPipe;
 }());
 export { CurrencyPipe };

@@ -36,7 +36,7 @@ export class JsonPipe {
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
-/** @nocollapse */ JsonPipe.ngPipeDef = i0.ɵdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, pure: false });
+/** @nocollapse */ JsonPipe.ngPipeDef = i0.ΔdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, pure: false });
 /*@__PURE__*/ i0.ɵsetClassMetadata(JsonPipe, [{
         type: Pipe,
         args: [{ name: 'json', pure: false }]

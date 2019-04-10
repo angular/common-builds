@@ -52,5 +52,5 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _selectStrategy;
     private _dispose;
     private _updateLatestValue;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<AsyncPipe, "async">;
+    static ngPipeDef: i0.ΔPipeDefWithMeta<AsyncPipe, "async">;
 }

@@ -34,7 +34,7 @@ export declare class JsonpClientBackend implements HttpBackend {
      * Process a JSONP request and return an event stream of the results.
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
-    static ngInjectableDef: i0.ɵInjectableDef<JsonpClientBackend>;
+    static ngInjectableDef: i0.ΔInjectableDef<JsonpClientBackend>;
 }
 /**
  * An `HttpInterceptor` which identifies requests with the method JSONP and
@@ -46,5 +46,5 @@ export declare class JsonpInterceptor {
     private jsonp;
     constructor(jsonp: JsonpClientBackend);
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
-    static ngInjectableDef: i0.ɵInjectableDef<JsonpInterceptor>;
+    static ngInjectableDef: i0.ΔInjectableDef<JsonpInterceptor>;
 }

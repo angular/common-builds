@@ -158,7 +158,7 @@ DeprecatedDatePipe.decorators = [
 DeprecatedDatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DeprecatedDatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DeprecatedDatePipe.ngPipeDef = i0.ΔdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]

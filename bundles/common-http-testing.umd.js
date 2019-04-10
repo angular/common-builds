@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+55.sha-db62ccf.with-local-changes
+ * @license Angular v8.0.0-beta.11+57.sha-ef85336.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -342,7 +342,7 @@
                 return "Match by function: " + matcher.name;
             }
         };
-        HttpClientTestingBackend.ngInjectableDef = i0.defineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+        HttpClientTestingBackend.ngInjectableDef = i0.ΔdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
         return HttpClientTestingBackend;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
@@ -366,8 +366,8 @@
     var HttpClientTestingModule = /** @class */ (function () {
         function HttpClientTestingModule() {
         }
-        HttpClientTestingModule.ngModuleDef = i0.ɵdefineNgModule({ type: HttpClientTestingModule });
-        HttpClientTestingModule.ngInjectorDef = i0.defineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+        HttpClientTestingModule.ngModuleDef = i0.ΔdefineNgModule({ type: HttpClientTestingModule });
+        HttpClientTestingModule.ngInjectorDef = i0.ΔdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
                 HttpClientTestingBackend,
                 { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },
                 { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
@@ -376,7 +376,7 @@
                 ]] });
         return HttpClientTestingModule;
     }());
-    /*@__PURE__*/ i0.ɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] });
+    /*@__PURE__*/ i0.ΔsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] });
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingModule, [{
             type: i0.NgModule,
             args: [{

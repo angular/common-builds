@@ -132,7 +132,7 @@ var DeprecatedDatePipe = /** @class */ (function () {
         'mediumTime': 'jms',
         'shortTime': 'jm'
     };
-    DeprecatedDatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DeprecatedDatePipe.ngPipeDef = i0.ΔdefinePipe({ name: "date", type: DeprecatedDatePipe, factory: function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedDatePipe;
 }());
 export { DeprecatedDatePipe };

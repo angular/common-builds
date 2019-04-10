@@ -117,7 +117,7 @@ var AsyncPipe = /** @class */ (function () {
             this._ref.markForCheck();
         }
     };
-    AsyncPipe.ngPipeDef = i0.ɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵdirectiveInject(i0.ChangeDetectorRef)); }, pure: false });
+    AsyncPipe.ngPipeDef = i0.ΔdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ΔdirectiveInject(i0.ChangeDetectorRef)); }, pure: false });
     return AsyncPipe;
 }());
 export { AsyncPipe };

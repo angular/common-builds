@@ -54,7 +54,7 @@ export class I18nSelectPipe {
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
-/** @nocollapse */ I18nSelectPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
+/** @nocollapse */ I18nSelectPipe.ngPipeDef = i0.ΔdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(I18nSelectPipe, [{
         type: Pipe,
         args: [{ name: 'i18nSelect', pure: true }]

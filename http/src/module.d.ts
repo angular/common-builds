@@ -27,7 +27,7 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     private chain;
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ngInjectableDef: i0.ɵInjectableDef<HttpInterceptingHandler>;
+    static ngInjectableDef: i0.ΔInjectableDef<HttpInterceptingHandler>;
 }
 /**
  * Constructs an `HttpHandler` that applies interceptors
@@ -76,8 +76,8 @@ export declare class HttpClientXsrfModule {
         cookieName?: string;
         headerName?: string;
     }): ModuleWithProviders<HttpClientXsrfModule>;
-    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientXsrfModule, never, never, never>;
-    static ngInjectorDef: i0.ɵInjectorDef<HttpClientXsrfModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<HttpClientXsrfModule, never, never, never>;
+    static ngInjectorDef: i0.ΔInjectorDef<HttpClientXsrfModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -89,8 +89,8 @@ export declare class HttpClientXsrfModule {
  * @publicApi
  */
 export declare class HttpClientModule {
-    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
-    static ngInjectorDef: i0.ɵInjectorDef<HttpClientModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
+    static ngInjectorDef: i0.ΔInjectorDef<HttpClientModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -104,6 +104,6 @@ export declare class HttpClientModule {
  * @publicApi
  */
 export declare class HttpClientJsonpModule {
-    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientJsonpModule, never, never, never>;
-    static ngInjectorDef: i0.ɵInjectorDef<HttpClientJsonpModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<HttpClientJsonpModule, never, never, never>;
+    static ngInjectorDef: i0.ΔInjectorDef<HttpClientJsonpModule>;
 }

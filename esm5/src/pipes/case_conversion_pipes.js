@@ -37,7 +37,7 @@ var LowerCasePipe = /** @class */ (function () {
         }
         return value.toLowerCase();
     };
-    LowerCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, pure: true });
+    LowerCasePipe.ngPipeDef = i0.ΔdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, pure: true });
     return LowerCasePipe;
 }());
 export { LowerCasePipe };
@@ -85,7 +85,7 @@ var TitleCasePipe = /** @class */ (function () {
         }
         return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
     };
-    TitleCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, pure: true });
+    TitleCasePipe.ngPipeDef = i0.ΔdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, pure: true });
     return TitleCasePipe;
 }());
 export { TitleCasePipe };
@@ -115,7 +115,7 @@ var UpperCasePipe = /** @class */ (function () {
         }
         return value.toUpperCase();
     };
-    UpperCasePipe.ngPipeDef = i0.ɵdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, pure: true });
+    UpperCasePipe.ngPipeDef = i0.ΔdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, pure: true });
     return UpperCasePipe;
 }());
 export { UpperCasePipe };

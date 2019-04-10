@@ -31,5 +31,5 @@ export declare class SpyLocation implements Location {
     back(): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;
-    static ngInjectableDef: i0.ɵInjectableDef<SpyLocation>;
+    static ngInjectableDef: i0.ΔInjectableDef<SpyLocation>;
 }

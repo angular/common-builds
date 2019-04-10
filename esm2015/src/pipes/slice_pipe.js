@@ -82,7 +82,7 @@ export class SlicePipe {
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
-/** @nocollapse */ SlicePipe.ngPipeDef = i0.ɵdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
+/** @nocollapse */ SlicePipe.ngPipeDef = i0.ΔdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
 /*@__PURE__*/ i0.ɵsetClassMetadata(SlicePipe, [{
         type: Pipe,
         args: [{ name: 'slice', pure: false }]

@@ -70,7 +70,7 @@ var SlicePipe = /** @class */ (function () {
         return value.slice(start, end);
     };
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
-    SlicePipe.ngPipeDef = i0.ɵdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
+    SlicePipe.ngPipeDef = i0.ΔdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
     return SlicePipe;
 }());
 export { SlicePipe };

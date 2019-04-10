@@ -109,7 +109,7 @@ NgPlural.ctorParameters = () => [
 NgPlural.propDecorators = {
     ngPlural: [{ type: Input }]
 };
-/** @nocollapse */ NgPlural.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(i0.ɵdirectiveInject(i1.NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
+/** @nocollapse */ NgPlural.ngDirectiveDef = i0.ΔdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], factory: function NgPlural_Factory(t) { return new (t || NgPlural)(i0.ΔdirectiveInject(i1.NgLocalization)); }, inputs: { ngPlural: "ngPlural" } });
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
@@ -182,7 +182,7 @@ NgPluralCase.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: NgPlural, decorators: [{ type: Host }] }
 ];
-/** @nocollapse */ NgPluralCase.ngDirectiveDef = i0.ɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(i0.ɵinjectAttribute('ngPluralCase'), i0.ɵdirectiveInject(i0.TemplateRef), i0.ɵdirectiveInject(i0.ViewContainerRef), i0.ɵdirectiveInject(NgPlural, 1)); } });
+/** @nocollapse */ NgPluralCase.ngDirectiveDef = i0.ΔdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]], factory: function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(i0.ΔinjectAttribute('ngPluralCase'), i0.ΔdirectiveInject(i0.TemplateRef), i0.ΔdirectiveInject(i0.ViewContainerRef), i0.ΔdirectiveInject(NgPlural, 1)); } });
 /*@__PURE__*/ i0.ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]

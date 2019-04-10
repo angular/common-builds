@@ -177,7 +177,7 @@ var DatePipe = /** @class */ (function () {
             throw invalidPipeArgumentError(DatePipe, error.message);
         }
     };
-    DatePipe.ngPipeDef = i0.ɵdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DatePipe.ngPipeDef = i0.ΔdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DatePipe;
 }());
 export { DatePipe };

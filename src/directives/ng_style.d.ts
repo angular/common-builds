@@ -75,5 +75,5 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
         [klass: string]: any;
     } | null;
     ngDoCheck(): void;
-    static ngDirectiveDef: i0.ɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
+    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
 }

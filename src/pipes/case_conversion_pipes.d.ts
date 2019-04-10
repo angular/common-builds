@@ -27,7 +27,7 @@ export declare class LowerCasePipe implements PipeTransform {
      * @param value The string to transform to lower case.
      */
     transform(value: string): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<LowerCasePipe, "lowercase">;
+    static ngPipeDef: i0.ΔPipeDefWithMeta<LowerCasePipe, "lowercase">;
 }
 /**
  * Transforms text to title case.
@@ -51,7 +51,7 @@ export declare class TitleCasePipe implements PipeTransform {
      * @param value The string to transform to title case.
      */
     transform(value: string): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<TitleCasePipe, "titlecase">;
+    static ngPipeDef: i0.ΔPipeDefWithMeta<TitleCasePipe, "titlecase">;
 }
 /**
  * Transforms text to all upper case.
@@ -66,5 +66,5 @@ export declare class UpperCasePipe implements PipeTransform {
      * @param value The string to transform to upper case.
      */
     transform(value: string): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<UpperCasePipe, "uppercase">;
+    static ngPipeDef: i0.ΔPipeDefWithMeta<UpperCasePipe, "uppercase">;
 }

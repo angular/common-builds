@@ -35,5 +35,5 @@ export declare class I18nPluralPipe implements PipeTransform {
     transform(value: number, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
-    static ngPipeDef: i0.ɵPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
+    static ngPipeDef: i0.ΔPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
 }

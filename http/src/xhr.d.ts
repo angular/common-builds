@@ -19,7 +19,7 @@ export declare abstract class XhrFactory {
 export declare class BrowserXhr implements XhrFactory {
     constructor();
     build(): any;
-    static ngInjectableDef: i0.ɵInjectableDef<BrowserXhr>;
+    static ngInjectableDef: i0.ΔInjectableDef<BrowserXhr>;
 }
 /**
  * An `HttpBackend` which uses the XMLHttpRequest API to send
@@ -34,5 +34,5 @@ export declare class HttpXhrBackend implements HttpBackend {
      * Process a request and return a stream of response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ngInjectableDef: i0.ɵInjectableDef<HttpXhrBackend>;
+    static ngInjectableDef: i0.ΔInjectableDef<HttpXhrBackend>;
 }

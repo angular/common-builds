@@ -86,7 +86,7 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
     DeprecatedDecimalPipe.prototype.transform = function (value, digits) {
         return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
-    DeprecatedDecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DeprecatedDecimalPipe.ngPipeDef = i0.ΔdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedDecimalPipe;
 }());
 export { DeprecatedDecimalPipe };
@@ -124,7 +124,7 @@ var DeprecatedPercentPipe = /** @class */ (function () {
     DeprecatedPercentPipe.prototype.transform = function (value, digits) {
         return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
-    DeprecatedPercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DeprecatedPercentPipe.ngPipeDef = i0.ΔdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedPercentPipe;
 }());
 export { DeprecatedPercentPipe };
@@ -170,7 +170,7 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
         if (symbolDisplay === void 0) { symbolDisplay = false; }
         return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
-    DeprecatedCurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+    DeprecatedCurrencyPipe.ngPipeDef = i0.ΔdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
     return DeprecatedCurrencyPipe;
 }());
 export { DeprecatedCurrencyPipe };

@@ -93,7 +93,7 @@ DecimalPipe.decorators = [
 DecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DecimalPipe.ngPipeDef = i0.ΔdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
@@ -173,7 +173,7 @@ PercentPipe.decorators = [
 PercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ PercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ PercentPipe.ngPipeDef = i0.ΔdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
@@ -285,7 +285,7 @@ CurrencyPipe.decorators = [
 CurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ CurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ CurrencyPipe.ngPipeDef = i0.ΔdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]

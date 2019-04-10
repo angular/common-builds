@@ -45,7 +45,7 @@ var I18nPluralPipe = /** @class */ (function () {
         var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
-    I18nPluralPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵdirectiveInject(i1.NgLocalization)); }, pure: true });
+    I18nPluralPipe.ngPipeDef = i0.ΔdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ΔdirectiveInject(i1.NgLocalization)); }, pure: true });
     return I18nPluralPipe;
 }());
 export { I18nPluralPipe };

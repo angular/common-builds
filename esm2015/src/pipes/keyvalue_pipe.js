@@ -100,7 +100,7 @@ KeyValuePipe.decorators = [
 KeyValuePipe.ctorParameters = () => [
     { type: KeyValueDiffers }
 ];
-/** @nocollapse */ KeyValuePipe.ngPipeDef = i0.ɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵdirectiveInject(i0.KeyValueDiffers)); }, pure: false });
+/** @nocollapse */ KeyValuePipe.ngPipeDef = i0.ΔdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ΔdirectiveInject(i0.KeyValueDiffers)); }, pure: false });
 /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]

@@ -118,7 +118,7 @@ DeprecatedDecimalPipe.decorators = [
 DeprecatedDecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DeprecatedDecimalPipe.ngPipeDef = i0.ɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DeprecatedDecimalPipe.ngPipeDef = i0.ΔdefinePipe({ name: "number", type: DeprecatedDecimalPipe, factory: function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
@@ -176,7 +176,7 @@ DeprecatedPercentPipe.decorators = [
 DeprecatedPercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DeprecatedPercentPipe.ngPipeDef = i0.ɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DeprecatedPercentPipe.ngPipeDef = i0.ΔdefinePipe({ name: "percent", type: DeprecatedPercentPipe, factory: function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedPercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
@@ -242,7 +242,7 @@ DeprecatedCurrencyPipe.decorators = [
 DeprecatedCurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-/** @nocollapse */ DeprecatedCurrencyPipe.ngPipeDef = i0.ɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ɵdirectiveInject(LOCALE_ID)); }, pure: true });
+/** @nocollapse */ DeprecatedCurrencyPipe.ngPipeDef = i0.ΔdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, factory: function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]

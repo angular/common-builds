@@ -8,6 +8,6 @@ import * as i1 from "@angular/common/http";
  * @publicApi
  */
 export declare class HttpClientTestingModule {
-    static ngModuleDef: i0.ɵNgModuleDefWithMeta<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
-    static ngInjectorDef: i0.ɵInjectorDef<HttpClientTestingModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
+    static ngInjectorDef: i0.ΔInjectorDef<HttpClientTestingModule>;
 }

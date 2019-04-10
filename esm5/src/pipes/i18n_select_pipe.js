@@ -47,7 +47,7 @@ var I18nSelectPipe = /** @class */ (function () {
         }
         return '';
     };
-    I18nSelectPipe.ngPipeDef = i0.ɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
+    I18nSelectPipe.ngPipeDef = i0.ΔdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
     return I18nSelectPipe;
 }());
 export { I18nSelectPipe };
