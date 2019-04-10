@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+55.sha-db62ccf.with-local-changes
+ * @license Angular v8.0.0-beta.11+57.sha-ef85336.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -410,8 +410,8 @@
      */
     var HttpParams = /** @class */ (function () {
         function HttpParams(options) {
-            if (options === void 0) { options = {}; }
             var _this = this;
+            if (options === void 0) { options = {}; }
             this.updates = null;
             this.cloneFrom = null;
             this.encoder = options.encoder || new HttpUrlEncodingCodec();
