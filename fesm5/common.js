@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+81.sha-5b32f55.with-local-changes
+ * @license Angular v8.0.0-beta.11+82.sha-387fbb8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5486,6 +5486,7 @@ var AsyncPipe = /** @class */ (function () {
     };
     var AsyncPipe_1;
     AsyncPipe = AsyncPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'async', pure: false }),
         __metadata("design:paramtypes", [ChangeDetectorRef])
     ], AsyncPipe);
@@ -5531,6 +5532,7 @@ var LowerCasePipe = /** @class */ (function () {
     };
     var LowerCasePipe_1;
     LowerCasePipe = LowerCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'lowercase' })
     ], LowerCasePipe);
     return LowerCasePipe;
@@ -5578,6 +5580,7 @@ var TitleCasePipe = /** @class */ (function () {
     };
     var TitleCasePipe_1;
     TitleCasePipe = TitleCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'titlecase' })
     ], TitleCasePipe);
     return TitleCasePipe;
@@ -5607,6 +5610,7 @@ var UpperCasePipe = /** @class */ (function () {
     };
     var UpperCasePipe_1;
     UpperCasePipe = UpperCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'uppercase' })
     ], UpperCasePipe);
     return UpperCasePipe;
@@ -5790,6 +5794,7 @@ var DatePipe = /** @class */ (function () {
     };
     var DatePipe_1;
     DatePipe = DatePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'date', pure: true }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -5842,6 +5847,7 @@ var I18nPluralPipe = /** @class */ (function () {
     };
     var I18nPluralPipe_1;
     I18nPluralPipe = I18nPluralPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'i18nPlural', pure: true }),
         __metadata("design:paramtypes", [NgLocalization])
     ], I18nPluralPipe);
@@ -5897,6 +5903,7 @@ var I18nSelectPipe = /** @class */ (function () {
     };
     var I18nSelectPipe_1;
     I18nSelectPipe = I18nSelectPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'i18nSelect', pure: true })
     ], I18nSelectPipe);
     return I18nSelectPipe;
@@ -5932,6 +5939,7 @@ var JsonPipe = /** @class */ (function () {
      */
     JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
     JsonPipe = __decorate([
+        Injectable(),
         Pipe({ name: 'json', pure: false })
     ], JsonPipe);
     return JsonPipe;
@@ -5993,6 +6001,7 @@ var KeyValuePipe = /** @class */ (function () {
         return this.keyValues;
     };
     KeyValuePipe = __decorate([
+        Injectable(),
         Pipe({ name: 'keyvalue', pure: false }),
         __metadata("design:paramtypes", [KeyValueDiffers])
     ], KeyValuePipe);
@@ -6105,6 +6114,7 @@ var DecimalPipe = /** @class */ (function () {
     };
     var DecimalPipe_1;
     DecimalPipe = DecimalPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'number' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6166,6 +6176,7 @@ var PercentPipe = /** @class */ (function () {
     };
     var PercentPipe_1;
     PercentPipe = PercentPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'percent' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6259,6 +6270,7 @@ var CurrencyPipe = /** @class */ (function () {
     };
     var CurrencyPipe_1;
     CurrencyPipe = CurrencyPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'currency' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6354,6 +6366,7 @@ var SlicePipe = /** @class */ (function () {
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
     var SlicePipe_1;
     SlicePipe = SlicePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'slice', pure: false })
     ], SlicePipe);
     return SlicePipe;
@@ -6508,7 +6521,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.11+81.sha-5b32f55.with-local-changes');
+var VERSION = new Version('8.0.0-beta.11+82.sha-387fbb8.with-local-changes');
 
 /**
  * @license
