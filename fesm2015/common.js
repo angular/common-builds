@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+81.sha-5b32f55.with-local-changes
+ * @license Angular v8.0.0-beta.11+82.sha-387fbb8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6757,14 +6757,24 @@ class AsyncPipe {
     }
 }
 AsyncPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'async', pure: false },] },
 ];
 /** @nocollapse */
 AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
+/** @nocollapse */ AsyncPipe.ngInjectableDef = ΔdefineInjectable({ token: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(Δinject(ChangeDetectorRef)); }, providedIn: null });
 /** @nocollapse */ AsyncPipe.ngPipeDef = ΔdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ΔdirectiveInject(ChangeDetectorRef)); }, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'async', pure: false }]
+    }], function () { return [{ type: ChangeDetectorRef }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'async', pure: false }]
     }], function () { return [{ type: ChangeDetectorRef }]; }, null);
@@ -6810,10 +6820,20 @@ class LowerCasePipe {
     }
 }
 LowerCasePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];
+/** @nocollapse */ LowerCasePipe.ngInjectableDef = ΔdefineInjectable({ token: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, providedIn: null });
 /** @nocollapse */ LowerCasePipe.ngPipeDef = ΔdefinePipe({ name: "lowercase", type: LowerCasePipe, factory: function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(LowerCasePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'lowercase' }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(LowerCasePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'lowercase' }]
     }], null, null);
@@ -6863,10 +6883,20 @@ class TitleCasePipe {
     }
 }
 TitleCasePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'titlecase' },] },
 ];
+/** @nocollapse */ TitleCasePipe.ngInjectableDef = ΔdefineInjectable({ token: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, providedIn: null });
 /** @nocollapse */ TitleCasePipe.ngPipeDef = ΔdefinePipe({ name: "titlecase", type: TitleCasePipe, factory: function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(TitleCasePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'titlecase' }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(TitleCasePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'titlecase' }]
     }], null, null);
@@ -6893,10 +6923,20 @@ class UpperCasePipe {
     }
 }
 UpperCasePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];
+/** @nocollapse */ UpperCasePipe.ngInjectableDef = ΔdefineInjectable({ token: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, providedIn: null });
 /** @nocollapse */ UpperCasePipe.ngPipeDef = ΔdefinePipe({ name: "uppercase", type: UpperCasePipe, factory: function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(UpperCasePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'uppercase' }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(UpperCasePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'uppercase' }]
     }], null, null);
@@ -7084,14 +7124,27 @@ class DatePipe {
     }
 }
 DatePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'date', pure: true },] },
 ];
 /** @nocollapse */
 DatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+/** @nocollapse */ DatePipe.ngInjectableDef = ΔdefineInjectable({ token: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(Δinject(LOCALE_ID)); }, providedIn: null });
 /** @nocollapse */ DatePipe.ngPipeDef = ΔdefinePipe({ name: "date", type: DatePipe, factory: function DatePipe_Factory(t) { return new (t || DatePipe)(ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'date', pure: true }]
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }] }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'date', pure: true }]
     }], function () { return [{ type: undefined, decorators: [{
@@ -7153,14 +7206,24 @@ class I18nPluralPipe {
     }
 }
 I18nPluralPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] },
 ];
 /** @nocollapse */
 I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization }
 ];
+/** @nocollapse */ I18nPluralPipe.ngInjectableDef = ΔdefineInjectable({ token: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(Δinject(NgLocalization)); }, providedIn: null });
 /** @nocollapse */ I18nPluralPipe.ngPipeDef = ΔdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, factory: function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ΔdirectiveInject(NgLocalization)); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'i18nPlural', pure: true }]
+    }], function () { return [{ type: NgLocalization }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
     }], function () { return [{ type: NgLocalization }]; }, null);
@@ -7216,10 +7279,20 @@ class I18nSelectPipe {
     }
 }
 I18nSelectPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
+/** @nocollapse */ I18nSelectPipe.ngInjectableDef = ΔdefineInjectable({ token: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, providedIn: null });
 /** @nocollapse */ I18nSelectPipe.ngPipeDef = ΔdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, factory: function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(I18nSelectPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'i18nSelect', pure: true }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(I18nSelectPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'i18nSelect', pure: true }]
     }], null, null);
@@ -7258,10 +7331,20 @@ class JsonPipe {
     transform(value) { return JSON.stringify(value, null, 2); }
 }
 JsonPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
+/** @nocollapse */ JsonPipe.ngInjectableDef = ΔdefineInjectable({ token: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, providedIn: null });
 /** @nocollapse */ JsonPipe.ngPipeDef = ΔdefinePipe({ name: "json", type: JsonPipe, factory: function JsonPipe_Factory(t) { return new (t || JsonPipe)(); }, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(JsonPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'json', pure: false }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(JsonPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'json', pure: false }]
     }], null, null);
@@ -7345,14 +7428,24 @@ class KeyValuePipe {
     }
 }
 KeyValuePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'keyvalue', pure: false },] },
 ];
 /** @nocollapse */
 KeyValuePipe.ctorParameters = () => [
     { type: KeyValueDiffers }
 ];
+/** @nocollapse */ KeyValuePipe.ngInjectableDef = ΔdefineInjectable({ token: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(Δinject(KeyValueDiffers)); }, providedIn: null });
 /** @nocollapse */ KeyValuePipe.ngPipeDef = ΔdefinePipe({ name: "keyvalue", type: KeyValuePipe, factory: function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ΔdirectiveInject(KeyValueDiffers)); }, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'keyvalue', pure: false }]
+    }], function () { return [{ type: KeyValueDiffers }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
     }], function () { return [{ type: KeyValueDiffers }]; }, null);
@@ -7481,14 +7574,27 @@ class DecimalPipe {
     }
 }
 DecimalPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'number' },] },
 ];
 /** @nocollapse */
 DecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+/** @nocollapse */ DecimalPipe.ngInjectableDef = ΔdefineInjectable({ token: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(Δinject(LOCALE_ID)); }, providedIn: null });
 /** @nocollapse */ DecimalPipe.ngPipeDef = ΔdefinePipe({ name: "number", type: DecimalPipe, factory: function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'number' }]
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }] }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'number' }]
     }], function () { return [{ type: undefined, decorators: [{
@@ -7554,14 +7660,27 @@ class PercentPipe {
     }
 }
 PercentPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'percent' },] },
 ];
 /** @nocollapse */
 PercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+/** @nocollapse */ PercentPipe.ngInjectableDef = ΔdefineInjectable({ token: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(Δinject(LOCALE_ID)); }, providedIn: null });
 /** @nocollapse */ PercentPipe.ngPipeDef = ΔdefinePipe({ name: "percent", type: PercentPipe, factory: function PercentPipe_Factory(t) { return new (t || PercentPipe)(ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'percent' }]
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }] }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'percent' }]
     }], function () { return [{ type: undefined, decorators: [{
@@ -7659,14 +7778,27 @@ class CurrencyPipe {
     }
 }
 CurrencyPipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'currency' },] },
 ];
 /** @nocollapse */
 CurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+/** @nocollapse */ CurrencyPipe.ngInjectableDef = ΔdefineInjectable({ token: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(Δinject(LOCALE_ID)); }, providedIn: null });
 /** @nocollapse */ CurrencyPipe.ngPipeDef = ΔdefinePipe({ name: "currency", type: CurrencyPipe, factory: function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ΔdirectiveInject(LOCALE_ID)); }, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'currency' }]
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [LOCALE_ID]
+            }] }]; }, null);
+/*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'currency' }]
     }], function () { return [{ type: undefined, decorators: [{
@@ -7775,10 +7907,20 @@ class SlicePipe {
     supports(obj) { return typeof obj === 'string' || Array.isArray(obj); }
 }
 SlicePipe.decorators = [
+    { type: Injectable },
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
+/** @nocollapse */ SlicePipe.ngInjectableDef = ΔdefineInjectable({ token: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, providedIn: null });
 /** @nocollapse */ SlicePipe.ngPipeDef = ΔdefinePipe({ name: "slice", type: SlicePipe, factory: function SlicePipe_Factory(t) { return new (t || SlicePipe)(); }, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(SlicePipe, [{
+        type: Injectable
+    }, {
+        type: Pipe,
+        args: [{ name: 'slice', pure: false }]
+    }], null, null);
+/*@__PURE__*/ ɵsetClassMetadata(SlicePipe, [{
+        type: Injectable
+    }, {
         type: Pipe,
         args: [{ name: 'slice', pure: false }]
     }], null, null);
@@ -7965,7 +8107,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.11+81.sha-5b32f55.with-local-changes');
+const VERSION = new Version('8.0.0-beta.11+82.sha-387fbb8.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

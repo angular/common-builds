@@ -33,5 +33,6 @@ export declare class I18nSelectPipe implements PipeTransform {
     transform(value: string | null | undefined, mapping: {
         [key: string]: string;
     }): string;
+    static ngInjectableDef: i0.ΔInjectableDef<I18nSelectPipe>;
     static ngPipeDef: i0.ΔPipeDefWithMeta<I18nSelectPipe, "i18nSelect">;
 }
