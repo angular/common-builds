@@ -32,8 +32,8 @@ import * as i19 from "./pipes/deprecated/date_pipe";
  * @publicApi
  */
 export declare class CommonModule {
-    static ngModuleDef: i0.ΔNgModuleDefWithMeta<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
-    static ngInjectorDef: i0.ΔInjectorDef<CommonModule>;
+    static ngModuleDef: i0.ɵɵNgModuleDefWithMeta<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
+    static ngInjectorDef: i0.ɵɵInjectorDef<CommonModule>;
 }
 /**
  * A module that contains the deprecated i18n pipes.
@@ -42,6 +42,6 @@ export declare class CommonModule {
  * @publicApi
  */
 export declare class DeprecatedI18NPipesModule {
-    static ngModuleDef: i0.ΔNgModuleDefWithMeta<DeprecatedI18NPipesModule, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe], never, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe]>;
-    static ngInjectorDef: i0.ΔInjectorDef<DeprecatedI18NPipesModule>;
+    static ngModuleDef: i0.ɵɵNgModuleDefWithMeta<DeprecatedI18NPipesModule, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe], never, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe]>;
+    static ngInjectorDef: i0.ɵɵInjectorDef<DeprecatedI18NPipesModule>;
 }

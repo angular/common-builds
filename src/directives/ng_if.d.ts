@@ -176,7 +176,7 @@ export declare class NgIf {
      * strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     static ngTemplateGuard_ngIf<E>(dir: NgIf, expr: E): expr is NonNullable<E>;
-    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
+    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
 }
 /**
  * @publicApi

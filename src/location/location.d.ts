@@ -142,5 +142,5 @@ export declare class Location {
      * returns the string as is.
      */
     static stripTrailingSlash(url: string): string;
-    static ngInjectableDef: i0.ΔInjectableDef<Location>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<Location>;
 }

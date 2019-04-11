@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.11+84.sha-54058ba.with-local-changes
+ * @license Angular v8.0.0-beta.11+85.sha-b057806.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ΔdefineInjectable, ɵsetClassMetadata, Injectable, EventEmitter } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, EventEmitter } from '@angular/core';
 import { __extends } from 'tslib';
 import { LocationStrategy } from '@angular/common';
 
@@ -97,7 +97,7 @@ var SpyLocation = /** @class */ (function () {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
-    SpyLocation.ngInjectableDef = ΔdefineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
+    SpyLocation.ngInjectableDef = ɵɵdefineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
     return SpyLocation;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(SpyLocation, [{
@@ -168,7 +168,7 @@ var MockLocationStrategy = /** @class */ (function (_super) {
         }
     };
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
-    MockLocationStrategy.ngInjectableDef = ΔdefineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
+    MockLocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
     return MockLocationStrategy;
 }(LocationStrategy));
 /*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{

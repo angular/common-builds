@@ -75,5 +75,5 @@ export declare class DeprecatedDatePipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, pattern?: string): string | null;
-    static ngPipeDef: i0.ΔPipeDefWithMeta<DeprecatedDatePipe, "date">;
+    static ngPipeDef: i0.ɵɵPipeDefWithMeta<DeprecatedDatePipe, "date">;
 }

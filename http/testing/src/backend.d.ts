@@ -59,5 +59,5 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
         ignoreCancelled?: boolean;
     }): void;
     private descriptionFromMatcher;
-    static ngInjectableDef: i0.ΔInjectableDef<HttpClientTestingBackend>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<HttpClientTestingBackend>;
 }

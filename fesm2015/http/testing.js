@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.0.0-beta.11+84.sha-54058ba.with-local-changes
+ * @license Angular v8.0.0-beta.11+85.sha-b057806.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
-import { ΔdefineInjectable, ɵsetClassMetadata, Injectable, NgModule, ΔdefineNgModule, ΔdefineInjector, ΔsetNgModuleScope } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, NgModule, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -421,7 +421,7 @@ class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = ΔdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null);
@@ -458,15 +458,15 @@ HttpClientTestingModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ HttpClientTestingModule.ngModuleDef = ΔdefineNgModule({ type: HttpClientTestingModule });
-/** @nocollapse */ HttpClientTestingModule.ngInjectorDef = ΔdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+/** @nocollapse */ HttpClientTestingModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientTestingModule });
+/** @nocollapse */ HttpClientTestingModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
     ], imports: [[
             HttpClientModule,
         ]] });
-/*@__PURE__*/ ΔsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] });
+/*@__PURE__*/ ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,
         args: [{

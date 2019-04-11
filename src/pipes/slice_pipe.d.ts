@@ -60,6 +60,6 @@ export declare class SlicePipe implements PipeTransform {
      */
     transform(value: any, start: number, end?: number): any;
     private supports;
-    static ngInjectableDef: i0.ΔInjectableDef<SlicePipe>;
-    static ngPipeDef: i0.ΔPipeDefWithMeta<SlicePipe, "slice">;
+    static ngInjectableDef: i0.ɵɵInjectableDef<SlicePipe>;
+    static ngPipeDef: i0.ɵɵPipeDefWithMeta<SlicePipe, "slice">;
 }
