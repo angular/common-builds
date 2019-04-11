@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.11+84.sha-54058ba.with-local-changes
+ * @license Angular v8.0.0-beta.11+85.sha-b057806.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ΔdefineDirective, ΔelementHostStyling, ΔelementHostStylingMap, ΔelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ΔdefineInjectable, Δinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3974,7 +3974,7 @@ const ngClassDirectiveDef__PRE_R3__ = undefined;
 // never be instantiated normally because it is apart of a
 // base class)
 /** @type {?} */
-const ngClassDirectiveDef__POST_R3__ = ΔdefineDirective({
+const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: (/** @type {?} */ ((/**
      * @return {?}
      */
@@ -3992,11 +3992,11 @@ const ngClassDirectiveDef__POST_R3__ = ΔdefineDirective({
      */
     function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ΔelementHostStyling();
+            ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ΔelementHostStylingMap(ctx.getValue());
-            ΔelementHostStylingApply();
+            ɵɵelementHostStylingMap(ctx.getValue());
+            ɵɵelementHostStylingApply();
         }
     })
 });
@@ -5410,7 +5410,7 @@ const ngStyleDirectiveDef__PRE_R3__ = undefined;
 // never be instantiated normally because it is apart of a
 // base class)
 /** @type {?} */
-const ngStyleDirectiveDef__POST_R3__ = ΔdefineDirective({
+const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: (/** @type {?} */ ((/**
      * @return {?}
      */
@@ -5428,11 +5428,11 @@ const ngStyleDirectiveDef__POST_R3__ = ΔdefineDirective({
      */
     function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ΔelementHostStyling();
+            ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ΔelementHostStylingMap(null, ctx.getValue());
-            ΔelementHostStylingApply();
+            ɵɵelementHostStylingMap(null, ctx.getValue());
+            ɵɵelementHostStylingApply();
         }
     })
 });
@@ -7595,7 +7595,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.11+84.sha-54058ba.with-local-changes');
+const VERSION = new Version('8.0.0-beta.11+85.sha-b057806.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -7612,12 +7612,12 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ngInjectableDef = ΔdefineInjectable({
+/** @nocollapse */ ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
     providedIn: 'root',
     factory: (/**
      * @nocollapse @return {?}
      */
-    () => new BrowserViewportScroller(Δinject(DOCUMENT), window, Δinject(ErrorHandler)))
+    () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
 });
 /**
  * Manages the scroll position for a browser window.
