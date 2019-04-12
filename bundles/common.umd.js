@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.11+64.sha-675f390.with-local-changes
+ * @license Angular v8.0.0-beta.11+85.sha-b057806.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3368,17 +3368,17 @@
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngClassDirectiveDef__POST_R3__ = core.ΔdefineDirective({
+    var ngClassDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: function () { },
         selectors: null,
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ΔelementHostStyling();
+                core.ɵɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ΔelementHostStylingMap(ctx.getValue());
-                core.ΔelementHostStylingApply();
+                core.ɵɵelementHostStylingMap(ctx.getValue());
+                core.ɵɵelementHostStylingApply();
             }
         }
     });
@@ -4618,17 +4618,17 @@
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngStyleDirectiveDef__POST_R3__ = core.ΔdefineDirective({
+    var ngStyleDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: function () { },
         selectors: null,
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                core.ΔelementHostStyling();
+                core.ɵɵelementHostStyling();
             }
             if (rf & 2 /* Update */) {
-                core.ΔelementHostStylingMap(null, ctx.getValue());
-                core.ΔelementHostStylingApply();
+                core.ɵɵelementHostStylingMap(null, ctx.getValue());
+                core.ɵɵelementHostStylingApply();
             }
         }
     });
@@ -5509,6 +5509,7 @@
         };
         var AsyncPipe_1;
         AsyncPipe = AsyncPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'async', pure: false }),
             __metadata("design:paramtypes", [core.ChangeDetectorRef])
         ], AsyncPipe);
@@ -5554,6 +5555,7 @@
         };
         var LowerCasePipe_1;
         LowerCasePipe = LowerCasePipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'lowercase' })
         ], LowerCasePipe);
         return LowerCasePipe;
@@ -5601,6 +5603,7 @@
         };
         var TitleCasePipe_1;
         TitleCasePipe = TitleCasePipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'titlecase' })
         ], TitleCasePipe);
         return TitleCasePipe;
@@ -5630,6 +5633,7 @@
         };
         var UpperCasePipe_1;
         UpperCasePipe = UpperCasePipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'uppercase' })
         ], UpperCasePipe);
         return UpperCasePipe;
@@ -5813,6 +5817,7 @@
         };
         var DatePipe_1;
         DatePipe = DatePipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'date', pure: true }),
             __param(0, core.Inject(core.LOCALE_ID)),
             __metadata("design:paramtypes", [String])
@@ -5865,6 +5870,7 @@
         };
         var I18nPluralPipe_1;
         I18nPluralPipe = I18nPluralPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'i18nPlural', pure: true }),
             __metadata("design:paramtypes", [NgLocalization])
         ], I18nPluralPipe);
@@ -5920,6 +5926,7 @@
         };
         var I18nSelectPipe_1;
         I18nSelectPipe = I18nSelectPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'i18nSelect', pure: true })
         ], I18nSelectPipe);
         return I18nSelectPipe;
@@ -5955,6 +5962,7 @@
          */
         JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
         JsonPipe = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'json', pure: false })
         ], JsonPipe);
         return JsonPipe;
@@ -6016,6 +6024,7 @@
             return this.keyValues;
         };
         KeyValuePipe = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'keyvalue', pure: false }),
             __metadata("design:paramtypes", [core.KeyValueDiffers])
         ], KeyValuePipe);
@@ -6128,6 +6137,7 @@
         };
         var DecimalPipe_1;
         DecimalPipe = DecimalPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'number' }),
             __param(0, core.Inject(core.LOCALE_ID)),
             __metadata("design:paramtypes", [String])
@@ -6189,6 +6199,7 @@
         };
         var PercentPipe_1;
         PercentPipe = PercentPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'percent' }),
             __param(0, core.Inject(core.LOCALE_ID)),
             __metadata("design:paramtypes", [String])
@@ -6282,6 +6293,7 @@
         };
         var CurrencyPipe_1;
         CurrencyPipe = CurrencyPipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'currency' }),
             __param(0, core.Inject(core.LOCALE_ID)),
             __metadata("design:paramtypes", [String])
@@ -6377,6 +6389,7 @@
         SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
         var SlicePipe_1;
         SlicePipe = SlicePipe_1 = __decorate([
+            core.Injectable(),
             core.Pipe({ name: 'slice', pure: false })
         ], SlicePipe);
         return SlicePipe;
@@ -6531,7 +6544,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.11+64.sha-675f390.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.11+85.sha-b057806.with-local-changes');
 
     /**
      * @license
@@ -6551,9 +6564,9 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = core.ΔdefineInjectable({
+        ViewportScroller.ngInjectableDef = core.ɵɵdefineInjectable({
             providedIn: 'root',
-            factory: function () { return new BrowserViewportScroller(core.Δinject(DOCUMENT), window, core.Δinject(core.ErrorHandler)); }
+            factory: function () { return new BrowserViewportScroller(core.ɵɵinject(DOCUMENT), window, core.ɵɵinject(core.ErrorHandler)); }
         });
         return ViewportScroller;
     }());

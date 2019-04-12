@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.11+64.sha-675f390.with-local-changes
+ * @license Angular v8.0.0-beta.11+85.sha-b057806.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ΔdefineDirective, ΔelementHostStyling, ΔelementHostStylingMap, ΔelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ΔdefineInjectable, Δinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3345,17 +3345,17 @@ var ngClassDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
-var ngClassDirectiveDef__POST_R3__ = ΔdefineDirective({
+var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: function () { },
     selectors: null,
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ΔelementHostStyling();
+            ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ΔelementHostStylingMap(ctx.getValue());
-            ΔelementHostStylingApply();
+            ɵɵelementHostStylingMap(ctx.getValue());
+            ɵɵelementHostStylingApply();
         }
     }
 });
@@ -4595,17 +4595,17 @@ var ngStyleDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
-var ngStyleDirectiveDef__POST_R3__ = ΔdefineDirective({
+var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: function () { },
     selectors: null,
     factory: function () { },
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            ΔelementHostStyling();
+            ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ΔelementHostStylingMap(null, ctx.getValue());
-            ΔelementHostStylingApply();
+            ɵɵelementHostStylingMap(null, ctx.getValue());
+            ɵɵelementHostStylingApply();
         }
     }
 });
@@ -5486,6 +5486,7 @@ var AsyncPipe = /** @class */ (function () {
     };
     var AsyncPipe_1;
     AsyncPipe = AsyncPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'async', pure: false }),
         __metadata("design:paramtypes", [ChangeDetectorRef])
     ], AsyncPipe);
@@ -5531,6 +5532,7 @@ var LowerCasePipe = /** @class */ (function () {
     };
     var LowerCasePipe_1;
     LowerCasePipe = LowerCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'lowercase' })
     ], LowerCasePipe);
     return LowerCasePipe;
@@ -5578,6 +5580,7 @@ var TitleCasePipe = /** @class */ (function () {
     };
     var TitleCasePipe_1;
     TitleCasePipe = TitleCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'titlecase' })
     ], TitleCasePipe);
     return TitleCasePipe;
@@ -5607,6 +5610,7 @@ var UpperCasePipe = /** @class */ (function () {
     };
     var UpperCasePipe_1;
     UpperCasePipe = UpperCasePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'uppercase' })
     ], UpperCasePipe);
     return UpperCasePipe;
@@ -5790,6 +5794,7 @@ var DatePipe = /** @class */ (function () {
     };
     var DatePipe_1;
     DatePipe = DatePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'date', pure: true }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -5842,6 +5847,7 @@ var I18nPluralPipe = /** @class */ (function () {
     };
     var I18nPluralPipe_1;
     I18nPluralPipe = I18nPluralPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'i18nPlural', pure: true }),
         __metadata("design:paramtypes", [NgLocalization])
     ], I18nPluralPipe);
@@ -5897,6 +5903,7 @@ var I18nSelectPipe = /** @class */ (function () {
     };
     var I18nSelectPipe_1;
     I18nSelectPipe = I18nSelectPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'i18nSelect', pure: true })
     ], I18nSelectPipe);
     return I18nSelectPipe;
@@ -5932,6 +5939,7 @@ var JsonPipe = /** @class */ (function () {
      */
     JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
     JsonPipe = __decorate([
+        Injectable(),
         Pipe({ name: 'json', pure: false })
     ], JsonPipe);
     return JsonPipe;
@@ -5993,6 +6001,7 @@ var KeyValuePipe = /** @class */ (function () {
         return this.keyValues;
     };
     KeyValuePipe = __decorate([
+        Injectable(),
         Pipe({ name: 'keyvalue', pure: false }),
         __metadata("design:paramtypes", [KeyValueDiffers])
     ], KeyValuePipe);
@@ -6105,6 +6114,7 @@ var DecimalPipe = /** @class */ (function () {
     };
     var DecimalPipe_1;
     DecimalPipe = DecimalPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'number' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6166,6 +6176,7 @@ var PercentPipe = /** @class */ (function () {
     };
     var PercentPipe_1;
     PercentPipe = PercentPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'percent' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6259,6 +6270,7 @@ var CurrencyPipe = /** @class */ (function () {
     };
     var CurrencyPipe_1;
     CurrencyPipe = CurrencyPipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'currency' }),
         __param(0, Inject(LOCALE_ID)),
         __metadata("design:paramtypes", [String])
@@ -6354,6 +6366,7 @@ var SlicePipe = /** @class */ (function () {
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
     var SlicePipe_1;
     SlicePipe = SlicePipe_1 = __decorate([
+        Injectable(),
         Pipe({ name: 'slice', pure: false })
     ], SlicePipe);
     return SlicePipe;
@@ -6508,7 +6521,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.11+64.sha-675f390.with-local-changes');
+var VERSION = new Version('8.0.0-beta.11+85.sha-b057806.with-local-changes');
 
 /**
  * @license
@@ -6528,9 +6541,9 @@ var ViewportScroller = /** @class */ (function () {
     // De-sugared tree-shakable injection
     // See #23917
     /** @nocollapse */
-    ViewportScroller.ngInjectableDef = ΔdefineInjectable({
+    ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
         providedIn: 'root',
-        factory: function () { return new BrowserViewportScroller(Δinject(DOCUMENT), window, Δinject(ErrorHandler)); }
+        factory: function () { return new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)); }
     });
     return ViewportScroller;
 }());
