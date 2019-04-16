@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.12+16.sha-8027b3e.with-local-changes
+ * @license Angular v8.0.0-beta.12+18.sha-2deac0a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -592,6 +592,96 @@ PathLocationStrategy.ctorParameters = () => [
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+/** @type {?} */
+const u = undefined;
+/**
+ * @param {?} n
+ * @return {?}
+ */
+function plural(n) {
+    /** @type {?} */
+    let i = Math.floor(Math.abs(n));
+    /** @type {?} */
+    let v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
+var localeEn = [
+    'en', [['a', 'p'], ['AM', 'PM'], u], [['AM', 'PM'], u, u],
+    [
+        ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    ],
+    u,
+    [
+        ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ]
+    ],
+    u, [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
+    ['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1}, {0}', u, '{1} \'at\' {0}', u],
+    ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', {}, plural
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@publicApi
+ * @type {?}
+ */
+const LOCALE_DATA = {};
+/**
+ * Register global data to be used internally by Angular. See the
+ * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
+ *
+ * \@publicApi
+ * @param {?} data
+ * @param {?=} localeId
+ * @param {?=} extraData
+ * @return {?}
+ */
+// The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+function registerLocaleData(data, localeId, extraData) {
+    if (typeof localeId !== 'string') {
+        extraData = localeId;
+        localeId = data[0 /* LocaleId */];
+    }
+    localeId = localeId.toLowerCase().replace(/_/g, '-');
+    LOCALE_DATA[localeId] = data;
+    if (extraData) {
+        LOCALE_DATA[localeId][19 /* ExtraData */] = extraData;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
 /**
  * \@internal
  * @type {?}
@@ -930,7 +1020,7 @@ WeekDay[WeekDay.Saturday] = 'Saturday';
  * @return {?} The locale code. For example, `fr`.
  */
 function getLocaleId(locale) {
-    return ɵfindLocaleData(locale)[ɵLocaleDataIndex.LocaleId];
+    return findLocaleData(locale)[0 /* LocaleId */];
 }
 /**
  * Retrieves day period strings for the given locale.
@@ -945,9 +1035,9 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const amPmData = (/** @type {?} */ ([data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]]));
+    const amPmData = (/** @type {?} */ ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]));
     /** @type {?} */
     const amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
@@ -966,9 +1056,9 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  */
 function getLocaleDayNames(locale, formStyle, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const daysData = (/** @type {?} */ ([data[ɵLocaleDataIndex.DaysFormat], data[ɵLocaleDataIndex.DaysStandalone]]));
+    const daysData = (/** @type {?} */ ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]));
     /** @type {?} */
     const days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
@@ -987,9 +1077,9 @@ function getLocaleDayNames(locale, formStyle, width) {
  */
 function getLocaleMonthNames(locale, formStyle, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const monthsData = (/** @type {?} */ ([data[ɵLocaleDataIndex.MonthsFormat], data[ɵLocaleDataIndex.MonthsStandalone]]));
+    const monthsData = (/** @type {?} */ ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]));
     /** @type {?} */
     const months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
@@ -1006,9 +1096,9 @@ function getLocaleMonthNames(locale, formStyle, width) {
  */
 function getLocaleEraNames(locale, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const erasData = (/** @type {?} */ (data[ɵLocaleDataIndex.Eras]));
+    const erasData = (/** @type {?} */ (data[7 /* Eras */]));
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -1024,8 +1114,8 @@ function getLocaleEraNames(locale, width) {
  */
 function getLocaleFirstDayOfWeek(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.FirstDayOfWeek];
+    const data = findLocaleData(locale);
+    return data[8 /* FirstDayOfWeek */];
 }
 /**
  * Range of week days that are considered the week-end for the given locale.
@@ -1038,8 +1128,8 @@ function getLocaleFirstDayOfWeek(locale) {
  */
 function getLocaleWeekEndRange(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.WeekendRange];
+    const data = findLocaleData(locale);
+    return data[9 /* WeekendRange */];
 }
 /**
  * Retrieves a localized date-value formating string.
@@ -1053,8 +1143,8 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return getLastDefinedValue(data[ɵLocaleDataIndex.DateFormat], width);
+    const data = findLocaleData(locale);
+    return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
  * Retrieves a localized time-value formatting string.
@@ -1067,8 +1157,8 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return getLastDefinedValue(data[ɵLocaleDataIndex.TimeFormat], width);
+    const data = findLocaleData(locale);
+    return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
  * Retrieves a localized date-time formatting string.
@@ -1082,9 +1172,9 @@ function getLocaleTimeFormat(locale, width) {
  */
 function getLocaleDateTimeFormat(locale, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const dateTimeFormatData = (/** @type {?} */ (data[ɵLocaleDataIndex.DateTimeFormat]));
+    const dateTimeFormatData = (/** @type {?} */ (data[12 /* DateTimeFormat */]));
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1098,15 +1188,15 @@ function getLocaleDateTimeFormat(locale, width) {
  */
 function getLocaleNumberSymbol(locale, symbol) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     /** @type {?} */
-    const res = data[ɵLocaleDataIndex.NumberSymbols][symbol];
+    const res = data[13 /* NumberSymbols */][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
-            return data[ɵLocaleDataIndex.NumberSymbols][NumberSymbol.Decimal];
+            return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
         }
         else if (symbol === NumberSymbol.CurrencyGroup) {
-            return data[ɵLocaleDataIndex.NumberSymbols][NumberSymbol.Group];
+            return data[13 /* NumberSymbols */][NumberSymbol.Group];
         }
     }
     return res;
@@ -1146,8 +1236,8 @@ function getLocaleNumberSymbol(locale, symbol) {
  */
 function getLocaleNumberFormat(locale, type) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.NumberFormats][type];
+    const data = findLocaleData(locale);
+    return data[14 /* NumberFormats */][type];
 }
 /**
  * Retrieves the symbol used to represent the currency for the main country
@@ -1162,8 +1252,8 @@ function getLocaleNumberFormat(locale, type) {
  */
 function getLocaleCurrencySymbol(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.CurrencySymbol] || null;
+    const data = findLocaleData(locale);
+    return data[15 /* CurrencySymbol */] || null;
 }
 /**
  * Retrieves the name of the currency for the main country corresponding
@@ -1177,8 +1267,8 @@ function getLocaleCurrencySymbol(locale) {
  */
 function getLocaleCurrencyName(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.CurrencyName] || null;
+    const data = findLocaleData(locale);
+    return data[16 /* CurrencyName */] || null;
 }
 /**
  * Retrieves the currency values for a given locale.
@@ -1188,22 +1278,30 @@ function getLocaleCurrencyName(locale) {
  */
 function getLocaleCurrencies(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
-    return data[ɵLocaleDataIndex.Currencies];
+    const data = findLocaleData(locale);
+    return data[17 /* Currencies */];
 }
 /**
- * \@alias core/ɵgetLocalePluralCase
+ * Retrieves the plural function used by ICU expressions to determine the plural case to use
+ * for a given locale.
+ * @see `NgPlural` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
  * \@publicApi
- * @type {?}
+ * @param {?} locale A locale code for the locale format rules to use.
+ * @return {?} The plural function for the locale.
  */
-const getLocalePluralCase = ɵgetLocalePluralCase;
+function getLocalePluralCase(locale) {
+    /** @type {?} */
+    const data = findLocaleData(locale);
+    return data[18 /* PluralCase */];
+}
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[ɵLocaleDataIndex.ExtraData]) {
-        throw new Error(`Missing extra locale data for the locale "${data[ɵLocaleDataIndex.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+    if (!data[19 /* ExtraData */]) {
+        throw new Error(`Missing extra locale data for the locale "${data[0 /* LocaleId */]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
     }
 }
 /**
@@ -1229,10 +1327,10 @@ function checkFullData(data) {
  */
 function getLocaleExtraDayPeriodRules(locale) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     checkFullData(data);
     /** @type {?} */
-    const rules = data[ɵLocaleDataIndex.ExtraData][2 /* ExtraDayPeriodsRules */] || [];
+    const rules = data[19 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map((/**
      * @param {?} rule
      * @return {?}
@@ -1262,12 +1360,12 @@ function getLocaleExtraDayPeriodRules(locale) {
  */
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
     /** @type {?} */
-    const data = ɵfindLocaleData(locale);
+    const data = findLocaleData(locale);
     checkFullData(data);
     /** @type {?} */
     const dayPeriodsData = (/** @type {?} */ ([
-        data[ɵLocaleDataIndex.ExtraData][0 /* ExtraDayPeriodFormats */],
-        data[ɵLocaleDataIndex.ExtraData][1 /* ExtraDayPeriodStandalone */]
+        data[19 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[19 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]));
     /** @type {?} */
     const dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
@@ -1303,6 +1401,35 @@ function getLastDefinedValue(data, index) {
 function extractTime(time) {
     const [h, m] = time.split(':');
     return { hours: +h, minutes: +m };
+}
+/**
+ * Finds the locale data for a given locale.
+ *
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * \@publicApi
+ * @param {?} locale The locale code.
+ * @return {?} The locale data.
+ */
+function findLocaleData(locale) {
+    /** @type {?} */
+    const normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
+    /** @type {?} */
+    let match = LOCALE_DATA[normalizedLocale];
+    if (match) {
+        return match;
+    }
+    // let's try to find a parent locale
+    /** @type {?} */
+    const parentLocale = normalizedLocale.split('-')[0];
+    match = LOCALE_DATA[parentLocale];
+    if (match) {
+        return match;
+    }
+    if (parentLocale === 'en') {
+        return localeEn;
+    }
+    throw new Error(`Missing locale data for the locale "${locale}".`);
 }
 /**
  * Retrieves the currency symbol for a given currency code.
@@ -3156,33 +3283,6 @@ function getPluralCase(locale, nLike) {
         // > other (required—general plural form — also used if the language only has a single form)
         default:
             return Plural.Other;
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Register global data to be used internally by Angular. See the
- * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
- *
- * \@publicApi
- * @param {?} data
- * @param {?=} localeId
- * @param {?=} extraData
- * @return {?}
- */
-// The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
-function registerLocaleData(data, localeId, extraData) {
-    if (typeof localeId !== 'string') {
-        extraData = localeId;
-        localeId = data[ɵLocaleDataIndex.LocaleId];
-    }
-    localeId = localeId.toLowerCase().replace(/_/g, '-');
-    ɵLOCALE_DATA[localeId] = data;
-    if (extraData) {
-        ɵLOCALE_DATA[localeId][ɵLocaleDataIndex.ExtraData] = extraData;
     }
 }
 
@@ -7495,7 +7595,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.12+16.sha-8027b3e.with-local-changes');
+const VERSION = new Version('8.0.0-beta.12+18.sha-2deac0a.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -7715,5 +7815,5 @@ class NullViewportScroller {
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_c, NgClassImplProvider as ɵangular_packages_common_common_h, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_g, NgClassR3Impl as ɵangular_packages_common_common_f, NgStyleImplProvider as ɵangular_packages_common_common_k, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_j, NgStyleR3Impl as ɵangular_packages_common_common_i, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_d, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_e, NgClassImplProvider as ɵangular_packages_common_common_j, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_i, NgClassR3Impl as ɵangular_packages_common_common_h, NgStyleImplProvider as ɵangular_packages_common_common_m, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_l, NgStyleR3Impl as ɵangular_packages_common_common_k, findLocaleData as ɵangular_packages_common_common_d, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_f, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map
