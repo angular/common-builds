@@ -25,8 +25,7 @@ export declare enum NumberFormatStyle {
  * @see `NgPluralCase`
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * @publicApi
- */
+ * @publicApi */
 export declare enum Plural {
     Zero = 0,
     One = 1,
@@ -385,10 +384,16 @@ export declare function getLocaleCurrencySymbol(locale: string): string | null;
  */
 export declare function getLocaleCurrencyName(locale: string): string | null;
 /**
- * @alias core/ɵgetLocalePluralCase
+ * Retrieves the plural function used by ICU expressions to determine the plural case to use
+ * for a given locale.
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The plural function for the locale.
+ * @see `NgPlural`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
  * @publicApi
  */
-export declare const getLocalePluralCase: (locale: string) => ((value: number) => Plural);
+export declare function getLocalePluralCase(locale: string): (value: number) => Plural;
 /**
  * Retrieves locale-specific rules used to determine which day period to use
  * when more than one period is defined for a locale.
@@ -439,6 +444,16 @@ export declare type Time = {
     hours: number;
     minutes: number;
 };
+/**
+ * Finds the locale data for a given locale.
+ *
+ * @param locale The locale code.
+ * @returns The locale data.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+export declare function findLocaleData(locale: string): any;
 /**
  * Retrieves the currency symbol for a given currency code.
  *
