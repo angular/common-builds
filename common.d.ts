@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.12+16.sha-afa4c50.with-local-changes
+ * @license Angular v8.0.0-beta.12+18.sha-8d5ef9c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -942,10 +942,16 @@ export declare function getLocaleNumberFormat(locale: string, type: NumberFormat
 export declare function getLocaleNumberSymbol(locale: string, symbol: NumberSymbol): string;
 
 /**
- * @alias core/ɵgetLocalePluralCase
+ * Retrieves the plural function used by ICU expressions to determine the plural case to use
+ * for a given locale.
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The plural function for the locale.
+ * @see `NgPlural`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
  * @publicApi
  */
-export declare const getLocalePluralCase: (locale: string) => ((value: number) => Plural);
+export declare function getLocalePluralCase(locale: string): (value: number) => Plural;
 
 /**
  * Retrieves a localized time-value formatting string.
@@ -2429,8 +2435,7 @@ export declare abstract class PlatformLocation {
  * @see `NgPluralCase`
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * @publicApi
- */
+ * @publicApi */
 export declare enum Plural {
     Zero = 0,
     One = 1,
@@ -2447,7 +2452,6 @@ export declare interface PopStateEvent {
     type?: string;
     url?: string;
 }
-
 
 /**
  * Register global data to be used internally by Angular. See the
@@ -2663,24 +2667,61 @@ export declare const ɵangular_packages_common_common_a: InjectionToken<boolean>
 export declare function ɵangular_packages_common_common_b(locale: string, nLike: number | string): Plural;
 
 /**
+ * Index of each type of locale data from the locale data array
+ */
+export declare const enum ɵangular_packages_common_common_c {
+    LocaleId = 0,
+    DayPeriodsFormat = 1,
+    DayPeriodsStandalone = 2,
+    DaysFormat = 3,
+    DaysStandalone = 4,
+    MonthsFormat = 5,
+    MonthsStandalone = 6,
+    Eras = 7,
+    FirstDayOfWeek = 8,
+    WeekendRange = 9,
+    DateFormat = 10,
+    TimeFormat = 11,
+    DateTimeFormat = 12,
+    NumberSymbols = 13,
+    NumberFormats = 14,
+    CurrencySymbol = 15,
+    CurrencyName = 16,
+    Currencies = 17,
+    PluralCase = 18,
+    ExtraData = 19
+}
+
+/**
+ * Finds the locale data for a given locale.
+ *
+ * @param locale The locale code.
+ * @returns The locale data.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+export declare function ɵangular_packages_common_common_d(locale: string): any;
+
+/**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-export declare const ɵangular_packages_common_common_c: Provider[];
+export declare const ɵangular_packages_common_common_e: Provider[];
 
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-export declare const ɵangular_packages_common_common_d: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
+export declare const ɵangular_packages_common_common_f: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
 
 /**
  * A collection of deprecated i18n pipes that require intl api
  *
  * @deprecated from v5
  */
-export declare const ɵangular_packages_common_common_e: Provider[];
+export declare const ɵangular_packages_common_common_g: Provider[];
 
-export declare class ɵangular_packages_common_common_f implements ɵNgClassImpl {
+export declare class ɵangular_packages_common_common_h implements ɵNgClassImpl {
     private _value;
     private _ngClassDiffer;
     private _classStringDiffer;
@@ -2694,17 +2735,17 @@ export declare class ɵangular_packages_common_common_f implements ɵNgClassImpl
     applyChanges(): void;
 }
 
-export declare const ɵangular_packages_common_common_g: {
+export declare const ɵangular_packages_common_common_i: {
     provide: typeof ɵNgClassImpl;
     useClass: typeof ɵNgClassR2Impl;
 };
 
-export declare const ɵangular_packages_common_common_h: {
+export declare const ɵangular_packages_common_common_j: {
     provide: typeof ɵNgClassImpl;
     useClass: typeof ɵNgClassR2Impl;
 };
 
-export declare class ɵangular_packages_common_common_i implements ɵNgStyleImpl {
+export declare class ɵangular_packages_common_common_k implements ɵNgStyleImpl {
     private _differ;
     private _value;
     getValue(): {
@@ -2716,12 +2757,12 @@ export declare class ɵangular_packages_common_common_i implements ɵNgStyleImpl
     applyChanges(): void;
 }
 
-export declare const ɵangular_packages_common_common_j: {
+export declare const ɵangular_packages_common_common_l: {
     provide: typeof ɵNgStyleImpl;
     useClass: typeof ɵNgStyleR2Impl;
 };
 
-export declare const ɵangular_packages_common_common_k: {
+export declare const ɵangular_packages_common_common_m: {
     provide: typeof ɵNgStyleImpl;
     useClass: typeof ɵNgStyleR2Impl;
 };
@@ -2750,7 +2791,7 @@ export declare abstract class ɵNgClassImpl {
 
 export declare const ɵNgClassImplProvider__POST_R3__: {
     provide: typeof ɵNgClassImpl;
-    useClass: typeof ɵangular_packages_common_common_f;
+    useClass: typeof ɵangular_packages_common_common_h;
 };
 
 export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
@@ -2809,7 +2850,7 @@ export declare abstract class ɵNgStyleImpl {
 
 export declare const ɵNgStyleImplProvider__POST_R3__: {
     provide: typeof ɵNgStyleImpl;
-    useClass: typeof ɵangular_packages_common_common_i;
+    useClass: typeof ɵangular_packages_common_common_k;
 };
 
 export declare class ɵNgStyleR2Impl implements ɵNgStyleImpl {
