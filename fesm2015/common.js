@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.13+60.sha-c3c0df9.with-local-changes
+ * @license Angular v8.0.0-beta.13+61.sha-3f6bf6d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Directive, Input, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵɵinjectAttribute, Pipe, ɵɵdefinePipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Directive, Input, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵɵinjectAttribute, Pipe, ɵɵdefinePipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6698,7 +6698,7 @@ class AsyncPipe {
             this._dispose();
             return this.transform((/** @type {?} */ (obj)));
         }
-        if (this._latestValue === this._latestReturnedValue) {
+        if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
             return this._latestReturnedValue;
         }
         this._latestReturnedValue = this._latestValue;
@@ -8107,7 +8107,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.13+60.sha-c3c0df9.with-local-changes');
+const VERSION = new Version('8.0.0-beta.13+61.sha-3f6bf6d.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
