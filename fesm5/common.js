@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.13+60.sha-c3c0df9.with-local-changes
+ * @license Angular v8.0.0-beta.13+61.sha-3f6bf6d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -5450,7 +5450,7 @@ var AsyncPipe = /** @class */ (function () {
             this._dispose();
             return this.transform(obj);
         }
-        if (this._latestValue === this._latestReturnedValue) {
+        if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
             return this._latestReturnedValue;
         }
         this._latestReturnedValue = this._latestValue;
@@ -6521,7 +6521,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.13+60.sha-c3c0df9.with-local-changes');
+var VERSION = new Version('8.0.0-beta.13+61.sha-3f6bf6d.with-local-changes');
 
 /**
  * @license
