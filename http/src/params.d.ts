@@ -39,7 +39,7 @@ export interface HttpParamsOptions {
      * `fromObject`.
      */
     fromString?: string;
-    /** Object map of the HTTP params. Mutally exclusive with `fromString`. */
+    /** Object map of the HTTP params. Mutually exclusive with `fromString`. */
     fromObject?: {
         [param: string]: string | string[];
     };
