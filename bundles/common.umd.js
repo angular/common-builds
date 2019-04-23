@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.13+80.sha-9873356.with-local-changes
+ * @license Angular v8.0.0-beta.13+82.sha-8e73f9b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3365,22 +3365,23 @@
      */
     // used when the VE is present
     var ngClassDirectiveDef__PRE_R3__ = undefined;
+    var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
+        if (rf & 1 /* Create */) {
+            core.ɵɵelementHostStyling();
+        }
+        if (rf & 2 /* Update */) {
+            core.ɵɵelementHostStylingMap(ctx.getValue());
+            core.ɵɵelementHostStylingApply();
+        }
+    };
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
     var ngClassDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
-        type: function () { },
+        type: ɵ0,
         selectors: null,
-        factory: function () { },
-        hostBindings: function (rf, ctx, elIndex) {
-            if (rf & 1 /* Create */) {
-                core.ɵɵelementHostStyling();
-            }
-            if (rf & 2 /* Update */) {
-                core.ɵɵelementHostStylingMap(ctx.getValue());
-                core.ɵɵelementHostStylingApply();
-            }
-        }
+        factory: ɵ1,
+        hostBindings: ɵ2
     });
     var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
     /**
@@ -4615,22 +4616,23 @@
      */
     // used when the VE is present
     var ngStyleDirectiveDef__PRE_R3__ = undefined;
+    var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
+        if (rf & 1 /* Create */) {
+            core.ɵɵelementHostStyling();
+        }
+        if (rf & 2 /* Update */) {
+            core.ɵɵelementHostStylingMap(null, ctx.getValue());
+            core.ɵɵelementHostStylingApply();
+        }
+    };
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
     var ngStyleDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
-        type: function () { },
+        type: ɵ0$1,
         selectors: null,
-        factory: function () { },
-        hostBindings: function (rf, ctx, elIndex) {
-            if (rf & 1 /* Create */) {
-                core.ɵɵelementHostStyling();
-            }
-            if (rf & 2 /* Update */) {
-                core.ɵɵelementHostStylingMap(null, ctx.getValue());
-                core.ɵɵelementHostStylingApply();
-            }
-        }
+        factory: ɵ1$1,
+        hostBindings: ɵ2$1
     });
     var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
     /**
@@ -6457,7 +6459,7 @@
         ], CommonModule);
         return CommonModule;
     }());
-    var ɵ0 = getPluralCase;
+    var ɵ0$2 = getPluralCase;
     /**
      * A module that contains the deprecated i18n pipes.
      *
@@ -6471,7 +6473,7 @@
             core.NgModule({
                 declarations: [COMMON_DEPRECATED_I18N_PIPES],
                 exports: [COMMON_DEPRECATED_I18N_PIPES],
-                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
+                providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0$2 }],
             })
         ], DeprecatedI18NPipesModule);
         return DeprecatedI18NPipesModule;
@@ -6544,7 +6546,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.13+80.sha-9873356.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.13+82.sha-8e73f9b.with-local-changes');
 
     /**
      * @license
