@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.13+80.sha-9873356.with-local-changes
+ * @license Angular v8.0.0-beta.13+88.sha-8e8e89a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, Input, Directive, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Input, Directive, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3342,22 +3342,23 @@ var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
  */
 // used when the VE is present
 var ngClassDirectiveDef__PRE_R3__ = undefined;
+var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
+    if (rf & 1 /* Create */) {
+        ɵɵelementHostStyling();
+    }
+    if (rf & 2 /* Update */) {
+        ɵɵelementHostStylingMap(ctx.getValue());
+        ɵɵelementHostStylingApply();
+    }
+};
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
 var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: function () { },
+    type: ɵ0,
     selectors: null,
-    factory: function () { },
-    hostBindings: function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            ɵɵelementHostStyling();
-        }
-        if (rf & 2 /* Update */) {
-            ɵɵelementHostStylingMap(ctx.getValue());
-            ɵɵelementHostStylingApply();
-        }
-    }
+    factory: ɵ1,
+    hostBindings: ɵ2
 });
 var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
 /**
@@ -4592,22 +4593,23 @@ var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
  */
 // used when the VE is present
 var ngStyleDirectiveDef__PRE_R3__ = undefined;
+var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
+    if (rf & 1 /* Create */) {
+        ɵɵelementHostStyling();
+    }
+    if (rf & 2 /* Update */) {
+        ɵɵelementHostStylingMap(null, ctx.getValue());
+        ɵɵelementHostStylingApply();
+    }
+};
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
 var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: function () { },
+    type: ɵ0$1,
     selectors: null,
-    factory: function () { },
-    hostBindings: function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            ɵɵelementHostStyling();
-        }
-        if (rf & 2 /* Update */) {
-            ɵɵelementHostStylingMap(null, ctx.getValue());
-            ɵɵelementHostStylingApply();
-        }
-    }
+    factory: ɵ1$1,
+    hostBindings: ɵ2$1
 });
 var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
 /**
@@ -6434,7 +6436,7 @@ var CommonModule = /** @class */ (function () {
     ], CommonModule);
     return CommonModule;
 }());
-var ɵ0 = getPluralCase;
+var ɵ0$2 = getPluralCase;
 /**
  * A module that contains the deprecated i18n pipes.
  *
@@ -6448,7 +6450,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
         NgModule({
             declarations: [COMMON_DEPRECATED_I18N_PIPES],
             exports: [COMMON_DEPRECATED_I18N_PIPES],
-            providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
+            providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0$2 }],
         })
     ], DeprecatedI18NPipesModule);
     return DeprecatedI18NPipesModule;
@@ -6521,7 +6523,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-beta.13+80.sha-9873356.with-local-changes');
+var VERSION = new Version('8.0.0-beta.13+88.sha-8e8e89a.with-local-changes');
 
 /**
  * @license
