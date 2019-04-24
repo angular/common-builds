@@ -1,11 +1,13 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { Location } from '@angular/common';
+import { LocationChangeListener } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
+import { PlatformLocation } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
 
 /**
@@ -19,6 +21,7 @@ export declare class MockLocationStrategy extends LocationStrategy {
     internalPath: string;
     internalTitle: string;
     urlChanges: string[];
+    private stateChanges;
     constructor();
     simulatePopState(url: string): void;
     path(includeHash?: boolean): string;
@@ -29,6 +32,42 @@ export declare class MockLocationStrategy extends LocationStrategy {
     getBaseHref(): string;
     back(): void;
     forward(): void;
+    getState(): unknown;
+}
+
+/**
+ * Mock implementation of URL state.
+ *
+ * @publicApi
+ */
+export declare class MockPlatformLocation implements PlatformLocation {
+    private baseHref;
+    private hashUpdate;
+    private urlChanges;
+    constructor(config?: MockPlatformLocationConfig);
+    readonly hostname: string;
+    readonly protocol: string;
+    readonly port: string;
+    readonly pathname: string;
+    readonly search: string;
+    readonly hash: string;
+    readonly state: unknown;
+    getBaseHrefFromDOM(): string;
+    onPopState(fn: LocationChangeListener): void;
+    onHashChange(fn: LocationChangeListener): void;
+    readonly href: string;
+    readonly url: string;
+    private parseChanges;
+    replaceState(state: any, title: string, newUrl: string): void;
+    pushState(state: any, title: string, newUrl: string): void;
+    forward(): void;
+    back(): void;
+    getState(): unknown;
+}
+
+declare interface MockPlatformLocationConfig {
+    startUrl?: string;
+    appBaseHref?: string;
 }
 
 /**
@@ -43,7 +82,7 @@ export declare class SpyLocation implements Location {
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;
-    private state;
+    getState(): unknown;
     isCurrentPathEqualTo(path: string, query?: string): boolean;
     simulateUrlPop(pathname: string): void;
     simulateHashChange(pathname: string): void;
@@ -52,6 +91,7 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string, state?: any): void;
     forward(): void;
     back(): void;
+    onUrlChange(fn: (url: string, state: unknown) => void): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;
 }

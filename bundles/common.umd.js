@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -225,12 +225,15 @@
      * @publicApi
      */
     var Location = /** @class */ (function () {
-        function Location(platformStrategy) {
+        function Location(platformStrategy, platformLocation) {
             var _this = this;
             /** @internal */
             this._subject = new core.EventEmitter();
+            /** @internal */
+            this._urlChangeListeners = [];
             this._platformStrategy = platformStrategy;
             var browserBaseHref = this._platformStrategy.getBaseHref();
+            this._platformLocation = platformLocation;
             this._baseHref = Location_1.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
             this._platformStrategy.onPopState(function (ev) {
                 _this._subject.emit({
@@ -255,6 +258,10 @@
             if (includeHash === void 0) { includeHash = false; }
             return this.normalize(this._platformStrategy.path(includeHash));
         };
+        /**
+         * Returns the current value of the history.state object.
+         */
+        Location.prototype.getState = function () { return this._platformLocation.getState(); };
         /**
          * Normalizes the given path and compares to the current normalized path.
          *
@@ -310,6 +317,7 @@
             if (query === void 0) { query = ''; }
             if (state === void 0) { state = null; }
             this._platformStrategy.pushState(state, '', path, query);
+            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location_1.normalizeQueryParams(query)), state);
         };
         /**
          * Changes the browser's URL to a normalized version of the given URL, and replaces
@@ -323,6 +331,7 @@
             if (query === void 0) { query = ''; }
             if (state === void 0) { state = null; }
             this._platformStrategy.replaceState(state, '', path, query);
+            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location_1.normalizeQueryParams(query)), state);
         };
         /**
          * Navigates forward in the platform's history.
@@ -332,6 +341,20 @@
          * Navigates back in the platform's history.
          */
         Location.prototype.back = function () { this._platformStrategy.back(); };
+        /**
+         * Register URL change listeners. This API can be used to catch updates performed by the Angular
+         * framework. These are not detectible through "popstate" or "hashchange" events.
+         */
+        Location.prototype.onUrlChange = function (fn) {
+            var _this = this;
+            this._urlChangeListeners.push(fn);
+            this.subscribe(function (v) { _this._notifyUrlChangeListeners(v.url, v.state); });
+        };
+        /** @internal */
+        Location.prototype._notifyUrlChangeListeners = function (url, state) {
+            if (url === void 0) { url = ''; }
+            this._urlChangeListeners.forEach(function (fn) { return fn(url, state); });
+        };
         /**
          * Subscribe to the platform's `popState` events.
          *
@@ -404,7 +427,7 @@
         var Location_1;
         Location = Location_1 = __decorate([
             core.Injectable(),
-            __metadata("design:paramtypes", [LocationStrategy])
+            __metadata("design:paramtypes", [LocationStrategy, PlatformLocation])
         ], Location);
         return Location;
     }());
@@ -6546,7 +6569,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-beta.14+19.sha-3938563.with-local-changes');
+    var VERSION = new core.Version('8.0.0-beta.14+31.sha-071ee64.with-local-changes');
 
     /**
      * @license

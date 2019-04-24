@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1198,7 +1198,7 @@ export declare class KeyValuePipe implements PipeTransform {
  * @publicApi
  */
 export declare class Location {
-    constructor(platformStrategy: LocationStrategy);
+    constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
      * Returns the normalized URL path.
      *
@@ -1207,6 +1207,10 @@ export declare class Location {
      * @returns The normalized URL path.
      */
     path(includeHash?: boolean): string;
+    /**
+     * Returns the current value of the history.state object.
+     */
+    getState(): unknown;
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
@@ -1265,6 +1269,11 @@ export declare class Location {
      * Navigates back in the platform's history.
      */
     back(): void;
+    /**
+     * Register URL change listeners. This API can be used to catch updates performed by the Angular
+     * framework. These are not detectible through "popstate" or "hashchange" events.
+     */
+    onUrlChange(fn: (url: string, state: unknown) => void): void;
     /**
      * Subscribe to the platform's `popState` events.
      *
@@ -2417,8 +2426,13 @@ export declare class PercentPipe implements PipeTransform {
  */
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
+    abstract getState(): unknown;
     abstract onPopState(fn: LocationChangeListener): void;
     abstract onHashChange(fn: LocationChangeListener): void;
+    abstract readonly href: string;
+    abstract readonly protocol: string;
+    abstract readonly hostname: string;
+    abstract readonly port: string;
     abstract readonly pathname: string;
     abstract readonly search: string;
     abstract readonly hash: string;

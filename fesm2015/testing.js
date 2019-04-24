@@ -1,11 +1,12 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, InjectionToken, Optional } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
+import { Subject } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
@@ -33,6 +34,14 @@ class SpyLocation {
          * \@internal
          */
         this._platformStrategy = (/** @type {?} */ (null));
+        /**
+         * \@internal
+         */
+        this._platformLocation = (/** @type {?} */ (null));
+        /**
+         * \@internal
+         */
+        this._urlChangeListeners = [];
     }
     /**
      * @param {?} url
@@ -49,10 +58,9 @@ class SpyLocation {
      */
     path() { return this._history[this._historyIndex].path; }
     /**
-     * @private
      * @return {?}
      */
-    state() { return this._history[this._historyIndex].state; }
+    getState() { return this._history[this._historyIndex].state; }
     /**
      * @param {?} path
      * @param {?=} query
@@ -141,7 +149,7 @@ class SpyLocation {
     forward() {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
         }
     }
     /**
@@ -150,8 +158,33 @@ class SpyLocation {
     back() {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'state': this.state(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
         }
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onUrlChange(fn) {
+        this._urlChangeListeners.push(fn);
+        this.subscribe((/**
+         * @param {?} v
+         * @return {?}
+         */
+        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+    }
+    /**
+     * \@internal
+     * @param {?=} url
+     * @param {?=} state
+     * @return {?}
+     */
+    _notifyUrlChangeListeners(url = '', state) {
+        this._urlChangeListeners.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn(url, state)));
     }
     /**
      * @param {?} onNext
@@ -205,6 +238,7 @@ class MockLocationStrategy extends LocationStrategy {
          * \@internal
          */
         this._subject = new EventEmitter();
+        this.stateChanges = [];
     }
     /**
      * @param {?} url
@@ -237,6 +271,8 @@ class MockLocationStrategy extends LocationStrategy {
      * @return {?}
      */
     pushState(ctx, title, path, query) {
+        // Add state change to changes array
+        this.stateChanges.push(ctx);
         this.internalTitle = title;
         /** @type {?} */
         const url = path + (query.length > 0 ? ('?' + query) : '');
@@ -253,6 +289,8 @@ class MockLocationStrategy extends LocationStrategy {
      * @return {?}
      */
     replaceState(ctx, title, path, query) {
+        // Reset the last index of stateChanges to the ctx (state) object
+        this.stateChanges[(this.stateChanges.length || 1) - 1] = ctx;
         this.internalTitle = title;
         /** @type {?} */
         const url = path + (query.length > 0 ? ('?' + query) : '');
@@ -276,6 +314,7 @@ class MockLocationStrategy extends LocationStrategy {
     back() {
         if (this.urlChanges.length > 0) {
             this.urlChanges.pop();
+            this.stateChanges.pop();
             /** @type {?} */
             const nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
             this.simulatePopState(nextUrl);
@@ -285,6 +324,10 @@ class MockLocationStrategy extends LocationStrategy {
      * @return {?}
      */
     forward() { throw 'not implemented'; }
+    /**
+     * @return {?}
+     */
+    getState() { return this.stateChanges[(this.stateChanges.length || 1) - 1]; }
 }
 MockLocationStrategy.decorators = [
     { type: Injectable }
@@ -306,6 +349,236 @@ class _MockPopStateEvent {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Parser from https://tools.ietf.org/html/rfc3986#appendix-B
+ * ^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?
+ *  12            3  4          5       6  7        8 9
+ *
+ * Example: http://www.ics.uci.edu/pub/ietf/uri/#Related
+ *
+ * Results in:
+ *
+ * $1 = http:
+ * $2 = http
+ * $3 = //www.ics.uci.edu
+ * $4 = www.ics.uci.edu
+ * $5 = /pub/ietf/uri/
+ * $6 = <undefined>
+ * $7 = <undefined>
+ * $8 = #Related
+ * $9 = Related
+ * @type {?}
+ */
+const urlParse = /^(([^:\/?#]+):)?(\/\/([^\/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
+/**
+ * @param {?} urlStr
+ * @param {?} baseHref
+ * @return {?}
+ */
+function parseUrl(urlStr, baseHref) {
+    /** @type {?} */
+    const verifyProtocol = /^((http[s]?|ftp):\/\/)/;
+    /** @type {?} */
+    let serverBase;
+    // URL class requires full URL. If the URL string doesn't start with protocol, we need to add
+    // an arbitrary base URL which can be removed afterward.
+    if (!verifyProtocol.test(urlStr)) {
+        serverBase = 'http://empty.com/';
+    }
+    /** @type {?} */
+    let parsedUrl;
+    try {
+        parsedUrl = new URL(urlStr, serverBase);
+    }
+    catch (e) {
+        /** @type {?} */
+        const result = urlParse.exec(serverBase || '' + urlStr);
+        if (!result) {
+            throw new Error(`Invalid URL: ${urlStr} with base: ${baseHref}`);
+        }
+        /** @type {?} */
+        const hostSplit = result[4].split(':');
+        parsedUrl = {
+            protocol: result[1],
+            hostname: hostSplit[0],
+            port: hostSplit[1] || '',
+            pathname: result[5],
+            search: result[6],
+            hash: result[8],
+        };
+    }
+    if (parsedUrl.pathname && parsedUrl.pathname.indexOf(baseHref) === 0) {
+        parsedUrl.pathname = parsedUrl.pathname.substring(baseHref.length);
+    }
+    return {
+        hostname: !serverBase && parsedUrl.hostname || '',
+        protocol: !serverBase && parsedUrl.protocol || '',
+        port: !serverBase && parsedUrl.port || '',
+        pathname: parsedUrl.pathname || '/',
+        search: parsedUrl.search || '',
+        hash: parsedUrl.hash || '',
+    };
+}
+/** @type {?} */
+const MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
+/**
+ * Mock implementation of URL state.
+ *
+ * \@publicApi
+ */
+class MockPlatformLocation {
+    /**
+     * @param {?=} config
+     */
+    constructor(config) {
+        this.baseHref = '';
+        this.hashUpdate = new Subject();
+        this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
+        if (config) {
+            this.baseHref = config.appBaseHref || '';
+            /** @type {?} */
+            const parsedChanges = this.parseChanges(null, config.startUrl || 'http://<empty>/', this.baseHref);
+            this.urlChanges[0] = Object.assign({}, parsedChanges);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get hostname() { return this.urlChanges[0].hostname; }
+    /**
+     * @return {?}
+     */
+    get protocol() { return this.urlChanges[0].protocol; }
+    /**
+     * @return {?}
+     */
+    get port() { return this.urlChanges[0].port; }
+    /**
+     * @return {?}
+     */
+    get pathname() { return this.urlChanges[0].pathname; }
+    /**
+     * @return {?}
+     */
+    get search() { return this.urlChanges[0].search; }
+    /**
+     * @return {?}
+     */
+    get hash() { return this.urlChanges[0].hash; }
+    /**
+     * @return {?}
+     */
+    get state() { return this.urlChanges[0].state; }
+    /**
+     * @return {?}
+     */
+    getBaseHrefFromDOM() { return this.baseHref; }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onPopState(fn) {
+        // No-op: a state stack is not implemented, so
+        // no events will ever come.
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onHashChange(fn) { this.hashUpdate.subscribe(fn); }
+    /**
+     * @return {?}
+     */
+    get href() {
+        /** @type {?} */
+        let url = `${this.protocol}//${this.hostname}${this.port ? ':' + this.port : ''}`;
+        url += `${this.pathname === '/' ? '' : this.pathname}${this.search}${this.hash}`;
+        return url;
+    }
+    /**
+     * @return {?}
+     */
+    get url() { return `${this.pathname}${this.search}${this.hash}`; }
+    /**
+     * @private
+     * @param {?} state
+     * @param {?} url
+     * @param {?=} baseHref
+     * @return {?}
+     */
+    parseChanges(state, url, baseHref = '') {
+        // When the `history.state` value is stored, it is always copied.
+        state = JSON.parse(JSON.stringify(state));
+        return Object.assign({}, parseUrl(url, baseHref), { state });
+    }
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} newUrl
+     * @return {?}
+     */
+    replaceState(state, title, newUrl) {
+        const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
+        this.urlChanges[0] = Object.assign({}, this.urlChanges[0], { pathname, search, hash, state: parsedState });
+    }
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} newUrl
+     * @return {?}
+     */
+    pushState(state, title, newUrl) {
+        const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
+        this.urlChanges.unshift(Object.assign({}, this.urlChanges[0], { pathname, search, hash, state: parsedState }));
+    }
+    /**
+     * @return {?}
+     */
+    forward() { throw new Error('Not implemented'); }
+    /**
+     * @return {?}
+     */
+    back() {
+        /** @type {?} */
+        const oldUrl = this.url;
+        /** @type {?} */
+        const oldHash = this.hash;
+        this.urlChanges.shift();
+        /** @type {?} */
+        const newHash = this.hash;
+        if (oldHash !== newHash) {
+            scheduleMicroTask((/**
+             * @return {?}
+             */
+            () => this.hashUpdate.next((/** @type {?} */ ({
+                type: 'hashchange', state: null, oldUrl, newUrl: this.url
+            })))));
+        }
+    }
+    /**
+     * @return {?}
+     */
+    getState() { return this.state; }
+}
+MockPlatformLocation.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+MockPlatformLocation.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }] }
+];
+/**
+ * @param {?} cb
+ * @return {?}
+ */
+function scheduleMicroTask(cb) {
+    Promise.resolve(null).then(cb);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -321,5 +594,5 @@ class _MockPopStateEvent {
  * Generated bundle index. Do not edit.
  */
 
-export { SpyLocation, MockLocationStrategy };
+export { SpyLocation, MockLocationStrategy, MockPlatformLocation };
 //# sourceMappingURL=testing.js.map
