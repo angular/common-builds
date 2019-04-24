@@ -20,7 +20,7 @@ export declare class SpyLocation implements Location {
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;
-    private state;
+    getState(): unknown;
     isCurrentPathEqualTo(path: string, query?: string): boolean;
     simulateUrlPop(pathname: string): void;
     simulateHashChange(pathname: string): void;
@@ -29,6 +29,7 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string, state?: any): void;
     forward(): void;
     back(): void;
+    onUrlChange(fn: (url: string, state: unknown) => void): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;
     static ngInjectableDef: i0.ɵɵInjectableDef<SpyLocation>;

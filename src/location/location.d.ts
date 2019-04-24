@@ -1,5 +1,6 @@
 import { SubscriptionLike } from 'rxjs';
 import { LocationStrategy } from './location_strategy';
+import { PlatformLocation } from './platform_location';
 import * as i0 from "@angular/core";
 /** @publicApi */
 export interface PopStateEvent {
@@ -36,7 +37,7 @@ export interface PopStateEvent {
  * @publicApi
  */
 export declare class Location {
-    constructor(platformStrategy: LocationStrategy);
+    constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
      * Returns the normalized URL path.
      *
@@ -45,6 +46,10 @@ export declare class Location {
      * @returns The normalized URL path.
      */
     path(includeHash?: boolean): string;
+    /**
+     * Returns the current value of the history.state object.
+     */
+    getState(): unknown;
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
@@ -103,6 +108,11 @@ export declare class Location {
      * Navigates back in the platform's history.
      */
     back(): void;
+    /**
+     * Register URL change listeners. This API can be used to catch updates performed by the Angular
+     * framework. These are not detectible through "popstate" or "hashchange" events.
+     */
+    onUrlChange(fn: (url: string, state: unknown) => void): void;
     /**
      * Subscribe to the platform's `popState` events.
      *

@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+19.sha-3938563.with-local-changes
+ * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -129,15 +129,21 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
 class Location {
     /**
      * @param {?} platformStrategy
+     * @param {?} platformLocation
      */
-    constructor(platformStrategy) {
+    constructor(platformStrategy, platformLocation) {
         /**
          * \@internal
          */
         this._subject = new EventEmitter();
+        /**
+         * \@internal
+         */
+        this._urlChangeListeners = [];
         this._platformStrategy = platformStrategy;
         /** @type {?} */
         const browserBaseHref = this._platformStrategy.getBaseHref();
+        this._platformLocation = platformLocation;
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState((/**
          * @param {?} ev
@@ -164,6 +170,11 @@ class Location {
     path(includeHash = false) {
         return this.normalize(this._platformStrategy.path(includeHash));
     }
+    /**
+     * Returns the current value of the history.state object.
+     * @return {?}
+     */
+    getState() { return this._platformLocation.getState(); }
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
@@ -217,6 +228,7 @@ class Location {
      */
     go(path, query = '', state = null) {
         this._platformStrategy.pushState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location.normalizeQueryParams(query)), state);
     }
     /**
      * Changes the browser's URL to a normalized version of the given URL, and replaces
@@ -229,6 +241,7 @@ class Location {
      */
     replaceState(path, query = '', state = null) {
         this._platformStrategy.replaceState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location.normalizeQueryParams(query)), state);
     }
     /**
      * Navigates forward in the platform's history.
@@ -240,6 +253,33 @@ class Location {
      * @return {?}
      */
     back() { this._platformStrategy.back(); }
+    /**
+     * Register URL change listeners. This API can be used to catch updates performed by the Angular
+     * framework. These are not detectible through "popstate" or "hashchange" events.
+     * @param {?} fn
+     * @return {?}
+     */
+    onUrlChange(fn) {
+        this._urlChangeListeners.push(fn);
+        this.subscribe((/**
+         * @param {?} v
+         * @return {?}
+         */
+        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+    }
+    /**
+     * \@internal
+     * @param {?=} url
+     * @param {?=} state
+     * @return {?}
+     */
+    _notifyUrlChangeListeners(url = '', state) {
+        this._urlChangeListeners.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn(url, state)));
+    }
     /**
      * Subscribe to the platform's `popState` events.
      *
@@ -319,12 +359,13 @@ Location.decorators = [
 ];
 /** @nocollapse */
 Location.ctorParameters = () => [
-    { type: LocationStrategy }
+    { type: LocationStrategy },
+    { type: PlatformLocation }
 ];
-/** @nocollapse */ Location.ngInjectableDef = ɵɵdefineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy)); }, providedIn: null });
+/** @nocollapse */ Location.ngInjectableDef = ɵɵdefineInjectable({ token: Location, factory: function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(Location, [{
         type: Injectable
-    }], function () { return [{ type: LocationStrategy }]; }, null);
+    }], function () { return [{ type: LocationStrategy }, { type: PlatformLocation }]; }, null);
 /**
  * @param {?} baseHref
  * @param {?} url
@@ -8107,7 +8148,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-beta.14+19.sha-3938563.with-local-changes');
+const VERSION = new Version('8.0.0-beta.14+31.sha-071ee64.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

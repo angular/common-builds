@@ -18,6 +18,7 @@ export declare class MockLocationStrategy extends LocationStrategy {
     internalPath: string;
     internalTitle: string;
     urlChanges: string[];
+    private stateChanges;
     constructor();
     simulatePopState(url: string): void;
     path(includeHash?: boolean): string;
@@ -28,5 +29,6 @@ export declare class MockLocationStrategy extends LocationStrategy {
     getBaseHref(): string;
     back(): void;
     forward(): void;
+    getState(): unknown;
     static ngInjectableDef: i0.ɵɵInjectableDef<MockLocationStrategy>;
 }

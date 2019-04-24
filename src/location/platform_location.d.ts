@@ -30,8 +30,13 @@ import { InjectionToken } from '@angular/core';
  */
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
+    abstract getState(): unknown;
     abstract onPopState(fn: LocationChangeListener): void;
     abstract onHashChange(fn: LocationChangeListener): void;
+    abstract readonly href: string;
+    abstract readonly protocol: string;
+    abstract readonly hostname: string;
+    abstract readonly port: string;
     abstract readonly pathname: string;
     abstract readonly search: string;
     abstract readonly hash: string;
