@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.0.0-beta.14+73.sha-61365a9.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __extends, __metadata, __assign, __param } from 'tslib';
-import { Injectable, EventEmitter, InjectionToken, Optional } from '@angular/core';
+import { Injectable, EventEmitter, InjectionToken, Inject, Optional } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
 
@@ -284,6 +284,11 @@ function parseUrl(urlStr, baseHref) {
         hash: parsedUrl.hash || '',
     };
 }
+/**
+ * Provider for mock platform location config
+ *
+ * @publicApi
+ */
 var MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
 /**
  * Mock implementation of URL state.
@@ -386,7 +391,7 @@ var MockPlatformLocation = /** @class */ (function () {
     MockPlatformLocation.prototype.getState = function () { return this.state; };
     MockPlatformLocation = __decorate([
         Injectable(),
-        __param(0, Optional()),
+        __param(0, Inject(MOCK_PLATFORM_LOCATION_CONFIG)), __param(0, Optional()),
         __metadata("design:paramtypes", [Object])
     ], MockPlatformLocation);
     return MockPlatformLocation;
@@ -424,5 +429,5 @@ function scheduleMicroTask(cb) {
  * Generated bundle index. Do not edit.
  */
 
-export { SpyLocation, MockLocationStrategy, MockPlatformLocation };
+export { SpyLocation, MockLocationStrategy, MOCK_PLATFORM_LOCATION_CONFIG, MockPlatformLocation };
 //# sourceMappingURL=testing.js.map

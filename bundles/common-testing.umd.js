@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+73.sha-61365a9.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -340,6 +340,11 @@
             hash: parsedUrl.hash || '',
         };
     }
+    /**
+     * Provider for mock platform location config
+     *
+     * @publicApi
+     */
     var MOCK_PLATFORM_LOCATION_CONFIG = new core.InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
     /**
      * Mock implementation of URL state.
@@ -442,7 +447,7 @@
         MockPlatformLocation.prototype.getState = function () { return this.state; };
         MockPlatformLocation = __decorate([
             core.Injectable(),
-            __param(0, core.Optional()),
+            __param(0, core.Inject(MOCK_PLATFORM_LOCATION_CONFIG)), __param(0, core.Optional()),
             __metadata("design:paramtypes", [Object])
         ], MockPlatformLocation);
         return MockPlatformLocation;
@@ -482,6 +487,7 @@
 
     exports.SpyLocation = SpyLocation;
     exports.MockLocationStrategy = MockLocationStrategy;
+    exports.MOCK_PLATFORM_LOCATION_CONFIG = MOCK_PLATFORM_LOCATION_CONFIG;
     exports.MockPlatformLocation = MockPlatformLocation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
