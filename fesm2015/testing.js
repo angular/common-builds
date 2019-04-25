@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.14+73.sha-61365a9.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { EventEmitter, Injectable, ɵɵdefineInjectable, ɵsetClassMetadata, InjectionToken, Optional } from '@angular/core';
+import { EventEmitter, Injectable, ɵɵdefineInjectable, ɵsetClassMetadata, InjectionToken, Inject, Optional, ɵɵinject } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
 
@@ -448,7 +448,12 @@ function parseUrl(urlStr, baseHref) {
         hash: parsedUrl.hash || '',
     };
 }
-/** @type {?} */
+/**
+ * Provider for mock platform location config
+ *
+ * \@publicApi
+ * @type {?}
+ */
 const MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
 /**
  * Mock implementation of URL state.
@@ -594,12 +599,15 @@ MockPlatformLocation.decorators = [
 ];
 /** @nocollapse */
 MockPlatformLocation.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }] }
+    { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
 ];
-/** @nocollapse */ MockPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { throw new Error("MockPlatformLocation has a constructor which is not compatible with Dependency Injection. It should probably not be @Injectable()."); }, providedIn: null });
+/** @nocollapse */ MockPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [MOCK_PLATFORM_LOCATION_CONFIG]
+            }, {
                 type: Optional
             }] }]; }, null);
 /**
@@ -625,5 +633,5 @@ function scheduleMicroTask(cb) {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { SpyLocation, MockLocationStrategy, MockPlatformLocation };
+export { SpyLocation, MockLocationStrategy, MOCK_PLATFORM_LOCATION_CONFIG, MockPlatformLocation };
 //# sourceMappingURL=testing.js.map

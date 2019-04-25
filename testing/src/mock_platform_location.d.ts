@@ -8,10 +8,20 @@
 import { LocationChangeListener, PlatformLocation } from '@angular/common';
 import { InjectionToken } from '@angular/core';
 import * as i0 from "@angular/core";
+/**
+ * Mock platform location config
+ *
+ * @publicApi
+ */
 export interface MockPlatformLocationConfig {
     startUrl?: string;
     appBaseHref?: string;
 }
+/**
+ * Provider for mock platform location config
+ *
+ * @publicApi
+ */
 export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<{}>;
 /**
  * Mock implementation of URL state.

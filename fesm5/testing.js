@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-beta.14+73.sha-61365a9.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, EventEmitter, InjectionToken, Optional } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, EventEmitter, InjectionToken, ɵɵinject, Inject, Optional } from '@angular/core';
 import { __extends, __assign } from 'tslib';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
@@ -264,6 +264,11 @@ function parseUrl(urlStr, baseHref) {
         hash: parsedUrl.hash || '',
     };
 }
+/**
+ * Provider for mock platform location config
+ *
+ * @publicApi
+ */
 var MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
 /**
  * Mock implementation of URL state.
@@ -364,12 +369,15 @@ var MockPlatformLocation = /** @class */ (function () {
         }
     };
     MockPlatformLocation.prototype.getState = function () { return this.state; };
-    MockPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { throw new Error("MockPlatformLocation has a constructor which is not compatible with Dependency Injection. It should probably not be @Injectable()."); }, providedIn: null });
+    MockPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); }, providedIn: null });
     return MockPlatformLocation;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [MOCK_PLATFORM_LOCATION_CONFIG]
+            }, {
                 type: Optional
             }] }]; }, null);
 function scheduleMicroTask(cb) {
@@ -401,5 +409,5 @@ function scheduleMicroTask(cb) {
  * found in the LICENSE file at https://angular.io/license
  */
 
-export { SpyLocation, MockLocationStrategy, MockPlatformLocation };
+export { SpyLocation, MockLocationStrategy, MOCK_PLATFORM_LOCATION_CONFIG, MockPlatformLocation };
 //# sourceMappingURL=testing.js.map

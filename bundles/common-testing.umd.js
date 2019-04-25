@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-beta.14+73.sha-61365a9.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -305,6 +305,11 @@
             hash: parsedUrl.hash || '',
         };
     }
+    /**
+     * Provider for mock platform location config
+     *
+     * @publicApi
+     */
     var MOCK_PLATFORM_LOCATION_CONFIG = new i0.InjectionToken('MOCK_PLATFORM_LOCATION_CONFIG');
     /**
      * Mock implementation of URL state.
@@ -405,12 +410,15 @@
             }
         };
         MockPlatformLocation.prototype.getState = function () { return this.state; };
-        MockPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { throw new Error("MockPlatformLocation has a constructor which is not compatible with Dependency Injection. It should probably not be @Injectable()."); }, providedIn: null });
+        MockPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(i0.ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); }, providedIn: null });
         return MockPlatformLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MockPlatformLocation, [{
             type: i0.Injectable
         }], function () { return [{ type: undefined, decorators: [{
+                    type: i0.Inject,
+                    args: [MOCK_PLATFORM_LOCATION_CONFIG]
+                }, {
                     type: i0.Optional
                 }] }]; }, null);
     function scheduleMicroTask(cb) {
@@ -444,6 +452,7 @@
 
     exports.SpyLocation = SpyLocation;
     exports.MockLocationStrategy = MockLocationStrategy;
+    exports.MOCK_PLATFORM_LOCATION_CONFIG = MOCK_PLATFORM_LOCATION_CONFIG;
     exports.MockPlatformLocation = MockPlatformLocation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
