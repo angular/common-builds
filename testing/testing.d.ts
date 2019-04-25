@@ -1,14 +1,22 @@
 /**
- * @license Angular v8.0.0-beta.14+31.sha-071ee64.with-local-changes
+ * @license Angular v8.0.0-beta.14+74.sha-6de4cbd.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { InjectionToken } from '@angular/core';
 import { Location } from '@angular/common';
 import { LocationChangeListener } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
+
+/**
+ * Provider for mock platform location config
+ *
+ * @publicApi
+ */
+export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<{}>;
 
 /**
  * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
@@ -65,7 +73,12 @@ export declare class MockPlatformLocation implements PlatformLocation {
     getState(): unknown;
 }
 
-declare interface MockPlatformLocationConfig {
+/**
+ * Mock platform location config
+ *
+ * @publicApi
+ */
+export declare interface MockPlatformLocationConfig {
     startUrl?: string;
     appBaseHref?: string;
 }
