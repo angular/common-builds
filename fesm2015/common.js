@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-rc.0+96.sha-98a38ec.with-local-changes
+ * @license Angular v8.0.0-rc.0+97.sha-be8fbac.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, ɵɵelementHostStyling, ɵɵelementHostClassMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵelementHostStyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -4031,7 +4031,7 @@ function (rf, ctx, elIndex) {
         ɵɵelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(ctx.getValue());
+        ɵɵelementHostClassMap(ctx.getValue());
         ɵɵelementHostStylingApply();
     }
 };
@@ -5468,7 +5468,7 @@ function (rf, ctx, elIndex) {
         ɵɵelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(null, ctx.getValue());
+        ɵɵelementHostStyleMap(ctx.getValue());
         ɵɵelementHostStylingApply();
     }
 };
@@ -7638,7 +7638,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-rc.0+96.sha-98a38ec.with-local-changes');
+const VERSION = new Version('8.0.0-rc.0+97.sha-be8fbac.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
