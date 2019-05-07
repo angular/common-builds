@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-rc.0+91.sha-b40f6f3.with-local-changes
+ * @license Angular v8.0.0-rc.0+97.sha-be8fbac.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Input, Directive, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Input, Directive, ɵɵelementHostStyling, ɵɵelementHostClassMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵelementHostStyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3370,7 +3370,7 @@ var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elInd
         ɵɵelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(ctx.getValue());
+        ɵɵelementHostClassMap(ctx.getValue());
         ɵɵelementHostStylingApply();
     }
 };
@@ -4621,7 +4621,7 @@ var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx,
         ɵɵelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(null, ctx.getValue());
+        ɵɵelementHostStyleMap(ctx.getValue());
         ɵɵelementHostStylingApply();
     }
 };
@@ -5763,7 +5763,7 @@ var UpperCasePipe = /** @class */ (function () {
  * {{ dateObj | date }}               // output is 'Jun 15, 2015'
  * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
  * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- * {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
  * ```
  *
  * ### Usage example
@@ -6546,7 +6546,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-rc.0+91.sha-b40f6f3.with-local-changes');
+var VERSION = new Version('8.0.0-rc.0+97.sha-be8fbac.with-local-changes');
 
 /**
  * @license
