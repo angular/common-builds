@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+95.sha-4f055d4.with-local-changes
+ * @license Angular v8.0.0-rc.0+96.sha-98a38ec.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -287,7 +287,7 @@ export declare class CurrencyPipe implements PipeTransform {
  * {{ dateObj | date }}               // output is 'Jun 15, 2015'
  * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
  * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- * {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
  * ```
  *
  * ### Usage example
