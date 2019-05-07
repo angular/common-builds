@@ -121,7 +121,7 @@ import * as i0 from "@angular/core";
  * {{ dateObj | date }}               // output is 'Jun 15, 2015'
  * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
  * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- * {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
  * ```
  *
  * ### Usage example
