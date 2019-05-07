@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.2+26.sha-f6d7271.with-local-changes
+ * @license Angular v8.0.0-rc.2+27.sha-82fd192.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6822,7 +6822,7 @@ UpperCasePipe.decorators = [
  * {{ dateObj | date }}               // output is 'Jun 15, 2015'
  * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
  * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
- * {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
  * ```
  *
  * ### Usage example
@@ -7638,7 +7638,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-rc.2+26.sha-f6d7271.with-local-changes');
+const VERSION = new Version('8.0.0-rc.2+27.sha-82fd192.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
