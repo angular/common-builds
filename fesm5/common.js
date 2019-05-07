@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-rc.0+96.sha-98a38ec.with-local-changes
+ * @license Angular v8.0.0-rc.0+97.sha-be8fbac.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵelementHostStyling, ɵɵelementHostClassMap, ɵɵelementHostStylingApply, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵelementHostStyleMap, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 import { __extends, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3348,7 +3348,7 @@ var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
             ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵɵelementHostStylingMap(ctx.getValue());
+            ɵɵelementHostClassMap(ctx.getValue());
             ɵɵelementHostStylingApply();
         }
     }
@@ -4552,7 +4552,7 @@ var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
             ɵɵelementHostStyling();
         }
         if (rf & 2 /* Update */) {
-            ɵɵelementHostStylingMap(null, ctx.getValue());
+            ɵɵelementHostStyleMap(ctx.getValue());
             ɵɵelementHostStylingApply();
         }
     }
@@ -6585,7 +6585,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.0.0-rc.0+96.sha-98a38ec.with-local-changes');
+var VERSION = new Version('8.0.0-rc.0+97.sha-be8fbac.with-local-changes');
 
 /**
  * @license
