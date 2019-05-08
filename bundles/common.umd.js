@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+120.sha-452f121.with-local-changes
+ * @license Angular v8.0.0-rc.0+121.sha-c016e2c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3390,11 +3390,11 @@
     var ngClassDirectiveDef__PRE_R3__ = undefined;
     var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            core.ɵɵelementHostStyling();
+            core.ɵɵelementStyling();
         }
         if (rf & 2 /* Update */) {
-            core.ɵɵelementHostClassMap(ctx.getValue());
-            core.ɵɵelementHostStylingApply();
+            core.ɵɵelementClassMap(ctx.getValue());
+            core.ɵɵelementStylingApply();
         }
     };
     // used when the VE is not present (note the directive will
@@ -4641,11 +4641,11 @@
     var ngStyleDirectiveDef__PRE_R3__ = undefined;
     var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            core.ɵɵelementHostStyling();
+            core.ɵɵelementStyling();
         }
         if (rf & 2 /* Update */) {
-            core.ɵɵelementHostStyleMap(ctx.getValue());
-            core.ɵɵelementHostStylingApply();
+            core.ɵɵelementStyleMap(ctx.getValue());
+            core.ɵɵelementStylingApply();
         }
     };
     // used when the VE is not present (note the directive will
@@ -6569,7 +6569,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-rc.0+120.sha-452f121.with-local-changes');
+    var VERSION = new core.Version('8.0.0-rc.0+121.sha-c016e2c.with-local-changes');
 
     /**
      * @license
