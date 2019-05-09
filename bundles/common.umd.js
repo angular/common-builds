@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+121.sha-c016e2c.with-local-changes
+ * @license Angular v8.0.0-rc.0+124.sha-d70b1ff.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3353,11 +3353,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                i0.ɵɵelementStyling();
+                i0.ɵɵstyling();
             }
             if (rf & 2 /* Update */) {
-                i0.ɵɵelementClassMap(ctx.getValue());
-                i0.ɵɵelementStylingApply();
+                i0.ɵɵclassMap(ctx.getValue());
+                i0.ɵɵstylingApply();
             }
         }
     });
@@ -4557,11 +4557,11 @@
         factory: function () { },
         hostBindings: function (rf, ctx, elIndex) {
             if (rf & 1 /* Create */) {
-                i0.ɵɵelementStyling();
+                i0.ɵɵstyling();
             }
             if (rf & 2 /* Update */) {
-                i0.ɵɵelementStyleMap(ctx.getValue());
-                i0.ɵɵelementStylingApply();
+                i0.ɵɵstyleMap(ctx.getValue());
+                i0.ɵɵstylingApply();
             }
         }
     });
@@ -6593,7 +6593,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.0.0-rc.0+121.sha-c016e2c.with-local-changes');
+    var VERSION = new i0.Version('8.0.0-rc.0+124.sha-d70b1ff.with-local-changes');
 
     /**
      * @license
