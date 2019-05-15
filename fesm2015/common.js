@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.0.0-rc.3+54.sha-17361d2.with-local-changes
+ * @license Angular v8.0.0-rc.3+57.sha-e10b213.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, ɵɵelementHostStyling, ɵɵelementHostStylingMap, ɵɵelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, LOCALE_ID, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ΔdefineDirective, Directive, Input, ΔelementHostStyling, ΔelementHostStylingMap, ΔelementHostStylingApply, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ΔdefineInjectable, Δinject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -4028,15 +4028,15 @@ function () { }, ɵ1 = /**
  */
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
-        ɵɵelementHostStyling();
+        ΔelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(ctx.getValue());
-        ɵɵelementHostStylingApply();
+        ΔelementHostStylingMap(ctx.getValue());
+        ΔelementHostStylingApply();
     }
 };
 /** @type {?} */
-const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
+const ngClassDirectiveDef__POST_R3__ = ΔdefineDirective({
     type: (/** @type {?} */ ((ɵ0))),
     selectors: (/** @type {?} */ (null)),
     factory: (ɵ1),
@@ -5465,15 +5465,15 @@ function () { }, ɵ1$1 = /**
  */
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
-        ɵɵelementHostStyling();
+        ΔelementHostStyling();
     }
     if (rf & 2 /* Update */) {
-        ɵɵelementHostStylingMap(null, ctx.getValue());
-        ɵɵelementHostStylingApply();
+        ΔelementHostStylingMap(null, ctx.getValue());
+        ΔelementHostStylingApply();
     }
 };
 /** @type {?} */
-const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
+const ngStyleDirectiveDef__POST_R3__ = ΔdefineDirective({
     type: (/** @type {?} */ ((ɵ0$1))),
     selectors: (/** @type {?} */ (null)),
     factory: (ɵ1$1),
@@ -7638,7 +7638,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-rc.3+54.sha-17361d2.with-local-changes');
+const VERSION = new Version('8.0.0-rc.3+57.sha-e10b213.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -7655,12 +7655,12 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
+/** @nocollapse */ ViewportScroller.ngInjectableDef = ΔdefineInjectable({
     providedIn: 'root',
     factory: (/**
      * @nocollapse @return {?}
      */
-    () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
+    () => new BrowserViewportScroller(Δinject(DOCUMENT), window, Δinject(ErrorHandler)))
 });
 /**
  * Manages the scroll position for a browser window.
