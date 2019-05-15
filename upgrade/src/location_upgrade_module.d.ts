@@ -37,8 +37,8 @@ export declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgr
  */
 export declare class LocationUpgradeModule {
     static config(config?: LocationUpgradeConfig): ModuleWithProviders<LocationUpgradeModule>;
-    static ngModuleDef: i0.ɵɵNgModuleDefWithMeta<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<LocationUpgradeModule>;
+    static ngModuleDef: i0.ΔNgModuleDefWithMeta<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
+    static ngInjectorDef: i0.ΔInjectorDef<LocationUpgradeModule>;
 }
 export declare function provideAppBaseHref(config: LocationUpgradeConfig, appBaseHref?: string): string;
 export declare function provideUrlCodec(config: LocationUpgradeConfig): any;

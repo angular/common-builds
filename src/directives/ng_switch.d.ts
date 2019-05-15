@@ -93,7 +93,7 @@ export declare class NgSwitch {
     private _ngSwitch;
     ngSwitch: any;
     private _updateDefaultCases;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
+    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -140,7 +140,7 @@ export declare class NgSwitchCase implements DoCheck {
      * Performs case matching. For internal use only.
      */
     ngDoCheck(): void;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
+    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -158,5 +158,5 @@ export declare class NgSwitchCase implements DoCheck {
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
+    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
 }

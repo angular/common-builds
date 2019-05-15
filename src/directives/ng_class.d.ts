@@ -68,5 +68,5 @@ export declare class NgClass extends NgClassBase implements DoCheck {
         [klass: string]: any;
     };
     ngDoCheck(): void;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
+    static ngDirectiveDef: i0.ΔDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
 }
