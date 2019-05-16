@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+200.sha-3f7e823.with-local-changes
+ * @license Angular v8.0.0-rc.0+222.sha-757d4c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -297,7 +297,7 @@ export declare class AngularJSUrlCodec implements UrlCodec {
     normalize(path: string, search: {
         [k: string]: unknown;
     }, hash: string, baseUrl?: string): string;
-    areEqual(a: string, b: string): boolean;
+    areEqual(valA: string, valB: string): boolean;
     parse(url: string, base?: string): {
         href: string;
         protocol: string;
@@ -360,7 +360,7 @@ export declare abstract class UrlCodec {
     abstract normalize(path: string, search: {
         [k: string]: unknown;
     }, hash: string, baseUrl?: string): string;
-    abstract areEqual(a: string, b: string): boolean;
+    abstract areEqual(valA: string, valB: string): boolean;
     abstract parse(url: string, base?: string): {
         href: string;
         protocol: string;
