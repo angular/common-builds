@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.4+6.sha-581336a.with-local-changes
+ * @license Angular v8.0.0-rc.4+8.sha-3de26a8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -96,6 +96,7 @@ class $locationShim {
         this.$$path = '';
         this.$$search = '';
         this.$$hash = '';
+        this.$$changeListeners = [];
         this.cachedState = null;
         this.lastBrowserUrl = '';
         // This variable should be used *only* inside the cacheState function.
@@ -401,6 +402,46 @@ class $locationShim {
         }
     }
     /**
+     * Register URL change listeners. This API can be used to catch updates performed by the
+     * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
+     * as those events fire when AngularJS updates it's internally referenced version of the browser
+     * URL. It's possible for `$locationChange` events to happen, but for the browser URL
+     * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
+     * actually updates the browser URL (window.location).
+     * @param {?} fn
+     * @param {?=} err
+     * @return {?}
+     */
+    onChange(fn, err = (/**
+     * @param {?} e
+     * @return {?}
+     */
+    (e) => { })) {
+        this.$$changeListeners.push([fn, err]);
+    }
+    /**
+     * \@internal
+     * @param {?=} url
+     * @param {?=} state
+     * @param {?=} oldUrl
+     * @param {?=} oldState
+     * @return {?}
+     */
+    $$notifyChangeListeners(url = '', state, oldUrl = '', oldState) {
+        this.$$changeListeners.forEach((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([fn, err]) => {
+            try {
+                fn(url, state, oldUrl, oldState);
+            }
+            catch (e) {
+                err(e);
+            }
+        }));
+    }
+    /**
      * @param {?} url
      * @return {?}
      */
@@ -468,6 +509,7 @@ class $locationShim {
             // state object; this makes possible quick checking if the state changed in the digest
             // loop. Checking deep equality would be too expensive.
             this.$$state = this.browserState();
+            this.$$notifyChangeListeners(url, state, oldUrl, oldState);
         }
         catch (e) {
             // Restore old values if pushState fails
