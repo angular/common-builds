@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+196.sha-0778093.with-local-changes
+ * @license Angular v8.0.0-rc.0+199.sha-e9ead2b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -41,6 +41,23 @@
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
     }
 
     /**
@@ -114,6 +131,7 @@
             this.$$path = '';
             this.$$search = '';
             this.$$hash = '';
+            this.$$changeListeners = [];
             this.cachedState = null;
             this.lastBrowserUrl = '';
             // This variable should be used *only* inside the cacheState function.
@@ -340,6 +358,32 @@
                 this.$$path = '/' + this.$$path;
             }
         };
+        /**
+         * Register URL change listeners. This API can be used to catch updates performed by the
+         * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
+         * as those events fire when AngularJS updates it's internally referenced version of the browser
+         * URL. It's possible for `$locationChange` events to happen, but for the browser URL
+         * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
+         * actually updates the browser URL (window.location).
+         */
+        $locationShim.prototype.onChange = function (fn, err) {
+            if (err === void 0) { err = function (e) { }; }
+            this.$$changeListeners.push([fn, err]);
+        };
+        /** @internal */
+        $locationShim.prototype.$$notifyChangeListeners = function (url, state, oldUrl, oldState) {
+            if (url === void 0) { url = ''; }
+            if (oldUrl === void 0) { oldUrl = ''; }
+            this.$$changeListeners.forEach(function (_a) {
+                var _b = __read(_a, 2), fn = _b[0], err = _b[1];
+                try {
+                    fn(url, state, oldUrl, oldState);
+                }
+                catch (e) {
+                    err(e);
+                }
+            });
+        };
         $locationShim.prototype.$$parse = function (url) {
             var pathUrl;
             if (url.startsWith('/')) {
@@ -387,6 +431,7 @@
                 // state object; this makes possible quick checking if the state changed in the digest
                 // loop. Checking deep equality would be too expensive.
                 this.$$state = this.browserState();
+                this.$$notifyChangeListeners(url, state, oldUrl, oldState);
             }
             catch (e) {
                 // Restore old values if pushState fails
