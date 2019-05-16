@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+182.sha-79d4b16.with-local-changes
+ * @license Angular v8.0.0-rc.0+199.sha-e9ead2b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -35,6 +35,7 @@ export declare class $locationShim {
     private $$search;
     private $$hash;
     private $$state;
+    private $$changeListeners;
     private cachedState;
     constructor($injector: any, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
     private initialize;
@@ -52,6 +53,15 @@ export declare class $locationShim {
     private stripBaseUrl;
     private getServerBase;
     private parseAppUrl;
+    /**
+     * Register URL change listeners. This API can be used to catch updates performed by the
+     * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
+     * as those events fire when AngularJS updates it's internally referenced version of the browser
+     * URL. It's possible for `$locationChange` events to happen, but for the browser URL
+     * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
+     * actually updates the browser URL (window.location).
+     */
+    onChange(fn: (url: string, state: unknown, oldUrl: string, oldState: unknown) => void, err?: (e: Error) => void): void;
     $$parse(url: string): void;
     $$parseLinkUrl(url: string, relHref?: string | null): boolean;
     private setBrowserUrlWithFallback;

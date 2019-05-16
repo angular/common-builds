@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+182.sha-79d4b16.with-local-changes
+ * @license Angular v8.0.0-rc.0+199.sha-e9ead2b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4811,19 +4811,6 @@ class NgIf {
             }
         }
     }
-    /**
-     * Assert the correct type of the expression bound to the `ngIf` input within the template.
-     *
-     * The presence of this method is a signal to the Ivy template type check compiler that when the
-     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
-     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
-     * strictNullChecks feature of TypeScript to work with `NgIf`.
-     * @template E
-     * @param {?} dir
-     * @param {?} expr
-     * @return {?}
-     */
-    static ngTemplateGuard_ngIf(dir, expr) { return true; }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] }
@@ -7638,7 +7625,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-rc.0+182.sha-79d4b16.with-local-changes');
+const VERSION = new Version('8.0.0-rc.0+199.sha-e9ead2b.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
