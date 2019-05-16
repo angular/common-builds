@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+199.sha-e9ead2b.with-local-changes
+ * @license Angular v8.0.0-rc.0+216.sha-c9b588b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -672,7 +672,7 @@ var AngularJSUrlCodec = /** @class */ (function () {
             return joinedPath + encSearch + encHash;
         }
     };
-    AngularJSUrlCodec.prototype.areEqual = function (a, b) { return this.normalize(a) === this.normalize(b); };
+    AngularJSUrlCodec.prototype.areEqual = function (valA, valB) { return this.normalize(valA) === this.normalize(valB); };
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/urlUtils.js#L60
     AngularJSUrlCodec.prototype.parse = function (url, base) {
         try {
