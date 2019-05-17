@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+254.sha-661a57d.with-local-changes
+ * @license Angular v8.0.0-rc.0+257.sha-c1135ee.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6379,21 +6379,6 @@
         function SlicePipe() {
         }
         SlicePipe_1 = SlicePipe;
-        /**
-         * @param value a list or a string to be sliced.
-         * @param start the starting index of the subset to return:
-         *   - **a positive integer**: return the item at `start` index and all items after
-         *     in the list or string expression.
-         *   - **a negative integer**: return the item at `start` index from the end and all items after
-         *     in the list or string expression.
-         *   - **if positive and greater than the size of the expression**: return an empty list or
-         * string.
-         *   - **if negative and greater than the size of the expression**: return entire list or string.
-         * @param end the ending index of the subset to return:
-         *   - **omitted**: return all items until the end.
-         *   - **if positive**: return all items before `end` index of the list or string.
-         *   - **if negative**: return all items before `end` index from the end of the list or string.
-         */
         SlicePipe.prototype.transform = function (value, start, end) {
             if (value == null)
                 return value;
@@ -6560,7 +6545,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-rc.0+254.sha-661a57d.with-local-changes');
+    var VERSION = new core.Version('8.0.0-rc.0+257.sha-c1135ee.with-local-changes');
 
     /**
      * @license
