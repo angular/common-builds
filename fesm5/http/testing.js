@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.0.0-rc.0+259.sha-6454f76.with-local-changes
+ * @license Angular v8.0.0-rc.0+262.sha-d7eaae6.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
-import { ΔdefineInjectable, ɵsetClassMetadata, Injectable, ΔdefineNgModule, ΔdefineInjector, ΔsetNgModuleScope, NgModule } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -340,7 +340,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
             return "Match by function: " + matcher.name;
         }
     };
-    HttpClientTestingBackend.ngInjectableDef = ΔdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+    HttpClientTestingBackend.ngInjectableDef = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
     return HttpClientTestingBackend;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
@@ -364,8 +364,8 @@ var HttpClientTestingBackend = /** @class */ (function () {
 var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
-    HttpClientTestingModule.ngModuleDef = ΔdefineNgModule({ type: HttpClientTestingModule });
-    HttpClientTestingModule.ngInjectorDef = ΔdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+    HttpClientTestingModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientTestingModule });
+    HttpClientTestingModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
             HttpClientTestingBackend,
             { provide: HttpBackend, useExisting: HttpClientTestingBackend },
             { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
@@ -374,7 +374,7 @@ var HttpClientTestingModule = /** @class */ (function () {
             ]] });
     return HttpClientTestingModule;
 }());
-/*@__PURE__*/ ΔsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] });
+/*@__PURE__*/ ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,
         args: [{

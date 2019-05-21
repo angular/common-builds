@@ -30,5 +30,5 @@ export declare class MockLocationStrategy extends LocationStrategy {
     back(): void;
     forward(): void;
     getState(): unknown;
-    static ngInjectableDef: i0.ΔInjectableDef<MockLocationStrategy>;
+    static ngInjectableDef: i0.ɵɵInjectableDef<MockLocationStrategy>;
 }

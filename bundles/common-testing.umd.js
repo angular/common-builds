@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+259.sha-6454f76.with-local-changes
+ * @license Angular v8.0.0-rc.0+262.sha-d7eaae6.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -113,7 +113,7 @@
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
         SpyLocation.prototype.normalize = function (url) { return null; };
-        SpyLocation.ngInjectableDef = i0.ΔdefineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
+        SpyLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: function SpyLocation_Factory(t) { return new (t || SpyLocation)(); }, providedIn: null });
         return SpyLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(SpyLocation, [{
@@ -231,7 +231,7 @@
         };
         MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
         MockLocationStrategy.prototype.getState = function () { return this.stateChanges[(this.stateChanges.length || 1) - 1]; };
-        MockLocationStrategy.ngInjectableDef = i0.ΔdefineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
+        MockLocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); }, providedIn: null });
         return MockLocationStrategy;
     }(common.LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(MockLocationStrategy, [{
@@ -410,7 +410,7 @@
             }
         };
         MockPlatformLocation.prototype.getState = function () { return this.state; };
-        MockPlatformLocation.ngInjectableDef = i0.ΔdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(i0.Δinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); }, providedIn: null });
+        MockPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(i0.ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); }, providedIn: null });
         return MockPlatformLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(MockPlatformLocation, [{

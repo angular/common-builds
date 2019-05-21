@@ -1,12 +1,12 @@
 /**
- * @license Angular v8.0.0-rc.0+259.sha-6454f76.with-local-changes
+ * @license Angular v8.0.0-rc.0+262.sha-d7eaae6.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __read, __assign } from 'tslib';
 import { CommonModule, Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
-import { InjectionToken, ΔdefineNgModule, ΔdefineInjector, ΔsetNgModuleScope, ɵsetClassMetadata, NgModule, Inject, Optional } from '@angular/core';
+import { InjectionToken, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, ɵsetClassMetadata, NgModule, Inject, Optional } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 /**
@@ -865,11 +865,11 @@ var LocationUpgradeModule = /** @class */ (function () {
             ],
         };
     };
-    LocationUpgradeModule.ngModuleDef = ΔdefineNgModule({ type: LocationUpgradeModule });
-    LocationUpgradeModule.ngInjectorDef = ΔdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
+    LocationUpgradeModule.ngModuleDef = ɵɵdefineNgModule({ type: LocationUpgradeModule });
+    LocationUpgradeModule.ngInjectorDef = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
     return LocationUpgradeModule;
 }());
-/*@__PURE__*/ ΔsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] });
+/*@__PURE__*/ ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] });
 /*@__PURE__*/ ɵsetClassMetadata(LocationUpgradeModule, [{
         type: NgModule,
         args: [{ imports: [CommonModule] }]
