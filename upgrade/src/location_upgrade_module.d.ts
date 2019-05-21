@@ -18,20 +18,38 @@ import * as i1 from "@angular/common";
  * @publicApi
  */
 export interface LocationUpgradeConfig {
+    /**
+     * Configures whether the location upgrade module should use the `HashLocationStrategy`
+     * or the `PathLocationStrategy`
+     */
     useHash?: boolean;
+    /**
+     * Configures the hash prefix used in the URL when using the `HashLocationStrategy`
+     */
     hashPrefix?: string;
+    /**
+     * Configures the URL codec for encoding and decoding URLs. Default is the `AngularJSCodec`
+     */
     urlCodec?: typeof UrlCodec;
+    /**
+     * Configures the base href when used in server-side rendered applications
+     */
     serverBaseHref?: string;
+    /**
+     * Configures the base href when used in client-side rendered applications
+     */
     appBaseHref?: string;
 }
 /**
- * Is used in DI to configure the location upgrade package.
+ * A provider token used to configure the location upgrade module.
  *
  * @publicApi
  */
 export declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgradeConfig>;
 /**
- * Module used for configuring Angular's LocationUpgradeService.
+ * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
+ *
+ * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
  *
  * @publicApi
  */
