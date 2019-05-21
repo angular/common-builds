@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.4+36.sha-d1345c7.with-local-changes
+ * @license Angular v8.0.0-rc.4+31.sha-df1ab49.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -70,10 +70,7 @@ const DEFAULT_PORTS = {
     'ftp:': 21
 };
 /**
- * Location service that provides a drop-in replacement for the $location service
- * provided in AngularJS.
- *
- * @see [Using the Angular Unified Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ * Docs TBD.
  *
  * \@publicApi
  */
@@ -405,17 +402,14 @@ class $locationShim {
         }
     }
     /**
-     * Registers listeners for URL changes. This API is used to catch updates performed by the
-     * AngularJS framework. These changes are a subset of the `$locationChangeStart` and
-     * `$locationChangeSuccess` events which fire when AngularJS updates its internally-referenced
-     * version of the browser URL.
-     *
-     * It's possible for `$locationChange` events to happen, but for the browser URL
+     * Register URL change listeners. This API can be used to catch updates performed by the
+     * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
+     * as those events fire when AngularJS updates it's internally referenced version of the browser
+     * URL. It's possible for `$locationChange` events to happen, but for the browser URL
      * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
      * actually updates the browser URL (window.location).
-     *
-     * @param {?} fn The callback function that is triggered for the listener when the URL changes.
-     * @param {?=} err The callback function that is triggered when an error occurs.
+     * @param {?} fn
+     * @param {?=} err
      * @return {?}
      */
     onChange(fn, err = (/**
@@ -448,9 +442,7 @@ class $locationShim {
         }));
     }
     /**
-     * Parses the provided URL, and sets the current URL to the parsed result.
-     *
-     * @param {?} url The URL string.
+     * @param {?} url
      * @return {?}
      */
     $$parse(url) {
@@ -473,10 +465,8 @@ class $locationShim {
         this.composeUrls();
     }
     /**
-     * Parses the provided URL and its relative URL.
-     *
-     * @param {?} url The full URL string.
-     * @param {?=} relHref A URL string relative to the full URL string.
+     * @param {?} url
+     * @param {?=} relHref
      * @return {?}
      */
     $$parseLinkUrl(url, relHref) {
@@ -538,8 +528,9 @@ class $locationShim {
         this.updateBrowser = true;
     }
     /**
-     * Retrieves the full URL representation with all segments encoded according to
-     * rules specified in
+     * This method is getter only.
+     *
+     * Return full URL representation with all segments encoded according to rules specified in
      * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
      *
      *
@@ -575,7 +566,10 @@ class $locationShim {
         return this.$$url;
     }
     /**
-     * Retrieves the protocol of the current URL.
+     * This method is getter only.
+     *
+     * Return protocol of current URL.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -586,9 +580,11 @@ class $locationShim {
      */
     protocol() { return this.$$protocol; }
     /**
-     * Retrieves the protocol of the current URL.
+     * This method is getter only.
      *
-     * In contrast to the non-AngularJS version `location.host` which returns `hostname:port`, this
+     * Return host of current URL.
+     *
+     * Note: compared to the non-AngularJS version `location.host` which returns `hostname:port`, this
      * returns the `hostname` portion only.
      *
      *
@@ -607,7 +603,10 @@ class $locationShim {
      */
     host() { return this.$$host; }
     /**
-     * Retrieves the port of the current URL.
+     * This method is getter only.
+     *
+     * Return port of current URL.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -689,7 +688,7 @@ class $locationShim {
         return this;
     }
     /**
-     * Changes to `$location` during the current `$digest` will replace the current
+     * If called, all changes to $location during the current `$digest` will replace the current
      * history record, instead of adding a new one.
      * @template THIS
      * @this {THIS}
@@ -712,8 +711,7 @@ class $locationShim {
     }
 }
 /**
- * The factory function used to create an instance of the `$locationShim` in Angular,
- * and provides an API-compatiable `$locationProvider` for AngularJS.
+ * Docs TBD.
  *
  * \@publicApi
  */
@@ -733,7 +731,6 @@ class $locationShimProvider {
         this.locationStrategy = locationStrategy;
     }
     /**
-     * Factory method that returns an instance of the $locationShim
      * @return {?}
      */
     $get() {
@@ -780,8 +777,8 @@ class $locationShimProvider {
 class UrlCodec {
 }
 /**
- * A `UrlCodec` that uses logic from AngularJS to serialize and parse URLs
- * and URL parameters.
+ * A `AngularJSUrlCodec` that uses logic from AngularJS to serialize and parse URLs
+ * and URL parameters
  *
  * \@publicApi
  */
@@ -1071,7 +1068,7 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * A provider token used to configure the location upgrade module.
+ * Is used in DI to configure the location upgrade package.
  *
  * \@publicApi
  * @type {?}
@@ -1080,9 +1077,7 @@ const LOCATION_UPGRADE_CONFIGURATION = new InjectionToken('LOCATION_UPGRADE_CONF
 /** @type {?} */
 const APP_BASE_HREF_RESOLVED = new InjectionToken('APP_BASE_HREF_RESOLVED');
 /**
- * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
- *
- * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ * Module used for configuring Angular's LocationUpgradeService.
  *
  * \@publicApi
  */

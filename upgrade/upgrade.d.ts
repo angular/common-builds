@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.4+36.sha-d1345c7.with-local-changes
+ * @license Angular v8.0.0-rc.4+31.sha-df1ab49.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -14,10 +14,7 @@ import { PlatformLocation } from '@angular/common';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 /**
- * Location service that provides a drop-in replacement for the $location service
- * provided in AngularJS.
- *
- * @see [Using the Angular Unified Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ * Docs TBD.
  *
  * @publicApi
  */
@@ -57,37 +54,22 @@ export declare class $locationShim {
     private getServerBase;
     private parseAppUrl;
     /**
-     * Registers listeners for URL changes. This API is used to catch updates performed by the
-     * AngularJS framework. These changes are a subset of the `$locationChangeStart` and
-     * `$locationChangeSuccess` events which fire when AngularJS updates its internally-referenced
-     * version of the browser URL.
-     *
-     * It's possible for `$locationChange` events to happen, but for the browser URL
+     * Register URL change listeners. This API can be used to catch updates performed by the
+     * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
+     * as those events fire when AngularJS updates it's internally referenced version of the browser
+     * URL. It's possible for `$locationChange` events to happen, but for the browser URL
      * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
      * actually updates the browser URL (window.location).
-     *
-     * @param fn The callback function that is triggered for the listener when the URL changes.
-     * @param err The callback function that is triggered when an error occurs.
      */
     onChange(fn: (url: string, state: unknown, oldUrl: string, oldState: unknown) => void, err?: (e: Error) => void): void;
-    /**
-     * Parses the provided URL, and sets the current URL to the parsed result.
-     *
-     * @param url The URL string.
-     */
     $$parse(url: string): void;
-    /**
-     * Parses the provided URL and its relative URL.
-     *
-     * @param url The full URL string.
-     * @param relHref A URL string relative to the full URL string.
-     */
     $$parseLinkUrl(url: string, relHref?: string | null): boolean;
     private setBrowserUrlWithFallback;
     private composeUrls;
     /**
-     * Retrieves the full URL representation with all segments encoded according to
-     * rules specified in
+     * This method is getter only.
+     *
+     * Return full URL representation with all segments encoded according to rules specified in
      * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
      *
      *
@@ -99,8 +81,12 @@ export declare class $locationShim {
      */
     absUrl(): string;
     /**
-     * Retrieves the current URL, or sets a new URL. When setting a URL,
-     * changes the path, search, and hash, and returns a reference to its own instance.
+     * This method is getter / setter.
+     *
+     * Return URL (e.g. `/path?a=b#hash`) when called without any parameter.
+     *
+     * Change path, search and hash, when called with parameter and return `$location`.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -111,7 +97,10 @@ export declare class $locationShim {
     url(): string;
     url(url: string): this;
     /**
-     * Retrieves the protocol of the current URL.
+     * This method is getter only.
+     *
+     * Return protocol of current URL.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -121,9 +110,11 @@ export declare class $locationShim {
      */
     protocol(): string;
     /**
-     * Retrieves the protocol of the current URL.
+     * This method is getter only.
      *
-     * In contrast to the non-AngularJS version `location.host` which returns `hostname:port`, this
+     * Return host of current URL.
+     *
+     * Note: compared to the non-AngularJS version `location.host` which returns `hostname:port`, this
      * returns the `hostname` portion only.
      *
      *
@@ -141,7 +132,10 @@ export declare class $locationShim {
      */
     host(): string;
     /**
-     * Retrieves the port of the current URL.
+     * This method is getter only.
+     *
+     * Return port of current URL.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -151,11 +145,15 @@ export declare class $locationShim {
      */
     port(): number | null;
     /**
-     * Retrieves the path of the current URL, or changes the path and returns a reference to its own
-     * instance.
+     * This method is getter / setter.
      *
-     * Paths should always begin with forward slash (/). This method adds the forward slash
+     * Return path of current URL when called without any parameter.
+     *
+     * Change path when called with parameter and return `$location`.
+     *
+     * Note: Path should always begin with forward slash (/), this method will add the forward slash
      * if it is missing.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -166,8 +164,11 @@ export declare class $locationShim {
     path(): string;
     path(path: string | number | null): this;
     /**
-     * Retrieves a map of the search parameters of the current URL, or changes a search
-     * part and returns a reference to its own instance.
+     * This method is getter / setter.
+     *
+     * Return search part (as object) of current URL when called without any parameter.
+     *
+     * Change search part when called with parameter and return `$location`.
      *
      *
      * ```js
@@ -200,7 +201,8 @@ export declare class $locationShim {
      * If `paramValue` is `true`, the property specified via the first argument will be added with no
      * value nor trailing equal sign.
      *
-     * @return {Object} The parsed `search` object of the current URL, or the changed `search` object.
+     * @return {Object} If called with no arguments returns the parsed `search` object. If called with
+     * one or more arguments returns `$location` object itself.
      */
     search(): {
         [key: string]: unknown;
@@ -212,8 +214,12 @@ export declare class $locationShim {
         [key: string]: unknown;
     }, paramValue: null | undefined | string | number | boolean | string[]): this;
     /**
-     * Retrieves the current hash fragment, or changes the hash fragment and returns a reference to
-     * its own instance.
+     * This method is getter / setter.
+     *
+     * Returns the hash fragment when called without any parameters.
+     *
+     * Changes the hash fragment when called with a parameter and returns `$location`.
+     *
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo#hashValue
@@ -224,18 +230,20 @@ export declare class $locationShim {
     hash(): string;
     hash(hash: string | number | null): this;
     /**
-     * Changes to `$location` during the current `$digest` will replace the current
+     * If called, all changes to $location during the current `$digest` will replace the current
      * history record, instead of adding a new one.
      */
     replace(): this;
     /**
-     * Retrieves the history state object when called without any parameter.
+     * This method is getter / setter.
+     *
+     * Return the history state object when called without any parameter.
      *
      * Change the history state object when called with one parameter and return `$location`.
      * The state object is later passed to `pushState` or `replaceState`.
      *
-     * This method is supported only in HTML5 mode and only in browsers supporting
-     * the HTML5 History API methods such as `pushState` and `replaceState`. If you need to support
+     * NOTE: This method is supported only in HTML5 mode and only in browsers supporting
+     * the HTML5 History API (i.e. methods `pushState` and `replaceState`). If you need to support
      * older browsers (like IE9 or Android < 4.0), don't use this method.
      *
      */
@@ -244,8 +252,7 @@ export declare class $locationShim {
 }
 
 /**
- * The factory function used to create an instance of the `$locationShim` in Angular,
- * and provides an API-compatiable `$locationProvider` for AngularJS.
+ * Docs TBD.
  *
  * @publicApi
  */
@@ -256,9 +263,6 @@ export declare class $locationShimProvider {
     private urlCodec;
     private locationStrategy;
     constructor(ngUpgrade: UpgradeModule, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
-    /**
-     * Factory method that returns an instance of the $locationShim
-     */
     $get(): $locationShim;
     /**
      * Stub method used to keep API compatible with AngularJS. This setting is configured through
@@ -273,8 +277,8 @@ export declare class $locationShimProvider {
 }
 
 /**
- * A `UrlCodec` that uses logic from AngularJS to serialize and parse URLs
- * and URL parameters.
+ * A `AngularJSUrlCodec` that uses logic from AngularJS to serialize and parse URLs
+ * and URL parameters
  *
  * @publicApi
  */
@@ -307,7 +311,7 @@ export declare class AngularJSUrlCodec implements UrlCodec {
 }
 
 /**
- * A provider token used to configure the location upgrade module.
+ * Is used in DI to configure the location upgrade package.
  *
  * @publicApi
  */
@@ -319,33 +323,15 @@ export declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgr
  * @publicApi
  */
 export declare interface LocationUpgradeConfig {
-    /**
-     * Configures whether the location upgrade module should use the `HashLocationStrategy`
-     * or the `PathLocationStrategy`
-     */
     useHash?: boolean;
-    /**
-     * Configures the hash prefix used in the URL when using the `HashLocationStrategy`
-     */
     hashPrefix?: string;
-    /**
-     * Configures the URL codec for encoding and decoding URLs. Default is the `AngularJSCodec`
-     */
     urlCodec?: typeof UrlCodec;
-    /**
-     * Configures the base href when used in server-side rendered applications
-     */
     serverBaseHref?: string;
-    /**
-     * Configures the base href when used in client-side rendered applications
-     */
     appBaseHref?: string;
 }
 
 /**
- * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
- *
- * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ * Module used for configuring Angular's LocationUpgradeService.
  *
  * @publicApi
  */
@@ -360,75 +346,21 @@ export declare class LocationUpgradeModule {
  * @publicApi
  **/
 export declare abstract class UrlCodec {
-    /**
-     * Encodes the path from the provided string
-     *
-     * @param path The path string
-     */
     abstract encodePath(path: string): string;
-    /**
-     * Decodes the path from the provided string
-     *
-     * @param path The path string
-     */
     abstract decodePath(path: string): string;
-    /**
-     * Encodes the search string from the provided string or object
-     *
-     * @param path The path string or object
-     */
     abstract encodeSearch(search: string | {
         [k: string]: unknown;
     }): string;
-    /**
-     * Decodes the search objects from the provided string
-     *
-     * @param path The path string
-     */
     abstract decodeSearch(search: string): {
         [k: string]: unknown;
     };
-    /**
-     * Encodes the hash from the provided string
-     *
-     * @param path The hash string
-     */
     abstract encodeHash(hash: string): string;
-    /**
-     * Decodes the hash from the provided string
-     *
-     * @param path The hash string
-     */
     abstract decodeHash(hash: string): string;
-    /**
-     * Normalizes the URL from the provided string
-     *
-     * @param path The URL string
-     */
     abstract normalize(href: string): string;
-    /**
-     * Normalizes the URL from the provided string, search, hash, and base URL parameters
-     *
-     * @param path The URL path
-     * @param search The search object
-     * @param hash The has string
-     * @param baseUrl The base URL for the URL
-     */
     abstract normalize(path: string, search: {
         [k: string]: unknown;
     }, hash: string, baseUrl?: string): string;
-    /**
-     * Checks whether the two strings are equal
-     * @param valA First string for comparison
-     * @param valB Second string for comparison
-     */
     abstract areEqual(valA: string, valB: string): boolean;
-    /**
-     * Parses the URL string based on the base URL
-     *
-     * @param url The full URL string
-     * @param base The base for the URL
-     */
     abstract parse(url: string, base?: string): {
         href: string;
         protocol: string;
