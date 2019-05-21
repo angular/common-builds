@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.4+16.sha-736d3ef.with-local-changes
+ * @license Angular v8.0.0-rc.4+36.sha-d1345c7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -111,7 +111,10 @@
         'ftp:': 21
     };
     /**
-     * Docs TBD.
+     * Location service that provides a drop-in replacement for the $location service
+     * provided in AngularJS.
+     *
+     * @see [Using the Angular Unified Location Service](guide/upgrade#using-the-unified-angular-location-service)
      *
      * @publicApi
      */
@@ -359,12 +362,17 @@
             }
         };
         /**
-         * Register URL change listeners. This API can be used to catch updates performed by the
-         * AngularJS framework. These changes are a subset of the `$locationChangeStart/Success` events
-         * as those events fire when AngularJS updates it's internally referenced version of the browser
-         * URL. It's possible for `$locationChange` events to happen, but for the browser URL
+         * Registers listeners for URL changes. This API is used to catch updates performed by the
+         * AngularJS framework. These changes are a subset of the `$locationChangeStart` and
+         * `$locationChangeSuccess` events which fire when AngularJS updates its internally-referenced
+         * version of the browser URL.
+         *
+         * It's possible for `$locationChange` events to happen, but for the browser URL
          * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
          * actually updates the browser URL (window.location).
+         *
+         * @param fn The callback function that is triggered for the listener when the URL changes.
+         * @param err The callback function that is triggered when an error occurs.
          */
         $locationShim.prototype.onChange = function (fn, err) {
             if (err === void 0) { err = function (e) { }; }
@@ -384,6 +392,11 @@
                 }
             });
         };
+        /**
+         * Parses the provided URL, and sets the current URL to the parsed result.
+         *
+         * @param url The URL string.
+         */
         $locationShim.prototype.$$parse = function (url) {
             var pathUrl;
             if (url.startsWith('/')) {
@@ -402,6 +415,12 @@
             }
             this.composeUrls();
         };
+        /**
+         * Parses the provided URL and its relative URL.
+         *
+         * @param url The full URL string.
+         * @param relHref A URL string relative to the full URL string.
+         */
         $locationShim.prototype.$$parseLinkUrl = function (url, relHref) {
             // When relHref is passed, it should be a hash and is handled separately
             if (relHref && relHref[0] === '#') {
@@ -446,9 +465,8 @@
             this.updateBrowser = true;
         };
         /**
-         * This method is getter only.
-         *
-         * Return full URL representation with all segments encoded according to rules specified in
+         * Retrieves the full URL representation with all segments encoded according to
+         * rules specified in
          * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
          *
          *
@@ -478,10 +496,7 @@
             return this.$$url;
         };
         /**
-         * This method is getter only.
-         *
-         * Return protocol of current URL.
-         *
+         * Retrieves the protocol of the current URL.
          *
          * ```js
          * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -491,11 +506,9 @@
          */
         $locationShim.prototype.protocol = function () { return this.$$protocol; };
         /**
-         * This method is getter only.
+         * Retrieves the protocol of the current URL.
          *
-         * Return host of current URL.
-         *
-         * Note: compared to the non-AngularJS version `location.host` which returns `hostname:port`, this
+         * In contrast to the non-AngularJS version `location.host` which returns `hostname:port`, this
          * returns the `hostname` portion only.
          *
          *
@@ -513,10 +526,7 @@
          */
         $locationShim.prototype.host = function () { return this.$$host; };
         /**
-         * This method is getter only.
-         *
-         * Return port of current URL.
-         *
+         * Retrieves the port of the current URL.
          *
          * ```js
          * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
@@ -583,7 +593,7 @@
             return this;
         };
         /**
-         * If called, all changes to $location during the current `$digest` will replace the current
+         * Changes to `$location` during the current `$digest` will replace the current
          * history record, instead of adding a new one.
          */
         $locationShim.prototype.replace = function () {
@@ -600,7 +610,8 @@
         return $locationShim;
     }());
     /**
-     * Docs TBD.
+     * The factory function used to create an instance of the `$locationShim` in Angular,
+     * and provides an API-compatiable `$locationProvider` for AngularJS.
      *
      * @publicApi
      */
@@ -612,6 +623,9 @@
             this.urlCodec = urlCodec;
             this.locationStrategy = locationStrategy;
         }
+        /**
+         * Factory method that returns an instance of the $locationShim
+         */
         $locationShimProvider.prototype.$get = function () {
             return new $locationShim(this.ngUpgrade.$injector, this.location, this.platformLocation, this.urlCodec, this.locationStrategy);
         };
@@ -650,8 +664,8 @@
         return UrlCodec;
     }());
     /**
-     * A `AngularJSUrlCodec` that uses logic from AngularJS to serialize and parse URLs
-     * and URL parameters
+     * A `UrlCodec` that uses logic from AngularJS to serialize and parse URLs
+     * and URL parameters.
      *
      * @publicApi
      */
@@ -873,14 +887,16 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * Is used in DI to configure the location upgrade package.
+     * A provider token used to configure the location upgrade module.
      *
      * @publicApi
      */
     var LOCATION_UPGRADE_CONFIGURATION = new core.InjectionToken('LOCATION_UPGRADE_CONFIGURATION');
     var APP_BASE_HREF_RESOLVED = new core.InjectionToken('APP_BASE_HREF_RESOLVED');
     /**
-     * Module used for configuring Angular's LocationUpgradeService.
+     * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
+     *
+     * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
      *
      * @publicApi
      */
