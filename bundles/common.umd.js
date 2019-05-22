@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+259.sha-6454f76.with-local-changes
+ * @license Angular v8.0.0-rc.0+287.sha-66f269c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3390,17 +3390,17 @@
     var ngClassDirectiveDef__PRE_R3__ = undefined;
     var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            core.Δstyling();
+            core.ɵɵstyling();
         }
         if (rf & 2 /* Update */) {
-            core.ΔclassMap(ctx.getValue());
-            core.ΔstylingApply();
+            core.ɵɵclassMap(ctx.getValue());
+            core.ɵɵstylingApply();
         }
     };
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngClassDirectiveDef__POST_R3__ = core.ΔdefineDirective({
+    var ngClassDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: ɵ0,
         selectors: null,
         factory: ɵ1,
@@ -4632,17 +4632,17 @@
     var ngStyleDirectiveDef__PRE_R3__ = undefined;
     var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
-            core.Δstyling();
+            core.ɵɵstyling();
         }
         if (rf & 2 /* Update */) {
-            core.ΔstyleMap(ctx.getValue());
-            core.ΔstylingApply();
+            core.ɵɵstyleMap(ctx.getValue());
+            core.ɵɵstylingApply();
         }
     };
     // used when the VE is not present (note the directive will
     // never be instantiated normally because it is apart of a
     // base class)
-    var ngStyleDirectiveDef__POST_R3__ = core.ΔdefineDirective({
+    var ngStyleDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: ɵ0$1,
         selectors: null,
         factory: ɵ1$1,
@@ -6545,7 +6545,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-rc.0+259.sha-6454f76.with-local-changes');
+    var VERSION = new core.Version('8.0.0-rc.0+287.sha-66f269c.with-local-changes');
 
     /**
      * @license
@@ -6565,9 +6565,9 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = core.ΔdefineInjectable({
+        ViewportScroller.ngInjectableDef = core.ɵɵdefineInjectable({
             providedIn: 'root',
-            factory: function () { return new BrowserViewportScroller(core.Δinject(DOCUMENT), window, core.Δinject(core.ErrorHandler)); }
+            factory: function () { return new BrowserViewportScroller(core.ɵɵinject(DOCUMENT), window, core.ɵɵinject(core.ErrorHandler)); }
         });
         return ViewportScroller;
     }());
