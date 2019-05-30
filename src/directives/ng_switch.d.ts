@@ -81,7 +81,7 @@ export declare class SwitchView {
  * @publicApi
  * @see `NgSwitchCase`
  * @see `NgSwitchDefault`
- * @see [Stuctural Directives](guide/structural-directives)
+ * @see [Structural Directives](guide/structural-directives)
  *
  */
 export declare class NgSwitch {
