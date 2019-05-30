@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+358.sha-1a98d51.with-local-changes
+ * @license Angular v8.0.0-rc.0+372.sha-fd23663.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4263,7 +4263,7 @@
      * @publicApi
      * @see `NgSwitchCase`
      * @see `NgSwitchDefault`
-     * @see [Stuctural Directives](guide/structural-directives)
+     * @see [Structural Directives](guide/structural-directives)
      *
      */
     var NgSwitch = /** @class */ (function () {
@@ -6545,7 +6545,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.0.0-rc.0+358.sha-1a98d51.with-local-changes');
+    var VERSION = new core.Version('8.0.0-rc.0+372.sha-fd23663.with-local-changes');
 
     /**
      * @license
