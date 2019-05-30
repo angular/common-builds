@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0-rc.0+359.sha-7bf7244.with-local-changes
+ * @license Angular v8.0.0-rc.0+368.sha-0b23adc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4953,7 +4953,7 @@ class SwitchView {
  * \@publicApi
  * @see `NgSwitchCase`
  * @see `NgSwitchDefault`
- * @see [Stuctural Directives](guide/structural-directives)
+ * @see [Structural Directives](guide/structural-directives)
  *
  */
 class NgSwitch {
@@ -7615,7 +7615,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.0.0-rc.0+359.sha-7bf7244.with-local-changes');
+const VERSION = new Version('8.0.0-rc.0+368.sha-0b23adc.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
