@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.0.0+4.sha-ae6fa92.with-local-changes
+ * @license Angular v8.0.0+8.sha-b19a05c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2086,7 +2086,7 @@ export declare class NgStyleBase {
  * @publicApi
  * @see `NgSwitchCase`
  * @see `NgSwitchDefault`
- * @see [Stuctural Directives](guide/structural-directives)
+ * @see [Structural Directives](guide/structural-directives)
  *
  */
 export declare class NgSwitch {
