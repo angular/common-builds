@@ -74,7 +74,7 @@ export interface HttpDownloadProgressEvent extends HttpProgressEvent {
 /**
  * An upload progress event.
  *
- * @publicApi
+ *
  */
 export interface HttpUploadProgressEvent extends HttpProgressEvent {
     type: HttpEventType.UploadProgress;
