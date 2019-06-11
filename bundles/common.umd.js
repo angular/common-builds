@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.1.0-next.1+43.sha-b086676.with-local-changes
+ * @license Angular v8.1.0-next.1+47.sha-7912db3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6467,7 +6467,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.1.0-next.1+43.sha-b086676.with-local-changes');
+    var VERSION = new core.Version('8.1.0-next.1+47.sha-7912db3.with-local-changes');
 
     /**
      * @license
@@ -6488,6 +6488,7 @@
         // See #23917
         /** @nocollapse */
         ViewportScroller.ngInjectableDef = core.ɵɵdefineInjectable({
+            token: ViewportScroller,
             providedIn: 'root',
             factory: function () { return new BrowserViewportScroller(core.ɵɵinject(DOCUMENT), window, core.ɵɵinject(core.ErrorHandler)); }
         });
