@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.1.0-next.1+18.sha-c038675.with-local-changes
+ * @license Angular v8.1.0-next.2+14.sha-4ad323a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6445,7 +6445,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.1.0-next.1+18.sha-c038675.with-local-changes');
+var VERSION = new Version('8.1.0-next.2+14.sha-4ad323a.with-local-changes');
 
 /**
  * @license
@@ -6466,6 +6466,7 @@ var ViewportScroller = /** @class */ (function () {
     // See #23917
     /** @nocollapse */
     ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
+        token: ViewportScroller,
         providedIn: 'root',
         factory: function () { return new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)); }
     });
