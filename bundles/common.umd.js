@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.1.0-next.3+3.sha-4ec5081.with-local-changes
+ * @license Angular v8.1.0-next.3+4.sha-ab86a58.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -60,18 +60,17 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * `LocationStrategy` is responsible for representing and reading route state
-     * from the browser's URL. Angular provides two strategies:
-     * {@link HashLocationStrategy} and {@link PathLocationStrategy}.
+     * Enables the `Location` service to read route state from the browser's URL.
+     * Angular provides two strategies:
+     * `HashLocationStrategy` and `PathLocationStrategy`.
      *
-     * This is used under the hood of the {@link Location} service.
-     *
-     * Applications should use the {@link Router} or {@link Location} services to
+     * Applications should use the `Router` or `Location` services to
      * interact with application route state.
      *
-     * For instance, {@link HashLocationStrategy} produces URLs like
-     * `http://example.com#/foo`, and {@link PathLocationStrategy} produces
-     * `http://example.com/foo` as an equivalent URL.
+     * For instance, `HashLocationStrategy` produces URLs like
+     * <code class="no-auto-link">http://example.com#/foo</code>,
+     * and `PathLocationStrategy` produces
+     * <code class="no-auto-link">http://example.com/foo</code> as an equivalent URL.
      *
      * See these two classes for more.
      *
@@ -202,7 +201,7 @@
      *
      * A service that applications can use to interact with a browser's URL.
      *
-     * Depending on the {@link LocationStrategy} used, `Location` will either persist
+     * Depending on the `LocationStrategy` used, `Location` will either persist
      * to the URL's path or the URL's hash segment.
      *
      * @usageNotes
@@ -220,7 +219,8 @@
      *
      * ### Example
      *
-     * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
+     * <code-example path='common/location/ts/path_location_component.ts'
+     * region='LocationComponent'></code-example>
      *
      * @publicApi
      */
@@ -6467,7 +6467,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.1.0-next.3+3.sha-4ec5081.with-local-changes');
+    var VERSION = new core.Version('8.1.0-next.3+4.sha-ab86a58.with-local-changes');
 
     /**
      * @license
