@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+8.sha-78e7fdd.with-local-changes
+ * @license Angular v8.2.0-next.2+22.sha-60f58bf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3741,14 +3741,14 @@ var NgForOf = /** @class */ (function () {
         var insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this._ngForOf, -1, -1), currentIndex);
+                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(null, _this._ngForOf, -1, -1), currentIndex === null ? undefined : currentIndex);
                 var tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
             else if (currentIndex == null) {
-                _this._viewContainer.remove(adjustedPreviousIndex);
+                _this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
             }
-            else {
+            else if (adjustedPreviousIndex !== null) {
                 var view = _this._viewContainer.get(adjustedPreviousIndex);
                 _this._viewContainer.move(view, currentIndex);
                 var tuple = new RecordViewTuple(item, view);
@@ -6445,7 +6445,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.2.0-next.2+8.sha-78e7fdd.with-local-changes');
+var VERSION = new Version('8.2.0-next.2+22.sha-60f58bf.with-local-changes');
 
 /**
  * @license
