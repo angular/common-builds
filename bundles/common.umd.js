@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+47.sha-f50dede.with-local-changes
+ * @license Angular v8.2.0-next.2+51.sha-24ca582.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5340,7 +5340,7 @@
             }
         };
         AsyncPipe.ngInjectableDef = i0.ɵɵdefineInjectable({ token: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinject(i0.ChangeDetectorRef)); }, providedIn: null });
-        AsyncPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵdirectiveInject(i0.ChangeDetectorRef)); }, pure: false });
+        AsyncPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinjectPipeChangeDetectorRef()); }, pure: false });
         return AsyncPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
@@ -6492,7 +6492,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('8.2.0-next.2+47.sha-f50dede.with-local-changes');
+    var VERSION = new i0.Version('8.2.0-next.2+51.sha-24ca582.with-local-changes');
 
     /**
      * @license

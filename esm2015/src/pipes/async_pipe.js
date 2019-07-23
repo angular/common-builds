@@ -216,7 +216,7 @@ AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
 /** @nocollapse */ AsyncPipe.ngInjectableDef = i0.ɵɵdefineInjectable({ token: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinject(i0.ChangeDetectorRef)); }, providedIn: null });
-/** @nocollapse */ AsyncPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵdirectiveInject(i0.ChangeDetectorRef)); }, pure: false });
+/** @nocollapse */ AsyncPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinjectPipeChangeDetectorRef()); }, pure: false });
 /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
         type: Injectable
     }, {

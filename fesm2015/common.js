@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.2.0-next.2+47.sha-f50dede.with-local-changes
+ * @license Angular v8.2.0-next.2+51.sha-24ca582.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, Directive, Input, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵɵinjectAttribute, ɵɵstyleMap, Pipe, ɵɵdefinePipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, Directive, Input, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, Attribute, ɵɵinjectAttribute, ɵɵstyleMap, Pipe, ɵɵdefinePipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵinjectPipeChangeDetectorRef, NgModule, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6694,7 +6694,7 @@ AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
 /** @nocollapse */ AsyncPipe.ngInjectableDef = ɵɵdefineInjectable({ token: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinject(ChangeDetectorRef)); }, providedIn: null });
-/** @nocollapse */ AsyncPipe.ngPipeDef = ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵdirectiveInject(ChangeDetectorRef)); }, pure: false });
+/** @nocollapse */ AsyncPipe.ngPipeDef = ɵɵdefinePipe({ name: "async", type: AsyncPipe, factory: function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinjectPipeChangeDetectorRef()); }, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
         type: Injectable
     }, {
@@ -8026,7 +8026,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.2.0-next.2+47.sha-f50dede.with-local-changes');
+const VERSION = new Version('8.2.0-next.2+51.sha-24ca582.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
