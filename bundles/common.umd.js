@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+32.sha-f14693b.with-local-changes
+ * @license Angular v8.2.0-next.2+46.sha-0e68c7e.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3312,6 +3312,7 @@
     var ngClassDirectiveDef__PRE_R3__ = undefined;
     var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
+            core.ɵɵallocHostVars(1);
             core.ɵɵstyling();
         }
         if (rf & 2 /* Update */) {
@@ -6467,7 +6468,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.2.0-next.2+32.sha-f14693b.with-local-changes');
+    var VERSION = new core.Version('8.2.0-next.2+46.sha-0e68c7e.with-local-changes');
 
     /**
      * @license
