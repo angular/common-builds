@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.2.0-next.2+43.sha-5a8eb92.with-local-changes
+ * @license Angular v8.2.0-next.2+45.sha-54ef63b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, EventEmitter, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Input, Directive, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵstyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, EventEmitter, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Input, Directive, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵstyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 import { __decorate, __metadata, __extends, __param, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3290,6 +3290,7 @@ var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
 var ngClassDirectiveDef__PRE_R3__ = undefined;
 var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
+        ɵɵallocHostVars(1);
         ɵɵstyling();
     }
     if (rf & 2 /* Update */) {
@@ -6445,7 +6446,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('8.2.0-next.2+43.sha-5a8eb92.with-local-changes');
+var VERSION = new Version('8.2.0-next.2+45.sha-54ef63b.with-local-changes');
 
 /**
  * @license
