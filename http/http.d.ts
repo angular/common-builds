@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+55.sha-f69e4e6.with-local-changes
+ * @license Angular v8.2.0-next.2+65.sha-a445826.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,8 +10,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
- * A multi-provider token which represents the array of `HttpInterceptor`s that
- * are registered.
+ * A multi-provider token that represents the array of registered
+ * `HttpInterceptor` objects.
  *
  * @publicApi
  */
@@ -34,13 +34,9 @@ export declare abstract class HttpBackend implements HttpHandler {
 /**
  * Performs HTTP requests.
  *
- * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
+ * This service is available as an injectable class, with methods to perform HTTP requests.
  * Each request method has multiple signatures, and the return type varies based on
  * the signature that is called (mainly the values of `observe` and `responseType`).
- *
- *
- * @see [HTTP Guide](guide/http)
- *
  *
  * @usageNotes
  * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
@@ -62,7 +58,6 @@ export declare abstract class HttpBackend implements HttpHandler {
  * }
  * ```
  *
- *
  * ### PATCH Example
  * ```
  * // PATCH one of the heroes' name
@@ -71,7 +66,9 @@ export declare abstract class HttpBackend implements HttpHandler {
  *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
  *    .pipe(catchError(this.handleError('patchHero')));
  * }
-* ```
+ * ```
+ *
+ * @see [HTTP Guide](guide/http)
  *
  * @publicApi
  */
@@ -2966,7 +2963,8 @@ export declare class HttpHeaderResponse extends HttpResponseBase {
 
 
 /**
- * `HttpHeaders` class represents the header configuration options for an HTTP request.
+ * Represents the header configuration options for an HTTP request.
+ *
  * Instances should be assumed immutable with lazy parsing.
  *
  * @publicApi
@@ -3002,7 +3000,7 @@ export declare class HttpHeaders {
      */
     has(name: string): boolean;
     /**
-     * Returns the first header value that matches a given name.
+     * Retrieves the first header value that matches a given name.
      *
      * @param name The header name to retrieve.
      *
@@ -3010,13 +3008,13 @@ export declare class HttpHeaders {
      */
     get(name: string): string | null;
     /**
-     * Returns the names of the headers.
+     * Retrieves the names of the headers.
      *
      * @returns A list of header names.
      */
     keys(): string[];
     /**
-     * Returns a list of header values for a given header name.
+     * Retrieves a list of header values for a given header name.
      *
      * @param name The header name from which to retrieve the values.
      *
@@ -3037,7 +3035,7 @@ export declare class HttpHeaders {
      * its value is replaced with the given value.
      *
      * @param name The header name.
-     * @param value Provides the value to set or overide for a given name.
+     * @param value The value to set or overide for a given name.
      *
      * @returns A clone of the HTTP header object with the newly set header value.
      */
@@ -3059,7 +3057,7 @@ export declare class HttpHeaders {
 }
 
 /**
- * Intercepts `HttpRequest` or `HttpResponse` and handles them.
+ * Intercepts and handles an `HttpRequest` or `HttpResponse`.
  *
  * Most interceptors transform the outgoing request before passing it to the
  * next interceptor in the chain, by calling `next.handle(transformedReq)`.
@@ -3089,9 +3087,11 @@ export declare class HttpHeaders {
  */
 export declare interface HttpInterceptor {
     /**
-     * * **req**: The outgoing request to handle
-     * * **next**: The next interceptor in the chain, or the backend if no interceptors in the chain.
-     *
+     * Identifies and handles a given HTTP request.
+     * @param req The outgoing request object to handle.
+     * @param next The next interceptor in the chain, or the backend
+     * if no interceptors remain in the chain.
+     * @returns An observable of the event stream.
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
@@ -3117,7 +3117,7 @@ export declare interface HttpParameterCodec {
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
  *
- * This class is immutable - all mutation operations return a new instance.
+ * This class is immutable; all mutation operations return a new instance.
  *
  * @publicApi
  */
@@ -3128,37 +3128,55 @@ export declare class HttpParams {
     private cloneFrom;
     constructor(options?: HttpParamsOptions);
     /**
-     * Check whether the body has one or more values for the given parameter name.
+     * Reports whether the body includes one or more values for a given parameter.
+     * @param param The parameter name.
+     * @returns True if the parameter has one or more values,
+     * false if it has no value or is not present.
      */
     has(param: string): boolean;
     /**
-     * Get the first value for the given parameter name, or `null` if it's not present.
+     * Retrieves the first value for a parameter.
+     * @param param The parameter name.
+     * @returns The first value of the given parameter,
+     * or `null` if the parameter is not present.
      */
     get(param: string): string | null;
     /**
-     * Get all values for the given parameter name, or `null` if it's not present.
+     * Retrieves all values for a  parameter.
+     * @param param The parameter name.
+     * @returns All values in a string array,
+     * or `null` if the parameter not present.
      */
     getAll(param: string): string[] | null;
     /**
-     * Get all the parameter names for this body.
+     * Retrieves all the parameters for this body.
+     * @returns The parameter names in a string array.
      */
     keys(): string[];
     /**
-     * Construct a new body with an appended value for the given parameter name.
+     * Appends a new value to existing values for a parameter.
+     * @param param The parameter name.
+     * @param value The new value to add.
+     * @return A new body with the appended value.
      */
     append(param: string, value: string): HttpParams;
     /**
-     * Construct a new body with a new value for the given parameter name.
+     * Replaces the value for a parameter.
+     * @param param The parameter name.
+     * @param value The new value.
+     * @return A new body with the new value.
      */
     set(param: string, value: string): HttpParams;
     /**
-     * Construct a new body with either the given value for the given parameter
-     * removed, if a value is given, or all values for the given parameter removed
-     * if not.
+     * Removes a given value or all values from a parameter.
+     * @param param The parameter name.
+     * @param value The value to remove, if provided.
+     * @return A new body with the given value removed, or with all values
+     * removed if no value is specified.
      */
     delete(param: string, value?: string): HttpParams;
     /**
-     * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+     * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
      * separated by `&`s.
      */
     toString(): string;
@@ -3166,18 +3184,21 @@ export declare class HttpParams {
     private init;
 }
 
-/** Options used to construct an `HttpParams` instance. */
+/** Options used to construct an `HttpParams` instance.
+ *
+ * @publicApi
+ */
 declare interface HttpParamsOptions {
     /**
-     * String representation of the HTTP params in URL-query-string format. Mutually exclusive with
-     * `fromObject`.
+     * String representation of the HTTP parameters in URL-query-string format.
+     * Mutually exclusive with `fromObject`.
      */
     fromString?: string;
-    /** Object map of the HTTP params. Mutually exclusive with `fromString`. */
+    /** Object map of the HTTP parameters. Mutually exclusive with `fromString`. */
     fromObject?: {
         [param: string]: string | string[];
     };
-    /** Encoding codec used to parse and serialize the params. */
+    /** Encoding codec used to parse and serialize the parameters. */
     encoder?: HttpParameterCodec;
 }
 
@@ -3432,17 +3453,39 @@ export declare interface HttpUploadProgressEvent extends HttpProgressEvent {
 }
 
 /**
- * A class that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values. If you pass URL query parameters
- * without encoding, the query parameters can get misinterpreted at the receiving end.
- * Use the `HttpParameterCodec` class to encode and decode the query-string values.
+ * Provides encoding and decoding of URL parameter and query-string values.
+ *
+ * Serializes and parses URL parameter keys and values to encode and decode them.
+ * If you pass URL query parameters without encoding,
+ * the query parameters can be misinterpreted at the receiving end.
+ *
  *
  * @publicApi
  */
 export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
+    /**
+     * Encodes a key name for a URL parameter or query-string.
+     * @param key The key name.
+     * @returns The encoded key name.
+     */
     encodeKey(key: string): string;
+    /**
+     * Encodes the value of a URL parameter or query-string.
+     * @param value The value.
+     * @returns The encoded value.
+     */
     encodeValue(value: string): string;
+    /**
+     * Decodes an encoded URL parameter or query-string key.
+     * @param key The encoded key name.
+     * @returns The decoded key name.
+     */
     decodeKey(key: string): string;
+    /**
+     * Decodes an encoded URL parameter or query-string value.
+     * @param value The encoded value.
+     * @returns The decoded value.
+     */
     decodeValue(value: string): string;
 }
 
@@ -3459,8 +3502,9 @@ export declare interface HttpUserEvent<T> {
 }
 
 /**
- * An `HttpBackend` which uses the XMLHttpRequest API to send
- * requests to a backend server.
+ * Uses `XMLHttpRequest` to send requests to a backend server.
+ * @see `HttpHandler`
+ * @see `JsonpClientBackend`
  *
  * @publicApi
  */
@@ -3468,7 +3512,9 @@ export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;
     constructor(xhrFactory: XhrFactory);
     /**
-     * Process a request and return a stream of response events.
+     * Processes a request and returns a stream of response events.
+     * @param req The request object.
+     * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
@@ -3488,8 +3534,10 @@ export declare abstract class HttpXsrfTokenExtractor {
 }
 
 /**
- * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
+ * Processes an `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
+ * @see `HttpHandler`
+ * @see `HttpXhrBackend`
  *
  * @publicApi
  */
@@ -3502,20 +3550,32 @@ export declare class JsonpClientBackend implements HttpBackend {
      */
     private nextCallback;
     /**
-     * Process a JSONP request and return an event stream of the results.
+     * Processes a JSONP request and returns an event stream of the results.
+     * @param req The request object.
+     * @returns An observable of the response events.
+     *
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
 }
 
 /**
- * An `HttpInterceptor` which identifies requests with the method JSONP and
+ * Identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
+ *
+ * @see `HttpInterceptor`
  *
  * @publicApi
  */
 export declare class JsonpInterceptor {
     private jsonp;
     constructor(jsonp: JsonpClientBackend);
+    /**
+     * Identifies and handles a given JSONP request.
+     * @param req The outgoing request object to handle.
+     * @param next The next interceptor in the chain, or the backend
+     * if no interceptors remain in the chain.
+     * @returns An observable of the event stream.
+     */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
 
@@ -3554,8 +3614,7 @@ export declare abstract class ɵangular_packages_common_http_http_b {
 export declare function ɵangular_packages_common_http_http_c(): Object;
 
 /**
- * A factory for @{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
- *
+ * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
  *
  */
 export declare class ɵangular_packages_common_http_http_d implements XhrFactory {
