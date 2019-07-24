@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.1.2+15.sha-a9f3547.with-local-changes
+ * @license Angular v8.1.2+24.sha-77143b5.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -125,7 +125,8 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * `HttpHeaders` class represents the header configuration options for an HTTP request.
+     * Represents the header configuration options for an HTTP request.
+     *
      * Instances should be assumed immutable with lazy parsing.
      *
      * @publicApi
@@ -195,7 +196,7 @@
             return this.headers.has(name.toLowerCase());
         };
         /**
-         * Returns the first header value that matches a given name.
+         * Retrieves the first header value that matches a given name.
          *
          * @param name The header name to retrieve.
          *
@@ -207,7 +208,7 @@
             return values && values.length > 0 ? values[0] : null;
         };
         /**
-         * Returns the names of the headers.
+         * Retrieves the names of the headers.
          *
          * @returns A list of header names.
          */
@@ -216,7 +217,7 @@
             return Array.from(this.normalizedNames.values());
         };
         /**
-         * Returns a list of header values for a given header name.
+         * Retrieves a list of header values for a given header name.
          *
          * @param name The header name from which to retrieve the values.
          *
@@ -242,7 +243,7 @@
          * its value is replaced with the given value.
          *
          * @param name The header name.
-         * @param value Provides the value to set or overide for a given name.
+         * @param value The value to set or overide for a given name.
          *
          * @returns A clone of the HTTP header object with the newly set header value.
          */
@@ -356,19 +357,41 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * A class that uses `encodeURIComponent` and `decodeURIComponent` to
-     * serialize and parse URL parameter keys and values. If you pass URL query parameters
-     * without encoding, the query parameters can get misinterpreted at the receiving end.
-     * Use the `HttpParameterCodec` class to encode and decode the query-string values.
+     * Provides encoding and decoding of URL parameter and query-string values.
+     *
+     * Serializes and parses URL parameter keys and values to encode and decode them.
+     * If you pass URL query parameters without encoding,
+     * the query parameters can be misinterpreted at the receiving end.
+     *
      *
      * @publicApi
      */
     var HttpUrlEncodingCodec = /** @class */ (function () {
         function HttpUrlEncodingCodec() {
         }
+        /**
+         * Encodes a key name for a URL parameter or query-string.
+         * @param key The key name.
+         * @returns The encoded key name.
+         */
         HttpUrlEncodingCodec.prototype.encodeKey = function (key) { return standardEncoding(key); };
+        /**
+         * Encodes the value of a URL parameter or query-string.
+         * @param value The value.
+         * @returns The encoded value.
+         */
         HttpUrlEncodingCodec.prototype.encodeValue = function (value) { return standardEncoding(value); };
+        /**
+         * Decodes an encoded URL parameter or query-string key.
+         * @param key The encoded key name.
+         * @returns The decoded key name.
+         */
         HttpUrlEncodingCodec.prototype.decodeKey = function (key) { return decodeURIComponent(key); };
+        /**
+         * Decodes an encoded URL parameter or query-string value.
+         * @param value The encoded value.
+         * @returns The decoded value.
+         */
         HttpUrlEncodingCodec.prototype.decodeValue = function (value) { return decodeURIComponent(value); };
         return HttpUrlEncodingCodec;
     }());
@@ -404,7 +427,7 @@
      * An HTTP request/response body that represents serialized parameters,
      * per the MIME type `application/x-www-form-urlencoded`.
      *
-     * This class is immutable - all mutation operations return a new instance.
+     * This class is immutable; all mutation operations return a new instance.
      *
      * @publicApi
      */
@@ -433,14 +456,20 @@
             }
         }
         /**
-         * Check whether the body has one or more values for the given parameter name.
+         * Reports whether the body includes one or more values for a given parameter.
+         * @param param The parameter name.
+         * @returns True if the parameter has one or more values,
+         * false if it has no value or is not present.
          */
         HttpParams.prototype.has = function (param) {
             this.init();
             return this.map.has(param);
         };
         /**
-         * Get the first value for the given parameter name, or `null` if it's not present.
+         * Retrieves the first value for a parameter.
+         * @param param The parameter name.
+         * @returns The first value of the given parameter,
+         * or `null` if the parameter is not present.
          */
         HttpParams.prototype.get = function (param) {
             this.init();
@@ -448,35 +477,47 @@
             return !!res ? res[0] : null;
         };
         /**
-         * Get all values for the given parameter name, or `null` if it's not present.
+         * Retrieves all values for a  parameter.
+         * @param param The parameter name.
+         * @returns All values in a string array,
+         * or `null` if the parameter not present.
          */
         HttpParams.prototype.getAll = function (param) {
             this.init();
             return this.map.get(param) || null;
         };
         /**
-         * Get all the parameter names for this body.
+         * Retrieves all the parameters for this body.
+         * @returns The parameter names in a string array.
          */
         HttpParams.prototype.keys = function () {
             this.init();
             return Array.from(this.map.keys());
         };
         /**
-         * Construct a new body with an appended value for the given parameter name.
+         * Appends a new value to existing values for a parameter.
+         * @param param The parameter name.
+         * @param value The new value to add.
+         * @return A new body with the appended value.
          */
         HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
         /**
-         * Construct a new body with a new value for the given parameter name.
+         * Replaces the value for a parameter.
+         * @param param The parameter name.
+         * @param value The new value.
+         * @return A new body with the new value.
          */
         HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
         /**
-         * Construct a new body with either the given value for the given parameter
-         * removed, if a value is given, or all values for the given parameter removed
-         * if not.
+         * Removes a given value or all values from a parameter.
+         * @param param The parameter name.
+         * @param value The value to remove, if provided.
+         * @return A new body with the given value removed, or with all values
+         * removed if no value is specified.
          */
         HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
         /**
-         * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+         * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
          * separated by `&`s.
          */
         HttpParams.prototype.toString = function () {
@@ -989,13 +1030,9 @@
     /**
      * Performs HTTP requests.
      *
-     * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
+     * This service is available as an injectable class, with methods to perform HTTP requests.
      * Each request method has multiple signatures, and the return type varies based on
      * the signature that is called (mainly the values of `observe` and `responseType`).
-     *
-     *
-     * @see [HTTP Guide](guide/http)
-     *
      *
      * @usageNotes
      * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
@@ -1017,7 +1054,6 @@
      * }
      * ```
      *
-     *
      * ### PATCH Example
      * ```
      * // PATCH one of the heroes' name
@@ -1026,7 +1062,9 @@
      *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
      *    .pipe(catchError(this.handleError('patchHero')));
      * }
-    * ```
+     * ```
+     *
+     * @see [HTTP Guide](guide/http)
      *
      * @publicApi
      */
@@ -1291,8 +1329,8 @@
         return HttpInterceptorHandler;
     }());
     /**
-     * A multi-provider token which represents the array of `HttpInterceptor`s that
-     * are registered.
+     * A multi-provider token that represents the array of registered
+     * `HttpInterceptor` objects.
      *
      * @publicApi
      */
@@ -1341,8 +1379,10 @@
         return JsonpCallbackContext;
     }());
     /**
-     * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
+     * Processes an `HttpRequest` with the JSONP method,
      * by performing JSONP style requests.
+     * @see `HttpHandler`
+     * @see `HttpXhrBackend`
      *
      * @publicApi
      */
@@ -1356,7 +1396,10 @@
          */
         JsonpClientBackend.prototype.nextCallback = function () { return "ng_jsonp_callback_" + nextRequestId++; };
         /**
-         * Process a JSONP request and return an event stream of the results.
+         * Processes a JSONP request and returns an event stream of the results.
+         * @param req The request object.
+         * @returns An observable of the response events.
+         *
          */
         JsonpClientBackend.prototype.handle = function (req) {
             var _this = this;
@@ -1489,8 +1532,10 @@
         return JsonpClientBackend;
     }());
     /**
-     * An `HttpInterceptor` which identifies requests with the method JSONP and
+     * Identifies requests with the method JSONP and
      * shifts them to the `JsonpClientBackend`.
+     *
+     * @see `HttpInterceptor`
      *
      * @publicApi
      */
@@ -1498,6 +1543,13 @@
         function JsonpInterceptor(jsonp) {
             this.jsonp = jsonp;
         }
+        /**
+         * Identifies and handles a given JSONP request.
+         * @param req The outgoing request object to handle.
+         * @param next The next interceptor in the chain, or the backend
+         * if no interceptors remain in the chain.
+         * @returns An observable of the event stream.
+         */
         JsonpInterceptor.prototype.intercept = function (req, next) {
             if (req.method === 'JSONP') {
                 return this.jsonp.handle(req);
@@ -1544,8 +1596,7 @@
         return XhrFactory;
     }());
     /**
-     * A factory for @{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
-     *
+     * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
      *
      */
     var BrowserXhr = /** @class */ (function () {
@@ -1559,8 +1610,9 @@
         return BrowserXhr;
     }());
     /**
-     * An `HttpBackend` which uses the XMLHttpRequest API to send
-     * requests to a backend server.
+     * Uses `XMLHttpRequest` to send requests to a backend server.
+     * @see `HttpHandler`
+     * @see `JsonpClientBackend`
      *
      * @publicApi
      */
@@ -1569,7 +1621,9 @@
             this.xhrFactory = xhrFactory;
         }
         /**
-         * Process a request and return a stream of response events.
+         * Processes a request and returns a stream of response events.
+         * @param req The request object.
+         * @returns An observable of the response events.
          */
         HttpXhrBackend.prototype.handle = function (req) {
             var _this = this;
