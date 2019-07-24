@@ -17,8 +17,10 @@ export declare abstract class JsonpCallbackContext {
     [key: string]: (data: any) => void;
 }
 /**
- * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
+ * Processes an `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
+ * @see `HttpHandler`
+ * @see `HttpXhrBackend`
  *
  * @publicApi
  */
@@ -31,20 +33,32 @@ export declare class JsonpClientBackend implements HttpBackend {
      */
     private nextCallback;
     /**
-     * Process a JSONP request and return an event stream of the results.
+     * Processes a JSONP request and returns an event stream of the results.
+     * @param req The request object.
+     * @returns An observable of the response events.
+     *
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
     static ngInjectableDef: i0.ɵɵInjectableDef<JsonpClientBackend>;
 }
 /**
- * An `HttpInterceptor` which identifies requests with the method JSONP and
+ * Identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
+ *
+ * @see `HttpInterceptor`
  *
  * @publicApi
  */
 export declare class JsonpInterceptor {
     private jsonp;
     constructor(jsonp: JsonpClientBackend);
+    /**
+     * Identifies and handles a given JSONP request.
+     * @param req The outgoing request object to handle.
+     * @param next The next interceptor in the chain, or the backend
+     * if no interceptors remain in the chain.
+     * @returns An observable of the event stream.
+     */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
     static ngInjectableDef: i0.ɵɵInjectableDef<JsonpInterceptor>;
 }

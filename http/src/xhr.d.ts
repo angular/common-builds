@@ -12,8 +12,7 @@ export declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
 }
 /**
- * A factory for @{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
- *
+ * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
  *
  */
 export declare class BrowserXhr implements XhrFactory {
@@ -22,8 +21,9 @@ export declare class BrowserXhr implements XhrFactory {
     static ngInjectableDef: i0.ɵɵInjectableDef<BrowserXhr>;
 }
 /**
- * An `HttpBackend` which uses the XMLHttpRequest API to send
- * requests to a backend server.
+ * Uses `XMLHttpRequest` to send requests to a backend server.
+ * @see `HttpHandler`
+ * @see `JsonpClientBackend`
  *
  * @publicApi
  */
@@ -31,7 +31,9 @@ export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;
     constructor(xhrFactory: XhrFactory);
     /**
-     * Process a request and return a stream of response events.
+     * Processes a request and returns a stream of response events.
+     * @param req The request object.
+     * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ngInjectableDef: i0.ɵɵInjectableDef<HttpXhrBackend>;

@@ -6,7 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * `HttpHeaders` class represents the header configuration options for an HTTP request.
+ * Represents the header configuration options for an HTTP request.
+ *
  * Instances should be assumed immutable with lazy parsing.
  *
  * @publicApi
@@ -42,7 +43,7 @@ export declare class HttpHeaders {
      */
     has(name: string): boolean;
     /**
-     * Returns the first header value that matches a given name.
+     * Retrieves the first header value that matches a given name.
      *
      * @param name The header name to retrieve.
      *
@@ -50,13 +51,13 @@ export declare class HttpHeaders {
      */
     get(name: string): string | null;
     /**
-     * Returns the names of the headers.
+     * Retrieves the names of the headers.
      *
      * @returns A list of header names.
      */
     keys(): string[];
     /**
-     * Returns a list of header values for a given header name.
+     * Retrieves a list of header values for a given header name.
      *
      * @param name The header name from which to retrieve the values.
      *
@@ -77,7 +78,7 @@ export declare class HttpHeaders {
      * its value is replaced with the given value.
      *
      * @param name The header name.
-     * @param value Provides the value to set or overide for a given name.
+     * @param value The value to set or overide for a given name.
      *
      * @returns A clone of the HTTP header object with the newly set header value.
      */
