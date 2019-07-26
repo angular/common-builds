@@ -22,7 +22,7 @@ export interface MockPlatformLocationConfig {
  *
  * @publicApi
  */
-export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<{}>;
+export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<MockPlatformLocationConfig>;
 /**
  * Mock implementation of URL state.
  *
