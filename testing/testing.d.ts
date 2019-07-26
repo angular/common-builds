@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0-next.2+93.sha-3a2b195.with-local-changes
+ * @license Angular v8.2.0-next.2+94.sha-6ece7db.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -16,7 +16,7 @@ import { SubscriptionLike } from 'rxjs';
  *
  * @publicApi
  */
-export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<{}>;
+export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<MockPlatformLocationConfig>;
 
 /**
  * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
