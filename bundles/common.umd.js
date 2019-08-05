@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.0+15.sha-c00e7ff.with-local-changes
+ * @license Angular v8.2.0+19.sha-83d67b4.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5736,8 +5736,8 @@
          * @param format The date/time components to include, using predefined options or a
          * custom format string.
          * @param timezone A timezone offset (such as `'+0430'`), or a standard
-         * UTC/GMT or continental US timezone abbreviation. Default is
-         * the local system timezone of the end-user's machine.
+         * UTC/GMT or continental US timezone abbreviation.
+         * When not supplied, uses the end-user's local system timezone.
          * @param locale A locale code for the locale format rules to use.
          * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
          * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
@@ -6468,7 +6468,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.2.0+15.sha-c00e7ff.with-local-changes');
+    var VERSION = new core.Version('8.2.0+19.sha-83d67b4.with-local-changes');
 
     /**
      * @license
