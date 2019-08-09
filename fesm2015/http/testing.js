@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13,6 +13,26 @@ import { Observable } from 'rxjs';
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Defines a matcher for requests based on URL, method, or both.
+ *
+ * \@publicApi
+ * @record
+ */
+function RequestMatch() { }
+if (false) {
+    /** @type {?|undefined} */
+    RequestMatch.prototype.method;
+    /** @type {?|undefined} */
+    RequestMatch.prototype.url;
+}
+/**
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
@@ -20,6 +40,120 @@ import { Observable } from 'rxjs';
  * @abstract
  */
 class HttpTestingController {
+}
+if (false) {
+    /**
+     * Search for requests that match the given parameter, without any expectations.
+     * @abstract
+     * @param {?} match
+     * @return {?}
+     */
+    HttpTestingController.prototype.match = function (match) { };
+    /**
+     * Expect that a single request has been made which matches the given URL, and return its
+     * mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
+     * @abstract
+     * @param {?} url
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectOne = function (url, description) { };
+    /**
+     * Expect that a single request has been made which matches the given parameters, and return
+     * its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
+     * @abstract
+     * @param {?} params
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectOne = function (params, description) { };
+    /**
+     * Expect that a single request has been made which matches the given predicate function, and
+     * return its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
+     * @abstract
+     * @param {?} matchFn
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectOne = function (matchFn, description) { };
+    /**
+     * Expect that a single request has been made which matches the given condition, and return
+     * its mock.
+     *
+     * If no such request has been made, or more than one such request has been made, fail with an
+     * error message including the given request description, if any.
+     * @abstract
+     * @param {?} match
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectOne = function (match, description) { };
+    /**
+     * Expect that no requests have been made which match the given URL.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
+     * @abstract
+     * @param {?} url
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectNone = function (url, description) { };
+    /**
+     * Expect that no requests have been made which match the given parameters.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
+     * @abstract
+     * @param {?} params
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectNone = function (params, description) { };
+    /**
+     * Expect that no requests have been made which match the given predicate function.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
+     * @abstract
+     * @param {?} matchFn
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectNone = function (matchFn, description) { };
+    /**
+     * Expect that no requests have been made which match the given condition.
+     *
+     * If a matching request has been made, fail with an error message including the given request
+     * description, if any.
+     * @abstract
+     * @param {?} match
+     * @param {?=} description
+     * @return {?}
+     */
+    HttpTestingController.prototype.expectNone = function (match, description) { };
+    /**
+     * Verify that no unmatched requests are outstanding.
+     *
+     * If any requests are outstanding, fail with an error message indicating which requests were not
+     * handled.
+     *
+     * If `ignoreCancelled` is not set (the default), `verify()` will also fail if cancelled requests
+     * were not explicitly matched.
+     * @abstract
+     * @param {?=} opts
+     * @return {?}
+     */
+    HttpTestingController.prototype.verify = function (opts) { };
 }
 
 /**
@@ -131,6 +265,20 @@ class TestRequest {
         }
         this.observer.next(event);
     }
+}
+if (false) {
+    /**
+     * \@internal set by `HttpClientTestingBackend`
+     * @type {?}
+     */
+    TestRequest.prototype._cancelled;
+    /** @type {?} */
+    TestRequest.prototype.request;
+    /**
+     * @type {?}
+     * @private
+     */
+    TestRequest.prototype.observer;
 }
 /**
  * Helper function to convert a response body to an ArrayBuffer.
@@ -414,6 +562,14 @@ class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /**
+     * List of pending requests which have not yet been expected.
+     * @type {?}
+     * @private
+     */
+    HttpClientTestingBackend.prototype.open;
+}
 
 /**
  * @fileoverview added by tsickle

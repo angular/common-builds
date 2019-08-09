@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -12,6 +12,21 @@ import { UpgradeModule } from '@angular/upgrade/static';
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @param {?} val
+ * @param {?} prefix
+ * @return {?}
+ */
+function stripPrefix(val, prefix) {
+    return val.startsWith(prefix) ? val.substring(prefix.length) : val;
+}
 /**
  * @param {?} a
  * @param {?} b
@@ -711,6 +726,113 @@ class $locationShim {
         return this;
     }
 }
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.initalizing;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.updateBrowser;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$absUrl;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$url;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$protocol;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$host;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$port;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$replace;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$path;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$search;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$hash;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$state;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.$$changeListeners;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.cachedState;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.lastHistoryState;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.lastBrowserUrl;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.lastCachedState;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.location;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.platformLocation;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.urlCodec;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.locationStrategy;
+}
 /**
  * The factory function used to create an instance of the `$locationShim` in Angular,
  * and provides an API-compatiable `$locationProvider` for AngularJS.
@@ -758,6 +880,33 @@ class $locationShimProvider {
         throw new Error('Configure LocationUpgrade through LocationUpgradeModule.config method.');
     }
 }
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShimProvider.prototype.ngUpgrade;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShimProvider.prototype.location;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShimProvider.prototype.platformLocation;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShimProvider.prototype.urlCodec;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShimProvider.prototype.locationStrategy;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -778,6 +927,92 @@ class $locationShimProvider {
  * @abstract
  */
 class UrlCodec {
+}
+if (false) {
+    /**
+     * Encodes the path from the provided string
+     *
+     * @abstract
+     * @param {?} path The path string
+     * @return {?}
+     */
+    UrlCodec.prototype.encodePath = function (path) { };
+    /**
+     * Decodes the path from the provided string
+     *
+     * @abstract
+     * @param {?} path The path string
+     * @return {?}
+     */
+    UrlCodec.prototype.decodePath = function (path) { };
+    /**
+     * Encodes the search string from the provided string or object
+     *
+     * @abstract
+     * @param {?} search
+     * @return {?}
+     */
+    UrlCodec.prototype.encodeSearch = function (search) { };
+    /**
+     * Decodes the search objects from the provided string
+     *
+     * @abstract
+     * @param {?} search
+     * @return {?}
+     */
+    UrlCodec.prototype.decodeSearch = function (search) { };
+    /**
+     * Encodes the hash from the provided string
+     *
+     * @abstract
+     * @param {?} hash
+     * @return {?}
+     */
+    UrlCodec.prototype.encodeHash = function (hash) { };
+    /**
+     * Decodes the hash from the provided string
+     *
+     * @abstract
+     * @param {?} hash
+     * @return {?}
+     */
+    UrlCodec.prototype.decodeHash = function (hash) { };
+    /**
+     * Normalizes the URL from the provided string
+     *
+     * @abstract
+     * @param {?} href
+     * @return {?}
+     */
+    UrlCodec.prototype.normalize = function (href) { };
+    /**
+     * Normalizes the URL from the provided string, search, hash, and base URL parameters
+     *
+     * @abstract
+     * @param {?} path The URL path
+     * @param {?} search The search object
+     * @param {?} hash The has string
+     * @param {?=} baseUrl The base URL for the URL
+     * @return {?}
+     */
+    UrlCodec.prototype.normalize = function (path, search, hash, baseUrl) { };
+    /**
+     * Checks whether the two strings are equal
+     * @abstract
+     * @param {?} valA First string for comparison
+     * @param {?} valB Second string for comparison
+     * @return {?}
+     */
+    UrlCodec.prototype.areEqual = function (valA, valB) { };
+    /**
+     * Parses the URL string based on the base URL
+     *
+     * @abstract
+     * @param {?} url The full URL string
+     * @param {?=} base The base for the URL
+     * @return {?}
+     */
+    UrlCodec.prototype.parse = function (url, base) { };
 }
 /**
  * A `UrlCodec` that uses logic from AngularJS to serialize and parse URLs
@@ -1070,6 +1305,41 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Configuration options for LocationUpgrade.
+ *
+ * \@publicApi
+ * @record
+ */
+function LocationUpgradeConfig() { }
+if (false) {
+    /**
+     * Configures whether the location upgrade module should use the `HashLocationStrategy`
+     * or the `PathLocationStrategy`
+     * @type {?|undefined}
+     */
+    LocationUpgradeConfig.prototype.useHash;
+    /**
+     * Configures the hash prefix used in the URL when using the `HashLocationStrategy`
+     * @type {?|undefined}
+     */
+    LocationUpgradeConfig.prototype.hashPrefix;
+    /**
+     * Configures the URL codec for encoding and decoding URLs. Default is the `AngularJSCodec`
+     * @type {?|undefined}
+     */
+    LocationUpgradeConfig.prototype.urlCodec;
+    /**
+     * Configures the base href when used in server-side rendered applications
+     * @type {?|undefined}
+     */
+    LocationUpgradeConfig.prototype.serverBaseHref;
+    /**
+     * Configures the base href when used in client-side rendered applications
+     * @type {?|undefined}
+     */
+    LocationUpgradeConfig.prototype.appBaseHref;
+}
 /**
  * A provider token used to configure the location upgrade module.
  *

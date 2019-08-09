@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -204,6 +204,45 @@ class SpyLocation {
 SpyLocation.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /** @type {?} */
+    SpyLocation.prototype.urlChanges;
+    /**
+     * @type {?}
+     * @private
+     */
+    SpyLocation.prototype._history;
+    /**
+     * @type {?}
+     * @private
+     */
+    SpyLocation.prototype._historyIndex;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    SpyLocation.prototype._subject;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    SpyLocation.prototype._baseHref;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    SpyLocation.prototype._platformStrategy;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    SpyLocation.prototype._platformLocation;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    SpyLocation.prototype._urlChangeListeners;
+}
 class LocationState {
     /**
      * @param {?} path
@@ -215,6 +254,14 @@ class LocationState {
         this.query = query;
         this.state = state;
     }
+}
+if (false) {
+    /** @type {?} */
+    LocationState.prototype.path;
+    /** @type {?} */
+    LocationState.prototype.query;
+    /** @type {?} */
+    LocationState.prototype.state;
 }
 
 /**
@@ -334,6 +381,26 @@ MockLocationStrategy.decorators = [
 ];
 /** @nocollapse */
 MockLocationStrategy.ctorParameters = () => [];
+if (false) {
+    /** @type {?} */
+    MockLocationStrategy.prototype.internalBaseHref;
+    /** @type {?} */
+    MockLocationStrategy.prototype.internalPath;
+    /** @type {?} */
+    MockLocationStrategy.prototype.internalTitle;
+    /** @type {?} */
+    MockLocationStrategy.prototype.urlChanges;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    MockLocationStrategy.prototype._subject;
+    /**
+     * @type {?}
+     * @private
+     */
+    MockLocationStrategy.prototype.stateChanges;
+}
 class _MockPopStateEvent {
     /**
      * @param {?} newUrl
@@ -343,6 +410,14 @@ class _MockPopStateEvent {
         this.pop = true;
         this.type = 'popstate';
     }
+}
+if (false) {
+    /** @type {?} */
+    _MockPopStateEvent.prototype.pop;
+    /** @type {?} */
+    _MockPopStateEvent.prototype.type;
+    /** @type {?} */
+    _MockPopStateEvent.prototype.newUrl;
 }
 
 /**
@@ -418,6 +493,19 @@ function parseUrl(urlStr, baseHref) {
         search: parsedUrl.search || '',
         hash: parsedUrl.hash || '',
     };
+}
+/**
+ * Mock platform location config
+ *
+ * \@publicApi
+ * @record
+ */
+function MockPlatformLocationConfig() { }
+if (false) {
+    /** @type {?|undefined} */
+    MockPlatformLocationConfig.prototype.startUrl;
+    /** @type {?|undefined} */
+    MockPlatformLocationConfig.prototype.appBaseHref;
 }
 /**
  * Provider for mock platform location config
@@ -572,6 +660,23 @@ MockPlatformLocation.decorators = [
 MockPlatformLocation.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    MockPlatformLocation.prototype.baseHref;
+    /**
+     * @type {?}
+     * @private
+     */
+    MockPlatformLocation.prototype.hashUpdate;
+    /**
+     * @type {?}
+     * @private
+     */
+    MockPlatformLocation.prototype.urlChanges;
+}
 /**
  * @param {?} cb
  * @return {?}
