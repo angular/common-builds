@@ -1,10 +1,10 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, EventEmitter, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵstyleMap, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵinjectPipeChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵstyleMap, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵinjectPipeChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 import { __extends, __read, __values, __assign } from 'tslib';
 
 /**
@@ -3253,12 +3253,32 @@ var NgClassR3Impl = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgClassR3Impl, [{
         type: Injectable
     }], null, null);
+// the implementation for both NgStyleR2Impl and NgStyleR3Impl are
+// not ivy_switch'd away, instead they are only hooked up into the
+// DI via NgStyle's directive's provider property.
+var NgClassImplProvider__PRE_R3__ = {
+    provide: NgClassImpl,
+    useClass: NgClassR2Impl
+};
 var NgClassImplProvider__POST_R3__ = {
     provide: NgClassImpl,
     useClass: NgClassR3Impl
 };
 var NgClassImplProvider = NgClassImplProvider__POST_R3__;
 
+/*
+ * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
+ *
+ * If the VE is present (which is for older versions of Angular) then NgClass will inject
+ * the legacy diffing algorithm as a service and delegate all styling changes to that.
+ *
+ * If the VE is not present then NgStyle will normalize (through the injected service) and
+ * then write all styling changes to the `[style]` binding directly (through a host binding).
+ * Then Angular will notice the host binding change and treat the changes as styling
+ * changes and apply them via the core styling instructions that exist within Angular.
+ */
+// used when the VE is present
+var ngClassDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
@@ -4449,12 +4469,32 @@ var NgStyleR3Impl = /** @class */ (function () {
 /*@__PURE__*/ ɵsetClassMetadata(NgStyleR3Impl, [{
         type: Injectable
     }], null, null);
+// the implementation for both NgClassR2Impl and NgClassR3Impl are
+// not ivy_switch'd away, instead they are only hooked up into the
+// DI via NgStyle's directive's provider property.
+var NgStyleImplProvider__PRE_R3__ = {
+    provide: NgStyleImpl,
+    useClass: NgStyleR2Impl
+};
 var NgStyleImplProvider__POST_R3__ = {
     provide: NgStyleImpl,
     useClass: NgStyleR3Impl
 };
 var NgStyleImplProvider = NgStyleImplProvider__POST_R3__;
 
+/*
+ * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
+ *
+ * If the VE is present (which is for older versions of Angular) then NgStyle will inject
+ * the legacy diffing algorithm as a service and delegate all styling changes to that.
+ *
+ * If the VE is not present then NgStyle will normalize (through the injected service) and
+ * then write all styling changes to the `[style]` binding directly (through a host binding).
+ * Then Angular will notice the host binding change and treat the changes as styling
+ * changes and apply them via the core styling instructions that exist within Angular.
+ */
+// used when the VE is present
+var ngStyleDirectiveDef__PRE_R3__ = undefined;
 // used when the VE is not present (note the directive will
 // never be instantiated normally because it is apart of a
 // base class)
@@ -6485,7 +6525,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.1+11.sha-0ddf0c4.with-local-changes');
+var VERSION = new Version('9.0.0-next.1+13.sha-c198a27.with-local-changes');
 
 /**
  * @license

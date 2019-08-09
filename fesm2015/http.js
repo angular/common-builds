@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+13.sha-c198a27.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -35,6 +35,14 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
  */
 class HttpHandler {
 }
+if (false) {
+    /**
+     * @abstract
+     * @param {?} req
+     * @return {?}
+     */
+    HttpHandler.prototype.handle = function (req) { };
+}
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
  *
@@ -48,11 +56,38 @@ class HttpHandler {
  */
 class HttpBackend {
 }
+if (false) {
+    /**
+     * @abstract
+     * @param {?} req
+     * @return {?}
+     */
+    HttpBackend.prototype.handle = function (req) { };
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @record
+ */
+function Update() { }
+if (false) {
+    /** @type {?} */
+    Update.prototype.name;
+    /** @type {?|undefined} */
+    Update.prototype.value;
+    /** @type {?} */
+    Update.prototype.op;
+}
 /**
  * Represents the header configuration options for an HTTP request.
  *
@@ -346,11 +381,77 @@ class HttpHeaders {
         key => fn((/** @type {?} */ (this.normalizedNames.get(key))), (/** @type {?} */ (this.headers.get(key))))));
     }
 }
+if (false) {
+    /**
+     * Internal map of lowercase header names to values.
+     * @type {?}
+     * @private
+     */
+    HttpHeaders.prototype.headers;
+    /**
+     * Internal map of lowercased header names to the normalized
+     * form of the name (the form seen first).
+     * @type {?}
+     * @private
+     */
+    HttpHeaders.prototype.normalizedNames;
+    /**
+     * Complete the lazy initialization of this object (needed before reading).
+     * @type {?}
+     * @private
+     */
+    HttpHeaders.prototype.lazyInit;
+    /**
+     * Queued updates to be materialized the next initialization.
+     * @type {?}
+     * @private
+     */
+    HttpHeaders.prototype.lazyUpdate;
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A codec for encoding and decoding parameters in URLs.
+ *
+ * Used by `HttpParams`.
+ *
+ * \@publicApi
+ *
+ * @record
+ */
+function HttpParameterCodec() { }
+if (false) {
+    /**
+     * @param {?} key
+     * @return {?}
+     */
+    HttpParameterCodec.prototype.encodeKey = function (key) { };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    HttpParameterCodec.prototype.encodeValue = function (value) { };
+    /**
+     * @param {?} key
+     * @return {?}
+     */
+    HttpParameterCodec.prototype.decodeKey = function (key) { };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    HttpParameterCodec.prototype.decodeValue = function (value) { };
+}
 /**
  * Provides encoding and decoding of URL parameter and query-string values.
  *
@@ -431,6 +532,43 @@ function standardEncoding(v) {
         .replace(/%3D/gi, '=')
         .replace(/%3F/gi, '?')
         .replace(/%2F/gi, '/');
+}
+/**
+ * @record
+ */
+function Update$1() { }
+if (false) {
+    /** @type {?} */
+    Update$1.prototype.param;
+    /** @type {?|undefined} */
+    Update$1.prototype.value;
+    /** @type {?} */
+    Update$1.prototype.op;
+}
+/**
+ * Options used to construct an `HttpParams` instance.
+ *
+ * \@publicApi
+ * @record
+ */
+function HttpParamsOptions() { }
+if (false) {
+    /**
+     * String representation of the HTTP parameters in URL-query-string format.
+     * Mutually exclusive with `fromObject`.
+     * @type {?|undefined}
+     */
+    HttpParamsOptions.prototype.fromString;
+    /**
+     * Object map of the HTTP parameters. Mutually exclusive with `fromString`.
+     * @type {?|undefined}
+     */
+    HttpParamsOptions.prototype.fromObject;
+    /**
+     * Encoding codec used to parse and serialize the parameters.
+     * @type {?|undefined}
+     */
+    HttpParamsOptions.prototype.encoder;
 }
 /**
  * An HTTP request/response body that represents serialized parameters,
@@ -622,11 +760,52 @@ class HttpParams {
         }
     }
 }
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpParams.prototype.map;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpParams.prototype.encoder;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpParams.prototype.updates;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpParams.prototype.cloneFrom;
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Construction interface for `HttpRequest`s.
+ *
+ * All values are optional and will override default values if provided.
+ * @record
+ */
+function HttpRequestInit() { }
+if (false) {
+    /** @type {?|undefined} */
+    HttpRequestInit.prototype.headers;
+    /** @type {?|undefined} */
+    HttpRequestInit.prototype.reportProgress;
+    /** @type {?|undefined} */
+    HttpRequestInit.prototype.params;
+    /** @type {?|undefined} */
+    HttpRequestInit.prototype.responseType;
+    /** @type {?|undefined} */
+    HttpRequestInit.prototype.withCredentials;
+}
 /**
  * Determine whether the given HTTP method may include a body.
  * @param {?} method
@@ -917,6 +1096,60 @@ class HttpRequest {
         });
     }
 }
+if (false) {
+    /**
+     * The request body, or `null` if one isn't set.
+     *
+     * Bodies are not enforced to be immutable, as they can include a reference to any
+     * user-defined data type. However, interceptors should take care to preserve
+     * idempotence by treating them as such.
+     * @type {?}
+     */
+    HttpRequest.prototype.body;
+    /**
+     * Outgoing headers for this request.
+     * @type {?}
+     */
+    HttpRequest.prototype.headers;
+    /**
+     * Whether this request should be made in a way that exposes progress events.
+     *
+     * Progress events are expensive (change detection runs on each event) and so
+     * they should only be requested if the consumer intends to monitor them.
+     * @type {?}
+     */
+    HttpRequest.prototype.reportProgress;
+    /**
+     * Whether this request should be sent with outgoing credentials (cookies).
+     * @type {?}
+     */
+    HttpRequest.prototype.withCredentials;
+    /**
+     * The expected response type of the server.
+     *
+     * This is used to parse the response appropriately before returning it to
+     * the requestee.
+     * @type {?}
+     */
+    HttpRequest.prototype.responseType;
+    /**
+     * The outgoing HTTP request method.
+     * @type {?}
+     */
+    HttpRequest.prototype.method;
+    /**
+     * Outgoing URL parameters.
+     * @type {?}
+     */
+    HttpRequest.prototype.params;
+    /**
+     * The outgoing URL with all URL parameters set.
+     * @type {?}
+     */
+    HttpRequest.prototype.urlWithParams;
+    /** @type {?} */
+    HttpRequest.prototype.url;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -956,6 +1189,104 @@ HttpEventType[HttpEventType.DownloadProgress] = 'DownloadProgress';
 HttpEventType[HttpEventType.Response] = 'Response';
 HttpEventType[HttpEventType.User] = 'User';
 /**
+ * Base interface for progress events.
+ *
+ * \@publicApi
+ * @record
+ */
+function HttpProgressEvent() { }
+if (false) {
+    /**
+     * Progress event type is either upload or download.
+     * @type {?}
+     */
+    HttpProgressEvent.prototype.type;
+    /**
+     * Number of bytes uploaded or downloaded.
+     * @type {?}
+     */
+    HttpProgressEvent.prototype.loaded;
+    /**
+     * Total number of bytes to upload or download. Depending on the request or
+     * response, this may not be computable and thus may not be present.
+     * @type {?|undefined}
+     */
+    HttpProgressEvent.prototype.total;
+}
+/**
+ * A download progress event.
+ *
+ * \@publicApi
+ * @record
+ */
+function HttpDownloadProgressEvent() { }
+if (false) {
+    /** @type {?} */
+    HttpDownloadProgressEvent.prototype.type;
+    /**
+     * The partial response body as downloaded so far.
+     *
+     * Only present if the responseType was `text`.
+     * @type {?|undefined}
+     */
+    HttpDownloadProgressEvent.prototype.partialText;
+}
+/**
+ * An upload progress event.
+ *
+ * \@publicApi
+ * @record
+ */
+function HttpUploadProgressEvent() { }
+if (false) {
+    /** @type {?} */
+    HttpUploadProgressEvent.prototype.type;
+}
+/**
+ * An event indicating that the request was sent to the server. Useful
+ * when a request may be retried multiple times, to distinguish between
+ * retries on the final event stream.
+ *
+ * \@publicApi
+ * @record
+ */
+function HttpSentEvent() { }
+if (false) {
+    /** @type {?} */
+    HttpSentEvent.prototype.type;
+}
+/**
+ * A user-defined event.
+ *
+ * Grouping all custom events under this type ensures they will be handled
+ * and forwarded by all implementations of interceptors.
+ *
+ * \@publicApi
+ * @record
+ * @template T
+ */
+function HttpUserEvent() { }
+if (false) {
+    /** @type {?} */
+    HttpUserEvent.prototype.type;
+}
+/**
+ * An error that represents a failed attempt to JSON.parse text coming back
+ * from the server.
+ *
+ * It bundles the Error object with the actual response body that failed to parse.
+ *
+ *
+ * @record
+ */
+function HttpJsonParseError() { }
+if (false) {
+    /** @type {?} */
+    HttpJsonParseError.prototype.error;
+    /** @type {?} */
+    HttpJsonParseError.prototype.text;
+}
+/**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
  * \@publicApi
@@ -981,6 +1312,40 @@ class HttpResponseBase {
         // Cache the ok value to avoid defining a getter.
         this.ok = this.status >= 200 && this.status < 300;
     }
+}
+if (false) {
+    /**
+     * All response headers.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.headers;
+    /**
+     * Response status code.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.status;
+    /**
+     * Textual description of response status code.
+     *
+     * Do not depend on this.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.statusText;
+    /**
+     * URL of the resource retrieved, or null if not available.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.url;
+    /**
+     * Whether the status code falls in the 2xx range.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.ok;
+    /**
+     * Type of the response, narrowed to either the full response or the header.
+     * @type {?}
+     */
+    HttpResponseBase.prototype.type;
 }
 /**
  * A partial HTTP response which only includes the status and header data,
@@ -1017,6 +1382,10 @@ class HttpHeaderResponse extends HttpResponseBase {
         });
     }
 }
+if (false) {
+    /** @type {?} */
+    HttpHeaderResponse.prototype.type;
+}
 /**
  * A full HTTP response, including a typed response body (which may be `null`
  * if one was not returned).
@@ -1050,6 +1419,15 @@ class HttpResponse extends HttpResponseBase {
             url: update.url || this.url || undefined,
         });
     }
+}
+if (false) {
+    /**
+     * The response body, or `null` if one was not returned.
+     * @type {?}
+     */
+    HttpResponse.prototype.body;
+    /** @type {?} */
+    HttpResponse.prototype.type;
 }
 /**
  * A response that represents an error or failure, either from a
@@ -1088,6 +1466,19 @@ class HttpErrorResponse extends HttpResponseBase {
         }
         this.error = init.error || null;
     }
+}
+if (false) {
+    /** @type {?} */
+    HttpErrorResponse.prototype.name;
+    /** @type {?} */
+    HttpErrorResponse.prototype.message;
+    /** @type {?} */
+    HttpErrorResponse.prototype.error;
+    /**
+     * Errors are never okay, even when the status code is in the 2xx success range.
+     * @type {?}
+     */
+    HttpErrorResponse.prototype.ok;
 }
 
 /**
@@ -1455,11 +1846,66 @@ HttpClient.ctorParameters = () => [
 /*@__PURE__*/ ɵsetClassMetadata(HttpClient, [{
         type: Injectable
     }], function () { return [{ type: HttpHandler }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpClient.prototype.handler;
+}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Intercepts and handles an `HttpRequest` or `HttpResponse`.
+ *
+ * Most interceptors transform the outgoing request before passing it to the
+ * next interceptor in the chain, by calling `next.handle(transformedReq)`.
+ * An interceptor may transform the
+ * response event stream as well, by applying additional RxJS operators on the stream
+ * returned by `next.handle()`.
+ *
+ * More rarely, an interceptor may handle the request entirely,
+ * and compose a new event stream instead of invoking `next.handle()`. This is an
+ * acceptable behavior, but keep in mind that further interceptors will be skipped entirely.
+ *
+ * It is also rare but valid for an interceptor to return multiple responses on the
+ * event stream for a single request.
+ *
+ * \@publicApi
+ *
+ * @see [HTTP Guide](guide/http#intercepting-requests-and-responses)
+ *
+ * \@usageNotes
+ *
+ * To use the same instance of `HttpInterceptors` for the entire app, import the `HttpClientModule`
+ * only in your `AppModule`, and add the interceptors to the root application injector .
+ * If you import `HttpClientModule` multiple times across different modules (for example, in lazy
+ * loading modules), each import creates a new copy of the `HttpClientModule`, which overwrites the interceptors
+ * provided in the root module.
+ *
+ * @record
+ */
+function HttpInterceptor() { }
+if (false) {
+    /**
+     * Identifies and handles a given HTTP request.
+     * @param {?} req The outgoing request object to handle.
+     * @param {?} next The next interceptor in the chain, or the backend
+     * if no interceptors remain in the chain.
+     * @return {?} An observable of the event stream.
+     */
+    HttpInterceptor.prototype.intercept = function (req, next) { };
+}
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
@@ -1481,6 +1927,18 @@ class HttpInterceptorHandler {
     handle(req) {
         return this.interceptor.intercept(req, this.next);
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpInterceptorHandler.prototype.next;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpInterceptorHandler.prototype.interceptor;
 }
 /**
  * A multi-provider token that represents the array of registered
@@ -1743,6 +2201,18 @@ JsonpClientBackend.ctorParameters = () => [
                 type: Inject,
                 args: [DOCUMENT]
             }] }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonpClientBackend.prototype.callbackMap;
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonpClientBackend.prototype.document;
+}
 /**
  * Identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
@@ -1784,6 +2254,13 @@ JsonpInterceptor.ctorParameters = () => [
 /*@__PURE__*/ ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
     }], function () { return [{ type: JsonpClientBackend }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonpInterceptor.prototype.jsonp;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -1821,6 +2298,13 @@ function getResponseUrl(xhr) {
  */
 class XhrFactory {
 }
+if (false) {
+    /**
+     * @abstract
+     * @return {?}
+     */
+    XhrFactory.prototype.build = function () { };
+}
 /**
  * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
  *
@@ -1841,6 +2325,21 @@ BrowserXhr.ctorParameters = () => [];
 /*@__PURE__*/ ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
     }], function () { return []; }, null);
+/**
+ * Tracks a response from the server that does not yet have a body.
+ * @record
+ */
+function PartialResponse() { }
+if (false) {
+    /** @type {?} */
+    PartialResponse.prototype.headers;
+    /** @type {?} */
+    PartialResponse.prototype.status;
+    /** @type {?} */
+    PartialResponse.prototype.statusText;
+    /** @type {?} */
+    PartialResponse.prototype.url;
+}
 /**
  * Uses `XMLHttpRequest` to send requests to a backend server.
  * @see `HttpHandler`
@@ -2153,6 +2652,13 @@ HttpXhrBackend.ctorParameters = () => [
 /*@__PURE__*/ ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
     }], function () { return [{ type: XhrFactory }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXhrBackend.prototype.xhrFactory;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -2176,6 +2682,16 @@ const XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
  * @abstract
  */
 class HttpXsrfTokenExtractor {
+}
+if (false) {
+    /**
+     * Get the XSRF token to use with an outgoing request.
+     *
+     * Will be called for every request, so the token may change between requests.
+     * @abstract
+     * @return {?}
+     */
+    HttpXsrfTokenExtractor.prototype.getToken = function () { };
 }
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
@@ -2236,6 +2752,38 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
                 type: Inject,
                 args: [XSRF_COOKIE_NAME]
             }] }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfCookieExtractor.prototype.lastCookieString;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfCookieExtractor.prototype.lastToken;
+    /**
+     * \@internal for testing
+     * @type {?}
+     */
+    HttpXsrfCookieExtractor.prototype.parseCount;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfCookieExtractor.prototype.doc;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfCookieExtractor.prototype.platform;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfCookieExtractor.prototype.cookieName;
+}
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
@@ -2288,6 +2836,18 @@ HttpXsrfInterceptor.ctorParameters = () => [
                 type: Inject,
                 args: [XSRF_HEADER_NAME]
             }] }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfInterceptor.prototype.tokenService;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpXsrfInterceptor.prototype.headerName;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -2349,6 +2909,45 @@ HttpInterceptingHandler.ctorParameters = () => [
 /*@__PURE__*/ ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null);
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpInterceptingHandler.prototype.chain;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpInterceptingHandler.prototype.backend;
+    /**
+     * @type {?}
+     * @private
+     */
+    HttpInterceptingHandler.prototype.injector;
+}
+/**
+ * Constructs an `HttpHandler` that applies interceptors
+ * to a request before passing it to the given `HttpBackend`.
+ *
+ * Use as a factory function within `HttpClientModule`.
+ *
+ *
+ * @param {?} backend
+ * @param {?=} interceptors
+ * @return {?}
+ */
+function interceptingHandler(backend, interceptors = []) {
+    if (!interceptors) {
+        return backend;
+    }
+    return interceptors.reduceRight((/**
+     * @param {?} next
+     * @param {?} interceptor
+     * @return {?}
+     */
+    (next, interceptor) => new HttpInterceptorHandler(next, interceptor)), backend);
+}
 /**
  * Factory function that determines where to store JSONP callbacks.
  *
