@@ -1,10 +1,10 @@
 /**
- * @license Angular v8.2.1+4.sha-6ec91dd.with-local-changes
+ * @license Angular v8.2.1+6.sha-eccb60c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵstyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵstyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -35,6 +35,91 @@ import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocal
  */
 class PlatformLocation {
 }
+if (false) {
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.getState = function () { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    PlatformLocation.prototype.onPopState = function (fn) { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    PlatformLocation.prototype.onHashChange = function (fn) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.href = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.protocol = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.hostname = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.port = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.pathname = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.search = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.hash = function () { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    PlatformLocation.prototype.replaceState = function (state, title, url) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    PlatformLocation.prototype.pushState = function (state, title, url) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.forward = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    PlatformLocation.prototype.back = function () { };
+}
 /**
  * \@description
  * Indicates when a location is initialized.
@@ -43,6 +128,25 @@ class PlatformLocation {
  * @type {?}
  */
 const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
+/**
+ * \@description
+ * A serializable version of the event from `onPopState` or `onHashChange`
+ *
+ * \@publicApi
+ * @record
+ */
+function LocationChangeEvent() { }
+if (false) {
+    /** @type {?} */
+    LocationChangeEvent.prototype.type;
+    /** @type {?} */
+    LocationChangeEvent.prototype.state;
+}
+/**
+ * \@publicApi
+ * @record
+ */
+function LocationChangeListener() { }
 
 /**
  * @fileoverview added by tsickle
@@ -67,6 +171,59 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * @abstract
  */
 class LocationStrategy {
+}
+if (false) {
+    /**
+     * @abstract
+     * @param {?=} includeHash
+     * @return {?}
+     */
+    LocationStrategy.prototype.path = function (includeHash) { };
+    /**
+     * @abstract
+     * @param {?} internal
+     * @return {?}
+     */
+    LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
+    /**
+     * @abstract
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.forward = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.back = function () { };
+    /**
+     * @abstract
+     * @param {?} fn
+     * @return {?}
+     */
+    LocationStrategy.prototype.onPopState = function (fn) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    LocationStrategy.prototype.getBaseHref = function () { };
 }
 /**
  * A predefined [DI token](guide/glossary#di-token) for the base href
@@ -98,6 +255,21 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * \@publicApi
+ * @record
+ */
+function PopStateEvent() { }
+if (false) {
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.pop;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.state;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.type;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.url;
+}
 /**
  * \@description
  *
@@ -362,6 +534,33 @@ Location.ctorParameters = () => [
     { type: LocationStrategy },
     { type: PlatformLocation }
 ];
+if (false) {
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._subject;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._baseHref;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._platformStrategy;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._platformLocation;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._urlChangeListeners;
+}
 /**
  * @param {?} baseHref
  * @param {?} url
@@ -494,6 +693,18 @@ HashLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation },
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    HashLocationStrategy.prototype._baseHref;
+    /**
+     * @type {?}
+     * @private
+     */
+    HashLocationStrategy.prototype._platformLocation;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -614,6 +825,18 @@ PathLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation },
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PathLocationStrategy.prototype._baseHref;
+    /**
+     * @type {?}
+     * @private
+     */
+    PathLocationStrategy.prototype._platformLocation;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -2466,6 +2689,30 @@ function formatNumber(value, locale, digitsInfo) {
     return formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
 }
 /**
+ * @record
+ */
+function ParsedNumberFormat() { }
+if (false) {
+    /** @type {?} */
+    ParsedNumberFormat.prototype.minInt;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.minFrac;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.maxFrac;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.posPre;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.posSuf;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.negPre;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.negSuf;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.gSize;
+    /** @type {?} */
+    ParsedNumberFormat.prototype.lgSize;
+}
+/**
  * @param {?} format
  * @param {?=} minusSign
  * @return {?}
@@ -2531,6 +2778,18 @@ function parseNumberFormat(format, minusSign = '-') {
         p.negSuf = p.posSuf;
     }
     return p;
+}
+/**
+ * @record
+ */
+function ParsedNumber() { }
+if (false) {
+    /** @type {?} */
+    ParsedNumber.prototype.digits;
+    /** @type {?} */
+    ParsedNumber.prototype.exponent;
+    /** @type {?} */
+    ParsedNumber.prototype.integerLen;
 }
 // Transforms a parsed number into a percentage by multiplying it by 100
 /**
@@ -2743,6 +3002,15 @@ const DEPRECATED_PLURAL_FN = new InjectionToken('UseV4Plurals');
  */
 class NgLocalization {
 }
+if (false) {
+    /**
+     * @abstract
+     * @param {?} value
+     * @param {?=} locale
+     * @return {?}
+     */
+    NgLocalization.prototype.getPluralCategory = function (value, locale) { };
+}
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
@@ -2816,6 +3084,19 @@ NgLocaleLocalization.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DEPRECATED_PLURAL_FN,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    NgLocaleLocalization.prototype.locale;
+    /**
+     * @deprecated from v5
+     * @type {?}
+     * @protected
+     */
+    NgLocaleLocalization.prototype.deprecatedPluralFn;
+}
 /**
  * Returns the plural case based on the locale
  *
@@ -3226,6 +3507,16 @@ function registerLocaleData(data, localeId, extraData) {
         ɵLOCALE_DATA[localeId][ɵLocaleDataIndex.ExtraData] = extraData;
     }
 }
+/** @enum {number} */
+const ExtraLocaleDataIndex = {
+    ExtraDayPeriodFormats: 0,
+    ExtraDayPeriodStandalone: 1,
+    ExtraDayPeriodsRules: 2,
+};
+/** @enum {number} */
+const CurrencyIndex = {
+    Symbol: 0, SymbolNarrow: 1, NbOfDigits: 2,
+};
 
 /**
  * @fileoverview added by tsickle
@@ -3455,6 +3746,53 @@ class StylingDiffer {
         return valueHasChanged;
     }
 }
+if (false) {
+    /** @type {?} */
+    StylingDiffer.prototype.value;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValue;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValueType;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValueIdentityChange;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._name;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._options;
+}
+/** @enum {number} */
+const StylingDifferOptions = {
+    None: 0,
+    TrimProperties: 1,
+    AllowSubKeys: 2,
+    AllowStringValue: 4,
+    AllowUnits: 8,
+    ForceAsMap: 16,
+};
+/** @enum {number} */
+const StylingDifferValueTypes = {
+    Null: 0,
+    String: 1,
+    Map: 2,
+    Array: 4,
+    Set: 8,
+    Collection: 14,
+};
 /**
  * builds and returns a map based on the values input value
  *
@@ -3615,6 +3953,30 @@ function arrayEqualsArray(a, b) {
  * @abstract
  */
 class NgClassImpl {
+}
+if (false) {
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgClassImpl.prototype.setClass = function (value) { };
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgClassImpl.prototype.setNgClass = function (value) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgClassImpl.prototype.applyChanges = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgClassImpl.prototype.getValue = function () { };
 }
 class NgClassR2Impl {
     /**
@@ -3820,6 +4182,48 @@ NgClassR2Impl.ctorParameters = () => [
     { type: ElementRef },
     { type: Renderer2 }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._iterableDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._keyValueDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._initialClasses;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._rawClass;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._iterableDiffers;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._keyValueDiffers;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._ngEl;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._renderer;
+}
 class NgClassR3Impl {
     constructor() {
         this._value = null;
@@ -3877,6 +4281,23 @@ class NgClassR3Impl {
 NgClassR3Impl.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._value;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._ngClassDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._classStringDiffer;
+}
 // the implementation for both NgStyleR2Impl and NgStyleR3Impl are
 // not ivy_switch'd away, instead they are only hooked up into the
 // DI via NgStyle's directive's provider property.
@@ -3972,6 +4393,15 @@ class NgClassBase {
     getValue() { return this._delegate.getValue(); }
 }
 /** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+if (false) {
+    /** @nocollapse @type {?} */
+    NgClassBase.ngDirectiveDef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    NgClassBase.prototype._delegate;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -4153,6 +4583,31 @@ NgComponentOutlet.propDecorators = {
     ngComponentOutletContent: [{ type: Input }],
     ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
+if (false) {
+    /** @type {?} */
+    NgComponentOutlet.prototype.ngComponentOutlet;
+    /** @type {?} */
+    NgComponentOutlet.prototype.ngComponentOutletInjector;
+    /** @type {?} */
+    NgComponentOutlet.prototype.ngComponentOutletContent;
+    /** @type {?} */
+    NgComponentOutlet.prototype.ngComponentOutletNgModuleFactory;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgComponentOutlet.prototype._componentRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgComponentOutlet.prototype._moduleRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgComponentOutlet.prototype._viewContainerRef;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -4191,6 +4646,16 @@ class NgForOfContext {
      * @return {?}
      */
     get odd() { return !this.even; }
+}
+if (false) {
+    /** @type {?} */
+    NgForOfContext.prototype.$implicit;
+    /** @type {?} */
+    NgForOfContext.prototype.ngForOf;
+    /** @type {?} */
+    NgForOfContext.prototype.index;
+    /** @type {?} */
+    NgForOfContext.prototype.count;
 }
 /**
  * A [structural directive](guide/structural-directives) that renders
@@ -4477,6 +4942,43 @@ NgForOf.propDecorators = {
     ngForTrackBy: [{ type: Input }],
     ngForTemplate: [{ type: Input }]
 };
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._ngForOf;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._ngForOfDirty;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._trackByFn;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._viewContainer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._template;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgForOf.prototype._differs;
+}
 /**
  * @template T
  */
@@ -4489,6 +4991,12 @@ class RecordViewTuple {
         this.record = record;
         this.view = view;
     }
+}
+if (false) {
+    /** @type {?} */
+    RecordViewTuple.prototype.record;
+    /** @type {?} */
+    RecordViewTuple.prototype.view;
 }
 /**
  * @param {?} type
@@ -4726,6 +5234,53 @@ NgIf.propDecorators = {
     ngIfThen: [{ type: Input }],
     ngIfElse: [{ type: Input }]
 };
+if (false) {
+    /**
+     * \@internal
+     * @type {?}
+     */
+    NgIf.ngIfUseIfTypeGuard;
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this static field is a signal to the Ivy template type check compiler that
+     * when the `NgIf` structural directive renders its template, the type of the expression bound
+     * to `ngIf` should be narrowed in some way. For `NgIf`, the binding expression itself is used to
+     * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgIf`.
+     * @type {?}
+     */
+    NgIf.ngTemplateGuard_ngIf;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._context;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._thenTemplateRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._elseTemplateRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._thenViewRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._elseViewRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgIf.prototype._viewContainer;
+}
 /**
  * \@publicApi
  */
@@ -4734,6 +5289,12 @@ class NgIfContext {
         this.$implicit = null;
         this.ngIf = null;
     }
+}
+if (false) {
+    /** @type {?} */
+    NgIfContext.prototype.$implicit;
+    /** @type {?} */
+    NgIfContext.prototype.ngIf;
 }
 /**
  * @param {?} property
@@ -4788,6 +5349,23 @@ class SwitchView {
             this.destroy();
         }
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    SwitchView.prototype._created;
+    /**
+     * @type {?}
+     * @private
+     */
+    SwitchView.prototype._viewContainerRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    SwitchView.prototype._templateRef;
 }
 /**
  * \@ngModule CommonModule
@@ -4929,6 +5507,38 @@ NgSwitch.decorators = [
 NgSwitch.propDecorators = {
     ngSwitch: [{ type: Input }]
 };
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._defaultViews;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._defaultUsed;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._caseCount;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._lastCaseCheckIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._lastCasesMatched;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitch.prototype._ngSwitch;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -4991,6 +5601,23 @@ NgSwitchCase.ctorParameters = () => [
 NgSwitchCase.propDecorators = {
     ngSwitchCase: [{ type: Input }]
 };
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitchCase.prototype._view;
+    /**
+     * Stores the HTML template to be selected on match.
+     * @type {?}
+     */
+    NgSwitchCase.prototype.ngSwitchCase;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgSwitchCase.prototype.ngSwitch;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -5124,6 +5751,28 @@ NgPlural.ctorParameters = () => [
 NgPlural.propDecorators = {
     ngPlural: [{ type: Input }]
 };
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgPlural.prototype._switchValue;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgPlural.prototype._activeView;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgPlural.prototype._caseViews;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgPlural.prototype._localization;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -5168,6 +5817,10 @@ NgPluralCase.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: NgPlural, decorators: [{ type: Host }] }
 ];
+if (false) {
+    /** @type {?} */
+    NgPluralCase.prototype.value;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -5184,6 +5837,24 @@ NgPluralCase.ctorParameters = () => [
  * @abstract
  */
 class NgStyleImpl {
+}
+if (false) {
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgStyleImpl.prototype.getValue = function () { };
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgStyleImpl.prototype.setNgStyle = function (value) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgStyleImpl.prototype.applyChanges = function () { };
 }
 class NgStyleR2Impl {
     /**
@@ -5276,6 +5947,33 @@ NgStyleR2Impl.ctorParameters = () => [
     { type: KeyValueDiffers },
     { type: Renderer2 }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._ngStyle;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._ngEl;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._differs;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._renderer;
+}
 class NgStyleR3Impl {
     constructor() {
         this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
@@ -5302,6 +6000,18 @@ class NgStyleR3Impl {
 NgStyleR3Impl.decorators = [
     { type: Injectable }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR3Impl.prototype._differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR3Impl.prototype._value;
+}
 // the implementation for both NgClassR2Impl and NgClassR3Impl are
 // not ivy_switch'd away, instead they are only hooked up into the
 // DI via NgStyle's directive's provider property.
@@ -5396,6 +6106,15 @@ class NgStyleBase {
     getValue() { return this._delegate.getValue(); }
 }
 /** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+if (false) {
+    /** @nocollapse @type {?} */
+    NgStyleBase.ngDirectiveDef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    NgStyleBase.prototype._delegate;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -5588,6 +6307,31 @@ NgTemplateOutlet.propDecorators = {
     ngTemplateOutletContext: [{ type: Input }],
     ngTemplateOutlet: [{ type: Input }]
 };
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgTemplateOutlet.prototype._viewRef;
+    /**
+     * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
+     * object, the object's keys will be available for binding by the local template `let`
+     * declarations.
+     * Using the key `$implicit` in the context object will set its value as default.
+     * @type {?}
+     */
+    NgTemplateOutlet.prototype.ngTemplateOutletContext;
+    /**
+     * A string defining the template reference and optionally the context object for the template.
+     * @type {?}
+     */
+    NgTemplateOutlet.prototype.ngTemplateOutlet;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgTemplateOutlet.prototype._viewContainerRef;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6070,6 +6814,18 @@ DeprecatedDatePipe.decorators = [
 DeprecatedDatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * \@internal
+     * @type {?}
+     */
+    DeprecatedDatePipe._ALIASES;
+    /**
+     * @type {?}
+     * @private
+     */
+    DeprecatedDatePipe.prototype._locale;
+}
 /**
  * @param {?} value
  * @return {?}
@@ -6185,6 +6941,13 @@ DeprecatedDecimalPipe.decorators = [
 DeprecatedDecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    DeprecatedDecimalPipe.prototype._locale;
+}
 /**
  * \@ngModule CommonModule
  *
@@ -6228,6 +6991,13 @@ DeprecatedPercentPipe.decorators = [
 DeprecatedPercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    DeprecatedPercentPipe.prototype._locale;
+}
 /**
  * \@ngModule CommonModule
  * \@description
@@ -6279,6 +7049,13 @@ DeprecatedCurrencyPipe.decorators = [
 DeprecatedCurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    DeprecatedCurrencyPipe.prototype._locale;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6296,6 +7073,28 @@ const COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPi
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @record
+ */
+function SubscriptionStrategy() { }
+if (false) {
+    /**
+     * @param {?} async
+     * @param {?} updateLatestValue
+     * @return {?}
+     */
+    SubscriptionStrategy.prototype.createSubscription = function (async, updateLatestValue) { };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    SubscriptionStrategy.prototype.dispose = function (subscription) { };
+    /**
+     * @param {?} subscription
+     * @return {?}
+     */
+    SubscriptionStrategy.prototype.onDestroy = function (subscription) { };
+}
 class ObservableStrategy {
     /**
      * @param {?} async
@@ -6477,6 +7276,38 @@ AsyncPipe.decorators = [
 AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._latestValue;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._latestReturnedValue;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._subscription;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._obj;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._strategy;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsyncPipe.prototype._ref;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6774,6 +7605,13 @@ DatePipe.decorators = [
 DatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    DatePipe.prototype.locale;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6829,6 +7667,13 @@ I18nPluralPipe.decorators = [
 I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    I18nPluralPipe.prototype._localization;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -6923,6 +7768,21 @@ function makeKeyValuePair(key, value) {
     return { key: key, value: value };
 }
 /**
+ * A key value pair.
+ * Usually used to represent the key value pairs from a Map or Object.
+ *
+ * \@publicApi
+ * @record
+ * @template K, V
+ */
+function KeyValue() { }
+if (false) {
+    /** @type {?} */
+    KeyValue.prototype.key;
+    /** @type {?} */
+    KeyValue.prototype.value;
+}
+/**
  * \@ngModule CommonModule
  * \@description
  *
@@ -6988,6 +7848,23 @@ KeyValuePipe.decorators = [
 KeyValuePipe.ctorParameters = () => [
     { type: KeyValueDiffers }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    KeyValuePipe.prototype.differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    KeyValuePipe.prototype.keyValues;
+    /**
+     * @type {?}
+     * @private
+     */
+    KeyValuePipe.prototype.differs;
+}
 /**
  * @template K, V
  * @param {?} keyValueA
@@ -7113,6 +7990,13 @@ DecimalPipe.decorators = [
 DecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    DecimalPipe.prototype._locale;
+}
 /**
  * \@ngModule CommonModule
  * \@description
@@ -7179,6 +8063,13 @@ PercentPipe.decorators = [
 PercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PercentPipe.prototype._locale;
+}
 /**
  * \@ngModule CommonModule
  * \@description
@@ -7277,6 +8168,13 @@ CurrencyPipe.decorators = [
 CurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrencyPipe.prototype._locale;
+}
 /**
  * @param {?} value
  * @return {?}
@@ -7516,7 +8414,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('8.2.1+4.sha-6ec91dd.with-local-changes');
+const VERSION = new Version('8.2.1+6.sha-eccb60c.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -7541,6 +8439,51 @@ class ViewportScroller {
      */
     () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
 });
+if (false) {
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    ViewportScroller.ngInjectableDef;
+    /**
+     * Configures the top offset used when scrolling to an anchor.
+     * @abstract
+     * @param {?} offset A position in screen coordinates (a tuple with x and y values)
+     * or a function that returns the top offset position.
+     *
+     * @return {?}
+     */
+    ViewportScroller.prototype.setOffset = function (offset) { };
+    /**
+     * Retrieves the current scroll position.
+     * @abstract
+     * @return {?} A position in screen coordinates (a tuple with x and y values).
+     */
+    ViewportScroller.prototype.getScrollPosition = function () { };
+    /**
+     * Scrolls to a specified position.
+     * @abstract
+     * @param {?} position A position in screen coordinates (a tuple with x and y values).
+     * @return {?}
+     */
+    ViewportScroller.prototype.scrollToPosition = function (position) { };
+    /**
+     * Scrolls to an anchor element.
+     * @abstract
+     * @param {?} anchor The ID of the anchor element.
+     * @return {?}
+     */
+    ViewportScroller.prototype.scrollToAnchor = function (anchor) { };
+    /**
+     * Disables automatic scroll restoration provided by the browser.
+     * See also [window.history.scrollRestoration
+     * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration).
+     * @abstract
+     * @param {?} scrollRestoration
+     * @return {?}
+     */
+    ViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
+}
 /**
  * Manages the scroll position for a browser window.
  */
@@ -7681,6 +8624,28 @@ class BrowserViewportScroller {
             return false;
         }
     }
+}
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserViewportScroller.prototype.offset;
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserViewportScroller.prototype.document;
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserViewportScroller.prototype.window;
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserViewportScroller.prototype.errorHandler;
 }
 /**
  * Provides an empty implementation of the viewport scroller. This will

@@ -1,11 +1,11 @@
 /**
- * @license Angular v8.2.1+4.sha-6ec91dd.with-local-changes
+ * @license Angular v8.2.1+6.sha-eccb60c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __extends, __metadata, __assign, __param } from 'tslib';
-import { Injectable, EventEmitter, InjectionToken, Inject, Optional } from '@angular/core';
+import { EventEmitter, Injectable, InjectionToken, Inject, Optional } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
 
