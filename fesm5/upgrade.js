@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.1+11.sha-0ddf0c4.with-local-changes
+ * @license Angular v9.0.0-next.1+18.sha-9a37e82.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -16,6 +16,9 @@ import { UpgradeModule } from '@angular/upgrade/static';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+function stripPrefix(val, prefix) {
+    return val.startsWith(prefix) ? val.substring(prefix.length) : val;
+}
 function deepEqual(a, b) {
     if (a === b) {
         return true;
