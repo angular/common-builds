@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.2.with-local-changes
+ * @license Angular v9.0.0-next.2+1.sha-c68371e.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2666,7 +2666,8 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  * such as "$" or "Canadian Dollar". Used in output string, but does not affect the operation
  * of the function.
  * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
- * currency code to use in the result string, such as `USD` for the US dollar and `EUR` for the euro.
+ * currency code, such as `USD` for the US dollar and `EUR` for the euro.
+ * Used to determine the number of digits in the decimal part.
  * @param {?=} digitsInfo
  * @return {?} The formatted currency value.
  *
@@ -8982,7 +8983,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.2.with-local-changes');
+const VERSION = new Version('9.0.0-next.2+1.sha-c68371e.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
