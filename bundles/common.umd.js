@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.1+12.sha-7685428.with-local-changes
+ * @license Angular v8.2.2+1.sha-a1fe52b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2171,7 +2171,8 @@
      * such as "$" or "Canadian Dollar". Used in output string, but does not affect the operation
      * of the function.
      * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
-     * currency code to use in the result string, such as `USD` for the US dollar and `EUR` for the euro.
+     * currency code, such as `USD` for the US dollar and `EUR` for the euro.
+     * Used to determine the number of digits in the decimal part.
      * @param digitInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
@@ -6572,7 +6573,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.2.1+12.sha-7685428.with-local-changes');
+    var VERSION = new core.Version('8.2.2+1.sha-a1fe52b.with-local-changes');
 
     /**
      * @license
