@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.2+9.sha-a5f39ae.with-local-changes
+ * @license Angular v9.0.0-next.2+12.sha-e4d5102.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -305,12 +305,12 @@
      *
      * A service that applications can use to interact with a browser's URL.
      *
-     * Depending on the `LocationStrategy` used, `Location` will either persist
+     * Depending on the `LocationStrategy` used, `Location` persists
      * to the URL's path or the URL's hash segment.
      *
      * @usageNotes
      *
-     * It's better to use the {@link Router#navigate} service to trigger route changes. Use
+     * It's better to use the `Router#navigate` service to trigger route changes. Use
      * `Location` only if you need to interact with or create normalized URLs outside of
      * routing.
      *
@@ -349,9 +349,9 @@
             });
         }
         /**
-         * Returns the normalized URL path.
+         * Normalizes the URL path for this location.
          *
-         * @param includeHash Whether path has an anchor fragment.
+         * @param includeHash True to include an anchor fragment in the path.
          *
          * @returns The normalized URL path.
          */
@@ -362,16 +362,17 @@
             return this.normalize(this._platformStrategy.path(includeHash));
         };
         /**
-         * Returns the current value of the history.state object.
+         * Reports the current state of the location history.
+         * @returns The current value of the `history.state` object.
          */
         Location.prototype.getState = function () { return this._platformLocation.getState(); };
         /**
          * Normalizes the given path and compares to the current normalized path.
          *
-         * @param path The given URL path
-         * @param query Query parameters
+         * @param path The given URL path.
+         * @param query Query parameters.
          *
-         * @returns `true` if the given URL path is equal to the current normalized path, `false`
+         * @returns True if the given URL path is equal to the current normalized path, false
          * otherwise.
          */
         Location.prototype.isCurrentPathEqualTo = function (path, query) {
@@ -379,22 +380,20 @@
             return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
         };
         /**
-         * Given a string representing a URL, returns the URL path after stripping the
-         * trailing slashes.
+         * Normalizes a URL path by stripping any trailing slashes.
          *
          * @param url String representing a URL.
          *
-         * @returns Normalized URL string.
+         * @returns The normalized URL string.
          */
         Location.prototype.normalize = function (url) {
             return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
         };
         /**
-         * Given a string representing a URL, returns the platform-specific external URL path.
-         * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
-         * before normalizing. This method also adds a hash if `HashLocationStrategy` is
-         * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-         *
+         * Normalizes an external URL path.
+         * If the given URL doesn't begin with a leading slash (`'/'`), adds one
+         * before normalizing. Adds a hash if `HashLocationStrategy` is
+         * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
          *
          * @param url String representing a URL.
          *
@@ -408,12 +407,12 @@
         };
         // TODO: rename this method to pushState
         /**
-         * Changes the browsers URL to a normalized version of the given URL, and pushes a
+         * Changes the browser's URL to a normalized version of a given URL, and pushes a
          * new item onto the platform's history.
          *
-         * @param path  URL path to normalizze
-         * @param query Query parameters
-         * @param state Location history state
+         * @param path  URL path to normalize.
+         * @param query Query parameters.
+         * @param state Location history state.
          *
          */
         Location.prototype.go = function (path, query, state) {
@@ -426,9 +425,9 @@
          * Changes the browser's URL to a normalized version of the given URL, and replaces
          * the top item on the platform's history stack.
          *
-         * @param path  URL path to normalizze
-         * @param query Query parameters
-         * @param state Location history state
+         * @param path  URL path to normalize.
+         * @param query Query parameters.
+         * @param state Location history state.
          */
         Location.prototype.replaceState = function (path, query, state) {
             if (query === void 0) { query = ''; }
@@ -445,8 +444,10 @@
          */
         Location.prototype.back = function () { this._platformStrategy.back(); };
         /**
-         * Register URL change listeners. This API can be used to catch updates performed by the Angular
-         * framework. These are not detectible through "popstate" or "hashchange" events.
+         * Registers a URL change listener. Use to catch updates performed by the Angular
+         * framework that are not detectible through "popstate" or "hashchange" events.
+         *
+         * @param fn The change handler function, which take a URL and a location history state.
          */
         Location.prototype.onUrlChange = function (fn) {
             var _this = this;
@@ -459,7 +460,7 @@
             this._urlChangeListeners.forEach(function (fn) { return fn(url, state); });
         };
         /**
-         * Subscribe to the platform's `popState` events.
+         * Subscribes to the platform's `popState` events.
          *
          * @param value Event that is triggered when the state history changes.
          * @param exception The exception to throw.
@@ -470,24 +471,23 @@
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
         /**
-         * Given a string of url parameters, prepend with `?` if needed, otherwise return the
-         * parameters as is.
+         * Normalizes URL parameters by prepending with `?` if needed.
          *
-         *  @param  params String of URL parameters
+         * @param  params String of URL parameters.
          *
-         *  @returns URL parameters prepended with `?` or the parameters as is.
+         * @returns The normalized URL parameters string.
          */
         Location.normalizeQueryParams = function (params) {
             return params && params[0] !== '?' ? '?' + params : params;
         };
         /**
-         * Given 2 parts of a URL, join them with a slash if needed.
+         * Joins two parts of a URL with a slash if needed.
          *
          * @param start  URL string
          * @param end    URL string
          *
          *
-         * @returns Given URL strings joined with a slash, if needed.
+         * @returns The joined URL string.
          */
         Location.joinWithSlash = function (start, end) {
             if (start.length == 0) {
@@ -512,14 +512,13 @@
             return start + '/' + end;
         };
         /**
-         * If URL has a trailing slash, remove it, otherwise return the URL as is. The
-         * method looks for the first occurrence of either `#`, `?`, or the end of the
+         * Removes a trailing slash from a URL string if needed.
+         * Looks for the first occurrence of either `#`, `?`, or the end of the
          * line as `/` characters and removes the trailing slash if one exists.
          *
-         * @param url URL string
+         * @param url URL string.
          *
-         * @returns Returns a URL string after removing the trailing slash if one exists, otherwise
-         * returns the string as is.
+         * @returns The URL string, modified if needed.
          */
         Location.stripTrailingSlash = function (url) {
             var match = url.match(/#|\?|$/);
@@ -6652,7 +6651,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-next.2+9.sha-a5f39ae.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.2+12.sha-e4d5102.with-local-changes');
 
     /**
      * @license
