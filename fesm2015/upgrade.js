@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.2+15.sha-5064dc7.with-local-changes
+ * @license Angular v9.0.0-next.2+14.sha-bef27f2.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -221,7 +221,6 @@ class $locationShim {
                 this.$$parse(oldUrl);
                 this.state(oldState);
                 this.setBrowserUrlWithFallback(oldUrl, false, oldState);
-                this.$$notifyChangeListeners(this.url(), this.$$state, oldUrl, oldState);
             }
             else {
                 this.initalizing = false;
@@ -282,9 +281,6 @@ class $locationShim {
                                 this.$$replace = false;
                             }
                             $rootScope.$broadcast('$locationChangeSuccess', newUrl, oldUrl, this.$$state, oldState);
-                            if (urlOrStateChanged) {
-                                this.$$notifyChangeListeners(this.url(), this.$$state, oldUrl, oldState);
-                            }
                         }
                     }));
                 }
@@ -538,6 +534,7 @@ class $locationShim {
             // state object; this makes possible quick checking if the state changed in the digest
             // loop. Checking deep equality would be too expensive.
             this.$$state = this.browserState();
+            this.$$notifyChangeListeners(url, state, oldUrl, oldState);
         }
         catch (e) {
             // Restore old values if pushState fails
