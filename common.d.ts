@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.2+8.sha-7b3bd21.with-local-changes
+ * @license Angular v8.2.2+5.sha-3d1b82b.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1170,12 +1170,12 @@ export declare class KeyValuePipe implements PipeTransform {
  *
  * A service that applications can use to interact with a browser's URL.
  *
- * Depending on the `LocationStrategy` used, `Location` persists
+ * Depending on the `LocationStrategy` used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
  * @usageNotes
  *
- * It's better to use the `Router#navigate` service to trigger route changes. Use
+ * It's better to use the {@link Router#navigate} service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -1196,41 +1196,42 @@ export declare class KeyValuePipe implements PipeTransform {
 export declare class Location {
     constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
-     * Normalizes the URL path for this location.
+     * Returns the normalized URL path.
      *
-     * @param includeHash True to include an anchor fragment in the path.
+     * @param includeHash Whether path has an anchor fragment.
      *
      * @returns The normalized URL path.
      */
     path(includeHash?: boolean): string;
     /**
-     * Reports the current state of the location history.
-     * @returns The current value of the `history.state` object.
+     * Returns the current value of the history.state object.
      */
     getState(): unknown;
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
-     * @param path The given URL path.
-     * @param query Query parameters.
+     * @param path The given URL path
+     * @param query Query parameters
      *
-     * @returns True if the given URL path is equal to the current normalized path, false
+     * @returns `true` if the given URL path is equal to the current normalized path, `false`
      * otherwise.
      */
     isCurrentPathEqualTo(path: string, query?: string): boolean;
     /**
-     * Normalizes a URL path by stripping any trailing slashes.
+     * Given a string representing a URL, returns the URL path after stripping the
+     * trailing slashes.
      *
      * @param url String representing a URL.
      *
-     * @returns The normalized URL string.
+     * @returns Normalized URL string.
      */
     normalize(url: string): string;
     /**
-     * Normalizes an external URL path.
-     * If the given URL doesn't begin with a leading slash (`'/'`), adds one
-     * before normalizing. Adds a hash if `HashLocationStrategy` is
-     * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     * Given a string representing a URL, returns the platform-specific external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), this method adds one
+     * before normalizing. This method also adds a hash if `HashLocationStrategy` is
+     * used, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     *
      *
      * @param url String representing a URL.
      *
@@ -1238,12 +1239,12 @@ export declare class Location {
      */
     prepareExternalUrl(url: string): string;
     /**
-     * Changes the browser's URL to a normalized version of a given URL, and pushes a
+     * Changes the browsers URL to a normalized version of the given URL, and pushes a
      * new item onto the platform's history.
      *
-     * @param path  URL path to normalize.
-     * @param query Query parameters.
-     * @param state Location history state.
+     * @param path  URL path to normalizze
+     * @param query Query parameters
+     * @param state Location history state
      *
      */
     go(path: string, query?: string, state?: any): void;
@@ -1251,9 +1252,9 @@ export declare class Location {
      * Changes the browser's URL to a normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      *
-     * @param path  URL path to normalize.
-     * @param query Query parameters.
-     * @param state Location history state.
+     * @param path  URL path to normalizze
+     * @param query Query parameters
+     * @param state Location history state
      */
     replaceState(path: string, query?: string, state?: any): void;
     /**
@@ -1265,14 +1266,12 @@ export declare class Location {
      */
     back(): void;
     /**
-     * Registers a URL change listener. Use to catch updates performed by the Angular
-     * framework that are not detectible through "popstate" or "hashchange" events.
-     *
-     * @param fn The change handler function, which take a URL and a location history state.
+     * Register URL change listeners. This API can be used to catch updates performed by the Angular
+     * framework. These are not detectible through "popstate" or "hashchange" events.
      */
     onUrlChange(fn: (url: string, state: unknown) => void): void;
     /**
-     * Subscribes to the platform's `popState` events.
+     * Subscribe to the platform's `popState` events.
      *
      * @param value Event that is triggered when the state history changes.
      * @param exception The exception to throw.
@@ -1281,31 +1280,33 @@ export declare class Location {
      */
     subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     /**
-     * Normalizes URL parameters by prepending with `?` if needed.
+     * Given a string of url parameters, prepend with `?` if needed, otherwise return the
+     * parameters as is.
      *
-     * @param  params String of URL parameters.
+     *  @param  params String of URL parameters
      *
-     * @returns The normalized URL parameters string.
+     *  @returns URL parameters prepended with `?` or the parameters as is.
      */
     static normalizeQueryParams(params: string): string;
     /**
-     * Joins two parts of a URL with a slash if needed.
+     * Given 2 parts of a URL, join them with a slash if needed.
      *
      * @param start  URL string
      * @param end    URL string
      *
      *
-     * @returns The joined URL string.
+     * @returns Given URL strings joined with a slash, if needed.
      */
     static joinWithSlash(start: string, end: string): string;
     /**
-     * Removes a trailing slash from a URL string if needed.
-     * Looks for the first occurrence of either `#`, `?`, or the end of the
+     * If URL has a trailing slash, remove it, otherwise return the URL as is. The
+     * method looks for the first occurrence of either `#`, `?`, or the end of the
      * line as `/` characters and removes the trailing slash if one exists.
      *
-     * @param url URL string.
+     * @param url URL string
      *
-     * @returns The URL string, modified if needed.
+     * @returns Returns a URL string after removing the trailing slash if one exists, otherwise
+     * returns the string as is.
      */
     static stripTrailingSlash(url: string): string;
 }
