@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.2+58.sha-994264c.with-local-changes
+ * @license Angular v9.0.0-next.2+59.sha-c2868de.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6442,17 +6442,17 @@ class NgTemplateOutlet {
         /** @type {?} */
         const recreateView = this._shouldRecreateView(changes);
         if (recreateView) {
+            /** @type {?} */
+            const viewContainerRef = this._viewContainerRef;
             if (this._viewRef) {
-                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
+                viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
             }
-            if (this.ngTemplateOutlet) {
-                this._viewRef = this._viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext);
-            }
+            this._viewRef = this.ngTemplateOutlet ?
+                viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
+                null;
         }
-        else {
-            if (this._viewRef && this.ngTemplateOutletContext) {
-                this._updateExistingContext(this.ngTemplateOutletContext);
-            }
+        else if (this._viewRef && this.ngTemplateOutletContext) {
+            this._updateExistingContext(this.ngTemplateOutletContext);
         }
     }
     /**
@@ -6491,9 +6491,7 @@ class NgTemplateOutlet {
             }
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
     }
     /**
      * @private
@@ -8980,7 +8978,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.2+58.sha-994264c.with-local-changes');
+const VERSION = new Version('9.0.0-next.2+59.sha-c2868de.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
