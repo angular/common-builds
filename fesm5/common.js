@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.3+53.sha-14feb56.with-local-changes
+ * @license Angular v9.0.0-next.3+55.sha-7c7fcd7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3288,7 +3288,7 @@ var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
  */
 // used when the VE is present
 var ngClassDirectiveDef__PRE_R3__ = undefined;
-var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
+var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
         ɵɵallocHostVars(1);
         ɵɵstyling();
@@ -3304,10 +3304,12 @@ var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elInd
 var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: ɵ0,
     selectors: null,
-    factory: ɵ1,
-    hostBindings: ɵ2
+    hostBindings: ɵ1
 });
 var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
+var ngClassFactoryDef__PRE_R3__ = undefined;
+var ngClassFactoryDef__POST_R3__ = function () { };
+var ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
 /**
  * Serves as the base non-VE container for NgClass.
  *
@@ -3328,6 +3330,7 @@ var NgClassBase = /** @class */ (function () {
     }
     NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
     NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+    NgClassBase.ngFactoryDef = ngClassFactoryDef;
     return NgClassBase;
 }());
 /**
@@ -4531,7 +4534,8 @@ var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
  */
 // used when the VE is present
 var ngStyleDirectiveDef__PRE_R3__ = undefined;
-var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
+var ngStyleFactoryDef__PRE_R3__ = undefined;
+var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
         ɵɵstyling();
     }
@@ -4546,10 +4550,11 @@ var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx,
 var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: ɵ0$1,
     selectors: null,
-    factory: ɵ1$1,
-    hostBindings: ɵ2$1
+    hostBindings: ɵ1$1
 });
+var ngStyleFactoryDef__POST_R3__ = function () { };
 var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
+var ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
 /**
  * Serves as the base non-VE container for NgStyle.
  *
@@ -4570,6 +4575,7 @@ var NgStyleBase = /** @class */ (function () {
     }
     NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
     NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+    NgStyleBase.ngFactory = ngStyleFactoryDef;
     return NgStyleBase;
 }());
 /**
@@ -6443,7 +6449,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.3+53.sha-14feb56.with-local-changes');
+var VERSION = new Version('9.0.0-next.3+55.sha-7c7fcd7.with-local-changes');
 
 /**
  * @license
@@ -6641,5 +6647,5 @@ var NullViewportScroller = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_c, NgClassImplProvider as ɵangular_packages_common_common_h, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_g, NgClassR3Impl as ɵangular_packages_common_common_f, NgStyleImplProvider as ɵangular_packages_common_common_k, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_j, NgStyleR3Impl as ɵangular_packages_common_common_i, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_d, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_c, NgClassImplProvider as ɵangular_packages_common_common_h, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_g, NgClassR3Impl as ɵangular_packages_common_common_f, NgStyleImplProvider as ɵangular_packages_common_common_k, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_j, NgStyleR3Impl as ɵangular_packages_common_common_i, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_d, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
 //# sourceMappingURL=common.js.map

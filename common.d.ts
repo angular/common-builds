@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.3+53.sha-14feb56.with-local-changes
+ * @license Angular v9.0.0-next.3+55.sha-7c7fcd7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1440,6 +1440,7 @@ export declare class NgClass extends NgClassBase implements DoCheck {
 export declare class NgClassBase {
     protected _delegate: ɵNgClassImpl;
     static ngDirectiveDef: any;
+    static ngFactoryDef: any;
     constructor(_delegate: ɵNgClassImpl);
     getValue(): {
         [key: string]: any;
@@ -2009,6 +2010,7 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
 export declare class NgStyleBase {
     protected _delegate: ɵNgStyleImpl;
     static ngDirectiveDef: any;
+    static ngFactory: any;
     constructor(_delegate: ɵNgStyleImpl);
     getValue(): {
         [key: string]: any;
@@ -2745,6 +2747,8 @@ export declare const ɵangular_packages_common_common_k: {
 
 export declare const ɵngClassDirectiveDef__POST_R3__: never;
 
+export declare const ɵngClassFactoryDef__POST_R3__: () => void;
+
 /**
  * Used as a token for an injected service within the NgClass directive.
  *
@@ -2804,6 +2808,8 @@ export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
 }
 
 export declare const ɵngStyleDirectiveDef__POST_R3__: never;
+
+export declare const ɵngStyleFactoryDef__POST_R3__: () => void;
 
 /**
  * Used as a token for an injected service within the NgStyle directive.

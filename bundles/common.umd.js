@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.3+53.sha-14feb56.with-local-changes
+ * @license Angular v9.0.0-next.3+55.sha-7c7fcd7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3414,7 +3414,7 @@
      */
     // used when the VE is present
     var ngClassDirectiveDef__PRE_R3__ = undefined;
-    var ɵ0 = function () { }, ɵ1 = function () { }, ɵ2 = function (rf, ctx, elIndex) {
+    var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
             core.ɵɵallocHostVars(1);
             core.ɵɵstyling();
@@ -3430,10 +3430,12 @@
     var ngClassDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: ɵ0,
         selectors: null,
-        factory: ɵ1,
-        hostBindings: ɵ2
+        hostBindings: ɵ1
     });
     var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
+    var ngClassFactoryDef__PRE_R3__ = undefined;
+    var ngClassFactoryDef__POST_R3__ = function () { };
+    var ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
     /**
      * Serves as the base non-VE container for NgClass.
      *
@@ -3454,6 +3456,7 @@
         }
         NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
         NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+        NgClassBase.ngFactoryDef = ngClassFactoryDef;
         return NgClassBase;
     }());
     /**
@@ -4657,7 +4660,8 @@
      */
     // used when the VE is present
     var ngStyleDirectiveDef__PRE_R3__ = undefined;
-    var ɵ0$1 = function () { }, ɵ1$1 = function () { }, ɵ2$1 = function (rf, ctx, elIndex) {
+    var ngStyleFactoryDef__PRE_R3__ = undefined;
+    var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
             core.ɵɵstyling();
         }
@@ -4672,10 +4676,11 @@
     var ngStyleDirectiveDef__POST_R3__ = core.ɵɵdefineDirective({
         type: ɵ0$1,
         selectors: null,
-        factory: ɵ1$1,
-        hostBindings: ɵ2$1
+        hostBindings: ɵ1$1
     });
+    var ngStyleFactoryDef__POST_R3__ = function () { };
     var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
+    var ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
     /**
      * Serves as the base non-VE container for NgStyle.
      *
@@ -4696,6 +4701,7 @@
         }
         NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
         NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+        NgStyleBase.ngFactory = ngStyleFactoryDef;
         return NgStyleBase;
     }());
     /**
@@ -6569,7 +6575,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('9.0.0-next.3+53.sha-14feb56.with-local-changes');
+    var VERSION = new core.Version('9.0.0-next.3+55.sha-7c7fcd7.with-local-changes');
 
     /**
      * @license
@@ -6859,7 +6865,9 @@
     exports.ɵNgStyleR2Impl = NgStyleR2Impl;
     exports.ɵNgStyleImpl = NgStyleImpl;
     exports.ɵngStyleDirectiveDef__POST_R3__ = ngStyleDirectiveDef__POST_R3__;
+    exports.ɵngStyleFactoryDef__POST_R3__ = ngStyleFactoryDef__POST_R3__;
     exports.ɵngClassDirectiveDef__POST_R3__ = ngClassDirectiveDef__POST_R3__;
+    exports.ɵngClassFactoryDef__POST_R3__ = ngClassFactoryDef__POST_R3__;
     exports.PlatformLocation = PlatformLocation;
     exports.LOCATION_INITIALIZED = LOCATION_INITIALIZED;
     exports.LocationStrategy = LocationStrategy;
