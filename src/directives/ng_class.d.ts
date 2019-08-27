@@ -11,6 +11,9 @@ import * as i0 from "@angular/core";
 export declare const ngClassDirectiveDef__PRE_R3__: undefined;
 export declare const ngClassDirectiveDef__POST_R3__: never;
 export declare const ngClassDirectiveDef: undefined;
+export declare const ngClassFactoryDef__PRE_R3__: undefined;
+export declare const ngClassFactoryDef__POST_R3__: () => void;
+export declare const ngClassFactoryDef: undefined;
 /**
  * Serves as the base non-VE container for NgClass.
  *
@@ -28,6 +31,7 @@ export declare const ngClassDirectiveDef: undefined;
 export declare class NgClassBase {
     protected _delegate: NgClassImpl;
     static ngDirectiveDef: any;
+    static ngFactoryDef: any;
     constructor(_delegate: NgClassImpl);
     getValue(): {
         [key: string]: any;
@@ -68,5 +72,6 @@ export declare class NgClass extends NgClassBase implements DoCheck {
         [klass: string]: any;
     };
     ngDoCheck(): void;
+    static ngFactoryDef: i0.ɵɵFactoryDef<NgClass>;
     static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
 }

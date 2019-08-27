@@ -176,6 +176,7 @@ export declare class NgIf {
      * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     static ngTemplateGuard_ngIf: 'binding';
+    static ngFactoryDef: i0.ɵɵFactoryDef<NgIf>;
     static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
 }
 /**

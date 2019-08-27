@@ -34,5 +34,6 @@ export declare class I18nSelectPipe implements PipeTransform {
         [key: string]: string;
     }): string;
     static ngInjectableDef: i0.ɵɵInjectableDef<I18nSelectPipe>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<I18nSelectPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<I18nSelectPipe, "i18nSelect">;
 }

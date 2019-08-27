@@ -9,8 +9,11 @@ import { DoCheck } from '@angular/core';
 import { NgStyleImpl } from './ng_style_impl';
 import * as i0 from "@angular/core";
 export declare const ngStyleDirectiveDef__PRE_R3__: undefined;
+export declare const ngStyleFactoryDef__PRE_R3__: undefined;
 export declare const ngStyleDirectiveDef__POST_R3__: never;
+export declare const ngStyleFactoryDef__POST_R3__: () => void;
 export declare const ngStyleDirectiveDef: undefined;
+export declare const ngStyleFactoryDef: undefined;
 /**
  * Serves as the base non-VE container for NgStyle.
  *
@@ -28,6 +31,7 @@ export declare const ngStyleDirectiveDef: undefined;
 export declare class NgStyleBase {
     protected _delegate: NgStyleImpl;
     static ngDirectiveDef: any;
+    static ngFactory: any;
     constructor(_delegate: NgStyleImpl);
     getValue(): {
         [key: string]: any;
@@ -75,5 +79,6 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
         [klass: string]: any;
     } | null;
     ngDoCheck(): void;
+    static ngFactoryDef: i0.ɵɵFactoryDef<NgStyle>;
     static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
 }
