@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1287,7 +1287,7 @@ export declare class Location {
      *
      * @returns The normalized URL parameters string.
      */
-    static normalizeQueryParams(params: string): string;
+    static normalizeQueryParams: (params: string) => string;
     /**
      * Joins two parts of a URL with a slash if needed.
      *
@@ -1297,7 +1297,7 @@ export declare class Location {
      *
      * @returns The joined URL string.
      */
-    static joinWithSlash(start: string, end: string): string;
+    static joinWithSlash: (start: string, end: string) => string;
     /**
      * Removes a trailing slash from a URL string if needed.
      * Looks for the first occurrence of either `#`, `?`, or the end of the
@@ -1307,7 +1307,7 @@ export declare class Location {
      *
      * @returns The URL string, modified if needed.
      */
-    static stripTrailingSlash(url: string): string;
+    static stripTrailingSlash: (url: string) => string;
 }
 
 /**
@@ -2668,38 +2668,7 @@ export declare enum WeekDay {
     Saturday = 6
 }
 
-/**
- * @deprecated from v5
- */
-export declare const ɵangular_packages_common_common_a: InjectionToken<boolean>;
-
-/**
- * Returns the plural case based on the locale
- *
- * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
- * @publicApi
- */
-export declare function ɵangular_packages_common_common_b(locale: string, nLike: number | string): Plural;
-
-/**
- * A collection of Angular directives that are likely to be used in each and every Angular
- * application.
- */
-export declare const ɵangular_packages_common_common_c: Provider[];
-
-/**
- * A collection of Angular pipes that are likely to be used in each and every application.
- */
-export declare const ɵangular_packages_common_common_d: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
-
-/**
- * A collection of deprecated i18n pipes that require intl api
- *
- * @deprecated from v5
- */
-export declare const ɵangular_packages_common_common_e: Provider[];
-
-export declare class ɵangular_packages_common_common_f implements ɵNgClassImpl {
+export declare class ɵangular_packages_common_common_a implements ɵNgClassImpl {
     private _value;
     private _ngClassDiffer;
     private _classStringDiffer;
@@ -2713,17 +2682,17 @@ export declare class ɵangular_packages_common_common_f implements ɵNgClassImpl
     applyChanges(): void;
 }
 
-export declare const ɵangular_packages_common_common_g: {
+export declare const ɵangular_packages_common_common_b: {
     provide: typeof ɵNgClassImpl;
     useClass: typeof ɵNgClassR2Impl;
 };
 
-export declare const ɵangular_packages_common_common_h: {
+export declare const ɵangular_packages_common_common_c: {
     provide: typeof ɵNgClassImpl;
     useClass: typeof ɵNgClassR2Impl;
 };
 
-export declare class ɵangular_packages_common_common_i implements ɵNgStyleImpl {
+export declare class ɵangular_packages_common_common_d implements ɵNgStyleImpl {
     private _differ;
     private _value;
     getValue(): {
@@ -2735,15 +2704,144 @@ export declare class ɵangular_packages_common_common_i implements ɵNgStyleImpl
     applyChanges(): void;
 }
 
-export declare const ɵangular_packages_common_common_j: {
+export declare const ɵangular_packages_common_common_e: {
     provide: typeof ɵNgStyleImpl;
     useClass: typeof ɵNgStyleR2Impl;
 };
 
-export declare const ɵangular_packages_common_common_k: {
+export declare const ɵangular_packages_common_common_f: {
     provide: typeof ɵNgStyleImpl;
     useClass: typeof ɵNgStyleR2Impl;
 };
+
+export declare function ɵangular_packages_common_common_g(): ɵBrowserPlatformLocation;
+
+export declare function ɵangular_packages_common_common_h(): ɵBrowserPlatformLocation;
+
+export declare function ɵangular_packages_common_common_i(): Location;
+
+export declare function ɵangular_packages_common_common_j(platformLocation: PlatformLocation): PathLocationStrategy;
+
+/**
+ * @deprecated from v5
+ */
+export declare const ɵangular_packages_common_common_k: InjectionToken<boolean>;
+
+/**
+ * Returns the plural case based on the locale
+ *
+ * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
+ * @publicApi
+ */
+export declare function ɵangular_packages_common_common_l(locale: string, nLike: number | string): Plural;
+
+/**
+ * A collection of Angular directives that are likely to be used in each and every Angular
+ * application.
+ */
+export declare const ɵangular_packages_common_common_m: Provider[];
+
+/**
+ * A collection of Angular pipes that are likely to be used in each and every application.
+ */
+export declare const ɵangular_packages_common_common_n: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
+
+/**
+ * A collection of deprecated i18n pipes that require intl api
+ *
+ * @deprecated from v5
+ */
+export declare const ɵangular_packages_common_common_o: Provider[];
+
+/**
+ * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
+ * This class should not be used directly by an application developer. Instead, use
+ * {@link Location}.
+ */
+export declare class ɵBrowserPlatformLocation extends PlatformLocation {
+    private _doc;
+    readonly location: Location;
+    private _history;
+    constructor(_doc: any);
+    getBaseHrefFromDOM(): string;
+    onPopState(fn: LocationChangeListener): void;
+    onHashChange(fn: LocationChangeListener): void;
+    readonly href: string;
+    readonly protocol: string;
+    readonly hostname: string;
+    readonly port: string;
+    pathname: string;
+    readonly search: string;
+    readonly hash: string;
+    pushState(state: any, title: string, url: string): void;
+    replaceState(state: any, title: string, url: string): void;
+    forward(): void;
+    back(): void;
+    getState(): unknown;
+}
+
+/**
+ * Provides DOM operations in an environment-agnostic way.
+ *
+ * @security Tread carefully! Interacting with the DOM directly is dangerous and
+ * can introduce XSS risks.
+ */
+export declare abstract class ɵDomAdapter {
+    abstract getProperty(el: Element, name: string): any;
+    abstract dispatchEvent(el: any, evt: any): any;
+    abstract log(error: any): any;
+    abstract logGroup(error: any): any;
+    abstract logGroupEnd(): any;
+    abstract querySelectorAll(el: any, selector: string): any[];
+    abstract remove(el: any): Node;
+    abstract getAttribute(element: any, attribute: string): string | null;
+    abstract setProperty(el: Element, name: string, value: any): any;
+    abstract querySelector(el: any, selector: string): any;
+    abstract nextSibling(el: any): Node | null;
+    abstract parentElement(el: any): Node | null;
+    abstract clearNodes(el: any): any;
+    abstract appendChild(el: any, node: any): any;
+    abstract removeChild(el: any, node: any): any;
+    abstract insertBefore(parent: any, ref: any, node: any): any;
+    abstract setText(el: any, value: string): any;
+    abstract createComment(text: string): any;
+    abstract createElement(tagName: any, doc?: any): HTMLElement;
+    abstract createElementNS(ns: string, tagName: string, doc?: any): Element;
+    abstract createTextNode(text: string, doc?: any): Text;
+    abstract getElementsByTagName(element: any, name: string): HTMLElement[];
+    abstract addClass(element: any, className: string): any;
+    abstract removeClass(element: any, className: string): any;
+    abstract getStyle(element: any, styleName: string): any;
+    abstract setStyle(element: any, styleName: string, styleValue: string): any;
+    abstract removeStyle(element: any, styleName: string): any;
+    abstract setAttribute(element: any, name: string, value: string): any;
+    abstract setAttributeNS(element: any, ns: string, name: string, value: string): any;
+    abstract removeAttribute(element: any, attribute: string): any;
+    abstract removeAttributeNS(element: any, ns: string, attribute: string): any;
+    abstract createHtmlDocument(): HTMLDocument;
+    abstract getDefaultDocument(): Document;
+    abstract getTitle(doc: Document): string;
+    abstract setTitle(doc: Document, newTitle: string): any;
+    abstract elementMatches(n: any, selector: string): boolean;
+    abstract isElementNode(node: any): boolean;
+    abstract isShadowRoot(node: any): boolean;
+    abstract getHost(el: any): any;
+    abstract onAndCancel(el: any, evt: any, listener: any): Function;
+    abstract getEventKey(event: any): string;
+    abstract supportsDOMEvents(): boolean;
+    abstract getGlobalEventTarget(doc: Document, target: string): any;
+    abstract getHistory(): History;
+    abstract getLocation(): any; /** This is the ambient Location definition, NOT Location from @angular/common.  */
+    abstract getBaseHref(doc: Document): string | null;
+    abstract resetBaseElement(): void;
+    abstract getUserAgent(): string;
+    abstract performanceNow(): number;
+    abstract supportsCookies(): boolean;
+    abstract getCookie(name: string): string | null;
+}
+
+
+export declare function ɵgetDOM(): ɵDomAdapter;
 
 export declare const ɵngClassDirectiveDef__POST_R3__: never;
 
@@ -2771,7 +2869,7 @@ export declare abstract class ɵNgClassImpl {
 
 export declare const ɵNgClassImplProvider__POST_R3__: {
     provide: typeof ɵNgClassImpl;
-    useClass: typeof ɵangular_packages_common_common_f;
+    useClass: typeof ɵangular_packages_common_common_a;
 };
 
 export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
@@ -2832,7 +2930,7 @@ export declare abstract class ɵNgStyleImpl {
 
 export declare const ɵNgStyleImplProvider__POST_R3__: {
     provide: typeof ɵNgStyleImpl;
-    useClass: typeof ɵangular_packages_common_common_i;
+    useClass: typeof ɵangular_packages_common_common_d;
 };
 
 export declare class ɵNgStyleR2Impl implements ɵNgStyleImpl {
@@ -2899,5 +2997,7 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
 export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
 
 export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
+
+export declare function ɵsetRootDomAdapter(adapter: ɵDomAdapter): void;
 
 export { }

@@ -1,10 +1,1694 @@
 /**
- * @license Angular v9.0.0-next.4+39.sha-3758978.with-local-changes
+ * @license Angular v9.0.0-next.4+44.sha-1537791.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, ɵisListLikeIterable, ɵstringify, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵɵstyleMap, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ɵɵdefineInjectable, ɵɵinject, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
+ *
+ * ngStyle and ngClass both accept various forms of input and behave differently than that
+ * of how [style] and [class] behave in Angular.
+ *
+ * The differences are:
+ *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
+ *    while [style] and [class] bindings do not (they check for identity changes)
+ *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
+ *  - ngClass supports arrays of class values and [class] only accepts map and string values
+ *  - ngClass allows for multiple className keys (space-separated) within an array or map
+ *     (as the * key) while [class] only accepts a simple key/value map object
+ *
+ * Having Angular understand and adapt to all the different forms of behavior is complicated
+ * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
+ * into something that the core-level [style] and [class] bindings understand.
+ *
+ * This [StylingDiffer] class handles this conversion by creating a new input value each time
+ * the inner representation of the binding value have changed.
+ *
+ * ## Why do we care about ngStyle/ngClass?
+ * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
+ * respect and understand the styling values emitted through ngStyle and ngClass (when they
+ * are present and used in a template).
+ *
+ * Instead of having these directives manage styling on their own, they should be included
+ * into the Angular styling algorithm that exists for [style] and [class] bindings.
+ *
+ * Here's why:
+ *
+ * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
+ *   styles and classes would fall out of sync and be applied and updated at
+ *   inconsistent times
+ * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
+ *   (they will write over them given the right combination of events)
+ *
+ *   ```
+ *   <!-- if `w1` is updated then it will always override `w2`
+ *        if `w2` is updated then it will always override `w1`
+ *        if both are updated at the same time then `w1` wins -->
+ *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
+ *
+ *   <!-- if `w1` is updated then it will always lose to `w2`
+ *        if `w2` is updated then it will always override `w1`
+ *        if both are updated at the same time then `w2` wins -->
+ *   <div [style]="{width:w1}" [style.width]="w2">...</div>
+ *   ```
+ * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
+ *   expensive data structures which were evaluated each time CD runs
+ * @template T
+ */
+class StylingDiffer {
+    /**
+     * @param {?} _name
+     * @param {?} _options
+     */
+    constructor(_name, _options) {
+        this._name = _name;
+        this._options = _options;
+        this.value = null;
+        this._lastSetValue = null;
+        this._lastSetValueType = 0 /* Null */;
+        this._lastSetValueIdentityChange = false;
+    }
+    /**
+     * Sets (updates) the styling value within the differ.
+     *
+     * Only when `hasValueChanged` is called then this new value will be evaluted
+     * and checked against the previous value.
+     *
+     * @param {?} value the new styling value provided from the ngClass/ngStyle binding
+     * @return {?}
+     */
+    setValue(value) {
+        if (Array.isArray(value)) {
+            this._lastSetValueType = 4 /* Array */;
+        }
+        else if (value instanceof Set) {
+            this._lastSetValueType = 8 /* Set */;
+        }
+        else if (value && typeof value === 'string') {
+            if (!(this._options & 4 /* AllowStringValue */)) {
+                throw new Error(this._name + ' string values are not allowed');
+            }
+            this._lastSetValueType = 1 /* String */;
+        }
+        else {
+            this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
+        }
+        this._lastSetValueIdentityChange = true;
+        this._lastSetValue = value || null;
+    }
+    /**
+     * Determines whether or not the value has changed.
+     *
+     * This function can be called right after `setValue()` is called, but it can also be
+     * called incase the existing value (if it's a collection) changes internally. If the
+     * value is indeed a collection it will do the necessary diffing work and produce a
+     * new object value as assign that to `value`.
+     *
+     * @return {?} whether or not the value has changed in some way.
+     */
+    hasValueChanged() {
+        /** @type {?} */
+        let valueHasChanged = this._lastSetValueIdentityChange;
+        if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
+            return false;
+        /** @type {?} */
+        let finalValue = null;
+        /** @type {?} */
+        const trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
+        /** @type {?} */
+        const parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
+        /** @type {?} */
+        const allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
+        switch (this._lastSetValueType) {
+            // case 1: [input]="string"
+            case 1 /* String */:
+                /** @type {?} */
+                const tokens = ((/** @type {?} */ (this._lastSetValue))).split(/\s+/g);
+                if (this._options & 16 /* ForceAsMap */) {
+                    finalValue = {};
+                    tokens.forEach((/**
+                     * @param {?} token
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    (token, i) => ((/** @type {?} */ (finalValue)))[token] = true));
+                }
+                else {
+                    finalValue = tokens.reduce((/**
+                     * @param {?} str
+                     * @param {?} token
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    (str, token, i) => str + (i ? ' ' : '') + token));
+                }
+                break;
+            // case 2: [input]="{key:value}"
+            case 2 /* Map */:
+                /** @type {?} */
+                const map = (/** @type {?} */ (this._lastSetValue));
+                /** @type {?} */
+                const keys = Object.keys(map);
+                if (!valueHasChanged) {
+                    if (this.value) {
+                        // we know that the classExp value exists and that it is
+                        // a map (otherwise an identity change would have occurred)
+                        valueHasChanged = mapHasChanged(keys, (/** @type {?} */ (this.value)), map);
+                    }
+                    else {
+                        valueHasChanged = true;
+                    }
+                }
+                if (valueHasChanged) {
+                    finalValue =
+                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
+                }
+                break;
+            // case 3a: [input]="[str1, str2, ...]"
+            // case 3b: [input]="Set"
+            case 4 /* Array */:
+            case 8 /* Set */:
+                /** @type {?} */
+                const values = Array.from((/** @type {?} */ (this._lastSetValue)));
+                if (!valueHasChanged) {
+                    /** @type {?} */
+                    const keys = Object.keys((/** @type {?} */ (this.value)));
+                    valueHasChanged = !arrayEqualsArray(keys, values);
+                }
+                if (valueHasChanged) {
+                    finalValue =
+                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
+                }
+                break;
+            // case 4: [input]="null|undefined"
+            default:
+                finalValue = null;
+                break;
+        }
+        if (valueHasChanged) {
+            ((/** @type {?} */ (this))).value = (/** @type {?} */ (finalValue));
+        }
+        return valueHasChanged;
+    }
+}
+if (false) {
+    /** @type {?} */
+    StylingDiffer.prototype.value;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValue;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValueType;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._lastSetValueIdentityChange;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._name;
+    /**
+     * @type {?}
+     * @private
+     */
+    StylingDiffer.prototype._options;
+}
+/** @enum {number} */
+const StylingDifferOptions = {
+    None: 0,
+    TrimProperties: 1,
+    AllowSubKeys: 2,
+    AllowStringValue: 4,
+    AllowUnits: 8,
+    ForceAsMap: 16,
+};
+/** @enum {number} */
+const StylingDifferValueTypes = {
+    Null: 0,
+    String: 1,
+    Map: 2,
+    Array: 4,
+    Set: 8,
+    Collection: 14,
+};
+/**
+ * builds and returns a map based on the values input value
+ *
+ * If the `keys` param is provided then the `values` param is treated as a
+ * string map. Otherwise `values` is treated as a string array.
+ * @param {?} errorPrefix
+ * @param {?} trim
+ * @param {?} parseOutUnits
+ * @param {?} allowSubKeys
+ * @param {?} values
+ * @param {?=} keys
+ * @return {?}
+ */
+function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
+    /** @type {?} */
+    const map = {};
+    if (keys) {
+        // case 1: map
+        for (let i = 0; i < keys.length; i++) {
+            /** @type {?} */
+            let key = keys[i];
+            key = trim ? key.trim() : key;
+            /** @type {?} */
+            const value = ((/** @type {?} */ (values)))[key];
+            setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+        }
+    }
+    else {
+        // case 2: array
+        for (let i = 0; i < values.length; i++) {
+            /** @type {?} */
+            let value = ((/** @type {?} */ (values)))[i];
+            assertValidValue(errorPrefix, value);
+            value = trim ? value.trim() : value;
+            setMapValues(map, value, true, false, allowSubKeys);
+        }
+    }
+    return map;
+}
+/**
+ * @param {?} errorPrefix
+ * @param {?} value
+ * @return {?}
+ */
+function assertValidValue(errorPrefix, value) {
+    if (typeof value !== 'string') {
+        throw new Error(`${errorPrefix} can only toggle CSS classes expressed as strings, got ${value}`);
+    }
+}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @param {?} parseOutUnits
+ * @param {?} allowSubKeys
+ * @return {?}
+ */
+function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
+    if (allowSubKeys && key.indexOf(' ') > 0) {
+        /** @type {?} */
+        const innerKeys = key.split(/\s+/g);
+        for (let j = 0; j < innerKeys.length; j++) {
+            setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
+        }
+    }
+    else {
+        setIndividualMapValue(map, key, value, parseOutUnits);
+    }
+}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @param {?} parseOutUnits
+ * @return {?}
+ */
+function setIndividualMapValue(map, key, value, parseOutUnits) {
+    if (parseOutUnits) {
+        /** @type {?} */
+        const values = normalizeStyleKeyAndValue(key, value);
+        value = values.value;
+        key = values.key;
+    }
+    map[key] = value;
+}
+/**
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function normalizeStyleKeyAndValue(key, value) {
+    /** @type {?} */
+    const index = key.indexOf('.');
+    if (index > 0) {
+        /** @type {?} */
+        const unit = key.substr(index + 1);
+        key = key.substring(0, index);
+        if (value != null) { // we should not convert null values to string
+            value += unit;
+        }
+    }
+    return { key, value };
+}
+/**
+ * @param {?} keys
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function mapHasChanged(keys, a, b) {
+    /** @type {?} */
+    const oldKeys = Object.keys(a);
+    /** @type {?} */
+    const newKeys = keys;
+    // the keys are different which means the map changed
+    if (!arrayEqualsArray(oldKeys, newKeys)) {
+        return true;
+    }
+    for (let i = 0; i < newKeys.length; i++) {
+        /** @type {?} */
+        const key = newKeys[i];
+        if (a[key] !== b[key]) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function arrayEqualsArray(a, b) {
+    if (a && b) {
+        if (a.length !== b.length)
+            return false;
+        for (let i = 0; i < a.length; i++) {
+            if (b.indexOf(a[i]) === -1)
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Used as a token for an injected service within the NgClass directive.
+ *
+ * NgClass behaves differenly whether or not VE is being used or not. If
+ * present then the legacy ngClass diffing algorithm will be used as an
+ * injected service. Otherwise the new diffing algorithm (which delegates
+ * to the `[class]` binding) will be used. This toggle behavior is done so
+ * via the ivy_switch mechanism.
+ * @abstract
+ */
+class NgClassImpl {
+}
+if (false) {
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgClassImpl.prototype.setClass = function (value) { };
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgClassImpl.prototype.setNgClass = function (value) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgClassImpl.prototype.applyChanges = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgClassImpl.prototype.getValue = function () { };
+}
+class NgClassR2Impl {
+    /**
+     * @param {?} _iterableDiffers
+     * @param {?} _keyValueDiffers
+     * @param {?} _ngEl
+     * @param {?} _renderer
+     */
+    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+        this._iterableDiffers = _iterableDiffers;
+        this._keyValueDiffers = _keyValueDiffers;
+        this._ngEl = _ngEl;
+        this._renderer = _renderer;
+        this._initialClasses = [];
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return null; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setClass(value) {
+        this._removeClasses(this._initialClasses);
+        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+        this._applyClasses(this._initialClasses);
+        this._applyClasses(this._rawClass);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setNgClass(value) {
+        this._removeClasses(this._rawClass);
+        this._applyClasses(this._initialClasses);
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
+        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+        if (this._rawClass) {
+            if (ɵisListLikeIterable(this._rawClass)) {
+                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
+            }
+            else {
+                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    applyChanges() {
+        if (this._iterableDiffer) {
+            /** @type {?} */
+            const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
+            if (iterableChanges) {
+                this._applyIterableChanges(iterableChanges);
+            }
+        }
+        else if (this._keyValueDiffer) {
+            /** @type {?} */
+            const keyValueChanges = this._keyValueDiffer.diff((/** @type {?} */ (this._rawClass)));
+            if (keyValueChanges) {
+                this._applyKeyValueChanges(keyValueChanges);
+            }
+        }
+    }
+    /**
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    _applyKeyValueChanges(changes) {
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.key, record.currentValue)));
+        changes.forEachChangedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.key, record.currentValue)));
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => {
+            if (record.previousValue) {
+                this._toggleClass(record.key, false);
+            }
+        }));
+    }
+    /**
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    _applyIterableChanges(changes) {
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => {
+            if (typeof record.item === 'string') {
+                this._toggleClass(record.item, true);
+            }
+            else {
+                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
+            }
+        }));
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._toggleClass(record.item, false)));
+    }
+    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
+     * @private
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    _applyClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                ((/** @type {?} */ (rawClassVal))).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                (klass) => this._toggleClass(klass, true)));
+            }
+            else {
+                Object.keys(rawClassVal).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                klass => this._toggleClass(klass, !!rawClassVal[klass])));
+            }
+        }
+    }
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     * @private
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    _removeClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                ((/** @type {?} */ (rawClassVal))).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                (klass) => this._toggleClass(klass, false)));
+            }
+            else {
+                Object.keys(rawClassVal).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                klass => this._toggleClass(klass, false)));
+            }
+        }
+    }
+    /**
+     * @private
+     * @param {?} klass
+     * @param {?} enabled
+     * @return {?}
+     */
+    _toggleClass(klass, enabled) {
+        klass = klass.trim();
+        if (klass) {
+            klass.split(/\s+/g).forEach((/**
+             * @param {?} klass
+             * @return {?}
+             */
+            klass => {
+                if (enabled) {
+                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+                }
+                else {
+                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                }
+            }));
+        }
+    }
+}
+NgClassR2Impl.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+NgClassR2Impl.ctorParameters = () => [
+    { type: IterableDiffers },
+    { type: KeyValueDiffers },
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._iterableDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._keyValueDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._initialClasses;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._rawClass;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._iterableDiffers;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._keyValueDiffers;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._ngEl;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR2Impl.prototype._renderer;
+}
+class NgClassR3Impl {
+    constructor() {
+        this._value = null;
+        this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
+            2 /* AllowSubKeys */ |
+            4 /* AllowStringValue */ | 16 /* ForceAsMap */);
+        this._classStringDiffer = null;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._value; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setClass(value) {
+        // early exit incase the binding gets emitted as an empty value which
+        // means there is no reason to instantiate and diff the values...
+        if (!value && !this._classStringDiffer)
+            return;
+        this._classStringDiffer = this._classStringDiffer ||
+            new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
+        this._classStringDiffer.setValue(value);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setNgClass(value) {
+        this._ngClassDiffer.setValue(value);
+    }
+    /**
+     * @return {?}
+     */
+    applyChanges() {
+        /** @type {?} */
+        const classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
+        /** @type {?} */
+        const ngClassChanged = this._ngClassDiffer.hasValueChanged();
+        if (classChanged || ngClassChanged) {
+            /** @type {?} */
+            let value = this._ngClassDiffer.value;
+            if (this._classStringDiffer) {
+                /** @type {?} */
+                let classValue = this._classStringDiffer.value;
+                if (classValue) {
+                    value = value ? Object.assign({}, classValue, value) : classValue;
+                }
+            }
+            this._value = value;
+        }
+    }
+}
+NgClassR3Impl.decorators = [
+    { type: Injectable }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._value;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._ngClassDiffer;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgClassR3Impl.prototype._classStringDiffer;
+}
+// the implementation for both NgStyleR2Impl and NgStyleR3Impl are
+// not ivy_switch'd away, instead they are only hooked up into the
+// DI via NgStyle's directive's provider property.
+/** @type {?} */
+const NgClassImplProvider__PRE_R3__ = {
+    provide: NgClassImpl,
+    useClass: NgClassR2Impl
+};
+/** @type {?} */
+const NgClassImplProvider__POST_R3__ = {
+    provide: NgClassImpl,
+    useClass: NgClassR3Impl
+};
+/** @type {?} */
+const NgClassImplProvider = NgClassImplProvider__PRE_R3__;
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
+ *
+ * If the VE is present (which is for older versions of Angular) then NgClass will inject
+ * the legacy diffing algorithm as a service and delegate all styling changes to that.
+ *
+ * If the VE is not present then NgStyle will normalize (through the injected service) and
+ * then write all styling changes to the `[style]` binding directly (through a host binding).
+ * Then Angular will notice the host binding change and treat the changes as styling
+ * changes and apply them via the core styling instructions that exist within Angular.
+ */
+// used when the VE is present
+/** @type {?} */
+const ngClassDirectiveDef__PRE_R3__ = undefined;
+// used when the VE is not present (note the directive will
+// never be instantiated normally because it is apart of a
+// base class)
+const ɵ0 = /**
+ * @return {?}
+ */
+function () { }, ɵ1 = /**
+ * @param {?} rf
+ * @param {?} ctx
+ * @param {?} elIndex
+ * @return {?}
+ */
+function (rf, ctx, elIndex) {
+    if (rf & 1 /* Create */) {
+        ɵɵallocHostVars(1);
+        ɵɵstyling();
+    }
+    if (rf & 2 /* Update */) {
+        ɵɵclassMap(ctx.getValue());
+        ɵɵstylingApply();
+    }
+};
+/** @type {?} */
+const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
+    type: (/** @type {?} */ ((ɵ0))),
+    selectors: (/** @type {?} */ (null)),
+    hostBindings: (ɵ1)
+});
+/** @type {?} */
+const ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
+/** @type {?} */
+const ngClassFactoryDef__PRE_R3__ = undefined;
+/** @type {?} */
+const ngClassFactoryDef__POST_R3__ = (/**
+ * @return {?}
+ */
+function () { });
+/** @type {?} */
+const ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
+/**
+ * Serves as the base non-VE container for NgClass.
+ *
+ * While this is a base class that NgClass extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[class]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * \@publicApi
+ */
+class NgClassBase {
+    /**
+     * @param {?} _delegate
+     */
+    constructor(_delegate) {
+        this._delegate = _delegate;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._delegate.getValue(); }
+}
+/** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+/** @nocollapse */ NgClassBase.ngFactoryDef = ngClassFactoryDef;
+if (false) {
+    /** @nocollapse @type {?} */
+    NgClassBase.ngDirectiveDef;
+    /** @nocollapse @type {?} */
+    NgClassBase.ngFactoryDef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    NgClassBase.prototype._delegate;
+}
+/**
+ * \@ngModule CommonModule
+ *
+ * \@usageNotes
+ * ```
+ *     <some-element [ngClass]="'first second'">...</some-element>
+ *
+ *     <some-element [ngClass]="['first', 'second']">...</some-element>
+ *
+ *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+ *
+ *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+ *
+ *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+ * ```
+ *
+ * \@description
+ *
+ * Adds and removes CSS classes on an HTML element.
+ *
+ * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+ * - `string` - the CSS classes listed in the string (space delimited) are added,
+ * - `Array` - the CSS classes declared as Array elements are added,
+ * - `Object` - keys are CSS classes that get added when the expression given in the value
+ *              evaluates to a truthy value, otherwise they are removed.
+ *
+ * \@publicApi
+ */
+class NgClass extends NgClassBase {
+    /**
+     * @param {?} delegate
+     */
+    constructor(delegate) { super(delegate); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set klass(value) { this._delegate.setClass(value); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set ngClass(value) {
+        this._delegate.setNgClass(value);
+    }
+    /**
+     * @return {?}
+     */
+    ngDoCheck() { this._delegate.applyChanges(); }
+}
+NgClass.decorators = [
+    { type: Directive, args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] },] }
+];
+/** @nocollapse */
+NgClass.ctorParameters = () => [
+    { type: NgClassImpl }
+];
+NgClass.propDecorators = {
+    klass: [{ type: Input, args: ['class',] }],
+    ngClass: [{ type: Input, args: ['ngClass',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Used as a token for an injected service within the NgStyle directive.
+ *
+ * NgStyle behaves differenly whether or not VE is being used or not. If
+ * present then the legacy ngClass diffing algorithm will be used as an
+ * injected service. Otherwise the new diffing algorithm (which delegates
+ * to the `[style]` binding) will be used. This toggle behavior is done so
+ * via the ivy_switch mechanism.
+ * @abstract
+ */
+class NgStyleImpl {
+}
+if (false) {
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgStyleImpl.prototype.getValue = function () { };
+    /**
+     * @abstract
+     * @param {?} value
+     * @return {?}
+     */
+    NgStyleImpl.prototype.setNgStyle = function (value) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    NgStyleImpl.prototype.applyChanges = function () { };
+}
+class NgStyleR2Impl {
+    /**
+     * @param {?} _ngEl
+     * @param {?} _differs
+     * @param {?} _renderer
+     */
+    constructor(_ngEl, _differs, _renderer) {
+        this._ngEl = _ngEl;
+        this._differs = _differs;
+        this._renderer = _renderer;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return null; }
+    /**
+     * A map of style properties, specified as colon-separated
+     * key-value pairs.
+     * * The key is a style name, with an optional `.<unit>` suffix
+     *    (such as 'top.px', 'font-style.em').
+     * * The value is an expression to be evaluated.
+     * @param {?} values
+     * @return {?}
+     */
+    setNgStyle(values) {
+        this._ngStyle = values;
+        if (!this._differ && values) {
+            this._differ = this._differs.find(values).create();
+        }
+    }
+    /**
+     * Applies the new styles if needed.
+     * @return {?}
+     */
+    applyChanges() {
+        if (this._differ) {
+            /** @type {?} */
+            const changes = this._differ.diff(this._ngStyle);
+            if (changes) {
+                this._applyChanges(changes);
+            }
+        }
+    }
+    /**
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    _applyChanges(changes) {
+        changes.forEachRemovedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, null)));
+        changes.forEachAddedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, record.currentValue)));
+        changes.forEachChangedItem((/**
+         * @param {?} record
+         * @return {?}
+         */
+        (record) => this._setStyle(record.key, record.currentValue)));
+    }
+    /**
+     * @private
+     * @param {?} nameAndUnit
+     * @param {?} value
+     * @return {?}
+     */
+    _setStyle(nameAndUnit, value) {
+        const [name, unit] = nameAndUnit.split('.');
+        value = value != null && unit ? `${value}${unit}` : value;
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
+    }
+}
+NgStyleR2Impl.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+NgStyleR2Impl.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyValueDiffers },
+    { type: Renderer2 }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._ngStyle;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._ngEl;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._differs;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR2Impl.prototype._renderer;
+}
+class NgStyleR3Impl {
+    constructor() {
+        this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
+        this._value = null;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._value; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setNgStyle(value) { this._differ.setValue(value); }
+    /**
+     * @return {?}
+     */
+    applyChanges() {
+        if (this._differ.hasValueChanged()) {
+            this._value = this._differ.value;
+        }
+    }
+}
+NgStyleR3Impl.decorators = [
+    { type: Injectable }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR3Impl.prototype._differ;
+    /**
+     * @type {?}
+     * @private
+     */
+    NgStyleR3Impl.prototype._value;
+}
+// the implementation for both NgClassR2Impl and NgClassR3Impl are
+// not ivy_switch'd away, instead they are only hooked up into the
+// DI via NgStyle's directive's provider property.
+/** @type {?} */
+const NgStyleImplProvider__PRE_R3__ = {
+    provide: NgStyleImpl,
+    useClass: NgStyleR2Impl
+};
+/** @type {?} */
+const NgStyleImplProvider__POST_R3__ = {
+    provide: NgStyleImpl,
+    useClass: NgStyleR3Impl
+};
+/** @type {?} */
+const NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
+ *
+ * If the VE is present (which is for older versions of Angular) then NgStyle will inject
+ * the legacy diffing algorithm as a service and delegate all styling changes to that.
+ *
+ * If the VE is not present then NgStyle will normalize (through the injected service) and
+ * then write all styling changes to the `[style]` binding directly (through a host binding).
+ * Then Angular will notice the host binding change and treat the changes as styling
+ * changes and apply them via the core styling instructions that exist within Angular.
+ */
+// used when the VE is present
+/** @type {?} */
+const ngStyleDirectiveDef__PRE_R3__ = undefined;
+/** @type {?} */
+const ngStyleFactoryDef__PRE_R3__ = undefined;
+// used when the VE is not present (note the directive will
+// never be instantiated normally because it is apart of a
+// base class)
+const ɵ0$1 = /**
+ * @return {?}
+ */
+function () { }, ɵ1$1 = /**
+ * @param {?} rf
+ * @param {?} ctx
+ * @param {?} elIndex
+ * @return {?}
+ */
+function (rf, ctx, elIndex) {
+    if (rf & 1 /* Create */) {
+        ɵɵstyling();
+    }
+    if (rf & 2 /* Update */) {
+        ɵɵstyleMap(ctx.getValue());
+        ɵɵstylingApply();
+    }
+};
+/** @type {?} */
+const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
+    type: (/** @type {?} */ ((ɵ0$1))),
+    selectors: (/** @type {?} */ (null)),
+    hostBindings: (ɵ1$1)
+});
+/** @type {?} */
+const ngStyleFactoryDef__POST_R3__ = (/**
+ * @return {?}
+ */
+function () { });
+/** @type {?} */
+const ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
+/** @type {?} */
+const ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
+/**
+ * Serves as the base non-VE container for NgStyle.
+ *
+ * While this is a base class that NgStyle extends from, the
+ * class itself acts as a container for non-VE code to setup
+ * a link to the `[style]` host binding (via the static
+ * `ngDirectiveDef` property on the class).
+ *
+ * Note that the `ngDirectiveDef` property's code is switched
+ * depending if VE is present or not (this allows for the
+ * binding code to be set only for newer versions of Angular).
+ *
+ * \@publicApi
+ */
+class NgStyleBase {
+    /**
+     * @param {?} _delegate
+     */
+    constructor(_delegate) {
+        this._delegate = _delegate;
+    }
+    /**
+     * @return {?}
+     */
+    getValue() { return this._delegate.getValue(); }
+}
+/** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+NgStyleBase.ngFactory = ngStyleFactoryDef;
+if (false) {
+    /** @nocollapse @type {?} */
+    NgStyleBase.ngDirectiveDef;
+    /** @type {?} */
+    NgStyleBase.ngFactory;
+    /**
+     * @type {?}
+     * @protected
+     */
+    NgStyleBase.prototype._delegate;
+}
+/**
+ * \@ngModule CommonModule
+ *
+ * \@usageNotes
+ *
+ * Set the font of the containing element to the result of an expression.
+ *
+ * ```
+ * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+ * ```
+ *
+ * Set the width of the containing element to a pixel value returned by an expression.
+ *
+ * ```
+ * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+ * ```
+ *
+ * Set a collection of style values using an expression that returns key-value pairs.
+ *
+ * ```
+ * <some-element [ngStyle]="objExp">...</some-element>
+ * ```
+ *
+ * \@description
+ *
+ * An attribute directive that updates styles for the containing HTML element.
+ * Sets one or more style properties, specified as colon-separated key-value pairs.
+ * The key is a style name, with an optional `.<unit>` suffix
+ * (such as 'top.px', 'font-style.em').
+ * The value is an expression to be evaluated.
+ * The resulting non-null value, expressed in the given unit,
+ * is assigned to the given style property.
+ * If the result of evaluation is null, the corresponding style is removed.
+ *
+ * \@publicApi
+ */
+class NgStyle extends NgStyleBase {
+    /**
+     * @param {?} delegate
+     */
+    constructor(delegate) { super(delegate); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set ngStyle(value) { this._delegate.setNgStyle(value); }
+    /**
+     * @return {?}
+     */
+    ngDoCheck() { this._delegate.applyChanges(); }
+}
+NgStyle.decorators = [
+    { type: Directive, args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] },] }
+];
+/** @nocollapse */
+NgStyle.ctorParameters = () => [
+    { type: NgStyleImpl }
+];
+NgStyle.propDecorators = {
+    ngStyle: [{ type: Input, args: ['ngStyle',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** @type {?} */
+let _DOM = (/** @type {?} */ (null));
+/**
+ * @return {?}
+ */
+function getDOM() {
+    return _DOM;
+}
+/**
+ * @param {?} adapter
+ * @return {?}
+ */
+function setDOM(adapter) {
+    _DOM = adapter;
+}
+/**
+ * @param {?} adapter
+ * @return {?}
+ */
+function setRootDomAdapter(adapter) {
+    if (!_DOM) {
+        _DOM = adapter;
+    }
+}
+/* tslint:disable:requireParameterType */
+/**
+ * Provides DOM operations in an environment-agnostic way.
+ *
+ * \@security Tread carefully! Interacting with the DOM directly is dangerous and
+ * can introduce XSS risks.
+ * @abstract
+ */
+class DomAdapter {
+}
+if (false) {
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    DomAdapter.prototype.getProperty = function (el, name) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} evt
+     * @return {?}
+     */
+    DomAdapter.prototype.dispatchEvent = function (el, evt) { };
+    /**
+     * @abstract
+     * @param {?} error
+     * @return {?}
+     */
+    DomAdapter.prototype.log = function (error) { };
+    /**
+     * @abstract
+     * @param {?} error
+     * @return {?}
+     */
+    DomAdapter.prototype.logGroup = function (error) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.logGroupEnd = function () { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    DomAdapter.prototype.querySelectorAll = function (el, selector) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @return {?}
+     */
+    DomAdapter.prototype.remove = function (el) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} attribute
+     * @return {?}
+     */
+    DomAdapter.prototype.getAttribute = function (element, attribute) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    DomAdapter.prototype.setProperty = function (el, name, value) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} selector
+     * @return {?}
+     */
+    DomAdapter.prototype.querySelector = function (el, selector) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @return {?}
+     */
+    DomAdapter.prototype.nextSibling = function (el) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @return {?}
+     */
+    DomAdapter.prototype.parentElement = function (el) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @return {?}
+     */
+    DomAdapter.prototype.clearNodes = function (el) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} node
+     * @return {?}
+     */
+    DomAdapter.prototype.appendChild = function (el, node) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} node
+     * @return {?}
+     */
+    DomAdapter.prototype.removeChild = function (el, node) { };
+    /**
+     * @abstract
+     * @param {?} parent
+     * @param {?} ref
+     * @param {?} node
+     * @return {?}
+     */
+    DomAdapter.prototype.insertBefore = function (parent, ref, node) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} value
+     * @return {?}
+     */
+    DomAdapter.prototype.setText = function (el, value) { };
+    /**
+     * @abstract
+     * @param {?} text
+     * @return {?}
+     */
+    DomAdapter.prototype.createComment = function (text) { };
+    /**
+     * @abstract
+     * @param {?} tagName
+     * @param {?=} doc
+     * @return {?}
+     */
+    DomAdapter.prototype.createElement = function (tagName, doc) { };
+    /**
+     * @abstract
+     * @param {?} ns
+     * @param {?} tagName
+     * @param {?=} doc
+     * @return {?}
+     */
+    DomAdapter.prototype.createElementNS = function (ns, tagName, doc) { };
+    /**
+     * @abstract
+     * @param {?} text
+     * @param {?=} doc
+     * @return {?}
+     */
+    DomAdapter.prototype.createTextNode = function (text, doc) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} name
+     * @return {?}
+     */
+    DomAdapter.prototype.getElementsByTagName = function (element, name) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    DomAdapter.prototype.addClass = function (element, className) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} className
+     * @return {?}
+     */
+    DomAdapter.prototype.removeClass = function (element, className) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} styleName
+     * @return {?}
+     */
+    DomAdapter.prototype.getStyle = function (element, styleName) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} styleName
+     * @param {?} styleValue
+     * @return {?}
+     */
+    DomAdapter.prototype.setStyle = function (element, styleName, styleValue) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} styleName
+     * @return {?}
+     */
+    DomAdapter.prototype.removeStyle = function (element, styleName) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    DomAdapter.prototype.setAttribute = function (element, name, value) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} ns
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    DomAdapter.prototype.setAttributeNS = function (element, ns, name, value) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} attribute
+     * @return {?}
+     */
+    DomAdapter.prototype.removeAttribute = function (element, attribute) { };
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?} ns
+     * @param {?} attribute
+     * @return {?}
+     */
+    DomAdapter.prototype.removeAttributeNS = function (element, ns, attribute) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.createHtmlDocument = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.getDefaultDocument = function () { };
+    /**
+     * @abstract
+     * @param {?} doc
+     * @return {?}
+     */
+    DomAdapter.prototype.getTitle = function (doc) { };
+    /**
+     * @abstract
+     * @param {?} doc
+     * @param {?} newTitle
+     * @return {?}
+     */
+    DomAdapter.prototype.setTitle = function (doc, newTitle) { };
+    /**
+     * @abstract
+     * @param {?} n
+     * @param {?} selector
+     * @return {?}
+     */
+    DomAdapter.prototype.elementMatches = function (n, selector) { };
+    /**
+     * @abstract
+     * @param {?} node
+     * @return {?}
+     */
+    DomAdapter.prototype.isElementNode = function (node) { };
+    /**
+     * @abstract
+     * @param {?} node
+     * @return {?}
+     */
+    DomAdapter.prototype.isShadowRoot = function (node) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @return {?}
+     */
+    DomAdapter.prototype.getHost = function (el) { };
+    /**
+     * @abstract
+     * @param {?} el
+     * @param {?} evt
+     * @param {?} listener
+     * @return {?}
+     */
+    DomAdapter.prototype.onAndCancel = function (el, evt, listener) { };
+    /**
+     * @abstract
+     * @param {?} event
+     * @return {?}
+     */
+    DomAdapter.prototype.getEventKey = function (event) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.supportsDOMEvents = function () { };
+    /**
+     * @abstract
+     * @param {?} doc
+     * @param {?} target
+     * @return {?}
+     */
+    DomAdapter.prototype.getGlobalEventTarget = function (doc, target) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.getHistory = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.getLocation = function () { };
+    /**
+     * This is the ambient Location definition, NOT Location from \@angular/common.
+     * @abstract
+     * @param {?} doc
+     * @return {?}
+     */
+    DomAdapter.prototype.getBaseHref = function (doc) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.resetBaseElement = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.getUserAgent = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.performanceNow = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    DomAdapter.prototype.supportsCookies = function () { };
+    /**
+     * @abstract
+     * @param {?} name
+     * @return {?}
+     */
+    DomAdapter.prototype.getCookie = function (name) { };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * A DI Token representing the main rendering context. In a browser this is the DOM Document.
+ *
+ * Note: Document might not be available in the Application Context when Application and Rendering
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
+ *
+ * \@publicApi
+ * @type {?}
+ */
+const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
@@ -35,6 +1719,14 @@ import { InjectionToken, EventEmitter, Injectable, Optional, Inject, ɵfindLocal
  */
 class PlatformLocation {
 }
+PlatformLocation.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'platform',
+                // See #23917
+                useFactory: useBrowserPlatformLocation
+            },] }
+];
+/** @nocollapse */ PlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 if (false) {
     /**
      * @abstract
@@ -121,6 +1813,12 @@ if (false) {
     PlatformLocation.prototype.back = function () { };
 }
 /**
+ * @return {?}
+ */
+function useBrowserPlatformLocation() {
+    return ɵɵinject(BrowserPlatformLocation);
+}
+/**
  * \@description
  * Indicates when a location is initialized.
  *
@@ -147,6 +1845,236 @@ if (false) {
  * @record
  */
 function LocationChangeListener() { }
+/**
+ * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
+ * This class should not be used directly by an application developer. Instead, use
+ * {\@link Location}.
+ */
+class BrowserPlatformLocation extends PlatformLocation {
+    /**
+     * @param {?} _doc
+     */
+    constructor(_doc) {
+        super();
+        this._doc = _doc;
+        this._init();
+    }
+    // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
+    /**
+     * \@internal
+     * @return {?}
+     */
+    _init() {
+        ((/** @type {?} */ (this))).location = getDOM().getLocation();
+        this._history = getDOM().getHistory();
+    }
+    /**
+     * @return {?}
+     */
+    getBaseHrefFromDOM() { return (/** @type {?} */ (getDOM().getBaseHref(this._doc))); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onPopState(fn) {
+        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onHashChange(fn) {
+        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+    }
+    /**
+     * @return {?}
+     */
+    get href() { return this.location.href; }
+    /**
+     * @return {?}
+     */
+    get protocol() { return this.location.protocol; }
+    /**
+     * @return {?}
+     */
+    get hostname() { return this.location.hostname; }
+    /**
+     * @return {?}
+     */
+    get port() { return this.location.port; }
+    /**
+     * @return {?}
+     */
+    get pathname() { return this.location.pathname; }
+    /**
+     * @return {?}
+     */
+    get search() { return this.location.search; }
+    /**
+     * @return {?}
+     */
+    get hash() { return this.location.hash; }
+    /**
+     * @param {?} newPath
+     * @return {?}
+     */
+    set pathname(newPath) { this.location.pathname = newPath; }
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    pushState(state, title, url) {
+        if (supportsState()) {
+            this._history.pushState(state, title, url);
+        }
+        else {
+            this.location.hash = url;
+        }
+    }
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @return {?}
+     */
+    replaceState(state, title, url) {
+        if (supportsState()) {
+            this._history.replaceState(state, title, url);
+        }
+        else {
+            this.location.hash = url;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    forward() { this._history.forward(); }
+    /**
+     * @return {?}
+     */
+    back() { this._history.back(); }
+    /**
+     * @return {?}
+     */
+    getState() { return this._history.state; }
+}
+BrowserPlatformLocation.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'platform',
+                // See #23917
+                useFactory: createBrowserPlatformLocation,
+            },] }
+];
+/** @nocollapse */
+BrowserPlatformLocation.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+];
+/** @nocollapse */ BrowserPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+if (false) {
+    /** @type {?} */
+    BrowserPlatformLocation.prototype.location;
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserPlatformLocation.prototype._history;
+    /**
+     * @type {?}
+     * @private
+     */
+    BrowserPlatformLocation.prototype._doc;
+}
+/**
+ * @return {?}
+ */
+function supportsState() {
+    return !!window.history.pushState;
+}
+/**
+ * @return {?}
+ */
+function createBrowserPlatformLocation() {
+    return new BrowserPlatformLocation(ɵɵinject(DOCUMENT));
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Joins two parts of a URL with a slash if needed.
+ *
+ * @param {?} start  URL string
+ * @param {?} end    URL string
+ *
+ *
+ * @return {?} The joined URL string.
+ */
+function joinWithSlash(start, end) {
+    if (start.length == 0) {
+        return end;
+    }
+    if (end.length == 0) {
+        return start;
+    }
+    /** @type {?} */
+    let slashes = 0;
+    if (start.endsWith('/')) {
+        slashes++;
+    }
+    if (end.startsWith('/')) {
+        slashes++;
+    }
+    if (slashes == 2) {
+        return start + end.substring(1);
+    }
+    if (slashes == 1) {
+        return start + end;
+    }
+    return start + '/' + end;
+}
+/**
+ * Removes a trailing slash from a URL string if needed.
+ * Looks for the first occurrence of either `#`, `?`, or the end of the
+ * line as `/` characters and removes the trailing slash if one exists.
+ *
+ * @param {?} url URL string.
+ *
+ * @return {?} The URL string, modified if needed.
+ */
+function stripTrailingSlash(url) {
+    /** @type {?} */
+    const match = url.match(/#|\?|$/);
+    /** @type {?} */
+    const pathEndIdx = match && match.index || url.length;
+    /** @type {?} */
+    const droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+    return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+}
+/**
+ * Normalizes URL parameters by prepending with `?` if needed.
+ *
+ * @param {?} params String of URL parameters.
+ *
+ * @return {?} The normalized URL parameters string.
+ */
+function normalizeQueryParams(params) {
+    return params && params[0] !== '?' ? '?' + params : params;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -172,6 +2100,10 @@ function LocationChangeListener() { }
  */
 class LocationStrategy {
 }
+LocationStrategy.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
+];
+/** @nocollapse */ LocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 if (false) {
     /**
      * @abstract
@@ -226,6 +2158,16 @@ if (false) {
     LocationStrategy.prototype.getBaseHref = function () { };
 }
 /**
+ * @param {?} platformLocation
+ * @return {?}
+ */
+function provideLocationStrategy(platformLocation) {
+    // See #23917
+    /** @type {?} */
+    const location = ɵɵinject(DOCUMENT).location;
+    return new PathLocationStrategy(ɵɵinject((/** @type {?} */ (PlatformLocation))), location && location.origin || '');
+}
+/**
  * A predefined [DI token](guide/glossary#di-token) for the base href
  * to be used with the `PathLocationStrategy`.
  * The base href is the URL prefix that should be preserved when generating
@@ -250,328 +2192,129 @@ if (false) {
  * @type {?}
  */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * \@publicApi
- * @record
- */
-function PopStateEvent() { }
-if (false) {
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.pop;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.state;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.type;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.url;
-}
 /**
  * \@description
+ * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * represent its state in the
+ * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
+ * browser's URL.
  *
- * A service that applications can use to interact with a browser's URL.
+ * If you're using `PathLocationStrategy`, you must provide a {\@link APP_BASE_HREF}
+ * or add a base element to the document. This URL prefix that will be preserved
+ * when generating and recognizing URLs.
  *
- * Depending on the `LocationStrategy` used, `Location` persists
- * to the URL's path or the URL's hash segment.
+ * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+ * `location.go('/foo')`, the browser's URL will become
+ * `example.com/my/app/foo`.
+ *
+ * Similarly, if you add `<base href='/my/app'/>` to the document and call
+ * `location.go('/foo')`, the browser's URL will become
+ * `example.com/my/app/foo`.
  *
  * \@usageNotes
  *
- * It's better to use the `Router#navigate` service to trigger route changes. Use
- * `Location` only if you need to interact with or create normalized URLs outside of
- * routing.
- *
- * `Location` is responsible for normalizing the URL against the application's base href.
- * A normalized URL is absolute from the URL host, includes the application's base href, and has no
- * trailing slash:
- * - `/my/app/user/123` is normalized
- * - `my/app/user/123` **is not** normalized
- * - `/my/app/user/123/` **is not** normalized
- *
  * ### Example
  *
- * <code-example path='common/location/ts/path_location_component.ts'
- * region='LocationComponent'></code-example>
+ * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
  * \@publicApi
  */
-class Location {
+class PathLocationStrategy extends LocationStrategy {
     /**
-     * @param {?} platformStrategy
-     * @param {?} platformLocation
+     * @param {?} _platformLocation
+     * @param {?=} href
      */
-    constructor(platformStrategy, platformLocation) {
-        /**
-         * \@internal
-         */
-        this._subject = new EventEmitter();
-        /**
-         * \@internal
-         */
-        this._urlChangeListeners = [];
-        this._platformStrategy = platformStrategy;
-        /** @type {?} */
-        const browserBaseHref = this._platformStrategy.getBaseHref();
-        this._platformLocation = platformLocation;
-        this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this._platformStrategy.onPopState((/**
-         * @param {?} ev
-         * @return {?}
-         */
-        (ev) => {
-            this._subject.emit({
-                'url': this.path(true),
-                'pop': true,
-                'state': ev.state,
-                'type': ev.type,
-            });
-        }));
+    constructor(_platformLocation, href) {
+        super();
+        this._platformLocation = _platformLocation;
+        if (href == null) {
+            href = this._platformLocation.getBaseHrefFromDOM();
+        }
+        if (href == null) {
+            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
+        }
+        this._baseHref = href;
     }
     /**
-     * Normalizes the URL path for this location.
-     *
-     * @param {?=} includeHash True to include an anchor fragment in the path.
-     *
-     * @return {?} The normalized URL path.
+     * @param {?} fn
+     * @return {?}
      */
-    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-    // removed.
+    onPopState(fn) {
+        this._platformLocation.onPopState(fn);
+        this._platformLocation.onHashChange(fn);
+    }
+    /**
+     * @return {?}
+     */
+    getBaseHref() { return this._baseHref; }
+    /**
+     * @param {?} internal
+     * @return {?}
+     */
+    prepareExternalUrl(internal) { return joinWithSlash(this._baseHref, internal); }
+    /**
+     * @param {?=} includeHash
+     * @return {?}
+     */
     path(includeHash = false) {
-        return this.normalize(this._platformStrategy.path(includeHash));
-    }
-    /**
-     * Reports the current state of the location history.
-     * @return {?} The current value of the `history.state` object.
-     */
-    getState() { return this._platformLocation.getState(); }
-    /**
-     * Normalizes the given path and compares to the current normalized path.
-     *
-     * @param {?} path The given URL path.
-     * @param {?=} query Query parameters.
-     *
-     * @return {?} True if the given URL path is equal to the current normalized path, false
-     * otherwise.
-     */
-    isCurrentPathEqualTo(path, query = '') {
-        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
-    }
-    /**
-     * Normalizes a URL path by stripping any trailing slashes.
-     *
-     * @param {?} url String representing a URL.
-     *
-     * @return {?} The normalized URL string.
-     */
-    normalize(url) {
-        return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
-    }
-    /**
-     * Normalizes an external URL path.
-     * If the given URL doesn't begin with a leading slash (`'/'`), adds one
-     * before normalizing. Adds a hash if `HashLocationStrategy` is
-     * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-     *
-     * @param {?} url String representing a URL.
-     *
-     * @return {?} A normalized platform-specific URL.
-     */
-    prepareExternalUrl(url) {
-        if (url && url[0] !== '/') {
-            url = '/' + url;
-        }
-        return this._platformStrategy.prepareExternalUrl(url);
-    }
-    // TODO: rename this method to pushState
-    /**
-     * Changes the browser's URL to a normalized version of a given URL, and pushes a
-     * new item onto the platform's history.
-     *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
-     *
-     * @return {?}
-     */
-    go(path, query = '', state = null) {
-        this._platformStrategy.pushState(state, '', path, query);
-        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location.normalizeQueryParams(query)), state);
-    }
-    /**
-     * Changes the browser's URL to a normalized version of the given URL, and replaces
-     * the top item on the platform's history stack.
-     *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
-     * @return {?}
-     */
-    replaceState(path, query = '', state = null) {
-        this._platformStrategy.replaceState(state, '', path, query);
-        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + Location.normalizeQueryParams(query)), state);
-    }
-    /**
-     * Navigates forward in the platform's history.
-     * @return {?}
-     */
-    forward() { this._platformStrategy.forward(); }
-    /**
-     * Navigates back in the platform's history.
-     * @return {?}
-     */
-    back() { this._platformStrategy.back(); }
-    /**
-     * Registers a URL change listener. Use to catch updates performed by the Angular
-     * framework that are not detectible through "popstate" or "hashchange" events.
-     *
-     * @param {?} fn The change handler function, which take a URL and a location history state.
-     * @return {?}
-     */
-    onUrlChange(fn) {
-        this._urlChangeListeners.push(fn);
-        this.subscribe((/**
-         * @param {?} v
-         * @return {?}
-         */
-        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
-    }
-    /**
-     * \@internal
-     * @param {?=} url
-     * @param {?=} state
-     * @return {?}
-     */
-    _notifyUrlChangeListeners(url = '', state) {
-        this._urlChangeListeners.forEach((/**
-         * @param {?} fn
-         * @return {?}
-         */
-        fn => fn(url, state)));
-    }
-    /**
-     * Subscribes to the platform's `popState` events.
-     *
-     * @param {?} onNext
-     * @param {?=} onThrow
-     * @param {?=} onReturn
-     * @return {?} Subscribed events.
-     */
-    subscribe(onNext, onThrow, onReturn) {
-        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-    }
-    /**
-     * Normalizes URL parameters by prepending with `?` if needed.
-     *
-     * @param {?} params String of URL parameters.
-     *
-     * @return {?} The normalized URL parameters string.
-     */
-    static normalizeQueryParams(params) {
-        return params && params[0] !== '?' ? '?' + params : params;
-    }
-    /**
-     * Joins two parts of a URL with a slash if needed.
-     *
-     * @param {?} start  URL string
-     * @param {?} end    URL string
-     *
-     *
-     * @return {?} The joined URL string.
-     */
-    static joinWithSlash(start, end) {
-        if (start.length == 0) {
-            return end;
-        }
-        if (end.length == 0) {
-            return start;
-        }
         /** @type {?} */
-        let slashes = 0;
-        if (start.endsWith('/')) {
-            slashes++;
-        }
-        if (end.startsWith('/')) {
-            slashes++;
-        }
-        if (slashes == 2) {
-            return start + end.substring(1);
-        }
-        if (slashes == 1) {
-            return start + end;
-        }
-        return start + '/' + end;
+        const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
+        /** @type {?} */
+        const hash = this._platformLocation.hash;
+        return hash && includeHash ? `${pathname}${hash}` : pathname;
     }
     /**
-     * Removes a trailing slash from a URL string if needed.
-     * Looks for the first occurrence of either `#`, `?`, or the end of the
-     * line as `/` characters and removes the trailing slash if one exists.
-     *
-     * @param {?} url URL string.
-     *
-     * @return {?} The URL string, modified if needed.
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
      */
-    static stripTrailingSlash(url) {
+    pushState(state, title, url, queryParams) {
         /** @type {?} */
-        const match = url.match(/#|\?|$/);
-        /** @type {?} */
-        const pathEndIdx = match && match.index || url.length;
-        /** @type {?} */
-        const droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
-        return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+        this._platformLocation.pushState(state, title, externalUrl);
     }
+    /**
+     * @param {?} state
+     * @param {?} title
+     * @param {?} url
+     * @param {?} queryParams
+     * @return {?}
+     */
+    replaceState(state, title, url, queryParams) {
+        /** @type {?} */
+        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+        this._platformLocation.replaceState(state, title, externalUrl);
+    }
+    /**
+     * @return {?}
+     */
+    forward() { this._platformLocation.forward(); }
+    /**
+     * @return {?}
+     */
+    back() { this._platformLocation.back(); }
 }
-Location.decorators = [
+PathLocationStrategy.decorators = [
     { type: Injectable }
 ];
 /** @nocollapse */
-Location.ctorParameters = () => [
-    { type: LocationStrategy },
-    { type: PlatformLocation }
+PathLocationStrategy.ctorParameters = () => [
+    { type: PlatformLocation },
+    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
 if (false) {
     /**
-     * \@internal
      * @type {?}
+     * @private
      */
-    Location.prototype._subject;
+    PathLocationStrategy.prototype._baseHref;
     /**
-     * \@internal
      * @type {?}
+     * @private
      */
-    Location.prototype._baseHref;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._platformStrategy;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._platformLocation;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._urlChangeListeners;
-}
-/**
- * @param {?} baseHref
- * @param {?} url
- * @return {?}
- */
-function _stripBaseHref(baseHref, url) {
-    return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
-}
-/**
- * @param {?} url
- * @return {?}
- */
-function _stripIndexHtml(url) {
-    return url.replace(/\/index.html$/, '');
+    PathLocationStrategy.prototype._platformLocation;
 }
 
 /**
@@ -640,7 +2383,7 @@ class HashLocationStrategy extends LocationStrategy {
      */
     prepareExternalUrl(internal) {
         /** @type {?} */
-        const url = Location.joinWithSlash(this._baseHref, internal);
+        const url = joinWithSlash(this._baseHref, internal);
         return url.length > 0 ? ('#' + url) : url;
     }
     /**
@@ -652,7 +2395,7 @@ class HashLocationStrategy extends LocationStrategy {
      */
     pushState(state, title, path, queryParams) {
         /** @type {?} */
-        let url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
@@ -667,7 +2410,7 @@ class HashLocationStrategy extends LocationStrategy {
      */
     replaceState(state, title, path, queryParams) {
         /** @type {?} */
-        let url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
@@ -708,131 +2451,332 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
+ * \@publicApi
+ * @record
+ */
+function PopStateEvent() { }
+if (false) {
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.pop;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.state;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.type;
+    /** @type {?|undefined} */
+    PopStateEvent.prototype.url;
+}
+/**
  * \@description
- * A {\@link LocationStrategy} used to configure the {\@link Location} service to
- * represent its state in the
- * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
- * browser's URL.
  *
- * If you're using `PathLocationStrategy`, you must provide a {\@link APP_BASE_HREF}
- * or add a base element to the document. This URL prefix that will be preserved
- * when generating and recognizing URLs.
+ * A service that applications can use to interact with a browser's URL.
  *
- * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
- * `location.go('/foo')`, the browser's URL will become
- * `example.com/my/app/foo`.
- *
- * Similarly, if you add `<base href='/my/app'/>` to the document and call
- * `location.go('/foo')`, the browser's URL will become
- * `example.com/my/app/foo`.
+ * Depending on the `LocationStrategy` used, `Location` persists
+ * to the URL's path or the URL's hash segment.
  *
  * \@usageNotes
  *
+ * It's better to use the `Router#navigate` service to trigger route changes. Use
+ * `Location` only if you need to interact with or create normalized URLs outside of
+ * routing.
+ *
+ * `Location` is responsible for normalizing the URL against the application's base href.
+ * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+ * trailing slash:
+ * - `/my/app/user/123` is normalized
+ * - `my/app/user/123` **is not** normalized
+ * - `/my/app/user/123/` **is not** normalized
+ *
  * ### Example
  *
- * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
+ * <code-example path='common/location/ts/path_location_component.ts'
+ * region='LocationComponent'></code-example>
  *
  * \@publicApi
  */
-class PathLocationStrategy extends LocationStrategy {
+class Location {
     /**
-     * @param {?} _platformLocation
-     * @param {?=} href
+     * @param {?} platformStrategy
+     * @param {?} platformLocation
      */
-    constructor(_platformLocation, href) {
-        super();
-        this._platformLocation = _platformLocation;
-        if (href == null) {
-            href = this._platformLocation.getBaseHrefFromDOM();
-        }
-        if (href == null) {
-            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
-        }
-        this._baseHref = href;
+    constructor(platformStrategy, platformLocation) {
+        /**
+         * \@internal
+         */
+        this._subject = new EventEmitter();
+        /**
+         * \@internal
+         */
+        this._urlChangeListeners = [];
+        this._platformStrategy = platformStrategy;
+        /** @type {?} */
+        const browserBaseHref = this._platformStrategy.getBaseHref();
+        this._platformLocation = platformLocation;
+        this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
+        this._platformStrategy.onPopState((/**
+         * @param {?} ev
+         * @return {?}
+         */
+        (ev) => {
+            this._subject.emit({
+                'url': this.path(true),
+                'pop': true,
+                'state': ev.state,
+                'type': ev.type,
+            });
+        }));
     }
     /**
-     * @param {?} fn
-     * @return {?}
+     * Normalizes the URL path for this location.
+     *
+     * @param {?=} includeHash True to include an anchor fragment in the path.
+     *
+     * @return {?} The normalized URL path.
      */
-    onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHref() { return this._baseHref; }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) {
-        return Location.joinWithSlash(this._baseHref, internal);
-    }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
+    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+    // removed.
     path(includeHash = false) {
-        /** @type {?} */
-        const pathname = this._platformLocation.pathname +
-            Location.normalizeQueryParams(this._platformLocation.search);
-        /** @type {?} */
-        const hash = this._platformLocation.hash;
-        return hash && includeHash ? `${pathname}${hash}` : pathname;
+        return this.normalize(this._platformStrategy.path(includeHash));
     }
     /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
+     * Reports the current state of the location history.
+     * @return {?} The current value of the `history.state` object.
      */
-    pushState(state, title, url, queryParams) {
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-        this._platformLocation.pushState(state, title, externalUrl);
+    getState() { return this._platformLocation.getState(); }
+    /**
+     * Normalizes the given path and compares to the current normalized path.
+     *
+     * @param {?} path The given URL path.
+     * @param {?=} query Query parameters.
+     *
+     * @return {?} True if the given URL path is equal to the current normalized path, false
+     * otherwise.
+     */
+    isCurrentPathEqualTo(path, query = '') {
+        return this.path() == this.normalize(path + normalizeQueryParams(query));
     }
     /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
+     * Normalizes a URL path by stripping any trailing slashes.
+     *
+     * @param {?} url String representing a URL.
+     *
+     * @return {?} The normalized URL string.
      */
-    replaceState(state, title, url, queryParams) {
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-        this._platformLocation.replaceState(state, title, externalUrl);
+    normalize(url) {
+        return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
     }
     /**
-     * @return {?}
+     * Normalizes an external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), adds one
+     * before normalizing. Adds a hash if `HashLocationStrategy` is
+     * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     *
+     * @param {?} url String representing a URL.
+     *
+     * @return {?} A normalized platform-specific URL.
      */
-    forward() { this._platformLocation.forward(); }
+    prepareExternalUrl(url) {
+        if (url && url[0] !== '/') {
+            url = '/' + url;
+        }
+        return this._platformStrategy.prepareExternalUrl(url);
+    }
+    // TODO: rename this method to pushState
     /**
+     * Changes the browser's URL to a normalized version of a given URL, and pushes a
+     * new item onto the platform's history.
+     *
+     * @param {?} path  URL path to normalize.
+     * @param {?=} query Query parameters.
+     * @param {?=} state Location history state.
+     *
      * @return {?}
      */
-    back() { this._platformLocation.back(); }
+    go(path, query = '', state = null) {
+        this._platformStrategy.pushState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+    }
+    /**
+     * Changes the browser's URL to a normalized version of the given URL, and replaces
+     * the top item on the platform's history stack.
+     *
+     * @param {?} path  URL path to normalize.
+     * @param {?=} query Query parameters.
+     * @param {?=} state Location history state.
+     * @return {?}
+     */
+    replaceState(path, query = '', state = null) {
+        this._platformStrategy.replaceState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+    }
+    /**
+     * Navigates forward in the platform's history.
+     * @return {?}
+     */
+    forward() { this._platformStrategy.forward(); }
+    /**
+     * Navigates back in the platform's history.
+     * @return {?}
+     */
+    back() { this._platformStrategy.back(); }
+    /**
+     * Registers a URL change listener. Use to catch updates performed by the Angular
+     * framework that are not detectible through "popstate" or "hashchange" events.
+     *
+     * @param {?} fn The change handler function, which take a URL and a location history state.
+     * @return {?}
+     */
+    onUrlChange(fn) {
+        this._urlChangeListeners.push(fn);
+        this.subscribe((/**
+         * @param {?} v
+         * @return {?}
+         */
+        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+    }
+    /**
+     * \@internal
+     * @param {?=} url
+     * @param {?=} state
+     * @return {?}
+     */
+    _notifyUrlChangeListeners(url = '', state) {
+        this._urlChangeListeners.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn(url, state)));
+    }
+    /**
+     * Subscribes to the platform's `popState` events.
+     *
+     * @param {?} onNext
+     * @param {?=} onThrow
+     * @param {?=} onReturn
+     * @return {?} Subscribed events.
+     */
+    subscribe(onNext, onThrow, onReturn) {
+        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+    }
 }
-PathLocationStrategy.decorators = [
-    { type: Injectable }
+/**
+ * Normalizes URL parameters by prepending with `?` if needed.
+ *
+ * @param params String of URL parameters.
+ *
+ * @return The normalized URL parameters string.
+ */
+Location.normalizeQueryParams = normalizeQueryParams;
+/**
+ * Joins two parts of a URL with a slash if needed.
+ *
+ * @param start  URL string
+ * @param end    URL string
+ *
+ *
+ * @return The joined URL string.
+ */
+Location.joinWithSlash = joinWithSlash;
+/**
+ * Removes a trailing slash from a URL string if needed.
+ * Looks for the first occurrence of either `#`, `?`, or the end of the
+ * line as `/` characters and removes the trailing slash if one exists.
+ *
+ * @param url URL string.
+ *
+ * @return The URL string, modified if needed.
+ */
+Location.stripTrailingSlash = stripTrailingSlash;
+Location.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+                // See #23917
+                useFactory: createLocation,
+            },] }
 ];
 /** @nocollapse */
-PathLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation },
-    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
+Location.ctorParameters = () => [
+    { type: LocationStrategy },
+    { type: PlatformLocation }
 ];
+/** @nocollapse */ Location.ngInjectableDef = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
 if (false) {
     /**
+     * Normalizes URL parameters by prepending with `?` if needed.
+     *
+     * \@param params String of URL parameters.
+     *
+     * \@return The normalized URL parameters string.
      * @type {?}
-     * @private
      */
-    PathLocationStrategy.prototype._baseHref;
+    Location.normalizeQueryParams;
     /**
+     * Joins two parts of a URL with a slash if needed.
+     *
+     * \@param start  URL string
+     * \@param end    URL string
+     *
+     *
+     * \@return The joined URL string.
      * @type {?}
-     * @private
      */
-    PathLocationStrategy.prototype._platformLocation;
+    Location.joinWithSlash;
+    /**
+     * Removes a trailing slash from a URL string if needed.
+     * Looks for the first occurrence of either `#`, `?`, or the end of the
+     * line as `/` characters and removes the trailing slash if one exists.
+     *
+     * \@param url URL string.
+     *
+     * \@return The URL string, modified if needed.
+     * @type {?}
+     */
+    Location.stripTrailingSlash;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._subject;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._baseHref;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._platformStrategy;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._platformLocation;
+    /**
+     * \@internal
+     * @type {?}
+     */
+    Location.prototype._urlChangeListeners;
+}
+/**
+ * @return {?}
+ */
+function createLocation() {
+    return new Location(ɵɵinject((/** @type {?} */ (LocationStrategy))), ɵɵinject((/** @type {?} */ (PlatformLocation))));
+}
+/**
+ * @param {?} baseHref
+ * @param {?} url
+ * @return {?}
+ */
+function _stripBaseHref(baseHref, url) {
+    return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
+}
+/**
+ * @param {?} url
+ * @return {?}
+ */
+function _stripIndexHtml(url) {
+    return url.replace(/\/index.html$/, '');
 }
 
 /**
@@ -3550,931 +5494,6 @@ function parseCookieValue(cookieStr, name) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
- *
- * ngStyle and ngClass both accept various forms of input and behave differently than that
- * of how [style] and [class] behave in Angular.
- *
- * The differences are:
- *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
- *    while [style] and [class] bindings do not (they check for identity changes)
- *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
- *  - ngClass supports arrays of class values and [class] only accepts map and string values
- *  - ngClass allows for multiple className keys (space-separated) within an array or map
- *     (as the * key) while [class] only accepts a simple key/value map object
- *
- * Having Angular understand and adapt to all the different forms of behavior is complicated
- * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
- * into something that the core-level [style] and [class] bindings understand.
- *
- * This [StylingDiffer] class handles this conversion by creating a new input value each time
- * the inner representation of the binding value have changed.
- *
- * ## Why do we care about ngStyle/ngClass?
- * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
- * respect and understand the styling values emitted through ngStyle and ngClass (when they
- * are present and used in a template).
- *
- * Instead of having these directives manage styling on their own, they should be included
- * into the Angular styling algorithm that exists for [style] and [class] bindings.
- *
- * Here's why:
- *
- * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
- *   styles and classes would fall out of sync and be applied and updated at
- *   inconsistent times
- * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
- *   (they will write over them given the right combination of events)
- *
- *   ```
- *   <!-- if `w1` is updated then it will always override `w2`
- *        if `w2` is updated then it will always override `w1`
- *        if both are updated at the same time then `w1` wins -->
- *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
- *
- *   <!-- if `w1` is updated then it will always lose to `w2`
- *        if `w2` is updated then it will always override `w1`
- *        if both are updated at the same time then `w2` wins -->
- *   <div [style]="{width:w1}" [style.width]="w2">...</div>
- *   ```
- * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
- *   expensive data structures which were evaluated each time CD runs
- * @template T
- */
-class StylingDiffer {
-    /**
-     * @param {?} _name
-     * @param {?} _options
-     */
-    constructor(_name, _options) {
-        this._name = _name;
-        this._options = _options;
-        this.value = null;
-        this._lastSetValue = null;
-        this._lastSetValueType = 0 /* Null */;
-        this._lastSetValueIdentityChange = false;
-    }
-    /**
-     * Sets (updates) the styling value within the differ.
-     *
-     * Only when `hasValueChanged` is called then this new value will be evaluted
-     * and checked against the previous value.
-     *
-     * @param {?} value the new styling value provided from the ngClass/ngStyle binding
-     * @return {?}
-     */
-    setValue(value) {
-        if (Array.isArray(value)) {
-            this._lastSetValueType = 4 /* Array */;
-        }
-        else if (value instanceof Set) {
-            this._lastSetValueType = 8 /* Set */;
-        }
-        else if (value && typeof value === 'string') {
-            if (!(this._options & 4 /* AllowStringValue */)) {
-                throw new Error(this._name + ' string values are not allowed');
-            }
-            this._lastSetValueType = 1 /* String */;
-        }
-        else {
-            this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
-        }
-        this._lastSetValueIdentityChange = true;
-        this._lastSetValue = value || null;
-    }
-    /**
-     * Determines whether or not the value has changed.
-     *
-     * This function can be called right after `setValue()` is called, but it can also be
-     * called incase the existing value (if it's a collection) changes internally. If the
-     * value is indeed a collection it will do the necessary diffing work and produce a
-     * new object value as assign that to `value`.
-     *
-     * @return {?} whether or not the value has changed in some way.
-     */
-    hasValueChanged() {
-        /** @type {?} */
-        let valueHasChanged = this._lastSetValueIdentityChange;
-        if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
-            return false;
-        /** @type {?} */
-        let finalValue = null;
-        /** @type {?} */
-        const trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
-        /** @type {?} */
-        const parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
-        /** @type {?} */
-        const allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
-        switch (this._lastSetValueType) {
-            // case 1: [input]="string"
-            case 1 /* String */:
-                /** @type {?} */
-                const tokens = ((/** @type {?} */ (this._lastSetValue))).split(/\s+/g);
-                if (this._options & 16 /* ForceAsMap */) {
-                    finalValue = {};
-                    tokens.forEach((/**
-                     * @param {?} token
-                     * @param {?} i
-                     * @return {?}
-                     */
-                    (token, i) => ((/** @type {?} */ (finalValue)))[token] = true));
-                }
-                else {
-                    finalValue = tokens.reduce((/**
-                     * @param {?} str
-                     * @param {?} token
-                     * @param {?} i
-                     * @return {?}
-                     */
-                    (str, token, i) => str + (i ? ' ' : '') + token));
-                }
-                break;
-            // case 2: [input]="{key:value}"
-            case 2 /* Map */:
-                /** @type {?} */
-                const map = (/** @type {?} */ (this._lastSetValue));
-                /** @type {?} */
-                const keys = Object.keys(map);
-                if (!valueHasChanged) {
-                    if (this.value) {
-                        // we know that the classExp value exists and that it is
-                        // a map (otherwise an identity change would have occurred)
-                        valueHasChanged = mapHasChanged(keys, (/** @type {?} */ (this.value)), map);
-                    }
-                    else {
-                        valueHasChanged = true;
-                    }
-                }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
-                }
-                break;
-            // case 3a: [input]="[str1, str2, ...]"
-            // case 3b: [input]="Set"
-            case 4 /* Array */:
-            case 8 /* Set */:
-                /** @type {?} */
-                const values = Array.from((/** @type {?} */ (this._lastSetValue)));
-                if (!valueHasChanged) {
-                    /** @type {?} */
-                    const keys = Object.keys((/** @type {?} */ (this.value)));
-                    valueHasChanged = !arrayEqualsArray(keys, values);
-                }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
-                }
-                break;
-            // case 4: [input]="null|undefined"
-            default:
-                finalValue = null;
-                break;
-        }
-        if (valueHasChanged) {
-            ((/** @type {?} */ (this))).value = (/** @type {?} */ (finalValue));
-        }
-        return valueHasChanged;
-    }
-}
-if (false) {
-    /** @type {?} */
-    StylingDiffer.prototype.value;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValueType;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValueIdentityChange;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._name;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._options;
-}
-/** @enum {number} */
-const StylingDifferOptions = {
-    None: 0,
-    TrimProperties: 1,
-    AllowSubKeys: 2,
-    AllowStringValue: 4,
-    AllowUnits: 8,
-    ForceAsMap: 16,
-};
-/** @enum {number} */
-const StylingDifferValueTypes = {
-    Null: 0,
-    String: 1,
-    Map: 2,
-    Array: 4,
-    Set: 8,
-    Collection: 14,
-};
-/**
- * builds and returns a map based on the values input value
- *
- * If the `keys` param is provided then the `values` param is treated as a
- * string map. Otherwise `values` is treated as a string array.
- * @param {?} errorPrefix
- * @param {?} trim
- * @param {?} parseOutUnits
- * @param {?} allowSubKeys
- * @param {?} values
- * @param {?=} keys
- * @return {?}
- */
-function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
-    /** @type {?} */
-    const map = {};
-    if (keys) {
-        // case 1: map
-        for (let i = 0; i < keys.length; i++) {
-            /** @type {?} */
-            let key = keys[i];
-            key = trim ? key.trim() : key;
-            /** @type {?} */
-            const value = ((/** @type {?} */ (values)))[key];
-            setMapValues(map, key, value, parseOutUnits, allowSubKeys);
-        }
-    }
-    else {
-        // case 2: array
-        for (let i = 0; i < values.length; i++) {
-            /** @type {?} */
-            let value = ((/** @type {?} */ (values)))[i];
-            assertValidValue(errorPrefix, value);
-            value = trim ? value.trim() : value;
-            setMapValues(map, value, true, false, allowSubKeys);
-        }
-    }
-    return map;
-}
-/**
- * @param {?} errorPrefix
- * @param {?} value
- * @return {?}
- */
-function assertValidValue(errorPrefix, value) {
-    if (typeof value !== 'string') {
-        throw new Error(`${errorPrefix} can only toggle CSS classes expressed as strings, got ${value}`);
-    }
-}
-/**
- * @param {?} map
- * @param {?} key
- * @param {?} value
- * @param {?} parseOutUnits
- * @param {?} allowSubKeys
- * @return {?}
- */
-function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
-    if (allowSubKeys && key.indexOf(' ') > 0) {
-        /** @type {?} */
-        const innerKeys = key.split(/\s+/g);
-        for (let j = 0; j < innerKeys.length; j++) {
-            setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
-        }
-    }
-    else {
-        setIndividualMapValue(map, key, value, parseOutUnits);
-    }
-}
-/**
- * @param {?} map
- * @param {?} key
- * @param {?} value
- * @param {?} parseOutUnits
- * @return {?}
- */
-function setIndividualMapValue(map, key, value, parseOutUnits) {
-    if (parseOutUnits) {
-        /** @type {?} */
-        const values = normalizeStyleKeyAndValue(key, value);
-        value = values.value;
-        key = values.key;
-    }
-    map[key] = value;
-}
-/**
- * @param {?} key
- * @param {?} value
- * @return {?}
- */
-function normalizeStyleKeyAndValue(key, value) {
-    /** @type {?} */
-    const index = key.indexOf('.');
-    if (index > 0) {
-        /** @type {?} */
-        const unit = key.substr(index + 1);
-        key = key.substring(0, index);
-        if (value != null) { // we should not convert null values to string
-            value += unit;
-        }
-    }
-    return { key, value };
-}
-/**
- * @param {?} keys
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
-function mapHasChanged(keys, a, b) {
-    /** @type {?} */
-    const oldKeys = Object.keys(a);
-    /** @type {?} */
-    const newKeys = keys;
-    // the keys are different which means the map changed
-    if (!arrayEqualsArray(oldKeys, newKeys)) {
-        return true;
-    }
-    for (let i = 0; i < newKeys.length; i++) {
-        /** @type {?} */
-        const key = newKeys[i];
-        if (a[key] !== b[key]) {
-            return true;
-        }
-    }
-    return false;
-}
-/**
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
-function arrayEqualsArray(a, b) {
-    if (a && b) {
-        if (a.length !== b.length)
-            return false;
-        for (let i = 0; i < a.length; i++) {
-            if (b.indexOf(a[i]) === -1)
-                return false;
-        }
-        return true;
-    }
-    return false;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Used as a token for an injected service within the NgClass directive.
- *
- * NgClass behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[class]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- * @abstract
- */
-class NgClassImpl {
-}
-if (false) {
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgClassImpl.prototype.setClass = function (value) { };
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgClassImpl.prototype.setNgClass = function (value) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgClassImpl.prototype.applyChanges = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgClassImpl.prototype.getValue = function () { };
-}
-class NgClassR2Impl {
-    /**
-     * @param {?} _iterableDiffers
-     * @param {?} _keyValueDiffers
-     * @param {?} _ngEl
-     * @param {?} _renderer
-     */
-    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-        this._iterableDiffers = _iterableDiffers;
-        this._keyValueDiffers = _keyValueDiffers;
-        this._ngEl = _ngEl;
-        this._renderer = _renderer;
-        this._initialClasses = [];
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return null; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setClass(value) {
-        this._removeClasses(this._initialClasses);
-        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-        this._applyClasses(this._initialClasses);
-        this._applyClasses(this._rawClass);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgClass(value) {
-        this._removeClasses(this._rawClass);
-        this._applyClasses(this._initialClasses);
-        this._iterableDiffer = null;
-        this._keyValueDiffer = null;
-        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-        if (this._rawClass) {
-            if (ɵisListLikeIterable(this._rawClass)) {
-                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-            }
-            else {
-                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-            }
-        }
-    }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._iterableDiffer) {
-            /** @type {?} */
-            const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (iterableChanges) {
-                this._applyIterableChanges(iterableChanges);
-            }
-        }
-        else if (this._keyValueDiffer) {
-            /** @type {?} */
-            const keyValueChanges = this._keyValueDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (keyValueChanges) {
-                this._applyKeyValueChanges(keyValueChanges);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyKeyValueChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (record.previousValue) {
-                this._toggleClass(record.key, false);
-            }
-        }));
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyIterableChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (typeof record.item === 'string') {
-                this._toggleClass(record.item, true);
-            }
-            else {
-                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
-            }
-        }));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.item, false)));
-    }
-    /**
-     * Applies a collection of CSS classes to the DOM element.
-     *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _applyClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, true)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, !!rawClassVal[klass])));
-            }
-        }
-    }
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _removeClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, false)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, false)));
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} klass
-     * @param {?} enabled
-     * @return {?}
-     */
-    _toggleClass(klass, enabled) {
-        klass = klass.trim();
-        if (klass) {
-            klass.split(/\s+/g).forEach((/**
-             * @param {?} klass
-             * @return {?}
-             */
-            klass => {
-                if (enabled) {
-                    this._renderer.addClass(this._ngEl.nativeElement, klass);
-                }
-                else {
-                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
-                }
-            }));
-        }
-    }
-}
-NgClassR2Impl.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NgClassR2Impl.ctorParameters = () => [
-    { type: IterableDiffers },
-    { type: KeyValueDiffers },
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._iterableDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._keyValueDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._initialClasses;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._rawClass;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._iterableDiffers;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._keyValueDiffers;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._ngEl;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._renderer;
-}
-class NgClassR3Impl {
-    constructor() {
-        this._value = null;
-        this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
-            2 /* AllowSubKeys */ |
-            4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer = null;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._value; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setClass(value) {
-        // early exit incase the binding gets emitted as an empty value which
-        // means there is no reason to instantiate and diff the values...
-        if (!value && !this._classStringDiffer)
-            return;
-        this._classStringDiffer = this._classStringDiffer ||
-            new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer.setValue(value);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgClass(value) {
-        this._ngClassDiffer.setValue(value);
-    }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        /** @type {?} */
-        const classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
-        /** @type {?} */
-        const ngClassChanged = this._ngClassDiffer.hasValueChanged();
-        if (classChanged || ngClassChanged) {
-            /** @type {?} */
-            let value = this._ngClassDiffer.value;
-            if (this._classStringDiffer) {
-                /** @type {?} */
-                let classValue = this._classStringDiffer.value;
-                if (classValue) {
-                    value = value ? Object.assign({}, classValue, value) : classValue;
-                }
-            }
-            this._value = value;
-        }
-    }
-}
-NgClassR3Impl.decorators = [
-    { type: Injectable }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._value;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._ngClassDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._classStringDiffer;
-}
-// the implementation for both NgStyleR2Impl and NgStyleR3Impl are
-// not ivy_switch'd away, instead they are only hooked up into the
-// DI via NgStyle's directive's provider property.
-/** @type {?} */
-const NgClassImplProvider__PRE_R3__ = {
-    provide: NgClassImpl,
-    useClass: NgClassR2Impl
-};
-/** @type {?} */
-const NgClassImplProvider__POST_R3__ = {
-    provide: NgClassImpl,
-    useClass: NgClassR3Impl
-};
-/** @type {?} */
-const NgClassImplProvider = NgClassImplProvider__PRE_R3__;
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*
- * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
- *
- * If the VE is present (which is for older versions of Angular) then NgClass will inject
- * the legacy diffing algorithm as a service and delegate all styling changes to that.
- *
- * If the VE is not present then NgStyle will normalize (through the injected service) and
- * then write all styling changes to the `[style]` binding directly (through a host binding).
- * Then Angular will notice the host binding change and treat the changes as styling
- * changes and apply them via the core styling instructions that exist within Angular.
- */
-// used when the VE is present
-/** @type {?} */
-const ngClassDirectiveDef__PRE_R3__ = undefined;
-// used when the VE is not present (note the directive will
-// never be instantiated normally because it is apart of a
-// base class)
-const ɵ0 = /**
- * @return {?}
- */
-function () { }, ɵ1 = /**
- * @param {?} rf
- * @param {?} ctx
- * @param {?} elIndex
- * @return {?}
- */
-function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(1);
-        ɵɵstyling();
-    }
-    if (rf & 2 /* Update */) {
-        ɵɵclassMap(ctx.getValue());
-        ɵɵstylingApply();
-    }
-};
-/** @type {?} */
-const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: (/** @type {?} */ ((ɵ0))),
-    selectors: (/** @type {?} */ (null)),
-    hostBindings: (ɵ1)
-});
-/** @type {?} */
-const ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
-/** @type {?} */
-const ngClassFactoryDef__PRE_R3__ = undefined;
-/** @type {?} */
-const ngClassFactoryDef__POST_R3__ = (/**
- * @return {?}
- */
-function () { });
-/** @type {?} */
-const ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
-/**
- * Serves as the base non-VE container for NgClass.
- *
- * While this is a base class that NgClass extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
- *
- * Note that the `ngDirectiveDef` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * \@publicApi
- */
-class NgClassBase {
-    /**
-     * @param {?} _delegate
-     */
-    constructor(_delegate) {
-        this._delegate = _delegate;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._delegate.getValue(); }
-}
-/** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
-/** @nocollapse */ NgClassBase.ngFactoryDef = ngClassFactoryDef;
-if (false) {
-    /** @nocollapse @type {?} */
-    NgClassBase.ngDirectiveDef;
-    /** @nocollapse @type {?} */
-    NgClassBase.ngFactoryDef;
-    /**
-     * @type {?}
-     * @protected
-     */
-    NgClassBase.prototype._delegate;
-}
-/**
- * \@ngModule CommonModule
- *
- * \@usageNotes
- * ```
- *     <some-element [ngClass]="'first second'">...</some-element>
- *
- *     <some-element [ngClass]="['first', 'second']">...</some-element>
- *
- *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
- *
- *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
- *
- *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
- * ```
- *
- * \@description
- *
- * Adds and removes CSS classes on an HTML element.
- *
- * The CSS classes are updated as follows, depending on the type of the expression evaluation:
- * - `string` - the CSS classes listed in the string (space delimited) are added,
- * - `Array` - the CSS classes declared as Array elements are added,
- * - `Object` - keys are CSS classes that get added when the expression given in the value
- *              evaluates to a truthy value, otherwise they are removed.
- *
- * \@publicApi
- */
-class NgClass extends NgClassBase {
-    /**
-     * @param {?} delegate
-     */
-    constructor(delegate) { super(delegate); }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set klass(value) { this._delegate.setClass(value); }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngClass(value) {
-        this._delegate.setNgClass(value);
-    }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() { this._delegate.applyChanges(); }
-}
-NgClass.decorators = [
-    { type: Directive, args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] },] }
-];
-/** @nocollapse */
-NgClass.ctorParameters = () => [
-    { type: NgClassImpl }
-];
-NgClass.propDecorators = {
-    klass: [{ type: Input, args: ['class',] }],
-    ngClass: [{ type: Input, args: ['ngClass',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
  *
@@ -5827,369 +6846,6 @@ if (false) {
     /** @type {?} */
     NgPluralCase.prototype.value;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Used as a token for an injected service within the NgStyle directive.
- *
- * NgStyle behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[style]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- * @abstract
- */
-class NgStyleImpl {
-}
-if (false) {
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgStyleImpl.prototype.getValue = function () { };
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgStyleImpl.prototype.setNgStyle = function (value) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgStyleImpl.prototype.applyChanges = function () { };
-}
-class NgStyleR2Impl {
-    /**
-     * @param {?} _ngEl
-     * @param {?} _differs
-     * @param {?} _renderer
-     */
-    constructor(_ngEl, _differs, _renderer) {
-        this._ngEl = _ngEl;
-        this._differs = _differs;
-        this._renderer = _renderer;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return null; }
-    /**
-     * A map of style properties, specified as colon-separated
-     * key-value pairs.
-     * * The key is a style name, with an optional `.<unit>` suffix
-     *    (such as 'top.px', 'font-style.em').
-     * * The value is an expression to be evaluated.
-     * @param {?} values
-     * @return {?}
-     */
-    setNgStyle(values) {
-        this._ngStyle = values;
-        if (!this._differ && values) {
-            this._differ = this._differs.find(values).create();
-        }
-    }
-    /**
-     * Applies the new styles if needed.
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._differ) {
-            /** @type {?} */
-            const changes = this._differ.diff(this._ngStyle);
-            if (changes) {
-                this._applyChanges(changes);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyChanges(changes) {
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, null)));
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-    }
-    /**
-     * @private
-     * @param {?} nameAndUnit
-     * @param {?} value
-     * @return {?}
-     */
-    _setStyle(nameAndUnit, value) {
-        const [name, unit] = nameAndUnit.split('.');
-        value = value != null && unit ? `${value}${unit}` : value;
-        if (value != null) {
-            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
-        }
-        else {
-            this._renderer.removeStyle(this._ngEl.nativeElement, name);
-        }
-    }
-}
-NgStyleR2Impl.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NgStyleR2Impl.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyValueDiffers },
-    { type: Renderer2 }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._ngStyle;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._ngEl;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._differs;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._renderer;
-}
-class NgStyleR3Impl {
-    constructor() {
-        this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
-        this._value = null;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._value; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgStyle(value) { this._differ.setValue(value); }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._differ.hasValueChanged()) {
-            this._value = this._differ.value;
-        }
-    }
-}
-NgStyleR3Impl.decorators = [
-    { type: Injectable }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR3Impl.prototype._differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR3Impl.prototype._value;
-}
-// the implementation for both NgClassR2Impl and NgClassR3Impl are
-// not ivy_switch'd away, instead they are only hooked up into the
-// DI via NgStyle's directive's provider property.
-/** @type {?} */
-const NgStyleImplProvider__PRE_R3__ = {
-    provide: NgStyleImpl,
-    useClass: NgStyleR2Impl
-};
-/** @type {?} */
-const NgStyleImplProvider__POST_R3__ = {
-    provide: NgStyleImpl,
-    useClass: NgStyleR3Impl
-};
-/** @type {?} */
-const NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*
- * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
- *
- * If the VE is present (which is for older versions of Angular) then NgStyle will inject
- * the legacy diffing algorithm as a service and delegate all styling changes to that.
- *
- * If the VE is not present then NgStyle will normalize (through the injected service) and
- * then write all styling changes to the `[style]` binding directly (through a host binding).
- * Then Angular will notice the host binding change and treat the changes as styling
- * changes and apply them via the core styling instructions that exist within Angular.
- */
-// used when the VE is present
-/** @type {?} */
-const ngStyleDirectiveDef__PRE_R3__ = undefined;
-/** @type {?} */
-const ngStyleFactoryDef__PRE_R3__ = undefined;
-// used when the VE is not present (note the directive will
-// never be instantiated normally because it is apart of a
-// base class)
-const ɵ0$1 = /**
- * @return {?}
- */
-function () { }, ɵ1$1 = /**
- * @param {?} rf
- * @param {?} ctx
- * @param {?} elIndex
- * @return {?}
- */
-function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵstyling();
-    }
-    if (rf & 2 /* Update */) {
-        ɵɵstyleMap(ctx.getValue());
-        ɵɵstylingApply();
-    }
-};
-/** @type {?} */
-const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: (/** @type {?} */ ((ɵ0$1))),
-    selectors: (/** @type {?} */ (null)),
-    hostBindings: (ɵ1$1)
-});
-/** @type {?} */
-const ngStyleFactoryDef__POST_R3__ = (/**
- * @return {?}
- */
-function () { });
-/** @type {?} */
-const ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
-/** @type {?} */
-const ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
-/**
- * Serves as the base non-VE container for NgStyle.
- *
- * While this is a base class that NgStyle extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
- *
- * Note that the `ngDirectiveDef` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * \@publicApi
- */
-class NgStyleBase {
-    /**
-     * @param {?} _delegate
-     */
-    constructor(_delegate) {
-        this._delegate = _delegate;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._delegate.getValue(); }
-}
-/** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
-NgStyleBase.ngFactory = ngStyleFactoryDef;
-if (false) {
-    /** @nocollapse @type {?} */
-    NgStyleBase.ngDirectiveDef;
-    /** @type {?} */
-    NgStyleBase.ngFactory;
-    /**
-     * @type {?}
-     * @protected
-     */
-    NgStyleBase.prototype._delegate;
-}
-/**
- * \@ngModule CommonModule
- *
- * \@usageNotes
- *
- * Set the font of the containing element to the result of an expression.
- *
- * ```
- * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
- * ```
- *
- * Set the width of the containing element to a pixel value returned by an expression.
- *
- * ```
- * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
- * ```
- *
- * Set a collection of style values using an expression that returns key-value pairs.
- *
- * ```
- * <some-element [ngStyle]="objExp">...</some-element>
- * ```
- *
- * \@description
- *
- * An attribute directive that updates styles for the containing HTML element.
- * Sets one or more style properties, specified as colon-separated key-value pairs.
- * The key is a style name, with an optional `.<unit>` suffix
- * (such as 'top.px', 'font-style.em').
- * The value is an expression to be evaluated.
- * The resulting non-null value, expressed in the given unit,
- * is assigned to the given style property.
- * If the result of evaluation is null, the corresponding style is removed.
- *
- * \@publicApi
- */
-class NgStyle extends NgStyleBase {
-    /**
-     * @param {?} delegate
-     */
-    constructor(delegate) { super(delegate); }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngStyle(value) { this._delegate.setNgStyle(value); }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() { this._delegate.applyChanges(); }
-}
-NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] },] }
-];
-/** @nocollapse */
-NgStyle.ctorParameters = () => [
-    { type: NgStyleImpl }
-];
-NgStyle.propDecorators = {
-    ngStyle: [{ type: Input, args: ['ngStyle',] }]
-};
 
 /**
  * @fileoverview added by tsickle
@@ -8352,21 +9008,6 @@ DeprecatedI18NPipesModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * A DI Token representing the main rendering context. In a browser this is the DOM Document.
- *
- * Note: Document might not be available in the Application Context when Application and Rendering
- * Contexts are not the same (e.g. when running the application into a Web Worker).
- *
- * \@publicApi
- * @type {?}
- */
-const DOCUMENT = new InjectionToken('DocumentToken');
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -8426,7 +9067,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.4+39.sha-3758978.with-local-changes');
+const VERSION = new Version('9.0.0-next.4+44.sha-1537791.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -8714,5 +9355,5 @@ class NullViewportScroller {
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_c, NgClassImplProvider as ɵangular_packages_common_common_h, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_g, NgClassR3Impl as ɵangular_packages_common_common_f, NgStyleImplProvider as ɵangular_packages_common_common_k, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_j, NgStyleR3Impl as ɵangular_packages_common_common_i, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_a, getPluralCase as ɵangular_packages_common_common_b, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_d, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, NgClassImpl as ɵNgClassImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, NgStyleImpl as ɵNgStyleImpl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, PlatformLocation, LOCATION_INITIALIZED, LocationStrategy, APP_BASE_HREF, HashLocationStrategy, PathLocationStrategy, Location };
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_m, NgClassImplProvider as ɵangular_packages_common_common_c, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_b, NgClassR3Impl as ɵangular_packages_common_common_a, NgStyleImplProvider as ɵangular_packages_common_common_f, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_e, NgStyleR3Impl as ɵangular_packages_common_common_d, DEPRECATED_PLURAL_FN as ɵangular_packages_common_common_k, getPluralCase as ɵangular_packages_common_common_l, createLocation as ɵangular_packages_common_common_i, provideLocationStrategy as ɵangular_packages_common_common_j, createBrowserPlatformLocation as ɵangular_packages_common_common_h, useBrowserPlatformLocation as ɵangular_packages_common_common_g, COMMON_DEPRECATED_I18N_PIPES as ɵangular_packages_common_common_o, COMMON_PIPES as ɵangular_packages_common_common_n, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, DeprecatedI18NPipesModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, DeprecatedDatePipe, DeprecatedCurrencyPipe, DeprecatedDecimalPipe, DeprecatedPercentPipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, NgClassImpl as ɵNgClassImpl, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, NgStyleImpl as ɵNgStyleImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter, BrowserPlatformLocation as ɵBrowserPlatformLocation, HashLocationStrategy, Location, APP_BASE_HREF, LocationStrategy, PathLocationStrategy, LOCATION_INITIALIZED, PlatformLocation };
 //# sourceMappingURL=common.js.map
