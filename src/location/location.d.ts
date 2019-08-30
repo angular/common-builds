@@ -131,7 +131,7 @@ export declare class Location {
      *
      * @returns The normalized URL parameters string.
      */
-    static normalizeQueryParams(params: string): string;
+    static normalizeQueryParams: (params: string) => string;
     /**
      * Joins two parts of a URL with a slash if needed.
      *
@@ -141,7 +141,7 @@ export declare class Location {
      *
      * @returns The joined URL string.
      */
-    static joinWithSlash(start: string, end: string): string;
+    static joinWithSlash: (start: string, end: string) => string;
     /**
      * Removes a trailing slash from a URL string if needed.
      * Looks for the first occurrence of either `#`, `?`, or the end of the
@@ -151,6 +151,7 @@ export declare class Location {
      *
      * @returns The URL string, modified if needed.
      */
-    static stripTrailingSlash(url: string): string;
+    static stripTrailingSlash: (url: string) => string;
     static ngInjectableDef: i0.ɵɵInjectableDef<Location>;
 }
+export declare function createLocation(): Location;
