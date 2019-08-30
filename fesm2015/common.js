@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+48.sha-9bbe67f.with-local-changes
+ * @license Angular v9.0.0-next.4+46.sha-ba5e07e.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9717,7 +9717,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.4+48.sha-9bbe67f.with-local-changes');
+const VERSION = new Version('9.0.0-next.4+46.sha-ba5e07e.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
