@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+69.sha-9a55eaf.with-local-changes
+ * @license Angular v9.0.0-next.4+70.sha-f5bec3f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3196,7 +3196,7 @@ declare interface HttpParamsOptions {
     fromString?: string;
     /** Object map of the HTTP parameters. Mutually exclusive with `fromString`. */
     fromObject?: {
-        [param: string]: string | string[];
+        [param: string]: string | ReadonlyArray<string>;
     };
     /** Encoding codec used to parse and serialize the parameters. */
     encoder?: HttpParameterCodec;
