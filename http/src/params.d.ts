@@ -66,7 +66,7 @@ export interface HttpParamsOptions {
     fromString?: string;
     /** Object map of the HTTP parameters. Mutually exclusive with `fromString`. */
     fromObject?: {
-        [param: string]: string | string[];
+        [param: string]: string | ReadonlyArray<string>;
     };
     /** Encoding codec used to parse and serialize the parameters. */
     encoder?: HttpParameterCodec;
