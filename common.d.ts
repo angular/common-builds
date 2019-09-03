@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.4+71.sha-e8f9ba4.with-local-changes
+ * @license Angular v9.0.0-next.4+78.sha-89434e0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2792,42 +2792,13 @@ export declare abstract class ɵDomAdapter {
     abstract log(error: any): any;
     abstract logGroup(error: any): any;
     abstract logGroupEnd(): any;
-    abstract querySelectorAll(el: any, selector: string): any[];
     abstract remove(el: any): Node;
-    abstract getAttribute(element: any, attribute: string): string | null;
-    abstract setProperty(el: Element, name: string, value: any): any;
-    abstract querySelector(el: any, selector: string): any;
-    abstract nextSibling(el: any): Node | null;
-    abstract parentElement(el: any): Node | null;
-    abstract clearNodes(el: any): any;
-    abstract appendChild(el: any, node: any): any;
-    abstract removeChild(el: any, node: any): any;
-    abstract insertBefore(parent: any, ref: any, node: any): any;
-    abstract setText(el: any, value: string): any;
-    abstract createComment(text: string): any;
     abstract createElement(tagName: any, doc?: any): HTMLElement;
-    abstract createElementNS(ns: string, tagName: string, doc?: any): Element;
-    abstract createTextNode(text: string, doc?: any): Text;
-    abstract getElementsByTagName(element: any, name: string): HTMLElement[];
-    abstract addClass(element: any, className: string): any;
-    abstract removeClass(element: any, className: string): any;
-    abstract getStyle(element: any, styleName: string): any;
-    abstract setStyle(element: any, styleName: string, styleValue: string): any;
-    abstract removeStyle(element: any, styleName: string): any;
-    abstract setAttribute(element: any, name: string, value: string): any;
-    abstract setAttributeNS(element: any, ns: string, name: string, value: string): any;
-    abstract removeAttribute(element: any, attribute: string): any;
-    abstract removeAttributeNS(element: any, ns: string, attribute: string): any;
     abstract createHtmlDocument(): HTMLDocument;
     abstract getDefaultDocument(): Document;
-    abstract getTitle(doc: Document): string;
-    abstract setTitle(doc: Document, newTitle: string): any;
-    abstract elementMatches(n: any, selector: string): boolean;
     abstract isElementNode(node: any): boolean;
     abstract isShadowRoot(node: any): boolean;
-    abstract getHost(el: any): any;
     abstract onAndCancel(el: any, evt: any, listener: any): Function;
-    abstract getEventKey(event: any): string;
     abstract supportsDOMEvents(): boolean;
     abstract getGlobalEventTarget(doc: Document, target: string): any;
     abstract getHistory(): History;
