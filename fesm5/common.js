@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-next.5+73.sha-a813ae0.with-local-changes
+ * @license Angular v9.0.0-next.5+74.sha-c84c27f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __assign, __extends, __read, __values } from 'tslib';
-import { ɵisListLikeIterable, ɵstringify, ɵɵdefineInjectable, ɵɵinject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵsetClassMetadata, Injectable, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵclassMap, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, ɵɵstyleMap, InjectionToken, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵinjectPipeChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, ɵɵdefineInjectable, ɵɵinject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵsetClassMetadata, Injectable, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, ɵɵstyleMap, InjectionToken, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵɵdefinePipe, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, ɵɵinjectPipeChangeDetectorRef, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -477,9 +477,11 @@ var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     hostBindings: function (rf, ctx, elIndex) {
         if (rf & 1 /* Create */) {
             ɵɵallocHostVars(1);
+            ɵɵstyling();
         }
         if (rf & 2 /* Update */) {
             ɵɵclassMap(ctx.getValue());
+            ɵɵstylingApply();
         }
     }
 });
@@ -690,8 +692,12 @@ var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: function () { },
     selectors: null,
     hostBindings: function (rf, ctx, elIndex) {
+        if (rf & 1 /* Create */) {
+            ɵɵstyling();
+        }
         if (rf & 2 /* Update */) {
             ɵɵstyleMap(ctx.getValue());
+            ɵɵstylingApply();
         }
     }
 });
@@ -6759,7 +6765,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.5+73.sha-a813ae0.with-local-changes');
+var VERSION = new Version('9.0.0-next.5+74.sha-c84c27f.with-local-changes');
 
 /**
  * @license
