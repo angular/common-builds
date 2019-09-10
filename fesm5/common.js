@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-next.5+67.sha-8a7129e.with-local-changes
+ * @license Angular v9.0.0-next.5+68.sha-3b37469.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __metadata, __assign, __extends, __read, __param, __values } from 'tslib';
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -471,11 +471,9 @@ var ngClassDirectiveDef__PRE_R3__ = undefined;
 var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
         ɵɵallocHostVars(1);
-        ɵɵstyling();
     }
     if (rf & 2 /* Update */) {
         ɵɵclassMap(ctx.getValue());
-        ɵɵstylingApply();
     }
 };
 // used when the VE is not present (note the directive will
@@ -688,12 +686,8 @@ var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
 var ngStyleDirectiveDef__PRE_R3__ = undefined;
 var ngStyleFactoryDef__PRE_R3__ = undefined;
 var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵstyling();
-    }
     if (rf & 2 /* Update */) {
         ɵɵstyleMap(ctx.getValue());
-        ɵɵstylingApply();
     }
 };
 // used when the VE is not present (note the directive will
@@ -6620,7 +6614,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.5+67.sha-8a7129e.with-local-changes');
+var VERSION = new Version('9.0.0-next.5+68.sha-3b37469.with-local-changes');
 
 /**
  * @license
