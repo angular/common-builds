@@ -1,10 +1,10 @@
 /**
- * @license Angular v9.0.0-next.6+58.sha-e6ed4a2.with-local-changes
+ * @license Angular v9.0.0-next.6+60.sha-a2e890e.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵstyling, ɵɵclassMap, ɵɵstylingApply, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, Pipe, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -806,11 +806,9 @@ function () { }, ɵ1 = /**
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
         ɵɵallocHostVars(1);
-        ɵɵstyling();
     }
     if (rf & 2 /* Update */) {
         ɵɵclassMap(ctx.getValue());
-        ɵɵstylingApply();
     }
 };
 /** @type {?} */
@@ -1171,11 +1169,10 @@ function () { }, ɵ1$1 = /**
  */
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
-        ɵɵstyling();
+        ɵɵallocHostVars(1);
     }
     if (rf & 2 /* Update */) {
         ɵɵstyleMap(ctx.getValue());
-        ɵɵstylingApply();
     }
 };
 /** @type {?} */
@@ -8863,7 +8860,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.6+58.sha-e6ed4a2.with-local-changes');
+const VERSION = new Version('9.0.0-next.6+60.sha-a2e890e.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
