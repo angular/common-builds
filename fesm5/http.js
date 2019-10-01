@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.8+14.sha-0818e2c.with-local-changes
+ * @license Angular v8.2.8+16.sha-06e7272.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -954,6 +954,12 @@ var HttpErrorResponse = /** @class */ (function (_super) {
 /**
  * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
  * the given `body`. This function clones the object and adds the body.
+ *
+ * Note that the `responseType` *options* value is a String that identifies the
+ * single data type of the response.
+ * A single overload version of the method handles each response type.
+ * The value of `responseType` cannot be a union, as the combined signature could imply.
+ *
  */
 function addBody(options, body) {
     return {
@@ -968,10 +974,15 @@ function addBody(options, body) {
 }
 /**
  * Performs HTTP requests.
- *
  * This service is available as an injectable class, with methods to perform HTTP requests.
  * Each request method has multiple signatures, and the return type varies based on
  * the signature that is called (mainly the values of `observe` and `responseType`).
+ *
+ * Note that the `responseType` *options* value is a String that identifies the
+ * single data type of the response.
+ * A single overload version of the method handles each response type.
+ * The value of `responseType` cannot be a union, as the combined signature could imply.
+
  *
  * @usageNotes
  * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
