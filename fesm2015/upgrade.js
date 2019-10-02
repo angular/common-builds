@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.8+20.sha-c6041b9.with-local-changes
+ * @license Angular v8.2.8+22.sha-57457fb.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1141,8 +1141,9 @@ class AngularJSUrlCodec {
      */
     parse(url, base) {
         try {
+            // Safari 12 throws an error when the URL constructor is called with an undefined base.
             /** @type {?} */
-            const parsed = new URL(url, base);
+            const parsed = !base ? new URL(url) : new URL(url, base);
             return {
                 href: parsed.href,
                 protocol: parsed.protocol ? parsed.protocol.replace(/:$/, '') : '',
