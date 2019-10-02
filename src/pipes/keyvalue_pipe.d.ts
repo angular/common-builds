@@ -50,7 +50,6 @@ export declare class KeyValuePipe implements PipeTransform {
         [key: number]: V;
     } | Map<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
     transform<K, V>(input: Map<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<KeyValuePipe>;
     static ngFactoryDef: i0.ɵɵFactoryDef<KeyValuePipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<KeyValuePipe, "keyvalue">;
 }

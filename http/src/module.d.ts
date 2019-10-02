@@ -27,6 +27,7 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     private chain;
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<HttpInterceptingHandler>;
     static ngInjectableDef: i0.ɵɵInjectableDef<HttpInterceptingHandler>;
 }
 /**

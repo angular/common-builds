@@ -57,6 +57,7 @@ export declare class NgClassR2Impl implements NgClassImpl {
      */
     private _removeClasses;
     private _toggleClass;
+    static ngFactoryDef: i0.ɵɵFactoryDef<NgClassR2Impl>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NgClassR2Impl>;
 }
 export declare class NgClassR3Impl implements NgClassImpl {
@@ -71,6 +72,7 @@ export declare class NgClassR3Impl implements NgClassImpl {
         [klass: string]: any;
     }): void;
     applyChanges(): void;
+    static ngFactoryDef: i0.ɵɵFactoryDef<NgClassR3Impl>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NgClassR3Impl>;
 }
 export declare const NgClassImplProvider__PRE_R3__: {

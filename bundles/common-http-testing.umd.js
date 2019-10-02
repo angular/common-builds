@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9.with-local-changes
+ * @license Angular v9.0.0-next.9+1.sha-4e35e34.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -342,7 +342,8 @@
                 return "Match by function: " + matcher.name;
             }
         };
-        HttpClientTestingBackend.ngInjectableDef = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+        HttpClientTestingBackend.ngFactoryDef = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
+        HttpClientTestingBackend.ngInjectableDef = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ngFactoryDef(t); }, providedIn: null });
         return HttpClientTestingBackend;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingBackend, [{

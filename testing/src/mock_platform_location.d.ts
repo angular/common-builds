@@ -51,6 +51,7 @@ export declare class MockPlatformLocation implements PlatformLocation {
     forward(): void;
     back(): void;
     getState(): unknown;
+    static ngFactoryDef: i0.ɵɵFactoryDef<MockPlatformLocation>;
     static ngInjectableDef: i0.ɵɵInjectableDef<MockPlatformLocation>;
 }
 export declare function scheduleMicroTask(cb: () => any): void;

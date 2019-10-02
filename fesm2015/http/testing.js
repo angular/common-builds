@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9.with-local-changes
+ * @license Angular v9.0.0-next.9+1.sha-4e35e34.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -569,7 +569,8 @@ class HttpClientTestingBackend {
 HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
-/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); }, providedIn: null });
+/** @nocollapse */ HttpClientTestingBackend.ngFactoryDef = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
+/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ngFactoryDef(t); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null);

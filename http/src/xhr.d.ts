@@ -18,6 +18,7 @@ export declare abstract class XhrFactory {
 export declare class BrowserXhr implements XhrFactory {
     constructor();
     build(): any;
+    static ngFactoryDef: i0.ɵɵFactoryDef<BrowserXhr>;
     static ngInjectableDef: i0.ɵɵInjectableDef<BrowserXhr>;
 }
 /**
@@ -36,5 +37,6 @@ export declare class HttpXhrBackend implements HttpBackend {
      * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<HttpXhrBackend>;
     static ngInjectableDef: i0.ɵɵInjectableDef<HttpXhrBackend>;
 }

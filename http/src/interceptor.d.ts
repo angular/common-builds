@@ -70,5 +70,6 @@ export declare class HttpInterceptorHandler implements HttpHandler {
 export declare const HTTP_INTERCEPTORS: InjectionToken<HttpInterceptor[]>;
 export declare class NoopInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<NoopInterceptor>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NoopInterceptor>;
 }

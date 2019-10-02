@@ -39,6 +39,7 @@ export declare class JsonpClientBackend implements HttpBackend {
      *
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<JsonpClientBackend>;
     static ngInjectableDef: i0.ɵɵInjectableDef<JsonpClientBackend>;
 }
 /**
@@ -60,5 +61,6 @@ export declare class JsonpInterceptor {
      * @returns An observable of the event stream.
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    static ngFactoryDef: i0.ɵɵFactoryDef<JsonpInterceptor>;
     static ngInjectableDef: i0.ɵɵInjectableDef<JsonpInterceptor>;
 }
