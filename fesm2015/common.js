@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9.with-local-changes
+ * @license Angular v9.0.0-next.9+1.sha-4e35e34.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7730,7 +7730,6 @@ class AsyncPipe {
     }
 }
 AsyncPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'async', pure: false },] }
 ];
 /** @nocollapse */
@@ -7804,7 +7803,6 @@ class LowerCasePipe {
     }
 }
 LowerCasePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'lowercase' },] }
 ];
 //
@@ -7853,7 +7851,6 @@ class TitleCasePipe {
     }
 }
 TitleCasePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'titlecase' },] }
 ];
 /**
@@ -7879,7 +7876,6 @@ class UpperCasePipe {
     }
 }
 UpperCasePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'uppercase' },] }
 ];
 
@@ -8059,7 +8055,6 @@ class DatePipe {
     }
 }
 DatePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'date', pure: true },] }
 ];
 /** @nocollapse */
@@ -8121,7 +8116,6 @@ class I18nPluralPipe {
     }
 }
 I18nPluralPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
 ];
 /** @nocollapse */
@@ -8180,7 +8174,6 @@ class I18nSelectPipe {
     }
 }
 I18nSelectPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
 ];
 
@@ -8211,7 +8204,6 @@ class JsonPipe {
     transform(value) { return JSON.stringify(value, null, 2); }
 }
 JsonPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'json', pure: false },] }
 ];
 
@@ -8302,7 +8294,6 @@ class KeyValuePipe {
     }
 }
 KeyValuePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
 ];
 /** @nocollapse */
@@ -8444,7 +8435,6 @@ class DecimalPipe {
     }
 }
 DecimalPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'number' },] }
 ];
 /** @nocollapse */
@@ -8517,7 +8507,6 @@ class PercentPipe {
     }
 }
 PercentPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'percent' },] }
 ];
 /** @nocollapse */
@@ -8622,7 +8611,6 @@ class CurrencyPipe {
     }
 }
 CurrencyPipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'currency' },] }
 ];
 /** @nocollapse */
@@ -8721,7 +8709,6 @@ class SlicePipe {
     supports(obj) { return typeof obj === 'string' || Array.isArray(obj); }
 }
 SlicePipe.decorators = [
-    { type: Injectable },
     { type: Pipe, args: [{ name: 'slice', pure: false },] }
 ];
 
@@ -8860,7 +8847,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.9.with-local-changes');
+const VERSION = new Version('9.0.0-next.9+1.sha-4e35e34.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
