@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9+58.sha-3efb060.with-local-changes
+ * @license Angular v9.0.0-next.9+61.sha-2089727.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5753,6 +5753,7 @@ class NgForOf {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
+        this._ngForOf = null;
         this._ngForOfDirty = true;
         this._differ = null;
     }
@@ -5855,8 +5856,11 @@ class NgForOf {
          */
         (item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
+                // NgForOf is never "null" or "undefined" here because the differ detected
+                // that a new item needs to be inserted from the iterable. This implies that
+                // there is an iterable value for "_ngForOf".
                 /** @type {?} */
-                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), this._ngForOf, -1, -1), currentIndex === null ? undefined : currentIndex);
+                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), (/** @type {?} */ (this._ngForOf)), -1, -1), currentIndex === null ? undefined : currentIndex);
                 /** @type {?} */
                 const tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
@@ -5881,7 +5885,7 @@ class NgForOf {
             const viewRef = (/** @type {?} */ (this._viewContainer.get(i)));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
-            viewRef.context.ngForOf = this._ngForOf;
+            viewRef.context.ngForOf = (/** @type {?} */ (this._ngForOf));
         }
         changes.forEachIdentityChange((/**
          * @param {?} record
@@ -9359,7 +9363,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.9+58.sha-3efb060.with-local-changes');
+const VERSION = new Version('9.0.0-next.9+61.sha-2089727.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
