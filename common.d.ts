@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.9+58.sha-3efb060.with-local-changes
+ * @license Angular v9.0.0-next.9+61.sha-2089727.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1620,7 +1620,7 @@ export declare class NgForOf<T> implements DoCheck {
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    ngForOf: NgIterable<T>;
+    ngForOf: NgIterable<T> | undefined | null;
     /**
      * A function that defines how to track changes for items in the iterable.
      *
