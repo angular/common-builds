@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+4.sha-be54c58.with-local-changes
+ * @license Angular v9.0.0-next.10+3.sha-676a95a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1515,7 +1515,7 @@ if (false) {
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
  *
  * Note: Document might not be available in the Application Context when Application and Rendering
- * Contexts are not the same (e.g. when running the application in a Web Worker).
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
  * \@publicApi
  * @type {?}
@@ -9363,7 +9363,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+4.sha-be54c58.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+3.sha-676a95a.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
