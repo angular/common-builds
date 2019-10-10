@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+27.sha-1ae77da.with-local-changes
+ * @license Angular v9.0.0-next.10+28.sha-6ab5f36.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1599,7 +1599,7 @@ class HttpClient {
         if (first instanceof HttpRequest) {
             // It is. The other arguments must be undefined (per the signatures) and can be
             // ignored.
-            req = (/** @type {?} */ (first));
+            req = first;
         }
         else {
             // It's a string, so it represents a URL. Construct a request based on it,
@@ -1622,7 +1622,7 @@ class HttpClient {
                     params = options.params;
                 }
                 else {
-                    params = new HttpParams((/** @type {?} */ ({ fromObject: options.params })));
+                    params = new HttpParams({ fromObject: options.params });
                 }
             }
             // Construct the request.

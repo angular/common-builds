@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+27.sha-1ae77da.with-local-changes
+ * @license Angular v9.0.0-next.10+28.sha-6ab5f36.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1813,7 +1813,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Constructs a `PATCH` request that interprets the body as as a text string and
+     * Constructs a `PATCH` request that interprets the body as a text string and
      * returns the response as a string value.
      *
      * @param url The endpoint URL.
