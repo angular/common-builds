@@ -1788,7 +1788,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Blob>;
     /**
-     * Constructs a `PATCH` request that interprets the body as as a text string and
+     * Constructs a `PATCH` request that interprets the body as a text string and
      * returns the response as a string value.
      *
      * @param url The endpoint URL.

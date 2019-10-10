@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+27.sha-1ae77da.with-local-changes
+ * @license Angular v9.0.0-next.10+28.sha-6ab5f36.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4986,10 +4986,10 @@ if (false) {
 function getPluralCase(locale, nLike) {
     // TODO(vicb): lazy compute
     if (typeof nLike === 'string') {
-        nLike = parseInt((/** @type {?} */ (nLike)), 10);
+        nLike = parseInt(nLike, 10);
     }
     /** @type {?} */
-    const n = (/** @type {?} */ (nLike));
+    const n = nLike;
     /** @type {?} */
     const nDecimal = n.toString().replace(/^[^.]*\.?/, '');
     /** @type {?} */
@@ -7649,7 +7649,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
             maxFraction = parseIntAutoRadix(parts[5]);
         }
     }
-    return NumberFormatter.format((/** @type {?} */ (value)), locale, style, {
+    return NumberFormatter.format(value, locale, style, {
         minimumIntegerDigits: minInt,
         minimumFractionDigits: minFraction,
         maximumFractionDigits: maxFraction,
@@ -9363,7 +9363,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+27.sha-1ae77da.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+28.sha-6ab5f36.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
