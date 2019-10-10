@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+16.sha-8d111da.with-local-changes
+ * @license Angular v9.0.0-next.10+2.sha-a3ef3e1.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -830,7 +830,7 @@ var DomAdapter = /** @class */ (function () {
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
  *
  * Note: Document might not be available in the Application Context when Application and Rendering
- * Contexts are not the same (e.g. when running the application in a Web Worker).
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
  * @publicApi
  */
@@ -6628,7 +6628,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.10+16.sha-8d111da.with-local-changes');
+var VERSION = new Version('9.0.0-next.10+2.sha-a3ef3e1.with-local-changes');
 
 /**
  * @license
