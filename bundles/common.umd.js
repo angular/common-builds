@@ -1,5 +1,5 @@
 /**
- * @license Angular v8.2.9+27.sha-2952ea5.with-local-changes
+ * @license Angular v8.2.10+4.sha-5f78456.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6516,7 +6516,7 @@
      * A DI Token representing the main rendering context. In a browser this is the DOM Document.
      *
      * Note: Document might not be available in the Application Context when Application and Rendering
-     * Contexts are not the same (e.g. when running the application into a Web Worker).
+     * Contexts are not the same (e.g. when running the application in a Web Worker).
      *
      * @publicApi
      */
@@ -6572,7 +6572,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new core.Version('8.2.9+27.sha-2952ea5.with-local-changes');
+    var VERSION = new core.Version('8.2.10+4.sha-5f78456.with-local-changes');
 
     /**
      * @license
