@@ -37,7 +37,7 @@ export declare class NgLocaleLocalization extends NgLocalization {
     /** @deprecated from v5 */
     deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
     getPluralCategory(value: any, locale?: string): string;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgLocaleLocalization>;
+    static ɵfac: i0.ɵɵFactoryDef<NgLocaleLocalization>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NgLocaleLocalization>;
 }
 /**

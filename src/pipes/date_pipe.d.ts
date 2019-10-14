@@ -162,6 +162,6 @@ export declare class DatePipe implements PipeTransform {
      * @returns A date string in the desired format.
      */
     transform(value: any, format?: string, timezone?: string, locale?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<DatePipe>;
+    static ɵfac: i0.ɵɵFactoryDef<DatePipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<DatePipe, "date">;
 }

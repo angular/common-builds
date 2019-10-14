@@ -50,7 +50,7 @@ export declare class KeyValuePipe implements PipeTransform {
         [key: number]: V;
     } | Map<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
     transform<K, V>(input: Map<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    static ngFactoryDef: i0.ɵɵFactoryDef<KeyValuePipe>;
+    static ɵfac: i0.ɵɵFactoryDef<KeyValuePipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<KeyValuePipe, "keyvalue">;
 }
 export declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;

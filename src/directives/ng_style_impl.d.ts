@@ -49,7 +49,7 @@ export declare class NgStyleR2Impl implements NgStyleImpl {
     applyChanges(): void;
     private _applyChanges;
     private _setStyle;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgStyleR2Impl>;
+    static ɵfac: i0.ɵɵFactoryDef<NgStyleR2Impl>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NgStyleR2Impl>;
 }
 export declare class NgStyleR3Impl implements NgStyleImpl {
@@ -62,7 +62,7 @@ export declare class NgStyleR3Impl implements NgStyleImpl {
         [key: string]: any;
     } | null): void;
     applyChanges(): void;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgStyleR3Impl>;
+    static ɵfac: i0.ɵɵFactoryDef<NgStyleR3Impl>;
     static ngInjectableDef: i0.ɵɵInjectableDef<NgStyleR3Impl>;
 }
 export declare const NgStyleImplProvider__PRE_R3__: {

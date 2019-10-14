@@ -31,7 +31,7 @@ export declare const ngStyleFactoryDef: undefined;
 export declare class NgStyleBase {
     protected _delegate: NgStyleImpl;
     static ɵdir: any;
-    static ngFactory: any;
+    static ɵfac: any;
     constructor(_delegate: NgStyleImpl);
     getValue(): {
         [key: string]: any;
@@ -79,6 +79,6 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
         [klass: string]: any;
     } | null;
     ngDoCheck(): void;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgStyle>;
+    static ɵfac: i0.ɵɵFactoryDef<NgStyle>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
 }

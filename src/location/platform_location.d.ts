@@ -45,7 +45,7 @@ export declare abstract class PlatformLocation {
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
     abstract back(): void;
-    static ngFactoryDef: i0.ɵɵFactoryDef<PlatformLocation>;
+    static ɵfac: i0.ɵɵFactoryDef<PlatformLocation>;
     static ngInjectableDef: i0.ɵɵInjectableDef<PlatformLocation>;
 }
 export declare function useBrowserPlatformLocation(): BrowserPlatformLocation;
@@ -97,7 +97,7 @@ export declare class BrowserPlatformLocation extends PlatformLocation {
     forward(): void;
     back(): void;
     getState(): unknown;
-    static ngFactoryDef: i0.ɵɵFactoryDef<BrowserPlatformLocation>;
+    static ɵfac: i0.ɵɵFactoryDef<BrowserPlatformLocation>;
     static ngInjectableDef: i0.ɵɵInjectableDef<BrowserPlatformLocation>;
 }
 export declare function supportsState(): boolean;

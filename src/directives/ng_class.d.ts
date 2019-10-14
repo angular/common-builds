@@ -31,7 +31,7 @@ export declare const ngClassFactoryDef: undefined;
 export declare class NgClassBase {
     protected _delegate: NgClassImpl;
     static ɵdir: any;
-    static ngFactoryDef: any;
+    static ɵfac: any;
     constructor(_delegate: NgClassImpl);
     getValue(): {
         [key: string]: any;
@@ -72,6 +72,6 @@ export declare class NgClass extends NgClassBase implements DoCheck {
         [klass: string]: any;
     };
     ngDoCheck(): void;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgClass>;
+    static ɵfac: i0.ɵɵFactoryDef<NgClass>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
 }

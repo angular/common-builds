@@ -73,6 +73,6 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
-    static ngFactoryDef: i0.ɵɵFactoryDef<NgComponentOutlet>;
+    static ɵfac: i0.ɵɵFactoryDef<NgComponentOutlet>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgComponentOutlet, "[ngComponentOutlet]", never, { 'ngComponentOutlet': "ngComponentOutlet", 'ngComponentOutletInjector': "ngComponentOutletInjector", 'ngComponentOutletContent': "ngComponentOutletContent", 'ngComponentOutletNgModuleFactory': "ngComponentOutletNgModuleFactory" }, {}, never>;
 }

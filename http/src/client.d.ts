@@ -2748,6 +2748,6 @@ export declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
-    static ngFactoryDef: i0.ɵɵFactoryDef<HttpClient>;
+    static ɵfac: i0.ɵɵFactoryDef<HttpClient>;
     static ngInjectableDef: i0.ɵɵInjectableDef<HttpClient>;
 }

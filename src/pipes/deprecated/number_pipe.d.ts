@@ -37,7 +37,7 @@ export declare class DeprecatedDecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, digits?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<DeprecatedDecimalPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<DeprecatedDecimalPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<DeprecatedDecimalPipe, "number">;
 }
 /**
@@ -64,7 +64,7 @@ export declare class DeprecatedPercentPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, digits?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<DeprecatedPercentPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<DeprecatedPercentPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<DeprecatedPercentPipe, "percent">;
 }
 /**
@@ -97,6 +97,6 @@ export declare class DeprecatedCurrencyPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
     transform(value: any, currencyCode?: string, symbolDisplay?: boolean, digits?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<DeprecatedCurrencyPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<DeprecatedCurrencyPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<DeprecatedCurrencyPipe, "currency">;
 }

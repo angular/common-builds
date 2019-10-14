@@ -61,7 +61,7 @@ export declare class DecimalPipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
     transform(value: any, digitsInfo?: string, locale?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<DecimalPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<DecimalPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<DecimalPipe, "number">;
 }
 /**
@@ -104,7 +104,7 @@ export declare class PercentPipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
     transform(value: any, digitsInfo?: string, locale?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<PercentPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<PercentPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<PercentPipe, "percent">;
 }
 /**
@@ -163,6 +163,6 @@ export declare class CurrencyPipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
     transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
-    static ngFactoryDef: i0.ɵɵFactoryDef<CurrencyPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<CurrencyPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<CurrencyPipe, "currency">;
 }

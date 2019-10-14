@@ -27,6 +27,6 @@ export declare class JsonPipe implements PipeTransform {
      * @param value A value of any type to convert into a JSON-format string.
      */
     transform(value: any): string;
-    static ngFactoryDef: i0.ɵɵFactoryDef<JsonPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<JsonPipe>;
     static ngPipeDef: i0.ɵɵPipeDefWithMeta<JsonPipe, "json">;
 }
