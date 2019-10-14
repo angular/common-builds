@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+44.sha-d8249d1.with-local-changes
+ * @license Angular v9.0.0-next.10+46.sha-84ba1f0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -843,9 +843,9 @@ const ngClassFactoryDef = ngClassFactoryDef__POST_R3__;
  * While this is a base class that NgClass extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -863,11 +863,11 @@ class NgClassBase {
      */
     getValue() { return this._delegate.getValue(); }
 }
-/** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+/** @nocollapse */ NgClassBase.ɵdir = ngClassDirectiveDef;
 /** @nocollapse */ NgClassBase.ngFactoryDef = ngClassFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
-    NgClassBase.ngDirectiveDef;
+    NgClassBase.ɵdir;
     /** @nocollapse @type {?} */
     NgClassBase.ngFactoryDef;
     /**
@@ -938,7 +938,7 @@ NgClass.propDecorators = {
     ngClass: [{ type: Input, args: ['ngClass',] }]
 };
 /** @nocollapse */ NgClass.ngFactoryDef = function NgClass_Factory(t) { return new (t || NgClass)(ɵɵdirectiveInject(NgClassImpl)); };
-/** @nocollapse */ NgClass.ngDirectiveDef = ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, features: [ɵɵProvidersFeature([NgClassImplProvider]), ɵɵInheritDefinitionFeature] });
+/** @nocollapse */ NgClass.ɵdir = ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, features: [ɵɵProvidersFeature([NgClassImplProvider]), ɵɵInheritDefinitionFeature] });
 /*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] }]
@@ -1226,9 +1226,9 @@ const ngStyleFactoryDef = ngStyleDirectiveDef__POST_R3__;
  * While this is a base class that NgStyle extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -1246,11 +1246,11 @@ class NgStyleBase {
      */
     getValue() { return this._delegate.getValue(); }
 }
-/** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+/** @nocollapse */ NgStyleBase.ɵdir = ngStyleDirectiveDef;
 NgStyleBase.ngFactory = ngStyleFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
-    NgStyleBase.ngDirectiveDef;
+    NgStyleBase.ɵdir;
     /** @type {?} */
     NgStyleBase.ngFactory;
     /**
@@ -1321,7 +1321,7 @@ NgStyle.propDecorators = {
     ngStyle: [{ type: Input, args: ['ngStyle',] }]
 };
 /** @nocollapse */ NgStyle.ngFactoryDef = function NgStyle_Factory(t) { return new (t || NgStyle)(ɵɵdirectiveInject(NgStyleImpl)); };
-/** @nocollapse */ NgStyle.ngDirectiveDef = ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" }, features: [ɵɵProvidersFeature([NgStyleImplProvider]), ɵɵInheritDefinitionFeature] });
+/** @nocollapse */ NgStyle.ɵdir = ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" }, features: [ɵɵProvidersFeature([NgStyleImplProvider]), ɵɵInheritDefinitionFeature] });
 /*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] }]
@@ -5551,7 +5551,7 @@ NgComponentOutlet.propDecorators = {
     ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
 /** @nocollapse */ NgComponentOutlet.ngFactoryDef = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-/** @nocollapse */ NgComponentOutlet.ngDirectiveDef = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature()] });
+/** @nocollapse */ NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature()] });
 /*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
@@ -5935,7 +5935,7 @@ NgForOf.propDecorators = {
     ngForTemplate: [{ type: Input }]
 };
 /** @nocollapse */ NgForOf.ngFactoryDef = function NgForOf_Factory(t) { return new (t || NgForOf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(IterableDiffers)); };
-/** @nocollapse */ NgForOf.ngDirectiveDef = ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
+/** @nocollapse */ NgForOf.ɵdir = ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
 /*@__PURE__*/ ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
@@ -6246,7 +6246,7 @@ NgIf.propDecorators = {
     ngIfElse: [{ type: Input }]
 };
 /** @nocollapse */ NgIf.ngFactoryDef = function NgIf_Factory(t) { return new (t || NgIf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef)); };
-/** @nocollapse */ NgIf.ngDirectiveDef = ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
+/** @nocollapse */ NgIf.ɵdir = ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
 /*@__PURE__*/ ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
@@ -6538,7 +6538,7 @@ NgSwitch.propDecorators = {
     ngSwitch: [{ type: Input }]
 };
 /** @nocollapse */ NgSwitch.ngFactoryDef = function NgSwitch_Factory(t) { return new (t || NgSwitch)(); };
-/** @nocollapse */ NgSwitch.ngDirectiveDef = ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
+/** @nocollapse */ NgSwitch.ɵdir = ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitch, [{
         type: Directive,
         args: [{ selector: '[ngSwitch]' }]
@@ -6640,7 +6640,7 @@ NgSwitchCase.propDecorators = {
     ngSwitchCase: [{ type: Input }]
 };
 /** @nocollapse */ NgSwitchCase.ngFactoryDef = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
-/** @nocollapse */ NgSwitchCase.ngDirectiveDef = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
+/** @nocollapse */ NgSwitchCase.ɵdir = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
@@ -6700,7 +6700,7 @@ NgSwitchDefault.ctorParameters = () => [
     { type: NgSwitch, decorators: [{ type: Host }] }
 ];
 /** @nocollapse */ NgSwitchDefault.ngFactoryDef = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
-/** @nocollapse */ NgSwitchDefault.ngDirectiveDef = ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
+/** @nocollapse */ NgSwitchDefault.ɵdir = ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
 /*@__PURE__*/ ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
@@ -6815,7 +6815,7 @@ NgPlural.propDecorators = {
     ngPlural: [{ type: Input }]
 };
 /** @nocollapse */ NgPlural.ngFactoryDef = function NgPlural_Factory(t) { return new (t || NgPlural)(ɵɵdirectiveInject(NgLocalization)); };
-/** @nocollapse */ NgPlural.ngDirectiveDef = ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
+/** @nocollapse */ NgPlural.ɵdir = ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
 /*@__PURE__*/ ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
@@ -6889,7 +6889,7 @@ NgPluralCase.ctorParameters = () => [
     { type: NgPlural, decorators: [{ type: Host }] }
 ];
 /** @nocollapse */ NgPluralCase.ngFactoryDef = function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(ɵɵinjectAttribute('ngPluralCase'), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(NgPlural, 1)); };
-/** @nocollapse */ NgPluralCase.ngDirectiveDef = ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
+/** @nocollapse */ NgPluralCase.ɵdir = ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
 /*@__PURE__*/ ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
@@ -7040,7 +7040,7 @@ NgTemplateOutlet.propDecorators = {
     ngTemplateOutlet: [{ type: Input }]
 };
 /** @nocollapse */ NgTemplateOutlet.ngFactoryDef = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-/** @nocollapse */ NgTemplateOutlet.ngDirectiveDef = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature()] });
+/** @nocollapse */ NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature()] });
 /*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
@@ -9363,7 +9363,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+44.sha-d8249d1.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+46.sha-84ba1f0.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

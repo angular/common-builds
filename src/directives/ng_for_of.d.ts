@@ -169,5 +169,5 @@ export declare class NgForOf<T> implements DoCheck {
      */
     static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
     static ngFactoryDef: i0.ɵɵFactoryDef<NgForOf<any>>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgForOf<any>, "[ngFor][ngForOf]", never, { 'ngForOf': "ngForOf", 'ngForTrackBy': "ngForTrackBy", 'ngForTemplate': "ngForTemplate" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgForOf<any>, "[ngFor][ngForOf]", never, { 'ngForOf': "ngForOf", 'ngForTrackBy': "ngForTrackBy", 'ngForTemplate': "ngForTemplate" }, {}, never>;
 }

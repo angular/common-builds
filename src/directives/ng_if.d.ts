@@ -177,7 +177,7 @@ export declare class NgIf {
      */
     static ngTemplateGuard_ngIf: 'binding';
     static ngFactoryDef: i0.ɵɵFactoryDef<NgIf>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
 }
 /**
  * @publicApi

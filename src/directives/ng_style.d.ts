@@ -20,9 +20,9 @@ export declare const ngStyleFactoryDef: undefined;
  * While this is a base class that NgStyle extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -30,7 +30,7 @@ export declare const ngStyleFactoryDef: undefined;
  */
 export declare class NgStyleBase {
     protected _delegate: NgStyleImpl;
-    static ngDirectiveDef: any;
+    static ɵdir: any;
     static ngFactory: any;
     constructor(_delegate: NgStyleImpl);
     getValue(): {
@@ -80,5 +80,5 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
     } | null;
     ngDoCheck(): void;
     static ngFactoryDef: i0.ɵɵFactoryDef<NgStyle>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
 }

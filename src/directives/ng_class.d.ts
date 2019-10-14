@@ -20,9 +20,9 @@ export declare const ngClassFactoryDef: undefined;
  * While this is a base class that NgClass extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -30,7 +30,7 @@ export declare const ngClassFactoryDef: undefined;
  */
 export declare class NgClassBase {
     protected _delegate: NgClassImpl;
-    static ngDirectiveDef: any;
+    static ɵdir: any;
     static ngFactoryDef: any;
     constructor(_delegate: NgClassImpl);
     getValue(): {
@@ -73,5 +73,5 @@ export declare class NgClass extends NgClassBase implements DoCheck {
     };
     ngDoCheck(): void;
     static ngFactoryDef: i0.ɵɵFactoryDef<NgClass>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { 'klass': "class", 'ngClass': "ngClass" }, {}, never>;
 }

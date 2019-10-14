@@ -94,7 +94,7 @@ export declare class NgSwitch {
     ngSwitch: any;
     private _updateDefaultCases;
     static ngFactoryDef: i0.ɵɵFactoryDef<NgSwitch>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -142,7 +142,7 @@ export declare class NgSwitchCase implements DoCheck {
      */
     ngDoCheck(): void;
     static ngFactoryDef: i0.ɵɵFactoryDef<NgSwitchCase>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -161,5 +161,5 @@ export declare class NgSwitchCase implements DoCheck {
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     static ngFactoryDef: i0.ɵɵFactoryDef<NgSwitchDefault>;
-    static ngDirectiveDef: i0.ɵɵDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
 }
