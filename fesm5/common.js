@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+44.sha-d8249d1.with-local-changes
+ * @license Angular v9.0.0-next.10+46.sha-84ba1f0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -494,9 +494,9 @@ var ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
  * While this is a base class that NgClass extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -507,7 +507,7 @@ var NgClassBase = /** @class */ (function () {
         this._delegate = _delegate;
     }
     NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
-    NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+    NgClassBase.ɵdir = ngClassDirectiveDef;
     NgClassBase.ngFactoryDef = ngClassFactoryDef;
     return NgClassBase;
 }());
@@ -710,9 +710,9 @@ var ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
  * While this is a base class that NgStyle extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -723,7 +723,7 @@ var NgStyleBase = /** @class */ (function () {
         this._delegate = _delegate;
     }
     NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
-    NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+    NgStyleBase.ɵdir = ngStyleDirectiveDef;
     NgStyleBase.ngFactory = ngStyleFactoryDef;
     return NgStyleBase;
 }());
@@ -6608,7 +6608,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.10+44.sha-d8249d1.with-local-changes');
+var VERSION = new Version('9.0.0-next.10+46.sha-84ba1f0.with-local-changes');
 
 /**
  * @license

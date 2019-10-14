@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+44.sha-d8249d1.with-local-changes
+ * @license Angular v9.0.0-next.10+46.sha-84ba1f0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -834,9 +834,9 @@ const ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
  * While this is a base class that NgClass extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -854,11 +854,11 @@ class NgClassBase {
      */
     getValue() { return this._delegate.getValue(); }
 }
-/** @nocollapse */ NgClassBase.ngDirectiveDef = ngClassDirectiveDef;
+/** @nocollapse */ NgClassBase.ɵdir = ngClassDirectiveDef;
 /** @nocollapse */ NgClassBase.ngFactoryDef = ngClassFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
-    NgClassBase.ngDirectiveDef;
+    NgClassBase.ɵdir;
     /** @nocollapse @type {?} */
     NgClassBase.ngFactoryDef;
     /**
@@ -1196,9 +1196,9 @@ const ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
  * While this is a base class that NgStyle extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -1216,11 +1216,11 @@ class NgStyleBase {
      */
     getValue() { return this._delegate.getValue(); }
 }
-/** @nocollapse */ NgStyleBase.ngDirectiveDef = ngStyleDirectiveDef;
+/** @nocollapse */ NgStyleBase.ɵdir = ngStyleDirectiveDef;
 NgStyleBase.ngFactory = ngStyleFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
-    NgStyleBase.ngDirectiveDef;
+    NgStyleBase.ɵdir;
     /** @type {?} */
     NgStyleBase.ngFactory;
     /**
@@ -8851,7 +8851,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+44.sha-d8249d1.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+46.sha-84ba1f0.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

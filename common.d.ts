@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+44.sha-d8249d1.with-local-changes
+ * @license Angular v9.0.0-next.10+46.sha-84ba1f0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1429,9 +1429,9 @@ export declare class NgClass extends NgClassBase implements DoCheck {
  * While this is a base class that NgClass extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[class]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -1439,7 +1439,7 @@ export declare class NgClass extends NgClassBase implements DoCheck {
  */
 export declare class NgClassBase {
     protected _delegate: ɵNgClassImpl;
-    static ngDirectiveDef: any;
+    static ɵdir: any;
     static ngFactoryDef: any;
     constructor(_delegate: ɵNgClassImpl);
     getValue(): {
@@ -1999,9 +1999,9 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
  * While this is a base class that NgStyle extends from, the
  * class itself acts as a container for non-VE code to setup
  * a link to the `[style]` host binding (via the static
- * `ngDirectiveDef` property on the class).
+ * `ɵdir` property on the class).
  *
- * Note that the `ngDirectiveDef` property's code is switched
+ * Note that the `ɵdir` property's code is switched
  * depending if VE is present or not (this allows for the
  * binding code to be set only for newer versions of Angular).
  *
@@ -2009,7 +2009,7 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
  */
 export declare class NgStyleBase {
     protected _delegate: ɵNgStyleImpl;
-    static ngDirectiveDef: any;
+    static ɵdir: any;
     static ngFactory: any;
     constructor(_delegate: ɵNgStyleImpl);
     getValue(): {
