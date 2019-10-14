@@ -64,5 +64,5 @@ export declare class SlicePipe implements PipeTransform {
     transform(value: undefined, start: number, end?: number): undefined;
     private supports;
     static ɵfac: i0.ɵɵFactoryDef<SlicePipe>;
-    static ngPipeDef: i0.ɵɵPipeDefWithMeta<SlicePipe, "slice">;
+    static ɵpipe: i0.ɵɵPipeDefWithMeta<SlicePipe, "slice">;
 }

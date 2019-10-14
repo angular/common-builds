@@ -36,5 +36,5 @@ export declare class I18nPluralPipe implements PipeTransform {
         [count: string]: string;
     }, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDef<I18nPluralPipe>;
-    static ngPipeDef: i0.ɵɵPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
+    static ɵpipe: i0.ɵɵPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
 }

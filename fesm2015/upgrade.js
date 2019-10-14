@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1405,7 +1405,7 @@ class LocationUpgradeModule {
 LocationUpgradeModule.decorators = [
     { type: NgModule, args: [{ imports: [CommonModule] },] },
 ];
-/** @nocollapse */ LocationUpgradeModule.ngModuleDef = ɵɵdefineNgModule({ type: LocationUpgradeModule });
+/** @nocollapse */ LocationUpgradeModule.ɵmod = ɵɵdefineNgModule({ type: LocationUpgradeModule });
 /** @nocollapse */ LocationUpgradeModule.ngInjectorDef = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
 /*@__PURE__*/ ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] });
 /*@__PURE__*/ ɵsetClassMetadata(LocationUpgradeModule, [{

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5412,7 +5412,7 @@
             'shortTime': 'jm'
         };
         DeprecatedDatePipe.ɵfac = function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DeprecatedDatePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "date", type: DeprecatedDatePipe, pure: true });
+        DeprecatedDatePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "date", type: DeprecatedDatePipe, pure: true });
         return DeprecatedDatePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDatePipe, [{
@@ -5509,7 +5509,7 @@
             return formatNumber$1(DeprecatedDecimalPipe, this._locale, value, exports.NumberFormatStyle.Decimal, digits);
         };
         DeprecatedDecimalPipe.ɵfac = function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DeprecatedDecimalPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, pure: true });
+        DeprecatedDecimalPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, pure: true });
         return DeprecatedDecimalPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedDecimalPipe, [{
@@ -5547,7 +5547,7 @@
             return formatNumber$1(DeprecatedPercentPipe, this._locale, value, exports.NumberFormatStyle.Percent, digits);
         };
         DeprecatedPercentPipe.ɵfac = function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DeprecatedPercentPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, pure: true });
+        DeprecatedPercentPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, pure: true });
         return DeprecatedPercentPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedPercentPipe, [{
@@ -5593,7 +5593,7 @@
             return formatNumber$1(DeprecatedCurrencyPipe, this._locale, value, exports.NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
         };
         DeprecatedCurrencyPipe.ɵfac = function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DeprecatedCurrencyPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, pure: true });
+        DeprecatedCurrencyPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, pure: true });
         return DeprecatedCurrencyPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
@@ -5735,7 +5735,7 @@
             }
         };
         AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinjectPipeChangeDetectorRef()); };
-        AsyncPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
+        AsyncPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
         return AsyncPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
@@ -5780,7 +5780,7 @@
             return value.toLowerCase();
         };
         LowerCasePipe.ɵfac = function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); };
-        LowerCasePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
+        LowerCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
         return LowerCasePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(LowerCasePipe, [{
@@ -5828,7 +5828,7 @@
             return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
         };
         TitleCasePipe.ɵfac = function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); };
-        TitleCasePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
+        TitleCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
         return TitleCasePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(TitleCasePipe, [{
@@ -5858,7 +5858,7 @@
             return value.toUpperCase();
         };
         UpperCasePipe.ɵfac = function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); };
-        UpperCasePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
+        UpperCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
         return UpperCasePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(UpperCasePipe, [{
@@ -6042,7 +6042,7 @@
             }
         };
         DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DatePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
+        DatePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
         return DatePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DatePipe, [{
@@ -6096,7 +6096,7 @@
             return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
         };
         I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵɵdirectiveInject(NgLocalization)); };
-        I18nPluralPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
+        I18nPluralPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
         return I18nPluralPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(I18nPluralPipe, [{
@@ -6151,7 +6151,7 @@
             return '';
         };
         I18nSelectPipe.ɵfac = function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); };
-        I18nSelectPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
+        I18nSelectPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
         return I18nSelectPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(I18nSelectPipe, [{
@@ -6189,7 +6189,7 @@
          */
         JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
         JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
-        JsonPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
+        JsonPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
         return JsonPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(JsonPipe, [{
@@ -6253,7 +6253,7 @@
             return this.keyValues;
         };
         KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵɵdirectiveInject(i0.KeyValueDiffers)); };
-        KeyValuePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
+        KeyValuePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
         return KeyValuePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
@@ -6365,7 +6365,7 @@
             }
         };
         DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        DecimalPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
+        DecimalPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
         return DecimalPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
@@ -6428,7 +6428,7 @@
             }
         };
         PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        PercentPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
+        PercentPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
         return PercentPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
@@ -6523,7 +6523,7 @@
             }
         };
         CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
-        CurrencyPipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
+        CurrencyPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
         return CurrencyPipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
@@ -6605,7 +6605,7 @@
         };
         SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
         SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
-        SlicePipe.ngPipeDef = i0.ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
+        SlicePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
         return SlicePipe;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(SlicePipe, [{
@@ -6664,7 +6664,7 @@
     var CommonModule = /** @class */ (function () {
         function CommonModule() {
         }
-        CommonModule.ngModuleDef = i0.ɵɵdefineNgModule({ type: CommonModule });
+        CommonModule.ɵmod = i0.ɵɵdefineNgModule({ type: CommonModule });
         CommonModule.ngInjectorDef = i0.ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
                 { provide: NgLocalization, useClass: NgLocaleLocalization },
             ] });
@@ -6690,7 +6690,7 @@
     var DeprecatedI18NPipesModule = /** @class */ (function () {
         function DeprecatedI18NPipesModule() {
         }
-        DeprecatedI18NPipesModule.ngModuleDef = i0.ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
+        DeprecatedI18NPipesModule.ɵmod = i0.ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
         DeprecatedI18NPipesModule.ngInjectorDef = i0.ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
         return DeprecatedI18NPipesModule;
     }());
@@ -6754,7 +6754,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-next.10+73.sha-f433d66.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.10+75.sha-fc93daf.with-local-changes');
 
     /**
      * @license

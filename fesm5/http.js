@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2029,7 +2029,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
             ],
         };
     };
-    HttpClientXsrfModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientXsrfModule });
+    HttpClientXsrfModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientXsrfModule });
     HttpClientXsrfModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
             HttpXsrfInterceptor,
             { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
@@ -2063,7 +2063,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
 var HttpClientModule = /** @class */ (function () {
     function HttpClientModule() {
     }
-    HttpClientModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientModule });
+    HttpClientModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientModule });
     HttpClientModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
             HttpClient,
             { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -2120,7 +2120,7 @@ var HttpClientModule = /** @class */ (function () {
 var HttpClientJsonpModule = /** @class */ (function () {
     function HttpClientJsonpModule() {
     }
-    HttpClientJsonpModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientJsonpModule });
+    HttpClientJsonpModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientJsonpModule });
     HttpClientJsonpModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
             JsonpClientBackend,
             { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },

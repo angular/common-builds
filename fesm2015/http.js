@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3037,7 +3037,7 @@ HttpClientXsrfModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ HttpClientXsrfModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientXsrfModule });
+/** @nocollapse */ HttpClientXsrfModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientXsrfModule });
 /** @nocollapse */ HttpClientXsrfModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
         HttpXsrfInterceptor,
         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
@@ -3093,7 +3093,7 @@ HttpClientModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ HttpClientModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientModule });
+/** @nocollapse */ HttpClientModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientModule });
 /** @nocollapse */ HttpClientModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
         HttpClient,
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
@@ -3156,7 +3156,7 @@ HttpClientJsonpModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ HttpClientJsonpModule.ngModuleDef = ɵɵdefineNgModule({ type: HttpClientJsonpModule });
+/** @nocollapse */ HttpClientJsonpModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientJsonpModule });
 /** @nocollapse */ HttpClientJsonpModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
         JsonpClientBackend,
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },

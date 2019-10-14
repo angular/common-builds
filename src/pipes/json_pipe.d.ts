@@ -28,5 +28,5 @@ export declare class JsonPipe implements PipeTransform {
      */
     transform(value: any): string;
     static ɵfac: i0.ɵɵFactoryDef<JsonPipe>;
-    static ngPipeDef: i0.ɵɵPipeDefWithMeta<JsonPipe, "json">;
+    static ɵpipe: i0.ɵɵPipeDefWithMeta<JsonPipe, "json">;
 }

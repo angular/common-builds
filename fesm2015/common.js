@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+73.sha-f433d66.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7564,7 +7564,7 @@ DeprecatedDatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DeprecatedDatePipe.ɵfac = function DeprecatedDatePipe_Factory(t) { return new (t || DeprecatedDatePipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DeprecatedDatePipe.ngPipeDef = ɵɵdefinePipe({ name: "date", type: DeprecatedDatePipe, pure: true });
+/** @nocollapse */ DeprecatedDatePipe.ɵpipe = ɵɵdefinePipe({ name: "date", type: DeprecatedDatePipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
@@ -7707,7 +7707,7 @@ DeprecatedDecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DeprecatedDecimalPipe.ɵfac = function DeprecatedDecimalPipe_Factory(t) { return new (t || DeprecatedDecimalPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DeprecatedDecimalPipe.ngPipeDef = ɵɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, pure: true });
+/** @nocollapse */ DeprecatedDecimalPipe.ɵpipe = ɵɵdefinePipe({ name: "number", type: DeprecatedDecimalPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedDecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
@@ -7766,7 +7766,7 @@ DeprecatedPercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DeprecatedPercentPipe.ɵfac = function DeprecatedPercentPipe_Factory(t) { return new (t || DeprecatedPercentPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DeprecatedPercentPipe.ngPipeDef = ɵɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, pure: true });
+/** @nocollapse */ DeprecatedPercentPipe.ɵpipe = ɵɵdefinePipe({ name: "percent", type: DeprecatedPercentPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedPercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
@@ -7833,7 +7833,7 @@ DeprecatedCurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DeprecatedCurrencyPipe.ɵfac = function DeprecatedCurrencyPipe_Factory(t) { return new (t || DeprecatedCurrencyPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DeprecatedCurrencyPipe.ngPipeDef = ɵɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, pure: true });
+/** @nocollapse */ DeprecatedCurrencyPipe.ɵpipe = ɵɵdefinePipe({ name: "currency", type: DeprecatedCurrencyPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedCurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
@@ -8075,7 +8075,7 @@ AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
 /** @nocollapse */ AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinjectPipeChangeDetectorRef()); };
-/** @nocollapse */ AsyncPipe.ngPipeDef = ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
+/** @nocollapse */ AsyncPipe.ɵpipe = ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
@@ -8157,7 +8157,7 @@ LowerCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'lowercase' },] },
 ];
 /** @nocollapse */ LowerCasePipe.ɵfac = function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); };
-/** @nocollapse */ LowerCasePipe.ngPipeDef = ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
+/** @nocollapse */ LowerCasePipe.ɵpipe = ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(LowerCasePipe, [{
         type: Pipe,
         args: [{ name: 'lowercase' }]
@@ -8211,7 +8211,7 @@ TitleCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'titlecase' },] },
 ];
 /** @nocollapse */ TitleCasePipe.ɵfac = function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); };
-/** @nocollapse */ TitleCasePipe.ngPipeDef = ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
+/** @nocollapse */ TitleCasePipe.ɵpipe = ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(TitleCasePipe, [{
         type: Pipe,
         args: [{ name: 'titlecase' }]
@@ -8242,7 +8242,7 @@ UpperCasePipe.decorators = [
     { type: Pipe, args: [{ name: 'uppercase' },] },
 ];
 /** @nocollapse */ UpperCasePipe.ɵfac = function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); };
-/** @nocollapse */ UpperCasePipe.ngPipeDef = ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
+/** @nocollapse */ UpperCasePipe.ɵpipe = ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(UpperCasePipe, [{
         type: Pipe,
         args: [{ name: 'uppercase' }]
@@ -8438,7 +8438,7 @@ DatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DatePipe.ngPipeDef = ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
+/** @nocollapse */ DatePipe.ɵpipe = ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
@@ -8515,7 +8515,7 @@ I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization }
 ];
 /** @nocollapse */ I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ɵɵdirectiveInject(NgLocalization)); };
-/** @nocollapse */ I18nPluralPipe.ngPipeDef = ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
+/** @nocollapse */ I18nPluralPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
@@ -8582,7 +8582,7 @@ I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
 ];
 /** @nocollapse */ I18nSelectPipe.ɵfac = function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); };
-/** @nocollapse */ I18nSelectPipe.ngPipeDef = ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
+/** @nocollapse */ I18nSelectPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(I18nSelectPipe, [{
         type: Pipe,
         args: [{ name: 'i18nSelect', pure: true }]
@@ -8625,7 +8625,7 @@ JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
 ];
 /** @nocollapse */ JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
-/** @nocollapse */ JsonPipe.ngPipeDef = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
+/** @nocollapse */ JsonPipe.ɵpipe = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(JsonPipe, [{
         type: Pipe,
         args: [{ name: 'json', pure: false }]
@@ -8732,7 +8732,7 @@ KeyValuePipe.ctorParameters = () => [
     { type: KeyValueDiffers }
 ];
 /** @nocollapse */ KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ɵɵdirectiveInject(KeyValueDiffers)); };
-/** @nocollapse */ KeyValuePipe.ngPipeDef = ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
+/** @nocollapse */ KeyValuePipe.ɵpipe = ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
@@ -8886,7 +8886,7 @@ DecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ DecimalPipe.ngPipeDef = ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
+/** @nocollapse */ DecimalPipe.ɵpipe = ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
@@ -8967,7 +8967,7 @@ PercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ PercentPipe.ngPipeDef = ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
+/** @nocollapse */ PercentPipe.ɵpipe = ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
@@ -9080,7 +9080,7 @@ CurrencyPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-/** @nocollapse */ CurrencyPipe.ngPipeDef = ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
+/** @nocollapse */ CurrencyPipe.ɵpipe = ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
 /*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
@@ -9190,7 +9190,7 @@ SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
 ];
 /** @nocollapse */ SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
-/** @nocollapse */ SlicePipe.ngPipeDef = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
+/** @nocollapse */ SlicePipe.ɵpipe = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
 /*@__PURE__*/ ɵsetClassMetadata(SlicePipe, [{
         type: Pipe,
         args: [{ name: 'slice', pure: false }]
@@ -9257,7 +9257,7 @@ CommonModule.decorators = [
                 ],
             },] },
 ];
-/** @nocollapse */ CommonModule.ngModuleDef = ɵɵdefineNgModule({ type: CommonModule });
+/** @nocollapse */ CommonModule.ɵmod = ɵɵdefineNgModule({ type: CommonModule });
 /** @nocollapse */ CommonModule.ngInjectorDef = ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
         { provide: NgLocalization, useClass: NgLocaleLocalization },
     ] });
@@ -9287,7 +9287,7 @@ DeprecatedI18NPipesModule.decorators = [
                 providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }],
             },] },
 ];
-/** @nocollapse */ DeprecatedI18NPipesModule.ngModuleDef = ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
+/** @nocollapse */ DeprecatedI18NPipesModule.ɵmod = ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
 /** @nocollapse */ DeprecatedI18NPipesModule.ngInjectorDef = ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
 /*@__PURE__*/ ɵɵsetNgModuleScope(DeprecatedI18NPipesModule, { declarations: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe], exports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
 /*@__PURE__*/ ɵsetClassMetadata(DeprecatedI18NPipesModule, [{
@@ -9363,7 +9363,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+73.sha-f433d66.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+75.sha-fc93daf.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
