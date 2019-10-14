@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+70.sha-c3aaa52.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -698,7 +698,7 @@
         }
         NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
         NgClassBase.ɵdir = ngClassDirectiveDef;
-        NgClassBase.ngFactoryDef = ngClassFactoryDef;
+        NgClassBase.ɵfac = ngClassFactoryDef;
         return NgClassBase;
     }());
     /**
@@ -914,7 +914,7 @@
         }
         NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
         NgStyleBase.ɵdir = ngStyleDirectiveDef;
-        NgStyleBase.ngFactory = ngStyleFactoryDef;
+        NgStyleBase.ɵfac = ngStyleFactoryDef;
         return NgStyleBase;
     }());
     /**
@@ -6734,7 +6734,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-next.10+70.sha-c3aaa52.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.10+75.sha-fc93daf.with-local-changes');
 
     /**
      * @license

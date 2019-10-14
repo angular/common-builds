@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.10+70.sha-c3aaa52.with-local-changes
+ * @license Angular v9.0.0-next.10+75.sha-fc93daf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -855,12 +855,12 @@ class NgClassBase {
     getValue() { return this._delegate.getValue(); }
 }
 /** @nocollapse */ NgClassBase.ɵdir = ngClassDirectiveDef;
-/** @nocollapse */ NgClassBase.ngFactoryDef = ngClassFactoryDef;
+/** @nocollapse */ NgClassBase.ɵfac = ngClassFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
     NgClassBase.ɵdir;
     /** @nocollapse @type {?} */
-    NgClassBase.ngFactoryDef;
+    NgClassBase.ɵfac;
     /**
      * @type {?}
      * @protected
@@ -1217,12 +1217,12 @@ class NgStyleBase {
     getValue() { return this._delegate.getValue(); }
 }
 /** @nocollapse */ NgStyleBase.ɵdir = ngStyleDirectiveDef;
-NgStyleBase.ngFactory = ngStyleFactoryDef;
+/** @nocollapse */ NgStyleBase.ɵfac = ngStyleFactoryDef;
 if (false) {
     /** @nocollapse @type {?} */
     NgStyleBase.ɵdir;
-    /** @type {?} */
-    NgStyleBase.ngFactory;
+    /** @nocollapse @type {?} */
+    NgStyleBase.ɵfac;
     /**
      * @type {?}
      * @protected
@@ -8851,7 +8851,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.10+70.sha-c3aaa52.with-local-changes');
+const VERSION = new Version('9.0.0-next.10+75.sha-fc93daf.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
