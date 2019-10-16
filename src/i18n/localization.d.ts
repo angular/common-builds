@@ -38,7 +38,7 @@ export declare class NgLocaleLocalization extends NgLocalization {
     deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
     getPluralCategory(value: any, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDef<NgLocaleLocalization>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<NgLocaleLocalization>;
+    static ɵprov: i0.ɵɵInjectableDef<NgLocaleLocalization>;
 }
 /**
  * Returns the plural case based on the locale

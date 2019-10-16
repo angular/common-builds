@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -396,7 +396,7 @@ var NgClassR2Impl = /** @class */ (function () {
         }
     };
     NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(ɵɵinject(IterableDiffers), ɵɵinject(KeyValueDiffers), ɵɵinject(ElementRef), ɵɵinject(Renderer2)); };
-    NgClassR2Impl.ngInjectableDef = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
+    NgClassR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
     return NgClassR2Impl;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgClassR2Impl, [{
@@ -438,7 +438,7 @@ var NgClassR3Impl = /** @class */ (function () {
         }
     };
     NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
-    NgClassR3Impl.ngInjectableDef = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
+    NgClassR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
     return NgClassR3Impl;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgClassR3Impl, [{
@@ -635,7 +635,7 @@ var NgStyleR2Impl = /** @class */ (function () {
         }
     };
     NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(ɵɵinject(ElementRef), ɵɵinject(KeyValueDiffers), ɵɵinject(Renderer2)); };
-    NgStyleR2Impl.ngInjectableDef = ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
+    NgStyleR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
     return NgStyleR2Impl;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgStyleR2Impl, [{
@@ -654,7 +654,7 @@ var NgStyleR3Impl = /** @class */ (function () {
         }
     };
     NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
-    NgStyleR3Impl.ngInjectableDef = ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
+    NgStyleR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
     return NgStyleR3Impl;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(NgStyleR3Impl, [{
@@ -862,7 +862,7 @@ var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
     }
     PlatformLocation.ɵfac = function PlatformLocation_Factory(t) { return new (t || PlatformLocation)(); };
-    PlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
+    PlatformLocation.ɵprov = ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
     return PlatformLocation;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(PlatformLocation, [{
@@ -965,7 +965,7 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
     BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
     BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
     BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(ɵɵinject(DOCUMENT)); };
-    BrowserPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
+    BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
     return BrowserPlatformLocation;
 }(PlatformLocation));
 /*@__PURE__*/ ɵsetClassMetadata(BrowserPlatformLocation, [{
@@ -1079,7 +1079,7 @@ var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
     }
     LocationStrategy.ɵfac = function LocationStrategy_Factory(t) { return new (t || LocationStrategy)(); };
-    LocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
+    LocationStrategy.ɵprov = ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
     return LocationStrategy;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(LocationStrategy, [{
@@ -1179,7 +1179,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
     PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
     PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
     PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-    PathLocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
+    PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
     return PathLocationStrategy;
 }(LocationStrategy));
 /*@__PURE__*/ ɵsetClassMetadata(PathLocationStrategy, [{
@@ -1255,7 +1255,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
     HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
     HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
     HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-    HashLocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
+    HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
     return HashLocationStrategy;
 }(LocationStrategy));
 /*@__PURE__*/ ɵsetClassMetadata(HashLocationStrategy, [{
@@ -1473,7 +1473,7 @@ var Location = /** @class */ (function () {
      */
     Location.stripTrailingSlash = stripTrailingSlash;
     Location.ɵfac = function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation)); };
-    Location.ngInjectableDef = ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
+    Location.ɵprov = ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
     return Location;
 }());
 /*@__PURE__*/ ɵsetClassMetadata(Location, [{
@@ -3367,7 +3367,7 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
         }
     };
     NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(ɵɵinject(LOCALE_ID), ɵɵinject(DEPRECATED_PLURAL_FN, 8)); };
-    NgLocaleLocalization.ngInjectableDef = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
+    NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
     return NgLocaleLocalization;
 }(NgLocalization));
 /*@__PURE__*/ ɵsetClassMetadata(NgLocaleLocalization, [{
@@ -6539,7 +6539,7 @@ var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
     CommonModule.ɵmod = ɵɵdefineNgModule({ type: CommonModule });
-    CommonModule.ngInjectorDef = ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
+    CommonModule.ɵinj = ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
             { provide: NgLocalization, useClass: NgLocaleLocalization },
         ] });
     return CommonModule;
@@ -6565,7 +6565,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
     function DeprecatedI18NPipesModule() {
     }
     DeprecatedI18NPipesModule.ɵmod = ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
-    DeprecatedI18NPipesModule.ngInjectorDef = ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
+    DeprecatedI18NPipesModule.ɵinj = ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
     return DeprecatedI18NPipesModule;
 }());
 /*@__PURE__*/ ɵɵsetNgModuleScope(DeprecatedI18NPipesModule, { declarations: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe], exports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
@@ -6628,7 +6628,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.11+8.sha-3e14c2d.with-local-changes');
+var VERSION = new Version('9.0.0-next.11+10.sha-86104b8.with-local-changes');
 
 /**
  * @license
@@ -6648,7 +6648,7 @@ var ViewportScroller = /** @class */ (function () {
     // De-sugared tree-shakable injection
     // See #23917
     /** @nocollapse */
-    ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
+    ViewportScroller.ɵprov = ɵɵdefineInjectable({
         token: ViewportScroller,
         providedIn: 'root',
         factory: function () { return new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)); }

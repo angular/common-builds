@@ -35,7 +35,7 @@ export declare abstract class LocationStrategy {
     abstract onPopState(fn: LocationChangeListener): void;
     abstract getBaseHref(): string;
     static ɵfac: i0.ɵɵFactoryDef<LocationStrategy>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<LocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDef<LocationStrategy>;
 }
 export declare function provideLocationStrategy(platformLocation: PlatformLocation): PathLocationStrategy;
 /**
@@ -102,5 +102,5 @@ export declare class PathLocationStrategy extends LocationStrategy {
     forward(): void;
     back(): void;
     static ɵfac: i0.ɵɵFactoryDef<PathLocationStrategy>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<PathLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDef<PathLocationStrategy>;
 }

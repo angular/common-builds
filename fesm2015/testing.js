@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -212,7 +212,7 @@ SpyLocation.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
-/** @nocollapse */ SpyLocation.ngInjectableDef = ɵɵdefineInjectable({ token: SpyLocation, factory: function (t) { return SpyLocation.ɵfac(t); }, providedIn: null });
+/** @nocollapse */ SpyLocation.ɵprov = ɵɵdefineInjectable({ token: SpyLocation, factory: function (t) { return SpyLocation.ɵfac(t); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
     }], null, null);
@@ -401,7 +401,7 @@ MockLocationStrategy.decorators = [
 /** @nocollapse */
 MockLocationStrategy.ctorParameters = () => [];
 /** @nocollapse */ MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
-/** @nocollapse */ MockLocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function (t) { return MockLocationStrategy.ɵfac(t); }, providedIn: null });
+/** @nocollapse */ MockLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function (t) { return MockLocationStrategy.ɵfac(t); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
     }], function () { return []; }, null);
@@ -692,7 +692,7 @@ MockPlatformLocation.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
 ];
 /** @nocollapse */ MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
-/** @nocollapse */ MockPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function (t) { return MockPlatformLocation.ɵfac(t); }, providedIn: null });
+/** @nocollapse */ MockPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function (t) { return MockPlatformLocation.ɵfac(t); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{

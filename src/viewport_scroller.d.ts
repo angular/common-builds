@@ -13,7 +13,7 @@ import { ErrorHandler } from '@angular/core';
  */
 export declare abstract class ViewportScroller {
     /** @nocollapse */
-    static ngInjectableDef: never;
+    static ɵprov: never;
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @param offset A position in screen coordinates (a tuple with x and y values)

@@ -9,5 +9,5 @@ import * as i1 from "@angular/common/http";
  */
 export declare class HttpClientTestingModule {
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<HttpClientTestingModule>;
+    static ɵinj: i0.ɵɵInjectorDef<HttpClientTestingModule>;
 }

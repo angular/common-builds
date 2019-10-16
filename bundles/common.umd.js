@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -586,7 +586,7 @@
             }
         };
         NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(i0.ɵɵinject(i0.IterableDiffers), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.Renderer2)); };
-        NgClassR2Impl.ngInjectableDef = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
+        NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
         return NgClassR2Impl;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgClassR2Impl, [{
@@ -628,7 +628,7 @@
             }
         };
         NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
-        NgClassR3Impl.ngInjectableDef = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
+        NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
         return NgClassR3Impl;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgClassR3Impl, [{
@@ -825,7 +825,7 @@
             }
         };
         NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.Renderer2)); };
-        NgStyleR2Impl.ngInjectableDef = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
+        NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
         return NgStyleR2Impl;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyleR2Impl, [{
@@ -844,7 +844,7 @@
             }
         };
         NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
-        NgStyleR3Impl.ngInjectableDef = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
+        NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
         return NgStyleR3Impl;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyleR3Impl, [{
@@ -1052,7 +1052,7 @@
         function PlatformLocation() {
         }
         PlatformLocation.ɵfac = function PlatformLocation_Factory(t) { return new (t || PlatformLocation)(); };
-        PlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
+        PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
         return PlatformLocation;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(PlatformLocation, [{
@@ -1155,7 +1155,7 @@
         BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
         BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
         BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(i0.ɵɵinject(DOCUMENT)); };
-        BrowserPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
+        BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
         return BrowserPlatformLocation;
     }(PlatformLocation));
     /*@__PURE__*/ i0.ɵsetClassMetadata(BrowserPlatformLocation, [{
@@ -1269,7 +1269,7 @@
         function LocationStrategy() {
         }
         LocationStrategy.ɵfac = function LocationStrategy_Factory(t) { return new (t || LocationStrategy)(); };
-        LocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
+        LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
         return LocationStrategy;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(LocationStrategy, [{
@@ -1369,7 +1369,7 @@
         PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
         PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(i0.ɵɵinject(PlatformLocation), i0.ɵɵinject(APP_BASE_HREF, 8)); };
-        PathLocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
+        PathLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
         return PathLocationStrategy;
     }(LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(PathLocationStrategy, [{
@@ -1445,7 +1445,7 @@
         HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
         HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
         HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(i0.ɵɵinject(PlatformLocation), i0.ɵɵinject(APP_BASE_HREF, 8)); };
-        HashLocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
+        HashLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
         return HashLocationStrategy;
     }(LocationStrategy));
     /*@__PURE__*/ i0.ɵsetClassMetadata(HashLocationStrategy, [{
@@ -1663,7 +1663,7 @@
          */
         Location.stripTrailingSlash = stripTrailingSlash;
         Location.ɵfac = function Location_Factory(t) { return new (t || Location)(i0.ɵɵinject(LocationStrategy), i0.ɵɵinject(PlatformLocation)); };
-        Location.ngInjectableDef = i0.ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
+        Location.ɵprov = i0.ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
         return Location;
     }());
     /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
@@ -3493,7 +3493,7 @@
             }
         };
         NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(i0.ɵɵinject(i0.LOCALE_ID), i0.ɵɵinject(DEPRECATED_PLURAL_FN, 8)); };
-        NgLocaleLocalization.ngInjectableDef = i0.ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
+        NgLocaleLocalization.ɵprov = i0.ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
         return NgLocaleLocalization;
     }(NgLocalization));
     /*@__PURE__*/ i0.ɵsetClassMetadata(NgLocaleLocalization, [{
@@ -6665,7 +6665,7 @@
         function CommonModule() {
         }
         CommonModule.ɵmod = i0.ɵɵdefineNgModule({ type: CommonModule });
-        CommonModule.ngInjectorDef = i0.ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
+        CommonModule.ɵinj = i0.ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
                 { provide: NgLocalization, useClass: NgLocaleLocalization },
             ] });
         return CommonModule;
@@ -6691,7 +6691,7 @@
         function DeprecatedI18NPipesModule() {
         }
         DeprecatedI18NPipesModule.ɵmod = i0.ɵɵdefineNgModule({ type: DeprecatedI18NPipesModule });
-        DeprecatedI18NPipesModule.ngInjectorDef = i0.ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
+        DeprecatedI18NPipesModule.ɵinj = i0.ɵɵdefineInjector({ factory: function DeprecatedI18NPipesModule_Factory(t) { return new (t || DeprecatedI18NPipesModule)(); }, providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: getPluralCase }] });
         return DeprecatedI18NPipesModule;
     }());
     /*@__PURE__*/ i0.ɵɵsetNgModuleScope(DeprecatedI18NPipesModule, { declarations: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe], exports: [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe] });
@@ -6754,7 +6754,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-next.11+8.sha-3e14c2d.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.11+10.sha-86104b8.with-local-changes');
 
     /**
      * @license
@@ -6774,7 +6774,7 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = i0.ɵɵdefineInjectable({
+        ViewportScroller.ɵprov = i0.ɵɵdefineInjectable({
             token: ViewportScroller,
             providedIn: 'root',
             factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window, i0.ɵɵinject(i0.ErrorHandler)); }

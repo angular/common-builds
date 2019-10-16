@@ -32,5 +32,5 @@ export declare class HashLocationStrategy extends LocationStrategy {
     forward(): void;
     back(): void;
     static ɵfac: i0.ɵɵFactoryDef<HashLocationStrategy>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<HashLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDef<HashLocationStrategy>;
 }

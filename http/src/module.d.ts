@@ -28,7 +28,7 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDef<HttpInterceptingHandler>;
-    static ngInjectableDef: i0.ɵɵInjectableDef<HttpInterceptingHandler>;
+    static ɵprov: i0.ɵɵInjectableDef<HttpInterceptingHandler>;
 }
 /**
  * Constructs an `HttpHandler` that applies interceptors
@@ -78,7 +78,7 @@ export declare class HttpClientXsrfModule {
         headerName?: string;
     }): ModuleWithProviders<HttpClientXsrfModule>;
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientXsrfModule, never, never, never>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<HttpClientXsrfModule>;
+    static ɵinj: i0.ɵɵInjectorDef<HttpClientXsrfModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -91,7 +91,7 @@ export declare class HttpClientXsrfModule {
  */
 export declare class HttpClientModule {
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<HttpClientModule>;
+    static ɵinj: i0.ɵɵInjectorDef<HttpClientModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -106,5 +106,5 @@ export declare class HttpClientModule {
  */
 export declare class HttpClientJsonpModule {
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientJsonpModule, never, never, never>;
-    static ngInjectorDef: i0.ɵɵInjectorDef<HttpClientJsonpModule>;
+    static ɵinj: i0.ɵɵInjectorDef<HttpClientJsonpModule>;
 }

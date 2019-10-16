@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -570,7 +570,7 @@ HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
-/** @nocollapse */ HttpClientTestingBackend.ngInjectableDef = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ɵfac(t); }, providedIn: null });
+/** @nocollapse */ HttpClientTestingBackend.ɵprov = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ɵfac(t); }, providedIn: null });
 /*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null);
@@ -616,7 +616,7 @@ HttpClientTestingModule.decorators = [
             },] },
 ];
 /** @nocollapse */ HttpClientTestingModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientTestingModule });
-/** @nocollapse */ HttpClientTestingModule.ngInjectorDef = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+/** @nocollapse */ HttpClientTestingModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
