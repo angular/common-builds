@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1050,7 +1050,7 @@
     var PlatformLocation = /** @class */ (function () {
         function PlatformLocation() {
         }
-        PlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+        PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
         PlatformLocation = __decorate([
             i0.Injectable({
                 providedIn: 'platform',
@@ -1151,7 +1151,7 @@
         BrowserPlatformLocation.prototype.forward = function () { this._history.forward(); };
         BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
         BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
-        BrowserPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+        BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
         BrowserPlatformLocation = __decorate([
             i0.Injectable({
                 providedIn: 'platform',
@@ -1262,7 +1262,7 @@
     var LocationStrategy = /** @class */ (function () {
         function LocationStrategy() {
         }
-        LocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+        LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
         LocationStrategy = __decorate([
             i0.Injectable({ providedIn: 'root', useFactory: provideLocationStrategy })
         ], LocationStrategy);
@@ -1646,7 +1646,7 @@
          * @returns The URL string, modified if needed.
          */
         Location.stripTrailingSlash = stripTrailingSlash;
-        Location.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+        Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
         Location = Location_1 = __decorate([
             i0.Injectable({
                 providedIn: 'root',
@@ -6734,7 +6734,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-next.11+8.sha-3e14c2d.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-next.11+10.sha-86104b8.with-local-changes');
 
     /**
      * @license
@@ -6754,7 +6754,7 @@
         // De-sugared tree-shakable injection
         // See #23917
         /** @nocollapse */
-        ViewportScroller.ngInjectableDef = i0.ɵɵdefineInjectable({
+        ViewportScroller.ɵprov = i0.ɵɵdefineInjectable({
             token: ViewportScroller,
             providedIn: 'root',
             factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window, i0.ɵɵinject(i0.ErrorHandler)); }

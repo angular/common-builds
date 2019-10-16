@@ -35,7 +35,7 @@ import * as i0 from "@angular/core";
 var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
     }
-    PlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+    PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
     PlatformLocation = tslib_1.__decorate([
         Injectable({
             providedIn: 'platform',
@@ -137,7 +137,7 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
     BrowserPlatformLocation.prototype.forward = function () { this._history.forward(); };
     BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
     BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
-    BrowserPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+    BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
     BrowserPlatformLocation = tslib_1.__decorate([
         Injectable({
             providedIn: 'platform',

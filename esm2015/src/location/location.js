@@ -262,7 +262,7 @@ Location.ctorParameters = () => [
     { type: LocationStrategy },
     { type: PlatformLocation }
 ];
-/** @nocollapse */ Location.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+/** @nocollapse */ Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
 if (false) {
     /**
      * Normalizes URL parameters by prepending with `?` if needed.

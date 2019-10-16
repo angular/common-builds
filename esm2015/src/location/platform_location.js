@@ -45,7 +45,7 @@ PlatformLocation.decorators = [
                 useFactory: useBrowserPlatformLocation
             },] }
 ];
-/** @nocollapse */ PlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+/** @nocollapse */ PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 if (false) {
     /**
      * @abstract
@@ -290,7 +290,7 @@ BrowserPlatformLocation.decorators = [
 BrowserPlatformLocation.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
-/** @nocollapse */ BrowserPlatformLocation.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+/** @nocollapse */ BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
 if (false) {
     /** @type {?} */
     BrowserPlatformLocation.prototype.location;

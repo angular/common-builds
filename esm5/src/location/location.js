@@ -211,7 +211,7 @@ var Location = /** @class */ (function () {
      * @returns The URL string, modified if needed.
      */
     Location.stripTrailingSlash = stripTrailingSlash;
-    Location.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+    Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
     Location = Location_1 = tslib_1.__decorate([
         Injectable({
             providedIn: 'root',

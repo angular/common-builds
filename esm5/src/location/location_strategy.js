@@ -31,7 +31,7 @@ import * as i0 from "@angular/core";
 var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
     }
-    LocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+    LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
     LocationStrategy = tslib_1.__decorate([
         Injectable({ providedIn: 'root', useFactory: provideLocationStrategy })
     ], LocationStrategy);

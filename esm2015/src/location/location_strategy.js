@@ -37,7 +37,7 @@ export class LocationStrategy {
 LocationStrategy.decorators = [
     { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
 ];
-/** @nocollapse */ LocationStrategy.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+/** @nocollapse */ LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 if (false) {
     /**
      * @abstract

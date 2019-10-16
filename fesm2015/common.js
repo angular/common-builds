@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+8.sha-3e14c2d.with-local-changes
+ * @license Angular v9.0.0-next.11+10.sha-86104b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1519,7 +1519,7 @@ PlatformLocation.decorators = [
                 useFactory: useBrowserPlatformLocation
             },] }
 ];
-/** @nocollapse */ PlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+/** @nocollapse */ PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 if (false) {
     /**
      * @abstract
@@ -1764,7 +1764,7 @@ BrowserPlatformLocation.decorators = [
 BrowserPlatformLocation.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
-/** @nocollapse */ BrowserPlatformLocation.ngInjectableDef = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+/** @nocollapse */ BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
 if (false) {
     /** @type {?} */
     BrowserPlatformLocation.prototype.location;
@@ -1896,7 +1896,7 @@ class LocationStrategy {
 LocationStrategy.decorators = [
     { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
 ];
-/** @nocollapse */ LocationStrategy.ngInjectableDef = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+/** @nocollapse */ LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 if (false) {
     /**
      * @abstract
@@ -2491,7 +2491,7 @@ Location.ctorParameters = () => [
     { type: LocationStrategy },
     { type: PlatformLocation }
 ];
-/** @nocollapse */ Location.ngInjectableDef = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+/** @nocollapse */ Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
 if (false) {
     /**
      * Normalizes URL parameters by prepending with `?` if needed.
@@ -8851,7 +8851,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.11+8.sha-3e14c2d.with-local-changes');
+const VERSION = new Version('9.0.0-next.11+10.sha-86104b8.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
@@ -8868,7 +8868,7 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ngInjectableDef = ɵɵdefineInjectable({
+/** @nocollapse */ ViewportScroller.ɵprov = ɵɵdefineInjectable({
     token: ViewportScroller,
     providedIn: 'root',
     factory: (/**
@@ -8881,7 +8881,7 @@ if (false) {
      * @nocollapse
      * @type {?}
      */
-    ViewportScroller.ngInjectableDef;
+    ViewportScroller.ɵprov;
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @abstract
