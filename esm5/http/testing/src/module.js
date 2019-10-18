@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { HttpTestingController } from './api';
@@ -20,7 +20,7 @@ import { HttpClientTestingBackend } from './backend';
 var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
-    HttpClientTestingModule = tslib_1.__decorate([
+    HttpClientTestingModule = __decorate([
         NgModule({
             imports: [
                 HttpClientModule,

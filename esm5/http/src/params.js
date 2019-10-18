@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __read } from "tslib";
 /**
  * Provides encoding and decoding of URL parameter and query-string values.
  *
@@ -52,7 +52,7 @@ function paramParser(rawParams, codec) {
         var params = rawParams.split('&');
         params.forEach(function (param) {
             var eqIdx = param.indexOf('=');
-            var _a = tslib_1.__read(eqIdx == -1 ?
+            var _a = __read(eqIdx == -1 ?
                 [codec.decodeKey(param), ''] :
                 [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))], 2), key = _a[0], val = _a[1];
             var list = map.get(key) || [];

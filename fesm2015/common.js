@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+59.sha-117ca7c.with-local-changes
+ * @license Angular v9.0.0-next.11+62.sha-a0d16dc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -730,7 +730,7 @@ class NgClassR3Impl {
                 /** @type {?} */
                 let classValue = this._classStringDiffer.value;
                 if (classValue) {
-                    value = value ? Object.assign({}, classValue, value) : classValue;
+                    value = value ? Object.assign(Object.assign({}, classValue), value) : classValue;
                 }
             }
             this._value = value;
@@ -899,7 +899,9 @@ class NgClass extends NgClassBase {
     /**
      * @param {?} delegate
      */
-    constructor(delegate) { super(delegate); }
+    constructor(delegate) {
+        super(delegate);
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -1269,7 +1271,9 @@ class NgStyle extends NgStyleBase {
     /**
      * @param {?} delegate
      */
-    constructor(delegate) { super(delegate); }
+    constructor(delegate) {
+        super(delegate);
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -7737,7 +7741,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.11+59.sha-117ca7c.with-local-changes');
+const VERSION = new Version('9.0.0-next.11+62.sha-a0d16dc.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

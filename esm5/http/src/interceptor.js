@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Injectable, InjectionToken } from '@angular/core';
 /**
  * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
@@ -36,7 +36,7 @@ var NoopInterceptor = /** @class */ (function () {
     NoopInterceptor.prototype.intercept = function (req, next) {
         return next.handle(req);
     };
-    NoopInterceptor = tslib_1.__decorate([
+    NoopInterceptor = __decorate([
         Injectable()
     ], NoopInterceptor);
     return NoopInterceptor;

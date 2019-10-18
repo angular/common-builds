@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+59.sha-117ca7c.with-local-changes
+ * @license Angular v9.0.0-next.11+62.sha-a0d16dc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -365,15 +365,15 @@ var MockPlatformLocation = /** @class */ (function () {
         if (baseHref === void 0) { baseHref = ''; }
         // When the `history.state` value is stored, it is always copied.
         state = JSON.parse(JSON.stringify(state));
-        return __assign({}, parseUrl(url, baseHref), { state: state });
+        return __assign(__assign({}, parseUrl(url, baseHref)), { state: state });
     };
     MockPlatformLocation.prototype.replaceState = function (state, title, newUrl) {
         var _a = this.parseChanges(state, newUrl), pathname = _a.pathname, search = _a.search, parsedState = _a.state, hash = _a.hash;
-        this.urlChanges[0] = __assign({}, this.urlChanges[0], { pathname: pathname, search: search, hash: hash, state: parsedState });
+        this.urlChanges[0] = __assign(__assign({}, this.urlChanges[0]), { pathname: pathname, search: search, hash: hash, state: parsedState });
     };
     MockPlatformLocation.prototype.pushState = function (state, title, newUrl) {
         var _a = this.parseChanges(state, newUrl), pathname = _a.pathname, search = _a.search, parsedState = _a.state, hash = _a.hash;
-        this.urlChanges.unshift(__assign({}, this.urlChanges[0], { pathname: pathname, search: search, hash: hash, state: parsedState }));
+        this.urlChanges.unshift(__assign(__assign({}, this.urlChanges[0]), { pathname: pathname, search: search, hash: hash, state: parsedState }));
     };
     MockPlatformLocation.prototype.forward = function () { throw new Error('Not implemented'); };
     MockPlatformLocation.prototype.back = function () {

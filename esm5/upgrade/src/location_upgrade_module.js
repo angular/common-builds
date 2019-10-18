@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { APP_BASE_HREF, CommonModule, HashLocationStrategy, Location, LocationStrategy, PathLocationStrategy, PlatformLocation } from '@angular/common';
 import { Inject, InjectionToken, NgModule, Optional } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -59,7 +59,7 @@ var LocationUpgradeModule = /** @class */ (function () {
         };
     };
     var LocationUpgradeModule_1;
-    LocationUpgradeModule = LocationUpgradeModule_1 = tslib_1.__decorate([
+    LocationUpgradeModule = LocationUpgradeModule_1 = __decorate([
         NgModule({ imports: [CommonModule] })
     ], LocationUpgradeModule);
     return LocationUpgradeModule;

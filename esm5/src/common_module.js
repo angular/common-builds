@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { COMMON_DIRECTIVES } from './directives/index';
 import { NgLocaleLocalization, NgLocalization } from './i18n/localization';
@@ -28,7 +28,7 @@ import { COMMON_PIPES } from './pipes/index';
 var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
-    CommonModule = tslib_1.__decorate([
+    CommonModule = __decorate([
         NgModule({
             declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
             exports: [COMMON_DIRECTIVES, COMMON_PIPES],
