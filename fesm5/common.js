@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+59.sha-117ca7c.with-local-changes
+ * @license Angular v9.0.0-next.11+62.sha-a0d16dc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -431,7 +431,7 @@ var NgClassR3Impl = /** @class */ (function () {
             if (this._classStringDiffer) {
                 var classValue = this._classStringDiffer.value;
                 if (classValue) {
-                    value = value ? __assign({}, classValue, value) : classValue;
+                    value = value ? __assign(__assign({}, classValue), value) : classValue;
                 }
             }
             this._value = value;
@@ -5713,7 +5713,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-next.11+59.sha-117ca7c.with-local-changes');
+var VERSION = new Version('9.0.0-next.11+62.sha-a0d16dc.with-local-changes');
 
 /**
  * @license
