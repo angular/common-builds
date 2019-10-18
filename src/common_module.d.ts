@@ -16,8 +16,6 @@ import * as i14 from "./pipes/date_pipe";
 import * as i15 from "./pipes/i18n_plural_pipe";
 import * as i16 from "./pipes/i18n_select_pipe";
 import * as i17 from "./pipes/keyvalue_pipe";
-import * as i18 from "./pipes/deprecated/number_pipe";
-import * as i19 from "./pipes/deprecated/date_pipe";
 /**
  * Exports all the basic Angular directives and pipes,
  * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
@@ -34,14 +32,4 @@ import * as i19 from "./pipes/deprecated/date_pipe";
 export declare class CommonModule {
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
     static ɵinj: i0.ɵɵInjectorDef<CommonModule>;
-}
-/**
- * A module that contains the deprecated i18n pipes.
- *
- * @deprecated from v5
- * @publicApi
- */
-export declare class DeprecatedI18NPipesModule {
-    static ɵmod: i0.ɵɵNgModuleDefWithMeta<DeprecatedI18NPipesModule, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe], never, [typeof i18.DeprecatedDecimalPipe, typeof i18.DeprecatedPercentPipe, typeof i18.DeprecatedCurrencyPipe, typeof i19.DeprecatedDatePipe]>;
-    static ɵinj: i0.ɵɵInjectorDef<DeprecatedI18NPipesModule>;
 }

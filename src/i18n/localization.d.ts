@@ -1,17 +1,4 @@
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-import { InjectionToken } from '@angular/core';
-import { Plural } from './locale_data_api';
 import * as i0 from "@angular/core";
-/**
- * @deprecated from v5
- */
-export declare const DEPRECATED_PLURAL_FN: InjectionToken<boolean>;
 /**
  * @publicApi
  */
@@ -31,19 +18,8 @@ export declare function getPluralCategory(value: number, cases: string[], ngLoca
  */
 export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
-    /** @deprecated from v5 */
-    protected deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined;
-    constructor(locale: string, 
-    /** @deprecated from v5 */
-    deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
+    constructor(locale: string);
     getPluralCategory(value: any, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDef<NgLocaleLocalization>;
     static ɵprov: i0.ɵɵInjectableDef<NgLocaleLocalization>;
 }
-/**
- * Returns the plural case based on the locale
- *
- * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
- * @publicApi
- */
-export declare function getPluralCase(locale: string, nLike: number | string): Plural;
