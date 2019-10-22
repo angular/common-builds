@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
 import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
@@ -39,7 +39,7 @@ var LowerCasePipe = /** @class */ (function () {
         return value.toLowerCase();
     };
     var LowerCasePipe_1;
-    LowerCasePipe = LowerCasePipe_1 = tslib_1.__decorate([
+    LowerCasePipe = LowerCasePipe_1 = __decorate([
         Pipe({ name: 'lowercase' })
     ], LowerCasePipe);
     return LowerCasePipe;
@@ -87,7 +87,7 @@ var TitleCasePipe = /** @class */ (function () {
         return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
     };
     var TitleCasePipe_1;
-    TitleCasePipe = TitleCasePipe_1 = tslib_1.__decorate([
+    TitleCasePipe = TitleCasePipe_1 = __decorate([
         Pipe({ name: 'titlecase' })
     ], TitleCasePipe);
     return TitleCasePipe;
@@ -117,7 +117,7 @@ var UpperCasePipe = /** @class */ (function () {
         return value.toUpperCase();
     };
     var UpperCasePipe_1;
-    UpperCasePipe = UpperCasePipe_1 = tslib_1.__decorate([
+    UpperCasePipe = UpperCasePipe_1 = __decorate([
         Pipe({ name: 'uppercase' })
     ], UpperCasePipe);
     return UpperCasePipe;

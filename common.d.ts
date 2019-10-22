@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+24.sha-20be755.with-local-changes
+ * @license Angular v9.0.0-next.12+50.sha-dfff5fe.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -384,175 +384,6 @@ export declare class DecimalPipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
     transform(value: any, digitsInfo?: string, locale?: string): string | null;
-}
-
-/**
- * @ngModule CommonModule
- * @description
- *
- * Formats a number as currency using locale rules.
- *
- * Use `currency` to format a number as currency.
- *
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `symbolDisplay` is a boolean indicating whether to use the currency symbol or code.
- *   - `true`: use symbol (e.g. `$`).
- *   - `false`(default): use code (e.g. `USD`).
- * - `digitInfo` See {@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
- *
- * @usageNotes
- *
- * ### Example
- *
- * {@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
- *
- * @publicApi
- */
-export declare class DeprecatedCurrencyPipe implements PipeTransform {
-    private _locale;
-    constructor(_locale: string);
-    transform(value: any, currencyCode?: string, symbolDisplay?: boolean, digits?: string): string | null;
-}
-
-/**
- * @ngModule CommonModule
- * @description
- *
- * Formats a date according to locale rules.
- *
- * Where:
- * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
- * (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. The format can be predefined as
- *   shown below or custom as shown in the table.
- *   - `'medium'`: equivalent to `'yMMMdjms'` (e.g. `Sep 3, 2010, 12:05:08 PM` for `en-US`)
- *   - `'short'`: equivalent to `'yMdjm'` (e.g. `9/3/2010, 12:05 PM` for `en-US`)
- *   - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. `Friday, September 3, 2010` for `en-US`)
- *   - `'longDate'`: equivalent to `'yMMMMd'` (e.g. `September 3, 2010` for `en-US`)
- *   - `'mediumDate'`: equivalent to `'yMMMd'` (e.g. `Sep 3, 2010` for `en-US`)
- *   - `'shortDate'`: equivalent to `'yMd'` (e.g. `9/3/2010` for `en-US`)
- *   - `'mediumTime'`: equivalent to `'jms'` (e.g. `12:05:08 PM` for `en-US`)
- *   - `'shortTime'`: equivalent to `'jm'` (e.g. `12:05 PM` for `en-US`)
- *
- *
- *  | Component | Symbol | Narrow | Short Form   | Long Form         | Numeric   | 2-digit   |
- *  |-----------|:------:|--------|--------------|-------------------|-----------|-----------|
- *  | era       |   G    | G (A)  | GGG (AD)     | GGGG (Anno Domini)| -         | -         |
- *  | year      |   y    | -      | -            | -                 | y (2015)  | yy (15)   |
- *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
- *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
- *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
- *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
- *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
- *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
- *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
- *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
- *  | timezone  |   z    | -      | -            | z (Pacific Standard Time)| -  | -         |
- *  | timezone  |   Z    | -      | Z (GMT-8:00) | -                 | -         | -         |
- *  | timezone  |   a    | -      | a (PM)       | -                 | -         | -         |
- *
- * In javascript, only the components specified will be respected (not the ordering,
- * punctuations, ...) and details of the formatting will be dependent on the locale.
- *
- * Timezone of the formatted text will be the local system timezone of the end-user's machine.
- *
- * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
- * applied and the formatted text will have the same day, month and year of the expression.
- *
- * WARNINGS:
- * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
- *   Instead users should treat the date as an immutable object and change the reference when the
- *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
- *   which would be an expensive operation).
- * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
- *   browsers.
- *
- * @usageNotes
- *
- * ### Examples
- *
- * Assuming `dateObj` is (year: 2010, month: 9, day: 3, hour: 12 PM, minute: 05, second: 08)
- * in the _local_ time and locale is 'en-US':
- *
- * {@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
- *
- * @publicApi
- */
-export declare class DeprecatedDatePipe implements PipeTransform {
-    private _locale;
-    constructor(_locale: string);
-    transform(value: any, pattern?: string): string | null;
-}
-
-/**
- * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the active locale.
- *
- * where `expression` is a number:
- *  - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
- *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
- *
- * For more information on the acceptable range for each of these numbers and other
- * details see your native internationalization library.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
- *
- * @usageNotes
- *
- * ### Example
- *
- * {@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
- *
- * @ngModule CommonModule
- * @publicApi
- */
-export declare class DeprecatedDecimalPipe implements PipeTransform {
-    private _locale;
-    constructor(_locale: string);
-    transform(value: any, digits?: string): string | null;
-}
-
-/**
- * A module that contains the deprecated i18n pipes.
- *
- * @deprecated from v5
- * @publicApi
- */
-export declare class DeprecatedI18NPipesModule {
-}
-
-/**
- * @ngModule CommonModule
- *
- * @description
- *
- * Formats a number as percentage according to locale rules.
- *
- * - `digitInfo` See {@link DecimalPipe} for detailed description.
- *
- * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
- *
- * @usageNotes
- *
- * ### Example
- *
- * {@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
- *
- * @publicApi
- */
-export declare class DeprecatedPercentPipe implements PipeTransform {
-    private _locale;
-    constructor(_locale: string);
-    transform(value: any, digits?: string): string | null;
 }
 
 /**
@@ -1865,13 +1696,10 @@ export declare class NgIfContext {
  */
 export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
-    /** @deprecated from v5 */
-    protected deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined;
-    constructor(locale: string, 
-    /** @deprecated from v5 */
-    deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
+    constructor(locale: string);
     getPluralCategory(value: any, locale?: string): string;
 }
+
 
 /**
  * @publicApi
@@ -2723,35 +2551,15 @@ export declare function ɵangular_packages_common_common_i(): Location;
 export declare function ɵangular_packages_common_common_j(platformLocation: PlatformLocation): PathLocationStrategy;
 
 /**
- * @deprecated from v5
- */
-export declare const ɵangular_packages_common_common_k: InjectionToken<boolean>;
-
-/**
- * Returns the plural case based on the locale
- *
- * @deprecated from v5 the plural case function is in locale data files common/locales/*.ts
- * @publicApi
- */
-export declare function ɵangular_packages_common_common_l(locale: string, nLike: number | string): Plural;
-
-/**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-export declare const ɵangular_packages_common_common_m: Provider[];
+export declare const ɵangular_packages_common_common_k: Provider[];
 
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-export declare const ɵangular_packages_common_common_n: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
-
-/**
- * A collection of deprecated i18n pipes that require intl api
- *
- * @deprecated from v5
- */
-export declare const ɵangular_packages_common_common_o: Provider[];
+export declare const ɵangular_packages_common_common_l: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
 
 /**
  * `PlatformLocation` encapsulates all of the direct calls to platform APIs.

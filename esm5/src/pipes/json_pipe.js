@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
 /**
  * @ngModule CommonModule
@@ -29,7 +29,7 @@ var JsonPipe = /** @class */ (function () {
      * @param value A value of any type to convert into a JSON-format string.
      */
     JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
-    JsonPipe = tslib_1.__decorate([
+    JsonPipe = __decorate([
         Pipe({ name: 'json', pure: false })
     ], JsonPipe);
     return JsonPipe;

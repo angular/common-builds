@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.11+24.sha-20be755.with-local-changes
+ * @license Angular v9.0.0-next.12+50.sha-dfff5fe.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -602,7 +602,7 @@ class MockPlatformLocation {
     parseChanges(state, url, baseHref = '') {
         // When the `history.state` value is stored, it is always copied.
         state = JSON.parse(JSON.stringify(state));
-        return Object.assign({}, parseUrl(url, baseHref), { state });
+        return Object.assign(Object.assign({}, parseUrl(url, baseHref)), { state });
     }
     /**
      * @param {?} state
@@ -612,7 +612,7 @@ class MockPlatformLocation {
      */
     replaceState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges[0] = Object.assign({}, this.urlChanges[0], { pathname, search, hash, state: parsedState });
+        this.urlChanges[0] = Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState });
     }
     /**
      * @param {?} state
@@ -622,7 +622,7 @@ class MockPlatformLocation {
      */
     pushState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges.unshift(Object.assign({}, this.urlChanges[0], { pathname, search, hash, state: parsedState }));
+        this.urlChanges.unshift(Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState }));
     }
     /**
      * @return {?}

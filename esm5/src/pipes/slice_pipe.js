@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
 import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
@@ -57,7 +57,7 @@ var SlicePipe = /** @class */ (function () {
     };
     SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
     var SlicePipe_1;
-    SlicePipe = SlicePipe_1 = tslib_1.__decorate([
+    SlicePipe = SlicePipe_1 = __decorate([
         Pipe({ name: 'slice', pure: false })
     ], SlicePipe);
     return SlicePipe;

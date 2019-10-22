@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Pipe } from '@angular/core';
 import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 /**
@@ -49,7 +49,7 @@ var I18nSelectPipe = /** @class */ (function () {
         return '';
     };
     var I18nSelectPipe_1;
-    I18nSelectPipe = I18nSelectPipe_1 = tslib_1.__decorate([
+    I18nSelectPipe = I18nSelectPipe_1 = __decorate([
         Pipe({ name: 'i18nSelect', pure: true })
     ], I18nSelectPipe);
     return I18nSelectPipe;
