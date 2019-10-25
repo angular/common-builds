@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.13+34.sha-ee4fc12.with-local-changes
+ * @license Angular v9.0.0-next.13+35.sha-dcdb433.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -805,7 +805,7 @@ function () { }, ɵ1 = /**
  */
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(1);
+        ɵɵallocHostVars(2);
     }
     if (rf & 2 /* Update */) {
         ɵɵclassMap(ctx.getValue());
@@ -1171,7 +1171,7 @@ function () { }, ɵ1$1 = /**
  */
 function (rf, ctx, elIndex) {
     if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(1);
+        ɵɵallocHostVars(2);
     }
     if (rf & 2 /* Update */) {
         ɵɵstyleMap(ctx.getValue());
@@ -7741,7 +7741,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-next.13+34.sha-ee4fc12.with-local-changes');
+const VERSION = new Version('9.0.0-next.13+35.sha-dcdb433.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
