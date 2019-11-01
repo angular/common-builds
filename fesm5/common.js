@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+17.sha-602eeee.with-local-changes
+ * @license Angular v9.0.0-rc.0+18.sha-4d4b527.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3625,7 +3625,7 @@ var NgForOfContext = /** @class */ (function () {
  * For example:
  *
  *  ```
- * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+ * <li *ngFor="let user of users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
  * ```
@@ -5713,7 +5713,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.0+17.sha-602eeee.with-local-changes');
+var VERSION = new Version('9.0.0-rc.0+18.sha-4d4b527.with-local-changes');
 
 /**
  * @license
