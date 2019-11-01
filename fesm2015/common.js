@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+14.sha-7dbf716.with-local-changes
+ * @license Angular v9.0.0-rc.0+19.sha-88e8023.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5131,7 +5131,7 @@ if (false) {
  * For example:
  *
  *  ```
- * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+ * <li *ngFor="let user of users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
  * ```
@@ -7741,7 +7741,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.0+14.sha-7dbf716.with-local-changes');
+const VERSION = new Version('9.0.0-rc.0+19.sha-88e8023.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
