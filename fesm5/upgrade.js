@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+47.sha-85298e3.with-local-changes
+ * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -945,5 +945,5 @@ function provide$location(ngUpgrade, location, platformLocation, urlCodec, locat
  * found in the LICENSE file at https://angular.io/license
  */
 
-export { $locationShim, $locationShimProvider, LOCATION_UPGRADE_CONFIGURATION, LocationUpgradeModule, AngularJSUrlCodec, UrlCodec };
+export { $locationShim, $locationShimProvider, AngularJSUrlCodec, LOCATION_UPGRADE_CONFIGURATION, LocationUpgradeModule, UrlCodec };
 //# sourceMappingURL=upgrade.js.map

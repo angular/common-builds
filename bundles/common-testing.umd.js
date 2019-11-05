@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+47.sha-85298e3.with-local-changes
+ * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@angular/common/testing', ['exports', '@angular/core', '@angular/common', 'rxjs'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.testing = {}), global.ng.core, global.ng.common, global.rxjs));
-}(this, function (exports, i0, common, rxjs) { 'use strict';
+}(this, (function (exports, i0, common, rxjs) { 'use strict';
 
     /**
      * A spy for {@link Location} that allows tests to fire simulated location events.
@@ -610,12 +610,12 @@
      * found in the LICENSE file at https://angular.io/license
      */
 
-    exports.SpyLocation = SpyLocation;
-    exports.MockLocationStrategy = MockLocationStrategy;
     exports.MOCK_PLATFORM_LOCATION_CONFIG = MOCK_PLATFORM_LOCATION_CONFIG;
+    exports.MockLocationStrategy = MockLocationStrategy;
     exports.MockPlatformLocation = MockPlatformLocation;
+    exports.SpyLocation = SpyLocation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=common-testing.umd.js.map
