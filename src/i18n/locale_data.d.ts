@@ -9,8 +9,22 @@
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
- * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
- *
  * @publicApi
  */
 export declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
+/**
+ * Index of each type of locale data from the extra locale data array
+ */
+export declare const enum ExtraLocaleDataIndex {
+    ExtraDayPeriodFormats = 0,
+    ExtraDayPeriodStandalone = 1,
+    ExtraDayPeriodsRules = 2
+}
+/**
+ * Index of each value in currency data (used to describe CURRENCIES_EN in currencies.ts)
+ */
+export declare const enum CurrencyIndex {
+    Symbol = 0,
+    SymbolNarrow = 1,
+    NbOfDigits = 2
+}
