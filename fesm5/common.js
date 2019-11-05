@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-rc.0+43.sha-abdbd46.with-local-changes
+ * @license Angular v9.0.0-rc.0+53.sha-12ddda3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __metadata, __assign, __extends, __read, __param, __values } from 'tslib';
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -3367,19 +3367,12 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
+ * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+ *
  * @publicApi
  */
-// The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
 function registerLocaleData(data, localeId, extraData) {
-    if (typeof localeId !== 'string') {
-        extraData = localeId;
-        localeId = data[ɵLocaleDataIndex.LocaleId];
-    }
-    localeId = localeId.toLowerCase().replace(/_/g, '-');
-    ɵLOCALE_DATA[localeId] = data;
-    if (extraData) {
-        ɵLOCALE_DATA[localeId][ɵLocaleDataIndex.ExtraData] = extraData;
-    }
+    return ɵregisterLocaleData(data, localeId, extraData);
 }
 
 /**
@@ -5701,7 +5694,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.0+43.sha-abdbd46.with-local-changes');
+var VERSION = new Version('9.0.0-rc.0+53.sha-12ddda3.with-local-changes');
 
 /**
  * @license
@@ -5899,5 +5892,5 @@ var NullViewportScroller = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_k, NgClassImplProvider as ɵangular_packages_common_common_c, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_b, NgClassR3Impl as ɵangular_packages_common_common_a, NgStyleImplProvider as ɵangular_packages_common_common_f, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_e, NgStyleR3Impl as ɵangular_packages_common_common_d, createLocation as ɵangular_packages_common_common_i, provideLocationStrategy as ɵangular_packages_common_common_j, createBrowserPlatformLocation as ɵangular_packages_common_common_h, useBrowserPlatformLocation as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_l, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, NgClassImpl as ɵNgClassImpl, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, NgStyleImpl as ɵNgStyleImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter, BrowserPlatformLocation as ɵBrowserPlatformLocation, HashLocationStrategy, Location, APP_BASE_HREF, LocationStrategy, PathLocationStrategy, LOCATION_INITIALIZED, PlatformLocation };
+export { COMMON_DIRECTIVES as ɵangular_packages_common_common_k, NgClassImplProvider as ɵangular_packages_common_common_c, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_b, NgClassR3Impl as ɵangular_packages_common_common_a, NgStyleImplProvider as ɵangular_packages_common_common_f, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_e, NgStyleR3Impl as ɵangular_packages_common_common_d, createLocation as ɵangular_packages_common_common_i, provideLocationStrategy as ɵangular_packages_common_common_j, createBrowserPlatformLocation as ɵangular_packages_common_common_h, useBrowserPlatformLocation as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_l, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, registerLocaleData, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, NgClassImpl as ɵNgClassImpl, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, NgStyleImpl as ɵNgStyleImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter, BrowserPlatformLocation as ɵBrowserPlatformLocation, HashLocationStrategy, Location, APP_BASE_HREF, LocationStrategy, PathLocationStrategy, LOCATION_INITIALIZED, PlatformLocation };
 //# sourceMappingURL=common.js.map
