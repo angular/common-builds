@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+42.sha-25aaff2.with-local-changes
+ * @license Angular v9.0.0-rc.0+53.sha-c5894e0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3503,19 +3503,12 @@
      * Register global data to be used internally by Angular. See the
      * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
      *
+     * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+     *
      * @publicApi
      */
-    // The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
     function registerLocaleData(data, localeId, extraData) {
-        if (typeof localeId !== 'string') {
-            extraData = localeId;
-            localeId = data[i0.ɵLocaleDataIndex.LocaleId];
-        }
-        localeId = localeId.toLowerCase().replace(/_/g, '-');
-        i0.ɵLOCALE_DATA[localeId] = data;
-        if (extraData) {
-            i0.ɵLOCALE_DATA[localeId][i0.ɵLocaleDataIndex.ExtraData] = extraData;
-        }
+        return i0.ɵregisterLocaleData(data, localeId, extraData);
     }
 
     /**
@@ -5837,7 +5830,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.0+42.sha-25aaff2.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.0+53.sha-c5894e0.with-local-changes');
 
     /**
      * @license
@@ -6047,14 +6040,13 @@
     exports.ɵangular_packages_common_common_h = createBrowserPlatformLocation;
     exports.ɵangular_packages_common_common_g = useBrowserPlatformLocation;
     exports.ɵangular_packages_common_common_l = COMMON_PIPES;
-    exports.ɵregisterLocaleData = registerLocaleData;
-    exports.registerLocaleData = registerLocaleData;
     exports.formatDate = formatDate;
     exports.formatCurrency = formatCurrency;
     exports.formatNumber = formatNumber;
     exports.formatPercent = formatPercent;
     exports.NgLocaleLocalization = NgLocaleLocalization;
     exports.NgLocalization = NgLocalization;
+    exports.registerLocaleData = registerLocaleData;
     exports.getNumberOfCurrencyDigits = getNumberOfCurrencyDigits;
     exports.getCurrencySymbol = getCurrencySymbol;
     exports.getLocaleDayPeriods = getLocaleDayPeriods;
