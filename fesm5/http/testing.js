@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
+ * @license Angular v9.0.0-rc.0+63.sha-3de72e4.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -399,5 +399,5 @@ var HttpClientTestingModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { HttpClientTestingModule, HttpTestingController, TestRequest, HttpClientTestingBackend as ɵangular_packages_common_http_testing_testing_a };
+export { HttpClientTestingBackend as ɵangular_packages_common_http_testing_testing_a, HttpTestingController, HttpClientTestingModule, TestRequest };
 //# sourceMappingURL=testing.js.map
