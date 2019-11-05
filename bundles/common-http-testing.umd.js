@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+47.sha-85298e3.with-local-changes
+ * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}), global.ng.common.http, global.ng.core, global.rxjs));
-}(this, function (exports, http, core, rxjs) { 'use strict';
+}(this, (function (exports, http, core, rxjs) { 'use strict';
 
     /**
      * @license
@@ -597,12 +597,12 @@
      * Generated bundle index. Do not edit.
      */
 
-    exports.ɵangular_packages_common_http_testing_testing_a = HttpClientTestingBackend;
-    exports.HttpTestingController = HttpTestingController;
     exports.HttpClientTestingModule = HttpClientTestingModule;
+    exports.HttpTestingController = HttpTestingController;
     exports.TestRequest = TestRequest;
+    exports.ɵangular_packages_common_http_testing_testing_a = HttpClientTestingBackend;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=common-http-testing.umd.js.map

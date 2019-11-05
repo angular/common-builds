@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+47.sha-85298e3.with-local-changes
+ * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2297,11 +2297,11 @@ export declare interface PopStateEvent {
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
+ * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+ *
  * @publicApi
  */
-declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
-export { registerLocaleData }
-export { registerLocaleData as ɵregisterLocaleData }
+export declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
 
 /**
  * @ngModule CommonModule

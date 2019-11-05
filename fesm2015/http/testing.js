@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+47.sha-85298e3.with-local-changes
+ * @license Angular v9.0.0-rc.0+62.sha-d751ca7.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -611,5 +611,5 @@ HttpClientTestingModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { HttpClientTestingBackend as ɵangular_packages_common_http_testing_testing_a, HttpTestingController, HttpClientTestingModule, TestRequest };
+export { HttpClientTestingModule, HttpTestingController, TestRequest, HttpClientTestingBackend as ɵangular_packages_common_http_testing_testing_a };
 //# sourceMappingURL=testing.js.map
