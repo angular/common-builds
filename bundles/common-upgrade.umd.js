@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
+ * @license Angular v9.0.0-rc.0+78.sha-a20979d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/upgrade/static')) :
     typeof define === 'function' && define.amd ? define('@angular/common/upgrade', ['exports', '@angular/common', '@angular/core', '@angular/upgrade/static'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.upgrade = {}), global.ng.common, global.ng.core, global.ng.upgrade.static));
-}(this, function (exports, common, i0, _static) { 'use strict';
+}(this, (function (exports, common, i0, _static) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1145,12 +1145,12 @@
 
     exports.$locationShim = $locationShim;
     exports.$locationShimProvider = $locationShimProvider;
+    exports.AngularJSUrlCodec = AngularJSUrlCodec;
     exports.LOCATION_UPGRADE_CONFIGURATION = LOCATION_UPGRADE_CONFIGURATION;
     exports.LocationUpgradeModule = LocationUpgradeModule;
-    exports.AngularJSUrlCodec = AngularJSUrlCodec;
     exports.UrlCodec = UrlCodec;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=common-upgrade.umd.js.map
