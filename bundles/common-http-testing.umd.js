@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+77.sha-2ed04ff.with-local-changes
+ * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}), global.ng.common.http, global.ng.core, global.rxjs));
-}(this, (function (exports, http, i0, rxjs) { 'use strict';
+}(this, function (exports, http, i0, rxjs) { 'use strict';
 
     /**
      * @license
@@ -408,11 +408,11 @@
      * found in the LICENSE file at https://angular.io/license
      */
 
-    exports.HttpClientTestingModule = HttpClientTestingModule;
     exports.HttpTestingController = HttpTestingController;
+    exports.HttpClientTestingModule = HttpClientTestingModule;
     exports.TestRequest = TestRequest;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=common-http-testing.umd.js.map
