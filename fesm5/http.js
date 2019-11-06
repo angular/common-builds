@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+71.sha-d749dd3.with-local-changes
+ * @license Angular v9.0.0-rc.0+73.sha-7b87392.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -164,8 +164,8 @@ var HttpHeaders = /** @class */ (function () {
      * Appends a new value to the existing set of values for a header
      * and returns them in a clone of the original instance.
      *
-     * @param name The header name for which to append the value or values.
-     * @param value The new value or array of values.
+     * @param name The header name for which to append the values.
+     * @param value The value to append.
      *
      * @returns A clone of the HTTP headers object with the value appended to the given header.
      */
