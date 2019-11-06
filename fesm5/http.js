@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+69.sha-41560b4.with-local-changes
+ * @license Angular v9.0.0-rc.0+77.sha-2ed04ff.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -164,8 +164,8 @@ var HttpHeaders = /** @class */ (function () {
      * Appends a new value to the existing set of values for a header
      * and returns them in a clone of the original instance.
      *
-     * @param name The header name for which to append the value or values.
-     * @param value The new value or array of values.
+     * @param name The header name for which to append the values.
+     * @param value The value to append.
      *
      * @returns A clone of the HTTP headers object with the value appended to the given header.
      */
@@ -2157,5 +2157,5 @@ var HttpClientJsonpModule = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpInterceptingHandler as ɵHttpInterceptingHandler, HttpParams, HttpUrlEncodingCodec, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpXhrBackend, XhrFactory, HttpXsrfTokenExtractor };
+export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler };
 //# sourceMappingURL=http.js.map
