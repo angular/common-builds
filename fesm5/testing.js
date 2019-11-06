@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+66.sha-1735135.with-local-changes
+ * @license Angular v9.0.0-rc.0+75.sha-114317c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -429,5 +429,5 @@ function scheduleMicroTask(cb) {
  * Generated bundle index. Do not edit.
  */
 
-export { SpyLocation, MockLocationStrategy, MOCK_PLATFORM_LOCATION_CONFIG, MockPlatformLocation };
+export { MOCK_PLATFORM_LOCATION_CONFIG, MockLocationStrategy, MockPlatformLocation, SpyLocation };
 //# sourceMappingURL=testing.js.map

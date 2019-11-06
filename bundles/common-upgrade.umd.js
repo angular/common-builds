@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.0+66.sha-1735135.with-local-changes
+ * @license Angular v9.0.0-rc.0+75.sha-114317c.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/upgrade/static')) :
     typeof define === 'function' && define.amd ? define('@angular/common/upgrade', ['exports', '@angular/common', '@angular/core', '@angular/upgrade/static'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.upgrade = {}), global.ng.common, global.ng.core, global.ng.upgrade.static));
-}(this, function (exports, common, core, _static) { 'use strict';
+}(this, (function (exports, common, core, _static) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1145,18 +1145,18 @@
      * Generated bundle index. Do not edit.
      */
 
-    exports.ɵangular_packages_common_upgrade_upgrade_d = provide$location;
-    exports.ɵangular_packages_common_upgrade_upgrade_a = provideAppBaseHref;
-    exports.ɵangular_packages_common_upgrade_upgrade_c = provideLocationStrategy;
-    exports.ɵangular_packages_common_upgrade_upgrade_b = provideUrlCodec;
     exports.$locationShim = $locationShim;
     exports.$locationShimProvider = $locationShimProvider;
+    exports.AngularJSUrlCodec = AngularJSUrlCodec;
     exports.LOCATION_UPGRADE_CONFIGURATION = LOCATION_UPGRADE_CONFIGURATION;
     exports.LocationUpgradeModule = LocationUpgradeModule;
-    exports.AngularJSUrlCodec = AngularJSUrlCodec;
     exports.UrlCodec = UrlCodec;
+    exports.ɵangular_packages_common_upgrade_upgrade_a = provideAppBaseHref;
+    exports.ɵangular_packages_common_upgrade_upgrade_b = provideUrlCodec;
+    exports.ɵangular_packages_common_upgrade_upgrade_c = provideLocationStrategy;
+    exports.ɵangular_packages_common_upgrade_upgrade_d = provide$location;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=common-upgrade.umd.js.map
