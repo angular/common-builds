@@ -27,5 +27,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'VND': (string | undefined)[];
     'XCD': (string | undefined)[];
     'XPF': never[];
+    'XXX': never[];
 } | undefined)[];
 export default _default;
