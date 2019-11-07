@@ -12,7 +12,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'JPY': string[];
     'PTE': string[];
     'RON': (string | undefined)[];
-    'SYP': (string | undefined)[];
     'THB': string[];
     'TWD': string[];
     'USD': string[];

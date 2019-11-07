@@ -24,21 +24,17 @@
     [['AM', 'PM'], u, u],
     u,
     [
-      ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-      ['dom.', 'seg.', 'ter.', 'qua.', 'qui.', 'sex.', 'sáb.'],
+      ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'], ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'],
       [
         'domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira',
         'sábado'
       ],
-      ['dom.', 'seg.', 'ter.', 'qua.', 'qui.', 'sex.', 'sáb.']
+      ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb']
     ],
     u,
     [
       ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-      [
-        'jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.',
-        'dez.'
-      ],
+      ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
       [
         'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro',
         'outubro', 'novembro', 'dezembro'
@@ -60,7 +56,6 @@
       'JPY': ['JP¥', '¥'],
       'PTE': ['Esc.'],
       'RON': [u, 'L'],
-      'SYP': [u, 'S£'],
       'THB': ['฿'],
       'TWD': ['NT$'],
       'USD': ['US$', '$']

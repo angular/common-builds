@@ -23,14 +23,6 @@
     [['a', 'p'], ['AM', 'PM'], u],
     [['AM', 'PM'], u, u],
     [
-      ['7', '1', '2', '3', '4', '5', '6'], ['B.', 'B.e.', 'Ç.a.', 'Ç.', 'C.a.', 'C.', 'Ş.'],
-      [
-        'bazar', 'bazar ertəsi', 'çərşənbə axşamı', 'çərşənbə', 'cümə axşamı',
-        'cümə', 'şənbə'
-      ],
-      ['B.', 'B.E.', 'Ç.A.', 'Ç.', 'C.A.', 'C.', 'Ş.']
-    ],
-    [
       ['7', '1', '2', '3', '4', '5', '6'], ['B.', 'B.E.', 'Ç.A.', 'Ç.', 'C.A.', 'C.', 'Ş.'],
       [
         'bazar', 'bazar ertəsi', 'çərşənbə axşamı', 'çərşənbə', 'cümə axşamı',
@@ -38,6 +30,7 @@
       ],
       ['B.', 'B.E.', 'Ç.A.', 'Ç.', 'C.A.', 'C.', 'Ş.']
     ],
+    u,
     [
       ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
       ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'],
@@ -50,8 +43,8 @@
       ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
       ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'],
       [
-        'yanvar', 'Fevral', 'mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr',
-        'Oktyabr', 'Noyabr', 'dekabr'
+        'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr',
+        'Oktyabr', 'Noyabr', 'Dekabr'
       ]
     ],
     [['e.ə.', 'y.e.'], u, ['eramızdan əvvəl', 'yeni era']],
@@ -61,7 +54,7 @@
     ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
     ['{1} {0}', u, u, u],
     [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '#,##0.00 ¤', '#E0'],
+    ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'],
     '₼',
     'Azərbaycan Manatı',
     {

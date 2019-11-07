@@ -71,8 +71,7 @@
       'TWD': ['NT$'],
       'USD': ['US$', '$'],
       'VND': [u, '₫'],
-      'XEU': ['ECU'],
-      'XXX': []
+      'XEU': ['ECU']
     },
     plural,
     [

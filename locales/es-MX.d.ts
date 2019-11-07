@@ -21,12 +21,11 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'INR': (string | undefined)[];
     'JPY': (string | undefined)[];
     'KRW': (string | undefined)[];
-    'MRO': string[];
-    'MRU': string[];
     'MXN': string[];
     'NZD': (string | undefined)[];
     'TWD': (string | undefined)[];
     'USD': (string | undefined)[];
+    'VEF': (string | undefined)[];
     'VND': (string | undefined)[];
     'XAF': never[];
     'XCD': (string | undefined)[];

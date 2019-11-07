@@ -36,10 +36,9 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'KWD': string[];
     'KYD': (string | undefined)[];
     'LBP': string[];
-    'LRD': (string | undefined)[];
     'LYD': string[];
     'MAD': string[];
-    'MRU': string[];
+    'MRO': string[];
     'MXN': string[];
     'NZD': string[];
     'OMR': string[];

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+20.sha-c77faf5.with-local-changes
+ * @license Angular v9.0.0-rc.1+17.sha-0ca2a39.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2724,7 +2724,7 @@ const CURRENCIES_EN = {
     'ADP': [undefined, undefined, 0],
     'AFN': [undefined, undefined, 0],
     'ALL': [undefined, undefined, 0],
-    'AMD': [undefined, undefined, 2],
+    'AMD': [undefined, undefined, 0],
     'AOA': [undefined, 'Kz'],
     'ARS': [undefined, '$'],
     'AUD': ['A$', '$'],
@@ -2747,7 +2747,7 @@ const CURRENCIES_EN = {
     'CLF': [undefined, undefined, 4],
     'CLP': [undefined, '$', 0],
     'CNY': ['CN¥', '¥'],
-    'COP': [undefined, '$', 2],
+    'COP': [undefined, '$', 0],
     'CRC': [undefined, '₡', 2],
     'CUC': [undefined, '$'],
     'CUP': [undefined, '$'],
@@ -2765,12 +2765,12 @@ const CURRENCIES_EN = {
     'GIP': [undefined, '£'],
     'GNF': [undefined, 'FG', 0],
     'GTQ': [undefined, 'Q'],
-    'GYD': [undefined, '$', 2],
+    'GYD': [undefined, '$', 0],
     'HKD': ['HK$', '$'],
     'HNL': [undefined, 'L'],
     'HRK': [undefined, 'kn'],
     'HUF': [undefined, 'Ft', 2],
-    'IDR': [undefined, 'Rp', 2],
+    'IDR': [undefined, 'Rp', 0],
     'ILS': ['₪'],
     'INR': ['₹'],
     'IQD': [undefined, undefined, 0],
@@ -2798,9 +2798,9 @@ const CURRENCIES_EN = {
     'MGA': [undefined, 'Ar', 0],
     'MGF': [undefined, undefined, 0],
     'MMK': [undefined, 'K', 0],
-    'MNT': [undefined, '₮', 2],
+    'MNT': [undefined, '₮', 0],
     'MRO': [undefined, undefined, 0],
-    'MUR': [undefined, 'Rs', 2],
+    'MUR': [undefined, 'Rs', 0],
     'MXN': ['MX$', '$'],
     'MYR': [undefined, 'RM'],
     'NAD': [undefined, '$'],
@@ -2811,7 +2811,7 @@ const CURRENCIES_EN = {
     'NZD': ['NZ$', '$'],
     'OMR': [undefined, undefined, 3],
     'PHP': [undefined, '₱'],
-    'PKR': [undefined, 'Rs', 2],
+    'PKR': [undefined, 'Rs', 0],
     'PLN': [undefined, 'zł'],
     'PYG': [undefined, '₲', 0],
     'RON': [undefined, 'lei'],
@@ -2838,22 +2838,20 @@ const CURRENCIES_EN = {
     'TRY': [undefined, '₺'],
     'TTD': [undefined, '$'],
     'TWD': ['NT$', '$', 2],
-    'TZS': [undefined, undefined, 2],
+    'TZS': [undefined, undefined, 0],
     'UAH': [undefined, '₴'],
     'UGX': [undefined, undefined, 0],
     'USD': ['$'],
     'UYI': [undefined, undefined, 0],
     'UYU': [undefined, '$'],
-    'UYW': [undefined, undefined, 4],
-    'UZS': [undefined, undefined, 2],
-    'VEF': [undefined, 'Bs', 2],
+    'UZS': [undefined, undefined, 0],
+    'VEF': [undefined, 'Bs'],
     'VND': ['₫', undefined, 0],
     'VUV': [undefined, undefined, 0],
     'XAF': ['FCFA', undefined, 0],
     'XCD': ['EC$', '$'],
     'XOF': ['CFA', undefined, 0],
     'XPF': ['CFPF', undefined, 0],
-    'XXX': ['¤'],
     'YER': [undefined, undefined, 0],
     'ZAR': [undefined, 'R'],
     'ZMK': [undefined, undefined, 0],
@@ -8173,7 +8171,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+20.sha-c77faf5.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+17.sha-0ca2a39.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
