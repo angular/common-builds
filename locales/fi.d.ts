@@ -101,6 +101,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'VND': never[];
     'XCD': never[];
     'XPF': never[];
+    'XXX': never[];
     'ZAR': never[];
     'ZMW': never[];
 } | undefined)[];

@@ -11,5 +11,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'AUD': string[];
     'KRW': string[];
     'USD': string[];
+    'XXX': never[];
 } | undefined)[];
 export default _default;
