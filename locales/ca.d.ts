@@ -11,13 +11,13 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'AUD': string[];
     'BRL': (string | undefined)[];
     'CAD': (string | undefined)[];
-    'CNY': string[];
+    'CNY': (string | undefined)[];
     'ESP': string[];
-    'JPY': string[];
     'MXN': (string | undefined)[];
     'THB': string[];
     'USD': (string | undefined)[];
-    'VEF': never[];
+    'VEF': (string | undefined)[];
     'XCD': (string | undefined)[];
+    'XXX': never[];
 } | undefined)[];
 export default _default;
