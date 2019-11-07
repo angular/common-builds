@@ -18,6 +18,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'SEK': (string | undefined)[];
     'THB': string[];
     'TWD': string[];
+    'USD': string[];
     'ZAR': string[];
 } | undefined)[];
 export default _default;

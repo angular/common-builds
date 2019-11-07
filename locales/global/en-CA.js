@@ -21,8 +21,8 @@
   }
   root.ng.common.locales['en-ca'] = [
     'en-CA',
-    [['am', 'pm'], ['a.m.', 'p.m.'], u],
-    [['a.m.', 'pm'], ['a.m.', 'p.m.'], u],
+    [['a', 'p'], ['a.m.', 'p.m.'], u],
+    [['a.m.', 'p.m.'], u, u],
     [
       ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
       ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -40,7 +40,14 @@
         'October', 'November', 'December'
       ]
     ],
-    u,
+    [
+      ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December'
+      ]
+    ],
     [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']],
     0,
     [6, 0],
@@ -55,13 +62,10 @@
     plural,
     [
       [
-        ['mid', 'n', 'mor', 'aft', 'eve', 'night'],
+        ['mi', 'n', 'in the morning', 'in the afternoon', 'in the evening', 'at night'],
         ['midnight', 'noon', 'in the morning', 'in the afternoon', 'in the evening', 'at night'], u
       ],
-      [
-        ['mid', 'noon', 'mor', 'aft', 'eve', 'night'],
-        ['midnight', 'noon', 'morning', 'afternoon', 'evening', 'night'], u
-      ],
+      [['midnight', 'noon', 'morning', 'afternoon', 'evening', 'night'], u, u],
       [
         '00:00', '12:00', ['06:00', '12:00'], ['12:00', '18:00'], ['18:00', '21:00'],
         ['21:00', '06:00']

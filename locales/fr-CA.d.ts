@@ -31,10 +31,10 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'RON': (string | undefined)[];
     'RWF': (string | undefined)[];
     'SGD': string[];
-    'TOP': (string | undefined)[];
     'TWD': (string | undefined)[];
     'USD': string[];
     'VND': (string | undefined)[];
+    'WST': string[];
     'XAF': never[];
     'XCD': (string | undefined)[];
     'XOF': never[];

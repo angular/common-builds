@@ -29,7 +29,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'TWD': (string | undefined)[];
     'USD': string[];
     'UYU': string[];
-    'UYW': string[];
     'VEF': (string | undefined)[];
     'VND': (string | undefined)[];
     'XAF': never[];

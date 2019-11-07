@@ -13,6 +13,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'BEF': string[];
     'BMD': string[];
     'BND': string[];
+    'BSD': string[];
     'BZD': string[];
     'CAD': string[];
     'CLP': string[];
@@ -44,7 +45,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'SGD': string[];
     'SRD': string[];
     'TND': string[];
-    'TOP': (string | undefined)[];
     'TTD': string[];
     'TWD': (string | undefined)[];
     'USD': string[];

@@ -63,10 +63,7 @@
     },
     plural,
     [
-      [
-        ['mezzanotte', 'mezzogiorno', 'di mattina', 'di pomeriggio', 'di sera', 'di notte'], u,
-        ['mezzanotte', 'mezzogiorno', 'di mattina', 'del pomeriggio', 'di sera', 'di notte']
-      ],
+      [['mezzanotte', 'mezzogiorno', 'di mattina', 'del pomeriggio', 'di sera', 'di notte'], u, u],
       [['mezzanotte', 'mezzogiorno', 'mattina', 'pomeriggio', 'sera', 'notte'], u, u],
       [
         '00:00', '12:00', ['06:00', '12:00'], ['12:00', '18:00'], ['18:00', '24:00'],
