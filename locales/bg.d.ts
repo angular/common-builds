@@ -27,6 +27,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     'CUP': never[];
     'DOP': never[];
     'FJD': never[];
+    'FKP': never[];
     'GBP': (string | undefined)[];
     'GIP': never[];
     'GYD': never[];
