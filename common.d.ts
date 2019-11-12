@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-next.12+25.sha-083d4b8.with-local-changes
+ * @license Angular v9.0.0-rc.1+58.sha-dbd55fc.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1396,7 +1396,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * For example:
  *
  *  ```
- * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+ * <li *ngFor="let user of users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
  * ```
@@ -2297,11 +2297,11 @@ export declare interface PopStateEvent {
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
+ * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+ *
  * @publicApi
  */
-declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
-export { registerLocaleData }
-export { registerLocaleData as ɵregisterLocaleData }
+export declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
 
 /**
  * @ngModule CommonModule
