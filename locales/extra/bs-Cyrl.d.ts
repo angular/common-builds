@@ -6,5 +6,5 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-declare const _default: never[];
+declare const _default: ((string[] | undefined)[] | (string | string[])[])[];
 export default _default;
