@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+89.sha-f1b3284.with-local-changes
+ * @license Angular v9.0.0-rc.1+100.sha-b30bb8d.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3443,7 +3443,7 @@ function extractTime(time) {
  * @param {?} format The format, `wide` or `narrow`.
  * @param {?=} locale A locale code for the locale format rules to use.
  *
- * @return {?} The symbol, or the currency code if no symbol is available.0
+ * @return {?} The symbol, or the currency code if no symbol is available.
  */
 function getCurrencySymbol(code, format, locale = 'en') {
     /** @type {?} */
@@ -8173,7 +8173,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+89.sha-f1b3284.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+100.sha-b30bb8d.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
