@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.2.with-local-changes
+ * @license Angular v9.0.0-rc.2+11.sha-8e5ed20.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2203,7 +2203,7 @@ function extractTime(time) {
  * @param format The format, `wide` or `narrow`.
  * @param locale A locale code for the locale format rules to use.
  *
- * @returns The symbol, or the currency code if no symbol is available.0
+ * @returns The symbol, or the currency code if no symbol is available.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * @publicApi
@@ -5696,7 +5696,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.2.with-local-changes');
+var VERSION = new Version('9.0.0-rc.2+11.sha-8e5ed20.with-local-changes');
 
 /**
  * @license
