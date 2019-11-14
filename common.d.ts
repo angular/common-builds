@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+100.sha-b30bb8d.with-local-changes
+ * @license Angular v9.0.0-rc.1+106.sha-e25b256.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1631,7 +1631,7 @@ export declare class NgForOfContext<T> {
  * the content of this unlabeled `<ng-template>` tag.
  *
  * ```
- * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+ * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
  *  <div class="hero-list">
  *   ...
  *  </div>
