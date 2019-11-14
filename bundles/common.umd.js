@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.2+11.sha-8e5ed20.with-local-changes
+ * @license Angular v9.0.0-rc.2+17.sha-aaa38cf.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4097,7 +4097,7 @@
      * the content of this unlabeled `<ng-template>` tag.
      *
      * ```
-     * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+     * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
      *  <div class="hero-list">
      *   ...
      *  </div>
@@ -5832,7 +5832,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.2+11.sha-8e5ed20.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.2+17.sha-aaa38cf.with-local-changes');
 
     /**
      * @license
