@@ -128,7 +128,7 @@ import * as i0 from "@angular/core";
  * the content of this unlabeled `<ng-template>` tag.
  *
  * ```
- * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+ * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
  *  <div class="hero-list">
  *   ...
  *  </div>

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+100.sha-b30bb8d.with-local-changes
+ * @license Angular v9.0.0-rc.1+106.sha-e25b256.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5728,7 +5728,7 @@ function getTypeName(type) {
  * the content of this unlabeled `<ng-template>` tag.
  *
  * ```
- * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+ * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
  *  <div class="hero-list">
  *   ...
  *  </div>
@@ -8173,7 +8173,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+100.sha-b30bb8d.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+106.sha-e25b256.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
