@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -346,9 +346,9 @@
         HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ɵfac(t); }, providedIn: null });
         return HttpClientTestingBackend;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
             type: i0.Injectable
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -378,7 +378,7 @@
         return HttpClientTestingModule;
     }());
     (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] }); })();
-    /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingModule, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpClientTestingModule, [{
             type: i0.NgModule,
             args: [{
                     imports: [
@@ -390,7 +390,7 @@
                         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
                     ],
                 }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license

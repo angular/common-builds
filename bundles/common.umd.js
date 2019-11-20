@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -599,9 +599,9 @@
         NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
         return NgClassR2Impl;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgClassR2Impl, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgClassR2Impl, [{
             type: i0.Injectable
-        }], function () { return [{ type: i0.IterableDiffers }, { type: i0.KeyValueDiffers }, { type: i0.ElementRef }, { type: i0.Renderer2 }]; }, null);
+        }], function () { return [{ type: i0.IterableDiffers }, { type: i0.KeyValueDiffers }, { type: i0.ElementRef }, { type: i0.Renderer2 }]; }, null); })();
     var NgClassR3Impl = /** @class */ (function () {
         function NgClassR3Impl() {
             this._value = null;
@@ -641,9 +641,9 @@
         NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
         return NgClassR3Impl;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgClassR3Impl, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgClassR3Impl, [{
             type: i0.Injectable
-        }], null, null);
+        }], null, null); })();
     // the implementation for both NgStyleR2Impl and NgStyleR3Impl are
     // not ivy_switch'd away, instead they are only hooked up into the
     // DI via NgStyle's directive's provider property.
@@ -762,7 +762,7 @@
         NgClass.ɵdir = i0.ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, features: [i0.ɵɵProvidersFeature([NgClassImplProvider]), i0.ɵɵInheritDefinitionFeature] });
         return NgClass;
     }(NgClassBase));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgClass, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgClass, [{
             type: i0.Directive,
             args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] }]
         }], function () { return [{ type: NgClassImpl }]; }, { klass: [{
@@ -771,7 +771,7 @@
             }], ngClass: [{
                 type: i0.Input,
                 args: ['ngClass']
-            }] });
+            }] }); })();
 
     /**
      * Used as a token for an injected service within the NgStyle directive.
@@ -838,9 +838,9 @@
         NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
         return NgStyleR2Impl;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyleR2Impl, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgStyleR2Impl, [{
             type: i0.Injectable
-        }], function () { return [{ type: i0.ElementRef }, { type: i0.KeyValueDiffers }, { type: i0.Renderer2 }]; }, null);
+        }], function () { return [{ type: i0.ElementRef }, { type: i0.KeyValueDiffers }, { type: i0.Renderer2 }]; }, null); })();
     var NgStyleR3Impl = /** @class */ (function () {
         function NgStyleR3Impl() {
             this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
@@ -857,9 +857,9 @@
         NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
         return NgStyleR3Impl;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyleR3Impl, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgStyleR3Impl, [{
             type: i0.Injectable
-        }], null, null);
+        }], null, null); })();
     // the implementation for both NgClassR2Impl and NgClassR3Impl are
     // not ivy_switch'd away, instead they are only hooked up into the
     // DI via NgStyle's directive's provider property.
@@ -979,13 +979,13 @@
         NgStyle.ɵdir = i0.ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" }, features: [i0.ɵɵProvidersFeature([NgStyleImplProvider]), i0.ɵɵInheritDefinitionFeature] });
         return NgStyle;
     }(NgStyleBase));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgStyle, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgStyle, [{
             type: i0.Directive,
             args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] }]
         }], function () { return [{ type: NgStyleImpl }]; }, { ngStyle: [{
                 type: i0.Input,
                 args: ['ngStyle']
-            }] });
+            }] }); })();
 
     /**
      * @license
@@ -1065,14 +1065,14 @@
         PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
         return PlatformLocation;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(PlatformLocation, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(PlatformLocation, [{
             type: i0.Injectable,
             args: [{
                     providedIn: 'platform',
                     // See #23917
                     useFactory: useBrowserPlatformLocation
                 }]
-        }], null, null);
+        }], null, null); })();
     function useBrowserPlatformLocation() {
         return i0.ɵɵinject(BrowserPlatformLocation);
     }
@@ -1168,7 +1168,7 @@
         BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
         return BrowserPlatformLocation;
     }(PlatformLocation));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(BrowserPlatformLocation, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(BrowserPlatformLocation, [{
             type: i0.Injectable,
             args: [{
                     providedIn: 'platform',
@@ -1178,7 +1178,7 @@
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [DOCUMENT]
-                }] }]; }, null);
+                }] }]; }, null); })();
     function supportsState() {
         return !!window.history.pushState;
     }
@@ -1282,10 +1282,10 @@
         LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
         return LocationStrategy;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(LocationStrategy, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LocationStrategy, [{
             type: i0.Injectable,
             args: [{ providedIn: 'root', useFactory: provideLocationStrategy }]
-        }], null, null);
+        }], null, null); })();
     function provideLocationStrategy(platformLocation) {
         // See #23917
         var location = i0.ɵɵinject(DOCUMENT).location;
@@ -1382,14 +1382,14 @@
         PathLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
         return PathLocationStrategy;
     }(LocationStrategy));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(PathLocationStrategy, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(PathLocationStrategy, [{
             type: i0.Injectable
         }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
                     type: i0.Optional
                 }, {
                     type: i0.Inject,
                     args: [APP_BASE_HREF]
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @description
@@ -1458,14 +1458,14 @@
         HashLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
         return HashLocationStrategy;
     }(LocationStrategy));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(HashLocationStrategy, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HashLocationStrategy, [{
             type: i0.Injectable
         }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
                     type: i0.Optional
                 }, {
                     type: i0.Inject,
                     args: [APP_BASE_HREF]
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @license
@@ -1676,14 +1676,14 @@
         Location.ɵprov = i0.ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
         return Location;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(Location, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(Location, [{
             type: i0.Injectable,
             args: [{
                     providedIn: 'root',
                     // See #23917
                     useFactory: createLocation,
                 }]
-        }], function () { return [{ type: LocationStrategy }, { type: PlatformLocation }]; }, null);
+        }], function () { return [{ type: LocationStrategy }, { type: PlatformLocation }]; }, null); })();
     function createLocation() {
         return new Location(i0.ɵɵinject(LocationStrategy), i0.ɵɵinject(PlatformLocation));
     }
@@ -3500,12 +3500,12 @@
         NgLocaleLocalization.ɵprov = i0.ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
         return NgLocaleLocalization;
     }(NgLocalization));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgLocaleLocalization, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgLocaleLocalization, [{
             type: i0.Injectable
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @license
@@ -3654,7 +3654,7 @@
         NgComponentOutlet.ɵdir = i0.ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [i0.ɵɵNgOnChangesFeature()] });
         return NgComponentOutlet;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgComponentOutlet, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgComponentOutlet, [{
             type: i0.Directive,
             args: [{ selector: '[ngComponentOutlet]' }]
         }], function () { return [{ type: i0.ViewContainerRef }]; }, { ngComponentOutlet: [{
@@ -3665,7 +3665,7 @@
                 type: i0.Input
             }], ngComponentOutletNgModuleFactory: [{
                 type: i0.Input
-            }] });
+            }] }); })();
 
     /**
      * @license
@@ -3947,7 +3947,7 @@
         NgForOf.ɵdir = i0.ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
         return NgForOf;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgForOf, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgForOf, [{
             type: i0.Directive,
             args: [{ selector: '[ngFor][ngForOf]' }]
         }], function () { return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }, { type: i0.IterableDiffers }]; }, { ngForOf: [{
@@ -3956,7 +3956,7 @@
                 type: i0.Input
             }], ngForTemplate: [{
                 type: i0.Input
-            }] });
+            }] }); })();
     var RecordViewTuple = /** @class */ (function () {
         function RecordViewTuple(record, view) {
             this.record = record;
@@ -4187,7 +4187,7 @@
         NgIf.ɵdir = i0.ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
         return NgIf;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgIf, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgIf, [{
             type: i0.Directive,
             args: [{ selector: '[ngIf]' }]
         }], function () { return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }]; }, { ngIf: [{
@@ -4196,7 +4196,7 @@
                 type: i0.Input
             }], ngIfElse: [{
                 type: i0.Input
-            }] });
+            }] }); })();
     /**
      * @publicApi
      */
@@ -4364,12 +4364,12 @@
         NgSwitch.ɵdir = i0.ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
         return NgSwitch;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgSwitch, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgSwitch, [{
             type: i0.Directive,
             args: [{ selector: '[ngSwitch]' }]
         }], null, { ngSwitch: [{
                 type: i0.Input
-            }] });
+            }] }); })();
     /**
      * @ngModule CommonModule
      *
@@ -4417,14 +4417,14 @@
         NgSwitchCase.ɵdir = i0.ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
         return NgSwitchCase;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgSwitchCase, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgSwitchCase, [{
             type: i0.Directive,
             args: [{ selector: '[ngSwitchCase]' }]
         }], function () { return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }, { type: NgSwitch, decorators: [{
                     type: i0.Host
                 }] }]; }, { ngSwitchCase: [{
                 type: i0.Input
-            }] });
+            }] }); })();
     /**
      * @ngModule CommonModule
      *
@@ -4447,12 +4447,12 @@
         NgSwitchDefault.ɵdir = i0.ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
         return NgSwitchDefault;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgSwitchDefault, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgSwitchDefault, [{
             type: i0.Directive,
             args: [{ selector: '[ngSwitchDefault]' }]
         }], function () { return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }, { type: NgSwitch, decorators: [{
                     type: i0.Host
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @license
@@ -4526,12 +4526,12 @@
         NgPlural.ɵdir = i0.ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
         return NgPlural;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgPlural, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgPlural, [{
             type: i0.Directive,
             args: [{ selector: '[ngPlural]' }]
         }], function () { return [{ type: NgLocalization }]; }, { ngPlural: [{
                 type: i0.Input
-            }] });
+            }] }); })();
     /**
      * @ngModule CommonModule
      *
@@ -4562,7 +4562,7 @@
         NgPluralCase.ɵdir = i0.ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
         return NgPluralCase;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgPluralCase, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgPluralCase, [{
             type: i0.Directive,
             args: [{ selector: '[ngPluralCase]' }]
         }], function () { return [{ type: undefined, decorators: [{
@@ -4570,7 +4570,7 @@
                     args: ['ngPluralCase']
                 }] }, { type: i0.TemplateRef }, { type: i0.ViewContainerRef }, { type: NgPlural, decorators: [{
                     type: i0.Host
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @ngModule CommonModule
@@ -4685,14 +4685,14 @@
         NgTemplateOutlet.ɵdir = i0.ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵɵNgOnChangesFeature()] });
         return NgTemplateOutlet;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(NgTemplateOutlet, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgTemplateOutlet, [{
             type: i0.Directive,
             args: [{ selector: '[ngTemplateOutlet]' }]
         }], function () { return [{ type: i0.ViewContainerRef }]; }, { ngTemplateOutletContext: [{
                 type: i0.Input
             }], ngTemplateOutlet: [{
                 type: i0.Input
-            }] });
+            }] }); })();
 
     /**
      * @license
@@ -4850,10 +4850,10 @@
         AsyncPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
         return AsyncPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(AsyncPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AsyncPipe, [{
             type: i0.Pipe,
             args: [{ name: 'async', pure: false }]
-        }], function () { return [{ type: i0.ChangeDetectorRef }]; }, null);
+        }], function () { return [{ type: i0.ChangeDetectorRef }]; }, null); })();
 
     /**
      * @license
@@ -4895,10 +4895,10 @@
         LowerCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
         return LowerCasePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(LowerCasePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LowerCasePipe, [{
             type: i0.Pipe,
             args: [{ name: 'lowercase' }]
-        }], null, null);
+        }], null, null); })();
     //
     // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
     // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
@@ -4943,10 +4943,10 @@
         TitleCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
         return TitleCasePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(TitleCasePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(TitleCasePipe, [{
             type: i0.Pipe,
             args: [{ name: 'titlecase' }]
-        }], null, null);
+        }], null, null); })();
     /**
      * Transforms text to all upper case.
      * @see `LowerCasePipe`
@@ -4973,10 +4973,10 @@
         UpperCasePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
         return UpperCasePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(UpperCasePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UpperCasePipe, [{
             type: i0.Pipe,
             args: [{ name: 'uppercase' }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -5157,13 +5157,13 @@
         DatePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
         return DatePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(DatePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(DatePipe, [{
             type: i0.Pipe,
             args: [{ name: 'date', pure: true }]
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
-                }] }]; }, null);
+                }] }]; }, null); })();
 
     /**
      * @license
@@ -5211,10 +5211,10 @@
         I18nPluralPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
         return I18nPluralPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(I18nPluralPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(I18nPluralPipe, [{
             type: i0.Pipe,
             args: [{ name: 'i18nPlural', pure: true }]
-        }], function () { return [{ type: NgLocalization }]; }, null);
+        }], function () { return [{ type: NgLocalization }]; }, null); })();
 
     /**
      * @license
@@ -5266,10 +5266,10 @@
         I18nSelectPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
         return I18nSelectPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(I18nSelectPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(I18nSelectPipe, [{
             type: i0.Pipe,
             args: [{ name: 'i18nSelect', pure: true }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -5304,10 +5304,10 @@
         JsonPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
         return JsonPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(JsonPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(JsonPipe, [{
             type: i0.Pipe,
             args: [{ name: 'json', pure: false }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -5368,10 +5368,10 @@
         KeyValuePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
         return KeyValuePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(KeyValuePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(KeyValuePipe, [{
             type: i0.Pipe,
             args: [{ name: 'keyvalue', pure: false }]
-        }], function () { return [{ type: i0.KeyValueDiffers }]; }, null);
+        }], function () { return [{ type: i0.KeyValueDiffers }]; }, null); })();
     function defaultComparator(keyValueA, keyValueB) {
         var a = keyValueA.key;
         var b = keyValueB.key;
@@ -5480,13 +5480,13 @@
         DecimalPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
         return DecimalPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(DecimalPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(DecimalPipe, [{
             type: i0.Pipe,
             args: [{ name: 'number' }]
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
-                }] }]; }, null);
+                }] }]; }, null); })();
     /**
      * @ngModule CommonModule
      * @description
@@ -5543,13 +5543,13 @@
         PercentPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
         return PercentPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(PercentPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(PercentPipe, [{
             type: i0.Pipe,
             args: [{ name: 'percent' }]
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
-                }] }]; }, null);
+                }] }]; }, null); })();
     /**
      * @ngModule CommonModule
      * @description
@@ -5638,13 +5638,13 @@
         CurrencyPipe.ɵpipe = i0.ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
         return CurrencyPipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(CurrencyPipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(CurrencyPipe, [{
             type: i0.Pipe,
             args: [{ name: 'currency' }]
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [i0.LOCALE_ID]
-                }] }]; }, null);
+                }] }]; }, null); })();
     function isEmpty(value) {
         return value == null || value === '' || value !== value;
     }
@@ -5720,10 +5720,10 @@
         SlicePipe.ɵpipe = i0.ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
         return SlicePipe;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(SlicePipe, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(SlicePipe, [{
             type: i0.Pipe,
             args: [{ name: 'slice', pure: false }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -5783,7 +5783,7 @@
         return CommonModule;
     }());
     (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(CommonModule, { declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] }); })();
-    /*@__PURE__*/ i0.ɵsetClassMetadata(CommonModule, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(CommonModule, [{
             type: i0.NgModule,
             args: [{
                     declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
@@ -5792,7 +5792,7 @@
                         { provide: NgLocalization, useClass: NgLocaleLocalization },
                     ],
                 }]
-        }], null, null);
+        }], null, null); })();
 
     /**
      * @license
@@ -5844,7 +5844,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+188.sha-b54ed98.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.1+190.sha-d78d29f.with-local-changes');
 
     /**
      * @license

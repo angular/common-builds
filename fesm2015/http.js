@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1855,9 +1855,9 @@ HttpClient.ctorParameters = () => [
 ];
 /** @nocollapse */ HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(ɵɵinject(HttpHandler)); };
 /** @nocollapse */ HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: function (t) { return HttpClient.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HttpClient, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClient, [{
         type: Injectable
-    }], function () { return [{ type: HttpHandler }]; }, null);
+    }], function () { return [{ type: HttpHandler }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -1975,9 +1975,9 @@ NoopInterceptor.decorators = [
 ];
 /** @nocollapse */ NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
 /** @nocollapse */ NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: function (t) { return NoopInterceptor.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NoopInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -2209,12 +2209,12 @@ JsonpClientBackend.ctorParameters = () => [
 ];
 /** @nocollapse */ JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT)); };
 /** @nocollapse */ JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: function (t) { return JsonpClientBackend.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(JsonpClientBackend, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [DOCUMENT]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2266,9 +2266,9 @@ JsonpInterceptor.ctorParameters = () => [
 ];
 /** @nocollapse */ JsonpInterceptor.ɵfac = function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(ɵɵinject(JsonpClientBackend)); };
 /** @nocollapse */ JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: function (t) { return JsonpInterceptor.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(JsonpInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
-    }], function () { return [{ type: JsonpClientBackend }]; }, null);
+    }], function () { return [{ type: JsonpClientBackend }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2339,9 +2339,9 @@ BrowserXhr.decorators = [
 BrowserXhr.ctorParameters = () => [];
 /** @nocollapse */ BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
 /** @nocollapse */ BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: function (t) { return BrowserXhr.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(BrowserXhr, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
-    }], function () { return []; }, null);
+    }], function () { return []; }, null); })();
 /**
  * Tracks a response from the server that does not yet have a body.
  * @record
@@ -2667,9 +2667,9 @@ HttpXhrBackend.ctorParameters = () => [
 ];
 /** @nocollapse */ HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
 /** @nocollapse */ HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: function (t) { return HttpXhrBackend.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HttpXhrBackend, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
-    }], function () { return [{ type: XhrFactory }]; }, null);
+    }], function () { return [{ type: XhrFactory }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2759,7 +2759,7 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
 ];
 /** @nocollapse */ HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(XSRF_COOKIE_NAME)); };
 /** @nocollapse */ HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: function (t) { return HttpXsrfCookieExtractor.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
@@ -2770,7 +2770,7 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
             }] }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_COOKIE_NAME]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2850,12 +2850,12 @@ HttpXsrfInterceptor.ctorParameters = () => [
 ];
 /** @nocollapse */ HttpXsrfInterceptor.ɵfac = function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(ɵɵinject(HttpXsrfTokenExtractor), ɵɵinject(XSRF_HEADER_NAME)); };
 /** @nocollapse */ HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: function (t) { return HttpXsrfInterceptor.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HttpXsrfInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_HEADER_NAME]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2927,9 +2927,9 @@ HttpInterceptingHandler.ctorParameters = () => [
 ];
 /** @nocollapse */ HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(ɵɵinject(HttpBackend), ɵɵinject(Injector)); };
 /** @nocollapse */ HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: function (t) { return HttpInterceptingHandler.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HttpInterceptingHandler, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
-    }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null);
+    }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -3047,7 +3047,7 @@ HttpClientXsrfModule.decorators = [
         { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
         { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
     ] });
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientXsrfModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientXsrfModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -3058,7 +3058,7 @@ HttpClientXsrfModule.decorators = [
                     { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
@@ -3110,7 +3110,7 @@ HttpClientModule.decorators = [
             }),
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientModule, { imports: [HttpClientXsrfModule] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientModule, [{
         type: NgModule,
         args: [{
                 /**
@@ -3135,7 +3135,7 @@ HttpClientModule.decorators = [
                     { provide: XhrFactory, useExisting: BrowserXhr },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for JSONP.
@@ -3164,7 +3164,7 @@ HttpClientJsonpModule.decorators = [
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
     ] });
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientJsonpModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientJsonpModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -3173,7 +3173,7 @@ HttpClientJsonpModule.decorators = [
                     { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle

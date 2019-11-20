@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -643,9 +643,9 @@ NgClassR2Impl.ctorParameters = () => [
 ];
 /** @nocollapse */ NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(ɵɵinject(IterableDiffers), ɵɵinject(KeyValueDiffers), ɵɵinject(ElementRef), ɵɵinject(Renderer2)); };
 /** @nocollapse */ NgClassR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: function (t) { return NgClassR2Impl.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NgClassR2Impl, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR2Impl, [{
         type: Injectable
-    }], function () { return [{ type: IterableDiffers }, { type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer2 }]; }, null);
+    }], function () { return [{ type: IterableDiffers }, { type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer2 }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -747,9 +747,9 @@ NgClassR3Impl.decorators = [
 ];
 /** @nocollapse */ NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
 /** @nocollapse */ NgClassR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: function (t) { return NgClassR3Impl.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NgClassR3Impl, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR3Impl, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 if (false) {
     /**
      * @type {?}
@@ -941,7 +941,7 @@ NgClass.propDecorators = {
 };
 /** @nocollapse */ NgClass.ɵfac = function NgClass_Factory(t) { return new (t || NgClass)(ɵɵdirectiveInject(NgClassImpl)); };
 /** @nocollapse */ NgClass.ɵdir = ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, features: [ɵɵProvidersFeature([NgClassImplProvider]), ɵɵInheritDefinitionFeature] });
-/*@__PURE__*/ ɵsetClassMetadata(NgClass, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] }]
     }], function () { return [{ type: NgClassImpl }]; }, { klass: [{
@@ -950,7 +950,7 @@ NgClass.propDecorators = {
         }], ngClass: [{
             type: Input,
             args: ['ngClass']
-        }] });
+        }] }); })();
 
 /**
  * @fileoverview added by tsickle
@@ -1079,9 +1079,9 @@ NgStyleR2Impl.ctorParameters = () => [
 ];
 /** @nocollapse */ NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(ɵɵinject(ElementRef), ɵɵinject(KeyValueDiffers), ɵɵinject(Renderer2)); };
 /** @nocollapse */ NgStyleR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: function (t) { return NgStyleR2Impl.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NgStyleR2Impl, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyleR2Impl, [{
         type: Injectable
-    }], function () { return [{ type: ElementRef }, { type: KeyValueDiffers }, { type: Renderer2 }]; }, null);
+    }], function () { return [{ type: ElementRef }, { type: KeyValueDiffers }, { type: Renderer2 }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -1137,9 +1137,9 @@ NgStyleR3Impl.decorators = [
 ];
 /** @nocollapse */ NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
 /** @nocollapse */ NgStyleR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: function (t) { return NgStyleR3Impl.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NgStyleR3Impl, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyleR3Impl, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 if (false) {
     /**
      * @type {?}
@@ -1326,13 +1326,13 @@ NgStyle.propDecorators = {
 };
 /** @nocollapse */ NgStyle.ɵfac = function NgStyle_Factory(t) { return new (t || NgStyle)(ɵɵdirectiveInject(NgStyleImpl)); };
 /** @nocollapse */ NgStyle.ɵdir = ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" }, features: [ɵɵProvidersFeature([NgStyleImplProvider]), ɵɵInheritDefinitionFeature] });
-/*@__PURE__*/ ɵsetClassMetadata(NgStyle, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] }]
     }], function () { return [{ type: NgStyleImpl }]; }, { ngStyle: [{
             type: Input,
             args: ['ngStyle']
-        }] });
+        }] }); })();
 
 /**
  * @fileoverview added by tsickle
@@ -1571,14 +1571,14 @@ PlatformLocation.decorators = [
 ];
 /** @nocollapse */ PlatformLocation.ɵfac = function PlatformLocation_Factory(t) { return new (t || PlatformLocation)(); };
 /** @nocollapse */ PlatformLocation.ɵprov = ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
-/*@__PURE__*/ ɵsetClassMetadata(PlatformLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(PlatformLocation, [{
         type: Injectable,
         args: [{
                 providedIn: 'platform',
                 // See #23917
                 useFactory: useBrowserPlatformLocation
             }]
-    }], null, null);
+    }], null, null); })();
 if (false) {
     /**
      * @abstract
@@ -1825,7 +1825,7 @@ BrowserPlatformLocation.ctorParameters = () => [
 ];
 /** @nocollapse */ BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(ɵɵinject(DOCUMENT)); };
 /** @nocollapse */ BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
-/*@__PURE__*/ ɵsetClassMetadata(BrowserPlatformLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserPlatformLocation, [{
         type: Injectable,
         args: [{
                 providedIn: 'platform',
@@ -1835,7 +1835,7 @@ BrowserPlatformLocation.ctorParameters = () => [
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [DOCUMENT]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /** @type {?} */
     BrowserPlatformLocation.prototype.location;
@@ -1976,10 +1976,10 @@ LocationStrategy.decorators = [
 ];
 /** @nocollapse */ LocationStrategy.ɵfac = function LocationStrategy_Factory(t) { return new (t || LocationStrategy)(); };
 /** @nocollapse */ LocationStrategy.ɵprov = ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
-/*@__PURE__*/ ɵsetClassMetadata(LocationStrategy, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(LocationStrategy, [{
         type: Injectable,
         args: [{ providedIn: 'root', useFactory: provideLocationStrategy }]
-    }], null, null);
+    }], null, null); })();
 if (false) {
     /**
      * @abstract
@@ -2182,14 +2182,14 @@ PathLocationStrategy.ctorParameters = () => [
 ];
 /** @nocollapse */ PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
 /** @nocollapse */ PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: function (t) { return PathLocationStrategy.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(PathLocationStrategy, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
                 type: Optional
             }, {
                 type: Inject,
                 args: [APP_BASE_HREF]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2328,14 +2328,14 @@ HashLocationStrategy.ctorParameters = () => [
 ];
 /** @nocollapse */ HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
 /** @nocollapse */ HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: function (t) { return HashLocationStrategy.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(HashLocationStrategy, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
                 type: Optional
             }, {
                 type: Inject,
                 args: [APP_BASE_HREF]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -2610,14 +2610,14 @@ Location.ctorParameters = () => [
 ];
 /** @nocollapse */ Location.ɵfac = function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation)); };
 /** @nocollapse */ Location.ɵprov = ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
-/*@__PURE__*/ ɵsetClassMetadata(Location, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(Location, [{
         type: Injectable,
         args: [{
                 providedIn: 'root',
                 // See #23917
                 useFactory: createLocation,
             }]
-    }], function () { return [{ type: LocationStrategy }, { type: PlatformLocation }]; }, null);
+    }], function () { return [{ type: LocationStrategy }, { type: PlatformLocation }]; }, null); })();
 if (false) {
     /**
      * Normalizes URL parameters by prepending with `?` if needed.
@@ -4947,12 +4947,12 @@ NgLocaleLocalization.ctorParameters = () => [
 ];
 /** @nocollapse */ NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(ɵɵinject(LOCALE_ID)); };
 /** @nocollapse */ NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: function (t) { return NgLocaleLocalization.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(NgLocaleLocalization, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -5138,7 +5138,7 @@ NgComponentOutlet.propDecorators = {
 };
 /** @nocollapse */ NgComponentOutlet.ɵfac = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
 /** @nocollapse */ NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature()] });
-/*@__PURE__*/ ɵsetClassMetadata(NgComponentOutlet, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
     }], function () { return [{ type: ViewContainerRef }]; }, { ngComponentOutlet: [{
@@ -5149,7 +5149,7 @@ NgComponentOutlet.propDecorators = {
             type: Input
         }], ngComponentOutletNgModuleFactory: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /** @type {?} */
     NgComponentOutlet.prototype.ngComponentOutlet;
@@ -5522,7 +5522,7 @@ NgForOf.propDecorators = {
 };
 /** @nocollapse */ NgForOf.ɵfac = function NgForOf_Factory(t) { return new (t || NgForOf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(IterableDiffers)); };
 /** @nocollapse */ NgForOf.ɵdir = ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgForOf, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: IterableDiffers }]; }, { ngForOf: [{
@@ -5531,7 +5531,7 @@ NgForOf.propDecorators = {
             type: Input
         }], ngForTemplate: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * @type {?}
@@ -5833,7 +5833,7 @@ NgIf.propDecorators = {
 };
 /** @nocollapse */ NgIf.ɵfac = function NgIf_Factory(t) { return new (t || NgIf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef)); };
 /** @nocollapse */ NgIf.ɵdir = ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgIf, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }]; }, { ngIf: [{
@@ -5842,7 +5842,7 @@ NgIf.propDecorators = {
             type: Input
         }], ngIfElse: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * \@internal
@@ -6125,12 +6125,12 @@ NgSwitch.propDecorators = {
 };
 /** @nocollapse */ NgSwitch.ɵfac = function NgSwitch_Factory(t) { return new (t || NgSwitch)(); };
 /** @nocollapse */ NgSwitch.ɵdir = ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgSwitch, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitch, [{
         type: Directive,
         args: [{ selector: '[ngSwitch]' }]
     }], null, { ngSwitch: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * @type {?}
@@ -6227,14 +6227,14 @@ NgSwitchCase.propDecorators = {
 };
 /** @nocollapse */ NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
 /** @nocollapse */ NgSwitchCase.ɵdir = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgSwitchCase, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{
                 type: Host
             }] }]; }, { ngSwitchCase: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * @type {?}
@@ -6287,12 +6287,12 @@ NgSwitchDefault.ctorParameters = () => [
 ];
 /** @nocollapse */ NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
 /** @nocollapse */ NgSwitchDefault.ɵdir = ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
-/*@__PURE__*/ ɵsetClassMetadata(NgSwitchDefault, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{
                 type: Host
-            }] }]; }, null);
+            }] }]; }, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -6402,12 +6402,12 @@ NgPlural.propDecorators = {
 };
 /** @nocollapse */ NgPlural.ɵfac = function NgPlural_Factory(t) { return new (t || NgPlural)(ɵɵdirectiveInject(NgLocalization)); };
 /** @nocollapse */ NgPlural.ɵdir = ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
-/*@__PURE__*/ ɵsetClassMetadata(NgPlural, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
     }], function () { return [{ type: NgLocalization }]; }, { ngPlural: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * @type {?}
@@ -6476,7 +6476,7 @@ NgPluralCase.ctorParameters = () => [
 ];
 /** @nocollapse */ NgPluralCase.ɵfac = function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(ɵɵinjectAttribute('ngPluralCase'), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(NgPlural, 1)); };
 /** @nocollapse */ NgPluralCase.ɵdir = ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
-/*@__PURE__*/ ɵsetClassMetadata(NgPluralCase, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
     }], function () { return [{ type: undefined, decorators: [{
@@ -6484,7 +6484,7 @@ NgPluralCase.ctorParameters = () => [
                 args: ['ngPluralCase']
             }] }, { type: TemplateRef }, { type: ViewContainerRef }, { type: NgPlural, decorators: [{
                 type: Host
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /** @type {?} */
     NgPluralCase.prototype.value;
@@ -6627,14 +6627,14 @@ NgTemplateOutlet.propDecorators = {
 };
 /** @nocollapse */ NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
 /** @nocollapse */ NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature()] });
-/*@__PURE__*/ ɵsetClassMetadata(NgTemplateOutlet, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
     }], function () { return [{ type: ViewContainerRef }]; }, { ngTemplateOutletContext: [{
             type: Input
         }], ngTemplateOutlet: [{
             type: Input
-        }] });
+        }] }); })();
 if (false) {
     /**
      * @type {?}
@@ -6912,10 +6912,10 @@ AsyncPipe.ctorParameters = () => [
 ];
 /** @nocollapse */ AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinjectPipeChangeDetectorRef()); };
 /** @nocollapse */ AsyncPipe.ɵpipe = ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
-/*@__PURE__*/ ɵsetClassMetadata(AsyncPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
-    }], function () { return [{ type: ChangeDetectorRef }]; }, null);
+    }], function () { return [{ type: ChangeDetectorRef }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -6994,10 +6994,10 @@ LowerCasePipe.decorators = [
 ];
 /** @nocollapse */ LowerCasePipe.ɵfac = function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); };
 /** @nocollapse */ LowerCasePipe.ɵpipe = ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(LowerCasePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(LowerCasePipe, [{
         type: Pipe,
         args: [{ name: 'lowercase' }]
-    }], null, null);
+    }], null, null); })();
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
@@ -7048,10 +7048,10 @@ TitleCasePipe.decorators = [
 ];
 /** @nocollapse */ TitleCasePipe.ɵfac = function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); };
 /** @nocollapse */ TitleCasePipe.ɵpipe = ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(TitleCasePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(TitleCasePipe, [{
         type: Pipe,
         args: [{ name: 'titlecase' }]
-    }], null, null);
+    }], null, null); })();
 /**
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
@@ -7079,10 +7079,10 @@ UpperCasePipe.decorators = [
 ];
 /** @nocollapse */ UpperCasePipe.ɵfac = function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); };
 /** @nocollapse */ UpperCasePipe.ɵpipe = ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(UpperCasePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(UpperCasePipe, [{
         type: Pipe,
         args: [{ name: 'uppercase' }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -7275,13 +7275,13 @@ DatePipe.ctorParameters = () => [
 ];
 /** @nocollapse */ DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(ɵɵdirectiveInject(LOCALE_ID)); };
 /** @nocollapse */ DatePipe.ɵpipe = ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(DatePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -7352,10 +7352,10 @@ I18nPluralPipe.ctorParameters = () => [
 ];
 /** @nocollapse */ I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ɵɵdirectiveInject(NgLocalization)); };
 /** @nocollapse */ I18nPluralPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(I18nPluralPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
-    }], function () { return [{ type: NgLocalization }]; }, null);
+    }], function () { return [{ type: NgLocalization }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -7419,10 +7419,10 @@ I18nSelectPipe.decorators = [
 ];
 /** @nocollapse */ I18nSelectPipe.ɵfac = function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); };
 /** @nocollapse */ I18nSelectPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(I18nSelectPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(I18nSelectPipe, [{
         type: Pipe,
         args: [{ name: 'i18nSelect', pure: true }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -7462,10 +7462,10 @@ JsonPipe.decorators = [
 ];
 /** @nocollapse */ JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
 /** @nocollapse */ JsonPipe.ɵpipe = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
-/*@__PURE__*/ ɵsetClassMetadata(JsonPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonPipe, [{
         type: Pipe,
         args: [{ name: 'json', pure: false }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -7569,10 +7569,10 @@ KeyValuePipe.ctorParameters = () => [
 ];
 /** @nocollapse */ KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ɵɵdirectiveInject(KeyValueDiffers)); };
 /** @nocollapse */ KeyValuePipe.ɵpipe = ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
-/*@__PURE__*/ ɵsetClassMetadata(KeyValuePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
-    }], function () { return [{ type: KeyValueDiffers }]; }, null);
+    }], function () { return [{ type: KeyValueDiffers }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -7723,13 +7723,13 @@ DecimalPipe.ctorParameters = () => [
 ];
 /** @nocollapse */ DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
 /** @nocollapse */ DecimalPipe.ɵpipe = ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(DecimalPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -7804,13 +7804,13 @@ PercentPipe.ctorParameters = () => [
 ];
 /** @nocollapse */ PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
 /** @nocollapse */ PercentPipe.ɵpipe = ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(PercentPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -7917,13 +7917,13 @@ CurrencyPipe.ctorParameters = () => [
 ];
 /** @nocollapse */ CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
 /** @nocollapse */ CurrencyPipe.ɵpipe = ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
-/*@__PURE__*/ ɵsetClassMetadata(CurrencyPipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [LOCALE_ID]
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}
@@ -8027,10 +8027,10 @@ SlicePipe.decorators = [
 ];
 /** @nocollapse */ SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
 /** @nocollapse */ SlicePipe.ɵpipe = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
-/*@__PURE__*/ ɵsetClassMetadata(SlicePipe, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(SlicePipe, [{
         type: Pipe,
         args: [{ name: 'slice', pure: false }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -8098,7 +8098,7 @@ CommonModule.decorators = [
         { provide: NgLocalization, useClass: NgLocaleLocalization },
     ] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CommonModule, { declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(CommonModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CommonModule, [{
         type: NgModule,
         args: [{
                 declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
@@ -8107,7 +8107,7 @@ CommonModule.decorators = [
                     { provide: NgLocalization, useClass: NgLocaleLocalization },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @fileoverview added by tsickle
@@ -8173,7 +8173,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+188.sha-b54ed98.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+190.sha-d78d29f.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1255,9 +1255,9 @@ var HttpClient = /** @class */ (function () {
     HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: function (t) { return HttpClient.ɵfac(t); }, providedIn: null });
     return HttpClient;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpClient, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClient, [{
         type: Injectable
-    }], function () { return [{ type: HttpHandler }]; }, null);
+    }], function () { return [{ type: HttpHandler }]; }, null); })();
 
 /**
  * @license
@@ -1298,9 +1298,9 @@ var NoopInterceptor = /** @class */ (function () {
     NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: function (t) { return NoopInterceptor.ɵfac(t); }, providedIn: null });
     return NoopInterceptor;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(NoopInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license
@@ -1483,12 +1483,12 @@ var JsonpClientBackend = /** @class */ (function () {
     JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: function (t) { return JsonpClientBackend.ɵfac(t); }, providedIn: null });
     return JsonpClientBackend;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(JsonpClientBackend, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [DOCUMENT]
-            }] }]; }, null);
+            }] }]; }, null); })();
 /**
  * Identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
@@ -1519,9 +1519,9 @@ var JsonpInterceptor = /** @class */ (function () {
     JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: function (t) { return JsonpInterceptor.ɵfac(t); }, providedIn: null });
     return JsonpInterceptor;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(JsonpInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
-    }], function () { return [{ type: JsonpClientBackend }]; }, null);
+    }], function () { return [{ type: JsonpClientBackend }]; }, null); })();
 
 /**
  * @license
@@ -1566,9 +1566,9 @@ var BrowserXhr = /** @class */ (function () {
     BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: function (t) { return BrowserXhr.ɵfac(t); }, providedIn: null });
     return BrowserXhr;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(BrowserXhr, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
-    }], function () { return []; }, null);
+    }], function () { return []; }, null); })();
 /**
  * Uses `XMLHttpRequest` to send requests to a backend server.
  * @see `HttpHandler`
@@ -1820,9 +1820,9 @@ var HttpXhrBackend = /** @class */ (function () {
     HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: function (t) { return HttpXhrBackend.ɵfac(t); }, providedIn: null });
     return HttpXhrBackend;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpXhrBackend, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
-    }], function () { return [{ type: XhrFactory }]; }, null);
+    }], function () { return [{ type: XhrFactory }]; }, null); })();
 
 /**
  * @license
@@ -1874,7 +1874,7 @@ var HttpXsrfCookieExtractor = /** @class */ (function () {
     HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: function (t) { return HttpXsrfCookieExtractor.ɵfac(t); }, providedIn: null });
     return HttpXsrfCookieExtractor;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
@@ -1885,7 +1885,7 @@ var HttpXsrfCookieExtractor = /** @class */ (function () {
             }] }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_COOKIE_NAME]
-            }] }]; }, null);
+            }] }]; }, null); })();
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
@@ -1915,12 +1915,12 @@ var HttpXsrfInterceptor = /** @class */ (function () {
     HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: function (t) { return HttpXsrfInterceptor.ɵfac(t); }, providedIn: null });
     return HttpXsrfInterceptor;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpXsrfInterceptor, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
                 type: Inject,
                 args: [XSRF_HEADER_NAME]
-            }] }]; }, null);
+            }] }]; }, null); })();
 
 /**
  * @license
@@ -1955,9 +1955,9 @@ var HttpInterceptingHandler = /** @class */ (function () {
     HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: function (t) { return HttpInterceptingHandler.ɵfac(t); }, providedIn: null });
     return HttpInterceptingHandler;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpInterceptingHandler, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
-    }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null);
+    }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null); })();
 /**
  * Constructs an `HttpHandler` that applies interceptors
  * to a request before passing it to the given `HttpBackend`.
@@ -2041,7 +2041,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
         ] });
     return HttpClientXsrfModule;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientXsrfModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientXsrfModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -2052,7 +2052,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
                     { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
@@ -2082,7 +2082,7 @@ var HttpClientModule = /** @class */ (function () {
     return HttpClientModule;
 }());
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientModule, { imports: [HttpClientXsrfModule] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientModule, [{
         type: NgModule,
         args: [{
                 /**
@@ -2107,7 +2107,7 @@ var HttpClientModule = /** @class */ (function () {
                     { provide: XhrFactory, useExisting: BrowserXhr },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for JSONP.
@@ -2130,7 +2130,7 @@ var HttpClientJsonpModule = /** @class */ (function () {
         ] });
     return HttpClientJsonpModule;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientJsonpModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientJsonpModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -2139,7 +2139,7 @@ var HttpClientJsonpModule = /** @class */ (function () {
                     { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1408,10 +1408,10 @@ LocationUpgradeModule.decorators = [
 /** @nocollapse */ LocationUpgradeModule.ɵmod = ɵɵdefineNgModule({ type: LocationUpgradeModule });
 /** @nocollapse */ LocationUpgradeModule.ɵinj = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(LocationUpgradeModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(LocationUpgradeModule, [{
         type: NgModule,
         args: [{ imports: [CommonModule] }]
-    }], null, null);
+    }], null, null); })();
 /**
  * @param {?} config
  * @param {?=} appBaseHref

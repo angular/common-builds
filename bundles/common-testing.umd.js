@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -117,9 +117,9 @@
         SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: function (t) { return SpyLocation.ɵfac(t); }, providedIn: null });
         return SpyLocation;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(SpyLocation, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(SpyLocation, [{
             type: i0.Injectable
-        }], null, null);
+        }], null, null); })();
     var LocationState = /** @class */ (function () {
         function LocationState(path, query, state) {
             this.path = path;
@@ -393,9 +393,9 @@
         MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function (t) { return MockLocationStrategy.ɵfac(t); }, providedIn: null });
         return MockLocationStrategy;
     }(common.LocationStrategy));
-    /*@__PURE__*/ i0.ɵsetClassMetadata(MockLocationStrategy, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(MockLocationStrategy, [{
             type: i0.Injectable
-        }], function () { return []; }, null);
+        }], function () { return []; }, null); })();
     var _MockPopStateEvent = /** @class */ (function () {
         function _MockPopStateEvent(newUrl) {
             this.newUrl = newUrl;
@@ -573,14 +573,14 @@
         MockPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function (t) { return MockPlatformLocation.ɵfac(t); }, providedIn: null });
         return MockPlatformLocation;
     }());
-    /*@__PURE__*/ i0.ɵsetClassMetadata(MockPlatformLocation, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(MockPlatformLocation, [{
             type: i0.Injectable
         }], function () { return [{ type: undefined, decorators: [{
                     type: i0.Inject,
                     args: [MOCK_PLATFORM_LOCATION_CONFIG]
                 }, {
                     type: i0.Optional
-                }] }]; }, null);
+                }] }]; }, null); })();
     function scheduleMicroTask(cb) {
         Promise.resolve(null).then(cb);
     }

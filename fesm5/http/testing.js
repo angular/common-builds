@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -344,9 +344,9 @@ var HttpClientTestingBackend = /** @class */ (function () {
     HttpClientTestingBackend.ɵprov = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: function (t) { return HttpClientTestingBackend.ɵfac(t); }, providedIn: null });
     return HttpClientTestingBackend;
 }());
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingBackend, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license
@@ -376,7 +376,7 @@ var HttpClientTestingModule = /** @class */ (function () {
     return HttpClientTestingModule;
 }());
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] }); })();
-/*@__PURE__*/ ɵsetClassMetadata(HttpClientTestingModule, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,
         args: [{
                 imports: [
@@ -388,7 +388,7 @@ var HttpClientTestingModule = /** @class */ (function () {
                     { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
                 ],
             }]
-    }], null, null);
+    }], null, null); })();
 
 /**
  * @license

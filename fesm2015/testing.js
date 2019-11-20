@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -213,9 +213,9 @@ SpyLocation.decorators = [
 ];
 /** @nocollapse */ SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
 /** @nocollapse */ SpyLocation.ɵprov = ɵɵdefineInjectable({ token: SpyLocation, factory: function (t) { return SpyLocation.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(SpyLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
-    }], null, null);
+    }], null, null); })();
 if (false) {
     /** @type {?} */
     SpyLocation.prototype.urlChanges;
@@ -402,9 +402,9 @@ MockLocationStrategy.decorators = [
 MockLocationStrategy.ctorParameters = () => [];
 /** @nocollapse */ MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
 /** @nocollapse */ MockLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: function (t) { return MockLocationStrategy.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(MockLocationStrategy, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
-    }], function () { return []; }, null);
+    }], function () { return []; }, null); })();
 if (false) {
     /** @type {?} */
     MockLocationStrategy.prototype.internalBaseHref;
@@ -693,14 +693,14 @@ MockPlatformLocation.ctorParameters = () => [
 ];
 /** @nocollapse */ MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
 /** @nocollapse */ MockPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: function (t) { return MockPlatformLocation.ɵfac(t); }, providedIn: null });
-/*@__PURE__*/ ɵsetClassMetadata(MockPlatformLocation, [{
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
                 args: [MOCK_PLATFORM_LOCATION_CONFIG]
             }, {
                 type: Optional
-            }] }]; }, null);
+            }] }]; }, null); })();
 if (false) {
     /**
      * @type {?}

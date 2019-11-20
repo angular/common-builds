@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
+ * @license Angular v9.0.0-rc.1+190.sha-d78d29f.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1091,10 +1091,10 @@
         return LocationUpgradeModule;
     }());
     (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [common.CommonModule] }); })();
-    /*@__PURE__*/ i0.ɵsetClassMetadata(LocationUpgradeModule, [{
+    /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LocationUpgradeModule, [{
             type: i0.NgModule,
             args: [{ imports: [common.CommonModule] }]
-        }], null, null);
+        }], null, null); })();
     function provideAppBaseHref(config, appBaseHref) {
         if (config && config.appBaseHref != null) {
             return config.appBaseHref;
