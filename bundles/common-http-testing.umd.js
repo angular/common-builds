@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+186.sha-97fbdab.with-local-changes
+ * @license Angular v9.0.0-rc.1+188.sha-b54ed98.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -377,7 +377,7 @@
                 ]] });
         return HttpClientTestingModule;
     }());
-    /*@__PURE__*/ i0.ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] });
+    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] }); })();
     /*@__PURE__*/ i0.ɵsetClassMetadata(HttpClientTestingModule, [{
             type: i0.NgModule,
             args: [{
