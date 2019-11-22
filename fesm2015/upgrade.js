@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+226.sha-a37bf9a.with-local-changes
+ * @license Angular v9.0.0-rc.1+227.sha-3c335c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/src/utils.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -70,6 +71,7 @@ function isPromise(obj) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/src/location_shim.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
@@ -913,6 +915,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/src/params.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1307,6 +1310,7 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/src/location_upgrade_module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1447,16 +1451,19 @@ function provide$location(ngUpgrade, location, platformLocation, urlCodec, locat
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/src/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/public_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/upgrade/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 

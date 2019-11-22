@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+226.sha-a37bf9a.with-local-changes
+ * @license Angular v9.0.0-rc.1+227.sha-3c335c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/src/api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -158,6 +159,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/src/request.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -373,6 +375,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/src/backend.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -573,6 +576,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/src/module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -599,11 +603,13 @@ HttpClientTestingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/public_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/testing/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
