@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+226.sha-a37bf9a.with-local-changes
+ * @license Angular v9.0.0-rc.1+227.sha-3c335c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -11,6 +11,7 @@ import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/backend.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -67,6 +68,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/headers.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -412,6 +414,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/params.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -786,6 +789,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/request.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1154,6 +1158,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/response.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
@@ -1484,6 +1489,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/client.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1868,6 +1874,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/interceptor.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1981,6 +1988,7 @@ NoopInterceptor.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/jsonp.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2279,6 +2287,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/xhr.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2680,6 +2689,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/xsrf.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2871,6 +2881,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/src/module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -3177,11 +3188,13 @@ HttpClientJsonpModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/public_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/http/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 

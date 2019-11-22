@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+226.sha-a37bf9a.with-local-changes
+ * @license Angular v9.0.0-rc.1+227.sha-3c335c3.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,6 +8,7 @@ import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValu
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/styling_differ.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -399,6 +400,7 @@ function arrayEqualsArray(a, b) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_class_impl.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -785,6 +787,7 @@ const NgClassImplProvider = NgClassImplProvider__POST_R3__;
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_class.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*
@@ -954,6 +957,7 @@ NgClass.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_style_impl.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1170,6 +1174,7 @@ const NgStyleImplProvider = NgStyleImplProvider__POST_R3__;
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_style.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /*
@@ -1336,6 +1341,7 @@ NgStyle.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/dom_adapter.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1513,6 +1519,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/dom_tokens.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1528,6 +1535,7 @@ const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/platform_location.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1865,11 +1873,13 @@ function createBrowserPlatformLocation() {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/private_export.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/util.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -1942,6 +1952,7 @@ function normalizeQueryParams(params) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/location_strategy.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2205,6 +2216,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/hash_location_strategy.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2351,6 +2363,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/location.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2700,11 +2713,13 @@ function _stripIndexHtml(url) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/location/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/currencies.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -2863,6 +2878,7 @@ const CURRENCIES_EN = {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/locale_data_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
@@ -3481,6 +3497,7 @@ function getNumberOfCurrencyDigits(code) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/format_date.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
@@ -4335,6 +4352,7 @@ function isDate(value) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/format_number.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
@@ -4852,6 +4870,7 @@ function parseIntAutoRadix(text) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/localization.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -4963,6 +4982,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/i18n/locale_data.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -4983,6 +5003,7 @@ function registerLocaleData(data, localeId, extraData) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/cookie.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -5012,6 +5033,7 @@ function parseCookieValue(cookieStr, name) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_component_outlet.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -5178,6 +5200,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_for_of.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -5598,6 +5621,7 @@ function getTypeName(type) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_if.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -5920,6 +5944,7 @@ function assertTemplate(property, templateRef) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_switch.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6296,6 +6321,7 @@ NgSwitchDefault.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_plural.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6492,6 +6518,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/ng_template_outlet.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6663,6 +6690,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/directives/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6686,6 +6714,7 @@ const COMMON_DIRECTIVES = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/invalid_pipe_argument_error.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6699,6 +6728,7 @@ function invalidPipeArgumentError(type, value) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/async_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -6951,6 +6981,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/case_conversion_pipes.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7086,6 +7117,7 @@ UpperCasePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/date_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7292,6 +7324,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/i18n_plural_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7366,6 +7399,7 @@ if (false) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/i18n_select_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7426,6 +7460,7 @@ I18nSelectPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/json_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7469,6 +7504,7 @@ JsonPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/keyvalue_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7633,6 +7669,7 @@ function defaultComparator(keyValueA, keyValueB) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/number_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -7956,6 +7993,7 @@ function strToNumber(value) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/slice_pipe.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -8034,6 +8072,7 @@ SlicePipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/pipes/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -8058,6 +8097,7 @@ const COMMON_PIPES = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/common_module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -8111,6 +8151,7 @@ CommonModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/platform_id.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -8167,16 +8208,18 @@ function isPlatformWorkerUi(platformId) {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/version.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+226.sha-a37bf9a.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+227.sha-3c335c3.with-local-changes');
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/viewport_scroller.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
@@ -8444,16 +8487,19 @@ class NullViewportScroller {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/src/common.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/public_api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: packages/common/index.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
