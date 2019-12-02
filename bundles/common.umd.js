@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+327.sha-e6dbcd0.with-local-changes
+ * @license Angular v9.0.0-rc.1+329.sha-02958c0.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4183,6 +4183,13 @@
                 }
             }
         };
+        /**
+         * Asserts the correct type of the context for the template that `NgIf` will render.
+         *
+         * The presence of this method is a signal to the Ivy template type-check compiler that the
+         * `NgIf` structural directive renders its template with a specific context type.
+         */
+        NgIf.ngTemplateContextGuard = function (dir, ctx) { return true; };
         NgIf.ɵfac = function NgIf_Factory(t) { return new (t || NgIf)(i0.ɵɵdirectiveInject(i0.ViewContainerRef), i0.ɵɵdirectiveInject(i0.TemplateRef)); };
         NgIf.ɵdir = i0.ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
         return NgIf;
@@ -5844,7 +5851,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+327.sha-e6dbcd0.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.1+329.sha-02958c0.with-local-changes');
 
     /**
      * @license

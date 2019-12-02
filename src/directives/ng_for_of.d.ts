@@ -10,12 +10,12 @@ import * as i0 from "@angular/core";
 /**
  * @publicApi
  */
-export declare class NgForOfContext<T> {
+export declare class NgForOfContext<T, U extends NgIterable<T>> {
     $implicit: T;
-    ngForOf: NgIterable<T>;
+    ngForOf: U;
     index: number;
     count: number;
-    constructor($implicit: T, ngForOf: NgIterable<T>, index: number, count: number);
+    constructor($implicit: T, ngForOf: U, index: number, count: number);
     readonly first: boolean;
     readonly last: boolean;
     readonly even: boolean;
@@ -118,7 +118,7 @@ export declare class NgForOfContext<T> {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgForOf<T> implements DoCheck {
+export declare class NgForOf<T, U extends NgIterable<T>> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
@@ -126,7 +126,7 @@ export declare class NgForOf<T> implements DoCheck {
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    ngForOf: NgIterable<T> | undefined | null;
+    ngForOf: (U & NgIterable<T>) | undefined | null;
     /**
      * A function that defines how to track changes for items in the iterable.
      *
@@ -149,12 +149,12 @@ export declare class NgForOf<T> implements DoCheck {
     private _ngForOfDirty;
     private _differ;
     private _trackByFn;
-    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers);
+    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
      */
-    ngForTemplate: TemplateRef<NgForOfContext<T>>;
+    ngForTemplate: TemplateRef<NgForOfContext<T, U>>;
     /**
      * Applies the changes when needed.
      */
@@ -167,7 +167,7 @@ export declare class NgForOf<T> implements DoCheck {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgForOf` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
-    static ɵfac: i0.ɵɵFactoryDef<NgForOf<any>>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgForOf<any>, "[ngFor][ngForOf]", never, { 'ngForOf': "ngForOf", 'ngForTrackBy': "ngForTrackBy", 'ngForTemplate': "ngForTemplate" }, {}, never>;
+    static ngTemplateContextGuard<T, U extends NgIterable<T>>(dir: NgForOf<T, U>, ctx: any): ctx is NgForOfContext<T, U>;
+    static ɵfac: i0.ɵɵFactoryDef<NgForOf<any, any>>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgForOf<any, any>, "[ngFor][ngForOf]", never, { 'ngForOf': "ngForOf", 'ngForTrackBy': "ngForTrackBy", 'ngForTemplate': "ngForTemplate" }, {}, never>;
 }

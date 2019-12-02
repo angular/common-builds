@@ -146,26 +146,26 @@ import * as i0 from "@angular/core";
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgIf {
+export declare class NgIf<T> {
     private _viewContainer;
     private _context;
     private _thenTemplateRef;
     private _elseTemplateRef;
     private _thenViewRef;
     private _elseViewRef;
-    constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext>);
+    constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext<T>>);
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
      */
-    ngIf: any;
+    ngIf: T;
     /**
      * A template to show if the condition expression evaluates to true.
      */
-    ngIfThen: TemplateRef<NgIfContext> | null;
+    ngIfThen: TemplateRef<NgIfContext<T>> | null;
     /**
      * A template to show if the condition expression evaluates to false.
      */
-    ngIfElse: TemplateRef<NgIfContext> | null;
+    ngIfElse: TemplateRef<NgIfContext<T>> | null;
     private _updateView;
     /**
      * Assert the correct type of the expression bound to the `ngIf` input within the template.
@@ -176,13 +176,20 @@ export declare class NgIf {
      * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     static ngTemplateGuard_ngIf: 'binding';
-    static ɵfac: i0.ɵɵFactoryDef<NgIf>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<T>;
+    static ɵfac: i0.ɵɵFactoryDef<NgIf<any>>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf<any>, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
 }
 /**
  * @publicApi
  */
-export declare class NgIfContext {
-    $implicit: any;
-    ngIf: any;
+export declare class NgIfContext<T> {
+    $implicit: T;
+    ngIf: T;
 }
