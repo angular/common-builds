@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+329.sha-02958c0.with-local-changes
+ * @license Angular v9.0.0-rc.1+330.sha-755d2d5.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1252,7 +1252,7 @@ var HttpClient = /** @class */ (function () {
         return this.request('PUT', url, addBody(options, body));
     };
     HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(ɵɵinject(HttpHandler)); };
-    HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: function (t) { return HttpClient.ɵfac(t); }, providedIn: null });
+    HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac, providedIn: null });
     return HttpClient;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClient, [{
@@ -1295,7 +1295,7 @@ var NoopInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
-    NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: function (t) { return NoopInterceptor.ɵfac(t); }, providedIn: null });
+    NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac, providedIn: null });
     return NoopInterceptor;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NoopInterceptor, [{
@@ -1480,7 +1480,7 @@ var JsonpClientBackend = /** @class */ (function () {
         });
     };
     JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT)); };
-    JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: function (t) { return JsonpClientBackend.ɵfac(t); }, providedIn: null });
+    JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac, providedIn: null });
     return JsonpClientBackend;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpClientBackend, [{
@@ -1516,7 +1516,7 @@ var JsonpInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     JsonpInterceptor.ɵfac = function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(ɵɵinject(JsonpClientBackend)); };
-    JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: function (t) { return JsonpInterceptor.ɵfac(t); }, providedIn: null });
+    JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac, providedIn: null });
     return JsonpInterceptor;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpInterceptor, [{
@@ -1563,7 +1563,7 @@ var BrowserXhr = /** @class */ (function () {
     }
     BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
     BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-    BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: function (t) { return BrowserXhr.ɵfac(t); }, providedIn: null });
+    BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac, providedIn: null });
     return BrowserXhr;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserXhr, [{
@@ -1817,7 +1817,7 @@ var HttpXhrBackend = /** @class */ (function () {
         });
     };
     HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
-    HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: function (t) { return HttpXhrBackend.ɵfac(t); }, providedIn: null });
+    HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac, providedIn: null });
     return HttpXhrBackend;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXhrBackend, [{
@@ -1871,7 +1871,7 @@ var HttpXsrfCookieExtractor = /** @class */ (function () {
         return this.lastToken;
     };
     HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(XSRF_COOKIE_NAME)); };
-    HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: function (t) { return HttpXsrfCookieExtractor.ɵfac(t); }, providedIn: null });
+    HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac, providedIn: null });
     return HttpXsrfCookieExtractor;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
@@ -1912,7 +1912,7 @@ var HttpXsrfInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     HttpXsrfInterceptor.ɵfac = function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(ɵɵinject(HttpXsrfTokenExtractor), ɵɵinject(XSRF_HEADER_NAME)); };
-    HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: function (t) { return HttpXsrfInterceptor.ɵfac(t); }, providedIn: null });
+    HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac, providedIn: null });
     return HttpXsrfInterceptor;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfInterceptor, [{
@@ -1952,7 +1952,7 @@ var HttpInterceptingHandler = /** @class */ (function () {
         return this.chain.handle(req);
     };
     HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(ɵɵinject(HttpBackend), ɵɵinject(Injector)); };
-    HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: function (t) { return HttpInterceptingHandler.ɵfac(t); }, providedIn: null });
+    HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac, providedIn: null });
     return HttpInterceptingHandler;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpInterceptingHandler, [{
