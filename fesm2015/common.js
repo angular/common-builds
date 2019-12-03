@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.4.with-local-changes
+ * @license Angular v9.0.0-rc.4+28.sha-716fc84.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5047,7 +5047,7 @@ if (false) {
  */
 /**
  * \@publicApi
- * @template T
+ * @template T, U
  */
 class NgForOfContext {
     /**
@@ -5185,7 +5185,7 @@ if (false) {
  * @see [Structural Directives](guide/structural-directives)
  * \@ngModule CommonModule
  * \@publicApi
- * @template T
+ * @template T, U
  */
 class NgForOf {
     /**
@@ -5355,7 +5355,7 @@ class NgForOf {
      *
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgForOf` structural directive renders its template with a specific context type.
-     * @template T
+     * @template T, U
      * @param {?} dir
      * @param {?} ctx
      * @return {?}
@@ -5416,7 +5416,7 @@ if (false) {
     NgForOf.prototype._differs;
 }
 /**
- * @template T
+ * @template T, U
  */
 class RecordViewTuple {
     /**
@@ -5585,6 +5585,7 @@ function getTypeName(type) {
  *
  * \@ngModule CommonModule
  * \@publicApi
+ * @template T
  */
 class NgIf {
     /**
@@ -5657,6 +5658,17 @@ class NgIf {
             }
         }
     }
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    static ngTemplateContextGuard(dir, ctx) { return true; }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] }
@@ -5720,11 +5732,12 @@ if (false) {
 }
 /**
  * \@publicApi
+ * @template T
  */
 class NgIfContext {
     constructor() {
-        this.$implicit = null;
-        this.ngIf = null;
+        this.$implicit = (/** @type {?} */ (null));
+        this.ngIf = (/** @type {?} */ (null));
     }
 }
 if (false) {
@@ -7768,7 +7781,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.4.with-local-changes');
+const VERSION = new Version('9.0.0-rc.4+28.sha-716fc84.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

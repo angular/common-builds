@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.4.with-local-changes
+ * @license Angular v9.0.0-rc.4+28.sha-716fc84.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3817,8 +3817,8 @@ var NgForOf = /** @class */ (function () {
     ], NgForOf.prototype, "ngForTemplate", null);
     NgForOf = __decorate([
         Directive({ selector: '[ngFor][ngForOf]' }),
-        __metadata("design:paramtypes", [ViewContainerRef, TemplateRef,
-            IterableDiffers])
+        __metadata("design:paramtypes", [ViewContainerRef,
+            TemplateRef, IterableDiffers])
     ], NgForOf);
     return NgForOf;
 }());
@@ -4048,6 +4048,13 @@ var NgIf = /** @class */ (function () {
             }
         }
     };
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     */
+    NgIf.ngTemplateContextGuard = function (dir, ctx) { return true; };
     __decorate([
         Input(),
         __metadata("design:type", Object),
@@ -5696,7 +5703,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.4.with-local-changes');
+var VERSION = new Version('9.0.0-rc.4+28.sha-716fc84.with-local-changes');
 
 /**
  * @license

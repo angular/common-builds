@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.4.with-local-changes
+ * @license Angular v9.0.0-rc.4+28.sha-716fc84.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1443,7 +1443,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgForOf<T> implements DoCheck {
+export declare class NgForOf<T, U extends NgIterable<T>> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
@@ -1451,7 +1451,7 @@ export declare class NgForOf<T> implements DoCheck {
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    ngForOf: NgIterable<T> | undefined | null;
+    ngForOf: (U & NgIterable<T>) | undefined | null;
     /**
      * A function that defines how to track changes for items in the iterable.
      *
@@ -1474,12 +1474,12 @@ export declare class NgForOf<T> implements DoCheck {
     private _ngForOfDirty;
     private _differ;
     private _trackByFn;
-    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers);
+    constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
      */
-    ngForTemplate: TemplateRef<NgForOfContext<T>>;
+    ngForTemplate: TemplateRef<NgForOfContext<T, U>>;
     /**
      * Applies the changes when needed.
      */
@@ -1492,18 +1492,18 @@ export declare class NgForOf<T> implements DoCheck {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgForOf` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: NgForOf<T>, ctx: any): ctx is NgForOfContext<T>;
+    static ngTemplateContextGuard<T, U extends NgIterable<T>>(dir: NgForOf<T, U>, ctx: any): ctx is NgForOfContext<T, U>;
 }
 
 /**
  * @publicApi
  */
-export declare class NgForOfContext<T> {
+export declare class NgForOfContext<T, U extends NgIterable<T>> {
     $implicit: T;
-    ngForOf: NgIterable<T>;
+    ngForOf: U;
     index: number;
     count: number;
-    constructor($implicit: T, ngForOf: NgIterable<T>, index: number, count: number);
+    constructor($implicit: T, ngForOf: U, index: number, count: number);
     readonly first: boolean;
     readonly last: boolean;
     readonly even: boolean;
@@ -1649,26 +1649,26 @@ export declare class NgForOfContext<T> {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgIf {
+export declare class NgIf<T> {
     private _viewContainer;
     private _context;
     private _thenTemplateRef;
     private _elseTemplateRef;
     private _thenViewRef;
     private _elseViewRef;
-    constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext>);
+    constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext<T>>);
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
      */
-    ngIf: any;
+    ngIf: T;
     /**
      * A template to show if the condition expression evaluates to true.
      */
-    ngIfThen: TemplateRef<NgIfContext> | null;
+    ngIfThen: TemplateRef<NgIfContext<T>> | null;
     /**
      * A template to show if the condition expression evaluates to false.
      */
-    ngIfElse: TemplateRef<NgIfContext> | null;
+    ngIfElse: TemplateRef<NgIfContext<T>> | null;
     private _updateView;
     /**
      * Assert the correct type of the expression bound to the `ngIf` input within the template.
@@ -1679,14 +1679,21 @@ export declare class NgIf {
      * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgIf`.
      */
     static ngTemplateGuard_ngIf: 'binding';
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<T>;
 }
 
 /**
  * @publicApi
  */
-export declare class NgIfContext {
-    $implicit: any;
-    ngIf: any;
+export declare class NgIfContext<T> {
+    $implicit: T;
+    ngIf: T;
 }
 
 /**
