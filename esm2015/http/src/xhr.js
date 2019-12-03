@@ -65,7 +65,7 @@ BrowserXhr.decorators = [
 /** @nocollapse */
 BrowserXhr.ctorParameters = () => [];
 /** @nocollapse */ BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-/** @nocollapse */ BrowserXhr.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac, providedIn: null });
+/** @nocollapse */ BrowserXhr.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
     }], function () { return []; }, null); })();
@@ -393,7 +393,7 @@ HttpXhrBackend.ctorParameters = () => [
     { type: XhrFactory }
 ];
 /** @nocollapse */ HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.ɵɵinject(XhrFactory)); };
-/** @nocollapse */ HttpXhrBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac, providedIn: null });
+/** @nocollapse */ HttpXhrBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
     }], function () { return [{ type: XhrFactory }]; }, null); })();

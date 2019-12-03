@@ -104,7 +104,7 @@ var SpyLocation = /** @class */ (function () {
     };
     SpyLocation.prototype.normalize = function (url) { return null; };
     SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
-    SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac, providedIn: null });
+    SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
     return SpyLocation;
 }());
 export { SpyLocation };

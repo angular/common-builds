@@ -135,7 +135,7 @@ var HttpClientTestingBackend = /** @class */ (function () {
         }
     };
     HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
-    HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac, providedIn: null });
+    HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac });
     return HttpClientTestingBackend;
 }());
 export { HttpClientTestingBackend };

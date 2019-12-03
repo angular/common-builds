@@ -135,7 +135,7 @@ NgStyleR2Impl.ctorParameters = () => [
     { type: Renderer2 }
 ];
 /** @nocollapse */ NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.Renderer2)); };
-/** @nocollapse */ NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgStyleR2Impl, [{
         type: Injectable
     }], function () { return [{ type: i0.ElementRef }, { type: i0.KeyValueDiffers }, { type: i0.Renderer2 }]; }, null); })();
@@ -193,7 +193,7 @@ NgStyleR3Impl.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
-/** @nocollapse */ NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgStyleR3Impl, [{
         type: Injectable
     }], null, null); })();

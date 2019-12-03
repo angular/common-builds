@@ -203,7 +203,7 @@ HttpClientTestingBackend.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
-/** @nocollapse */ HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac, providedIn: null });
+/** @nocollapse */ HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null); })();

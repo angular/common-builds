@@ -314,7 +314,7 @@ var HttpClient = /** @class */ (function () {
         return this.request('PUT', url, addBody(options, body));
     };
     HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(i0.ɵɵinject(i1.HttpHandler)); };
-    HttpClient.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac, providedIn: null });
+    HttpClient.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
     return HttpClient;
 }());
 export { HttpClient };

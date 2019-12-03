@@ -72,7 +72,7 @@ var NgStyleR2Impl = /** @class */ (function () {
         }
     };
     NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.Renderer2)); };
-    NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac, providedIn: null });
+    NgStyleR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac });
     return NgStyleR2Impl;
 }());
 export { NgStyleR2Impl };
@@ -92,7 +92,7 @@ var NgStyleR3Impl = /** @class */ (function () {
         }
     };
     NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
-    NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac, providedIn: null });
+    NgStyleR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac });
     return NgStyleR3Impl;
 }());
 export { NgStyleR3Impl };

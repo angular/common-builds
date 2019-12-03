@@ -109,7 +109,7 @@ NoopInterceptor.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
-/** @nocollapse */ NoopInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac, providedIn: null });
+/** @nocollapse */ NoopInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
     }], null, null); })();

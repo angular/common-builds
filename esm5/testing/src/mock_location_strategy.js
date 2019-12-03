@@ -73,7 +73,7 @@ var MockLocationStrategy = /** @class */ (function (_super) {
     MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
     MockLocationStrategy.prototype.getState = function () { return this.stateChanges[(this.stateChanges.length || 1) - 1]; };
     MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
-    MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac, providedIn: null });
+    MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
     return MockLocationStrategy;
 }(LocationStrategy));
 export { MockLocationStrategy };

@@ -254,7 +254,7 @@ NgClassR2Impl.ctorParameters = () => [
     { type: Renderer2 }
 ];
 /** @nocollapse */ NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(i0.ɵɵinject(i0.IterableDiffers), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.Renderer2)); };
-/** @nocollapse */ NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgClassR2Impl, [{
         type: Injectable
     }], function () { return [{ type: i0.IterableDiffers }, { type: i0.KeyValueDiffers }, { type: i0.ElementRef }, { type: i0.Renderer2 }]; }, null); })();
@@ -358,7 +358,7 @@ NgClassR3Impl.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
-/** @nocollapse */ NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NgClassR3Impl, [{
         type: Injectable
     }], null, null); })();

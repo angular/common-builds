@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+335.sha-56f4e56.with-local-changes
+ * @license Angular v9.0.0-rc.1+336.sha-67eac73.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1860,7 +1860,7 @@ HttpClient.ctorParameters = () => [
     { type: HttpHandler }
 ];
 /** @nocollapse */ HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(ɵɵinject(HttpHandler)); };
-/** @nocollapse */ HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac, providedIn: null });
+/** @nocollapse */ HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClient, [{
         type: Injectable
     }], function () { return [{ type: HttpHandler }]; }, null); })();
@@ -1981,7 +1981,7 @@ NoopInterceptor.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
-/** @nocollapse */ NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac, providedIn: null });
+/** @nocollapse */ NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
     }], null, null); })();
@@ -2216,7 +2216,7 @@ JsonpClientBackend.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
 /** @nocollapse */ JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT)); };
-/** @nocollapse */ JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac, providedIn: null });
+/** @nocollapse */ JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
@@ -2273,7 +2273,7 @@ JsonpInterceptor.ctorParameters = () => [
     { type: JsonpClientBackend }
 ];
 /** @nocollapse */ JsonpInterceptor.ɵfac = function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(ɵɵinject(JsonpClientBackend)); };
-/** @nocollapse */ JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac, providedIn: null });
+/** @nocollapse */ JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
     }], function () { return [{ type: JsonpClientBackend }]; }, null); })();
@@ -2347,7 +2347,7 @@ BrowserXhr.decorators = [
 /** @nocollapse */
 BrowserXhr.ctorParameters = () => [];
 /** @nocollapse */ BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-/** @nocollapse */ BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac, providedIn: null });
+/** @nocollapse */ BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
     }], function () { return []; }, null); })();
@@ -2675,7 +2675,7 @@ HttpXhrBackend.ctorParameters = () => [
     { type: XhrFactory }
 ];
 /** @nocollapse */ HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
-/** @nocollapse */ HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac, providedIn: null });
+/** @nocollapse */ HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
     }], function () { return [{ type: XhrFactory }]; }, null); })();
@@ -2768,7 +2768,7 @@ HttpXsrfCookieExtractor.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
 ];
 /** @nocollapse */ HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(XSRF_COOKIE_NAME)); };
-/** @nocollapse */ HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac, providedIn: null });
+/** @nocollapse */ HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
@@ -2859,7 +2859,7 @@ HttpXsrfInterceptor.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
 ];
 /** @nocollapse */ HttpXsrfInterceptor.ɵfac = function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(ɵɵinject(HttpXsrfTokenExtractor), ɵɵinject(XSRF_HEADER_NAME)); };
-/** @nocollapse */ HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac, providedIn: null });
+/** @nocollapse */ HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
@@ -2937,7 +2937,7 @@ HttpInterceptingHandler.ctorParameters = () => [
     { type: Injector }
 ];
 /** @nocollapse */ HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(ɵɵinject(HttpBackend), ɵɵinject(Injector)); };
-/** @nocollapse */ HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac, providedIn: null });
+/** @nocollapse */ HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null); })();

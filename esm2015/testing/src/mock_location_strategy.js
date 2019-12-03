@@ -127,7 +127,7 @@ MockLocationStrategy.decorators = [
 /** @nocollapse */
 MockLocationStrategy.ctorParameters = () => [];
 /** @nocollapse */ MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
-/** @nocollapse */ MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac, providedIn: null });
+/** @nocollapse */ MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
     }], function () { return []; }, null); })();

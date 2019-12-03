@@ -139,7 +139,7 @@ var NgClassR2Impl = /** @class */ (function () {
         }
     };
     NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(i0.ɵɵinject(i0.IterableDiffers), i0.ɵɵinject(i0.KeyValueDiffers), i0.ɵɵinject(i0.ElementRef), i0.ɵɵinject(i0.Renderer2)); };
-    NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac, providedIn: null });
+    NgClassR2Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac });
     return NgClassR2Impl;
 }());
 export { NgClassR2Impl };
@@ -182,7 +182,7 @@ var NgClassR3Impl = /** @class */ (function () {
         }
     };
     NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
-    NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac, providedIn: null });
+    NgClassR3Impl.ɵprov = i0.ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac });
     return NgClassR3Impl;
 }());
 export { NgClassR3Impl };

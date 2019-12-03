@@ -65,7 +65,7 @@ HttpInterceptingHandler.ctorParameters = () => [
     { type: Injector }
 ];
 /** @nocollapse */ HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(i0.ɵɵinject(i1.HttpBackend), i0.ɵɵinject(i0.Injector)); };
-/** @nocollapse */ HttpInterceptingHandler.ɵprov = i0.ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac, providedIn: null });
+/** @nocollapse */ HttpInterceptingHandler.ɵprov = i0.ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{ type: i1.HttpBackend }, { type: i0.Injector }]; }, null); })();

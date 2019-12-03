@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+335.sha-56f4e56.with-local-changes
+ * @license Angular v9.0.0-rc.1+336.sha-67eac73.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -644,7 +644,7 @@ NgClassR2Impl.ctorParameters = () => [
     { type: Renderer2 }
 ];
 /** @nocollapse */ NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(ɵɵinject(IterableDiffers), ɵɵinject(KeyValueDiffers), ɵɵinject(ElementRef), ɵɵinject(Renderer2)); };
-/** @nocollapse */ NgClassR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgClassR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR2Impl, [{
         type: Injectable
     }], function () { return [{ type: IterableDiffers }, { type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer2 }]; }, null); })();
@@ -748,7 +748,7 @@ NgClassR3Impl.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
-/** @nocollapse */ NgClassR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgClassR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR3Impl, [{
         type: Injectable
     }], null, null); })();
@@ -1082,7 +1082,7 @@ NgStyleR2Impl.ctorParameters = () => [
     { type: Renderer2 }
 ];
 /** @nocollapse */ NgStyleR2Impl.ɵfac = function NgStyleR2Impl_Factory(t) { return new (t || NgStyleR2Impl)(ɵɵinject(ElementRef), ɵɵinject(KeyValueDiffers), ɵɵinject(Renderer2)); };
-/** @nocollapse */ NgStyleR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgStyleR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR2Impl, factory: NgStyleR2Impl.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyleR2Impl, [{
         type: Injectable
     }], function () { return [{ type: ElementRef }, { type: KeyValueDiffers }, { type: Renderer2 }]; }, null); })();
@@ -1140,7 +1140,7 @@ NgStyleR3Impl.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ NgStyleR3Impl.ɵfac = function NgStyleR3Impl_Factory(t) { return new (t || NgStyleR3Impl)(); };
-/** @nocollapse */ NgStyleR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac, providedIn: null });
+/** @nocollapse */ NgStyleR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgStyleR3Impl, factory: NgStyleR3Impl.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyleR3Impl, [{
         type: Injectable
     }], null, null); })();
@@ -2192,7 +2192,7 @@ PathLocationStrategy.ctorParameters = () => [
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
 /** @nocollapse */ PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-/** @nocollapse */ PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: PathLocationStrategy.ɵfac, providedIn: null });
+/** @nocollapse */ PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: PathLocationStrategy.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -2339,7 +2339,7 @@ HashLocationStrategy.ctorParameters = () => [
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
 /** @nocollapse */ HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-/** @nocollapse */ HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: HashLocationStrategy.ɵfac, providedIn: null });
+/** @nocollapse */ HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: HashLocationStrategy.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -4965,7 +4965,7 @@ NgLocaleLocalization.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
 /** @nocollapse */ NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(ɵɵinject(LOCALE_ID)); };
-/** @nocollapse */ NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: NgLocaleLocalization.ɵfac, providedIn: null });
+/** @nocollapse */ NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: NgLocaleLocalization.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
@@ -8228,7 +8228,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+335.sha-56f4e56.with-local-changes');
+const VERSION = new Version('9.0.0-rc.1+336.sha-67eac73.with-local-changes');
 
 /**
  * @fileoverview added by tsickle

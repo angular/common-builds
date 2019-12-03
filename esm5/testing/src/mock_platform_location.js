@@ -167,7 +167,7 @@ var MockPlatformLocation = /** @class */ (function () {
     };
     MockPlatformLocation.prototype.getState = function () { return this.state; };
     MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(i0.ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
-    MockPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac, providedIn: null });
+    MockPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac });
     return MockPlatformLocation;
 }());
 export { MockPlatformLocation };

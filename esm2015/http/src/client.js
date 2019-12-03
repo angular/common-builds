@@ -381,7 +381,7 @@ HttpClient.ctorParameters = () => [
     { type: HttpHandler }
 ];
 /** @nocollapse */ HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(i0.ɵɵinject(i1.HttpHandler)); };
-/** @nocollapse */ HttpClient.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac, providedIn: null });
+/** @nocollapse */ HttpClient.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HttpClient, [{
         type: Injectable
     }], function () { return [{ type: i1.HttpHandler }]; }, null); })();

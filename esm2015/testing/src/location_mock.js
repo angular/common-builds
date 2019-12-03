@@ -205,7 +205,7 @@ SpyLocation.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */ SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
-/** @nocollapse */ SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac, providedIn: null });
+/** @nocollapse */ SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
     }], null, null); })();

@@ -37,7 +37,7 @@ var NoopInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
-    NoopInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac, providedIn: null });
+    NoopInterceptor.ɵprov = i0.ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
     return NoopInterceptor;
 }());
 export { NoopInterceptor };
