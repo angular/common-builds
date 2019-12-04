@@ -431,6 +431,14 @@ export declare function getLocaleExtraDayPeriodRules(locale: string): (Time | [T
  */
 export declare function getLocaleExtraDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
 /**
+ * Retrieves the writing direction of a specified locale
+ * @param locale A locale code for the locale format rules to use.
+ * @publicApi
+ * @returns 'rtl' or 'ltr'
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ */
+export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
+/**
  * Represents a time value with hours and minutes.
  *
  * @publicApi
