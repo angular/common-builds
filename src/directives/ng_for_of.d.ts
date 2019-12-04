@@ -10,7 +10,7 @@ import * as i0 from "@angular/core";
 /**
  * @publicApi
  */
-export declare class NgForOfContext<T, U extends NgIterable<T>> {
+export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
     $implicit: T;
     ngForOf: U;
     index: number;
@@ -118,7 +118,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T>> {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgForOf<T, U extends NgIterable<T>> implements DoCheck {
+export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
