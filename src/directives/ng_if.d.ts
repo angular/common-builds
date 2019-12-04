@@ -146,7 +146,7 @@ import * as i0 from "@angular/core";
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgIf<T = unknown> {
+export declare class NgIf<T> {
     private _viewContainer;
     private _context;
     private _thenTemplateRef;
@@ -189,7 +189,7 @@ export declare class NgIf<T = unknown> {
 /**
  * @publicApi
  */
-export declare class NgIfContext<T = unknown> {
+export declare class NgIfContext<T> {
     $implicit: T;
     ngIf: T;
 }
