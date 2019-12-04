@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+366.sha-cca2616.with-local-changes
+ * @license Angular v9.0.0-rc.1+365.sha-9b6a1b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1452,7 +1452,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
+export declare class NgForOf<T, U extends NgIterable<T>> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
@@ -1507,7 +1507,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
 /**
  * @publicApi
  */
-export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
+export declare class NgForOfContext<T, U extends NgIterable<T>> {
     $implicit: T;
     ngForOf: U;
     index: number;
@@ -1658,7 +1658,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgIf<T = unknown> {
+export declare class NgIf<T> {
     private _viewContainer;
     private _context;
     private _thenTemplateRef;
@@ -1700,7 +1700,7 @@ export declare class NgIf<T = unknown> {
 /**
  * @publicApi
  */
-export declare class NgIfContext<T = unknown> {
+export declare class NgIfContext<T> {
     $implicit: T;
     ngIf: T;
 }
