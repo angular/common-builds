@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+352.sha-86d5472.with-local-changes
+ * @license Angular v9.0.0-rc.1+354.sha-15d3e74.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -628,6 +628,15 @@ export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, 
  * @publicApi
  */
 export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): [string, string];
+
+/**
+ * Retrieves the writing direction of a specified locale
+ * @param locale A locale code for the locale format rules to use.
+ * @publicApi
+ * @returns 'rtl' or 'ltr'
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ */
+export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
 
 /**
  * Retrieves Gregorian-calendar eras for the given locale.

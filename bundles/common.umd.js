@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+352.sha-86d5472.with-local-changes
+ * @license Angular v9.0.0-rc.1+354.sha-15d3e74.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2300,6 +2300,17 @@
         ];
         var dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
         return getLastDefinedValue(dayPeriods, width) || [];
+    }
+    /**
+     * Retrieves the writing direction of a specified locale
+     * @param locale A locale code for the locale format rules to use.
+     * @publicApi
+     * @returns 'rtl' or 'ltr'
+     * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+     */
+    function getLocaleDirection(locale) {
+        var data = i0.ɵfindLocaleData(locale);
+        return data[i0.ɵLocaleDataIndex.Directionality];
     }
     /**
      * Retrieves the first value that is defined in an array, going backwards from an index position.
@@ -5839,7 +5850,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+352.sha-86d5472.with-local-changes');
+    var VERSION = new i0.Version('9.0.0-rc.1+354.sha-15d3e74.with-local-changes');
 
     /**
      * @license
@@ -6089,6 +6100,7 @@
     exports.getLocaleDateTimeFormat = getLocaleDateTimeFormat;
     exports.getLocaleDayNames = getLocaleDayNames;
     exports.getLocaleDayPeriods = getLocaleDayPeriods;
+    exports.getLocaleDirection = getLocaleDirection;
     exports.getLocaleEraNames = getLocaleEraNames;
     exports.getLocaleExtraDayPeriodRules = getLocaleExtraDayPeriodRules;
     exports.getLocaleExtraDayPeriods = getLocaleExtraDayPeriods;
