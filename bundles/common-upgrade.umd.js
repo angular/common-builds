@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.6+15.sha-c26738d.with-local-changes
+ * @license Angular v9.0.0-rc.6+16.sha-25b210a.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -921,8 +921,7 @@
      *
      * @private
      * @param str value potential URI component to check.
-     * @returns {boolean} True if `value` can be decoded
-     * with the decodeURIComponent function.
+     * @returns the decoded URI if it can be decoded or else `undefined`.
      */
     function tryDecodeURIComponent(value) {
         try {
@@ -936,7 +935,6 @@
     /**
      * Parses an escaped url query string into key-value pairs. Logic taken from
      * https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1382
-     * @returns {Object.<string,boolean|Array>}
      */
     function parseKeyValue(keyValue) {
         var obj = {};
