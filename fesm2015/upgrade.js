@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+443.sha-1583293.with-local-changes
+ * @license Angular v9.0.0-rc.1+445.sha-c13a4b8.with-local-changes
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1177,7 +1177,7 @@ function _stripIndexHtml(url) {
  * Tries to decode the URI component without throwing an exception.
  *
  * @param {?} value
- * @return {?}
+ * @return {?} the decoded URI if it can be decoded or else `undefined`.
  */
 function tryDecodeURIComponent(value) {
     try {
