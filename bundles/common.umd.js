@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+483.sha-23cf11a
+ * @license Angular v9.0.0-rc.1+488.sha-28b4f4a
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -390,7 +390,9 @@
                 var key = keys[i];
                 key = trim ? key.trim() : key;
                 var value = values[key];
-                setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                if (value !== undefined) {
+                    setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                }
             }
         }
         else {
@@ -5850,7 +5852,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+483.sha-23cf11a');
+    var VERSION = new i0.Version('9.0.0-rc.1+488.sha-28b4f4a');
 
     /**
      * @license
