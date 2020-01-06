@@ -184,7 +184,7 @@ export declare class NgIf<T = unknown> {
      */
     static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<T>;
     static ɵfac: i0.ɵɵFactoryDef<NgIf<any>>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf<any>, "[ngIf]", never, { 'ngIf': "ngIf", 'ngIfThen': "ngIfThen", 'ngIfElse': "ngIfElse" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never>;
 }
 /**
  * @publicApi

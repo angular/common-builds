@@ -80,5 +80,5 @@ export declare class NgStyle extends NgStyleBase implements DoCheck {
     } | null;
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDef<NgStyle>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { 'ngStyle': "ngStyle" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;
 }

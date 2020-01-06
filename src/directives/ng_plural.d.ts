@@ -52,7 +52,7 @@ export declare class NgPlural {
     private _clearViews;
     private _activateView;
     static ɵfac: i0.ɵɵFactoryDef<NgPlural>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgPlural, "[ngPlural]", never, { 'ngPlural': "ngPlural" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule

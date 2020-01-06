@@ -94,7 +94,7 @@ export declare class NgSwitch {
     ngSwitch: any;
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDef<NgSwitch>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { 'ngSwitch': "ngSwitch" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -142,7 +142,7 @@ export declare class NgSwitchCase implements DoCheck {
      */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDef<NgSwitchCase>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { 'ngSwitchCase': "ngSwitchCase" }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule
