@@ -2085,7 +2085,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Constructs a `POST` request that interprets the body as an as an `ArrayBuffer` and returns
+     * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
      * an `ArrayBuffer`.
      *
      * @param url The endpoint URL.
