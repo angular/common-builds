@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "9.0.0-rc.1+538.sha-3053e02",
+  "version": "9.0.0-rc.1+554.sha-18d89c9",
   "description": "Angular - commonly needed directives and services",
   "main": "./bundles/common.umd.js",
   "module": "./fesm5/common.js",
@@ -15,7 +15,7 @@
   "locales": "locales",
   "peerDependencies": {
     "rxjs": "^6.5.3",
-    "@angular/core": "9.0.0-rc.1+538.sha-3053e02",
+    "@angular/core": "9.0.0-rc.1+554.sha-18d89c9",
     "tslib": "^1.10.0"
   },
   "repository": {
