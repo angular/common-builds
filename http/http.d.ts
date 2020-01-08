@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+524.sha-f004195
+ * @license Angular v9.0.0-rc.1+558.sha-d1c7ca7
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2110,7 +2110,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     /**
-     * Constructs a `POST` request that interprets the body as an as an `ArrayBuffer` and returns
+     * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
      * an `ArrayBuffer`.
      *
      * @param url The endpoint URL.
