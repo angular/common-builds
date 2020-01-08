@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+541.sha-4f42de9
+ * @license Angular v9.0.0-rc.1+555.sha-b3398ee
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4413,7 +4413,12 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
     return res
         .replace(CURRENCY_CHAR, currency)
         // if we have 2 time the currency character, the second one is ignored
-        .replace(CURRENCY_CHAR, '');
+        .replace(CURRENCY_CHAR, '')
+        // If there is a spacing between currency character and the value and
+        // the currency character is supressed by passing an empty string, the
+        // spacing character would remain as part of the string. Then we
+        // should remove it.
+        .trim();
 }
 /**
  * \@ngModule CommonModule
@@ -7795,7 +7800,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+541.sha-4f42de9');
+const VERSION = new Version('9.0.0-rc.1+555.sha-b3398ee');
 
 /**
  * @fileoverview added by tsickle
