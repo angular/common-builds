@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+554.sha-18d89c9
+ * @license Angular v9.0.0-rc.1+541.sha-4f42de9
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3201,12 +3201,7 @@
         return res
             .replace(CURRENCY_CHAR, currency)
             // if we have 2 time the currency character, the second one is ignored
-            .replace(CURRENCY_CHAR, '')
-            // If there is a spacing between currency character and the value and
-            // the currency character is supressed by passing an empty string, the
-            // spacing character would remain as part of the string. Then we
-            // should remove it.
-            .trim();
+            .replace(CURRENCY_CHAR, '');
     }
     /**
      * @ngModule CommonModule
@@ -5869,7 +5864,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+554.sha-18d89c9');
+    var VERSION = new i0.Version('9.0.0-rc.1+541.sha-4f42de9');
 
     /**
      * @license
