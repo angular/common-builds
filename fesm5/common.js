@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.7+39.sha-186d310
+ * @license Angular v9.0.0-rc.8+18.sha-f295240
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -188,10 +188,10 @@ function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, valu
         // case 1: map
         for (var i = 0; i < keys.length; i++) {
             var key = keys[i];
-            key = trim ? key.trim() : key;
             var value = values[key];
             if (value !== undefined) {
-                setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
+                setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
             }
         }
     }
@@ -5710,7 +5710,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.7+39.sha-186d310');
+var VERSION = new Version('9.0.0-rc.8+18.sha-f295240');
 
 /**
  * @license
