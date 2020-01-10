@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-rc.1+558.sha-d1c7ca7
+ * @license Angular v9.0.0-rc.1+615.sha-82a41af
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __decorate, __metadata, __assign, __extends, __read, __param, __values } from 'tslib';
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵclassMap, ɵɵdefineDirective, Input, Directive, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -188,10 +188,10 @@ function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, valu
         // case 1: map
         for (var i = 0; i < keys.length; i++) {
             var key = keys[i];
-            key = trim ? key.trim() : key;
             var value = values[key];
             if (value !== undefined) {
-                setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
+                setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
             }
         }
     }
@@ -471,9 +471,6 @@ var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
 // used when the VE is present
 var ngClassDirectiveDef__PRE_R3__ = undefined;
 var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(2);
-    }
     if (rf & 2 /* Update */) {
         ɵɵclassMap(ctx.getValue());
     }
@@ -484,6 +481,7 @@ var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
 var ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: ɵ0,
     selectors: null,
+    hostVars: 2,
     hostBindings: ɵ1
 });
 var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
@@ -688,9 +686,6 @@ var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
 var ngStyleDirectiveDef__PRE_R3__ = undefined;
 var ngStyleFactoryDef__PRE_R3__ = undefined;
 var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(2);
-    }
     if (rf & 2 /* Update */) {
         ɵɵstyleMap(ctx.getValue());
     }
@@ -701,6 +696,7 @@ var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
 var ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: ɵ0$1,
     selectors: null,
+    hostVars: 2,
     hostBindings: ɵ1$1
 });
 var ngStyleFactoryDef__POST_R3__ = function () { };
@@ -5721,7 +5717,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.0.0-rc.1+558.sha-d1c7ca7');
+var VERSION = new Version('0.0.0');
 
 /**
  * @license

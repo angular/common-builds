@@ -1,10 +1,10 @@
 /**
- * @license Angular v9.0.0-rc.1+558.sha-d1c7ca7
+ * @license Angular v9.0.0-rc.1+615.sha-82a41af
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -274,11 +274,11 @@ function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, valu
         for (let i = 0; i < keys.length; i++) {
             /** @type {?} */
             let key = keys[i];
-            key = trim ? key.trim() : key;
             /** @type {?} */
             const value = ((/** @type {?} */ (values)))[key];
             if (value !== undefined) {
-                setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
+                setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
             }
         }
     }
@@ -809,9 +809,6 @@ function () { }, ɵ1 = /**
  * @return {?}
  */
 function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(2);
-    }
     if (rf & 2 /* Update */) {
         ɵɵclassMap(ctx.getValue());
     }
@@ -820,6 +817,7 @@ function (rf, ctx, elIndex) {
 const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: (/** @type {?} */ ((ɵ0))),
     selectors: (/** @type {?} */ (null)),
+    hostVars: 2,
     hostBindings: (ɵ1)
 });
 /** @type {?} */
@@ -1177,9 +1175,6 @@ function () { }, ɵ1$1 = /**
  * @return {?}
  */
 function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(2);
-    }
     if (rf & 2 /* Update */) {
         ɵɵstyleMap(ctx.getValue());
     }
@@ -1188,6 +1183,7 @@ function (rf, ctx, elIndex) {
 const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
     type: (/** @type {?} */ ((ɵ0$1))),
     selectors: (/** @type {?} */ (null)),
+    hostVars: 2,
     hostBindings: (ɵ1$1)
 });
 /** @type {?} */
@@ -7800,7 +7796,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+558.sha-d1c7ca7');
+const VERSION = new Version('0.0.0');
 
 /**
  * @fileoverview added by tsickle

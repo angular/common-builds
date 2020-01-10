@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+558.sha-d1c7ca7
+ * @license Angular v9.0.0-rc.1+615.sha-82a41af
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -388,10 +388,10 @@
             // case 1: map
             for (var i = 0; i < keys.length; i++) {
                 var key = keys[i];
-                key = trim ? key.trim() : key;
                 var value = values[key];
                 if (value !== undefined) {
-                    setMapValues(map, key, value, parseOutUnits, allowSubKeys);
+                    // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
+                    setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
                 }
             }
         }
@@ -671,9 +671,6 @@
     // used when the VE is present
     var ngClassDirectiveDef__PRE_R3__ = undefined;
     var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            i0.ɵɵallocHostVars(2);
-        }
         if (rf & 2 /* Update */) {
             i0.ɵɵclassMap(ctx.getValue());
         }
@@ -684,6 +681,7 @@
     var ngClassDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
         type: ɵ0,
         selectors: null,
+        hostVars: 2,
         hostBindings: ɵ1
     });
     var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
@@ -888,9 +886,6 @@
     var ngStyleDirectiveDef__PRE_R3__ = undefined;
     var ngStyleFactoryDef__PRE_R3__ = undefined;
     var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            i0.ɵɵallocHostVars(2);
-        }
         if (rf & 2 /* Update */) {
             i0.ɵɵstyleMap(ctx.getValue());
         }
@@ -901,6 +896,7 @@
     var ngStyleDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
         type: ɵ0$1,
         selectors: null,
+        hostVars: 2,
         hostBindings: ɵ1$1
     });
     var ngStyleFactoryDef__POST_R3__ = function () { };
@@ -5857,7 +5853,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+558.sha-d1c7ca7');
+    var VERSION = new i0.Version('0.0.0');
 
     /**
      * @license
