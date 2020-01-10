@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+629.sha-e88d652
+ * @license Angular v9.0.0-rc.1+631.sha-6d28a20
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8247,7 +8247,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.1+629.sha-e88d652');
+const VERSION = new Version('9.0.0-rc.1+631.sha-6d28a20');
 
 /**
  * @fileoverview added by tsickle
