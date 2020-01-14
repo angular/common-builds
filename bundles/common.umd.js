@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.8+91.sha-7305b02
+ * @license Angular v9.0.0-rc.8+112.sha-b1d213b
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5569,6 +5569,26 @@
      * that determine group sizing and separator, decimal-point character,
      * and other locale-specific configurations.
      *
+     * {@a currency-code-deprecation}
+     * <div class="alert is-helpful">
+     *
+     * **Deprecation notice:**
+     *
+     * The default currency code is currently always `USD` but this is deprecated from v9.
+     *
+     * **In v11 the default currency code will be taken from the current locale identified by
+     * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+     * more information.**
+     *
+     * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+     * your application `NgModule`:
+     *
+     * ```ts
+     * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+     * ```
+     *
+     * </div>
+     *
      * @see `getCurrencySymbol()`
      * @see `formatCurrency()`
      *
@@ -5582,15 +5602,18 @@
      * @publicApi
      */
     var CurrencyPipe = /** @class */ (function () {
-        function CurrencyPipe(_locale) {
+        function CurrencyPipe(_locale, _defaultCurrencyCode) {
+            if (_defaultCurrencyCode === void 0) { _defaultCurrencyCode = 'USD'; }
             this._locale = _locale;
+            this._defaultCurrencyCode = _defaultCurrencyCode;
         }
         CurrencyPipe_1 = CurrencyPipe;
         /**
          *
          * @param value The number to be formatted as currency.
          * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-         * such as `USD` for the US dollar and `EUR` for the euro.
+         * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
+         * configured using the `DEFAULT_CURRENCY_CODE` injection token.
          * @param display The format for the currency indicator. One of the following:
          *   - `code`: Show the code (such as `USD`).
          *   - `symbol`(default): Show the symbol (such as `$`).
@@ -5629,7 +5652,7 @@
                 }
                 display = display ? 'symbol' : 'code';
             }
-            var currency = currencyCode || 'USD';
+            var currency = currencyCode || this._defaultCurrencyCode;
             if (display !== 'code') {
                 if (display === 'symbol' || display === 'symbol-narrow') {
                     currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
@@ -5650,7 +5673,8 @@
         CurrencyPipe = CurrencyPipe_1 = __decorate([
             i0.Pipe({ name: 'currency' }),
             __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
+            __param(1, i0.Inject(i0.DEFAULT_CURRENCY_CODE)),
+            __metadata("design:paramtypes", [String, String])
         ], CurrencyPipe);
         return CurrencyPipe;
     }());
@@ -5846,7 +5870,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.8+91.sha-7305b02');
+    var VERSION = new i0.Version('9.0.0-rc.8+112.sha-b1d213b');
 
     /**
      * @license

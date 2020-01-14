@@ -1,10 +1,10 @@
 /**
- * @license Angular v9.0.0-rc.8+91.sha-7305b02
+ * @license Angular v9.0.0-rc.8+112.sha-b1d213b
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -7480,6 +7480,26 @@ if (false) {
  * that determine group sizing and separator, decimal-point character,
  * and other locale-specific configurations.
  *
+ * {\@a currency-code-deprecation}
+ * <div class="alert is-helpful">
+ *
+ * **Deprecation notice:**
+ *
+ * The default currency code is currently always `USD` but this is deprecated from v9.
+ *
+ * **In v11 the default currency code will be taken from the current locale identified by
+ * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * more information.**
+ *
+ * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+ * your application `NgModule`:
+ *
+ * ```ts
+ * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+ * ```
+ *
+ * </div>
+ *
  * @see `getCurrencySymbol()`
  * @see `formatCurrency()`
  *
@@ -7495,15 +7515,18 @@ if (false) {
 class CurrencyPipe {
     /**
      * @param {?} _locale
+     * @param {?=} _defaultCurrencyCode
      */
-    constructor(_locale) {
+    constructor(_locale, _defaultCurrencyCode = 'USD') {
         this._locale = _locale;
+        this._defaultCurrencyCode = _defaultCurrencyCode;
     }
     /**
      *
      * @param {?} value The number to be formatted as currency.
      * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-     * such as `USD` for the US dollar and `EUR` for the euro.
+     * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
+     * configured using the `DEFAULT_CURRENCY_CODE` injection token.
      * @param {?=} display The format for the currency indicator. One of the following:
      *   - `code`: Show the code (such as `USD`).
      *   - `symbol`(default): Show the symbol (such as `$`).
@@ -7543,7 +7566,7 @@ class CurrencyPipe {
             display = display ? 'symbol' : 'code';
         }
         /** @type {?} */
-        let currency = currencyCode || 'USD';
+        let currency = currencyCode || this._defaultCurrencyCode;
         if (display !== 'code') {
             if (display === 'symbol' || display === 'symbol-narrow') {
                 currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
@@ -7567,7 +7590,8 @@ CurrencyPipe.decorators = [
 ];
 /** @nocollapse */
 CurrencyPipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
+    { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
 ];
 if (false) {
     /**
@@ -7575,6 +7599,11 @@ if (false) {
      * @private
      */
     CurrencyPipe.prototype._locale;
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrencyPipe.prototype._defaultCurrencyCode;
 }
 /**
  * @param {?} value
@@ -7788,7 +7817,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.0.0-rc.8+91.sha-7305b02');
+const VERSION = new Version('9.0.0-rc.8+112.sha-b1d213b');
 
 /**
  * @fileoverview added by tsickle
