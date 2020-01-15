@@ -46,7 +46,7 @@ export declare class NgPlural {
     private _activeView;
     private _caseViews;
     constructor(_localization: NgLocalization);
-    ngPlural: number;
+    set ngPlural(value: number);
     addCase(value: string, switchView: SwitchView): void;
     private _updateView;
     private _clearViews;

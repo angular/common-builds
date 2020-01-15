@@ -16,10 +16,10 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
     index: number;
     count: number;
     constructor($implicit: T, ngForOf: U, index: number, count: number);
-    readonly first: boolean;
-    readonly last: boolean;
-    readonly even: boolean;
-    readonly odd: boolean;
+    get first(): boolean;
+    get last(): boolean;
+    get even(): boolean;
+    get odd(): boolean;
 }
 /**
  * A [structural directive](guide/structural-directives) that renders
@@ -126,7 +126,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    ngForOf: (U & NgIterable<T>) | undefined | null;
+    set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
     /**
      * A function that defines how to track changes for items in the iterable.
      *
@@ -144,7 +144,8 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * The function receives two inputs,
      * the iteration index and the node object ID.
      */
-    ngForTrackBy: TrackByFunction<T>;
+    set ngForTrackBy(fn: TrackByFunction<T>);
+    get ngForTrackBy(): TrackByFunction<T>;
     private _ngForOf;
     private _ngForOfDirty;
     private _differ;
@@ -154,7 +155,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
      */
-    ngForTemplate: TemplateRef<NgForOfContext<T, U>>;
+    set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
      * Applies the changes when needed.
      */

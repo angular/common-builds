@@ -21,7 +21,7 @@ export declare class TestRequest {
     /**
      * Whether the request was cancelled after it was sent.
      */
-    readonly cancelled: boolean;
+    get cancelled(): boolean;
     constructor(request: HttpRequest<any>, observer: Observer<HttpEvent<any>>);
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response

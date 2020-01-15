@@ -67,10 +67,10 @@ export declare class NgClassBase {
  */
 export declare class NgClass extends NgClassBase implements DoCheck {
     constructor(delegate: NgClassImpl);
-    klass: string;
-    ngClass: string | string[] | Set<string> | {
+    set klass(value: string);
+    set ngClass(value: string | string[] | Set<string> | {
         [klass: string]: any;
-    };
+    });
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDef<NgClass>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never>;

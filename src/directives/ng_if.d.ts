@@ -157,15 +157,15 @@ export declare class NgIf<T = unknown> {
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
      */
-    ngIf: T;
+    set ngIf(condition: T);
     /**
      * A template to show if the condition expression evaluates to true.
      */
-    ngIfThen: TemplateRef<NgIfContext<T>> | null;
+    set ngIfThen(templateRef: TemplateRef<NgIfContext<T>> | null);
     /**
      * A template to show if the condition expression evaluates to false.
      */
-    ngIfElse: TemplateRef<NgIfContext<T>> | null;
+    set ngIfElse(templateRef: TemplateRef<NgIfContext<T>> | null);
     private _updateView;
     /**
      * Assert the correct type of the expression bound to the `ngIf` input within the template.

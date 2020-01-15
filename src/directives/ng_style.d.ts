@@ -75,9 +75,9 @@ export declare class NgStyleBase {
  */
 export declare class NgStyle extends NgStyleBase implements DoCheck {
     constructor(delegate: NgStyleImpl);
-    ngStyle: {
+    set ngStyle(value: {
         [klass: string]: any;
-    } | null;
+    } | null);
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDef<NgStyle>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;

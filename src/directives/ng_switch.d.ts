@@ -91,7 +91,7 @@ export declare class NgSwitch {
     private _lastCaseCheckIndex;
     private _lastCasesMatched;
     private _ngSwitch;
-    ngSwitch: any;
+    set ngSwitch(newValue: any);
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDef<NgSwitch>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never>;
