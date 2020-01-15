@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+675.sha-d7ea389
+ * @license Angular v9.0.0-rc.1+688.sha-bf8ba89
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -131,7 +131,7 @@ export declare class TestRequest {
     /**
      * Whether the request was cancelled after it was sent.
      */
-    readonly cancelled: boolean;
+    get cancelled(): boolean;
     constructor(request: HttpRequest<any>, observer: Observer<HttpEvent<any>>);
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response
