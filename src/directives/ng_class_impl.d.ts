@@ -26,7 +26,7 @@ export declare abstract class NgClassImpl {
         [key: string]: any;
     } | null;
 }
-export declare class NgClassR2Impl implements NgClassImpl {
+export declare class NgClassR2Impl extends NgClassImpl {
     private _iterableDiffers;
     private _keyValueDiffers;
     private _ngEl;
@@ -38,7 +38,9 @@ export declare class NgClassR2Impl implements NgClassImpl {
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     getValue(): null;
     setClass(value: string): void;
-    setNgClass(value: string): void;
+    setNgClass(value: string | string[] | Set<string> | {
+        [klass: string]: any;
+    }): void;
     applyChanges(): void;
     private _applyKeyValueChanges;
     private _applyIterableChanges;
@@ -60,7 +62,7 @@ export declare class NgClassR2Impl implements NgClassImpl {
     static ɵfac: i0.ɵɵFactoryDef<NgClassR2Impl>;
     static ɵprov: i0.ɵɵInjectableDef<NgClassR2Impl>;
 }
-export declare class NgClassR3Impl implements NgClassImpl {
+export declare class NgClassR3Impl extends NgClassImpl {
     private _value;
     private _ngClassDiffer;
     private _classStringDiffer;

@@ -1,11 +1,11 @@
 /**
- * @license Angular v9.0.0-rc.1+718.sha-27b9eb5
+ * @license Angular v9.0.0-rc.1+720.sha-0b1e34d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __assign, __extends, __read, __values } from 'tslib';
-import { ɵisListLikeIterable, ɵstringify, ɵɵinject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵclassMap, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, ɵɵstyleMap, InjectionToken, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { __extends, __assign, __read, __values } from 'tslib';
+import { ɵisListLikeIterable, ɵstringify, ɵɵinject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵgetInheritedFactory, ɵɵdefineDirective, ɵɵallocHostVars, ɵɵclassMap, ɵɵdirectiveInject, ɵɵProvidersFeature, ɵɵInheritDefinitionFeature, Directive, Input, ɵɵstyleMap, InjectionToken, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -21,7 +21,7 @@ import { ɵisListLikeIterable, ɵstringify, ɵɵinject, IterableDiffers, KeyValu
  * of how [style] and [class] behave in Angular.
  *
  * The differences are:
- *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
+ *  - ngStyle and ngClass both **deep-watch** their binding values for changes each time CD runs
  *    while [style] and [class] bindings do not (they check for identity changes)
  *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
  *  - ngClass supports arrays of class values and [class] only accepts map and string values
@@ -32,8 +32,9 @@ import { ɵisListLikeIterable, ɵstringify, ɵɵinject, IterableDiffers, KeyValu
  * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
  * into something that the core-level [style] and [class] bindings understand.
  *
- * This [StylingDiffer] class handles this conversion by creating a new input value each time
- * the inner representation of the binding value have changed.
+ * This [StylingDiffer] class handles this conversion by creating a new output value each time
+ * the input value of the binding value has changed (either via identity change or deep collection
+ * content change).
  *
  * ## Why do we care about ngStyle/ngClass?
  * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
@@ -48,8 +49,8 @@ import { ɵisListLikeIterable, ɵstringify, ɵɵinject, IterableDiffers, KeyValu
  * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
  *   styles and classes would fall out of sync and be applied and updated at
  *   inconsistent times
- * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
- *   (they will write over them given the right combination of events)
+ * - Both ngClass/ngStyle should respect [class.name] and [style.prop] bindings (and not arbitrarily
+ *   overwrite their changes)
  *
  *   ```
  *   <!-- if `w1` is updated then it will always override `w2`
@@ -69,40 +70,60 @@ var StylingDiffer = /** @class */ (function () {
     function StylingDiffer(_name, _options) {
         this._name = _name;
         this._options = _options;
+        /**
+         * Normalized string map representing the last value set via `setValue()` or null if no value has
+         * been set or the last set value was null
+         */
         this.value = null;
-        this._lastSetValue = null;
-        this._lastSetValueType = 0 /* Null */;
-        this._lastSetValueIdentityChange = false;
+        /**
+         * The last set value that was applied via `setValue()`
+         */
+        this._inputValue = null;
+        /**
+         * The type of value that the `_lastSetValue` variable is
+         */
+        this._inputValueType = 0 /* Null */;
+        /**
+         * Whether or not the last value change occurred because the variable itself changed reference
+         * (identity)
+         */
+        this._inputValueIdentityChangeSinceLastCheck = false;
     }
     /**
-     * Sets (updates) the styling value within the differ.
+     * Sets the input value for the differ and updates the output value if necessary.
      *
-     * Only when `hasValueChanged` is called then this new value will be evaluted
-     * and checked against the previous value.
-     *
-     * @param value the new styling value provided from the ngClass/ngStyle binding
+     * @param value the new styling input value provided from the ngClass/ngStyle binding
      */
-    StylingDiffer.prototype.setValue = function (value) {
-        if (Array.isArray(value)) {
-            this._lastSetValueType = 4 /* Array */;
-        }
-        else if (value instanceof Set) {
-            this._lastSetValueType = 8 /* Set */;
-        }
-        else if (value && typeof value === 'string') {
-            if (!(this._options & 4 /* AllowStringValue */)) {
-                throw new Error(this._name + ' string values are not allowed');
+    StylingDiffer.prototype.setInput = function (value) {
+        if (value !== this._inputValue) {
+            var type = void 0;
+            if (!value) { // matches empty strings, null, false and undefined
+                type = 0 /* Null */;
+                value = null;
             }
-            this._lastSetValueType = 1 /* String */;
+            else if (Array.isArray(value)) {
+                type = 4 /* Array */;
+            }
+            else if (value instanceof Set) {
+                type = 8 /* Set */;
+            }
+            else if (typeof value === 'string') {
+                if (!(this._options & 4 /* AllowStringValue */)) {
+                    throw new Error(this._name + ' string values are not allowed');
+                }
+                type = 1 /* String */;
+            }
+            else {
+                type = 2 /* StringMap */;
+            }
+            this._inputValue = value;
+            this._inputValueType = type;
+            this._inputValueIdentityChangeSinceLastCheck = true;
+            this._processValueChange(true);
         }
-        else {
-            this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
-        }
-        this._lastSetValueIdentityChange = true;
-        this._lastSetValue = value || null;
     };
     /**
-     * Determines whether or not the value has changed.
+     * Checks the input value for identity or deep changes and updates output value if necessary.
      *
      * This function can be called right after `setValue()` is called, but it can also be
      * called incase the existing value (if it's a collection) changes internally. If the
@@ -111,104 +132,143 @@ var StylingDiffer = /** @class */ (function () {
      *
      * @returns whether or not the value has changed in some way.
      */
-    StylingDiffer.prototype.hasValueChanged = function () {
-        var valueHasChanged = this._lastSetValueIdentityChange;
-        if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
-            return false;
-        var finalValue = null;
+    StylingDiffer.prototype.updateValue = function () {
+        var valueHasChanged = this._inputValueIdentityChangeSinceLastCheck;
+        if (!this._inputValueIdentityChangeSinceLastCheck &&
+            (this._inputValueType & 14 /* Collection */)) {
+            valueHasChanged = this._processValueChange(false);
+        }
+        else {
+            // this is set to false in the event that the value is a collection.
+            // This way (if the identity hasn't changed), then the algorithm can
+            // diff the collection value to see if the contents have mutated
+            // (otherwise the value change was processed during the time when
+            // the variable changed).
+            this._inputValueIdentityChangeSinceLastCheck = false;
+        }
+        return valueHasChanged;
+    };
+    /**
+     * Examines the last set value to see if there was a change in content.
+     *
+     * @param inputValueIdentityChanged whether or not the last set value changed in identity or not
+     * @returns `true` when the value has changed (either by identity or by shape if its a
+     * collection)
+     */
+    StylingDiffer.prototype._processValueChange = function (inputValueIdentityChanged) {
+        // if the inputValueIdentityChanged then we know that input has changed
+        var inputChanged = inputValueIdentityChanged;
+        var newOutputValue = null;
         var trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
         var parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
         var allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
-        switch (this._lastSetValueType) {
+        switch (this._inputValueType) {
             // case 1: [input]="string"
-            case 1 /* String */:
-                var tokens = this._lastSetValue.split(/\s+/g);
-                if (this._options & 16 /* ForceAsMap */) {
-                    finalValue = {};
-                    tokens.forEach(function (token, i) { return finalValue[token] = true; });
-                }
-                else {
-                    finalValue = tokens.reduce(function (str, token, i) { return str + (i ? ' ' : '') + token; });
-                }
-                break;
-            // case 2: [input]="{key:value}"
-            case 2 /* Map */:
-                var map = this._lastSetValue;
-                var keys = Object.keys(map);
-                if (!valueHasChanged) {
-                    if (this.value) {
-                        // we know that the classExp value exists and that it is
-                        // a map (otherwise an identity change would have occurred)
-                        valueHasChanged = mapHasChanged(keys, this.value, map);
+            case 1 /* String */: {
+                if (inputValueIdentityChanged) {
+                    // process string input only if the identity has changed since the strings are immutable
+                    var keys = this._inputValue.split(/\s+/g);
+                    if (this._options & 16 /* ForceAsMap */) {
+                        newOutputValue = {};
+                        for (var i = 0; i < keys.length; i++) {
+                            newOutputValue[keys[i]] = true;
+                        }
                     }
                     else {
-                        valueHasChanged = true;
+                        newOutputValue = keys.join(' ');
                     }
                 }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
+                break;
+            }
+            // case 2: [input]="{key:value}"
+            case 2 /* StringMap */: {
+                var inputMap = this._inputValue;
+                var inputKeys = Object.keys(inputMap);
+                if (!inputValueIdentityChanged) {
+                    // if StringMap and the identity has not changed then output value must have already been
+                    // initialized to a StringMap, so we can safely compare the input and output maps
+                    inputChanged = mapsAreEqual(inputKeys, inputMap, this.value);
+                }
+                if (inputChanged) {
+                    newOutputValue = bulidMapFromStringMap(trimValues, parseOutUnits, allowSubKeys, inputMap, inputKeys);
                 }
                 break;
+            }
             // case 3a: [input]="[str1, str2, ...]"
             // case 3b: [input]="Set"
             case 4 /* Array */:
-            case 8 /* Set */:
-                var values = Array.from(this._lastSetValue);
-                if (!valueHasChanged) {
-                    var keys_1 = Object.keys(this.value);
-                    valueHasChanged = !arrayEqualsArray(keys_1, values);
+            case 8 /* Set */: {
+                var inputKeys = Array.from(this._inputValue);
+                if (!inputValueIdentityChanged) {
+                    var outputKeys = Object.keys(this.value);
+                    inputChanged = !keyArraysAreEqual(outputKeys, inputKeys);
                 }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
+                if (inputChanged) {
+                    newOutputValue =
+                        bulidMapFromStringArray(this._name, trimValues, allowSubKeys, inputKeys);
                 }
                 break;
+            }
             // case 4: [input]="null|undefined"
             default:
-                finalValue = null;
+                inputChanged = inputValueIdentityChanged;
+                newOutputValue = null;
                 break;
         }
-        if (valueHasChanged) {
-            this.value = finalValue;
+        if (inputChanged) {
+            // update the readonly `value` property by casting it to `any` first
+            this.value = newOutputValue;
         }
-        return valueHasChanged;
+        return inputChanged;
     };
     return StylingDiffer;
 }());
 /**
- * builds and returns a map based on the values input value
- *
- * If the `keys` param is provided then the `values` param is treated as a
- * string map. Otherwise `values` is treated as a string array.
+ * @param trim whether the keys should be trimmed of leading or trailing whitespace
+ * @param parseOutUnits whether units like "px" should be parsed out of the key name and appended to
+ *   the value
+ * @param allowSubKeys whether key needs to be subsplit by whitespace into multiple keys
+ * @param values values of the map
+ * @param keys keys of the map
+ * @return a normalized string map based on the input string map
  */
-function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
+function bulidMapFromStringMap(trim, parseOutUnits, allowSubKeys, values, keys) {
     var map = {};
-    if (keys) {
-        // case 1: map
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            var value = values[key];
-            if (value !== undefined) {
-                // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
-                setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var value = values[key];
+        if (value !== undefined) {
+            if (typeof value !== 'boolean') {
+                value = '' + value;
             }
+            // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
+            setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
         }
     }
-    else {
-        // case 2: array
-        for (var i = 0; i < values.length; i++) {
-            var value = values[i];
-            assertValidValue(errorPrefix, value);
-            value = trim ? value.trim() : value;
-            setMapValues(map, value, true, false, allowSubKeys);
-        }
+    return map;
+}
+/**
+ * @param trim whether the keys should be trimmed of leading or trailing whitespace
+ * @param parseOutUnits whether units like "px" should be parsed out of the key name and appended to
+ *   the value
+ * @param allowSubKeys whether key needs to be subsplit by whitespace into multiple keys
+ * @param values values of the map
+ * @param keys keys of the map
+ * @return a normalized string map based on the input string array
+ */
+function bulidMapFromStringArray(errorPrefix, trim, allowSubKeys, keys) {
+    var map = {};
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        ngDevMode && assertValidValue(errorPrefix, key);
+        key = trim ? key.trim() : key;
+        setMapValues(map, key, true, false, allowSubKeys);
     }
     return map;
 }
 function assertValidValue(errorPrefix, value) {
     if (typeof value !== 'string') {
-        throw new Error(errorPrefix + " can only toggle CSS classes expressed as strings, got " + value);
+        throw new Error(errorPrefix + " can only toggle CSS classes expressed as strings, got: " + value);
     }
 }
 function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
@@ -223,50 +283,57 @@ function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
     }
 }
 function setIndividualMapValue(map, key, value, parseOutUnits) {
-    if (parseOutUnits) {
-        var values = normalizeStyleKeyAndValue(key, value);
-        value = values.value;
-        key = values.key;
-    }
-    map[key] = value;
-}
-function normalizeStyleKeyAndValue(key, value) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-        var unit = key.substr(index + 1); // ignore the . ([width.px]="'40'" => "40px")
-        key = key.substring(0, index);
-        if (value != null) { // we should not convert null values to string
+    if (parseOutUnits && typeof value === 'string') {
+        // parse out the unit (e.g. ".px") from the key and append it to the value
+        // e.g. for [width.px]="40" => ["width","40px"]
+        var unitIndex = key.indexOf('.');
+        if (unitIndex > 0) {
+            var unit = key.substr(unitIndex + 1); // skip over the "." in "width.px"
+            key = key.substring(0, unitIndex);
             value += unit;
         }
     }
-    return { key: key, value: value };
+    map[key] = value;
 }
-function mapHasChanged(keys, a, b) {
-    var oldKeys = Object.keys(a);
-    var newKeys = keys;
-    // the keys are different which means the map changed
-    if (!arrayEqualsArray(oldKeys, newKeys)) {
+/**
+ * Compares two maps and returns true if they are equal
+ *
+ * @param inputKeys value of `Object.keys(inputMap)` it's unclear if this actually performs better
+ * @param inputMap map to compare
+ * @param outputMap map to compare
+ */
+function mapsAreEqual(inputKeys, inputMap, outputMap) {
+    var outputKeys = Object.keys(outputMap);
+    if (inputKeys.length !== outputKeys.length) {
         return true;
     }
-    for (var i = 0; i < newKeys.length; i++) {
-        var key = newKeys[i];
-        if (a[key] !== b[key]) {
+    for (var i = 0, n = inputKeys.length; i <= n; i++) {
+        var key = inputKeys[i];
+        if (key !== outputKeys[i] || inputMap[key] !== outputMap[key]) {
             return true;
         }
     }
     return false;
 }
-function arrayEqualsArray(a, b) {
-    if (a && b) {
-        if (a.length !== b.length)
-            return false;
-        for (var i = 0; i < a.length; i++) {
-            if (b.indexOf(a[i]) === -1)
-                return false;
-        }
-        return true;
+/**
+ * Compares two Object.keys() arrays and returns true if they are equal.
+ *
+ * @param keyArray1 Object.keys() array to compare
+ * @param keyArray1 Object.keys() array to compare
+ */
+function keyArraysAreEqual(keyArray1, keyArray2) {
+    if (!Array.isArray(keyArray1) || !Array.isArray(keyArray2)) {
+        return false;
     }
-    return false;
+    if (keyArray1.length !== keyArray2.length) {
+        return false;
+    }
+    for (var i = 0; i < keyArray1.length; i++) {
+        if (keyArray1[i] !== keyArray2[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -283,13 +350,16 @@ var NgClassImpl = /** @class */ (function () {
     }
     return NgClassImpl;
 }());
-var NgClassR2Impl = /** @class */ (function () {
+var NgClassR2Impl = /** @class */ (function (_super) {
+    __extends(NgClassR2Impl, _super);
     function NgClassR2Impl(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-        this._iterableDiffers = _iterableDiffers;
-        this._keyValueDiffers = _keyValueDiffers;
-        this._ngEl = _ngEl;
-        this._renderer = _renderer;
-        this._initialClasses = [];
+        var _this = _super.call(this) || this;
+        _this._iterableDiffers = _iterableDiffers;
+        _this._keyValueDiffers = _keyValueDiffers;
+        _this._ngEl = _ngEl;
+        _this._renderer = _renderer;
+        _this._initialClasses = [];
+        return _this;
     }
     NgClassR2Impl.prototype.getValue = function () { return null; };
     NgClassR2Impl.prototype.setClass = function (value) {
@@ -344,7 +414,7 @@ var NgClassR2Impl = /** @class */ (function () {
                 _this._toggleClass(record.item, true);
             }
             else {
-                throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + ɵstringify(record.item));
+                throw new Error("NgClass can only toggle CSS classes expressed as strings, got: " + ɵstringify(record.item));
             }
         });
         changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
@@ -400,17 +470,20 @@ var NgClassR2Impl = /** @class */ (function () {
     NgClassR2Impl.ɵfac = function NgClassR2Impl_Factory(t) { return new (t || NgClassR2Impl)(ɵɵinject(IterableDiffers), ɵɵinject(KeyValueDiffers), ɵɵinject(ElementRef), ɵɵinject(Renderer2)); };
     NgClassR2Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR2Impl, factory: NgClassR2Impl.ɵfac });
     return NgClassR2Impl;
-}());
+}(NgClassImpl));
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR2Impl, [{
         type: Injectable
     }], function () { return [{ type: IterableDiffers }, { type: KeyValueDiffers }, { type: ElementRef }, { type: Renderer2 }]; }, null); })();
-var NgClassR3Impl = /** @class */ (function () {
+var NgClassR3Impl = /** @class */ (function (_super) {
+    __extends(NgClassR3Impl, _super);
     function NgClassR3Impl() {
-        this._value = null;
-        this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._value = null;
+        _this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
             2 /* AllowSubKeys */ |
             4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer = null;
+        _this._classStringDiffer = null;
+        return _this;
     }
     NgClassR3Impl.prototype.getValue = function () { return this._value; };
     NgClassR3Impl.prototype.setClass = function (value) {
@@ -420,29 +493,27 @@ var NgClassR3Impl = /** @class */ (function () {
             return;
         this._classStringDiffer = this._classStringDiffer ||
             new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer.setValue(value);
+        this._classStringDiffer.setInput(value);
     };
     NgClassR3Impl.prototype.setNgClass = function (value) {
-        this._ngClassDiffer.setValue(value);
+        this._ngClassDiffer.setInput(value);
     };
     NgClassR3Impl.prototype.applyChanges = function () {
-        var classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
-        var ngClassChanged = this._ngClassDiffer.hasValueChanged();
+        var classChanged = this._classStringDiffer ? this._classStringDiffer.updateValue() : false;
+        var ngClassChanged = this._ngClassDiffer.updateValue();
         if (classChanged || ngClassChanged) {
-            var value = this._ngClassDiffer.value;
-            if (this._classStringDiffer) {
-                var classValue = this._classStringDiffer.value;
-                if (classValue) {
-                    value = value ? __assign(__assign({}, classValue), value) : classValue;
-                }
-            }
-            this._value = value;
+            var ngClassValue = this._ngClassDiffer.value;
+            var classValue = this._classStringDiffer ? this._classStringDiffer.value : null;
+            // merge classValue and ngClassValue and set value
+            this._value = (classValue && ngClassValue) ? __assign(__assign({}, classValue), ngClassValue) :
+                classValue || ngClassValue;
         }
     };
-    NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return new (t || NgClassR3Impl)(); };
+    NgClassR3Impl.ɵfac = function NgClassR3Impl_Factory(t) { return ɵNgClassR3Impl_BaseFactory(t || NgClassR3Impl); };
     NgClassR3Impl.ɵprov = ɵɵdefineInjectable({ token: NgClassR3Impl, factory: NgClassR3Impl.ɵfac });
     return NgClassR3Impl;
-}());
+}(NgClassImpl));
+var ɵNgClassR3Impl_BaseFactory = ɵɵgetInheritedFactory(NgClassR3Impl);
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgClassR3Impl, [{
         type: Injectable
     }], null, null); })();
@@ -649,9 +720,9 @@ var NgStyleR3Impl = /** @class */ (function () {
         this._value = null;
     }
     NgStyleR3Impl.prototype.getValue = function () { return this._value; };
-    NgStyleR3Impl.prototype.setNgStyle = function (value) { this._differ.setValue(value); };
+    NgStyleR3Impl.prototype.setNgStyle = function (value) { this._differ.setInput(value); };
     NgStyleR3Impl.prototype.applyChanges = function () {
-        if (this._differ.hasValueChanged()) {
+        if (this._differ.updateValue()) {
             this._value = this._differ.value;
         }
     };

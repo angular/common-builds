@@ -12,7 +12,7 @@
  * of how [style] and [class] behave in Angular.
  *
  * The differences are:
- *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
+ *  - ngStyle and ngClass both **deep-watch** their binding values for changes each time CD runs
  *    while [style] and [class] bindings do not (they check for identity changes)
  *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
  *  - ngClass supports arrays of class values and [class] only accepts map and string values
@@ -23,8 +23,9 @@
  * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
  * into something that the core-level [style] and [class] bindings understand.
  *
- * This [StylingDiffer] class handles this conversion by creating a new input value each time
- * the inner representation of the binding value have changed.
+ * This [StylingDiffer] class handles this conversion by creating a new output value each time
+ * the input value of the binding value has changed (either via identity change or deep collection
+ * content change).
  *
  * ## Why do we care about ngStyle/ngClass?
  * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
@@ -39,8 +40,8 @@
  * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
  *   styles and classes would fall out of sync and be applied and updated at
  *   inconsistent times
- * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
- *   (they will write over them given the right combination of events)
+ * - Both ngClass/ngStyle should respect [class.name] and [style.prop] bindings (and not arbitrarily
+ *   overwrite their changes)
  *
  *   ```
  *   <!-- if `w1` is updated then it will always override `w2`
@@ -56,27 +57,40 @@
  * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
  *   expensive data structures which were evaluated each time CD runs
  */
-export declare class StylingDiffer<T> {
+export declare class StylingDiffer<T extends ({
+    [key: string]: string | null;
+} | {
+    [key: string]: true;
+})> {
     private _name;
     private _options;
+    /**
+     * Normalized string map representing the last value set via `setValue()` or null if no value has
+     * been set or the last set value was null
+     */
     readonly value: T | null;
-    private _lastSetValue;
-    private _lastSetValueType;
-    private _lastSetValueIdentityChange;
+    /**
+     * The last set value that was applied via `setValue()`
+     */
+    private _inputValue;
+    /**
+     * The type of value that the `_lastSetValue` variable is
+     */
+    private _inputValueType;
+    /**
+     * Whether or not the last value change occurred because the variable itself changed reference
+     * (identity)
+     */
+    private _inputValueIdentityChangeSinceLastCheck;
     constructor(_name: string, _options: StylingDifferOptions);
     /**
-     * Sets (updates) the styling value within the differ.
+     * Sets the input value for the differ and updates the output value if necessary.
      *
-     * Only when `hasValueChanged` is called then this new value will be evaluted
-     * and checked against the previous value.
-     *
-     * @param value the new styling value provided from the ngClass/ngStyle binding
+     * @param value the new styling input value provided from the ngClass/ngStyle binding
      */
-    setValue(value: {
-        [key: string]: any;
-    } | string[] | string | null): void;
+    setInput(value: T | string[] | string | Set<string> | null): void;
     /**
-     * Determines whether or not the value has changed.
+     * Checks the input value for identity or deep changes and updates output value if necessary.
      *
      * This function can be called right after `setValue()` is called, but it can also be
      * called incase the existing value (if it's a collection) changes internally. If the
@@ -85,10 +99,18 @@ export declare class StylingDiffer<T> {
      *
      * @returns whether or not the value has changed in some way.
      */
-    hasValueChanged(): boolean;
+    updateValue(): boolean;
+    /**
+     * Examines the last set value to see if there was a change in content.
+     *
+     * @param inputValueIdentityChanged whether or not the last set value changed in identity or not
+     * @returns `true` when the value has changed (either by identity or by shape if its a
+     * collection)
+     */
+    private _processValueChange;
 }
 /**
- * Various options that are consumed by the [StylingDiffer] class.
+ * Various options that are consumed by the [StylingDiffer] class
  */
 export declare const enum StylingDifferOptions {
     None = 0,
