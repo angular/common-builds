@@ -2526,7 +2526,7 @@ export declare enum WeekDay {
     Saturday = 6
 }
 
-export declare class ɵangular_packages_common_common_a implements ɵNgClassImpl {
+export declare class ɵangular_packages_common_common_a extends ɵNgClassImpl {
     private _value;
     private _ngClassDiffer;
     private _classStringDiffer;
@@ -2682,7 +2682,7 @@ export declare const ɵNgClassImplProvider__POST_R3__: {
     useClass: typeof ɵangular_packages_common_common_a;
 };
 
-export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
+export declare class ɵNgClassR2Impl extends ɵNgClassImpl {
     private _iterableDiffers;
     private _keyValueDiffers;
     private _ngEl;
@@ -2694,7 +2694,9 @@ export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     getValue(): null;
     setClass(value: string): void;
-    setNgClass(value: string): void;
+    setNgClass(value: string | string[] | Set<string> | {
+        [klass: string]: any;
+    }): void;
     applyChanges(): void;
     private _applyKeyValueChanges;
     private _applyIterableChanges;
