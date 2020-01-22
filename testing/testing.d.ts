@@ -1,6 +1,6 @@
 /**
- * @license Angular v9.0.0-rc.1+636.sha-142363a
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v0.0.0
+ * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -53,18 +53,18 @@ export declare class MockPlatformLocation implements PlatformLocation {
     private hashUpdate;
     private urlChanges;
     constructor(config?: MockPlatformLocationConfig);
-    readonly hostname: string;
-    readonly protocol: string;
-    readonly port: string;
-    readonly pathname: string;
-    readonly search: string;
-    readonly hash: string;
-    readonly state: unknown;
+    get hostname(): string;
+    get protocol(): string;
+    get port(): string;
+    get pathname(): string;
+    get search(): string;
+    get hash(): string;
+    get state(): unknown;
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
-    readonly href: string;
-    readonly url: string;
+    get href(): string;
+    get url(): string;
     private parseChanges;
     replaceState(state: any, title: string, newUrl: string): void;
     pushState(state: any, title: string, newUrl: string): void;

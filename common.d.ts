@@ -1,6 +1,6 @@
 /**
- * @license Angular v9.0.0-rc.1+636.sha-142363a
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v0.0.0
+ * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -123,6 +123,26 @@ export declare class CommonModule {
  * that determine group sizing and separator, decimal-point character,
  * and other locale-specific configurations.
  *
+ * {@a currency-code-deprecation}
+ * <div class="alert is-helpful">
+ *
+ * **Deprecation notice:**
+ *
+ * The default currency code is currently always `USD` but this is deprecated from v9.
+ *
+ * **In v11 the default currency code will be taken from the current locale identified by
+ * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * more information.**
+ *
+ * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+ * your application `NgModule`:
+ *
+ * ```ts
+ * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+ * ```
+ *
+ * </div>
+ *
  * @see `getCurrencySymbol()`
  * @see `formatCurrency()`
  *
@@ -137,12 +157,14 @@ export declare class CommonModule {
  */
 export declare class CurrencyPipe implements PipeTransform {
     private _locale;
-    constructor(_locale: string);
+    private _defaultCurrencyCode;
+    constructor(_locale: string, _defaultCurrencyCode?: string);
     /**
      *
      * @param value The number to be formatted as currency.
      * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-     * such as `USD` for the US dollar and `EUR` for the euro.
+     * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
+     * configured using the `DEFAULT_CURRENCY_CODE` injection token.
      * @param display The format for the currency indicator. One of the following:
      *   - `code`: Show the code (such as `USD`).
      *   - `symbol`(default): Show the symbol (such as `$`).
@@ -1256,10 +1278,10 @@ export declare class LowerCasePipe implements PipeTransform {
  */
 export declare class NgClass extends NgClassBase implements DoCheck {
     constructor(delegate: ɵNgClassImpl);
-    klass: string;
-    ngClass: string | string[] | Set<string> | {
+    set klass(value: string);
+    set ngClass(value: string | string[] | Set<string> | {
         [klass: string]: any;
-    };
+    });
     ngDoCheck(): void;
 }
 
@@ -1460,7 +1482,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    ngForOf: (U & NgIterable<T>) | undefined | null;
+    set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
     /**
      * A function that defines how to track changes for items in the iterable.
      *
@@ -1478,7 +1500,8 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * The function receives two inputs,
      * the iteration index and the node object ID.
      */
-    ngForTrackBy: TrackByFunction<T>;
+    set ngForTrackBy(fn: TrackByFunction<T>);
+    get ngForTrackBy(): TrackByFunction<T>;
     private _ngForOf;
     private _ngForOfDirty;
     private _differ;
@@ -1488,7 +1511,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
      */
-    ngForTemplate: TemplateRef<NgForOfContext<T, U>>;
+    set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
      * Applies the changes when needed.
      */
@@ -1513,10 +1536,10 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
     index: number;
     count: number;
     constructor($implicit: T, ngForOf: U, index: number, count: number);
-    readonly first: boolean;
-    readonly last: boolean;
-    readonly even: boolean;
-    readonly odd: boolean;
+    get first(): boolean;
+    get last(): boolean;
+    get even(): boolean;
+    get odd(): boolean;
 }
 
 /**
@@ -1669,15 +1692,15 @@ export declare class NgIf<T = unknown> {
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
      */
-    ngIf: T;
+    set ngIf(condition: T);
     /**
      * A template to show if the condition expression evaluates to true.
      */
-    ngIfThen: TemplateRef<NgIfContext<T>> | null;
+    set ngIfThen(templateRef: TemplateRef<NgIfContext<T>> | null);
     /**
      * A template to show if the condition expression evaluates to false.
      */
-    ngIfElse: TemplateRef<NgIfContext<T>> | null;
+    set ngIfElse(templateRef: TemplateRef<NgIfContext<T>> | null);
     private _updateView;
     /**
      * Assert the correct type of the expression bound to the `ngIf` input within the template.
@@ -1761,7 +1784,7 @@ export declare class NgPlural {
     private _activeView;
     private _caseViews;
     constructor(_localization: NgLocalization);
-    ngPlural: number;
+    set ngPlural(value: number);
     addCase(value: string, switchView: SwitchView): void;
     private _updateView;
     private _clearViews;
@@ -1831,9 +1854,9 @@ export declare class NgPluralCase {
  */
 export declare class NgStyle extends NgStyleBase implements DoCheck {
     constructor(delegate: ɵNgStyleImpl);
-    ngStyle: {
+    set ngStyle(value: {
         [klass: string]: any;
-    } | null;
+    } | null);
     ngDoCheck(): void;
 }
 
@@ -1936,7 +1959,7 @@ export declare class NgSwitch {
     private _lastCaseCheckIndex;
     private _lastCasesMatched;
     private _ngSwitch;
-    ngSwitch: any;
+    set ngSwitch(newValue: any);
     private _updateDefaultCases;
 }
 
@@ -2269,13 +2292,13 @@ export declare abstract class PlatformLocation {
     abstract getState(): unknown;
     abstract onPopState(fn: LocationChangeListener): void;
     abstract onHashChange(fn: LocationChangeListener): void;
-    abstract readonly href: string;
-    abstract readonly protocol: string;
-    abstract readonly hostname: string;
-    abstract readonly port: string;
-    abstract readonly pathname: string;
-    abstract readonly search: string;
-    abstract readonly hash: string;
+    abstract get href(): string;
+    abstract get protocol(): string;
+    abstract get hostname(): string;
+    abstract get port(): string;
+    abstract get pathname(): string;
+    abstract get search(): string;
+    abstract get hash(): string;
     abstract replaceState(state: any, title: string, url: string): void;
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
@@ -2512,7 +2535,7 @@ export declare enum WeekDay {
     Saturday = 6
 }
 
-export declare class ɵangular_packages_common_common_a implements ɵNgClassImpl {
+export declare class ɵangular_packages_common_common_a extends ɵNgClassImpl {
     private _value;
     private _ngClassDiffer;
     private _classStringDiffer;
@@ -2590,13 +2613,14 @@ export declare class ɵBrowserPlatformLocation extends PlatformLocation {
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): void;
     onHashChange(fn: LocationChangeListener): void;
-    readonly href: string;
-    readonly protocol: string;
-    readonly hostname: string;
-    readonly port: string;
-    pathname: string;
-    readonly search: string;
-    readonly hash: string;
+    get href(): string;
+    get protocol(): string;
+    get hostname(): string;
+    get port(): string;
+    get pathname(): string;
+    get search(): string;
+    get hash(): string;
+    set pathname(newPath: string);
     pushState(state: any, title: string, url: string): void;
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
@@ -2667,7 +2691,7 @@ export declare const ɵNgClassImplProvider__POST_R3__: {
     useClass: typeof ɵangular_packages_common_common_a;
 };
 
-export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
+export declare class ɵNgClassR2Impl extends ɵNgClassImpl {
     private _iterableDiffers;
     private _keyValueDiffers;
     private _ngEl;
@@ -2679,7 +2703,9 @@ export declare class ɵNgClassR2Impl implements ɵNgClassImpl {
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     getValue(): null;
     setClass(value: string): void;
-    setNgClass(value: string): void;
+    setNgClass(value: string | string[] | Set<string> | {
+        [klass: string]: any;
+    }): void;
     applyChanges(): void;
     private _applyKeyValueChanges;
     private _applyIterableChanges;
