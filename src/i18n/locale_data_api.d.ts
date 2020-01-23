@@ -385,6 +385,17 @@ export declare function getLocaleCurrencySymbol(locale: string): string | null;
  */
 export declare function getLocaleCurrencyName(locale: string): string | null;
 /**
+ * Retrieves the default currency code for the given locale.
+ *
+ * The default is defined as the first currency which is still in use.
+ *
+ * @param locale The code of the locale whose currency code we want.
+ * @returns The code of the default currency for the given locale.
+ *
+ * @publicApi
+ */
+export declare function getLocaleCurrencyCode(locale: string): string | null;
+/**
  * @alias core/ɵgetLocalePluralCase
  * @publicApi
  */
