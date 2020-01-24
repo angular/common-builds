@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+745.sha-ad68b61
+ * @license Angular v9.0.0-rc.1+804.sha-0eaf874
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -208,580 +208,6 @@
     }
 
     /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    /**
-     * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
-     *
-     * ngStyle and ngClass both accept various forms of input and behave differently than that
-     * of how [style] and [class] behave in Angular.
-     *
-     * The differences are:
-     *  - ngStyle and ngClass both **deep-watch** their binding values for changes each time CD runs
-     *    while [style] and [class] bindings do not (they check for identity changes)
-     *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
-     *  - ngClass supports arrays of class values and [class] only accepts map and string values
-     *  - ngClass allows for multiple className keys (space-separated) within an array or map
-     *     (as the * key) while [class] only accepts a simple key/value map object
-     *
-     * Having Angular understand and adapt to all the different forms of behavior is complicated
-     * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
-     * into something that the core-level [style] and [class] bindings understand.
-     *
-     * This [StylingDiffer] class handles this conversion by creating a new output value each time
-     * the input value of the binding value has changed (either via identity change or deep collection
-     * content change).
-     *
-     * ## Why do we care about ngStyle/ngClass?
-     * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
-     * respect and understand the styling values emitted through ngStyle and ngClass (when they
-     * are present and used in a template).
-     *
-     * Instead of having these directives manage styling on their own, they should be included
-     * into the Angular styling algorithm that exists for [style] and [class] bindings.
-     *
-     * Here's why:
-     *
-     * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
-     *   styles and classes would fall out of sync and be applied and updated at
-     *   inconsistent times
-     * - Both ngClass/ngStyle should respect [class.name] and [style.prop] bindings (and not arbitrarily
-     *   overwrite their changes)
-     *
-     *   ```
-     *   <!-- if `w1` is updated then it will always override `w2`
-     *        if `w2` is updated then it will always override `w1`
-     *        if both are updated at the same time then `w1` wins -->
-     *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
-     *
-     *   <!-- if `w1` is updated then it will always lose to `w2`
-     *        if `w2` is updated then it will always override `w1`
-     *        if both are updated at the same time then `w2` wins -->
-     *   <div [style]="{width:w1}" [style.width]="w2">...</div>
-     *   ```
-     * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
-     *   expensive data structures which were evaluated each time CD runs
-     */
-    var StylingDiffer = /** @class */ (function () {
-        function StylingDiffer(_name, _options) {
-            this._name = _name;
-            this._options = _options;
-            /**
-             * Normalized string map representing the last value set via `setValue()` or null if no value has
-             * been set or the last set value was null
-             */
-            this.value = null;
-            /**
-             * The last set value that was applied via `setValue()`
-             */
-            this._inputValue = null;
-            /**
-             * The type of value that the `_lastSetValue` variable is
-             */
-            this._inputValueType = 0 /* Null */;
-            /**
-             * Whether or not the last value change occurred because the variable itself changed reference
-             * (identity)
-             */
-            this._inputValueIdentityChangeSinceLastCheck = false;
-        }
-        /**
-         * Sets the input value for the differ and updates the output value if necessary.
-         *
-         * @param value the new styling input value provided from the ngClass/ngStyle binding
-         */
-        StylingDiffer.prototype.setInput = function (value) {
-            if (value !== this._inputValue) {
-                var type = void 0;
-                if (!value) { // matches empty strings, null, false and undefined
-                    type = 0 /* Null */;
-                    value = null;
-                }
-                else if (Array.isArray(value)) {
-                    type = 4 /* Array */;
-                }
-                else if (value instanceof Set) {
-                    type = 8 /* Set */;
-                }
-                else if (typeof value === 'string') {
-                    if (!(this._options & 4 /* AllowStringValue */)) {
-                        throw new Error(this._name + ' string values are not allowed');
-                    }
-                    type = 1 /* String */;
-                }
-                else {
-                    type = 2 /* StringMap */;
-                }
-                this._inputValue = value;
-                this._inputValueType = type;
-                this._inputValueIdentityChangeSinceLastCheck = true;
-                this._processValueChange(true);
-            }
-        };
-        /**
-         * Checks the input value for identity or deep changes and updates output value if necessary.
-         *
-         * This function can be called right after `setValue()` is called, but it can also be
-         * called incase the existing value (if it's a collection) changes internally. If the
-         * value is indeed a collection it will do the necessary diffing work and produce a
-         * new object value as assign that to `value`.
-         *
-         * @returns whether or not the value has changed in some way.
-         */
-        StylingDiffer.prototype.updateValue = function () {
-            var valueHasChanged = this._inputValueIdentityChangeSinceLastCheck;
-            if (!this._inputValueIdentityChangeSinceLastCheck &&
-                (this._inputValueType & 14 /* Collection */)) {
-                valueHasChanged = this._processValueChange(false);
-            }
-            else {
-                // this is set to false in the event that the value is a collection.
-                // This way (if the identity hasn't changed), then the algorithm can
-                // diff the collection value to see if the contents have mutated
-                // (otherwise the value change was processed during the time when
-                // the variable changed).
-                this._inputValueIdentityChangeSinceLastCheck = false;
-            }
-            return valueHasChanged;
-        };
-        /**
-         * Examines the last set value to see if there was a change in content.
-         *
-         * @param inputValueIdentityChanged whether or not the last set value changed in identity or not
-         * @returns `true` when the value has changed (either by identity or by shape if its a
-         * collection)
-         */
-        StylingDiffer.prototype._processValueChange = function (inputValueIdentityChanged) {
-            // if the inputValueIdentityChanged then we know that input has changed
-            var inputChanged = inputValueIdentityChanged;
-            var newOutputValue = null;
-            var trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
-            var parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
-            var allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
-            switch (this._inputValueType) {
-                // case 1: [input]="string"
-                case 1 /* String */: {
-                    if (inputValueIdentityChanged) {
-                        // process string input only if the identity has changed since the strings are immutable
-                        var keys = this._inputValue.split(/\s+/g);
-                        if (this._options & 16 /* ForceAsMap */) {
-                            newOutputValue = {};
-                            for (var i = 0; i < keys.length; i++) {
-                                newOutputValue[keys[i]] = true;
-                            }
-                        }
-                        else {
-                            newOutputValue = keys.join(' ');
-                        }
-                    }
-                    break;
-                }
-                // case 2: [input]="{key:value}"
-                case 2 /* StringMap */: {
-                    var inputMap = this._inputValue;
-                    var inputKeys = Object.keys(inputMap);
-                    if (!inputValueIdentityChanged) {
-                        // if StringMap and the identity has not changed then output value must have already been
-                        // initialized to a StringMap, so we can safely compare the input and output maps
-                        inputChanged = mapsAreEqual(inputKeys, inputMap, this.value);
-                    }
-                    if (inputChanged) {
-                        newOutputValue = bulidMapFromStringMap(trimValues, parseOutUnits, allowSubKeys, inputMap, inputKeys);
-                    }
-                    break;
-                }
-                // case 3a: [input]="[str1, str2, ...]"
-                // case 3b: [input]="Set"
-                case 4 /* Array */:
-                case 8 /* Set */: {
-                    var inputKeys = Array.from(this._inputValue);
-                    if (!inputValueIdentityChanged) {
-                        var outputKeys = Object.keys(this.value);
-                        inputChanged = !keyArraysAreEqual(outputKeys, inputKeys);
-                    }
-                    if (inputChanged) {
-                        newOutputValue =
-                            bulidMapFromStringArray(this._name, trimValues, allowSubKeys, inputKeys);
-                    }
-                    break;
-                }
-                // case 4: [input]="null|undefined"
-                default:
-                    inputChanged = inputValueIdentityChanged;
-                    newOutputValue = null;
-                    break;
-            }
-            if (inputChanged) {
-                // update the readonly `value` property by casting it to `any` first
-                this.value = newOutputValue;
-            }
-            return inputChanged;
-        };
-        return StylingDiffer;
-    }());
-    /**
-     * @param trim whether the keys should be trimmed of leading or trailing whitespace
-     * @param parseOutUnits whether units like "px" should be parsed out of the key name and appended to
-     *   the value
-     * @param allowSubKeys whether key needs to be subsplit by whitespace into multiple keys
-     * @param values values of the map
-     * @param keys keys of the map
-     * @return a normalized string map based on the input string map
-     */
-    function bulidMapFromStringMap(trim, parseOutUnits, allowSubKeys, values, keys) {
-        var map = {};
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            var value = values[key];
-            if (value !== undefined) {
-                if (typeof value !== 'boolean') {
-                    value = '' + value;
-                }
-                // Map uses untrimmed keys, so don't trim until passing to `setMapValues`
-                setMapValues(map, trim ? key.trim() : key, value, parseOutUnits, allowSubKeys);
-            }
-        }
-        return map;
-    }
-    /**
-     * @param trim whether the keys should be trimmed of leading or trailing whitespace
-     * @param parseOutUnits whether units like "px" should be parsed out of the key name and appended to
-     *   the value
-     * @param allowSubKeys whether key needs to be subsplit by whitespace into multiple keys
-     * @param values values of the map
-     * @param keys keys of the map
-     * @return a normalized string map based on the input string array
-     */
-    function bulidMapFromStringArray(errorPrefix, trim, allowSubKeys, keys) {
-        var map = {};
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            ngDevMode && assertValidValue(errorPrefix, key);
-            key = trim ? key.trim() : key;
-            setMapValues(map, key, true, false, allowSubKeys);
-        }
-        return map;
-    }
-    function assertValidValue(errorPrefix, value) {
-        if (typeof value !== 'string') {
-            throw new Error(errorPrefix + " can only toggle CSS classes expressed as strings, got: " + value);
-        }
-    }
-    function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
-        if (allowSubKeys && key.indexOf(' ') > 0) {
-            var innerKeys = key.split(/\s+/g);
-            for (var j = 0; j < innerKeys.length; j++) {
-                setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
-            }
-        }
-        else {
-            setIndividualMapValue(map, key, value, parseOutUnits);
-        }
-    }
-    function setIndividualMapValue(map, key, value, parseOutUnits) {
-        if (parseOutUnits && typeof value === 'string') {
-            // parse out the unit (e.g. ".px") from the key and append it to the value
-            // e.g. for [width.px]="40" => ["width","40px"]
-            var unitIndex = key.indexOf('.');
-            if (unitIndex > 0) {
-                var unit = key.substr(unitIndex + 1); // skip over the "." in "width.px"
-                key = key.substring(0, unitIndex);
-                value += unit;
-            }
-        }
-        map[key] = value;
-    }
-    /**
-     * Compares two maps and returns true if they are equal
-     *
-     * @param inputKeys value of `Object.keys(inputMap)` it's unclear if this actually performs better
-     * @param inputMap map to compare
-     * @param outputMap map to compare
-     */
-    function mapsAreEqual(inputKeys, inputMap, outputMap) {
-        var outputKeys = Object.keys(outputMap);
-        if (inputKeys.length !== outputKeys.length) {
-            return true;
-        }
-        for (var i = 0, n = inputKeys.length; i <= n; i++) {
-            var key = inputKeys[i];
-            if (key !== outputKeys[i] || inputMap[key] !== outputMap[key]) {
-                return true;
-            }
-        }
-        return false;
-    }
-    /**
-     * Compares two Object.keys() arrays and returns true if they are equal.
-     *
-     * @param keyArray1 Object.keys() array to compare
-     * @param keyArray1 Object.keys() array to compare
-     */
-    function keyArraysAreEqual(keyArray1, keyArray2) {
-        if (!Array.isArray(keyArray1) || !Array.isArray(keyArray2)) {
-            return false;
-        }
-        if (keyArray1.length !== keyArray2.length) {
-            return false;
-        }
-        for (var i = 0; i < keyArray1.length; i++) {
-            if (keyArray1[i] !== keyArray2[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Used as a token for an injected service within the NgClass directive.
-     *
-     * NgClass behaves differenly whether or not VE is being used or not. If
-     * present then the legacy ngClass diffing algorithm will be used as an
-     * injected service. Otherwise the new diffing algorithm (which delegates
-     * to the `[class]` binding) will be used. This toggle behavior is done so
-     * via the ivy_switch mechanism.
-     */
-    var NgClassImpl = /** @class */ (function () {
-        function NgClassImpl() {
-        }
-        return NgClassImpl;
-    }());
-    var NgClassR2Impl = /** @class */ (function (_super) {
-        __extends(NgClassR2Impl, _super);
-        function NgClassR2Impl(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-            var _this = _super.call(this) || this;
-            _this._iterableDiffers = _iterableDiffers;
-            _this._keyValueDiffers = _keyValueDiffers;
-            _this._ngEl = _ngEl;
-            _this._renderer = _renderer;
-            _this._initialClasses = [];
-            return _this;
-        }
-        NgClassR2Impl.prototype.getValue = function () { return null; };
-        NgClassR2Impl.prototype.setClass = function (value) {
-            this._removeClasses(this._initialClasses);
-            this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-            this._applyClasses(this._initialClasses);
-            this._applyClasses(this._rawClass);
-        };
-        NgClassR2Impl.prototype.setNgClass = function (value) {
-            this._removeClasses(this._rawClass);
-            this._applyClasses(this._initialClasses);
-            this._iterableDiffer = null;
-            this._keyValueDiffer = null;
-            this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-            if (this._rawClass) {
-                if (i0.ɵisListLikeIterable(this._rawClass)) {
-                    this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-                }
-                else {
-                    this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-                }
-            }
-        };
-        NgClassR2Impl.prototype.applyChanges = function () {
-            if (this._iterableDiffer) {
-                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
-                }
-            }
-            else if (this._keyValueDiffer) {
-                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
-                }
-            }
-        };
-        NgClassR2Impl.prototype._applyKeyValueChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachRemovedItem(function (record) {
-                if (record.previousValue) {
-                    _this._toggleClass(record.key, false);
-                }
-            });
-        };
-        NgClassR2Impl.prototype._applyIterableChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) {
-                if (typeof record.item === 'string') {
-                    _this._toggleClass(record.item, true);
-                }
-                else {
-                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got: " + i0.ɵstringify(record.item));
-                }
-            });
-            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
-        };
-        /**
-         * Applies a collection of CSS classes to the DOM element.
-         *
-         * For argument of type Set and Array CSS class names contained in those collections are always
-         * added.
-         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-         * for truthy and removed for falsy).
-         */
-        NgClassR2Impl.prototype._applyClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
-                }
-            }
-        };
-        /**
-         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-         * purposes.
-         */
-        NgClassR2Impl.prototype._removeClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-            }
-        };
-        NgClassR2Impl.prototype._toggleClass = function (klass, enabled) {
-            var _this = this;
-            klass = klass.trim();
-            if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) {
-                    if (enabled) {
-                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
-                    }
-                    else {
-                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
-                    }
-                });
-            }
-        };
-        NgClassR2Impl = __decorate([
-            i0.Injectable(),
-            __metadata("design:paramtypes", [i0.IterableDiffers, i0.KeyValueDiffers,
-                i0.ElementRef, i0.Renderer2])
-        ], NgClassR2Impl);
-        return NgClassR2Impl;
-    }(NgClassImpl));
-    var NgClassR3Impl = /** @class */ (function (_super) {
-        __extends(NgClassR3Impl, _super);
-        function NgClassR3Impl() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this._value = null;
-            _this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
-                2 /* AllowSubKeys */ |
-                4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-            _this._classStringDiffer = null;
-            return _this;
-        }
-        NgClassR3Impl.prototype.getValue = function () { return this._value; };
-        NgClassR3Impl.prototype.setClass = function (value) {
-            // early exit incase the binding gets emitted as an empty value which
-            // means there is no reason to instantiate and diff the values...
-            if (!value && !this._classStringDiffer)
-                return;
-            this._classStringDiffer = this._classStringDiffer ||
-                new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-            this._classStringDiffer.setInput(value);
-        };
-        NgClassR3Impl.prototype.setNgClass = function (value) {
-            this._ngClassDiffer.setInput(value);
-        };
-        NgClassR3Impl.prototype.applyChanges = function () {
-            var classChanged = this._classStringDiffer ? this._classStringDiffer.updateValue() : false;
-            var ngClassChanged = this._ngClassDiffer.updateValue();
-            if (classChanged || ngClassChanged) {
-                var ngClassValue = this._ngClassDiffer.value;
-                var classValue = this._classStringDiffer ? this._classStringDiffer.value : null;
-                // merge classValue and ngClassValue and set value
-                this._value = (classValue && ngClassValue) ? __assign(__assign({}, classValue), ngClassValue) :
-                    classValue || ngClassValue;
-            }
-        };
-        NgClassR3Impl = __decorate([
-            i0.Injectable()
-        ], NgClassR3Impl);
-        return NgClassR3Impl;
-    }(NgClassImpl));
-    // the implementation for both NgStyleR2Impl and NgStyleR3Impl are
-    // not ivy_switch'd away, instead they are only hooked up into the
-    // DI via NgStyle's directive's provider property.
-    var NgClassImplProvider__PRE_R3__ = {
-        provide: NgClassImpl,
-        useClass: NgClassR2Impl
-    };
-    var NgClassImplProvider__POST_R3__ = {
-        provide: NgClassImpl,
-        useClass: NgClassR3Impl
-    };
-    var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
-
-    /*
-     * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
-     *
-     * If the VE is present (which is for older versions of Angular) then NgClass will inject
-     * the legacy diffing algorithm as a service and delegate all styling changes to that.
-     *
-     * If the VE is not present then NgStyle will normalize (through the injected service) and
-     * then write all styling changes to the `[style]` binding directly (through a host binding).
-     * Then Angular will notice the host binding change and treat the changes as styling
-     * changes and apply them via the core styling instructions that exist within Angular.
-     */
-    // used when the VE is present
-    var ngClassDirectiveDef__PRE_R3__ = undefined;
-    var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
-        if (rf & 2 /* Update */) {
-            i0.ɵɵclassMap(ctx.getValue());
-        }
-    };
-    // used when the VE is not present (note the directive will
-    // never be instantiated normally because it is apart of a
-    // base class)
-    var ngClassDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
-        type: ɵ0,
-        selectors: null,
-        hostVars: 2,
-        hostBindings: ɵ1
-    });
-    var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
-    var ngClassFactoryDef__PRE_R3__ = undefined;
-    var ngClassFactoryDef__POST_R3__ = function () { };
-    var ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
-    /**
-     * Serves as the base non-VE container for NgClass.
-     *
-     * While this is a base class that NgClass extends from, the
-     * class itself acts as a container for non-VE code to setup
-     * a link to the `[class]` host binding (via the static
-     * `ɵdir` property on the class).
-     *
-     * Note that the `ɵdir` property's code is switched
-     * depending if VE is present or not (this allows for the
-     * binding code to be set only for newer versions of Angular).
-     *
-     * @publicApi
-     */
-    var NgClassBase = /** @class */ (function () {
-        function NgClassBase(_delegate) {
-            this._delegate = _delegate;
-        }
-        NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
-        NgClassBase.ɵdir = ngClassDirectiveDef;
-        NgClassBase.ɵfac = ngClassFactoryDef;
-        return NgClassBase;
-    }());
-    /**
      * @ngModule CommonModule
      *
      * @usageNotes
@@ -809,24 +235,136 @@
      *
      * @publicApi
      */
-    var NgClass = /** @class */ (function (_super) {
-        __extends(NgClass, _super);
-        function NgClass(delegate) {
-            return _super.call(this, delegate) || this;
+    var NgClass = /** @class */ (function () {
+        function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+            this._iterableDiffers = _iterableDiffers;
+            this._keyValueDiffers = _keyValueDiffers;
+            this._ngEl = _ngEl;
+            this._renderer = _renderer;
+            this._iterableDiffer = null;
+            this._keyValueDiffer = null;
+            this._initialClasses = [];
+            this._rawClass = null;
         }
         Object.defineProperty(NgClass.prototype, "klass", {
-            set: function (value) { this._delegate.setClass(value); },
+            set: function (value) {
+                this._removeClasses(this._initialClasses);
+                this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+                this._applyClasses(this._initialClasses);
+                this._applyClasses(this._rawClass);
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgClass.prototype, "ngClass", {
             set: function (value) {
-                this._delegate.setNgClass(value);
+                this._removeClasses(this._rawClass);
+                this._applyClasses(this._initialClasses);
+                this._iterableDiffer = null;
+                this._keyValueDiffer = null;
+                this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+                if (this._rawClass) {
+                    if (i0.ɵisListLikeIterable(this._rawClass)) {
+                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
+                    }
+                    else {
+                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+                    }
+                }
             },
             enumerable: true,
             configurable: true
         });
-        NgClass.prototype.ngDoCheck = function () { this._delegate.applyChanges(); };
+        NgClass.prototype.ngDoCheck = function () {
+            if (this._iterableDiffer) {
+                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
+                if (iterableChanges) {
+                    this._applyIterableChanges(iterableChanges);
+                }
+            }
+            else if (this._keyValueDiffer) {
+                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
+                if (keyValueChanges) {
+                    this._applyKeyValueChanges(keyValueChanges);
+                }
+            }
+        };
+        NgClass.prototype._applyKeyValueChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachRemovedItem(function (record) {
+                if (record.previousValue) {
+                    _this._toggleClass(record.key, false);
+                }
+            });
+        };
+        NgClass.prototype._applyIterableChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) {
+                if (typeof record.item === 'string') {
+                    _this._toggleClass(record.item, true);
+                }
+                else {
+                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + i0.ɵstringify(record.item));
+                }
+            });
+            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
+        };
+        /**
+         * Applies a collection of CSS classes to the DOM element.
+         *
+         * For argument of type Set and Array CSS class names contained in those collections are always
+         * added.
+         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+         * for truthy and removed for falsy).
+         */
+        NgClass.prototype._applyClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
+                }
+            }
+        };
+        /**
+         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+         * purposes.
+         */
+        NgClass.prototype._removeClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+            }
+        };
+        NgClass.prototype._toggleClass = function (klass, enabled) {
+            var _this = this;
+            klass = klass.trim();
+            if (klass) {
+                klass.split(/\s+/g).forEach(function (klass) {
+                    if (enabled) {
+                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
+                    }
+                    else {
+                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
+                    }
+                });
+            }
+        };
+        // TODO(misko): Delete this code after angula/flex-layout stops depending on private APIs
+        // We need to export this to make angular/flex-layout happy
+        // https://github.com/angular/flex-layout/blob/ec7b57eb6adf59ecfdfff1de5ccf1ab2f6652ed3/src/lib/extended/class/class.ts#L9
+        NgClass.prototype.setClass = function (value) { this.klass = value; };
+        NgClass.prototype.setNgClass = function (value) { this.ngClass = value; };
+        NgClass.prototype.applyChanges = function () { this.ngDoCheck(); };
         __decorate([
             i0.Input('class'),
             __metadata("design:type", String),
@@ -838,163 +376,13 @@
             __metadata("design:paramtypes", [Object])
         ], NgClass.prototype, "ngClass", null);
         NgClass = __decorate([
-            i0.Directive({ selector: '[ngClass]', providers: [NgClassImplProvider] }),
-            __metadata("design:paramtypes", [NgClassImpl])
+            i0.Directive({ selector: '[ngClass]' }),
+            __metadata("design:paramtypes", [i0.IterableDiffers, i0.KeyValueDiffers,
+                i0.ElementRef, i0.Renderer2])
         ], NgClass);
         return NgClass;
-    }(NgClassBase));
+    }());
 
-    /**
-     * Used as a token for an injected service within the NgStyle directive.
-     *
-     * NgStyle behaves differenly whether or not VE is being used or not. If
-     * present then the legacy ngClass diffing algorithm will be used as an
-     * injected service. Otherwise the new diffing algorithm (which delegates
-     * to the `[style]` binding) will be used. This toggle behavior is done so
-     * via the ivy_switch mechanism.
-     */
-    var NgStyleImpl = /** @class */ (function () {
-        function NgStyleImpl() {
-        }
-        return NgStyleImpl;
-    }());
-    var NgStyleR2Impl = /** @class */ (function () {
-        function NgStyleR2Impl(_ngEl, _differs, _renderer) {
-            this._ngEl = _ngEl;
-            this._differs = _differs;
-            this._renderer = _renderer;
-        }
-        NgStyleR2Impl.prototype.getValue = function () { return null; };
-        /**
-         * A map of style properties, specified as colon-separated
-         * key-value pairs.
-         * * The key is a style name, with an optional `.<unit>` suffix
-         *    (such as 'top.px', 'font-style.em').
-         * * The value is an expression to be evaluated.
-         */
-        NgStyleR2Impl.prototype.setNgStyle = function (values) {
-            this._ngStyle = values;
-            if (!this._differ && values) {
-                this._differ = this._differs.find(values).create();
-            }
-        };
-        /**
-         * Applies the new styles if needed.
-         */
-        NgStyleR2Impl.prototype.applyChanges = function () {
-            if (this._differ) {
-                var changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        };
-        NgStyleR2Impl.prototype._applyChanges = function (changes) {
-            var _this = this;
-            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
-            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-        };
-        NgStyleR2Impl.prototype._setStyle = function (nameAndUnit, value) {
-            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
-            value = value != null && unit ? "" + value + unit : value;
-            if (value != null) {
-                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
-            }
-            else {
-                this._renderer.removeStyle(this._ngEl.nativeElement, name);
-            }
-        };
-        NgStyleR2Impl = __decorate([
-            i0.Injectable(),
-            __metadata("design:paramtypes", [i0.ElementRef, i0.KeyValueDiffers, i0.Renderer2])
-        ], NgStyleR2Impl);
-        return NgStyleR2Impl;
-    }());
-    var NgStyleR3Impl = /** @class */ (function () {
-        function NgStyleR3Impl() {
-            this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
-            this._value = null;
-        }
-        NgStyleR3Impl.prototype.getValue = function () { return this._value; };
-        NgStyleR3Impl.prototype.setNgStyle = function (value) { this._differ.setInput(value); };
-        NgStyleR3Impl.prototype.applyChanges = function () {
-            if (this._differ.updateValue()) {
-                this._value = this._differ.value;
-            }
-        };
-        NgStyleR3Impl = __decorate([
-            i0.Injectable()
-        ], NgStyleR3Impl);
-        return NgStyleR3Impl;
-    }());
-    // the implementation for both NgClassR2Impl and NgClassR3Impl are
-    // not ivy_switch'd away, instead they are only hooked up into the
-    // DI via NgStyle's directive's provider property.
-    var NgStyleImplProvider__PRE_R3__ = {
-        provide: NgStyleImpl,
-        useClass: NgStyleR2Impl
-    };
-    var NgStyleImplProvider__POST_R3__ = {
-        provide: NgStyleImpl,
-        useClass: NgStyleR3Impl
-    };
-    var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
-
-    /*
-     * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
-     *
-     * If the VE is present (which is for older versions of Angular) then NgStyle will inject
-     * the legacy diffing algorithm as a service and delegate all styling changes to that.
-     *
-     * If the VE is not present then NgStyle will normalize (through the injected service) and
-     * then write all styling changes to the `[style]` binding directly (through a host binding).
-     * Then Angular will notice the host binding change and treat the changes as styling
-     * changes and apply them via the core styling instructions that exist within Angular.
-     */
-    // used when the VE is present
-    var ngStyleDirectiveDef__PRE_R3__ = undefined;
-    var ngStyleFactoryDef__PRE_R3__ = undefined;
-    var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
-        if (rf & 2 /* Update */) {
-            i0.ɵɵstyleMap(ctx.getValue());
-        }
-    };
-    // used when the VE is not present (note the directive will
-    // never be instantiated normally because it is apart of a
-    // base class)
-    var ngStyleDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
-        type: ɵ0$1,
-        selectors: null,
-        hostVars: 2,
-        hostBindings: ɵ1$1
-    });
-    var ngStyleFactoryDef__POST_R3__ = function () { };
-    var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
-    var ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
-    /**
-     * Serves as the base non-VE container for NgStyle.
-     *
-     * While this is a base class that NgStyle extends from, the
-     * class itself acts as a container for non-VE code to setup
-     * a link to the `[style]` host binding (via the static
-     * `ɵdir` property on the class).
-     *
-     * Note that the `ɵdir` property's code is switched
-     * depending if VE is present or not (this allows for the
-     * binding code to be set only for newer versions of Angular).
-     *
-     * @publicApi
-     */
-    var NgStyleBase = /** @class */ (function () {
-        function NgStyleBase(_delegate) {
-            this._delegate = _delegate;
-        }
-        NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
-        NgStyleBase.ɵdir = ngStyleDirectiveDef;
-        NgStyleBase.ɵfac = ngStyleFactoryDef;
-        return NgStyleBase;
-    }());
     /**
      * @ngModule CommonModule
      *
@@ -1031,28 +419,64 @@
      *
      * @publicApi
      */
-    var NgStyle = /** @class */ (function (_super) {
-        __extends(NgStyle, _super);
-        function NgStyle(delegate) {
-            return _super.call(this, delegate) || this;
+    var NgStyle = /** @class */ (function () {
+        function NgStyle(_ngEl, _differs, _renderer) {
+            this._ngEl = _ngEl;
+            this._differs = _differs;
+            this._renderer = _renderer;
+            this._ngStyle = null;
+            this._differ = null;
         }
         Object.defineProperty(NgStyle.prototype, "ngStyle", {
-            set: function (value) { this._delegate.setNgStyle(value); },
+            set: function (values) {
+                this._ngStyle = values;
+                if (!this._differ && values) {
+                    this._differ = this._differs.find(values).create();
+                }
+            },
             enumerable: true,
             configurable: true
         });
-        NgStyle.prototype.ngDoCheck = function () { this._delegate.applyChanges(); };
+        NgStyle.prototype.ngDoCheck = function () {
+            if (this._differ) {
+                var changes = this._differ.diff(this._ngStyle);
+                if (changes) {
+                    this._applyChanges(changes);
+                }
+            }
+        };
+        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
+            value = value != null && unit ? "" + value + unit : value;
+            if (value != null) {
+                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+            }
+            else {
+                this._renderer.removeStyle(this._ngEl.nativeElement, name);
+            }
+        };
+        NgStyle.prototype._applyChanges = function (changes) {
+            var _this = this;
+            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        };
+        // TODO(misko): Delete this code after angula/flex-layout stops depending on private APIs
+        // We need to export this to make angular/flex-layout happy
+        // https://github.com/angular/flex-layout/blob/ec7b57eb6adf59ecfdfff1de5ccf1ab2f6652ed3/src/lib/extended/class/class.ts#L9
+        NgStyle.prototype.setNgStyle = function (value) { this.ngStyle = value; };
+        NgStyle.prototype.applyChanges = function () { this.ngDoCheck(); };
         __decorate([
             i0.Input('ngStyle'),
             __metadata("design:type", Object),
             __metadata("design:paramtypes", [Object])
         ], NgStyle.prototype, "ngStyle", null);
         NgStyle = __decorate([
-            i0.Directive({ selector: '[ngStyle]', providers: [NgStyleImplProvider] }),
-            __metadata("design:paramtypes", [NgStyleImpl])
+            i0.Directive({ selector: '[ngStyle]' }),
+            __metadata("design:paramtypes", [i0.ElementRef, i0.KeyValueDiffers, i0.Renderer2])
         ], NgStyle);
         return NgStyle;
-    }(NgStyleBase));
+    }());
 
     /**
      * @license
@@ -2288,6 +1712,19 @@
     function getLocaleCurrencyName(locale) {
         var data = i0.ɵfindLocaleData(locale);
         return data[i0.ɵLocaleDataIndex.CurrencyName] || null;
+    }
+    /**
+     * Retrieves the default currency code for the given locale.
+     *
+     * The default is defined as the first currency which is still in use.
+     *
+     * @param locale The code of the locale whose currency code we want.
+     * @returns The code of the default currency for the given locale.
+     *
+     * @publicApi
+     */
+    function getLocaleCurrencyCode(locale) {
+        return i0.ɵgetLocaleCurrencyCode(locale);
     }
     /**
      * Retrieves the currency values for a given locale.
@@ -5947,7 +5384,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('0.0.0');
+    var VERSION = new i0.Version('9.0.0-rc.1+804.sha-0eaf874');
 
     /**
      * @license
@@ -6162,7 +5599,6 @@
     exports.LocationStrategy = LocationStrategy;
     exports.LowerCasePipe = LowerCasePipe;
     exports.NgClass = NgClass;
-    exports.NgClassBase = NgClassBase;
     exports.NgComponentOutlet = NgComponentOutlet;
     exports.NgForOf = NgForOf;
     exports.NgForOfContext = NgForOfContext;
@@ -6173,7 +5609,6 @@
     exports.NgPlural = NgPlural;
     exports.NgPluralCase = NgPluralCase;
     exports.NgStyle = NgStyle;
-    exports.NgStyleBase = NgStyleBase;
     exports.NgSwitch = NgSwitch;
     exports.NgSwitchCase = NgSwitchCase;
     exports.NgSwitchDefault = NgSwitchDefault;
@@ -6191,6 +5626,7 @@
     exports.formatNumber = formatNumber;
     exports.formatPercent = formatPercent;
     exports.getCurrencySymbol = getCurrencySymbol;
+    exports.getLocaleCurrencyCode = getLocaleCurrencyCode;
     exports.getLocaleCurrencyName = getLocaleCurrencyName;
     exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
     exports.getLocaleDateFormat = getLocaleDateFormat;
@@ -6217,34 +5653,21 @@
     exports.registerLocaleData = registerLocaleData;
     exports.ɵBrowserPlatformLocation = BrowserPlatformLocation;
     exports.ɵDomAdapter = DomAdapter;
-    exports.ɵNgClassImpl = NgClassImpl;
-    exports.ɵNgClassImplProvider__POST_R3__ = NgClassImplProvider__POST_R3__;
-    exports.ɵNgClassR2Impl = NgClassR2Impl;
-    exports.ɵNgStyleImpl = NgStyleImpl;
-    exports.ɵNgStyleImplProvider__POST_R3__ = NgStyleImplProvider__POST_R3__;
-    exports.ɵNgStyleR2Impl = NgStyleR2Impl;
+    exports.ɵNgClassImpl = NgClass;
+    exports.ɵNgClassR2Impl = NgClass;
+    exports.ɵNgStyleR2Impl = NgStyle;
     exports.ɵNullViewportScroller = NullViewportScroller;
     exports.ɵPLATFORM_BROWSER_ID = PLATFORM_BROWSER_ID;
     exports.ɵPLATFORM_SERVER_ID = PLATFORM_SERVER_ID;
     exports.ɵPLATFORM_WORKER_APP_ID = PLATFORM_WORKER_APP_ID;
     exports.ɵPLATFORM_WORKER_UI_ID = PLATFORM_WORKER_UI_ID;
-    exports.ɵangular_packages_common_common_a = NgClassR3Impl;
-    exports.ɵangular_packages_common_common_b = NgClassImplProvider__PRE_R3__;
-    exports.ɵangular_packages_common_common_c = NgClassImplProvider;
-    exports.ɵangular_packages_common_common_d = NgStyleR3Impl;
-    exports.ɵangular_packages_common_common_e = NgStyleImplProvider__PRE_R3__;
-    exports.ɵangular_packages_common_common_f = NgStyleImplProvider;
-    exports.ɵangular_packages_common_common_g = useBrowserPlatformLocation;
-    exports.ɵangular_packages_common_common_h = createBrowserPlatformLocation;
-    exports.ɵangular_packages_common_common_i = createLocation;
-    exports.ɵangular_packages_common_common_j = provideLocationStrategy;
-    exports.ɵangular_packages_common_common_k = COMMON_DIRECTIVES;
-    exports.ɵangular_packages_common_common_l = COMMON_PIPES;
+    exports.ɵangular_packages_common_common_a = useBrowserPlatformLocation;
+    exports.ɵangular_packages_common_common_b = createBrowserPlatformLocation;
+    exports.ɵangular_packages_common_common_c = createLocation;
+    exports.ɵangular_packages_common_common_d = provideLocationStrategy;
+    exports.ɵangular_packages_common_common_e = COMMON_DIRECTIVES;
+    exports.ɵangular_packages_common_common_f = COMMON_PIPES;
     exports.ɵgetDOM = getDOM;
-    exports.ɵngClassDirectiveDef__POST_R3__ = ngClassDirectiveDef__POST_R3__;
-    exports.ɵngClassFactoryDef__POST_R3__ = ngClassFactoryDef__POST_R3__;
-    exports.ɵngStyleDirectiveDef__POST_R3__ = ngStyleDirectiveDef__POST_R3__;
-    exports.ɵngStyleFactoryDef__POST_R3__ = ngStyleFactoryDef__POST_R3__;
     exports.ɵparseCookieValue = parseCookieValue;
     exports.ɵsetRootDomAdapter = setRootDomAdapter;
 
