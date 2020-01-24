@@ -5,38 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { DoCheck } from '@angular/core';
-import { NgStyleImpl } from './ng_style_impl';
+import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
 import * as i0 from "@angular/core";
-export declare const ngStyleDirectiveDef__PRE_R3__: undefined;
-export declare const ngStyleFactoryDef__PRE_R3__: undefined;
-export declare const ngStyleDirectiveDef__POST_R3__: never;
-export declare const ngStyleFactoryDef__POST_R3__: () => void;
-export declare const ngStyleDirectiveDef: undefined;
-export declare const ngStyleFactoryDef: undefined;
-/**
- * Serves as the base non-VE container for NgStyle.
- *
- * While this is a base class that NgStyle extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[style]` host binding (via the static
- * `ɵdir` property on the class).
- *
- * Note that the `ɵdir` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * @publicApi
- */
-export declare class NgStyleBase {
-    protected _delegate: NgStyleImpl;
-    static ɵdir: any;
-    static ɵfac: any;
-    constructor(_delegate: NgStyleImpl);
-    getValue(): {
-        [key: string]: any;
-    } | null;
-}
 /**
  * @ngModule CommonModule
  *
@@ -73,12 +43,21 @@ export declare class NgStyleBase {
  *
  * @publicApi
  */
-export declare class NgStyle extends NgStyleBase implements DoCheck {
-    constructor(delegate: NgStyleImpl);
-    set ngStyle(value: {
+export declare class NgStyle implements DoCheck {
+    private _ngEl;
+    private _differs;
+    private _renderer;
+    private _ngStyle;
+    private _differ;
+    constructor(_ngEl: ElementRef, _differs: KeyValueDiffers, _renderer: Renderer2);
+    set ngStyle(values: {
         [klass: string]: any;
     } | null);
     ngDoCheck(): void;
+    private _setStyle;
+    private _applyChanges;
+    setNgStyle(value: any): void;
+    applyChanges(): void;
     static ɵfac: i0.ɵɵFactoryDef<NgStyle>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;
 }
