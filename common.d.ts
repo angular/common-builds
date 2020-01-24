@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+793.sha-ef95da6
+ * @license Angular v9.0.0-rc.1+806.sha-9bd9590
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1288,38 +1288,45 @@ export declare class LowerCasePipe implements PipeTransform {
  *
  * @publicApi
  */
-export declare class NgClass extends NgClassBase implements DoCheck {
-    constructor(delegate: ɵNgClassImpl);
+declare class NgClass implements DoCheck {
+    private _iterableDiffers;
+    private _keyValueDiffers;
+    private _ngEl;
+    private _renderer;
+    private _iterableDiffer;
+    private _keyValueDiffer;
+    private _initialClasses;
+    private _rawClass;
+    constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     set klass(value: string);
     set ngClass(value: string | string[] | Set<string> | {
         [klass: string]: any;
     });
     ngDoCheck(): void;
+    private _applyKeyValueChanges;
+    private _applyIterableChanges;
+    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
+     */
+    private _applyClasses;
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     */
+    private _removeClasses;
+    private _toggleClass;
+    setClass(value: string): void;
+    setNgClass(value: any): void;
+    applyChanges(): void;
 }
-
-/**
- * Serves as the base non-VE container for NgClass.
- *
- * While this is a base class that NgClass extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[class]` host binding (via the static
- * `ɵdir` property on the class).
- *
- * Note that the `ɵdir` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * @publicApi
- */
-export declare class NgClassBase {
-    protected _delegate: ɵNgClassImpl;
-    static ɵdir: any;
-    static ɵfac: any;
-    constructor(_delegate: ɵNgClassImpl);
-    getValue(): {
-        [key: string]: any;
-    } | null;
-}
+export { NgClass }
+export { NgClass as ɵNgClassImpl }
+export { NgClass as ɵNgClassR2Impl }
 
 /**
  * Instantiates a single {@link Component} type and inserts its Host View into current View.
@@ -1864,37 +1871,24 @@ export declare class NgPluralCase {
  *
  * @publicApi
  */
-export declare class NgStyle extends NgStyleBase implements DoCheck {
-    constructor(delegate: ɵNgStyleImpl);
-    set ngStyle(value: {
+declare class NgStyle implements DoCheck {
+    private _ngEl;
+    private _differs;
+    private _renderer;
+    private _ngStyle;
+    private _differ;
+    constructor(_ngEl: ElementRef, _differs: KeyValueDiffers, _renderer: Renderer2);
+    set ngStyle(values: {
         [klass: string]: any;
     } | null);
     ngDoCheck(): void;
+    private _setStyle;
+    private _applyChanges;
+    setNgStyle(value: any): void;
+    applyChanges(): void;
 }
-
-/**
- * Serves as the base non-VE container for NgStyle.
- *
- * While this is a base class that NgStyle extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[style]` host binding (via the static
- * `ɵdir` property on the class).
- *
- * Note that the `ɵdir` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * @publicApi
- */
-export declare class NgStyleBase {
-    protected _delegate: ɵNgStyleImpl;
-    static ɵdir: any;
-    static ɵfac: any;
-    constructor(_delegate: ɵNgStyleImpl);
-    getValue(): {
-        [key: string]: any;
-    } | null;
-}
+export { NgStyle }
+export { NgStyle as ɵNgStyleR2Impl }
 
 /**
  * @ngModule CommonModule
@@ -2547,70 +2541,24 @@ export declare enum WeekDay {
     Saturday = 6
 }
 
-export declare class ɵangular_packages_common_common_a extends ɵNgClassImpl {
-    private _value;
-    private _ngClassDiffer;
-    private _classStringDiffer;
-    getValue(): {
-        [key: string]: boolean;
-    } | null;
-    setClass(value: string): void;
-    setNgClass(value: string | string[] | Set<string> | {
-        [klass: string]: any;
-    }): void;
-    applyChanges(): void;
-}
+export declare function ɵangular_packages_common_common_a(): ɵBrowserPlatformLocation;
 
-export declare const ɵangular_packages_common_common_b: {
-    provide: typeof ɵNgClassImpl;
-    useClass: typeof ɵNgClassR2Impl;
-};
+export declare function ɵangular_packages_common_common_b(): ɵBrowserPlatformLocation;
 
-export declare const ɵangular_packages_common_common_c: {
-    provide: typeof ɵNgClassImpl;
-    useClass: typeof ɵNgClassR2Impl;
-};
+export declare function ɵangular_packages_common_common_c(): Location;
 
-export declare class ɵangular_packages_common_common_d implements ɵNgStyleImpl {
-    private _differ;
-    private _value;
-    getValue(): {
-        [key: string]: any;
-    } | null;
-    setNgStyle(value: {
-        [key: string]: any;
-    } | null): void;
-    applyChanges(): void;
-}
-
-export declare const ɵangular_packages_common_common_e: {
-    provide: typeof ɵNgStyleImpl;
-    useClass: typeof ɵNgStyleR2Impl;
-};
-
-export declare const ɵangular_packages_common_common_f: {
-    provide: typeof ɵNgStyleImpl;
-    useClass: typeof ɵNgStyleR2Impl;
-};
-
-export declare function ɵangular_packages_common_common_g(): ɵBrowserPlatformLocation;
-
-export declare function ɵangular_packages_common_common_h(): ɵBrowserPlatformLocation;
-
-export declare function ɵangular_packages_common_common_i(): Location;
-
-export declare function ɵangular_packages_common_common_j(platformLocation: PlatformLocation): PathLocationStrategy;
+export declare function ɵangular_packages_common_common_d(platformLocation: PlatformLocation): PathLocationStrategy;
 
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
  */
-export declare const ɵangular_packages_common_common_k: Provider[];
+export declare const ɵangular_packages_common_common_e: Provider[];
 
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
-export declare const ɵangular_packages_common_common_l: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
+export declare const ɵangular_packages_common_common_f: (typeof AsyncPipe | typeof SlicePipe | typeof DecimalPipe | typeof PercentPipe | typeof CurrencyPipe | typeof DatePipe | typeof I18nPluralPipe | typeof I18nSelectPipe | typeof KeyValuePipe)[];
 
 /**
  * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
@@ -2673,124 +2621,6 @@ export declare abstract class ɵDomAdapter {
 
 
 export declare function ɵgetDOM(): ɵDomAdapter;
-
-export declare const ɵngClassDirectiveDef__POST_R3__: never;
-
-export declare const ɵngClassFactoryDef__POST_R3__: () => void;
-
-/**
- * Used as a token for an injected service within the NgClass directive.
- *
- * NgClass behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[class]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- */
-export declare abstract class ɵNgClassImpl {
-    abstract setClass(value: string): void;
-    abstract setNgClass(value: string | string[] | Set<string> | {
-        [klass: string]: any;
-    }): void;
-    abstract applyChanges(): void;
-    abstract getValue(): {
-        [key: string]: any;
-    } | null;
-}
-
-export declare const ɵNgClassImplProvider__POST_R3__: {
-    provide: typeof ɵNgClassImpl;
-    useClass: typeof ɵangular_packages_common_common_a;
-};
-
-export declare class ɵNgClassR2Impl extends ɵNgClassImpl {
-    private _iterableDiffers;
-    private _keyValueDiffers;
-    private _ngEl;
-    private _renderer;
-    private _iterableDiffer;
-    private _keyValueDiffer;
-    private _initialClasses;
-    private _rawClass;
-    constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
-    getValue(): null;
-    setClass(value: string): void;
-    setNgClass(value: string | string[] | Set<string> | {
-        [klass: string]: any;
-    }): void;
-    applyChanges(): void;
-    private _applyKeyValueChanges;
-    private _applyIterableChanges;
-    /**
-     * Applies a collection of CSS classes to the DOM element.
-     *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     */
-    private _applyClasses;
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     */
-    private _removeClasses;
-    private _toggleClass;
-}
-
-export declare const ɵngStyleDirectiveDef__POST_R3__: never;
-
-export declare const ɵngStyleFactoryDef__POST_R3__: () => void;
-
-/**
- * Used as a token for an injected service within the NgStyle directive.
- *
- * NgStyle behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[style]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- */
-export declare abstract class ɵNgStyleImpl {
-    abstract getValue(): {
-        [key: string]: any;
-    } | null;
-    abstract setNgStyle(value: {
-        [key: string]: any;
-    } | null): void;
-    abstract applyChanges(): void;
-}
-
-export declare const ɵNgStyleImplProvider__POST_R3__: {
-    provide: typeof ɵNgStyleImpl;
-    useClass: typeof ɵangular_packages_common_common_d;
-};
-
-export declare class ɵNgStyleR2Impl implements ɵNgStyleImpl {
-    private _ngEl;
-    private _differs;
-    private _renderer;
-    private _ngStyle;
-    private _differ;
-    constructor(_ngEl: ElementRef, _differs: KeyValueDiffers, _renderer: Renderer2);
-    getValue(): null;
-    /**
-     * A map of style properties, specified as colon-separated
-     * key-value pairs.
-     * * The key is a style name, with an optional `.<unit>` suffix
-     *    (such as 'top.px', 'font-style.em').
-     * * The value is an expression to be evaluated.
-     */
-    setNgStyle(values: {
-        [key: string]: string;
-    }): void;
-    /**
-     * Applies the new styles if needed.
-     */
-    applyChanges(): void;
-    private _applyChanges;
-    private _setStyle;
-}
 
 /**
  * Provides an empty implementation of the viewport scroller. This will
