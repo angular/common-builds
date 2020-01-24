@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.10+52.sha-65354fb
+ * @license Angular v9.0.0-rc.10+54.sha-622737c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2292,6 +2292,19 @@
     function getLocaleCurrencyName(locale) {
         var data = i0.ɵfindLocaleData(locale);
         return data[i0.ɵLocaleDataIndex.CurrencyName] || null;
+    }
+    /**
+     * Retrieves the default currency code for the given locale.
+     *
+     * The default is defined as the first currency which is still in use.
+     *
+     * @param locale The code of the locale whose currency code we want.
+     * @returns The code of the default currency for the given locale.
+     *
+     * @publicApi
+     */
+    function getLocaleCurrencyCode(locale) {
+        return i0.ɵgetLocaleCurrencyCode(locale);
     }
     /**
      * Retrieves the currency values for a given locale.
@@ -5940,7 +5953,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.10+52.sha-65354fb');
+    var VERSION = new i0.Version('9.0.0-rc.10+54.sha-622737c');
 
     /**
      * @license
@@ -6184,6 +6197,7 @@
     exports.formatNumber = formatNumber;
     exports.formatPercent = formatPercent;
     exports.getCurrencySymbol = getCurrencySymbol;
+    exports.getLocaleCurrencyCode = getLocaleCurrencyCode;
     exports.getLocaleCurrencyName = getLocaleCurrencyName;
     exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
     exports.getLocaleDateFormat = getLocaleDateFormat;

@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.10+52.sha-65354fb
+ * @license Angular v9.0.0-rc.10+54.sha-622737c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -572,6 +572,18 @@ export declare enum FormStyle {
  * @publicApi
  */
 export declare function getCurrencySymbol(code: string, format: 'wide' | 'narrow', locale?: string): string;
+
+/**
+ * Retrieves the default currency code for the given locale.
+ *
+ * The default is defined as the first currency which is still in use.
+ *
+ * @param locale The code of the locale whose currency code we want.
+ * @returns The code of the default currency for the given locale.
+ *
+ * @publicApi
+ */
+export declare function getLocaleCurrencyCode(locale: string): string | null;
 
 /**
  * Retrieves the name of the currency for the main country corresponding
