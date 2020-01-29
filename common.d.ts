@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.11+58.sha-9b7d703
+ * @license Angular v9.0.0-rc.11+59.sha-0390d20
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1279,7 +1279,7 @@ export declare class LowerCasePipe implements PipeTransform {
  *
  * @publicApi
  */
-declare class NgClass implements DoCheck {
+export declare class NgClass implements DoCheck {
     private _iterableDiffers;
     private _keyValueDiffers;
     private _ngEl;
@@ -1311,13 +1311,7 @@ declare class NgClass implements DoCheck {
      */
     private _removeClasses;
     private _toggleClass;
-    setClass(value: string): void;
-    setNgClass(value: any): void;
-    applyChanges(): void;
 }
-export { NgClass }
-export { NgClass as ɵNgClassImpl }
-export { NgClass as ɵNgClassR2Impl }
 
 /**
  * Instantiates a single {@link Component} type and inserts its Host View into current View.
@@ -1862,7 +1856,7 @@ export declare class NgPluralCase {
  *
  * @publicApi
  */
-declare class NgStyle implements DoCheck {
+export declare class NgStyle implements DoCheck {
     private _ngEl;
     private _differs;
     private _renderer;
@@ -1875,11 +1869,7 @@ declare class NgStyle implements DoCheck {
     ngDoCheck(): void;
     private _setStyle;
     private _applyChanges;
-    setNgStyle(value: any): void;
-    applyChanges(): void;
 }
-export { NgStyle }
-export { NgStyle as ɵNgStyleR2Impl }
 
 /**
  * @ngModule CommonModule
