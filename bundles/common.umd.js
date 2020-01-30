@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+859.sha-a3de110
+ * @license Angular v9.0.0-rc.1+864.sha-ee8b8f5
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9,6 +9,38 @@
     typeof define === 'function' && define.amd ? define('@angular/common', ['exports', '@angular/core'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = {}), global.ng.core));
 }(this, (function (exports, i0) { 'use strict';
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var _DOM = null;
+    function getDOM() {
+        return _DOM;
+    }
+    function setDOM(adapter) {
+        _DOM = adapter;
+    }
+    function setRootDomAdapter(adapter) {
+        if (!_DOM) {
+            _DOM = adapter;
+        }
+    }
+    /* tslint:disable:requireParameterType */
+    /**
+     * Provides DOM operations in an environment-agnostic way.
+     *
+     * @security Tread carefully! Interacting with the DOM directly is dangerous and
+     * can introduce XSS risks.
+     */
+    var DomAdapter = /** @class */ (function () {
+        function DomAdapter() {
+        }
+        return DomAdapter;
+    }());
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -206,309 +238,6 @@
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-
-    /**
-     * @ngModule CommonModule
-     *
-     * @usageNotes
-     * ```
-     *     <some-element [ngClass]="'first second'">...</some-element>
-     *
-     *     <some-element [ngClass]="['first', 'second']">...</some-element>
-     *
-     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
-     *
-     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
-     *
-     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
-     * ```
-     *
-     * @description
-     *
-     * Adds and removes CSS classes on an HTML element.
-     *
-     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
-     * - `string` - the CSS classes listed in the string (space delimited) are added,
-     * - `Array` - the CSS classes declared as Array elements are added,
-     * - `Object` - keys are CSS classes that get added when the expression given in the value
-     *              evaluates to a truthy value, otherwise they are removed.
-     *
-     * @publicApi
-     */
-    var NgClass = /** @class */ (function () {
-        function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-            this._iterableDiffers = _iterableDiffers;
-            this._keyValueDiffers = _keyValueDiffers;
-            this._ngEl = _ngEl;
-            this._renderer = _renderer;
-            this._iterableDiffer = null;
-            this._keyValueDiffer = null;
-            this._initialClasses = [];
-            this._rawClass = null;
-        }
-        Object.defineProperty(NgClass.prototype, "klass", {
-            set: function (value) {
-                this._removeClasses(this._initialClasses);
-                this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-                this._applyClasses(this._initialClasses);
-                this._applyClasses(this._rawClass);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgClass.prototype, "ngClass", {
-            set: function (value) {
-                this._removeClasses(this._rawClass);
-                this._applyClasses(this._initialClasses);
-                this._iterableDiffer = null;
-                this._keyValueDiffer = null;
-                this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-                if (this._rawClass) {
-                    if (i0.ɵisListLikeIterable(this._rawClass)) {
-                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-                    }
-                    else {
-                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-                    }
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        NgClass.prototype.ngDoCheck = function () {
-            if (this._iterableDiffer) {
-                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
-                }
-            }
-            else if (this._keyValueDiffer) {
-                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
-                }
-            }
-        };
-        NgClass.prototype._applyKeyValueChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachRemovedItem(function (record) {
-                if (record.previousValue) {
-                    _this._toggleClass(record.key, false);
-                }
-            });
-        };
-        NgClass.prototype._applyIterableChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) {
-                if (typeof record.item === 'string') {
-                    _this._toggleClass(record.item, true);
-                }
-                else {
-                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + i0.ɵstringify(record.item));
-                }
-            });
-            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
-        };
-        /**
-         * Applies a collection of CSS classes to the DOM element.
-         *
-         * For argument of type Set and Array CSS class names contained in those collections are always
-         * added.
-         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-         * for truthy and removed for falsy).
-         */
-        NgClass.prototype._applyClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
-                }
-            }
-        };
-        /**
-         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-         * purposes.
-         */
-        NgClass.prototype._removeClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-            }
-        };
-        NgClass.prototype._toggleClass = function (klass, enabled) {
-            var _this = this;
-            klass = klass.trim();
-            if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) {
-                    if (enabled) {
-                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
-                    }
-                    else {
-                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
-                    }
-                });
-            }
-        };
-        // TODO(misko): Delete this code after angula/flex-layout stops depending on private APIs
-        // We need to export this to make angular/flex-layout happy
-        // https://github.com/angular/flex-layout/blob/ec7b57eb6adf59ecfdfff1de5ccf1ab2f6652ed3/src/lib/extended/class/class.ts#L9
-        NgClass.prototype.setClass = function (value) { this.klass = value; };
-        NgClass.prototype.setNgClass = function (value) { this.ngClass = value; };
-        NgClass.prototype.applyChanges = function () { this.ngDoCheck(); };
-        __decorate([
-            i0.Input('class'),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
-        ], NgClass.prototype, "klass", null);
-        __decorate([
-            i0.Input('ngClass'),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgClass.prototype, "ngClass", null);
-        NgClass = __decorate([
-            i0.Directive({ selector: '[ngClass]' }),
-            __metadata("design:paramtypes", [i0.IterableDiffers, i0.KeyValueDiffers,
-                i0.ElementRef, i0.Renderer2])
-        ], NgClass);
-        return NgClass;
-    }());
-
-    /**
-     * @ngModule CommonModule
-     *
-     * @usageNotes
-     *
-     * Set the font of the containing element to the result of an expression.
-     *
-     * ```
-     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
-     * ```
-     *
-     * Set the width of the containing element to a pixel value returned by an expression.
-     *
-     * ```
-     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
-     * ```
-     *
-     * Set a collection of style values using an expression that returns key-value pairs.
-     *
-     * ```
-     * <some-element [ngStyle]="objExp">...</some-element>
-     * ```
-     *
-     * @description
-     *
-     * An attribute directive that updates styles for the containing HTML element.
-     * Sets one or more style properties, specified as colon-separated key-value pairs.
-     * The key is a style name, with an optional `.<unit>` suffix
-     * (such as 'top.px', 'font-style.em').
-     * The value is an expression to be evaluated.
-     * The resulting non-null value, expressed in the given unit,
-     * is assigned to the given style property.
-     * If the result of evaluation is null, the corresponding style is removed.
-     *
-     * @publicApi
-     */
-    var NgStyle = /** @class */ (function () {
-        function NgStyle(_ngEl, _differs, _renderer) {
-            this._ngEl = _ngEl;
-            this._differs = _differs;
-            this._renderer = _renderer;
-            this._ngStyle = null;
-            this._differ = null;
-        }
-        Object.defineProperty(NgStyle.prototype, "ngStyle", {
-            set: function (values) {
-                this._ngStyle = values;
-                if (!this._differ && values) {
-                    this._differ = this._differs.find(values).create();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        NgStyle.prototype.ngDoCheck = function () {
-            if (this._differ) {
-                var changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        };
-        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
-            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
-            value = value != null && unit ? "" + value + unit : value;
-            if (value != null) {
-                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
-            }
-            else {
-                this._renderer.removeStyle(this._ngEl.nativeElement, name);
-            }
-        };
-        NgStyle.prototype._applyChanges = function (changes) {
-            var _this = this;
-            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
-            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-        };
-        // TODO(misko): Delete this code after angula/flex-layout stops depending on private APIs
-        // We need to export this to make angular/flex-layout happy
-        // https://github.com/angular/flex-layout/blob/ec7b57eb6adf59ecfdfff1de5ccf1ab2f6652ed3/src/lib/extended/class/class.ts#L9
-        NgStyle.prototype.setNgStyle = function (value) { this.ngStyle = value; };
-        NgStyle.prototype.applyChanges = function () { this.ngDoCheck(); };
-        __decorate([
-            i0.Input('ngStyle'),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgStyle.prototype, "ngStyle", null);
-        NgStyle = __decorate([
-            i0.Directive({ selector: '[ngStyle]' }),
-            __metadata("design:paramtypes", [i0.ElementRef, i0.KeyValueDiffers, i0.Renderer2])
-        ], NgStyle);
-        return NgStyle;
-    }());
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var _DOM = null;
-    function getDOM() {
-        return _DOM;
-    }
-    function setDOM(adapter) {
-        _DOM = adapter;
-    }
-    function setRootDomAdapter(adapter) {
-        if (!_DOM) {
-            _DOM = adapter;
-        }
-    }
-    /* tslint:disable:requireParameterType */
-    /**
-     * Provides DOM operations in an environment-agnostic way.
-     *
-     * @security Tread carefully! Interacting with the DOM directly is dangerous and
-     * can introduce XSS risks.
-     */
-    var DomAdapter = /** @class */ (function () {
-        function DomAdapter() {
-        }
-        return DomAdapter;
-    }());
 
     /**
      * @license
@@ -3065,6 +2794,176 @@
     }
 
     /**
+     * @ngModule CommonModule
+     *
+     * @usageNotes
+     * ```
+     *     <some-element [ngClass]="'first second'">...</some-element>
+     *
+     *     <some-element [ngClass]="['first', 'second']">...</some-element>
+     *
+     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+     *
+     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+     *
+     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+     * ```
+     *
+     * @description
+     *
+     * Adds and removes CSS classes on an HTML element.
+     *
+     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+     * - `string` - the CSS classes listed in the string (space delimited) are added,
+     * - `Array` - the CSS classes declared as Array elements are added,
+     * - `Object` - keys are CSS classes that get added when the expression given in the value
+     *              evaluates to a truthy value, otherwise they are removed.
+     *
+     * @publicApi
+     */
+    var NgClass = /** @class */ (function () {
+        function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+            this._iterableDiffers = _iterableDiffers;
+            this._keyValueDiffers = _keyValueDiffers;
+            this._ngEl = _ngEl;
+            this._renderer = _renderer;
+            this._iterableDiffer = null;
+            this._keyValueDiffer = null;
+            this._initialClasses = [];
+            this._rawClass = null;
+        }
+        Object.defineProperty(NgClass.prototype, "klass", {
+            set: function (value) {
+                this._removeClasses(this._initialClasses);
+                this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+                this._applyClasses(this._initialClasses);
+                this._applyClasses(this._rawClass);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(NgClass.prototype, "ngClass", {
+            set: function (value) {
+                this._removeClasses(this._rawClass);
+                this._applyClasses(this._initialClasses);
+                this._iterableDiffer = null;
+                this._keyValueDiffer = null;
+                this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+                if (this._rawClass) {
+                    if (i0.ɵisListLikeIterable(this._rawClass)) {
+                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
+                    }
+                    else {
+                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+                    }
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        NgClass.prototype.ngDoCheck = function () {
+            if (this._iterableDiffer) {
+                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
+                if (iterableChanges) {
+                    this._applyIterableChanges(iterableChanges);
+                }
+            }
+            else if (this._keyValueDiffer) {
+                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
+                if (keyValueChanges) {
+                    this._applyKeyValueChanges(keyValueChanges);
+                }
+            }
+        };
+        NgClass.prototype._applyKeyValueChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachRemovedItem(function (record) {
+                if (record.previousValue) {
+                    _this._toggleClass(record.key, false);
+                }
+            });
+        };
+        NgClass.prototype._applyIterableChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) {
+                if (typeof record.item === 'string') {
+                    _this._toggleClass(record.item, true);
+                }
+                else {
+                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + i0.ɵstringify(record.item));
+                }
+            });
+            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
+        };
+        /**
+         * Applies a collection of CSS classes to the DOM element.
+         *
+         * For argument of type Set and Array CSS class names contained in those collections are always
+         * added.
+         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+         * for truthy and removed for falsy).
+         */
+        NgClass.prototype._applyClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
+                }
+            }
+        };
+        /**
+         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+         * purposes.
+         */
+        NgClass.prototype._removeClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+            }
+        };
+        NgClass.prototype._toggleClass = function (klass, enabled) {
+            var _this = this;
+            klass = klass.trim();
+            if (klass) {
+                klass.split(/\s+/g).forEach(function (klass) {
+                    if (enabled) {
+                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
+                    }
+                    else {
+                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
+                    }
+                });
+            }
+        };
+        __decorate([
+            i0.Input('class'),
+            __metadata("design:type", String),
+            __metadata("design:paramtypes", [String])
+        ], NgClass.prototype, "klass", null);
+        __decorate([
+            i0.Input('ngClass'),
+            __metadata("design:type", Object),
+            __metadata("design:paramtypes", [Object])
+        ], NgClass.prototype, "ngClass", null);
+        NgClass = __decorate([
+            i0.Directive({ selector: '[ngClass]' }),
+            __metadata("design:paramtypes", [i0.IterableDiffers, i0.KeyValueDiffers,
+                i0.ElementRef, i0.Renderer2])
+        ], NgClass);
+        return NgClass;
+    }());
+
+    /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
      *
@@ -4101,6 +4000,96 @@
                 i0.ViewContainerRef, NgPlural])
         ], NgPluralCase);
         return NgPluralCase;
+    }());
+
+    /**
+     * @ngModule CommonModule
+     *
+     * @usageNotes
+     *
+     * Set the font of the containing element to the result of an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     * ```
+     *
+     * Set the width of the containing element to a pixel value returned by an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     * ```
+     *
+     * Set a collection of style values using an expression that returns key-value pairs.
+     *
+     * ```
+     * <some-element [ngStyle]="objExp">...</some-element>
+     * ```
+     *
+     * @description
+     *
+     * An attribute directive that updates styles for the containing HTML element.
+     * Sets one or more style properties, specified as colon-separated key-value pairs.
+     * The key is a style name, with an optional `.<unit>` suffix
+     * (such as 'top.px', 'font-style.em').
+     * The value is an expression to be evaluated.
+     * The resulting non-null value, expressed in the given unit,
+     * is assigned to the given style property.
+     * If the result of evaluation is null, the corresponding style is removed.
+     *
+     * @publicApi
+     */
+    var NgStyle = /** @class */ (function () {
+        function NgStyle(_ngEl, _differs, _renderer) {
+            this._ngEl = _ngEl;
+            this._differs = _differs;
+            this._renderer = _renderer;
+            this._ngStyle = null;
+            this._differ = null;
+        }
+        Object.defineProperty(NgStyle.prototype, "ngStyle", {
+            set: function (values) {
+                this._ngStyle = values;
+                if (!this._differ && values) {
+                    this._differ = this._differs.find(values).create();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        NgStyle.prototype.ngDoCheck = function () {
+            if (this._differ) {
+                var changes = this._differ.diff(this._ngStyle);
+                if (changes) {
+                    this._applyChanges(changes);
+                }
+            }
+        };
+        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
+            value = value != null && unit ? "" + value + unit : value;
+            if (value != null) {
+                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+            }
+            else {
+                this._renderer.removeStyle(this._ngEl.nativeElement, name);
+            }
+        };
+        NgStyle.prototype._applyChanges = function (changes) {
+            var _this = this;
+            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        };
+        __decorate([
+            i0.Input('ngStyle'),
+            __metadata("design:type", Object),
+            __metadata("design:paramtypes", [Object])
+        ], NgStyle.prototype, "ngStyle", null);
+        NgStyle = __decorate([
+            i0.Directive({ selector: '[ngStyle]' }),
+            __metadata("design:paramtypes", [i0.ElementRef, i0.KeyValueDiffers, i0.Renderer2])
+        ], NgStyle);
+        return NgStyle;
     }());
 
     /**
@@ -5384,7 +5373,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+859.sha-a3de110');
+    var VERSION = new i0.Version('9.0.0-rc.1+864.sha-ee8b8f5');
 
     /**
      * @license
@@ -5653,9 +5642,6 @@
     exports.registerLocaleData = registerLocaleData;
     exports.ɵBrowserPlatformLocation = BrowserPlatformLocation;
     exports.ɵDomAdapter = DomAdapter;
-    exports.ɵNgClassImpl = NgClass;
-    exports.ɵNgClassR2Impl = NgClass;
-    exports.ɵNgStyleR2Impl = NgStyle;
     exports.ɵNullViewportScroller = NullViewportScroller;
     exports.ɵPLATFORM_BROWSER_ID = PLATFORM_BROWSER_ID;
     exports.ɵPLATFORM_SERVER_ID = PLATFORM_SERVER_ID;
