@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+880.sha-e672b1f
+ * @license Angular v9.0.0-rc.1+887.sha-58b29f1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -494,7 +494,27 @@ class HttpClientTestingBackend {
             throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
         }
         if (matches.length === 0) {
-            throw new Error(`Expected one matching request for criteria "${description}", found none.`);
+            /** @type {?} */
+            let message = `Expected one matching request for criteria "${description}", found none.`;
+            if (this.open.length > 0) {
+                // Show the methods and URLs of open requests in the error, for convenience.
+                /** @type {?} */
+                const requests = this.open
+                    .map((/**
+                 * @param {?} testReq
+                 * @return {?}
+                 */
+                testReq => {
+                    /** @type {?} */
+                    const url = testReq.request.urlWithParams;
+                    /** @type {?} */
+                    const method = testReq.request.method;
+                    return `${method} ${url}`;
+                }))
+                    .join(', ');
+                message += ` Requests received are: ${requests}.`;
+            }
+            throw new Error(message);
         }
         return matches[0];
     }
