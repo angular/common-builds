@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+880.sha-e672b1f
+ * @license Angular v9.0.0-rc.1+887.sha-58b29f1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -489,7 +489,19 @@
                 throw new Error("Expected one matching request for criteria \"" + description + "\", found " + matches.length + " requests.");
             }
             if (matches.length === 0) {
-                throw new Error("Expected one matching request for criteria \"" + description + "\", found none.");
+                var message = "Expected one matching request for criteria \"" + description + "\", found none.";
+                if (this.open.length > 0) {
+                    // Show the methods and URLs of open requests in the error, for convenience.
+                    var requests = this.open
+                        .map(function (testReq) {
+                        var url = testReq.request.urlWithParams;
+                        var method = testReq.request.method;
+                        return method + " " + url;
+                    })
+                        .join(', ');
+                    message += " Requests received are: " + requests + ".";
+                }
+                throw new Error(message);
             }
             return matches[0];
         };
