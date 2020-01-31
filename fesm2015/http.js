@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.0-rc.1+878.sha-fcfce99
+ * @license Angular v9.0.0-rc.1+877.sha-6b710f7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -689,9 +689,6 @@ class HttpParams {
         key => {
             /** @type {?} */
             const eKey = this.encoder.encodeKey(key);
-            // `a: ['1']` produces `'a=1'`
-            // `b: []` produces `''`
-            // `c: ['1', '2']` produces `'c=1&c=2'`
             return (/** @type {?} */ ((/** @type {?} */ (this.map)).get(key))).map((/**
              * @param {?} value
              * @return {?}
@@ -699,13 +696,6 @@ class HttpParams {
             value => eKey + '=' + this.encoder.encodeValue(value)))
                 .join('&');
         }))
-            // filter out empty values because `b: []` produces `''`
-            // which results in `a=1&&c=1&c=2` instead of `a=1&c=1&c=2` if we don't
-            .filter((/**
-         * @param {?} param
-         * @return {?}
-         */
-        param => param !== ''))
             .join('&');
     }
     /**
