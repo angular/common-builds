@@ -182,7 +182,7 @@ export declare class NgIf<T = unknown> {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgIf` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<T>;
+    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<NonNullable<T>>;
     static ɵfac: i0.ɵɵFactoryDef<NgIf<any>>;
     static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never>;
 }
