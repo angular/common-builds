@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-next.2+20.sha-208ef7b
+ * @license Angular v9.1.0-next.2+21.sha-40039d8
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4687,7 +4687,9 @@ class NgIf {
      * @param {?} ctx
      * @return {?}
      */
-    static ngTemplateContextGuard(dir, ctx) { return true; }
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
+    }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] }
@@ -6984,7 +6986,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.1.0-next.2+20.sha-208ef7b');
+const VERSION = new Version('9.1.0-next.2+21.sha-40039d8');
 
 /**
  * @fileoverview added by tsickle
