@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.0.4+4.sha-52fc087
+ * @license Angular v9.0.4+10.sha-fcad075
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3599,7 +3599,9 @@
          * The presence of this method is a signal to the Ivy template type-check compiler that the
          * `NgIf` structural directive renders its template with a specific context type.
          */
-        NgIf.ngTemplateContextGuard = function (dir, ctx) { return true; };
+        NgIf.ngTemplateContextGuard = function (dir, ctx) {
+            return true;
+        };
         __decorate([
             i0.Input(),
             __metadata("design:type", Object),
@@ -5362,7 +5364,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.4+4.sha-52fc087');
+    var VERSION = new i0.Version('9.0.4+10.sha-fcad075');
 
     /**
      * @license
