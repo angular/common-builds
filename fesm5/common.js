@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-next.2+41.sha-47a1811
+ * @license Angular v9.1.0-next.2+46.sha-c195d22
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2938,7 +2938,7 @@ var NgComponentOutlet = /** @class */ (function () {
             this._moduleRef.destroy();
     };
     NgComponentOutlet.ɵfac = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-    NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature()] });
+    NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature] });
     return NgComponentOutlet;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgComponentOutlet, [{
@@ -4068,7 +4068,7 @@ var NgTemplateOutlet = /** @class */ (function () {
         }
     };
     NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-    NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature()] });
+    NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature] });
     return NgTemplateOutlet;
 }());
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgTemplateOutlet, [{
@@ -5256,7 +5256,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.1.0-next.2+41.sha-47a1811');
+var VERSION = new Version('9.1.0-next.2+46.sha-c195d22');
 
 /**
  * @license

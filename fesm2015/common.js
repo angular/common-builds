@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-next.2+41.sha-47a1811
+ * @license Angular v9.1.0-next.2+46.sha-c195d22
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4151,7 +4151,7 @@ NgComponentOutlet.propDecorators = {
     ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
 /** @nocollapse */ NgComponentOutlet.ɵfac = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-/** @nocollapse */ NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature()] });
+/** @nocollapse */ NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
@@ -5824,7 +5824,7 @@ NgTemplateOutlet.propDecorators = {
     ngTemplateOutlet: [{ type: Input }]
 };
 /** @nocollapse */ NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-/** @nocollapse */ NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature()] });
+/** @nocollapse */ NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
@@ -7418,7 +7418,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.1.0-next.2+41.sha-47a1811');
+const VERSION = new Version('9.1.0-next.2+46.sha-c195d22');
 
 /**
  * @fileoverview added by tsickle
