@@ -8,9 +8,9 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'JPY': string[];
-    'THB': string[];
-    'USD': string[];
-    'UZS': string[];
+    JPY: string[];
+    THB: string[];
+    USD: string[];
+    UZS: string[];
 } | undefined)[];
 export default _default;

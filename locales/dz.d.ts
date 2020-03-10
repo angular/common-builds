@@ -8,13 +8,13 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'AUD': string[];
-    'BTN': string[];
-    'ILS': (string | undefined)[];
-    'JPY': string[];
-    'KRW': string[];
-    'THB': string[];
-    'USD': string[];
-    'XAF': never[];
+    AUD: string[];
+    BTN: string[];
+    ILS: (string | undefined)[];
+    JPY: string[];
+    KRW: string[];
+    THB: string[];
+    USD: string[];
+    XAF: never[];
 } | undefined)[];
 export default _default;

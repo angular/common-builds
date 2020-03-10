@@ -8,14 +8,14 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'AFN': string[];
-    'CAD': string[];
-    'CNY': string[];
-    'HKD': string[];
-    'IRR': string[];
-    'MXN': string[];
-    'NZD': string[];
-    'THB': string[];
-    'XCD': string[];
+    AFN: string[];
+    CAD: string[];
+    CNY: string[];
+    HKD: string[];
+    IRR: string[];
+    MXN: string[];
+    NZD: string[];
+    THB: string[];
+    XCD: string[];
 } | undefined)[];
 export default _default;

@@ -8,16 +8,16 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'BYN': never[];
-    'DKK': never[];
-    'HRK': never[];
-    'ISK': never[];
-    'NOK': never[];
-    'PLN': never[];
-    'RUR': never[];
-    'SEK': never[];
-    'THB': string[];
-    'TWD': string[];
-    'XXX': never[];
+    BYN: never[];
+    DKK: never[];
+    HRK: never[];
+    ISK: never[];
+    NOK: never[];
+    PLN: never[];
+    RUR: never[];
+    SEK: never[];
+    THB: string[];
+    TWD: string[];
+    XXX: never[];
 } | undefined)[];
 export default _default;
