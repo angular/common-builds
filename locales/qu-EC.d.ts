@@ -8,10 +8,10 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'BBD': string[];
-    'BMD': string[];
-    'BZD': string[];
-    'CAD': string[];
-    'JPY': string[];
+    BBD: string[];
+    BMD: string[];
+    BZD: string[];
+    CAD: string[];
+    JPY: string[];
 } | undefined)[];
 export default _default;

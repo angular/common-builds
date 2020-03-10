@@ -8,17 +8,17 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'AUD': (string | undefined)[];
-    'CNY': (string | undefined)[];
-    'GEL': string[];
-    'HKD': (string | undefined)[];
-    'ILS': (string | undefined)[];
-    'INR': (string | undefined)[];
-    'JPY': (string | undefined)[];
-    'KRW': (string | undefined)[];
-    'NZD': (string | undefined)[];
-    'TWD': string[];
-    'USD': string[];
-    'VND': (string | undefined)[];
+    AUD: (string | undefined)[];
+    CNY: (string | undefined)[];
+    GEL: string[];
+    HKD: (string | undefined)[];
+    ILS: (string | undefined)[];
+    INR: (string | undefined)[];
+    JPY: (string | undefined)[];
+    KRW: (string | undefined)[];
+    NZD: (string | undefined)[];
+    TWD: string[];
+    USD: string[];
+    VND: (string | undefined)[];
 } | undefined)[];
 export default _default;

@@ -8,12 +8,12 @@
 
 declare function plural(n: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    'BND': string[];
-    'CAD': (string | undefined)[];
-    'JPY': string[];
-    'MXN': (string | undefined)[];
-    'MYR': string[];
-    'TWD': string[];
-    'USD': (string | undefined)[];
+    BND: string[];
+    CAD: (string | undefined)[];
+    JPY: string[];
+    MXN: (string | undefined)[];
+    MYR: string[];
+    TWD: string[];
+    USD: (string | undefined)[];
 } | undefined)[];
 export default _default;
