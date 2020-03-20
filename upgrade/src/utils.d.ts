@@ -8,4 +8,4 @@
 export declare function stripPrefix(val: string, prefix: string): string;
 export declare function deepEqual(a: any, b: any): boolean;
 export declare function isAnchor(el: (Node & ParentNode) | Element | null): el is HTMLAnchorElement;
-export declare function isPromise(obj: any): obj is Promise<any>;
+export declare function isPromise<T = any>(obj: any): obj is Promise<T>;
