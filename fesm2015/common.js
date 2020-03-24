@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-rc.0+26.sha-380de1e
+ * @license Angular v9.1.0-rc.0+22.sha-58f4254
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4170,7 +4170,6 @@ if (false) {
  * more complex then a property access, for example when using the async pipe (`userStreams |
  * async`).
  * - `index: number`: The index of the current item in the iterable.
- * - `count: number`: The length of the iterable.
  * - `first: boolean`: True when the item is the first item in the iterable.
  * - `last: boolean`: True when the item is the last item in the iterable.
  * - `even: boolean`: True when the item has an even index in the iterable.
@@ -6987,7 +6986,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.1.0-rc.0+26.sha-380de1e');
+const VERSION = new Version('9.1.0-rc.0+22.sha-58f4254');
 
 /**
  * @fileoverview added by tsickle
