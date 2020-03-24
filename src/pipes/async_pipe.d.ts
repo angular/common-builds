@@ -52,6 +52,6 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _selectStrategy;
     private _dispose;
     private _updateLatestValue;
-    static ɵfac: i0.ɵɵFactoryDef<AsyncPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<AsyncPipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<AsyncPipe, "async">;
 }

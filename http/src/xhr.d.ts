@@ -18,7 +18,7 @@ export declare abstract class XhrFactory {
 export declare class BrowserXhr implements XhrFactory {
     constructor();
     build(): any;
-    static ɵfac: i0.ɵɵFactoryDef<BrowserXhr>;
+    static ɵfac: i0.ɵɵFactoryDef<BrowserXhr, never>;
     static ɵprov: i0.ɵɵInjectableDef<BrowserXhr>;
 }
 /**
@@ -37,6 +37,6 @@ export declare class HttpXhrBackend implements HttpBackend {
      * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDef<HttpXhrBackend>;
+    static ɵfac: i0.ɵɵFactoryDef<HttpXhrBackend, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpXhrBackend>;
 }

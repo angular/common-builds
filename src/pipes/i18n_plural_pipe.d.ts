@@ -35,6 +35,6 @@ export declare class I18nPluralPipe implements PipeTransform {
     transform(value: number, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
-    static ɵfac: i0.ɵɵFactoryDef<I18nPluralPipe>;
+    static ɵfac: i0.ɵɵFactoryDef<I18nPluralPipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<I18nPluralPipe, "i18nPlural">;
 }

@@ -152,7 +152,7 @@ export declare class Location {
      * @returns The URL string, modified if needed.
      */
     static stripTrailingSlash: (url: string) => string;
-    static ɵfac: i0.ɵɵFactoryDef<Location>;
+    static ɵfac: i0.ɵɵFactoryDef<Location, never>;
     static ɵprov: i0.ɵɵInjectableDef<Location>;
 }
 export declare function createLocation(): Location;

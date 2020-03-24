@@ -20,6 +20,6 @@ export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
     constructor(locale: string);
     getPluralCategory(value: any, locale?: string): string;
-    static ɵfac: i0.ɵɵFactoryDef<NgLocaleLocalization>;
+    static ɵfac: i0.ɵɵFactoryDef<NgLocaleLocalization, never>;
     static ɵprov: i0.ɵɵInjectableDef<NgLocaleLocalization>;
 }

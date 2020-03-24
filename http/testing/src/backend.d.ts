@@ -59,6 +59,6 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
         ignoreCancelled?: boolean;
     }): void;
     private descriptionFromMatcher;
-    static ɵfac: i0.ɵɵFactoryDef<HttpClientTestingBackend>;
+    static ɵfac: i0.ɵɵFactoryDef<HttpClientTestingBackend, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpClientTestingBackend>;
 }
