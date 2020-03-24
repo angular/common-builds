@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-rc.1+10.sha-c9c2408
+ * @license Angular v9.1.0-rc.1+13.sha-407fa42
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1034,9 +1034,16 @@ export declare class KeyValuePipe implements PipeTransform {
         [key: string]: V;
     } | Map<string, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
     transform<V>(input: {
+        [key: string]: V;
+    } | Map<string, V> | null, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
+    transform<V>(input: {
         [key: number]: V;
     } | Map<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
+    transform<V>(input: {
+        [key: number]: V;
+    } | Map<number, V> | null, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>> | null;
     transform<K, V>(input: Map<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
+    transform<K, V>(input: Map<K, V> | null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
 }
 
 /**
