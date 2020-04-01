@@ -23,11 +23,11 @@ export class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ɵprov = ɵɵdefineInjectable({
+ViewportScroller.ɵprov = ɵɵdefineInjectable({
     token: ViewportScroller,
     providedIn: 'root',
     factory: (/**
-     * @nocollapse @return {?}
+     * @return {?}
      */
     () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
 });
