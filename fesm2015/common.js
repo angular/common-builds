@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.0-rc.0+88.sha-a5eb0e5
+ * @license Angular v9.1.0-rc.0+90.sha-e9de281
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6987,7 +6987,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.1.0-rc.0+88.sha-a5eb0e5');
+const VERSION = new Version('9.1.0-rc.0+90.sha-e9de281');
 
 /**
  * @fileoverview added by tsickle
@@ -7005,11 +7005,11 @@ class ViewportScroller {
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ɵprov = ɵɵdefineInjectable({
+ViewportScroller.ɵprov = ɵɵdefineInjectable({
     token: ViewportScroller,
     providedIn: 'root',
     factory: (/**
-     * @nocollapse @return {?}
+     * @return {?}
      */
     () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
 });
