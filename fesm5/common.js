@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -122,7 +122,9 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
         this.location = getDOM().getLocation();
         this._history = getDOM().getHistory();
     };
-    BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function () { return getDOM().getBaseHref(this._doc); };
+    BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function () {
+        return getDOM().getBaseHref(this._doc);
+    };
     BrowserPlatformLocation.prototype.onPopState = function (fn) {
         getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
     };
@@ -130,38 +132,54 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
         getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
     };
     Object.defineProperty(BrowserPlatformLocation.prototype, "href", {
-        get: function () { return this.location.href; },
+        get: function () {
+            return this.location.href;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "protocol", {
-        get: function () { return this.location.protocol; },
+        get: function () {
+            return this.location.protocol;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "hostname", {
-        get: function () { return this.location.hostname; },
+        get: function () {
+            return this.location.hostname;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "port", {
-        get: function () { return this.location.port; },
+        get: function () {
+            return this.location.port;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "pathname", {
-        get: function () { return this.location.pathname; },
-        set: function (newPath) { this.location.pathname = newPath; },
+        get: function () {
+            return this.location.pathname;
+        },
+        set: function (newPath) {
+            this.location.pathname = newPath;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "search", {
-        get: function () { return this.location.search; },
+        get: function () {
+            return this.location.search;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(BrowserPlatformLocation.prototype, "hash", {
-        get: function () { return this.location.hash; },
+        get: function () {
+            return this.location.hash;
+        },
         enumerable: true,
         configurable: true
     });
@@ -181,9 +199,15 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
             this.location.hash = url;
         }
     };
-    BrowserPlatformLocation.prototype.forward = function () { this._history.forward(); };
-    BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
-    BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
+    BrowserPlatformLocation.prototype.forward = function () {
+        this._history.forward();
+    };
+    BrowserPlatformLocation.prototype.back = function () {
+        this._history.back();
+    };
+    BrowserPlatformLocation.prototype.getState = function () {
+        return this._history.state;
+    };
     BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(ɵɵinject(DOCUMENT)); };
     BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
     return BrowserPlatformLocation;
@@ -380,8 +404,12 @@ var PathLocationStrategy = /** @class */ (function (_super) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
     };
-    PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-    PathLocationStrategy.prototype.prepareExternalUrl = function (internal) { return joinWithSlash(this._baseHref, internal); };
+    PathLocationStrategy.prototype.getBaseHref = function () {
+        return this._baseHref;
+    };
+    PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+        return joinWithSlash(this._baseHref, internal);
+    };
     PathLocationStrategy.prototype.path = function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         var pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
@@ -396,8 +424,12 @@ var PathLocationStrategy = /** @class */ (function (_super) {
         var externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
         this._platformLocation.replaceState(state, title, externalUrl);
     };
-    PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-    PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    PathLocationStrategy.prototype.forward = function () {
+        this._platformLocation.forward();
+    };
+    PathLocationStrategy.prototype.back = function () {
+        this._platformLocation.back();
+    };
     PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
     PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: PathLocationStrategy.ɵfac });
     return PathLocationStrategy;
@@ -444,7 +476,9 @@ var HashLocationStrategy = /** @class */ (function (_super) {
         this._platformLocation.onPopState(fn);
         this._platformLocation.onHashChange(fn);
     };
-    HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+    HashLocationStrategy.prototype.getBaseHref = function () {
+        return this._baseHref;
+    };
     HashLocationStrategy.prototype.path = function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
         // the hash value is always prefixed with a `#`
@@ -472,8 +506,12 @@ var HashLocationStrategy = /** @class */ (function (_super) {
         }
         this._platformLocation.replaceState(state, title, url);
     };
-    HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-    HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    HashLocationStrategy.prototype.forward = function () {
+        this._platformLocation.forward();
+    };
+    HashLocationStrategy.prototype.back = function () {
+        this._platformLocation.back();
+    };
     HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
     HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: HashLocationStrategy.ɵfac });
     return HashLocationStrategy;
@@ -559,7 +597,9 @@ var Location = /** @class */ (function () {
      * Reports the current state of the location history.
      * @returns The current value of the `history.state` object.
      */
-    Location.prototype.getState = function () { return this._platformLocation.getState(); };
+    Location.prototype.getState = function () {
+        return this._platformLocation.getState();
+    };
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
@@ -632,11 +672,15 @@ var Location = /** @class */ (function () {
     /**
      * Navigates forward in the platform's history.
      */
-    Location.prototype.forward = function () { this._platformStrategy.forward(); };
+    Location.prototype.forward = function () {
+        this._platformStrategy.forward();
+    };
     /**
      * Navigates back in the platform's history.
      */
-    Location.prototype.back = function () { this._platformStrategy.back(); };
+    Location.prototype.back = function () {
+        this._platformStrategy.back();
+    };
     /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
      * framework that are not detectible through "popstate" or "hashchange" events.
@@ -646,7 +690,9 @@ var Location = /** @class */ (function () {
     Location.prototype.onUrlChange = function (fn) {
         var _this = this;
         this._urlChangeListeners.push(fn);
-        this.subscribe(function (v) { _this._notifyUrlChangeListeners(v.url, v.state); });
+        this.subscribe(function (v) {
+            _this._notifyUrlChangeListeners(v.url, v.state);
+        });
     };
     /** @internal */
     Location.prototype._notifyUrlChangeListeners = function (url, state) {
@@ -1100,7 +1146,9 @@ function getLocaleId(locale) {
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
     var data = ɵfindLocaleData(locale);
-    var amPmData = [data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]];
+    var amPmData = [
+        data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]
+    ];
     var amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
@@ -1352,7 +1400,8 @@ function getLocaleCurrencies(locale) {
 var getLocalePluralCase = ɵgetLocalePluralCase;
 function checkFullData(data) {
     if (!data[ɵLocaleDataIndex.ExtraData]) {
-        throw new Error("Missing extra locale data for the locale \"" + data[ɵLocaleDataIndex.LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
+        throw new Error("Missing extra locale data for the locale \"" + data[ɵLocaleDataIndex
+            .LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
 /**
@@ -2972,22 +3021,30 @@ var NgForOfContext = /** @class */ (function () {
         this.count = count;
     }
     Object.defineProperty(NgForOfContext.prototype, "first", {
-        get: function () { return this.index === 0; },
+        get: function () {
+            return this.index === 0;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "last", {
-        get: function () { return this.index === this.count - 1; },
+        get: function () {
+            return this.index === this.count - 1;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "even", {
-        get: function () { return this.index % 2 === 0; },
+        get: function () {
+            return this.index % 2 === 0;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForOfContext.prototype, "odd", {
-        get: function () { return !this.even; },
+        get: function () {
+            return !this.even;
+        },
         enumerable: true,
         configurable: true
     });
@@ -3113,7 +3170,9 @@ var NgForOf = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
-        get: function () { return this._trackByFn; },
+        get: function () {
+            return this._trackByFn;
+        },
         /**
          * A function that defines how to track changes for items in the iterable.
          *
@@ -3628,7 +3687,9 @@ var NgSwitch = /** @class */ (function () {
         configurable: true
     });
     /** @internal */
-    NgSwitch.prototype._addCase = function () { return this._caseCount++; };
+    NgSwitch.prototype._addCase = function () {
+        return this._caseCount++;
+    };
     /** @internal */
     NgSwitch.prototype._addDefault = function (view) {
         if (!this._defaultViews) {
@@ -3709,7 +3770,9 @@ var NgSwitchCase = /** @class */ (function () {
     /**
      * Performs case matching. For internal use only.
      */
-    NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
+    NgSwitchCase.prototype.ngDoCheck = function () {
+        this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+    };
     NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
     NgSwitchCase.ɵdir = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
     return NgSwitchCase;
@@ -3802,7 +3865,9 @@ var NgPlural = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
+    NgPlural.prototype.addCase = function (value, switchView) {
+        this._caseViews[value] = switchView;
+    };
     NgPlural.prototype._updateView = function () {
         this._clearViews();
         var cases = Object.keys(this._caseViews);
@@ -4128,17 +4193,28 @@ var ObservableStrategy = /** @class */ (function () {
     function ObservableStrategy() {
     }
     ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-        return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+        return async.subscribe({
+            next: updateLatestValue,
+            error: function (e) {
+                throw e;
+            }
+        });
     };
-    ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
-    ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
+    ObservableStrategy.prototype.dispose = function (subscription) {
+        subscription.unsubscribe();
+    };
+    ObservableStrategy.prototype.onDestroy = function (subscription) {
+        subscription.unsubscribe();
+    };
     return ObservableStrategy;
 }());
 var PromiseStrategy = /** @class */ (function () {
     function PromiseStrategy() {
     }
     PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-        return async.then(updateLatestValue, function (e) { throw e; });
+        return async.then(updateLatestValue, function (e) {
+            throw e;
+        });
     };
     PromiseStrategy.prototype.dispose = function (subscription) { };
     PromiseStrategy.prototype.onDestroy = function (subscription) { };
@@ -4686,7 +4762,9 @@ var JsonPipe = /** @class */ (function () {
     /**
      * @param value A value of any type to convert into a JSON-format string.
      */
-    JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
+    JsonPipe.prototype.transform = function (value) {
+        return JSON.stringify(value, null, 2);
+    };
     JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
     JsonPipe.ɵpipe = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
     return JsonPipe;
@@ -5128,7 +5206,9 @@ var SlicePipe = /** @class */ (function () {
         }
         return value.slice(start, end);
     };
-    SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
+    SlicePipe.prototype.supports = function (obj) {
+        return typeof obj === 'string' || Array.isArray(obj);
+    };
     SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
     SlicePipe.ɵpipe = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
     return SlicePipe;
@@ -5257,7 +5337,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('10.0.0-next.1+32.sha-5e80e7e');
+var VERSION = new Version('10.0.0-next.1+33.sha-698b028');
 
 /**
  * @license
@@ -5410,7 +5490,9 @@ var NullViewportScroller = /** @class */ (function () {
     /**
      * Empty implementation
      */
-    NullViewportScroller.prototype.getScrollPosition = function () { return [0, 0]; };
+    NullViewportScroller.prototype.getScrollPosition = function () {
+        return [0, 0];
+    };
     /**
      * Empty implementation
      */

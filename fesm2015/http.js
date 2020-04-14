@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -472,25 +472,33 @@ class HttpUrlEncodingCodec {
      * @param {?} key The key name.
      * @return {?} The encoded key name.
      */
-    encodeKey(key) { return standardEncoding(key); }
+    encodeKey(key) {
+        return standardEncoding(key);
+    }
     /**
      * Encodes the value of a URL parameter or query-string.
      * @param {?} value The value.
      * @return {?} The encoded value.
      */
-    encodeValue(value) { return standardEncoding(value); }
+    encodeValue(value) {
+        return standardEncoding(value);
+    }
     /**
      * Decodes an encoded URL parameter or query-string key.
      * @param {?} key The encoded key name.
      * @return {?} The decoded key name.
      */
-    decodeKey(key) { return decodeURIComponent(key); }
+    decodeKey(key) {
+        return decodeURIComponent(key);
+    }
     /**
      * Decodes an encoded URL parameter or query-string value.
      * @param {?} value The encoded value.
      * @return {?} The decoded value.
      */
-    decodeValue(value) { return decodeURIComponent(value); }
+    decodeValue(value) {
+        return decodeURIComponent(value);
+    }
 }
 /**
  * @param {?} rawParams
@@ -658,14 +666,18 @@ class HttpParams {
      * @param {?} value The new value to add.
      * @return {?} A new body with the appended value.
      */
-    append(param, value) { return this.clone({ param, value, op: 'a' }); }
+    append(param, value) {
+        return this.clone({ param, value, op: 'a' });
+    }
     /**
      * Replaces the value for a parameter.
      * @param {?} param The parameter name.
      * @param {?} value The new value.
      * @return {?} A new body with the new value.
      */
-    set(param, value) { return this.clone({ param, value, op: 's' }); }
+    set(param, value) {
+        return this.clone({ param, value, op: 's' });
+    }
     /**
      * Removes a given value or all values from a parameter.
      * @param {?} param The parameter name.
@@ -673,7 +685,9 @@ class HttpParams {
      * @return {?} A new body with the given value removed, or with all values
      * removed if no value is specified.
      */
-    delete(param, value) { return this.clone({ param, value, op: 'd' }); }
+    delete(param, value) {
+        return this.clone({ param, value, op: 'd' });
+    }
     /**
      * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
      * separated by `&`s.
@@ -1107,7 +1121,11 @@ class HttpRequest {
         }
         // Finally, construct the new HttpRequest using the pieces from above.
         return new HttpRequest(method, url, body, {
-            params, headers, reportProgress, responseType, withCredentials,
+            params,
+            headers,
+            reportProgress,
+            responseType,
+            withCredentials,
         });
     }
 }
@@ -1477,8 +1495,7 @@ class HttpErrorResponse extends HttpResponseBase {
             this.message = `Http failure during parsing for ${init.url || '(unknown url)'}`;
         }
         else {
-            this.message =
-                `Http failure response for ${init.url || '(unknown url)'}: ${init.status} ${init.statusText}`;
+            this.message = `Http failure response for ${init.url || '(unknown url)'}: ${init.status} ${init.statusText}`;
         }
         this.error = init.error || null;
     }
@@ -1919,8 +1936,8 @@ if (false) {
  * To use the same instance of `HttpInterceptors` for the entire app, import the `HttpClientModule`
  * only in your `AppModule`, and add the interceptors to the root application injector .
  * If you import `HttpClientModule` multiple times across different modules (for example, in lazy
- * loading modules), each import creates a new copy of the `HttpClientModule`, which overwrites the interceptors
- * provided in the root module.
+ * loading modules), each import creates a new copy of the `HttpClientModule`, which overwrites the
+ * interceptors provided in the root module.
  *
  * @record
  */
@@ -2056,7 +2073,9 @@ class JsonpClientBackend {
      * @private
      * @return {?}
      */
-    nextCallback() { return `ng_jsonp_callback_${nextRequestId++}`; }
+    nextCallback() {
+        return `ng_jsonp_callback_${nextRequestId++}`;
+    }
     /**
      * Processes a JSONP request and returns an event stream of the results.
      * @param {?} req The request object.
@@ -2168,7 +2187,8 @@ class JsonpClientBackend {
                 observer.next(new HttpResponse({
                     body,
                     status: 200,
-                    statusText: 'OK', url,
+                    statusText: 'OK',
+                    url,
                 }));
                 // Complete the stream, the response is over.
                 observer.complete();
@@ -2191,7 +2211,8 @@ class JsonpClientBackend {
                 observer.error(new HttpErrorResponse({
                     error,
                     status: 0,
-                    statusText: 'JSONP Error', url,
+                    statusText: 'JSONP Error',
+                    url,
                 }));
             });
             // Subscribe to both the success (load) and error events on the <script> tag,
@@ -2348,7 +2369,9 @@ class BrowserXhr {
     /**
      * @return {?}
      */
-    build() { return (/** @type {?} */ ((new XMLHttpRequest()))); }
+    build() {
+        return (/** @type {?} */ ((new XMLHttpRequest())));
+    }
 }
 BrowserXhr.decorators = [
     { type: Injectable },

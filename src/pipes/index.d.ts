@@ -19,7 +19,7 @@ import { JsonPipe } from './json_pipe';
 import { KeyValue, KeyValuePipe } from './keyvalue_pipe';
 import { CurrencyPipe, DecimalPipe, PercentPipe } from './number_pipe';
 import { SlicePipe } from './slice_pipe';
-export { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, KeyValue, KeyValuePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe, };
+export { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe, };
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */

@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -55,20 +55,28 @@ class SpyLocation {
      * @param {?} url
      * @return {?}
      */
-    setInitialPath(url) { this._history[this._historyIndex].path = url; }
+    setInitialPath(url) {
+        this._history[this._historyIndex].path = url;
+    }
     /**
      * @param {?} url
      * @return {?}
      */
-    setBaseHref(url) { this._baseHref = url; }
+    setBaseHref(url) {
+        this._baseHref = url;
+    }
     /**
      * @return {?}
      */
-    path() { return this._history[this._historyIndex].path; }
+    path() {
+        return this._history[this._historyIndex].path;
+    }
     /**
      * @return {?}
      */
-    getState() { return this._history[this._historyIndex].state; }
+    getState() {
+        return this._history[this._historyIndex].state;
+    }
     /**
      * @param {?} path
      * @param {?=} query
@@ -179,7 +187,9 @@ class SpyLocation {
          * @param {?} v
          * @return {?}
          */
-        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+        v => {
+            this._notifyUrlChangeListeners(v.url, v.state);
+        }));
     }
     /**
      * \@internal
@@ -207,7 +217,9 @@ class SpyLocation {
      * @param {?} url
      * @return {?}
      */
-    normalize(url) { return (/** @type {?} */ (null)); }
+    normalize(url) {
+        return (/** @type {?} */ (null));
+    }
 }
 SpyLocation.decorators = [
     { type: Injectable },
@@ -320,7 +332,9 @@ class MockLocationStrategy extends LocationStrategy {
      * @param {?=} includeHash
      * @return {?}
      */
-    path(includeHash = false) { return this.internalPath; }
+    path(includeHash = false) {
+        return this.internalPath;
+    }
     /**
      * @param {?} internal
      * @return {?}
@@ -371,11 +385,15 @@ class MockLocationStrategy extends LocationStrategy {
      * @param {?} fn
      * @return {?}
      */
-    onPopState(fn) { this._subject.subscribe({ next: fn }); }
+    onPopState(fn) {
+        this._subject.subscribe({ next: fn });
+    }
     /**
      * @return {?}
      */
-    getBaseHref() { return this.internalBaseHref; }
+    getBaseHref() {
+        return this.internalBaseHref;
+    }
     /**
      * @return {?}
      */
@@ -391,11 +409,15 @@ class MockLocationStrategy extends LocationStrategy {
     /**
      * @return {?}
      */
-    forward() { throw 'not implemented'; }
+    forward() {
+        throw 'not implemented';
+    }
     /**
      * @return {?}
      */
-    getState() { return this.stateChanges[(this.stateChanges.length || 1) - 1]; }
+    getState() {
+        return this.stateChanges[(this.stateChanges.length || 1) - 1];
+    }
 }
 MockLocationStrategy.decorators = [
     { type: Injectable },
@@ -571,35 +593,51 @@ class MockPlatformLocation {
     /**
      * @return {?}
      */
-    get hostname() { return this.urlChanges[0].hostname; }
+    get hostname() {
+        return this.urlChanges[0].hostname;
+    }
     /**
      * @return {?}
      */
-    get protocol() { return this.urlChanges[0].protocol; }
+    get protocol() {
+        return this.urlChanges[0].protocol;
+    }
     /**
      * @return {?}
      */
-    get port() { return this.urlChanges[0].port; }
+    get port() {
+        return this.urlChanges[0].port;
+    }
     /**
      * @return {?}
      */
-    get pathname() { return this.urlChanges[0].pathname; }
+    get pathname() {
+        return this.urlChanges[0].pathname;
+    }
     /**
      * @return {?}
      */
-    get search() { return this.urlChanges[0].search; }
+    get search() {
+        return this.urlChanges[0].search;
+    }
     /**
      * @return {?}
      */
-    get hash() { return this.urlChanges[0].hash; }
+    get hash() {
+        return this.urlChanges[0].hash;
+    }
     /**
      * @return {?}
      */
-    get state() { return this.urlChanges[0].state; }
+    get state() {
+        return this.urlChanges[0].state;
+    }
     /**
      * @return {?}
      */
-    getBaseHrefFromDOM() { return this.baseHref; }
+    getBaseHrefFromDOM() {
+        return this.baseHref;
+    }
     /**
      * @param {?} fn
      * @return {?}
@@ -612,7 +650,9 @@ class MockPlatformLocation {
      * @param {?} fn
      * @return {?}
      */
-    onHashChange(fn) { this.hashUpdate.subscribe(fn); }
+    onHashChange(fn) {
+        this.hashUpdate.subscribe(fn);
+    }
     /**
      * @return {?}
      */
@@ -625,7 +665,9 @@ class MockPlatformLocation {
     /**
      * @return {?}
      */
-    get url() { return `${this.pathname}${this.search}${this.hash}`; }
+    get url() {
+        return `${this.pathname}${this.search}${this.hash}`;
+    }
     /**
      * @private
      * @param {?} state
@@ -661,7 +703,9 @@ class MockPlatformLocation {
     /**
      * @return {?}
      */
-    forward() { throw new Error('Not implemented'); }
+    forward() {
+        throw new Error('Not implemented');
+    }
     /**
      * @return {?}
      */
@@ -677,15 +721,15 @@ class MockPlatformLocation {
             scheduleMicroTask((/**
              * @return {?}
              */
-            () => this.hashUpdate.next((/** @type {?} */ ({
-                type: 'hashchange', state: null, oldUrl, newUrl: this.url
-            })))));
+            () => this.hashUpdate.next((/** @type {?} */ ({ type: 'hashchange', state: null, oldUrl, newUrl: this.url })))));
         }
     }
     /**
      * @return {?}
      */
-    getState() { return this.state; }
+    getState() {
+        return this.state;
+    }
 }
 MockPlatformLocation.decorators = [
     { type: Injectable },

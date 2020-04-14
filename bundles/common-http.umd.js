@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -523,25 +523,33 @@
          * @param key The key name.
          * @returns The encoded key name.
          */
-        HttpUrlEncodingCodec.prototype.encodeKey = function (key) { return standardEncoding(key); };
+        HttpUrlEncodingCodec.prototype.encodeKey = function (key) {
+            return standardEncoding(key);
+        };
         /**
          * Encodes the value of a URL parameter or query-string.
          * @param value The value.
          * @returns The encoded value.
          */
-        HttpUrlEncodingCodec.prototype.encodeValue = function (value) { return standardEncoding(value); };
+        HttpUrlEncodingCodec.prototype.encodeValue = function (value) {
+            return standardEncoding(value);
+        };
         /**
          * Decodes an encoded URL parameter or query-string key.
          * @param key The encoded key name.
          * @returns The decoded key name.
          */
-        HttpUrlEncodingCodec.prototype.decodeKey = function (key) { return decodeURIComponent(key); };
+        HttpUrlEncodingCodec.prototype.decodeKey = function (key) {
+            return decodeURIComponent(key);
+        };
         /**
          * Decodes an encoded URL parameter or query-string value.
          * @param value The encoded value.
          * @returns The decoded value.
          */
-        HttpUrlEncodingCodec.prototype.decodeValue = function (value) { return decodeURIComponent(value); };
+        HttpUrlEncodingCodec.prototype.decodeValue = function (value) {
+            return decodeURIComponent(value);
+        };
         return HttpUrlEncodingCodec;
     }());
     function paramParser(rawParams, codec) {
@@ -649,14 +657,18 @@
          * @param value The new value to add.
          * @return A new body with the appended value.
          */
-        HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+        HttpParams.prototype.append = function (param, value) {
+            return this.clone({ param: param, value: value, op: 'a' });
+        };
         /**
          * Replaces the value for a parameter.
          * @param param The parameter name.
          * @param value The new value.
          * @return A new body with the new value.
          */
-        HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+        HttpParams.prototype.set = function (param, value) {
+            return this.clone({ param: param, value: value, op: 's' });
+        };
         /**
          * Removes a given value or all values from a parameter.
          * @param param The parameter name.
@@ -664,7 +676,9 @@
          * @return A new body with the given value removed, or with all values
          * removed if no value is specified.
          */
-        HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+        HttpParams.prototype.delete = function (param, value) {
+            return this.clone({ param: param, value: value, op: 'd' });
+        };
         /**
          * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
          * separated by `&`s.
@@ -985,7 +999,11 @@
             }
             // Finally, construct the new HttpRequest using the pieces from above.
             return new HttpRequest(method, url, body, {
-                params: params, headers: headers, reportProgress: reportProgress, responseType: responseType, withCredentials: withCredentials,
+                params: params,
+                headers: headers,
+                reportProgress: reportProgress,
+                responseType: responseType,
+                withCredentials: withCredentials,
             });
         };
         return HttpRequest;
@@ -1151,8 +1169,7 @@
                 _this.message = "Http failure during parsing for " + (init.url || '(unknown url)');
             }
             else {
-                _this.message =
-                    "Http failure response for " + (init.url || '(unknown url)') + ": " + init.status + " " + init.statusText;
+                _this.message = "Http failure response for " + (init.url || '(unknown url)') + ": " + init.status + " " + init.statusText;
             }
             _this.error = init.error || null;
             return _this;
@@ -1563,7 +1580,9 @@
         /**
          * Get the name of the next callback method, by incrementing the global `nextRequestId`.
          */
-        JsonpClientBackend.prototype.nextCallback = function () { return "ng_jsonp_callback_" + nextRequestId++; };
+        JsonpClientBackend.prototype.nextCallback = function () {
+            return "ng_jsonp_callback_" + nextRequestId++;
+        };
         /**
          * Processes a JSONP request and returns an event stream of the results.
          * @param req The request object.
@@ -1653,7 +1672,8 @@
                     observer.next(new HttpResponse({
                         body: body,
                         status: 200,
-                        statusText: 'OK', url: url,
+                        statusText: 'OK',
+                        url: url,
                     }));
                     // Complete the stream, the response is over.
                     observer.complete();
@@ -1671,7 +1691,8 @@
                     observer.error(new HttpErrorResponse({
                         error: error,
                         status: 0,
-                        statusText: 'JSONP Error', url: url,
+                        statusText: 'JSONP Error',
+                        url: url,
                     }));
                 };
                 // Subscribe to both the success (load) and error events on the <script> tag,
@@ -1775,7 +1796,9 @@
     var BrowserXhr = /** @class */ (function () {
         function BrowserXhr() {
         }
-        BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
+        BrowserXhr.prototype.build = function () {
+            return (new XMLHttpRequest());
+        };
         BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
         BrowserXhr.ɵprov = i0.ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
         return BrowserXhr;

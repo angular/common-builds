@@ -54,7 +54,8 @@ export declare class HttpUrlEncodingCodec implements HttpParameterCodec {
      */
     decodeValue(value: string): string;
 }
-/** Options used to construct an `HttpParams` instance.
+/**
+ * Options used to construct an `HttpParams` instance.
  *
  * @publicApi
  */

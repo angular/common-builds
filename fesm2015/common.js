@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -398,7 +398,9 @@ class BrowserPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    getBaseHrefFromDOM() { return (/** @type {?} */ (getDOM().getBaseHref(this._doc))); }
+    getBaseHrefFromDOM() {
+        return (/** @type {?} */ (getDOM().getBaseHref(this._doc)));
+    }
     /**
      * @param {?} fn
      * @return {?}
@@ -416,36 +418,52 @@ class BrowserPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    get href() { return this.location.href; }
+    get href() {
+        return this.location.href;
+    }
     /**
      * @return {?}
      */
-    get protocol() { return this.location.protocol; }
+    get protocol() {
+        return this.location.protocol;
+    }
     /**
      * @return {?}
      */
-    get hostname() { return this.location.hostname; }
+    get hostname() {
+        return this.location.hostname;
+    }
     /**
      * @return {?}
      */
-    get port() { return this.location.port; }
+    get port() {
+        return this.location.port;
+    }
     /**
      * @return {?}
      */
-    get pathname() { return this.location.pathname; }
+    get pathname() {
+        return this.location.pathname;
+    }
     /**
      * @return {?}
      */
-    get search() { return this.location.search; }
+    get search() {
+        return this.location.search;
+    }
     /**
      * @return {?}
      */
-    get hash() { return this.location.hash; }
+    get hash() {
+        return this.location.hash;
+    }
     /**
      * @param {?} newPath
      * @return {?}
      */
-    set pathname(newPath) { this.location.pathname = newPath; }
+    set pathname(newPath) {
+        this.location.pathname = newPath;
+    }
     /**
      * @param {?} state
      * @param {?} title
@@ -477,15 +495,21 @@ class BrowserPlatformLocation extends PlatformLocation {
     /**
      * @return {?}
      */
-    forward() { this._history.forward(); }
+    forward() {
+        this._history.forward();
+    }
     /**
      * @return {?}
      */
-    back() { this._history.back(); }
+    back() {
+        this._history.back();
+    }
     /**
      * @return {?}
      */
-    getState() { return this._history.state; }
+    getState() {
+        return this._history.state;
+    }
 }
 BrowserPlatformLocation.decorators = [
     { type: Injectable, args: [{
@@ -800,12 +824,16 @@ class PathLocationStrategy extends LocationStrategy {
     /**
      * @return {?}
      */
-    getBaseHref() { return this._baseHref; }
+    getBaseHref() {
+        return this._baseHref;
+    }
     /**
      * @param {?} internal
      * @return {?}
      */
-    prepareExternalUrl(internal) { return joinWithSlash(this._baseHref, internal); }
+    prepareExternalUrl(internal) {
+        return joinWithSlash(this._baseHref, internal);
+    }
     /**
      * @param {?=} includeHash
      * @return {?}
@@ -844,11 +872,15 @@ class PathLocationStrategy extends LocationStrategy {
     /**
      * @return {?}
      */
-    forward() { this._platformLocation.forward(); }
+    forward() {
+        this._platformLocation.forward();
+    }
     /**
      * @return {?}
      */
-    back() { this._platformLocation.back(); }
+    back() {
+        this._platformLocation.back();
+    }
 }
 PathLocationStrategy.decorators = [
     { type: Injectable },
@@ -935,7 +967,9 @@ class HashLocationStrategy extends LocationStrategy {
     /**
      * @return {?}
      */
-    getBaseHref() { return this._baseHref; }
+    getBaseHref() {
+        return this._baseHref;
+    }
     /**
      * @param {?=} includeHash
      * @return {?}
@@ -991,11 +1025,15 @@ class HashLocationStrategy extends LocationStrategy {
     /**
      * @return {?}
      */
-    forward() { this._platformLocation.forward(); }
+    forward() {
+        this._platformLocation.forward();
+    }
     /**
      * @return {?}
      */
-    back() { this._platformLocation.back(); }
+    back() {
+        this._platformLocation.back();
+    }
 }
 HashLocationStrategy.decorators = [
     { type: Injectable },
@@ -1131,7 +1169,9 @@ class Location {
      * Reports the current state of the location history.
      * @return {?} The current value of the `history.state` object.
      */
-    getState() { return this._platformLocation.getState(); }
+    getState() {
+        return this._platformLocation.getState();
+    }
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
@@ -1202,12 +1242,16 @@ class Location {
      * Navigates forward in the platform's history.
      * @return {?}
      */
-    forward() { this._platformStrategy.forward(); }
+    forward() {
+        this._platformStrategy.forward();
+    }
     /**
      * Navigates back in the platform's history.
      * @return {?}
      */
-    back() { this._platformStrategy.back(); }
+    back() {
+        this._platformStrategy.back();
+    }
     /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
      * framework that are not detectible through "popstate" or "hashchange" events.
@@ -1221,7 +1265,9 @@ class Location {
          * @param {?} v
          * @return {?}
          */
-        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+        v => {
+            this._notifyUrlChangeListeners(v.url, v.state);
+        }));
     }
     /**
      * \@internal
@@ -1756,7 +1802,9 @@ function getLocaleDayPeriods(locale, formStyle, width) {
     /** @type {?} */
     const data = ɵfindLocaleData(locale);
     /** @type {?} */
-    const amPmData = (/** @type {?} */ ([data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]]));
+    const amPmData = (/** @type {?} */ ([
+        data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]
+    ]));
     /** @type {?} */
     const amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
@@ -2025,7 +2073,8 @@ const getLocalePluralCase = ɵgetLocalePluralCase;
  */
 function checkFullData(data) {
     if (!data[ɵLocaleDataIndex.ExtraData]) {
-        throw new Error(`Missing extra locale data for the locale "${data[ɵLocaleDataIndex.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+        throw new Error(`Missing extra locale data for the locale "${data[ɵLocaleDataIndex
+            .LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
     }
 }
 /**
@@ -4222,19 +4271,27 @@ class NgForOfContext {
     /**
      * @return {?}
      */
-    get first() { return this.index === 0; }
+    get first() {
+        return this.index === 0;
+    }
     /**
      * @return {?}
      */
-    get last() { return this.index === this.count - 1; }
+    get last() {
+        return this.index === this.count - 1;
+    }
     /**
      * @return {?}
      */
-    get even() { return this.index % 2 === 0; }
+    get even() {
+        return this.index % 2 === 0;
+    }
     /**
      * @return {?}
      */
-    get odd() { return !this.even; }
+    get odd() {
+        return !this.even;
+    }
 }
 if (false) {
     /** @type {?} */
@@ -4401,7 +4458,9 @@ class NgForOf {
     /**
      * @return {?}
      */
-    get ngForTrackBy() { return this._trackByFn; }
+    get ngForTrackBy() {
+        return this._trackByFn;
+    }
     /**
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
@@ -5105,7 +5164,9 @@ class NgSwitch {
      * \@internal
      * @return {?}
      */
-    _addCase() { return this._caseCount++; }
+    _addCase() {
+        return this._caseCount++;
+    }
     /**
      * \@internal
      * @param {?} view
@@ -5244,7 +5305,9 @@ class NgSwitchCase {
      * Performs case matching. For internal use only.
      * @return {?}
      */
-    ngDoCheck() { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); }
+    ngDoCheck() {
+        this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+    }
 }
 NgSwitchCase.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchCase]' },] },
@@ -5391,7 +5454,9 @@ class NgPlural {
      * @param {?} switchView
      * @return {?}
      */
-    addCase(value, switchView) { this._caseViews[value] = switchView; }
+    addCase(value, switchView) {
+        this._caseViews[value] = switchView;
+    }
     /**
      * @private
      * @return {?}
@@ -5939,22 +6004,31 @@ class ObservableStrategy {
      * @return {?}
      */
     createSubscription(async, updateLatestValue) {
-        return async.subscribe({ next: updateLatestValue, error: (/**
+        return async.subscribe({
+            next: updateLatestValue,
+            error: (/**
              * @param {?} e
              * @return {?}
              */
-            (e) => { throw e; }) });
+            (e) => {
+                throw e;
+            })
+        });
     }
     /**
      * @param {?} subscription
      * @return {?}
      */
-    dispose(subscription) { subscription.unsubscribe(); }
+    dispose(subscription) {
+        subscription.unsubscribe();
+    }
     /**
      * @param {?} subscription
      * @return {?}
      */
-    onDestroy(subscription) { subscription.unsubscribe(); }
+    onDestroy(subscription) {
+        subscription.unsubscribe();
+    }
 }
 class PromiseStrategy {
     /**
@@ -5967,7 +6041,9 @@ class PromiseStrategy {
          * @param {?} e
          * @return {?}
          */
-        e => { throw e; }));
+        e => {
+            throw e;
+        }));
     }
     /**
      * @param {?} subscription
@@ -6662,7 +6738,9 @@ class JsonPipe {
      * @param {?} value A value of any type to convert into a JSON-format string.
      * @return {?}
      */
-    transform(value) { return JSON.stringify(value, null, 2); }
+    transform(value) {
+        return JSON.stringify(value, null, 2);
+    }
 }
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] },
@@ -7262,7 +7340,9 @@ class SlicePipe {
      * @param {?} obj
      * @return {?}
      */
-    supports(obj) { return typeof obj === 'string' || Array.isArray(obj); }
+    supports(obj) {
+        return typeof obj === 'string' || Array.isArray(obj);
+    }
 }
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] },
@@ -7419,7 +7499,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('10.0.0-next.1+32.sha-5e80e7e');
+const VERSION = new Version('10.0.0-next.1+33.sha-698b028');
 
 /**
  * @fileoverview added by tsickle
@@ -7668,7 +7748,9 @@ class NullViewportScroller {
      * Empty implementation
      * @return {?}
      */
-    getScrollPosition() { return [0, 0]; }
+    getScrollPosition() {
+        return [0, 0];
+    }
     /**
      * Empty implementation
      * @param {?} position

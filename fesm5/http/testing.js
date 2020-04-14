@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.1+32.sha-5e80e7e
+ * @license Angular v10.0.0-next.1+33.sha-698b028
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -55,7 +55,9 @@ var TestRequest = /** @class */ (function () {
         /**
          * Whether the request was cancelled after it was sent.
          */
-        get: function () { return this._cancelled; },
+        get: function () {
+            return this._cancelled;
+        },
         enumerable: true,
         configurable: true
     });
@@ -243,7 +245,9 @@ var HttpClientTestingBackend = /** @class */ (function () {
             var testReq = new TestRequest(req, observer);
             _this.open.push(testReq);
             observer.next({ type: HttpEventType.Sent });
-            return function () { testReq._cancelled = true; };
+            return function () {
+                testReq._cancelled = true;
+            };
         });
     };
     /**
