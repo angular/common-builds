@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.1+36.sha-c8f2ca2
+ * @license Angular v9.1.1+40.sha-26f4915
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1115,7 +1115,9 @@ class AngularJSUrlCodec {
      * @param {?} search
      * @return {?}
      */
-    decodeSearch(search) { return parseKeyValue(search); }
+    decodeSearch(search) {
+        return parseKeyValue(search);
+    }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L73
     /**
      * @param {?} hash
@@ -1163,7 +1165,9 @@ class AngularJSUrlCodec {
      * @param {?} valB
      * @return {?}
      */
-    areEqual(valA, valB) { return this.normalize(valA) === this.normalize(valB); }
+    areEqual(valA, valB) {
+        return this.normalize(valA) === this.normalize(valB);
+    }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/urlUtils.js#L60
     /**
      * @param {?} url

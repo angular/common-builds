@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.1+36.sha-c8f2ca2
+ * @license Angular v9.1.1+40.sha-26f4915
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -682,7 +682,9 @@ var AngularJSUrlCodec = /** @class */ (function () {
         return segments.join('/');
     };
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L72
-    AngularJSUrlCodec.prototype.decodeSearch = function (search) { return parseKeyValue(search); };
+    AngularJSUrlCodec.prototype.decodeSearch = function (search) {
+        return parseKeyValue(search);
+    };
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L73
     AngularJSUrlCodec.prototype.decodeHash = function (hash) {
         hash = decodeURIComponent(hash);
@@ -708,7 +710,9 @@ var AngularJSUrlCodec = /** @class */ (function () {
             return joinedPath + encSearch + encHash;
         }
     };
-    AngularJSUrlCodec.prototype.areEqual = function (valA, valB) { return this.normalize(valA) === this.normalize(valB); };
+    AngularJSUrlCodec.prototype.areEqual = function (valA, valB) {
+        return this.normalize(valA) === this.normalize(valB);
+    };
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/urlUtils.js#L60
     AngularJSUrlCodec.prototype.parse = function (url, base) {
         try {

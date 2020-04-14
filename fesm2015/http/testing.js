@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.1+36.sha-c8f2ca2
+ * @license Angular v9.1.1+40.sha-26f4915
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -187,7 +187,9 @@ class TestRequest {
      * Whether the request was cancelled after it was sent.
      * @return {?}
      */
-    get cancelled() { return this._cancelled; }
+    get cancelled() {
+        return this._cancelled;
+    }
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response
      * headers) if provided.
@@ -414,7 +416,9 @@ class HttpClientTestingBackend {
             return (/**
              * @return {?}
              */
-            () => { testReq._cancelled = true; });
+            () => {
+                testReq._cancelled = true;
+            });
         }));
     }
     /**

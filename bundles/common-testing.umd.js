@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.1+36.sha-c8f2ca2
+ * @license Angular v9.1.1+40.sha-26f4915
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -252,10 +252,18 @@
             /** @internal */
             this._urlChangeListeners = [];
         }
-        SpyLocation.prototype.setInitialPath = function (url) { this._history[this._historyIndex].path = url; };
-        SpyLocation.prototype.setBaseHref = function (url) { this._baseHref = url; };
-        SpyLocation.prototype.path = function () { return this._history[this._historyIndex].path; };
-        SpyLocation.prototype.getState = function () { return this._history[this._historyIndex].state; };
+        SpyLocation.prototype.setInitialPath = function (url) {
+            this._history[this._historyIndex].path = url;
+        };
+        SpyLocation.prototype.setBaseHref = function (url) {
+            this._baseHref = url;
+        };
+        SpyLocation.prototype.path = function () {
+            return this._history[this._historyIndex].path;
+        };
+        SpyLocation.prototype.getState = function () {
+            return this._history[this._historyIndex].state;
+        };
         SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
             if (query === void 0) { query = ''; }
             var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
@@ -323,7 +331,9 @@
         SpyLocation.prototype.onUrlChange = function (fn) {
             var _this = this;
             this._urlChangeListeners.push(fn);
-            this.subscribe(function (v) { _this._notifyUrlChangeListeners(v.url, v.state); });
+            this.subscribe(function (v) {
+                _this._notifyUrlChangeListeners(v.url, v.state);
+            });
         };
         /** @internal */
         SpyLocation.prototype._notifyUrlChangeListeners = function (url, state) {
@@ -333,7 +343,9 @@
         SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
-        SpyLocation.prototype.normalize = function (url) { return null; };
+        SpyLocation.prototype.normalize = function (url) {
+            return null;
+        };
         SpyLocation = __decorate([
             core.Injectable()
         ], SpyLocation);
@@ -406,8 +418,12 @@
             var externalUrl = this.prepareExternalUrl(url);
             this.urlChanges.push('replace: ' + externalUrl);
         };
-        MockLocationStrategy.prototype.onPopState = function (fn) { this._subject.subscribe({ next: fn }); };
-        MockLocationStrategy.prototype.getBaseHref = function () { return this.internalBaseHref; };
+        MockLocationStrategy.prototype.onPopState = function (fn) {
+            this._subject.subscribe({ next: fn });
+        };
+        MockLocationStrategy.prototype.getBaseHref = function () {
+            return this.internalBaseHref;
+        };
         MockLocationStrategy.prototype.back = function () {
             if (this.urlChanges.length > 0) {
                 this.urlChanges.pop();
@@ -416,8 +432,12 @@
                 this.simulatePopState(nextUrl);
             }
         };
-        MockLocationStrategy.prototype.forward = function () { throw 'not implemented'; };
-        MockLocationStrategy.prototype.getState = function () { return this.stateChanges[(this.stateChanges.length || 1) - 1]; };
+        MockLocationStrategy.prototype.forward = function () {
+            throw 'not implemented';
+        };
+        MockLocationStrategy.prototype.getState = function () {
+            return this.stateChanges[(this.stateChanges.length || 1) - 1];
+        };
         MockLocationStrategy = __decorate([
             core.Injectable(),
             __metadata("design:paramtypes", [])
@@ -522,46 +542,64 @@
             }
         }
         Object.defineProperty(MockPlatformLocation.prototype, "hostname", {
-            get: function () { return this.urlChanges[0].hostname; },
+            get: function () {
+                return this.urlChanges[0].hostname;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "protocol", {
-            get: function () { return this.urlChanges[0].protocol; },
+            get: function () {
+                return this.urlChanges[0].protocol;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "port", {
-            get: function () { return this.urlChanges[0].port; },
+            get: function () {
+                return this.urlChanges[0].port;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "pathname", {
-            get: function () { return this.urlChanges[0].pathname; },
+            get: function () {
+                return this.urlChanges[0].pathname;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "search", {
-            get: function () { return this.urlChanges[0].search; },
+            get: function () {
+                return this.urlChanges[0].search;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "hash", {
-            get: function () { return this.urlChanges[0].hash; },
+            get: function () {
+                return this.urlChanges[0].hash;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "state", {
-            get: function () { return this.urlChanges[0].state; },
+            get: function () {
+                return this.urlChanges[0].state;
+            },
             enumerable: true,
             configurable: true
         });
-        MockPlatformLocation.prototype.getBaseHrefFromDOM = function () { return this.baseHref; };
+        MockPlatformLocation.prototype.getBaseHrefFromDOM = function () {
+            return this.baseHref;
+        };
         MockPlatformLocation.prototype.onPopState = function (fn) {
             // No-op: a state stack is not implemented, so
             // no events will ever come.
         };
-        MockPlatformLocation.prototype.onHashChange = function (fn) { this.hashUpdate.subscribe(fn); };
+        MockPlatformLocation.prototype.onHashChange = function (fn) {
+            this.hashUpdate.subscribe(fn);
+        };
         Object.defineProperty(MockPlatformLocation.prototype, "href", {
             get: function () {
                 var url = this.protocol + "//" + this.hostname + (this.port ? ':' + this.port : '');
@@ -572,7 +610,9 @@
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "url", {
-            get: function () { return "" + this.pathname + this.search + this.hash; },
+            get: function () {
+                return "" + this.pathname + this.search + this.hash;
+            },
             enumerable: true,
             configurable: true
         });
@@ -590,7 +630,9 @@
             var _a = this.parseChanges(state, newUrl), pathname = _a.pathname, search = _a.search, parsedState = _a.state, hash = _a.hash;
             this.urlChanges.unshift(__assign(__assign({}, this.urlChanges[0]), { pathname: pathname, search: search, hash: hash, state: parsedState }));
         };
-        MockPlatformLocation.prototype.forward = function () { throw new Error('Not implemented'); };
+        MockPlatformLocation.prototype.forward = function () {
+            throw new Error('Not implemented');
+        };
         MockPlatformLocation.prototype.back = function () {
             var _this = this;
             var oldUrl = this.url;
@@ -598,12 +640,12 @@
             this.urlChanges.shift();
             var newHash = this.hash;
             if (oldHash !== newHash) {
-                scheduleMicroTask(function () { return _this.hashUpdate.next({
-                    type: 'hashchange', state: null, oldUrl: oldUrl, newUrl: _this.url
-                }); });
+                scheduleMicroTask(function () { return _this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl: oldUrl, newUrl: _this.url }); });
             }
         };
-        MockPlatformLocation.prototype.getState = function () { return this.state; };
+        MockPlatformLocation.prototype.getState = function () {
+            return this.state;
+        };
         MockPlatformLocation = __decorate([
             core.Injectable(),
             __param(0, core.Inject(MOCK_PLATFORM_LOCATION_CONFIG)), __param(0, core.Optional()),
