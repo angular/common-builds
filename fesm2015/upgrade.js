@@ -1,9 +1,10 @@
 /**
- * @license Angular v9.1.1+34.sha-fd76982
+ * @license Angular v9.1.1+36.sha-c8f2ca2
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { ReplaySubject } from 'rxjs';
 import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, CommonModule, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { InjectionToken, Inject, Optional, NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -119,6 +120,7 @@ class $locationShim {
         this.$$hash = '';
         this.$$changeListeners = [];
         this.cachedState = null;
+        this.urlChanges = new ReplaySubject(1);
         this.lastBrowserUrl = '';
         // This variable should be used *only* inside the cacheState function.
         this.lastCachedState = null;
@@ -135,6 +137,14 @@ class $locationShim {
         this.$$parseLinkUrl(initialUrl, initialUrl);
         this.cacheState();
         this.$$state = this.browserState();
+        this.location.onUrlChange((/**
+         * @param {?} newUrl
+         * @param {?} newState
+         * @return {?}
+         */
+        (newUrl, newState) => {
+            this.urlChanges.next({ newUrl, newState });
+        }));
         if (isPromise($injector)) {
             $injector.then((/**
              * @param {?} $i
@@ -198,16 +208,15 @@ class $locationShim {
                 }
             }
         }));
-        this.location.onUrlChange((/**
-         * @param {?} newUrl
-         * @param {?} newState
+        this.urlChanges.subscribe((/**
+         * @param {?} __0
          * @return {?}
          */
-        (newUrl, newState) => {
+        ({ newUrl, newState }) => {
             /** @type {?} */
-            let oldUrl = this.absUrl();
+            const oldUrl = this.absUrl();
             /** @type {?} */
-            let oldState = this.$$state;
+            const oldState = this.$$state;
             this.$$parse(newUrl);
             newUrl = this.absUrl();
             this.$$state = newState;
@@ -372,7 +381,9 @@ class $locationShim {
      * @private
      * @return {?}
      */
-    browserState() { return this.cachedState; }
+    browserState() {
+        return this.cachedState;
+    }
     /**
      * @private
      * @param {?} base
@@ -571,7 +582,9 @@ class $locationShim {
      * ```
      * @return {?}
      */
-    absUrl() { return this.$$absUrl; }
+    absUrl() {
+        return this.$$absUrl;
+    }
     /**
      * @param {?=} url
      * @return {?}
@@ -605,7 +618,9 @@ class $locationShim {
      * ```
      * @return {?}
      */
-    protocol() { return this.$$protocol; }
+    protocol() {
+        return this.$$protocol;
+    }
     /**
      * Retrieves the protocol of the current URL.
      *
@@ -626,7 +641,9 @@ class $locationShim {
      * ```
      * @return {?}
      */
-    host() { return this.$$host; }
+    host() {
+        return this.$$host;
+    }
     /**
      * Retrieves the port of the current URL.
      *
@@ -637,7 +654,9 @@ class $locationShim {
      * ```
      * @return {?}
      */
-    port() { return this.$$port; }
+    port() {
+        return this.$$port;
+    }
     /**
      * @param {?=} path
      * @return {?}
@@ -803,6 +822,11 @@ if (false) {
      * @private
      */
     $locationShim.prototype.cachedState;
+    /**
+     * @type {?}
+     * @private
+     */
+    $locationShim.prototype.urlChanges;
     /**
      * @type {?}
      * @private
