@@ -1,14 +1,14 @@
 /**
- * @license Angular v10.0.0-next.1+24.sha-2d16b47
+ * @license Angular v10.0.0-next.1+28.sha-f88e635
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/upgrade/static')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/upgrade', ['exports', '@angular/common', '@angular/core', '@angular/upgrade/static'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.upgrade = {}), global.ng.common, global.ng.core, global.ng.upgrade.static));
-}(this, (function (exports, common, i0, _static) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs'), require('@angular/common'), require('@angular/core'), require('@angular/upgrade/static')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/upgrade', ['exports', 'rxjs', '@angular/common', '@angular/core', '@angular/upgrade/static'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.upgrade = {}), global.rxjs, global.ng.common, global.ng.core, global.ng.upgrade.static));
+}(this, (function (exports, rxjs, common, i0, _static) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -303,6 +303,7 @@
             this.$$hash = '';
             this.$$changeListeners = [];
             this.cachedState = null;
+            this.urlChanges = new rxjs.ReplaySubject(1);
             this.lastBrowserUrl = '';
             // This variable should be used *only* inside the cacheState function.
             this.lastCachedState = null;
@@ -317,6 +318,9 @@
             this.$$parseLinkUrl(initialUrl, initialUrl);
             this.cacheState();
             this.$$state = this.browserState();
+            this.location.onUrlChange(function (newUrl, newState) {
+                _this.urlChanges.next({ newUrl: newUrl, newState: newState });
+            });
             if (isPromise($injector)) {
                 $injector.then(function ($i) { return _this.initialize($i); });
             }
@@ -363,7 +367,8 @@
                     }
                 }
             });
-            this.location.onUrlChange(function (newUrl, newState) {
+            this.urlChanges.subscribe(function (_a) {
+                var newUrl = _a.newUrl, newState = _a.newState;
                 var oldUrl = _this.absUrl();
                 var oldState = _this.$$state;
                 _this.$$parse(newUrl);
@@ -498,7 +503,9 @@
          * This function emulates the $browser.state() function from AngularJS. It will cause
          * history.state to be cached unless changed with deep equality check.
          */
-        $locationShim.prototype.browserState = function () { return this.cachedState; };
+        $locationShim.prototype.browserState = function () {
+            return this.cachedState;
+        };
         $locationShim.prototype.stripBaseUrl = function (base, url) {
             if (url.startsWith(base)) {
                 return url.substr(base.length);
@@ -646,7 +653,9 @@
          * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
          * ```
          */
-        $locationShim.prototype.absUrl = function () { return this.$$absUrl; };
+        $locationShim.prototype.absUrl = function () {
+            return this.$$absUrl;
+        };
         $locationShim.prototype.url = function (url) {
             if (typeof url === 'string') {
                 if (!url.length) {
@@ -674,7 +683,9 @@
          * // => "http"
          * ```
          */
-        $locationShim.prototype.protocol = function () { return this.$$protocol; };
+        $locationShim.prototype.protocol = function () {
+            return this.$$protocol;
+        };
         /**
          * Retrieves the protocol of the current URL.
          *
@@ -694,7 +705,9 @@
          * // => "example.com:8080"
          * ```
          */
-        $locationShim.prototype.host = function () { return this.$$host; };
+        $locationShim.prototype.host = function () {
+            return this.$$host;
+        };
         /**
          * Retrieves the port of the current URL.
          *
@@ -704,7 +717,9 @@
          * // => 80
          * ```
          */
-        $locationShim.prototype.port = function () { return this.$$port; };
+        $locationShim.prototype.port = function () {
+            return this.$$port;
+        };
         $locationShim.prototype.path = function (path) {
             if (typeof path === 'undefined') {
                 return this.$$path;

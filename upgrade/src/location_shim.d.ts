@@ -35,6 +35,7 @@ export declare class $locationShim {
     private $$state;
     private $$changeListeners;
     private cachedState;
+    private urlChanges;
     constructor($injector: any, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
     private initialize;
     private resetBrowserUpdate;
@@ -184,7 +185,8 @@ export declare class $locationShim {
      * If the argument is a hash object containing an array of values, these values will be encoded
      * as duplicate search parameters in the URL.
      *
-     * @param {(string|Number|Array<string>|boolean)=} paramValue If `search` is a string or number, then `paramValue`
+     * @param {(string|Number|Array<string>|boolean)=} paramValue If `search` is a string or number,
+     *     then `paramValue`
      * will override only a single search property.
      *
      * If `paramValue` is an array, it will override the property of the `search` component of

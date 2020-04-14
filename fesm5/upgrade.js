@@ -1,10 +1,11 @@
 /**
- * @license Angular v10.0.0-next.1+24.sha-2d16b47
+ * @license Angular v10.0.0-next.1+28.sha-f88e635
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __read, __assign } from 'tslib';
+import { ReplaySubject } from 'rxjs';
 import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, CommonModule, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { InjectionToken, Inject, Optional, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, ɵsetClassMetadata, NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -88,6 +89,7 @@ var $locationShim = /** @class */ (function () {
         this.$$hash = '';
         this.$$changeListeners = [];
         this.cachedState = null;
+        this.urlChanges = new ReplaySubject(1);
         this.lastBrowserUrl = '';
         // This variable should be used *only* inside the cacheState function.
         this.lastCachedState = null;
@@ -102,6 +104,9 @@ var $locationShim = /** @class */ (function () {
         this.$$parseLinkUrl(initialUrl, initialUrl);
         this.cacheState();
         this.$$state = this.browserState();
+        this.location.onUrlChange(function (newUrl, newState) {
+            _this.urlChanges.next({ newUrl: newUrl, newState: newState });
+        });
         if (isPromise($injector)) {
             $injector.then(function ($i) { return _this.initialize($i); });
         }
@@ -148,7 +153,8 @@ var $locationShim = /** @class */ (function () {
                 }
             }
         });
-        this.location.onUrlChange(function (newUrl, newState) {
+        this.urlChanges.subscribe(function (_a) {
+            var newUrl = _a.newUrl, newState = _a.newState;
             var oldUrl = _this.absUrl();
             var oldState = _this.$$state;
             _this.$$parse(newUrl);
@@ -283,7 +289,9 @@ var $locationShim = /** @class */ (function () {
      * This function emulates the $browser.state() function from AngularJS. It will cause
      * history.state to be cached unless changed with deep equality check.
      */
-    $locationShim.prototype.browserState = function () { return this.cachedState; };
+    $locationShim.prototype.browserState = function () {
+        return this.cachedState;
+    };
     $locationShim.prototype.stripBaseUrl = function (base, url) {
         if (url.startsWith(base)) {
             return url.substr(base.length);
@@ -431,7 +439,9 @@ var $locationShim = /** @class */ (function () {
      * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
      * ```
      */
-    $locationShim.prototype.absUrl = function () { return this.$$absUrl; };
+    $locationShim.prototype.absUrl = function () {
+        return this.$$absUrl;
+    };
     $locationShim.prototype.url = function (url) {
         if (typeof url === 'string') {
             if (!url.length) {
@@ -459,7 +469,9 @@ var $locationShim = /** @class */ (function () {
      * // => "http"
      * ```
      */
-    $locationShim.prototype.protocol = function () { return this.$$protocol; };
+    $locationShim.prototype.protocol = function () {
+        return this.$$protocol;
+    };
     /**
      * Retrieves the protocol of the current URL.
      *
@@ -479,7 +491,9 @@ var $locationShim = /** @class */ (function () {
      * // => "example.com:8080"
      * ```
      */
-    $locationShim.prototype.host = function () { return this.$$host; };
+    $locationShim.prototype.host = function () {
+        return this.$$host;
+    };
     /**
      * Retrieves the port of the current URL.
      *
@@ -489,7 +503,9 @@ var $locationShim = /** @class */ (function () {
      * // => 80
      * ```
      */
-    $locationShim.prototype.port = function () { return this.$$port; };
+    $locationShim.prototype.port = function () {
+        return this.$$port;
+    };
     $locationShim.prototype.path = function (path) {
         if (typeof path === 'undefined') {
             return this.$$path;
