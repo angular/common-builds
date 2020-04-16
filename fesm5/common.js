@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.2
+ * @license Angular v9.1.2+17.sha-797c306
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1787,28 +1787,42 @@ function getDateTranslation(date, locale, name, width, form, extended) {
             var currentMinutes_1 = date.getMinutes();
             if (extended) {
                 var rules = getLocaleExtraDayPeriodRules(locale);
-                var dayPeriods_1 = getLocaleExtraDayPeriods(locale, form, width);
-                var result_1;
-                rules.forEach(function (rule, index) {
+                var dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
+                var index = rules.findIndex(function (rule) {
                     if (Array.isArray(rule)) {
                         // morning, afternoon, evening, night
-                        var _a = rule[0], hoursFrom = _a.hours, minutesFrom = _a.minutes;
-                        var _b = rule[1], hoursTo = _b.hours, minutesTo = _b.minutes;
-                        if (currentHours_1 >= hoursFrom && currentMinutes_1 >= minutesFrom &&
-                            (currentHours_1 < hoursTo ||
-                                (currentHours_1 === hoursTo && currentMinutes_1 < minutesTo))) {
-                            result_1 = dayPeriods_1[index];
+                        var _a = __read(rule, 2), from = _a[0], to = _a[1];
+                        var afterFrom = currentHours_1 >= from.hours && currentMinutes_1 >= from.minutes;
+                        var beforeTo = (currentHours_1 < to.hours ||
+                            (currentHours_1 === to.hours && currentMinutes_1 < to.minutes));
+                        // We must account for normal rules that span a period during the day (e.g. 6am-9am)
+                        // where `from` is less (earlier) than `to`. But also rules that span midnight (e.g.
+                        // 10pm - 5am) where `from` is greater (later!) than `to`.
+                        //
+                        // In the first case the current time must be BOTH after `from` AND before `to`
+                        // (e.g. 8am is after 6am AND before 10am).
+                        //
+                        // In the second case the current time must be EITHER after `from` OR before `to`
+                        // (e.g. 4am is before 5am but not after 10pm; and 11pm is not before 5am but it is
+                        // after 10pm).
+                        if (from.hours < to.hours) {
+                            if (afterFrom && beforeTo) {
+                                return true;
+                            }
+                        }
+                        else if (afterFrom || beforeTo) {
+                            return true;
                         }
                     }
                     else { // noon or midnight
-                        var hours = rule.hours, minutes = rule.minutes;
-                        if (hours === currentHours_1 && minutes === currentMinutes_1) {
-                            result_1 = dayPeriods_1[index];
+                        if (rule.hours === currentHours_1 && rule.minutes === currentMinutes_1) {
+                            return true;
                         }
                     }
+                    return false;
                 });
-                if (result_1) {
-                    return result_1;
+                if (index !== -1) {
+                    return dayPeriods[index];
                 }
             }
             // if no rules for the day periods, we use am/pm by default
@@ -5320,7 +5334,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.1.2');
+var VERSION = new Version('9.1.2+17.sha-797c306');
 
 /**
  * @license
