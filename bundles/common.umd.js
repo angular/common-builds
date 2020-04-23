@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.3+9.sha-7743c43
+ * @license Angular v9.1.3+15.sha-f898c9a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3762,9 +3762,7 @@
     /**
      * @ngModule CommonModule
      *
-     * @description A structural directive that adds or removes templates (displaying or hiding views)
-     * when the next match expression matches the switch expression.
-     *
+     * @description
      * The `[ngSwitch]` directive on a container specifies an expression to match against.
      * The expressions to match are provided by `ngSwitchCase` directives on views within the container.
      * - Every view that matches is rendered.
@@ -5473,7 +5471,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.1.3+9.sha-7743c43');
+    var VERSION = new i0.Version('9.1.3+15.sha-f898c9a');
 
     /**
      * @license
