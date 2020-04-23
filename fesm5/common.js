@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.3+13.sha-dd806b0
+ * @license Angular v10.0.0-next.3+16.sha-e5d2853
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3623,9 +3623,7 @@ var SwitchView = /** @class */ (function () {
 /**
  * @ngModule CommonModule
  *
- * @description A structural directive that adds or removes templates (displaying or hiding views)
- * when the next match expression matches the switch expression.
- *
+ * @description
  * The `[ngSwitch]` directive on a container specifies an expression to match against.
  * The expressions to match are provided by `ngSwitchCase` directives on views within the container.
  * - Every view that matches is rendered.
@@ -5334,7 +5332,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('10.0.0-next.3+13.sha-dd806b0');
+var VERSION = new Version('10.0.0-next.3+16.sha-e5d2853');
 
 /**
  * @license
