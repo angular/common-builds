@@ -1,10 +1,10 @@
 /**
- * @license Angular v10.0.0-next.4+14.sha-1786586
+ * @license Angular v10.0.0-next.4+15.sha-49be32c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -5845,7 +5845,6 @@ class AsyncPipe {
     constructor(_ref) {
         this._ref = _ref;
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
         this._strategy = (/** @type {?} */ (null));
@@ -5867,18 +5866,13 @@ class AsyncPipe {
             if (obj) {
                 this._subscribe(obj);
             }
-            this._latestReturnedValue = this._latestValue;
             return this._latestValue;
         }
         if (obj !== this._obj) {
             this._dispose();
             return this.transform((/** @type {?} */ (obj)));
         }
-        if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-            return this._latestReturnedValue;
-        }
-        this._latestReturnedValue = this._latestValue;
-        return WrappedValue.wrap(this._latestValue);
+        return this._latestValue;
     }
     /**
      * @private
@@ -5915,7 +5909,6 @@ class AsyncPipe {
     _dispose() {
         this._strategy.dispose((/** @type {?} */ (this._subscription)));
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
     }
@@ -5945,11 +5938,6 @@ if (false) {
      * @private
      */
     AsyncPipe.prototype._latestValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._latestReturnedValue;
     /**
      * @type {?}
      * @private
@@ -7079,7 +7067,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('10.0.0-next.4+14.sha-1786586');
+const VERSION = new Version('10.0.0-next.4+15.sha-49be32c');
 
 /**
  * @fileoverview added by tsickle

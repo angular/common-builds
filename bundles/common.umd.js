@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.4+14.sha-1786586
+ * @license Angular v10.0.0-next.4+15.sha-49be32c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4427,7 +4427,6 @@
         function AsyncPipe(_ref) {
             this._ref = _ref;
             this._latestValue = null;
-            this._latestReturnedValue = null;
             this._subscription = null;
             this._obj = null;
             this._strategy = null;
@@ -4443,18 +4442,13 @@
                 if (obj) {
                     this._subscribe(obj);
                 }
-                this._latestReturnedValue = this._latestValue;
                 return this._latestValue;
             }
             if (obj !== this._obj) {
                 this._dispose();
                 return this.transform(obj);
             }
-            if (i0.ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-                return this._latestReturnedValue;
-            }
-            this._latestReturnedValue = this._latestValue;
-            return i0.WrappedValue.wrap(this._latestValue);
+            return this._latestValue;
         };
         AsyncPipe.prototype._subscribe = function (obj) {
             var _this = this;
@@ -4474,7 +4468,6 @@
         AsyncPipe.prototype._dispose = function () {
             this._strategy.dispose(this._subscription);
             this._latestValue = null;
-            this._latestReturnedValue = null;
             this._subscription = null;
             this._obj = null;
         };
@@ -5485,7 +5478,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.0.0-next.4+14.sha-1786586');
+    var VERSION = new i0.Version('10.0.0-next.4+15.sha-49be32c');
 
     /**
      * @license
