@@ -38,7 +38,6 @@ import * as i0 from "@angular/core";
 export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _ref;
     private _latestValue;
-    private _latestReturnedValue;
     private _subscription;
     private _obj;
     private _strategy;

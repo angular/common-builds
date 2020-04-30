@@ -1,11 +1,11 @@
 /**
- * @license Angular v10.0.0-next.4+14.sha-1786586
+ * @license Angular v10.0.0-next.4+15.sha-49be32c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { __extends, __read, __values } from 'tslib';
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵisPromise, ɵisObservable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -4265,7 +4265,6 @@ var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
         this._strategy = null;
@@ -4280,18 +4279,13 @@ var AsyncPipe = /** @class */ (function () {
             if (obj) {
                 this._subscribe(obj);
             }
-            this._latestReturnedValue = this._latestValue;
             return this._latestValue;
         }
         if (obj !== this._obj) {
             this._dispose();
             return this.transform(obj);
         }
-        if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-            return this._latestReturnedValue;
-        }
-        this._latestReturnedValue = this._latestValue;
-        return WrappedValue.wrap(this._latestValue);
+        return this._latestValue;
     };
     AsyncPipe.prototype._subscribe = function (obj) {
         var _this = this;
@@ -4311,7 +4305,6 @@ var AsyncPipe = /** @class */ (function () {
     AsyncPipe.prototype._dispose = function () {
         this._strategy.dispose(this._subscription);
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
     };
@@ -5349,7 +5342,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('10.0.0-next.4+14.sha-1786586');
+var VERSION = new Version('10.0.0-next.4+15.sha-49be32c');
 
 /**
  * @license
