@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.5
+ * @license Angular v9.1.5+16.sha-99b63b6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -209,21 +209,21 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  *
- * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
- * agnostic.
+ * `PlatformLocation` encapsulates all calls to DOM APIs, which allows the Router to be
+ * platform-agnostic.
  * This means that we can have different implementation of `PlatformLocation` for the different
- * platforms that angular supports. For example, `\@angular/platform-browser` provides an
- * implementation specific to the browser environment, while `\@angular/platform-webworker` provides
- * one suitable for use with web workers.
+ * platforms that Angular supports. For example, `\@angular/platform-browser` provides an
+ * implementation specific to the browser environment, while `\@angular/platform-server` provides
+ * one suitable for use with server-side rendering.
  *
  * The `PlatformLocation` class is used directly by all implementations of {\@link LocationStrategy}
- * when they need to interact with the DOM apis like pushState, popState, etc...
+ * when they need to interact with the DOM APIs like pushState, popState, etc.
  *
  * {\@link LocationStrategy} in turn is used by the {\@link Location} service which is used directly
  * by the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
  * Router} /
- * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
- * class they are all platform independent.
+ * {\@link Location} / {\@link LocationStrategy} and DOM APIs flow through the `PlatformLocation`
+ * class, they are all platform-agnostic.
  *
  * \@publicApi
  * @abstract
@@ -7065,7 +7065,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('9.1.5');
+const VERSION = new Version('9.1.5+16.sha-99b63b6');
 
 /**
  * @fileoverview added by tsickle
