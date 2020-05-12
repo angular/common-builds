@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.6+33.sha-4f3ac1d
+ * @license Angular v10.0.0-next.6+31.sha-2cddeab
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -545,7 +545,7 @@ export declare enum FormatWidth {
  * Context-dependant translation forms for strings.
  * Typically the standalone version is for the nominative form of the word,
  * and the format version is used for the genitive case.
- * @see [CLDR website](http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles)
+ * @see [CLDR website](http://cldr.unicode.org/translation/date-time#TOC-Stand-Alone-vs.-Format-Styles)
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * @publicApi
