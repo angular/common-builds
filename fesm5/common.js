@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.6+15.sha-468aeb4
+ * @license Angular v9.1.6+19.sha-b91b3d7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -944,7 +944,7 @@ var Plural;
  * Context-dependant translation forms for strings.
  * Typically the standalone version is for the nominative form of the word,
  * and the format version is used for the genitive case.
- * @see [CLDR website](http://cldr.unicode.org/translation/date-time#TOC-Stand-Alone-vs.-Format-Styles)
+ * @see [CLDR website](http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles)
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
  * @publicApi
@@ -5318,7 +5318,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-var VERSION = new Version('9.1.6+15.sha-468aeb4');
+var VERSION = new Version('9.1.6+19.sha-b91b3d7');
 
 /**
  * @license
