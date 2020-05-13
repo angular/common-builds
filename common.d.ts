@@ -1,5 +1,5 @@
 /**
- * @license Angular v9.1.6+19.sha-b91b3d7
+ * @license Angular v9.1.6+31.sha-92b97f7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2424,7 +2424,7 @@ export declare type Time = {
 
 /**
  * Transforms text to title case.
- * Capitalizes the first letter of each word, and transforms the
+ * Capitalizes the first letter of each word and transforms the
  * rest of the word to lower case.
  * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
  *
