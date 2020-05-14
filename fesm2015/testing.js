@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -25,207 +25,215 @@ import { Subject } from 'rxjs';
  *
  * \@publicApi
  */
-class SpyLocation {
-    constructor() {
-        this.urlChanges = [];
-        this._history = [new LocationState('', '', null)];
-        this._historyIndex = 0;
+let SpyLocation = /** @class */ (() => {
+    /**
+     * A spy for {\@link Location} that allows tests to fire simulated location events.
+     *
+     * \@publicApi
+     */
+    class SpyLocation {
+        constructor() {
+            this.urlChanges = [];
+            this._history = [new LocationState('', '', null)];
+            this._historyIndex = 0;
+            /**
+             * \@internal
+             */
+            this._subject = new EventEmitter();
+            /**
+             * \@internal
+             */
+            this._baseHref = '';
+            /**
+             * \@internal
+             */
+            this._platformStrategy = (/** @type {?} */ (null));
+            /**
+             * \@internal
+             */
+            this._platformLocation = (/** @type {?} */ (null));
+            /**
+             * \@internal
+             */
+            this._urlChangeListeners = [];
+        }
         /**
-         * \@internal
-         */
-        this._subject = new EventEmitter();
-        /**
-         * \@internal
-         */
-        this._baseHref = '';
-        /**
-         * \@internal
-         */
-        this._platformStrategy = (/** @type {?} */ (null));
-        /**
-         * \@internal
-         */
-        this._platformLocation = (/** @type {?} */ (null));
-        /**
-         * \@internal
-         */
-        this._urlChangeListeners = [];
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    setInitialPath(url) {
-        this._history[this._historyIndex].path = url;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    setBaseHref(url) {
-        this._baseHref = url;
-    }
-    /**
-     * @return {?}
-     */
-    path() {
-        return this._history[this._historyIndex].path;
-    }
-    /**
-     * @return {?}
-     */
-    getState() {
-        return this._history[this._historyIndex].state;
-    }
-    /**
-     * @param {?} path
-     * @param {?=} query
-     * @return {?}
-     */
-    isCurrentPathEqualTo(path, query = '') {
-        /** @type {?} */
-        const givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
-        /** @type {?} */
-        const currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
-        return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
-    }
-    /**
-     * @param {?} pathname
-     * @return {?}
-     */
-    simulateUrlPop(pathname) {
-        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
-    }
-    /**
-     * @param {?} pathname
-     * @return {?}
-     */
-    simulateHashChange(pathname) {
-        // Because we don't prevent the native event, the browser will independently update the path
-        this.setInitialPath(pathname);
-        this.urlChanges.push('hash: ' + pathname);
-        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    prepareExternalUrl(url) {
-        if (url.length > 0 && !url.startsWith('/')) {
-            url = '/' + url;
-        }
-        return this._baseHref + url;
-    }
-    /**
-     * @param {?} path
-     * @param {?=} query
-     * @param {?=} state
-     * @return {?}
-     */
-    go(path, query = '', state = null) {
-        path = this.prepareExternalUrl(path);
-        if (this._historyIndex > 0) {
-            this._history.splice(this._historyIndex + 1);
-        }
-        this._history.push(new LocationState(path, query, state));
-        this._historyIndex = this._history.length - 1;
-        /** @type {?} */
-        const locationState = this._history[this._historyIndex - 1];
-        if (locationState.path == path && locationState.query == query) {
-            return;
-        }
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
-        this.urlChanges.push(url);
-        this._subject.emit({ 'url': url, 'pop': false });
-    }
-    /**
-     * @param {?} path
-     * @param {?=} query
-     * @param {?=} state
-     * @return {?}
-     */
-    replaceState(path, query = '', state = null) {
-        path = this.prepareExternalUrl(path);
-        /** @type {?} */
-        const history = this._history[this._historyIndex];
-        if (history.path == path && history.query == query) {
-            return;
-        }
-        history.path = path;
-        history.query = query;
-        history.state = state;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
-        this.urlChanges.push('replace: ' + url);
-    }
-    /**
-     * @return {?}
-     */
-    forward() {
-        if (this._historyIndex < (this._history.length - 1)) {
-            this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        if (this._historyIndex > 0) {
-            this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
-        }
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onUrlChange(fn) {
-        this._urlChangeListeners.push(fn);
-        this.subscribe((/**
-         * @param {?} v
+         * @param {?} url
          * @return {?}
          */
-        v => {
-            this._notifyUrlChangeListeners(v.url, v.state);
-        }));
-    }
-    /**
-     * \@internal
-     * @param {?=} url
-     * @param {?=} state
-     * @return {?}
-     */
-    _notifyUrlChangeListeners(url = '', state) {
-        this._urlChangeListeners.forEach((/**
+        setInitialPath(url) {
+            this._history[this._historyIndex].path = url;
+        }
+        /**
+         * @param {?} url
+         * @return {?}
+         */
+        setBaseHref(url) {
+            this._baseHref = url;
+        }
+        /**
+         * @return {?}
+         */
+        path() {
+            return this._history[this._historyIndex].path;
+        }
+        /**
+         * @return {?}
+         */
+        getState() {
+            return this._history[this._historyIndex].state;
+        }
+        /**
+         * @param {?} path
+         * @param {?=} query
+         * @return {?}
+         */
+        isCurrentPathEqualTo(path, query = '') {
+            /** @type {?} */
+            const givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+            /** @type {?} */
+            const currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+            return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+        }
+        /**
+         * @param {?} pathname
+         * @return {?}
+         */
+        simulateUrlPop(pathname) {
+            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
+        }
+        /**
+         * @param {?} pathname
+         * @return {?}
+         */
+        simulateHashChange(pathname) {
+            // Because we don't prevent the native event, the browser will independently update the path
+            this.setInitialPath(pathname);
+            this.urlChanges.push('hash: ' + pathname);
+            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
+        }
+        /**
+         * @param {?} url
+         * @return {?}
+         */
+        prepareExternalUrl(url) {
+            if (url.length > 0 && !url.startsWith('/')) {
+                url = '/' + url;
+            }
+            return this._baseHref + url;
+        }
+        /**
+         * @param {?} path
+         * @param {?=} query
+         * @param {?=} state
+         * @return {?}
+         */
+        go(path, query = '', state = null) {
+            path = this.prepareExternalUrl(path);
+            if (this._historyIndex > 0) {
+                this._history.splice(this._historyIndex + 1);
+            }
+            this._history.push(new LocationState(path, query, state));
+            this._historyIndex = this._history.length - 1;
+            /** @type {?} */
+            const locationState = this._history[this._historyIndex - 1];
+            if (locationState.path == path && locationState.query == query) {
+                return;
+            }
+            /** @type {?} */
+            const url = path + (query.length > 0 ? ('?' + query) : '');
+            this.urlChanges.push(url);
+            this._subject.emit({ 'url': url, 'pop': false });
+        }
+        /**
+         * @param {?} path
+         * @param {?=} query
+         * @param {?=} state
+         * @return {?}
+         */
+        replaceState(path, query = '', state = null) {
+            path = this.prepareExternalUrl(path);
+            /** @type {?} */
+            const history = this._history[this._historyIndex];
+            if (history.path == path && history.query == query) {
+                return;
+            }
+            history.path = path;
+            history.query = query;
+            history.state = state;
+            /** @type {?} */
+            const url = path + (query.length > 0 ? ('?' + query) : '');
+            this.urlChanges.push('replace: ' + url);
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            if (this._historyIndex < (this._history.length - 1)) {
+                this._historyIndex++;
+                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            }
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            if (this._historyIndex > 0) {
+                this._historyIndex--;
+                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            }
+        }
+        /**
          * @param {?} fn
          * @return {?}
          */
-        fn => fn(url, state)));
+        onUrlChange(fn) {
+            this._urlChangeListeners.push(fn);
+            this.subscribe((/**
+             * @param {?} v
+             * @return {?}
+             */
+            v => {
+                this._notifyUrlChangeListeners(v.url, v.state);
+            }));
+        }
+        /**
+         * \@internal
+         * @param {?=} url
+         * @param {?=} state
+         * @return {?}
+         */
+        _notifyUrlChangeListeners(url = '', state) {
+            this._urlChangeListeners.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn(url, state)));
+        }
+        /**
+         * @param {?} onNext
+         * @param {?=} onThrow
+         * @param {?=} onReturn
+         * @return {?}
+         */
+        subscribe(onNext, onThrow, onReturn) {
+            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+        }
+        /**
+         * @param {?} url
+         * @return {?}
+         */
+        normalize(url) {
+            return (/** @type {?} */ (null));
+        }
     }
-    /**
-     * @param {?} onNext
-     * @param {?=} onThrow
-     * @param {?=} onReturn
-     * @return {?}
-     */
-    subscribe(onNext, onThrow, onReturn) {
-        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    normalize(url) {
-        return (/** @type {?} */ (null));
-    }
-}
-SpyLocation.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */ SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
-/** @nocollapse */ SpyLocation.ɵprov = ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
+    SpyLocation.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */ SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
+    /** @nocollapse */ SpyLocation.ɵprov = ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
+    return SpyLocation;
+})();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
     }], null, null); })();
@@ -307,125 +315,134 @@ if (false) {
  *
  * \@publicApi
  */
-class MockLocationStrategy extends LocationStrategy {
-    constructor() {
-        super();
-        this.internalBaseHref = '/';
-        this.internalPath = '/';
-        this.internalTitle = '';
-        this.urlChanges = [];
+let MockLocationStrategy = /** @class */ (() => {
+    /**
+     * A mock implementation of {\@link LocationStrategy} that allows tests to fire simulated
+     * location events.
+     *
+     * \@publicApi
+     */
+    class MockLocationStrategy extends LocationStrategy {
+        constructor() {
+            super();
+            this.internalBaseHref = '/';
+            this.internalPath = '/';
+            this.internalTitle = '';
+            this.urlChanges = [];
+            /**
+             * \@internal
+             */
+            this._subject = new EventEmitter();
+            this.stateChanges = [];
+        }
         /**
-         * \@internal
+         * @param {?} url
+         * @return {?}
          */
-        this._subject = new EventEmitter();
-        this.stateChanges = [];
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    simulatePopState(url) {
-        this.internalPath = url;
-        this._subject.emit(new _MockPopStateEvent(this.path()));
-    }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    path(includeHash = false) {
-        return this.internalPath;
-    }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) {
-        if (internal.startsWith('/') && this.internalBaseHref.endsWith('/')) {
-            return this.internalBaseHref + internal.substring(1);
+        simulatePopState(url) {
+            this.internalPath = url;
+            this._subject.emit(new _MockPopStateEvent(this.path()));
         }
-        return this.internalBaseHref + internal;
-    }
-    /**
-     * @param {?} ctx
-     * @param {?} title
-     * @param {?} path
-     * @param {?} query
-     * @return {?}
-     */
-    pushState(ctx, title, path, query) {
-        // Add state change to changes array
-        this.stateChanges.push(ctx);
-        this.internalTitle = title;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
-        this.internalPath = url;
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url);
-        this.urlChanges.push(externalUrl);
-    }
-    /**
-     * @param {?} ctx
-     * @param {?} title
-     * @param {?} path
-     * @param {?} query
-     * @return {?}
-     */
-    replaceState(ctx, title, path, query) {
-        // Reset the last index of stateChanges to the ctx (state) object
-        this.stateChanges[(this.stateChanges.length || 1) - 1] = ctx;
-        this.internalTitle = title;
-        /** @type {?} */
-        const url = path + (query.length > 0 ? ('?' + query) : '');
-        this.internalPath = url;
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url);
-        this.urlChanges.push('replace: ' + externalUrl);
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        this._subject.subscribe({ next: fn });
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHref() {
-        return this.internalBaseHref;
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        if (this.urlChanges.length > 0) {
-            this.urlChanges.pop();
-            this.stateChanges.pop();
+        /**
+         * @param {?=} includeHash
+         * @return {?}
+         */
+        path(includeHash = false) {
+            return this.internalPath;
+        }
+        /**
+         * @param {?} internal
+         * @return {?}
+         */
+        prepareExternalUrl(internal) {
+            if (internal.startsWith('/') && this.internalBaseHref.endsWith('/')) {
+                return this.internalBaseHref + internal.substring(1);
+            }
+            return this.internalBaseHref + internal;
+        }
+        /**
+         * @param {?} ctx
+         * @param {?} title
+         * @param {?} path
+         * @param {?} query
+         * @return {?}
+         */
+        pushState(ctx, title, path, query) {
+            // Add state change to changes array
+            this.stateChanges.push(ctx);
+            this.internalTitle = title;
             /** @type {?} */
-            const nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
-            this.simulatePopState(nextUrl);
+            const url = path + (query.length > 0 ? ('?' + query) : '');
+            this.internalPath = url;
+            /** @type {?} */
+            const externalUrl = this.prepareExternalUrl(url);
+            this.urlChanges.push(externalUrl);
+        }
+        /**
+         * @param {?} ctx
+         * @param {?} title
+         * @param {?} path
+         * @param {?} query
+         * @return {?}
+         */
+        replaceState(ctx, title, path, query) {
+            // Reset the last index of stateChanges to the ctx (state) object
+            this.stateChanges[(this.stateChanges.length || 1) - 1] = ctx;
+            this.internalTitle = title;
+            /** @type {?} */
+            const url = path + (query.length > 0 ? ('?' + query) : '');
+            this.internalPath = url;
+            /** @type {?} */
+            const externalUrl = this.prepareExternalUrl(url);
+            this.urlChanges.push('replace: ' + externalUrl);
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onPopState(fn) {
+            this._subject.subscribe({ next: fn });
+        }
+        /**
+         * @return {?}
+         */
+        getBaseHref() {
+            return this.internalBaseHref;
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            if (this.urlChanges.length > 0) {
+                this.urlChanges.pop();
+                this.stateChanges.pop();
+                /** @type {?} */
+                const nextUrl = this.urlChanges.length > 0 ? this.urlChanges[this.urlChanges.length - 1] : '';
+                this.simulatePopState(nextUrl);
+            }
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            throw 'not implemented';
+        }
+        /**
+         * @return {?}
+         */
+        getState() {
+            return this.stateChanges[(this.stateChanges.length || 1) - 1];
         }
     }
-    /**
-     * @return {?}
-     */
-    forward() {
-        throw 'not implemented';
-    }
-    /**
-     * @return {?}
-     */
-    getState() {
-        return this.stateChanges[(this.stateChanges.length || 1) - 1];
-    }
-}
-MockLocationStrategy.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-MockLocationStrategy.ctorParameters = () => [];
-/** @nocollapse */ MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
-/** @nocollapse */ MockLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
+    MockLocationStrategy.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    MockLocationStrategy.ctorParameters = () => [];
+    /** @nocollapse */ MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
+    /** @nocollapse */ MockLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
+    return MockLocationStrategy;
+})();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
     }], function () { return []; }, null); })();
@@ -575,171 +592,179 @@ const MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION
  *
  * \@publicApi
  */
-class MockPlatformLocation {
+let MockPlatformLocation = /** @class */ (() => {
     /**
-     * @param {?=} config
+     * Mock implementation of URL state.
+     *
+     * \@publicApi
      */
-    constructor(config) {
-        this.baseHref = '';
-        this.hashUpdate = new Subject();
-        this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
-        if (config) {
-            this.baseHref = config.appBaseHref || '';
+    class MockPlatformLocation {
+        /**
+         * @param {?=} config
+         */
+        constructor(config) {
+            this.baseHref = '';
+            this.hashUpdate = new Subject();
+            this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
+            if (config) {
+                this.baseHref = config.appBaseHref || '';
+                /** @type {?} */
+                const parsedChanges = this.parseChanges(null, config.startUrl || 'http://<empty>/', this.baseHref);
+                this.urlChanges[0] = Object.assign({}, parsedChanges);
+            }
+        }
+        /**
+         * @return {?}
+         */
+        get hostname() {
+            return this.urlChanges[0].hostname;
+        }
+        /**
+         * @return {?}
+         */
+        get protocol() {
+            return this.urlChanges[0].protocol;
+        }
+        /**
+         * @return {?}
+         */
+        get port() {
+            return this.urlChanges[0].port;
+        }
+        /**
+         * @return {?}
+         */
+        get pathname() {
+            return this.urlChanges[0].pathname;
+        }
+        /**
+         * @return {?}
+         */
+        get search() {
+            return this.urlChanges[0].search;
+        }
+        /**
+         * @return {?}
+         */
+        get hash() {
+            return this.urlChanges[0].hash;
+        }
+        /**
+         * @return {?}
+         */
+        get state() {
+            return this.urlChanges[0].state;
+        }
+        /**
+         * @return {?}
+         */
+        getBaseHrefFromDOM() {
+            return this.baseHref;
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onPopState(fn) {
+            // No-op: a state stack is not implemented, so
+            // no events will ever come.
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onHashChange(fn) {
+            this.hashUpdate.subscribe(fn);
+        }
+        /**
+         * @return {?}
+         */
+        get href() {
             /** @type {?} */
-            const parsedChanges = this.parseChanges(null, config.startUrl || 'http://<empty>/', this.baseHref);
-            this.urlChanges[0] = Object.assign({}, parsedChanges);
+            let url = `${this.protocol}//${this.hostname}${this.port ? ':' + this.port : ''}`;
+            url += `${this.pathname === '/' ? '' : this.pathname}${this.search}${this.hash}`;
+            return url;
+        }
+        /**
+         * @return {?}
+         */
+        get url() {
+            return `${this.pathname}${this.search}${this.hash}`;
+        }
+        /**
+         * @private
+         * @param {?} state
+         * @param {?} url
+         * @param {?=} baseHref
+         * @return {?}
+         */
+        parseChanges(state, url, baseHref = '') {
+            // When the `history.state` value is stored, it is always copied.
+            state = JSON.parse(JSON.stringify(state));
+            return Object.assign(Object.assign({}, parseUrl(url, baseHref)), { state });
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} newUrl
+         * @return {?}
+         */
+        replaceState(state, title, newUrl) {
+            const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
+            this.urlChanges[0] = Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState });
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} newUrl
+         * @return {?}
+         */
+        pushState(state, title, newUrl) {
+            const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
+            this.urlChanges.unshift(Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState }));
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            throw new Error('Not implemented');
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            /** @type {?} */
+            const oldUrl = this.url;
+            /** @type {?} */
+            const oldHash = this.hash;
+            this.urlChanges.shift();
+            /** @type {?} */
+            const newHash = this.hash;
+            if (oldHash !== newHash) {
+                scheduleMicroTask((/**
+                 * @return {?}
+                 */
+                () => this.hashUpdate.next((/** @type {?} */ ({ type: 'hashchange', state: null, oldUrl, newUrl: this.url })))));
+            }
+        }
+        /**
+         * @return {?}
+         */
+        getState() {
+            return this.state;
         }
     }
-    /**
-     * @return {?}
-     */
-    get hostname() {
-        return this.urlChanges[0].hostname;
-    }
-    /**
-     * @return {?}
-     */
-    get protocol() {
-        return this.urlChanges[0].protocol;
-    }
-    /**
-     * @return {?}
-     */
-    get port() {
-        return this.urlChanges[0].port;
-    }
-    /**
-     * @return {?}
-     */
-    get pathname() {
-        return this.urlChanges[0].pathname;
-    }
-    /**
-     * @return {?}
-     */
-    get search() {
-        return this.urlChanges[0].search;
-    }
-    /**
-     * @return {?}
-     */
-    get hash() {
-        return this.urlChanges[0].hash;
-    }
-    /**
-     * @return {?}
-     */
-    get state() {
-        return this.urlChanges[0].state;
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHrefFromDOM() {
-        return this.baseHref;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        // No-op: a state stack is not implemented, so
-        // no events will ever come.
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onHashChange(fn) {
-        this.hashUpdate.subscribe(fn);
-    }
-    /**
-     * @return {?}
-     */
-    get href() {
-        /** @type {?} */
-        let url = `${this.protocol}//${this.hostname}${this.port ? ':' + this.port : ''}`;
-        url += `${this.pathname === '/' ? '' : this.pathname}${this.search}${this.hash}`;
-        return url;
-    }
-    /**
-     * @return {?}
-     */
-    get url() {
-        return `${this.pathname}${this.search}${this.hash}`;
-    }
-    /**
-     * @private
-     * @param {?} state
-     * @param {?} url
-     * @param {?=} baseHref
-     * @return {?}
-     */
-    parseChanges(state, url, baseHref = '') {
-        // When the `history.state` value is stored, it is always copied.
-        state = JSON.parse(JSON.stringify(state));
-        return Object.assign(Object.assign({}, parseUrl(url, baseHref)), { state });
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} newUrl
-     * @return {?}
-     */
-    replaceState(state, title, newUrl) {
-        const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges[0] = Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState });
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} newUrl
-     * @return {?}
-     */
-    pushState(state, title, newUrl) {
-        const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges.unshift(Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState }));
-    }
-    /**
-     * @return {?}
-     */
-    forward() {
-        throw new Error('Not implemented');
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        /** @type {?} */
-        const oldUrl = this.url;
-        /** @type {?} */
-        const oldHash = this.hash;
-        this.urlChanges.shift();
-        /** @type {?} */
-        const newHash = this.hash;
-        if (oldHash !== newHash) {
-            scheduleMicroTask((/**
-             * @return {?}
-             */
-            () => this.hashUpdate.next((/** @type {?} */ ({ type: 'hashchange', state: null, oldUrl, newUrl: this.url })))));
-        }
-    }
-    /**
-     * @return {?}
-     */
-    getState() {
-        return this.state;
-    }
-}
-MockPlatformLocation.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-MockPlatformLocation.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
-];
-/** @nocollapse */ MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
-/** @nocollapse */ MockPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac });
+    MockPlatformLocation.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    MockPlatformLocation.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
+    ];
+    /** @nocollapse */ MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
+    /** @nocollapse */ MockPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac });
+    return MockPlatformLocation;
+})();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{

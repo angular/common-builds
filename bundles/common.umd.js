@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -352,28 +352,28 @@
             get: function () {
                 return this.location.href;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "protocol", {
             get: function () {
                 return this.location.protocol;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "hostname", {
             get: function () {
                 return this.location.hostname;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "port", {
             get: function () {
                 return this.location.port;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "pathname", {
@@ -383,21 +383,21 @@
             set: function (newPath) {
                 this.location.pathname = newPath;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "search", {
             get: function () {
                 return this.location.search;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "hash", {
             get: function () {
                 return this.location.hash;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         BrowserPlatformLocation.prototype.pushState = function (state, title, url) {
@@ -2938,7 +2938,7 @@
                 this._applyClasses(this._initialClasses);
                 this._applyClasses(this._rawClass);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgClass.prototype, "ngClass", {
@@ -2957,7 +2957,7 @@
                     }
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         NgClass.prototype.ngDoCheck = function () {
@@ -3191,28 +3191,28 @@
             get: function () {
                 return this.index === 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "last", {
             get: function () {
                 return this.index === this.count - 1;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "even", {
             get: function () {
                 return this.index % 2 === 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "odd", {
             get: function () {
                 return !this.even;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return NgForOfContext;
@@ -3333,7 +3333,7 @@
                 this._ngForOf = ngForOf;
                 this._ngForOfDirty = true;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
@@ -3367,7 +3367,7 @@
                 }
                 this._trackByFn = fn;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
@@ -3383,7 +3383,7 @@
                     this._template = value;
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3646,7 +3646,7 @@
                 this._context.$implicit = this._context.ngIf = condition;
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgIf.prototype, "ngIfThen", {
@@ -3659,7 +3659,7 @@
                 this._thenViewRef = null; // clear previous view if any.
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgIf.prototype, "ngIfElse", {
@@ -3672,7 +3672,7 @@
                 this._elseViewRef = null; // clear previous view if any.
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         NgIf.prototype._updateView = function () {
@@ -3848,7 +3848,7 @@
                     this._updateDefaultCases(true);
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /** @internal */
@@ -4027,7 +4027,7 @@
                 this._switchValue = value;
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         NgPlural.prototype.addCase = function (value, switchView) {
@@ -4150,7 +4150,7 @@
                     this._differ = this._differs.find(values).create();
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         NgStyle.prototype.ngDoCheck = function () {
@@ -5495,7 +5495,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.0.0-next.7+17.sha-2418c6a');
+    var VERSION = new i0.Version('10.0.0-next.7+43.sha-f16ca1c');
 
     /**
      * @license

@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -398,206 +398,220 @@ function _maybeConvertBody(responseType, body) {
  *
  *
  */
-class HttpClientTestingBackend {
-    constructor() {
-        /**
-         * List of pending requests which have not yet been expected.
-         */
-        this.open = [];
-    }
+let HttpClientTestingBackend = /** @class */ (() => {
     /**
-     * Handle an incoming request by queueing it in the list of open requests.
-     * @param {?} req
-     * @return {?}
-     */
-    handle(req) {
-        return new Observable((/**
-         * @param {?} observer
-         * @return {?}
-         */
-        (observer) => {
-            /** @type {?} */
-            const testReq = new TestRequest(req, observer);
-            this.open.push(testReq);
-            observer.next((/** @type {?} */ ({ type: HttpEventType.Sent })));
-            return (/**
-             * @return {?}
-             */
-            () => {
-                testReq._cancelled = true;
-            });
-        }));
-    }
-    /**
-     * Helper function to search for requests in the list of open requests.
-     * @private
-     * @param {?} match
-     * @return {?}
-     */
-    _match(match) {
-        if (typeof match === 'string') {
-            return this.open.filter((/**
-             * @param {?} testReq
-             * @return {?}
-             */
-            testReq => testReq.request.urlWithParams === match));
-        }
-        else if (typeof match === 'function') {
-            return this.open.filter((/**
-             * @param {?} testReq
-             * @return {?}
-             */
-            testReq => match(testReq.request)));
-        }
-        else {
-            return this.open.filter((/**
-             * @param {?} testReq
-             * @return {?}
-             */
-            testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                (!match.url || testReq.request.urlWithParams === match.url)));
-        }
-    }
-    /**
-     * Search for requests in the list of open requests, and return all that match
-     * without asserting anything about the number of matches.
-     * @param {?} match
-     * @return {?}
-     */
-    match(match) {
-        /** @type {?} */
-        const results = this._match(match);
-        results.forEach((/**
-         * @param {?} result
-         * @return {?}
-         */
-        result => {
-            /** @type {?} */
-            const index = this.open.indexOf(result);
-            if (index !== -1) {
-                this.open.splice(index, 1);
-            }
-        }));
-        return results;
-    }
-    /**
-     * Expect that a single outstanding request matches the given matcher, and return
-     * it.
+     * A testing backend for `HttpClient` which both acts as an `HttpBackend`
+     * and as the `HttpTestingController`.
      *
-     * Requests returned through this API will no longer be in the list of open requests,
-     * and thus will not match twice.
-     * @param {?} match
-     * @param {?=} description
-     * @return {?}
+     * `HttpClientTestingBackend` works by keeping a list of all open requests.
+     * As requests come in, they're added to the list. Users can assert that specific
+     * requests were made and then flush them. In the end, a verify() method asserts
+     * that no unexpected requests were made.
+     *
+     *
      */
-    expectOne(match, description) {
-        description = description || this.descriptionFromMatcher(match);
-        /** @type {?} */
-        const matches = this.match(match);
-        if (matches.length > 1) {
-            throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
+    class HttpClientTestingBackend {
+        constructor() {
+            /**
+             * List of pending requests which have not yet been expected.
+             */
+            this.open = [];
         }
-        if (matches.length === 0) {
+        /**
+         * Handle an incoming request by queueing it in the list of open requests.
+         * @param {?} req
+         * @return {?}
+         */
+        handle(req) {
+            return new Observable((/**
+             * @param {?} observer
+             * @return {?}
+             */
+            (observer) => {
+                /** @type {?} */
+                const testReq = new TestRequest(req, observer);
+                this.open.push(testReq);
+                observer.next((/** @type {?} */ ({ type: HttpEventType.Sent })));
+                return (/**
+                 * @return {?}
+                 */
+                () => {
+                    testReq._cancelled = true;
+                });
+            }));
+        }
+        /**
+         * Helper function to search for requests in the list of open requests.
+         * @private
+         * @param {?} match
+         * @return {?}
+         */
+        _match(match) {
+            if (typeof match === 'string') {
+                return this.open.filter((/**
+                 * @param {?} testReq
+                 * @return {?}
+                 */
+                testReq => testReq.request.urlWithParams === match));
+            }
+            else if (typeof match === 'function') {
+                return this.open.filter((/**
+                 * @param {?} testReq
+                 * @return {?}
+                 */
+                testReq => match(testReq.request)));
+            }
+            else {
+                return this.open.filter((/**
+                 * @param {?} testReq
+                 * @return {?}
+                 */
+                testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                    (!match.url || testReq.request.urlWithParams === match.url)));
+            }
+        }
+        /**
+         * Search for requests in the list of open requests, and return all that match
+         * without asserting anything about the number of matches.
+         * @param {?} match
+         * @return {?}
+         */
+        match(match) {
             /** @type {?} */
-            let message = `Expected one matching request for criteria "${description}", found none.`;
-            if (this.open.length > 0) {
+            const results = this._match(match);
+            results.forEach((/**
+             * @param {?} result
+             * @return {?}
+             */
+            result => {
+                /** @type {?} */
+                const index = this.open.indexOf(result);
+                if (index !== -1) {
+                    this.open.splice(index, 1);
+                }
+            }));
+            return results;
+        }
+        /**
+         * Expect that a single outstanding request matches the given matcher, and return
+         * it.
+         *
+         * Requests returned through this API will no longer be in the list of open requests,
+         * and thus will not match twice.
+         * @param {?} match
+         * @param {?=} description
+         * @return {?}
+         */
+        expectOne(match, description) {
+            description = description || this.descriptionFromMatcher(match);
+            /** @type {?} */
+            const matches = this.match(match);
+            if (matches.length > 1) {
+                throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
+            }
+            if (matches.length === 0) {
+                /** @type {?} */
+                let message = `Expected one matching request for criteria "${description}", found none.`;
+                if (this.open.length > 0) {
+                    // Show the methods and URLs of open requests in the error, for convenience.
+                    /** @type {?} */
+                    const requests = this.open
+                        .map((/**
+                     * @param {?} testReq
+                     * @return {?}
+                     */
+                    testReq => {
+                        /** @type {?} */
+                        const url = testReq.request.urlWithParams;
+                        /** @type {?} */
+                        const method = testReq.request.method;
+                        return `${method} ${url}`;
+                    }))
+                        .join(', ');
+                    message += ` Requests received are: ${requests}.`;
+                }
+                throw new Error(message);
+            }
+            return matches[0];
+        }
+        /**
+         * Expect that no outstanding requests match the given matcher, and throw an error
+         * if any do.
+         * @param {?} match
+         * @param {?=} description
+         * @return {?}
+         */
+        expectNone(match, description) {
+            description = description || this.descriptionFromMatcher(match);
+            /** @type {?} */
+            const matches = this.match(match);
+            if (matches.length > 0) {
+                throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
+            }
+        }
+        /**
+         * Validate that there are no outstanding requests.
+         * @param {?=} opts
+         * @return {?}
+         */
+        verify(opts = {}) {
+            /** @type {?} */
+            let open = this.open;
+            // It's possible that some requests may be cancelled, and this is expected.
+            // The user can ask to ignore open requests which have been cancelled.
+            if (opts.ignoreCancelled) {
+                open = open.filter((/**
+                 * @param {?} testReq
+                 * @return {?}
+                 */
+                testReq => !testReq.cancelled));
+            }
+            if (open.length > 0) {
                 // Show the methods and URLs of open requests in the error, for convenience.
                 /** @type {?} */
-                const requests = this.open
-                    .map((/**
+                const requests = open.map((/**
                  * @param {?} testReq
                  * @return {?}
                  */
                 testReq => {
                     /** @type {?} */
-                    const url = testReq.request.urlWithParams;
+                    const url = testReq.request.urlWithParams.split('?')[0];
                     /** @type {?} */
                     const method = testReq.request.method;
                     return `${method} ${url}`;
                 }))
                     .join(', ');
-                message += ` Requests received are: ${requests}.`;
+                throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
             }
-            throw new Error(message);
         }
-        return matches[0];
-    }
-    /**
-     * Expect that no outstanding requests match the given matcher, and throw an error
-     * if any do.
-     * @param {?} match
-     * @param {?=} description
-     * @return {?}
-     */
-    expectNone(match, description) {
-        description = description || this.descriptionFromMatcher(match);
-        /** @type {?} */
-        const matches = this.match(match);
-        if (matches.length > 0) {
-            throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
-        }
-    }
-    /**
-     * Validate that there are no outstanding requests.
-     * @param {?=} opts
-     * @return {?}
-     */
-    verify(opts = {}) {
-        /** @type {?} */
-        let open = this.open;
-        // It's possible that some requests may be cancelled, and this is expected.
-        // The user can ask to ignore open requests which have been cancelled.
-        if (opts.ignoreCancelled) {
-            open = open.filter((/**
-             * @param {?} testReq
-             * @return {?}
-             */
-            testReq => !testReq.cancelled));
-        }
-        if (open.length > 0) {
-            // Show the methods and URLs of open requests in the error, for convenience.
-            /** @type {?} */
-            const requests = open.map((/**
-             * @param {?} testReq
-             * @return {?}
-             */
-            testReq => {
+        /**
+         * @private
+         * @param {?} matcher
+         * @return {?}
+         */
+        descriptionFromMatcher(matcher) {
+            if (typeof matcher === 'string') {
+                return `Match URL: ${matcher}`;
+            }
+            else if (typeof matcher === 'object') {
                 /** @type {?} */
-                const url = testReq.request.urlWithParams.split('?')[0];
+                const method = matcher.method || '(any)';
                 /** @type {?} */
-                const method = testReq.request.method;
-                return `${method} ${url}`;
-            }))
-                .join(', ');
-            throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
+                const url = matcher.url || '(any)';
+                return `Match method: ${method}, URL: ${url}`;
+            }
+            else {
+                return `Match by function: ${matcher.name}`;
+            }
         }
     }
-    /**
-     * @private
-     * @param {?} matcher
-     * @return {?}
-     */
-    descriptionFromMatcher(matcher) {
-        if (typeof matcher === 'string') {
-            return `Match URL: ${matcher}`;
-        }
-        else if (typeof matcher === 'object') {
-            /** @type {?} */
-            const method = matcher.method || '(any)';
-            /** @type {?} */
-            const url = matcher.url || '(any)';
-            return `Match method: ${method}, URL: ${url}`;
-        }
-        else {
-            return `Match by function: ${matcher.name}`;
-        }
-    }
-}
-HttpClientTestingBackend.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */ HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
-/** @nocollapse */ HttpClientTestingBackend.ɵprov = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac });
+    HttpClientTestingBackend.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */ HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
+    /** @nocollapse */ HttpClientTestingBackend.ɵprov = ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac });
+    return HttpClientTestingBackend;
+})();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientTestingBackend, [{
         type: Injectable
     }], null, null); })();
@@ -629,28 +643,38 @@ if (false) {
  *
  * \@publicApi
  */
-class HttpClientTestingModule {
-}
-HttpClientTestingModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    HttpClientModule,
-                ],
-                providers: [
-                    HttpClientTestingBackend,
-                    { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-                    { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-                ],
-            },] },
-];
-/** @nocollapse */ HttpClientTestingModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientTestingModule });
-/** @nocollapse */ HttpClientTestingModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
-        HttpClientTestingBackend,
-        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-    ], imports: [[
-            HttpClientModule,
-        ]] });
+let HttpClientTestingModule = /** @class */ (() => {
+    /**
+     * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
+     *
+     * Inject `HttpTestingController` to expect and flush requests in your tests.
+     *
+     * \@publicApi
+     */
+    class HttpClientTestingModule {
+    }
+    HttpClientTestingModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        HttpClientModule,
+                    ],
+                    providers: [
+                        HttpClientTestingBackend,
+                        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                    ],
+                },] },
+    ];
+    /** @nocollapse */ HttpClientTestingModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientTestingModule });
+    /** @nocollapse */ HttpClientTestingModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+            HttpClientTestingBackend,
+            { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+            { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+        ], imports: [[
+                HttpClientModule,
+            ]] });
+    return HttpClientTestingModule;
+})();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] }); })();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,

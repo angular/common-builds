@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -527,49 +527,49 @@
             get: function () {
                 return this.urlChanges[0].hostname;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "protocol", {
             get: function () {
                 return this.urlChanges[0].protocol;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "port", {
             get: function () {
                 return this.urlChanges[0].port;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "pathname", {
             get: function () {
                 return this.urlChanges[0].pathname;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "search", {
             get: function () {
                 return this.urlChanges[0].search;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "hash", {
             get: function () {
                 return this.urlChanges[0].hash;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "state", {
             get: function () {
                 return this.urlChanges[0].state;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         MockPlatformLocation.prototype.getBaseHrefFromDOM = function () {
@@ -588,14 +588,14 @@
                 url += "" + (this.pathname === '/' ? '' : this.pathname) + this.search + this.hash;
                 return url;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "url", {
             get: function () {
                 return "" + this.pathname + this.search + this.hash;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         MockPlatformLocation.prototype.parseChanges = function (state, url, baseHref) {
