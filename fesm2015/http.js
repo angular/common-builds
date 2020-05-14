@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1589,296 +1589,344 @@ function addBody(options, body) {
  *
  * \@publicApi
  */
-class HttpClient {
+let HttpClient = /** @class */ (() => {
     /**
-     * @param {?} handler
+     * Performs HTTP requests.
+     * This service is available as an injectable class, with methods to perform HTTP requests.
+     * Each request method has multiple signatures, and the return type varies based on
+     * the signature that is called (mainly the values of `observe` and `responseType`).
+     *
+     * Note that the `responseType` *options* value is a String that identifies the
+     * single data type of the response.
+     * A single overload version of the method handles each response type.
+     * The value of `responseType` cannot be a union, as the combined signature could imply.
+     *
+     * \@usageNotes
+     * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
+     *
+     * ### HTTP Request Example
+     *
+     * ```
+     *  // GET heroes whose name contains search term
+     * searchHeroes(term: string): observable<Hero[]>{
+     *
+     *  const params = new HttpParams({fromString: 'name=term'});
+     *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
+     * }
+     * ```
+     * ### JSONP Example
+     * ```
+     * requestJsonp(url, callback = 'callback') {
+     *  return this.httpClient.jsonp(this.heroesURL, callback);
+     * }
+     * ```
+     *
+     * ### PATCH Example
+     * ```
+     * // PATCH one of the heroes' name
+     * patchHero (id: number, heroName: string): Observable<{}> {
+     * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
+     *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
+     *    .pipe(catchError(this.handleError('patchHero')));
+     * }
+     * ```
+     *
+     * @see [HTTP Guide](guide/http)
+     *
+     * \@publicApi
      */
-    constructor(handler) {
-        this.handler = handler;
-    }
-    /**
-     * Constructs an observable for a generic HTTP request that, when subscribed,
-     * fires the request through the chain of registered interceptors and on to the
-     * server.
-     *
-     * You can pass an `HttpRequest` directly as the only parameter. In this case,
-     * the call returns an observable of the raw `HttpEvent` stream.
-     *
-     * Alternatively you can pass an HTTP method as the first parameter,
-     * a URL string as the second, and an options hash containing the request body as the third.
-     * See `addBody()`. In this case, the specified `responseType` and `observe` options determine the
-     * type of returned observable.
-     *   * The `responseType` value determines how a successful response body is parsed.
-     *   * If `responseType` is the default `json`, you can pass a type interface for the resulting
-     * object as a type parameter to the call.
-     *
-     * The `observe` value determines the return type, according to what you are interested in
-     * observing.
-     *   * An `observe` value of events returns an observable of the raw `HttpEvent` stream, including
-     * progress events by default.
-     *   * An `observe` value of response returns an observable of `HttpResponse<T>`,
-     * where the `T` parameter depends on the `responseType` and any optionally provided type
-     * parameter.
-     *   * An `observe` value of body returns an observable of `<T>` with the same `T` body type.
-     *
-     * @param {?} first
-     * @param {?=} url
-     * @param {?=} options
-     * @return {?}
-     */
-    request(first, url, options = {}) {
-        /** @type {?} */
-        let req;
-        // First, check whether the primary argument is an instance of `HttpRequest`.
-        if (first instanceof HttpRequest) {
-            // It is. The other arguments must be undefined (per the signatures) and can be
-            // ignored.
-            req = first;
+    class HttpClient {
+        /**
+         * @param {?} handler
+         */
+        constructor(handler) {
+            this.handler = handler;
         }
-        else {
-            // It's a string, so it represents a URL. Construct a request based on it,
-            // and incorporate the remaining arguments (assuming `GET` unless a method is
-            // provided.
-            // Figure out the headers.
+        /**
+         * Constructs an observable for a generic HTTP request that, when subscribed,
+         * fires the request through the chain of registered interceptors and on to the
+         * server.
+         *
+         * You can pass an `HttpRequest` directly as the only parameter. In this case,
+         * the call returns an observable of the raw `HttpEvent` stream.
+         *
+         * Alternatively you can pass an HTTP method as the first parameter,
+         * a URL string as the second, and an options hash containing the request body as the third.
+         * See `addBody()`. In this case, the specified `responseType` and `observe` options determine the
+         * type of returned observable.
+         *   * The `responseType` value determines how a successful response body is parsed.
+         *   * If `responseType` is the default `json`, you can pass a type interface for the resulting
+         * object as a type parameter to the call.
+         *
+         * The `observe` value determines the return type, according to what you are interested in
+         * observing.
+         *   * An `observe` value of events returns an observable of the raw `HttpEvent` stream, including
+         * progress events by default.
+         *   * An `observe` value of response returns an observable of `HttpResponse<T>`,
+         * where the `T` parameter depends on the `responseType` and any optionally provided type
+         * parameter.
+         *   * An `observe` value of body returns an observable of `<T>` with the same `T` body type.
+         *
+         * @param {?} first
+         * @param {?=} url
+         * @param {?=} options
+         * @return {?}
+         */
+        request(first, url, options = {}) {
             /** @type {?} */
-            let headers = undefined;
-            if (options.headers instanceof HttpHeaders) {
-                headers = options.headers;
+            let req;
+            // First, check whether the primary argument is an instance of `HttpRequest`.
+            if (first instanceof HttpRequest) {
+                // It is. The other arguments must be undefined (per the signatures) and can be
+                // ignored.
+                req = first;
             }
             else {
-                headers = new HttpHeaders(options.headers);
-            }
-            // Sort out parameters.
-            /** @type {?} */
-            let params = undefined;
-            if (!!options.params) {
-                if (options.params instanceof HttpParams) {
-                    params = options.params;
+                // It's a string, so it represents a URL. Construct a request based on it,
+                // and incorporate the remaining arguments (assuming `GET` unless a method is
+                // provided.
+                // Figure out the headers.
+                /** @type {?} */
+                let headers = undefined;
+                if (options.headers instanceof HttpHeaders) {
+                    headers = options.headers;
                 }
                 else {
-                    params = new HttpParams((/** @type {?} */ ({ fromObject: options.params })));
+                    headers = new HttpHeaders(options.headers);
                 }
+                // Sort out parameters.
+                /** @type {?} */
+                let params = undefined;
+                if (!!options.params) {
+                    if (options.params instanceof HttpParams) {
+                        params = options.params;
+                    }
+                    else {
+                        params = new HttpParams((/** @type {?} */ ({ fromObject: options.params })));
+                    }
+                }
+                // Construct the request.
+                req = new HttpRequest(first, (/** @type {?} */ (url)), (options.body !== undefined ? options.body : null), {
+                    headers,
+                    params,
+                    reportProgress: options.reportProgress,
+                    // By default, JSON is assumed to be returned for all calls.
+                    responseType: options.responseType || 'json',
+                    withCredentials: options.withCredentials,
+                });
             }
-            // Construct the request.
-            req = new HttpRequest(first, (/** @type {?} */ (url)), (options.body !== undefined ? options.body : null), {
-                headers,
-                params,
-                reportProgress: options.reportProgress,
-                // By default, JSON is assumed to be returned for all calls.
-                responseType: options.responseType || 'json',
-                withCredentials: options.withCredentials,
+            // Start with an Observable.of() the initial request, and run the handler (which
+            // includes all interceptors) inside a concatMap(). This way, the handler runs
+            // inside an Observable chain, which causes interceptors to be re-run on every
+            // subscription (this also makes retries re-run the handler, including interceptors).
+            /** @type {?} */
+            const events$ = of(req).pipe(concatMap((/**
+             * @param {?} req
+             * @return {?}
+             */
+            (req) => this.handler.handle(req))));
+            // If coming via the API signature which accepts a previously constructed HttpRequest,
+            // the only option is to get the event stream. Otherwise, return the event stream if
+            // that is what was requested.
+            if (first instanceof HttpRequest || options.observe === 'events') {
+                return events$;
+            }
+            // The requested stream contains either the full response or the body. In either
+            // case, the first step is to filter the event stream to extract a stream of
+            // responses(s).
+            /** @type {?} */
+            const res$ = (/** @type {?} */ (events$.pipe(filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => event instanceof HttpResponse)))));
+            // Decide which stream to return.
+            switch (options.observe || 'body') {
+                case 'body':
+                    // The requested stream is the body. Map the response stream to the response
+                    // body. This could be done more simply, but a misbehaving interceptor might
+                    // transform the response body into a different format and ignore the requested
+                    // responseType. Guard against this by validating that the response is of the
+                    // requested type.
+                    switch (req.responseType) {
+                        case 'arraybuffer':
+                            return res$.pipe(map((/**
+                             * @param {?} res
+                             * @return {?}
+                             */
+                            (res) => {
+                                // Validate that the body is an ArrayBuffer.
+                                if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
+                                    throw new Error('Response is not an ArrayBuffer.');
+                                }
+                                return res.body;
+                            })));
+                        case 'blob':
+                            return res$.pipe(map((/**
+                             * @param {?} res
+                             * @return {?}
+                             */
+                            (res) => {
+                                // Validate that the body is a Blob.
+                                if (res.body !== null && !(res.body instanceof Blob)) {
+                                    throw new Error('Response is not a Blob.');
+                                }
+                                return res.body;
+                            })));
+                        case 'text':
+                            return res$.pipe(map((/**
+                             * @param {?} res
+                             * @return {?}
+                             */
+                            (res) => {
+                                // Validate that the body is a string.
+                                if (res.body !== null && typeof res.body !== 'string') {
+                                    throw new Error('Response is not a string.');
+                                }
+                                return res.body;
+                            })));
+                        case 'json':
+                        default:
+                            // No validation needed for JSON responses, as they can be of any type.
+                            return res$.pipe(map((/**
+                             * @param {?} res
+                             * @return {?}
+                             */
+                            (res) => res.body)));
+                    }
+                case 'response':
+                    // The response stream was requested directly, so return it.
+                    return res$;
+                default:
+                    // Guard against new future observe types being added.
+                    throw new Error(`Unreachable: unhandled observe type ${options.observe}}`);
+            }
+        }
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `DELETE` request to execute on the server. See the individual overloads for
+         * details on the return type.
+         *
+         * @param {?} url     The endpoint URL.
+         * @param {?=} options The HTTP options to send with the request.
+         *
+         * @return {?}
+         */
+        delete(url, options = {}) {
+            return this.request('DELETE', url, (/** @type {?} */ (options)));
+        }
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `GET` request to execute on the server. See the individual overloads for
+         * details on the return type.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        get(url, options = {}) {
+            return this.request('GET', url, (/** @type {?} */ (options)));
+        }
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `HEAD` request to execute on the server. The `HEAD` method returns
+         * meta information about the resource without transferring the
+         * resource itself. See the individual overloads for
+         * details on the return type.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        head(url, options = {}) {
+            return this.request('HEAD', url, (/** @type {?} */ (options)));
+        }
+        /**
+         * Constructs an `Observable` that, when subscribed, causes a request with the special method
+         * `JSONP` to be dispatched via the interceptor pipeline.
+         * The [JSONP pattern](https://en.wikipedia.org/wiki/JSONP) works around limitations of certain
+         * API endpoints that don't support newer,
+         * and preferable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protocol.
+         * JSONP treats the endpoint API as a JavaScript file and tricks the browser to process the
+         * requests even if the API endpoint is not located on the same domain (origin) as the client-side
+         * application making the request.
+         * The endpoint API must support JSONP callback for JSONP requests to work.
+         * The resource API returns the JSON response wrapped in a callback function.
+         * You can pass the callback function name as one of the query parameters.
+         * Note that JSONP requests can only be used with `GET` requests.
+         *
+         * @template T
+         * @param {?} url The resource URL.
+         * @param {?} callbackParam The callback function name.
+         *
+         * @return {?}
+         */
+        jsonp(url, callbackParam) {
+            return this.request('JSONP', url, {
+                params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
+                observe: 'body',
+                responseType: 'json',
             });
         }
-        // Start with an Observable.of() the initial request, and run the handler (which
-        // includes all interceptors) inside a concatMap(). This way, the handler runs
-        // inside an Observable chain, which causes interceptors to be re-run on every
-        // subscription (this also makes retries re-run the handler, including interceptors).
-        /** @type {?} */
-        const events$ = of(req).pipe(concatMap((/**
-         * @param {?} req
+        /**
+         * Constructs an `Observable` that, when subscribed, causes the configured
+         * `OPTIONS` request to execute on the server. This method allows the client
+         * to determine the supported HTTP methods and other capabilites of an endpoint,
+         * without implying a resource action. See the individual overloads for
+         * details on the return type.
+         * @param {?} url
+         * @param {?=} options
          * @return {?}
          */
-        (req) => this.handler.handle(req))));
-        // If coming via the API signature which accepts a previously constructed HttpRequest,
-        // the only option is to get the event stream. Otherwise, return the event stream if
-        // that is what was requested.
-        if (first instanceof HttpRequest || options.observe === 'events') {
-            return events$;
+        options(url, options = {}) {
+            return this.request('OPTIONS', url, (/** @type {?} */ (options)));
         }
-        // The requested stream contains either the full response or the body. In either
-        // case, the first step is to filter the event stream to extract a stream of
-        // responses(s).
-        /** @type {?} */
-        const res$ = (/** @type {?} */ (events$.pipe(filter((/**
-         * @param {?} event
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `PATCH` request to execute on the server. See the individual overloads for
+         * details on the return type.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
          * @return {?}
          */
-        (event) => event instanceof HttpResponse)))));
-        // Decide which stream to return.
-        switch (options.observe || 'body') {
-            case 'body':
-                // The requested stream is the body. Map the response stream to the response
-                // body. This could be done more simply, but a misbehaving interceptor might
-                // transform the response body into a different format and ignore the requested
-                // responseType. Guard against this by validating that the response is of the
-                // requested type.
-                switch (req.responseType) {
-                    case 'arraybuffer':
-                        return res$.pipe(map((/**
-                         * @param {?} res
-                         * @return {?}
-                         */
-                        (res) => {
-                            // Validate that the body is an ArrayBuffer.
-                            if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
-                                throw new Error('Response is not an ArrayBuffer.');
-                            }
-                            return res.body;
-                        })));
-                    case 'blob':
-                        return res$.pipe(map((/**
-                         * @param {?} res
-                         * @return {?}
-                         */
-                        (res) => {
-                            // Validate that the body is a Blob.
-                            if (res.body !== null && !(res.body instanceof Blob)) {
-                                throw new Error('Response is not a Blob.');
-                            }
-                            return res.body;
-                        })));
-                    case 'text':
-                        return res$.pipe(map((/**
-                         * @param {?} res
-                         * @return {?}
-                         */
-                        (res) => {
-                            // Validate that the body is a string.
-                            if (res.body !== null && typeof res.body !== 'string') {
-                                throw new Error('Response is not a string.');
-                            }
-                            return res.body;
-                        })));
-                    case 'json':
-                    default:
-                        // No validation needed for JSON responses, as they can be of any type.
-                        return res$.pipe(map((/**
-                         * @param {?} res
-                         * @return {?}
-                         */
-                        (res) => res.body)));
-                }
-            case 'response':
-                // The response stream was requested directly, so return it.
-                return res$;
-            default:
-                // Guard against new future observe types being added.
-                throw new Error(`Unreachable: unhandled observe type ${options.observe}}`);
+        patch(url, body, options = {}) {
+            return this.request('PATCH', url, addBody(options, body));
+        }
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `POST` request to execute on the server. The server responds with the location of
+         * the replaced resource. See the individual overloads for
+         * details on the return type.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
+         * @return {?}
+         */
+        post(url, body, options = {}) {
+            return this.request('POST', url, addBody(options, body));
+        }
+        /**
+         * Constructs an observable that, when subscribed, causes the configured
+         * `PUT` request to execute on the server. The `PUT` method replaces an existing resource
+         * with a new set of values.
+         * See the individual overloads for details on the return type.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
+         * @return {?}
+         */
+        put(url, body, options = {}) {
+            return this.request('PUT', url, addBody(options, body));
         }
     }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `DELETE` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     *
-     * @param {?} url     The endpoint URL.
-     * @param {?=} options The HTTP options to send with the request.
-     *
-     * @return {?}
-     */
-    delete(url, options = {}) {
-        return this.request('DELETE', url, (/** @type {?} */ (options)));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `GET` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     * @param {?} url
-     * @param {?=} options
-     * @return {?}
-     */
-    get(url, options = {}) {
-        return this.request('GET', url, (/** @type {?} */ (options)));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `HEAD` request to execute on the server. The `HEAD` method returns
-     * meta information about the resource without transferring the
-     * resource itself. See the individual overloads for
-     * details on the return type.
-     * @param {?} url
-     * @param {?=} options
-     * @return {?}
-     */
-    head(url, options = {}) {
-        return this.request('HEAD', url, (/** @type {?} */ (options)));
-    }
-    /**
-     * Constructs an `Observable` that, when subscribed, causes a request with the special method
-     * `JSONP` to be dispatched via the interceptor pipeline.
-     * The [JSONP pattern](https://en.wikipedia.org/wiki/JSONP) works around limitations of certain
-     * API endpoints that don't support newer,
-     * and preferable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protocol.
-     * JSONP treats the endpoint API as a JavaScript file and tricks the browser to process the
-     * requests even if the API endpoint is not located on the same domain (origin) as the client-side
-     * application making the request.
-     * The endpoint API must support JSONP callback for JSONP requests to work.
-     * The resource API returns the JSON response wrapped in a callback function.
-     * You can pass the callback function name as one of the query parameters.
-     * Note that JSONP requests can only be used with `GET` requests.
-     *
-     * @template T
-     * @param {?} url The resource URL.
-     * @param {?} callbackParam The callback function name.
-     *
-     * @return {?}
-     */
-    jsonp(url, callbackParam) {
-        return this.request('JSONP', url, {
-            params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
-            observe: 'body',
-            responseType: 'json',
-        });
-    }
-    /**
-     * Constructs an `Observable` that, when subscribed, causes the configured
-     * `OPTIONS` request to execute on the server. This method allows the client
-     * to determine the supported HTTP methods and other capabilites of an endpoint,
-     * without implying a resource action. See the individual overloads for
-     * details on the return type.
-     * @param {?} url
-     * @param {?=} options
-     * @return {?}
-     */
-    options(url, options = {}) {
-        return this.request('OPTIONS', url, (/** @type {?} */ (options)));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `PATCH` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     * @param {?} url
-     * @param {?} body
-     * @param {?=} options
-     * @return {?}
-     */
-    patch(url, body, options = {}) {
-        return this.request('PATCH', url, addBody(options, body));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `POST` request to execute on the server. The server responds with the location of
-     * the replaced resource. See the individual overloads for
-     * details on the return type.
-     * @param {?} url
-     * @param {?} body
-     * @param {?=} options
-     * @return {?}
-     */
-    post(url, body, options = {}) {
-        return this.request('POST', url, addBody(options, body));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `PUT` request to execute on the server. The `PUT` method replaces an existing resource
-     * with a new set of values.
-     * See the individual overloads for details on the return type.
-     * @param {?} url
-     * @param {?} body
-     * @param {?=} options
-     * @return {?}
-     */
-    put(url, body, options = {}) {
-        return this.request('PUT', url, addBody(options, body));
-    }
-}
-HttpClient.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HttpClient.ctorParameters = () => [
-    { type: HttpHandler }
-];
+    HttpClient.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpClient.ctorParameters = () => [
+        { type: HttpHandler }
+    ];
+    return HttpClient;
+})();
 if (false) {
     /**
      * @type {?}
@@ -1975,19 +2023,22 @@ if (false) {
  * @type {?}
  */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
-class NoopInterceptor {
-    /**
-     * @param {?} req
-     * @param {?} next
-     * @return {?}
-     */
-    intercept(req, next) {
-        return next.handle(req);
+let NoopInterceptor = /** @class */ (() => {
+    class NoopInterceptor {
+        /**
+         * @param {?} req
+         * @param {?} next
+         * @return {?}
+         */
+        intercept(req, next) {
+            return next.handle(req);
+        }
     }
-}
-NoopInterceptor.decorators = [
-    { type: Injectable }
-];
+    NoopInterceptor.decorators = [
+        { type: Injectable }
+    ];
+    return NoopInterceptor;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -2028,193 +2079,204 @@ class JsonpCallbackContext {
  *
  * \@publicApi
  */
-class JsonpClientBackend {
+let JsonpClientBackend = /** @class */ (() => {
     /**
-     * @param {?} callbackMap
-     * @param {?} document
-     */
-    constructor(callbackMap, document) {
-        this.callbackMap = callbackMap;
-        this.document = document;
-    }
-    /**
-     * Get the name of the next callback method, by incrementing the global `nextRequestId`.
-     * @private
-     * @return {?}
-     */
-    nextCallback() {
-        return `ng_jsonp_callback_${nextRequestId++}`;
-    }
-    /**
-     * Processes a JSONP request and returns an event stream of the results.
-     * @param {?} req The request object.
-     * @return {?} An observable of the response events.
+     * Processes an `HttpRequest` with the JSONP method,
+     * by performing JSONP style requests.
+     * @see `HttpHandler`
+     * @see `HttpXhrBackend`
      *
+     * \@publicApi
      */
-    handle(req) {
-        // Firstly, check both the method and response type. If either doesn't match
-        // then the request was improperly routed here and cannot be handled.
-        if (req.method !== 'JSONP') {
-            throw new Error(JSONP_ERR_WRONG_METHOD);
+    class JsonpClientBackend {
+        /**
+         * @param {?} callbackMap
+         * @param {?} document
+         */
+        constructor(callbackMap, document) {
+            this.callbackMap = callbackMap;
+            this.document = document;
         }
-        else if (req.responseType !== 'json') {
-            throw new Error(JSONP_ERR_WRONG_RESPONSE_TYPE);
-        }
-        // Everything else happens inside the Observable boundary.
-        return new Observable((/**
-         * @param {?} observer
+        /**
+         * Get the name of the next callback method, by incrementing the global `nextRequestId`.
+         * @private
          * @return {?}
          */
-        (observer) => {
-            // The first step to make a request is to generate the callback name, and replace the
-            // callback placeholder in the URL with the name. Care has to be taken here to ensure
-            // a trailing &, if matched, gets inserted back into the URL in the correct place.
-            /** @type {?} */
-            const callback = this.nextCallback();
-            /** @type {?} */
-            const url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
-            // Construct the <script> tag and point it at the URL.
-            /** @type {?} */
-            const node = this.document.createElement('script');
-            node.src = url;
-            // A JSONP request requires waiting for multiple callbacks. These variables
-            // are closed over and track state across those callbacks.
-            // The response object, if one has been received, or null otherwise.
-            /** @type {?} */
-            let body = null;
-            // Whether the response callback has been called.
-            /** @type {?} */
-            let finished = false;
-            // Whether the request has been cancelled (and thus any other callbacks)
-            // should be ignored.
-            /** @type {?} */
-            let cancelled = false;
-            // Set the response callback in this.callbackMap (which will be the window
-            // object in the browser. The script being loaded via the <script> tag will
-            // eventually call this callback.
-            this.callbackMap[callback] = (/**
-             * @param {?=} data
+        nextCallback() {
+            return `ng_jsonp_callback_${nextRequestId++}`;
+        }
+        /**
+         * Processes a JSONP request and returns an event stream of the results.
+         * @param {?} req The request object.
+         * @return {?} An observable of the response events.
+         *
+         */
+        handle(req) {
+            // Firstly, check both the method and response type. If either doesn't match
+            // then the request was improperly routed here and cannot be handled.
+            if (req.method !== 'JSONP') {
+                throw new Error(JSONP_ERR_WRONG_METHOD);
+            }
+            else if (req.responseType !== 'json') {
+                throw new Error(JSONP_ERR_WRONG_RESPONSE_TYPE);
+            }
+            // Everything else happens inside the Observable boundary.
+            return new Observable((/**
+             * @param {?} observer
              * @return {?}
              */
-            (data) => {
-                // Data has been received from the JSONP script. Firstly, delete this callback.
-                delete this.callbackMap[callback];
-                // Next, make sure the request wasn't cancelled in the meantime.
-                if (cancelled) {
-                    return;
-                }
-                // Set state to indicate data was received.
-                body = data;
-                finished = true;
-            });
-            // cleanup() is a utility closure that removes the <script> from the page and
-            // the response callback from the window. This logic is used in both the
-            // success, error, and cancellation paths, so it's extracted out for convenience.
-            /** @type {?} */
-            const cleanup = (/**
-             * @return {?}
-             */
-            () => {
-                // Remove the <script> tag if it's still on the page.
-                if (node.parentNode) {
-                    node.parentNode.removeChild(node);
-                }
-                // Remove the response callback from the callbackMap (window object in the
-                // browser).
-                delete this.callbackMap[callback];
-            });
-            // onLoad() is the success callback which runs after the response callback
-            // if the JSONP script loads successfully. The event itself is unimportant.
-            // If something went wrong, onLoad() may run without the response callback
-            // having been invoked.
-            /** @type {?} */
-            const onLoad = (/**
-             * @param {?} event
-             * @return {?}
-             */
-            (event) => {
-                // Do nothing if the request has been cancelled.
-                if (cancelled) {
-                    return;
-                }
-                // Cleanup the page.
-                cleanup();
-                // Check whether the response callback has run.
-                if (!finished) {
-                    // It hasn't, something went wrong with the request. Return an error via
-                    // the Observable error path. All JSONP errors have status 0.
-                    observer.error(new HttpErrorResponse({
+            (observer) => {
+                // The first step to make a request is to generate the callback name, and replace the
+                // callback placeholder in the URL with the name. Care has to be taken here to ensure
+                // a trailing &, if matched, gets inserted back into the URL in the correct place.
+                /** @type {?} */
+                const callback = this.nextCallback();
+                /** @type {?} */
+                const url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
+                // Construct the <script> tag and point it at the URL.
+                /** @type {?} */
+                const node = this.document.createElement('script');
+                node.src = url;
+                // A JSONP request requires waiting for multiple callbacks. These variables
+                // are closed over and track state across those callbacks.
+                // The response object, if one has been received, or null otherwise.
+                /** @type {?} */
+                let body = null;
+                // Whether the response callback has been called.
+                /** @type {?} */
+                let finished = false;
+                // Whether the request has been cancelled (and thus any other callbacks)
+                // should be ignored.
+                /** @type {?} */
+                let cancelled = false;
+                // Set the response callback in this.callbackMap (which will be the window
+                // object in the browser. The script being loaded via the <script> tag will
+                // eventually call this callback.
+                this.callbackMap[callback] = (/**
+                 * @param {?=} data
+                 * @return {?}
+                 */
+                (data) => {
+                    // Data has been received from the JSONP script. Firstly, delete this callback.
+                    delete this.callbackMap[callback];
+                    // Next, make sure the request wasn't cancelled in the meantime.
+                    if (cancelled) {
+                        return;
+                    }
+                    // Set state to indicate data was received.
+                    body = data;
+                    finished = true;
+                });
+                // cleanup() is a utility closure that removes the <script> from the page and
+                // the response callback from the window. This logic is used in both the
+                // success, error, and cancellation paths, so it's extracted out for convenience.
+                /** @type {?} */
+                const cleanup = (/**
+                 * @return {?}
+                 */
+                () => {
+                    // Remove the <script> tag if it's still on the page.
+                    if (node.parentNode) {
+                        node.parentNode.removeChild(node);
+                    }
+                    // Remove the response callback from the callbackMap (window object in the
+                    // browser).
+                    delete this.callbackMap[callback];
+                });
+                // onLoad() is the success callback which runs after the response callback
+                // if the JSONP script loads successfully. The event itself is unimportant.
+                // If something went wrong, onLoad() may run without the response callback
+                // having been invoked.
+                /** @type {?} */
+                const onLoad = (/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                (event) => {
+                    // Do nothing if the request has been cancelled.
+                    if (cancelled) {
+                        return;
+                    }
+                    // Cleanup the page.
+                    cleanup();
+                    // Check whether the response callback has run.
+                    if (!finished) {
+                        // It hasn't, something went wrong with the request. Return an error via
+                        // the Observable error path. All JSONP errors have status 0.
+                        observer.error(new HttpErrorResponse({
+                            url,
+                            status: 0,
+                            statusText: 'JSONP Error',
+                            error: new Error(JSONP_ERR_NO_CALLBACK),
+                        }));
+                        return;
+                    }
+                    // Success. body either contains the response body or null if none was
+                    // returned.
+                    observer.next(new HttpResponse({
+                        body,
+                        status: 200,
+                        statusText: 'OK',
                         url,
+                    }));
+                    // Complete the stream, the response is over.
+                    observer.complete();
+                });
+                // onError() is the error callback, which runs if the script returned generates
+                // a Javascript error. It emits the error via the Observable error channel as
+                // a HttpErrorResponse.
+                /** @type {?} */
+                const onError = (/**
+                 * @param {?} error
+                 * @return {?}
+                 */
+                (error) => {
+                    // If the request was already cancelled, no need to emit anything.
+                    if (cancelled) {
+                        return;
+                    }
+                    cleanup();
+                    // Wrap the error in a HttpErrorResponse.
+                    observer.error(new HttpErrorResponse({
+                        error,
                         status: 0,
                         statusText: 'JSONP Error',
-                        error: new Error(JSONP_ERR_NO_CALLBACK),
+                        url,
                     }));
-                    return;
-                }
-                // Success. body either contains the response body or null if none was
-                // returned.
-                observer.next(new HttpResponse({
-                    body,
-                    status: 200,
-                    statusText: 'OK',
-                    url,
-                }));
-                // Complete the stream, the response is over.
-                observer.complete();
-            });
-            // onError() is the error callback, which runs if the script returned generates
-            // a Javascript error. It emits the error via the Observable error channel as
-            // a HttpErrorResponse.
-            /** @type {?} */
-            const onError = (/**
-             * @param {?} error
-             * @return {?}
-             */
-            (error) => {
-                // If the request was already cancelled, no need to emit anything.
-                if (cancelled) {
-                    return;
-                }
-                cleanup();
-                // Wrap the error in a HttpErrorResponse.
-                observer.error(new HttpErrorResponse({
-                    error,
-                    status: 0,
-                    statusText: 'JSONP Error',
-                    url,
-                }));
-            });
-            // Subscribe to both the success (load) and error events on the <script> tag,
-            // and add it to the page.
-            node.addEventListener('load', onLoad);
-            node.addEventListener('error', onError);
-            this.document.body.appendChild(node);
-            // The request has now been successfully sent.
-            observer.next({ type: HttpEventType.Sent });
-            // Cancellation handler.
-            return (/**
-             * @return {?}
-             */
-            () => {
-                // Track the cancellation so event listeners won't do anything even if already scheduled.
-                cancelled = true;
-                // Remove the event listeners so they won't run if the events later fire.
-                node.removeEventListener('load', onLoad);
-                node.removeEventListener('error', onError);
-                // And finally, clean up the page.
-                cleanup();
-            });
-        }));
+                });
+                // Subscribe to both the success (load) and error events on the <script> tag,
+                // and add it to the page.
+                node.addEventListener('load', onLoad);
+                node.addEventListener('error', onError);
+                this.document.body.appendChild(node);
+                // The request has now been successfully sent.
+                observer.next({ type: HttpEventType.Sent });
+                // Cancellation handler.
+                return (/**
+                 * @return {?}
+                 */
+                () => {
+                    // Track the cancellation so event listeners won't do anything even if already scheduled.
+                    cancelled = true;
+                    // Remove the event listeners so they won't run if the events later fire.
+                    node.removeEventListener('load', onLoad);
+                    node.removeEventListener('error', onError);
+                    // And finally, clean up the page.
+                    cleanup();
+                });
+            }));
+        }
     }
-}
-JsonpClientBackend.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-JsonpClientBackend.ctorParameters = () => [
-    { type: JsonpCallbackContext },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
-];
+    JsonpClientBackend.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    JsonpClientBackend.ctorParameters = () => [
+        { type: JsonpCallbackContext },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ];
+    return JsonpClientBackend;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2235,35 +2297,46 @@ if (false) {
  *
  * \@publicApi
  */
-class JsonpInterceptor {
+let JsonpInterceptor = /** @class */ (() => {
     /**
-     * @param {?} jsonp
+     * Identifies requests with the method JSONP and
+     * shifts them to the `JsonpClientBackend`.
+     *
+     * @see `HttpInterceptor`
+     *
+     * \@publicApi
      */
-    constructor(jsonp) {
-        this.jsonp = jsonp;
-    }
-    /**
-     * Identifies and handles a given JSONP request.
-     * @param {?} req The outgoing request object to handle.
-     * @param {?} next The next interceptor in the chain, or the backend
-     * if no interceptors remain in the chain.
-     * @return {?} An observable of the event stream.
-     */
-    intercept(req, next) {
-        if (req.method === 'JSONP') {
-            return this.jsonp.handle((/** @type {?} */ (req)));
+    class JsonpInterceptor {
+        /**
+         * @param {?} jsonp
+         */
+        constructor(jsonp) {
+            this.jsonp = jsonp;
         }
-        // Fall through for normal HTTP requests.
-        return next.handle(req);
+        /**
+         * Identifies and handles a given JSONP request.
+         * @param {?} req The outgoing request object to handle.
+         * @param {?} next The next interceptor in the chain, or the backend
+         * if no interceptors remain in the chain.
+         * @return {?} An observable of the event stream.
+         */
+        intercept(req, next) {
+            if (req.method === 'JSONP') {
+                return this.jsonp.handle((/** @type {?} */ (req)));
+            }
+            // Fall through for normal HTTP requests.
+            return next.handle(req);
+        }
     }
-}
-JsonpInterceptor.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-JsonpInterceptor.ctorParameters = () => [
-    { type: JsonpClientBackend }
-];
+    JsonpInterceptor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    JsonpInterceptor.ctorParameters = () => [
+        { type: JsonpClientBackend }
+    ];
+    return JsonpInterceptor;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2313,20 +2386,27 @@ if (false) {
  * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
  *
  */
-class BrowserXhr {
-    constructor() { }
+let BrowserXhr = /** @class */ (() => {
     /**
-     * @return {?}
+     * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
+     *
      */
-    build() {
-        return (/** @type {?} */ ((new XMLHttpRequest())));
+    class BrowserXhr {
+        constructor() { }
+        /**
+         * @return {?}
+         */
+        build() {
+            return (/** @type {?} */ ((new XMLHttpRequest())));
+        }
     }
-}
-BrowserXhr.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-BrowserXhr.ctorParameters = () => [];
+    BrowserXhr.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    BrowserXhr.ctorParameters = () => [];
+    return BrowserXhr;
+})();
 /**
  * Tracks a response from the server that does not yet have a body.
  * @record
@@ -2349,307 +2429,317 @@ if (false) {
  *
  * \@publicApi
  */
-class HttpXhrBackend {
+let HttpXhrBackend = /** @class */ (() => {
     /**
-     * @param {?} xhrFactory
+     * Uses `XMLHttpRequest` to send requests to a backend server.
+     * @see `HttpHandler`
+     * @see `JsonpClientBackend`
+     *
+     * \@publicApi
      */
-    constructor(xhrFactory) {
-        this.xhrFactory = xhrFactory;
-    }
-    /**
-     * Processes a request and returns a stream of response events.
-     * @param {?} req The request object.
-     * @return {?} An observable of the response events.
-     */
-    handle(req) {
-        // Quick check to give a better error message when a user attempts to use
-        // HttpClient.jsonp() without installing the JsonpClientModule
-        if (req.method === 'JSONP') {
-            throw new Error(`Attempted to construct Jsonp request without JsonpClientModule installed.`);
-        }
-        // Everything happens on Observable subscription.
-        return new Observable((/**
-         * @param {?} observer
-         * @return {?}
+    class HttpXhrBackend {
+        /**
+         * @param {?} xhrFactory
          */
-        (observer) => {
-            // Start by setting up the XHR object with request method, URL, and withCredentials flag.
-            /** @type {?} */
-            const xhr = this.xhrFactory.build();
-            xhr.open(req.method, req.urlWithParams);
-            if (!!req.withCredentials) {
-                xhr.withCredentials = true;
+        constructor(xhrFactory) {
+            this.xhrFactory = xhrFactory;
+        }
+        /**
+         * Processes a request and returns a stream of response events.
+         * @param {?} req The request object.
+         * @return {?} An observable of the response events.
+         */
+        handle(req) {
+            // Quick check to give a better error message when a user attempts to use
+            // HttpClient.jsonp() without installing the JsonpClientModule
+            if (req.method === 'JSONP') {
+                throw new Error(`Attempted to construct Jsonp request without JsonpClientModule installed.`);
             }
-            // Add all the requested headers.
-            req.headers.forEach((/**
-             * @param {?} name
-             * @param {?} values
+            // Everything happens on Observable subscription.
+            return new Observable((/**
+             * @param {?} observer
              * @return {?}
              */
-            (name, values) => xhr.setRequestHeader(name, values.join(','))));
-            // Add an Accept header if one isn't present already.
-            if (!req.headers.has('Accept')) {
-                xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
-            }
-            // Auto-detect the Content-Type header if one isn't present already.
-            if (!req.headers.has('Content-Type')) {
+            (observer) => {
+                // Start by setting up the XHR object with request method, URL, and withCredentials flag.
                 /** @type {?} */
-                const detectedType = req.detectContentTypeHeader();
-                // Sometimes Content-Type detection fails.
-                if (detectedType !== null) {
-                    xhr.setRequestHeader('Content-Type', detectedType);
+                const xhr = this.xhrFactory.build();
+                xhr.open(req.method, req.urlWithParams);
+                if (!!req.withCredentials) {
+                    xhr.withCredentials = true;
                 }
-            }
-            // Set the responseType if one was requested.
-            if (req.responseType) {
-                /** @type {?} */
-                const responseType = req.responseType.toLowerCase();
-                // JSON responses need to be processed as text. This is because if the server
-                // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
-                // xhr.response will be null, and xhr.responseText cannot be accessed to
-                // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
-                // is parsed by first requesting text and then applying JSON.parse.
-                xhr.responseType = (/** @type {?} */ (((responseType !== 'json') ? responseType : 'text')));
-            }
-            // Serialize the request body if one is present. If not, this will be set to null.
-            /** @type {?} */
-            const reqBody = req.serializeBody();
-            // If progress events are enabled, response headers will be delivered
-            // in two events - the HttpHeaderResponse event and the full HttpResponse
-            // event. However, since response headers don't change in between these
-            // two events, it doesn't make sense to parse them twice. So headerResponse
-            // caches the data extracted from the response whenever it's first parsed,
-            // to ensure parsing isn't duplicated.
-            /** @type {?} */
-            let headerResponse = null;
-            // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
-            // state, and memoizes it into headerResponse.
-            /** @type {?} */
-            const partialFromXhr = (/**
-             * @return {?}
-             */
-            () => {
-                if (headerResponse !== null) {
-                    return headerResponse;
+                // Add all the requested headers.
+                req.headers.forEach((/**
+                 * @param {?} name
+                 * @param {?} values
+                 * @return {?}
+                 */
+                (name, values) => xhr.setRequestHeader(name, values.join(','))));
+                // Add an Accept header if one isn't present already.
+                if (!req.headers.has('Accept')) {
+                    xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
                 }
-                // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
-                /** @type {?} */
-                const status = xhr.status === 1223 ? 204 : xhr.status;
-                /** @type {?} */
-                const statusText = xhr.statusText || 'OK';
-                // Parse headers from XMLHttpRequest - this step is lazy.
-                /** @type {?} */
-                const headers = new HttpHeaders(xhr.getAllResponseHeaders());
-                // Read the response URL from the XMLHttpResponse instance and fall back on the
-                // request URL.
-                /** @type {?} */
-                const url = getResponseUrl(xhr) || req.url;
-                // Construct the HttpHeaderResponse and memoize it.
-                headerResponse = new HttpHeaderResponse({ headers, status, statusText, url });
-                return headerResponse;
-            });
-            // Next, a few closures are defined for the various events which XMLHttpRequest can
-            // emit. This allows them to be unregistered as event listeners later.
-            // First up is the load event, which represents a response being fully available.
-            /** @type {?} */
-            const onLoad = (/**
-             * @return {?}
-             */
-            () => {
-                // Read response state from the memoized partial data.
-                let { headers, status, statusText, url } = partialFromXhr();
-                // The body will be read out if present.
-                /** @type {?} */
-                let body = null;
-                if (status !== 204) {
-                    // Use XMLHttpRequest.response if set, responseText otherwise.
-                    body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
-                }
-                // Normalize another potential bug (this one comes from CORS).
-                if (status === 0) {
-                    status = !!body ? 200 : 0;
-                }
-                // ok determines whether the response will be transmitted on the event or
-                // error channel. Unsuccessful status codes (not 2xx) will always be errors,
-                // but a successful status code can still result in an error if the user
-                // asked for JSON data and the body cannot be parsed as such.
-                /** @type {?} */
-                let ok = status >= 200 && status < 300;
-                // Check whether the body needs to be parsed as JSON (in many cases the browser
-                // will have done that already).
-                if (req.responseType === 'json' && typeof body === 'string') {
-                    // Save the original body, before attempting XSSI prefix stripping.
+                // Auto-detect the Content-Type header if one isn't present already.
+                if (!req.headers.has('Content-Type')) {
                     /** @type {?} */
-                    const originalBody = body;
-                    body = body.replace(XSSI_PREFIX, '');
-                    try {
-                        // Attempt the parse. If it fails, a parse error should be delivered to the user.
-                        body = body !== '' ? JSON.parse(body) : null;
+                    const detectedType = req.detectContentTypeHeader();
+                    // Sometimes Content-Type detection fails.
+                    if (detectedType !== null) {
+                        xhr.setRequestHeader('Content-Type', detectedType);
                     }
-                    catch (error) {
-                        // Since the JSON.parse failed, it's reasonable to assume this might not have been a
-                        // JSON response. Restore the original body (including any XSSI prefix) to deliver
-                        // a better error response.
-                        body = originalBody;
-                        // If this was an error request to begin with, leave it as a string, it probably
-                        // just isn't JSON. Otherwise, deliver the parsing error to the user.
-                        if (ok) {
-                            // Even though the response status was 2xx, this is still an error.
-                            ok = false;
-                            // The parse error contains the text of the body that failed to parse.
-                            body = (/** @type {?} */ ({ error, text: body }));
+                }
+                // Set the responseType if one was requested.
+                if (req.responseType) {
+                    /** @type {?} */
+                    const responseType = req.responseType.toLowerCase();
+                    // JSON responses need to be processed as text. This is because if the server
+                    // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
+                    // xhr.response will be null, and xhr.responseText cannot be accessed to
+                    // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
+                    // is parsed by first requesting text and then applying JSON.parse.
+                    xhr.responseType = (/** @type {?} */ (((responseType !== 'json') ? responseType : 'text')));
+                }
+                // Serialize the request body if one is present. If not, this will be set to null.
+                /** @type {?} */
+                const reqBody = req.serializeBody();
+                // If progress events are enabled, response headers will be delivered
+                // in two events - the HttpHeaderResponse event and the full HttpResponse
+                // event. However, since response headers don't change in between these
+                // two events, it doesn't make sense to parse them twice. So headerResponse
+                // caches the data extracted from the response whenever it's first parsed,
+                // to ensure parsing isn't duplicated.
+                /** @type {?} */
+                let headerResponse = null;
+                // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
+                // state, and memoizes it into headerResponse.
+                /** @type {?} */
+                const partialFromXhr = (/**
+                 * @return {?}
+                 */
+                () => {
+                    if (headerResponse !== null) {
+                        return headerResponse;
+                    }
+                    // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
+                    /** @type {?} */
+                    const status = xhr.status === 1223 ? 204 : xhr.status;
+                    /** @type {?} */
+                    const statusText = xhr.statusText || 'OK';
+                    // Parse headers from XMLHttpRequest - this step is lazy.
+                    /** @type {?} */
+                    const headers = new HttpHeaders(xhr.getAllResponseHeaders());
+                    // Read the response URL from the XMLHttpResponse instance and fall back on the
+                    // request URL.
+                    /** @type {?} */
+                    const url = getResponseUrl(xhr) || req.url;
+                    // Construct the HttpHeaderResponse and memoize it.
+                    headerResponse = new HttpHeaderResponse({ headers, status, statusText, url });
+                    return headerResponse;
+                });
+                // Next, a few closures are defined for the various events which XMLHttpRequest can
+                // emit. This allows them to be unregistered as event listeners later.
+                // First up is the load event, which represents a response being fully available.
+                /** @type {?} */
+                const onLoad = (/**
+                 * @return {?}
+                 */
+                () => {
+                    // Read response state from the memoized partial data.
+                    let { headers, status, statusText, url } = partialFromXhr();
+                    // The body will be read out if present.
+                    /** @type {?} */
+                    let body = null;
+                    if (status !== 204) {
+                        // Use XMLHttpRequest.response if set, responseText otherwise.
+                        body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
+                    }
+                    // Normalize another potential bug (this one comes from CORS).
+                    if (status === 0) {
+                        status = !!body ? 200 : 0;
+                    }
+                    // ok determines whether the response will be transmitted on the event or
+                    // error channel. Unsuccessful status codes (not 2xx) will always be errors,
+                    // but a successful status code can still result in an error if the user
+                    // asked for JSON data and the body cannot be parsed as such.
+                    /** @type {?} */
+                    let ok = status >= 200 && status < 300;
+                    // Check whether the body needs to be parsed as JSON (in many cases the browser
+                    // will have done that already).
+                    if (req.responseType === 'json' && typeof body === 'string') {
+                        // Save the original body, before attempting XSSI prefix stripping.
+                        /** @type {?} */
+                        const originalBody = body;
+                        body = body.replace(XSSI_PREFIX, '');
+                        try {
+                            // Attempt the parse. If it fails, a parse error should be delivered to the user.
+                            body = body !== '' ? JSON.parse(body) : null;
+                        }
+                        catch (error) {
+                            // Since the JSON.parse failed, it's reasonable to assume this might not have been a
+                            // JSON response. Restore the original body (including any XSSI prefix) to deliver
+                            // a better error response.
+                            body = originalBody;
+                            // If this was an error request to begin with, leave it as a string, it probably
+                            // just isn't JSON. Otherwise, deliver the parsing error to the user.
+                            if (ok) {
+                                // Even though the response status was 2xx, this is still an error.
+                                ok = false;
+                                // The parse error contains the text of the body that failed to parse.
+                                body = (/** @type {?} */ ({ error, text: body }));
+                            }
                         }
                     }
-                }
-                if (ok) {
-                    // A successful response is delivered on the event stream.
-                    observer.next(new HttpResponse({
-                        body,
-                        headers,
-                        status,
-                        statusText,
-                        url: url || undefined,
-                    }));
-                    // The full body has been received and delivered, no further events
-                    // are possible. This request is complete.
-                    observer.complete();
-                }
-                else {
-                    // An unsuccessful request is delivered on the error channel.
-                    observer.error(new HttpErrorResponse({
-                        // The error in this case is the response body (error from the server).
-                        error: body,
-                        headers,
-                        status,
-                        statusText,
-                        url: url || undefined,
-                    }));
-                }
-            });
-            // The onError callback is called when something goes wrong at the network level.
-            // Connection timeout, DNS error, offline, etc. These are actual errors, and are
-            // transmitted on the error channel.
-            /** @type {?} */
-            const onError = (/**
-             * @param {?} error
-             * @return {?}
-             */
-            (error) => {
-                const { url } = partialFromXhr();
-                /** @type {?} */
-                const res = new HttpErrorResponse({
-                    error,
-                    status: xhr.status || 0,
-                    statusText: xhr.statusText || 'Unknown Error',
-                    url: url || undefined,
+                    if (ok) {
+                        // A successful response is delivered on the event stream.
+                        observer.next(new HttpResponse({
+                            body,
+                            headers,
+                            status,
+                            statusText,
+                            url: url || undefined,
+                        }));
+                        // The full body has been received and delivered, no further events
+                        // are possible. This request is complete.
+                        observer.complete();
+                    }
+                    else {
+                        // An unsuccessful request is delivered on the error channel.
+                        observer.error(new HttpErrorResponse({
+                            // The error in this case is the response body (error from the server).
+                            error: body,
+                            headers,
+                            status,
+                            statusText,
+                            url: url || undefined,
+                        }));
+                    }
                 });
-                observer.error(res);
-            });
-            // The sentHeaders flag tracks whether the HttpResponseHeaders event
-            // has been sent on the stream. This is necessary to track if progress
-            // is enabled since the event will be sent on only the first download
-            // progerss event.
-            /** @type {?} */
-            let sentHeaders = false;
-            // The download progress event handler, which is only registered if
-            // progress events are enabled.
-            /** @type {?} */
-            const onDownProgress = (/**
-             * @param {?} event
-             * @return {?}
-             */
-            (event) => {
-                // Send the HttpResponseHeaders event if it hasn't been sent already.
-                if (!sentHeaders) {
-                    observer.next(partialFromXhr());
-                    sentHeaders = true;
-                }
-                // Start building the download progress event to deliver on the response
-                // event stream.
+                // The onError callback is called when something goes wrong at the network level.
+                // Connection timeout, DNS error, offline, etc. These are actual errors, and are
+                // transmitted on the error channel.
                 /** @type {?} */
-                let progressEvent = {
-                    type: HttpEventType.DownloadProgress,
-                    loaded: event.loaded,
-                };
-                // Set the total number of bytes in the event if it's available.
-                if (event.lengthComputable) {
-                    progressEvent.total = event.total;
-                }
-                // If the request was for text content and a partial response is
-                // available on XMLHttpRequest, include it in the progress event
-                // to allow for streaming reads.
-                if (req.responseType === 'text' && !!xhr.responseText) {
-                    progressEvent.partialText = xhr.responseText;
-                }
-                // Finally, fire the event.
-                observer.next(progressEvent);
-            });
-            // The upload progress event handler, which is only registered if
-            // progress events are enabled.
-            /** @type {?} */
-            const onUpProgress = (/**
-             * @param {?} event
-             * @return {?}
-             */
-            (event) => {
-                // Upload progress events are simpler. Begin building the progress
-                // event.
+                const onError = (/**
+                 * @param {?} error
+                 * @return {?}
+                 */
+                (error) => {
+                    const { url } = partialFromXhr();
+                    /** @type {?} */
+                    const res = new HttpErrorResponse({
+                        error,
+                        status: xhr.status || 0,
+                        statusText: xhr.statusText || 'Unknown Error',
+                        url: url || undefined,
+                    });
+                    observer.error(res);
+                });
+                // The sentHeaders flag tracks whether the HttpResponseHeaders event
+                // has been sent on the stream. This is necessary to track if progress
+                // is enabled since the event will be sent on only the first download
+                // progerss event.
                 /** @type {?} */
-                let progress = {
-                    type: HttpEventType.UploadProgress,
-                    loaded: event.loaded,
-                };
-                // If the total number of bytes being uploaded is available, include
-                // it.
-                if (event.lengthComputable) {
-                    progress.total = event.total;
-                }
-                // Send the event.
-                observer.next(progress);
-            });
-            // By default, register for load and error events.
-            xhr.addEventListener('load', onLoad);
-            xhr.addEventListener('error', onError);
-            // Progress events are only enabled if requested.
-            if (req.reportProgress) {
-                // Download progress is always enabled if requested.
-                xhr.addEventListener('progress', onDownProgress);
-                // Upload progress depends on whether there is a body to upload.
-                if (reqBody !== null && xhr.upload) {
-                    xhr.upload.addEventListener('progress', onUpProgress);
-                }
-            }
-            // Fire the request, and notify the event stream that it was fired.
-            xhr.send((/** @type {?} */ (reqBody)));
-            observer.next({ type: HttpEventType.Sent });
-            // This is the return from the Observable function, which is the
-            // request cancellation handler.
-            return (/**
-             * @return {?}
-             */
-            () => {
-                // On a cancellation, remove all registered event listeners.
-                xhr.removeEventListener('error', onError);
-                xhr.removeEventListener('load', onLoad);
+                let sentHeaders = false;
+                // The download progress event handler, which is only registered if
+                // progress events are enabled.
+                /** @type {?} */
+                const onDownProgress = (/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                (event) => {
+                    // Send the HttpResponseHeaders event if it hasn't been sent already.
+                    if (!sentHeaders) {
+                        observer.next(partialFromXhr());
+                        sentHeaders = true;
+                    }
+                    // Start building the download progress event to deliver on the response
+                    // event stream.
+                    /** @type {?} */
+                    let progressEvent = {
+                        type: HttpEventType.DownloadProgress,
+                        loaded: event.loaded,
+                    };
+                    // Set the total number of bytes in the event if it's available.
+                    if (event.lengthComputable) {
+                        progressEvent.total = event.total;
+                    }
+                    // If the request was for text content and a partial response is
+                    // available on XMLHttpRequest, include it in the progress event
+                    // to allow for streaming reads.
+                    if (req.responseType === 'text' && !!xhr.responseText) {
+                        progressEvent.partialText = xhr.responseText;
+                    }
+                    // Finally, fire the event.
+                    observer.next(progressEvent);
+                });
+                // The upload progress event handler, which is only registered if
+                // progress events are enabled.
+                /** @type {?} */
+                const onUpProgress = (/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                (event) => {
+                    // Upload progress events are simpler. Begin building the progress
+                    // event.
+                    /** @type {?} */
+                    let progress = {
+                        type: HttpEventType.UploadProgress,
+                        loaded: event.loaded,
+                    };
+                    // If the total number of bytes being uploaded is available, include
+                    // it.
+                    if (event.lengthComputable) {
+                        progress.total = event.total;
+                    }
+                    // Send the event.
+                    observer.next(progress);
+                });
+                // By default, register for load and error events.
+                xhr.addEventListener('load', onLoad);
+                xhr.addEventListener('error', onError);
+                // Progress events are only enabled if requested.
                 if (req.reportProgress) {
-                    xhr.removeEventListener('progress', onDownProgress);
+                    // Download progress is always enabled if requested.
+                    xhr.addEventListener('progress', onDownProgress);
+                    // Upload progress depends on whether there is a body to upload.
                     if (reqBody !== null && xhr.upload) {
-                        xhr.upload.removeEventListener('progress', onUpProgress);
+                        xhr.upload.addEventListener('progress', onUpProgress);
                     }
                 }
-                // Finally, abort the in-flight request.
-                xhr.abort();
-            });
-        }));
+                // Fire the request, and notify the event stream that it was fired.
+                xhr.send((/** @type {?} */ (reqBody)));
+                observer.next({ type: HttpEventType.Sent });
+                // This is the return from the Observable function, which is the
+                // request cancellation handler.
+                return (/**
+                 * @return {?}
+                 */
+                () => {
+                    // On a cancellation, remove all registered event listeners.
+                    xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('load', onLoad);
+                    if (req.reportProgress) {
+                        xhr.removeEventListener('progress', onDownProgress);
+                        if (reqBody !== null && xhr.upload) {
+                            xhr.upload.removeEventListener('progress', onUpProgress);
+                        }
+                    }
+                    // Finally, abort the in-flight request.
+                    xhr.abort();
+                });
+            }));
+        }
     }
-}
-HttpXhrBackend.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory }
-];
+    HttpXhrBackend.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXhrBackend.ctorParameters = () => [
+        { type: XhrFactory }
+    ];
+    return HttpXhrBackend;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2688,49 +2778,55 @@ if (false) {
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
-class HttpXsrfCookieExtractor {
+let HttpXsrfCookieExtractor = /** @class */ (() => {
     /**
-     * @param {?} doc
-     * @param {?} platform
-     * @param {?} cookieName
+     * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
      */
-    constructor(doc, platform, cookieName) {
-        this.doc = doc;
-        this.platform = platform;
-        this.cookieName = cookieName;
-        this.lastCookieString = '';
-        this.lastToken = null;
+    class HttpXsrfCookieExtractor {
         /**
-         * \@internal for testing
+         * @param {?} doc
+         * @param {?} platform
+         * @param {?} cookieName
          */
-        this.parseCount = 0;
-    }
-    /**
-     * @return {?}
-     */
-    getToken() {
-        if (this.platform === 'server') {
-            return null;
+        constructor(doc, platform, cookieName) {
+            this.doc = doc;
+            this.platform = platform;
+            this.cookieName = cookieName;
+            this.lastCookieString = '';
+            this.lastToken = null;
+            /**
+             * \@internal for testing
+             */
+            this.parseCount = 0;
         }
-        /** @type {?} */
-        const cookieString = this.doc.cookie || '';
-        if (cookieString !== this.lastCookieString) {
-            this.parseCount++;
-            this.lastToken = ɵparseCookieValue(cookieString, this.cookieName);
-            this.lastCookieString = cookieString;
+        /**
+         * @return {?}
+         */
+        getToken() {
+            if (this.platform === 'server') {
+                return null;
+            }
+            /** @type {?} */
+            const cookieString = this.doc.cookie || '';
+            if (cookieString !== this.lastCookieString) {
+                this.parseCount++;
+                this.lastToken = ɵparseCookieValue(cookieString, this.cookieName);
+                this.lastCookieString = cookieString;
+            }
+            return this.lastToken;
         }
-        return this.lastToken;
     }
-}
-HttpXsrfCookieExtractor.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HttpXsrfCookieExtractor.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
-];
+    HttpXsrfCookieExtractor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXsrfCookieExtractor.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+        { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+        { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
+    ];
+    return HttpXsrfCookieExtractor;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2766,48 +2862,54 @@ if (false) {
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
-class HttpXsrfInterceptor {
+let HttpXsrfInterceptor = /** @class */ (() => {
     /**
-     * @param {?} tokenService
-     * @param {?} headerName
+     * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
      */
-    constructor(tokenService, headerName) {
-        this.tokenService = tokenService;
-        this.headerName = headerName;
-    }
-    /**
-     * @param {?} req
-     * @param {?} next
-     * @return {?}
-     */
-    intercept(req, next) {
-        /** @type {?} */
-        const lcUrl = req.url.toLowerCase();
-        // Skip both non-mutating requests and absolute URLs.
-        // Non-mutating requests don't require a token, and absolute URLs require special handling
-        // anyway as the cookie set
-        // on our origin is not the same as the token expected by another origin.
-        if (req.method === 'GET' || req.method === 'HEAD' || lcUrl.startsWith('http://') ||
-            lcUrl.startsWith('https://')) {
+    class HttpXsrfInterceptor {
+        /**
+         * @param {?} tokenService
+         * @param {?} headerName
+         */
+        constructor(tokenService, headerName) {
+            this.tokenService = tokenService;
+            this.headerName = headerName;
+        }
+        /**
+         * @param {?} req
+         * @param {?} next
+         * @return {?}
+         */
+        intercept(req, next) {
+            /** @type {?} */
+            const lcUrl = req.url.toLowerCase();
+            // Skip both non-mutating requests and absolute URLs.
+            // Non-mutating requests don't require a token, and absolute URLs require special handling
+            // anyway as the cookie set
+            // on our origin is not the same as the token expected by another origin.
+            if (req.method === 'GET' || req.method === 'HEAD' || lcUrl.startsWith('http://') ||
+                lcUrl.startsWith('https://')) {
+                return next.handle(req);
+            }
+            /** @type {?} */
+            const token = this.tokenService.getToken();
+            // Be careful not to overwrite an existing header of the same name.
+            if (token !== null && !req.headers.has(this.headerName)) {
+                req = req.clone({ headers: req.headers.set(this.headerName, token) });
+            }
             return next.handle(req);
         }
-        /** @type {?} */
-        const token = this.tokenService.getToken();
-        // Be careful not to overwrite an existing header of the same name.
-        if (token !== null && !req.headers.has(this.headerName)) {
-            req = req.clone({ headers: req.headers.set(this.headerName, token) });
-        }
-        return next.handle(req);
     }
-}
-HttpXsrfInterceptor.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HttpXsrfInterceptor.ctorParameters = () => [
-    { type: HttpXsrfTokenExtractor },
-    { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
-];
+    HttpXsrfInterceptor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXsrfInterceptor.ctorParameters = () => [
+        { type: HttpXsrfTokenExtractor },
+        { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
+    ];
+    return HttpXsrfInterceptor;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2835,42 +2937,54 @@ if (false) {
  * on `HttpInterceptingHandler` itself.
  * @see `HttpInterceptor`
  */
-class HttpInterceptingHandler {
+let HttpInterceptingHandler = /** @class */ (() => {
     /**
-     * @param {?} backend
-     * @param {?} injector
+     * An injectable `HttpHandler` that applies multiple interceptors
+     * to a request before passing it to the given `HttpBackend`.
+     *
+     * The interceptors are loaded lazily from the injector, to allow
+     * interceptors to themselves inject classes depending indirectly
+     * on `HttpInterceptingHandler` itself.
+     * @see `HttpInterceptor`
      */
-    constructor(backend, injector) {
-        this.backend = backend;
-        this.injector = injector;
-        this.chain = null;
-    }
-    /**
-     * @param {?} req
-     * @return {?}
-     */
-    handle(req) {
-        if (this.chain === null) {
-            /** @type {?} */
-            const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
-            this.chain = interceptors.reduceRight((/**
-             * @param {?} next
-             * @param {?} interceptor
-             * @return {?}
-             */
-            (next, interceptor) => new HttpInterceptorHandler(next, interceptor)), this.backend);
+    class HttpInterceptingHandler {
+        /**
+         * @param {?} backend
+         * @param {?} injector
+         */
+        constructor(backend, injector) {
+            this.backend = backend;
+            this.injector = injector;
+            this.chain = null;
         }
-        return this.chain.handle(req);
+        /**
+         * @param {?} req
+         * @return {?}
+         */
+        handle(req) {
+            if (this.chain === null) {
+                /** @type {?} */
+                const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
+                this.chain = interceptors.reduceRight((/**
+                 * @param {?} next
+                 * @param {?} interceptor
+                 * @return {?}
+                 */
+                (next, interceptor) => new HttpInterceptorHandler(next, interceptor)), this.backend);
+            }
+            return this.chain.handle(req);
+        }
     }
-}
-HttpInterceptingHandler.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HttpInterceptingHandler.ctorParameters = () => [
-    { type: HttpBackend },
-    { type: Injector }
-];
+    HttpInterceptingHandler.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpInterceptingHandler.ctorParameters = () => [
+        { type: HttpBackend },
+        { type: Injector }
+    ];
+    return HttpInterceptingHandler;
+})();
 if (false) {
     /**
      * @type {?}
@@ -2937,49 +3051,64 @@ function jsonpCallbackContext() {
  *
  * \@publicApi
  */
-class HttpClientXsrfModule {
+let HttpClientXsrfModule = /** @class */ (() => {
     /**
-     * Disable the default XSRF protection.
-     * @return {?}
-     */
-    static disable() {
-        return {
-            ngModule: HttpClientXsrfModule,
-            providers: [
-                { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
-            ],
-        };
-    }
-    /**
-     * Configure XSRF protection.
-     * @param {?=} options An object that can specify either or both
-     * cookie name or header name.
-     * - Cookie name default is `XSRF-TOKEN`.
-     * - Header name default is `X-XSRF-TOKEN`.
+     * Configures XSRF protection support for outgoing requests.
      *
-     * @return {?}
+     * For a server that supports a cookie-based XSRF protection system,
+     * use directly to configure XSRF protection with the correct
+     * cookie and header names.
+     *
+     * If no names are supplied, the default cookie name is `XSRF-TOKEN`
+     * and the default header name is `X-XSRF-TOKEN`.
+     *
+     * \@publicApi
      */
-    static withOptions(options = {}) {
-        return {
-            ngModule: HttpClientXsrfModule,
-            providers: [
-                options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
-                options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
-            ],
-        };
-    }
-}
-HttpClientXsrfModule.decorators = [
-    { type: NgModule, args: [{
+    class HttpClientXsrfModule {
+        /**
+         * Disable the default XSRF protection.
+         * @return {?}
+         */
+        static disable() {
+            return {
+                ngModule: HttpClientXsrfModule,
                 providers: [
-                    HttpXsrfInterceptor,
-                    { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
-                    { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
-                    { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
-                    { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
                 ],
-            },] }
-];
+            };
+        }
+        /**
+         * Configure XSRF protection.
+         * @param {?=} options An object that can specify either or both
+         * cookie name or header name.
+         * - Cookie name default is `XSRF-TOKEN`.
+         * - Header name default is `X-XSRF-TOKEN`.
+         *
+         * @return {?}
+         */
+        static withOptions(options = {}) {
+            return {
+                ngModule: HttpClientXsrfModule,
+                providers: [
+                    options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
+                    options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
+                ],
+            };
+        }
+    }
+    HttpClientXsrfModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                },] }
+    ];
+    return HttpClientXsrfModule;
+})();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
@@ -2989,33 +3118,45 @@ HttpClientXsrfModule.decorators = [
  *
  * \@publicApi
  */
-class HttpClientModule {
-}
-HttpClientModule.decorators = [
-    { type: NgModule, args: [{
-                /**
-                 * Optional configuration for XSRF protection.
-                 */
-                imports: [
-                    HttpClientXsrfModule.withOptions({
-                        cookieName: 'XSRF-TOKEN',
-                        headerName: 'X-XSRF-TOKEN',
-                    }),
-                ],
-                /**
-                 * Configures the [dependency injector](guide/glossary#injector) where it is imported
-                 * with supporting services for HTTP communications.
-                 */
-                providers: [
-                    HttpClient,
-                    { provide: HttpHandler, useClass: HttpInterceptingHandler },
-                    HttpXhrBackend,
-                    { provide: HttpBackend, useExisting: HttpXhrBackend },
-                    BrowserXhr,
-                    { provide: XhrFactory, useExisting: BrowserXhr },
-                ],
-            },] }
-];
+let HttpClientModule = /** @class */ (() => {
+    /**
+     * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+     * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
+     *
+     * You can add interceptors to the chain behind `HttpClient` by binding them to the
+     * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
+     *
+     * \@publicApi
+     */
+    class HttpClientModule {
+    }
+    HttpClientModule.decorators = [
+        { type: NgModule, args: [{
+                    /**
+                     * Optional configuration for XSRF protection.
+                     */
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    /**
+                     * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                     * with supporting services for HTTP communications.
+                     */
+                    providers: [
+                        HttpClient,
+                        { provide: HttpHandler, useClass: HttpInterceptingHandler },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                        BrowserXhr,
+                        { provide: XhrFactory, useExisting: BrowserXhr },
+                    ],
+                },] }
+    ];
+    return HttpClientModule;
+})();
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
  * with supporting services for JSONP.
@@ -3027,17 +3168,31 @@ HttpClientModule.decorators = [
  *
  * \@publicApi
  */
-class HttpClientJsonpModule {
-}
-HttpClientJsonpModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    JsonpClientBackend,
-                    { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
-                    { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-                ],
-            },] }
-];
+let HttpClientJsonpModule = /** @class */ (() => {
+    /**
+     * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+     * with supporting services for JSONP.
+     * Without this module, Jsonp requests reach the backend
+     * with method JSONP, where they are rejected.
+     *
+     * You can add interceptors to the chain behind `HttpClient` by binding them to the
+     * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
+     *
+     * \@publicApi
+     */
+    class HttpClientJsonpModule {
+    }
+    HttpClientJsonpModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        JsonpClientBackend,
+                        { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                        { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                    ],
+                },] }
+    ];
+    return HttpClientJsonpModule;
+})();
 
 /**
  * @fileoverview added by tsickle

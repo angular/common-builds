@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-next.7+17.sha-2418c6a
+ * @license Angular v10.0.0-next.7+43.sha-f16ca1c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -228,16 +228,42 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * \@publicApi
  * @abstract
  */
-class PlatformLocation {
-}
-PlatformLocation.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'platform',
-                // See #23917
-                useFactory: useBrowserPlatformLocation
-            },] }
-];
-/** @nocollapse */ PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+let PlatformLocation = /** @class */ (() => {
+    /**
+     * This class should not be used directly by an application developer. Instead, use
+     * {\@link Location}.
+     *
+     * `PlatformLocation` encapsulates all calls to DOM APIs, which allows the Router to be
+     * platform-agnostic.
+     * This means that we can have different implementation of `PlatformLocation` for the different
+     * platforms that Angular supports. For example, `\@angular/platform-browser` provides an
+     * implementation specific to the browser environment, while `\@angular/platform-server` provides
+     * one suitable for use with server-side rendering.
+     *
+     * The `PlatformLocation` class is used directly by all implementations of {\@link LocationStrategy}
+     * when they need to interact with the DOM APIs like pushState, popState, etc.
+     *
+     * {\@link LocationStrategy} in turn is used by the {\@link Location} service which is used directly
+     * by the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
+     * Router} /
+     * {\@link Location} / {\@link LocationStrategy} and DOM APIs flow through the `PlatformLocation`
+     * class, they are all platform-agnostic.
+     *
+     * \@publicApi
+     * @abstract
+     */
+    class PlatformLocation {
+    }
+    PlatformLocation.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: useBrowserPlatformLocation
+                },] }
+    ];
+    /** @nocollapse */ PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+    return PlatformLocation;
+})();
 if (false) {
     /**
      * @abstract
@@ -361,152 +387,160 @@ function LocationChangeListener() { }
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  */
-class BrowserPlatformLocation extends PlatformLocation {
+let BrowserPlatformLocation = /** @class */ (() => {
     /**
-     * @param {?} _doc
+     * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
+     * This class should not be used directly by an application developer. Instead, use
+     * {\@link Location}.
      */
-    constructor(_doc) {
-        super();
-        this._doc = _doc;
-        this._init();
-    }
-    // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
-    /**
-     * \@internal
-     * @return {?}
-     */
-    _init() {
-        ((/** @type {?} */ (this))).location = getDOM().getLocation();
-        this._history = getDOM().getHistory();
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHrefFromDOM() {
-        return (/** @type {?} */ (getDOM().getBaseHref(this._doc)));
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onHashChange(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
-    }
-    /**
-     * @return {?}
-     */
-    get href() {
-        return this.location.href;
-    }
-    /**
-     * @return {?}
-     */
-    get protocol() {
-        return this.location.protocol;
-    }
-    /**
-     * @return {?}
-     */
-    get hostname() {
-        return this.location.hostname;
-    }
-    /**
-     * @return {?}
-     */
-    get port() {
-        return this.location.port;
-    }
-    /**
-     * @return {?}
-     */
-    get pathname() {
-        return this.location.pathname;
-    }
-    /**
-     * @return {?}
-     */
-    get search() {
-        return this.location.search;
-    }
-    /**
-     * @return {?}
-     */
-    get hash() {
-        return this.location.hash;
-    }
-    /**
-     * @param {?} newPath
-     * @return {?}
-     */
-    set pathname(newPath) {
-        this.location.pathname = newPath;
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    pushState(state, title, url) {
-        if (supportsState()) {
-            this._history.pushState(state, title, url);
+    class BrowserPlatformLocation extends PlatformLocation {
+        /**
+         * @param {?} _doc
+         */
+        constructor(_doc) {
+            super();
+            this._doc = _doc;
+            this._init();
         }
-        else {
-            this.location.hash = url;
+        // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
+        /**
+         * \@internal
+         * @return {?}
+         */
+        _init() {
+            ((/** @type {?} */ (this))).location = getDOM().getLocation();
+            this._history = getDOM().getHistory();
+        }
+        /**
+         * @return {?}
+         */
+        getBaseHrefFromDOM() {
+            return (/** @type {?} */ (getDOM().getBaseHref(this._doc)));
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onPopState(fn) {
+            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onHashChange(fn) {
+            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+        }
+        /**
+         * @return {?}
+         */
+        get href() {
+            return this.location.href;
+        }
+        /**
+         * @return {?}
+         */
+        get protocol() {
+            return this.location.protocol;
+        }
+        /**
+         * @return {?}
+         */
+        get hostname() {
+            return this.location.hostname;
+        }
+        /**
+         * @return {?}
+         */
+        get port() {
+            return this.location.port;
+        }
+        /**
+         * @return {?}
+         */
+        get pathname() {
+            return this.location.pathname;
+        }
+        /**
+         * @return {?}
+         */
+        get search() {
+            return this.location.search;
+        }
+        /**
+         * @return {?}
+         */
+        get hash() {
+            return this.location.hash;
+        }
+        /**
+         * @param {?} newPath
+         * @return {?}
+         */
+        set pathname(newPath) {
+            this.location.pathname = newPath;
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} url
+         * @return {?}
+         */
+        pushState(state, title, url) {
+            if (supportsState()) {
+                this._history.pushState(state, title, url);
+            }
+            else {
+                this.location.hash = url;
+            }
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} url
+         * @return {?}
+         */
+        replaceState(state, title, url) {
+            if (supportsState()) {
+                this._history.replaceState(state, title, url);
+            }
+            else {
+                this.location.hash = url;
+            }
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            this._history.forward();
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            this._history.back();
+        }
+        /**
+         * @return {?}
+         */
+        getState() {
+            return this._history.state;
         }
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    replaceState(state, title, url) {
-        if (supportsState()) {
-            this._history.replaceState(state, title, url);
-        }
-        else {
-            this.location.hash = url;
-        }
-    }
-    /**
-     * @return {?}
-     */
-    forward() {
-        this._history.forward();
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this._history.back();
-    }
-    /**
-     * @return {?}
-     */
-    getState() {
-        return this._history.state;
-    }
-}
-BrowserPlatformLocation.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'platform',
-                // See #23917
-                useFactory: createBrowserPlatformLocation,
-            },] }
-];
-/** @nocollapse */
-BrowserPlatformLocation.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
-];
-/** @nocollapse */ BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+    BrowserPlatformLocation.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: createBrowserPlatformLocation,
+                },] }
+    ];
+    /** @nocollapse */
+    BrowserPlatformLocation.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ];
+    /** @nocollapse */ BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+    return BrowserPlatformLocation;
+})();
 if (false) {
     /** @type {?} */
     BrowserPlatformLocation.prototype.location;
@@ -636,12 +670,33 @@ function normalizeQueryParams(params) {
  * \@publicApi
  * @abstract
  */
-class LocationStrategy {
-}
-LocationStrategy.decorators = [
-    { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
-];
-/** @nocollapse */ LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+let LocationStrategy = /** @class */ (() => {
+    /**
+     * Enables the `Location` service to read route state from the browser's URL.
+     * Angular provides two strategies:
+     * `HashLocationStrategy` and `PathLocationStrategy`.
+     *
+     * Applications should use the `Router` or `Location` services to
+     * interact with application route state.
+     *
+     * For instance, `HashLocationStrategy` produces URLs like
+     * <code class="no-auto-link">http://example.com#/foo</code>,
+     * and `PathLocationStrategy` produces
+     * <code class="no-auto-link">http://example.com/foo</code> as an equivalent URL.
+     *
+     * See these two classes for more.
+     *
+     * \@publicApi
+     * @abstract
+     */
+    class LocationStrategy {
+    }
+    LocationStrategy.decorators = [
+        { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
+    ];
+    /** @nocollapse */ LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+    return LocationStrategy;
+})();
 if (false) {
     /**
      * @abstract
@@ -757,99 +812,129 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * \@publicApi
  */
-class PathLocationStrategy extends LocationStrategy {
+let PathLocationStrategy = /** @class */ (() => {
     /**
-     * @param {?} _platformLocation
-     * @param {?=} href
+     * \@description
+     * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+     * represent its state in the
+     * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
+     * browser's URL.
+     *
+     * If you're using `PathLocationStrategy`, you must provide a {\@link APP_BASE_HREF}
+     * or add a base element to the document. This URL prefix that will be preserved
+     * when generating and recognizing URLs.
+     *
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * Similarly, if you add `<base href='/my/app'/>` to the document and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
+     *
+     * \@usageNotes
+     *
+     * ### Example
+     *
+     * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
+     *
+     * \@publicApi
      */
-    constructor(_platformLocation, href) {
-        super();
-        this._platformLocation = _platformLocation;
-        if (href == null) {
-            href = this._platformLocation.getBaseHrefFromDOM();
+    class PathLocationStrategy extends LocationStrategy {
+        /**
+         * @param {?} _platformLocation
+         * @param {?=} href
+         */
+        constructor(_platformLocation, href) {
+            super();
+            this._platformLocation = _platformLocation;
+            if (href == null) {
+                href = this._platformLocation.getBaseHrefFromDOM();
+            }
+            if (href == null) {
+                throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
+            }
+            this._baseHref = href;
         }
-        if (href == null) {
-            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onPopState(fn) {
+            this._platformLocation.onPopState(fn);
+            this._platformLocation.onHashChange(fn);
         }
-        this._baseHref = href;
+        /**
+         * @return {?}
+         */
+        getBaseHref() {
+            return this._baseHref;
+        }
+        /**
+         * @param {?} internal
+         * @return {?}
+         */
+        prepareExternalUrl(internal) {
+            return joinWithSlash(this._baseHref, internal);
+        }
+        /**
+         * @param {?=} includeHash
+         * @return {?}
+         */
+        path(includeHash = false) {
+            /** @type {?} */
+            const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
+            /** @type {?} */
+            const hash = this._platformLocation.hash;
+            return hash && includeHash ? `${pathname}${hash}` : pathname;
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} url
+         * @param {?} queryParams
+         * @return {?}
+         */
+        pushState(state, title, url, queryParams) {
+            /** @type {?} */
+            const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+            this._platformLocation.pushState(state, title, externalUrl);
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} url
+         * @param {?} queryParams
+         * @return {?}
+         */
+        replaceState(state, title, url, queryParams) {
+            /** @type {?} */
+            const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+            this._platformLocation.replaceState(state, title, externalUrl);
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            this._platformLocation.forward();
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            this._platformLocation.back();
+        }
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHref() {
-        return this._baseHref;
-    }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) {
-        return joinWithSlash(this._baseHref, internal);
-    }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    path(includeHash = false) {
-        /** @type {?} */
-        const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
-        /** @type {?} */
-        const hash = this._platformLocation.hash;
-        return hash && includeHash ? `${pathname}${hash}` : pathname;
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    pushState(state, title, url, queryParams) {
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
-        this._platformLocation.pushState(state, title, externalUrl);
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    replaceState(state, title, url, queryParams) {
-        /** @type {?} */
-        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
-        this._platformLocation.replaceState(state, title, externalUrl);
-    }
-    /**
-     * @return {?}
-     */
-    forward() {
-        this._platformLocation.forward();
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this._platformLocation.back();
-    }
-}
-PathLocationStrategy.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-PathLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation },
-    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
-];
+    PathLocationStrategy.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    PathLocationStrategy.ctorParameters = () => [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
+    ];
+    return PathLocationStrategy;
+})();
 if (false) {
     /**
      * @type {?}
@@ -886,106 +971,127 @@ if (false) {
  *
  * \@publicApi
  */
-class HashLocationStrategy extends LocationStrategy {
+let HashLocationStrategy = /** @class */ (() => {
     /**
-     * @param {?} _platformLocation
-     * @param {?=} _baseHref
+     * \@description
+     * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+     * represent its state in the
+     * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
+     * of the browser's URL.
+     *
+     * For instance, if you call `location.go('/foo')`, the browser's URL will become
+     * `example.com#/foo`.
+     *
+     * \@usageNotes
+     *
+     * ### Example
+     *
+     * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
+     *
+     * \@publicApi
      */
-    constructor(_platformLocation, _baseHref) {
-        super();
-        this._platformLocation = _platformLocation;
-        this._baseHref = '';
-        if (_baseHref != null) {
-            this._baseHref = _baseHref;
+    class HashLocationStrategy extends LocationStrategy {
+        /**
+         * @param {?} _platformLocation
+         * @param {?=} _baseHref
+         */
+        constructor(_platformLocation, _baseHref) {
+            super();
+            this._platformLocation = _platformLocation;
+            this._baseHref = '';
+            if (_baseHref != null) {
+                this._baseHref = _baseHref;
+            }
+        }
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        onPopState(fn) {
+            this._platformLocation.onPopState(fn);
+            this._platformLocation.onHashChange(fn);
+        }
+        /**
+         * @return {?}
+         */
+        getBaseHref() {
+            return this._baseHref;
+        }
+        /**
+         * @param {?=} includeHash
+         * @return {?}
+         */
+        path(includeHash = false) {
+            // the hash value is always prefixed with a `#`
+            // and if it is empty then it will stay empty
+            /** @type {?} */
+            let path = this._platformLocation.hash;
+            if (path == null)
+                path = '#';
+            return path.length > 0 ? path.substring(1) : path;
+        }
+        /**
+         * @param {?} internal
+         * @return {?}
+         */
+        prepareExternalUrl(internal) {
+            /** @type {?} */
+            const url = joinWithSlash(this._baseHref, internal);
+            return url.length > 0 ? ('#' + url) : url;
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} path
+         * @param {?} queryParams
+         * @return {?}
+         */
+        pushState(state, title, path, queryParams) {
+            /** @type {?} */
+            let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
+            if (url.length == 0) {
+                url = this._platformLocation.pathname;
+            }
+            this._platformLocation.pushState(state, title, url);
+        }
+        /**
+         * @param {?} state
+         * @param {?} title
+         * @param {?} path
+         * @param {?} queryParams
+         * @return {?}
+         */
+        replaceState(state, title, path, queryParams) {
+            /** @type {?} */
+            let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
+            if (url.length == 0) {
+                url = this._platformLocation.pathname;
+            }
+            this._platformLocation.replaceState(state, title, url);
+        }
+        /**
+         * @return {?}
+         */
+        forward() {
+            this._platformLocation.forward();
+        }
+        /**
+         * @return {?}
+         */
+        back() {
+            this._platformLocation.back();
         }
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
-    }
-    /**
-     * @return {?}
-     */
-    getBaseHref() {
-        return this._baseHref;
-    }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    path(includeHash = false) {
-        // the hash value is always prefixed with a `#`
-        // and if it is empty then it will stay empty
-        /** @type {?} */
-        let path = this._platformLocation.hash;
-        if (path == null)
-            path = '#';
-        return path.length > 0 ? path.substring(1) : path;
-    }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) {
-        /** @type {?} */
-        const url = joinWithSlash(this._baseHref, internal);
-        return url.length > 0 ? ('#' + url) : url;
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} path
-     * @param {?} queryParams
-     * @return {?}
-     */
-    pushState(state, title, path, queryParams) {
-        /** @type {?} */
-        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
-        if (url.length == 0) {
-            url = this._platformLocation.pathname;
-        }
-        this._platformLocation.pushState(state, title, url);
-    }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} path
-     * @param {?} queryParams
-     * @return {?}
-     */
-    replaceState(state, title, path, queryParams) {
-        /** @type {?} */
-        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
-        if (url.length == 0) {
-            url = this._platformLocation.pathname;
-        }
-        this._platformLocation.replaceState(state, title, url);
-    }
-    /**
-     * @return {?}
-     */
-    forward() {
-        this._platformLocation.forward();
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this._platformLocation.back();
-    }
-}
-HashLocationStrategy.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-HashLocationStrategy.ctorParameters = () => [
-    { type: PlatformLocation },
-    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
-];
+    HashLocationStrategy.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HashLocationStrategy.ctorParameters = () => [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
+    ];
+    return HashLocationStrategy;
+})();
 if (false) {
     /**
      * @type {?}
@@ -1047,220 +1153,251 @@ if (false) {
  *
  * \@publicApi
  */
-class Location {
+let Location = /** @class */ (() => {
     /**
-     * @param {?} platformStrategy
-     * @param {?} platformLocation
+     * \@description
+     *
+     * A service that applications can use to interact with a browser's URL.
+     *
+     * Depending on the `LocationStrategy` used, `Location` persists
+     * to the URL's path or the URL's hash segment.
+     *
+     * \@usageNotes
+     *
+     * It's better to use the `Router#navigate` service to trigger route changes. Use
+     * `Location` only if you need to interact with or create normalized URLs outside of
+     * routing.
+     *
+     * `Location` is responsible for normalizing the URL against the application's base href.
+     * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+     * trailing slash:
+     * - `/my/app/user/123` is normalized
+     * - `my/app/user/123` **is not** normalized
+     * - `/my/app/user/123/` **is not** normalized
+     *
+     * ### Example
+     *
+     * <code-example path='common/location/ts/path_location_component.ts'
+     * region='LocationComponent'></code-example>
+     *
+     * \@publicApi
      */
-    constructor(platformStrategy, platformLocation) {
+    class Location {
         /**
-         * \@internal
+         * @param {?} platformStrategy
+         * @param {?} platformLocation
          */
-        this._subject = new EventEmitter();
-        /**
-         * \@internal
-         */
-        this._urlChangeListeners = [];
-        this._platformStrategy = platformStrategy;
-        /** @type {?} */
-        const browserBaseHref = this._platformStrategy.getBaseHref();
-        this._platformLocation = platformLocation;
-        this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this._platformStrategy.onPopState((/**
-         * @param {?} ev
-         * @return {?}
-         */
-        (ev) => {
-            this._subject.emit({
-                'url': this.path(true),
-                'pop': true,
-                'state': ev.state,
-                'type': ev.type,
-            });
-        }));
-    }
-    /**
-     * Normalizes the URL path for this location.
-     *
-     * @param {?=} includeHash True to include an anchor fragment in the path.
-     *
-     * @return {?} The normalized URL path.
-     */
-    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-    // removed.
-    path(includeHash = false) {
-        return this.normalize(this._platformStrategy.path(includeHash));
-    }
-    /**
-     * Reports the current state of the location history.
-     * @return {?} The current value of the `history.state` object.
-     */
-    getState() {
-        return this._platformLocation.getState();
-    }
-    /**
-     * Normalizes the given path and compares to the current normalized path.
-     *
-     * @param {?} path The given URL path.
-     * @param {?=} query Query parameters.
-     *
-     * @return {?} True if the given URL path is equal to the current normalized path, false
-     * otherwise.
-     */
-    isCurrentPathEqualTo(path, query = '') {
-        return this.path() == this.normalize(path + normalizeQueryParams(query));
-    }
-    /**
-     * Normalizes a URL path by stripping any trailing slashes.
-     *
-     * @param {?} url String representing a URL.
-     *
-     * @return {?} The normalized URL string.
-     */
-    normalize(url) {
-        return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
-    }
-    /**
-     * Normalizes an external URL path.
-     * If the given URL doesn't begin with a leading slash (`'/'`), adds one
-     * before normalizing. Adds a hash if `HashLocationStrategy` is
-     * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-     *
-     * @param {?} url String representing a URL.
-     *
-     * @return {?} A normalized platform-specific URL.
-     */
-    prepareExternalUrl(url) {
-        if (url && url[0] !== '/') {
-            url = '/' + url;
+        constructor(platformStrategy, platformLocation) {
+            /**
+             * \@internal
+             */
+            this._subject = new EventEmitter();
+            /**
+             * \@internal
+             */
+            this._urlChangeListeners = [];
+            this._platformStrategy = platformStrategy;
+            /** @type {?} */
+            const browserBaseHref = this._platformStrategy.getBaseHref();
+            this._platformLocation = platformLocation;
+            this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
+            this._platformStrategy.onPopState((/**
+             * @param {?} ev
+             * @return {?}
+             */
+            (ev) => {
+                this._subject.emit({
+                    'url': this.path(true),
+                    'pop': true,
+                    'state': ev.state,
+                    'type': ev.type,
+                });
+            }));
         }
-        return this._platformStrategy.prepareExternalUrl(url);
-    }
-    // TODO: rename this method to pushState
-    /**
-     * Changes the browser's URL to a normalized version of a given URL, and pushes a
-     * new item onto the platform's history.
-     *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
-     *
-     * @return {?}
-     */
-    go(path, query = '', state = null) {
-        this._platformStrategy.pushState(state, '', path, query);
-        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
-    }
-    /**
-     * Changes the browser's URL to a normalized version of the given URL, and replaces
-     * the top item on the platform's history stack.
-     *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
-     * @return {?}
-     */
-    replaceState(path, query = '', state = null) {
-        this._platformStrategy.replaceState(state, '', path, query);
-        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
-    }
-    /**
-     * Navigates forward in the platform's history.
-     * @return {?}
-     */
-    forward() {
-        this._platformStrategy.forward();
-    }
-    /**
-     * Navigates back in the platform's history.
-     * @return {?}
-     */
-    back() {
-        this._platformStrategy.back();
-    }
-    /**
-     * Registers a URL change listener. Use to catch updates performed by the Angular
-     * framework that are not detectible through "popstate" or "hashchange" events.
-     *
-     * @param {?} fn The change handler function, which take a URL and a location history state.
-     * @return {?}
-     */
-    onUrlChange(fn) {
-        this._urlChangeListeners.push(fn);
-        this.subscribe((/**
-         * @param {?} v
+        /**
+         * Normalizes the URL path for this location.
+         *
+         * @param {?=} includeHash True to include an anchor fragment in the path.
+         *
+         * @return {?} The normalized URL path.
+         */
+        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+        // removed.
+        path(includeHash = false) {
+            return this.normalize(this._platformStrategy.path(includeHash));
+        }
+        /**
+         * Reports the current state of the location history.
+         * @return {?} The current value of the `history.state` object.
+         */
+        getState() {
+            return this._platformLocation.getState();
+        }
+        /**
+         * Normalizes the given path and compares to the current normalized path.
+         *
+         * @param {?} path The given URL path.
+         * @param {?=} query Query parameters.
+         *
+         * @return {?} True if the given URL path is equal to the current normalized path, false
+         * otherwise.
+         */
+        isCurrentPathEqualTo(path, query = '') {
+            return this.path() == this.normalize(path + normalizeQueryParams(query));
+        }
+        /**
+         * Normalizes a URL path by stripping any trailing slashes.
+         *
+         * @param {?} url String representing a URL.
+         *
+         * @return {?} The normalized URL string.
+         */
+        normalize(url) {
+            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+        }
+        /**
+         * Normalizes an external URL path.
+         * If the given URL doesn't begin with a leading slash (`'/'`), adds one
+         * before normalizing. Adds a hash if `HashLocationStrategy` is
+         * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+         *
+         * @param {?} url String representing a URL.
+         *
+         * @return {?} A normalized platform-specific URL.
+         */
+        prepareExternalUrl(url) {
+            if (url && url[0] !== '/') {
+                url = '/' + url;
+            }
+            return this._platformStrategy.prepareExternalUrl(url);
+        }
+        // TODO: rename this method to pushState
+        /**
+         * Changes the browser's URL to a normalized version of a given URL, and pushes a
+         * new item onto the platform's history.
+         *
+         * @param {?} path  URL path to normalize.
+         * @param {?=} query Query parameters.
+         * @param {?=} state Location history state.
+         *
          * @return {?}
          */
-        v => {
-            this._notifyUrlChangeListeners(v.url, v.state);
-        }));
-    }
-    /**
-     * \@internal
-     * @param {?=} url
-     * @param {?=} state
-     * @return {?}
-     */
-    _notifyUrlChangeListeners(url = '', state) {
-        this._urlChangeListeners.forEach((/**
-         * @param {?} fn
+        go(path, query = '', state = null) {
+            this._platformStrategy.pushState(state, '', path, query);
+            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+        }
+        /**
+         * Changes the browser's URL to a normalized version of the given URL, and replaces
+         * the top item on the platform's history stack.
+         *
+         * @param {?} path  URL path to normalize.
+         * @param {?=} query Query parameters.
+         * @param {?=} state Location history state.
          * @return {?}
          */
-        fn => fn(url, state)));
+        replaceState(path, query = '', state = null) {
+            this._platformStrategy.replaceState(state, '', path, query);
+            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+        }
+        /**
+         * Navigates forward in the platform's history.
+         * @return {?}
+         */
+        forward() {
+            this._platformStrategy.forward();
+        }
+        /**
+         * Navigates back in the platform's history.
+         * @return {?}
+         */
+        back() {
+            this._platformStrategy.back();
+        }
+        /**
+         * Registers a URL change listener. Use to catch updates performed by the Angular
+         * framework that are not detectible through "popstate" or "hashchange" events.
+         *
+         * @param {?} fn The change handler function, which take a URL and a location history state.
+         * @return {?}
+         */
+        onUrlChange(fn) {
+            this._urlChangeListeners.push(fn);
+            this.subscribe((/**
+             * @param {?} v
+             * @return {?}
+             */
+            v => {
+                this._notifyUrlChangeListeners(v.url, v.state);
+            }));
+        }
+        /**
+         * \@internal
+         * @param {?=} url
+         * @param {?=} state
+         * @return {?}
+         */
+        _notifyUrlChangeListeners(url = '', state) {
+            this._urlChangeListeners.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn(url, state)));
+        }
+        /**
+         * Subscribes to the platform's `popState` events.
+         *
+         * @param {?} onNext
+         * @param {?=} onThrow
+         * @param {?=} onReturn
+         * @return {?} Subscribed events.
+         */
+        subscribe(onNext, onThrow, onReturn) {
+            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+        }
     }
     /**
-     * Subscribes to the platform's `popState` events.
+     * Normalizes URL parameters by prepending with `?` if needed.
      *
-     * @param {?} onNext
-     * @param {?=} onThrow
-     * @param {?=} onReturn
-     * @return {?} Subscribed events.
+     * @param params String of URL parameters.
+     *
+     * @return The normalized URL parameters string.
      */
-    subscribe(onNext, onThrow, onReturn) {
-        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-    }
-}
-/**
- * Normalizes URL parameters by prepending with `?` if needed.
- *
- * @param params String of URL parameters.
- *
- * @return The normalized URL parameters string.
- */
-Location.normalizeQueryParams = normalizeQueryParams;
-/**
- * Joins two parts of a URL with a slash if needed.
- *
- * @param start  URL string
- * @param end    URL string
- *
- *
- * @return The joined URL string.
- */
-Location.joinWithSlash = joinWithSlash;
-/**
- * Removes a trailing slash from a URL string if needed.
- * Looks for the first occurrence of either `#`, `?`, or the end of the
- * line as `/` characters and removes the trailing slash if one exists.
- *
- * @param url URL string.
- *
- * @return The URL string, modified if needed.
- */
-Location.stripTrailingSlash = stripTrailingSlash;
-Location.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-                // See #23917
-                useFactory: createLocation,
-            },] }
-];
-/** @nocollapse */
-Location.ctorParameters = () => [
-    { type: LocationStrategy },
-    { type: PlatformLocation }
-];
-/** @nocollapse */ Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+    Location.normalizeQueryParams = normalizeQueryParams;
+    /**
+     * Joins two parts of a URL with a slash if needed.
+     *
+     * @param start  URL string
+     * @param end    URL string
+     *
+     *
+     * @return The joined URL string.
+     */
+    Location.joinWithSlash = joinWithSlash;
+    /**
+     * Removes a trailing slash from a URL string if needed.
+     * Looks for the first occurrence of either `#`, `?`, or the end of the
+     * line as `/` characters and removes the trailing slash if one exists.
+     *
+     * @param url URL string.
+     *
+     * @return The URL string, modified if needed.
+     */
+    Location.stripTrailingSlash = stripTrailingSlash;
+    Location.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                    // See #23917
+                    useFactory: createLocation,
+                },] }
+    ];
+    /** @nocollapse */
+    Location.ctorParameters = () => [
+        { type: LocationStrategy },
+        { type: PlatformLocation }
+    ];
+    /** @nocollapse */ Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+    return Location;
+})();
 if (false) {
     /**
      * Normalizes URL parameters by prepending with `?` if needed.
@@ -3595,45 +3732,53 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * \@publicApi
  */
-class NgLocaleLocalization extends NgLocalization {
+let NgLocaleLocalization = /** @class */ (() => {
     /**
-     * @param {?} locale
+     * Returns the plural case based on the locale
+     *
+     * \@publicApi
      */
-    constructor(locale) {
-        super();
-        this.locale = locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} locale
-     * @return {?}
-     */
-    getPluralCategory(value, locale) {
-        /** @type {?} */
-        const plural = getLocalePluralCase(locale || this.locale)(value);
-        switch (plural) {
-            case Plural.Zero:
-                return 'zero';
-            case Plural.One:
-                return 'one';
-            case Plural.Two:
-                return 'two';
-            case Plural.Few:
-                return 'few';
-            case Plural.Many:
-                return 'many';
-            default:
-                return 'other';
+    class NgLocaleLocalization extends NgLocalization {
+        /**
+         * @param {?} locale
+         */
+        constructor(locale) {
+            super();
+            this.locale = locale;
+        }
+        /**
+         * @param {?} value
+         * @param {?=} locale
+         * @return {?}
+         */
+        getPluralCategory(value, locale) {
+            /** @type {?} */
+            const plural = getLocalePluralCase(locale || this.locale)(value);
+            switch (plural) {
+                case Plural.Zero:
+                    return 'zero';
+                case Plural.One:
+                    return 'one';
+                case Plural.Two:
+                    return 'two';
+                case Plural.Few:
+                    return 'few';
+                case Plural.Many:
+                    return 'many';
+                default:
+                    return 'other';
+            }
         }
     }
-}
-NgLocaleLocalization.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NgLocaleLocalization.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
-];
+    NgLocaleLocalization.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    NgLocaleLocalization.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
+    return NgLocaleLocalization;
+})();
 if (false) {
     /**
      * @type {?}
@@ -3726,213 +3871,244 @@ function parseCookieValue(cookieStr, name) {
  *
  * \@publicApi
  */
-class NgClass {
+let NgClass = /** @class */ (() => {
     /**
-     * @param {?} _iterableDiffers
-     * @param {?} _keyValueDiffers
-     * @param {?} _ngEl
-     * @param {?} _renderer
-     */
-    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-        this._iterableDiffers = _iterableDiffers;
-        this._keyValueDiffers = _keyValueDiffers;
-        this._ngEl = _ngEl;
-        this._renderer = _renderer;
-        this._iterableDiffer = null;
-        this._keyValueDiffer = null;
-        this._initialClasses = [];
-        this._rawClass = null;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set klass(value) {
-        this._removeClasses(this._initialClasses);
-        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-        this._applyClasses(this._initialClasses);
-        this._applyClasses(this._rawClass);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngClass(value) {
-        this._removeClasses(this._rawClass);
-        this._applyClasses(this._initialClasses);
-        this._iterableDiffer = null;
-        this._keyValueDiffer = null;
-        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-        if (this._rawClass) {
-            if (ɵisListLikeIterable(this._rawClass)) {
-                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-            }
-            else {
-                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-            }
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() {
-        if (this._iterableDiffer) {
-            /** @type {?} */
-            const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (iterableChanges) {
-                this._applyIterableChanges(iterableChanges);
-            }
-        }
-        else if (this._keyValueDiffer) {
-            /** @type {?} */
-            const keyValueChanges = this._keyValueDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (keyValueChanges) {
-                this._applyKeyValueChanges(keyValueChanges);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyKeyValueChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (record.previousValue) {
-                this._toggleClass(record.key, false);
-            }
-        }));
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyIterableChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (typeof record.item === 'string') {
-                this._toggleClass(record.item, true);
-            }
-            else {
-                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
-            }
-        }));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.item, false)));
-    }
-    /**
-     * Applies a collection of CSS classes to the DOM element.
+     * \@ngModule CommonModule
      *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
+     * \@usageNotes
+     * ```
+     *     <some-element [ngClass]="'first second'">...</some-element>
+     *
+     *     <some-element [ngClass]="['first', 'second']">...</some-element>
+     *
+     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+     *
+     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+     *
+     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+     * ```
+     *
+     * \@description
+     *
+     * Adds and removes CSS classes on an HTML element.
+     *
+     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+     * - `string` - the CSS classes listed in the string (space delimited) are added,
+     * - `Array` - the CSS classes declared as Array elements are added,
+     * - `Object` - keys are CSS classes that get added when the expression given in the value
+     *              evaluates to a truthy value, otherwise they are removed.
+     *
+     * \@publicApi
      */
-    _applyClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, true)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, !!rawClassVal[klass])));
-            }
+    class NgClass {
+        /**
+         * @param {?} _iterableDiffers
+         * @param {?} _keyValueDiffers
+         * @param {?} _ngEl
+         * @param {?} _renderer
+         */
+        constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+            this._iterableDiffers = _iterableDiffers;
+            this._keyValueDiffers = _keyValueDiffers;
+            this._ngEl = _ngEl;
+            this._renderer = _renderer;
+            this._iterableDiffer = null;
+            this._keyValueDiffer = null;
+            this._initialClasses = [];
+            this._rawClass = null;
         }
-    }
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _removeClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, false)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, false)));
-            }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set klass(value) {
+            this._removeClasses(this._initialClasses);
+            this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+            this._applyClasses(this._initialClasses);
+            this._applyClasses(this._rawClass);
         }
-    }
-    /**
-     * @private
-     * @param {?} klass
-     * @param {?} enabled
-     * @return {?}
-     */
-    _toggleClass(klass, enabled) {
-        klass = klass.trim();
-        if (klass) {
-            klass.split(/\s+/g).forEach((/**
-             * @param {?} klass
-             * @return {?}
-             */
-            klass => {
-                if (enabled) {
-                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set ngClass(value) {
+            this._removeClasses(this._rawClass);
+            this._applyClasses(this._initialClasses);
+            this._iterableDiffer = null;
+            this._keyValueDiffer = null;
+            this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+            if (this._rawClass) {
+                if (ɵisListLikeIterable(this._rawClass)) {
+                    this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
                 }
                 else {
-                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                    this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+                }
+            }
+        }
+        /**
+         * @return {?}
+         */
+        ngDoCheck() {
+            if (this._iterableDiffer) {
+                /** @type {?} */
+                const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
+                if (iterableChanges) {
+                    this._applyIterableChanges(iterableChanges);
+                }
+            }
+            else if (this._keyValueDiffer) {
+                /** @type {?} */
+                const keyValueChanges = this._keyValueDiffer.diff((/** @type {?} */ (this._rawClass)));
+                if (keyValueChanges) {
+                    this._applyKeyValueChanges(keyValueChanges);
+                }
+            }
+        }
+        /**
+         * @private
+         * @param {?} changes
+         * @return {?}
+         */
+        _applyKeyValueChanges(changes) {
+            changes.forEachAddedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._toggleClass(record.key, record.currentValue)));
+            changes.forEachChangedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._toggleClass(record.key, record.currentValue)));
+            changes.forEachRemovedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => {
+                if (record.previousValue) {
+                    this._toggleClass(record.key, false);
                 }
             }));
         }
+        /**
+         * @private
+         * @param {?} changes
+         * @return {?}
+         */
+        _applyIterableChanges(changes) {
+            changes.forEachAddedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => {
+                if (typeof record.item === 'string') {
+                    this._toggleClass(record.item, true);
+                }
+                else {
+                    throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
+                }
+            }));
+            changes.forEachRemovedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._toggleClass(record.item, false)));
+        }
+        /**
+         * Applies a collection of CSS classes to the DOM element.
+         *
+         * For argument of type Set and Array CSS class names contained in those collections are always
+         * added.
+         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+         * for truthy and removed for falsy).
+         * @private
+         * @param {?} rawClassVal
+         * @return {?}
+         */
+        _applyClasses(rawClassVal) {
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    ((/** @type {?} */ (rawClassVal))).forEach((/**
+                     * @param {?} klass
+                     * @return {?}
+                     */
+                    (klass) => this._toggleClass(klass, true)));
+                }
+                else {
+                    Object.keys(rawClassVal).forEach((/**
+                     * @param {?} klass
+                     * @return {?}
+                     */
+                    klass => this._toggleClass(klass, !!rawClassVal[klass])));
+                }
+            }
+        }
+        /**
+         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+         * purposes.
+         * @private
+         * @param {?} rawClassVal
+         * @return {?}
+         */
+        _removeClasses(rawClassVal) {
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    ((/** @type {?} */ (rawClassVal))).forEach((/**
+                     * @param {?} klass
+                     * @return {?}
+                     */
+                    (klass) => this._toggleClass(klass, false)));
+                }
+                else {
+                    Object.keys(rawClassVal).forEach((/**
+                     * @param {?} klass
+                     * @return {?}
+                     */
+                    klass => this._toggleClass(klass, false)));
+                }
+            }
+        }
+        /**
+         * @private
+         * @param {?} klass
+         * @param {?} enabled
+         * @return {?}
+         */
+        _toggleClass(klass, enabled) {
+            klass = klass.trim();
+            if (klass) {
+                klass.split(/\s+/g).forEach((/**
+                 * @param {?} klass
+                 * @return {?}
+                 */
+                klass => {
+                    if (enabled) {
+                        this._renderer.addClass(this._ngEl.nativeElement, klass);
+                    }
+                    else {
+                        this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                    }
+                }));
+            }
+        }
     }
-}
-NgClass.decorators = [
-    { type: Directive, args: [{ selector: '[ngClass]' },] }
-];
-/** @nocollapse */
-NgClass.ctorParameters = () => [
-    { type: IterableDiffers },
-    { type: KeyValueDiffers },
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-NgClass.propDecorators = {
-    klass: [{ type: Input, args: ['class',] }],
-    ngClass: [{ type: Input, args: ['ngClass',] }]
-};
+    NgClass.decorators = [
+        { type: Directive, args: [{ selector: '[ngClass]' },] }
+    ];
+    /** @nocollapse */
+    NgClass.ctorParameters = () => [
+        { type: IterableDiffers },
+        { type: KeyValueDiffers },
+        { type: ElementRef },
+        { type: Renderer2 }
+    ];
+    NgClass.propDecorators = {
+        klass: [{ type: Input, args: ['class',] }],
+        ngClass: [{ type: Input, args: ['ngClass',] }]
+    };
+    return NgClass;
+})();
 if (false) {
     /**
      * @type {?}
@@ -4036,66 +4212,124 @@ if (false) {
  * \@publicApi
  * \@ngModule CommonModule
  */
-class NgComponentOutlet {
+let NgComponentOutlet = /** @class */ (() => {
     /**
-     * @param {?} _viewContainerRef
+     * Instantiates a single {\@link Component} type and inserts its Host View into current View.
+     * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
+     *
+     * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
+     * any existing component will get destroyed.
+     *
+     * \@usageNotes
+     *
+     * ### Fine tune control
+     *
+     * You can control the component creation process by using the following optional attributes:
+     *
+     * * `ngComponentOutletInjector`: Optional custom {\@link Injector} that will be used as parent for
+     * the Component. Defaults to the injector of the current view container.
+     *
+     * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
+     * section of the component, if exists.
+     *
+     * * `ngComponentOutletNgModuleFactory`: Optional module factory to allow dynamically loading other
+     * module, then load a component from that module.
+     *
+     * ### Syntax
+     *
+     * Simple
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
+     * ```
+     *
+     * Customized injector/content
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression;
+     *                                   injector: injectorExpression;
+     *                                   content: contentNodesExpression;">
+     * </ng-container>
+     * ```
+     *
+     * Customized ngModuleFactory
+     * ```
+     * <ng-container *ngComponentOutlet="componentTypeExpression;
+     *                                   ngModuleFactory: moduleFactory;">
+     * </ng-container>
+     * ```
+     *
+     * ### A simple example
+     *
+     * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
+     *
+     * A more complete example with additional options:
+     *
+     * {\@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
+     *
+     * \@publicApi
+     * \@ngModule CommonModule
      */
-    constructor(_viewContainerRef) {
-        this._viewContainerRef = _viewContainerRef;
-        this._componentRef = null;
-        this._moduleRef = null;
-    }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        this._viewContainerRef.clear();
-        this._componentRef = null;
-        if (this.ngComponentOutlet) {
-            /** @type {?} */
-            const elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-            if (changes['ngComponentOutletNgModuleFactory']) {
-                if (this._moduleRef)
-                    this._moduleRef.destroy();
-                if (this.ngComponentOutletNgModuleFactory) {
-                    /** @type {?} */
-                    const parentModule = elInjector.get(NgModuleRef);
-                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
+    class NgComponentOutlet {
+        /**
+         * @param {?} _viewContainerRef
+         */
+        constructor(_viewContainerRef) {
+            this._viewContainerRef = _viewContainerRef;
+            this._componentRef = null;
+            this._moduleRef = null;
+        }
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        ngOnChanges(changes) {
+            this._viewContainerRef.clear();
+            this._componentRef = null;
+            if (this.ngComponentOutlet) {
+                /** @type {?} */
+                const elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+                if (changes['ngComponentOutletNgModuleFactory']) {
+                    if (this._moduleRef)
+                        this._moduleRef.destroy();
+                    if (this.ngComponentOutletNgModuleFactory) {
+                        /** @type {?} */
+                        const parentModule = elInjector.get(NgModuleRef);
+                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
+                    }
+                    else {
+                        this._moduleRef = null;
+                    }
                 }
-                else {
-                    this._moduleRef = null;
-                }
+                /** @type {?} */
+                const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+                    elInjector.get(ComponentFactoryResolver);
+                /** @type {?} */
+                const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
             }
-            /** @type {?} */
-            const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
-                elInjector.get(ComponentFactoryResolver);
-            /** @type {?} */
-            const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
-            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
+        }
+        /**
+         * @return {?}
+         */
+        ngOnDestroy() {
+            if (this._moduleRef)
+                this._moduleRef.destroy();
         }
     }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this._moduleRef)
-            this._moduleRef.destroy();
-    }
-}
-NgComponentOutlet.decorators = [
-    { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] }
-];
-/** @nocollapse */
-NgComponentOutlet.ctorParameters = () => [
-    { type: ViewContainerRef }
-];
-NgComponentOutlet.propDecorators = {
-    ngComponentOutlet: [{ type: Input }],
-    ngComponentOutletInjector: [{ type: Input }],
-    ngComponentOutletContent: [{ type: Input }],
-    ngComponentOutletNgModuleFactory: [{ type: Input }]
-};
+    NgComponentOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] }
+    ];
+    /** @nocollapse */
+    NgComponentOutlet.ctorParameters = () => [
+        { type: ViewContainerRef }
+    ];
+    NgComponentOutlet.propDecorators = {
+        ngComponentOutlet: [{ type: Input }],
+        ngComponentOutletInjector: [{ type: Input }],
+        ngComponentOutletContent: [{ type: Input }],
+        ngComponentOutletNgModuleFactory: [{ type: Input }]
+    };
+    return NgComponentOutlet;
+})();
 if (false) {
     /** @type {?} */
     NgComponentOutlet.prototype.ngComponentOutlet;
@@ -4278,199 +4512,301 @@ if (false) {
  * \@publicApi
  * @template T, U
  */
-class NgForOf {
+let NgForOf = /** @class */ (() => {
     /**
-     * @param {?} _viewContainer
-     * @param {?} _template
-     * @param {?} _differs
-     */
-    constructor(_viewContainer, _template, _differs) {
-        this._viewContainer = _viewContainer;
-        this._template = _template;
-        this._differs = _differs;
-        this._ngForOf = null;
-        this._ngForOfDirty = true;
-        this._differ = null;
-    }
-    /**
-     * The value of the iterable expression, which can be used as a
-     * [template input variable](guide/structural-directives#template-input-variable).
-     * @param {?} ngForOf
-     * @return {?}
-     */
-    set ngForOf(ngForOf) {
-        this._ngForOf = ngForOf;
-        this._ngForOfDirty = true;
-    }
-    /**
-     * A function that defines how to track changes for items in the iterable.
+     * A [structural directive](guide/structural-directives) that renders
+     * a template for each item in a collection.
+     * The directive is placed on an element, which becomes the parent
+     * of the cloned templates.
      *
-     * When items are added, moved, or removed in the iterable,
-     * the directive must re-render the appropriate DOM nodes.
-     * To minimize churn in the DOM, only nodes that have changed
-     * are re-rendered.
+     * The `ngForOf` directive is generally used in the
+     * [shorthand form](guide/structural-directives#the-asterisk--prefix) `*ngFor`.
+     * In this form, the template to be rendered for each iteration is the content
+     * of an anchor element containing the directive.
      *
-     * By default, the change detector assumes that
-     * the object instance identifies the node in the iterable.
-     * When this function is supplied, the directive uses
-     * the result of calling this function to identify the item node,
-     * rather than the identity of the object itself.
+     * The following example shows the shorthand syntax with some options,
+     * contained in an `<li>` element.
      *
-     * The function receives two inputs,
-     * the iteration index and the node object ID.
-     * @param {?} fn
-     * @return {?}
+     * ```
+     * <li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>
+     * ```
+     *
+     * The shorthand form expands into a long form that uses the `ngForOf` selector
+     * on an `<ng-template>` element.
+     * The content of the `<ng-template>` element is the `<li>` element that held the
+     * short-form directive.
+     *
+     * Here is the expanded version of the short-form example.
+     *
+     * ```
+     * <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
+     *   <li>...</li>
+     * </ng-template>
+     * ```
+     *
+     * Angular automatically expands the shorthand syntax as it compiles the template.
+     * The context for each embedded view is logically merged to the current component
+     * context according to its lexical position.
+     *
+     * When using the shorthand syntax, Angular allows only [one structural directive
+     * on an element](guide/structural-directives#one-structural-directive-per-host-element).
+     * If you want to iterate conditionally, for example,
+     * put the `*ngIf` on a container element that wraps the `*ngFor` element.
+     * For futher discussion, see
+     * [Structural Directives](guide/structural-directives#one-per-element).
+     *
+     * \@usageNotes
+     *
+     * ### Local variables
+     *
+     * `NgForOf` provides exported values that can be aliased to local variables.
+     * For example:
+     *
+     *  ```
+     * <li *ngFor="let user of users; index as i; first as isFirst">
+     *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+     * </li>
+     * ```
+     *
+     * The following exported values can be aliased to local variables:
+     *
+     * - `$implicit: T`: The value of the individual items in the iterable (`ngForOf`).
+     * - `ngForOf: NgIterable<T>`: The value of the iterable expression. Useful when the expression is
+     * more complex then a property access, for example when using the async pipe (`userStreams |
+     * async`).
+     * - `index: number`: The index of the current item in the iterable.
+     * - `count: number`: The length of the iterable.
+     * - `first: boolean`: True when the item is the first item in the iterable.
+     * - `last: boolean`: True when the item is the last item in the iterable.
+     * - `even: boolean`: True when the item has an even index in the iterable.
+     * - `odd: boolean`: True when the item has an odd index in the iterable.
+     *
+     * ### Change propagation
+     *
+     * When the contents of the iterator changes, `NgForOf` makes the corresponding changes to the DOM:
+     *
+     * * When an item is added, a new instance of the template is added to the DOM.
+     * * When an item is removed, its template instance is removed from the DOM.
+     * * When items are reordered, their respective templates are reordered in the DOM.
+     *
+     * Angular uses object identity to track insertions and deletions within the iterator and reproduce
+     * those changes in the DOM. This has important implications for animations and any stateful
+     * controls that are present, such as `<input>` elements that accept user input. Inserted rows can
+     * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
+     * such as user input.
+     * For more on animations, see [Transitions and Triggers](guide/transition-and-triggers).
+     *
+     * The identities of elements in the iterator can change while the data does not.
+     * This can happen, for example, if the iterator is produced from an RPC to the server, and that
+     * RPC is re-run. Even if the data hasn't changed, the second response produces objects with
+     * different identities, and Angular must tear down the entire DOM and rebuild it (as if all old
+     * elements were deleted and all new elements inserted).
+     *
+     * To avoid this expensive operation, you can customize the default tracking algorithm.
+     * by supplying the `trackBy` option to `NgForOf`.
+     * `trackBy` takes a function that has two arguments: `index` and `item`.
+     * If `trackBy` is given, Angular tracks changes by the return value of the function.
+     *
+     * @see [Structural Directives](guide/structural-directives)
+     * \@ngModule CommonModule
+     * \@publicApi
+     * @template T, U
      */
-    set ngForTrackBy(fn) {
-        if (isDevMode() && fn != null && typeof fn !== 'function') {
-            // TODO(vicb): use a log service once there is a public one available
-            if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
-                console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
-                    `See https://angular.io/api/common/NgForOf#change-propagation for more information.`);
-            }
+    class NgForOf {
+        /**
+         * @param {?} _viewContainer
+         * @param {?} _template
+         * @param {?} _differs
+         */
+        constructor(_viewContainer, _template, _differs) {
+            this._viewContainer = _viewContainer;
+            this._template = _template;
+            this._differs = _differs;
+            this._ngForOf = null;
+            this._ngForOfDirty = true;
+            this._differ = null;
         }
-        this._trackByFn = fn;
-    }
-    /**
-     * @return {?}
-     */
-    get ngForTrackBy() {
-        return this._trackByFn;
-    }
-    /**
-     * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
-     * @param {?} value
-     * @return {?}
-     */
-    set ngForTemplate(value) {
-        // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
-        // The current type is too restrictive; a template that just uses index, for example,
-        // should be acceptable.
-        if (value) {
-            this._template = value;
-        }
-    }
-    /**
-     * Applies the changes when needed.
-     * @return {?}
-     */
-    ngDoCheck() {
-        if (this._ngForOfDirty) {
-            this._ngForOfDirty = false;
-            // React on ngForOf changes only once all inputs have been initialized
-            /** @type {?} */
-            const value = this._ngForOf;
-            if (!this._differ && value) {
-                try {
-                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
-                }
-                catch (_a) {
-                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeName(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
-                }
-            }
-        }
-        if (this._differ) {
-            /** @type {?} */
-            const changes = this._differ.diff(this._ngForOf);
-            if (changes)
-                this._applyChanges(changes);
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyChanges(changes) {
-        /** @type {?} */
-        const insertTuples = [];
-        changes.forEachOperation((/**
-         * @param {?} item
-         * @param {?} adjustedPreviousIndex
-         * @param {?} currentIndex
+        /**
+         * The value of the iterable expression, which can be used as a
+         * [template input variable](guide/structural-directives#template-input-variable).
+         * @param {?} ngForOf
          * @return {?}
          */
-        (item, adjustedPreviousIndex, currentIndex) => {
-            if (item.previousIndex == null) {
-                // NgForOf is never "null" or "undefined" here because the differ detected
-                // that a new item needs to be inserted from the iterable. This implies that
-                // there is an iterable value for "_ngForOf".
-                /** @type {?} */
-                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), (/** @type {?} */ (this._ngForOf)), -1, -1), currentIndex === null ? undefined : currentIndex);
-                /** @type {?} */
-                const tuple = new RecordViewTuple(item, view);
-                insertTuples.push(tuple);
-            }
-            else if (currentIndex == null) {
-                this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
-            }
-            else if (adjustedPreviousIndex !== null) {
-                /** @type {?} */
-                const view = (/** @type {?} */ (this._viewContainer.get(adjustedPreviousIndex)));
-                this._viewContainer.move(view, currentIndex);
-                /** @type {?} */
-                const tuple = new RecordViewTuple(item, (/** @type {?} */ (view)));
-                insertTuples.push(tuple);
-            }
-        }));
-        for (let i = 0; i < insertTuples.length; i++) {
-            this._perViewChange(insertTuples[i].view, insertTuples[i].record);
+        set ngForOf(ngForOf) {
+            this._ngForOf = ngForOf;
+            this._ngForOfDirty = true;
         }
-        for (let i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
+        /**
+         * A function that defines how to track changes for items in the iterable.
+         *
+         * When items are added, moved, or removed in the iterable,
+         * the directive must re-render the appropriate DOM nodes.
+         * To minimize churn in the DOM, only nodes that have changed
+         * are re-rendered.
+         *
+         * By default, the change detector assumes that
+         * the object instance identifies the node in the iterable.
+         * When this function is supplied, the directive uses
+         * the result of calling this function to identify the item node,
+         * rather than the identity of the object itself.
+         *
+         * The function receives two inputs,
+         * the iteration index and the node object ID.
+         * @param {?} fn
+         * @return {?}
+         */
+        set ngForTrackBy(fn) {
+            if (isDevMode() && fn != null && typeof fn !== 'function') {
+                // TODO(vicb): use a log service once there is a public one available
+                if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
+                    console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
+                        `See https://angular.io/api/common/NgForOf#change-propagation for more information.`);
+                }
+            }
+            this._trackByFn = fn;
+        }
+        /**
+         * @return {?}
+         */
+        get ngForTrackBy() {
+            return this._trackByFn;
+        }
+        /**
+         * A reference to the template that is stamped out for each item in the iterable.
+         * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+         * @param {?} value
+         * @return {?}
+         */
+        set ngForTemplate(value) {
+            // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
+            // The current type is too restrictive; a template that just uses index, for example,
+            // should be acceptable.
+            if (value) {
+                this._template = value;
+            }
+        }
+        /**
+         * Applies the changes when needed.
+         * @return {?}
+         */
+        ngDoCheck() {
+            if (this._ngForOfDirty) {
+                this._ngForOfDirty = false;
+                // React on ngForOf changes only once all inputs have been initialized
+                /** @type {?} */
+                const value = this._ngForOf;
+                if (!this._differ && value) {
+                    try {
+                        this._differ = this._differs.find(value).create(this.ngForTrackBy);
+                    }
+                    catch (_a) {
+                        throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeName(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+                    }
+                }
+            }
+            if (this._differ) {
+                /** @type {?} */
+                const changes = this._differ.diff(this._ngForOf);
+                if (changes)
+                    this._applyChanges(changes);
+            }
+        }
+        /**
+         * @private
+         * @param {?} changes
+         * @return {?}
+         */
+        _applyChanges(changes) {
             /** @type {?} */
-            const viewRef = (/** @type {?} */ (this._viewContainer.get(i)));
-            viewRef.context.index = i;
-            viewRef.context.count = ilen;
-            viewRef.context.ngForOf = (/** @type {?} */ (this._ngForOf));
+            const insertTuples = [];
+            changes.forEachOperation((/**
+             * @param {?} item
+             * @param {?} adjustedPreviousIndex
+             * @param {?} currentIndex
+             * @return {?}
+             */
+            (item, adjustedPreviousIndex, currentIndex) => {
+                if (item.previousIndex == null) {
+                    // NgForOf is never "null" or "undefined" here because the differ detected
+                    // that a new item needs to be inserted from the iterable. This implies that
+                    // there is an iterable value for "_ngForOf".
+                    /** @type {?} */
+                    const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), (/** @type {?} */ (this._ngForOf)), -1, -1), currentIndex === null ? undefined : currentIndex);
+                    /** @type {?} */
+                    const tuple = new RecordViewTuple(item, view);
+                    insertTuples.push(tuple);
+                }
+                else if (currentIndex == null) {
+                    this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
+                }
+                else if (adjustedPreviousIndex !== null) {
+                    /** @type {?} */
+                    const view = (/** @type {?} */ (this._viewContainer.get(adjustedPreviousIndex)));
+                    this._viewContainer.move(view, currentIndex);
+                    /** @type {?} */
+                    const tuple = new RecordViewTuple(item, (/** @type {?} */ (view)));
+                    insertTuples.push(tuple);
+                }
+            }));
+            for (let i = 0; i < insertTuples.length; i++) {
+                this._perViewChange(insertTuples[i].view, insertTuples[i].record);
+            }
+            for (let i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
+                /** @type {?} */
+                const viewRef = (/** @type {?} */ (this._viewContainer.get(i)));
+                viewRef.context.index = i;
+                viewRef.context.count = ilen;
+                viewRef.context.ngForOf = (/** @type {?} */ (this._ngForOf));
+            }
+            changes.forEachIdentityChange((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => {
+                /** @type {?} */
+                const viewRef = (/** @type {?} */ (this._viewContainer.get(record.currentIndex)));
+                viewRef.context.$implicit = record.item;
+            }));
         }
-        changes.forEachIdentityChange((/**
+        /**
+         * @private
+         * @param {?} view
          * @param {?} record
          * @return {?}
          */
-        (record) => {
-            /** @type {?} */
-            const viewRef = (/** @type {?} */ (this._viewContainer.get(record.currentIndex)));
-            viewRef.context.$implicit = record.item;
-        }));
+        _perViewChange(view, record) {
+            view.context.$implicit = record.item;
+        }
+        /**
+         * Asserts the correct type of the context for the template that `NgForOf` will render.
+         *
+         * The presence of this method is a signal to the Ivy template type-check compiler that the
+         * `NgForOf` structural directive renders its template with a specific context type.
+         * @template T, U
+         * @param {?} dir
+         * @param {?} ctx
+         * @return {?}
+         */
+        static ngTemplateContextGuard(dir, ctx) {
+            return true;
+        }
     }
-    /**
-     * @private
-     * @param {?} view
-     * @param {?} record
-     * @return {?}
-     */
-    _perViewChange(view, record) {
-        view.context.$implicit = record.item;
-    }
-    /**
-     * Asserts the correct type of the context for the template that `NgForOf` will render.
-     *
-     * The presence of this method is a signal to the Ivy template type-check compiler that the
-     * `NgForOf` structural directive renders its template with a specific context type.
-     * @template T, U
-     * @param {?} dir
-     * @param {?} ctx
-     * @return {?}
-     */
-    static ngTemplateContextGuard(dir, ctx) {
-        return true;
-    }
-}
-NgForOf.decorators = [
-    { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
-];
-/** @nocollapse */
-NgForOf.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: IterableDiffers }
-];
-NgForOf.propDecorators = {
-    ngForOf: [{ type: Input }],
-    ngForTrackBy: [{ type: Input }],
-    ngForTemplate: [{ type: Input }]
-};
+    NgForOf.decorators = [
+        { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
+    ];
+    /** @nocollapse */
+    NgForOf.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: IterableDiffers }
+    ];
+    NgForOf.propDecorators = {
+        ngForOf: [{ type: Input }],
+        ngForTrackBy: [{ type: Input }],
+        ngForTemplate: [{ type: Input }]
+    };
+    return NgForOf;
+})();
 if (false) {
     /**
      * @type {?}
@@ -4680,104 +5016,247 @@ function getTypeName(type) {
  * \@publicApi
  * @template T
  */
-class NgIf {
+let NgIf = /** @class */ (() => {
     /**
-     * @param {?} _viewContainer
-     * @param {?} templateRef
-     */
-    constructor(_viewContainer, templateRef) {
-        this._viewContainer = _viewContainer;
-        this._context = new NgIfContext();
-        this._thenTemplateRef = null;
-        this._elseTemplateRef = null;
-        this._thenViewRef = null;
-        this._elseViewRef = null;
-        this._thenTemplateRef = templateRef;
-    }
-    /**
-     * The Boolean expression to evaluate as the condition for showing a template.
-     * @param {?} condition
-     * @return {?}
-     */
-    set ngIf(condition) {
-        this._context.$implicit = this._context.ngIf = condition;
-        this._updateView();
-    }
-    /**
-     * A template to show if the condition expression evaluates to true.
-     * @param {?} templateRef
-     * @return {?}
-     */
-    set ngIfThen(templateRef) {
-        assertTemplate('ngIfThen', templateRef);
-        this._thenTemplateRef = templateRef;
-        this._thenViewRef = null; // clear previous view if any.
-        this._updateView();
-    }
-    /**
-     * A template to show if the condition expression evaluates to false.
-     * @param {?} templateRef
-     * @return {?}
-     */
-    set ngIfElse(templateRef) {
-        assertTemplate('ngIfElse', templateRef);
-        this._elseTemplateRef = templateRef;
-        this._elseViewRef = null; // clear previous view if any.
-        this._updateView();
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    _updateView() {
-        if (this._context.$implicit) {
-            if (!this._thenViewRef) {
-                this._viewContainer.clear();
-                this._elseViewRef = null;
-                if (this._thenTemplateRef) {
-                    this._thenViewRef =
-                        this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
-                }
-            }
-        }
-        else {
-            if (!this._elseViewRef) {
-                this._viewContainer.clear();
-                this._thenViewRef = null;
-                if (this._elseTemplateRef) {
-                    this._elseViewRef =
-                        this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
-                }
-            }
-        }
-    }
-    /**
-     * Asserts the correct type of the context for the template that `NgIf` will render.
+     * A structural directive that conditionally includes a template based on the value of
+     * an expression coerced to Boolean.
+     * When the expression evaluates to true, Angular renders the template
+     * provided in a `then` clause, and when  false or null,
+     * Angular renders the template provided in an optional `else` clause. The default
+     * template for the `else` clause is blank.
      *
-     * The presence of this method is a signal to the Ivy template type-check compiler that the
-     * `NgIf` structural directive renders its template with a specific context type.
+     * A [shorthand form](guide/structural-directives#the-asterisk--prefix) of the directive,
+     * `*ngIf="condition"`, is generally used, provided
+     * as an attribute of the anchor element for the inserted template.
+     * Angular expands this into a more explicit version, in which the anchor element
+     * is contained in an `<ng-template>` element.
+     *
+     * Simple form with shorthand syntax:
+     *
+     * ```
+     * <div *ngIf="condition">Content to render when condition is true.</div>
+     * ```
+     *
+     * Simple form with expanded syntax:
+     *
+     * ```
+     * <ng-template [ngIf]="condition"><div>Content to render when condition is
+     * true.</div></ng-template>
+     * ```
+     *
+     * Form with an "else" block:
+     *
+     * ```
+     * <div *ngIf="condition; else elseBlock">Content to render when condition is true.</div>
+     * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+     * ```
+     *
+     * Shorthand form with "then" and "else" blocks:
+     *
+     * ```
+     * <div *ngIf="condition; then thenBlock else elseBlock"></div>
+     * <ng-template #thenBlock>Content to render when condition is true.</ng-template>
+     * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+     * ```
+     *
+     * Form with storing the value locally:
+     *
+     * ```
+     * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
+     * <ng-template #elseBlock>Content to render when value is null.</ng-template>
+     * ```
+     *
+     * \@usageNotes
+     *
+     * The `*ngIf` directive is most commonly used to conditionally show an inline template,
+     * as seen in the following  example.
+     * The default `else` template is blank.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
+     *
+     * ### Showing an alternative template using `else`
+     *
+     * To display a template when `expression` evaluates to false, use an `else` template
+     * binding as shown in the following example.
+     * The `else` binding points to an `<ng-template>`  element labeled `#elseBlock`.
+     * The template can be defined anywhere in the component view, but is typically placed right after
+     * `ngIf` for readability.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
+     *
+     * ### Using an external `then` template
+     *
+     * In the previous example, the then-clause template is specified inline, as the content of the
+     * tag that contains the `ngIf` directive. You can also specify a template that is defined
+     * externally, by referencing a labeled `<ng-template>` element. When you do this, you can
+     * change which template to use at runtime, as shown in the following example.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
+     *
+     * ### Storing a conditional result in a variable
+     *
+     * You might want to show a set of properties from the same object. If you are waiting
+     * for asynchronous data, the object can be undefined.
+     * In this case, you can use `ngIf` and store the result of the condition in a local
+     * variable as shown in the the following example.
+     *
+     * {\@example common/ngIf/ts/module.ts region='NgIfAs'}
+     *
+     * This code uses only one `AsyncPipe`, so only one subscription is created.
+     * The conditional statement stores the result of `userStream|async` in the local variable `user`.
+     * You can then bind the local `user` repeatedly.
+     *
+     * The conditional displays the data only if `userStream` returns a value,
+     * so you don't need to use the
+     * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+     * to guard against null values when accessing properties.
+     * You can display an alternative template while waiting for the data.
+     *
+     * ### Shorthand syntax
+     *
+     * The shorthand syntax `*ngIf` expands into two separate template specifications
+     * for the "then" and "else" clauses. For example, consider the following shorthand statement,
+     * that is meant to show a loading page while waiting for data to be loaded.
+     *
+     * ```
+     * <div class="hero-list" *ngIf="heroes else loading">
+     *  ...
+     * </div>
+     *
+     * <ng-template #loading>
+     *  <div>Loading...</div>
+     * </ng-template>
+     * ```
+     *
+     * You can see that the "else" clause references the `<ng-template>`
+     * with the `#loading` label, and the template for the "then" clause
+     * is provided as the content of the anchor element.
+     *
+     * However, when Angular expands the shorthand syntax, it creates
+     * another `<ng-template>` tag, with `ngIf` and `ngIfElse` directives.
+     * The anchor element containing the template for the "then" clause becomes
+     * the content of this unlabeled `<ng-template>` tag.
+     *
+     * ```
+     * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
+     *  <div class="hero-list">
+     *   ...
+     *  </div>
+     * </ng-template>
+     *
+     * <ng-template #loading>
+     *  <div>Loading...</div>
+     * </ng-template>
+     * ```
+     *
+     * The presence of the implicit template object has implications for the nesting of
+     * structural directives. For more on this subject, see
+     * [Structural Directives](https://angular.io/guide/structural-directives#one-per-element).
+     *
+     * \@ngModule CommonModule
+     * \@publicApi
      * @template T
-     * @param {?} dir
-     * @param {?} ctx
-     * @return {?}
      */
-    static ngTemplateContextGuard(dir, ctx) {
-        return true;
+    class NgIf {
+        /**
+         * @param {?} _viewContainer
+         * @param {?} templateRef
+         */
+        constructor(_viewContainer, templateRef) {
+            this._viewContainer = _viewContainer;
+            this._context = new NgIfContext();
+            this._thenTemplateRef = null;
+            this._elseTemplateRef = null;
+            this._thenViewRef = null;
+            this._elseViewRef = null;
+            this._thenTemplateRef = templateRef;
+        }
+        /**
+         * The Boolean expression to evaluate as the condition for showing a template.
+         * @param {?} condition
+         * @return {?}
+         */
+        set ngIf(condition) {
+            this._context.$implicit = this._context.ngIf = condition;
+            this._updateView();
+        }
+        /**
+         * A template to show if the condition expression evaluates to true.
+         * @param {?} templateRef
+         * @return {?}
+         */
+        set ngIfThen(templateRef) {
+            assertTemplate('ngIfThen', templateRef);
+            this._thenTemplateRef = templateRef;
+            this._thenViewRef = null; // clear previous view if any.
+            this._updateView();
+        }
+        /**
+         * A template to show if the condition expression evaluates to false.
+         * @param {?} templateRef
+         * @return {?}
+         */
+        set ngIfElse(templateRef) {
+            assertTemplate('ngIfElse', templateRef);
+            this._elseTemplateRef = templateRef;
+            this._elseViewRef = null; // clear previous view if any.
+            this._updateView();
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+        _updateView() {
+            if (this._context.$implicit) {
+                if (!this._thenViewRef) {
+                    this._viewContainer.clear();
+                    this._elseViewRef = null;
+                    if (this._thenTemplateRef) {
+                        this._thenViewRef =
+                            this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
+                    }
+                }
+            }
+            else {
+                if (!this._elseViewRef) {
+                    this._viewContainer.clear();
+                    this._thenViewRef = null;
+                    if (this._elseTemplateRef) {
+                        this._elseViewRef =
+                            this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
+                    }
+                }
+            }
+        }
+        /**
+         * Asserts the correct type of the context for the template that `NgIf` will render.
+         *
+         * The presence of this method is a signal to the Ivy template type-check compiler that the
+         * `NgIf` structural directive renders its template with a specific context type.
+         * @template T
+         * @param {?} dir
+         * @param {?} ctx
+         * @return {?}
+         */
+        static ngTemplateContextGuard(dir, ctx) {
+            return true;
+        }
     }
-}
-NgIf.decorators = [
-    { type: Directive, args: [{ selector: '[ngIf]' },] }
-];
-/** @nocollapse */
-NgIf.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef }
-];
-NgIf.propDecorators = {
-    ngIf: [{ type: Input }],
-    ngIfThen: [{ type: Input }],
-    ngIfElse: [{ type: Input }]
-};
+    NgIf.decorators = [
+        { type: Directive, args: [{ selector: '[ngIf]' },] }
+    ];
+    /** @nocollapse */
+    NgIf.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef }
+    ];
+    NgIf.propDecorators = {
+        ngIf: [{ type: Input }],
+        ngIfThen: [{ type: Input }],
+        ngIfElse: [{ type: Input }]
+    };
+    return NgIf;
+})();
 if (false) {
     /**
      * \@internal
@@ -4979,80 +5458,149 @@ if (false) {
  * @see [Structural Directives](guide/structural-directives)
  *
  */
-class NgSwitch {
-    constructor() {
-        this._defaultUsed = false;
-        this._caseCount = 0;
-        this._lastCaseCheckIndex = 0;
-        this._lastCasesMatched = false;
-    }
+let NgSwitch = /** @class */ (() => {
     /**
-     * @param {?} newValue
-     * @return {?}
+     * \@ngModule CommonModule
+     *
+     * \@description
+     * The `[ngSwitch]` directive on a container specifies an expression to match against.
+     * The expressions to match are provided by `ngSwitchCase` directives on views within the container.
+     * - Every view that matches is rendered.
+     * - If there are no matches, a view with the `ngSwitchDefault` directive is rendered.
+     * - Elements within the `[NgSwitch]` statement but outside of any `NgSwitchCase`
+     * or `ngSwitchDefault` directive are preserved at the location.
+     *
+     * \@usageNotes
+     * Define a container element for the directive, and specify the switch expression
+     * to match against as an attribute:
+     *
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     * ```
+     *
+     * Within the container, `*ngSwitchCase` statements specify the match expressions
+     * as attributes. Include `*ngSwitchDefault` as the final case.
+     *
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *    <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     * ...
+     *    <some-element *ngSwitchDefault>...</some-element>
+     * </container-element>
+     * ```
+     *
+     * ### Usage Examples
+     *
+     * The following example shows how to use more than one case to display the same view:
+     *
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <!-- the same view can be shown in more than one case -->
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *   <some-element *ngSwitchCase="match_expression_2">...</some-element>
+     *   <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
+     *   <!--default case when there are no matches -->
+     *   <some-element *ngSwitchDefault>...</some-element>
+     * </container-element>
+     * ```
+     *
+     * The following example shows how cases can be nested:
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *       <some-element *ngSwitchCase="match_expression_2">...</some-element>
+     *       <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
+     *       <ng-container *ngSwitchCase="match_expression_3">
+     *         <!-- use a ng-container to group multiple root nodes -->
+     *         <inner-element></inner-element>
+     *         <inner-other-element></inner-other-element>
+     *       </ng-container>
+     *       <some-element *ngSwitchDefault>...</some-element>
+     *     </container-element>
+     * ```
+     *
+     * \@publicApi
+     * @see `NgSwitchCase`
+     * @see `NgSwitchDefault`
+     * @see [Structural Directives](guide/structural-directives)
+     *
      */
-    set ngSwitch(newValue) {
-        this._ngSwitch = newValue;
-        if (this._caseCount === 0) {
-            this._updateDefaultCases(true);
-        }
-    }
-    /**
-     * \@internal
-     * @return {?}
-     */
-    _addCase() {
-        return this._caseCount++;
-    }
-    /**
-     * \@internal
-     * @param {?} view
-     * @return {?}
-     */
-    _addDefault(view) {
-        if (!this._defaultViews) {
-            this._defaultViews = [];
-        }
-        this._defaultViews.push(view);
-    }
-    /**
-     * \@internal
-     * @param {?} value
-     * @return {?}
-     */
-    _matchCase(value) {
-        /** @type {?} */
-        const matched = value == this._ngSwitch;
-        this._lastCasesMatched = this._lastCasesMatched || matched;
-        this._lastCaseCheckIndex++;
-        if (this._lastCaseCheckIndex === this._caseCount) {
-            this._updateDefaultCases(!this._lastCasesMatched);
+    class NgSwitch {
+        constructor() {
+            this._defaultUsed = false;
+            this._caseCount = 0;
             this._lastCaseCheckIndex = 0;
             this._lastCasesMatched = false;
         }
-        return matched;
-    }
-    /**
-     * @private
-     * @param {?} useDefault
-     * @return {?}
-     */
-    _updateDefaultCases(useDefault) {
-        if (this._defaultViews && useDefault !== this._defaultUsed) {
-            this._defaultUsed = useDefault;
-            for (let i = 0; i < this._defaultViews.length; i++) {
-                /** @type {?} */
-                const defaultView = this._defaultViews[i];
-                defaultView.enforceState(useDefault);
+        /**
+         * @param {?} newValue
+         * @return {?}
+         */
+        set ngSwitch(newValue) {
+            this._ngSwitch = newValue;
+            if (this._caseCount === 0) {
+                this._updateDefaultCases(true);
+            }
+        }
+        /**
+         * \@internal
+         * @return {?}
+         */
+        _addCase() {
+            return this._caseCount++;
+        }
+        /**
+         * \@internal
+         * @param {?} view
+         * @return {?}
+         */
+        _addDefault(view) {
+            if (!this._defaultViews) {
+                this._defaultViews = [];
+            }
+            this._defaultViews.push(view);
+        }
+        /**
+         * \@internal
+         * @param {?} value
+         * @return {?}
+         */
+        _matchCase(value) {
+            /** @type {?} */
+            const matched = value == this._ngSwitch;
+            this._lastCasesMatched = this._lastCasesMatched || matched;
+            this._lastCaseCheckIndex++;
+            if (this._lastCaseCheckIndex === this._caseCount) {
+                this._updateDefaultCases(!this._lastCasesMatched);
+                this._lastCaseCheckIndex = 0;
+                this._lastCasesMatched = false;
+            }
+            return matched;
+        }
+        /**
+         * @private
+         * @param {?} useDefault
+         * @return {?}
+         */
+        _updateDefaultCases(useDefault) {
+            if (this._defaultViews && useDefault !== this._defaultUsed) {
+                this._defaultUsed = useDefault;
+                for (let i = 0; i < this._defaultViews.length; i++) {
+                    /** @type {?} */
+                    const defaultView = this._defaultViews[i];
+                    defaultView.enforceState(useDefault);
+                }
             }
         }
     }
-}
-NgSwitch.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitch]' },] }
-];
-NgSwitch.propDecorators = {
-    ngSwitch: [{ type: Input }]
-};
+    NgSwitch.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitch]' },] }
+    ];
+    NgSwitch.propDecorators = {
+        ngSwitch: [{ type: Input }]
+    };
+    return NgSwitch;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5118,37 +5666,73 @@ if (false) {
  * @see `NgSwitchDefault`
  *
  */
-class NgSwitchCase {
+let NgSwitchCase = /** @class */ (() => {
     /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
+     * \@ngModule CommonModule
+     *
+     * \@description
+     * Provides a switch case expression to match against an enclosing `ngSwitch` expression.
+     * When the expressions match, the given `NgSwitchCase` template is rendered.
+     * If multiple match expressions match the switch expression value, all of them are displayed.
+     *
+     * \@usageNotes
+     *
+     * Within a switch container, `*ngSwitchCase` statements specify the match expressions
+     * as attributes. Include `*ngSwitchDefault` as the final case.
+     *
+     * ```
+     * <container-element [ngSwitch]="switch_expression">
+     *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
+     *   ...
+     *   <some-element *ngSwitchDefault>...</some-element>
+     * </container-element>
+     * ```
+     *
+     * Each switch-case statement contains an in-line HTML template or template reference
+     * that defines the subtree to be selected if the value of the match expression
+     * matches the value of the switch expression.
+     *
+     * Unlike JavaScript, which uses strict equality, Angular uses loose equality.
+     * This means that the empty string, `""` matches 0.
+     *
+     * \@publicApi
+     * @see `NgSwitch`
+     * @see `NgSwitchDefault`
+     *
      */
-    constructor(viewContainer, templateRef, ngSwitch) {
-        this.ngSwitch = ngSwitch;
-        ngSwitch._addCase();
-        this._view = new SwitchView(viewContainer, templateRef);
+    class NgSwitchCase {
+        /**
+         * @param {?} viewContainer
+         * @param {?} templateRef
+         * @param {?} ngSwitch
+         */
+        constructor(viewContainer, templateRef, ngSwitch) {
+            this.ngSwitch = ngSwitch;
+            ngSwitch._addCase();
+            this._view = new SwitchView(viewContainer, templateRef);
+        }
+        /**
+         * Performs case matching. For internal use only.
+         * @return {?}
+         */
+        ngDoCheck() {
+            this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+        }
     }
-    /**
-     * Performs case matching. For internal use only.
-     * @return {?}
-     */
-    ngDoCheck() {
-        this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
-    }
-}
-NgSwitchCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchCase]' },] }
-];
-/** @nocollapse */
-NgSwitchCase.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: NgSwitch, decorators: [{ type: Host }] }
-];
-NgSwitchCase.propDecorators = {
-    ngSwitchCase: [{ type: Input }]
-};
+    NgSwitchCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchCase]' },] }
+    ];
+    /** @nocollapse */
+    NgSwitchCase.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: NgSwitch, decorators: [{ type: Host }] }
+    ];
+    NgSwitchCase.propDecorators = {
+        ngSwitchCase: [{ type: Input }]
+    };
+    return NgSwitchCase;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5180,25 +5764,42 @@ if (false) {
  * @see `NgSwitchCase`
  *
  */
-class NgSwitchDefault {
+let NgSwitchDefault = /** @class */ (() => {
     /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
+     * \@ngModule CommonModule
+     *
+     * \@description
+     *
+     * Creates a view that is rendered when no `NgSwitchCase` expressions
+     * match the `NgSwitch` expression.
+     * This statement should be the final case in an `NgSwitch`.
+     *
+     * \@publicApi
+     * @see `NgSwitch`
+     * @see `NgSwitchCase`
+     *
      */
-    constructor(viewContainer, templateRef, ngSwitch) {
-        ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
+    class NgSwitchDefault {
+        /**
+         * @param {?} viewContainer
+         * @param {?} templateRef
+         * @param {?} ngSwitch
+         */
+        constructor(viewContainer, templateRef, ngSwitch) {
+            ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
+        }
     }
-}
-NgSwitchDefault.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] }
-];
-/** @nocollapse */
-NgSwitchDefault.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: NgSwitch, decorators: [{ type: Host }] }
-];
+    NgSwitchDefault.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] }
+    ];
+    /** @nocollapse */
+    NgSwitchDefault.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: NgSwitch, decorators: [{ type: Host }] }
+    ];
+    return NgSwitchDefault;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -5236,72 +5837,106 @@ NgSwitchDefault.ctorParameters = () => [
  *
  * \@publicApi
  */
-class NgPlural {
+let NgPlural = /** @class */ (() => {
     /**
-     * @param {?} _localization
+     * \@ngModule CommonModule
+     *
+     * \@usageNotes
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
+     *   <ng-template ngPluralCase="=1">there is one</ng-template>
+     *   <ng-template ngPluralCase="few">there are a few</ng-template>
+     * </some-element>
+     * ```
+     *
+     * \@description
+     *
+     * Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
+     *
+     * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
+     * that match the switch expression's pluralization category.
+     *
+     * To use this directive you must provide a container element that sets the `[ngPlural]` attribute
+     * to a switch expression. Inner elements with a `[ngPluralCase]` will display based on their
+     * expression:
+     * - if `[ngPluralCase]` is set to a value starting with `=`, it will only display if the value
+     *   matches the switch expression exactly,
+     * - otherwise, the view will be treated as a "category match", and will only display if exact
+     *   value matches aren't found and the value maps to its category for the defined locale.
+     *
+     * See http://cldr.unicode.org/index/cldr-spec/plural-rules
+     *
+     * \@publicApi
      */
-    constructor(_localization) {
-        this._localization = _localization;
-        this._caseViews = {};
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngPlural(value) {
-        this._switchValue = value;
-        this._updateView();
-    }
-    /**
-     * @param {?} value
-     * @param {?} switchView
-     * @return {?}
-     */
-    addCase(value, switchView) {
-        this._caseViews[value] = switchView;
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    _updateView() {
-        this._clearViews();
-        /** @type {?} */
-        const cases = Object.keys(this._caseViews);
-        /** @type {?} */
-        const key = getPluralCategory(this._switchValue, cases, this._localization);
-        this._activateView(this._caseViews[key]);
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    _clearViews() {
-        if (this._activeView)
-            this._activeView.destroy();
-    }
-    /**
-     * @private
-     * @param {?} view
-     * @return {?}
-     */
-    _activateView(view) {
-        if (view) {
-            this._activeView = view;
-            this._activeView.create();
+    class NgPlural {
+        /**
+         * @param {?} _localization
+         */
+        constructor(_localization) {
+            this._localization = _localization;
+            this._caseViews = {};
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        set ngPlural(value) {
+            this._switchValue = value;
+            this._updateView();
+        }
+        /**
+         * @param {?} value
+         * @param {?} switchView
+         * @return {?}
+         */
+        addCase(value, switchView) {
+            this._caseViews[value] = switchView;
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+        _updateView() {
+            this._clearViews();
+            /** @type {?} */
+            const cases = Object.keys(this._caseViews);
+            /** @type {?} */
+            const key = getPluralCategory(this._switchValue, cases, this._localization);
+            this._activateView(this._caseViews[key]);
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+        _clearViews() {
+            if (this._activeView)
+                this._activeView.destroy();
+        }
+        /**
+         * @private
+         * @param {?} view
+         * @return {?}
+         */
+        _activateView(view) {
+            if (view) {
+                this._activeView = view;
+                this._activeView.create();
+            }
         }
     }
-}
-NgPlural.decorators = [
-    { type: Directive, args: [{ selector: '[ngPlural]' },] }
-];
-/** @nocollapse */
-NgPlural.ctorParameters = () => [
-    { type: NgLocalization }
-];
-NgPlural.propDecorators = {
-    ngPlural: [{ type: Input }]
-};
+    NgPlural.decorators = [
+        { type: Directive, args: [{ selector: '[ngPlural]' },] }
+    ];
+    /** @nocollapse */
+    NgPlural.ctorParameters = () => [
+        { type: NgLocalization }
+    ];
+    NgPlural.propDecorators = {
+        ngPlural: [{ type: Input }]
+    };
+    return NgPlural;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5344,30 +5979,53 @@ if (false) {
  *
  * \@publicApi
  */
-class NgPluralCase {
+let NgPluralCase = /** @class */ (() => {
     /**
-     * @param {?} value
-     * @param {?} template
-     * @param {?} viewContainer
-     * @param {?} ngPlural
+     * \@ngModule CommonModule
+     *
+     * \@description
+     *
+     * Creates a view that will be added/removed from the parent {\@link NgPlural} when the
+     * given expression matches the plural expression according to CLDR rules.
+     *
+     * \@usageNotes
+     * ```
+     * <some-element [ngPlural]="value">
+     *   <ng-template ngPluralCase="=0">...</ng-template>
+     *   <ng-template ngPluralCase="other">...</ng-template>
+     * </some-element>
+     * ```
+     *
+     * See {\@link NgPlural} for more details and example.
+     *
+     * \@publicApi
      */
-    constructor(value, template, viewContainer, ngPlural) {
-        this.value = value;
-        /** @type {?} */
-        const isANumber = !isNaN(Number(value));
-        ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
+    class NgPluralCase {
+        /**
+         * @param {?} value
+         * @param {?} template
+         * @param {?} viewContainer
+         * @param {?} ngPlural
+         */
+        constructor(value, template, viewContainer, ngPlural) {
+            this.value = value;
+            /** @type {?} */
+            const isANumber = !isNaN(Number(value));
+            ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
+        }
     }
-}
-NgPluralCase.decorators = [
-    { type: Directive, args: [{ selector: '[ngPluralCase]' },] }
-];
-/** @nocollapse */
-NgPluralCase.ctorParameters = () => [
-    { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
-    { type: TemplateRef },
-    { type: ViewContainerRef },
-    { type: NgPlural, decorators: [{ type: Host }] }
-];
+    NgPluralCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngPluralCase]' },] }
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = () => [
+        { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
+        { type: TemplateRef },
+        { type: ViewContainerRef },
+        { type: NgPlural, decorators: [{ type: Host }] }
+    ];
+    return NgPluralCase;
+})();
 if (false) {
     /** @type {?} */
     NgPluralCase.prototype.value;
@@ -5414,92 +6072,131 @@ if (false) {
  *
  * \@publicApi
  */
-class NgStyle {
+let NgStyle = /** @class */ (() => {
     /**
-     * @param {?} _ngEl
-     * @param {?} _differs
-     * @param {?} _renderer
+     * \@ngModule CommonModule
+     *
+     * \@usageNotes
+     *
+     * Set the font of the containing element to the result of an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     * ```
+     *
+     * Set the width of the containing element to a pixel value returned by an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     * ```
+     *
+     * Set a collection of style values using an expression that returns key-value pairs.
+     *
+     * ```
+     * <some-element [ngStyle]="objExp">...</some-element>
+     * ```
+     *
+     * \@description
+     *
+     * An attribute directive that updates styles for the containing HTML element.
+     * Sets one or more style properties, specified as colon-separated key-value pairs.
+     * The key is a style name, with an optional `.<unit>` suffix
+     * (such as 'top.px', 'font-style.em').
+     * The value is an expression to be evaluated.
+     * The resulting non-null value, expressed in the given unit,
+     * is assigned to the given style property.
+     * If the result of evaluation is null, the corresponding style is removed.
+     *
+     * \@publicApi
      */
-    constructor(_ngEl, _differs, _renderer) {
-        this._ngEl = _ngEl;
-        this._differs = _differs;
-        this._renderer = _renderer;
-        this._ngStyle = null;
-        this._differ = null;
-    }
-    /**
-     * @param {?} values
-     * @return {?}
-     */
-    set ngStyle(values) {
-        this._ngStyle = values;
-        if (!this._differ && values) {
-            this._differ = this._differs.find(values).create();
+    class NgStyle {
+        /**
+         * @param {?} _ngEl
+         * @param {?} _differs
+         * @param {?} _renderer
+         */
+        constructor(_ngEl, _differs, _renderer) {
+            this._ngEl = _ngEl;
+            this._differs = _differs;
+            this._renderer = _renderer;
+            this._ngStyle = null;
+            this._differ = null;
         }
-    }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() {
-        if (this._differ) {
-            /** @type {?} */
-            const changes = this._differ.diff((/** @type {?} */ (this._ngStyle)));
-            if (changes) {
-                this._applyChanges(changes);
+        /**
+         * @param {?} values
+         * @return {?}
+         */
+        set ngStyle(values) {
+            this._ngStyle = values;
+            if (!this._differ && values) {
+                this._differ = this._differs.find(values).create();
             }
         }
-    }
-    /**
-     * @private
-     * @param {?} nameAndUnit
-     * @param {?} value
-     * @return {?}
-     */
-    _setStyle(nameAndUnit, value) {
-        const [name, unit] = nameAndUnit.split('.');
-        value = value != null && unit ? `${value}${unit}` : value;
-        if (value != null) {
-            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
+        /**
+         * @return {?}
+         */
+        ngDoCheck() {
+            if (this._differ) {
+                /** @type {?} */
+                const changes = this._differ.diff((/** @type {?} */ (this._ngStyle)));
+                if (changes) {
+                    this._applyChanges(changes);
+                }
+            }
         }
-        else {
-            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        /**
+         * @private
+         * @param {?} nameAndUnit
+         * @param {?} value
+         * @return {?}
+         */
+        _setStyle(nameAndUnit, value) {
+            const [name, unit] = nameAndUnit.split('.');
+            value = value != null && unit ? `${value}${unit}` : value;
+            if (value != null) {
+                this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
+            }
+            else {
+                this._renderer.removeStyle(this._ngEl.nativeElement, name);
+            }
+        }
+        /**
+         * @private
+         * @param {?} changes
+         * @return {?}
+         */
+        _applyChanges(changes) {
+            changes.forEachRemovedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._setStyle(record.key, null)));
+            changes.forEachAddedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._setStyle(record.key, record.currentValue)));
+            changes.forEachChangedItem((/**
+             * @param {?} record
+             * @return {?}
+             */
+            (record) => this._setStyle(record.key, record.currentValue)));
         }
     }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyChanges(changes) {
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, null)));
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-    }
-}
-NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]' },] }
-];
-/** @nocollapse */
-NgStyle.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyValueDiffers },
-    { type: Renderer2 }
-];
-NgStyle.propDecorators = {
-    ngStyle: [{ type: Input, args: ['ngStyle',] }]
-};
+    NgStyle.decorators = [
+        { type: Directive, args: [{ selector: '[ngStyle]' },] }
+    ];
+    /** @nocollapse */
+    NgStyle.ctorParameters = () => [
+        { type: ElementRef },
+        { type: KeyValueDiffers },
+        { type: Renderer2 }
+    ];
+    NgStyle.propDecorators = {
+        ngStyle: [{ type: Input, args: ['ngStyle',] }]
+    };
+    return NgStyle;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5557,106 +6254,133 @@ if (false) {
  *
  * \@publicApi
  */
-class NgTemplateOutlet {
+let NgTemplateOutlet = /** @class */ (() => {
     /**
-     * @param {?} _viewContainerRef
-     */
-    constructor(_viewContainerRef) {
-        this._viewContainerRef = _viewContainerRef;
-        this._viewRef = null;
-        /**
-         * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
-         * object, the object's keys will be available for binding by the local template `let`
-         * declarations.
-         * Using the key `$implicit` in the context object will set its value as default.
-         */
-        this.ngTemplateOutletContext = null;
-        /**
-         * A string defining the template reference and optionally the context object for the template.
-         */
-        this.ngTemplateOutlet = null;
-    }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        /** @type {?} */
-        const recreateView = this._shouldRecreateView(changes);
-        if (recreateView) {
-            /** @type {?} */
-            const viewContainerRef = this._viewContainerRef;
-            if (this._viewRef) {
-                viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
-            }
-            this._viewRef = this.ngTemplateOutlet ?
-                viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
-                null;
-        }
-        else if (this._viewRef && this.ngTemplateOutletContext) {
-            this._updateExistingContext(this.ngTemplateOutletContext);
-        }
-    }
-    /**
-     * We need to re-create existing embedded view if:
-     * - templateRef has changed
-     * - context has changes
+     * \@ngModule CommonModule
      *
-     * We mark context object as changed when the corresponding object
-     * shape changes (new properties are added or existing properties are removed).
-     * In other words we consider context with the same properties as "the same" even
-     * if object reference changes (see https://github.com/angular/angular/issues/13407).
-     * @private
-     * @param {?} changes
-     * @return {?}
+     * \@description
+     *
+     * Inserts an embedded view from a prepared `TemplateRef`.
+     *
+     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
+     * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
+     * by the local template `let` declarations.
+     *
+     * \@usageNotes
+     * ```
+     * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+     * ```
+     *
+     * Using the key `$implicit` in the context object will set its value as default.
+     *
+     * ### Example
+     *
+     * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+     *
+     * \@publicApi
      */
-    _shouldRecreateView(changes) {
-        /** @type {?} */
-        const ctxChange = changes['ngTemplateOutletContext'];
-        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-    }
-    /**
-     * @private
-     * @param {?} ctxChange
-     * @return {?}
-     */
-    _hasContextShapeChanged(ctxChange) {
-        /** @type {?} */
-        const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-        /** @type {?} */
-        const currCtxKeys = Object.keys(ctxChange.currentValue || {});
-        if (prevCtxKeys.length === currCtxKeys.length) {
-            for (let propName of currCtxKeys) {
-                if (prevCtxKeys.indexOf(propName) === -1) {
-                    return true;
+    class NgTemplateOutlet {
+        /**
+         * @param {?} _viewContainerRef
+         */
+        constructor(_viewContainerRef) {
+            this._viewContainerRef = _viewContainerRef;
+            this._viewRef = null;
+            /**
+             * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
+             * object, the object's keys will be available for binding by the local template `let`
+             * declarations.
+             * Using the key `$implicit` in the context object will set its value as default.
+             */
+            this.ngTemplateOutletContext = null;
+            /**
+             * A string defining the template reference and optionally the context object for the template.
+             */
+            this.ngTemplateOutlet = null;
+        }
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        ngOnChanges(changes) {
+            /** @type {?} */
+            const recreateView = this._shouldRecreateView(changes);
+            if (recreateView) {
+                /** @type {?} */
+                const viewContainerRef = this._viewContainerRef;
+                if (this._viewRef) {
+                    viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
                 }
+                this._viewRef = this.ngTemplateOutlet ?
+                    viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
+                    null;
             }
-            return false;
+            else if (this._viewRef && this.ngTemplateOutletContext) {
+                this._updateExistingContext(this.ngTemplateOutletContext);
+            }
         }
-        return true;
-    }
-    /**
-     * @private
-     * @param {?} ctx
-     * @return {?}
-     */
-    _updateExistingContext(ctx) {
-        for (let propName of Object.keys(ctx)) {
-            ((/** @type {?} */ ((/** @type {?} */ (this._viewRef)).context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
+        /**
+         * We need to re-create existing embedded view if:
+         * - templateRef has changed
+         * - context has changes
+         *
+         * We mark context object as changed when the corresponding object
+         * shape changes (new properties are added or existing properties are removed).
+         * In other words we consider context with the same properties as "the same" even
+         * if object reference changes (see https://github.com/angular/angular/issues/13407).
+         * @private
+         * @param {?} changes
+         * @return {?}
+         */
+        _shouldRecreateView(changes) {
+            /** @type {?} */
+            const ctxChange = changes['ngTemplateOutletContext'];
+            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
+        }
+        /**
+         * @private
+         * @param {?} ctxChange
+         * @return {?}
+         */
+        _hasContextShapeChanged(ctxChange) {
+            /** @type {?} */
+            const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+            /** @type {?} */
+            const currCtxKeys = Object.keys(ctxChange.currentValue || {});
+            if (prevCtxKeys.length === currCtxKeys.length) {
+                for (let propName of currCtxKeys) {
+                    if (prevCtxKeys.indexOf(propName) === -1) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+        /**
+         * @private
+         * @param {?} ctx
+         * @return {?}
+         */
+        _updateExistingContext(ctx) {
+            for (let propName of Object.keys(ctx)) {
+                ((/** @type {?} */ ((/** @type {?} */ (this._viewRef)).context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
+            }
         }
     }
-}
-NgTemplateOutlet.decorators = [
-    { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
-];
-/** @nocollapse */
-NgTemplateOutlet.ctorParameters = () => [
-    { type: ViewContainerRef }
-];
-NgTemplateOutlet.propDecorators = {
-    ngTemplateOutletContext: [{ type: Input }],
-    ngTemplateOutlet: [{ type: Input }]
-};
+    NgTemplateOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
+    ];
+    /** @nocollapse */
+    NgTemplateOutlet.ctorParameters = () => [
+        { type: ViewContainerRef }
+    ];
+    NgTemplateOutlet.propDecorators = {
+        ngTemplateOutletContext: [{ type: Input }],
+        ngTemplateOutlet: [{ type: Input }]
+    };
+    return NgTemplateOutlet;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5838,100 +6562,130 @@ const _observableStrategy = new ObservableStrategy();
  *
  * \@publicApi
  */
-class AsyncPipe {
+let AsyncPipe = /** @class */ (() => {
     /**
-     * @param {?} _ref
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Unwraps a value from an asynchronous primitive.
+     *
+     * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
+     * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
+     * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
+     * potential memory leaks.
+     *
+     * \@usageNotes
+     *
+     * ### Examples
+     *
+     * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
+     * promise.
+     *
+     * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
+     *
+     * It's also possible to use `async` with Observables. The example below binds the `time` Observable
+     * to the view. The Observable continuously updates the view with the current time.
+     *
+     * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
+     *
+     * \@publicApi
      */
-    constructor(_ref) {
-        this._ref = _ref;
-        this._latestValue = null;
-        this._subscription = null;
-        this._obj = null;
-        this._strategy = (/** @type {?} */ (null));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this._subscription) {
-            this._dispose();
+    class AsyncPipe {
+        /**
+         * @param {?} _ref
+         */
+        constructor(_ref) {
+            this._ref = _ref;
+            this._latestValue = null;
+            this._subscription = null;
+            this._obj = null;
+            this._strategy = (/** @type {?} */ (null));
         }
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    transform(obj) {
-        if (!this._obj) {
-            if (obj) {
-                this._subscribe(obj);
+        /**
+         * @return {?}
+         */
+        ngOnDestroy() {
+            if (this._subscription) {
+                this._dispose();
+            }
+        }
+        /**
+         * @param {?} obj
+         * @return {?}
+         */
+        transform(obj) {
+            if (!this._obj) {
+                if (obj) {
+                    this._subscribe(obj);
+                }
+                return this._latestValue;
+            }
+            if (obj !== this._obj) {
+                this._dispose();
+                return this.transform((/** @type {?} */ (obj)));
             }
             return this._latestValue;
         }
-        if (obj !== this._obj) {
-            this._dispose();
-            return this.transform((/** @type {?} */ (obj)));
+        /**
+         * @private
+         * @param {?} obj
+         * @return {?}
+         */
+        _subscribe(obj) {
+            this._obj = obj;
+            this._strategy = this._selectStrategy(obj);
+            this._subscription = this._strategy.createSubscription(obj, (/**
+             * @param {?} value
+             * @return {?}
+             */
+            (value) => this._updateLatestValue(obj, value)));
         }
-        return this._latestValue;
-    }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
-    _subscribe(obj) {
-        this._obj = obj;
-        this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, (/**
+        /**
+         * @private
+         * @param {?} obj
+         * @return {?}
+         */
+        _selectStrategy(obj) {
+            if (ɵisPromise(obj)) {
+                return _promiseStrategy;
+            }
+            if (ɵisObservable(obj)) {
+                return _observableStrategy;
+            }
+            throw invalidPipeArgumentError(AsyncPipe, obj);
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+        _dispose() {
+            this._strategy.dispose((/** @type {?} */ (this._subscription)));
+            this._latestValue = null;
+            this._subscription = null;
+            this._obj = null;
+        }
+        /**
+         * @private
+         * @param {?} async
          * @param {?} value
          * @return {?}
          */
-        (value) => this._updateLatestValue(obj, value)));
-    }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
-    _selectStrategy(obj) {
-        if (ɵisPromise(obj)) {
-            return _promiseStrategy;
-        }
-        if (ɵisObservable(obj)) {
-            return _observableStrategy;
-        }
-        throw invalidPipeArgumentError(AsyncPipe, obj);
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    _dispose() {
-        this._strategy.dispose((/** @type {?} */ (this._subscription)));
-        this._latestValue = null;
-        this._subscription = null;
-        this._obj = null;
-    }
-    /**
-     * @private
-     * @param {?} async
-     * @param {?} value
-     * @return {?}
-     */
-    _updateLatestValue(async, value) {
-        if (async === this._obj) {
-            this._latestValue = value;
-            this._ref.markForCheck();
+        _updateLatestValue(async, value) {
+            if (async === this._obj) {
+                this._latestValue = value;
+                this._ref.markForCheck();
+            }
         }
     }
-}
-AsyncPipe.decorators = [
-    { type: Pipe, args: [{ name: 'async', pure: false },] }
-];
-/** @nocollapse */
-AsyncPipe.ctorParameters = () => [
-    { type: ChangeDetectorRef }
-];
+    AsyncPipe.decorators = [
+        { type: Pipe, args: [{ name: 'async', pure: false },] }
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = () => [
+        { type: ChangeDetectorRef }
+    ];
+    return AsyncPipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -5980,23 +6734,41 @@ if (false) {
  * \@ngModule CommonModule
  * \@publicApi
  */
-class LowerCasePipe {
+let LowerCasePipe = /** @class */ (() => {
     /**
-     * @param {?} value The string to transform to lower case.
-     * @return {?}
+     * Transforms text to all lower case.
+     *
+     * @see `UpperCasePipe`
+     * @see `TitleCasePipe`
+     * \@usageNotes
+     *
+     * The following example defines a view that allows the user to enter
+     * text, and then uses the pipe to convert the input text to all lower case.
+     *
+     * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
+     *
+     * \@ngModule CommonModule
+     * \@publicApi
      */
-    transform(value) {
-        if (!value)
-            return value;
-        if (typeof value !== 'string') {
-            throw invalidPipeArgumentError(LowerCasePipe, value);
+    class LowerCasePipe {
+        /**
+         * @param {?} value The string to transform to lower case.
+         * @return {?}
+         */
+        transform(value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(LowerCasePipe, value);
+            }
+            return value.toLowerCase();
         }
-        return value.toLowerCase();
     }
-}
-LowerCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'lowercase' },] }
-];
+    LowerCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'lowercase' },] }
+    ];
+    return LowerCasePipe;
+})();
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
@@ -6024,27 +6796,47 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  * \@ngModule CommonModule
  * \@publicApi
  */
-class TitleCasePipe {
+let TitleCasePipe = /** @class */ (() => {
     /**
-     * @param {?} value The string to transform to title case.
-     * @return {?}
+     * Transforms text to title case.
+     * Capitalizes the first letter of each word and transforms the
+     * rest of the word to lower case.
+     * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
+     *
+     * @see `LowerCasePipe`
+     * @see `UpperCasePipe`
+     *
+     * \@usageNotes
+     * The following example shows the result of transforming various strings into title case.
+     *
+     * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
+     *
+     * \@ngModule CommonModule
+     * \@publicApi
      */
-    transform(value) {
-        if (!value)
-            return value;
-        if (typeof value !== 'string') {
-            throw invalidPipeArgumentError(TitleCasePipe, value);
-        }
-        return value.replace(unicodeWordMatch, ((/**
-         * @param {?} txt
+    class TitleCasePipe {
+        /**
+         * @param {?} value The string to transform to title case.
          * @return {?}
          */
-        txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase())));
+        transform(value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(TitleCasePipe, value);
+            }
+            return value.replace(unicodeWordMatch, ((/**
+             * @param {?} txt
+             * @return {?}
+             */
+            txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase())));
+        }
     }
-}
-TitleCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'titlecase' },] }
-];
+    TitleCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'titlecase' },] }
+    ];
+    return TitleCasePipe;
+})();
 /**
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
@@ -6053,23 +6845,34 @@ TitleCasePipe.decorators = [
  * \@ngModule CommonModule
  * \@publicApi
  */
-class UpperCasePipe {
+let UpperCasePipe = /** @class */ (() => {
     /**
-     * @param {?} value The string to transform to upper case.
-     * @return {?}
+     * Transforms text to all upper case.
+     * @see `LowerCasePipe`
+     * @see `TitleCasePipe`
+     *
+     * \@ngModule CommonModule
+     * \@publicApi
      */
-    transform(value) {
-        if (!value)
-            return value;
-        if (typeof value !== 'string') {
-            throw invalidPipeArgumentError(UpperCasePipe, value);
+    class UpperCasePipe {
+        /**
+         * @param {?} value The string to transform to upper case.
+         * @return {?}
+         */
+        transform(value) {
+            if (!value)
+                return value;
+            if (typeof value !== 'string') {
+                throw invalidPipeArgumentError(UpperCasePipe, value);
+            }
+            return value.toUpperCase();
         }
-        return value.toUpperCase();
     }
-}
-UpperCasePipe.decorators = [
-    { type: Pipe, args: [{ name: 'uppercase' },] }
-];
+    UpperCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'uppercase' },] }
+    ];
+    return UpperCasePipe;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -6216,44 +7019,187 @@ UpperCasePipe.decorators = [
  * \@publicApi
  */
 // clang-format on
-class DatePipe {
+let DatePipe = /** @class */ (() => {
+    // clang-format off
     /**
-     * @param {?} locale
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Formats a date value according to locale rules.
+     *
+     * Only the `en-US` locale data comes with Angular. To localize dates
+     * in another language, you must import the corresponding locale data.
+     * See the [I18n guide](guide/i18n#i18n-pipes) for more information.
+     *
+     * @see `formatDate()`
+     *
+     *
+     * \@usageNotes
+     *
+     * The result of this pipe is not reevaluated when the input is mutated. To avoid the need to
+     * reformat the date on every change-detection cycle, treat the date as an immutable object
+     * and change the reference when the pipe needs to run again.
+     *
+     * ### Pre-defined format options
+     *
+     * Examples are given in `en-US` locale.
+     *
+     * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
+     * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
+     * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
+     * GMT+1`).
+     * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
+     * 9:03:01 AM GMT+01:00`).
+     * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
+     * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
+     * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
+     * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
+     * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
+     * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
+     * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
+     * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+     *
+     * ### Custom format options
+     *
+     * You can construct a format string using symbols to specify the components
+     * of a date-time value, as described in the following table.
+     * Format details depend on the locale.
+     * Fields marked with (*) are only available in the extra data set for the given locale.
+     *
+     *  | Field type         | Format      | Description                                                   | Example Value                                              |
+     *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+     *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+     *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+     *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+     *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+     *  |                    | MMMM        | Wide                                                          | September                                                  |
+     *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+     *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+     *  |                    | LLLL        | Wide                                                          | September                                                  |
+     *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+     *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+     *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+     *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+     *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+     *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
+     *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+     *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+     *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+     *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+     *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+     *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+     *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+     *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+     *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+     *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+     *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+     *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+     *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+     *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+     *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+     *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+     *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+     *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+     *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+     *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+     *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+     *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+     *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+     *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+     *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+     *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+     *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+     *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+     *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+     *
+     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
+     *
+     * ### Format examples
+     *
+     * These examples transform a date into various formats,
+     * assuming that `dateObj` is a JavaScript `Date` object for
+     * year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11,
+     * given in the local time for the `en-US` locale.
+     *
+     * ```
+     * {{ dateObj | date }}               // output is 'Jun 15, 2015'
+     * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+     * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+     * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
+     * ```
+     *
+     * ### Usage example
+     *
+     * The following component uses a date pipe to display the current date in different formats.
+     *
+     * ```
+     * \@Component({
+     *  selector: 'date-pipe',
+     *  template: `<div>
+     *    <p>Today is {{today | date}}</p>
+     *    <p>Or if you prefer, {{today | date:'fullDate'}}</p>
+     *    <p>The time is {{today | date:'h:mm a z'}}</p>
+     *  </div>`
+     * })
+     * // Get the current date and time as a date-time value.
+     * export class DatePipeComponent {
+     *   today: number = Date.now();
+     * }
+     * ```
+     *
+     * \@publicApi
      */
-    constructor(locale) {
-        this.locale = locale;
-    }
-    /**
-     * @param {?} value The date expression: a `Date` object,  a number
-     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
-     * @param {?=} format The date/time components to include, using predefined options or a
-     * custom format string.
-     * @param {?=} timezone A timezone offset (such as `'+0430'`), or a standard
-     * UTC/GMT or continental US timezone abbreviation.
-     * When not supplied, uses the end-user's local system timezone.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?} A date string in the desired format.
-     */
-    transform(value, format = 'mediumDate', timezone, locale) {
-        if (value == null || value === '' || value !== value)
-            return null;
-        try {
-            return formatDate(value, format, locale || this.locale, timezone);
+    // clang-format on
+    class DatePipe {
+        /**
+         * @param {?} locale
+         */
+        constructor(locale) {
+            this.locale = locale;
         }
-        catch (error) {
-            throw invalidPipeArgumentError(DatePipe, error.message);
+        /**
+         * @param {?} value The date expression: a `Date` object,  a number
+         * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+         * @param {?=} format The date/time components to include, using predefined options or a
+         * custom format string.
+         * @param {?=} timezone A timezone offset (such as `'+0430'`), or a standard
+         * UTC/GMT or continental US timezone abbreviation.
+         * When not supplied, uses the end-user's local system timezone.
+         * @param {?=} locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @return {?} A date string in the desired format.
+         */
+        transform(value, format = 'mediumDate', timezone, locale) {
+            if (value == null || value === '' || value !== value)
+                return null;
+            try {
+                return formatDate(value, format, locale || this.locale, timezone);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(DatePipe, error.message);
+            }
         }
     }
-}
-DatePipe.decorators = [
-    { type: Pipe, args: [{ name: 'date', pure: true },] }
-];
-/** @nocollapse */
-DatePipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
-];
+    DatePipe.decorators = [
+        { type: Pipe, args: [{ name: 'date', pure: true },] }
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
+    return DatePipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6283,39 +7229,56 @@ const _INTERPOLATION_REGEXP = /#/g;
  *
  * \@publicApi
  */
-class I18nPluralPipe {
+let I18nPluralPipe = /** @class */ (() => {
     /**
-     * @param {?} _localization
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Maps a value to a string that pluralizes the value according to locale rules.
+     *
+     * \@usageNotes
+     *
+     * ### Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
+     *
+     * \@publicApi
      */
-    constructor(_localization) {
-        this._localization = _localization;
-    }
-    /**
-     * @param {?} value the number to be formatted
-     * @param {?} pluralMap an object that mimics the ICU format, see
-     * http://userguide.icu-project.org/formatparse/messages.
-     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
-     * default).
-     * @return {?}
-     */
-    transform(value, pluralMap, locale) {
-        if (value == null)
-            return '';
-        if (typeof pluralMap !== 'object' || pluralMap === null) {
-            throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
+    class I18nPluralPipe {
+        /**
+         * @param {?} _localization
+         */
+        constructor(_localization) {
+            this._localization = _localization;
         }
-        /** @type {?} */
-        const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
-        return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+        /**
+         * @param {?} value the number to be formatted
+         * @param {?} pluralMap an object that mimics the ICU format, see
+         * http://userguide.icu-project.org/formatparse/messages.
+         * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+         * default).
+         * @return {?}
+         */
+        transform(value, pluralMap, locale) {
+            if (value == null)
+                return '';
+            if (typeof pluralMap !== 'object' || pluralMap === null) {
+                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
+            }
+            /** @type {?} */
+            const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
+            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+        }
     }
-}
-I18nPluralPipe.decorators = [
-    { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
-];
-/** @nocollapse */
-I18nPluralPipe.ctorParameters = () => [
-    { type: NgLocalization }
-];
+    I18nPluralPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = () => [
+        { type: NgLocalization }
+    ];
+    return I18nPluralPipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6346,31 +7309,51 @@ if (false) {
  *
  * \@publicApi
  */
-class I18nSelectPipe {
+let I18nSelectPipe = /** @class */ (() => {
     /**
-     * @param {?} value a string to be internationalized.
-     * @param {?} mapping an object that indicates the text that should be displayed
-     * for different values of the provided `value`.
-     * @return {?}
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Generic selector that displays the string that matches the current value.
+     *
+     * If none of the keys of the `mapping` match the `value`, then the content
+     * of the `other` key is returned when present, otherwise an empty string is returned.
+     *
+     * \@usageNotes
+     *
+     * ### Example
+     *
+     * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+     *
+     * \@publicApi
      */
-    transform(value, mapping) {
-        if (value == null)
+    class I18nSelectPipe {
+        /**
+         * @param {?} value a string to be internationalized.
+         * @param {?} mapping an object that indicates the text that should be displayed
+         * for different values of the provided `value`.
+         * @return {?}
+         */
+        transform(value, mapping) {
+            if (value == null)
+                return '';
+            if (typeof mapping !== 'object' || typeof value !== 'string') {
+                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
+            }
+            if (mapping.hasOwnProperty(value)) {
+                return mapping[value];
+            }
+            if (mapping.hasOwnProperty('other')) {
+                return mapping['other'];
+            }
             return '';
-        if (typeof mapping !== 'object' || typeof value !== 'string') {
-            throw invalidPipeArgumentError(I18nSelectPipe, mapping);
         }
-        if (mapping.hasOwnProperty(value)) {
-            return mapping[value];
-        }
-        if (mapping.hasOwnProperty('other')) {
-            return mapping['other'];
-        }
-        return '';
     }
-}
-I18nSelectPipe.decorators = [
-    { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
-];
+    I18nSelectPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
+    ];
+    return I18nSelectPipe;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -6392,18 +7375,36 @@ I18nSelectPipe.decorators = [
  *
  * \@publicApi
  */
-class JsonPipe {
+let JsonPipe = /** @class */ (() => {
     /**
-     * @param {?} value A value of any type to convert into a JSON-format string.
-     * @return {?}
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Converts a value into its JSON-format representation.  Useful for debugging.
+     *
+     * \@usageNotes
+     *
+     * The following component uses a JSON pipe to convert an object
+     * to JSON format, and displays the string in both formats for comparison.
+     *
+     * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+     *
+     * \@publicApi
      */
-    transform(value) {
-        return JSON.stringify(value, null, 2);
+    class JsonPipe {
+        /**
+         * @param {?} value A value of any type to convert into a JSON-format string.
+         * @return {?}
+         */
+        transform(value) {
+            return JSON.stringify(value, null, 2);
+        }
     }
-}
-JsonPipe.decorators = [
-    { type: Pipe, args: [{ name: 'json', pure: false },] }
-];
+    JsonPipe.decorators = [
+        { type: Pipe, args: [{ name: 'json', pure: false },] }
+    ];
+    return JsonPipe;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -6454,51 +7455,74 @@ if (false) {
  *
  * \@publicApi
  */
-class KeyValuePipe {
+let KeyValuePipe = /** @class */ (() => {
     /**
-     * @param {?} differs
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Transforms Object or Map into an array of key value pairs.
+     *
+     * The output array will be ordered by keys.
+     * By default the comparator will be by Unicode point value.
+     * You can optionally pass a compareFn if your keys are complex types.
+     *
+     * \@usageNotes
+     * ### Examples
+     *
+     * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
+     * pipe.
+     *
+     * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+     *
+     * \@publicApi
      */
-    constructor(differs) {
-        this.differs = differs;
-        this.keyValues = [];
-    }
-    /**
-     * @template K, V
-     * @param {?} input
-     * @param {?=} compareFn
-     * @return {?}
-     */
-    transform(input, compareFn = defaultComparator) {
-        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
-            return null;
-        }
-        if (!this.differ) {
-            // make a differ for whatever type we've been passed in
-            this.differ = this.differs.find(input).create();
-        }
-        /** @type {?} */
-        const differChanges = this.differ.diff((/** @type {?} */ (input)));
-        if (differChanges) {
+    class KeyValuePipe {
+        /**
+         * @param {?} differs
+         */
+        constructor(differs) {
+            this.differs = differs;
             this.keyValues = [];
-            differChanges.forEachItem((/**
-             * @param {?} r
-             * @return {?}
-             */
-            (r) => {
-                this.keyValues.push(makeKeyValuePair(r.key, (/** @type {?} */ (r.currentValue))));
-            }));
-            this.keyValues.sort(compareFn);
         }
-        return this.keyValues;
+        /**
+         * @template K, V
+         * @param {?} input
+         * @param {?=} compareFn
+         * @return {?}
+         */
+        transform(input, compareFn = defaultComparator) {
+            if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+                return null;
+            }
+            if (!this.differ) {
+                // make a differ for whatever type we've been passed in
+                this.differ = this.differs.find(input).create();
+            }
+            /** @type {?} */
+            const differChanges = this.differ.diff((/** @type {?} */ (input)));
+            if (differChanges) {
+                this.keyValues = [];
+                differChanges.forEachItem((/**
+                 * @param {?} r
+                 * @return {?}
+                 */
+                (r) => {
+                    this.keyValues.push(makeKeyValuePair(r.key, (/** @type {?} */ (r.currentValue))));
+                }));
+                this.keyValues.sort(compareFn);
+            }
+            return this.keyValues;
+        }
     }
-}
-KeyValuePipe.decorators = [
-    { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
-];
-/** @nocollapse */
-KeyValuePipe.ctorParameters = () => [
-    { type: KeyValueDiffers }
-];
+    KeyValuePipe.decorators = [
+        { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
+    ];
+    /** @nocollapse */
+    KeyValuePipe.ctorParameters = () => [
+        { type: KeyValueDiffers }
+    ];
+    return KeyValuePipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6597,50 +7621,88 @@ function defaultComparator(keyValueA, keyValueB) {
  *
  * \@publicApi
  */
-class DecimalPipe {
+let DecimalPipe = /** @class */ (() => {
     /**
-     * @param {?} _locale
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Transforms a number into a string,
+     * formatted according to locale rules that determine group sizing and
+     * separator, decimal-point character, and other locale-specific
+     * configurations.
+     *
+     * If no parameters are specified, the function rounds off to the nearest value using this
+     * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
+     * The behavior differs from that of the JavaScript ```Math.round()``` function.
+     * In the following case for example, the pipe rounds down where
+     * ```Math.round()``` rounds up:
+     *
+     * ```html
+     * -2.5 | number:'1.0-0'
+     * > -3
+     * Math.round(-2.5)
+     * > -2
+     * ```
+     *
+     * @see `formatNumber()`
+     *
+     * \@usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * ### Example
+     *
+     * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
+     *
+     * \@publicApi
      */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
-     * @param {?} value The number to be formatted.
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
-     */
-    transform(value, digitsInfo, locale) {
-        if (isEmpty(value))
-            return null;
-        locale = locale || this._locale;
-        try {
-            /** @type {?} */
-            const num = strToNumber(value);
-            return formatNumber(num, locale, digitsInfo);
+    class DecimalPipe {
+        /**
+         * @param {?} _locale
+         */
+        constructor(_locale) {
+            this._locale = _locale;
         }
-        catch (error) {
-            throw invalidPipeArgumentError(DecimalPipe, error.message);
+        /**
+         * @param {?} value The number to be formatted.
+         * @param {?=} digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `0`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `3`.
+         * @param {?=} locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @return {?}
+         */
+        transform(value, digitsInfo, locale) {
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            try {
+                /** @type {?} */
+                const num = strToNumber(value);
+                return formatNumber(num, locale, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(DecimalPipe, error.message);
+            }
         }
     }
-}
-DecimalPipe.decorators = [
-    { type: Pipe, args: [{ name: 'number' },] }
-];
-/** @nocollapse */
-DecimalPipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
-];
+    DecimalPipe.decorators = [
+        { type: Pipe, args: [{ name: 'number' },] }
+    ];
+    /** @nocollapse */
+    DecimalPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
+    return DecimalPipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6668,51 +7730,74 @@ if (false) {
  *
  * \@publicApi
  */
-class PercentPipe {
+let PercentPipe = /** @class */ (() => {
     /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
-        this._locale = _locale;
-    }
-    /**
+     * \@ngModule CommonModule
+     * \@description
      *
-     * @param {?} value The number to be formatted as a percentage.
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `0`.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
+     * Transforms a number to a percentage
+     * string, formatted according to locale rules that determine group sizing and
+     * separator, decimal-point character, and other locale-specific
+     * configurations.
+     *
+     * @see `formatPercent()`
+     *
+     * \@usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
+     *
+     * \@publicApi
      */
-    transform(value, digitsInfo, locale) {
-        if (isEmpty(value))
-            return null;
-        locale = locale || this._locale;
-        try {
-            /** @type {?} */
-            const num = strToNumber(value);
-            return formatPercent(num, locale, digitsInfo);
+    class PercentPipe {
+        /**
+         * @param {?} _locale
+         */
+        constructor(_locale) {
+            this._locale = _locale;
         }
-        catch (error) {
-            throw invalidPipeArgumentError(PercentPipe, error.message);
+        /**
+         *
+         * @param {?} value The number to be formatted as a percentage.
+         * @param {?=} digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `0`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `0`.
+         * @param {?=} locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @return {?}
+         */
+        transform(value, digitsInfo, locale) {
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            try {
+                /** @type {?} */
+                const num = strToNumber(value);
+                return formatPercent(num, locale, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(PercentPipe, error.message);
+            }
         }
     }
-}
-PercentPipe.decorators = [
-    { type: Pipe, args: [{ name: 'percent' },] }
-];
-/** @nocollapse */
-PercentPipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
-];
+    PercentPipe.decorators = [
+        { type: Pipe, args: [{ name: 'percent' },] }
+    ];
+    /** @nocollapse */
+    PercentPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
+    return PercentPipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6760,87 +7845,130 @@ if (false) {
  *
  * \@publicApi
  */
-class CurrencyPipe {
+let CurrencyPipe = /** @class */ (() => {
     /**
-     * @param {?} _locale
-     * @param {?=} _defaultCurrencyCode
-     */
-    constructor(_locale, _defaultCurrencyCode = 'USD') {
-        this._locale = _locale;
-        this._defaultCurrencyCode = _defaultCurrencyCode;
-    }
-    /**
+     * \@ngModule CommonModule
+     * \@description
      *
-     * @param {?} value The number to be formatted as currency.
-     * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-     * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
-     * configured using the `DEFAULT_CURRENCY_CODE` injection token.
-     * @param {?=} display The format for the currency indicator. One of the following:
-     *   - `code`: Show the code (such as `USD`).
-     *   - `symbol`(default): Show the symbol (such as `$`).
-     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-     * currency.
-     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-     * locale has no narrow symbol, uses the standard symbol for the locale.
-     *   - String: Use the given string value instead of a code or a symbol.
-     * For example, an empty string will suppress the currency & symbol.
-     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+     * Transforms a number to a currency string, formatted according to locale rules
+     * that determine group sizing and separator, decimal-point character,
+     * and other locale-specific configurations.
      *
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `2`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `2`.
-     * If not provided, the number will be formatted with the proper amount of digits,
-     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
+     * {\@a currency-code-deprecation}
+     * <div class="alert is-helpful">
+     *
+     * **Deprecation notice:**
+     *
+     * The default currency code is currently always `USD` but this is deprecated from v9.
+     *
+     * **In v11 the default currency code will be taken from the current locale identified by
+     * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+     * more information.**
+     *
+     * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+     * your application `NgModule`:
+     *
+     * ```ts
+     * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+     * ```
+     *
+     * </div>
+     *
+     * @see `getCurrencySymbol()`
+     * @see `formatCurrency()`
+     *
+     * \@usageNotes
+     * The following code shows how the pipe transforms numbers
+     * into text strings, according to various format specifications,
+     * where the caller's default locale is `en-US`.
+     *
+     * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
+     *
+     * \@publicApi
      */
-    transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
-        if (isEmpty(value))
-            return null;
-        locale = locale || this._locale;
-        if (typeof display === 'boolean') {
-            if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
-                console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
-            }
-            display = display ? 'symbol' : 'code';
+    class CurrencyPipe {
+        /**
+         * @param {?} _locale
+         * @param {?=} _defaultCurrencyCode
+         */
+        constructor(_locale, _defaultCurrencyCode = 'USD') {
+            this._locale = _locale;
+            this._defaultCurrencyCode = _defaultCurrencyCode;
         }
-        /** @type {?} */
-        let currency = currencyCode || this._defaultCurrencyCode;
-        if (display !== 'code') {
-            if (display === 'symbol' || display === 'symbol-narrow') {
-                currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
+        /**
+         *
+         * @param {?} value The number to be formatted as currency.
+         * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+         * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
+         * configured using the `DEFAULT_CURRENCY_CODE` injection token.
+         * @param {?=} display The format for the currency indicator. One of the following:
+         *   - `code`: Show the code (such as `USD`).
+         *   - `symbol`(default): Show the symbol (such as `$`).
+         *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+         * currency.
+         * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+         * locale has no narrow symbol, uses the standard symbol for the locale.
+         *   - String: Use the given string value instead of a code or a symbol.
+         * For example, an empty string will suppress the currency & symbol.
+         *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+         *
+         * @param {?=} digitsInfo Decimal representation options, specified by a string
+         * in the following format:<br>
+         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+         * Default is `1`.
+         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+         * Default is `2`.
+         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+         * Default is `2`.
+         * If not provided, the number will be formatted with the proper amount of digits,
+         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+         * @param {?=} locale A locale code for the locale format rules to use.
+         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @return {?}
+         */
+        transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
+            if (isEmpty(value))
+                return null;
+            locale = locale || this._locale;
+            if (typeof display === 'boolean') {
+                if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
+                    console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
+                }
+                display = display ? 'symbol' : 'code';
             }
-            else {
-                currency = display;
-            }
-        }
-        try {
             /** @type {?} */
-            const num = strToNumber(value);
-            return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
-        }
-        catch (error) {
-            throw invalidPipeArgumentError(CurrencyPipe, error.message);
+            let currency = currencyCode || this._defaultCurrencyCode;
+            if (display !== 'code') {
+                if (display === 'symbol' || display === 'symbol-narrow') {
+                    currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
+                }
+                else {
+                    currency = display;
+                }
+            }
+            try {
+                /** @type {?} */
+                const num = strToNumber(value);
+                return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
+            }
+            catch (error) {
+                throw invalidPipeArgumentError(CurrencyPipe, error.message);
+            }
         }
     }
-}
-CurrencyPipe.decorators = [
-    { type: Pipe, args: [{ name: 'currency' },] }
-];
-/** @nocollapse */
-CurrencyPipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
-    { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
-];
+    CurrencyPipe.decorators = [
+        { type: Pipe, args: [{ name: 'currency' },] }
+    ];
+    /** @nocollapse */
+    CurrencyPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
+        { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
+    ];
+    return CurrencyPipe;
+})();
 if (false) {
     /**
      * @type {?}
@@ -6916,33 +8044,71 @@ function strToNumber(value) {
  *
  * \@publicApi
  */
-class SlicePipe {
+let SlicePipe = /** @class */ (() => {
     /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
-     * @return {?}
+     * \@ngModule CommonModule
+     * \@description
+     *
+     * Creates a new `Array` or `String` containing a subset (slice) of the elements.
+     *
+     * \@usageNotes
+     *
+     * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
+     * and `String.prototype.slice()`.
+     *
+     * When operating on an `Array`, the returned `Array` is always a copy even when all
+     * the elements are being returned.
+     *
+     * When operating on a blank value, the pipe returns the blank value.
+     *
+     * ### List Example
+     *
+     * This `ngFor` example:
+     *
+     * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
+     *
+     * produces the following:
+     *
+     * ```html
+     * <li>b</li>
+     * <li>c</li>
+     * ```
+     *
+     * ### String Examples
+     *
+     * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
+     *
+     * \@publicApi
      */
-    transform(value, start, end) {
-        if (value == null)
-            return value;
-        if (!this.supports(value)) {
-            throw invalidPipeArgumentError(SlicePipe, value);
+    class SlicePipe {
+        /**
+         * @param {?} value
+         * @param {?} start
+         * @param {?=} end
+         * @return {?}
+         */
+        transform(value, start, end) {
+            if (value == null)
+                return value;
+            if (!this.supports(value)) {
+                throw invalidPipeArgumentError(SlicePipe, value);
+            }
+            return value.slice(start, end);
         }
-        return value.slice(start, end);
+        /**
+         * @private
+         * @param {?} obj
+         * @return {?}
+         */
+        supports(obj) {
+            return typeof obj === 'string' || Array.isArray(obj);
+        }
     }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
-    supports(obj) {
-        return typeof obj === 'string' || Array.isArray(obj);
-    }
-}
-SlicePipe.decorators = [
-    { type: Pipe, args: [{ name: 'slice', pure: false },] }
-];
+    SlicePipe.decorators = [
+        { type: Pipe, args: [{ name: 'slice', pure: false },] }
+    ];
+    return SlicePipe;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -6989,17 +8155,35 @@ const COMMON_PIPES = [
  *
  * \@publicApi
  */
-class CommonModule {
-}
-CommonModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                providers: [
-                    { provide: NgLocalization, useClass: NgLocaleLocalization },
-                ],
-            },] }
-];
+let CommonModule = /** @class */ (() => {
+    // Note: This does not contain the location providers,
+    // as they need some platform specific implementations to work.
+    /**
+     * Exports all the basic Angular directives and pipes,
+     * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
+     * Re-exported by `BrowserModule`, which is included automatically in the root
+     * `AppModule` when you create a new app with the CLI `new` command.
+     *
+     * * The `providers` options configure the NgModule's injector to provide
+     * localization dependencies to members.
+     * * The `exports` options make the declared directives and pipes available for import
+     * by other NgModules.
+     *
+     * \@publicApi
+     */
+    class CommonModule {
+    }
+    CommonModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] }
+    ];
+    return CommonModule;
+})();
 
 /**
  * @fileoverview added by tsickle
@@ -7067,7 +8251,7 @@ function isPlatformWorkerUi(platformId) {
  * \@publicApi
  * @type {?}
  */
-const VERSION = new Version('10.0.0-next.7+17.sha-2418c6a');
+const VERSION = new Version('10.0.0-next.7+43.sha-f16ca1c');
 
 /**
  * @fileoverview added by tsickle
@@ -7080,19 +8264,28 @@ const VERSION = new Version('10.0.0-next.7+17.sha-2418c6a');
  * \@publicApi
  * @abstract
  */
-class ViewportScroller {
-}
-// De-sugared tree-shakable injection
-// See #23917
-/** @nocollapse */
-ViewportScroller.ɵprov = ɵɵdefineInjectable({
-    token: ViewportScroller,
-    providedIn: 'root',
-    factory: (/**
-     * @return {?}
+let ViewportScroller = /** @class */ (() => {
+    /**
+     * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
+     *
+     * \@publicApi
+     * @abstract
      */
-    () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
-});
+    class ViewportScroller {
+    }
+    // De-sugared tree-shakable injection
+    // See #23917
+    /** @nocollapse */
+    ViewportScroller.ɵprov = ɵɵdefineInjectable({
+        token: ViewportScroller,
+        providedIn: 'root',
+        factory: (/**
+         * @return {?}
+         */
+        () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
+    });
+    return ViewportScroller;
+})();
 if (false) {
     /**
      * @nocollapse
