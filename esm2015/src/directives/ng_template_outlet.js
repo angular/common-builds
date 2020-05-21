@@ -1,21 +1,16 @@
 /**
- * @fileoverview added by tsickle
- * Generated from: packages/common/src/directives/ng_template_outlet.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import { Directive, Input, ViewContainerRef } from '@angular/core';
-import * as i0 from "@angular/core";
-/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { Directive, Input, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description
+ * @description
  *
  * Inserts an embedded view from a prepared `TemplateRef`.
  *
@@ -23,7 +18,7 @@ import * as i0 from "@angular/core";
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * \@usageNotes
+ * @usageNotes
  * ```
  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
  * ```
@@ -32,44 +27,17 @@ import * as i0 from "@angular/core";
  *
  * ### Example
  *
- * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+ * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@publicApi
+ * @publicApi
  */
 let NgTemplateOutlet = /** @class */ (() => {
-    /**
-     * \@ngModule CommonModule
-     *
-     * \@description
-     *
-     * Inserts an embedded view from a prepared `TemplateRef`.
-     *
-     * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
-     * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
-     * by the local template `let` declarations.
-     *
-     * \@usageNotes
-     * ```
-     * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
-     * ```
-     *
-     * Using the key `$implicit` in the context object will set its value as default.
-     *
-     * ### Example
-     *
-     * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
-     *
-     * \@publicApi
-     */
     class NgTemplateOutlet {
-        /**
-         * @param {?} _viewContainerRef
-         */
         constructor(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
             this._viewRef = null;
             /**
-             * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
+             * A context object to attach to the {@link EmbeddedViewRef}. This should be an
              * object, the object's keys will be available for binding by the local template `let`
              * declarations.
              * Using the key `$implicit` in the context object will set its value as default.
@@ -80,15 +48,9 @@ let NgTemplateOutlet = /** @class */ (() => {
              */
             this.ngTemplateOutlet = null;
         }
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
         ngOnChanges(changes) {
-            /** @type {?} */
             const recreateView = this._shouldRecreateView(changes);
             if (recreateView) {
-                /** @type {?} */
                 const viewContainerRef = this._viewContainerRef;
                 if (this._viewRef) {
                     viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
@@ -110,24 +72,13 @@ let NgTemplateOutlet = /** @class */ (() => {
          * shape changes (new properties are added or existing properties are removed).
          * In other words we consider context with the same properties as "the same" even
          * if object reference changes (see https://github.com/angular/angular/issues/13407).
-         * @private
-         * @param {?} changes
-         * @return {?}
          */
         _shouldRecreateView(changes) {
-            /** @type {?} */
             const ctxChange = changes['ngTemplateOutletContext'];
             return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
         }
-        /**
-         * @private
-         * @param {?} ctxChange
-         * @return {?}
-         */
         _hasContextShapeChanged(ctxChange) {
-            /** @type {?} */
             const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-            /** @type {?} */
             const currCtxKeys = Object.keys(ctxChange.currentValue || {});
             if (prevCtxKeys.length === currCtxKeys.length) {
                 for (let propName of currCtxKeys) {
@@ -139,30 +90,14 @@ let NgTemplateOutlet = /** @class */ (() => {
             }
             return true;
         }
-        /**
-         * @private
-         * @param {?} ctx
-         * @return {?}
-         */
         _updateExistingContext(ctx) {
             for (let propName of Object.keys(ctx)) {
-                ((/** @type {?} */ ((/** @type {?} */ (this._viewRef)).context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
+                this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
             }
         }
     }
-    NgTemplateOutlet.decorators = [
-        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] },
-    ];
-    /** @nocollapse */
-    NgTemplateOutlet.ctorParameters = () => [
-        { type: ViewContainerRef }
-    ];
-    NgTemplateOutlet.propDecorators = {
-        ngTemplateOutletContext: [{ type: Input }],
-        ngTemplateOutlet: [{ type: Input }]
-    };
-    /** @nocollapse */ NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵɵdirectiveInject(i0.ViewContainerRef)); };
-    /** @nocollapse */ NgTemplateOutlet.ɵdir = i0.ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵɵNgOnChangesFeature] });
+    NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(i0.ɵɵdirectiveInject(i0.ViewContainerRef)); };
+    NgTemplateOutlet.ɵdir = i0.ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [i0.ɵɵNgOnChangesFeature] });
     return NgTemplateOutlet;
 })();
 export { NgTemplateOutlet };
@@ -174,29 +109,4 @@ export { NgTemplateOutlet };
         }], ngTemplateOutlet: [{
             type: Input
         }] }); })();
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgTemplateOutlet.prototype._viewRef;
-    /**
-     * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
-     * object, the object's keys will be available for binding by the local template `let`
-     * declarations.
-     * Using the key `$implicit` in the context object will set its value as default.
-     * @type {?}
-     */
-    NgTemplateOutlet.prototype.ngTemplateOutletContext;
-    /**
-     * A string defining the template reference and optionally the context object for the template.
-     * @type {?}
-     */
-    NgTemplateOutlet.prototype.ngTemplateOutlet;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgTemplateOutlet.prototype._viewContainerRef;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmdfdGVtcGxhdGVfb3V0bGV0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvY29tbW9uL3NyYy9kaXJlY3RpdmVzL25nX3RlbXBsYXRlX291dGxldC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQVFBLE9BQU8sRUFBQyxTQUFTLEVBQW1CLEtBQUssRUFBdUQsZ0JBQWdCLEVBQUMsTUFBTSxlQUFlLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQTBCdkk7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFBQSxNQUNhLGdCQUFnQjs7OztRQWdCM0IsWUFBb0IsaUJBQW1DO1lBQW5DLHNCQUFpQixHQUFqQixpQkFBaUIsQ0FBa0I7WUFmL0MsYUFBUSxHQUE4QixJQUFJLENBQUM7Ozs7Ozs7WUFRbkMsNEJBQXVCLEdBQWdCLElBQUksQ0FBQzs7OztZQUs1QyxxQkFBZ0IsR0FBMEIsSUFBSSxDQUFDO1FBRUwsQ0FBQzs7Ozs7UUFFM0QsV0FBVyxDQUFDLE9BQXNCOztrQkFDMUIsWUFBWSxHQUFHLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxPQUFPLENBQUM7WUFFdEQsSUFBSSxZQUFZLEVBQUU7O3NCQUNWLGdCQUFnQixHQUFHLElBQUksQ0FBQyxpQkFBaUI7Z0JBRS9DLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtvQkFDakIsZ0JBQWdCLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztpQkFDbEU7Z0JBRUQsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztvQkFDbkMsZ0JBQWdCLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLGdCQUFnQixFQUFFLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDLENBQUM7b0JBQzFGLElBQUksQ0FBQzthQUNWO2lCQUFNLElBQUksSUFBSSxDQUFDLFFBQVEsSUFBSSxJQUFJLENBQUMsdUJBQXVCLEVBQUU7Z0JBQ3hELElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsQ0FBQzthQUMzRDtRQUNILENBQUM7Ozs7Ozs7Ozs7Ozs7O1FBWU8sbUJBQW1CLENBQUMsT0FBc0I7O2tCQUMxQyxTQUFTLEdBQUcsT0FBTyxDQUFDLHlCQUF5QixDQUFDO1lBQ3BELE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsU0FBUyxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO1FBQ2pHLENBQUM7Ozs7OztRQUVPLHVCQUF1QixDQUFDLFNBQXVCOztrQkFDL0MsV0FBVyxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsSUFBSSxFQUFFLENBQUM7O2tCQUN4RCxXQUFXLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQztZQUU3RCxJQUFJLFdBQVcsQ0FBQyxNQUFNLEtBQUssV0FBVyxDQUFDLE1BQU0sRUFBRTtnQkFDN0MsS0FBSyxJQUFJLFFBQVEsSUFBSSxXQUFXLEVBQUU7b0JBQ2hDLElBQUksV0FBVyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTt3QkFDeEMsT0FBTyxJQUFJLENBQUM7cUJBQ2I7aUJBQ0Y7Z0JBQ0QsT0FBTyxLQUFLLENBQUM7YUFDZDtZQUNELE9BQU8sSUFBSSxDQUFDO1FBQ2QsQ0FBQzs7Ozs7O1FBRU8sc0JBQXNCLENBQUMsR0FBVztZQUN4QyxLQUFLLElBQUksUUFBUSxJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUU7Z0JBQ3JDLENBQUMsbUJBQUssbUJBQUEsSUFBSSxDQUFDLFFBQVEsRUFBQyxDQUFDLE9BQU8sRUFBQSxDQUFDLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxtQkFBSyxJQUFJLENBQUMsdUJBQXVCLEVBQUEsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxDQUFDO2FBQ3pGO1FBQ0gsQ0FBQzs7O2dCQXZFRixTQUFTLFNBQUMsRUFBQyxRQUFRLEVBQUUsb0JBQW9CLEVBQUM7Ozs7Z0JBMUJxRCxnQkFBZ0I7OzswQ0FvQzdHLEtBQUs7bUNBS0wsS0FBSzs7dUdBZEssZ0JBQWdCOzRFQUFoQixnQkFBZ0I7MkJBbkM3QjtLQTBHQztTQXZFWSxnQkFBZ0I7a0RBQWhCLGdCQUFnQjtjQUQ1QixTQUFTO2VBQUMsRUFBQyxRQUFRLEVBQUUsb0JBQW9CLEVBQUM7O2tCQVV4QyxLQUFLOztrQkFLTCxLQUFLOzs7Ozs7O0lBYk4sb0NBQW1EOzs7Ozs7OztJQVFuRCxtREFBNEQ7Ozs7O0lBSzVELDRDQUErRDs7Ozs7SUFFbkQsNkNBQTJDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBJbmMuIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4gKlxuICogVXNlIG9mIHRoaXMgc291cmNlIGNvZGUgaXMgZ292ZXJuZWQgYnkgYW4gTUlULXN0eWxlIGxpY2Vuc2UgdGhhdCBjYW4gYmVcbiAqIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgYXQgaHR0cHM6Ly9hbmd1bGFyLmlvL2xpY2Vuc2VcbiAqL1xuXG5pbXBvcnQge0RpcmVjdGl2ZSwgRW1iZWRkZWRWaWV3UmVmLCBJbnB1dCwgT25DaGFuZ2VzLCBTaW1wbGVDaGFuZ2UsIFNpbXBsZUNoYW5nZXMsIFRlbXBsYXRlUmVmLCBWaWV3Q29udGFpbmVyUmVmfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuLyoqXG4gKiBAbmdNb2R1bGUgQ29tbW9uTW9kdWxlXG4gKlxuICogQGRlc2NyaXB0aW9uXG4gKlxuICogSW5zZXJ0cyBhbiBlbWJlZGRlZCB2aWV3IGZyb20gYSBwcmVwYXJlZCBgVGVtcGxhdGVSZWZgLlxuICpcbiAqIFlvdSBjYW4gYXR0YWNoIGEgY29udGV4dCBvYmplY3QgdG8gdGhlIGBFbWJlZGRlZFZpZXdSZWZgIGJ5IHNldHRpbmcgYFtuZ1RlbXBsYXRlT3V0bGV0Q29udGV4dF1gLlxuICogYFtuZ1RlbXBsYXRlT3V0bGV0Q29udGV4dF1gIHNob3VsZCBiZSBhbiBvYmplY3QsIHRoZSBvYmplY3QncyBrZXlzIHdpbGwgYmUgYXZhaWxhYmxlIGZvciBiaW5kaW5nXG4gKiBieSB0aGUgbG9jYWwgdGVtcGxhdGUgYGxldGAgZGVjbGFyYXRpb25zLlxuICpcbiAqIEB1c2FnZU5vdGVzXG4gKiBgYGBcbiAqIDxuZy1jb250YWluZXIgKm5nVGVtcGxhdGVPdXRsZXQ9XCJ0ZW1wbGF0ZVJlZkV4cDsgY29udGV4dDogY29udGV4dEV4cFwiPjwvbmctY29udGFpbmVyPlxuICogYGBgXG4gKlxuICogVXNpbmcgdGhlIGtleSBgJGltcGxpY2l0YCBpbiB0aGUgY29udGV4dCBvYmplY3Qgd2lsbCBzZXQgaXRzIHZhbHVlIGFzIGRlZmF1bHQuXG4gKlxuICogIyMjIEV4YW1wbGVcbiAqXG4gKiB7QGV4YW1wbGUgY29tbW9uL25nVGVtcGxhdGVPdXRsZXQvdHMvbW9kdWxlLnRzIHJlZ2lvbj0nTmdUZW1wbGF0ZU91dGxldCd9XG4gKlxuICogQHB1YmxpY0FwaVxuICovXG5ARGlyZWN0aXZlKHtzZWxlY3RvcjogJ1tuZ1RlbXBsYXRlT3V0bGV0XSd9KVxuZXhwb3J0IGNsYXNzIE5nVGVtcGxhdGVPdXRsZXQgaW1wbGVtZW50cyBPbkNoYW5nZXMge1xuICBwcml2YXRlIF92aWV3UmVmOiBFbWJlZGRlZFZpZXdSZWY8YW55PnxudWxsID0gbnVsbDtcblxuICAvKipcbiAgICogQSBjb250ZXh0IG9iamVjdCB0byBhdHRhY2ggdG8gdGhlIHtAbGluayBFbWJlZGRlZFZpZXdSZWZ9LiBUaGlzIHNob3VsZCBiZSBhblxuICAgKiBvYmplY3QsIHRoZSBvYmplY3QncyBrZXlzIHdpbGwgYmUgYXZhaWxhYmxlIGZvciBiaW5kaW5nIGJ5IHRoZSBsb2NhbCB0ZW1wbGF0ZSBgbGV0YFxuICAgKiBkZWNsYXJhdGlvbnMuXG4gICAqIFVzaW5nIHRoZSBrZXkgYCRpbXBsaWNpdGAgaW4gdGhlIGNvbnRleHQgb2JqZWN0IHdpbGwgc2V0IGl0cyB2YWx1ZSBhcyBkZWZhdWx0LlxuICAgKi9cbiAgQElucHV0KCkgcHVibGljIG5nVGVtcGxhdGVPdXRsZXRDb250ZXh0OiBPYmplY3R8bnVsbCA9IG51bGw7XG5cbiAgLyoqXG4gICAqIEEgc3RyaW5nIGRlZmluaW5nIHRoZSB0ZW1wbGF0ZSByZWZlcmVuY2UgYW5kIG9wdGlvbmFsbHkgdGhlIGNvbnRleHQgb2JqZWN0IGZvciB0aGUgdGVtcGxhdGUuXG4gICAqL1xuICBASW5wdXQoKSBwdWJsaWMgbmdUZW1wbGF0ZU91dGxldDogVGVtcGxhdGVSZWY8YW55PnxudWxsID0gbnVsbDtcblxuICBjb25zdHJ1Y3Rvcihwcml2YXRlIF92aWV3Q29udGFpbmVyUmVmOiBWaWV3Q29udGFpbmVyUmVmKSB7fVxuXG4gIG5nT25DaGFuZ2VzKGNoYW5nZXM6IFNpbXBsZUNoYW5nZXMpIHtcbiAgICBjb25zdCByZWNyZWF0ZVZpZXcgPSB0aGlzLl9zaG91bGRSZWNyZWF0ZVZpZXcoY2hhbmdlcyk7XG5cbiAgICBpZiAocmVjcmVhdGVWaWV3KSB7XG4gICAgICBjb25zdCB2aWV3Q29udGFpbmVyUmVmID0gdGhpcy5fdmlld0NvbnRhaW5lclJlZjtcblxuICAgICAgaWYgKHRoaXMuX3ZpZXdSZWYpIHtcbiAgICAgICAgdmlld0NvbnRhaW5lclJlZi5yZW1vdmUodmlld0NvbnRhaW5lclJlZi5pbmRleE9mKHRoaXMuX3ZpZXdSZWYpKTtcbiAgICAgIH1cblxuICAgICAgdGhpcy5fdmlld1JlZiA9IHRoaXMubmdUZW1wbGF0ZU91dGxldCA/XG4gICAgICAgICAgdmlld0NvbnRhaW5lclJlZi5jcmVhdGVFbWJlZGRlZFZpZXcodGhpcy5uZ1RlbXBsYXRlT3V0bGV0LCB0aGlzLm5nVGVtcGxhdGVPdXRsZXRDb250ZXh0KSA6XG4gICAgICAgICAgbnVsbDtcbiAgICB9IGVsc2UgaWYgKHRoaXMuX3ZpZXdSZWYgJiYgdGhpcy5uZ1RlbXBsYXRlT3V0bGV0Q29udGV4dCkge1xuICAgICAgdGhpcy5fdXBkYXRlRXhpc3RpbmdDb250ZXh0KHRoaXMubmdUZW1wbGF0ZU91dGxldENvbnRleHQpO1xuICAgIH1cbiAgfVxuXG4gIC8qKlxuICAgKiBXZSBuZWVkIHRvIHJlLWNyZWF0ZSBleGlzdGluZyBlbWJlZGRlZCB2aWV3IGlmOlxuICAgKiAtIHRlbXBsYXRlUmVmIGhhcyBjaGFuZ2VkXG4gICAqIC0gY29udGV4dCBoYXMgY2hhbmdlc1xuICAgKlxuICAgKiBXZSBtYXJrIGNvbnRleHQgb2JqZWN0IGFzIGNoYW5nZWQgd2hlbiB0aGUgY29ycmVzcG9uZGluZyBvYmplY3RcbiAgICogc2hhcGUgY2hhbmdlcyAobmV3IHByb3BlcnRpZXMgYXJlIGFkZGVkIG9yIGV4aXN0aW5nIHByb3BlcnRpZXMgYXJlIHJlbW92ZWQpLlxuICAgKiBJbiBvdGhlciB3b3JkcyB3ZSBjb25zaWRlciBjb250ZXh0IHdpdGggdGhlIHNhbWUgcHJvcGVydGllcyBhcyBcInRoZSBzYW1lXCIgZXZlblxuICAgKiBpZiBvYmplY3QgcmVmZXJlbmNlIGNoYW5nZXMgKHNlZSBodHRwczovL2dpdGh1Yi5jb20vYW5ndWxhci9hbmd1bGFyL2lzc3Vlcy8xMzQwNykuXG4gICAqL1xuICBwcml2YXRlIF9zaG91bGRSZWNyZWF0ZVZpZXcoY2hhbmdlczogU2ltcGxlQ2hhbmdlcyk6IGJvb2xlYW4ge1xuICAgIGNvbnN0IGN0eENoYW5nZSA9IGNoYW5nZXNbJ25nVGVtcGxhdGVPdXRsZXRDb250ZXh0J107XG4gICAgcmV0dXJuICEhY2hhbmdlc1snbmdUZW1wbGF0ZU91dGxldCddIHx8IChjdHhDaGFuZ2UgJiYgdGhpcy5faGFzQ29udGV4dFNoYXBlQ2hhbmdlZChjdHhDaGFuZ2UpKTtcbiAgfVxuXG4gIHByaXZhdGUgX2hhc0NvbnRleHRTaGFwZUNoYW5nZWQoY3R4Q2hhbmdlOiBTaW1wbGVDaGFuZ2UpOiBib29sZWFuIHtcbiAgICBjb25zdCBwcmV2Q3R4S2V5cyA9IE9iamVjdC5rZXlzKGN0eENoYW5nZS5wcmV2aW91c1ZhbHVlIHx8IHt9KTtcbiAgICBjb25zdCBjdXJyQ3R4S2V5cyA9IE9iamVjdC5rZXlzKGN0eENoYW5nZS5jdXJyZW50VmFsdWUgfHwge30pO1xuXG4gICAgaWYgKHByZXZDdHhLZXlzLmxlbmd0aCA9PT0gY3VyckN0eEtleXMubGVuZ3RoKSB7XG4gICAgICBmb3IgKGxldCBwcm9wTmFtZSBvZiBjdXJyQ3R4S2V5cykge1xuICAgICAgICBpZiAocHJldkN0eEtleXMuaW5kZXhPZihwcm9wTmFtZSkgPT09IC0xKSB7XG4gICAgICAgICAgcmV0dXJuIHRydWU7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICAgIHJldHVybiBmYWxzZTtcbiAgICB9XG4gICAgcmV0dXJuIHRydWU7XG4gIH1cblxuICBwcml2YXRlIF91cGRhdGVFeGlzdGluZ0NvbnRleHQoY3R4OiBPYmplY3QpOiB2b2lkIHtcbiAgICBmb3IgKGxldCBwcm9wTmFtZSBvZiBPYmplY3Qua2V5cyhjdHgpKSB7XG4gICAgICAoPGFueT50aGlzLl92aWV3UmVmIS5jb250ZXh0KVtwcm9wTmFtZV0gPSAoPGFueT50aGlzLm5nVGVtcGxhdGVPdXRsZXRDb250ZXh0KVtwcm9wTmFtZV07XG4gICAgfVxuICB9XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmdfdGVtcGxhdGVfb3V0bGV0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvY29tbW9uL3NyYy9kaXJlY3RpdmVzL25nX3RlbXBsYXRlX291dGxldC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7O0dBTUc7QUFFSCxPQUFPLEVBQUMsU0FBUyxFQUFtQixLQUFLLEVBQXVELGdCQUFnQixFQUFDLE1BQU0sZUFBZSxDQUFDOztBQUV2STs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSDtJQUFBLE1BQ2EsZ0JBQWdCO1FBZ0IzQixZQUFvQixpQkFBbUM7WUFBbkMsc0JBQWlCLEdBQWpCLGlCQUFpQixDQUFrQjtZQWYvQyxhQUFRLEdBQThCLElBQUksQ0FBQztZQUVuRDs7Ozs7ZUFLRztZQUNhLDRCQUF1QixHQUFnQixJQUFJLENBQUM7WUFFNUQ7O2VBRUc7WUFDYSxxQkFBZ0IsR0FBMEIsSUFBSSxDQUFDO1FBRUwsQ0FBQztRQUUzRCxXQUFXLENBQUMsT0FBc0I7WUFDaEMsTUFBTSxZQUFZLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBRXZELElBQUksWUFBWSxFQUFFO2dCQUNoQixNQUFNLGdCQUFnQixHQUFHLElBQUksQ0FBQyxpQkFBaUIsQ0FBQztnQkFFaEQsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO29CQUNqQixnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO2lCQUNsRTtnQkFFRCxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO29CQUNuQyxnQkFBZ0IsQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLHVCQUF1QixDQUFDLENBQUMsQ0FBQztvQkFDMUYsSUFBSSxDQUFDO2FBQ1Y7aUJBQU0sSUFBSSxJQUFJLENBQUMsUUFBUSxJQUFJLElBQUksQ0FBQyx1QkFBdUIsRUFBRTtnQkFDeEQsSUFBSSxDQUFDLHNCQUFzQixDQUFDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO2FBQzNEO1FBQ0gsQ0FBQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNLLG1CQUFtQixDQUFDLE9BQXNCO1lBQ2hELE1BQU0sU0FBUyxHQUFHLE9BQU8sQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDO1lBQ3JELE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsU0FBUyxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO1FBQ2pHLENBQUM7UUFFTyx1QkFBdUIsQ0FBQyxTQUF1QjtZQUNyRCxNQUFNLFdBQVcsR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxhQUFhLElBQUksRUFBRSxDQUFDLENBQUM7WUFDL0QsTUFBTSxXQUFXLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxDQUFDO1lBRTlELElBQUksV0FBVyxDQUFDLE1BQU0sS0FBSyxXQUFXLENBQUMsTUFBTSxFQUFFO2dCQUM3QyxLQUFLLElBQUksUUFBUSxJQUFJLFdBQVcsRUFBRTtvQkFDaEMsSUFBSSxXQUFXLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO3dCQUN4QyxPQUFPLElBQUksQ0FBQztxQkFDYjtpQkFDRjtnQkFDRCxPQUFPLEtBQUssQ0FBQzthQUNkO1lBQ0QsT0FBTyxJQUFJLENBQUM7UUFDZCxDQUFDO1FBRU8sc0JBQXNCLENBQUMsR0FBVztZQUN4QyxLQUFLLElBQUksUUFBUSxJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUU7Z0JBQy9CLElBQUksQ0FBQyxRQUFTLENBQUMsT0FBUSxDQUFDLFFBQVEsQ0FBQyxHQUFTLElBQUksQ0FBQyx1QkFBd0IsQ0FBQyxRQUFRLENBQUMsQ0FBQzthQUN6RjtRQUNILENBQUM7O29GQXRFVSxnQkFBZ0I7eURBQWhCLGdCQUFnQjsyQkFuQzdCO0tBMEdDO1NBdkVZLGdCQUFnQjtrREFBaEIsZ0JBQWdCO2NBRDVCLFNBQVM7ZUFBQyxFQUFDLFFBQVEsRUFBRSxvQkFBb0IsRUFBQzs7a0JBVXhDLEtBQUs7O2tCQUtMLEtBQUsiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBsaWNlbnNlXG4gKiBDb3B5cmlnaHQgR29vZ2xlIEluYy4gQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmltcG9ydCB7RGlyZWN0aXZlLCBFbWJlZGRlZFZpZXdSZWYsIElucHV0LCBPbkNoYW5nZXMsIFNpbXBsZUNoYW5nZSwgU2ltcGxlQ2hhbmdlcywgVGVtcGxhdGVSZWYsIFZpZXdDb250YWluZXJSZWZ9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG4vKipcbiAqIEBuZ01vZHVsZSBDb21tb25Nb2R1bGVcbiAqXG4gKiBAZGVzY3JpcHRpb25cbiAqXG4gKiBJbnNlcnRzIGFuIGVtYmVkZGVkIHZpZXcgZnJvbSBhIHByZXBhcmVkIGBUZW1wbGF0ZVJlZmAuXG4gKlxuICogWW91IGNhbiBhdHRhY2ggYSBjb250ZXh0IG9iamVjdCB0byB0aGUgYEVtYmVkZGVkVmlld1JlZmAgYnkgc2V0dGluZyBgW25nVGVtcGxhdGVPdXRsZXRDb250ZXh0XWAuXG4gKiBgW25nVGVtcGxhdGVPdXRsZXRDb250ZXh0XWAgc2hvdWxkIGJlIGFuIG9iamVjdCwgdGhlIG9iamVjdCdzIGtleXMgd2lsbCBiZSBhdmFpbGFibGUgZm9yIGJpbmRpbmdcbiAqIGJ5IHRoZSBsb2NhbCB0ZW1wbGF0ZSBgbGV0YCBkZWNsYXJhdGlvbnMuXG4gKlxuICogQHVzYWdlTm90ZXNcbiAqIGBgYFxuICogPG5nLWNvbnRhaW5lciAqbmdUZW1wbGF0ZU91dGxldD1cInRlbXBsYXRlUmVmRXhwOyBjb250ZXh0OiBjb250ZXh0RXhwXCI+PC9uZy1jb250YWluZXI+XG4gKiBgYGBcbiAqXG4gKiBVc2luZyB0aGUga2V5IGAkaW1wbGljaXRgIGluIHRoZSBjb250ZXh0IG9iamVjdCB3aWxsIHNldCBpdHMgdmFsdWUgYXMgZGVmYXVsdC5cbiAqXG4gKiAjIyMgRXhhbXBsZVxuICpcbiAqIHtAZXhhbXBsZSBjb21tb24vbmdUZW1wbGF0ZU91dGxldC90cy9tb2R1bGUudHMgcmVnaW9uPSdOZ1RlbXBsYXRlT3V0bGV0J31cbiAqXG4gKiBAcHVibGljQXBpXG4gKi9cbkBEaXJlY3RpdmUoe3NlbGVjdG9yOiAnW25nVGVtcGxhdGVPdXRsZXRdJ30pXG5leHBvcnQgY2xhc3MgTmdUZW1wbGF0ZU91dGxldCBpbXBsZW1lbnRzIE9uQ2hhbmdlcyB7XG4gIHByaXZhdGUgX3ZpZXdSZWY6IEVtYmVkZGVkVmlld1JlZjxhbnk+fG51bGwgPSBudWxsO1xuXG4gIC8qKlxuICAgKiBBIGNvbnRleHQgb2JqZWN0IHRvIGF0dGFjaCB0byB0aGUge0BsaW5rIEVtYmVkZGVkVmlld1JlZn0uIFRoaXMgc2hvdWxkIGJlIGFuXG4gICAqIG9iamVjdCwgdGhlIG9iamVjdCdzIGtleXMgd2lsbCBiZSBhdmFpbGFibGUgZm9yIGJpbmRpbmcgYnkgdGhlIGxvY2FsIHRlbXBsYXRlIGBsZXRgXG4gICAqIGRlY2xhcmF0aW9ucy5cbiAgICogVXNpbmcgdGhlIGtleSBgJGltcGxpY2l0YCBpbiB0aGUgY29udGV4dCBvYmplY3Qgd2lsbCBzZXQgaXRzIHZhbHVlIGFzIGRlZmF1bHQuXG4gICAqL1xuICBASW5wdXQoKSBwdWJsaWMgbmdUZW1wbGF0ZU91dGxldENvbnRleHQ6IE9iamVjdHxudWxsID0gbnVsbDtcblxuICAvKipcbiAgICogQSBzdHJpbmcgZGVmaW5pbmcgdGhlIHRlbXBsYXRlIHJlZmVyZW5jZSBhbmQgb3B0aW9uYWxseSB0aGUgY29udGV4dCBvYmplY3QgZm9yIHRoZSB0ZW1wbGF0ZS5cbiAgICovXG4gIEBJbnB1dCgpIHB1YmxpYyBuZ1RlbXBsYXRlT3V0bGV0OiBUZW1wbGF0ZVJlZjxhbnk+fG51bGwgPSBudWxsO1xuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgX3ZpZXdDb250YWluZXJSZWY6IFZpZXdDb250YWluZXJSZWYpIHt9XG5cbiAgbmdPbkNoYW5nZXMoY2hhbmdlczogU2ltcGxlQ2hhbmdlcykge1xuICAgIGNvbnN0IHJlY3JlYXRlVmlldyA9IHRoaXMuX3Nob3VsZFJlY3JlYXRlVmlldyhjaGFuZ2VzKTtcblxuICAgIGlmIChyZWNyZWF0ZVZpZXcpIHtcbiAgICAgIGNvbnN0IHZpZXdDb250YWluZXJSZWYgPSB0aGlzLl92aWV3Q29udGFpbmVyUmVmO1xuXG4gICAgICBpZiAodGhpcy5fdmlld1JlZikge1xuICAgICAgICB2aWV3Q29udGFpbmVyUmVmLnJlbW92ZSh2aWV3Q29udGFpbmVyUmVmLmluZGV4T2YodGhpcy5fdmlld1JlZikpO1xuICAgICAgfVxuXG4gICAgICB0aGlzLl92aWV3UmVmID0gdGhpcy5uZ1RlbXBsYXRlT3V0bGV0ID9cbiAgICAgICAgICB2aWV3Q29udGFpbmVyUmVmLmNyZWF0ZUVtYmVkZGVkVmlldyh0aGlzLm5nVGVtcGxhdGVPdXRsZXQsIHRoaXMubmdUZW1wbGF0ZU91dGxldENvbnRleHQpIDpcbiAgICAgICAgICBudWxsO1xuICAgIH0gZWxzZSBpZiAodGhpcy5fdmlld1JlZiAmJiB0aGlzLm5nVGVtcGxhdGVPdXRsZXRDb250ZXh0KSB7XG4gICAgICB0aGlzLl91cGRhdGVFeGlzdGluZ0NvbnRleHQodGhpcy5uZ1RlbXBsYXRlT3V0bGV0Q29udGV4dCk7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIFdlIG5lZWQgdG8gcmUtY3JlYXRlIGV4aXN0aW5nIGVtYmVkZGVkIHZpZXcgaWY6XG4gICAqIC0gdGVtcGxhdGVSZWYgaGFzIGNoYW5nZWRcbiAgICogLSBjb250ZXh0IGhhcyBjaGFuZ2VzXG4gICAqXG4gICAqIFdlIG1hcmsgY29udGV4dCBvYmplY3QgYXMgY2hhbmdlZCB3aGVuIHRoZSBjb3JyZXNwb25kaW5nIG9iamVjdFxuICAgKiBzaGFwZSBjaGFuZ2VzIChuZXcgcHJvcGVydGllcyBhcmUgYWRkZWQgb3IgZXhpc3RpbmcgcHJvcGVydGllcyBhcmUgcmVtb3ZlZCkuXG4gICAqIEluIG90aGVyIHdvcmRzIHdlIGNvbnNpZGVyIGNvbnRleHQgd2l0aCB0aGUgc2FtZSBwcm9wZXJ0aWVzIGFzIFwidGhlIHNhbWVcIiBldmVuXG4gICAqIGlmIG9iamVjdCByZWZlcmVuY2UgY2hhbmdlcyAoc2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9hbmd1bGFyL2FuZ3VsYXIvaXNzdWVzLzEzNDA3KS5cbiAgICovXG4gIHByaXZhdGUgX3Nob3VsZFJlY3JlYXRlVmlldyhjaGFuZ2VzOiBTaW1wbGVDaGFuZ2VzKTogYm9vbGVhbiB7XG4gICAgY29uc3QgY3R4Q2hhbmdlID0gY2hhbmdlc1snbmdUZW1wbGF0ZU91dGxldENvbnRleHQnXTtcbiAgICByZXR1cm4gISFjaGFuZ2VzWyduZ1RlbXBsYXRlT3V0bGV0J10gfHwgKGN0eENoYW5nZSAmJiB0aGlzLl9oYXNDb250ZXh0U2hhcGVDaGFuZ2VkKGN0eENoYW5nZSkpO1xuICB9XG5cbiAgcHJpdmF0ZSBfaGFzQ29udGV4dFNoYXBlQ2hhbmdlZChjdHhDaGFuZ2U6IFNpbXBsZUNoYW5nZSk6IGJvb2xlYW4ge1xuICAgIGNvbnN0IHByZXZDdHhLZXlzID0gT2JqZWN0LmtleXMoY3R4Q2hhbmdlLnByZXZpb3VzVmFsdWUgfHwge30pO1xuICAgIGNvbnN0IGN1cnJDdHhLZXlzID0gT2JqZWN0LmtleXMoY3R4Q2hhbmdlLmN1cnJlbnRWYWx1ZSB8fCB7fSk7XG5cbiAgICBpZiAocHJldkN0eEtleXMubGVuZ3RoID09PSBjdXJyQ3R4S2V5cy5sZW5ndGgpIHtcbiAgICAgIGZvciAobGV0IHByb3BOYW1lIG9mIGN1cnJDdHhLZXlzKSB7XG4gICAgICAgIGlmIChwcmV2Q3R4S2V5cy5pbmRleE9mKHByb3BOYW1lKSA9PT0gLTEpIHtcbiAgICAgICAgICByZXR1cm4gdHJ1ZTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgICAgcmV0dXJuIGZhbHNlO1xuICAgIH1cbiAgICByZXR1cm4gdHJ1ZTtcbiAgfVxuXG4gIHByaXZhdGUgX3VwZGF0ZUV4aXN0aW5nQ29udGV4dChjdHg6IE9iamVjdCk6IHZvaWQge1xuICAgIGZvciAobGV0IHByb3BOYW1lIG9mIE9iamVjdC5rZXlzKGN0eCkpIHtcbiAgICAgICg8YW55PnRoaXMuX3ZpZXdSZWYhLmNvbnRleHQpW3Byb3BOYW1lXSA9ICg8YW55PnRoaXMubmdUZW1wbGF0ZU91dGxldENvbnRleHQpW3Byb3BOYW1lXTtcbiAgICB9XG4gIH1cbn1cbiJdfQ==
