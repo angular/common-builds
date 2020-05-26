@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+17.sha-d1ea1f4
+ * @license Angular v10.0.0-rc.0+15.sha-ecce994
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -26,7 +26,7 @@ class HttpTestingController {
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -202,7 +202,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -354,7 +354,7 @@ let HttpClientTestingBackend = /** @class */ (() => {
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -396,7 +396,7 @@ let HttpClientTestingModule = /** @class */ (() => {
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -404,7 +404,7 @@ let HttpClientTestingModule = /** @class */ (() => {
 
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
