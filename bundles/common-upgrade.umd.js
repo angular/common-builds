@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1104,10 +1104,9 @@
     var LocationUpgradeModule = /** @class */ (function () {
         function LocationUpgradeModule() {
         }
-        LocationUpgradeModule_1 = LocationUpgradeModule;
         LocationUpgradeModule.config = function (config) {
             return {
-                ngModule: LocationUpgradeModule_1,
+                ngModule: LocationUpgradeModule,
                 providers: [
                     common.Location,
                     {
@@ -1134,10 +1133,9 @@
                 ],
             };
         };
-        var LocationUpgradeModule_1;
-        LocationUpgradeModule = LocationUpgradeModule_1 = __decorate([
-            core.NgModule({ imports: [common.CommonModule] })
-        ], LocationUpgradeModule);
+        LocationUpgradeModule.decorators = [
+            { type: core.NgModule, args: [{ imports: [common.CommonModule] },] }
+        ];
         return LocationUpgradeModule;
     }());
     function provideAppBaseHref(config, appBaseHref) {

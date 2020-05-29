@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9,6 +9,142 @@
     typeof define === 'function' && define.amd ? define('@angular/common/testing', ['exports', '@angular/core', '@angular/common', 'rxjs'], factory) :
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.testing = {}), global.ng.core, global.ng.common, global.rxjs));
 }(this, (function (exports, core, common, rxjs) { 'use strict';
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A spy for {@link Location} that allows tests to fire simulated location events.
+     *
+     * @publicApi
+     */
+    var SpyLocation = /** @class */ (function () {
+        function SpyLocation() {
+            this.urlChanges = [];
+            this._history = [new LocationState('', '', null)];
+            this._historyIndex = 0;
+            /** @internal */
+            this._subject = new core.EventEmitter();
+            /** @internal */
+            this._baseHref = '';
+            /** @internal */
+            this._platformStrategy = null;
+            /** @internal */
+            this._platformLocation = null;
+            /** @internal */
+            this._urlChangeListeners = [];
+        }
+        SpyLocation.prototype.setInitialPath = function (url) {
+            this._history[this._historyIndex].path = url;
+        };
+        SpyLocation.prototype.setBaseHref = function (url) {
+            this._baseHref = url;
+        };
+        SpyLocation.prototype.path = function () {
+            return this._history[this._historyIndex].path;
+        };
+        SpyLocation.prototype.getState = function () {
+            return this._history[this._historyIndex].state;
+        };
+        SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
+            if (query === void 0) { query = ''; }
+            var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+            var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+            return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+        };
+        SpyLocation.prototype.simulateUrlPop = function (pathname) {
+            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
+        };
+        SpyLocation.prototype.simulateHashChange = function (pathname) {
+            // Because we don't prevent the native event, the browser will independently update the path
+            this.setInitialPath(pathname);
+            this.urlChanges.push('hash: ' + pathname);
+            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
+        };
+        SpyLocation.prototype.prepareExternalUrl = function (url) {
+            if (url.length > 0 && !url.startsWith('/')) {
+                url = '/' + url;
+            }
+            return this._baseHref + url;
+        };
+        SpyLocation.prototype.go = function (path, query, state) {
+            if (query === void 0) { query = ''; }
+            if (state === void 0) { state = null; }
+            path = this.prepareExternalUrl(path);
+            if (this._historyIndex > 0) {
+                this._history.splice(this._historyIndex + 1);
+            }
+            this._history.push(new LocationState(path, query, state));
+            this._historyIndex = this._history.length - 1;
+            var locationState = this._history[this._historyIndex - 1];
+            if (locationState.path == path && locationState.query == query) {
+                return;
+            }
+            var url = path + (query.length > 0 ? ('?' + query) : '');
+            this.urlChanges.push(url);
+            this._subject.emit({ 'url': url, 'pop': false });
+        };
+        SpyLocation.prototype.replaceState = function (path, query, state) {
+            if (query === void 0) { query = ''; }
+            if (state === void 0) { state = null; }
+            path = this.prepareExternalUrl(path);
+            var history = this._history[this._historyIndex];
+            if (history.path == path && history.query == query) {
+                return;
+            }
+            history.path = path;
+            history.query = query;
+            history.state = state;
+            var url = path + (query.length > 0 ? ('?' + query) : '');
+            this.urlChanges.push('replace: ' + url);
+        };
+        SpyLocation.prototype.forward = function () {
+            if (this._historyIndex < (this._history.length - 1)) {
+                this._historyIndex++;
+                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            }
+        };
+        SpyLocation.prototype.back = function () {
+            if (this._historyIndex > 0) {
+                this._historyIndex--;
+                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            }
+        };
+        SpyLocation.prototype.onUrlChange = function (fn) {
+            var _this = this;
+            this._urlChangeListeners.push(fn);
+            this.subscribe(function (v) {
+                _this._notifyUrlChangeListeners(v.url, v.state);
+            });
+        };
+        /** @internal */
+        SpyLocation.prototype._notifyUrlChangeListeners = function (url, state) {
+            if (url === void 0) { url = ''; }
+            this._urlChangeListeners.forEach(function (fn) { return fn(url, state); });
+        };
+        SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
+            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+        };
+        SpyLocation.prototype.normalize = function (url) {
+            return null;
+        };
+        SpyLocation.decorators = [
+            { type: core.Injectable }
+        ];
+        return SpyLocation;
+    }());
+    var LocationState = /** @class */ (function () {
+        function LocationState(path, query, state) {
+            this.path = path;
+            this.query = query;
+            this.state = state;
+        }
+        return LocationState;
+    }());
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -246,142 +382,6 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * A spy for {@link Location} that allows tests to fire simulated location events.
-     *
-     * @publicApi
-     */
-    var SpyLocation = /** @class */ (function () {
-        function SpyLocation() {
-            this.urlChanges = [];
-            this._history = [new LocationState('', '', null)];
-            this._historyIndex = 0;
-            /** @internal */
-            this._subject = new core.EventEmitter();
-            /** @internal */
-            this._baseHref = '';
-            /** @internal */
-            this._platformStrategy = null;
-            /** @internal */
-            this._platformLocation = null;
-            /** @internal */
-            this._urlChangeListeners = [];
-        }
-        SpyLocation.prototype.setInitialPath = function (url) {
-            this._history[this._historyIndex].path = url;
-        };
-        SpyLocation.prototype.setBaseHref = function (url) {
-            this._baseHref = url;
-        };
-        SpyLocation.prototype.path = function () {
-            return this._history[this._historyIndex].path;
-        };
-        SpyLocation.prototype.getState = function () {
-            return this._history[this._historyIndex].state;
-        };
-        SpyLocation.prototype.isCurrentPathEqualTo = function (path, query) {
-            if (query === void 0) { query = ''; }
-            var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
-            var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
-            return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
-        };
-        SpyLocation.prototype.simulateUrlPop = function (pathname) {
-            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
-        };
-        SpyLocation.prototype.simulateHashChange = function (pathname) {
-            // Because we don't prevent the native event, the browser will independently update the path
-            this.setInitialPath(pathname);
-            this.urlChanges.push('hash: ' + pathname);
-            this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
-        };
-        SpyLocation.prototype.prepareExternalUrl = function (url) {
-            if (url.length > 0 && !url.startsWith('/')) {
-                url = '/' + url;
-            }
-            return this._baseHref + url;
-        };
-        SpyLocation.prototype.go = function (path, query, state) {
-            if (query === void 0) { query = ''; }
-            if (state === void 0) { state = null; }
-            path = this.prepareExternalUrl(path);
-            if (this._historyIndex > 0) {
-                this._history.splice(this._historyIndex + 1);
-            }
-            this._history.push(new LocationState(path, query, state));
-            this._historyIndex = this._history.length - 1;
-            var locationState = this._history[this._historyIndex - 1];
-            if (locationState.path == path && locationState.query == query) {
-                return;
-            }
-            var url = path + (query.length > 0 ? ('?' + query) : '');
-            this.urlChanges.push(url);
-            this._subject.emit({ 'url': url, 'pop': false });
-        };
-        SpyLocation.prototype.replaceState = function (path, query, state) {
-            if (query === void 0) { query = ''; }
-            if (state === void 0) { state = null; }
-            path = this.prepareExternalUrl(path);
-            var history = this._history[this._historyIndex];
-            if (history.path == path && history.query == query) {
-                return;
-            }
-            history.path = path;
-            history.query = query;
-            history.state = state;
-            var url = path + (query.length > 0 ? ('?' + query) : '');
-            this.urlChanges.push('replace: ' + url);
-        };
-        SpyLocation.prototype.forward = function () {
-            if (this._historyIndex < (this._history.length - 1)) {
-                this._historyIndex++;
-                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
-            }
-        };
-        SpyLocation.prototype.back = function () {
-            if (this._historyIndex > 0) {
-                this._historyIndex--;
-                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
-            }
-        };
-        SpyLocation.prototype.onUrlChange = function (fn) {
-            var _this = this;
-            this._urlChangeListeners.push(fn);
-            this.subscribe(function (v) {
-                _this._notifyUrlChangeListeners(v.url, v.state);
-            });
-        };
-        /** @internal */
-        SpyLocation.prototype._notifyUrlChangeListeners = function (url, state) {
-            if (url === void 0) { url = ''; }
-            this._urlChangeListeners.forEach(function (fn) { return fn(url, state); });
-        };
-        SpyLocation.prototype.subscribe = function (onNext, onThrow, onReturn) {
-            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-        };
-        SpyLocation.prototype.normalize = function (url) {
-            return null;
-        };
-        SpyLocation = __decorate([
-            core.Injectable()
-        ], SpyLocation);
-        return SpyLocation;
-    }());
-    var LocationState = /** @class */ (function () {
-        function LocationState(path, query, state) {
-            this.path = path;
-            this.query = query;
-            this.state = state;
-        }
-        return LocationState;
-    }());
-
-    /**
-     * @license
-     * Copyright Google LLC All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    /**
      * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
      * location events.
      *
@@ -452,10 +452,11 @@
         MockLocationStrategy.prototype.getState = function () {
             return this.stateChanges[(this.stateChanges.length || 1) - 1];
         };
-        MockLocationStrategy = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], MockLocationStrategy);
+        MockLocationStrategy.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        MockLocationStrategy.ctorParameters = function () { return []; };
         return MockLocationStrategy;
     }(common.LocationStrategy));
     var _MockPopStateEvent = /** @class */ (function () {
@@ -660,11 +661,13 @@
         MockPlatformLocation.prototype.getState = function () {
             return this.state;
         };
-        MockPlatformLocation = __decorate([
-            core.Injectable(),
-            __param(0, core.Inject(MOCK_PLATFORM_LOCATION_CONFIG)), __param(0, core.Optional()),
-            __metadata("design:paramtypes", [Object])
-        ], MockPlatformLocation);
+        MockPlatformLocation.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        MockPlatformLocation.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: core.Optional }] }
+        ]; };
         return MockPlatformLocation;
     }());
     function scheduleMicroTask(cb) {

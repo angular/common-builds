@@ -1,11 +1,10 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { ReplaySubject } from 'rxjs';
-import { __decorate } from 'tslib';
 import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, CommonModule, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { InjectionToken, Inject, Optional, NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -854,11 +853,10 @@ const APP_BASE_HREF_RESOLVED = new InjectionToken('APP_BASE_HREF_RESOLVED');
  * @publicApi
  */
 let LocationUpgradeModule = /** @class */ (() => {
-    var LocationUpgradeModule_1;
-    let LocationUpgradeModule = LocationUpgradeModule_1 = class LocationUpgradeModule {
+    class LocationUpgradeModule {
         static config(config) {
             return {
-                ngModule: LocationUpgradeModule_1,
+                ngModule: LocationUpgradeModule,
                 providers: [
                     Location,
                     {
@@ -885,10 +883,10 @@ let LocationUpgradeModule = /** @class */ (() => {
                 ],
             };
         }
-    };
-    LocationUpgradeModule = LocationUpgradeModule_1 = __decorate([
-        NgModule({ imports: [CommonModule] })
-    ], LocationUpgradeModule);
+    }
+    LocationUpgradeModule.decorators = [
+        { type: NgModule, args: [{ imports: [CommonModule] },] }
+    ];
     return LocationUpgradeModule;
 })();
 function provideAppBaseHref(config, appBaseHref) {

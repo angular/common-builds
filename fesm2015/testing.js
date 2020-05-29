@@ -1,10 +1,9 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __metadata, __param } from 'tslib';
 import { EventEmitter, Injectable, InjectionToken, Inject, Optional } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
@@ -22,7 +21,7 @@ import { Subject } from 'rxjs';
  * @publicApi
  */
 let SpyLocation = /** @class */ (() => {
-    let SpyLocation = class SpyLocation {
+    class SpyLocation {
         constructor() {
             this.urlChanges = [];
             this._history = [new LocationState('', '', null)];
@@ -125,10 +124,10 @@ let SpyLocation = /** @class */ (() => {
         normalize(url) {
             return null;
         }
-    };
-    SpyLocation = __decorate([
-        Injectable()
-    ], SpyLocation);
+    }
+    SpyLocation.decorators = [
+        { type: Injectable }
+    ];
     return SpyLocation;
 })();
 class LocationState {
@@ -153,7 +152,7 @@ class LocationState {
  * @publicApi
  */
 let MockLocationStrategy = /** @class */ (() => {
-    let MockLocationStrategy = class MockLocationStrategy extends LocationStrategy {
+    class MockLocationStrategy extends LocationStrategy {
         constructor() {
             super();
             this.internalBaseHref = '/';
@@ -215,11 +214,12 @@ let MockLocationStrategy = /** @class */ (() => {
         getState() {
             return this.stateChanges[(this.stateChanges.length || 1) - 1];
         }
-    };
-    MockLocationStrategy = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [])
-    ], MockLocationStrategy);
+    }
+    MockLocationStrategy.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    MockLocationStrategy.ctorParameters = () => [];
     return MockLocationStrategy;
 })();
 class _MockPopStateEvent {
@@ -308,7 +308,7 @@ const MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION
  * @publicApi
  */
 let MockPlatformLocation = /** @class */ (() => {
-    let MockPlatformLocation = class MockPlatformLocation {
+    class MockPlatformLocation {
         constructor(config) {
             this.baseHref = '';
             this.hashUpdate = new Subject();
@@ -386,12 +386,14 @@ let MockPlatformLocation = /** @class */ (() => {
         getState() {
             return this.state;
         }
-    };
-    MockPlatformLocation = __decorate([
-        Injectable(),
-        __param(0, Inject(MOCK_PLATFORM_LOCATION_CONFIG)), __param(0, Optional()),
-        __metadata("design:paramtypes", [Object])
-    ], MockPlatformLocation);
+    }
+    MockPlatformLocation.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    MockPlatformLocation.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: Optional }] }
+    ];
     return MockPlatformLocation;
 })();
 function scheduleMicroTask(cb) {

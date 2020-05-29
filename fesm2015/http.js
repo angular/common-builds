@@ -1,10 +1,9 @@
 /**
- * @license Angular v10.0.0-rc.0+22.sha-82761ec
+ * @license Angular v10.0.0-rc.0+23.sha-d16a7f3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __metadata, __param } from 'tslib';
 import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
@@ -1006,7 +1005,7 @@ function addBody(options, body) {
  * @publicApi
  */
 let HttpClient = /** @class */ (() => {
-    let HttpClient = class HttpClient {
+    class HttpClient {
         constructor(handler) {
             this.handler = handler;
         }
@@ -1228,11 +1227,14 @@ let HttpClient = /** @class */ (() => {
         put(url, body, options = {}) {
             return this.request('PUT', url, addBody(options, body));
         }
-    };
-    HttpClient = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [HttpHandler])
-    ], HttpClient);
+    }
+    HttpClient.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpClient.ctorParameters = () => [
+        { type: HttpHandler }
+    ];
     return HttpClient;
 })();
 
@@ -1265,14 +1267,14 @@ class HttpInterceptorHandler {
  */
 const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 let NoopInterceptor = /** @class */ (() => {
-    let NoopInterceptor = class NoopInterceptor {
+    class NoopInterceptor {
         intercept(req, next) {
             return next.handle(req);
         }
-    };
-    NoopInterceptor = __decorate([
-        Injectable()
-    ], NoopInterceptor);
+    }
+    NoopInterceptor.decorators = [
+        { type: Injectable }
+    ];
     return NoopInterceptor;
 })();
 
@@ -1313,7 +1315,7 @@ class JsonpCallbackContext {
  * @publicApi
  */
 let JsonpClientBackend = /** @class */ (() => {
-    let JsonpClientBackend = class JsonpClientBackend {
+    class JsonpClientBackend {
         constructor(callbackMap, document) {
             this.callbackMap = callbackMap;
             this.document = document;
@@ -1454,12 +1456,15 @@ let JsonpClientBackend = /** @class */ (() => {
                 };
             });
         }
-    };
-    JsonpClientBackend = __decorate([
-        Injectable(),
-        __param(1, Inject(DOCUMENT)),
-        __metadata("design:paramtypes", [JsonpCallbackContext, Object])
-    ], JsonpClientBackend);
+    }
+    JsonpClientBackend.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    JsonpClientBackend.ctorParameters = () => [
+        { type: JsonpCallbackContext },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ];
     return JsonpClientBackend;
 })();
 /**
@@ -1471,7 +1476,7 @@ let JsonpClientBackend = /** @class */ (() => {
  * @publicApi
  */
 let JsonpInterceptor = /** @class */ (() => {
-    let JsonpInterceptor = class JsonpInterceptor {
+    class JsonpInterceptor {
         constructor(jsonp) {
             this.jsonp = jsonp;
         }
@@ -1489,11 +1494,14 @@ let JsonpInterceptor = /** @class */ (() => {
             // Fall through for normal HTTP requests.
             return next.handle(req);
         }
-    };
-    JsonpInterceptor = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [JsonpClientBackend])
-    ], JsonpInterceptor);
+    }
+    JsonpInterceptor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    JsonpInterceptor.ctorParameters = () => [
+        { type: JsonpClientBackend }
+    ];
     return JsonpInterceptor;
 })();
 
@@ -1530,16 +1538,17 @@ class XhrFactory {
  *
  */
 let BrowserXhr = /** @class */ (() => {
-    let BrowserXhr = class BrowserXhr {
+    class BrowserXhr {
         constructor() { }
         build() {
             return (new XMLHttpRequest());
         }
-    };
-    BrowserXhr = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [])
-    ], BrowserXhr);
+    }
+    BrowserXhr.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    BrowserXhr.ctorParameters = () => [];
     return BrowserXhr;
 })();
 /**
@@ -1550,7 +1559,7 @@ let BrowserXhr = /** @class */ (() => {
  * @publicApi
  */
 let HttpXhrBackend = /** @class */ (() => {
-    let HttpXhrBackend = class HttpXhrBackend {
+    class HttpXhrBackend {
         constructor(xhrFactory) {
             this.xhrFactory = xhrFactory;
         }
@@ -1789,11 +1798,14 @@ let HttpXhrBackend = /** @class */ (() => {
                 };
             });
         }
-    };
-    HttpXhrBackend = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [XhrFactory])
-    ], HttpXhrBackend);
+    }
+    HttpXhrBackend.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXhrBackend.ctorParameters = () => [
+        { type: XhrFactory }
+    ];
     return HttpXhrBackend;
 })();
 
@@ -1817,7 +1829,7 @@ class HttpXsrfTokenExtractor {
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
 let HttpXsrfCookieExtractor = /** @class */ (() => {
-    let HttpXsrfCookieExtractor = class HttpXsrfCookieExtractor {
+    class HttpXsrfCookieExtractor {
         constructor(doc, platform, cookieName) {
             this.doc = doc;
             this.platform = platform;
@@ -1841,20 +1853,23 @@ let HttpXsrfCookieExtractor = /** @class */ (() => {
             }
             return this.lastToken;
         }
-    };
-    HttpXsrfCookieExtractor = __decorate([
-        Injectable(),
-        __param(0, Inject(DOCUMENT)), __param(1, Inject(PLATFORM_ID)),
-        __param(2, Inject(XSRF_COOKIE_NAME)),
-        __metadata("design:paramtypes", [Object, String, String])
-    ], HttpXsrfCookieExtractor);
+    }
+    HttpXsrfCookieExtractor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXsrfCookieExtractor.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+        { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+        { type: String, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] }] }
+    ];
     return HttpXsrfCookieExtractor;
 })();
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
 let HttpXsrfInterceptor = /** @class */ (() => {
-    let HttpXsrfInterceptor = class HttpXsrfInterceptor {
+    class HttpXsrfInterceptor {
         constructor(tokenService, headerName) {
             this.tokenService = tokenService;
             this.headerName = headerName;
@@ -1876,12 +1891,15 @@ let HttpXsrfInterceptor = /** @class */ (() => {
             }
             return next.handle(req);
         }
-    };
-    HttpXsrfInterceptor = __decorate([
-        Injectable(),
-        __param(1, Inject(XSRF_HEADER_NAME)),
-        __metadata("design:paramtypes", [HttpXsrfTokenExtractor, String])
-    ], HttpXsrfInterceptor);
+    }
+    HttpXsrfInterceptor.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpXsrfInterceptor.ctorParameters = () => [
+        { type: HttpXsrfTokenExtractor },
+        { type: String, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] }] }
+    ];
     return HttpXsrfInterceptor;
 })();
 
@@ -1902,7 +1920,7 @@ let HttpXsrfInterceptor = /** @class */ (() => {
  * @see `HttpInterceptor`
  */
 let HttpInterceptingHandler = /** @class */ (() => {
-    let HttpInterceptingHandler = class HttpInterceptingHandler {
+    class HttpInterceptingHandler {
         constructor(backend, injector) {
             this.backend = backend;
             this.injector = injector;
@@ -1915,11 +1933,15 @@ let HttpInterceptingHandler = /** @class */ (() => {
             }
             return this.chain.handle(req);
         }
-    };
-    HttpInterceptingHandler = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [HttpBackend, Injector])
-    ], HttpInterceptingHandler);
+    }
+    HttpInterceptingHandler.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HttpInterceptingHandler.ctorParameters = () => [
+        { type: HttpBackend },
+        { type: Injector }
+    ];
     return HttpInterceptingHandler;
 })();
 /**
@@ -1963,14 +1985,13 @@ function jsonpCallbackContext() {
  * @publicApi
  */
 let HttpClientXsrfModule = /** @class */ (() => {
-    var HttpClientXsrfModule_1;
-    let HttpClientXsrfModule = HttpClientXsrfModule_1 = class HttpClientXsrfModule {
+    class HttpClientXsrfModule {
         /**
          * Disable the default XSRF protection.
          */
         static disable() {
             return {
-                ngModule: HttpClientXsrfModule_1,
+                ngModule: HttpClientXsrfModule,
                 providers: [
                     { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
                 ],
@@ -1986,25 +2007,25 @@ let HttpClientXsrfModule = /** @class */ (() => {
          */
         static withOptions(options = {}) {
             return {
-                ngModule: HttpClientXsrfModule_1,
+                ngModule: HttpClientXsrfModule,
                 providers: [
                     options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
                     options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
                 ],
             };
         }
-    };
-    HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
-        NgModule({
-            providers: [
-                HttpXsrfInterceptor,
-                { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
-                { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
-                { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
-                { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-            ],
-        })
-    ], HttpClientXsrfModule);
+    }
+    HttpClientXsrfModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                },] }
+    ];
     return HttpClientXsrfModule;
 })();
 /**
@@ -2017,33 +2038,33 @@ let HttpClientXsrfModule = /** @class */ (() => {
  * @publicApi
  */
 let HttpClientModule = /** @class */ (() => {
-    let HttpClientModule = class HttpClientModule {
-    };
-    HttpClientModule = __decorate([
-        NgModule({
-            /**
-             * Optional configuration for XSRF protection.
-             */
-            imports: [
-                HttpClientXsrfModule.withOptions({
-                    cookieName: 'XSRF-TOKEN',
-                    headerName: 'X-XSRF-TOKEN',
-                }),
-            ],
-            /**
-             * Configures the [dependency injector](guide/glossary#injector) where it is imported
-             * with supporting services for HTTP communications.
-             */
-            providers: [
-                HttpClient,
-                { provide: HttpHandler, useClass: HttpInterceptingHandler },
-                HttpXhrBackend,
-                { provide: HttpBackend, useExisting: HttpXhrBackend },
-                BrowserXhr,
-                { provide: XhrFactory, useExisting: BrowserXhr },
-            ],
-        })
-    ], HttpClientModule);
+    class HttpClientModule {
+    }
+    HttpClientModule.decorators = [
+        { type: NgModule, args: [{
+                    /**
+                     * Optional configuration for XSRF protection.
+                     */
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    /**
+                     * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                     * with supporting services for HTTP communications.
+                     */
+                    providers: [
+                        HttpClient,
+                        { provide: HttpHandler, useClass: HttpInterceptingHandler },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                        BrowserXhr,
+                        { provide: XhrFactory, useExisting: BrowserXhr },
+                    ],
+                },] }
+    ];
     return HttpClientModule;
 })();
 /**
@@ -2058,17 +2079,17 @@ let HttpClientModule = /** @class */ (() => {
  * @publicApi
  */
 let HttpClientJsonpModule = /** @class */ (() => {
-    let HttpClientJsonpModule = class HttpClientJsonpModule {
-    };
-    HttpClientJsonpModule = __decorate([
-        NgModule({
-            providers: [
-                JsonpClientBackend,
-                { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
-                { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-            ],
-        })
-    ], HttpClientJsonpModule);
+    class HttpClientJsonpModule {
+    }
+    HttpClientJsonpModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        JsonpClientBackend,
+                        { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                        { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                    ],
+                },] }
+    ];
     return HttpClientJsonpModule;
 })();
 
