@@ -1,10 +1,9 @@
 /**
- * @license Angular v10.0.0-rc.0+34.sha-bd7393f
+ * @license Angular v10.0.0-rc.0+35.sha-4d0e175
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __decorate } from 'tslib';
 import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -220,7 +219,7 @@ function _maybeConvertBody(responseType, body) {
  *
  */
 let HttpClientTestingBackend = /** @class */ (() => {
-    let HttpClientTestingBackend = class HttpClientTestingBackend {
+    class HttpClientTestingBackend {
         constructor() {
             /**
              * List of pending requests which have not yet been expected.
@@ -344,10 +343,10 @@ let HttpClientTestingBackend = /** @class */ (() => {
                 return `Match by function: ${matcher.name}`;
             }
         }
-    };
-    HttpClientTestingBackend = __decorate([
-        Injectable()
-    ], HttpClientTestingBackend);
+    }
+    HttpClientTestingBackend.decorators = [
+        { type: Injectable }
+    ];
     return HttpClientTestingBackend;
 })();
 
@@ -366,20 +365,20 @@ let HttpClientTestingBackend = /** @class */ (() => {
  * @publicApi
  */
 let HttpClientTestingModule = /** @class */ (() => {
-    let HttpClientTestingModule = class HttpClientTestingModule {
-    };
-    HttpClientTestingModule = __decorate([
-        NgModule({
-            imports: [
-                HttpClientModule,
-            ],
-            providers: [
-                HttpClientTestingBackend,
-                { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-                { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-            ],
-        })
-    ], HttpClientTestingModule);
+    class HttpClientTestingModule {
+    }
+    HttpClientTestingModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        HttpClientModule,
+                    ],
+                    providers: [
+                        HttpClientTestingBackend,
+                        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                    ],
+                },] }
+    ];
     return HttpClientTestingModule;
 })();
 

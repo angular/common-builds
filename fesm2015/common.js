@@ -1,11 +1,10 @@
 /**
- * @license Angular v10.0.0-rc.0+34.sha-bd7393f
+ * @license Angular v10.0.0-rc.0+35.sha-4d0e175
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { __decorate, __param, __metadata } from 'tslib';
-import { InjectionToken, ɵɵdefineInjectable, Injectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Input, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, NgModuleRef, ComponentFactoryResolver, Type, Injector, NgModuleFactory, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, Injectable, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -54,6 +53,13 @@ class DomAdapter {
 const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
  *
@@ -76,16 +82,16 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * @publicApi
  */
 let PlatformLocation = /** @class */ (() => {
-    let PlatformLocation = class PlatformLocation {
-    };
+    class PlatformLocation {
+    }
+    PlatformLocation.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: useBrowserPlatformLocation
+                },] }
+    ];
     PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
-    PlatformLocation = __decorate([
-        Injectable({
-            providedIn: 'platform',
-            // See #23917
-            useFactory: useBrowserPlatformLocation
-        })
-    ], PlatformLocation);
     return PlatformLocation;
 })();
 function useBrowserPlatformLocation() {
@@ -104,7 +110,7 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * {@link Location}.
  */
 let BrowserPlatformLocation = /** @class */ (() => {
-    let BrowserPlatformLocation = class BrowserPlatformLocation extends PlatformLocation {
+    class BrowserPlatformLocation extends PlatformLocation {
         constructor(_doc) {
             super();
             this._doc = _doc;
@@ -174,17 +180,19 @@ let BrowserPlatformLocation = /** @class */ (() => {
         getState() {
             return this._history.state;
         }
-    };
+    }
+    BrowserPlatformLocation.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: createBrowserPlatformLocation,
+                },] }
+    ];
+    /** @nocollapse */
+    BrowserPlatformLocation.ctorParameters = () => [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ];
     BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
-    BrowserPlatformLocation = __decorate([
-        Injectable({
-            providedIn: 'platform',
-            // See #23917
-            useFactory: createBrowserPlatformLocation,
-        }),
-        __param(0, Inject(DOCUMENT)),
-        __metadata("design:paramtypes", [Object])
-    ], BrowserPlatformLocation);
     return BrowserPlatformLocation;
 })();
 function supportsState() {
@@ -267,6 +275,13 @@ function normalizeQueryParams(params) {
 }
 
 /**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Enables the `Location` service to read route state from the browser's URL.
  * Angular provides two strategies:
  * `HashLocationStrategy` and `PathLocationStrategy`.
@@ -284,12 +299,12 @@ function normalizeQueryParams(params) {
  * @publicApi
  */
 let LocationStrategy = /** @class */ (() => {
-    let LocationStrategy = class LocationStrategy {
-    };
+    class LocationStrategy {
+    }
+    LocationStrategy.decorators = [
+        { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
+    ];
     LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
-    LocationStrategy = __decorate([
-        Injectable({ providedIn: 'root', useFactory: provideLocationStrategy })
-    ], LocationStrategy);
     return LocationStrategy;
 })();
 function provideLocationStrategy(platformLocation) {
@@ -349,7 +364,7 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  * @publicApi
  */
 let PathLocationStrategy = /** @class */ (() => {
-    let PathLocationStrategy = class PathLocationStrategy extends LocationStrategy {
+    class PathLocationStrategy extends LocationStrategy {
         constructor(_platformLocation, href) {
             super();
             this._platformLocation = _platformLocation;
@@ -390,12 +405,15 @@ let PathLocationStrategy = /** @class */ (() => {
         back() {
             this._platformLocation.back();
         }
-    };
-    PathLocationStrategy = __decorate([
-        Injectable(),
-        __param(1, Optional()), __param(1, Inject(APP_BASE_HREF)),
-        __metadata("design:paramtypes", [PlatformLocation, String])
-    ], PathLocationStrategy);
+    }
+    PathLocationStrategy.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    PathLocationStrategy.ctorParameters = () => [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
+    ];
     return PathLocationStrategy;
 })();
 
@@ -425,7 +443,7 @@ let PathLocationStrategy = /** @class */ (() => {
  * @publicApi
  */
 let HashLocationStrategy = /** @class */ (() => {
-    let HashLocationStrategy = class HashLocationStrategy extends LocationStrategy {
+    class HashLocationStrategy extends LocationStrategy {
         constructor(_platformLocation, _baseHref) {
             super();
             this._platformLocation = _platformLocation;
@@ -473,15 +491,25 @@ let HashLocationStrategy = /** @class */ (() => {
         back() {
             this._platformLocation.back();
         }
-    };
-    HashLocationStrategy = __decorate([
-        Injectable(),
-        __param(1, Optional()), __param(1, Inject(APP_BASE_HREF)),
-        __metadata("design:paramtypes", [PlatformLocation, String])
-    ], HashLocationStrategy);
+    }
+    HashLocationStrategy.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    HashLocationStrategy.ctorParameters = () => [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
+    ];
     return HashLocationStrategy;
 })();
 
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * @description
  *
@@ -511,8 +539,7 @@ let HashLocationStrategy = /** @class */ (() => {
  * @publicApi
  */
 let Location = /** @class */ (() => {
-    var Location_1;
-    let Location = Location_1 = class Location {
+    class Location {
         constructor(platformStrategy, platformLocation) {
             /** @internal */
             this._subject = new EventEmitter();
@@ -570,7 +597,7 @@ let Location = /** @class */ (() => {
          * @returns The normalized URL string.
          */
         normalize(url) {
-            return Location_1.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
         }
         /**
          * Normalizes an external URL path.
@@ -653,7 +680,7 @@ let Location = /** @class */ (() => {
         subscribe(onNext, onThrow, onReturn) {
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         }
-    };
+    }
     /**
      * Normalizes URL parameters by prepending with `?` if needed.
      *
@@ -682,15 +709,19 @@ let Location = /** @class */ (() => {
      * @returns The URL string, modified if needed.
      */
     Location.stripTrailingSlash = stripTrailingSlash;
+    Location.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                    // See #23917
+                    useFactory: createLocation,
+                },] }
+    ];
+    /** @nocollapse */
+    Location.ctorParameters = () => [
+        { type: LocationStrategy },
+        { type: PlatformLocation }
+    ];
     Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
-    Location = Location_1 = __decorate([
-        Injectable({
-            providedIn: 'root',
-            // See #23917
-            useFactory: createLocation,
-        }),
-        __metadata("design:paramtypes", [LocationStrategy, PlatformLocation])
-    ], Location);
     return Location;
 })();
 function createLocation() {
@@ -2586,7 +2617,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  * @publicApi
  */
 let NgLocaleLocalization = /** @class */ (() => {
-    let NgLocaleLocalization = class NgLocaleLocalization extends NgLocalization {
+    class NgLocaleLocalization extends NgLocalization {
         constructor(locale) {
             super();
             this.locale = locale;
@@ -2608,12 +2639,14 @@ let NgLocaleLocalization = /** @class */ (() => {
                     return 'other';
             }
         }
-    };
-    NgLocaleLocalization = __decorate([
-        Injectable(),
-        __param(0, Inject(LOCALE_ID)),
-        __metadata("design:paramtypes", [String])
-    ], NgLocaleLocalization);
+    }
+    NgLocaleLocalization.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    NgLocaleLocalization.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
     return NgLocaleLocalization;
 })();
 
@@ -2656,6 +2689,13 @@ function parseCookieValue(cookieStr, name) {
 }
 
 /**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @ngModule CommonModule
  *
  * @usageNotes
@@ -2684,7 +2724,7 @@ function parseCookieValue(cookieStr, name) {
  * @publicApi
  */
 let NgClass = /** @class */ (() => {
-    let NgClass = class NgClass {
+    class NgClass {
         constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
             this._iterableDiffers = _iterableDiffers;
             this._keyValueDiffers = _keyValueDiffers;
@@ -2795,22 +2835,21 @@ let NgClass = /** @class */ (() => {
                 });
             }
         }
+    }
+    NgClass.decorators = [
+        { type: Directive, args: [{ selector: '[ngClass]' },] }
+    ];
+    /** @nocollapse */
+    NgClass.ctorParameters = () => [
+        { type: IterableDiffers },
+        { type: KeyValueDiffers },
+        { type: ElementRef },
+        { type: Renderer2 }
+    ];
+    NgClass.propDecorators = {
+        klass: [{ type: Input, args: ['class',] }],
+        ngClass: [{ type: Input, args: ['ngClass',] }]
     };
-    __decorate([
-        Input('class'),
-        __metadata("design:type", String),
-        __metadata("design:paramtypes", [String])
-    ], NgClass.prototype, "klass", null);
-    __decorate([
-        Input('ngClass'),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgClass.prototype, "ngClass", null);
-    NgClass = __decorate([
-        Directive({ selector: '[ngClass]' }),
-        __metadata("design:paramtypes", [IterableDiffers, KeyValueDiffers,
-            ElementRef, Renderer2])
-    ], NgClass);
     return NgClass;
 })();
 
@@ -2877,7 +2916,7 @@ let NgClass = /** @class */ (() => {
  * @ngModule CommonModule
  */
 let NgComponentOutlet = /** @class */ (() => {
-    let NgComponentOutlet = class NgComponentOutlet {
+    class NgComponentOutlet {
         constructor(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
             this._componentRef = null;
@@ -2909,27 +2948,20 @@ let NgComponentOutlet = /** @class */ (() => {
             if (this._moduleRef)
                 this._moduleRef.destroy();
         }
+    }
+    NgComponentOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] }
+    ];
+    /** @nocollapse */
+    NgComponentOutlet.ctorParameters = () => [
+        { type: ViewContainerRef }
+    ];
+    NgComponentOutlet.propDecorators = {
+        ngComponentOutlet: [{ type: Input }],
+        ngComponentOutletInjector: [{ type: Input }],
+        ngComponentOutletContent: [{ type: Input }],
+        ngComponentOutletNgModuleFactory: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Type)
-    ], NgComponentOutlet.prototype, "ngComponentOutlet", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Injector)
-    ], NgComponentOutlet.prototype, "ngComponentOutletInjector", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Array)
-    ], NgComponentOutlet.prototype, "ngComponentOutletContent", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", NgModuleFactory)
-    ], NgComponentOutlet.prototype, "ngComponentOutletNgModuleFactory", void 0);
-    NgComponentOutlet = __decorate([
-        Directive({ selector: '[ngComponentOutlet]' }),
-        __metadata("design:paramtypes", [ViewContainerRef])
-    ], NgComponentOutlet);
     return NgComponentOutlet;
 })();
 
@@ -3062,7 +3094,7 @@ class NgForOfContext {
  * @publicApi
  */
 let NgForOf = /** @class */ (() => {
-    let NgForOf = class NgForOf {
+    class NgForOf {
         constructor(_viewContainer, _template, _differs) {
             this._viewContainer = _viewContainer;
             this._template = _template;
@@ -3191,27 +3223,21 @@ let NgForOf = /** @class */ (() => {
         static ngTemplateContextGuard(dir, ctx) {
             return true;
         }
+    }
+    NgForOf.decorators = [
+        { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
+    ];
+    /** @nocollapse */
+    NgForOf.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: IterableDiffers }
+    ];
+    NgForOf.propDecorators = {
+        ngForOf: [{ type: Input }],
+        ngForTrackBy: [{ type: Input }],
+        ngForTemplate: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgForOf.prototype, "ngForOf", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Function])
-    ], NgForOf.prototype, "ngForTrackBy", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", TemplateRef),
-        __metadata("design:paramtypes", [TemplateRef])
-    ], NgForOf.prototype, "ngForTemplate", null);
-    NgForOf = __decorate([
-        Directive({ selector: '[ngFor][ngForOf]' }),
-        __metadata("design:paramtypes", [ViewContainerRef,
-            TemplateRef, IterableDiffers])
-    ], NgForOf);
     return NgForOf;
 })();
 class RecordViewTuple {
@@ -3371,7 +3397,7 @@ function getTypeName(type) {
  * @publicApi
  */
 let NgIf = /** @class */ (() => {
-    let NgIf = class NgIf {
+    class NgIf {
         constructor(_viewContainer, templateRef) {
             this._viewContainer = _viewContainer;
             this._context = new NgIfContext();
@@ -3437,26 +3463,20 @@ let NgIf = /** @class */ (() => {
         static ngTemplateContextGuard(dir, ctx) {
             return true;
         }
+    }
+    NgIf.decorators = [
+        { type: Directive, args: [{ selector: '[ngIf]' },] }
+    ];
+    /** @nocollapse */
+    NgIf.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef }
+    ];
+    NgIf.propDecorators = {
+        ngIf: [{ type: Input }],
+        ngIfThen: [{ type: Input }],
+        ngIfElse: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgIf.prototype, "ngIf", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgIf.prototype, "ngIfThen", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgIf.prototype, "ngIfElse", null);
-    NgIf = __decorate([
-        Directive({ selector: '[ngIf]' }),
-        __metadata("design:paramtypes", [ViewContainerRef, TemplateRef])
-    ], NgIf);
     return NgIf;
 })();
 /**
@@ -3572,7 +3592,7 @@ class SwitchView {
  *
  */
 let NgSwitch = /** @class */ (() => {
-    let NgSwitch = class NgSwitch {
+    class NgSwitch {
         constructor() {
             this._defaultUsed = false;
             this._caseCount = 0;
@@ -3617,15 +3637,13 @@ let NgSwitch = /** @class */ (() => {
                 }
             }
         }
+    }
+    NgSwitch.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitch]' },] }
+    ];
+    NgSwitch.propDecorators = {
+        ngSwitch: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgSwitch.prototype, "ngSwitch", null);
-    NgSwitch = __decorate([
-        Directive({ selector: '[ngSwitch]' })
-    ], NgSwitch);
     return NgSwitch;
 })();
 /**
@@ -3662,7 +3680,7 @@ let NgSwitch = /** @class */ (() => {
  *
  */
 let NgSwitchCase = /** @class */ (() => {
-    let NgSwitchCase = class NgSwitchCase {
+    class NgSwitchCase {
         constructor(viewContainer, templateRef, ngSwitch) {
             this.ngSwitch = ngSwitch;
             ngSwitch._addCase();
@@ -3674,17 +3692,19 @@ let NgSwitchCase = /** @class */ (() => {
         ngDoCheck() {
             this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
         }
+    }
+    NgSwitchCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchCase]' },] }
+    ];
+    /** @nocollapse */
+    NgSwitchCase.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: NgSwitch, decorators: [{ type: Host }] }
+    ];
+    NgSwitchCase.propDecorators = {
+        ngSwitchCase: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], NgSwitchCase.prototype, "ngSwitchCase", void 0);
-    NgSwitchCase = __decorate([
-        Directive({ selector: '[ngSwitchCase]' }),
-        __param(2, Host()),
-        __metadata("design:paramtypes", [ViewContainerRef, TemplateRef,
-            NgSwitch])
-    ], NgSwitchCase);
     return NgSwitchCase;
 })();
 /**
@@ -3702,17 +3722,20 @@ let NgSwitchCase = /** @class */ (() => {
  *
  */
 let NgSwitchDefault = /** @class */ (() => {
-    let NgSwitchDefault = class NgSwitchDefault {
+    class NgSwitchDefault {
         constructor(viewContainer, templateRef, ngSwitch) {
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
-    };
-    NgSwitchDefault = __decorate([
-        Directive({ selector: '[ngSwitchDefault]' }),
-        __param(2, Host()),
-        __metadata("design:paramtypes", [ViewContainerRef, TemplateRef,
-            NgSwitch])
-    ], NgSwitchDefault);
+    }
+    NgSwitchDefault.decorators = [
+        { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] }
+    ];
+    /** @nocollapse */
+    NgSwitchDefault.ctorParameters = () => [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: NgSwitch, decorators: [{ type: Host }] }
+    ];
     return NgSwitchDefault;
 })();
 
@@ -3755,7 +3778,7 @@ let NgSwitchDefault = /** @class */ (() => {
  * @publicApi
  */
 let NgPlural = /** @class */ (() => {
-    let NgPlural = class NgPlural {
+    class NgPlural {
         constructor(_localization) {
             this._localization = _localization;
             this._caseViews = {};
@@ -3783,16 +3806,17 @@ let NgPlural = /** @class */ (() => {
                 this._activeView.create();
             }
         }
+    }
+    NgPlural.decorators = [
+        { type: Directive, args: [{ selector: '[ngPlural]' },] }
+    ];
+    /** @nocollapse */
+    NgPlural.ctorParameters = () => [
+        { type: NgLocalization }
+    ];
+    NgPlural.propDecorators = {
+        ngPlural: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Number),
-        __metadata("design:paramtypes", [Number])
-    ], NgPlural.prototype, "ngPlural", null);
-    NgPlural = __decorate([
-        Directive({ selector: '[ngPlural]' }),
-        __metadata("design:paramtypes", [NgLocalization])
-    ], NgPlural);
     return NgPlural;
 })();
 /**
@@ -3816,23 +3840,33 @@ let NgPlural = /** @class */ (() => {
  * @publicApi
  */
 let NgPluralCase = /** @class */ (() => {
-    let NgPluralCase = class NgPluralCase {
+    class NgPluralCase {
         constructor(value, template, viewContainer, ngPlural) {
             this.value = value;
             const isANumber = !isNaN(Number(value));
             ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
         }
-    };
-    NgPluralCase = __decorate([
-        Directive({ selector: '[ngPluralCase]' }),
-        __param(0, Attribute('ngPluralCase')),
-        __param(3, Host()),
-        __metadata("design:paramtypes", [String, TemplateRef,
-            ViewContainerRef, NgPlural])
-    ], NgPluralCase);
+    }
+    NgPluralCase.decorators = [
+        { type: Directive, args: [{ selector: '[ngPluralCase]' },] }
+    ];
+    /** @nocollapse */
+    NgPluralCase.ctorParameters = () => [
+        { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
+        { type: TemplateRef },
+        { type: ViewContainerRef },
+        { type: NgPlural, decorators: [{ type: Host }] }
+    ];
     return NgPluralCase;
 })();
 
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 /**
  * @ngModule CommonModule
  *
@@ -3870,7 +3904,7 @@ let NgPluralCase = /** @class */ (() => {
  * @publicApi
  */
 let NgStyle = /** @class */ (() => {
-    let NgStyle = class NgStyle {
+    class NgStyle {
         constructor(_ngEl, _differs, _renderer) {
             this._ngEl = _ngEl;
             this._differs = _differs;
@@ -3907,16 +3941,19 @@ let NgStyle = /** @class */ (() => {
             changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
             changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
         }
+    }
+    NgStyle.decorators = [
+        { type: Directive, args: [{ selector: '[ngStyle]' },] }
+    ];
+    /** @nocollapse */
+    NgStyle.ctorParameters = () => [
+        { type: ElementRef },
+        { type: KeyValueDiffers },
+        { type: Renderer2 }
+    ];
+    NgStyle.propDecorators = {
+        ngStyle: [{ type: Input, args: ['ngStyle',] }]
     };
-    __decorate([
-        Input('ngStyle'),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], NgStyle.prototype, "ngStyle", null);
-    NgStyle = __decorate([
-        Directive({ selector: '[ngStyle]' }),
-        __metadata("design:paramtypes", [ElementRef, KeyValueDiffers, Renderer2])
-    ], NgStyle);
     return NgStyle;
 })();
 
@@ -3952,7 +3989,7 @@ let NgStyle = /** @class */ (() => {
  * @publicApi
  */
 let NgTemplateOutlet = /** @class */ (() => {
-    let NgTemplateOutlet = class NgTemplateOutlet {
+    class NgTemplateOutlet {
         constructor(_viewContainerRef) {
             this._viewContainerRef = _viewContainerRef;
             this._viewRef = null;
@@ -4015,19 +4052,18 @@ let NgTemplateOutlet = /** @class */ (() => {
                 this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
             }
         }
+    }
+    NgTemplateOutlet.decorators = [
+        { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
+    ];
+    /** @nocollapse */
+    NgTemplateOutlet.ctorParameters = () => [
+        { type: ViewContainerRef }
+    ];
+    NgTemplateOutlet.propDecorators = {
+        ngTemplateOutletContext: [{ type: Input }],
+        ngTemplateOutlet: [{ type: Input }]
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], NgTemplateOutlet.prototype, "ngTemplateOutletContext", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], NgTemplateOutlet.prototype, "ngTemplateOutlet", void 0);
-    NgTemplateOutlet = __decorate([
-        Directive({ selector: '[ngTemplateOutlet]' }),
-        __metadata("design:paramtypes", [ViewContainerRef])
-    ], NgTemplateOutlet);
     return NgTemplateOutlet;
 })();
 
@@ -4129,8 +4165,7 @@ const _observableStrategy = new ObservableStrategy();
  * @publicApi
  */
 let AsyncPipe = /** @class */ (() => {
-    var AsyncPipe_1;
-    let AsyncPipe = AsyncPipe_1 = class AsyncPipe {
+    class AsyncPipe {
         constructor(_ref) {
             this._ref = _ref;
             this._latestValue = null;
@@ -4168,7 +4203,7 @@ let AsyncPipe = /** @class */ (() => {
             if (ɵisObservable(obj)) {
                 return _observableStrategy;
             }
-            throw invalidPipeArgumentError(AsyncPipe_1, obj);
+            throw invalidPipeArgumentError(AsyncPipe, obj);
         }
         _dispose() {
             this._strategy.dispose(this._subscription);
@@ -4182,11 +4217,14 @@ let AsyncPipe = /** @class */ (() => {
                 this._ref.markForCheck();
             }
         }
-    };
-    AsyncPipe = AsyncPipe_1 = __decorate([
-        Pipe({ name: 'async', pure: false }),
-        __metadata("design:paramtypes", [ChangeDetectorRef])
-    ], AsyncPipe);
+    }
+    AsyncPipe.decorators = [
+        { type: Pipe, args: [{ name: 'async', pure: false },] }
+    ];
+    /** @nocollapse */
+    AsyncPipe.ctorParameters = () => [
+        { type: ChangeDetectorRef }
+    ];
     return AsyncPipe;
 })();
 
@@ -4213,8 +4251,7 @@ let AsyncPipe = /** @class */ (() => {
  * @publicApi
  */
 let LowerCasePipe = /** @class */ (() => {
-    var LowerCasePipe_1;
-    let LowerCasePipe = LowerCasePipe_1 = class LowerCasePipe {
+    class LowerCasePipe {
         /**
          * @param value The string to transform to lower case.
          */
@@ -4222,14 +4259,14 @@ let LowerCasePipe = /** @class */ (() => {
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(LowerCasePipe_1, value);
+                throw invalidPipeArgumentError(LowerCasePipe, value);
             }
             return value.toLowerCase();
         }
-    };
-    LowerCasePipe = LowerCasePipe_1 = __decorate([
-        Pipe({ name: 'lowercase' })
-    ], LowerCasePipe);
+    }
+    LowerCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'lowercase' },] }
+    ];
     return LowerCasePipe;
 })();
 //
@@ -4259,8 +4296,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  * @publicApi
  */
 let TitleCasePipe = /** @class */ (() => {
-    var TitleCasePipe_1;
-    let TitleCasePipe = TitleCasePipe_1 = class TitleCasePipe {
+    class TitleCasePipe {
         /**
          * @param value The string to transform to title case.
          */
@@ -4268,14 +4304,14 @@ let TitleCasePipe = /** @class */ (() => {
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(TitleCasePipe_1, value);
+                throw invalidPipeArgumentError(TitleCasePipe, value);
             }
             return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
         }
-    };
-    TitleCasePipe = TitleCasePipe_1 = __decorate([
-        Pipe({ name: 'titlecase' })
-    ], TitleCasePipe);
+    }
+    TitleCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'titlecase' },] }
+    ];
     return TitleCasePipe;
 })();
 /**
@@ -4287,8 +4323,7 @@ let TitleCasePipe = /** @class */ (() => {
  * @publicApi
  */
 let UpperCasePipe = /** @class */ (() => {
-    var UpperCasePipe_1;
-    let UpperCasePipe = UpperCasePipe_1 = class UpperCasePipe {
+    class UpperCasePipe {
         /**
          * @param value The string to transform to upper case.
          */
@@ -4296,14 +4331,14 @@ let UpperCasePipe = /** @class */ (() => {
             if (!value)
                 return value;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(UpperCasePipe_1, value);
+                throw invalidPipeArgumentError(UpperCasePipe, value);
             }
             return value.toUpperCase();
         }
-    };
-    UpperCasePipe = UpperCasePipe_1 = __decorate([
-        Pipe({ name: 'uppercase' })
-    ], UpperCasePipe);
+    }
+    UpperCasePipe.decorators = [
+        { type: Pipe, args: [{ name: 'uppercase' },] }
+    ];
     return UpperCasePipe;
 })();
 
@@ -4455,8 +4490,7 @@ let UpperCasePipe = /** @class */ (() => {
  */
 // clang-format on
 let DatePipe = /** @class */ (() => {
-    var DatePipe_1;
-    let DatePipe = DatePipe_1 = class DatePipe {
+    class DatePipe {
         constructor(locale) {
             this.locale = locale;
         }
@@ -4480,15 +4514,17 @@ let DatePipe = /** @class */ (() => {
                 return formatDate(value, format, locale || this.locale, timezone);
             }
             catch (error) {
-                throw invalidPipeArgumentError(DatePipe_1, error.message);
+                throw invalidPipeArgumentError(DatePipe, error.message);
             }
         }
-    };
-    DatePipe = DatePipe_1 = __decorate([
-        Pipe({ name: 'date', pure: true }),
-        __param(0, Inject(LOCALE_ID)),
-        __metadata("design:paramtypes", [String])
-    ], DatePipe);
+    }
+    DatePipe.decorators = [
+        { type: Pipe, args: [{ name: 'date', pure: true },] }
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
     return DatePipe;
 })();
 
@@ -4515,8 +4551,7 @@ const _INTERPOLATION_REGEXP = /#/g;
  * @publicApi
  */
 let I18nPluralPipe = /** @class */ (() => {
-    var I18nPluralPipe_1;
-    let I18nPluralPipe = I18nPluralPipe_1 = class I18nPluralPipe {
+    class I18nPluralPipe {
         constructor(_localization) {
             this._localization = _localization;
         }
@@ -4531,16 +4566,19 @@ let I18nPluralPipe = /** @class */ (() => {
             if (value == null)
                 return '';
             if (typeof pluralMap !== 'object' || pluralMap === null) {
-                throw invalidPipeArgumentError(I18nPluralPipe_1, pluralMap);
+                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
             return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
         }
-    };
-    I18nPluralPipe = I18nPluralPipe_1 = __decorate([
-        Pipe({ name: 'i18nPlural', pure: true }),
-        __metadata("design:paramtypes", [NgLocalization])
-    ], I18nPluralPipe);
+    }
+    I18nPluralPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
+    ];
+    /** @nocollapse */
+    I18nPluralPipe.ctorParameters = () => [
+        { type: NgLocalization }
+    ];
     return I18nPluralPipe;
 })();
 
@@ -4569,8 +4607,7 @@ let I18nPluralPipe = /** @class */ (() => {
  * @publicApi
  */
 let I18nSelectPipe = /** @class */ (() => {
-    var I18nSelectPipe_1;
-    let I18nSelectPipe = I18nSelectPipe_1 = class I18nSelectPipe {
+    class I18nSelectPipe {
         /**
          * @param value a string to be internationalized.
          * @param mapping an object that indicates the text that should be displayed
@@ -4580,7 +4617,7 @@ let I18nSelectPipe = /** @class */ (() => {
             if (value == null)
                 return '';
             if (typeof mapping !== 'object' || typeof value !== 'string') {
-                throw invalidPipeArgumentError(I18nSelectPipe_1, mapping);
+                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
             }
             if (mapping.hasOwnProperty(value)) {
                 return mapping[value];
@@ -4590,10 +4627,10 @@ let I18nSelectPipe = /** @class */ (() => {
             }
             return '';
         }
-    };
-    I18nSelectPipe = I18nSelectPipe_1 = __decorate([
-        Pipe({ name: 'i18nSelect', pure: true })
-    ], I18nSelectPipe);
+    }
+    I18nSelectPipe.decorators = [
+        { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] }
+    ];
     return I18nSelectPipe;
 })();
 
@@ -4620,17 +4657,17 @@ let I18nSelectPipe = /** @class */ (() => {
  * @publicApi
  */
 let JsonPipe = /** @class */ (() => {
-    let JsonPipe = class JsonPipe {
+    class JsonPipe {
         /**
          * @param value A value of any type to convert into a JSON-format string.
          */
         transform(value) {
             return JSON.stringify(value, null, 2);
         }
-    };
-    JsonPipe = __decorate([
-        Pipe({ name: 'json', pure: false })
-    ], JsonPipe);
+    }
+    JsonPipe.decorators = [
+        { type: Pipe, args: [{ name: 'json', pure: false },] }
+    ];
     return JsonPipe;
 })();
 
@@ -4665,7 +4702,7 @@ function makeKeyValuePair(key, value) {
  * @publicApi
  */
 let KeyValuePipe = /** @class */ (() => {
-    let KeyValuePipe = class KeyValuePipe {
+    class KeyValuePipe {
         constructor(differs) {
             this.differs = differs;
             this.keyValues = [];
@@ -4688,11 +4725,14 @@ let KeyValuePipe = /** @class */ (() => {
             }
             return this.keyValues;
         }
-    };
-    KeyValuePipe = __decorate([
-        Pipe({ name: 'keyvalue', pure: false }),
-        __metadata("design:paramtypes", [KeyValueDiffers])
-    ], KeyValuePipe);
+    }
+    KeyValuePipe.decorators = [
+        { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
+    ];
+    /** @nocollapse */
+    KeyValuePipe.ctorParameters = () => [
+        { type: KeyValueDiffers }
+    ];
     return KeyValuePipe;
 })();
 function defaultComparator(keyValueA, keyValueB) {
@@ -4769,8 +4809,7 @@ function defaultComparator(keyValueA, keyValueB) {
  * @publicApi
  */
 let DecimalPipe = /** @class */ (() => {
-    var DecimalPipe_1;
-    let DecimalPipe = DecimalPipe_1 = class DecimalPipe {
+    class DecimalPipe {
         constructor(_locale) {
             this._locale = _locale;
         }
@@ -4798,15 +4837,17 @@ let DecimalPipe = /** @class */ (() => {
                 return formatNumber(num, locale, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(DecimalPipe_1, error.message);
+                throw invalidPipeArgumentError(DecimalPipe, error.message);
             }
         }
-    };
-    DecimalPipe = DecimalPipe_1 = __decorate([
-        Pipe({ name: 'number' }),
-        __param(0, Inject(LOCALE_ID)),
-        __metadata("design:paramtypes", [String])
-    ], DecimalPipe);
+    }
+    DecimalPipe.decorators = [
+        { type: Pipe, args: [{ name: 'number' },] }
+    ];
+    /** @nocollapse */
+    DecimalPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
     return DecimalPipe;
 })();
 /**
@@ -4830,8 +4871,7 @@ let DecimalPipe = /** @class */ (() => {
  * @publicApi
  */
 let PercentPipe = /** @class */ (() => {
-    var PercentPipe_1;
-    let PercentPipe = PercentPipe_1 = class PercentPipe {
+    class PercentPipe {
         constructor(_locale) {
             this._locale = _locale;
         }
@@ -4860,15 +4900,17 @@ let PercentPipe = /** @class */ (() => {
                 return formatPercent(num, locale, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(PercentPipe_1, error.message);
+                throw invalidPipeArgumentError(PercentPipe, error.message);
             }
         }
-    };
-    PercentPipe = PercentPipe_1 = __decorate([
-        Pipe({ name: 'percent' }),
-        __param(0, Inject(LOCALE_ID)),
-        __metadata("design:paramtypes", [String])
-    ], PercentPipe);
+    }
+    PercentPipe.decorators = [
+        { type: Pipe, args: [{ name: 'percent' },] }
+    ];
+    /** @nocollapse */
+    PercentPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    ];
     return PercentPipe;
 })();
 /**
@@ -4912,8 +4954,7 @@ let PercentPipe = /** @class */ (() => {
  * @publicApi
  */
 let CurrencyPipe = /** @class */ (() => {
-    var CurrencyPipe_1;
-    let CurrencyPipe = CurrencyPipe_1 = class CurrencyPipe {
+    class CurrencyPipe {
         constructor(_locale, _defaultCurrencyCode = 'USD') {
             this._locale = _locale;
             this._defaultCurrencyCode = _defaultCurrencyCode;
@@ -4975,16 +5016,18 @@ let CurrencyPipe = /** @class */ (() => {
                 return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(CurrencyPipe_1, error.message);
+                throw invalidPipeArgumentError(CurrencyPipe, error.message);
             }
         }
-    };
-    CurrencyPipe = CurrencyPipe_1 = __decorate([
-        Pipe({ name: 'currency' }),
-        __param(0, Inject(LOCALE_ID)),
-        __param(1, Inject(DEFAULT_CURRENCY_CODE)),
-        __metadata("design:paramtypes", [String, String])
-    ], CurrencyPipe);
+    }
+    CurrencyPipe.decorators = [
+        { type: Pipe, args: [{ name: 'currency' },] }
+    ];
+    /** @nocollapse */
+    CurrencyPipe.ctorParameters = () => [
+        { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
+        { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
+    ];
     return CurrencyPipe;
 })();
 function isEmpty(value) {
@@ -5047,23 +5090,22 @@ function strToNumber(value) {
  * @publicApi
  */
 let SlicePipe = /** @class */ (() => {
-    var SlicePipe_1;
-    let SlicePipe = SlicePipe_1 = class SlicePipe {
+    class SlicePipe {
         transform(value, start, end) {
             if (value == null)
                 return value;
             if (!this.supports(value)) {
-                throw invalidPipeArgumentError(SlicePipe_1, value);
+                throw invalidPipeArgumentError(SlicePipe, value);
             }
             return value.slice(start, end);
         }
         supports(obj) {
             return typeof obj === 'string' || Array.isArray(obj);
         }
-    };
-    SlicePipe = SlicePipe_1 = __decorate([
-        Pipe({ name: 'slice', pure: false })
-    ], SlicePipe);
+    }
+    SlicePipe.decorators = [
+        { type: Pipe, args: [{ name: 'slice', pure: false },] }
+    ];
     return SlicePipe;
 })();
 
@@ -5116,17 +5158,17 @@ const COMMON_PIPES = [
  * @publicApi
  */
 let CommonModule = /** @class */ (() => {
-    let CommonModule = class CommonModule {
-    };
-    CommonModule = __decorate([
-        NgModule({
-            declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-            exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-            providers: [
-                { provide: NgLocalization, useClass: NgLocaleLocalization },
-            ],
-        })
-    ], CommonModule);
+    class CommonModule {
+    }
+    CommonModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] }
+    ];
     return CommonModule;
 })();
 
@@ -5180,7 +5222,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.0-rc.0+34.sha-bd7393f');
+const VERSION = new Version('10.0.0-rc.0+35.sha-4d0e175');
 
 /**
  * @license
