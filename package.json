@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "10.0.0-rc.0+35.sha-4d0e175",
+  "version": "10.0.0-rc.0+37.sha-8bb7411",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/core": "10.0.0-rc.0+35.sha-4d0e175",
+    "@angular/core": "10.0.0-rc.0+37.sha-8bb7411",
     "rxjs": "^6.5.3"
   },
   "repository": {
@@ -43,9 +43,6 @@
     "**/global/*.js",
     "**/closure-locale.*"
   ],
-  "publishConfig": {
-    "registry": "https://wombat-dressing-room.appspot.com"
-  },
   "main": "./bundles/common.umd.js",
   "fesm2015": "./fesm2015/common.js",
   "esm2015": "./esm2015/common.js",
