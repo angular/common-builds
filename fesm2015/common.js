@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+74.sha-eb6ba9a
+ * @license Angular v10.0.0-rc.0+75.sha-3569fdf
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -661,9 +661,11 @@ let Location = /** @class */ (() => {
          */
         onUrlChange(fn) {
             this._urlChangeListeners.push(fn);
-            this.subscribe(v => {
-                this._notifyUrlChangeListeners(v.url, v.state);
-            });
+            if (!this._urlChangeSubscription) {
+                this._urlChangeSubscription = this.subscribe(v => {
+                    this._notifyUrlChangeListeners(v.url, v.state);
+                });
+            }
         }
         /** @internal */
         _notifyUrlChangeListeners(url = '', state) {
@@ -5222,7 +5224,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.0-rc.0+74.sha-eb6ba9a');
+const VERSION = new Version('10.0.0-rc.0+75.sha-3569fdf');
 
 /**
  * @license

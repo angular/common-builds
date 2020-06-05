@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+74.sha-eb6ba9a
+ * @license Angular v10.0.0-rc.0+75.sha-3569fdf
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1074,6 +1074,7 @@ export declare class KeyValuePipe implements PipeTransform {
  * @publicApi
  */
 export declare class Location {
+    private _urlChangeSubscription?;
     constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
      * Normalizes the URL path for this location.
