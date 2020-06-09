@@ -38,7 +38,6 @@ export interface PopStateEvent {
  * @publicApi
  */
 export declare class Location {
-    private _urlChangeSubscription?;
     constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
      * Normalizes the URL path for this location.
