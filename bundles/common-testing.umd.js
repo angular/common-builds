@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.3+3.sha-bf2cb6f
+ * @license Angular v10.0.0-rc.3+10.sha-ad6d2b4
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -117,9 +117,11 @@
         SpyLocation.prototype.onUrlChange = function (fn) {
             var _this = this;
             this._urlChangeListeners.push(fn);
-            this.subscribe(function (v) {
-                _this._notifyUrlChangeListeners(v.url, v.state);
-            });
+            if (!this._urlChangeSubscription) {
+                this._urlChangeSubscription = this.subscribe(function (v) {
+                    _this._notifyUrlChangeListeners(v.url, v.state);
+                });
+            }
         };
         /** @internal */
         SpyLocation.prototype._notifyUrlChangeListeners = function (url, state) {
