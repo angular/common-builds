@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+101.sha-55979fe
+ * @license Angular v10.0.0-rc.0+104.sha-7301e70
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -110,9 +110,11 @@ let SpyLocation = /** @class */ (() => {
         }
         onUrlChange(fn) {
             this._urlChangeListeners.push(fn);
-            this.subscribe(v => {
-                this._notifyUrlChangeListeners(v.url, v.state);
-            });
+            if (!this._urlChangeSubscription) {
+                this._urlChangeSubscription = this.subscribe(v => {
+                    this._notifyUrlChangeListeners(v.url, v.state);
+                });
+            }
         }
         /** @internal */
         _notifyUrlChangeListeners(url = '', state) {
