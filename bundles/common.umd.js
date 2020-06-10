@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+113.sha-0a1d078
+ * @license Angular v10.0.0-rc.0+114.sha-401ef71
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -312,6 +312,7 @@
     var PlatformLocation = /** @class */ (function () {
         function PlatformLocation() {
         }
+        PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
         PlatformLocation.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'platform',
@@ -319,7 +320,6 @@
                         useFactory: useBrowserPlatformLocation
                     },] }
         ];
-        PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
         return PlatformLocation;
     }());
     function useBrowserPlatformLocation() {
@@ -437,6 +437,7 @@
         BrowserPlatformLocation.prototype.getState = function () {
             return this._history.state;
         };
+        BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
         BrowserPlatformLocation.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'platform',
@@ -444,11 +445,9 @@
                         useFactory: createBrowserPlatformLocation,
                     },] }
         ];
-        /** @nocollapse */
         BrowserPlatformLocation.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: i0.Inject, args: [DOCUMENT,] }] }
         ]; };
-        BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
         return BrowserPlatformLocation;
     }(PlatformLocation));
     function supportsState() {
@@ -550,10 +549,10 @@
     var LocationStrategy = /** @class */ (function () {
         function LocationStrategy() {
         }
+        LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
         LocationStrategy.decorators = [
             { type: i0.Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
         ];
-        LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
         return LocationStrategy;
     }());
     function provideLocationStrategy(platformLocation) {
@@ -659,7 +658,6 @@
         PathLocationStrategy.decorators = [
             { type: i0.Injectable }
         ];
-        /** @nocollapse */
         PathLocationStrategy.ctorParameters = function () { return [
             { type: PlatformLocation },
             { type: String, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [APP_BASE_HREF,] }] }
@@ -746,7 +744,6 @@
         HashLocationStrategy.decorators = [
             { type: i0.Injectable }
         ];
-        /** @nocollapse */
         HashLocationStrategy.ctorParameters = function () { return [
             { type: PlatformLocation },
             { type: String, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [APP_BASE_HREF,] }] }
@@ -969,6 +966,7 @@
          * @returns The URL string, modified if needed.
          */
         Location.stripTrailingSlash = stripTrailingSlash;
+        Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
         Location.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root',
@@ -976,12 +974,10 @@
                         useFactory: createLocation,
                     },] }
         ];
-        /** @nocollapse */
         Location.ctorParameters = function () { return [
             { type: LocationStrategy },
             { type: PlatformLocation }
         ]; };
-        Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
         return Location;
     }());
     function createLocation() {
@@ -2852,7 +2848,6 @@
         NgLocaleLocalization.decorators = [
             { type: i0.Injectable }
         ];
-        /** @nocollapse */
         NgLocaleLocalization.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
         ]; };
@@ -3070,7 +3065,6 @@
         NgClass.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngClass]' },] }
         ];
-        /** @nocollapse */
         NgClass.ctorParameters = function () { return [
             { type: i0.IterableDiffers },
             { type: i0.KeyValueDiffers },
@@ -3181,7 +3175,6 @@
         NgComponentOutlet.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngComponentOutlet]' },] }
         ];
-        /** @nocollapse */
         NgComponentOutlet.ctorParameters = function () { return [
             { type: i0.ViewContainerRef }
         ]; };
@@ -3484,7 +3477,6 @@
         NgForOf.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
         ];
-        /** @nocollapse */
         NgForOf.ctorParameters = function () { return [
             { type: i0.ViewContainerRef },
             { type: i0.TemplateRef },
@@ -3735,7 +3727,6 @@
         NgIf.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngIf]' },] }
         ];
-        /** @nocollapse */
         NgIf.ctorParameters = function () { return [
             { type: i0.ViewContainerRef },
             { type: i0.TemplateRef }
@@ -3966,7 +3957,6 @@
         NgSwitchCase.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngSwitchCase]' },] }
         ];
-        /** @nocollapse */
         NgSwitchCase.ctorParameters = function () { return [
             { type: i0.ViewContainerRef },
             { type: i0.TemplateRef },
@@ -3998,7 +3988,6 @@
         NgSwitchDefault.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngSwitchDefault]' },] }
         ];
-        /** @nocollapse */
         NgSwitchDefault.ctorParameters = function () { return [
             { type: i0.ViewContainerRef },
             { type: i0.TemplateRef },
@@ -4080,7 +4069,6 @@
         NgPlural.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngPlural]' },] }
         ];
-        /** @nocollapse */
         NgPlural.ctorParameters = function () { return [
             { type: NgLocalization }
         ]; };
@@ -4118,7 +4106,6 @@
         NgPluralCase.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngPluralCase]' },] }
         ];
-        /** @nocollapse */
         NgPluralCase.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Attribute, args: ['ngPluralCase',] }] },
             { type: i0.TemplateRef },
@@ -4209,7 +4196,6 @@
         NgStyle.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngStyle]' },] }
         ];
-        /** @nocollapse */
         NgStyle.ctorParameters = function () { return [
             { type: i0.ElementRef },
             { type: i0.KeyValueDiffers },
@@ -4340,7 +4326,6 @@
         NgTemplateOutlet.decorators = [
             { type: i0.Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
         ];
-        /** @nocollapse */
         NgTemplateOutlet.ctorParameters = function () { return [
             { type: i0.ViewContainerRef }
         ]; };
@@ -4510,7 +4495,6 @@
         AsyncPipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'async', pure: false },] }
         ];
-        /** @nocollapse */
         AsyncPipe.ctorParameters = function () { return [
             { type: i0.ChangeDetectorRef }
         ]; };
@@ -4809,7 +4793,6 @@
         DatePipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'date', pure: true },] }
         ];
-        /** @nocollapse */
         DatePipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
         ]; };
@@ -4861,7 +4844,6 @@
         I18nPluralPipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'i18nPlural', pure: true },] }
         ];
-        /** @nocollapse */
         I18nPluralPipe.ctorParameters = function () { return [
             { type: NgLocalization }
         ]; };
@@ -5015,7 +4997,6 @@
         KeyValuePipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'keyvalue', pure: false },] }
         ];
-        /** @nocollapse */
         KeyValuePipe.ctorParameters = function () { return [
             { type: i0.KeyValueDiffers }
         ]; };
@@ -5128,7 +5109,6 @@
         DecimalPipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'number' },] }
         ];
-        /** @nocollapse */
         DecimalPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
         ]; };
@@ -5189,7 +5169,6 @@
         PercentPipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'percent' },] }
         ];
-        /** @nocollapse */
         PercentPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
         ]; };
@@ -5305,7 +5284,6 @@
         CurrencyPipe.decorators = [
             { type: i0.Pipe, args: [{ name: 'currency' },] }
         ];
-        /** @nocollapse */
         CurrencyPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] },
             { type: String, decorators: [{ type: i0.Inject, args: [i0.DEFAULT_CURRENCY_CODE,] }] }
@@ -5504,7 +5482,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.0.0-rc.0+113.sha-0a1d078');
+    var VERSION = new i0.Version('10.0.0-rc.0+114.sha-401ef71');
 
     /**
      * @license
