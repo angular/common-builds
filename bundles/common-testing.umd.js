@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.3+14.sha-9d397eb
+ * @license Angular v10.0.0-rc.3+16.sha-742f3d6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -457,7 +457,6 @@
         MockLocationStrategy.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         MockLocationStrategy.ctorParameters = function () { return []; };
         return MockLocationStrategy;
     }(common.LocationStrategy));
@@ -666,7 +665,6 @@
         MockPlatformLocation.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         MockPlatformLocation.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: core.Inject, args: [MOCK_PLATFORM_LOCATION_CONFIG,] }, { type: core.Optional }] }
         ]; };

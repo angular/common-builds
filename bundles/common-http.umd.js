@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.3+14.sha-9d397eb
+ * @license Angular v10.0.0-rc.3+16.sha-742f3d6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1499,7 +1499,6 @@
         HttpClient.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         HttpClient.ctorParameters = function () { return [
             { type: HttpHandler }
         ]; };
@@ -1731,7 +1730,6 @@
         JsonpClientBackend.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         JsonpClientBackend.ctorParameters = function () { return [
             { type: JsonpCallbackContext },
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
@@ -1767,7 +1765,6 @@
         JsonpInterceptor.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         JsonpInterceptor.ctorParameters = function () { return [
             { type: JsonpClientBackend }
         ]; };
@@ -1818,7 +1815,6 @@
         BrowserXhr.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         BrowserXhr.ctorParameters = function () { return []; };
         return BrowserXhr;
     }());
@@ -2072,7 +2068,6 @@
         HttpXhrBackend.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         HttpXhrBackend.ctorParameters = function () { return [
             { type: XhrFactory }
         ]; };
@@ -2128,7 +2123,6 @@
         HttpXsrfCookieExtractor.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         HttpXsrfCookieExtractor.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
             { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
@@ -2164,7 +2158,6 @@
         HttpXsrfInterceptor.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         HttpXsrfInterceptor.ctorParameters = function () { return [
             { type: HttpXsrfTokenExtractor },
             { type: String, decorators: [{ type: core.Inject, args: [XSRF_HEADER_NAME,] }] }
@@ -2204,7 +2197,6 @@
         HttpInterceptingHandler.decorators = [
             { type: core.Injectable }
         ];
-        /** @nocollapse */
         HttpInterceptingHandler.ctorParameters = function () { return [
             { type: HttpBackend },
             { type: core.Injector }

@@ -1,10 +1,10 @@
 /**
- * @license Angular v10.0.0-rc.3+14.sha-9d397eb
+ * @license Angular v10.0.0-rc.3+16.sha-742f3d6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, Injectable, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, Injectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -84,6 +84,7 @@ const DOCUMENT = new InjectionToken('DocumentToken');
 let PlatformLocation = /** @class */ (() => {
     class PlatformLocation {
     }
+    PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
     PlatformLocation.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'platform',
@@ -91,7 +92,6 @@ let PlatformLocation = /** @class */ (() => {
                     useFactory: useBrowserPlatformLocation
                 },] }
     ];
-    PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
     return PlatformLocation;
 })();
 function useBrowserPlatformLocation() {
@@ -181,6 +181,7 @@ let BrowserPlatformLocation = /** @class */ (() => {
             return this._history.state;
         }
     }
+    BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
     BrowserPlatformLocation.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'platform',
@@ -188,11 +189,9 @@ let BrowserPlatformLocation = /** @class */ (() => {
                     useFactory: createBrowserPlatformLocation,
                 },] }
     ];
-    /** @nocollapse */
     BrowserPlatformLocation.ctorParameters = () => [
         { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
     ];
-    BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
     return BrowserPlatformLocation;
 })();
 function supportsState() {
@@ -301,10 +300,10 @@ function normalizeQueryParams(params) {
 let LocationStrategy = /** @class */ (() => {
     class LocationStrategy {
     }
+    LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
     LocationStrategy.decorators = [
         { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
     ];
-    LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
     return LocationStrategy;
 })();
 function provideLocationStrategy(platformLocation) {
@@ -409,7 +408,6 @@ let PathLocationStrategy = /** @class */ (() => {
     PathLocationStrategy.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     PathLocationStrategy.ctorParameters = () => [
         { type: PlatformLocation },
         { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
@@ -495,7 +493,6 @@ let HashLocationStrategy = /** @class */ (() => {
     HashLocationStrategy.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     HashLocationStrategy.ctorParameters = () => [
         { type: PlatformLocation },
         { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
@@ -711,6 +708,7 @@ let Location = /** @class */ (() => {
      * @returns The URL string, modified if needed.
      */
     Location.stripTrailingSlash = stripTrailingSlash;
+    Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
     Location.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'root',
@@ -718,12 +716,10 @@ let Location = /** @class */ (() => {
                     useFactory: createLocation,
                 },] }
     ];
-    /** @nocollapse */
     Location.ctorParameters = () => [
         { type: LocationStrategy },
         { type: PlatformLocation }
     ];
-    Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
     return Location;
 })();
 function createLocation() {
@@ -2645,7 +2641,6 @@ let NgLocaleLocalization = /** @class */ (() => {
     NgLocaleLocalization.decorators = [
         { type: Injectable }
     ];
-    /** @nocollapse */
     NgLocaleLocalization.ctorParameters = () => [
         { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
     ];
@@ -2841,7 +2836,6 @@ let NgClass = /** @class */ (() => {
     NgClass.decorators = [
         { type: Directive, args: [{ selector: '[ngClass]' },] }
     ];
-    /** @nocollapse */
     NgClass.ctorParameters = () => [
         { type: IterableDiffers },
         { type: KeyValueDiffers },
@@ -2954,7 +2948,6 @@ let NgComponentOutlet = /** @class */ (() => {
     NgComponentOutlet.decorators = [
         { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] }
     ];
-    /** @nocollapse */
     NgComponentOutlet.ctorParameters = () => [
         { type: ViewContainerRef }
     ];
@@ -3229,7 +3222,6 @@ let NgForOf = /** @class */ (() => {
     NgForOf.decorators = [
         { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
     ];
-    /** @nocollapse */
     NgForOf.ctorParameters = () => [
         { type: ViewContainerRef },
         { type: TemplateRef },
@@ -3469,7 +3461,6 @@ let NgIf = /** @class */ (() => {
     NgIf.decorators = [
         { type: Directive, args: [{ selector: '[ngIf]' },] }
     ];
-    /** @nocollapse */
     NgIf.ctorParameters = () => [
         { type: ViewContainerRef },
         { type: TemplateRef }
@@ -3698,7 +3689,6 @@ let NgSwitchCase = /** @class */ (() => {
     NgSwitchCase.decorators = [
         { type: Directive, args: [{ selector: '[ngSwitchCase]' },] }
     ];
-    /** @nocollapse */
     NgSwitchCase.ctorParameters = () => [
         { type: ViewContainerRef },
         { type: TemplateRef },
@@ -3732,7 +3722,6 @@ let NgSwitchDefault = /** @class */ (() => {
     NgSwitchDefault.decorators = [
         { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] }
     ];
-    /** @nocollapse */
     NgSwitchDefault.ctorParameters = () => [
         { type: ViewContainerRef },
         { type: TemplateRef },
@@ -3812,7 +3801,6 @@ let NgPlural = /** @class */ (() => {
     NgPlural.decorators = [
         { type: Directive, args: [{ selector: '[ngPlural]' },] }
     ];
-    /** @nocollapse */
     NgPlural.ctorParameters = () => [
         { type: NgLocalization }
     ];
@@ -3852,7 +3840,6 @@ let NgPluralCase = /** @class */ (() => {
     NgPluralCase.decorators = [
         { type: Directive, args: [{ selector: '[ngPluralCase]' },] }
     ];
-    /** @nocollapse */
     NgPluralCase.ctorParameters = () => [
         { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
         { type: TemplateRef },
@@ -3947,7 +3934,6 @@ let NgStyle = /** @class */ (() => {
     NgStyle.decorators = [
         { type: Directive, args: [{ selector: '[ngStyle]' },] }
     ];
-    /** @nocollapse */
     NgStyle.ctorParameters = () => [
         { type: ElementRef },
         { type: KeyValueDiffers },
@@ -4058,7 +4044,6 @@ let NgTemplateOutlet = /** @class */ (() => {
     NgTemplateOutlet.decorators = [
         { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
     ];
-    /** @nocollapse */
     NgTemplateOutlet.ctorParameters = () => [
         { type: ViewContainerRef }
     ];
@@ -4223,7 +4208,6 @@ let AsyncPipe = /** @class */ (() => {
     AsyncPipe.decorators = [
         { type: Pipe, args: [{ name: 'async', pure: false },] }
     ];
-    /** @nocollapse */
     AsyncPipe.ctorParameters = () => [
         { type: ChangeDetectorRef }
     ];
@@ -4523,7 +4507,6 @@ let DatePipe = /** @class */ (() => {
     DatePipe.decorators = [
         { type: Pipe, args: [{ name: 'date', pure: true },] }
     ];
-    /** @nocollapse */
     DatePipe.ctorParameters = () => [
         { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
     ];
@@ -4577,7 +4560,6 @@ let I18nPluralPipe = /** @class */ (() => {
     I18nPluralPipe.decorators = [
         { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
     ];
-    /** @nocollapse */
     I18nPluralPipe.ctorParameters = () => [
         { type: NgLocalization }
     ];
@@ -4731,7 +4713,6 @@ let KeyValuePipe = /** @class */ (() => {
     KeyValuePipe.decorators = [
         { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
     ];
-    /** @nocollapse */
     KeyValuePipe.ctorParameters = () => [
         { type: KeyValueDiffers }
     ];
@@ -4846,7 +4827,6 @@ let DecimalPipe = /** @class */ (() => {
     DecimalPipe.decorators = [
         { type: Pipe, args: [{ name: 'number' },] }
     ];
-    /** @nocollapse */
     DecimalPipe.ctorParameters = () => [
         { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
     ];
@@ -4909,7 +4889,6 @@ let PercentPipe = /** @class */ (() => {
     PercentPipe.decorators = [
         { type: Pipe, args: [{ name: 'percent' },] }
     ];
-    /** @nocollapse */
     PercentPipe.ctorParameters = () => [
         { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
     ];
@@ -5025,7 +5004,6 @@ let CurrencyPipe = /** @class */ (() => {
     CurrencyPipe.decorators = [
         { type: Pipe, args: [{ name: 'currency' },] }
     ];
-    /** @nocollapse */
     CurrencyPipe.ctorParameters = () => [
         { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
         { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
@@ -5224,7 +5202,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.0-rc.3+14.sha-9d397eb');
+const VERSION = new Version('10.0.0-rc.3+16.sha-742f3d6');
 
 /**
  * @license
