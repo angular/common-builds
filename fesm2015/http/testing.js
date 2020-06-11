@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+130.sha-8c682c5
+ * @license Angular v10.0.0-rc.0+134.sha-a937889
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -218,137 +218,134 @@ function _maybeConvertBody(responseType, body) {
  *
  *
  */
-let HttpClientTestingBackend = /** @class */ (() => {
-    class HttpClientTestingBackend {
-        constructor() {
-            /**
-             * List of pending requests which have not yet been expected.
-             */
-            this.open = [];
-        }
+class HttpClientTestingBackend {
+    constructor() {
         /**
-         * Handle an incoming request by queueing it in the list of open requests.
+         * List of pending requests which have not yet been expected.
          */
-        handle(req) {
-            return new Observable((observer) => {
-                const testReq = new TestRequest(req, observer);
-                this.open.push(testReq);
-                observer.next({ type: HttpEventType.Sent });
-                return () => {
-                    testReq._cancelled = true;
-                };
-            });
+        this.open = [];
+    }
+    /**
+     * Handle an incoming request by queueing it in the list of open requests.
+     */
+    handle(req) {
+        return new Observable((observer) => {
+            const testReq = new TestRequest(req, observer);
+            this.open.push(testReq);
+            observer.next({ type: HttpEventType.Sent });
+            return () => {
+                testReq._cancelled = true;
+            };
+        });
+    }
+    /**
+     * Helper function to search for requests in the list of open requests.
+     */
+    _match(match) {
+        if (typeof match === 'string') {
+            return this.open.filter(testReq => testReq.request.urlWithParams === match);
         }
-        /**
-         * Helper function to search for requests in the list of open requests.
-         */
-        _match(match) {
-            if (typeof match === 'string') {
-                return this.open.filter(testReq => testReq.request.urlWithParams === match);
-            }
-            else if (typeof match === 'function') {
-                return this.open.filter(testReq => match(testReq.request));
-            }
-            else {
-                return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                    (!match.url || testReq.request.urlWithParams === match.url));
-            }
+        else if (typeof match === 'function') {
+            return this.open.filter(testReq => match(testReq.request));
         }
-        /**
-         * Search for requests in the list of open requests, and return all that match
-         * without asserting anything about the number of matches.
-         */
-        match(match) {
-            const results = this._match(match);
-            results.forEach(result => {
-                const index = this.open.indexOf(result);
-                if (index !== -1) {
-                    this.open.splice(index, 1);
-                }
-            });
-            return results;
+        else {
+            return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                (!match.url || testReq.request.urlWithParams === match.url));
         }
-        /**
-         * Expect that a single outstanding request matches the given matcher, and return
-         * it.
-         *
-         * Requests returned through this API will no longer be in the list of open requests,
-         * and thus will not match twice.
-         */
-        expectOne(match, description) {
-            description = description || this.descriptionFromMatcher(match);
-            const matches = this.match(match);
-            if (matches.length > 1) {
-                throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
+    }
+    /**
+     * Search for requests in the list of open requests, and return all that match
+     * without asserting anything about the number of matches.
+     */
+    match(match) {
+        const results = this._match(match);
+        results.forEach(result => {
+            const index = this.open.indexOf(result);
+            if (index !== -1) {
+                this.open.splice(index, 1);
             }
-            if (matches.length === 0) {
-                let message = `Expected one matching request for criteria "${description}", found none.`;
-                if (this.open.length > 0) {
-                    // Show the methods and URLs of open requests in the error, for convenience.
-                    const requests = this.open
-                        .map(testReq => {
-                        const url = testReq.request.urlWithParams;
-                        const method = testReq.request.method;
-                        return `${method} ${url}`;
-                    })
-                        .join(', ');
-                    message += ` Requests received are: ${requests}.`;
-                }
-                throw new Error(message);
-            }
-            return matches[0];
+        });
+        return results;
+    }
+    /**
+     * Expect that a single outstanding request matches the given matcher, and return
+     * it.
+     *
+     * Requests returned through this API will no longer be in the list of open requests,
+     * and thus will not match twice.
+     */
+    expectOne(match, description) {
+        description = description || this.descriptionFromMatcher(match);
+        const matches = this.match(match);
+        if (matches.length > 1) {
+            throw new Error(`Expected one matching request for criteria "${description}", found ${matches.length} requests.`);
         }
-        /**
-         * Expect that no outstanding requests match the given matcher, and throw an error
-         * if any do.
-         */
-        expectNone(match, description) {
-            description = description || this.descriptionFromMatcher(match);
-            const matches = this.match(match);
-            if (matches.length > 0) {
-                throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
-            }
-        }
-        /**
-         * Validate that there are no outstanding requests.
-         */
-        verify(opts = {}) {
-            let open = this.open;
-            // It's possible that some requests may be cancelled, and this is expected.
-            // The user can ask to ignore open requests which have been cancelled.
-            if (opts.ignoreCancelled) {
-                open = open.filter(testReq => !testReq.cancelled);
-            }
-            if (open.length > 0) {
+        if (matches.length === 0) {
+            let message = `Expected one matching request for criteria "${description}", found none.`;
+            if (this.open.length > 0) {
                 // Show the methods and URLs of open requests in the error, for convenience.
-                const requests = open.map(testReq => {
-                    const url = testReq.request.urlWithParams.split('?')[0];
+                const requests = this.open
+                    .map(testReq => {
+                    const url = testReq.request.urlWithParams;
                     const method = testReq.request.method;
                     return `${method} ${url}`;
                 })
                     .join(', ');
-                throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
+                message += ` Requests received are: ${requests}.`;
             }
+            throw new Error(message);
         }
-        descriptionFromMatcher(matcher) {
-            if (typeof matcher === 'string') {
-                return `Match URL: ${matcher}`;
-            }
-            else if (typeof matcher === 'object') {
-                const method = matcher.method || '(any)';
-                const url = matcher.url || '(any)';
-                return `Match method: ${method}, URL: ${url}`;
-            }
-            else {
-                return `Match by function: ${matcher.name}`;
-            }
+        return matches[0];
+    }
+    /**
+     * Expect that no outstanding requests match the given matcher, and throw an error
+     * if any do.
+     */
+    expectNone(match, description) {
+        description = description || this.descriptionFromMatcher(match);
+        const matches = this.match(match);
+        if (matches.length > 0) {
+            throw new Error(`Expected zero matching requests for criteria "${description}", found ${matches.length}.`);
         }
     }
-    HttpClientTestingBackend.decorators = [
-        { type: Injectable }
-    ];
-    return HttpClientTestingBackend;
-})();
+    /**
+     * Validate that there are no outstanding requests.
+     */
+    verify(opts = {}) {
+        let open = this.open;
+        // It's possible that some requests may be cancelled, and this is expected.
+        // The user can ask to ignore open requests which have been cancelled.
+        if (opts.ignoreCancelled) {
+            open = open.filter(testReq => !testReq.cancelled);
+        }
+        if (open.length > 0) {
+            // Show the methods and URLs of open requests in the error, for convenience.
+            const requests = open.map(testReq => {
+                const url = testReq.request.urlWithParams.split('?')[0];
+                const method = testReq.request.method;
+                return `${method} ${url}`;
+            })
+                .join(', ');
+            throw new Error(`Expected no open requests, found ${open.length}: ${requests}`);
+        }
+    }
+    descriptionFromMatcher(matcher) {
+        if (typeof matcher === 'string') {
+            return `Match URL: ${matcher}`;
+        }
+        else if (typeof matcher === 'object') {
+            const method = matcher.method || '(any)';
+            const url = matcher.url || '(any)';
+            return `Match method: ${method}, URL: ${url}`;
+        }
+        else {
+            return `Match by function: ${matcher.name}`;
+        }
+    }
+}
+HttpClientTestingBackend.decorators = [
+    { type: Injectable }
+];
 
 /**
  * @license
@@ -364,23 +361,20 @@ let HttpClientTestingBackend = /** @class */ (() => {
  *
  * @publicApi
  */
-let HttpClientTestingModule = /** @class */ (() => {
-    class HttpClientTestingModule {
-    }
-    HttpClientTestingModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        HttpClientModule,
-                    ],
-                    providers: [
-                        HttpClientTestingBackend,
-                        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-                    ],
-                },] }
-    ];
-    return HttpClientTestingModule;
-})();
+class HttpClientTestingModule {
+}
+HttpClientTestingModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    HttpClientModule,
+                ],
+                providers: [
+                    HttpClientTestingBackend,
+                    { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+                    { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                ],
+            },] }
+];
 
 /**
  * @license
