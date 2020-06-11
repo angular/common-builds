@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+130.sha-8c682c5
+ * @license Angular v10.0.0-rc.0+134.sha-a937889
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -81,13 +81,10 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  *
  * @publicApi
  */
-let PlatformLocation = /** @class */ (() => {
-    class PlatformLocation {
-    }
-    PlatformLocation.ɵfac = function PlatformLocation_Factory(t) { return new (t || PlatformLocation)(); };
-    PlatformLocation.ɵprov = ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
-    return PlatformLocation;
-})();
+class PlatformLocation {
+}
+PlatformLocation.ɵfac = function PlatformLocation_Factory(t) { return new (t || PlatformLocation)(); };
+PlatformLocation.ɵprov = ɵɵdefineInjectable({ token: PlatformLocation, factory: function () { return useBrowserPlatformLocation(); }, providedIn: 'platform' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(PlatformLocation, [{
         type: Injectable,
         args: [{
@@ -111,82 +108,79 @@ const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
  */
-let BrowserPlatformLocation = /** @class */ (() => {
-    class BrowserPlatformLocation extends PlatformLocation {
-        constructor(_doc) {
-            super();
-            this._doc = _doc;
-            this._init();
+class BrowserPlatformLocation extends PlatformLocation {
+    constructor(_doc) {
+        super();
+        this._doc = _doc;
+        this._init();
+    }
+    // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
+    /** @internal */
+    _init() {
+        this.location = getDOM().getLocation();
+        this._history = getDOM().getHistory();
+    }
+    getBaseHrefFromDOM() {
+        return getDOM().getBaseHref(this._doc);
+    }
+    onPopState(fn) {
+        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+    }
+    onHashChange(fn) {
+        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+    }
+    get href() {
+        return this.location.href;
+    }
+    get protocol() {
+        return this.location.protocol;
+    }
+    get hostname() {
+        return this.location.hostname;
+    }
+    get port() {
+        return this.location.port;
+    }
+    get pathname() {
+        return this.location.pathname;
+    }
+    get search() {
+        return this.location.search;
+    }
+    get hash() {
+        return this.location.hash;
+    }
+    set pathname(newPath) {
+        this.location.pathname = newPath;
+    }
+    pushState(state, title, url) {
+        if (supportsState()) {
+            this._history.pushState(state, title, url);
         }
-        // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
-        /** @internal */
-        _init() {
-            this.location = getDOM().getLocation();
-            this._history = getDOM().getHistory();
-        }
-        getBaseHrefFromDOM() {
-            return getDOM().getBaseHref(this._doc);
-        }
-        onPopState(fn) {
-            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
-        }
-        onHashChange(fn) {
-            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
-        }
-        get href() {
-            return this.location.href;
-        }
-        get protocol() {
-            return this.location.protocol;
-        }
-        get hostname() {
-            return this.location.hostname;
-        }
-        get port() {
-            return this.location.port;
-        }
-        get pathname() {
-            return this.location.pathname;
-        }
-        get search() {
-            return this.location.search;
-        }
-        get hash() {
-            return this.location.hash;
-        }
-        set pathname(newPath) {
-            this.location.pathname = newPath;
-        }
-        pushState(state, title, url) {
-            if (supportsState()) {
-                this._history.pushState(state, title, url);
-            }
-            else {
-                this.location.hash = url;
-            }
-        }
-        replaceState(state, title, url) {
-            if (supportsState()) {
-                this._history.replaceState(state, title, url);
-            }
-            else {
-                this.location.hash = url;
-            }
-        }
-        forward() {
-            this._history.forward();
-        }
-        back() {
-            this._history.back();
-        }
-        getState() {
-            return this._history.state;
+        else {
+            this.location.hash = url;
         }
     }
-    BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(ɵɵinject(DOCUMENT)); };
-    BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
-    return BrowserPlatformLocation;
-})();
+    replaceState(state, title, url) {
+        if (supportsState()) {
+            this._history.replaceState(state, title, url);
+        }
+        else {
+            this.location.hash = url;
+        }
+    }
+    forward() {
+        this._history.forward();
+    }
+    back() {
+        this._history.back();
+    }
+    getState() {
+        return this._history.state;
+    }
+}
+BrowserPlatformLocation.ɵfac = function BrowserPlatformLocation_Factory(t) { return new (t || BrowserPlatformLocation)(ɵɵinject(DOCUMENT)); };
+BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: BrowserPlatformLocation, factory: function () { return createBrowserPlatformLocation(); }, providedIn: 'platform' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserPlatformLocation, [{
         type: Injectable,
         args: [{
@@ -301,13 +295,10 @@ function normalizeQueryParams(params) {
  *
  * @publicApi
  */
-let LocationStrategy = /** @class */ (() => {
-    class LocationStrategy {
-    }
-    LocationStrategy.ɵfac = function LocationStrategy_Factory(t) { return new (t || LocationStrategy)(); };
-    LocationStrategy.ɵprov = ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
-    return LocationStrategy;
-})();
+class LocationStrategy {
+}
+LocationStrategy.ɵfac = function LocationStrategy_Factory(t) { return new (t || LocationStrategy)(); };
+LocationStrategy.ɵprov = ɵɵdefineInjectable({ token: LocationStrategy, factory: function () { return provideLocationStrategy(); }, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(LocationStrategy, [{
         type: Injectable,
         args: [{ providedIn: 'root', useFactory: provideLocationStrategy }]
@@ -368,53 +359,50 @@ const APP_BASE_HREF = new InjectionToken('appBaseHref');
  *
  * @publicApi
  */
-let PathLocationStrategy = /** @class */ (() => {
-    class PathLocationStrategy extends LocationStrategy {
-        constructor(_platformLocation, href) {
-            super();
-            this._platformLocation = _platformLocation;
-            if (href == null) {
-                href = this._platformLocation.getBaseHrefFromDOM();
-            }
-            if (href == null) {
-                throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
-            }
-            this._baseHref = href;
+class PathLocationStrategy extends LocationStrategy {
+    constructor(_platformLocation, href) {
+        super();
+        this._platformLocation = _platformLocation;
+        if (href == null) {
+            href = this._platformLocation.getBaseHrefFromDOM();
         }
-        onPopState(fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
+        if (href == null) {
+            throw new Error(`No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.`);
         }
-        getBaseHref() {
-            return this._baseHref;
-        }
-        prepareExternalUrl(internal) {
-            return joinWithSlash(this._baseHref, internal);
-        }
-        path(includeHash = false) {
-            const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
-            const hash = this._platformLocation.hash;
-            return hash && includeHash ? `${pathname}${hash}` : pathname;
-        }
-        pushState(state, title, url, queryParams) {
-            const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
-            this._platformLocation.pushState(state, title, externalUrl);
-        }
-        replaceState(state, title, url, queryParams) {
-            const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
-            this._platformLocation.replaceState(state, title, externalUrl);
-        }
-        forward() {
-            this._platformLocation.forward();
-        }
-        back() {
-            this._platformLocation.back();
-        }
+        this._baseHref = href;
     }
-    PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-    PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: PathLocationStrategy.ɵfac });
-    return PathLocationStrategy;
-})();
+    onPopState(fn) {
+        this._platformLocation.onPopState(fn);
+        this._platformLocation.onHashChange(fn);
+    }
+    getBaseHref() {
+        return this._baseHref;
+    }
+    prepareExternalUrl(internal) {
+        return joinWithSlash(this._baseHref, internal);
+    }
+    path(includeHash = false) {
+        const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
+        const hash = this._platformLocation.hash;
+        return hash && includeHash ? `${pathname}${hash}` : pathname;
+    }
+    pushState(state, title, url, queryParams) {
+        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+        this._platformLocation.pushState(state, title, externalUrl);
+    }
+    replaceState(state, title, url, queryParams) {
+        const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
+        this._platformLocation.replaceState(state, title, externalUrl);
+    }
+    forward() {
+        this._platformLocation.forward();
+    }
+    back() {
+        this._platformLocation.back();
+    }
+}
+PathLocationStrategy.ɵfac = function PathLocationStrategy_Factory(t) { return new (t || PathLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
+PathLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: PathLocationStrategy, factory: PathLocationStrategy.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(PathLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -449,60 +437,57 @@ let PathLocationStrategy = /** @class */ (() => {
  *
  * @publicApi
  */
-let HashLocationStrategy = /** @class */ (() => {
-    class HashLocationStrategy extends LocationStrategy {
-        constructor(_platformLocation, _baseHref) {
-            super();
-            this._platformLocation = _platformLocation;
-            this._baseHref = '';
-            if (_baseHref != null) {
-                this._baseHref = _baseHref;
-            }
-        }
-        onPopState(fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
-        }
-        getBaseHref() {
-            return this._baseHref;
-        }
-        path(includeHash = false) {
-            // the hash value is always prefixed with a `#`
-            // and if it is empty then it will stay empty
-            let path = this._platformLocation.hash;
-            if (path == null)
-                path = '#';
-            return path.length > 0 ? path.substring(1) : path;
-        }
-        prepareExternalUrl(internal) {
-            const url = joinWithSlash(this._baseHref, internal);
-            return url.length > 0 ? ('#' + url) : url;
-        }
-        pushState(state, title, path, queryParams) {
-            let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.pushState(state, title, url);
-        }
-        replaceState(state, title, path, queryParams) {
-            let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
-            if (url.length == 0) {
-                url = this._platformLocation.pathname;
-            }
-            this._platformLocation.replaceState(state, title, url);
-        }
-        forward() {
-            this._platformLocation.forward();
-        }
-        back() {
-            this._platformLocation.back();
+class HashLocationStrategy extends LocationStrategy {
+    constructor(_platformLocation, _baseHref) {
+        super();
+        this._platformLocation = _platformLocation;
+        this._baseHref = '';
+        if (_baseHref != null) {
+            this._baseHref = _baseHref;
         }
     }
-    HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
-    HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: HashLocationStrategy.ɵfac });
-    return HashLocationStrategy;
-})();
+    onPopState(fn) {
+        this._platformLocation.onPopState(fn);
+        this._platformLocation.onHashChange(fn);
+    }
+    getBaseHref() {
+        return this._baseHref;
+    }
+    path(includeHash = false) {
+        // the hash value is always prefixed with a `#`
+        // and if it is empty then it will stay empty
+        let path = this._platformLocation.hash;
+        if (path == null)
+            path = '#';
+        return path.length > 0 ? path.substring(1) : path;
+    }
+    prepareExternalUrl(internal) {
+        const url = joinWithSlash(this._baseHref, internal);
+        return url.length > 0 ? ('#' + url) : url;
+    }
+    pushState(state, title, path, queryParams) {
+        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
+        if (url.length == 0) {
+            url = this._platformLocation.pathname;
+        }
+        this._platformLocation.pushState(state, title, url);
+    }
+    replaceState(state, title, path, queryParams) {
+        let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
+        if (url.length == 0) {
+            url = this._platformLocation.pathname;
+        }
+        this._platformLocation.replaceState(state, title, url);
+    }
+    forward() {
+        this._platformLocation.forward();
+    }
+    back() {
+        this._platformLocation.back();
+    }
+}
+HashLocationStrategy.ɵfac = function HashLocationStrategy_Factory(t) { return new (t || HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8)); };
+HashLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: HashLocationStrategy, factory: HashLocationStrategy.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(HashLocationStrategy, [{
         type: Injectable
     }], function () { return [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -547,183 +532,180 @@ let HashLocationStrategy = /** @class */ (() => {
  *
  * @publicApi
  */
-let Location = /** @class */ (() => {
-    class Location {
-        constructor(platformStrategy, platformLocation) {
-            /** @internal */
-            this._subject = new EventEmitter();
-            /** @internal */
-            this._urlChangeListeners = [];
-            this._platformStrategy = platformStrategy;
-            const browserBaseHref = this._platformStrategy.getBaseHref();
-            this._platformLocation = platformLocation;
-            this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-            this._platformStrategy.onPopState((ev) => {
-                this._subject.emit({
-                    'url': this.path(true),
-                    'pop': true,
-                    'state': ev.state,
-                    'type': ev.type,
-                });
-            });
-        }
-        /**
-         * Normalizes the URL path for this location.
-         *
-         * @param includeHash True to include an anchor fragment in the path.
-         *
-         * @returns The normalized URL path.
-         */
-        // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
-        // removed.
-        path(includeHash = false) {
-            return this.normalize(this._platformStrategy.path(includeHash));
-        }
-        /**
-         * Reports the current state of the location history.
-         * @returns The current value of the `history.state` object.
-         */
-        getState() {
-            return this._platformLocation.getState();
-        }
-        /**
-         * Normalizes the given path and compares to the current normalized path.
-         *
-         * @param path The given URL path.
-         * @param query Query parameters.
-         *
-         * @returns True if the given URL path is equal to the current normalized path, false
-         * otherwise.
-         */
-        isCurrentPathEqualTo(path, query = '') {
-            return this.path() == this.normalize(path + normalizeQueryParams(query));
-        }
-        /**
-         * Normalizes a URL path by stripping any trailing slashes.
-         *
-         * @param url String representing a URL.
-         *
-         * @returns The normalized URL string.
-         */
-        normalize(url) {
-            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
-        }
-        /**
-         * Normalizes an external URL path.
-         * If the given URL doesn't begin with a leading slash (`'/'`), adds one
-         * before normalizing. Adds a hash if `HashLocationStrategy` is
-         * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
-         *
-         * @param url String representing a URL.
-         *
-         * @returns  A normalized platform-specific URL.
-         */
-        prepareExternalUrl(url) {
-            if (url && url[0] !== '/') {
-                url = '/' + url;
-            }
-            return this._platformStrategy.prepareExternalUrl(url);
-        }
-        // TODO: rename this method to pushState
-        /**
-         * Changes the browser's URL to a normalized version of a given URL, and pushes a
-         * new item onto the platform's history.
-         *
-         * @param path  URL path to normalize.
-         * @param query Query parameters.
-         * @param state Location history state.
-         *
-         */
-        go(path, query = '', state = null) {
-            this._platformStrategy.pushState(state, '', path, query);
-            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
-        }
-        /**
-         * Changes the browser's URL to a normalized version of the given URL, and replaces
-         * the top item on the platform's history stack.
-         *
-         * @param path  URL path to normalize.
-         * @param query Query parameters.
-         * @param state Location history state.
-         */
-        replaceState(path, query = '', state = null) {
-            this._platformStrategy.replaceState(state, '', path, query);
-            this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
-        }
-        /**
-         * Navigates forward in the platform's history.
-         */
-        forward() {
-            this._platformStrategy.forward();
-        }
-        /**
-         * Navigates back in the platform's history.
-         */
-        back() {
-            this._platformStrategy.back();
-        }
-        /**
-         * Registers a URL change listener. Use to catch updates performed by the Angular
-         * framework that are not detectible through "popstate" or "hashchange" events.
-         *
-         * @param fn The change handler function, which take a URL and a location history state.
-         */
-        onUrlChange(fn) {
-            this._urlChangeListeners.push(fn);
-            if (!this._urlChangeSubscription) {
-                this._urlChangeSubscription = this.subscribe(v => {
-                    this._notifyUrlChangeListeners(v.url, v.state);
-                });
-            }
-        }
+class Location {
+    constructor(platformStrategy, platformLocation) {
         /** @internal */
-        _notifyUrlChangeListeners(url = '', state) {
-            this._urlChangeListeners.forEach(fn => fn(url, state));
-        }
-        /**
-         * Subscribes to the platform's `popState` events.
-         *
-         * @param value Event that is triggered when the state history changes.
-         * @param exception The exception to throw.
-         *
-         * @returns Subscribed events.
-         */
-        subscribe(onNext, onThrow, onReturn) {
-            return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
-        }
+        this._subject = new EventEmitter();
+        /** @internal */
+        this._urlChangeListeners = [];
+        this._platformStrategy = platformStrategy;
+        const browserBaseHref = this._platformStrategy.getBaseHref();
+        this._platformLocation = platformLocation;
+        this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
+        this._platformStrategy.onPopState((ev) => {
+            this._subject.emit({
+                'url': this.path(true),
+                'pop': true,
+                'state': ev.state,
+                'type': ev.type,
+            });
+        });
     }
     /**
-     * Normalizes URL parameters by prepending with `?` if needed.
+     * Normalizes the URL path for this location.
      *
-     * @param  params String of URL parameters.
+     * @param includeHash True to include an anchor fragment in the path.
      *
-     * @returns The normalized URL parameters string.
+     * @returns The normalized URL path.
      */
-    Location.normalizeQueryParams = normalizeQueryParams;
+    // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
+    // removed.
+    path(includeHash = false) {
+        return this.normalize(this._platformStrategy.path(includeHash));
+    }
     /**
-     * Joins two parts of a URL with a slash if needed.
-     *
-     * @param start  URL string
-     * @param end    URL string
-     *
-     *
-     * @returns The joined URL string.
+     * Reports the current state of the location history.
+     * @returns The current value of the `history.state` object.
      */
-    Location.joinWithSlash = joinWithSlash;
+    getState() {
+        return this._platformLocation.getState();
+    }
     /**
-     * Removes a trailing slash from a URL string if needed.
-     * Looks for the first occurrence of either `#`, `?`, or the end of the
-     * line as `/` characters and removes the trailing slash if one exists.
+     * Normalizes the given path and compares to the current normalized path.
      *
-     * @param url URL string.
+     * @param path The given URL path.
+     * @param query Query parameters.
      *
-     * @returns The URL string, modified if needed.
+     * @returns True if the given URL path is equal to the current normalized path, false
+     * otherwise.
      */
-    Location.stripTrailingSlash = stripTrailingSlash;
-    Location.ɵfac = function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation)); };
-    Location.ɵprov = ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
-    return Location;
-})();
+    isCurrentPathEqualTo(path, query = '') {
+        return this.path() == this.normalize(path + normalizeQueryParams(query));
+    }
+    /**
+     * Normalizes a URL path by stripping any trailing slashes.
+     *
+     * @param url String representing a URL.
+     *
+     * @returns The normalized URL string.
+     */
+    normalize(url) {
+        return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+    }
+    /**
+     * Normalizes an external URL path.
+     * If the given URL doesn't begin with a leading slash (`'/'`), adds one
+     * before normalizing. Adds a hash if `HashLocationStrategy` is
+     * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
+     *
+     * @param url String representing a URL.
+     *
+     * @returns  A normalized platform-specific URL.
+     */
+    prepareExternalUrl(url) {
+        if (url && url[0] !== '/') {
+            url = '/' + url;
+        }
+        return this._platformStrategy.prepareExternalUrl(url);
+    }
+    // TODO: rename this method to pushState
+    /**
+     * Changes the browser's URL to a normalized version of a given URL, and pushes a
+     * new item onto the platform's history.
+     *
+     * @param path  URL path to normalize.
+     * @param query Query parameters.
+     * @param state Location history state.
+     *
+     */
+    go(path, query = '', state = null) {
+        this._platformStrategy.pushState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+    }
+    /**
+     * Changes the browser's URL to a normalized version of the given URL, and replaces
+     * the top item on the platform's history stack.
+     *
+     * @param path  URL path to normalize.
+     * @param query Query parameters.
+     * @param state Location history state.
+     */
+    replaceState(path, query = '', state = null) {
+        this._platformStrategy.replaceState(state, '', path, query);
+        this._notifyUrlChangeListeners(this.prepareExternalUrl(path + normalizeQueryParams(query)), state);
+    }
+    /**
+     * Navigates forward in the platform's history.
+     */
+    forward() {
+        this._platformStrategy.forward();
+    }
+    /**
+     * Navigates back in the platform's history.
+     */
+    back() {
+        this._platformStrategy.back();
+    }
+    /**
+     * Registers a URL change listener. Use to catch updates performed by the Angular
+     * framework that are not detectible through "popstate" or "hashchange" events.
+     *
+     * @param fn The change handler function, which take a URL and a location history state.
+     */
+    onUrlChange(fn) {
+        this._urlChangeListeners.push(fn);
+        if (!this._urlChangeSubscription) {
+            this._urlChangeSubscription = this.subscribe(v => {
+                this._notifyUrlChangeListeners(v.url, v.state);
+            });
+        }
+    }
+    /** @internal */
+    _notifyUrlChangeListeners(url = '', state) {
+        this._urlChangeListeners.forEach(fn => fn(url, state));
+    }
+    /**
+     * Subscribes to the platform's `popState` events.
+     *
+     * @param value Event that is triggered when the state history changes.
+     * @param exception The exception to throw.
+     *
+     * @returns Subscribed events.
+     */
+    subscribe(onNext, onThrow, onReturn) {
+        return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
+    }
+}
+/**
+ * Normalizes URL parameters by prepending with `?` if needed.
+ *
+ * @param  params String of URL parameters.
+ *
+ * @returns The normalized URL parameters string.
+ */
+Location.normalizeQueryParams = normalizeQueryParams;
+/**
+ * Joins two parts of a URL with a slash if needed.
+ *
+ * @param start  URL string
+ * @param end    URL string
+ *
+ *
+ * @returns The joined URL string.
+ */
+Location.joinWithSlash = joinWithSlash;
+/**
+ * Removes a trailing slash from a URL string if needed.
+ * Looks for the first occurrence of either `#`, `?`, or the end of the
+ * line as `/` characters and removes the trailing slash if one exists.
+ *
+ * @param url URL string.
+ *
+ * @returns The URL string, modified if needed.
+ */
+Location.stripTrailingSlash = stripTrailingSlash;
+Location.ɵfac = function Location_Factory(t) { return new (t || Location)(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation)); };
+Location.ɵprov = ɵɵdefineInjectable({ token: Location, factory: function () { return createLocation(); }, providedIn: 'root' });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(Location, [{
         type: Injectable,
         args: [{
@@ -2624,34 +2606,31 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * @publicApi
  */
-let NgLocaleLocalization = /** @class */ (() => {
-    class NgLocaleLocalization extends NgLocalization {
-        constructor(locale) {
-            super();
-            this.locale = locale;
-        }
-        getPluralCategory(value, locale) {
-            const plural = getLocalePluralCase(locale || this.locale)(value);
-            switch (plural) {
-                case Plural.Zero:
-                    return 'zero';
-                case Plural.One:
-                    return 'one';
-                case Plural.Two:
-                    return 'two';
-                case Plural.Few:
-                    return 'few';
-                case Plural.Many:
-                    return 'many';
-                default:
-                    return 'other';
-            }
+class NgLocaleLocalization extends NgLocalization {
+    constructor(locale) {
+        super();
+        this.locale = locale;
+    }
+    getPluralCategory(value, locale) {
+        const plural = getLocalePluralCase(locale || this.locale)(value);
+        switch (plural) {
+            case Plural.Zero:
+                return 'zero';
+            case Plural.One:
+                return 'one';
+            case Plural.Two:
+                return 'two';
+            case Plural.Few:
+                return 'few';
+            case Plural.Many:
+                return 'many';
+            default:
+                return 'other';
         }
     }
-    NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(ɵɵinject(LOCALE_ID)); };
-    NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: NgLocaleLocalization.ɵfac });
-    return NgLocaleLocalization;
-})();
+}
+NgLocaleLocalization.ɵfac = function NgLocaleLocalization_Factory(t) { return new (t || NgLocaleLocalization)(ɵɵinject(LOCALE_ID)); };
+NgLocaleLocalization.ɵprov = ɵɵdefineInjectable({ token: NgLocaleLocalization, factory: NgLocaleLocalization.ɵfac });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgLocaleLocalization, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
@@ -2732,123 +2711,120 @@ function parseCookieValue(cookieStr, name) {
  *
  * @publicApi
  */
-let NgClass = /** @class */ (() => {
-    class NgClass {
-        constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-            this._iterableDiffers = _iterableDiffers;
-            this._keyValueDiffers = _keyValueDiffers;
-            this._ngEl = _ngEl;
-            this._renderer = _renderer;
-            this._iterableDiffer = null;
-            this._keyValueDiffer = null;
-            this._initialClasses = [];
-            this._rawClass = null;
-        }
-        set klass(value) {
-            this._removeClasses(this._initialClasses);
-            this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-            this._applyClasses(this._initialClasses);
-            this._applyClasses(this._rawClass);
-        }
-        set ngClass(value) {
-            this._removeClasses(this._rawClass);
-            this._applyClasses(this._initialClasses);
-            this._iterableDiffer = null;
-            this._keyValueDiffer = null;
-            this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-            if (this._rawClass) {
-                if (ɵisListLikeIterable(this._rawClass)) {
-                    this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-                }
-                else {
-                    this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-                }
+class NgClass {
+    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+        this._iterableDiffers = _iterableDiffers;
+        this._keyValueDiffers = _keyValueDiffers;
+        this._ngEl = _ngEl;
+        this._renderer = _renderer;
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
+        this._initialClasses = [];
+        this._rawClass = null;
+    }
+    set klass(value) {
+        this._removeClasses(this._initialClasses);
+        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+        this._applyClasses(this._initialClasses);
+        this._applyClasses(this._rawClass);
+    }
+    set ngClass(value) {
+        this._removeClasses(this._rawClass);
+        this._applyClasses(this._initialClasses);
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
+        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+        if (this._rawClass) {
+            if (ɵisListLikeIterable(this._rawClass)) {
+                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
             }
-        }
-        ngDoCheck() {
-            if (this._iterableDiffer) {
-                const iterableChanges = this._iterableDiffer.diff(this._rawClass);
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
-                }
-            }
-            else if (this._keyValueDiffer) {
-                const keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
-                }
-            }
-        }
-        _applyKeyValueChanges(changes) {
-            changes.forEachAddedItem((record) => this._toggleClass(record.key, record.currentValue));
-            changes.forEachChangedItem((record) => this._toggleClass(record.key, record.currentValue));
-            changes.forEachRemovedItem((record) => {
-                if (record.previousValue) {
-                    this._toggleClass(record.key, false);
-                }
-            });
-        }
-        _applyIterableChanges(changes) {
-            changes.forEachAddedItem((record) => {
-                if (typeof record.item === 'string') {
-                    this._toggleClass(record.item, true);
-                }
-                else {
-                    throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
-                }
-            });
-            changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
-        }
-        /**
-         * Applies a collection of CSS classes to the DOM element.
-         *
-         * For argument of type Set and Array CSS class names contained in those collections are always
-         * added.
-         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-         * for truthy and removed for falsy).
-         */
-        _applyClasses(rawClassVal) {
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach((klass) => this._toggleClass(klass, true));
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, !!rawClassVal[klass]));
-                }
-            }
-        }
-        /**
-         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-         * purposes.
-         */
-        _removeClasses(rawClassVal) {
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach((klass) => this._toggleClass(klass, false));
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, false));
-                }
-            }
-        }
-        _toggleClass(klass, enabled) {
-            klass = klass.trim();
-            if (klass) {
-                klass.split(/\s+/g).forEach(klass => {
-                    if (enabled) {
-                        this._renderer.addClass(this._ngEl.nativeElement, klass);
-                    }
-                    else {
-                        this._renderer.removeClass(this._ngEl.nativeElement, klass);
-                    }
-                });
+            else {
+                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
             }
         }
     }
-    NgClass.ɵfac = function NgClass_Factory(t) { return new (t || NgClass)(ɵɵdirectiveInject(IterableDiffers), ɵɵdirectiveInject(KeyValueDiffers), ɵɵdirectiveInject(ElementRef), ɵɵdirectiveInject(Renderer2)); };
-    NgClass.ɵdir = ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
-    return NgClass;
-})();
+    ngDoCheck() {
+        if (this._iterableDiffer) {
+            const iterableChanges = this._iterableDiffer.diff(this._rawClass);
+            if (iterableChanges) {
+                this._applyIterableChanges(iterableChanges);
+            }
+        }
+        else if (this._keyValueDiffer) {
+            const keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
+            if (keyValueChanges) {
+                this._applyKeyValueChanges(keyValueChanges);
+            }
+        }
+    }
+    _applyKeyValueChanges(changes) {
+        changes.forEachAddedItem((record) => this._toggleClass(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._toggleClass(record.key, record.currentValue));
+        changes.forEachRemovedItem((record) => {
+            if (record.previousValue) {
+                this._toggleClass(record.key, false);
+            }
+        });
+    }
+    _applyIterableChanges(changes) {
+        changes.forEachAddedItem((record) => {
+            if (typeof record.item === 'string') {
+                this._toggleClass(record.item, true);
+            }
+            else {
+                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
+            }
+        });
+        changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
+    }
+    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
+     */
+    _applyClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                rawClassVal.forEach((klass) => this._toggleClass(klass, true));
+            }
+            else {
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, !!rawClassVal[klass]));
+            }
+        }
+    }
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     */
+    _removeClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                rawClassVal.forEach((klass) => this._toggleClass(klass, false));
+            }
+            else {
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, false));
+            }
+        }
+    }
+    _toggleClass(klass, enabled) {
+        klass = klass.trim();
+        if (klass) {
+            klass.split(/\s+/g).forEach(klass => {
+                if (enabled) {
+                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+                }
+                else {
+                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                }
+            });
+        }
+    }
+}
+NgClass.ɵfac = function NgClass_Factory(t) { return new (t || NgClass)(ɵɵdirectiveInject(IterableDiffers), ɵɵdirectiveInject(KeyValueDiffers), ɵɵdirectiveInject(ElementRef), ɵɵdirectiveInject(Renderer2)); };
+NgClass.ɵdir = ɵɵdefineDirective({ type: NgClass, selectors: [["", "ngClass", ""]], inputs: { klass: ["class", "klass"], ngClass: "ngClass" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgClass, [{
         type: Directive,
         args: [{ selector: '[ngClass]' }]
@@ -2922,44 +2898,41 @@ let NgClass = /** @class */ (() => {
  * @publicApi
  * @ngModule CommonModule
  */
-let NgComponentOutlet = /** @class */ (() => {
-    class NgComponentOutlet {
-        constructor(_viewContainerRef) {
-            this._viewContainerRef = _viewContainerRef;
-            this._componentRef = null;
-            this._moduleRef = null;
-        }
-        ngOnChanges(changes) {
-            this._viewContainerRef.clear();
-            this._componentRef = null;
-            if (this.ngComponentOutlet) {
-                const elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
-                if (changes['ngComponentOutletNgModuleFactory']) {
-                    if (this._moduleRef)
-                        this._moduleRef.destroy();
-                    if (this.ngComponentOutletNgModuleFactory) {
-                        const parentModule = elInjector.get(NgModuleRef);
-                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
-                    }
-                    else {
-                        this._moduleRef = null;
-                    }
+class NgComponentOutlet {
+    constructor(_viewContainerRef) {
+        this._viewContainerRef = _viewContainerRef;
+        this._componentRef = null;
+        this._moduleRef = null;
+    }
+    ngOnChanges(changes) {
+        this._viewContainerRef.clear();
+        this._componentRef = null;
+        if (this.ngComponentOutlet) {
+            const elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            if (changes['ngComponentOutletNgModuleFactory']) {
+                if (this._moduleRef)
+                    this._moduleRef.destroy();
+                if (this.ngComponentOutletNgModuleFactory) {
+                    const parentModule = elInjector.get(NgModuleRef);
+                    this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
-                const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
-                    elInjector.get(ComponentFactoryResolver);
-                const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
-                this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
+                else {
+                    this._moduleRef = null;
+                }
             }
-        }
-        ngOnDestroy() {
-            if (this._moduleRef)
-                this._moduleRef.destroy();
+            const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+                elInjector.get(ComponentFactoryResolver);
+            const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+            this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
     }
-    NgComponentOutlet.ɵfac = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-    NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature] });
-    return NgComponentOutlet;
-})();
+    ngOnDestroy() {
+        if (this._moduleRef)
+            this._moduleRef.destroy();
+    }
+}
+NgComponentOutlet.ɵfac = function NgComponentOutlet_Factory(t) { return new (t || NgComponentOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
+NgComponentOutlet.ɵdir = ɵɵdefineDirective({ type: NgComponentOutlet, selectors: [["", "ngComponentOutlet", ""]], inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, features: [ɵɵNgOnChangesFeature] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgComponentOutlet, [{
         type: Directive,
         args: [{ selector: '[ngComponentOutlet]' }]
@@ -3101,141 +3074,138 @@ class NgForOfContext {
  * @ngModule CommonModule
  * @publicApi
  */
-let NgForOf = /** @class */ (() => {
-    class NgForOf {
-        constructor(_viewContainer, _template, _differs) {
-            this._viewContainer = _viewContainer;
-            this._template = _template;
-            this._differs = _differs;
-            this._ngForOf = null;
-            this._ngForOfDirty = true;
-            this._differ = null;
-        }
-        /**
-         * The value of the iterable expression, which can be used as a
-         * [template input variable](guide/structural-directives#template-input-variable).
-         */
-        set ngForOf(ngForOf) {
-            this._ngForOf = ngForOf;
-            this._ngForOfDirty = true;
-        }
-        /**
-         * A function that defines how to track changes for items in the iterable.
-         *
-         * When items are added, moved, or removed in the iterable,
-         * the directive must re-render the appropriate DOM nodes.
-         * To minimize churn in the DOM, only nodes that have changed
-         * are re-rendered.
-         *
-         * By default, the change detector assumes that
-         * the object instance identifies the node in the iterable.
-         * When this function is supplied, the directive uses
-         * the result of calling this function to identify the item node,
-         * rather than the identity of the object itself.
-         *
-         * The function receives two inputs,
-         * the iteration index and the node object ID.
-         */
-        set ngForTrackBy(fn) {
-            if (isDevMode() && fn != null && typeof fn !== 'function') {
-                // TODO(vicb): use a log service once there is a public one available
-                if (console && console.warn) {
-                    console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
-                        `See https://angular.io/api/common/NgForOf#change-propagation for more information.`);
-                }
-            }
-            this._trackByFn = fn;
-        }
-        get ngForTrackBy() {
-            return this._trackByFn;
-        }
-        /**
-         * A reference to the template that is stamped out for each item in the iterable.
-         * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
-         */
-        set ngForTemplate(value) {
-            // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
-            // The current type is too restrictive; a template that just uses index, for example,
-            // should be acceptable.
-            if (value) {
-                this._template = value;
+class NgForOf {
+    constructor(_viewContainer, _template, _differs) {
+        this._viewContainer = _viewContainer;
+        this._template = _template;
+        this._differs = _differs;
+        this._ngForOf = null;
+        this._ngForOfDirty = true;
+        this._differ = null;
+    }
+    /**
+     * The value of the iterable expression, which can be used as a
+     * [template input variable](guide/structural-directives#template-input-variable).
+     */
+    set ngForOf(ngForOf) {
+        this._ngForOf = ngForOf;
+        this._ngForOfDirty = true;
+    }
+    /**
+     * A function that defines how to track changes for items in the iterable.
+     *
+     * When items are added, moved, or removed in the iterable,
+     * the directive must re-render the appropriate DOM nodes.
+     * To minimize churn in the DOM, only nodes that have changed
+     * are re-rendered.
+     *
+     * By default, the change detector assumes that
+     * the object instance identifies the node in the iterable.
+     * When this function is supplied, the directive uses
+     * the result of calling this function to identify the item node,
+     * rather than the identity of the object itself.
+     *
+     * The function receives two inputs,
+     * the iteration index and the node object ID.
+     */
+    set ngForTrackBy(fn) {
+        if (isDevMode() && fn != null && typeof fn !== 'function') {
+            // TODO(vicb): use a log service once there is a public one available
+            if (console && console.warn) {
+                console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
+                    `See https://angular.io/api/common/NgForOf#change-propagation for more information.`);
             }
         }
-        /**
-         * Applies the changes when needed.
-         */
-        ngDoCheck() {
-            if (this._ngForOfDirty) {
-                this._ngForOfDirty = false;
-                // React on ngForOf changes only once all inputs have been initialized
-                const value = this._ngForOf;
-                if (!this._differ && value) {
-                    try {
-                        this._differ = this._differs.find(value).create(this.ngForTrackBy);
-                    }
-                    catch (_a) {
-                        throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeName(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
-                    }
-                }
-            }
-            if (this._differ) {
-                const changes = this._differ.diff(this._ngForOf);
-                if (changes)
-                    this._applyChanges(changes);
-            }
-        }
-        _applyChanges(changes) {
-            const insertTuples = [];
-            changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
-                if (item.previousIndex == null) {
-                    // NgForOf is never "null" or "undefined" here because the differ detected
-                    // that a new item needs to be inserted from the iterable. This implies that
-                    // there is an iterable value for "_ngForOf".
-                    const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(null, this._ngForOf, -1, -1), currentIndex === null ? undefined : currentIndex);
-                    const tuple = new RecordViewTuple(item, view);
-                    insertTuples.push(tuple);
-                }
-                else if (currentIndex == null) {
-                    this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
-                }
-                else if (adjustedPreviousIndex !== null) {
-                    const view = this._viewContainer.get(adjustedPreviousIndex);
-                    this._viewContainer.move(view, currentIndex);
-                    const tuple = new RecordViewTuple(item, view);
-                    insertTuples.push(tuple);
-                }
-            });
-            for (let i = 0; i < insertTuples.length; i++) {
-                this._perViewChange(insertTuples[i].view, insertTuples[i].record);
-            }
-            for (let i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
-                const viewRef = this._viewContainer.get(i);
-                viewRef.context.index = i;
-                viewRef.context.count = ilen;
-                viewRef.context.ngForOf = this._ngForOf;
-            }
-            changes.forEachIdentityChange((record) => {
-                const viewRef = this._viewContainer.get(record.currentIndex);
-                viewRef.context.$implicit = record.item;
-            });
-        }
-        _perViewChange(view, record) {
-            view.context.$implicit = record.item;
-        }
-        /**
-         * Asserts the correct type of the context for the template that `NgForOf` will render.
-         *
-         * The presence of this method is a signal to the Ivy template type-check compiler that the
-         * `NgForOf` structural directive renders its template with a specific context type.
-         */
-        static ngTemplateContextGuard(dir, ctx) {
-            return true;
+        this._trackByFn = fn;
+    }
+    get ngForTrackBy() {
+        return this._trackByFn;
+    }
+    /**
+     * A reference to the template that is stamped out for each item in the iterable.
+     * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+     */
+    set ngForTemplate(value) {
+        // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
+        // The current type is too restrictive; a template that just uses index, for example,
+        // should be acceptable.
+        if (value) {
+            this._template = value;
         }
     }
-    NgForOf.ɵfac = function NgForOf_Factory(t) { return new (t || NgForOf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(IterableDiffers)); };
-    NgForOf.ɵdir = ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
-    return NgForOf;
-})();
+    /**
+     * Applies the changes when needed.
+     */
+    ngDoCheck() {
+        if (this._ngForOfDirty) {
+            this._ngForOfDirty = false;
+            // React on ngForOf changes only once all inputs have been initialized
+            const value = this._ngForOf;
+            if (!this._differ && value) {
+                try {
+                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
+                }
+                catch (_a) {
+                    throw new Error(`Cannot find a differ supporting object '${value}' of type '${getTypeName(value)}'. NgFor only supports binding to Iterables such as Arrays.`);
+                }
+            }
+        }
+        if (this._differ) {
+            const changes = this._differ.diff(this._ngForOf);
+            if (changes)
+                this._applyChanges(changes);
+        }
+    }
+    _applyChanges(changes) {
+        const insertTuples = [];
+        changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
+            if (item.previousIndex == null) {
+                // NgForOf is never "null" or "undefined" here because the differ detected
+                // that a new item needs to be inserted from the iterable. This implies that
+                // there is an iterable value for "_ngForOf".
+                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(null, this._ngForOf, -1, -1), currentIndex === null ? undefined : currentIndex);
+                const tuple = new RecordViewTuple(item, view);
+                insertTuples.push(tuple);
+            }
+            else if (currentIndex == null) {
+                this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
+            }
+            else if (adjustedPreviousIndex !== null) {
+                const view = this._viewContainer.get(adjustedPreviousIndex);
+                this._viewContainer.move(view, currentIndex);
+                const tuple = new RecordViewTuple(item, view);
+                insertTuples.push(tuple);
+            }
+        });
+        for (let i = 0; i < insertTuples.length; i++) {
+            this._perViewChange(insertTuples[i].view, insertTuples[i].record);
+        }
+        for (let i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
+            const viewRef = this._viewContainer.get(i);
+            viewRef.context.index = i;
+            viewRef.context.count = ilen;
+            viewRef.context.ngForOf = this._ngForOf;
+        }
+        changes.forEachIdentityChange((record) => {
+            const viewRef = this._viewContainer.get(record.currentIndex);
+            viewRef.context.$implicit = record.item;
+        });
+    }
+    _perViewChange(view, record) {
+        view.context.$implicit = record.item;
+    }
+    /**
+     * Asserts the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
+    }
+}
+NgForOf.ɵfac = function NgForOf_Factory(t) { return new (t || NgForOf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(IterableDiffers)); };
+NgForOf.ɵdir = ɵɵdefineDirective({ type: NgForOf, selectors: [["", "ngFor", "", "ngForOf", ""]], inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgForOf, [{
         type: Directive,
         args: [{ selector: '[ngFor][ngForOf]' }]
@@ -3402,78 +3372,75 @@ function getTypeName(type) {
  * @ngModule CommonModule
  * @publicApi
  */
-let NgIf = /** @class */ (() => {
-    class NgIf {
-        constructor(_viewContainer, templateRef) {
-            this._viewContainer = _viewContainer;
-            this._context = new NgIfContext();
-            this._thenTemplateRef = null;
-            this._elseTemplateRef = null;
-            this._thenViewRef = null;
-            this._elseViewRef = null;
-            this._thenTemplateRef = templateRef;
-        }
-        /**
-         * The Boolean expression to evaluate as the condition for showing a template.
-         */
-        set ngIf(condition) {
-            this._context.$implicit = this._context.ngIf = condition;
-            this._updateView();
-        }
-        /**
-         * A template to show if the condition expression evaluates to true.
-         */
-        set ngIfThen(templateRef) {
-            assertTemplate('ngIfThen', templateRef);
-            this._thenTemplateRef = templateRef;
-            this._thenViewRef = null; // clear previous view if any.
-            this._updateView();
-        }
-        /**
-         * A template to show if the condition expression evaluates to false.
-         */
-        set ngIfElse(templateRef) {
-            assertTemplate('ngIfElse', templateRef);
-            this._elseTemplateRef = templateRef;
-            this._elseViewRef = null; // clear previous view if any.
-            this._updateView();
-        }
-        _updateView() {
-            if (this._context.$implicit) {
-                if (!this._thenViewRef) {
-                    this._viewContainer.clear();
-                    this._elseViewRef = null;
-                    if (this._thenTemplateRef) {
-                        this._thenViewRef =
-                            this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
-                    }
-                }
-            }
-            else {
-                if (!this._elseViewRef) {
-                    this._viewContainer.clear();
-                    this._thenViewRef = null;
-                    if (this._elseTemplateRef) {
-                        this._elseViewRef =
-                            this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
-                    }
+class NgIf {
+    constructor(_viewContainer, templateRef) {
+        this._viewContainer = _viewContainer;
+        this._context = new NgIfContext();
+        this._thenTemplateRef = null;
+        this._elseTemplateRef = null;
+        this._thenViewRef = null;
+        this._elseViewRef = null;
+        this._thenTemplateRef = templateRef;
+    }
+    /**
+     * The Boolean expression to evaluate as the condition for showing a template.
+     */
+    set ngIf(condition) {
+        this._context.$implicit = this._context.ngIf = condition;
+        this._updateView();
+    }
+    /**
+     * A template to show if the condition expression evaluates to true.
+     */
+    set ngIfThen(templateRef) {
+        assertTemplate('ngIfThen', templateRef);
+        this._thenTemplateRef = templateRef;
+        this._thenViewRef = null; // clear previous view if any.
+        this._updateView();
+    }
+    /**
+     * A template to show if the condition expression evaluates to false.
+     */
+    set ngIfElse(templateRef) {
+        assertTemplate('ngIfElse', templateRef);
+        this._elseTemplateRef = templateRef;
+        this._elseViewRef = null; // clear previous view if any.
+        this._updateView();
+    }
+    _updateView() {
+        if (this._context.$implicit) {
+            if (!this._thenViewRef) {
+                this._viewContainer.clear();
+                this._elseViewRef = null;
+                if (this._thenTemplateRef) {
+                    this._thenViewRef =
+                        this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
                 }
             }
         }
-        /**
-         * Asserts the correct type of the context for the template that `NgIf` will render.
-         *
-         * The presence of this method is a signal to the Ivy template type-check compiler that the
-         * `NgIf` structural directive renders its template with a specific context type.
-         */
-        static ngTemplateContextGuard(dir, ctx) {
-            return true;
+        else {
+            if (!this._elseViewRef) {
+                this._viewContainer.clear();
+                this._thenViewRef = null;
+                if (this._elseTemplateRef) {
+                    this._elseViewRef =
+                        this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
+                }
+            }
         }
     }
-    NgIf.ɵfac = function NgIf_Factory(t) { return new (t || NgIf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef)); };
-    NgIf.ɵdir = ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
-    return NgIf;
-})();
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
+    }
+}
+NgIf.ɵfac = function NgIf_Factory(t) { return new (t || NgIf)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef)); };
+NgIf.ɵdir = ɵɵdefineDirective({ type: NgIf, selectors: [["", "ngIf", ""]], inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgIf, [{
         type: Directive,
         args: [{ selector: '[ngIf]' }]
@@ -3596,57 +3563,54 @@ class SwitchView {
  * @see [Structural Directives](guide/structural-directives)
  *
  */
-let NgSwitch = /** @class */ (() => {
-    class NgSwitch {
-        constructor() {
-            this._defaultUsed = false;
-            this._caseCount = 0;
+class NgSwitch {
+    constructor() {
+        this._defaultUsed = false;
+        this._caseCount = 0;
+        this._lastCaseCheckIndex = 0;
+        this._lastCasesMatched = false;
+    }
+    set ngSwitch(newValue) {
+        this._ngSwitch = newValue;
+        if (this._caseCount === 0) {
+            this._updateDefaultCases(true);
+        }
+    }
+    /** @internal */
+    _addCase() {
+        return this._caseCount++;
+    }
+    /** @internal */
+    _addDefault(view) {
+        if (!this._defaultViews) {
+            this._defaultViews = [];
+        }
+        this._defaultViews.push(view);
+    }
+    /** @internal */
+    _matchCase(value) {
+        const matched = value == this._ngSwitch;
+        this._lastCasesMatched = this._lastCasesMatched || matched;
+        this._lastCaseCheckIndex++;
+        if (this._lastCaseCheckIndex === this._caseCount) {
+            this._updateDefaultCases(!this._lastCasesMatched);
             this._lastCaseCheckIndex = 0;
             this._lastCasesMatched = false;
         }
-        set ngSwitch(newValue) {
-            this._ngSwitch = newValue;
-            if (this._caseCount === 0) {
-                this._updateDefaultCases(true);
-            }
-        }
-        /** @internal */
-        _addCase() {
-            return this._caseCount++;
-        }
-        /** @internal */
-        _addDefault(view) {
-            if (!this._defaultViews) {
-                this._defaultViews = [];
-            }
-            this._defaultViews.push(view);
-        }
-        /** @internal */
-        _matchCase(value) {
-            const matched = value == this._ngSwitch;
-            this._lastCasesMatched = this._lastCasesMatched || matched;
-            this._lastCaseCheckIndex++;
-            if (this._lastCaseCheckIndex === this._caseCount) {
-                this._updateDefaultCases(!this._lastCasesMatched);
-                this._lastCaseCheckIndex = 0;
-                this._lastCasesMatched = false;
-            }
-            return matched;
-        }
-        _updateDefaultCases(useDefault) {
-            if (this._defaultViews && useDefault !== this._defaultUsed) {
-                this._defaultUsed = useDefault;
-                for (let i = 0; i < this._defaultViews.length; i++) {
-                    const defaultView = this._defaultViews[i];
-                    defaultView.enforceState(useDefault);
-                }
+        return matched;
+    }
+    _updateDefaultCases(useDefault) {
+        if (this._defaultViews && useDefault !== this._defaultUsed) {
+            this._defaultUsed = useDefault;
+            for (let i = 0; i < this._defaultViews.length; i++) {
+                const defaultView = this._defaultViews[i];
+                defaultView.enforceState(useDefault);
             }
         }
     }
-    NgSwitch.ɵfac = function NgSwitch_Factory(t) { return new (t || NgSwitch)(); };
-    NgSwitch.ɵdir = ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
-    return NgSwitch;
-})();
+}
+NgSwitch.ɵfac = function NgSwitch_Factory(t) { return new (t || NgSwitch)(); };
+NgSwitch.ɵdir = ɵɵdefineDirective({ type: NgSwitch, selectors: [["", "ngSwitch", ""]], inputs: { ngSwitch: "ngSwitch" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitch, [{
         type: Directive,
         args: [{ selector: '[ngSwitch]' }]
@@ -3686,24 +3650,21 @@ let NgSwitch = /** @class */ (() => {
  * @see `NgSwitchDefault`
  *
  */
-let NgSwitchCase = /** @class */ (() => {
-    class NgSwitchCase {
-        constructor(viewContainer, templateRef, ngSwitch) {
-            this.ngSwitch = ngSwitch;
-            ngSwitch._addCase();
-            this._view = new SwitchView(viewContainer, templateRef);
-        }
-        /**
-         * Performs case matching. For internal use only.
-         */
-        ngDoCheck() {
-            this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
-        }
+class NgSwitchCase {
+    constructor(viewContainer, templateRef, ngSwitch) {
+        this.ngSwitch = ngSwitch;
+        ngSwitch._addCase();
+        this._view = new SwitchView(viewContainer, templateRef);
     }
-    NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
-    NgSwitchCase.ɵdir = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
-    return NgSwitchCase;
-})();
+    /**
+     * Performs case matching. For internal use only.
+     */
+    ngDoCheck() {
+        this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+    }
+}
+NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
+NgSwitchCase.ɵdir = ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
@@ -3726,16 +3687,13 @@ let NgSwitchCase = /** @class */ (() => {
  * @see `NgSwitchCase`
  *
  */
-let NgSwitchDefault = /** @class */ (() => {
-    class NgSwitchDefault {
-        constructor(viewContainer, templateRef, ngSwitch) {
-            ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
-        }
+class NgSwitchDefault {
+    constructor(viewContainer, templateRef, ngSwitch) {
+        ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
-    NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
-    NgSwitchDefault.ɵdir = ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
-    return NgSwitchDefault;
-})();
+}
+NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
+NgSwitchDefault.ɵdir = ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
@@ -3781,40 +3739,37 @@ let NgSwitchDefault = /** @class */ (() => {
  *
  * @publicApi
  */
-let NgPlural = /** @class */ (() => {
-    class NgPlural {
-        constructor(_localization) {
-            this._localization = _localization;
-            this._caseViews = {};
-        }
-        set ngPlural(value) {
-            this._switchValue = value;
-            this._updateView();
-        }
-        addCase(value, switchView) {
-            this._caseViews[value] = switchView;
-        }
-        _updateView() {
-            this._clearViews();
-            const cases = Object.keys(this._caseViews);
-            const key = getPluralCategory(this._switchValue, cases, this._localization);
-            this._activateView(this._caseViews[key]);
-        }
-        _clearViews() {
-            if (this._activeView)
-                this._activeView.destroy();
-        }
-        _activateView(view) {
-            if (view) {
-                this._activeView = view;
-                this._activeView.create();
-            }
+class NgPlural {
+    constructor(_localization) {
+        this._localization = _localization;
+        this._caseViews = {};
+    }
+    set ngPlural(value) {
+        this._switchValue = value;
+        this._updateView();
+    }
+    addCase(value, switchView) {
+        this._caseViews[value] = switchView;
+    }
+    _updateView() {
+        this._clearViews();
+        const cases = Object.keys(this._caseViews);
+        const key = getPluralCategory(this._switchValue, cases, this._localization);
+        this._activateView(this._caseViews[key]);
+    }
+    _clearViews() {
+        if (this._activeView)
+            this._activeView.destroy();
+    }
+    _activateView(view) {
+        if (view) {
+            this._activeView = view;
+            this._activeView.create();
         }
     }
-    NgPlural.ɵfac = function NgPlural_Factory(t) { return new (t || NgPlural)(ɵɵdirectiveInject(NgLocalization)); };
-    NgPlural.ɵdir = ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
-    return NgPlural;
-})();
+}
+NgPlural.ɵfac = function NgPlural_Factory(t) { return new (t || NgPlural)(ɵɵdirectiveInject(NgLocalization)); };
+NgPlural.ɵdir = ɵɵdefineDirective({ type: NgPlural, selectors: [["", "ngPlural", ""]], inputs: { ngPlural: "ngPlural" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgPlural, [{
         type: Directive,
         args: [{ selector: '[ngPlural]' }]
@@ -3841,18 +3796,15 @@ let NgPlural = /** @class */ (() => {
  *
  * @publicApi
  */
-let NgPluralCase = /** @class */ (() => {
-    class NgPluralCase {
-        constructor(value, template, viewContainer, ngPlural) {
-            this.value = value;
-            const isANumber = !isNaN(Number(value));
-            ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
-        }
+class NgPluralCase {
+    constructor(value, template, viewContainer, ngPlural) {
+        this.value = value;
+        const isANumber = !isNaN(Number(value));
+        ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
-    NgPluralCase.ɵfac = function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(ɵɵinjectAttribute('ngPluralCase'), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(NgPlural, 1)); };
-    NgPluralCase.ɵdir = ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
-    return NgPluralCase;
-})();
+}
+NgPluralCase.ɵfac = function NgPluralCase_Factory(t) { return new (t || NgPluralCase)(ɵɵinjectAttribute('ngPluralCase'), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(NgPlural, 1)); };
+NgPluralCase.ɵdir = ɵɵdefineDirective({ type: NgPluralCase, selectors: [["", "ngPluralCase", ""]] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgPluralCase, [{
         type: Directive,
         args: [{ selector: '[ngPluralCase]' }]
@@ -3906,49 +3858,46 @@ let NgPluralCase = /** @class */ (() => {
  *
  * @publicApi
  */
-let NgStyle = /** @class */ (() => {
-    class NgStyle {
-        constructor(_ngEl, _differs, _renderer) {
-            this._ngEl = _ngEl;
-            this._differs = _differs;
-            this._renderer = _renderer;
-            this._ngStyle = null;
-            this._differ = null;
-        }
-        set ngStyle(values) {
-            this._ngStyle = values;
-            if (!this._differ && values) {
-                this._differ = this._differs.find(values).create();
-            }
-        }
-        ngDoCheck() {
-            if (this._differ) {
-                const changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        }
-        _setStyle(nameAndUnit, value) {
-            const [name, unit] = nameAndUnit.split('.');
-            value = value != null && unit ? `${value}${unit}` : value;
-            if (value != null) {
-                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
-            }
-            else {
-                this._renderer.removeStyle(this._ngEl.nativeElement, name);
-            }
-        }
-        _applyChanges(changes) {
-            changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
-            changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
-            changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+class NgStyle {
+    constructor(_ngEl, _differs, _renderer) {
+        this._ngEl = _ngEl;
+        this._differs = _differs;
+        this._renderer = _renderer;
+        this._ngStyle = null;
+        this._differ = null;
+    }
+    set ngStyle(values) {
+        this._ngStyle = values;
+        if (!this._differ && values) {
+            this._differ = this._differs.find(values).create();
         }
     }
-    NgStyle.ɵfac = function NgStyle_Factory(t) { return new (t || NgStyle)(ɵɵdirectiveInject(ElementRef), ɵɵdirectiveInject(KeyValueDiffers), ɵɵdirectiveInject(Renderer2)); };
-    NgStyle.ɵdir = ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" } });
-    return NgStyle;
-})();
+    ngDoCheck() {
+        if (this._differ) {
+            const changes = this._differ.diff(this._ngStyle);
+            if (changes) {
+                this._applyChanges(changes);
+            }
+        }
+    }
+    _setStyle(nameAndUnit, value) {
+        const [name, unit] = nameAndUnit.split('.');
+        value = value != null && unit ? `${value}${unit}` : value;
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
+    }
+    _applyChanges(changes) {
+        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
+        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+    }
+}
+NgStyle.ɵfac = function NgStyle_Factory(t) { return new (t || NgStyle)(ɵɵdirectiveInject(ElementRef), ɵɵdirectiveInject(KeyValueDiffers), ɵɵdirectiveInject(Renderer2)); };
+NgStyle.ɵdir = ɵɵdefineDirective({ type: NgStyle, selectors: [["", "ngStyle", ""]], inputs: { ngStyle: "ngStyle" } });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgStyle, [{
         type: Directive,
         args: [{ selector: '[ngStyle]' }]
@@ -3988,75 +3937,72 @@ let NgStyle = /** @class */ (() => {
  *
  * @publicApi
  */
-let NgTemplateOutlet = /** @class */ (() => {
-    class NgTemplateOutlet {
-        constructor(_viewContainerRef) {
-            this._viewContainerRef = _viewContainerRef;
-            this._viewRef = null;
-            /**
-             * A context object to attach to the {@link EmbeddedViewRef}. This should be an
-             * object, the object's keys will be available for binding by the local template `let`
-             * declarations.
-             * Using the key `$implicit` in the context object will set its value as default.
-             */
-            this.ngTemplateOutletContext = null;
-            /**
-             * A string defining the template reference and optionally the context object for the template.
-             */
-            this.ngTemplateOutlet = null;
-        }
-        ngOnChanges(changes) {
-            const recreateView = this._shouldRecreateView(changes);
-            if (recreateView) {
-                const viewContainerRef = this._viewContainerRef;
-                if (this._viewRef) {
-                    viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
-                }
-                this._viewRef = this.ngTemplateOutlet ?
-                    viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
-                    null;
-            }
-            else if (this._viewRef && this.ngTemplateOutletContext) {
-                this._updateExistingContext(this.ngTemplateOutletContext);
-            }
-        }
+class NgTemplateOutlet {
+    constructor(_viewContainerRef) {
+        this._viewContainerRef = _viewContainerRef;
+        this._viewRef = null;
         /**
-         * We need to re-create existing embedded view if:
-         * - templateRef has changed
-         * - context has changes
-         *
-         * We mark context object as changed when the corresponding object
-         * shape changes (new properties are added or existing properties are removed).
-         * In other words we consider context with the same properties as "the same" even
-         * if object reference changes (see https://github.com/angular/angular/issues/13407).
+         * A context object to attach to the {@link EmbeddedViewRef}. This should be an
+         * object, the object's keys will be available for binding by the local template `let`
+         * declarations.
+         * Using the key `$implicit` in the context object will set its value as default.
          */
-        _shouldRecreateView(changes) {
-            const ctxChange = changes['ngTemplateOutletContext'];
-            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-        }
-        _hasContextShapeChanged(ctxChange) {
-            const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-            const currCtxKeys = Object.keys(ctxChange.currentValue || {});
-            if (prevCtxKeys.length === currCtxKeys.length) {
-                for (let propName of currCtxKeys) {
-                    if (prevCtxKeys.indexOf(propName) === -1) {
-                        return true;
-                    }
-                }
-                return false;
+        this.ngTemplateOutletContext = null;
+        /**
+         * A string defining the template reference and optionally the context object for the template.
+         */
+        this.ngTemplateOutlet = null;
+    }
+    ngOnChanges(changes) {
+        const recreateView = this._shouldRecreateView(changes);
+        if (recreateView) {
+            const viewContainerRef = this._viewContainerRef;
+            if (this._viewRef) {
+                viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
             }
-            return true;
+            this._viewRef = this.ngTemplateOutlet ?
+                viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
+                null;
         }
-        _updateExistingContext(ctx) {
-            for (let propName of Object.keys(ctx)) {
-                this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
-            }
+        else if (this._viewRef && this.ngTemplateOutletContext) {
+            this._updateExistingContext(this.ngTemplateOutletContext);
         }
     }
-    NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
-    NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature] });
-    return NgTemplateOutlet;
-})();
+    /**
+     * We need to re-create existing embedded view if:
+     * - templateRef has changed
+     * - context has changes
+     *
+     * We mark context object as changed when the corresponding object
+     * shape changes (new properties are added or existing properties are removed).
+     * In other words we consider context with the same properties as "the same" even
+     * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     */
+    _shouldRecreateView(changes) {
+        const ctxChange = changes['ngTemplateOutletContext'];
+        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
+    }
+    _hasContextShapeChanged(ctxChange) {
+        const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+        const currCtxKeys = Object.keys(ctxChange.currentValue || {});
+        if (prevCtxKeys.length === currCtxKeys.length) {
+            for (let propName of currCtxKeys) {
+                if (prevCtxKeys.indexOf(propName) === -1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+    _updateExistingContext(ctx) {
+        for (let propName of Object.keys(ctx)) {
+            this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
+        }
+    }
+}
+NgTemplateOutlet.ɵfac = function NgTemplateOutlet_Factory(t) { return new (t || NgTemplateOutlet)(ɵɵdirectiveInject(ViewContainerRef)); };
+NgTemplateOutlet.ɵdir = ɵɵdefineDirective({ type: NgTemplateOutlet, selectors: [["", "ngTemplateOutlet", ""]], inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet" }, features: [ɵɵNgOnChangesFeature] });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(NgTemplateOutlet, [{
         type: Directive,
         args: [{ selector: '[ngTemplateOutlet]' }]
@@ -4163,64 +4109,61 @@ const _observableStrategy = new ObservableStrategy();
  *
  * @publicApi
  */
-let AsyncPipe = /** @class */ (() => {
-    class AsyncPipe {
-        constructor(_ref) {
-            this._ref = _ref;
-            this._latestValue = null;
-            this._subscription = null;
-            this._obj = null;
-            this._strategy = null;
+class AsyncPipe {
+    constructor(_ref) {
+        this._ref = _ref;
+        this._latestValue = null;
+        this._subscription = null;
+        this._obj = null;
+        this._strategy = null;
+    }
+    ngOnDestroy() {
+        if (this._subscription) {
+            this._dispose();
         }
-        ngOnDestroy() {
-            if (this._subscription) {
-                this._dispose();
-            }
-        }
-        transform(obj) {
-            if (!this._obj) {
-                if (obj) {
-                    this._subscribe(obj);
-                }
-                return this._latestValue;
-            }
-            if (obj !== this._obj) {
-                this._dispose();
-                return this.transform(obj);
+    }
+    transform(obj) {
+        if (!this._obj) {
+            if (obj) {
+                this._subscribe(obj);
             }
             return this._latestValue;
         }
-        _subscribe(obj) {
-            this._obj = obj;
-            this._strategy = this._selectStrategy(obj);
-            this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
+        if (obj !== this._obj) {
+            this._dispose();
+            return this.transform(obj);
         }
-        _selectStrategy(obj) {
-            if (ɵisPromise(obj)) {
-                return _promiseStrategy;
-            }
-            if (ɵisObservable(obj)) {
-                return _observableStrategy;
-            }
-            throw invalidPipeArgumentError(AsyncPipe, obj);
+        return this._latestValue;
+    }
+    _subscribe(obj) {
+        this._obj = obj;
+        this._strategy = this._selectStrategy(obj);
+        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
+    }
+    _selectStrategy(obj) {
+        if (ɵisPromise(obj)) {
+            return _promiseStrategy;
         }
-        _dispose() {
-            this._strategy.dispose(this._subscription);
-            this._latestValue = null;
-            this._subscription = null;
-            this._obj = null;
+        if (ɵisObservable(obj)) {
+            return _observableStrategy;
         }
-        _updateLatestValue(async, value) {
-            if (async === this._obj) {
-                this._latestValue = value;
-                this._ref.markForCheck();
-            }
+        throw invalidPipeArgumentError(AsyncPipe, obj);
+    }
+    _dispose() {
+        this._strategy.dispose(this._subscription);
+        this._latestValue = null;
+        this._subscription = null;
+        this._obj = null;
+    }
+    _updateLatestValue(async, value) {
+        if (async === this._obj) {
+            this._latestValue = value;
+            this._ref.markForCheck();
         }
     }
-    AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinjectPipeChangeDetectorRef()); };
-    AsyncPipe.ɵpipe = ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
-    return AsyncPipe;
-})();
+}
+AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(ɵɵinjectPipeChangeDetectorRef()); };
+AsyncPipe.ɵpipe = ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,
         args: [{ name: 'async', pure: false }]
@@ -4248,24 +4191,21 @@ let AsyncPipe = /** @class */ (() => {
  * @ngModule CommonModule
  * @publicApi
  */
-let LowerCasePipe = /** @class */ (() => {
-    class LowerCasePipe {
-        /**
-         * @param value The string to transform to lower case.
-         */
-        transform(value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(LowerCasePipe, value);
-            }
-            return value.toLowerCase();
+class LowerCasePipe {
+    /**
+     * @param value The string to transform to lower case.
+     */
+    transform(value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(LowerCasePipe, value);
         }
+        return value.toLowerCase();
     }
-    LowerCasePipe.ɵfac = function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); };
-    LowerCasePipe.ɵpipe = ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
-    return LowerCasePipe;
-})();
+}
+LowerCasePipe.ɵfac = function LowerCasePipe_Factory(t) { return new (t || LowerCasePipe)(); };
+LowerCasePipe.ɵpipe = ɵɵdefinePipe({ name: "lowercase", type: LowerCasePipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(LowerCasePipe, [{
         type: Pipe,
         args: [{ name: 'lowercase' }]
@@ -4296,24 +4236,21 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  * @ngModule CommonModule
  * @publicApi
  */
-let TitleCasePipe = /** @class */ (() => {
-    class TitleCasePipe {
-        /**
-         * @param value The string to transform to title case.
-         */
-        transform(value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(TitleCasePipe, value);
-            }
-            return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
+class TitleCasePipe {
+    /**
+     * @param value The string to transform to title case.
+     */
+    transform(value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(TitleCasePipe, value);
         }
+        return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
     }
-    TitleCasePipe.ɵfac = function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); };
-    TitleCasePipe.ɵpipe = ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
-    return TitleCasePipe;
-})();
+}
+TitleCasePipe.ɵfac = function TitleCasePipe_Factory(t) { return new (t || TitleCasePipe)(); };
+TitleCasePipe.ɵpipe = ɵɵdefinePipe({ name: "titlecase", type: TitleCasePipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(TitleCasePipe, [{
         type: Pipe,
         args: [{ name: 'titlecase' }]
@@ -4326,24 +4263,21 @@ let TitleCasePipe = /** @class */ (() => {
  * @ngModule CommonModule
  * @publicApi
  */
-let UpperCasePipe = /** @class */ (() => {
-    class UpperCasePipe {
-        /**
-         * @param value The string to transform to upper case.
-         */
-        transform(value) {
-            if (!value)
-                return value;
-            if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(UpperCasePipe, value);
-            }
-            return value.toUpperCase();
+class UpperCasePipe {
+    /**
+     * @param value The string to transform to upper case.
+     */
+    transform(value) {
+        if (!value)
+            return value;
+        if (typeof value !== 'string') {
+            throw invalidPipeArgumentError(UpperCasePipe, value);
         }
+        return value.toUpperCase();
     }
-    UpperCasePipe.ɵfac = function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); };
-    UpperCasePipe.ɵpipe = ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
-    return UpperCasePipe;
-})();
+}
+UpperCasePipe.ɵfac = function UpperCasePipe_Factory(t) { return new (t || UpperCasePipe)(); };
+UpperCasePipe.ɵpipe = ɵɵdefinePipe({ name: "uppercase", type: UpperCasePipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(UpperCasePipe, [{
         type: Pipe,
         args: [{ name: 'uppercase' }]
@@ -4496,39 +4430,36 @@ let UpperCasePipe = /** @class */ (() => {
  * @publicApi
  */
 // clang-format on
-let DatePipe = /** @class */ (() => {
-    class DatePipe {
-        constructor(locale) {
-            this.locale = locale;
+class DatePipe {
+    constructor(locale) {
+        this.locale = locale;
+    }
+    /**
+     * @param value The date expression: a `Date` object,  a number
+     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+     * @param format The date/time components to include, using predefined options or a
+     * custom format string.
+     * @param timezone A timezone offset (such as `'+0430'`), or a standard
+     * UTC/GMT or continental US timezone abbreviation.
+     * When not supplied, uses the end-user's local system timezone.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * @returns A date string in the desired format.
+     */
+    transform(value, format = 'mediumDate', timezone, locale) {
+        if (value == null || value === '' || value !== value)
+            return null;
+        try {
+            return formatDate(value, format, locale || this.locale, timezone);
         }
-        /**
-         * @param value The date expression: a `Date` object,  a number
-         * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
-         * @param format The date/time components to include, using predefined options or a
-         * custom format string.
-         * @param timezone A timezone offset (such as `'+0430'`), or a standard
-         * UTC/GMT or continental US timezone abbreviation.
-         * When not supplied, uses the end-user's local system timezone.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         * @returns A date string in the desired format.
-         */
-        transform(value, format = 'mediumDate', timezone, locale) {
-            if (value == null || value === '' || value !== value)
-                return null;
-            try {
-                return formatDate(value, format, locale || this.locale, timezone);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(DatePipe, error.message);
-            }
+        catch (error) {
+            throw invalidPipeArgumentError(DatePipe, error.message);
         }
     }
-    DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-    DatePipe.ɵpipe = ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
-    return DatePipe;
-})();
+}
+DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(ɵɵdirectiveInject(LOCALE_ID)); };
+DatePipe.ɵpipe = ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
         args: [{ name: 'date', pure: true }]
@@ -4559,32 +4490,29 @@ const _INTERPOLATION_REGEXP = /#/g;
  *
  * @publicApi
  */
-let I18nPluralPipe = /** @class */ (() => {
-    class I18nPluralPipe {
-        constructor(_localization) {
-            this._localization = _localization;
-        }
-        /**
-         * @param value the number to be formatted
-         * @param pluralMap an object that mimics the ICU format, see
-         * http://userguide.icu-project.org/formatparse/messages.
-         * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
-         * default).
-         */
-        transform(value, pluralMap, locale) {
-            if (value == null)
-                return '';
-            if (typeof pluralMap !== 'object' || pluralMap === null) {
-                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
-            }
-            const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
-            return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
-        }
+class I18nPluralPipe {
+    constructor(_localization) {
+        this._localization = _localization;
     }
-    I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ɵɵdirectiveInject(NgLocalization)); };
-    I18nPluralPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
-    return I18nPluralPipe;
-})();
+    /**
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    transform(value, pluralMap, locale) {
+        if (value == null)
+            return '';
+        if (typeof pluralMap !== 'object' || pluralMap === null) {
+            throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
+        }
+        const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
+        return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
+    }
+}
+I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(ɵɵdirectiveInject(NgLocalization)); };
+I18nPluralPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,
         args: [{ name: 'i18nPlural', pure: true }]
@@ -4614,32 +4542,29 @@ let I18nPluralPipe = /** @class */ (() => {
  *
  * @publicApi
  */
-let I18nSelectPipe = /** @class */ (() => {
-    class I18nSelectPipe {
-        /**
-         * @param value a string to be internationalized.
-         * @param mapping an object that indicates the text that should be displayed
-         * for different values of the provided `value`.
-         */
-        transform(value, mapping) {
-            if (value == null)
-                return '';
-            if (typeof mapping !== 'object' || typeof value !== 'string') {
-                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
-            }
-            if (mapping.hasOwnProperty(value)) {
-                return mapping[value];
-            }
-            if (mapping.hasOwnProperty('other')) {
-                return mapping['other'];
-            }
+class I18nSelectPipe {
+    /**
+     * @param value a string to be internationalized.
+     * @param mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
+     */
+    transform(value, mapping) {
+        if (value == null)
             return '';
+        if (typeof mapping !== 'object' || typeof value !== 'string') {
+            throw invalidPipeArgumentError(I18nSelectPipe, mapping);
         }
+        if (mapping.hasOwnProperty(value)) {
+            return mapping[value];
+        }
+        if (mapping.hasOwnProperty('other')) {
+            return mapping['other'];
+        }
+        return '';
     }
-    I18nSelectPipe.ɵfac = function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); };
-    I18nSelectPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
-    return I18nSelectPipe;
-})();
+}
+I18nSelectPipe.ɵfac = function I18nSelectPipe_Factory(t) { return new (t || I18nSelectPipe)(); };
+I18nSelectPipe.ɵpipe = ɵɵdefinePipe({ name: "i18nSelect", type: I18nSelectPipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(I18nSelectPipe, [{
         type: Pipe,
         args: [{ name: 'i18nSelect', pure: true }]
@@ -4667,19 +4592,16 @@ let I18nSelectPipe = /** @class */ (() => {
  *
  * @publicApi
  */
-let JsonPipe = /** @class */ (() => {
-    class JsonPipe {
-        /**
-         * @param value A value of any type to convert into a JSON-format string.
-         */
-        transform(value) {
-            return JSON.stringify(value, null, 2);
-        }
+class JsonPipe {
+    /**
+     * @param value A value of any type to convert into a JSON-format string.
+     */
+    transform(value) {
+        return JSON.stringify(value, null, 2);
     }
-    JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
-    JsonPipe.ɵpipe = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
-    return JsonPipe;
-})();
+}
+JsonPipe.ɵfac = function JsonPipe_Factory(t) { return new (t || JsonPipe)(); };
+JsonPipe.ɵpipe = ɵɵdefinePipe({ name: "json", type: JsonPipe, pure: false });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(JsonPipe, [{
         type: Pipe,
         args: [{ name: 'json', pure: false }]
@@ -4715,35 +4637,32 @@ function makeKeyValuePair(key, value) {
  *
  * @publicApi
  */
-let KeyValuePipe = /** @class */ (() => {
-    class KeyValuePipe {
-        constructor(differs) {
-            this.differs = differs;
-            this.keyValues = [];
-        }
-        transform(input, compareFn = defaultComparator) {
-            if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
-                return null;
-            }
-            if (!this.differ) {
-                // make a differ for whatever type we've been passed in
-                this.differ = this.differs.find(input).create();
-            }
-            const differChanges = this.differ.diff(input);
-            if (differChanges) {
-                this.keyValues = [];
-                differChanges.forEachItem((r) => {
-                    this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
-                });
-                this.keyValues.sort(compareFn);
-            }
-            return this.keyValues;
-        }
+class KeyValuePipe {
+    constructor(differs) {
+        this.differs = differs;
+        this.keyValues = [];
     }
-    KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ɵɵdirectiveInject(KeyValueDiffers)); };
-    KeyValuePipe.ɵpipe = ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
-    return KeyValuePipe;
-})();
+    transform(input, compareFn = defaultComparator) {
+        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+            return null;
+        }
+        if (!this.differ) {
+            // make a differ for whatever type we've been passed in
+            this.differ = this.differs.find(input).create();
+        }
+        const differChanges = this.differ.diff(input);
+        if (differChanges) {
+            this.keyValues = [];
+            differChanges.forEachItem((r) => {
+                this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+            });
+            this.keyValues.sort(compareFn);
+        }
+        return this.keyValues;
+    }
+}
+KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(ɵɵdirectiveInject(KeyValueDiffers)); };
+KeyValuePipe.ɵpipe = ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,
         args: [{ name: 'keyvalue', pure: false }]
@@ -4821,43 +4740,40 @@ function defaultComparator(keyValueA, keyValueB) {
  *
  * @publicApi
  */
-let DecimalPipe = /** @class */ (() => {
-    class DecimalPipe {
-        constructor(_locale) {
-            this._locale = _locale;
+class DecimalPipe {
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param value The number to be formatted.
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    transform(value, digitsInfo, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        try {
+            const num = strToNumber(value);
+            return formatNumber(num, locale, digitsInfo);
         }
-        /**
-         * @param value The number to be formatted.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        transform(value, digitsInfo, locale) {
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            try {
-                const num = strToNumber(value);
-                return formatNumber(num, locale, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(DecimalPipe, error.message);
-            }
+        catch (error) {
+            throw invalidPipeArgumentError(DecimalPipe, error.message);
         }
     }
-    DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-    DecimalPipe.ɵpipe = ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
-    return DecimalPipe;
-})();
+}
+DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
+DecimalPipe.ɵpipe = ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(DecimalPipe, [{
         type: Pipe,
         args: [{ name: 'number' }]
@@ -4885,44 +4801,41 @@ let DecimalPipe = /** @class */ (() => {
  *
  * @publicApi
  */
-let PercentPipe = /** @class */ (() => {
-    class PercentPipe {
-        constructor(_locale) {
-            this._locale = _locale;
+class PercentPipe {
+    constructor(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     *
+     * @param value The number to be formatted as a percentage.
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `0`.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    transform(value, digitsInfo, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        try {
+            const num = strToNumber(value);
+            return formatPercent(num, locale, digitsInfo);
         }
-        /**
-         *
-         * @param value The number to be formatted as a percentage.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `0`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        transform(value, digitsInfo, locale) {
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            try {
-                const num = strToNumber(value);
-                return formatPercent(num, locale, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(PercentPipe, error.message);
-            }
+        catch (error) {
+            throw invalidPipeArgumentError(PercentPipe, error.message);
         }
     }
-    PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
-    PercentPipe.ɵpipe = ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
-    return PercentPipe;
-})();
+}
+PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(ɵɵdirectiveInject(LOCALE_ID)); };
+PercentPipe.ɵpipe = ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(PercentPipe, [{
         type: Pipe,
         args: [{ name: 'percent' }]
@@ -4970,77 +4883,74 @@ let PercentPipe = /** @class */ (() => {
  *
  * @publicApi
  */
-let CurrencyPipe = /** @class */ (() => {
-    class CurrencyPipe {
-        constructor(_locale, _defaultCurrencyCode = 'USD') {
-            this._locale = _locale;
-            this._defaultCurrencyCode = _defaultCurrencyCode;
+class CurrencyPipe {
+    constructor(_locale, _defaultCurrencyCode = 'USD') {
+        this._locale = _locale;
+        this._defaultCurrencyCode = _defaultCurrencyCode;
+    }
+    /**
+     *
+     * @param value The number to be formatted as currency.
+     * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+     * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
+     * configured using the `DEFAULT_CURRENCY_CODE` injection token.
+     * @param display The format for the currency indicator. One of the following:
+     *   - `code`: Show the code (such as `USD`).
+     *   - `symbol`(default): Show the symbol (such as `$`).
+     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+     * currency.
+     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+     * locale has no narrow symbol, uses the standard symbol for the locale.
+     *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
+     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+     *
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `2`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `2`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
+        if (isEmpty(value))
+            return null;
+        locale = locale || this._locale;
+        if (typeof display === 'boolean') {
+            if (console && console.warn) {
+                console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
+            }
+            display = display ? 'symbol' : 'code';
         }
-        /**
-         *
-         * @param value The number to be formatted as currency.
-         * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-         * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
-         * configured using the `DEFAULT_CURRENCY_CODE` injection token.
-         * @param display The format for the currency indicator. One of the following:
-         *   - `code`: Show the code (such as `USD`).
-         *   - `symbol`(default): Show the symbol (such as `$`).
-         *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-         * currency.
-         * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-         * locale has no narrow symbol, uses the standard symbol for the locale.
-         *   - String: Use the given string value instead of a code or a symbol.
-         * For example, an empty string will suppress the currency & symbol.
-         *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
-         *
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `2`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `2`.
-         * If not provided, the number will be formatted with the proper amount of digits,
-         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
-        transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
-            if (isEmpty(value))
-                return null;
-            locale = locale || this._locale;
-            if (typeof display === 'boolean') {
-                if (console && console.warn) {
-                    console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
-                }
-                display = display ? 'symbol' : 'code';
+        let currency = currencyCode || this._defaultCurrencyCode;
+        if (display !== 'code') {
+            if (display === 'symbol' || display === 'symbol-narrow') {
+                currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
             }
-            let currency = currencyCode || this._defaultCurrencyCode;
-            if (display !== 'code') {
-                if (display === 'symbol' || display === 'symbol-narrow') {
-                    currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
-                }
-                else {
-                    currency = display;
-                }
+            else {
+                currency = display;
             }
-            try {
-                const num = strToNumber(value);
-                return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
-            }
-            catch (error) {
-                throw invalidPipeArgumentError(CurrencyPipe, error.message);
-            }
+        }
+        try {
+            const num = strToNumber(value);
+            return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
+        }
+        catch (error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error.message);
         }
     }
-    CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ɵɵdirectiveInject(LOCALE_ID), ɵɵdirectiveInject(DEFAULT_CURRENCY_CODE)); };
-    CurrencyPipe.ɵpipe = ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
-    return CurrencyPipe;
-})();
+}
+CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(ɵɵdirectiveInject(LOCALE_ID), ɵɵdirectiveInject(DEFAULT_CURRENCY_CODE)); };
+CurrencyPipe.ɵpipe = ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(CurrencyPipe, [{
         type: Pipe,
         args: [{ name: 'currency' }]
@@ -5110,24 +5020,21 @@ function strToNumber(value) {
  *
  * @publicApi
  */
-let SlicePipe = /** @class */ (() => {
-    class SlicePipe {
-        transform(value, start, end) {
-            if (value == null)
-                return value;
-            if (!this.supports(value)) {
-                throw invalidPipeArgumentError(SlicePipe, value);
-            }
-            return value.slice(start, end);
+class SlicePipe {
+    transform(value, start, end) {
+        if (value == null)
+            return value;
+        if (!this.supports(value)) {
+            throw invalidPipeArgumentError(SlicePipe, value);
         }
-        supports(obj) {
-            return typeof obj === 'string' || Array.isArray(obj);
-        }
+        return value.slice(start, end);
     }
-    SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
-    SlicePipe.ɵpipe = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
-    return SlicePipe;
-})();
+    supports(obj) {
+        return typeof obj === 'string' || Array.isArray(obj);
+    }
+}
+SlicePipe.ɵfac = function SlicePipe_Factory(t) { return new (t || SlicePipe)(); };
+SlicePipe.ɵpipe = ɵɵdefinePipe({ name: "slice", type: SlicePipe, pure: false });
 /*@__PURE__*/ (function () { ɵsetClassMetadata(SlicePipe, [{
         type: Pipe,
         args: [{ name: 'slice', pure: false }]
@@ -5181,15 +5088,12 @@ const COMMON_PIPES = [
  *
  * @publicApi
  */
-let CommonModule = /** @class */ (() => {
-    class CommonModule {
-    }
-    CommonModule.ɵmod = ɵɵdefineNgModule({ type: CommonModule });
-    CommonModule.ɵinj = ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
-            { provide: NgLocalization, useClass: NgLocaleLocalization },
-        ] });
-    return CommonModule;
-})();
+class CommonModule {
+}
+CommonModule.ɵmod = ɵɵdefineNgModule({ type: CommonModule });
+CommonModule.ɵinj = ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
+        { provide: NgLocalization, useClass: NgLocaleLocalization },
+    ] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CommonModule, { declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] }); })();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(CommonModule, [{
         type: NgModule,
@@ -5252,7 +5156,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.0-rc.0+130.sha-8c682c5');
+const VERSION = new Version('10.0.0-rc.0+134.sha-a937889');
 
 /**
  * @license
@@ -5266,19 +5170,16 @@ const VERSION = new Version('10.0.0-rc.0+130.sha-8c682c5');
  *
  * @publicApi
  */
-let ViewportScroller = /** @class */ (() => {
-    class ViewportScroller {
-    }
-    // De-sugared tree-shakable injection
-    // See #23917
-    /** @nocollapse */
-    ViewportScroller.ɵprov = ɵɵdefineInjectable({
-        token: ViewportScroller,
-        providedIn: 'root',
-        factory: () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler))
-    });
-    return ViewportScroller;
-})();
+class ViewportScroller {
+}
+// De-sugared tree-shakable injection
+// See #23917
+/** @nocollapse */
+ViewportScroller.ɵprov = ɵɵdefineInjectable({
+    token: ViewportScroller,
+    providedIn: 'root',
+    factory: () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler))
+});
 /**
  * Manages the scroll position for a browser window.
  */

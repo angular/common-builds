@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+130.sha-8c682c5
+ * @license Angular v10.0.0-rc.0+134.sha-a937889
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -852,42 +852,39 @@ const APP_BASE_HREF_RESOLVED = new InjectionToken('APP_BASE_HREF_RESOLVED');
  *
  * @publicApi
  */
-let LocationUpgradeModule = /** @class */ (() => {
-    class LocationUpgradeModule {
-        static config(config) {
-            return {
-                ngModule: LocationUpgradeModule,
-                providers: [
-                    Location,
-                    {
-                        provide: $locationShim,
-                        useFactory: provide$location,
-                        deps: [UpgradeModule, Location, PlatformLocation, UrlCodec, LocationStrategy]
-                    },
-                    { provide: LOCATION_UPGRADE_CONFIGURATION, useValue: config ? config : {} },
-                    { provide: UrlCodec, useFactory: provideUrlCodec, deps: [LOCATION_UPGRADE_CONFIGURATION] },
-                    {
-                        provide: APP_BASE_HREF_RESOLVED,
-                        useFactory: provideAppBaseHref,
-                        deps: [LOCATION_UPGRADE_CONFIGURATION, [new Inject(APP_BASE_HREF), new Optional()]]
-                    },
-                    {
-                        provide: LocationStrategy,
-                        useFactory: provideLocationStrategy,
-                        deps: [
-                            PlatformLocation,
-                            APP_BASE_HREF_RESOLVED,
-                            LOCATION_UPGRADE_CONFIGURATION,
-                        ]
-                    },
-                ],
-            };
-        }
+class LocationUpgradeModule {
+    static config(config) {
+        return {
+            ngModule: LocationUpgradeModule,
+            providers: [
+                Location,
+                {
+                    provide: $locationShim,
+                    useFactory: provide$location,
+                    deps: [UpgradeModule, Location, PlatformLocation, UrlCodec, LocationStrategy]
+                },
+                { provide: LOCATION_UPGRADE_CONFIGURATION, useValue: config ? config : {} },
+                { provide: UrlCodec, useFactory: provideUrlCodec, deps: [LOCATION_UPGRADE_CONFIGURATION] },
+                {
+                    provide: APP_BASE_HREF_RESOLVED,
+                    useFactory: provideAppBaseHref,
+                    deps: [LOCATION_UPGRADE_CONFIGURATION, [new Inject(APP_BASE_HREF), new Optional()]]
+                },
+                {
+                    provide: LocationStrategy,
+                    useFactory: provideLocationStrategy,
+                    deps: [
+                        PlatformLocation,
+                        APP_BASE_HREF_RESOLVED,
+                        LOCATION_UPGRADE_CONFIGURATION,
+                    ]
+                },
+            ],
+        };
     }
-    LocationUpgradeModule.ɵmod = ɵɵdefineNgModule({ type: LocationUpgradeModule });
-    LocationUpgradeModule.ɵinj = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
-    return LocationUpgradeModule;
-})();
+}
+LocationUpgradeModule.ɵmod = ɵɵdefineNgModule({ type: LocationUpgradeModule });
+LocationUpgradeModule.ɵinj = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] }); })();
 /*@__PURE__*/ (function () { ɵsetClassMetadata(LocationUpgradeModule, [{
         type: NgModule,
