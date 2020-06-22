@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+200.sha-7e0eccc
+ * @license Angular v10.0.0-rc.0+208.sha-fd65958
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -358,11 +358,11 @@
                 return "Match by function: " + matcher.name;
             }
         };
-        HttpClientTestingBackend.decorators = [
-            { type: core.Injectable }
-        ];
         return HttpClientTestingBackend;
     }());
+    HttpClientTestingBackend.decorators = [
+        { type: core.Injectable }
+    ];
 
     /**
      * @license
@@ -381,20 +381,20 @@
     var HttpClientTestingModule = /** @class */ (function () {
         function HttpClientTestingModule() {
         }
-        HttpClientTestingModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            http.HttpClientModule,
-                        ],
-                        providers: [
-                            HttpClientTestingBackend,
-                            { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },
-                            { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
-                        ],
-                    },] }
-        ];
         return HttpClientTestingModule;
     }());
+    HttpClientTestingModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        http.HttpClientModule,
+                    ],
+                    providers: [
+                        HttpClientTestingBackend,
+                        { provide: http.HttpBackend, useExisting: HttpClientTestingBackend },
+                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                    ],
+                },] }
+    ];
 
     /**
      * @license
