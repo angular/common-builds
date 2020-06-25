@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+243.sha-e36d5b2
+ * @license Angular v10.0.0-rc.0+247.sha-2b2146b
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1851,8 +1851,10 @@ function weekGetter(size, monthBased = false) {
             result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
         }
         else {
-            const firstThurs = getFirstThursdayOfYear(date.getFullYear());
             const thisThurs = getThursdayThisWeek(date);
+            // Some days of a year are part of next year according to ISO 8601.
+            // Compute the firstThurs from the year of this week's Thursday
+            const firstThurs = getFirstThursdayOfYear(thisThurs.getFullYear());
             const diff = thisThurs.getTime() - firstThurs.getTime();
             result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
         }
@@ -5106,7 +5108,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.0-rc.0+243.sha-e36d5b2');
+const VERSION = new Version('10.0.0-rc.0+247.sha-2b2146b');
 
 /**
  * @license
