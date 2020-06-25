@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.0-rc.0+242.sha-77b62a5
+ * @license Angular v10.0.0-rc.0+245.sha-8a74508
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2151,8 +2151,10 @@
                 result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
             }
             else {
-                var firstThurs = getFirstThursdayOfYear(date.getFullYear());
                 var thisThurs = getThursdayThisWeek(date);
+                // Some days of a year are part of next year according to ISO 8601.
+                // Compute the firstThurs from the year of this week's Thursday
+                var firstThurs = getFirstThursdayOfYear(thisThurs.getFullYear());
                 var diff = thisThurs.getTime() - firstThurs.getTime();
                 result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
             }
@@ -5656,7 +5658,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.0.0-rc.0+242.sha-77b62a5');
+    var VERSION = new i0.Version('10.0.0-rc.0+245.sha-8a74508');
 
     /**
      * @license
