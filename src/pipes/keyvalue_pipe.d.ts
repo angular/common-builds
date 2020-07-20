@@ -30,8 +30,8 @@ export interface KeyValue<K, V> {
  * @usageNotes
  * ### Examples
  *
- * This examples show how an Object or a Map can be iterated by ngFor with the use of this
- * keyvalue pipe.
+ * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
+ * pipe.
  *
  * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
  *
@@ -45,18 +45,18 @@ export declare class KeyValuePipe implements PipeTransform {
     transform<K, V>(input: null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): null;
     transform<V>(input: {
         [key: string]: V;
-    } | ReadonlyMap<string, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
+    } | Map<string, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
     transform<V>(input: {
         [key: string]: V;
-    } | ReadonlyMap<string, V> | null, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
+    } | Map<string, V> | null, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
     transform<V>(input: {
         [key: number]: V;
-    } | ReadonlyMap<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
+    } | Map<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
     transform<V>(input: {
         [key: number]: V;
-    } | ReadonlyMap<number, V> | null, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>> | null;
-    transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    transform<K, V>(input: ReadonlyMap<K, V> | null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    } | Map<number, V> | null, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>> | null;
+    transform<K, V>(input: Map<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
+    transform<K, V>(input: Map<K, V> | null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
     static ɵfac: i0.ɵɵFactoryDef<KeyValuePipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<KeyValuePipe, "keyvalue">;
 }
