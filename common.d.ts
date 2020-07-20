@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.4+27.sha-e80278c
+ * @license Angular v10.0.4+31.sha-9cb318f
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1529,7 +1529,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+     * @see [template reference variable](guide/template-reference-variables)
      */
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
@@ -1653,7 +1653,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The conditional displays the data only if `userStream` returns a value,
  * so you don't need to use the
- * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+ * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
  * to guard against null values when accessing properties.
  * You can display an alternative template while waiting for the data.
  *
