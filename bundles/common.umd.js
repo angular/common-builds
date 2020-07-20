@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.1+35.sha-5d3d8b8
+ * @license Angular v10.1.0-next.1+36.sha-5b31a0a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3476,7 +3476,7 @@
         Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
             /**
              * A reference to the template that is stamped out for each item in the iterable.
-             * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+             * @see [template reference variable](guide/template-reference-variables)
              */
             set: function (value) {
                 // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
@@ -3685,7 +3685,7 @@
      *
      * The conditional displays the data only if `userStream` returns a value,
      * so you don't need to use the
-     * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+     * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
      * to guard against null values when accessing properties.
      * You can display an alternative template while waiting for the data.
      *
@@ -5658,7 +5658,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.1.0-next.1+35.sha-5d3d8b8');
+    var VERSION = new i0.Version('10.1.0-next.1+36.sha-5b31a0a');
 
     /**
      * @license

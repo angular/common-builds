@@ -154,7 +154,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+     * @see [template reference variable](guide/template-reference-variables)
      */
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
