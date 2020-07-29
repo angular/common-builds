@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.3+17.sha-8effc83
+ * @license Angular v10.1.0-next.3+16.sha-7f8c222
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -665,20 +665,16 @@
      * browser's URL.
      *
      * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
-     * or add a `<base href>` element to the document.
+     * or add a base element to the document. This URL prefix that will be preserved
+     * when generating and recognizing URLs.
      *
-     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app/'` and call
-     * `location.go('/foo')`, the browser's URL will become
-     * `example.com/my/app/foo`. To ensure all relative URIs resolve correctly,
-     * the `<base href>` and/or `APP_BASE_HREF` should end with a `/`.
-     *
-     * Similarly, if you add `<base href='/my/app/'/>` to the document and call
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
      * `location.go('/foo')`, the browser's URL will become
      * `example.com/my/app/foo`.
      *
-     * Note that when using `PathLocationStrategy`, neither the query nor
-     * the fragment in the `<base href>` will be preserved, as outlined
-     * by the [RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2).
+     * Similarly, if you add `<base href='/my/app'/>` to the document and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`.
      *
      * @usageNotes
      *
@@ -5526,7 +5522,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.1.0-next.3+17.sha-8effc83');
+    var VERSION = new i0.Version('10.1.0-next.3+16.sha-7f8c222');
 
     /**
      * @license
