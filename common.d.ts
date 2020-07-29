@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.3+1.sha-cf4da82
+ * @license Angular v10.1.0-next.3+2.sha-9c8bc4a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1737,7 +1737,7 @@ export declare class NgIf<T = unknown> {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgIf` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<NonNullable<T>>;
+    static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<Exclude<T, false | 0 | '' | null | undefined>>;
 }
 
 /**
