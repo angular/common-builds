@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.8+8.sha-db897f4
+ * @license Angular v10.0.8+10.sha-58f4b3a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5110,7 +5110,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.8+8.sha-db897f4');
+const VERSION = new Version('10.0.8+10.sha-58f4b3a');
 
 /**
  * @license
@@ -5238,12 +5238,24 @@ class BrowserViewportScroller {
      */
     supportScrollRestoration() {
         try {
-            return !!this.window && !!this.window.scrollTo;
+            if (!this.window || !this.window.scrollTo) {
+                return false;
+            }
+            // The `scrollRestoration` property could be on the `history` instance or its prototype.
+            const scrollRestorationDescriptor = getScrollRestorationProperty(this.window.history) ||
+                getScrollRestorationProperty(Object.getPrototypeOf(this.window.history));
+            // We can write to the `scrollRestoration` property if it is a writable data field or it has a
+            // setter function.
+            return !!scrollRestorationDescriptor &&
+                !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
         }
         catch (_a) {
             return false;
         }
     }
+}
+function getScrollRestorationProperty(obj) {
+    return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
 }
 /**
  * Provides an empty implementation of the viewport scroller. This will
