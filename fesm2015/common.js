@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.8+20.sha-ef7b70a
+ * @license Angular v10.0.8+22.sha-4107abb
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5110,7 +5110,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.8+20.sha-ef7b70a');
+const VERSION = new Version('10.0.8+22.sha-4107abb');
 
 /**
  * @license
@@ -5185,28 +5185,9 @@ class BrowserViewportScroller {
      */
     scrollToAnchor(anchor) {
         if (this.supportScrollRestoration()) {
-            // Escape anything passed to `querySelector` as it can throw errors and stop the application
-            // from working if invalid values are passed.
-            if (this.window.CSS && this.window.CSS.escape) {
-                anchor = this.window.CSS.escape(anchor);
-            }
-            else {
-                anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
-            }
-            try {
-                const elSelectedById = this.document.querySelector(`#${anchor}`);
-                if (elSelectedById) {
-                    this.scrollToElement(elSelectedById);
-                    return;
-                }
-                const elSelectedByName = this.document.querySelector(`[name='${anchor}']`);
-                if (elSelectedByName) {
-                    this.scrollToElement(elSelectedByName);
-                    return;
-                }
-            }
-            catch (e) {
-                this.errorHandler.handleError(e);
+            const elSelected = this.document.getElementById(anchor) || this.document.getElementsByName(anchor)[0];
+            if (elSelected) {
+                this.scrollToElement(elSelected);
             }
         }
     }
