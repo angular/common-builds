@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.0.9+16.sha-d5e09f4
+ * @license Angular v10.0.9+17.sha-b32126c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5110,7 +5110,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.9+16.sha-d5e09f4');
+const VERSION = new Version('10.0.9+17.sha-b32126c');
 
 /**
  * @license
@@ -5163,7 +5163,7 @@ class BrowserViewportScroller {
      * @returns The position in screen coordinates.
      */
     getScrollPosition() {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             return [this.window.scrollX, this.window.scrollY];
         }
         else {
@@ -5175,7 +5175,7 @@ class BrowserViewportScroller {
      * @param position The new position in screen coordinates.
      */
     scrollToPosition(position) {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             this.window.scrollTo(position[0], position[1]);
         }
     }
@@ -5184,7 +5184,7 @@ class BrowserViewportScroller {
      * @param anchor The ID of the anchor element.
      */
     scrollToAnchor(anchor) {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             const elSelected = this.document.getElementById(anchor) || this.document.getElementsByName(anchor)[0];
             if (elSelected) {
                 this.scrollToElement(elSelected);
@@ -5229,6 +5229,14 @@ class BrowserViewportScroller {
             // setter function.
             return !!scrollRestorationDescriptor &&
                 !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
+        }
+        catch (_a) {
+            return false;
+        }
+    }
+    supportsScrolling() {
+        try {
+            return !!this.window.scrollTo;
         }
         catch (_a) {
             return false;
