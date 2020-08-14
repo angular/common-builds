@@ -88,6 +88,7 @@ export declare class BrowserViewportScroller implements ViewportScroller {
      * battle-tested.
      */
     private supportScrollRestoration;
+    private supportsScrolling;
 }
 /**
  * Provides an empty implementation of the viewport scroller. This will

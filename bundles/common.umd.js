@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.5+19.sha-ca79880
+ * @license Angular v10.1.0-next.5+20.sha-71079ce
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5662,7 +5662,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.1.0-next.5+19.sha-ca79880');
+    var VERSION = new i0.Version('10.1.0-next.5+20.sha-71079ce');
 
     /**
      * @license
@@ -5718,7 +5718,7 @@
          * @returns The position in screen coordinates.
          */
         BrowserViewportScroller.prototype.getScrollPosition = function () {
-            if (this.supportScrollRestoration()) {
+            if (this.supportsScrolling()) {
                 return [this.window.scrollX, this.window.scrollY];
             }
             else {
@@ -5730,7 +5730,7 @@
          * @param position The new position in screen coordinates.
          */
         BrowserViewportScroller.prototype.scrollToPosition = function (position) {
-            if (this.supportScrollRestoration()) {
+            if (this.supportsScrolling()) {
                 this.window.scrollTo(position[0], position[1]);
             }
         };
@@ -5739,7 +5739,7 @@
          * @param anchor The ID of the anchor element.
          */
         BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
-            if (this.supportScrollRestoration()) {
+            if (this.supportsScrolling()) {
                 var elSelected = this.document.getElementById(anchor) || this.document.getElementsByName(anchor)[0];
                 if (elSelected) {
                     this.scrollToElement(elSelected);
@@ -5784,6 +5784,14 @@
                 // setter function.
                 return !!scrollRestorationDescriptor &&
                     !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
+            }
+            catch (_a) {
+                return false;
+            }
+        };
+        BrowserViewportScroller.prototype.supportsScrolling = function () {
+            try {
+                return !!this.window.scrollTo;
             }
             catch (_a) {
                 return false;
