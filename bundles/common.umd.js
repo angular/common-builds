@@ -1,5 +1,5 @@
 /**
- * @license Angular v10.1.0-next.6+3.sha-e472f5f
+ * @license Angular v10.1.0-next.6+4.sha-723a9ff
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3462,7 +3462,7 @@
              * rather than the identity of the object itself.
              *
              * The function receives two inputs,
-             * the iteration index and the node object ID.
+             * the iteration index and the associated node data.
              */
             set: function (fn) {
                 if (i0.isDevMode() && fn != null && typeof fn !== 'function') {
@@ -5662,7 +5662,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('10.1.0-next.6+3.sha-e472f5f');
+    var VERSION = new i0.Version('10.1.0-next.6+4.sha-723a9ff');
 
     /**
      * @license
