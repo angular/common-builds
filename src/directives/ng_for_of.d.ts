@@ -127,7 +127,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/structural-directives#template-input-variable).
      */
-    set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
+    set ngForOf(ngForOf: U & NgIterable<T> | undefined | null);
     /**
      * A function that defines how to track changes for items in the iterable.
      *
