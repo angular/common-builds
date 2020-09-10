@@ -216,7 +216,7 @@ export declare function getLocaleId(locale: string): string;
  *
  * @publicApi
  */
-export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): [string, string];
+export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): Readonly<[string, string]>;
 /**
  * Retrieves days of the week for the given locale, using the Gregorian calendar.
  *
@@ -229,7 +229,7 @@ export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle
  *
  * @publicApi
  */
-export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 /**
  * Retrieves months of the year for the given locale, using the Gregorian calendar.
  *
@@ -242,11 +242,10 @@ export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, 
  *
  * @publicApi
  */
-export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 /**
  * Retrieves Gregorian-calendar eras for the given locale.
  * @param locale A locale code for the locale format rules to use.
- * @param formStyle The required grammatical form.
  * @param width The required character width.
 
  * @returns An array of localized era strings.
@@ -255,7 +254,7 @@ export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle
  *
  * @publicApi
  */
-export declare function getLocaleEraNames(locale: string, width: TranslationWidth): [string, string];
+export declare function getLocaleEraNames(locale: string, width: TranslationWidth): Readonly<[string, string]>;
 /**
  * Retrieves the first day of the week for the given locale.
  *
