@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.1+12.sha-ce1efc1
+ * @license Angular v11.0.0-next.1+13.sha-26f2820
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2436,7 +2436,10 @@
         var h = Number(match[4] || 0) - tzHour;
         var m = Number(match[5] || 0) - tzMin;
         var s = Number(match[6] || 0);
-        var ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+        // The ECMAScript specification (https://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.11)
+        // defines that `DateTime` milliseconds should always be rounded down, so that `999.9ms`
+        // becomes `999ms`.
+        var ms = Math.floor(parseFloat('0.' + (match[7] || 0)) * 1000);
         timeSetter.call(date, h, m, s, ms);
         return date;
     }
@@ -5526,7 +5529,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.0.0-next.1+12.sha-ce1efc1');
+    var VERSION = new i0.Version('11.0.0-next.1+13.sha-26f2820');
 
     /**
      * @license
