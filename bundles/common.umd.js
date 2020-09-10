@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.1+22.sha-2d52c80
+ * @license Angular v11.0.0-next.1+23.sha-6acea54
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1420,7 +1420,6 @@
     /**
      * Retrieves Gregorian-calendar eras for the given locale.
      * @param locale A locale code for the locale format rules to use.
-     * @param formStyle The required grammatical form.
      * @param width The required character width.
 
      * @returns An array of localized era strings.
@@ -5529,7 +5528,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.0.0-next.1+22.sha-2d52c80');
+    var VERSION = new i0.Version('11.0.0-next.1+23.sha-6acea54');
 
     /**
      * @license

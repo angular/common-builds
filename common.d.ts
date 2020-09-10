@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.1+22.sha-2d52c80
+ * @license Angular v11.0.0-next.1+23.sha-6acea54
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -647,7 +647,7 @@ export declare function getLocaleDateTimeFormat(locale: string, width: FormatWid
  *
  * @publicApi
  */
-export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 
 /**
  * Retrieves day period strings for the given locale.
@@ -660,7 +660,7 @@ export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, 
  *
  * @publicApi
  */
-export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): [string, string];
+export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): Readonly<[string, string]>;
 
 /**
  * Retrieves the writing direction of a specified locale
@@ -674,7 +674,6 @@ export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
 /**
  * Retrieves Gregorian-calendar eras for the given locale.
  * @param locale A locale code for the locale format rules to use.
- * @param formStyle The required grammatical form.
  * @param width The required character width.
 
  * @returns An array of localized era strings.
@@ -683,7 +682,7 @@ export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
  *
  * @publicApi
  */
-export declare function getLocaleEraNames(locale: string, width: TranslationWidth): [string, string];
+export declare function getLocaleEraNames(locale: string, width: TranslationWidth): Readonly<[string, string]>;
 
 /**
  * Retrieves locale-specific rules used to determine which day period to use
@@ -764,7 +763,7 @@ export declare function getLocaleId(locale: string): string;
  *
  * @publicApi
  */
-export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 
 /**
  * Retrieves a number format for a given locale.
