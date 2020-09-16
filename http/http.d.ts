@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.2+13.sha-dd8d8c8
+ * @license Angular v11.0.0-next.2+12.sha-1291071
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2632,10 +2632,6 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
-        params?: HttpParams | {
-            [param: string]: string | string[];
-        };
-        reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<T>>;
