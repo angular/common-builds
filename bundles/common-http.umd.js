@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.2+26.sha-88d7bb8
+ * @license Angular v11.0.0-next.2+23.sha-d92a0dd
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1903,9 +1903,9 @@
         HttpXhrBackend.prototype.handle = function (req) {
             var _this = this;
             // Quick check to give a better error message when a user attempts to use
-            // HttpClient.jsonp() without installing the HttpClientJsonpModule
+            // HttpClient.jsonp() without installing the JsonpClientModule
             if (req.method === 'JSONP') {
-                throw new Error("Attempted to construct Jsonp request without HttpClientJsonpModule installed.");
+                throw new Error("Attempted to construct Jsonp request without JsonpClientModule installed.");
             }
             // Everything happens on Observable subscription.
             return new rxjs.Observable(function (observer) {
