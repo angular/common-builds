@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.2+34.sha-0c0c54d
+ * @license Angular v11.0.0-next.2+39.sha-49f27e3
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1807,7 +1807,7 @@
     var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
     //    1        2       3         4          5          6          7          8  9     10      11
     var NAMED_FORMATS = {};
-    var DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+    var DATE_FORMATS_SPLIT = /((?:[^GyrMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|r{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
     var ZoneWidth;
     (function (ZoneWidth) {
         ZoneWidth[ZoneWidth["Short"] = 0] = "Short";
@@ -2164,6 +2164,17 @@
             return padNumber(result, size, getLocaleNumberSymbol(locale, exports.NumberSymbol.MinusSign));
         };
     }
+    /**
+     * Returns a date formatter that provides the week-numbering year for the input date.
+     */
+    function weekNumberingYearGetter(size, trim) {
+        if (trim === void 0) { trim = false; }
+        return function (date, locale) {
+            var thisThurs = getThursdayThisWeek(date);
+            var weekNumberingYear = thisThurs.getFullYear();
+            return padNumber(weekNumberingYear, size, getLocaleNumberSymbol(locale, exports.NumberSymbol.MinusSign), trim);
+        };
+    }
     var DATE_FORMATS = {};
     // Based on CLDR formats:
     // See complete list: http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
@@ -2202,6 +2213,24 @@
             // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
             case 'yyyy':
                 formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+                break;
+            // 1 digit representation of the week-numbering year, e.g. (AD 1 => 1, AD 199 => 199)
+            case 'r':
+                formatter = weekNumberingYearGetter(1);
+                break;
+            // 2 digit representation of the week-numbering year, padded (00-99). (e.g. AD 2001 => 01, AD
+            // 2010 => 10)
+            case 'rr':
+                formatter = weekNumberingYearGetter(2, true);
+                break;
+            // 3 digit representation of the week-numbering year, padded (000-999). (e.g. AD 1 => 001, AD
+            // 2010 => 2010)
+            case 'rrr':
+                formatter = weekNumberingYearGetter(3);
+                break;
+            // 4 digit representation of the week-numbering year (e.g. AD 1 => 0001, AD 2010 => 2010)
+            case 'rrrr':
+                formatter = weekNumberingYearGetter(4);
                 break;
             // Month of the year (1-12), numeric
             case 'M':
@@ -4802,6 +4831,10 @@
      *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
      *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
      *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Week-numbering year| r           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                    | rr          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                    | rrr         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                    | rrrr        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
      *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
      *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
      *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
@@ -5664,7 +5697,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.0.0-next.2+34.sha-0c0c54d');
+    var VERSION = new i0.Version('11.0.0-next.2+39.sha-49f27e3');
 
     /**
      * @license
