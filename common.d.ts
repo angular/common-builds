@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.2+32.sha-f3f6a42
+ * @license Angular v11.0.0-next.2+36.sha-fdd4fa0
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -248,6 +248,10 @@ export declare class CurrencyPipe implements PipeTransform {
  *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
  *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
  *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Week-numbering year| r           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                    | rr          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                    | rrr         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                    | rrrr        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
  *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
  *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
  *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
