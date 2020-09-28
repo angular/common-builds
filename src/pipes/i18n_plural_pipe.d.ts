@@ -32,7 +32,7 @@ export declare class I18nPluralPipe implements PipeTransform {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    transform(value: number, pluralMap: {
+    transform(value: number | null | undefined, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDef<I18nPluralPipe, never>;

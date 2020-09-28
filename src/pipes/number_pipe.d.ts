@@ -60,7 +60,9 @@ export declare class DecimalPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDef<DecimalPipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<DecimalPipe, "number">;
 }
@@ -103,7 +105,9 @@ export declare class PercentPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDef<PercentPipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<PercentPipe, "percent">;
 }
@@ -184,7 +188,9 @@ export declare class CurrencyPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDef<CurrencyPipe, never>;
     static ɵpipe: i0.ɵɵPipeDefWithMeta<CurrencyPipe, "currency">;
 }
