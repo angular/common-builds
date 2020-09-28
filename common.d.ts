@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.3+22.sha-323be39
+ * @license Angular v11.0.0-next.3+29.sha-4744c22
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -87,10 +87,9 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _strategy;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
-    transform<T>(obj: null): null;
-    transform<T>(obj: undefined): undefined;
-    transform<T>(obj: Observable<T> | null | undefined): T | null;
-    transform<T>(obj: Promise<T> | null | undefined): T | null;
+    transform<T>(obj: Observable<T> | Promise<T>): T | null;
+    transform<T>(obj: null | undefined): null;
+    transform<T>(obj: Observable<T> | Promise<T> | null | undefined): T | null;
     private _subscribe;
     private _selectStrategy;
     private _dispose;
@@ -191,7 +190,9 @@ export declare class CurrencyPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -352,7 +353,9 @@ export declare class DatePipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @returns A date string in the desired format.
      */
-    transform(value: any, format?: string, timezone?: string, locale?: string): string | null;
+    transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
+    transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
+    transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
 }
 
 /**
@@ -408,7 +411,9 @@ export declare class DecimalPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -916,7 +921,7 @@ export declare class I18nPluralPipe implements PipeTransform {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    transform(value: number, pluralMap: {
+    transform(value: number | null | undefined, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
 }
@@ -1031,21 +1036,13 @@ export declare class KeyValuePipe implements PipeTransform {
     constructor(differs: KeyValueDiffers);
     private differ;
     private keyValues;
-    transform<K, V>(input: null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): null;
-    transform<V>(input: {
-        [key: string]: V;
-    } | ReadonlyMap<string, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
-    transform<V>(input: {
-        [key: string]: V;
-    } | ReadonlyMap<string, V> | null, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
-    transform<V>(input: {
-        [key: number]: V;
-    } | ReadonlyMap<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
-    transform<V>(input: {
-        [key: number]: V;
-    } | ReadonlyMap<number, V> | null, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>> | null;
     transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    transform<K, V>(input: ReadonlyMap<K, V> | null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    transform<K extends number, V>(input: Record<K, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
+    transform(input: null | undefined, compareFn?: (a: KeyValue<unknown, unknown>, b: KeyValue<unknown, unknown>) => number): null;
+    transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
 }
 
 /**
@@ -1267,6 +1264,8 @@ export declare class LowerCasePipe implements PipeTransform {
      * @param value The string to transform to lower case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
@@ -2270,7 +2269,9 @@ export declare class PercentPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -2402,9 +2403,10 @@ export declare class SlicePipe implements PipeTransform {
      *   - **if negative**: return all items before `end` index from the end of the list or string.
      */
     transform<T>(value: ReadonlyArray<T>, start: number, end?: number): Array<T>;
+    transform(value: null | undefined, start: number, end?: number): null;
+    transform<T>(value: ReadonlyArray<T> | null | undefined, start: number, end?: number): Array<T> | null;
     transform(value: string, start: number, end?: number): string;
-    transform(value: null, start: number, end?: number): null;
-    transform(value: undefined, start: number, end?: number): undefined;
+    transform(value: string | null | undefined, start: number, end?: number): string | null;
     private supports;
 }
 
@@ -2450,6 +2452,8 @@ export declare class TitleCasePipe implements PipeTransform {
      * @param value The string to transform to title case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
@@ -2483,6 +2487,8 @@ export declare class UpperCasePipe implements PipeTransform {
      * @param value The string to transform to upper case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
