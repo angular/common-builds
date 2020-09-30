@@ -91,7 +91,8 @@ export declare class BrowserViewportScroller implements ViewportScroller {
     private supportsScrolling;
 }
 /**
- * Provides an empty implementation of the viewport scroller.
+ * Provides an empty implementation of the viewport scroller. This will
+ * live in @angular/common as it will be used by both platform-server and platform-webworker.
  */
 export declare class NullViewportScroller implements ViewportScroller {
     /**
