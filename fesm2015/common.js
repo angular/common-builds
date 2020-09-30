@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.3+76.sha-e2997ed
+ * @license Angular v11.0.0-next.3+80.sha-a6971ba
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5060,7 +5060,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.0.0-next.3+76.sha-e2997ed');
+const VERSION = new Version('11.0.0-next.3+80.sha-a6971ba');
 
 /**
  * @license
@@ -5197,8 +5197,7 @@ function getScrollRestorationProperty(obj) {
     return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
 }
 /**
- * Provides an empty implementation of the viewport scroller. This will
- * live in @angular/common as it will be used by both platform-server and platform-webworker.
+ * Provides an empty implementation of the viewport scroller.
  */
 class NullViewportScroller {
     /**
