@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.3+80.sha-a6971ba
+ * @license Angular v11.0.0-next.3+78.sha-1b70dc9
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2631,7 +2631,8 @@ export declare abstract class ɵDomAdapter {
 export declare function ɵgetDOM(): ɵDomAdapter;
 
 /**
- * Provides an empty implementation of the viewport scroller.
+ * Provides an empty implementation of the viewport scroller. This will
+ * live in @angular/common as it will be used by both platform-server and platform-webworker.
  */
 export declare class ɵNullViewportScroller implements ViewportScroller {
     /**
