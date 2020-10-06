@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.4+49.sha-ee03408
+ * @license Angular v11.0.0-next.4+50.sha-3c474ec
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -172,7 +172,7 @@
             throw new Error("Automatic conversion to " + format + " is not supported for Blobs.");
         }
         if (typeof body === 'string' || typeof body === 'number' || typeof body === 'object' ||
-            Array.isArray(body)) {
+            typeof body === 'boolean' || Array.isArray(body)) {
             return body;
         }
         throw new Error("Automatic conversion to " + format + " is not supported for response type.");

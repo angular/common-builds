@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.4+49.sha-ee03408
+ * @license Angular v11.0.0-next.4+50.sha-3c474ec
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -141,7 +141,7 @@ export declare class TestRequest {
      *
      * Both successful and unsuccessful responses can be delivered via `flush()`.
      */
-    flush(body: ArrayBuffer | Blob | string | number | Object | (string | number | Object | null)[] | null, opts?: {
+    flush(body: ArrayBuffer | Blob | boolean | string | number | Object | (boolean | string | number | Object | null)[] | null, opts?: {
         headers?: HttpHeaders | {
             [name: string]: string | string[];
         };
