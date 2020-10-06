@@ -31,7 +31,7 @@ export declare class TestRequest {
      *
      * Both successful and unsuccessful responses can be delivered via `flush()`.
      */
-    flush(body: ArrayBuffer | Blob | string | number | Object | (string | number | Object | null)[] | null, opts?: {
+    flush(body: ArrayBuffer | Blob | boolean | string | number | Object | (boolean | string | number | Object | null)[] | null, opts?: {
         headers?: HttpHeaders | {
             [name: string]: string | string[];
         };
