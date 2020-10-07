@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.4+61.sha-5fa012e
+ * @license Angular v11.0.0-next.4+63.sha-2932706
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1117,10 +1117,7 @@
      * Logic from https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1437
      */
     function encodeUriSegment(val) {
-        return encodeUriQuery(val, true)
-            .replace(/%26/gi, '&')
-            .replace(/%3D/gi, '=')
-            .replace(/%2B/gi, '+');
+        return encodeUriQuery(val, true).replace(/%26/g, '&').replace(/%3D/gi, '=').replace(/%2B/gi, '+');
     }
     /**
      * This method is intended for encoding *key* or *value* parts of query component. We need a custom
@@ -1138,7 +1135,7 @@
     function encodeUriQuery(val, pctEncodeSpaces) {
         if (pctEncodeSpaces === void 0) { pctEncodeSpaces = false; }
         return encodeURIComponent(val)
-            .replace(/%40/gi, '@')
+            .replace(/%40/g, '@')
             .replace(/%3A/gi, ':')
             .replace(/%24/g, '$')
             .replace(/%2C/gi, ',')
