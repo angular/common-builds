@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.5+55.sha-584f37c
+ * @license Angular v11.0.0-next.5+62.sha-8fd25d9
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -238,7 +238,7 @@ export declare class $locationShim {
      *
      * This method is supported only in HTML5 mode and only in browsers supporting
      * the HTML5 History API methods such as `pushState` and `replaceState`. If you need to support
-     * older browsers (like IE9 or Android < 4.0), don't use this method.
+     * older browsers (like Android < 4.0), don't use this method.
      *
      */
     state(): unknown;
