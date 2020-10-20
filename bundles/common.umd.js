@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.5+2.sha-a8c0972
+ * @license Angular v11.0.0-next.6+52.sha-0f1a18e
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2379,7 +2379,7 @@
         return formatter;
     }
     function timezoneToOffset(timezone, fallback) {
-        // Support: IE 9-11 only, Edge 13-15+
+        // Support: IE 11 only, Edge 13-15+
         // IE/Edge do not "understand" colon (`:`) in timezone
         timezone = timezone.replace(/:/g, '');
         var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
@@ -5475,7 +5475,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.0.0-next.5+2.sha-a8c0972');
+    var VERSION = new i0.Version('11.0.0-next.6+52.sha-0f1a18e');
 
     /**
      * @license
