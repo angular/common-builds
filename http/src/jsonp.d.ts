@@ -27,6 +27,10 @@ export declare abstract class JsonpCallbackContext {
 export declare class JsonpClientBackend implements HttpBackend {
     private callbackMap;
     private document;
+    /**
+     * A resolved promise that can be used to schedule microtasks in the event handlers.
+     */
+    private readonly resolvedPromise;
     constructor(callbackMap: JsonpCallbackContext, document: any);
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
