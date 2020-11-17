@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.6+288.sha-b6893d2
+ * @license Angular v11.0.0-next.6+290.sha-49410f8
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3577,6 +3577,10 @@ export declare abstract class HttpXsrfTokenExtractor {
 export declare class JsonpClientBackend implements HttpBackend {
     private callbackMap;
     private document;
+    /**
+     * A resolved promise that can be used to schedule microtasks in the event handlers.
+     */
+    private readonly resolvedPromise;
     constructor(callbackMap: ɵangular_packages_common_http_http_b, document: any);
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
