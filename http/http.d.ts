@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.0-next.6+294.sha-0ab833f
+ * @license Angular v11.0.0-next.6+295.sha-b33b89d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3221,7 +3221,7 @@ export declare class HttpParams {
  *
  * @publicApi
  */
-declare interface HttpParamsOptions {
+export declare interface HttpParamsOptions {
     /**
      * String representation of the HTTP parameters in URL-query-string format.
      * Mutually exclusive with `fromObject`.
