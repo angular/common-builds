@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.2
+ * @license Angular v11.0.2+17.sha-27152e2
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5475,7 +5475,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.0.2');
+    var VERSION = new i0.Version('11.0.2+17.sha-27152e2');
 
     /**
      * @license
@@ -5532,7 +5532,7 @@
          */
         BrowserViewportScroller.prototype.getScrollPosition = function () {
             if (this.supportsScrolling()) {
-                return [this.window.scrollX, this.window.scrollY];
+                return [this.window.pageXOffset, this.window.pageYOffset];
             }
             else {
                 return [0, 0];
@@ -5587,7 +5587,7 @@
          */
         BrowserViewportScroller.prototype.supportScrollRestoration = function () {
             try {
-                if (!this.window || !this.window.scrollTo) {
+                if (!this.supportsScrolling()) {
                     return false;
                 }
                 // The `scrollRestoration` property could be on the `history` instance or its prototype.
@@ -5604,7 +5604,7 @@
         };
         BrowserViewportScroller.prototype.supportsScrolling = function () {
             try {
-                return !!this.window.scrollTo;
+                return !!this.window && !!this.window.scrollTo && 'pageXOffset' in this.window;
             }
             catch (_a) {
                 return false;
