@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+46.sha-ff0a90e
+ * @license Angular v11.1.0-next.0+51.sha-3e1e5a1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4617,7 +4617,7 @@
     //
     // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
     // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
-    // (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
+    // (https://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
     // transpilation of this functionality down to ES5 without external tool, the only solution is
     // to use already transpiled form. Example can be found here -
     // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
@@ -5475,7 +5475,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.0+46.sha-ff0a90e');
+    var VERSION = new i0.Version('11.1.0-next.0+51.sha-3e1e5a1');
 
     /**
      * @license
