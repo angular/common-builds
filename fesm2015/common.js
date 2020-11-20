@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.2+31.sha-3114b0a
+ * @license Angular v11.0.2+36.sha-e32fe1a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4231,7 +4231,7 @@ LowerCasePipe.decorators = [
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
-// (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
+// (https://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
 // transpilation of this functionality down to ES5 without external tool, the only solution is
 // to use already transpiled form. Example can be found here -
 // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
@@ -5060,7 +5060,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.0.2+31.sha-3114b0a');
+const VERSION = new Version('11.0.2+36.sha-e32fe1a');
 
 /**
  * @license

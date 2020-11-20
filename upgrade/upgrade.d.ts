@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.2+31.sha-3114b0a
+ * @license Angular v11.0.2+36.sha-e32fe1a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -89,7 +89,7 @@ export declare class $locationShim {
     /**
      * Retrieves the full URL representation with all segments encoded according to
      * rules specified in
-     * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
+     * [RFC 3986](https://tools.ietf.org/html/rfc3986).
      *
      *
      * ```js

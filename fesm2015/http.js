@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.2+31.sha-3114b0a
+ * @license Angular v11.0.2+36.sha-e32fe1a
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1610,7 +1610,7 @@ class HttpXhrBackend {
                 if (headerResponse !== null) {
                     return headerResponse;
                 }
-                // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
+                // Read status and normalize an IE9 bug (https://bugs.jquery.com/ticket/1450).
                 const status = xhr.status === 1223 ? 204 : xhr.status;
                 const statusText = xhr.statusText || 'OK';
                 // Parse headers from XMLHttpRequest - this step is lazy.
