@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+46.sha-ff0a90e
+ * @license Angular v11.1.0-next.0+51.sha-3e1e5a1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1977,7 +1977,7 @@
                     if (headerResponse !== null) {
                         return headerResponse;
                     }
-                    // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
+                    // Read status and normalize an IE9 bug (https://bugs.jquery.com/ticket/1450).
                     var status = xhr.status === 1223 ? 204 : xhr.status;
                     var statusText = xhr.statusText || 'OK';
                     // Parse headers from XMLHttpRequest - this step is lazy.
