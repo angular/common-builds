@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.0.2+36.sha-e32fe1a
+ * @license Angular v11.0.2+39.sha-7c9b84f
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3434,7 +3434,7 @@ export declare abstract class HttpResponseBase {
      */
     readonly status: number;
     /**
-     * Textual description of response status code.
+     * Textual description of response status code, defaults to OK.
      *
      * Do not depend on this.
      */
