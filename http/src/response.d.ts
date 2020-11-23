@@ -135,7 +135,7 @@ export declare abstract class HttpResponseBase {
      */
     readonly status: number;
     /**
-     * Textual description of response status code.
+     * Textual description of response status code, defaults to OK.
      *
      * Do not depend on this.
      */

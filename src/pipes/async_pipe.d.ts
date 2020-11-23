@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subscribable } from 'rxjs';
 import * as i0 from "@angular/core";
 /**
  * @ngModule CommonModule
@@ -43,9 +43,9 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _strategy;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
-    transform<T>(obj: Observable<T> | Promise<T>): T | null;
+    transform<T>(obj: Subscribable<T> | Promise<T>): T | null;
     transform<T>(obj: null | undefined): null;
-    transform<T>(obj: Observable<T> | Promise<T> | null | undefined): T | null;
+    transform<T>(obj: Subscribable<T> | Promise<T> | null | undefined): T | null;
     private _subscribe;
     private _selectStrategy;
     private _dispose;
