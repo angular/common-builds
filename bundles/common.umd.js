@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+51.sha-3e1e5a1
+ * @license Angular v11.1.0-next.0+60.sha-938abc0
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4454,10 +4454,10 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var ObservableStrategy = /** @class */ (function () {
-        function ObservableStrategy() {
+    var SubscribableStrategy = /** @class */ (function () {
+        function SubscribableStrategy() {
         }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+        SubscribableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
             return async.subscribe({
                 next: updateLatestValue,
                 error: function (e) {
@@ -4465,13 +4465,13 @@
                 }
             });
         };
-        ObservableStrategy.prototype.dispose = function (subscription) {
+        SubscribableStrategy.prototype.dispose = function (subscription) {
             subscription.unsubscribe();
         };
-        ObservableStrategy.prototype.onDestroy = function (subscription) {
+        SubscribableStrategy.prototype.onDestroy = function (subscription) {
             subscription.unsubscribe();
         };
-        return ObservableStrategy;
+        return SubscribableStrategy;
     }());
     var PromiseStrategy = /** @class */ (function () {
         function PromiseStrategy() {
@@ -4486,7 +4486,7 @@
         return PromiseStrategy;
     }());
     var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
+    var _subscribableStrategy = new SubscribableStrategy();
     /**
      * @ngModule CommonModule
      * @description
@@ -4550,8 +4550,8 @@
             if (i0.ɵisPromise(obj)) {
                 return _promiseStrategy;
             }
-            if (i0.ɵisObservable(obj)) {
-                return _observableStrategy;
+            if (i0.ɵisSubscribable(obj)) {
+                return _subscribableStrategy;
             }
             throw invalidPipeArgumentError(AsyncPipe, obj);
         };
@@ -5475,7 +5475,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.0+51.sha-3e1e5a1');
+    var VERSION = new i0.Version('11.1.0-next.0+60.sha-938abc0');
 
     /**
      * @license
