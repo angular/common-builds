@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+66.sha-88fbc06
+ * @license Angular v11.1.0-next.0+69.sha-b5c0f9d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3720,7 +3720,7 @@
      *
      * The conditional displays the data only if `userStream` returns a value,
      * so you don't need to use the
-     * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
+     * safe-navigation-operator (`?.`)
      * to guard against null values when accessing properties.
      * You can display an alternative template while waiting for the data.
      *
@@ -5611,7 +5611,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.0+66.sha-88fbc06');
+    var VERSION = new i0.Version('11.1.0-next.0+69.sha-b5c0f9d');
 
     /**
      * @license
