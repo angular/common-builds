@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+67.sha-2c275f6
+ * @license Angular v11.1.0-next.0+66.sha-88fbc06
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3348,7 +3348,7 @@ function getTypeName(type) {
  *
  * The conditional displays the data only if `userStream` returns a value,
  * so you don't need to use the
- * safe-navigation-operator (`?.`)
+ * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
  * to guard against null values when accessing properties.
  * You can display an alternative template while waiting for the data.
  *
@@ -5060,7 +5060,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.0-next.0+67.sha-2c275f6');
+const VERSION = new Version('11.1.0-next.0+66.sha-88fbc06');
 
 /**
  * @license
