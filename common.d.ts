@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+66.sha-88fbc06
+ * @license Angular v11.1.0-next.0+69.sha-b5c0f9d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1655,7 +1655,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The conditional displays the data only if `userStream` returns a value,
  * so you don't need to use the
- * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
+ * safe-navigation-operator (`?.`)
  * to guard against null values when accessing properties.
  * You can display an alternative template while waiting for the data.
  *
