@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.0+120.sha-b40aa0a
+ * @license Angular v11.1.0-next.0+121.sha-7a5bc95
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -455,7 +455,7 @@ export declare class HttpClient {
         params?: HttpParams | {
             [param: string]: string | string[];
         };
-        observe?: HttpObserve;
+        observe?: 'body' | 'events' | 'response';
         reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
@@ -3127,8 +3127,6 @@ export declare interface HttpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
-
-declare type HttpObserve = 'body' | 'events' | 'response';
 
 
 /**
