@@ -5,7 +5,6 @@ import { HttpParams } from './params';
 import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
 import * as i0 from "@angular/core";
-export declare type HttpObserve = 'body' | 'events' | 'response';
 /**
  * Performs HTTP requests.
  * This service is available as an injectable class, with methods to perform HTTP requests.
@@ -430,7 +429,7 @@ export declare class HttpClient {
         params?: HttpParams | {
             [param: string]: string | string[];
         };
-        observe?: HttpObserve;
+        observe?: 'body' | 'events' | 'response';
         reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
