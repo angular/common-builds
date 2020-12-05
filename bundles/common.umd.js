@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.1+45.sha-d2042a0
+ * @license Angular v11.1.0-next.1+49.sha-7954c8d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3457,7 +3457,7 @@
              * the iteration index and the associated node data.
              */
             set: function (fn) {
-                if (i0.isDevMode() && fn != null && typeof fn !== 'function') {
+                if ((typeof ngDevMode === 'undefined' || ngDevMode) && fn != null && typeof fn !== 'function') {
                     // TODO(vicb): use a log service once there is a public one available
                     if (console && console.warn) {
                         console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
@@ -5252,7 +5252,7 @@
                 return null;
             locale = locale || this._locale;
             if (typeof display === 'boolean') {
-                if (console && console.warn) {
+                if ((typeof ngDevMode === 'undefined' || ngDevMode) && console && console.warn) {
                     console.warn("Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are \"code\", \"symbol\" or \"symbol-narrow\".");
                 }
                 display = display ? 'symbol' : 'code';
@@ -5475,7 +5475,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.1+45.sha-d2042a0');
+    var VERSION = new i0.Version('11.1.0-next.1+49.sha-7954c8d');
 
     /**
      * @license
