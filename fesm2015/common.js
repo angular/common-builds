@@ -1,10 +1,10 @@
 /**
- * @license Angular v11.1.0-next.1+45.sha-d2042a0
+ * @license Angular v11.1.0-next.1+49.sha-7954c8d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, isDevMode, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵisPromise, ɵisSubscribable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵisPromise, ɵisSubscribable, ɵɵinjectPipeChangeDetectorRef, ɵɵdefinePipe, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Version, ErrorHandler } from '@angular/core';
 
 /**
  * @license
@@ -3145,7 +3145,7 @@ class NgForOf {
      * the iteration index and the associated node data.
      */
     set ngForTrackBy(fn) {
-        if (isDevMode() && fn != null && typeof fn !== 'function') {
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && fn != null && typeof fn !== 'function') {
             // TODO(vicb): use a log service once there is a public one available
             if (console && console.warn) {
                 console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
@@ -4880,7 +4880,7 @@ class CurrencyPipe {
             return null;
         locale = locale || this._locale;
         if (typeof display === 'boolean') {
-            if (console && console.warn) {
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && console && console.warn) {
                 console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
             }
             display = display ? 'symbol' : 'code';
@@ -5110,7 +5110,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.0-next.1+45.sha-d2042a0');
+const VERSION = new Version('11.1.0-next.1+49.sha-7954c8d');
 
 /**
  * @license
