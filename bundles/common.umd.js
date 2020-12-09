@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.1+101.sha-13126d2
+ * @license Angular v11.1.0-next.1+102.sha-42d478b
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4710,22 +4710,20 @@
      *
      * ### Pre-defined format options
      *
-     * Examples are given in `en-US` locale.
-     *
-     * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
-     * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
-     * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
-     * GMT+1`).
-     * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
-     * 9:03:01 AM GMT+01:00`).
-     * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
-     * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
-     * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
-     * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
-     * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
-     * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
-     * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
-     * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+     * | Option        | Equivalent to                       | Examples (given in `en-US` locale)              |
+     * |---------------|-------------------------------------|-------------------------------------------------|
+     * | `'short'`     | `'M/d/yy, h:mm a'`                  | `6/15/15, 9:03 AM`                              |
+     * | `'medium'`    | `'MMM d, y, h:mm:ss a'`             | `Jun 15, 2015, 9:03:01 AM`                      |
+     * | `'long'`      | `'MMMM d, y, h:mm:ss a z'`          | `June 15, 2015 at 9:03:01 AM GMT+1`             |
+     * | `'full'`      | `'EEEE, MMMM d, y, h:mm:ss a zzzz'` | `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00` |
+     * | `'shortDate'` | `'M/d/yy'`                          | `6/15/15`                                       |
+     * | `'mediumDate'`| `'MMM d, y'`                        | `Jun 15, 2015`                                  |
+     * | `'longDate'`  | `'MMMM d, y'`                       | `June 15, 2015`                                 |
+     * | `'fullDate'`  | `'EEEE, MMMM d, y'`                 | `Monday, June 15, 2015`                         |
+     * | `'shortTime'` | `'h:mm a'`                          | `9:03 AM`                                       |
+     * | `'mediumTime'`| `'h:mm:ss a'`                       | `9:03:01 AM`                                    |
+     * | `'longTime'`  | `'h:mm:ss a z'`                     | `9:03:01 AM GMT+1`                              |
+     * | `'fullTime'`  | `'h:mm:ss a zzzz'`                  | `9:03:01 AM GMT+01:00`                          |
      *
      * ### Custom format options
      *
@@ -5475,7 +5473,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.1+101.sha-13126d2');
+    var VERSION = new i0.Version('11.1.0-next.1+102.sha-42d478b');
 
     /**
      * @license
