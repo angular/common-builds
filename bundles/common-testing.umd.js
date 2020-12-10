@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.2+8.sha-85b07ad
+ * @license Angular v11.1.0-next.2+9.sha-1f73af7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -131,8 +131,8 @@
     }());
     SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
     SpyLocation.ɵprov = i0.ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(SpyLocation, [{
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SpyLocation, [{
                 type: i0.Injectable
             }], null, null);
     })();
@@ -521,8 +521,8 @@
     }(common.LocationStrategy));
     MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
     MockLocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(MockLocationStrategy, [{
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MockLocationStrategy, [{
                 type: i0.Injectable
             }], function () { return []; }, null);
     })();
@@ -725,8 +725,8 @@
     }());
     MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(i0.ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
     MockPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac });
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(MockPlatformLocation, [{
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MockPlatformLocation, [{
                 type: i0.Injectable
             }], function () {
             return [{ type: undefined, decorators: [{

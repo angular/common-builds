@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.2+8.sha-85b07ad
+ * @license Angular v11.1.0-next.2+9.sha-1f73af7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -362,8 +362,8 @@
     }());
     HttpClientTestingBackend.ɵfac = function HttpClientTestingBackend_Factory(t) { return new (t || HttpClientTestingBackend)(); };
     HttpClientTestingBackend.ɵprov = i0.ɵɵdefineInjectable({ token: HttpClientTestingBackend, factory: HttpClientTestingBackend.ɵfac });
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(HttpClientTestingBackend, [{
                 type: i0.Injectable
             }], null, null);
     })();
@@ -396,8 +396,8 @@
                 http.HttpClientModule,
             ]] });
     (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [http.HttpClientModule] }); })();
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(HttpClientTestingModule, [{
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(HttpClientTestingModule, [{
                 type: i0.NgModule,
                 args: [{
                         imports: [

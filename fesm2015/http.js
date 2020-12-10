@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.2+8.sha-85b07ad
+ * @license Angular v11.1.0-next.2+9.sha-1f73af7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1229,7 +1229,7 @@ class HttpClient {
 }
 HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(ɵɵinject(HttpHandler)); };
 HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClient, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClient, [{
         type: Injectable
     }], function () { return [{ type: HttpHandler }]; }, null); })();
 
@@ -1268,7 +1268,7 @@ class NoopInterceptor {
 }
 NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
 NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(NoopInterceptor, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
     }], null, null); })();
 
@@ -1461,7 +1461,7 @@ class JsonpClientBackend {
 }
 JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT)); };
 JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpClientBackend, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                 type: Inject,
@@ -1496,7 +1496,7 @@ class JsonpInterceptor {
 }
 JsonpInterceptor.ɵfac = function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(ɵɵinject(JsonpClientBackend)); };
 JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonpInterceptor, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
     }], function () { return [{ type: JsonpClientBackend }]; }, null); })();
 
@@ -1540,7 +1540,7 @@ class BrowserXhr {
 }
 BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
 BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(BrowserXhr, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
     }], function () { return []; }, null); })();
 /**
@@ -1794,7 +1794,7 @@ class HttpXhrBackend {
 }
 HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
 HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXhrBackend, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
     }], function () { return [{ type: XhrFactory }]; }, null); })();
 
@@ -1844,7 +1844,7 @@ class HttpXsrfCookieExtractor {
 }
 HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(XSRF_COOKIE_NAME)); };
 HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,
@@ -1884,7 +1884,7 @@ class HttpXsrfInterceptor {
 }
 HttpXsrfInterceptor.ɵfac = function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(ɵɵinject(HttpXsrfTokenExtractor), ɵɵinject(XSRF_HEADER_NAME)); };
 HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpXsrfInterceptor, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
                 type: Inject,
@@ -1923,7 +1923,7 @@ class HttpInterceptingHandler {
 }
 HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(ɵɵinject(HttpBackend), ɵɵinject(Injector)); };
 HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpInterceptingHandler, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null); })();
 /**
@@ -2004,7 +2004,7 @@ HttpClientXsrfModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientXs
         { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
         { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
     ] });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientXsrfModule, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClientXsrfModule, [{
         type: NgModule,
         args: [{
                 providers: [
@@ -2042,7 +2042,7 @@ HttpClientModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientModule
             }),
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientModule, { imports: [HttpClientXsrfModule] }); })();
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientModule, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClientModule, [{
         type: NgModule,
         args: [{
                 /**
@@ -2087,7 +2087,7 @@ HttpClientJsonpModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientJ
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
     ] });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(HttpClientJsonpModule, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClientJsonpModule, [{
         type: NgModule,
         args: [{
                 providers: [

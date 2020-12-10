@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.2+8.sha-85b07ad
+ * @license Angular v11.1.0-next.2+9.sha-1f73af7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -121,7 +121,7 @@ class SpyLocation {
 }
 SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
 SpyLocation.ɵprov = ɵɵdefineInjectable({ token: SpyLocation, factory: SpyLocation.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(SpyLocation, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(SpyLocation, [{
         type: Injectable
     }], null, null); })();
 class LocationState {
@@ -210,7 +210,7 @@ class MockLocationStrategy extends LocationStrategy {
 }
 MockLocationStrategy.ɵfac = function MockLocationStrategy_Factory(t) { return new (t || MockLocationStrategy)(); };
 MockLocationStrategy.ɵprov = ɵɵdefineInjectable({ token: MockLocationStrategy, factory: MockLocationStrategy.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(MockLocationStrategy, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(MockLocationStrategy, [{
         type: Injectable
     }], function () { return []; }, null); })();
 class _MockPopStateEvent {
@@ -372,7 +372,7 @@ class MockPlatformLocation {
 }
 MockPlatformLocation.ɵfac = function MockPlatformLocation_Factory(t) { return new (t || MockPlatformLocation)(ɵɵinject(MOCK_PLATFORM_LOCATION_CONFIG, 8)); };
 MockPlatformLocation.ɵprov = ɵɵdefineInjectable({ token: MockPlatformLocation, factory: MockPlatformLocation.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(MockPlatformLocation, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(MockPlatformLocation, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
                 type: Inject,

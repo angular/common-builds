@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.2+8.sha-85b07ad
+ * @license Angular v11.1.0-next.2+9.sha-1f73af7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -883,7 +883,7 @@ class LocationUpgradeModule {
 LocationUpgradeModule.ɵmod = ɵɵdefineNgModule({ type: LocationUpgradeModule });
 LocationUpgradeModule.ɵinj = ɵɵdefineInjector({ factory: function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); }, imports: [[CommonModule]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] }); })();
-/*@__PURE__*/ (function () { ɵsetClassMetadata(LocationUpgradeModule, [{
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(LocationUpgradeModule, [{
         type: NgModule,
         args: [{ imports: [CommonModule] }]
     }], null, null); })();
