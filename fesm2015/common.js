@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.3+40.sha-805b4f9
+ * @license Angular v11.1.0-next.3+42.sha-3735633
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5108,7 +5108,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.0-next.3+40.sha-805b4f9');
+const VERSION = new Version('11.1.0-next.3+42.sha-3735633');
 
 /**
  * @license
