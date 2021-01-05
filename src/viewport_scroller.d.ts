@@ -5,7 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { ErrorHandler } from '@angular/core';
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
@@ -49,9 +48,8 @@ export declare abstract class ViewportScroller {
 export declare class BrowserViewportScroller implements ViewportScroller {
     private document;
     private window;
-    private errorHandler;
     private offset;
-    constructor(document: any, window: any, errorHandler: ErrorHandler);
+    constructor(document: Document, window: Window);
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @param offset A position in screen coordinates (a tuple with x and y values)
@@ -70,15 +68,39 @@ export declare class BrowserViewportScroller implements ViewportScroller {
      */
     scrollToPosition(position: [number, number]): void;
     /**
-     * Scrolls to an anchor element.
-     * @param anchor The ID of the anchor element.
+     * Scrolls to an element and attempts to focus the element.
+     *
+     * Note that the function name here is misleading in that the target string may be an ID for a
+     * non-anchor element.
+     *
+     * @param target The ID of an element or name of the anchor.
+     *
+     * @see https://html.spec.whatwg.org/#the-indicated-part-of-the-document
+     * @see https://html.spec.whatwg.org/#scroll-to-fragid
      */
-    scrollToAnchor(anchor: string): void;
+    scrollToAnchor(target: string): void;
     /**
      * Disables automatic scroll restoration provided by the browser.
      */
     setHistoryScrollRestoration(scrollRestoration: 'auto' | 'manual'): void;
+    /**
+     * Scrolls to an element using the native offset and the specified offset set on this scroller.
+     *
+     * The offset can be used when we know that there is a floating header and scrolling naively to an
+     * element (ex: `scrollIntoView`) leaves the element hidden behind the floating header.
+     */
     private scrollToElement;
+    /**
+     * Calls `focus` on the `focusTarget` and returns `true` if the element was focused successfully.
+     *
+     * If `false`, further steps may be necessary to determine a valid substitute to be focused
+     * instead.
+     *
+     * @see https://html.spec.whatwg.org/#get-the-focusable-area
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
+     * @see https://html.spec.whatwg.org/#focusable-area
+     */
+    private attemptFocus;
     /**
      * We only support scroll restoration when we can get a hold of window.
      * This means that we do not support this behavior when running in a web worker.
