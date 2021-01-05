@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.3+34.sha-9248ee2
+ * @license Angular v11.1.0-next.3+37.sha-4eac7e6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5473,7 +5473,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.3+34.sha-9248ee2');
+    var VERSION = new i0.Version('11.1.0-next.3+37.sha-4eac7e6');
 
     /**
      * @license
@@ -5498,16 +5498,15 @@
     ViewportScroller.ɵprov = i0.ɵɵdefineInjectable({
         token: ViewportScroller,
         providedIn: 'root',
-        factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window, i0.ɵɵinject(i0.ErrorHandler)); }
+        factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window); }
     });
     /**
      * Manages the scroll position for a browser window.
      */
     var BrowserViewportScroller = /** @class */ (function () {
-        function BrowserViewportScroller(document, window, errorHandler) {
+        function BrowserViewportScroller(document, window) {
             this.document = document;
             this.window = window;
-            this.errorHandler = errorHandler;
             this.offset = function () { return [0, 0]; };
         }
         /**
@@ -5546,16 +5545,32 @@
             }
         };
         /**
-         * Scrolls to an anchor element.
-         * @param anchor The ID of the anchor element.
+         * Scrolls to an element and attempts to focus the element.
+         *
+         * Note that the function name here is misleading in that the target string may be an ID for a
+         * non-anchor element.
+         *
+         * @param target The ID of an element or name of the anchor.
+         *
+         * @see https://html.spec.whatwg.org/#the-indicated-part-of-the-document
+         * @see https://html.spec.whatwg.org/#scroll-to-fragid
          */
-        BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
-            if (this.supportsScrolling()) {
-                var elSelected = this.document.getElementById(anchor) || this.document.getElementsByName(anchor)[0];
-                if (elSelected) {
-                    this.scrollToElement(elSelected);
-                }
+        BrowserViewportScroller.prototype.scrollToAnchor = function (target) {
+            var _a;
+            if (!this.supportsScrolling()) {
+                return;
             }
+            // TODO(atscott): The correct behavior for `getElementsByName` would be to also verify that the
+            // element is an anchor. However, this could be considered a breaking change and should be
+            // done in a major version.
+            var elSelected = (_a = this.document.getElementById(target)) !== null && _a !== void 0 ? _a : this.document.getElementsByName(target)[0];
+            if (elSelected === undefined) {
+                return;
+            }
+            this.scrollToElement(elSelected);
+            // After scrolling to the element, the spec dictates that we follow the focus steps for the
+            // target. Rather than following the robust steps, simply attempt focus.
+            this.attemptFocus(elSelected);
         };
         /**
          * Disables automatic scroll restoration provided by the browser.
@@ -5568,12 +5583,32 @@
                 }
             }
         };
+        /**
+         * Scrolls to an element using the native offset and the specified offset set on this scroller.
+         *
+         * The offset can be used when we know that there is a floating header and scrolling naively to an
+         * element (ex: `scrollIntoView`) leaves the element hidden behind the floating header.
+         */
         BrowserViewportScroller.prototype.scrollToElement = function (el) {
             var rect = el.getBoundingClientRect();
             var left = rect.left + this.window.pageXOffset;
             var top = rect.top + this.window.pageYOffset;
             var offset = this.offset();
             this.window.scrollTo(left - offset[0], top - offset[1]);
+        };
+        /**
+         * Calls `focus` on the `focusTarget` and returns `true` if the element was focused successfully.
+         *
+         * If `false`, further steps may be necessary to determine a valid substitute to be focused
+         * instead.
+         *
+         * @see https://html.spec.whatwg.org/#get-the-focusable-area
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
+         * @see https://html.spec.whatwg.org/#focusable-area
+         */
+        BrowserViewportScroller.prototype.attemptFocus = function (focusTarget) {
+            focusTarget.focus();
+            return this.document.activeElement === focusTarget;
         };
         /**
          * We only support scroll restoration when we can get a hold of window.
