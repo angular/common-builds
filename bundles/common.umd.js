@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-rc.0+12.sha-968b2bb
+ * @license Angular v11.1.0-rc.0+19.sha-63bf613
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3670,7 +3670,7 @@
      * You might want to show a set of properties from the same object. If you are waiting
      * for asynchronous data, the object can be undefined.
      * In this case, you can use `ngIf` and store the result of the condition in a local
-     * variable as shown in the the following example.
+     * variable as shown in the following example.
      *
      * {@example common/ngIf/ts/module.ts region='NgIfAs'}
      *
@@ -5473,7 +5473,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-rc.0+12.sha-968b2bb');
+    var VERSION = new i0.Version('11.1.0-rc.0+19.sha-63bf613');
 
     /**
      * @license
