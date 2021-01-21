@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+149.sha-c9033d6
+ * @license Angular v11.1.0-next.4+150.sha-575a2d1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -748,6 +748,26 @@
             return this.clone({ param: param, value: value, op: 'a' });
         };
         /**
+         * Constructs a new body with appended values for the given parameter name.
+         * @param params parameters and values
+         * @return A new body with the new value.
+         */
+        HttpParams.prototype.appendAll = function (params) {
+            var updates = [];
+            Object.keys(params).forEach(function (param) {
+                var value = params[param];
+                if (Array.isArray(value)) {
+                    value.forEach(function (_value) {
+                        updates.push({ param: param, value: _value, op: 'a' });
+                    });
+                }
+                else {
+                    updates.push({ param: param, value: value, op: 'a' });
+                }
+            });
+            return this.clone(updates);
+        };
+        /**
          * Replaces the value for a parameter.
          * @param param The parameter name.
          * @param value The new value.
@@ -790,7 +810,7 @@
         HttpParams.prototype.clone = function (update) {
             var clone = new HttpParams({ encoder: this.encoder });
             clone.cloneFrom = this.cloneFrom || this;
-            clone.updates = (this.updates || []).concat([update]);
+            clone.updates = (this.updates || []).concat(update);
             return clone;
         };
         HttpParams.prototype.init = function () {

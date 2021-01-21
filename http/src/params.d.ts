@@ -120,6 +120,14 @@ export declare class HttpParams {
      */
     append(param: string, value: string): HttpParams;
     /**
+     * Constructs a new body with appended values for the given parameter name.
+     * @param params parameters and values
+     * @return A new body with the new value.
+     */
+    appendAll(params: {
+        [param: string]: string | string[];
+    }): HttpParams;
+    /**
      * Replaces the value for a parameter.
      * @param param The parameter name.
      * @param value The new value.
