@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+149.sha-c9033d6
+ * @license Angular v11.1.0-next.4+150.sha-575a2d1
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3189,6 +3189,14 @@ export declare class HttpParams {
      * @return A new body with the appended value.
      */
     append(param: string, value: string): HttpParams;
+    /**
+     * Constructs a new body with appended values for the given parameter name.
+     * @param params parameters and values
+     * @return A new body with the new value.
+     */
+    appendAll(params: {
+        [param: string]: string | string[];
+    }): HttpParams;
     /**
      * Replaces the value for a parameter.
      * @param param The parameter name.
