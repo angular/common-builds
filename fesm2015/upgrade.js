@@ -1,22 +1,24 @@
 /**
- * @license Angular v8.0.0-rc.0+81.sha-b46eb3c.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v11.1.0-next.4+175.sha-02ff4ed
+ * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { ReplaySubject } from 'rxjs';
 import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, CommonModule, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { InjectionToken, Inject, Optional, NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
+function stripPrefix(val, prefix) {
+    return val.startsWith(prefix) ? val.substring(prefix.length) : val;
+}
 function deepEqual(a, b) {
     if (a === b) {
         return true;
@@ -36,17 +38,9 @@ function deepEqual(a, b) {
         }
     }
 }
-/**
- * @param {?} el
- * @return {?}
- */
 function isAnchor(el) {
-    return ((/** @type {?} */ (el))).href !== undefined;
+    return el.href !== undefined;
 }
-/**
- * @param {?} obj
- * @return {?}
- */
 function isPromise(obj) {
     // allow any Promise/A+ compliant thenable.
     // It's up to the caller to ensure that obj.then conforms to the spec
@@ -54,34 +48,29 @@ function isPromise(obj) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/** @type {?} */
 const PATH_MATCH = /^([^?#]*)(\?([^#]*))?(#(.*))?$/;
-/** @type {?} */
 const DOUBLE_SLASH_REGEX = /^\s*[\\/]{2,}/;
-/** @type {?} */
 const IGNORE_URI_REGEXP = /^\s*(javascript|mailto):/i;
-/** @type {?} */
 const DEFAULT_PORTS = {
     'http:': 80,
     'https:': 443,
     'ftp:': 21
 };
 /**
- * Docs TBD.
+ * Location service that provides a drop-in replacement for the $location service
+ * provided in AngularJS.
  *
- * \@publicApi
+ * @see [Using the Angular Unified Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ *
+ * @publicApi
  */
 class $locationShim {
-    /**
-     * @param {?} $injector
-     * @param {?} location
-     * @param {?} platformLocation
-     * @param {?} urlCodec
-     * @param {?} locationStrategy
-     */
     constructor($injector, location, platformLocation, urlCodec, locationStrategy) {
         this.location = location;
         this.platformLocation = platformLocation;
@@ -96,13 +85,13 @@ class $locationShim {
         this.$$path = '';
         this.$$search = '';
         this.$$hash = '';
+        this.$$changeListeners = [];
         this.cachedState = null;
+        this.urlChanges = new ReplaySubject(1);
         this.lastBrowserUrl = '';
         // This variable should be used *only* inside the cacheState function.
         this.lastCachedState = null;
-        /** @type {?} */
         const initialUrl = this.browserUrl();
-        /** @type {?} */
         let parsedUrl = this.urlCodec.parse(initialUrl);
         if (typeof parsedUrl === 'string') {
             throw 'Invalid URL';
@@ -113,37 +102,24 @@ class $locationShim {
         this.$$parseLinkUrl(initialUrl, initialUrl);
         this.cacheState();
         this.$$state = this.browserState();
+        this.location.onUrlChange((newUrl, newState) => {
+            this.urlChanges.next({ newUrl, newState });
+        });
         if (isPromise($injector)) {
-            $injector.then((/**
-             * @param {?} $i
-             * @return {?}
-             */
-            $i => this.initialize($i)));
+            $injector.then($i => this.initialize($i));
         }
         else {
             this.initialize($injector);
         }
     }
-    /**
-     * @private
-     * @param {?} $injector
-     * @return {?}
-     */
     initialize($injector) {
-        /** @type {?} */
         const $rootScope = $injector.get('$rootScope');
-        /** @type {?} */
         const $rootElement = $injector.get('$rootElement');
-        $rootElement.on('click', (/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+        $rootElement.on('click', (event) => {
             if (event.ctrlKey || event.metaKey || event.shiftKey || event.which === 2 ||
                 event.button === 2) {
                 return;
             }
-            /** @type {?} */
             let elm = event.target;
             // traverse the DOM up to find first A tag
             while (elm && elm.nodeName.toLowerCase() !== 'a') {
@@ -155,9 +131,7 @@ class $locationShim {
             if (!isAnchor(elm)) {
                 return;
             }
-            /** @type {?} */
             const absHref = elm.href;
-            /** @type {?} */
             const relHref = elm.getAttribute('href');
             // Ignore when url is started with javascript: or mailto:
             if (IGNORE_URI_REGEXP.test(absHref)) {
@@ -175,21 +149,13 @@ class $locationShim {
                     }
                 }
             }
-        }));
-        this.location.onUrlChange((/**
-         * @param {?} newUrl
-         * @param {?} newState
-         * @return {?}
-         */
-        (newUrl, newState) => {
-            /** @type {?} */
-            let oldUrl = this.absUrl();
-            /** @type {?} */
-            let oldState = this.$$state;
+        });
+        this.urlChanges.subscribe(({ newUrl, newState }) => {
+            const oldUrl = this.absUrl();
+            const oldState = this.$$state;
             this.$$parse(newUrl);
             newUrl = this.absUrl();
             this.$$state = newState;
-            /** @type {?} */
             const defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl, newState, oldState)
                 .defaultPrevented;
             // if the location was changed by a `$locationChangeStart` handler then stop
@@ -202,6 +168,7 @@ class $locationShim {
                 this.$$parse(oldUrl);
                 this.state(oldState);
                 this.setBrowserUrlWithFallback(oldUrl, false, oldState);
+                this.$$notifyChangeListeners(this.url(), this.$$state, oldUrl, oldState);
             }
             else {
                 this.initalizing = false;
@@ -211,23 +178,15 @@ class $locationShim {
             if (!$rootScope.$$phase) {
                 $rootScope.$digest();
             }
-        }));
+        });
         // update browser
-        $rootScope.$watch((/**
-         * @return {?}
-         */
-        () => {
+        $rootScope.$watch(() => {
             if (this.initalizing || this.updateBrowser) {
                 this.updateBrowser = false;
-                /** @type {?} */
                 const oldUrl = this.browserUrl();
-                /** @type {?} */
                 const newUrl = this.absUrl();
-                /** @type {?} */
                 const oldState = this.browserState();
-                /** @type {?} */
                 let currentReplace = this.$$replace;
-                /** @type {?} */
                 const urlOrStateChanged = !this.urlCodec.areEqual(oldUrl, newUrl) || oldState !== this.$$state;
                 // Fire location changes one time to on initialization. This must be done on the
                 // next tick (thus inside $evalAsync()) in order for listeners to be registered
@@ -235,14 +194,9 @@ class $locationShim {
                 // https://github.com/angular/angular.js/blob/master/src/ng/location.js#L983
                 if (this.initalizing || urlOrStateChanged) {
                     this.initalizing = false;
-                    $rootScope.$evalAsync((/**
-                     * @return {?}
-                     */
-                    () => {
+                    $rootScope.$evalAsync(() => {
                         // Get the new URL again since it could have changed due to async update
-                        /** @type {?} */
                         const newUrl = this.absUrl();
-                        /** @type {?} */
                         const defaultPrevented = $rootScope
                             .$broadcast('$locationChangeStart', newUrl, oldUrl, this.$$state, oldState)
                             .defaultPrevented;
@@ -262,30 +216,22 @@ class $locationShim {
                                 this.$$replace = false;
                             }
                             $rootScope.$broadcast('$locationChangeSuccess', newUrl, oldUrl, this.$$state, oldState);
+                            if (urlOrStateChanged) {
+                                this.$$notifyChangeListeners(this.url(), this.$$state, oldUrl, oldState);
+                            }
                         }
-                    }));
+                    });
                 }
             }
             this.$$replace = false;
-        }));
+        });
     }
-    /**
-     * @private
-     * @return {?}
-     */
     resetBrowserUpdate() {
         this.$$replace = false;
         this.$$state = this.browserState();
         this.updateBrowser = false;
         this.lastBrowserUrl = this.browserUrl();
     }
-    /**
-     * @private
-     * @param {?=} url
-     * @param {?=} replace
-     * @param {?=} state
-     * @return {?}
-     */
     browserUrl(url, replace, state) {
         // In modern browsers `history.state` is `null` by default; treating it separately
         // from `undefined` would cause `$browser.url('/foo')` to change `history.state`
@@ -295,7 +241,6 @@ class $locationShim {
         }
         // setter
         if (url) {
-            /** @type {?} */
             let sameState = this.lastHistoryState === state;
             // Normalize the inputted URL
             url = this.urlCodec.parse(url).href;
@@ -323,10 +268,6 @@ class $locationShim {
             return this.platformLocation.href;
         }
     }
-    /**
-     * @private
-     * @return {?}
-     */
     cacheState() {
         // This should be the only place in $browser where `history.state` is read.
         this.cachedState = this.platformLocation.getState();
@@ -343,54 +284,34 @@ class $locationShim {
     /**
      * This function emulates the $browser.state() function from AngularJS. It will cause
      * history.state to be cached unless changed with deep equality check.
-     * @private
-     * @return {?}
      */
-    browserState() { return this.cachedState; }
-    /**
-     * @private
-     * @param {?} base
-     * @param {?} url
-     * @return {?}
-     */
+    browserState() {
+        return this.cachedState;
+    }
     stripBaseUrl(base, url) {
         if (url.startsWith(base)) {
             return url.substr(base.length);
         }
         return undefined;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getServerBase() {
         const { protocol, hostname, port } = this.platformLocation;
-        /** @type {?} */
         const baseHref = this.locationStrategy.getBaseHref();
-        /** @type {?} */
         let url = `${protocol}//${hostname}${port ? ':' + port : ''}${baseHref || '/'}`;
         return url.endsWith('/') ? url : url + '/';
     }
-    /**
-     * @private
-     * @param {?} url
-     * @return {?}
-     */
     parseAppUrl(url) {
         if (DOUBLE_SLASH_REGEX.test(url)) {
             throw new Error(`Bad Path - URL cannot start with double slashes: ${url}`);
         }
-        /** @type {?} */
         let prefixed = (url.charAt(0) !== '/');
         if (prefixed) {
             url = '/' + url;
         }
-        /** @type {?} */
         let match = this.urlCodec.parse(url, this.getServerBase());
         if (typeof match === 'string') {
             throw new Error(`Bad URL - Cannot parse URL: ${url}`);
         }
-        /** @type {?} */
         let path = prefixed && match.pathname.charAt(0) === '/' ? match.pathname.substring(1) : match.pathname;
         this.$$path = this.urlCodec.decodePath(path);
         this.$$search = this.urlCodec.decodeSearch(match.search);
@@ -401,11 +322,38 @@ class $locationShim {
         }
     }
     /**
-     * @param {?} url
-     * @return {?}
+     * Registers listeners for URL changes. This API is used to catch updates performed by the
+     * AngularJS framework. These changes are a subset of the `$locationChangeStart` and
+     * `$locationChangeSuccess` events which fire when AngularJS updates its internally-referenced
+     * version of the browser URL.
+     *
+     * It's possible for `$locationChange` events to happen, but for the browser URL
+     * (window.location) to remain unchanged. This `onChange` callback will fire only when AngularJS
+     * actually updates the browser URL (window.location).
+     *
+     * @param fn The callback function that is triggered for the listener when the URL changes.
+     * @param err The callback function that is triggered when an error occurs.
+     */
+    onChange(fn, err = (e) => { }) {
+        this.$$changeListeners.push([fn, err]);
+    }
+    /** @internal */
+    $$notifyChangeListeners(url = '', state, oldUrl = '', oldState) {
+        this.$$changeListeners.forEach(([fn, err]) => {
+            try {
+                fn(url, state, oldUrl, oldState);
+            }
+            catch (e) {
+                err(e);
+            }
+        });
+    }
+    /**
+     * Parses the provided URL, and sets the current URL to the parsed result.
+     *
+     * @param url The URL string.
      */
     $$parse(url) {
-        /** @type {?} */
         let pathUrl;
         if (url.startsWith('/')) {
             pathUrl = url;
@@ -424,9 +372,10 @@ class $locationShim {
         this.composeUrls();
     }
     /**
-     * @param {?} url
-     * @param {?=} relHref
-     * @return {?}
+     * Parses the provided URL and its relative URL.
+     *
+     * @param url The full URL string.
+     * @param relHref A URL string relative to the full URL string.
      */
     $$parseLinkUrl(url, relHref) {
         // When relHref is passed, it should be a hash and is handled separately
@@ -434,9 +383,7 @@ class $locationShim {
             this.hash(relHref.slice(1));
             return true;
         }
-        /** @type {?} */
         let rewrittenUrl;
-        /** @type {?} */
         let appUrl = this.stripBaseUrl(this.getServerBase(), url);
         if (typeof appUrl !== 'undefined') {
             rewrittenUrl = this.getServerBase() + appUrl;
@@ -450,17 +397,8 @@ class $locationShim {
         }
         return !!rewrittenUrl;
     }
-    /**
-     * @private
-     * @param {?} url
-     * @param {?} replace
-     * @param {?} state
-     * @return {?}
-     */
     setBrowserUrlWithFallback(url, replace, state) {
-        /** @type {?} */
         const oldUrl = this.url();
-        /** @type {?} */
         const oldState = this.$$state;
         try {
             this.browserUrl(url, replace, state);
@@ -476,20 +414,15 @@ class $locationShim {
             throw e;
         }
     }
-    /**
-     * @private
-     * @return {?}
-     */
     composeUrls() {
         this.$$url = this.urlCodec.normalize(this.$$path, this.$$search, this.$$hash);
         this.$$absUrl = this.getServerBase() + this.$$url.substr(1); // remove '/' from front of URL
         this.updateBrowser = true;
     }
     /**
-     * This method is getter only.
-     *
-     * Return full URL representation with all segments encoded according to rules specified in
-     * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
+     * Retrieves the full URL representation with all segments encoded according to
+     * rules specified in
+     * [RFC 3986](https://tools.ietf.org/html/rfc3986).
      *
      *
      * ```js
@@ -497,19 +430,15 @@ class $locationShim {
      * let absUrl = $location.absUrl();
      * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
      * ```
-     * @return {?}
      */
-    absUrl() { return this.$$absUrl; }
-    /**
-     * @param {?=} url
-     * @return {?}
-     */
+    absUrl() {
+        return this.$$absUrl;
+    }
     url(url) {
         if (typeof url === 'string') {
             if (!url.length) {
                 url = '/';
             }
-            /** @type {?} */
             const match = PATH_MATCH.exec(url);
             if (!match)
                 return this;
@@ -524,25 +453,21 @@ class $locationShim {
         return this.$$url;
     }
     /**
-     * This method is getter only.
-     *
-     * Return protocol of current URL.
-     *
+     * Retrieves the protocol of the current URL.
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
      * let protocol = $location.protocol();
      * // => "http"
      * ```
-     * @return {?}
      */
-    protocol() { return this.$$protocol; }
+    protocol() {
+        return this.$$protocol;
+    }
     /**
-     * This method is getter only.
+     * Retrieves the protocol of the current URL.
      *
-     * Return host of current URL.
-     *
-     * Note: compared to the non-AngularJS version `location.host` which returns `hostname:port`, this
+     * In contrast to the non-AngularJS version `location.host` which returns `hostname:port`, this
      * returns the `hostname` portion only.
      *
      *
@@ -551,33 +476,28 @@ class $locationShim {
      * let host = $location.host();
      * // => "example.com"
      *
-     * // given URL http://user:password\@example.com:8080/#/some/path?foo=bar&baz=xoxo
+     * // given URL http://user:password@example.com:8080/#/some/path?foo=bar&baz=xoxo
      * host = $location.host();
      * // => "example.com"
      * host = location.host;
      * // => "example.com:8080"
      * ```
-     * @return {?}
      */
-    host() { return this.$$host; }
+    host() {
+        return this.$$host;
+    }
     /**
-     * This method is getter only.
-     *
-     * Return port of current URL.
-     *
+     * Retrieves the port of the current URL.
      *
      * ```js
      * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
      * let port = $location.port();
      * // => 80
      * ```
-     * @return {?}
      */
-    port() { return this.$$port; }
-    /**
-     * @param {?=} path
-     * @return {?}
-     */
+    port() {
+        return this.$$port;
+    }
     path(path) {
         if (typeof path === 'undefined') {
             return this.$$path;
@@ -589,11 +509,6 @@ class $locationShim {
         this.composeUrls();
         return this;
     }
-    /**
-     * @param {?=} search
-     * @param {?=} paramValue
-     * @return {?}
-     */
     search(search, paramValue) {
         switch (arguments.length) {
             case 0:
@@ -618,7 +533,6 @@ class $locationShim {
                 break;
             default:
                 if (typeof search === 'string') {
-                    /** @type {?} */
                     const currentSearch = this.search();
                     if (typeof paramValue === 'undefined' || paramValue === null) {
                         delete currentSearch[search];
@@ -633,10 +547,6 @@ class $locationShim {
         this.composeUrls();
         return this;
     }
-    /**
-     * @param {?=} hash
-     * @return {?}
-     */
     hash(hash) {
         if (typeof hash === 'undefined') {
             return this.$$hash;
@@ -646,20 +556,13 @@ class $locationShim {
         return this;
     }
     /**
-     * If called, all changes to $location during the current `$digest` will replace the current
+     * Changes to `$location` during the current `$digest` will replace the current
      * history record, instead of adding a new one.
-     * @template THIS
-     * @this {THIS}
-     * @return {THIS}
      */
     replace() {
-        (/** @type {?} */ (this)).$$replace = true;
-        return (/** @type {?} */ (this));
+        this.$$replace = true;
+        return this;
     }
-    /**
-     * @param {?=} state
-     * @return {?}
-     */
     state(state) {
         if (typeof state === 'undefined') {
             return this.$$state;
@@ -669,18 +572,12 @@ class $locationShim {
     }
 }
 /**
- * Docs TBD.
+ * The factory function used to create an instance of the `$locationShim` in Angular,
+ * and provides an API-compatiable `$locationProvider` for AngularJS.
  *
- * \@publicApi
+ * @publicApi
  */
 class $locationShimProvider {
-    /**
-     * @param {?} ngUpgrade
-     * @param {?} location
-     * @param {?} platformLocation
-     * @param {?} urlCodec
-     * @param {?} locationStrategy
-     */
     constructor(ngUpgrade, location, platformLocation, urlCodec, locationStrategy) {
         this.ngUpgrade = ngUpgrade;
         this.location = location;
@@ -689,7 +586,7 @@ class $locationShimProvider {
         this.locationStrategy = locationStrategy;
     }
     /**
-     * @return {?}
+     * Factory method that returns an instance of the $locationShim
      */
     $get() {
         return new $locationShim(this.ngUpgrade.$injector, this.location, this.platformLocation, this.urlCodec, this.locationStrategy);
@@ -697,8 +594,6 @@ class $locationShimProvider {
     /**
      * Stub method used to keep API compatible with AngularJS. This setting is configured through
      * the LocationUpgradeModule's `config` method in your Angular app.
-     * @param {?=} prefix
-     * @return {?}
      */
     hashPrefix(prefix) {
         throw new Error('Configure LocationUpgrade through LocationUpgradeModule.config method.');
@@ -706,8 +601,6 @@ class $locationShimProvider {
     /**
      * Stub method used to keep API compatible with AngularJS. This setting is configured through
      * the LocationUpgradeModule's `config` method in your Angular app.
-     * @param {?=} mode
-     * @return {?}
      */
     html5Mode(mode) {
         throw new Error('Configure LocationUpgrade through LocationUpgradeModule.config method.');
@@ -715,12 +608,8 @@ class $locationShimProvider {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -728,28 +617,20 @@ class $locationShimProvider {
 /**
  * A codec for encoding and decoding URL parts.
  *
- * \@publicApi
- *
- * @abstract
- */
+ * @publicApi
+ **/
 class UrlCodec {
 }
 /**
- * A `AngularJSUrlCodec` that uses logic from AngularJS to serialize and parse URLs
- * and URL parameters
+ * A `UrlCodec` that uses logic from AngularJS to serialize and parse URLs
+ * and URL parameters.
  *
- * \@publicApi
+ * @publicApi
  */
 class AngularJSUrlCodec {
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L15
-    /**
-     * @param {?} path
-     * @return {?}
-     */
     encodePath(path) {
-        /** @type {?} */
         const segments = path.split('/');
-        /** @type {?} */
         let i = segments.length;
         while (i--) {
             // decode forward slashes to prevent them from being double encoded
@@ -759,10 +640,6 @@ class AngularJSUrlCodec {
         return _stripIndexHtml((path && path[0] !== '/' && '/' || '') + path);
     }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L42
-    /**
-     * @param {?} search
-     * @return {?}
-     */
     encodeSearch(search) {
         if (typeof search === 'string') {
             search = parseKeyValue(search);
@@ -771,24 +648,13 @@ class AngularJSUrlCodec {
         return search ? '?' + search : '';
     }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L44
-    /**
-     * @param {?} hash
-     * @return {?}
-     */
     encodeHash(hash) {
         hash = encodeUriSegment(hash);
         return hash ? '#' + hash : '';
     }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L27
-    /**
-     * @param {?} path
-     * @param {?=} html5Mode
-     * @return {?}
-     */
     decodePath(path, html5Mode = true) {
-        /** @type {?} */
         const segments = path.split('/');
-        /** @type {?} */
         let i = segments.length;
         while (i--) {
             segments[i] = decodeURIComponent(segments[i]);
@@ -800,46 +666,27 @@ class AngularJSUrlCodec {
         return segments.join('/');
     }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L72
-    /**
-     * @param {?} search
-     * @return {?}
-     */
-    decodeSearch(search) { return parseKeyValue(search); }
+    decodeSearch(search) {
+        return parseKeyValue(search);
+    }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L73
-    /**
-     * @param {?} hash
-     * @return {?}
-     */
     decodeHash(hash) {
         hash = decodeURIComponent(hash);
         return hash[0] === '#' ? hash.substring(1) : hash;
     }
-    /**
-     * @param {?} pathOrHref
-     * @param {?=} search
-     * @param {?=} hash
-     * @param {?=} baseUrl
-     * @return {?}
-     */
     normalize(pathOrHref, search, hash, baseUrl) {
         if (arguments.length === 1) {
-            /** @type {?} */
             const parsed = this.parse(pathOrHref, baseUrl);
             if (typeof parsed === 'string') {
                 return parsed;
             }
-            /** @type {?} */
             const serverUrl = `${parsed.protocol}://${parsed.hostname}${parsed.port ? ':' + parsed.port : ''}`;
             return this.normalize(this.decodePath(parsed.pathname), this.decodeSearch(parsed.search), this.decodeHash(parsed.hash), serverUrl);
         }
         else {
-            /** @type {?} */
             const encPath = this.encodePath(pathOrHref);
-            /** @type {?} */
             const encSearch = search && this.encodeSearch(search) || '';
-            /** @type {?} */
             const encHash = hash && this.encodeHash(hash) || '';
-            /** @type {?} */
             let joinedPath = (baseUrl || '') + encPath;
             if (!joinedPath.length || joinedPath[0] !== '/') {
                 joinedPath = '/' + joinedPath;
@@ -847,22 +694,14 @@ class AngularJSUrlCodec {
             return joinedPath + encSearch + encHash;
         }
     }
-    /**
-     * @param {?} a
-     * @param {?} b
-     * @return {?}
-     */
-    areEqual(a, b) { return this.normalize(a) === this.normalize(b); }
+    areEqual(valA, valB) {
+        return this.normalize(valA) === this.normalize(valB);
+    }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/urlUtils.js#L60
-    /**
-     * @param {?} url
-     * @param {?=} base
-     * @return {?}
-     */
     parse(url, base) {
         try {
-            /** @type {?} */
-            const parsed = new URL(url, base);
+            // Safari 12 throws an error when the URL constructor is called with an undefined base.
+            const parsed = !base ? new URL(url) : new URL(url, base);
             return {
                 href: parsed.href,
                 protocol: parsed.protocol ? parsed.protocol.replace(/:$/, '') : '',
@@ -879,18 +718,14 @@ class AngularJSUrlCodec {
         }
     }
 }
-/**
- * @param {?} url
- * @return {?}
- */
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
 /**
  * Tries to decode the URI component without throwing an exception.
  *
- * @param {?} value
- * @return {?}
+ * @param str value potential URI component to check.
+ * @returns the decoded URI if it can be decoded or else `undefined`.
  */
 function tryDecodeURIComponent(value) {
     try {
@@ -904,23 +739,11 @@ function tryDecodeURIComponent(value) {
 /**
  * Parses an escaped url query string into key-value pairs. Logic taken from
  * https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1382
- * @param {?} keyValue
- * @return {?}
  */
 function parseKeyValue(keyValue) {
-    /** @type {?} */
     const obj = {};
-    (keyValue || '').split('&').forEach((/**
-     * @param {?} keyValue
-     * @return {?}
-     */
-    (keyValue) => {
-        /** @type {?} */
-        let splitPoint;
-        /** @type {?} */
-        let key;
-        /** @type {?} */
-        let val;
+    (keyValue || '').split('&').forEach((keyValue) => {
+        let splitPoint, key, val;
         if (keyValue) {
             key = keyValue = keyValue.replace(/\+/g, '%20');
             splitPoint = keyValue.indexOf('=');
@@ -935,85 +758,69 @@ function parseKeyValue(keyValue) {
                     obj[key] = val;
                 }
                 else if (Array.isArray(obj[key])) {
-                    ((/** @type {?} */ (obj[key]))).push(val);
+                    obj[key].push(val);
                 }
                 else {
                     obj[key] = [obj[key], val];
                 }
             }
         }
-    }));
+    });
     return obj;
 }
 /**
  * Serializes into key-value pairs. Logic taken from
  * https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1409
- * @param {?} obj
- * @return {?}
  */
 function toKeyValue(obj) {
-    /** @type {?} */
     const parts = [];
     for (const key in obj) {
-        /** @type {?} */
         let value = obj[key];
         if (Array.isArray(value)) {
-            value.forEach((/**
-             * @param {?} arrayValue
-             * @return {?}
-             */
-            (arrayValue) => {
+            value.forEach((arrayValue) => {
                 parts.push(encodeUriQuery(key, true) +
                     (arrayValue === true ? '' : '=' + encodeUriQuery(arrayValue, true)));
-            }));
+            });
         }
         else {
             parts.push(encodeUriQuery(key, true) +
-                (value === true ? '' : '=' + encodeUriQuery((/** @type {?} */ (value)), true)));
+                (value === true ? '' : '=' + encodeUriQuery(value, true)));
         }
     }
     return parts.length ? parts.join('&') : '';
 }
 /**
  * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
- * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set (pchar) allowed in path
+ * https://tools.ietf.org/html/rfc3986 with regards to the character set (pchar) allowed in path
  * segments:
  *    segment       = *pchar
- *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "\@"
+ *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
  *    pct-encoded   = "%" HEXDIG HEXDIG
  *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
  *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
  *                     / "*" / "+" / "," / ";" / "="
  *
  * Logic from https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1437
- * @param {?} val
- * @return {?}
  */
 function encodeUriSegment(val) {
-    return encodeUriQuery(val, true)
-        .replace(/%26/gi, '&')
-        .replace(/%3D/gi, '=')
-        .replace(/%2B/gi, '+');
+    return encodeUriQuery(val, true).replace(/%26/g, '&').replace(/%3D/gi, '=').replace(/%2B/gi, '+');
 }
 /**
  * This method is intended for encoding *key* or *value* parts of query component. We need a custom
  * method because encodeURIComponent is too aggressive and encodes stuff that doesn't have to be
- * encoded per http://tools.ietf.org/html/rfc3986:
+ * encoded per https://tools.ietf.org/html/rfc3986:
  *    query         = *( pchar / "/" / "?" )
- *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "\@"
+ *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
  *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
  *    pct-encoded   = "%" HEXDIG HEXDIG
  *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
  *                     / "*" / "+" / "," / ";" / "="
  *
  * Logic from https://github.com/angular/angular.js/blob/864c7f0/src/Angular.js#L1456
- * @param {?} val
- * @param {?=} pctEncodeSpaces
- * @return {?}
  */
 function encodeUriQuery(val, pctEncodeSpaces = false) {
     return encodeURIComponent(val)
-        .replace(/%40/gi, '@')
+        .replace(/%40/g, '@')
         .replace(/%3A/gi, ':')
         .replace(/%24/g, '$')
         .replace(/%2C/gi, ',')
@@ -1022,28 +829,27 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Is used in DI to configure the location upgrade package.
+ * A provider token used to configure the location upgrade module.
  *
- * \@publicApi
- * @type {?}
+ * @publicApi
  */
 const LOCATION_UPGRADE_CONFIGURATION = new InjectionToken('LOCATION_UPGRADE_CONFIGURATION');
-/** @type {?} */
 const APP_BASE_HREF_RESOLVED = new InjectionToken('APP_BASE_HREF_RESOLVED');
 /**
- * Module used for configuring Angular's LocationUpgradeService.
+ * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
  *
- * \@publicApi
+ * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ *
+ * @publicApi
  */
 class LocationUpgradeModule {
-    /**
-     * @param {?=} config
-     * @return {?}
-     */
     static config(config) {
         return {
             ngModule: LocationUpgradeModule,
@@ -1077,11 +883,6 @@ class LocationUpgradeModule {
 LocationUpgradeModule.decorators = [
     { type: NgModule, args: [{ imports: [CommonModule] },] }
 ];
-/**
- * @param {?} config
- * @param {?=} appBaseHref
- * @return {?}
- */
 function provideAppBaseHref(config, appBaseHref) {
     if (config && config.appBaseHref != null) {
         return config.appBaseHref;
@@ -1091,57 +892,47 @@ function provideAppBaseHref(config, appBaseHref) {
     }
     return '';
 }
-/**
- * @param {?} config
- * @return {?}
- */
 function provideUrlCodec(config) {
-    /** @type {?} */
     const codec = config && config.urlCodec || AngularJSUrlCodec;
-    return new ((/** @type {?} */ (codec)))();
+    return new codec();
 }
-/**
- * @param {?} platformLocation
- * @param {?} baseHref
- * @param {?=} options
- * @return {?}
- */
 function provideLocationStrategy(platformLocation, baseHref, options = {}) {
     return options.useHash ? new HashLocationStrategy(platformLocation, baseHref) :
         new PathLocationStrategy(platformLocation, baseHref);
 }
-/**
- * @param {?} ngUpgrade
- * @param {?} location
- * @param {?} platformLocation
- * @param {?} urlCodec
- * @param {?} locationStrategy
- * @return {?}
- */
 function provide$location(ngUpgrade, location, platformLocation, urlCodec, locationStrategy) {
-    /** @type {?} */
     const $locationProvider = new $locationShimProvider(ngUpgrade, location, platformLocation, urlCodec, locationStrategy);
     return $locationProvider.$get();
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
+// This file only reexports content of the `src` folder. Keep it that way.
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { provide$location as ɵangular_packages_common_upgrade_upgrade_d, provideAppBaseHref as ɵangular_packages_common_upgrade_upgrade_a, provideLocationStrategy as ɵangular_packages_common_upgrade_upgrade_c, provideUrlCodec as ɵangular_packages_common_upgrade_upgrade_b, $locationShim, $locationShimProvider, LOCATION_UPGRADE_CONFIGURATION, LocationUpgradeModule, AngularJSUrlCodec, UrlCodec };
+export { $locationShim, $locationShimProvider, AngularJSUrlCodec, LOCATION_UPGRADE_CONFIGURATION, LocationUpgradeModule, UrlCodec, provideAppBaseHref as ɵangular_packages_common_upgrade_upgrade_a, provideUrlCodec as ɵangular_packages_common_upgrade_upgrade_b, provideLocationStrategy as ɵangular_packages_common_upgrade_upgrade_c, provide$location as ɵangular_packages_common_upgrade_upgrade_d };
 //# sourceMappingURL=upgrade.js.map

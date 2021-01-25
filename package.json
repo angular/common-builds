@@ -1,28 +1,21 @@
 {
   "name": "@angular/common",
-  "version": "8.0.0-rc.0+81.sha-b46eb3c.with-local-changes",
+  "version": "11.1.0-next.4+175.sha-02ff4ed",
   "description": "Angular - commonly needed directives and services",
-  "main": "./bundles/common.umd.js",
-  "module": "./fesm5/common.js",
-  "es2015": "./fesm2015/common.js",
-  "esm5": "./esm5/common.js",
-  "esm2015": "./esm2015/common.js",
-  "fesm5": "./fesm5/common.js",
-  "fesm2015": "./fesm2015/common.js",
-  "typings": "./common.d.ts",
   "author": "angular",
   "license": "MIT",
-  "dependencies": {
-    "tslib": "^1.9.0"
-  },
   "locales": "locales",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
-    "rxjs": "^6.4.0",
-    "@angular/core": "8.0.0-rc.0+81.sha-b46eb3c.with-local-changes"
+    "@angular/core": "11.1.0-next.4+175.sha-02ff4ed",
+    "rxjs": "^6.5.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular/angular.git"
+    "url": "https://github.com/angular/angular.git",
+    "directory": "packages/common"
   },
   "ng-update": {
     "packageGroup": [
@@ -37,13 +30,24 @@
       "@angular/platform-browser-dynamic",
       "@angular/forms",
       "@angular/platform-server",
-      "@angular/platform-webworker",
-      "@angular/platform-webworker-dynamic",
       "@angular/upgrade",
       "@angular/router",
       "@angular/language-service",
+      "@angular/localize",
       "@angular/service-worker"
     ]
   },
-  "sideEffects": false
+  "sideEffects": [
+    "**/global/*.js",
+    "**/closure-locale.*"
+  ],
+  "publishConfig": {
+    "registry": "https://wombat-dressing-room.appspot.com"
+  },
+  "main": "./bundles/common.umd.js",
+  "fesm2015": "./fesm2015/common.js",
+  "esm2015": "./esm2015/common.js",
+  "typings": "./common.d.ts",
+  "module": "./fesm2015/common.js",
+  "es2015": "./fesm2015/common.js"
 }

@@ -1,6 +1,6 @@
 /**
- * @license Angular v8.0.0-rc.0+81.sha-b46eb3c.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v11.1.0-next.4+175.sha-02ff4ed
+ * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -131,7 +131,7 @@ export declare class TestRequest {
     /**
      * Whether the request was cancelled after it was sent.
      */
-    readonly cancelled: boolean;
+    get cancelled(): boolean;
     constructor(request: HttpRequest<any>, observer: Observer<HttpEvent<any>>);
     /**
      * Resolve the request by returning a body plus additional HTTP information (such as response
@@ -141,7 +141,7 @@ export declare class TestRequest {
      *
      * Both successful and unsuccessful responses can be delivered via `flush()`.
      */
-    flush(body: ArrayBuffer | Blob | string | number | Object | (string | number | Object | null)[] | null, opts?: {
+    flush(body: ArrayBuffer | Blob | boolean | string | number | Object | (boolean | string | number | Object | null)[] | null, opts?: {
         headers?: HttpHeaders | {
             [name: string]: string | string[];
         };
