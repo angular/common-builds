@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+197.sha-d4bb4a0
+ * @license Angular v11.1.0-next.4+208.sha-88f8ddd
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1154,7 +1154,7 @@
          * The single parameter accepted is an initialization hash. Any properties
          * of the response passed there will override the default values.
          */
-        function HttpResponseBase(init, defaultStatus, defaultStatusText) {
+        function HttpResponseBase(init, defaultStatus /* Ok */, defaultStatusText) {
             if (defaultStatus === void 0) { defaultStatus = 200; }
             if (defaultStatusText === void 0) { defaultStatusText = 'OK'; }
             // If the hash has values passed, use them to initialize the response.
@@ -1783,7 +1783,7 @@
                         // returned.
                         observer.next(new HttpResponse({
                             body: body,
-                            status: 200,
+                            status: 200 /* Ok */,
                             statusText: 'OK',
                             url: url,
                         }));
@@ -1998,7 +1998,7 @@
                         return headerResponse;
                     }
                     // Read status and normalize an IE9 bug (https://bugs.jquery.com/ticket/1450).
-                    var status = xhr.status === 1223 ? 204 : xhr.status;
+                    var status = xhr.status === 1223 ? 204 /* NoContent */ : xhr.status;
                     var statusText = xhr.statusText || 'OK';
                     // Parse headers from XMLHttpRequest - this step is lazy.
                     var headers = new HttpHeaders(xhr.getAllResponseHeaders());
@@ -2017,13 +2017,13 @@
                     var _a = partialFromXhr(), headers = _a.headers, status = _a.status, statusText = _a.statusText, url = _a.url;
                     // The body will be read out if present.
                     var body = null;
-                    if (status !== 204) {
+                    if (status !== 204 /* NoContent */) {
                         // Use XMLHttpRequest.response if set, responseText otherwise.
                         body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
                     }
                     // Normalize another potential bug (this one comes from CORS).
                     if (status === 0) {
-                        status = !!body ? 200 : 0;
+                        status = !!body ? 200 /* Ok */ : 0;
                     }
                     // ok determines whether the response will be transmitted on the event or
                     // error channel. Unsuccessful status codes (not 2xx) will always be errors,
