@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+197.sha-d4bb4a0
+ * @license Angular v11.1.0-next.4+208.sha-88f8ddd
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -70,10 +70,10 @@ class TestRequest {
         const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
         let statusText = opts.statusText;
-        let status = opts.status !== undefined ? opts.status : 200;
+        let status = opts.status !== undefined ? opts.status : 200 /* Ok */;
         if (opts.status === undefined) {
             if (body === null) {
-                status = 204;
+                status = 204 /* NoContent */;
                 statusText = statusText || 'No Content';
             }
             else {
