@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.1+14.sha-cafd4f5
+ * @license Angular v11.1.1+17.sha-00eeebf4
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2417,11 +2417,6 @@
         }
         if (typeof value === 'string') {
             value = value.trim();
-            var parsedNb = parseFloat(value);
-            // any string that only contains numbers, like "1234" but not like "1234hello"
-            if (!isNaN(value - parsedNb)) {
-                return new Date(parsedNb);
-            }
             if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
                 /* For ISO Strings without time the day, month and year must be extracted from the ISO String
                 before Date creation to avoid time offset and errors in the new Date.
@@ -2432,6 +2427,11 @@
                 Note: ISO months are 0 for January, 1 for February, ... */
                 var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], _b = _a[1], m = _b === void 0 ? 1 : _b, _c = _a[2], d = _c === void 0 ? 1 : _c;
                 return new Date(y, m - 1, d);
+            }
+            var parsedNb = parseFloat(value);
+            // any string that only contains numbers, like "1234" but not like "1234hello"
+            if (!isNaN(value - parsedNb)) {
+                return new Date(parsedNb);
             }
             var match = void 0;
             if (match = value.match(ISO8601_DATE_REGEX)) {
@@ -5473,7 +5473,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.1+14.sha-cafd4f5');
+    var VERSION = new i0.Version('11.1.1+17.sha-00eeebf4');
 
     /**
      * @license
