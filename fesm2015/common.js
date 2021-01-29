@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+212.sha-028b383
+ * @license Angular v11.1.0-next.4+213.sha-b6cd38f
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2149,7 +2149,7 @@ function toDate(value) {
         if (!isNaN(value - parsedNb)) {
             return new Date(parsedNb);
         }
-        if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+        if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
             /* For ISO Strings without time the day, month and year must be extracted from the ISO String
             before Date creation to avoid time offset and errors in the new Date.
             If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
@@ -2157,7 +2157,7 @@ function toDate(value) {
             If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
             is applied.
             Note: ISO months are 0 for January, 1 for February, ... */
-            const [y, m, d] = value.split('-').map((val) => +val);
+            const [y, m = 1, d = 1] = value.split('-').map((val) => +val);
             return new Date(y, m - 1, d);
         }
         let match;
@@ -5058,7 +5058,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.0-next.4+212.sha-028b383');
+const VERSION = new Version('11.1.0-next.4+213.sha-b6cd38f');
 
 /**
  * @license

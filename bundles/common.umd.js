@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+212.sha-028b383
+ * @license Angular v11.1.0-next.4+213.sha-b6cd38f
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2422,7 +2422,7 @@
             if (!isNaN(value - parsedNb)) {
                 return new Date(parsedNb);
             }
-            if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
                 /* For ISO Strings without time the day, month and year must be extracted from the ISO String
                 before Date creation to avoid time offset and errors in the new Date.
                 If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
@@ -2430,7 +2430,7 @@
                 If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
                 is applied.
                 Note: ISO months are 0 for January, 1 for February, ... */
-                var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], m = _a[1], d = _a[2];
+                var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], _b = _a[1], m = _b === void 0 ? 1 : _b, _c = _a[2], d = _c === void 0 ? 1 : _c;
                 return new Date(y, m - 1, d);
             }
             var match = void 0;
@@ -5473,7 +5473,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.4+212.sha-028b383');
+    var VERSION = new i0.Version('11.1.0-next.4+213.sha-b6cd38f');
 
     /**
      * @license
