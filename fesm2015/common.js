@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.0-next.0+15.sha-4c5f18d
+ * @license Angular v11.2.0-next.0+18.sha-caafac2
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2144,11 +2144,6 @@ function toDate(value) {
     }
     if (typeof value === 'string') {
         value = value.trim();
-        const parsedNb = parseFloat(value);
-        // any string that only contains numbers, like "1234" but not like "1234hello"
-        if (!isNaN(value - parsedNb)) {
-            return new Date(parsedNb);
-        }
         if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
             /* For ISO Strings without time the day, month and year must be extracted from the ISO String
             before Date creation to avoid time offset and errors in the new Date.
@@ -2159,6 +2154,11 @@ function toDate(value) {
             Note: ISO months are 0 for January, 1 for February, ... */
             const [y, m = 1, d = 1] = value.split('-').map((val) => +val);
             return new Date(y, m - 1, d);
+        }
+        const parsedNb = parseFloat(value);
+        // any string that only contains numbers, like "1234" but not like "1234hello"
+        if (!isNaN(value - parsedNb)) {
+            return new Date(parsedNb);
         }
         let match;
         if (match = value.match(ISO8601_DATE_REGEX)) {
@@ -5058,7 +5058,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.2.0-next.0+15.sha-4c5f18d');
+const VERSION = new Version('11.2.0-next.0+18.sha-caafac2');
 
 /**
  * @license
