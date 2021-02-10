@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+324.sha-fface51
+ * @license Angular v11.1.0-next.4+321.sha-7a8821c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2358,7 +2358,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted currency value.
@@ -2393,7 +2393,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted percentage value.
@@ -2419,7 +2419,7 @@ function formatPercent(value, locale, digitsInfo) {
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
@@ -5135,7 +5135,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.0-next.4+324.sha-fface51');
+const VERSION = new Version('11.1.0-next.4+321.sha-7a8821c');
 
 /**
  * @license

@@ -20,7 +20,7 @@ export declare const NUMBER_FORMAT_REGEXP: RegExp;
  * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted currency value.
@@ -40,7 +40,7 @@ export declare function formatCurrency(value: number, locale: string, currency: 
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted percentage value.
@@ -61,7 +61,7 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
