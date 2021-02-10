@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+321.sha-7a8821c
+ * @license Angular v11.1.0-next.4+322.sha-ddff6b6
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2650,7 +2650,7 @@
      * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
      * currency code, such as `USD` for the US dollar and `EUR` for the euro.
      * Used to determine the number of digits in the decimal part.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted currency value.
@@ -2685,7 +2685,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted percentage value.
@@ -2711,7 +2711,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted text string.
@@ -5636,7 +5636,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.4+321.sha-7a8821c');
+    var VERSION = new i0.Version('11.1.0-next.4+322.sha-ddff6b6');
 
     /**
      * @license
