@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.2+4.sha-0fc5a16
+ * @license Angular v11.1.2+79.sha-e8c8a8d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1596,6 +1596,34 @@ function formatDate(value, format, locale, timezone) {
     });
     return text;
 }
+/**
+ * Create a new Date object with the given date value, and the time set to midnight.
+ *
+ * We cannot use `new Date(year, month, date)` because it maps years between 0 and 99 to 1900-1999.
+ * See: https://github.com/angular/angular/issues/40377
+ *
+ * Note that this function returns a Date object whose time is midnight in the current locale's
+ * timezone. In the future we might want to change this to be midnight in UTC, but this would be a
+ * considerable breaking change.
+ */
+function createDate(year, month, date) {
+    // The `newDate` is set to midnight (UTC) on January 1st 1970.
+    // - In PST this will be December 31st 1969 at 4pm.
+    // - In GMT this will be January 1st 1970 at 1am.
+    // Note that they even have different years, dates and months!
+    const newDate = new Date(0);
+    // `setFullYear()` allows years like 0001 to be set correctly. This function does not
+    // change the internal time of the date.
+    // Consider calling `setFullYear(2019, 8, 20)` (September 20, 2019).
+    // - In PST this will now be September 20, 2019 at 4pm
+    // - In GMT this will now be September 20, 2019 at 1am
+    newDate.setFullYear(year, month, date);
+    // We want the final date to be at local midnight, so we reset the time.
+    // - In PST this will now be September 20, 2019 at 12am
+    // - In GMT this will now be September 20, 2019 at 12am
+    newDate.setHours(0, 0, 0);
+    return newDate;
+}
 function getNamedFormat(locale, format) {
     const localeId = getLocaleId(locale);
     NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
@@ -1839,11 +1867,11 @@ function timeZoneGetter(width) {
 const JANUARY = 0;
 const THURSDAY = 4;
 function getFirstThursdayOfYear(year) {
-    const firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+    const firstDayOfYear = createDate(year, JANUARY, 1).getDay();
+    return createDate(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
 }
 function getThursdayThisWeek(datetime) {
-    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+    return createDate(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
 }
 function weekGetter(size, monthBased = false) {
     return function (date, locale) {
@@ -2153,7 +2181,7 @@ function toDate(value) {
             is applied.
             Note: ISO months are 0 for January, 1 for February, ... */
             const [y, m = 1, d = 1] = value.split('-').map((val) => +val);
-            return new Date(y, m - 1, d);
+            return createDate(y, m - 1, d);
         }
         const parsedNb = parseFloat(value);
         // any string that only contains numbers, like "1234" but not like "1234hello"
@@ -2320,7 +2348,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted currency value.
@@ -2355,7 +2383,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted percentage value.
@@ -2381,7 +2409,7 @@ function formatPercent(value, locale, digitsInfo) {
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
@@ -4400,7 +4428,6 @@ UpperCasePipe.decorators = [
  *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
  *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
  *
- * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
  *
  * ### Format examples
  *
@@ -5058,7 +5085,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.1.2+4.sha-0fc5a16');
+const VERSION = new Version('11.1.2+79.sha-e8c8a8d');
 
 /**
  * @license
