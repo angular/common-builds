@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+324.sha-fface51
+ * @license Angular v11.1.0-next.4+321.sha-7a8821c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -437,7 +437,7 @@ export declare const DOCUMENT: InjectionToken<Document>;
  * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted currency value.
@@ -482,7 +482,7 @@ export declare function formatDate(value: string | number | Date, format: string
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
@@ -500,7 +500,7 @@ export declare function formatNumber(value: number, locale: string, digitsInfo?:
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * @param digitInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted percentage value.
