@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+313.sha-378da71
+ * @license Angular v11.1.0-next.4+316.sha-03f0b15
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1889,6 +1889,34 @@
         });
         return text;
     }
+    /**
+     * Create a new Date object with the given date value, and the time set to midnight.
+     *
+     * We cannot use `new Date(year, month, date)` because it maps years between 0 and 99 to 1900-1999.
+     * See: https://github.com/angular/angular/issues/40377
+     *
+     * Note that this function returns a Date object whose time is midnight in the current locale's
+     * timezone. In the future we might want to change this to be midnight in UTC, but this would be a
+     * considerable breaking change.
+     */
+    function createDate(year, month, date) {
+        // The `newDate` is set to midnight (UTC) on January 1st 1970.
+        // - In PST this will be December 31st 1969 at 4pm.
+        // - In GMT this will be January 1st 1970 at 1am.
+        // Note that they even have different years, dates and months!
+        var newDate = new Date(0);
+        // `setFullYear()` allows years like 0001 to be set correctly. This function does not
+        // change the internal time of the date.
+        // Consider calling `setFullYear(2019, 8, 20)` (September 20, 2019).
+        // - In PST this will now be September 20, 2019 at 4pm
+        // - In GMT this will now be September 20, 2019 at 1am
+        newDate.setFullYear(year, month, date);
+        // We want the final date to be at local midnight, so we reset the time.
+        // - In PST this will now be September 20, 2019 at 12am
+        // - In GMT this will now be September 20, 2019 at 12am
+        newDate.setHours(0, 0, 0);
+        return newDate;
+    }
     function getNamedFormat(locale, format) {
         var localeId = getLocaleId(locale);
         NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
@@ -2138,11 +2166,11 @@
     var JANUARY = 0;
     var THURSDAY = 4;
     function getFirstThursdayOfYear(year) {
-        var firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-        return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+        var firstDayOfYear = createDate(year, JANUARY, 1).getDay();
+        return createDate(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
     }
     function getThursdayThisWeek(datetime) {
-        return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+        return createDate(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
     }
     function weekGetter(size, monthBased) {
         if (monthBased === void 0) { monthBased = false; }
@@ -2454,7 +2482,7 @@
                 is applied.
                 Note: ISO months are 0 for January, 1 for February, ... */
                 var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], _b = _a[1], m = _b === void 0 ? 1 : _b, _c = _a[2], d = _c === void 0 ? 1 : _c;
-                return new Date(y, m - 1, d);
+                return createDate(y, m - 1, d);
             }
             var parsedNb = parseFloat(value);
             // any string that only contains numbers, like "1234" but not like "1234hello"
@@ -4871,7 +4899,6 @@
      *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
      *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
      *
-     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
      *
      * ### Format examples
      *
@@ -5609,7 +5636,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.4+313.sha-378da71');
+    var VERSION = new i0.Version('11.1.0-next.4+316.sha-03f0b15');
 
     /**
      * @license
