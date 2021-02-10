@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+313.sha-378da71
+ * @license Angular v11.1.0-next.4+316.sha-03f0b15
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -298,7 +298,6 @@ export declare class CurrencyPipe implements PipeTransform {
  *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
  *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
  *
- * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
  *
  * ### Format examples
  *
