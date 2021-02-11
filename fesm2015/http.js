@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.0+3.sha-9cbd9be
+ * @license Angular v11.2.0+13.sha-925e2b7
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1778,6 +1778,7 @@ class HttpXhrBackend {
             // By default, register for load and error events.
             xhr.addEventListener('load', onLoad);
             xhr.addEventListener('error', onError);
+            xhr.addEventListener('timeout', onError);
             // Progress events are only enabled if requested.
             if (req.reportProgress) {
                 // Download progress is always enabled if requested.
@@ -1796,6 +1797,7 @@ class HttpXhrBackend {
                 // On a cancellation, remove all registered event listeners.
                 xhr.removeEventListener('error', onError);
                 xhr.removeEventListener('load', onLoad);
+                xhr.removeEventListener('timeout', onError);
                 if (req.reportProgress) {
                     xhr.removeEventListener('progress', onDownProgress);
                     if (reqBody !== null && xhr.upload) {
