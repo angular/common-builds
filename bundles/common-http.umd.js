@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+308.sha-0d8e6b4
+ * @license Angular v12.0.0-next.0+37.sha-1646f8d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2131,6 +2131,8 @@
                 // By default, register for load and error events.
                 xhr.addEventListener('load', onLoad);
                 xhr.addEventListener('error', onError);
+                xhr.addEventListener('timeout', onError);
+                xhr.addEventListener('abort', onError);
                 // Progress events are only enabled if requested.
                 if (req.reportProgress) {
                     // Download progress is always enabled if requested.
@@ -2148,7 +2150,9 @@
                 return function () {
                     // On a cancellation, remove all registered event listeners.
                     xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('abort', onError);
                     xhr.removeEventListener('load', onLoad);
+                    xhr.removeEventListener('timeout', onError);
                     if (req.reportProgress) {
                         xhr.removeEventListener('progress', onDownProgress);
                         if (reqBody !== null && xhr.upload) {

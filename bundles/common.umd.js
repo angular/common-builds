@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.1.0-next.4+308.sha-0d8e6b4
+ * @license Angular v12.0.0-next.0+37.sha-1646f8d
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1779,7 +1779,7 @@
     var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
     //    1        2       3         4          5          6          7          8  9     10      11
     var NAMED_FORMATS = {};
-    var DATE_FORMATS_SPLIT = /((?:[^GyYMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+    var DATE_FORMATS_SPLIT = /((?:[^BEGHLMOSWYZabcdhmswyz']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|c{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
     var ZoneWidth;
     (function (ZoneWidth) {
         ZoneWidth[ZoneWidth["Short"] = 0] = "Short";
@@ -1860,6 +1860,34 @@
                 value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
         });
         return text;
+    }
+    /**
+     * Create a new Date object with the given date value, and the time set to midnight.
+     *
+     * We cannot use `new Date(year, month, date)` because it maps years between 0 and 99 to 1900-1999.
+     * See: https://github.com/angular/angular/issues/40377
+     *
+     * Note that this function returns a Date object whose time is midnight in the current locale's
+     * timezone. In the future we might want to change this to be midnight in UTC, but this would be a
+     * considerable breaking change.
+     */
+    function createDate(year, month, date) {
+        // The `newDate` is set to midnight (UTC) on January 1st 1970.
+        // - In PST this will be December 31st 1969 at 4pm.
+        // - In GMT this will be January 1st 1970 at 1am.
+        // Note that they even have different years, dates and months!
+        var newDate = new Date(0);
+        // `setFullYear()` allows years like 0001 to be set correctly. This function does not
+        // change the internal time of the date.
+        // Consider calling `setFullYear(2019, 8, 20)` (September 20, 2019).
+        // - In PST this will now be September 20, 2019 at 4pm
+        // - In GMT this will now be September 20, 2019 at 1am
+        newDate.setFullYear(year, month, date);
+        // We want the final date to be at local midnight, so we reset the time.
+        // - In PST this will now be September 20, 2019 at 12am
+        // - In GMT this will now be September 20, 2019 at 12am
+        newDate.setHours(0, 0, 0);
+        return newDate;
     }
     function getNamedFormat(locale, format) {
         var localeId = getLocaleId(locale);
@@ -2110,11 +2138,11 @@
     var JANUARY = 0;
     var THURSDAY = 4;
     function getFirstThursdayOfYear(year) {
-        var firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-        return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+        var firstDayOfYear = createDate(year, JANUARY, 1).getDay();
+        return createDate(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
     }
     function getThursdayThisWeek(datetime) {
-        return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+        return createDate(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
     }
     function weekGetter(size, monthBased) {
         if (monthBased === void 0) { monthBased = false; }
@@ -2151,7 +2179,7 @@
     // Based on CLDR formats:
     // See complete list: http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
     // See also explanations: http://cldr.unicode.org/translation/date-time
-    // TODO(ocombe): support all missing cldr formats: Y, U, Q, D, F, e, c, j, J, C, A, v, V, X, x
+    // TODO(ocombe): support all missing cldr formats: U, Q, D, F, e, j, J, C, A, v, V, X, x
     function getDateFormatter(format) {
         if (DATE_FORMATS[format]) {
             return DATE_FORMATS[format];
@@ -2253,6 +2281,25 @@
                 break;
             case 'dd':
                 formatter = dateGetter(DateType.Date, 2);
+                break;
+            // Day of the Week StandAlone (1, 1, Mon, Monday, M, Mo)
+            case 'c':
+            case 'cc':
+                formatter = dateGetter(DateType.Day, 1);
+                break;
+            case 'ccc':
+                formatter =
+                    dateStrGetter(TranslationType.Days, exports.TranslationWidth.Abbreviated, exports.FormStyle.Standalone);
+                break;
+            case 'cccc':
+                formatter = dateStrGetter(TranslationType.Days, exports.TranslationWidth.Wide, exports.FormStyle.Standalone);
+                break;
+            case 'ccccc':
+                formatter =
+                    dateStrGetter(TranslationType.Days, exports.TranslationWidth.Narrow, exports.FormStyle.Standalone);
+                break;
+            case 'cccccc':
+                formatter = dateStrGetter(TranslationType.Days, exports.TranslationWidth.Short, exports.FormStyle.Standalone);
                 break;
             // Day of the Week
             case 'E':
@@ -2426,7 +2473,7 @@
                 is applied.
                 Note: ISO months are 0 for January, 1 for February, ... */
                 var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], _b = _a[1], m = _b === void 0 ? 1 : _b, _c = _a[2], d = _c === void 0 ? 1 : _c;
-                return new Date(y, m - 1, d);
+                return createDate(y, m - 1, d);
             }
             var parsedNb = parseFloat(value);
             // any string that only contains numbers, like "1234" but not like "1234hello"
@@ -2594,7 +2641,7 @@
      * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
      * currency code, such as `USD` for the US dollar and `EUR` for the euro.
      * Used to determine the number of digits in the decimal part.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted currency value.
@@ -2629,7 +2676,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted percentage value.
@@ -2655,7 +2702,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted text string.
@@ -4732,67 +4779,71 @@
      * Format details depend on the locale.
      * Fields marked with (*) are only available in the extra data set for the given locale.
      *
-     *  | Field type         | Format      | Description                                                   | Example Value                                              |
-     *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
-     *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
-     *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
-     *  |                    | GGGGG       | Narrow                                                        | A                                                          |
-     *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
-     *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
-     *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
-     *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
-     *  | Week-numbering year| Y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
-     *  |                    | YY          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
-     *  |                    | YYY         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
-     *  |                    | YYYY        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
-     *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | MMMM        | Wide                                                          | September                                                  |
-     *  |                    | MMMMM       | Narrow                                                        | S                                                          |
-     *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | LLLL        | Wide                                                          | September                                                  |
-     *  |                    | LLLLL       | Narrow                                                        | S                                                          |
-     *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
-     *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
-     *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
-     *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
-     *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
-     *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
-     *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
-     *  |                    | EEEEE       | Narrow                                                        | T                                                          |
-     *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
-     *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
-     *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
-     *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
-     *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
-     *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | BBBBB       | Narrow                                                        | md                                                         |
-     *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
-     *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | bbbbb       | Narrow                                                        | md                                                         |
-     *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
-     *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
-     *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
-     *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
-     *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
-     *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
-     *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
-     *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
-     *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
-     *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
-     *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
-     *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
-     *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
-     *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
-     *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
-     *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
-     *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
-     *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+     *  | Field type          | Format      | Description                                                   | Example Value                                              |
+     *  |-------------------- |-------------|---------------------------------------------------------------|------------------------------------------------------------|
+     *  | Era                 | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+     *  |                     | GGGG        | Wide                                                          | Anno Domini                                                |
+     *  |                     | GGGGG       | Narrow                                                        | A                                                          |
+     *  | Year                | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                     | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                     | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                     | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Week-numbering year | Y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                     | YY          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                     | YYY         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                     | YYYY        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Month               | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                     | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                     | MMM         | Abbreviated                                                   | Sep                                                        |
+     *  |                     | MMMM        | Wide                                                          | September                                                  |
+     *  |                     | MMMMM       | Narrow                                                        | S                                                          |
+     *  | Month standalone    | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                     | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                     | LLL         | Abbreviated                                                   | Sep                                                        |
+     *  |                     | LLLL        | Wide                                                          | September                                                  |
+     *  |                     | LLLLL       | Narrow                                                        | S                                                          |
+     *  | Week of year        | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+     *  |                     | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+     *  | Week of month       | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+     *  | Day of month        | d           | Numeric: minimum digits                                       | 1                                                          |
+     *  |                     | dd          | Numeric: 2 digits + zero padded                               | 01                                                         |
+     *  | Week day            | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+     *  |                     | EEEE        | Wide                                                          | Tuesday                                                    |
+     *  |                     | EEEEE       | Narrow                                                        | T                                                          |
+     *  |                     | EEEEEE      | Short                                                         | Tu                                                         |
+     *  | Week day standalone | c, cc       | Numeric: 1 digit                                              | 2                                                          |
+     *  |                     | ccc         | Abbreviated                                                   | Tue                                                        |
+     *  |                     | cccc        | Wide                                                          | Tuesday                                                    |
+     *  |                     | ccccc       | Narrow                                                        | T                                                          |
+     *  |                     | cccccc      | Short                                                         | Tu                                                         |
+     *  | Period              | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+     *  |                     | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+     *  |                     | aaaaa       | Narrow                                                        | a/p                                                        |
+     *  | Period*             | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+     *  |                     | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                     | BBBBB       | Narrow                                                        | md                                                         |
+     *  | Period standalone*  | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+     *  |                     | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                     | bbbbb       | Narrow                                                        | md                                                         |
+     *  | Hour 1-12           | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+     *  |                     | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+     *  | Hour 0-23           | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+     *  |                     | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+     *  | Minute              | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+     *  |                     | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+     *  | Second              | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+     *  |                     | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+     *  | Fractional seconds  | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+     *  |                     | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+     *  |                     | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+     *  | Zone                | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+     *  |                     | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+     *  |                     | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+     *  |                     | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+     *  |                     | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+     *  |                     | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+     *  |                     | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
      *
-     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
      *
      * ### Format examples
      *
@@ -5473,7 +5524,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.1.0-next.4+308.sha-0d8e6b4');
+    var VERSION = new i0.Version('12.0.0-next.0+37.sha-1646f8d');
 
     /**
      * @license
