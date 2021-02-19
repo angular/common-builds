@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.1+16.sha-a82fddf
+ * @license Angular v12.0.0-next.1+34.sha-f340a5b
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -326,7 +326,10 @@ class HttpUrlEncodingCodec {
 function paramParser(rawParams, codec) {
     const map = new Map();
     if (rawParams.length > 0) {
-        const params = rawParams.split('&');
+        // The `window.location.search` can be used while creating an instance of the `HttpParams` class
+        // (e.g. `new HttpParams({ fromString: window.location.search })`). The `window.location.search`
+        // may start with the `?` char, so we strip it if it's present.
+        const params = rawParams.replace(/^\?/, '').split('&');
         params.forEach((param) => {
             const eqIdx = param.indexOf('=');
             const [key, val] = eqIdx == -1 ?
