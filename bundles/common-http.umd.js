@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.0+37.sha-1646f8d
+ * @license Angular v12.0.0-next.1+38.sha-44ffa8c
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -642,7 +642,10 @@
     function paramParser(rawParams, codec) {
         var map = new Map();
         if (rawParams.length > 0) {
-            var params = rawParams.split('&');
+            // The `window.location.search` can be used while creating an instance of the `HttpParams` class
+            // (e.g. `new HttpParams({ fromString: window.location.search })`). The `window.location.search`
+            // may start with the `?` char, so we strip it if it's present.
+            var params = rawParams.replace(/^\?/, '').split('&');
             params.forEach(function (param) {
                 var eqIdx = param.indexOf('=');
                 var _a = __read(eqIdx == -1 ?
