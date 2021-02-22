@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.1+37.sha-8beead1
+ * @license Angular v11.2.1+38.sha-4a32579
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2135,6 +2135,7 @@
                 xhr.addEventListener('load', onLoad);
                 xhr.addEventListener('error', onError);
                 xhr.addEventListener('timeout', onError);
+                xhr.addEventListener('abort', onError);
                 // Progress events are only enabled if requested.
                 if (req.reportProgress) {
                     // Download progress is always enabled if requested.
@@ -2152,6 +2153,7 @@
                 return function () {
                     // On a cancellation, remove all registered event listeners.
                     xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('abort', onError);
                     xhr.removeEventListener('load', onLoad);
                     xhr.removeEventListener('timeout', onError);
                     if (req.reportProgress) {
