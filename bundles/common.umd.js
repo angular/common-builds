@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.1+45.sha-ddf7970
+ * @license Angular v12.0.0-next.1+47.sha-d3705b3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4397,6 +4397,13 @@
     })();
 
     /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
      * @ngModule CommonModule
      *
      * @description
@@ -4437,8 +4444,7 @@
             this.ngTemplateOutlet = null;
         }
         NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
-            var recreateView = this._shouldRecreateView(changes);
-            if (recreateView) {
+            if (changes['ngTemplateOutlet']) {
                 var viewContainerRef = this._viewContainerRef;
                 if (this._viewRef) {
                     viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
@@ -4447,62 +4453,8 @@
                     viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
                     null;
             }
-            else if (this._viewRef && this.ngTemplateOutletContext) {
-                this._updateExistingContext(this.ngTemplateOutletContext);
-            }
-        };
-        /**
-         * We need to re-create existing embedded view if:
-         * - templateRef has changed
-         * - context has changes
-         *
-         * We mark context object as changed when the corresponding object
-         * shape changes (new properties are added or existing properties are removed).
-         * In other words we consider context with the same properties as "the same" even
-         * if object reference changes (see https://github.com/angular/angular/issues/13407).
-         */
-        NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
-            var ctxChange = changes['ngTemplateOutletContext'];
-            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-        };
-        NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
-            var e_1, _a;
-            var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-            var currCtxKeys = Object.keys(ctxChange.currentValue || {});
-            if (prevCtxKeys.length === currCtxKeys.length) {
-                try {
-                    for (var currCtxKeys_1 = __values(currCtxKeys), currCtxKeys_1_1 = currCtxKeys_1.next(); !currCtxKeys_1_1.done; currCtxKeys_1_1 = currCtxKeys_1.next()) {
-                        var propName = currCtxKeys_1_1.value;
-                        if (prevCtxKeys.indexOf(propName) === -1) {
-                            return true;
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (currCtxKeys_1_1 && !currCtxKeys_1_1.done && (_a = currCtxKeys_1.return)) _a.call(currCtxKeys_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                return false;
-            }
-            return true;
-        };
-        NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
-            var e_2, _a;
-            try {
-                for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var propName = _c.value;
-                    this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_2) throw e_2.error; }
+            else if (this._viewRef && changes['ngTemplateOutletContext'] && this.ngTemplateOutletContext) {
+                this._viewRef.context = this.ngTemplateOutletContext;
             }
         };
         return NgTemplateOutlet;
@@ -5660,7 +5612,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.1+45.sha-ddf7970');
+    var VERSION = new i0.Version('12.0.0-next.1+47.sha-d3705b3');
 
     /**
      * @license
