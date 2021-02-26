@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.1+47.sha-b5f9d86
+ * @license Angular v12.0.0-next.2+16.sha-3df1582
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4025,8 +4025,7 @@ class NgTemplateOutlet {
         this.ngTemplateOutlet = null;
     }
     ngOnChanges(changes) {
-        const recreateView = this._shouldRecreateView(changes);
-        if (recreateView) {
+        if (changes['ngTemplateOutlet']) {
             const viewContainerRef = this._viewContainerRef;
             if (this._viewRef) {
                 viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
@@ -4035,40 +4034,8 @@ class NgTemplateOutlet {
                 viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
                 null;
         }
-        else if (this._viewRef && this.ngTemplateOutletContext) {
-            this._updateExistingContext(this.ngTemplateOutletContext);
-        }
-    }
-    /**
-     * We need to re-create existing embedded view if:
-     * - templateRef has changed
-     * - context has changes
-     *
-     * We mark context object as changed when the corresponding object
-     * shape changes (new properties are added or existing properties are removed).
-     * In other words we consider context with the same properties as "the same" even
-     * if object reference changes (see https://github.com/angular/angular/issues/13407).
-     */
-    _shouldRecreateView(changes) {
-        const ctxChange = changes['ngTemplateOutletContext'];
-        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-    }
-    _hasContextShapeChanged(ctxChange) {
-        const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-        const currCtxKeys = Object.keys(ctxChange.currentValue || {});
-        if (prevCtxKeys.length === currCtxKeys.length) {
-            for (let propName of currCtxKeys) {
-                if (prevCtxKeys.indexOf(propName) === -1) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
-    }
-    _updateExistingContext(ctx) {
-        for (let propName of Object.keys(ctx)) {
-            this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
+        else if (this._viewRef && changes['ngTemplateOutletContext'] && this.ngTemplateOutletContext) {
+            this._viewRef.context = this.ngTemplateOutletContext;
         }
     }
 }
@@ -5109,7 +5076,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.1+47.sha-b5f9d86');
+const VERSION = new Version('12.0.0-next.2+16.sha-3df1582');
 
 /**
  * @license
