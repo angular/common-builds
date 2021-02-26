@@ -78,7 +78,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -101,7 +101,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -124,7 +124,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -147,7 +147,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         observe: 'events';
         reportProgress?: boolean;
@@ -172,7 +172,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -196,7 +196,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -221,7 +221,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         withCredentials?: boolean;
@@ -245,7 +245,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         withCredentials?: boolean;
@@ -267,7 +267,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -289,7 +289,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -312,7 +312,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -337,7 +337,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         withCredentials?: boolean;
@@ -360,7 +360,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         withCredentials?: boolean;
@@ -382,7 +382,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         reportProgress?: boolean;
@@ -405,7 +405,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         responseType?: 'json';
         reportProgress?: boolean;
@@ -426,7 +426,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         observe?: 'body' | 'events' | 'response';
         reportProgress?: boolean;
@@ -448,7 +448,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -469,7 +469,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -490,7 +490,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -512,7 +512,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -534,7 +534,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -556,7 +556,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -578,7 +578,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -600,7 +600,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | (string | number | boolean)[];
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -621,7 +621,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -642,7 +642,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -663,7 +663,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -685,7 +685,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -706,7 +706,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -727,7 +727,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -748,7 +748,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -769,7 +769,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -790,7 +790,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -811,7 +811,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -833,7 +833,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -854,7 +854,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -875,7 +875,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -896,7 +896,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -917,7 +917,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -939,7 +939,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -961,7 +961,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -983,7 +983,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1005,7 +1005,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1027,7 +1027,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1049,7 +1049,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1070,7 +1070,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1091,7 +1091,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1112,7 +1112,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1133,7 +1133,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1155,7 +1155,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1177,7 +1177,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1199,7 +1199,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1221,7 +1221,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1243,7 +1243,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1265,7 +1265,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1287,7 +1287,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1309,7 +1309,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1331,7 +1331,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1353,7 +1353,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1374,7 +1374,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1396,7 +1396,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1439,7 +1439,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1460,7 +1460,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1481,7 +1481,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1503,7 +1503,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1525,7 +1525,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1547,7 +1547,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1569,7 +1569,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1591,7 +1591,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1613,7 +1613,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1635,7 +1635,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1657,7 +1657,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1679,7 +1679,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1701,7 +1701,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1722,7 +1722,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1743,7 +1743,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1765,7 +1765,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1787,7 +1787,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1809,7 +1809,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1832,7 +1832,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1855,7 +1855,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1878,7 +1878,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -1901,7 +1901,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1924,7 +1924,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -1947,7 +1947,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -1970,7 +1970,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -1993,7 +1993,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2016,7 +2016,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2039,7 +2039,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2061,7 +2061,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2084,7 +2084,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2106,7 +2106,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2128,7 +2128,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2150,7 +2150,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2173,7 +2173,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2195,7 +2195,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2218,7 +2218,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2241,7 +2241,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2264,7 +2264,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2287,7 +2287,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2310,7 +2310,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2333,7 +2333,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2356,7 +2356,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2380,7 +2380,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2402,7 +2402,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2425,7 +2425,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2447,7 +2447,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2469,7 +2469,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2491,7 +2491,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2514,7 +2514,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2537,7 +2537,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2560,7 +2560,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2583,7 +2583,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2606,7 +2606,7 @@ export declare class HttpClient {
         };
         observe: 'events';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2629,7 +2629,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'arraybuffer';
@@ -2652,7 +2652,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'blob';
@@ -2675,7 +2675,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType: 'text';
@@ -2698,7 +2698,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2721,7 +2721,7 @@ export declare class HttpClient {
         };
         observe: 'response';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2743,7 +2743,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';
@@ -2765,7 +2765,7 @@ export declare class HttpClient {
         };
         observe?: 'body';
         params?: HttpParams | {
-            [param: string]: string | string[];
+            [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
         reportProgress?: boolean;
         responseType?: 'json';

@@ -67,7 +67,7 @@ export interface HttpParamsOptions {
     fromString?: string;
     /** Object map of the HTTP parameters. Mutually exclusive with `fromString`. */
     fromObject?: {
-        [param: string]: string | ReadonlyArray<string>;
+        [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
     };
     /** Encoding codec used to parse and serialize the parameters. */
     encoder?: HttpParameterCodec;
@@ -118,14 +118,14 @@ export declare class HttpParams {
      * @param value The new value to add.
      * @return A new body with the appended value.
      */
-    append(param: string, value: string): HttpParams;
+    append(param: string, value: string | number | boolean): HttpParams;
     /**
      * Constructs a new body with appended values for the given parameter name.
      * @param params parameters and values
      * @return A new body with the new value.
      */
     appendAll(params: {
-        [param: string]: string | string[];
+        [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
     }): HttpParams;
     /**
      * Replaces the value for a parameter.
@@ -133,7 +133,7 @@ export declare class HttpParams {
      * @param value The new value.
      * @return A new body with the new value.
      */
-    set(param: string, value: string): HttpParams;
+    set(param: string, value: string | number | boolean): HttpParams;
     /**
      * Removes a given value or all values from a parameter.
      * @param param The parameter name.
@@ -141,7 +141,7 @@ export declare class HttpParams {
      * @return A new body with the given value removed, or with all values
      * removed if no value is specified.
      */
-    delete(param: string, value?: string): HttpParams;
+    delete(param: string, value?: string | number | boolean): HttpParams;
     /**
      * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
      * separated by `&`s.
