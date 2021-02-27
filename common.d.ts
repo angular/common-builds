@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.2+29.sha-272b564
+ * @license Angular v12.0.0-next.2+33.sha-bebdeba
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -364,32 +364,60 @@ export declare class DatePipe implements PipeTransform {
  * @ngModule CommonModule
  * @description
  *
- * Transforms a number into a string,
- * formatted according to locale rules that determine group sizing and
- * separator, decimal-point character, and other locale-specific
- * configurations.
- *
- * If no parameters are specified, the function rounds off to the nearest value using this
- * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
- * The behavior differs from that of the JavaScript ```Math.round()``` function.
- * In the following case for example, the pipe rounds down where
- * ```Math.round()``` rounds up:
- *
- * ```html
- * -2.5 | number:'1.0-0'
- * > -3
- * Math.round(-2.5)
- * > -2
- * ```
+ * Formats a value according to digit options and locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
  *
  * @see `formatNumber()`
  *
  * @usageNotes
- * The following code shows how the pipe transforms numbers
- * into text strings, according to various format specifications,
- * where the caller's default locale is `en-US`.
+ *
+ * ### digitsInfo
+ *
+ * The value's decimal representation is specified by the `digitsInfo`
+ * parameter, written in the following format:<br>
+ *
+ * ```
+ * {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+ * ```
+ *
+ *  - `minIntegerDigits`:
+ * The minimum number of integer digits before the decimal point.
+ * Default is 1.
+ *
+ * - `minFractionDigits`:
+ * The minimum number of digits after the decimal point.
+ * Default is 0.
+ *
+ *  - `maxFractionDigits`:
+ * The maximum number of digits after the decimal point.
+ * Default is 3.
+ *
+ * If the formatted value is truncated it will be rounded using the "to-nearest" method:
+ *
+ * ```
+ * {{3.6 | number: '1.0-0'}}
+ * <!--will output '4'-->
+ *
+ * {{-3.6 | number:'1.0-0'}}
+ * <!--will output '-4'-->
+ * ```
+ *
+ * ### locale
+ *
+ * `locale` will format a value according to locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
+ *
+ * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+ *
+ * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
  *
  * ### Example
+ *
+ * The following code shows how the pipe transforms values
+ * according to various format specifications,
+ * where the caller's default locale is `en-US`.
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
@@ -398,21 +426,6 @@ export declare class DatePipe implements PipeTransform {
 export declare class DecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    /**
-     * @param value The number to be formatted.
-     * @param digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
-     * @param locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     */
     transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
