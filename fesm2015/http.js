@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.2+16.sha-8d159b0
+ * @license Angular v12.0.0-next.2+52.sha-cba03bd
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -354,6 +354,9 @@ function standardEncoding(v) {
         .replace(/%3F/gi, '?')
         .replace(/%2F/gi, '/');
 }
+function valueToString(value) {
+    return `${value}`;
+}
 /**
  * An HTTP request/response body that represents serialized parameters,
  * per the MIME type `application/x-www-form-urlencoded`.
@@ -447,7 +450,7 @@ class HttpParams {
                 });
             }
             else {
-                updates.push({ param, value, op: 'a' });
+                updates.push({ param, value: value, op: 'a' });
             }
         });
         return this.clone(updates);
@@ -509,13 +512,13 @@ class HttpParams {
                     case 'a':
                     case 's':
                         const base = (update.op === 'a' ? this.map.get(update.param) : undefined) || [];
-                        base.push(update.value);
+                        base.push(valueToString(update.value));
                         this.map.set(update.param, base);
                         break;
                     case 'd':
                         if (update.value !== undefined) {
                             let base = this.map.get(update.param) || [];
-                            const idx = base.indexOf(update.value);
+                            const idx = base.indexOf(valueToString(update.value));
                             if (idx !== -1) {
                                 base.splice(idx, 1);
                             }
