@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+2.sha-9ae0faa
+ * @license Angular v12.0.0-next.3+3.sha-ad40fca
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -56,6 +56,14 @@ export declare abstract class HttpBackend implements HttpHandler {
  *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
  * }
  * ```
+ *
+ * Alternatively, the parameter string can be used without invoking HttpParams
+ * by directly joining to the URL.
+ * ```
+ * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
+ * ```
+ *
+ *
  * ### JSONP Example
  * ```
  * requestJsonp(url, callback = 'callback') {
@@ -74,6 +82,7 @@ export declare abstract class HttpBackend implements HttpHandler {
  * ```
  *
  * @see [HTTP Guide](guide/http)
+ * @see [HTTP Request](api/common/http/HttpRequest)
  *
  * @publicApi
  */
@@ -3309,6 +3318,13 @@ export declare class HttpRequest<T> {
     readonly method: string;
     /**
      * Outgoing URL parameters.
+     *
+     * To pass a string representation of HTTP parameters in the URL-query-string format,
+     * the `HttpParamsOptions`' `fromString` may be used. For example:
+     *
+     * ```
+     * new HttpParams({fromString: 'angular=awesome'})
+     * ```
      */
     readonly params: HttpParams;
     /**
