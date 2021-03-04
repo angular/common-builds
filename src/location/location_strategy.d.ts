@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, OnDestroy } from '@angular/core';
 import { LocationChangeListener, PlatformLocation } from './platform_location';
 import * as i0 from "@angular/core";
 /**
@@ -93,10 +93,12 @@ export declare const APP_BASE_HREF: InjectionToken<string>;
  *
  * @publicApi
  */
-export declare class PathLocationStrategy extends LocationStrategy {
+export declare class PathLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, href?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     prepareExternalUrl(internal: string): string;

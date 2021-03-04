@@ -32,8 +32,14 @@ import * as i0 from "@angular/core";
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
     abstract getState(): unknown;
-    abstract onPopState(fn: LocationChangeListener): void;
-    abstract onHashChange(fn: LocationChangeListener): void;
+    /**
+     * Returns a function that, when executed, removes the `popstate` event handler.
+     */
+    abstract onPopState(fn: LocationChangeListener): VoidFunction;
+    /**
+     * Returns a function that, when executed, removes the `hashchange` event handler.
+     */
+    abstract onHashChange(fn: LocationChangeListener): VoidFunction;
     abstract get href(): string;
     abstract get protocol(): string;
     abstract get hostname(): string;
@@ -83,8 +89,8 @@ export declare class BrowserPlatformLocation extends PlatformLocation {
     private _history;
     constructor(_doc: any);
     getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): void;
-    onHashChange(fn: LocationChangeListener): void;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
     get href(): string;
     get protocol(): string;
     get hostname(): string;

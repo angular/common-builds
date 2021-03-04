@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { OnDestroy } from '@angular/core';
 import { LocationStrategy } from './location_strategy';
 import { LocationChangeListener, PlatformLocation } from './platform_location';
 import * as i0 from "@angular/core";
@@ -19,10 +27,12 @@ import * as i0 from "@angular/core";
  *
  * @publicApi
  */
-export declare class HashLocationStrategy extends LocationStrategy {
+export declare class HashLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, _baseHref?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     path(includeHash?: boolean): string;
