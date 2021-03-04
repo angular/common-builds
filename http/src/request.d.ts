@@ -55,6 +55,13 @@ export declare class HttpRequest<T> {
     readonly method: string;
     /**
      * Outgoing URL parameters.
+     *
+     * To pass a string representation of HTTP parameters in the URL-query-string format,
+     * the `HttpParamsOptions`' `fromString` may be used. For example:
+     *
+     * ```
+     * new HttpParams({fromString: 'angular=awesome'})
+     * ```
      */
     readonly params: HttpParams;
     /**
