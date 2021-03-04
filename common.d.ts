@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.4+3.sha-4f4454d
+ * @license Angular v11.2.4+11.sha-1d4fc94
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2514,7 +2514,7 @@ export declare const VERSION: Version;
  */
 export declare abstract class ViewportScroller {
     /** @nocollapse */
-    static ɵprov: never;
+    static ɵprov: unknown;
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @param offset A position in screen coordinates (a tuple with x and y values)
