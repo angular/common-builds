@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+12.sha-ca721c2
+ * @license Angular v12.0.0-next.3+13.sha-38524c4
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -122,10 +122,14 @@ class BrowserPlatformLocation extends PlatformLocation {
         return getDOM().getBaseHref(this._doc);
     }
     onPopState(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+        const window = getDOM().getGlobalEventTarget(this._doc, 'window');
+        window.addEventListener('popstate', fn, false);
+        return () => window.removeEventListener('popstate', fn);
     }
     onHashChange(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+        const window = getDOM().getGlobalEventTarget(this._doc, 'window');
+        window.addEventListener('hashchange', fn, false);
+        return () => window.removeEventListener('hashchange', fn);
     }
     get href() {
         return this.location.href;
@@ -361,6 +365,7 @@ class PathLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, href) {
         super();
         this._platformLocation = _platformLocation;
+        this._removeListenerFns = [];
         if (href == null) {
             href = this._platformLocation.getBaseHrefFromDOM();
         }
@@ -369,9 +374,13 @@ class PathLocationStrategy extends LocationStrategy {
         }
         this._baseHref = href;
     }
+    ngOnDestroy() {
+        while (this._removeListenerFns.length) {
+            this._removeListenerFns.pop()();
+        }
+    }
     onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
+        this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
     }
     getBaseHref() {
         return this._baseHref;
@@ -437,13 +446,18 @@ class HashLocationStrategy extends LocationStrategy {
         super();
         this._platformLocation = _platformLocation;
         this._baseHref = '';
+        this._removeListenerFns = [];
         if (_baseHref != null) {
             this._baseHref = _baseHref;
         }
     }
+    ngOnDestroy() {
+        while (this._removeListenerFns.length) {
+            this._removeListenerFns.pop()();
+        }
+    }
     onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
+        this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
     }
     getBaseHref() {
         return this._baseHref;
@@ -5111,7 +5125,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.3+12.sha-ca721c2');
+const VERSION = new Version('12.0.0-next.3+13.sha-38524c4');
 
 /**
  * @license

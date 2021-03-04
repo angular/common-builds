@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+12.sha-ca721c2
+ * @license Angular v12.0.0-next.3+13.sha-38524c4
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -898,10 +898,12 @@ export declare function getNumberOfCurrencyDigits(code: string): number;
  *
  * @publicApi
  */
-export declare class HashLocationStrategy extends LocationStrategy {
+export declare class HashLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, _baseHref?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     path(includeHash?: boolean): string;
@@ -2218,10 +2220,12 @@ export declare enum NumberSymbol {
  *
  * @publicApi
  */
-export declare class PathLocationStrategy extends LocationStrategy {
+export declare class PathLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, href?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     prepareExternalUrl(internal: string): string;
@@ -2301,8 +2305,14 @@ export declare class PercentPipe implements PipeTransform {
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
     abstract getState(): unknown;
-    abstract onPopState(fn: LocationChangeListener): void;
-    abstract onHashChange(fn: LocationChangeListener): void;
+    /**
+     * Returns a function that, when executed, removes the `popstate` event handler.
+     */
+    abstract onPopState(fn: LocationChangeListener): VoidFunction;
+    /**
+     * Returns a function that, when executed, removes the `hashchange` event handler.
+     */
+    abstract onHashChange(fn: LocationChangeListener): VoidFunction;
     abstract get href(): string;
     abstract get protocol(): string;
     abstract get hostname(): string;
@@ -2582,8 +2592,8 @@ export declare class ɵBrowserPlatformLocation extends PlatformLocation {
     private _history;
     constructor(_doc: any);
     getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): void;
-    onHashChange(fn: LocationChangeListener): void;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
     get href(): string;
     get protocol(): string;
     get hostname(): string;

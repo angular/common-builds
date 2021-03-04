@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+12.sha-ca721c2
+ * @license Angular v12.0.0-next.3+13.sha-38524c4
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -61,8 +61,8 @@ export declare class MockPlatformLocation implements PlatformLocation {
     get hash(): string;
     get state(): unknown;
     getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): void;
-    onHashChange(fn: LocationChangeListener): void;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
     get href(): string;
     get url(): string;
     private parseChanges;

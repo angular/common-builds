@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+12.sha-ca721c2
+ * @license Angular v12.0.0-next.3+13.sha-38524c4
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -340,9 +340,11 @@ class MockPlatformLocation {
     onPopState(fn) {
         // No-op: a state stack is not implemented, so
         // no events will ever come.
+        return () => { };
     }
     onHashChange(fn) {
-        this.hashUpdate.subscribe(fn);
+        const subscription = this.hashUpdate.subscribe(fn);
+        return () => subscription.unsubscribe();
     }
     get href() {
         let url = `${this.protocol}//${this.hostname}${this.port ? ':' + this.port : ''}`;
