@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+17.sha-e7453f1
+ * @license Angular v12.0.0-next.3+18.sha-c676ec1
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2118,7 +2118,7 @@ export declare enum NumberSymbol {
     /**
      * Decimal separator.
      * For `en-US`, the dot character.
-     * Example : 2,345`.`67
+     * Example: 2,345`.`67
      */
     Decimal = 0,
     /**
