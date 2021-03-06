@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.4+14.sha-2de7eef
+ * @license Angular v11.2.4+15.sha-4fd5d68
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -994,7 +994,7 @@ var NumberSymbol;
     /**
      * Decimal separator.
      * For `en-US`, the dot character.
-     * Example : 2,345`.`67
+     * Example: 2,345`.`67
      */
     NumberSymbol[NumberSymbol["Decimal"] = 0] = "Decimal";
     /**
@@ -5120,7 +5120,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.2.4+14.sha-2de7eef');
+const VERSION = new Version('11.2.4+15.sha-4fd5d68');
 
 /**
  * @license
