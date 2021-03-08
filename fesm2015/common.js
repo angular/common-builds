@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+40.sha-bdf13fe
+ * @license Angular v12.0.0-next.3+42.sha-2ebe2bc
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5109,8 +5109,9 @@ const COMMON_PIPES = [
  */
 class CommonModule {
 }
+CommonModule.ɵfac = function CommonModule_Factory(t) { return new (t || CommonModule)(); };
 CommonModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: CommonModule });
-CommonModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ factory: function CommonModule_Factory(t) { return new (t || CommonModule)(); }, providers: [
+CommonModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
         { provide: NgLocalization, useClass: NgLocaleLocalization },
     ] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CommonModule, { declarations: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] }); })();
@@ -5175,7 +5176,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.3+40.sha-bdf13fe');
+const VERSION = new Version('12.0.0-next.3+42.sha-2ebe2bc');
 
 /**
  * @license

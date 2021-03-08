@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+40.sha-bdf13fe
+ * @license Angular v12.0.0-next.3+42.sha-2ebe2bc
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -365,8 +365,9 @@ HttpClientTestingBackend.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: Ht
  */
 class HttpClientTestingModule {
 }
+HttpClientTestingModule.ɵfac = function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); };
 HttpClientTestingModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: HttpClientTestingModule });
-HttpClientTestingModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ factory: function HttpClientTestingModule_Factory(t) { return new (t || HttpClientTestingModule)(); }, providers: [
+HttpClientTestingModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },

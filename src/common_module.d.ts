@@ -30,6 +30,7 @@ import * as i17 from "./pipes/keyvalue_pipe";
  * @publicApi
  */
 export declare class CommonModule {
+    static ɵfac: i0.ɵɵFactoryDef<CommonModule, never>;
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
     static ɵinj: i0.ɵɵInjectorDef<CommonModule>;
 }

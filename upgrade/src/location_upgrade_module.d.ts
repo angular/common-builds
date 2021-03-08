@@ -55,6 +55,7 @@ export declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgr
  */
 export declare class LocationUpgradeModule {
     static config(config?: LocationUpgradeConfig): ModuleWithProviders<LocationUpgradeModule>;
+    static ɵfac: i0.ɵɵFactoryDef<LocationUpgradeModule, never>;
     static ɵmod: i0.ɵɵNgModuleDefWithMeta<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
     static ɵinj: i0.ɵɵInjectorDef<LocationUpgradeModule>;
 }

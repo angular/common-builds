@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+40.sha-bdf13fe
+ * @license Angular v12.0.0-next.3+42.sha-2ebe2bc
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2424,8 +2424,9 @@
         };
         return HttpClientXsrfModule;
     }());
+    HttpClientXsrfModule.ɵfac = function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); };
     HttpClientXsrfModule.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: HttpClientXsrfModule });
-    HttpClientXsrfModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
+    HttpClientXsrfModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ providers: [
             HttpXsrfInterceptor,
             { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
             { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -2460,8 +2461,9 @@
         }
         return HttpClientModule;
     }());
+    HttpClientModule.ɵfac = function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); };
     HttpClientModule.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: HttpClientModule });
-    HttpClientModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
+    HttpClientModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ providers: [
             HttpClient,
             { provide: HttpHandler, useClass: HttpInterceptingHandler },
             HttpXhrBackend,
@@ -2519,8 +2521,9 @@
         }
         return HttpClientJsonpModule;
     }());
+    HttpClientJsonpModule.ɵfac = function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); };
     HttpClientJsonpModule.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: HttpClientJsonpModule });
-    HttpClientJsonpModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
+    HttpClientJsonpModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ providers: [
             JsonpClientBackend,
             { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
             { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
