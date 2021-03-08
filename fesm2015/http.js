@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+33.sha-1735430
+ * @license Angular v12.0.0-next.3+36.sha-03d47d5
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1263,7 +1263,7 @@ class HttpClient {
     }
 }
 HttpClient.ɵfac = function HttpClient_Factory(t) { return new (t || HttpClient)(ɵɵinject(HttpHandler)); };
-HttpClient.ɵprov = ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
+HttpClient.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpClient, factory: HttpClient.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClient, [{
         type: Injectable
     }], function () { return [{ type: HttpHandler }]; }, null); })();
@@ -1302,7 +1302,7 @@ class NoopInterceptor {
     }
 }
 NoopInterceptor.ɵfac = function NoopInterceptor_Factory(t) { return new (t || NoopInterceptor)(); };
-NoopInterceptor.ɵprov = ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
+NoopInterceptor.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: NoopInterceptor, factory: NoopInterceptor.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(NoopInterceptor, [{
         type: Injectable
     }], null, null); })();
@@ -1495,7 +1495,7 @@ class JsonpClientBackend {
     }
 }
 JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT)); };
-JsonpClientBackend.ɵprov = ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac });
+JsonpClientBackend.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(JsonpClientBackend, [{
         type: Injectable
     }], function () { return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
@@ -1530,7 +1530,7 @@ class JsonpInterceptor {
     }
 }
 JsonpInterceptor.ɵfac = function JsonpInterceptor_Factory(t) { return new (t || JsonpInterceptor)(ɵɵinject(JsonpClientBackend)); };
-JsonpInterceptor.ɵprov = ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac });
+JsonpInterceptor.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: JsonpInterceptor, factory: JsonpInterceptor.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(JsonpInterceptor, [{
         type: Injectable
     }], function () { return [{ type: JsonpClientBackend }]; }, null); })();
@@ -1574,7 +1574,7 @@ class BrowserXhr {
     }
 }
 BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-BrowserXhr.ɵprov = ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
+BrowserXhr.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(BrowserXhr, [{
         type: Injectable
     }], function () { return []; }, null); })();
@@ -1832,7 +1832,7 @@ class HttpXhrBackend {
     }
 }
 HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
-HttpXhrBackend.ɵprov = ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
+HttpXhrBackend.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
     }], function () { return [{ type: XhrFactory }]; }, null); })();
@@ -1882,7 +1882,7 @@ class HttpXsrfCookieExtractor {
     }
 }
 HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(XSRF_COOKIE_NAME)); };
-HttpXsrfCookieExtractor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac });
+HttpXsrfCookieExtractor.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
         type: Injectable
     }], function () { return [{ type: undefined, decorators: [{
@@ -1922,7 +1922,7 @@ class HttpXsrfInterceptor {
     }
 }
 HttpXsrfInterceptor.ɵfac = function HttpXsrfInterceptor_Factory(t) { return new (t || HttpXsrfInterceptor)(ɵɵinject(HttpXsrfTokenExtractor), ɵɵinject(XSRF_HEADER_NAME)); };
-HttpXsrfInterceptor.ɵprov = ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac });
+HttpXsrfInterceptor.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpXsrfInterceptor, factory: HttpXsrfInterceptor.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXsrfInterceptor, [{
         type: Injectable
     }], function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
@@ -1961,7 +1961,7 @@ class HttpInterceptingHandler {
     }
 }
 HttpInterceptingHandler.ɵfac = function HttpInterceptingHandler_Factory(t) { return new (t || HttpInterceptingHandler)(ɵɵinject(HttpBackend), ɵɵinject(Injector)); };
-HttpInterceptingHandler.ɵprov = ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac });
+HttpInterceptingHandler.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpInterceptingHandler, factory: HttpInterceptingHandler.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpInterceptingHandler, [{
         type: Injectable
     }], function () { return [{ type: HttpBackend }, { type: Injector }]; }, null); })();
@@ -2035,8 +2035,8 @@ class HttpClientXsrfModule {
         };
     }
 }
-HttpClientXsrfModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientXsrfModule });
-HttpClientXsrfModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
+HttpClientXsrfModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: HttpClientXsrfModule });
+HttpClientXsrfModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ factory: function HttpClientXsrfModule_Factory(t) { return new (t || HttpClientXsrfModule)(); }, providers: [
         HttpXsrfInterceptor,
         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
         { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -2066,8 +2066,8 @@ HttpClientXsrfModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientXs
  */
 class HttpClientModule {
 }
-HttpClientModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientModule });
-HttpClientModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
+HttpClientModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: HttpClientModule });
+HttpClientModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ factory: function HttpClientModule_Factory(t) { return new (t || HttpClientModule)(); }, providers: [
         HttpClient,
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
         HttpXhrBackend,
@@ -2120,8 +2120,8 @@ HttpClientModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientModule
  */
 class HttpClientJsonpModule {
 }
-HttpClientJsonpModule.ɵmod = ɵɵdefineNgModule({ type: HttpClientJsonpModule });
-HttpClientJsonpModule.ɵinj = ɵɵdefineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
+HttpClientJsonpModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: HttpClientJsonpModule });
+HttpClientJsonpModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ factory: function HttpClientJsonpModule_Factory(t) { return new (t || HttpClientJsonpModule)(); }, providers: [
         JsonpClientBackend,
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
