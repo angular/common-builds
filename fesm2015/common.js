@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.3+58.sha-f281310
+ * @license Angular v12.0.0-next.3+60.sha-e29a29c
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4911,7 +4911,7 @@ PercentPipe.ɵpipe = /*@__PURE__*/ ɵɵdefinePipe({ name: "percent", type: Perce
  * The default currency code is currently always `USD` but this is deprecated from v9.
  *
  * **In v11 the default currency code will be taken from the current locale identified by
- * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
  * more information.**
  *
  * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
@@ -5176,7 +5176,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.3+58.sha-f281310');
+const VERSION = new Version('12.0.0-next.3+60.sha-e29a29c');
 
 /**
  * @license
