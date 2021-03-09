@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.4+31.sha-c5ead38
+ * @license Angular v11.2.4+50.sha-e7ce857
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5276,7 +5276,7 @@
      * The default currency code is currently always `USD` but this is deprecated from v9.
      *
      * **In v11 the default currency code will be taken from the current locale identified by
-     * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+     * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
      * more information.**
      *
      * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
@@ -5535,7 +5535,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.2.4+31.sha-c5ead38');
+    var VERSION = new i0.Version('11.2.4+50.sha-e7ce857');
 
     /**
      * @license
