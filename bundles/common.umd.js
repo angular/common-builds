@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+3.sha-4c79b8a
+ * @license Angular v12.0.0-next.4+4.sha-3c66b10
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -425,8 +425,8 @@
         // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
         /** @internal */
         BrowserPlatformLocation.prototype._init = function () {
-            this.location = getDOM().getLocation();
-            this._history = getDOM().getHistory();
+            this.location = window.location;
+            this._history = window.history;
         };
         BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function () {
             return getDOM().getBaseHref(this._doc);
@@ -5662,7 +5662,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.4+3.sha-4c79b8a');
+    var VERSION = new i0.Version('12.0.0-next.4+4.sha-3c66b10');
 
     /**
      * @license
