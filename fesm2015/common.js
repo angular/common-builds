@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+3.sha-4c79b8a
+ * @license Angular v12.0.0-next.4+4.sha-3c66b10
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -115,8 +115,8 @@ class BrowserPlatformLocation extends PlatformLocation {
     // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
     /** @internal */
     _init() {
-        this.location = getDOM().getLocation();
-        this._history = getDOM().getHistory();
+        this.location = window.location;
+        this._history = window.history;
     }
     getBaseHrefFromDOM() {
         return getDOM().getBaseHref(this._doc);
@@ -5125,7 +5125,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.4+3.sha-4c79b8a');
+const VERSION = new Version('12.0.0-next.4+4.sha-3c66b10');
 
 /**
  * @license
