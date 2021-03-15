@@ -1,11 +1,11 @@
 /**
- * @license Angular v12.0.0-next.4+26.sha-cc75e1d
+ * @license Angular v12.0.0-next.4+34.sha-1a9f526
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
-import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule, ɵɵsetNgModuleScope } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -374,7 +374,6 @@ HttpClientTestingModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
     ], imports: [[
             HttpClientModule,
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] }); })();
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpClientTestingModule, [{
         type: NgModule,
         args: [{
@@ -388,6 +387,7 @@ HttpClientTestingModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
                 ],
             }]
     }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(HttpClientTestingModule, { imports: [HttpClientModule] }); })();
 
 /**
  * @license

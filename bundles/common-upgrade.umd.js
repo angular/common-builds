@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+26.sha-cc75e1d
+ * @license Angular v12.0.0-next.4+34.sha-1a9f526
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1201,13 +1201,13 @@
     LocationUpgradeModule.ɵfac = function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); };
     LocationUpgradeModule.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: LocationUpgradeModule });
     LocationUpgradeModule.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ imports: [[common.CommonModule]] });
-    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [common.CommonModule] }); })();
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(LocationUpgradeModule, [{
                 type: i0.NgModule,
                 args: [{ imports: [common.CommonModule] }]
             }], null, null);
     })();
+    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [common.CommonModule] }); })();
     function provideAppBaseHref(config, appBaseHref) {
         if (config && config.appBaseHref != null) {
             return config.appBaseHref;

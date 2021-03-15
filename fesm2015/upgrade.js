@@ -1,12 +1,12 @@
 /**
- * @license Angular v12.0.0-next.4+26.sha-cc75e1d
+ * @license Angular v12.0.0-next.4+34.sha-1a9f526
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { ReplaySubject } from 'rxjs';
 import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, CommonModule, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
-import { InjectionToken, Inject, Optional, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, ɵsetClassMetadata, NgModule } from '@angular/core';
+import { InjectionToken, Inject, Optional, ɵɵdefineNgModule, ɵɵdefineInjector, ɵsetClassMetadata, NgModule, ɵɵsetNgModuleScope } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 /**
@@ -883,11 +883,11 @@ class LocationUpgradeModule {
 LocationUpgradeModule.ɵfac = function LocationUpgradeModule_Factory(t) { return new (t || LocationUpgradeModule)(); };
 LocationUpgradeModule.ɵmod = /*@__PURE__*/ ɵɵdefineNgModule({ type: LocationUpgradeModule });
 LocationUpgradeModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ imports: [[CommonModule]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] }); })();
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(LocationUpgradeModule, [{
         type: NgModule,
         args: [{ imports: [CommonModule] }]
     }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(LocationUpgradeModule, { imports: [CommonModule] }); })();
 function provideAppBaseHref(config, appBaseHref) {
     if (config && config.appBaseHref != null) {
         return config.appBaseHref;
