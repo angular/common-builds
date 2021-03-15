@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { HttpContext } from './context';
 import { HttpHeaders } from './headers';
 import { HttpParams } from './params';
 /**
@@ -31,6 +32,10 @@ export declare class HttpRequest<T> {
      * Outgoing headers for this request.
      */
     readonly headers: HttpHeaders;
+    /**
+     * Shared and mutable context that can be used by interceptors
+     */
+    readonly context: HttpContext;
     /**
      * Whether this request should be made in a way that exposes progress events.
      *
@@ -70,6 +75,7 @@ export declare class HttpRequest<T> {
     readonly urlWithParams: string;
     constructor(method: 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS', url: string, init?: {
         headers?: HttpHeaders;
+        context?: HttpContext;
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -77,6 +83,7 @@ export declare class HttpRequest<T> {
     });
     constructor(method: 'POST' | 'PUT' | 'PATCH', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
+        context?: HttpContext;
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -84,6 +91,7 @@ export declare class HttpRequest<T> {
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
+        context?: HttpContext;
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -104,6 +112,7 @@ export declare class HttpRequest<T> {
     clone(): HttpRequest<T>;
     clone(update: {
         headers?: HttpHeaders;
+        context?: HttpContext;
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -120,6 +129,7 @@ export declare class HttpRequest<T> {
     }): HttpRequest<T>;
     clone<V>(update: {
         headers?: HttpHeaders;
+        context?: HttpContext;
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';

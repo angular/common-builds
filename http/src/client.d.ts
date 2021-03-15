@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { HttpHandler } from './backend';
+import { HttpContext } from './context';
 import { HttpHeaders } from './headers';
 import { HttpParams } from './params';
 import { HttpRequest } from './request';
@@ -85,6 +86,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -108,6 +110,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -131,6 +134,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -155,6 +159,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -180,6 +185,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -204,6 +210,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -227,6 +234,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams | {
@@ -251,6 +259,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         reportProgress?: boolean;
         observe: 'events';
         params?: HttpParams | {
@@ -275,6 +284,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -297,6 +307,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -320,6 +331,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -343,6 +355,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams | {
@@ -366,6 +379,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         reportProgress?: boolean;
         observe: 'response';
         params?: HttpParams | {
@@ -389,6 +403,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -412,6 +427,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -434,6 +450,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -455,6 +472,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -476,6 +494,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -497,6 +516,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -520,6 +540,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -542,6 +563,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -564,6 +586,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -586,6 +609,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -608,6 +632,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | (string | number | boolean)[];
         };
@@ -629,6 +654,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -650,6 +676,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -671,6 +698,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -693,6 +721,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -714,6 +743,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -734,6 +764,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -755,6 +786,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -776,6 +808,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -797,6 +830,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -818,6 +852,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -841,6 +876,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -862,6 +898,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -883,6 +920,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -904,6 +942,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -925,6 +964,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -947,6 +987,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -969,6 +1010,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -991,6 +1033,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1013,6 +1056,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1035,6 +1079,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1056,6 +1101,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1077,6 +1123,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1098,6 +1145,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1119,6 +1167,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1140,6 +1189,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1163,6 +1213,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1185,6 +1236,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1207,6 +1259,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1229,6 +1282,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1251,6 +1305,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1273,6 +1328,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1295,6 +1351,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1317,6 +1374,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1339,6 +1397,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1361,6 +1420,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1381,6 +1441,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1403,6 +1464,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1446,6 +1508,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1467,6 +1530,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1488,6 +1552,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1511,6 +1576,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1533,6 +1599,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1555,6 +1622,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1577,6 +1645,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1599,6 +1668,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1621,6 +1691,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1643,6 +1714,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1665,6 +1737,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1687,6 +1760,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1709,6 +1783,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1729,6 +1804,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1750,6 +1826,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1772,6 +1849,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1794,6 +1872,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1816,6 +1895,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -1840,6 +1920,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1863,6 +1944,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1886,6 +1968,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1909,6 +1992,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1932,6 +2016,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1955,6 +2040,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -1978,6 +2064,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2001,6 +2088,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2024,6 +2112,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2047,6 +2136,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2068,6 +2158,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2091,6 +2182,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2113,6 +2205,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2135,6 +2228,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2157,6 +2251,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2181,6 +2276,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2203,6 +2299,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2226,6 +2323,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2249,6 +2347,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2272,6 +2371,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2295,6 +2395,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2318,6 +2419,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2341,6 +2443,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2364,6 +2467,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2388,6 +2492,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2409,6 +2514,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2432,6 +2538,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2454,6 +2561,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2476,6 +2584,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2498,6 +2607,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2522,6 +2632,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2545,6 +2656,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2568,6 +2680,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2591,6 +2704,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2614,6 +2728,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'events';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2637,6 +2752,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2660,6 +2776,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2683,6 +2800,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2706,6 +2824,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2729,6 +2848,7 @@ export declare class HttpClient {
             [header: string]: string | string[];
         };
         observe: 'response';
+        context?: HttpContext;
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
         };
@@ -2750,6 +2870,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
@@ -2772,6 +2893,7 @@ export declare class HttpClient {
         headers?: HttpHeaders | {
             [header: string]: string | string[];
         };
+        context?: HttpContext;
         observe?: 'body';
         params?: HttpParams | {
             [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
