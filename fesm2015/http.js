@@ -1,6 +1,6 @@
 /**
- * @license Angular v10.1.0-next.4+26.sha-6248d6c
- * (c) 2010-2020 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.5+9.sha-bff0d8f
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -326,7 +326,10 @@ class HttpUrlEncodingCodec {
 function paramParser(rawParams, codec) {
     const map = new Map();
     if (rawParams.length > 0) {
-        const params = rawParams.split('&');
+        // The `window.location.search` can be used while creating an instance of the `HttpParams` class
+        // (e.g. `new HttpParams({ fromString: window.location.search })`). The `window.location.search`
+        // may start with the `?` char, so we strip it if it's present.
+        const params = rawParams.replace(/^\?/, '').split('&');
         params.forEach((param) => {
             const eqIdx = param.indexOf('=');
             const [key, val] = eqIdx == -1 ?
@@ -350,6 +353,9 @@ function standardEncoding(v) {
         .replace(/%3D/gi, '=')
         .replace(/%3F/gi, '?')
         .replace(/%2F/gi, '/');
+}
+function valueToString(value) {
+    return `${value}`;
 }
 /**
  * An HTTP request/response body that represents serialized parameters,
@@ -430,6 +436,26 @@ class HttpParams {
         return this.clone({ param, value, op: 'a' });
     }
     /**
+     * Constructs a new body with appended values for the given parameter name.
+     * @param params parameters and values
+     * @return A new body with the new value.
+     */
+    appendAll(params) {
+        const updates = [];
+        Object.keys(params).forEach(param => {
+            const value = params[param];
+            if (Array.isArray(value)) {
+                value.forEach(_value => {
+                    updates.push({ param, value: _value, op: 'a' });
+                });
+            }
+            else {
+                updates.push({ param, value: value, op: 'a' });
+            }
+        });
+        return this.clone(updates);
+    }
+    /**
      * Replaces the value for a parameter.
      * @param param The parameter name.
      * @param value The new value.
@@ -471,7 +497,7 @@ class HttpParams {
     clone(update) {
         const clone = new HttpParams({ encoder: this.encoder });
         clone.cloneFrom = this.cloneFrom || this;
-        clone.updates = (this.updates || []).concat([update]);
+        clone.updates = (this.updates || []).concat(update);
         return clone;
     }
     init() {
@@ -486,13 +512,13 @@ class HttpParams {
                     case 'a':
                     case 's':
                         const base = (update.op === 'a' ? this.map.get(update.param) : undefined) || [];
-                        base.push(update.value);
+                        base.push(valueToString(update.value));
                         this.map.set(update.param, base);
                         break;
                     case 'd':
                         if (update.value !== undefined) {
                             let base = this.map.get(update.param) || [];
-                            const idx = base.indexOf(update.value);
+                            const idx = base.indexOf(valueToString(update.value));
                             if (idx !== -1) {
                                 base.splice(idx, 1);
                             }
@@ -511,6 +537,104 @@ class HttpParams {
             });
             this.cloneFrom = this.updates = null;
         }
+    }
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A token used to manipulate and access values stored in `HttpContext`.
+ *
+ * @publicApi
+ */
+class HttpContextToken {
+    constructor(defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+}
+/**
+ * Http context stores arbitrary user defined values and ensures type safety without
+ * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
+ *
+ * This context is mutable and is shared between cloned requests unless explicitly specified.
+ *
+ * @usageNotes
+ *
+ * ### Usage Example
+ *
+ * ```typescript
+ * // inside cache.interceptors.ts
+ * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+ *
+ * export class CacheInterceptor implements HttpInterceptor {
+ *
+ *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
+ *     if (req.context.get(IS_CACHE_ENABLED) === true) {
+ *       return ...;
+ *     }
+ *     return delegate.handle(req);
+ *   }
+ * }
+ *
+ * // inside a service
+ *
+ * this.httpClient.get('/api/weather', {
+ *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
+ * }).subscribe(...);
+ * ```
+ *
+ * @publicApi
+ */
+class HttpContext {
+    constructor() {
+        this.map = new Map();
+    }
+    /**
+     * Store a value in the context. If a value is already present it will be overwritten.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     * @param value The value to store.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    set(token, value) {
+        this.map.set(token, value);
+        return this;
+    }
+    /**
+     * Retrieve the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns The stored value or default if one is defined.
+     */
+    get(token) {
+        if (!this.map.has(token)) {
+            this.map.set(token, token.defaultValue());
+        }
+        return this.map.get(token);
+    }
+    /**
+     * Delete the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    delete(token) {
+        this.map.delete(token);
+        return this;
+    }
+    /**
+     * @returns a list of tokens currently stored in the context.
+     */
+    keys() {
+        return this.map.keys();
     }
 }
 
@@ -627,6 +751,9 @@ class HttpRequest {
             if (!!options.headers) {
                 this.headers = options.headers;
             }
+            if (!!options.context) {
+                this.context = options.context;
+            }
             if (!!options.params) {
                 this.params = options.params;
             }
@@ -634,6 +761,10 @@ class HttpRequest {
         // If no headers have been passed in, construct a new HttpHeaders instance.
         if (!this.headers) {
             this.headers = new HttpHeaders();
+        }
+        // If no context have been passed in, construct a new HttpContext instance.
+        if (!this.context) {
+            this.context = new HttpContext();
         }
         // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
         if (!this.params) {
@@ -731,6 +862,7 @@ class HttpRequest {
         return null;
     }
     clone(update = {}) {
+        var _a;
         // For method, url, and responseType, take the current value unless
         // it is overridden in the update hash.
         const method = update.method || this.method;
@@ -749,6 +881,8 @@ class HttpRequest {
         // `setParams` are used.
         let headers = update.headers || this.headers;
         let params = update.params || this.params;
+        // Pass on context if needed
+        const context = (_a = update.context) !== null && _a !== void 0 ? _a : this.context;
         // Check whether the caller has asked to add headers.
         if (update.setHeaders !== undefined) {
             // Set every requested header.
@@ -766,6 +900,7 @@ class HttpRequest {
         return new HttpRequest(method, url, body, {
             params,
             headers,
+            context,
             reportProgress,
             responseType,
             withCredentials,
@@ -824,7 +959,7 @@ class HttpResponseBase {
      * The single parameter accepted is an initialization hash. Any properties
      * of the response passed there will override the default values.
      */
-    constructor(init, defaultStatus = 200, defaultStatusText = 'OK') {
+    constructor(init, defaultStatus = 200 /* Ok */, defaultStatusText = 'OK') {
         // If the hash has values passed, use them to initialize the response.
         // Otherwise use the default values.
         this.headers = init.headers || new HttpHeaders();
@@ -951,6 +1086,7 @@ function addBody(options, body) {
     return {
         body,
         headers: options.headers,
+        context: options.context,
         observe: options.observe,
         params: options.params,
         reportProgress: options.reportProgress,
@@ -983,6 +1119,14 @@ function addBody(options, body) {
  *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
  * }
  * ```
+ *
+ * Alternatively, the parameter string can be used without invoking HttpParams
+ * by directly joining to the URL.
+ * ```
+ * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
+ * ```
+ *
+ *
  * ### JSONP Example
  * ```
  * requestJsonp(url, callback = 'callback') {
@@ -1001,6 +1145,7 @@ function addBody(options, body) {
  * ```
  *
  * @see [HTTP Guide](guide/http)
+ * @see [HTTP Request](api/common/http/HttpRequest)
  *
  * @publicApi
  */
@@ -1067,6 +1212,7 @@ class HttpClient {
             // Construct the request.
             req = new HttpRequest(first, url, (options.body !== undefined ? options.body : null), {
                 headers,
+                context: options.context,
                 params,
                 reportProgress: options.reportProgress,
                 // By default, JSON is assumed to be returned for all calls.
@@ -1311,6 +1457,10 @@ class JsonpClientBackend {
     constructor(callbackMap, document) {
         this.callbackMap = callbackMap;
         this.document = document;
+        /**
+         * A resolved promise that can be used to schedule microtasks in the event handlers.
+         */
+        this.resolvedPromise = Promise.resolve();
     }
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
@@ -1387,30 +1537,35 @@ class JsonpClientBackend {
                 if (cancelled) {
                     return;
                 }
-                // Cleanup the page.
-                cleanup();
-                // Check whether the response callback has run.
-                if (!finished) {
-                    // It hasn't, something went wrong with the request. Return an error via
-                    // the Observable error path. All JSONP errors have status 0.
-                    observer.error(new HttpErrorResponse({
+                // We wrap it in an extra Promise, to ensure the microtask
+                // is scheduled after the loaded endpoint has executed any potential microtask itself,
+                // which is not guaranteed in Internet Explorer and EdgeHTML. See issue #39496
+                this.resolvedPromise.then(() => {
+                    // Cleanup the page.
+                    cleanup();
+                    // Check whether the response callback has run.
+                    if (!finished) {
+                        // It hasn't, something went wrong with the request. Return an error via
+                        // the Observable error path. All JSONP errors have status 0.
+                        observer.error(new HttpErrorResponse({
+                            url,
+                            status: 0,
+                            statusText: 'JSONP Error',
+                            error: new Error(JSONP_ERR_NO_CALLBACK),
+                        }));
+                        return;
+                    }
+                    // Success. body either contains the response body or null if none was
+                    // returned.
+                    observer.next(new HttpResponse({
+                        body,
+                        status: 200 /* Ok */,
+                        statusText: 'OK',
                         url,
-                        status: 0,
-                        statusText: 'JSONP Error',
-                        error: new Error(JSONP_ERR_NO_CALLBACK),
                     }));
-                    return;
-                }
-                // Success. body either contains the response body or null if none was
-                // returned.
-                observer.next(new HttpResponse({
-                    body,
-                    status: 200,
-                    statusText: 'OK',
-                    url,
-                }));
-                // Complete the stream, the response is over.
-                observer.complete();
+                    // Complete the stream, the response is over.
+                    observer.complete();
+                });
             };
             // onError() is the error callback, which runs if the script returned generates
             // a Javascript error. It emits the error via the Observable error channel as
@@ -1550,9 +1705,9 @@ class HttpXhrBackend {
      */
     handle(req) {
         // Quick check to give a better error message when a user attempts to use
-        // HttpClient.jsonp() without installing the JsonpClientModule
+        // HttpClient.jsonp() without installing the HttpClientJsonpModule
         if (req.method === 'JSONP') {
-            throw new Error(`Attempted to construct Jsonp request without JsonpClientModule installed.`);
+            throw new Error(`Attempted to construct Jsonp request without HttpClientJsonpModule installed.`);
         }
         // Everything happens on Observable subscription.
         return new Observable((observer) => {
@@ -1601,8 +1756,8 @@ class HttpXhrBackend {
                 if (headerResponse !== null) {
                     return headerResponse;
                 }
-                // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
-                const status = xhr.status === 1223 ? 204 : xhr.status;
+                // Read status and normalize an IE9 bug (https://bugs.jquery.com/ticket/1450).
+                const status = xhr.status === 1223 ? 204 /* NoContent */ : xhr.status;
                 const statusText = xhr.statusText || 'OK';
                 // Parse headers from XMLHttpRequest - this step is lazy.
                 const headers = new HttpHeaders(xhr.getAllResponseHeaders());
@@ -1621,13 +1776,13 @@ class HttpXhrBackend {
                 let { headers, status, statusText, url } = partialFromXhr();
                 // The body will be read out if present.
                 let body = null;
-                if (status !== 204) {
+                if (status !== 204 /* NoContent */) {
                     // Use XMLHttpRequest.response if set, responseText otherwise.
                     body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
                 }
                 // Normalize another potential bug (this one comes from CORS).
                 if (status === 0) {
-                    status = !!body ? 200 : 0;
+                    status = !!body ? 200 /* Ok */ : 0;
                 }
                 // ok determines whether the response will be transmitted on the event or
                 // error channel. Unsuccessful status codes (not 2xx) will always be errors,
@@ -1749,6 +1904,8 @@ class HttpXhrBackend {
             // By default, register for load and error events.
             xhr.addEventListener('load', onLoad);
             xhr.addEventListener('error', onError);
+            xhr.addEventListener('timeout', onError);
+            xhr.addEventListener('abort', onError);
             // Progress events are only enabled if requested.
             if (req.reportProgress) {
                 // Download progress is always enabled if requested.
@@ -1766,7 +1923,9 @@ class HttpXhrBackend {
             return () => {
                 // On a cancellation, remove all registered event listeners.
                 xhr.removeEventListener('error', onError);
+                xhr.removeEventListener('abort', onError);
                 xhr.removeEventListener('load', onLoad);
+                xhr.removeEventListener('timeout', onError);
                 if (req.reportProgress) {
                     xhr.removeEventListener('progress', onDownProgress);
                     if (reqBody !== null && xhr.upload) {
@@ -2071,5 +2230,5 @@ HttpClientJsonpModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, BrowserXhr as ɵangular_packages_common_http_http_d, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_e, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_f, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_g, HttpXsrfInterceptor as ɵangular_packages_common_http_http_h };
+export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, BrowserXhr as ɵangular_packages_common_http_http_d, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_e, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_f, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_g, HttpXsrfInterceptor as ɵangular_packages_common_http_http_h };
 //# sourceMappingURL=http.js.map

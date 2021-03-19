@@ -1,6 +1,6 @@
 /**
- * @license Angular v10.1.0-next.4+26.sha-6248d6c
- * (c) 2010-2020 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.5+9.sha-bff0d8f
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -13,13 +13,13 @@ import { IterableDiffers } from '@angular/core';
 import { KeyValueDiffers } from '@angular/core';
 import { NgIterable } from '@angular/core';
 import { NgModuleFactory } from '@angular/core';
-import { Observable } from 'rxjs';
 import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { PipeTransform } from '@angular/core';
 import { Provider } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
+import { Subscribable } from 'rxjs';
 import { SubscriptionLike } from 'rxjs';
 import { TemplateRef } from '@angular/core';
 import { TrackByFunction } from '@angular/core';
@@ -87,10 +87,9 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _strategy;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
-    transform<T>(obj: null): null;
-    transform<T>(obj: undefined): undefined;
-    transform<T>(obj: Observable<T> | null | undefined): T | null;
-    transform<T>(obj: Promise<T> | null | undefined): T | null;
+    transform<T>(obj: Subscribable<T> | Promise<T>): T | null;
+    transform<T>(obj: null | undefined): null;
+    transform<T>(obj: Subscribable<T> | Promise<T> | null | undefined): T | null;
     private _subscribe;
     private _selectStrategy;
     private _dispose;
@@ -130,7 +129,7 @@ export declare class CommonModule {
  * The default currency code is currently always `USD` but this is deprecated from v9.
  *
  * **In v11 the default currency code will be taken from the current locale identified by
- * the `LOCAL_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
  * more information.**
  *
  * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
@@ -191,7 +190,9 @@ export declare class CurrencyPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -215,22 +216,20 @@ export declare class CurrencyPipe implements PipeTransform {
  *
  * ### Pre-defined format options
  *
- * Examples are given in `en-US` locale.
- *
- * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
- * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
- * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
- * GMT+1`).
- * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`).
- * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
- * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
- * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
- * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
- * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
- * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
- * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
- * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+ * | Option        | Equivalent to                       | Examples (given in `en-US` locale)              |
+ * |---------------|-------------------------------------|-------------------------------------------------|
+ * | `'short'`     | `'M/d/yy, h:mm a'`                  | `6/15/15, 9:03 AM`                              |
+ * | `'medium'`    | `'MMM d, y, h:mm:ss a'`             | `Jun 15, 2015, 9:03:01 AM`                      |
+ * | `'long'`      | `'MMMM d, y, h:mm:ss a z'`          | `June 15, 2015 at 9:03:01 AM GMT+1`             |
+ * | `'full'`      | `'EEEE, MMMM d, y, h:mm:ss a zzzz'` | `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00` |
+ * | `'shortDate'` | `'M/d/yy'`                          | `6/15/15`                                       |
+ * | `'mediumDate'`| `'MMM d, y'`                        | `Jun 15, 2015`                                  |
+ * | `'longDate'`  | `'MMMM d, y'`                       | `June 15, 2015`                                 |
+ * | `'fullDate'`  | `'EEEE, MMMM d, y'`                 | `Monday, June 15, 2015`                         |
+ * | `'shortTime'` | `'h:mm a'`                          | `9:03 AM`                                       |
+ * | `'mediumTime'`| `'h:mm:ss a'`                       | `9:03:01 AM`                                    |
+ * | `'longTime'`  | `'h:mm:ss a z'`                     | `9:03:01 AM GMT+1`                              |
+ * | `'fullTime'`  | `'h:mm:ss a zzzz'`                  | `9:03:01 AM GMT+01:00`                          |
  *
  * ### Custom format options
  *
@@ -239,63 +238,71 @@ export declare class CurrencyPipe implements PipeTransform {
  * Format details depend on the locale.
  * Fields marked with (*) are only available in the extra data set for the given locale.
  *
- *  | Field type         | Format      | Description                                                   | Example Value                                              |
- *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
- *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
- *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
- *  |                    | GGGGG       | Narrow                                                        | A                                                          |
- *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
- *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
- *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
- *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
- *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
- *  |                    | MMMM        | Wide                                                          | September                                                  |
- *  |                    | MMMMM       | Narrow                                                        | S                                                          |
- *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
- *  |                    | LLLL        | Wide                                                          | September                                                  |
- *  |                    | LLLLL       | Narrow                                                        | S                                                          |
- *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
- *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
- *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
- *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
- *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
- *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
- *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
- *  |                    | EEEEE       | Narrow                                                        | T                                                          |
- *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
- *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
- *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
- *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
- *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
- *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | BBBBB       | Narrow                                                        | md                                                         |
- *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
- *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | bbbbb       | Narrow                                                        | md                                                         |
- *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
- *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
- *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
- *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
- *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
- *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
- *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
- *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
- *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
- *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
- *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
- *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
- *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
- *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
- *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
- *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
- *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
- *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *  | Field type          | Format      | Description                                                   | Example Value                                              |
+ *  |-------------------- |-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                 | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                     | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                     | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year                | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                     | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                     | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                     | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Week-numbering year | Y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                     | YY          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                     | YYY         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                     | YYYY        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month               | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                     | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                     | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                     | MMMM        | Wide                                                          | September                                                  |
+ *  |                     | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone    | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                     | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                     | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                     | LLLL        | Wide                                                          | September                                                  |
+ *  |                     | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year        | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                     | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month       | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month        | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                     | dd          | Numeric: 2 digits + zero padded                               | 01                                                         |
+ *  | Week day            | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                     | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                     | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                     | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Week day standalone | c, cc       | Numeric: 1 digit                                              | 2                                                          |
+ *  |                     | ccc         | Abbreviated                                                   | Tue                                                        |
+ *  |                     | cccc        | Wide                                                          | Tuesday                                                    |
+ *  |                     | ccccc       | Narrow                                                        | T                                                          |
+ *  |                     | cccccc      | Short                                                         | Tu                                                         |
+ *  | Period              | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                     | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                     | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*             | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                     | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                     | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone*  | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                     | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                     | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12           | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                     | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23           | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                     | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute              | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                     | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second              | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                     | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds  | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                     | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                     | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone                | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                     | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                     | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                     | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                     | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                     | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                     | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
  *
- * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
  *
  * ### Format examples
  *
@@ -348,39 +355,69 @@ export declare class DatePipe implements PipeTransform {
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @returns A date string in the desired format.
      */
-    transform(value: any, format?: string, timezone?: string, locale?: string): string | null;
+    transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
+    transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
+    transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
 }
 
 /**
  * @ngModule CommonModule
  * @description
  *
- * Transforms a number into a string,
- * formatted according to locale rules that determine group sizing and
- * separator, decimal-point character, and other locale-specific
- * configurations.
- *
- * If no parameters are specified, the function rounds off to the nearest value using this
- * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
- * The behavior differs from that of the JavaScript ```Math.round()``` function.
- * In the following case for example, the pipe rounds down where
- * ```Math.round()``` rounds up:
- *
- * ```html
- * -2.5 | number:'1.0-0'
- * > -3
- * Math.round(-2.5)
- * > -2
- * ```
+ * Formats a value according to digit options and locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
  *
  * @see `formatNumber()`
  *
  * @usageNotes
- * The following code shows how the pipe transforms numbers
- * into text strings, according to various format specifications,
- * where the caller's default locale is `en-US`.
+ *
+ * ### digitsInfo
+ *
+ * The value's decimal representation is specified by the `digitsInfo`
+ * parameter, written in the following format:<br>
+ *
+ * ```
+ * {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+ * ```
+ *
+ *  - `minIntegerDigits`:
+ * The minimum number of integer digits before the decimal point.
+ * Default is 1.
+ *
+ * - `minFractionDigits`:
+ * The minimum number of digits after the decimal point.
+ * Default is 0.
+ *
+ *  - `maxFractionDigits`:
+ * The maximum number of digits after the decimal point.
+ * Default is 3.
+ *
+ * If the formatted value is truncated it will be rounded using the "to-nearest" method:
+ *
+ * ```
+ * {{3.6 | number: '1.0-0'}}
+ * <!--will output '4'-->
+ *
+ * {{-3.6 | number:'1.0-0'}}
+ * <!--will output '-4'-->
+ * ```
+ *
+ * ### locale
+ *
+ * `locale` will format a value according to locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
+ *
+ * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+ *
+ * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
  *
  * ### Example
+ *
+ * The following code shows how the pipe transforms values
+ * according to various format specifications,
+ * where the caller's default locale is `en-US`.
  *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
@@ -389,22 +426,9 @@ export declare class DatePipe implements PipeTransform {
 export declare class DecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    /**
-     * @param value The number to be formatted.
-     * @param digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
-     * @param locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -431,7 +455,7 @@ export declare const DOCUMENT: InjectionToken<Document>;
  * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted currency value.
@@ -476,7 +500,7 @@ export declare function formatDate(value: string | number | Date, format: string
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
@@ -494,7 +518,7 @@ export declare function formatNumber(value: number, locale: string, digitsInfo?:
  *
  * @param value The number to format.
  * @param locale A locale code for the locale format rules to use.
- * @param digitInfo Decimal representation options, specified by a string in the following format:
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted percentage value.
@@ -647,7 +671,7 @@ export declare function getLocaleDateTimeFormat(locale: string, width: FormatWid
  *
  * @publicApi
  */
-export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 
 /**
  * Retrieves day period strings for the given locale.
@@ -660,7 +684,7 @@ export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, 
  *
  * @publicApi
  */
-export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): [string, string];
+export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle, width: TranslationWidth): Readonly<[string, string]>;
 
 /**
  * Retrieves the writing direction of a specified locale
@@ -674,7 +698,6 @@ export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
 /**
  * Retrieves Gregorian-calendar eras for the given locale.
  * @param locale A locale code for the locale format rules to use.
- * @param formStyle The required grammatical form.
  * @param width The required character width.
 
  * @returns An array of localized era strings.
@@ -683,7 +706,7 @@ export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
  *
  * @publicApi
  */
-export declare function getLocaleEraNames(locale: string, width: TranslationWidth): [string, string];
+export declare function getLocaleEraNames(locale: string, width: TranslationWidth): Readonly<[string, string]>;
 
 /**
  * Retrieves locale-specific rules used to determine which day period to use
@@ -764,7 +787,7 @@ export declare function getLocaleId(locale: string): string;
  *
  * @publicApi
  */
-export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): string[];
+export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle, width: TranslationWidth): ReadonlyArray<string>;
 
 /**
  * Retrieves a number format for a given locale.
@@ -875,10 +898,12 @@ export declare function getNumberOfCurrencyDigits(code: string): number;
  *
  * @publicApi
  */
-export declare class HashLocationStrategy extends LocationStrategy {
+export declare class HashLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, _baseHref?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     path(includeHash?: boolean): string;
@@ -913,7 +938,7 @@ export declare class I18nPluralPipe implements PipeTransform {
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
-    transform(value: number, pluralMap: {
+    transform(value: number | null | undefined, pluralMap: {
         [count: string]: string;
     }, locale?: string): string;
 }
@@ -1028,21 +1053,13 @@ export declare class KeyValuePipe implements PipeTransform {
     constructor(differs: KeyValueDiffers);
     private differ;
     private keyValues;
-    transform<K, V>(input: null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): null;
-    transform<V>(input: {
-        [key: string]: V;
-    } | ReadonlyMap<string, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
-    transform<V>(input: {
-        [key: string]: V;
-    } | ReadonlyMap<string, V> | null, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
-    transform<V>(input: {
-        [key: number]: V;
-    } | ReadonlyMap<number, V>, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>>;
-    transform<V>(input: {
-        [key: number]: V;
-    } | ReadonlyMap<number, V> | null, compareFn?: (a: KeyValue<number, V>, b: KeyValue<number, V>) => number): Array<KeyValue<number, V>> | null;
     transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    transform<K, V>(input: ReadonlyMap<K, V> | null, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    transform<K extends number, V>(input: Record<K, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
+    transform(input: null | undefined, compareFn?: (a: KeyValue<unknown, unknown>, b: KeyValue<unknown, unknown>) => number): null;
+    transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
 }
 
 /**
@@ -1264,6 +1281,8 @@ export declare class LowerCasePipe implements PipeTransform {
      * @param value The string to transform to lower case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
@@ -1403,7 +1422,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * of the cloned templates.
  *
  * The `ngForOf` directive is generally used in the
- * [shorthand form](guide/structural-directives#the-asterisk--prefix) `*ngFor`.
+ * [shorthand form](guide/structural-directives#asterisk) `*ngFor`.
  * In this form, the template to be rendered for each iteration is the content
  * of an anchor element containing the directive.
  *
@@ -1432,11 +1451,11 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * context according to its lexical position.
  *
  * When using the shorthand syntax, Angular allows only [one structural directive
- * on an element](guide/structural-directives#one-structural-directive-per-host-element).
+ * on an element](guide/built-in-directives#one-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
  * For futher discussion, see
- * [Structural Directives](guide/structural-directives#one-per-element).
+ * [Structural Directives](guide/built-in-directives#one-per-element).
  *
  * @usageNotes
  *
@@ -1500,9 +1519,9 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
     private _differs;
     /**
      * The value of the iterable expression, which can be used as a
-     * [template input variable](guide/structural-directives#template-input-variable).
+     * [template input variable](guide/structural-directives#shorthand).
      */
-    set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
+    set ngForOf(ngForOf: U & NgIterable<T> | undefined | null);
     /**
      * A function that defines how to track changes for items in the iterable.
      *
@@ -1518,7 +1537,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * rather than the identity of the object itself.
      *
      * The function receives two inputs,
-     * the iteration index and the node object ID.
+     * the iteration index and the associated node data.
      */
     set ngForTrackBy(fn: TrackByFunction<T>);
     get ngForTrackBy(): TrackByFunction<T>;
@@ -1570,7 +1589,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * Angular renders the template provided in an optional `else` clause. The default
  * template for the `else` clause is blank.
  *
- * A [shorthand form](guide/structural-directives#the-asterisk--prefix) of the directive,
+ * A [shorthand form](guide/structural-directives#asterisk) of the directive,
  * `*ngIf="condition"`, is generally used, provided
  * as an attribute of the anchor element for the inserted template.
  * Angular expands this into a more explicit version, in which the anchor element
@@ -1643,7 +1662,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * You might want to show a set of properties from the same object. If you are waiting
  * for asynchronous data, the object can be undefined.
  * In this case, you can use `ngIf` and store the result of the condition in a local
- * variable as shown in the the following example.
+ * variable as shown in the following example.
  *
  * {@example common/ngIf/ts/module.ts region='NgIfAs'}
  *
@@ -1653,7 +1672,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The conditional displays the data only if `userStream` returns a value,
  * so you don't need to use the
- * [safe-navigation-operator](guide/template-expression-operators#safe-navigation-operator) (`?.`)
+ * safe-navigation-operator (`?.`)
  * to guard against null values when accessing properties.
  * You can display an alternative template while waiting for the data.
  *
@@ -1696,7 +1715,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The presence of the implicit template object has implications for the nesting of
  * structural directives. For more on this subject, see
- * [Structural Directives](https://angular.io/guide/structural-directives#one-per-element).
+ * [Structural Directives](https://angular.io/guide/built-in-directives#one-per-element).
  *
  * @ngModule CommonModule
  * @publicApi
@@ -2069,19 +2088,6 @@ export declare class NgTemplateOutlet implements OnChanges {
     ngTemplateOutlet: TemplateRef<any> | null;
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
-    /**
-     * We need to re-create existing embedded view if:
-     * - templateRef has changed
-     * - context has changes
-     *
-     * We mark context object as changed when the corresponding object
-     * shape changes (new properties are added or existing properties are removed).
-     * In other words we consider context with the same properties as "the same" even
-     * if object reference changes (see https://github.com/angular/angular/issues/13407).
-     */
-    private _shouldRecreateView;
-    private _hasContextShapeChanged;
-    private _updateExistingContext;
 }
 
 
@@ -2112,7 +2118,7 @@ export declare enum NumberSymbol {
     /**
      * Decimal separator.
      * For `en-US`, the dot character.
-     * Example : 2,345`.`67
+     * Example: 2,345`.`67
      */
     Decimal = 0,
     /**
@@ -2214,10 +2220,12 @@ export declare enum NumberSymbol {
  *
  * @publicApi
  */
-export declare class PathLocationStrategy extends LocationStrategy {
+export declare class PathLocationStrategy extends LocationStrategy implements OnDestroy {
     private _platformLocation;
     private _baseHref;
+    private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, href?: string);
+    ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
     prepareExternalUrl(internal: string): string;
@@ -2267,7 +2275,9 @@ export declare class PercentPipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
+    transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
+    transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
 }
 
 /**
@@ -2295,8 +2305,14 @@ export declare class PercentPipe implements PipeTransform {
 export declare abstract class PlatformLocation {
     abstract getBaseHrefFromDOM(): string;
     abstract getState(): unknown;
-    abstract onPopState(fn: LocationChangeListener): void;
-    abstract onHashChange(fn: LocationChangeListener): void;
+    /**
+     * Returns a function that, when executed, removes the `popstate` event handler.
+     */
+    abstract onPopState(fn: LocationChangeListener): VoidFunction;
+    /**
+     * Returns a function that, when executed, removes the `hashchange` event handler.
+     */
+    abstract onHashChange(fn: LocationChangeListener): VoidFunction;
     abstract get href(): string;
     abstract get protocol(): string;
     abstract get hostname(): string;
@@ -2399,9 +2415,10 @@ export declare class SlicePipe implements PipeTransform {
      *   - **if negative**: return all items before `end` index from the end of the list or string.
      */
     transform<T>(value: ReadonlyArray<T>, start: number, end?: number): Array<T>;
+    transform(value: null | undefined, start: number, end?: number): null;
+    transform<T>(value: ReadonlyArray<T> | null | undefined, start: number, end?: number): Array<T> | null;
     transform(value: string, start: number, end?: number): string;
-    transform(value: null, start: number, end?: number): null;
-    transform(value: undefined, start: number, end?: number): undefined;
+    transform(value: string | null | undefined, start: number, end?: number): string | null;
     private supports;
 }
 
@@ -2447,6 +2464,8 @@ export declare class TitleCasePipe implements PipeTransform {
      * @param value The string to transform to title case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
@@ -2480,12 +2499,15 @@ export declare class UpperCasePipe implements PipeTransform {
      * @param value The string to transform to upper case.
      */
     transform(value: string): string;
+    transform(value: null | undefined): null;
+    transform(value: string | null | undefined): string | null;
 }
 
 /**
  * @publicApi
  */
 export declare const VERSION: Version;
+
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -2494,7 +2516,7 @@ export declare const VERSION: Version;
  */
 export declare abstract class ViewportScroller {
     /** @nocollapse */
-    static ɵprov: never;
+    static ɵprov: unknown;
     /**
      * Configures the top offset used when scrolling to an anchor.
      * @param offset A position in screen coordinates (a tuple with x and y values)
@@ -2570,8 +2592,8 @@ export declare class ɵBrowserPlatformLocation extends PlatformLocation {
     private _history;
     constructor(_doc: any);
     getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): void;
-    onHashChange(fn: LocationChangeListener): void;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
     get href(): string;
     get protocol(): string;
     get hostname(): string;
@@ -2594,27 +2616,19 @@ export declare class ɵBrowserPlatformLocation extends PlatformLocation {
  * can introduce XSS risks.
  */
 export declare abstract class ɵDomAdapter {
-    abstract getProperty(el: Element, name: string): any;
     abstract dispatchEvent(el: any, evt: any): any;
-    abstract log(error: any): any;
-    abstract logGroup(error: any): any;
-    abstract logGroupEnd(): any;
-    abstract remove(el: any): Node;
+    abstract readonly supportsDOMEvents: boolean;
+    abstract remove(el: any): void;
     abstract createElement(tagName: any, doc?: any): HTMLElement;
     abstract createHtmlDocument(): HTMLDocument;
     abstract getDefaultDocument(): Document;
     abstract isElementNode(node: any): boolean;
     abstract isShadowRoot(node: any): boolean;
     abstract onAndCancel(el: any, evt: any, listener: any): Function;
-    abstract supportsDOMEvents(): boolean;
     abstract getGlobalEventTarget(doc: Document, target: string): any;
-    abstract getHistory(): History;
-    abstract getLocation(): any; /** This is the ambient Location definition, NOT Location from @angular/common.  */
     abstract getBaseHref(doc: Document): string | null;
     abstract resetBaseElement(): void;
     abstract getUserAgent(): string;
-    abstract performanceNow(): number;
-    abstract supportsCookies(): boolean;
     abstract getCookie(name: string): string | null;
 }
 
@@ -2622,8 +2636,7 @@ export declare abstract class ɵDomAdapter {
 export declare function ɵgetDOM(): ɵDomAdapter;
 
 /**
- * Provides an empty implementation of the viewport scroller. This will
- * live in @angular/common as it will be used by both platform-server and platform-webworker.
+ * Provides an empty implementation of the viewport scroller.
  */
 export declare class ɵNullViewportScroller implements ViewportScroller {
     /**

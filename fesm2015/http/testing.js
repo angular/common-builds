@@ -1,6 +1,6 @@
 /**
- * @license Angular v10.1.0-next.4+26.sha-6248d6c
- * (c) 2010-2020 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.5+9.sha-bff0d8f
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -70,10 +70,10 @@ class TestRequest {
         const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
         let statusText = opts.statusText;
-        let status = opts.status !== undefined ? opts.status : 200;
+        let status = opts.status !== undefined ? opts.status : 200 /* Ok */;
         if (opts.status === undefined) {
             if (body === null) {
-                status = 204;
+                status = 204 /* NoContent */;
                 statusText = statusText || 'No Content';
             }
             else {
@@ -159,7 +159,7 @@ function _toJsonBody(body, format = 'JSON') {
         throw new Error(`Automatic conversion to ${format} is not supported for Blobs.`);
     }
     if (typeof body === 'string' || typeof body === 'number' || typeof body === 'object' ||
-        Array.isArray(body)) {
+        typeof body === 'boolean' || Array.isArray(body)) {
         return body;
     }
     throw new Error(`Automatic conversion to ${format} is not supported for response type.`);
