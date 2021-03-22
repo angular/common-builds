@@ -29,8 +29,8 @@ export declare class LowerCasePipe implements PipeTransform {
     transform(value: string): string;
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
-    static ɵfac: i0.ɵɵFactoryDef<LowerCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<LowerCasePipe, "lowercase">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LowerCasePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase">;
 }
 /**
  * Transforms text to title case.
@@ -56,8 +56,8 @@ export declare class TitleCasePipe implements PipeTransform {
     transform(value: string): string;
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
-    static ɵfac: i0.ɵɵFactoryDef<TitleCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<TitleCasePipe, "titlecase">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<TitleCasePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<TitleCasePipe, "titlecase">;
 }
 /**
  * Transforms text to all upper case.
@@ -74,6 +74,6 @@ export declare class UpperCasePipe implements PipeTransform {
     transform(value: string): string;
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
-    static ɵfac: i0.ɵɵFactoryDef<UpperCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<UpperCasePipe, "uppercase">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<UpperCasePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<UpperCasePipe, "uppercase">;
 }

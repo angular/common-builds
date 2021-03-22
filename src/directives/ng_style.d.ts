@@ -56,6 +56,6 @@ export declare class NgStyle implements DoCheck {
     ngDoCheck(): void;
     private _setStyle;
     private _applyChanges;
-    static ɵfac: i0.ɵɵFactoryDef<NgStyle, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgStyle, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;
 }

@@ -51,7 +51,7 @@ export declare abstract class PlatformLocation {
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
     abstract back(): void;
-    static ɵfac: i0.ɵɵFactoryDef<PlatformLocation, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<PlatformLocation>;
 }
 export declare function useBrowserPlatformLocation(): BrowserPlatformLocation;
@@ -104,7 +104,7 @@ export declare class BrowserPlatformLocation extends PlatformLocation {
     forward(): void;
     back(): void;
     getState(): unknown;
-    static ɵfac: i0.ɵɵFactoryDef<BrowserPlatformLocation, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<BrowserPlatformLocation>;
 }
 export declare function supportsState(): boolean;

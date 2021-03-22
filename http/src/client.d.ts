@@ -2902,6 +2902,6 @@ export declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
-    static ɵfac: i0.ɵɵFactoryDef<HttpClient, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpClient>;
 }

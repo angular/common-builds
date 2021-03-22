@@ -27,7 +27,7 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     private chain;
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDef<HttpInterceptingHandler, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptingHandler, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpInterceptingHandler>;
 }
 /**
@@ -77,9 +77,9 @@ export declare class HttpClientXsrfModule {
         cookieName?: string;
         headerName?: string;
     }): ModuleWithProviders<HttpClientXsrfModule>;
-    static ɵfac: i0.ɵɵFactoryDef<HttpClientXsrfModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientXsrfModule, never, never, never>;
-    static ɵinj: i0.ɵɵInjectorDef<HttpClientXsrfModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientXsrfModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientXsrfModule, never, never, never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientXsrfModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -91,9 +91,9 @@ export declare class HttpClientXsrfModule {
  * @publicApi
  */
 export declare class HttpClientModule {
-    static ɵfac: i0.ɵɵFactoryDef<HttpClientModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
-    static ɵinj: i0.ɵɵInjectorDef<HttpClientModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientModule>;
 }
 /**
  * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
@@ -107,7 +107,7 @@ export declare class HttpClientModule {
  * @publicApi
  */
 export declare class HttpClientJsonpModule {
-    static ɵfac: i0.ɵɵFactoryDef<HttpClientJsonpModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDefWithMeta<HttpClientJsonpModule, never, never, never>;
-    static ɵinj: i0.ɵɵInjectorDef<HttpClientJsonpModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientJsonpModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientJsonpModule, never, never, never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientJsonpModule>;
 }

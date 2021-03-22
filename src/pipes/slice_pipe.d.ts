@@ -64,6 +64,6 @@ export declare class SlicePipe implements PipeTransform {
     transform(value: string, start: number, end?: number): string;
     transform(value: string | null | undefined, start: number, end?: number): string | null;
     private supports;
-    static ɵfac: i0.ɵɵFactoryDef<SlicePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<SlicePipe, "slice">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SlicePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice">;
 }

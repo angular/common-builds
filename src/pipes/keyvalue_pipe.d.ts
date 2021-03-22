@@ -49,7 +49,7 @@ export declare class KeyValuePipe implements PipeTransform {
     transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
     transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
     transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
-    static ɵfac: i0.ɵɵFactoryDef<KeyValuePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<KeyValuePipe, "keyvalue">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<KeyValuePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue">;
 }
 export declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;

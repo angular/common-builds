@@ -33,6 +33,6 @@ export declare class I18nSelectPipe implements PipeTransform {
     transform(value: string | null | undefined, mapping: {
         [key: string]: string;
     }): string;
-    static ɵfac: i0.ɵɵFactoryDef<I18nSelectPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDefWithMeta<I18nSelectPipe, "i18nSelect">;
+    static ɵfac: i0.ɵɵFactoryDeclaration<I18nSelectPipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect">;
 }

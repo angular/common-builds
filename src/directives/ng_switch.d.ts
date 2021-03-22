@@ -91,8 +91,8 @@ export declare class NgSwitch {
     private _ngSwitch;
     set ngSwitch(newValue: any);
     private _updateDefaultCases;
-    static ɵfac: i0.ɵɵFactoryDef<NgSwitch, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitch, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -139,8 +139,8 @@ export declare class NgSwitchCase implements DoCheck {
      * Performs case matching. For internal use only.
      */
     ngDoCheck(): void;
-    static ɵfac: i0.ɵɵFactoryDef<NgSwitchCase, [null, null, { host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { host: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -158,6 +158,6 @@ export declare class NgSwitchCase implements DoCheck {
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
-    static ɵfac: i0.ɵɵFactoryDef<NgSwitchDefault, [null, null, { host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchDefault, [null, null, { host: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
 }

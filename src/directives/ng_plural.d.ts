@@ -51,8 +51,8 @@ export declare class NgPlural {
     private _updateView;
     private _clearViews;
     private _activateView;
-    static ɵfac: i0.ɵɵFactoryDef<NgPlural, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgPlural, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never>;
 }
 /**
  * @ngModule CommonModule
@@ -77,6 +77,6 @@ export declare class NgPlural {
 export declare class NgPluralCase {
     value: string;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef, ngPlural: NgPlural);
-    static ɵfac: i0.ɵɵFactoryDef<NgPluralCase, [{ attribute: "ngPluralCase"; }, null, null, { host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgPluralCase, "[ngPluralCase]", never, {}, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgPluralCase, [{ attribute: "ngPluralCase"; }, null, null, { host: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPluralCase, "[ngPluralCase]", never, {}, {}, never>;
 }

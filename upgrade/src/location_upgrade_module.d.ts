@@ -55,9 +55,9 @@ export declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgr
  */
 export declare class LocationUpgradeModule {
     static config(config?: LocationUpgradeConfig): ModuleWithProviders<LocationUpgradeModule>;
-    static ɵfac: i0.ɵɵFactoryDef<LocationUpgradeModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDefWithMeta<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
-    static ɵinj: i0.ɵɵInjectorDef<LocationUpgradeModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LocationUpgradeModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<LocationUpgradeModule>;
 }
 export declare function provideAppBaseHref(config: LocationUpgradeConfig, appBaseHref?: string): string;
 export declare function provideUrlCodec(config: LocationUpgradeConfig): any;

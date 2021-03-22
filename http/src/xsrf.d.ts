@@ -31,7 +31,7 @@ export declare class HttpXsrfCookieExtractor implements HttpXsrfTokenExtractor {
     private lastToken;
     constructor(doc: any, platform: string, cookieName: string);
     getToken(): string | null;
-    static ɵfac: i0.ɵɵFactoryDef<HttpXsrfCookieExtractor, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpXsrfCookieExtractor, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpXsrfCookieExtractor>;
 }
 /**
@@ -42,6 +42,6 @@ export declare class HttpXsrfInterceptor implements HttpInterceptor {
     private headerName;
     constructor(tokenService: HttpXsrfTokenExtractor, headerName: string);
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDef<HttpXsrfInterceptor, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpXsrfInterceptor, never>;
     static ɵprov: i0.ɵɵInjectableDef<HttpXsrfInterceptor>;
 }

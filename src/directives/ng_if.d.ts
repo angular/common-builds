@@ -183,8 +183,8 @@ export declare class NgIf<T = unknown> {
      * `NgIf` structural directive renders its template with a specific context type.
      */
     static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<Exclude<T, false | 0 | '' | null | undefined>>;
-    static ɵfac: i0.ɵɵFactoryDef<NgIf<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgIf<any>, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never>;
 }
 /**
  * @publicApi

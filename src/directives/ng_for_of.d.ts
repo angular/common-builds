@@ -170,6 +170,6 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      * `NgForOf` structural directive renders its template with a specific context type.
      */
     static ngTemplateContextGuard<T, U extends NgIterable<T>>(dir: NgForOf<T, U>, ctx: any): ctx is NgForOfContext<T, U>;
-    static ɵfac: i0.ɵɵFactoryDef<NgForOf<any, any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgForOf<any, any>, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never>;
 }

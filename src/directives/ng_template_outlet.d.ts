@@ -47,6 +47,6 @@ export declare class NgTemplateOutlet implements OnChanges {
     ngTemplateOutlet: TemplateRef<any> | null;
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
-    static ɵfac: i0.ɵɵFactoryDef<NgTemplateOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; }, {}, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; }, {}, never>;
 }
