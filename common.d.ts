@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+6.sha-95ff5ec
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2560,6 +2560,16 @@ export declare enum WeekDay {
     Thursday = 4,
     Friday = 5,
     Saturday = 6
+}
+
+
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ */
+export declare abstract class XhrFactory {
+    abstract build(): XMLHttpRequest;
 }
 
 export declare function ɵangular_packages_common_common_a(): ɵBrowserPlatformLocation;

@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+6.sha-95ff5ec
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,6 +8,7 @@ import { InjectionToken } from '@angular/core';
 import { Injector } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
+import { XhrFactory } from '@angular/common';
 
 /**
  * A multi-provider token that represents the array of registered
@@ -3914,15 +3915,7 @@ export declare class JsonpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
-
-/**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- */
-export declare abstract class XhrFactory {
-    abstract build(): XMLHttpRequest;
-}
+export { XhrFactory }
 
 export declare class ɵangular_packages_common_http_http_a implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
@@ -3949,23 +3942,14 @@ export declare abstract class ɵangular_packages_common_http_http_b {
  */
 export declare function ɵangular_packages_common_http_http_c(): Object;
 
-/**
- * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
- *
- */
-export declare class ɵangular_packages_common_http_http_d implements XhrFactory {
-    constructor();
-    build(): any;
-}
+export declare const ɵangular_packages_common_http_http_d: InjectionToken<string>;
 
 export declare const ɵangular_packages_common_http_http_e: InjectionToken<string>;
-
-export declare const ɵangular_packages_common_http_http_f: InjectionToken<string>;
 
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
-export declare class ɵangular_packages_common_http_http_g implements HttpXsrfTokenExtractor {
+export declare class ɵangular_packages_common_http_http_f implements HttpXsrfTokenExtractor {
     private doc;
     private platform;
     private cookieName;
@@ -3978,7 +3962,7 @@ export declare class ɵangular_packages_common_http_http_g implements HttpXsrfTo
 /**
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
-export declare class ɵangular_packages_common_http_http_h implements HttpInterceptor {
+export declare class ɵangular_packages_common_http_http_g implements HttpInterceptor {
     private tokenService;
     private headerName;
     constructor(tokenService: HttpXsrfTokenExtractor, headerName: string);

@@ -1,14 +1,14 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+6.sha-95ff5ec
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
-}(this, (function (exports, core, rxjs, operators, common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators));
+}(this, (function (exports, common, core, rxjs, operators) { 'use strict';
 
     /**
      * @license
@@ -2024,32 +2024,6 @@
         return null;
     }
     /**
-     * A wrapper around the `XMLHttpRequest` constructor.
-     *
-     * @publicApi
-     */
-    var XhrFactory = /** @class */ (function () {
-        function XhrFactory() {
-        }
-        return XhrFactory;
-    }());
-    /**
-     * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
-     *
-     */
-    var BrowserXhr = /** @class */ (function () {
-        function BrowserXhr() {
-        }
-        BrowserXhr.prototype.build = function () {
-            return (new XMLHttpRequest());
-        };
-        return BrowserXhr;
-    }());
-    BrowserXhr.decorators = [
-        { type: core.Injectable }
-    ];
-    BrowserXhr.ctorParameters = function () { return []; };
-    /**
      * Uses `XMLHttpRequest` to send requests to a backend server.
      * @see `HttpHandler`
      * @see `JsonpClientBackend`
@@ -2308,7 +2282,7 @@
         { type: core.Injectable }
     ];
     HttpXhrBackend.ctorParameters = function () { return [
-        { type: XhrFactory }
+        { type: common.XhrFactory }
     ]; };
 
     /**
@@ -2560,8 +2534,6 @@
                         { provide: HttpHandler, useClass: HttpInterceptingHandler },
                         HttpXhrBackend,
                         { provide: HttpBackend, useExisting: HttpXhrBackend },
-                        BrowserXhr,
-                        { provide: XhrFactory, useExisting: BrowserXhr },
                     ],
                 },] }
     ];
@@ -2611,6 +2583,12 @@
      * Generated bundle index. Do not edit.
      */
 
+    Object.defineProperty(exports, 'XhrFactory', {
+        enumerable: true,
+        get: function () {
+            return common.XhrFactory;
+        }
+    });
     exports.HTTP_INTERCEPTORS = HTTP_INTERCEPTORS;
     exports.HttpBackend = HttpBackend;
     exports.HttpClient = HttpClient;
@@ -2632,16 +2610,14 @@
     exports.HttpXsrfTokenExtractor = HttpXsrfTokenExtractor;
     exports.JsonpClientBackend = JsonpClientBackend;
     exports.JsonpInterceptor = JsonpInterceptor;
-    exports.XhrFactory = XhrFactory;
     exports.ɵHttpInterceptingHandler = HttpInterceptingHandler;
     exports.ɵangular_packages_common_http_http_a = NoopInterceptor;
     exports.ɵangular_packages_common_http_http_b = JsonpCallbackContext;
     exports.ɵangular_packages_common_http_http_c = jsonpCallbackContext;
-    exports.ɵangular_packages_common_http_http_d = BrowserXhr;
-    exports.ɵangular_packages_common_http_http_e = XSRF_COOKIE_NAME;
-    exports.ɵangular_packages_common_http_http_f = XSRF_HEADER_NAME;
-    exports.ɵangular_packages_common_http_http_g = HttpXsrfCookieExtractor;
-    exports.ɵangular_packages_common_http_http_h = HttpXsrfInterceptor;
+    exports.ɵangular_packages_common_http_http_d = XSRF_COOKIE_NAME;
+    exports.ɵangular_packages_common_http_http_e = XSRF_HEADER_NAME;
+    exports.ɵangular_packages_common_http_http_f = HttpXsrfCookieExtractor;
+    exports.ɵangular_packages_common_http_http_g = HttpXsrfInterceptor;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
