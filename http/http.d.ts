@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.6+21.sha-31370f4
+ * @license Angular v12.0.0-next.6+22.sha-c4628f2
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3915,7 +3915,6 @@ export declare class JsonpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
-export { XhrFactory }
 
 export declare class ɵangular_packages_common_http_http_a implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;

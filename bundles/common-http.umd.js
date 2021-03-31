@@ -1,14 +1,14 @@
 /**
- * @license Angular v12.0.0-next.6+21.sha-31370f4
+ * @license Angular v12.0.0-next.6+22.sha-c4628f2
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators));
-}(this, (function (exports, common, core, rxjs, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
+}(this, (function (exports, core, rxjs, operators, common) { 'use strict';
 
     /**
      * @license
@@ -2583,12 +2583,6 @@
      * Generated bundle index. Do not edit.
      */
 
-    Object.defineProperty(exports, 'XhrFactory', {
-        enumerable: true,
-        get: function () {
-            return common.XhrFactory;
-        }
-    });
     exports.HTTP_INTERCEPTORS = HTTP_INTERCEPTORS;
     exports.HttpBackend = HttpBackend;
     exports.HttpClient = HttpClient;
