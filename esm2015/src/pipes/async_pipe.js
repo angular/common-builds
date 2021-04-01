@@ -115,7 +115,7 @@ export class AsyncPipe {
         }
     }
 }
-AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinjectPipeChangeDetectorRef()); };
+AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵdirectiveInject(i0.ChangeDetectorRef, 16)); };
 AsyncPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AsyncPipe, [{
         type: Pipe,

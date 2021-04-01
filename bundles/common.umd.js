@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4652,7 +4652,7 @@
         };
         return AsyncPipe;
     }());
-    AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵinjectPipeChangeDetectorRef()); };
+    AsyncPipe.ɵfac = function AsyncPipe_Factory(t) { return new (t || AsyncPipe)(i0.ɵɵdirectiveInject(i0.ChangeDetectorRef, 16)); };
     AsyncPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "async", type: AsyncPipe, pure: false });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AsyncPipe, [{
@@ -4951,7 +4951,7 @@
         };
         return DatePipe;
     }());
-    DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
+    DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID, 16)); };
     DatePipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(DatePipe, [{
@@ -5009,7 +5009,7 @@
         };
         return I18nPluralPipe;
     }());
-    I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵɵdirectiveInject(NgLocalization)); };
+    I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵɵdirectiveInject(NgLocalization, 16)); };
     I18nPluralPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(I18nPluralPipe, [{
@@ -5174,7 +5174,7 @@
         };
         return KeyValuePipe;
     }());
-    KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵɵdirectiveInject(i0.KeyValueDiffers)); };
+    KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵɵdirectiveInject(i0.KeyValueDiffers, 16)); };
     KeyValuePipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(KeyValuePipe, [{
@@ -5308,7 +5308,7 @@
         };
         return DecimalPipe;
     }());
-    DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
+    DecimalPipe.ɵfac = function DecimalPipe_Factory(t) { return new (t || DecimalPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID, 16)); };
     DecimalPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "number", type: DecimalPipe, pure: true });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(DecimalPipe, [{
@@ -5359,7 +5359,7 @@
         };
         return PercentPipe;
     }());
-    PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID)); };
+    PercentPipe.ɵfac = function PercentPipe_Factory(t) { return new (t || PercentPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID, 16)); };
     PercentPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "percent", type: PercentPipe, pure: true });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(PercentPipe, [{
@@ -5448,7 +5448,7 @@
         };
         return CurrencyPipe;
     }());
-    CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID), i0.ɵɵdirectiveInject(i0.DEFAULT_CURRENCY_CODE)); };
+    CurrencyPipe.ɵfac = function CurrencyPipe_Factory(t) { return new (t || CurrencyPipe)(i0.ɵɵdirectiveInject(i0.LOCALE_ID, 16), i0.ɵɵdirectiveInject(i0.DEFAULT_CURRENCY_CODE, 16)); };
     CurrencyPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "currency", type: CurrencyPipe, pure: true });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(CurrencyPipe, [{
@@ -5670,7 +5670,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.6+3.sha-b61c009');
+    var VERSION = new i0.Version('12.0.0-next.6+36.sha-18bc9ff');
 
     /**
      * @license
@@ -5883,6 +5883,24 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     */
+    var XhrFactory = /** @class */ (function () {
+        function XhrFactory() {
+        }
+        return XhrFactory;
+    }());
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
 
     /**
      * @license
@@ -5944,6 +5962,7 @@
     exports.UpperCasePipe = UpperCasePipe;
     exports.VERSION = VERSION;
     exports.ViewportScroller = ViewportScroller;
+    exports.XhrFactory = XhrFactory;
     exports.formatCurrency = formatCurrency;
     exports.formatDate = formatDate;
     exports.formatNumber = formatNumber;

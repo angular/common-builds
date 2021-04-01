@@ -54,7 +54,7 @@ export class KeyValuePipe {
         return this.keyValues;
     }
 }
-KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵɵdirectiveInject(i0.KeyValueDiffers)); };
+KeyValuePipe.ɵfac = function KeyValuePipe_Factory(t) { return new (t || KeyValuePipe)(i0.ɵɵdirectiveInject(i0.KeyValueDiffers, 16)); };
 KeyValuePipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "keyvalue", type: KeyValuePipe, pure: false });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(KeyValuePipe, [{
         type: Pipe,

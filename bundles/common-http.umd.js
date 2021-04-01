@@ -1,14 +1,14 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
-}(this, (function (exports, i0, rxjs, operators, common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators));
+}(this, (function (exports, i1, i0, rxjs, operators) { 'use strict';
 
     /**
      * @license
@@ -1965,7 +1965,7 @@
         };
         return JsonpClientBackend;
     }());
-    JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.ɵɵinject(JsonpCallbackContext), i0.ɵɵinject(common.DOCUMENT)); };
+    JsonpClientBackend.ɵfac = function JsonpClientBackend_Factory(t) { return new (t || JsonpClientBackend)(i0.ɵɵinject(JsonpCallbackContext), i0.ɵɵinject(i1.DOCUMENT)); };
     JsonpClientBackend.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: JsonpClientBackend, factory: JsonpClientBackend.ɵfac });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(JsonpClientBackend, [{
@@ -1973,7 +1973,7 @@
             }], function () {
             return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                             type: i0.Inject,
-                            args: [common.DOCUMENT]
+                            args: [i1.DOCUMENT]
                         }] }];
         }, null);
     })();
@@ -2013,13 +2013,6 @@
             }], function () { return [{ type: JsonpClientBackend }]; }, null);
     })();
 
-    /**
-     * @license
-     * Copyright Google LLC All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
     var XSSI_PREFIX = /^\)\]\}',?\n/;
     /**
      * Determine an appropriate URL for the response, by checking either
@@ -2034,35 +2027,6 @@
         }
         return null;
     }
-    /**
-     * A wrapper around the `XMLHttpRequest` constructor.
-     *
-     * @publicApi
-     */
-    var XhrFactory = /** @class */ (function () {
-        function XhrFactory() {
-        }
-        return XhrFactory;
-    }());
-    /**
-     * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
-     *
-     */
-    var BrowserXhr = /** @class */ (function () {
-        function BrowserXhr() {
-        }
-        BrowserXhr.prototype.build = function () {
-            return (new XMLHttpRequest());
-        };
-        return BrowserXhr;
-    }());
-    BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-    BrowserXhr.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
-    (function () {
-        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(BrowserXhr, [{
-                type: i0.Injectable
-            }], function () { return []; }, null);
-    })();
     /**
      * Uses `XMLHttpRequest` to send requests to a backend server.
      * @see `HttpHandler`
@@ -2318,12 +2282,12 @@
         };
         return HttpXhrBackend;
     }());
-    HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.ɵɵinject(XhrFactory)); };
+    HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(i0.ɵɵinject(i1.XhrFactory)); };
     HttpXhrBackend.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(HttpXhrBackend, [{
                 type: i0.Injectable
-            }], function () { return [{ type: XhrFactory }]; }, null);
+            }], function () { return [{ type: i1.XhrFactory }]; }, null);
     })();
 
     /**
@@ -2367,14 +2331,14 @@
             var cookieString = this.doc.cookie || '';
             if (cookieString !== this.lastCookieString) {
                 this.parseCount++;
-                this.lastToken = common.ɵparseCookieValue(cookieString, this.cookieName);
+                this.lastToken = i1.ɵparseCookieValue(cookieString, this.cookieName);
                 this.lastCookieString = cookieString;
             }
             return this.lastToken;
         };
         return HttpXsrfCookieExtractor;
     }());
-    HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.ɵɵinject(common.DOCUMENT), i0.ɵɵinject(i0.PLATFORM_ID), i0.ɵɵinject(XSRF_COOKIE_NAME)); };
+    HttpXsrfCookieExtractor.ɵfac = function HttpXsrfCookieExtractor_Factory(t) { return new (t || HttpXsrfCookieExtractor)(i0.ɵɵinject(i1.DOCUMENT), i0.ɵɵinject(i0.PLATFORM_ID), i0.ɵɵinject(XSRF_COOKIE_NAME)); };
     HttpXsrfCookieExtractor.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: HttpXsrfCookieExtractor, factory: HttpXsrfCookieExtractor.ɵfac });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(HttpXsrfCookieExtractor, [{
@@ -2382,7 +2346,7 @@
             }], function () {
             return [{ type: undefined, decorators: [{
                             type: i0.Inject,
-                            args: [common.DOCUMENT]
+                            args: [i1.DOCUMENT]
                         }] }, { type: undefined, decorators: [{
                             type: i0.Inject,
                             args: [i0.PLATFORM_ID]
@@ -2589,8 +2553,6 @@
             { provide: HttpHandler, useClass: HttpInterceptingHandler },
             HttpXhrBackend,
             { provide: HttpBackend, useExisting: HttpXhrBackend },
-            BrowserXhr,
-            { provide: XhrFactory, useExisting: BrowserXhr },
         ], imports: [[
                 HttpClientXsrfModule.withOptions({
                     cookieName: 'XSRF-TOKEN',
@@ -2619,8 +2581,6 @@
                             { provide: HttpHandler, useClass: HttpInterceptingHandler },
                             HttpXhrBackend,
                             { provide: HttpBackend, useExisting: HttpXhrBackend },
-                            BrowserXhr,
-                            { provide: XhrFactory, useExisting: BrowserXhr },
                         ],
                     }]
             }], null, null);
@@ -2669,6 +2629,15 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     * @see `XhrFactory`
+     * @deprecated
+     * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+     */
+    var XhrFactory = i1.XhrFactory;
 
     /**
      * @license

@@ -1,26 +1,16 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { XhrFactory } from '@angular/common';
 import { Observable } from 'rxjs';
 import { HttpBackend } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
 import * as i0 from "@angular/core";
-/**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- */
-export declare abstract class XhrFactory {
-    abstract build(): XMLHttpRequest;
-}
-/**
- * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
- *
- */
-export declare class BrowserXhr implements XhrFactory {
-    constructor();
-    build(): any;
-    static ɵfac: i0.ɵɵFactoryDeclaration<BrowserXhr, never>;
-    static ɵprov: i0.ɵɵInjectableDef<BrowserXhr>;
-}
 /**
  * Uses `XMLHttpRequest` to send requests to a backend server.
  * @see `HttpHandler`

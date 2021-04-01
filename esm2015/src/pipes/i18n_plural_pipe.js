@@ -46,7 +46,7 @@ export class I18nPluralPipe {
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     }
 }
-I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵɵdirectiveInject(i1.NgLocalization)); };
+I18nPluralPipe.ɵfac = function I18nPluralPipe_Factory(t) { return new (t || I18nPluralPipe)(i0.ɵɵdirectiveInject(i1.NgLocalization, 16)); };
 I18nPluralPipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "i18nPlural", type: I18nPluralPipe, pure: true });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(I18nPluralPipe, [{
         type: Pipe,

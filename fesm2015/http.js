@@ -1,13 +1,13 @@
 /**
- * @license Angular v12.0.0-next.6+3.sha-b61c009
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { DOCUMENT, XhrFactory as XhrFactory$1, ɵparseCookieValue } from '@angular/common';
 import { ɵɵinject, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule, ɵɵsetNgModuleScope } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
-import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @license
@@ -1668,28 +1668,6 @@ function getResponseUrl(xhr) {
     return null;
 }
 /**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- */
-class XhrFactory {
-}
-/**
- * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
- *
- */
-class BrowserXhr {
-    constructor() { }
-    build() {
-        return (new XMLHttpRequest());
-    }
-}
-BrowserXhr.ɵfac = function BrowserXhr_Factory(t) { return new (t || BrowserXhr)(); };
-BrowserXhr.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: BrowserXhr, factory: BrowserXhr.ɵfac });
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(BrowserXhr, [{
-        type: Injectable
-    }], function () { return []; }, null); })();
-/**
  * Uses `XMLHttpRequest` to send requests to a backend server.
  * @see `HttpHandler`
  * @see `JsonpClientBackend`
@@ -1942,11 +1920,11 @@ class HttpXhrBackend {
         });
     }
 }
-HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory)); };
+HttpXhrBackend.ɵfac = function HttpXhrBackend_Factory(t) { return new (t || HttpXhrBackend)(ɵɵinject(XhrFactory$1)); };
 HttpXhrBackend.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HttpXhrBackend, factory: HttpXhrBackend.ɵfac });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(HttpXhrBackend, [{
         type: Injectable
-    }], function () { return [{ type: XhrFactory }]; }, null); })();
+    }], function () { return [{ type: XhrFactory$1 }]; }, null); })();
 
 /**
  * @license
@@ -2185,8 +2163,6 @@ HttpClientModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
         HttpXhrBackend,
         { provide: HttpBackend, useExisting: HttpXhrBackend },
-        BrowserXhr,
-        { provide: XhrFactory, useExisting: BrowserXhr },
     ], imports: [[
             HttpClientXsrfModule.withOptions({
                 cookieName: 'XSRF-TOKEN',
@@ -2214,8 +2190,6 @@ HttpClientModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
                     { provide: HttpHandler, useClass: HttpInterceptingHandler },
                     HttpXhrBackend,
                     { provide: HttpBackend, useExisting: HttpXhrBackend },
-                    BrowserXhr,
-                    { provide: XhrFactory, useExisting: BrowserXhr },
                 ],
             }]
     }], null, null); })();
@@ -2258,6 +2232,15 @@ HttpClientJsonpModule.ɵinj = /*@__PURE__*/ ɵɵdefineInjector({ providers: [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ * @see `XhrFactory`
+ * @deprecated
+ * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+ */
+const XhrFactory = XhrFactory$1;
 
 /**
  * @license

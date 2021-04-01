@@ -170,7 +170,7 @@ export class DatePipe {
         }
     }
 }
-DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵɵdirectiveInject(LOCALE_ID)); };
+DatePipe.ɵfac = function DatePipe_Factory(t) { return new (t || DatePipe)(i0.ɵɵdirectiveInject(LOCALE_ID, 16)); };
 DatePipe.ɵpipe = /*@__PURE__*/ i0.ɵɵdefinePipe({ name: "date", type: DatePipe, pure: true });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(DatePipe, [{
         type: Pipe,
