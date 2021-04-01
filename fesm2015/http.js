@@ -1,13 +1,13 @@
 /**
- * @license Angular v12.0.0-next.6+34.sha-6391a4a
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { DOCUMENT, XhrFactory as XhrFactory$1, ɵparseCookieValue } from '@angular/common';
 import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
-import { DOCUMENT, XhrFactory, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @license
@@ -1923,7 +1923,7 @@ HttpXhrBackend.decorators = [
     { type: Injectable }
 ];
 HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory }
+    { type: XhrFactory$1 }
 ];
 
 /**
@@ -2194,6 +2194,15 @@ HttpClientJsonpModule.decorators = [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ * @see `XhrFactory`
+ * @deprecated
+ * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+ */
+const XhrFactory = XhrFactory$1;
 
 /**
  * @license
@@ -2207,5 +2216,5 @@ HttpClientJsonpModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_d, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_e, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_f, HttpXsrfInterceptor as ɵangular_packages_common_http_http_g };
+export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_d, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_e, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_f, HttpXsrfInterceptor as ɵangular_packages_common_http_http_g };
 //# sourceMappingURL=http.js.map

@@ -1,14 +1,14 @@
 /**
- * @license Angular v12.0.0-next.6+34.sha-6391a4a
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
-}(this, (function (exports, core, rxjs, operators, common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators));
+}(this, (function (exports, common, core, rxjs, operators) { 'use strict';
 
     /**
      * @license
@@ -2570,6 +2570,15 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     * @see `XhrFactory`
+     * @deprecated
+     * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+     */
+    var XhrFactory = common.XhrFactory;
 
     /**
      * @license
@@ -2604,6 +2613,7 @@
     exports.HttpXsrfTokenExtractor = HttpXsrfTokenExtractor;
     exports.JsonpClientBackend = JsonpClientBackend;
     exports.JsonpInterceptor = JsonpInterceptor;
+    exports.XhrFactory = XhrFactory;
     exports.ɵHttpInterceptingHandler = HttpInterceptingHandler;
     exports.ɵangular_packages_common_http_http_a = NoopInterceptor;
     exports.ɵangular_packages_common_http_http_b = JsonpCallbackContext;

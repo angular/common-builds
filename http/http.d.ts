@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.6+34.sha-6391a4a
+ * @license Angular v12.0.0-next.6+36.sha-18bc9ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { InjectionToken } from '@angular/core';
 import { Injector } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
-import { XhrFactory } from '@angular/common';
+import { XhrFactory as XhrFactory_2 } from '@angular/common';
 
 /**
  * A multi-provider token that represents the array of registered
@@ -3843,7 +3843,7 @@ export declare interface HttpUserEvent<T> {
  */
 export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;
-    constructor(xhrFactory: XhrFactory);
+    constructor(xhrFactory: XhrFactory_2);
     /**
      * Processes a request and returns a stream of response events.
      * @param req The request object.
@@ -3915,6 +3915,26 @@ export declare class JsonpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
+
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ * @see `XhrFactory`
+ * @deprecated
+ * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+ */
+export declare type XhrFactory = XhrFactory_2;
+
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ * @see `XhrFactory`
+ * @deprecated
+ * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+ */
+export declare const XhrFactory: typeof XhrFactory_2;
 
 export declare class ɵangular_packages_common_http_http_a implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
