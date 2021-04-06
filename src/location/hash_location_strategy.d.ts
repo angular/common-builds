@@ -41,6 +41,7 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
     replaceState(state: any, title: string, path: string, queryParams: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HashLocationStrategy, [null, { optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDef<HashLocationStrategy>;
 }

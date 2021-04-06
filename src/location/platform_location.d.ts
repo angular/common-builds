@@ -51,6 +51,7 @@ export declare abstract class PlatformLocation {
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
     abstract back(): void;
+    historyGo?(relativePosition: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<PlatformLocation>;
 }
@@ -103,6 +104,7 @@ export declare class BrowserPlatformLocation extends PlatformLocation {
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDef<BrowserPlatformLocation>;

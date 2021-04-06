@@ -31,6 +31,7 @@ export declare const MOCK_PLATFORM_LOCATION_CONFIG: InjectionToken<MockPlatformL
 export declare class MockPlatformLocation implements PlatformLocation {
     private baseHref;
     private hashUpdate;
+    private urlChangeIndex;
     private urlChanges;
     constructor(config?: MockPlatformLocationConfig);
     get hostname(): string;
@@ -50,7 +51,9 @@ export declare class MockPlatformLocation implements PlatformLocation {
     pushState(state: any, title: string, newUrl: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     getState(): unknown;
+    private scheduleHashUpdate;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDef<MockPlatformLocation>;
 }

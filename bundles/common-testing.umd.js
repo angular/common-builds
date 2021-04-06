@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.7+18.sha-3a823ab
+ * @license Angular v12.0.0-next.7+19.sha-e05a6f3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -105,6 +105,14 @@
             if (this._historyIndex > 0) {
                 this._historyIndex--;
                 this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            }
+        };
+        SpyLocation.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var nextPageIndex = this._historyIndex + relativePosition;
+            if (nextPageIndex >= 0 && nextPageIndex < this._history.length) {
+                this._historyIndex = nextPageIndex;
+                this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
             }
         };
         SpyLocation.prototype.onUrlChange = function (fn) {
@@ -617,6 +625,7 @@
         function MockPlatformLocation(config) {
             this.baseHref = '';
             this.hashUpdate = new rxjs.Subject();
+            this.urlChangeIndex = 0;
             this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
             if (config) {
                 this.baseHref = config.appBaseHref || '';
@@ -626,49 +635,49 @@
         }
         Object.defineProperty(MockPlatformLocation.prototype, "hostname", {
             get: function () {
-                return this.urlChanges[0].hostname;
+                return this.urlChanges[this.urlChangeIndex].hostname;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "protocol", {
             get: function () {
-                return this.urlChanges[0].protocol;
+                return this.urlChanges[this.urlChangeIndex].protocol;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "port", {
             get: function () {
-                return this.urlChanges[0].port;
+                return this.urlChanges[this.urlChangeIndex].port;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "pathname", {
             get: function () {
-                return this.urlChanges[0].pathname;
+                return this.urlChanges[this.urlChangeIndex].pathname;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "search", {
             get: function () {
-                return this.urlChanges[0].search;
+                return this.urlChanges[this.urlChangeIndex].search;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "hash", {
             get: function () {
-                return this.urlChanges[0].hash;
+                return this.urlChanges[this.urlChangeIndex].hash;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(MockPlatformLocation.prototype, "state", {
             get: function () {
-                return this.urlChanges[0].state;
+                return this.urlChanges[this.urlChangeIndex].state;
             },
             enumerable: false,
             configurable: true
@@ -709,27 +718,50 @@
         };
         MockPlatformLocation.prototype.replaceState = function (state, title, newUrl) {
             var _a = this.parseChanges(state, newUrl), pathname = _a.pathname, search = _a.search, parsedState = _a.state, hash = _a.hash;
-            this.urlChanges[0] = Object.assign(Object.assign({}, this.urlChanges[0]), { pathname: pathname, search: search, hash: hash, state: parsedState });
+            this.urlChanges[this.urlChangeIndex] = Object.assign(Object.assign({}, this.urlChanges[this.urlChangeIndex]), { pathname: pathname, search: search, hash: hash, state: parsedState });
         };
         MockPlatformLocation.prototype.pushState = function (state, title, newUrl) {
             var _a = this.parseChanges(state, newUrl), pathname = _a.pathname, search = _a.search, parsedState = _a.state, hash = _a.hash;
-            this.urlChanges.unshift(Object.assign(Object.assign({}, this.urlChanges[0]), { pathname: pathname, search: search, hash: hash, state: parsedState }));
+            if (this.urlChangeIndex > 0) {
+                this.urlChanges.splice(this.urlChangeIndex + 1);
+            }
+            this.urlChanges.push(Object.assign(Object.assign({}, this.urlChanges[this.urlChangeIndex]), { pathname: pathname, search: search, hash: hash, state: parsedState }));
+            this.urlChangeIndex = this.urlChanges.length - 1;
         };
         MockPlatformLocation.prototype.forward = function () {
-            throw new Error('Not implemented');
-        };
-        MockPlatformLocation.prototype.back = function () {
-            var _this = this;
             var oldUrl = this.url;
             var oldHash = this.hash;
-            this.urlChanges.shift();
-            var newHash = this.hash;
-            if (oldHash !== newHash) {
-                scheduleMicroTask(function () { return _this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl: oldUrl, newUrl: _this.url }); });
+            if (this.urlChangeIndex < this.urlChanges.length) {
+                this.urlChangeIndex++;
             }
+            this.scheduleHashUpdate(oldHash, oldUrl);
+        };
+        MockPlatformLocation.prototype.back = function () {
+            var oldUrl = this.url;
+            var oldHash = this.hash;
+            if (this.urlChangeIndex > 0) {
+                this.urlChangeIndex--;
+            }
+            this.scheduleHashUpdate(oldHash, oldUrl);
+        };
+        MockPlatformLocation.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var oldUrl = this.url;
+            var oldHash = this.hash;
+            var nextPageIndex = this.urlChangeIndex + relativePosition;
+            if (nextPageIndex >= 0 && nextPageIndex < this.urlChanges.length) {
+                this.urlChangeIndex = nextPageIndex;
+            }
+            this.scheduleHashUpdate(oldHash, oldUrl);
         };
         MockPlatformLocation.prototype.getState = function () {
             return this.state;
+        };
+        MockPlatformLocation.prototype.scheduleHashUpdate = function (oldHash, oldUrl) {
+            var _this = this;
+            if (oldHash !== this.hash) {
+                scheduleMicroTask(function () { return _this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl: oldUrl, newUrl: _this.url }); });
+            }
         };
         return MockPlatformLocation;
     }());
