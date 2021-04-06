@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.7+18.sha-3a823ab
+ * @license Angular v12.0.0-next.7+19.sha-e05a6f3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -51,6 +51,7 @@ export declare class MockLocationStrategy extends LocationStrategy {
 export declare class MockPlatformLocation implements PlatformLocation {
     private baseHref;
     private hashUpdate;
+    private urlChangeIndex;
     private urlChanges;
     constructor(config?: MockPlatformLocationConfig);
     get hostname(): string;
@@ -70,7 +71,9 @@ export declare class MockPlatformLocation implements PlatformLocation {
     pushState(state: any, title: string, newUrl: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     getState(): unknown;
+    private scheduleHashUpdate;
 }
 
 /**
@@ -104,6 +107,7 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string, state?: any): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     onUrlChange(fn: (url: string, state: unknown) => void): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;

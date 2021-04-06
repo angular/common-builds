@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.7+18.sha-3a823ab
+ * @license Angular v12.0.0-next.7+19.sha-e05a6f3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -393,6 +393,9 @@
     var PlatformLocation = /** @class */ (function () {
         function PlatformLocation() {
         }
+        PlatformLocation.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return PlatformLocation;
     }());
     PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
@@ -519,6 +522,10 @@
         BrowserPlatformLocation.prototype.back = function () {
             this._history.back();
         };
+        BrowserPlatformLocation.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            this._history.go(relativePosition);
+        };
         BrowserPlatformLocation.prototype.getState = function () {
             return this._history.state;
         };
@@ -634,6 +641,9 @@
     var LocationStrategy = /** @class */ (function () {
         function LocationStrategy() {
         }
+        LocationStrategy.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return LocationStrategy;
     }());
     LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
@@ -749,6 +759,11 @@
         PathLocationStrategy.prototype.back = function () {
             this._platformLocation.back();
         };
+        PathLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+        };
         return PathLocationStrategy;
     }(LocationStrategy));
     PathLocationStrategy.decorators = [
@@ -832,6 +847,11 @@
         };
         HashLocationStrategy.prototype.back = function () {
             this._platformLocation.back();
+        };
+        HashLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
         };
         return HashLocationStrategy;
     }(LocationStrategy));
@@ -998,6 +1018,23 @@
          */
         Location.prototype.back = function () {
             this._platformStrategy.back();
+        };
+        /**
+         * Navigate to a specific page from session history, identified by its relative position to the
+         * current page.
+         *
+         * @param relativePosition  Position of the target page in the history relative to the current
+         *     page.
+         * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+         * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+         * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+         * when `relativePosition` equals 0.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+         */
+        Location.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
         };
         /**
          * Registers a URL change listener. Use to catch updates performed by the Angular
@@ -5533,7 +5570,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.7+18.sha-3a823ab');
+    var VERSION = new i0.Version('12.0.0-next.7+19.sha-e05a6f3');
 
     /**
      * @license

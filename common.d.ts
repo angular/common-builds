@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.7+18.sha-3a823ab
+ * @license Angular v12.0.0-next.7+19.sha-e05a6f3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -912,6 +912,7 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
     replaceState(state: any, title: string, path: string, queryParams: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
 }
 
 /**
@@ -1162,6 +1163,19 @@ export declare class Location {
      */
     back(): void;
     /**
+     * Navigate to a specific page from session history, identified by its relative position to the
+     * current page.
+     *
+     * @param relativePosition  Position of the target page in the history relative to the current
+     *     page.
+     * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+     * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+     * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+     * when `relativePosition` equals 0.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+     */
+    historyGo(relativePosition?: number): void;
+    /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
      * framework that are not detectible through "popstate" or "hashchange" events.
      *
@@ -1257,6 +1271,7 @@ export declare abstract class LocationStrategy {
     abstract replaceState(state: any, title: string, url: string, queryParams: string): void;
     abstract forward(): void;
     abstract back(): void;
+    historyGo?(relativePosition: number): void;
     abstract onPopState(fn: LocationChangeListener): void;
     abstract getBaseHref(): string;
 }
@@ -2234,6 +2249,7 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
     replaceState(state: any, title: string, url: string, queryParams: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
 }
 
 /**
@@ -2324,6 +2340,7 @@ export declare abstract class PlatformLocation {
     abstract pushState(state: any, title: string, url: string): void;
     abstract forward(): void;
     abstract back(): void;
+    historyGo?(relativePosition: number): void;
 }
 
 /**
@@ -2616,6 +2633,7 @@ export declare class ɵBrowserPlatformLocation extends PlatformLocation {
     replaceState(state: any, title: string, url: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     getState(): unknown;
 }
 

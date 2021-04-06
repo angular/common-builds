@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.7+18.sha-3a823ab
+ * @license Angular v12.0.0-next.7+19.sha-e05a6f3
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -82,6 +82,9 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * @publicApi
  */
 class PlatformLocation {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
 PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 PlatformLocation.decorators = [
@@ -176,6 +179,9 @@ class BrowserPlatformLocation extends PlatformLocation {
     }
     back() {
         this._history.back();
+    }
+    historyGo(relativePosition = 0) {
+        this._history.go(relativePosition);
     }
     getState() {
         return this._history.state;
@@ -296,6 +302,9 @@ function normalizeQueryParams(params) {
  * @publicApi
  */
 class LocationStrategy {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
 LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 LocationStrategy.decorators = [
@@ -407,6 +416,10 @@ class PathLocationStrategy extends LocationStrategy {
     back() {
         this._platformLocation.back();
     }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+    }
 }
 PathLocationStrategy.decorators = [
     { type: Injectable }
@@ -493,6 +506,10 @@ class HashLocationStrategy extends LocationStrategy {
     }
     back() {
         this._platformLocation.back();
+    }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
 }
 HashLocationStrategy.decorators = [
@@ -651,6 +668,22 @@ class Location {
      */
     back() {
         this._platformStrategy.back();
+    }
+    /**
+     * Navigate to a specific page from session history, identified by its relative position to the
+     * current page.
+     *
+     * @param relativePosition  Position of the target page in the history relative to the current
+     *     page.
+     * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+     * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+     * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+     * when `relativePosition` equals 0.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+     */
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
     /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
@@ -5125,7 +5158,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.7+18.sha-3a823ab');
+const VERSION = new Version('12.0.0-next.7+19.sha-e05a6f3');
 
 /**
  * @license
