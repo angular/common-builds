@@ -55,6 +55,6 @@ export declare class MockPlatformLocation implements PlatformLocation {
     getState(): unknown;
     private scheduleHashUpdate;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDef<MockPlatformLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MockPlatformLocation>;
 }
 export declare function scheduleMicroTask(cb: () => any): void;

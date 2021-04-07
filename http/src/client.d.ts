@@ -2903,5 +2903,5 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
-    static ɵprov: i0.ɵɵInjectableDef<HttpClient>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
 }

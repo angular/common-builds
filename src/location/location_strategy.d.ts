@@ -36,7 +36,7 @@ export declare abstract class LocationStrategy {
     abstract onPopState(fn: LocationChangeListener): void;
     abstract getBaseHref(): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<LocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDef<LocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<LocationStrategy>;
 }
 export declare function provideLocationStrategy(platformLocation: PlatformLocation): PathLocationStrategy;
 /**
@@ -110,5 +110,5 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
     back(): void;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PathLocationStrategy, [null, { optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDef<PathLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<PathLocationStrategy>;
 }

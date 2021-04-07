@@ -28,7 +28,7 @@ export declare class HttpInterceptingHandler implements HttpHandler {
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptingHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDef<HttpInterceptingHandler>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpInterceptingHandler>;
 }
 /**
  * Constructs an `HttpHandler` that applies interceptors

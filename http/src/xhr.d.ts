@@ -28,5 +28,5 @@ export declare class HttpXhrBackend implements HttpBackend {
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpXhrBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDef<HttpXhrBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpXhrBackend>;
 }

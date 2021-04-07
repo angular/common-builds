@@ -31,5 +31,5 @@ export declare class MockLocationStrategy extends LocationStrategy {
     forward(): void;
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockLocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDef<MockLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MockLocationStrategy>;
 }

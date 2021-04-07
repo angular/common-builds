@@ -44,7 +44,7 @@ export declare class JsonpClientBackend implements HttpBackend {
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpClientBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDef<JsonpClientBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpClientBackend>;
 }
 /**
  * Identifies requests with the method JSONP and
@@ -66,5 +66,5 @@ export declare class JsonpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpInterceptor, never>;
-    static ɵprov: i0.ɵɵInjectableDef<JsonpInterceptor>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpInterceptor>;
 }

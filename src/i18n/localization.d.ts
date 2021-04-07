@@ -21,5 +21,5 @@ export declare class NgLocaleLocalization extends NgLocalization {
     constructor(locale: string);
     getPluralCategory(value: any, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgLocaleLocalization, never>;
-    static ɵprov: i0.ɵɵInjectableDef<NgLocaleLocalization>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<NgLocaleLocalization>;
 }

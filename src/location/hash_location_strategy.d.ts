@@ -43,5 +43,5 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
     back(): void;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HashLocationStrategy, [null, { optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDef<HashLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HashLocationStrategy>;
 }

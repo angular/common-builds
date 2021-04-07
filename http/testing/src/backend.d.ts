@@ -60,5 +60,5 @@ export declare class HttpClientTestingBackend implements HttpBackend, HttpTestin
     }): void;
     private descriptionFromMatcher;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientTestingBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDef<HttpClientTestingBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpClientTestingBackend>;
 }

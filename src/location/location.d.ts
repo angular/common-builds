@@ -166,6 +166,6 @@ export declare class Location {
      */
     static stripTrailingSlash: (url: string) => string;
     static ɵfac: i0.ɵɵFactoryDeclaration<Location, never>;
-    static ɵprov: i0.ɵɵInjectableDef<Location>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<Location>;
 }
 export declare function createLocation(): Location;
