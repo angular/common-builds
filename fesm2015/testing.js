@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+10.sha-69afeb3
+ * @license Angular v12.0.0-next.8+99.sha-886bf37
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -105,6 +105,13 @@ class SpyLocation {
         if (this._historyIndex > 0) {
             this._historyIndex--;
             this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+        }
+    }
+    historyGo(relativePosition = 0) {
+        const nextPageIndex = this._historyIndex + relativePosition;
+        if (nextPageIndex >= 0 && nextPageIndex < this._history.length) {
+            this._historyIndex = nextPageIndex;
+            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
         }
     }
     onUrlChange(fn) {
@@ -306,6 +313,7 @@ class MockPlatformLocation {
     constructor(config) {
         this.baseHref = '';
         this.hashUpdate = new Subject();
+        this.urlChangeIndex = 0;
         this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
         if (config) {
             this.baseHref = config.appBaseHref || '';
@@ -314,25 +322,25 @@ class MockPlatformLocation {
         }
     }
     get hostname() {
-        return this.urlChanges[0].hostname;
+        return this.urlChanges[this.urlChangeIndex].hostname;
     }
     get protocol() {
-        return this.urlChanges[0].protocol;
+        return this.urlChanges[this.urlChangeIndex].protocol;
     }
     get port() {
-        return this.urlChanges[0].port;
+        return this.urlChanges[this.urlChangeIndex].port;
     }
     get pathname() {
-        return this.urlChanges[0].pathname;
+        return this.urlChanges[this.urlChangeIndex].pathname;
     }
     get search() {
-        return this.urlChanges[0].search;
+        return this.urlChanges[this.urlChangeIndex].search;
     }
     get hash() {
-        return this.urlChanges[0].hash;
+        return this.urlChanges[this.urlChangeIndex].hash;
     }
     get state() {
-        return this.urlChanges[0].state;
+        return this.urlChanges[this.urlChangeIndex].state;
     }
     getBaseHrefFromDOM() {
         return this.baseHref;
@@ -361,26 +369,48 @@ class MockPlatformLocation {
     }
     replaceState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges[0] = Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState });
+        this.urlChanges[this.urlChangeIndex] = Object.assign(Object.assign({}, this.urlChanges[this.urlChangeIndex]), { pathname, search, hash, state: parsedState });
     }
     pushState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges.unshift(Object.assign(Object.assign({}, this.urlChanges[0]), { pathname, search, hash, state: parsedState }));
+        if (this.urlChangeIndex > 0) {
+            this.urlChanges.splice(this.urlChangeIndex + 1);
+        }
+        this.urlChanges.push(Object.assign(Object.assign({}, this.urlChanges[this.urlChangeIndex]), { pathname, search, hash, state: parsedState }));
+        this.urlChangeIndex = this.urlChanges.length - 1;
     }
     forward() {
-        throw new Error('Not implemented');
+        const oldUrl = this.url;
+        const oldHash = this.hash;
+        if (this.urlChangeIndex < this.urlChanges.length) {
+            this.urlChangeIndex++;
+        }
+        this.scheduleHashUpdate(oldHash, oldUrl);
     }
     back() {
         const oldUrl = this.url;
         const oldHash = this.hash;
-        this.urlChanges.shift();
-        const newHash = this.hash;
-        if (oldHash !== newHash) {
-            scheduleMicroTask(() => this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url }));
+        if (this.urlChangeIndex > 0) {
+            this.urlChangeIndex--;
         }
+        this.scheduleHashUpdate(oldHash, oldUrl);
+    }
+    historyGo(relativePosition = 0) {
+        const oldUrl = this.url;
+        const oldHash = this.hash;
+        const nextPageIndex = this.urlChangeIndex + relativePosition;
+        if (nextPageIndex >= 0 && nextPageIndex < this.urlChanges.length) {
+            this.urlChangeIndex = nextPageIndex;
+        }
+        this.scheduleHashUpdate(oldHash, oldUrl);
     }
     getState() {
         return this.state;
+    }
+    scheduleHashUpdate(oldHash, oldUrl) {
+        if (oldHash !== this.hash) {
+            scheduleMicroTask(() => this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url }));
+        }
     }
 }
 MockPlatformLocation.decorators = [

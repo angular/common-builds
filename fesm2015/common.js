@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+10.sha-69afeb3
+ * @license Angular v12.0.0-next.8+99.sha-886bf37
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -82,6 +82,9 @@ const DOCUMENT = new InjectionToken('DocumentToken');
  * @publicApi
  */
 class PlatformLocation {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
 PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 PlatformLocation.decorators = [
@@ -176,6 +179,9 @@ class BrowserPlatformLocation extends PlatformLocation {
     }
     back() {
         this._history.back();
+    }
+    historyGo(relativePosition = 0) {
+        this._history.go(relativePosition);
     }
     getState() {
         return this._history.state;
@@ -296,6 +302,9 @@ function normalizeQueryParams(params) {
  * @publicApi
  */
 class LocationStrategy {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
 LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 LocationStrategy.decorators = [
@@ -407,6 +416,10 @@ class PathLocationStrategy extends LocationStrategy {
     back() {
         this._platformLocation.back();
     }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+    }
 }
 PathLocationStrategy.decorators = [
     { type: Injectable }
@@ -493,6 +506,10 @@ class HashLocationStrategy extends LocationStrategy {
     }
     back() {
         this._platformLocation.back();
+    }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
 }
 HashLocationStrategy.decorators = [
@@ -651,6 +668,22 @@ class Location {
      */
     back() {
         this._platformStrategy.back();
+    }
+    /**
+     * Navigate to a specific page from session history, identified by its relative position to the
+     * current page.
+     *
+     * @param relativePosition  Position of the target page in the history relative to the current
+     *     page.
+     * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+     * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+     * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+     * when `relativePosition` equals 0.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+     */
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
     /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
@@ -5125,7 +5158,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.4+10.sha-69afeb3');
+const VERSION = new Version('12.0.0-next.8+99.sha-886bf37');
 
 /**
  * @license
@@ -5331,6 +5364,21 @@ class NullViewportScroller {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ */
+class XhrFactory {
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 
 /**
  * @license
@@ -5353,5 +5401,5 @@ class NullViewportScroller {
  * Generated bundle index. Do not edit.
  */
 
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DOCUMENT, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, LOCATION_INITIALIZED, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PathLocationStrategy, PercentPipe, PlatformLocation, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, VERSION, ViewportScroller, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, registerLocaleData, BrowserPlatformLocation as ɵBrowserPlatformLocation, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, useBrowserPlatformLocation as ɵangular_packages_common_common_a, createBrowserPlatformLocation as ɵangular_packages_common_common_b, createLocation as ɵangular_packages_common_common_c, provideLocationStrategy as ɵangular_packages_common_common_d, COMMON_DIRECTIVES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_f, getDOM as ɵgetDOM, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DOCUMENT, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, LOCATION_INITIALIZED, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PathLocationStrategy, PercentPipe, PlatformLocation, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, VERSION, ViewportScroller, WeekDay, XhrFactory, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, registerLocaleData, BrowserPlatformLocation as ɵBrowserPlatformLocation, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, useBrowserPlatformLocation as ɵangular_packages_common_common_a, createBrowserPlatformLocation as ɵangular_packages_common_common_b, createLocation as ɵangular_packages_common_common_c, provideLocationStrategy as ɵangular_packages_common_common_d, COMMON_DIRECTIVES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_f, getDOM as ɵgetDOM, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
 //# sourceMappingURL=common.js.map

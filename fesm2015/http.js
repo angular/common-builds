@@ -1,13 +1,13 @@
 /**
- * @license Angular v12.0.0-next.4+10.sha-69afeb3
+ * @license Angular v12.0.0-next.8+99.sha-886bf37
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { DOCUMENT, XhrFactory as XhrFactory$1, ɵparseCookieValue } from '@angular/common';
 import { Injectable, InjectionToken, Inject, PLATFORM_ID, Injector, NgModule } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
-import { DOCUMENT, ɵparseCookieValue } from '@angular/common';
 
 /**
  * @license
@@ -548,6 +548,104 @@ class HttpParams {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * A token used to manipulate and access values stored in `HttpContext`.
+ *
+ * @publicApi
+ */
+class HttpContextToken {
+    constructor(defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+}
+/**
+ * Http context stores arbitrary user defined values and ensures type safety without
+ * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
+ *
+ * This context is mutable and is shared between cloned requests unless explicitly specified.
+ *
+ * @usageNotes
+ *
+ * ### Usage Example
+ *
+ * ```typescript
+ * // inside cache.interceptors.ts
+ * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+ *
+ * export class CacheInterceptor implements HttpInterceptor {
+ *
+ *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
+ *     if (req.context.get(IS_CACHE_ENABLED) === true) {
+ *       return ...;
+ *     }
+ *     return delegate.handle(req);
+ *   }
+ * }
+ *
+ * // inside a service
+ *
+ * this.httpClient.get('/api/weather', {
+ *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
+ * }).subscribe(...);
+ * ```
+ *
+ * @publicApi
+ */
+class HttpContext {
+    constructor() {
+        this.map = new Map();
+    }
+    /**
+     * Store a value in the context. If a value is already present it will be overwritten.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     * @param value The value to store.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    set(token, value) {
+        this.map.set(token, value);
+        return this;
+    }
+    /**
+     * Retrieve the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns The stored value or default if one is defined.
+     */
+    get(token) {
+        if (!this.map.has(token)) {
+            this.map.set(token, token.defaultValue());
+        }
+        return this.map.get(token);
+    }
+    /**
+     * Delete the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    delete(token) {
+        this.map.delete(token);
+        return this;
+    }
+    /**
+     * @returns a list of tokens currently stored in the context.
+     */
+    keys() {
+        return this.map.keys();
+    }
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * Determine whether the given HTTP method may include a body.
  */
 function mightHaveBody(method) {
@@ -653,6 +751,9 @@ class HttpRequest {
             if (!!options.headers) {
                 this.headers = options.headers;
             }
+            if (!!options.context) {
+                this.context = options.context;
+            }
             if (!!options.params) {
                 this.params = options.params;
             }
@@ -660,6 +761,10 @@ class HttpRequest {
         // If no headers have been passed in, construct a new HttpHeaders instance.
         if (!this.headers) {
             this.headers = new HttpHeaders();
+        }
+        // If no context have been passed in, construct a new HttpContext instance.
+        if (!this.context) {
+            this.context = new HttpContext();
         }
         // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
         if (!this.params) {
@@ -757,6 +862,7 @@ class HttpRequest {
         return null;
     }
     clone(update = {}) {
+        var _a;
         // For method, url, and responseType, take the current value unless
         // it is overridden in the update hash.
         const method = update.method || this.method;
@@ -775,6 +881,8 @@ class HttpRequest {
         // `setParams` are used.
         let headers = update.headers || this.headers;
         let params = update.params || this.params;
+        // Pass on context if needed
+        const context = (_a = update.context) !== null && _a !== void 0 ? _a : this.context;
         // Check whether the caller has asked to add headers.
         if (update.setHeaders !== undefined) {
             // Set every requested header.
@@ -792,6 +900,7 @@ class HttpRequest {
         return new HttpRequest(method, url, body, {
             params,
             headers,
+            context,
             reportProgress,
             responseType,
             withCredentials,
@@ -977,6 +1086,7 @@ function addBody(options, body) {
     return {
         body,
         headers: options.headers,
+        context: options.context,
         observe: options.observe,
         params: options.params,
         reportProgress: options.reportProgress,
@@ -1102,6 +1212,7 @@ class HttpClient {
             // Construct the request.
             req = new HttpRequest(first, url, (options.body !== undefined ? options.body : null), {
                 headers,
+                context: options.context,
                 params,
                 reportProgress: options.reportProgress,
                 // By default, JSON is assumed to be returned for all calls.
@@ -1556,27 +1667,6 @@ function getResponseUrl(xhr) {
     return null;
 }
 /**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- */
-class XhrFactory {
-}
-/**
- * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
- *
- */
-class BrowserXhr {
-    constructor() { }
-    build() {
-        return (new XMLHttpRequest());
-    }
-}
-BrowserXhr.decorators = [
-    { type: Injectable }
-];
-BrowserXhr.ctorParameters = () => [];
-/**
  * Uses `XMLHttpRequest` to send requests to a backend server.
  * @see `HttpHandler`
  * @see `JsonpClientBackend`
@@ -1833,7 +1923,7 @@ HttpXhrBackend.decorators = [
     { type: Injectable }
 ];
 HttpXhrBackend.ctorParameters = () => [
-    { type: XhrFactory }
+    { type: XhrFactory$1 }
 ];
 
 /**
@@ -2071,8 +2161,6 @@ HttpClientModule.decorators = [
                     { provide: HttpHandler, useClass: HttpInterceptingHandler },
                     HttpXhrBackend,
                     { provide: HttpBackend, useExisting: HttpXhrBackend },
-                    BrowserXhr,
-                    { provide: XhrFactory, useExisting: BrowserXhr },
                 ],
             },] }
 ];
@@ -2106,6 +2194,15 @@ HttpClientJsonpModule.decorators = [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ * @see `XhrFactory`
+ * @deprecated
+ * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+ */
+const XhrFactory = XhrFactory$1;
 
 /**
  * @license
@@ -2119,5 +2216,5 @@ HttpClientJsonpModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, BrowserXhr as ɵangular_packages_common_http_http_d, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_e, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_f, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_g, HttpXsrfInterceptor as ɵangular_packages_common_http_http_h };
+export { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, XhrFactory, HttpInterceptingHandler as ɵHttpInterceptingHandler, NoopInterceptor as ɵangular_packages_common_http_http_a, JsonpCallbackContext as ɵangular_packages_common_http_http_b, jsonpCallbackContext as ɵangular_packages_common_http_http_c, XSRF_COOKIE_NAME as ɵangular_packages_common_http_http_d, XSRF_HEADER_NAME as ɵangular_packages_common_http_http_e, HttpXsrfCookieExtractor as ɵangular_packages_common_http_http_f, HttpXsrfInterceptor as ɵangular_packages_common_http_http_g };
 //# sourceMappingURL=http.js.map

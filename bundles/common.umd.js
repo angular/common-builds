@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.4+10.sha-69afeb3
+ * @license Angular v12.0.0-next.8+99.sha-886bf37
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -61,11 +61,13 @@
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b)
-                if (b.hasOwnProperty(p))
+                if (Object.prototype.hasOwnProperty.call(b, p))
                     d[p] = b[p]; };
         return extendStatics(d, b);
     };
     function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -208,10 +210,10 @@
             k2 = k;
         o[k2] = m[k];
     });
-    function __exportStar(m, exports) {
+    function __exportStar(m, o) {
         for (var p in m)
-            if (p !== "default" && !exports.hasOwnProperty(p))
-                __createBinding(exports, m, p);
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
     }
     function __values(o) {
         var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
@@ -251,11 +253,13 @@
         }
         return ar;
     }
+    /** @deprecated */
     function __spread() {
         for (var ar = [], i = 0; i < arguments.length; i++)
             ar = ar.concat(__read(arguments[i]));
         return ar;
     }
+    /** @deprecated */
     function __spreadArrays() {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++)
             s += arguments[i].length;
@@ -264,7 +268,11 @@
                 r[k] = a[j];
         return r;
     }
-    ;
+    function __spreadArray(to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
+    }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
     }
@@ -321,7 +329,7 @@
         var result = {};
         if (mod != null)
             for (var k in mod)
-                if (Object.hasOwnProperty.call(mod, k))
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
                     __createBinding(result, mod, k);
         __setModuleDefault(result, mod);
         return result;
@@ -329,18 +337,21 @@
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
     }
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
     /**
@@ -385,6 +396,9 @@
     var PlatformLocation = /** @class */ (function () {
         function PlatformLocation() {
         }
+        PlatformLocation.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return PlatformLocation;
     }());
     PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
@@ -511,6 +525,10 @@
         BrowserPlatformLocation.prototype.back = function () {
             this._history.back();
         };
+        BrowserPlatformLocation.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            this._history.go(relativePosition);
+        };
         BrowserPlatformLocation.prototype.getState = function () {
             return this._history.state;
         };
@@ -626,6 +644,9 @@
     var LocationStrategy = /** @class */ (function () {
         function LocationStrategy() {
         }
+        LocationStrategy.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return LocationStrategy;
     }());
     LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
@@ -741,6 +762,11 @@
         PathLocationStrategy.prototype.back = function () {
             this._platformLocation.back();
         };
+        PathLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+        };
         return PathLocationStrategy;
     }(LocationStrategy));
     PathLocationStrategy.decorators = [
@@ -824,6 +850,11 @@
         };
         HashLocationStrategy.prototype.back = function () {
             this._platformLocation.back();
+        };
+        HashLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
         };
         return HashLocationStrategy;
     }(LocationStrategy));
@@ -990,6 +1021,23 @@
          */
         Location.prototype.back = function () {
             this._platformStrategy.back();
+        };
+        /**
+         * Navigate to a specific page from session history, identified by its relative position to the
+         * current page.
+         *
+         * @param relativePosition  Position of the target page in the history relative to the current
+         *     page.
+         * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+         * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+         * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+         * when `relativePosition` equals 0.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+         */
+        Location.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
         };
         /**
          * Registers a URL change listener. Use to catch updates performed by the Angular
@@ -5525,7 +5573,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.4+10.sha-69afeb3');
+    var VERSION = new i0.Version('12.0.0-next.8+99.sha-886bf37');
 
     /**
      * @license
@@ -5738,6 +5786,24 @@
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     */
+    var XhrFactory = /** @class */ (function () {
+        function XhrFactory() {
+        }
+        return XhrFactory;
+    }());
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
 
     /**
      * @license
@@ -5799,6 +5865,7 @@
     exports.UpperCasePipe = UpperCasePipe;
     exports.VERSION = VERSION;
     exports.ViewportScroller = ViewportScroller;
+    exports.XhrFactory = XhrFactory;
     exports.formatCurrency = formatCurrency;
     exports.formatDate = formatDate;
     exports.formatNumber = formatNumber;
