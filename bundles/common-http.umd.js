@@ -1,18 +1,18 @@
 /**
- * @license Angular v9.0.0-next.12+69.sha-1f498ab.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.8+121.sha-72c4288
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
-}(this, function (exports, core, rxjs, operators, common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@angular/common/http', ['exports', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = {}), global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators));
+}(this, (function (exports, common, core, rxjs, operators) { 'use strict';
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -51,49 +51,52 @@
     }());
 
     /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
+    Copyright (c) Microsoft Corporation.
 
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
 
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
     /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
+    var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b)
+                if (Object.prototype.hasOwnProperty.call(b, p))
+                    d[p] = b[p]; };
         return extendStatics(d, b);
     };
-
     function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
-
-    var __assign = function() {
+    var __assign = function () {
         __assign = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
             }
             return t;
         };
         return __assign.apply(this, arguments);
     };
-
     function __rest(s, e) {
         var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
+        for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+                t[p] = s[p];
         if (s != null && typeof Object.getOwnPropertySymbols === "function")
             for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
                 if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
@@ -101,155 +104,267 @@
             }
         return t;
     }
-
     function __decorate(decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     }
-
     function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
+        return function (target, key) { decorator(target, key, paramIndex); };
     }
-
     function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
     }
-
     function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     }
-
     function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
         function verb(n) { return function (v) { return step([n, v]); }; }
         function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
                 }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
         }
     }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    var __createBinding = Object.create ? (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
+    }) : (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        o[k2] = m[k];
+    });
+    function __exportStar(m, o) {
+        for (var p in m)
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
     }
-
     function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m) return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m)
+            return m.call(o);
+        if (o && typeof o.length === "number")
+            return {
+                next: function () {
+                    if (o && i >= o.length)
+                        o = void 0;
+                    return { value: o && o[i++], done: !o };
+                }
+            };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
     }
-
     function __read(o, n) {
         var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
+        if (!m)
+            return o;
         var i = m.call(o), r, ar = [], e;
         try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
         }
-        catch (error) { e = { error: error }; }
+        catch (error) {
+            e = { error: error };
+        }
         finally {
             try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
             }
-            finally { if (e) throw e.error; }
+            finally {
+                if (e)
+                    throw e.error;
+            }
         }
         return ar;
     }
-
+    /** @deprecated */
     function __spread() {
         for (var ar = [], i = 0; i < arguments.length; i++)
             ar = ar.concat(__read(arguments[i]));
         return ar;
     }
-
+    /** @deprecated */
     function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+            s += arguments[i].length;
         for (var r = Array(s), k = 0, i = 0; i < il; i++)
             for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
                 r[k] = a[j];
         return r;
-    };
-
+    }
+    function __spreadArray(to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
+    }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
     }
-
     function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
         var g = generator.apply(thisArg, _arguments || []), i, q = [];
         return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function verb(n) { if (g[n])
+            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try {
+            step(g[n](v));
+        }
+        catch (e) {
+            settle(q[0][3], e);
+        } }
         function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
         function fulfill(value) { resume("next", value); }
         function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+        function settle(f, v) { if (f(v), q.shift(), q.length)
+            resume(q[0][0], q[0][1]); }
     }
-
     function __asyncDelegator(o) {
         var i, p;
         return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
         function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
     }
-
     function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
         var m = o[Symbol.asyncIterator], i;
         return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
         function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
     }
-
     function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        if (Object.defineProperty) {
+            Object.defineProperty(cooked, "raw", { value: raw });
+        }
+        else {
+            cooked.raw = raw;
+        }
         return cooked;
+    }
+    ;
+    var __setModuleDefault = Object.create ? (function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function (o, v) {
+        o["default"] = v;
     };
-
     function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
+        if (mod && mod.__esModule)
+            return mod;
         var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
         return result;
     }
-
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    }
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -283,10 +398,10 @@
                     headers.split('\n').forEach(function (line) {
                         var index = line.indexOf(':');
                         if (index > 0) {
-                            var name_1 = line.slice(0, index);
-                            var key = name_1.toLowerCase();
+                            var name = line.slice(0, index);
+                            var key = name.toLowerCase();
                             var value = line.slice(index + 1).trim();
-                            _this.maybeSetNormalizedName(name_1, key);
+                            _this.maybeSetNormalizedName(name, key);
                             if (_this.headers.has(key)) {
                                 _this.headers.get(key).push(value);
                             }
@@ -361,8 +476,8 @@
          * Appends a new value to the existing set of values for a header
          * and returns them in a clone of the original instance.
          *
-         * @param name The header name for which to append the value or values.
-         * @param value The new value or array of values.
+         * @param name The header name for which to append the values.
+         * @param value The value to append.
          *
          * @returns A clone of the HTTP headers object with the value appended to the given header.
          */
@@ -443,7 +558,7 @@
                     }
                     this.maybeSetNormalizedName(update.name, key);
                     var base = (update.op === 'a' ? this.headers.get(key) : undefined) || [];
-                    base.push.apply(base, __spread(value));
+                    base.push.apply(base, __spreadArray([], __read(value)));
                     this.headers.set(key, base);
                     break;
                 case 'd':
@@ -483,7 +598,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -506,31 +621,42 @@
          * @param key The key name.
          * @returns The encoded key name.
          */
-        HttpUrlEncodingCodec.prototype.encodeKey = function (key) { return standardEncoding(key); };
+        HttpUrlEncodingCodec.prototype.encodeKey = function (key) {
+            return standardEncoding(key);
+        };
         /**
          * Encodes the value of a URL parameter or query-string.
          * @param value The value.
          * @returns The encoded value.
          */
-        HttpUrlEncodingCodec.prototype.encodeValue = function (value) { return standardEncoding(value); };
+        HttpUrlEncodingCodec.prototype.encodeValue = function (value) {
+            return standardEncoding(value);
+        };
         /**
          * Decodes an encoded URL parameter or query-string key.
          * @param key The encoded key name.
          * @returns The decoded key name.
          */
-        HttpUrlEncodingCodec.prototype.decodeKey = function (key) { return decodeURIComponent(key); };
+        HttpUrlEncodingCodec.prototype.decodeKey = function (key) {
+            return decodeURIComponent(key);
+        };
         /**
          * Decodes an encoded URL parameter or query-string value.
          * @param value The encoded value.
          * @returns The decoded value.
          */
-        HttpUrlEncodingCodec.prototype.decodeValue = function (value) { return decodeURIComponent(value); };
+        HttpUrlEncodingCodec.prototype.decodeValue = function (value) {
+            return decodeURIComponent(value);
+        };
         return HttpUrlEncodingCodec;
     }());
     function paramParser(rawParams, codec) {
         var map = new Map();
         if (rawParams.length > 0) {
-            var params = rawParams.split('&');
+            // The `window.location.search` can be used while creating an instance of the `HttpParams` class
+            // (e.g. `new HttpParams({ fromString: window.location.search })`). The `window.location.search`
+            // may start with the `?` char, so we strip it if it's present.
+            var params = rawParams.replace(/^\?/, '').split('&');
             params.forEach(function (param) {
                 var eqIdx = param.indexOf('=');
                 var _a = __read(eqIdx == -1 ?
@@ -554,6 +680,9 @@
             .replace(/%3D/gi, '=')
             .replace(/%3F/gi, '?')
             .replace(/%2F/gi, '/');
+    }
+    function valueToString(value) {
+        return "" + value;
     }
     /**
      * An HTTP request/response body that represents serialized parameters,
@@ -632,14 +761,38 @@
          * @param value The new value to add.
          * @return A new body with the appended value.
          */
-        HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+        HttpParams.prototype.append = function (param, value) {
+            return this.clone({ param: param, value: value, op: 'a' });
+        };
+        /**
+         * Constructs a new body with appended values for the given parameter name.
+         * @param params parameters and values
+         * @return A new body with the new value.
+         */
+        HttpParams.prototype.appendAll = function (params) {
+            var updates = [];
+            Object.keys(params).forEach(function (param) {
+                var value = params[param];
+                if (Array.isArray(value)) {
+                    value.forEach(function (_value) {
+                        updates.push({ param: param, value: _value, op: 'a' });
+                    });
+                }
+                else {
+                    updates.push({ param: param, value: value, op: 'a' });
+                }
+            });
+            return this.clone(updates);
+        };
         /**
          * Replaces the value for a parameter.
          * @param param The parameter name.
          * @param value The new value.
          * @return A new body with the new value.
          */
-        HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+        HttpParams.prototype.set = function (param, value) {
+            return this.clone({ param: param, value: value, op: 's' });
+        };
         /**
          * Removes a given value or all values from a parameter.
          * @param param The parameter name.
@@ -647,7 +800,9 @@
          * @return A new body with the given value removed, or with all values
          * removed if no value is specified.
          */
-        HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+        HttpParams.prototype.delete = function (param, value) {
+            return this.clone({ param: param, value: value, op: 'd' });
+        };
         /**
          * Serializes the body to an encoded string, where key-value pairs (separated by `=`) are
          * separated by `&`s.
@@ -658,15 +813,21 @@
             return this.keys()
                 .map(function (key) {
                 var eKey = _this.encoder.encodeKey(key);
+                // `a: ['1']` produces `'a=1'`
+                // `b: []` produces `''`
+                // `c: ['1', '2']` produces `'c=1&c=2'`
                 return _this.map.get(key).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); })
                     .join('&');
             })
+                // filter out empty values because `b: []` produces `''`
+                // which results in `a=1&&c=1&c=2` instead of `a=1&c=1&c=2` if we don't
+                .filter(function (param) { return param !== ''; })
                 .join('&');
         };
         HttpParams.prototype.clone = function (update) {
             var clone = new HttpParams({ encoder: this.encoder });
             clone.cloneFrom = this.cloneFrom || this;
-            clone.updates = (this.updates || []).concat([update]);
+            clone.updates = (this.updates || []).concat(update);
             return clone;
         };
         HttpParams.prototype.init = function () {
@@ -682,13 +843,13 @@
                         case 'a':
                         case 's':
                             var base = (update.op === 'a' ? _this.map.get(update.param) : undefined) || [];
-                            base.push(update.value);
+                            base.push(valueToString(update.value));
                             _this.map.set(update.param, base);
                             break;
                         case 'd':
                             if (update.value !== undefined) {
                                 var base_1 = _this.map.get(update.param) || [];
-                                var idx = base_1.indexOf(update.value);
+                                var idx = base_1.indexOf(valueToString(update.value));
                                 if (idx !== -1) {
                                     base_1.splice(idx, 1);
                                 }
@@ -713,7 +874,107 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A token used to manipulate and access values stored in `HttpContext`.
+     *
+     * @publicApi
+     */
+    var HttpContextToken = /** @class */ (function () {
+        function HttpContextToken(defaultValue) {
+            this.defaultValue = defaultValue;
+        }
+        return HttpContextToken;
+    }());
+    /**
+     * Http context stores arbitrary user defined values and ensures type safety without
+     * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
+     *
+     * This context is mutable and is shared between cloned requests unless explicitly specified.
+     *
+     * @usageNotes
+     *
+     * ### Usage Example
+     *
+     * ```typescript
+     * // inside cache.interceptors.ts
+     * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+     *
+     * export class CacheInterceptor implements HttpInterceptor {
+     *
+     *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
+     *     if (req.context.get(IS_CACHE_ENABLED) === true) {
+     *       return ...;
+     *     }
+     *     return delegate.handle(req);
+     *   }
+     * }
+     *
+     * // inside a service
+     *
+     * this.httpClient.get('/api/weather', {
+     *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
+     * }).subscribe(...);
+     * ```
+     *
+     * @publicApi
+     */
+    var HttpContext = /** @class */ (function () {
+        function HttpContext() {
+            this.map = new Map();
+        }
+        /**
+         * Store a value in the context. If a value is already present it will be overwritten.
+         *
+         * @param token The reference to an instance of `HttpContextToken`.
+         * @param value The value to store.
+         *
+         * @returns A reference to itself for easy chaining.
+         */
+        HttpContext.prototype.set = function (token, value) {
+            this.map.set(token, value);
+            return this;
+        };
+        /**
+         * Retrieve the value associated with the given token.
+         *
+         * @param token The reference to an instance of `HttpContextToken`.
+         *
+         * @returns The stored value or default if one is defined.
+         */
+        HttpContext.prototype.get = function (token) {
+            if (!this.map.has(token)) {
+                this.map.set(token, token.defaultValue());
+            }
+            return this.map.get(token);
+        };
+        /**
+         * Delete the value associated with the given token.
+         *
+         * @param token The reference to an instance of `HttpContextToken`.
+         *
+         * @returns A reference to itself for easy chaining.
+         */
+        HttpContext.prototype.delete = function (token) {
+            this.map.delete(token);
+            return this;
+        };
+        /**
+         * @returns a list of tokens currently stored in the context.
+         */
+        HttpContext.prototype.keys = function () {
+            return this.map.keys();
+        };
+        return HttpContext;
+    }());
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -824,6 +1085,9 @@
                 if (!!options.headers) {
                     this.headers = options.headers;
                 }
+                if (!!options.context) {
+                    this.context = options.context;
+                }
                 if (!!options.params) {
                     this.params = options.params;
                 }
@@ -831,6 +1095,10 @@
             // If no headers have been passed in, construct a new HttpHeaders instance.
             if (!this.headers) {
                 this.headers = new HttpHeaders();
+            }
+            // If no context have been passed in, construct a new HttpContext instance.
+            if (!this.context) {
+                this.context = new HttpContext();
             }
             // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
             if (!this.params) {
@@ -929,6 +1197,7 @@
         };
         HttpRequest.prototype.clone = function (update) {
             if (update === void 0) { update = {}; }
+            var _a;
             // For method, url, and responseType, take the current value unless
             // it is overridden in the update hash.
             var method = update.method || this.method;
@@ -947,6 +1216,8 @@
             // `setParams` are used.
             var headers = update.headers || this.headers;
             var params = update.params || this.params;
+            // Pass on context if needed
+            var context = (_a = update.context) !== null && _a !== void 0 ? _a : this.context;
             // Check whether the caller has asked to add headers.
             if (update.setHeaders !== undefined) {
                 // Set every requested header.
@@ -962,19 +1233,17 @@
             }
             // Finally, construct the new HttpRequest using the pieces from above.
             return new HttpRequest(method, url, body, {
-                params: params, headers: headers, reportProgress: reportProgress, responseType: responseType, withCredentials: withCredentials,
+                params: params,
+                headers: headers,
+                context: context,
+                reportProgress: reportProgress,
+                responseType: responseType,
+                withCredentials: withCredentials,
             });
         };
         return HttpRequest;
     }());
 
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
     (function (HttpEventType) {
         /**
          * The request was sent out over the wire.
@@ -1013,7 +1282,7 @@
          * The single parameter accepted is an initialization hash. Any properties
          * of the response passed there will override the default values.
          */
-        function HttpResponseBase(init, defaultStatus, defaultStatusText) {
+        function HttpResponseBase(init, defaultStatus /* Ok */, defaultStatusText) {
             if (defaultStatus === void 0) { defaultStatus = 200; }
             if (defaultStatusText === void 0) { defaultStatusText = 'OK'; }
             // If the hash has values passed, use them to initialize the response.
@@ -1128,8 +1397,7 @@
                 _this.message = "Http failure during parsing for " + (init.url || '(unknown url)');
             }
             else {
-                _this.message =
-                    "Http failure response for " + (init.url || '(unknown url)') + ": " + init.status + " " + init.statusText;
+                _this.message = "Http failure response for " + (init.url || '(unknown url)') + ": " + init.status + " " + init.statusText;
             }
             _this.error = init.error || null;
             return _this;
@@ -1139,7 +1407,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1158,6 +1426,7 @@
         return {
             body: body,
             headers: options.headers,
+            context: options.context,
             observe: options.observe,
             params: options.params,
             reportProgress: options.reportProgress,
@@ -1190,6 +1459,14 @@
      *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
      * }
      * ```
+     *
+     * Alternatively, the parameter string can be used without invoking HttpParams
+     * by directly joining to the URL.
+     * ```
+     * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
+     * ```
+     *
+     *
      * ### JSONP Example
      * ```
      * requestJsonp(url, callback = 'callback') {
@@ -1208,6 +1485,7 @@
      * ```
      *
      * @see [HTTP Guide](guide/http)
+     * @see [HTTP Request](api/common/http/HttpRequest)
      *
      * @publicApi
      */
@@ -1276,6 +1554,7 @@
                 // Construct the request.
                 req = new HttpRequest(first, url, (options.body !== undefined ? options.body : null), {
                     headers: headers,
+                    context: options.context,
                     params: params,
                     reportProgress: options.reportProgress,
                     // By default, JSON is assumed to be returned for all calls.
@@ -1442,16 +1721,18 @@
             if (options === void 0) { options = {}; }
             return this.request('PUT', url, addBody(options, body));
         };
-        HttpClient = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [HttpHandler])
-        ], HttpClient);
         return HttpClient;
     }());
+    HttpClient.decorators = [
+        { type: core.Injectable }
+    ];
+    HttpClient.ctorParameters = function () { return [
+        { type: HttpHandler }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1484,15 +1765,15 @@
         NoopInterceptor.prototype.intercept = function (req, next) {
             return next.handle(req);
         };
-        NoopInterceptor = __decorate([
-            core.Injectable()
-        ], NoopInterceptor);
         return NoopInterceptor;
     }());
+    NoopInterceptor.decorators = [
+        { type: core.Injectable }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1533,11 +1814,17 @@
         function JsonpClientBackend(callbackMap, document) {
             this.callbackMap = callbackMap;
             this.document = document;
+            /**
+             * A resolved promise that can be used to schedule microtasks in the event handlers.
+             */
+            this.resolvedPromise = Promise.resolve();
         }
         /**
          * Get the name of the next callback method, by incrementing the global `nextRequestId`.
          */
-        JsonpClientBackend.prototype.nextCallback = function () { return "ng_jsonp_callback_" + nextRequestId++; };
+        JsonpClientBackend.prototype.nextCallback = function () {
+            return "ng_jsonp_callback_" + nextRequestId++;
+        };
         /**
          * Processes a JSONP request and returns an event stream of the results.
          * @param req The request object.
@@ -1608,29 +1895,35 @@
                     if (cancelled) {
                         return;
                     }
-                    // Cleanup the page.
-                    cleanup();
-                    // Check whether the response callback has run.
-                    if (!finished) {
-                        // It hasn't, something went wrong with the request. Return an error via
-                        // the Observable error path. All JSONP errors have status 0.
-                        observer.error(new HttpErrorResponse({
+                    // We wrap it in an extra Promise, to ensure the microtask
+                    // is scheduled after the loaded endpoint has executed any potential microtask itself,
+                    // which is not guaranteed in Internet Explorer and EdgeHTML. See issue #39496
+                    _this.resolvedPromise.then(function () {
+                        // Cleanup the page.
+                        cleanup();
+                        // Check whether the response callback has run.
+                        if (!finished) {
+                            // It hasn't, something went wrong with the request. Return an error via
+                            // the Observable error path. All JSONP errors have status 0.
+                            observer.error(new HttpErrorResponse({
+                                url: url,
+                                status: 0,
+                                statusText: 'JSONP Error',
+                                error: new Error(JSONP_ERR_NO_CALLBACK),
+                            }));
+                            return;
+                        }
+                        // Success. body either contains the response body or null if none was
+                        // returned.
+                        observer.next(new HttpResponse({
+                            body: body,
+                            status: 200 /* Ok */,
+                            statusText: 'OK',
                             url: url,
-                            status: 0,
-                            statusText: 'JSONP Error',
-                            error: new Error(JSONP_ERR_NO_CALLBACK),
                         }));
-                        return;
-                    }
-                    // Success. body either contains the response body or null if none was
-                    // returned.
-                    observer.next(new HttpResponse({
-                        body: body,
-                        status: 200,
-                        statusText: 'OK', url: url,
-                    }));
-                    // Complete the stream, the response is over.
-                    observer.complete();
+                        // Complete the stream, the response is over.
+                        observer.complete();
+                    });
                 };
                 // onError() is the error callback, which runs if the script returned generates
                 // a Javascript error. It emits the error via the Observable error channel as
@@ -1645,7 +1938,8 @@
                     observer.error(new HttpErrorResponse({
                         error: error,
                         status: 0,
-                        statusText: 'JSONP Error', url: url,
+                        statusText: 'JSONP Error',
+                        url: url,
                     }));
                 };
                 // Subscribe to both the success (load) and error events on the <script> tag,
@@ -1667,13 +1961,15 @@
                 };
             });
         };
-        JsonpClientBackend = __decorate([
-            core.Injectable(),
-            __param(1, core.Inject(common.DOCUMENT)),
-            __metadata("design:paramtypes", [JsonpCallbackContext, Object])
-        ], JsonpClientBackend);
         return JsonpClientBackend;
     }());
+    JsonpClientBackend.decorators = [
+        { type: core.Injectable }
+    ];
+    JsonpClientBackend.ctorParameters = function () { return [
+        { type: JsonpCallbackContext },
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+    ]; };
     /**
      * Identifies requests with the method JSONP and
      * shifts them to the `JsonpClientBackend`.
@@ -1700,16 +1996,18 @@
             // Fall through for normal HTTP requests.
             return next.handle(req);
         };
-        JsonpInterceptor = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [JsonpClientBackend])
-        ], JsonpInterceptor);
         return JsonpInterceptor;
     }());
+    JsonpInterceptor.decorators = [
+        { type: core.Injectable }
+    ];
+    JsonpInterceptor.ctorParameters = function () { return [
+        { type: JsonpClientBackend }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1729,30 +2027,6 @@
         return null;
     }
     /**
-     * A wrapper around the `XMLHttpRequest` constructor.
-     *
-     * @publicApi
-     */
-    var XhrFactory = /** @class */ (function () {
-        function XhrFactory() {
-        }
-        return XhrFactory;
-    }());
-    /**
-     * A factory for `HttpXhrBackend` that uses the `XMLHttpRequest` browser API.
-     *
-     */
-    var BrowserXhr = /** @class */ (function () {
-        function BrowserXhr() {
-        }
-        BrowserXhr.prototype.build = function () { return (new XMLHttpRequest()); };
-        BrowserXhr = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], BrowserXhr);
-        return BrowserXhr;
-    }());
-    /**
      * Uses `XMLHttpRequest` to send requests to a backend server.
      * @see `HttpHandler`
      * @see `JsonpClientBackend`
@@ -1771,9 +2045,9 @@
         HttpXhrBackend.prototype.handle = function (req) {
             var _this = this;
             // Quick check to give a better error message when a user attempts to use
-            // HttpClient.jsonp() without installing the JsonpClientModule
+            // HttpClient.jsonp() without installing the HttpClientJsonpModule
             if (req.method === 'JSONP') {
-                throw new Error("Attempted to construct Jsonp request without JsonpClientModule installed.");
+                throw new Error("Attempted to construct Jsonp request without HttpClientJsonpModule installed.");
             }
             // Everything happens on Observable subscription.
             return new rxjs.Observable(function (observer) {
@@ -1822,8 +2096,8 @@
                     if (headerResponse !== null) {
                         return headerResponse;
                     }
-                    // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
-                    var status = xhr.status === 1223 ? 204 : xhr.status;
+                    // Read status and normalize an IE9 bug (https://bugs.jquery.com/ticket/1450).
+                    var status = xhr.status === 1223 ? 204 /* NoContent */ : xhr.status;
                     var statusText = xhr.statusText || 'OK';
                     // Parse headers from XMLHttpRequest - this step is lazy.
                     var headers = new HttpHeaders(xhr.getAllResponseHeaders());
@@ -1842,13 +2116,13 @@
                     var _a = partialFromXhr(), headers = _a.headers, status = _a.status, statusText = _a.statusText, url = _a.url;
                     // The body will be read out if present.
                     var body = null;
-                    if (status !== 204) {
+                    if (status !== 204 /* NoContent */) {
                         // Use XMLHttpRequest.response if set, responseText otherwise.
                         body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
                     }
                     // Normalize another potential bug (this one comes from CORS).
                     if (status === 0) {
-                        status = !!body ? 200 : 0;
+                        status = !!body ? 200 /* Ok */ : 0;
                     }
                     // ok determines whether the response will be transmitted on the event or
                     // error channel. Unsuccessful status codes (not 2xx) will always be errors,
@@ -1970,6 +2244,8 @@
                 // By default, register for load and error events.
                 xhr.addEventListener('load', onLoad);
                 xhr.addEventListener('error', onError);
+                xhr.addEventListener('timeout', onError);
+                xhr.addEventListener('abort', onError);
                 // Progress events are only enabled if requested.
                 if (req.reportProgress) {
                     // Download progress is always enabled if requested.
@@ -1987,7 +2263,9 @@
                 return function () {
                     // On a cancellation, remove all registered event listeners.
                     xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('abort', onError);
                     xhr.removeEventListener('load', onLoad);
+                    xhr.removeEventListener('timeout', onError);
                     if (req.reportProgress) {
                         xhr.removeEventListener('progress', onDownProgress);
                         if (reqBody !== null && xhr.upload) {
@@ -1995,20 +2273,24 @@
                         }
                     }
                     // Finally, abort the in-flight request.
-                    xhr.abort();
+                    if (xhr.readyState !== xhr.DONE) {
+                        xhr.abort();
+                    }
                 };
             });
         };
-        HttpXhrBackend = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [XhrFactory])
-        ], HttpXhrBackend);
         return HttpXhrBackend;
     }());
+    HttpXhrBackend.decorators = [
+        { type: core.Injectable }
+    ];
+    HttpXhrBackend.ctorParameters = function () { return [
+        { type: common.XhrFactory }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -2052,14 +2334,16 @@
             }
             return this.lastToken;
         };
-        HttpXsrfCookieExtractor = __decorate([
-            core.Injectable(),
-            __param(0, core.Inject(common.DOCUMENT)), __param(1, core.Inject(core.PLATFORM_ID)),
-            __param(2, core.Inject(XSRF_COOKIE_NAME)),
-            __metadata("design:paramtypes", [Object, String, String])
-        ], HttpXsrfCookieExtractor);
         return HttpXsrfCookieExtractor;
     }());
+    HttpXsrfCookieExtractor.decorators = [
+        { type: core.Injectable }
+    ];
+    HttpXsrfCookieExtractor.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+        { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+        { type: String, decorators: [{ type: core.Inject, args: [XSRF_COOKIE_NAME,] }] }
+    ]; };
     /**
      * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
      */
@@ -2085,17 +2369,19 @@
             }
             return next.handle(req);
         };
-        HttpXsrfInterceptor = __decorate([
-            core.Injectable(),
-            __param(1, core.Inject(XSRF_HEADER_NAME)),
-            __metadata("design:paramtypes", [HttpXsrfTokenExtractor, String])
-        ], HttpXsrfInterceptor);
         return HttpXsrfInterceptor;
     }());
+    HttpXsrfInterceptor.decorators = [
+        { type: core.Injectable }
+    ];
+    HttpXsrfInterceptor.ctorParameters = function () { return [
+        { type: HttpXsrfTokenExtractor },
+        { type: String, decorators: [{ type: core.Inject, args: [XSRF_HEADER_NAME,] }] }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -2122,12 +2408,15 @@
             }
             return this.chain.handle(req);
         };
-        HttpInterceptingHandler = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [HttpBackend, core.Injector])
-        ], HttpInterceptingHandler);
         return HttpInterceptingHandler;
     }());
+    HttpInterceptingHandler.decorators = [
+        { type: core.Injectable }
+    ];
+    HttpInterceptingHandler.ctorParameters = function () { return [
+        { type: HttpBackend },
+        { type: core.Injector }
+    ]; };
     /**
      * Constructs an `HttpHandler` that applies interceptors
      * to a request before passing it to the given `HttpBackend`.
@@ -2172,13 +2461,12 @@
     var HttpClientXsrfModule = /** @class */ (function () {
         function HttpClientXsrfModule() {
         }
-        HttpClientXsrfModule_1 = HttpClientXsrfModule;
         /**
          * Disable the default XSRF protection.
          */
         HttpClientXsrfModule.disable = function () {
             return {
-                ngModule: HttpClientXsrfModule_1,
+                ngModule: HttpClientXsrfModule,
                 providers: [
                     { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
                 ],
@@ -2195,27 +2483,26 @@
         HttpClientXsrfModule.withOptions = function (options) {
             if (options === void 0) { options = {}; }
             return {
-                ngModule: HttpClientXsrfModule_1,
+                ngModule: HttpClientXsrfModule,
                 providers: [
                     options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
                     options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
                 ],
             };
         };
-        var HttpClientXsrfModule_1;
-        HttpClientXsrfModule = HttpClientXsrfModule_1 = __decorate([
-            core.NgModule({
-                providers: [
-                    HttpXsrfInterceptor,
-                    { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
-                    { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
-                    { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
-                    { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
-                ],
-            })
-        ], HttpClientXsrfModule);
         return HttpClientXsrfModule;
     }());
+    HttpClientXsrfModule.decorators = [
+        { type: core.NgModule, args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                },] }
+    ];
     /**
      * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
      * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
@@ -2228,33 +2515,31 @@
     var HttpClientModule = /** @class */ (function () {
         function HttpClientModule() {
         }
-        HttpClientModule = __decorate([
-            core.NgModule({
-                /**
-                 * Optional configuration for XSRF protection.
-                 */
-                imports: [
-                    HttpClientXsrfModule.withOptions({
-                        cookieName: 'XSRF-TOKEN',
-                        headerName: 'X-XSRF-TOKEN',
-                    }),
-                ],
-                /**
-                 * Configures the [dependency injector](guide/glossary#injector) where it is imported
-                 * with supporting services for HTTP communications.
-                 */
-                providers: [
-                    HttpClient,
-                    { provide: HttpHandler, useClass: HttpInterceptingHandler },
-                    HttpXhrBackend,
-                    { provide: HttpBackend, useExisting: HttpXhrBackend },
-                    BrowserXhr,
-                    { provide: XhrFactory, useExisting: BrowserXhr },
-                ],
-            })
-        ], HttpClientModule);
         return HttpClientModule;
     }());
+    HttpClientModule.decorators = [
+        { type: core.NgModule, args: [{
+                    /**
+                     * Optional configuration for XSRF protection.
+                     */
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    /**
+                     * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                     * with supporting services for HTTP communications.
+                     */
+                    providers: [
+                        HttpClient,
+                        { provide: HttpHandler, useClass: HttpInterceptingHandler },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                    ],
+                },] }
+    ];
     /**
      * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
      * with supporting services for JSONP.
@@ -2269,29 +2554,38 @@
     var HttpClientJsonpModule = /** @class */ (function () {
         function HttpClientJsonpModule() {
         }
-        HttpClientJsonpModule = __decorate([
-            core.NgModule({
-                providers: [
-                    JsonpClientBackend,
-                    { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
-                    { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
-                ],
-            })
-        ], HttpClientJsonpModule);
         return HttpClientJsonpModule;
     }());
+    HttpClientJsonpModule.decorators = [
+        { type: core.NgModule, args: [{
+                    providers: [
+                        JsonpClientBackend,
+                        { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
+                        { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
+                    ],
+                },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     * @see `XhrFactory`
+     * @deprecated
+     * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
+     */
+    var XhrFactory = common.XhrFactory;
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -2301,37 +2595,38 @@
      * Generated bundle index. Do not edit.
      */
 
-    exports.ɵangular_packages_common_http_http_a = NoopInterceptor;
-    exports.ɵangular_packages_common_http_http_b = JsonpCallbackContext;
-    exports.ɵangular_packages_common_http_http_c = jsonpCallbackContext;
-    exports.ɵangular_packages_common_http_http_d = BrowserXhr;
-    exports.ɵangular_packages_common_http_http_g = HttpXsrfCookieExtractor;
-    exports.ɵangular_packages_common_http_http_h = HttpXsrfInterceptor;
-    exports.ɵangular_packages_common_http_http_e = XSRF_COOKIE_NAME;
-    exports.ɵangular_packages_common_http_http_f = XSRF_HEADER_NAME;
-    exports.HttpBackend = HttpBackend;
-    exports.HttpHandler = HttpHandler;
-    exports.HttpClient = HttpClient;
-    exports.HttpHeaders = HttpHeaders;
     exports.HTTP_INTERCEPTORS = HTTP_INTERCEPTORS;
-    exports.JsonpClientBackend = JsonpClientBackend;
-    exports.JsonpInterceptor = JsonpInterceptor;
+    exports.HttpBackend = HttpBackend;
+    exports.HttpClient = HttpClient;
     exports.HttpClientJsonpModule = HttpClientJsonpModule;
     exports.HttpClientModule = HttpClientModule;
     exports.HttpClientXsrfModule = HttpClientXsrfModule;
-    exports.ɵHttpInterceptingHandler = HttpInterceptingHandler;
-    exports.HttpParams = HttpParams;
-    exports.HttpUrlEncodingCodec = HttpUrlEncodingCodec;
-    exports.HttpRequest = HttpRequest;
+    exports.HttpContext = HttpContext;
+    exports.HttpContextToken = HttpContextToken;
     exports.HttpErrorResponse = HttpErrorResponse;
+    exports.HttpHandler = HttpHandler;
     exports.HttpHeaderResponse = HttpHeaderResponse;
+    exports.HttpHeaders = HttpHeaders;
+    exports.HttpParams = HttpParams;
+    exports.HttpRequest = HttpRequest;
     exports.HttpResponse = HttpResponse;
     exports.HttpResponseBase = HttpResponseBase;
+    exports.HttpUrlEncodingCodec = HttpUrlEncodingCodec;
     exports.HttpXhrBackend = HttpXhrBackend;
-    exports.XhrFactory = XhrFactory;
     exports.HttpXsrfTokenExtractor = HttpXsrfTokenExtractor;
+    exports.JsonpClientBackend = JsonpClientBackend;
+    exports.JsonpInterceptor = JsonpInterceptor;
+    exports.XhrFactory = XhrFactory;
+    exports.ɵHttpInterceptingHandler = HttpInterceptingHandler;
+    exports.ɵangular_packages_common_http_http_a = NoopInterceptor;
+    exports.ɵangular_packages_common_http_http_b = JsonpCallbackContext;
+    exports.ɵangular_packages_common_http_http_c = jsonpCallbackContext;
+    exports.ɵangular_packages_common_http_http_d = XSRF_COOKIE_NAME;
+    exports.ɵangular_packages_common_http_http_e = XSRF_HEADER_NAME;
+    exports.ɵangular_packages_common_http_http_f = HttpXsrfCookieExtractor;
+    exports.ɵangular_packages_common_http_http_g = HttpXsrfInterceptor;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=common-http.umd.js.map

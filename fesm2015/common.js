@@ -1,1330 +1,25 @@
 /**
- * @license Angular v9.0.0-next.12+69.sha-1f498ab.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.8+121.sha-72c4288
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵisListLikeIterable, ɵstringify, Injectable, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵallocHostVars, ɵɵclassMap, ɵɵdefineDirective, Directive, Input, ɵɵstyleMap, InjectionToken, ɵɵdefineInjectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocalePluralCase, LOCALE_ID, ɵLOCALE_DATA, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, isDevMode, TemplateRef, Host, Attribute, ɵlooseIdentical, WrappedValue, ɵisPromise, ɵisObservable, Pipe, ChangeDetectorRef, NgModule, Version, ErrorHandler } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, Injectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, TemplateRef, Host, Attribute, ɵisPromise, ɵisSubscribable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version } from '@angular/core';
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
- *
- * ngStyle and ngClass both accept various forms of input and behave differently than that
- * of how [style] and [class] behave in Angular.
- *
- * The differences are:
- *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
- *    while [style] and [class] bindings do not (they check for identity changes)
- *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
- *  - ngClass supports arrays of class values and [class] only accepts map and string values
- *  - ngClass allows for multiple className keys (space-separated) within an array or map
- *     (as the * key) while [class] only accepts a simple key/value map object
- *
- * Having Angular understand and adapt to all the different forms of behavior is complicated
- * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
- * into something that the core-level [style] and [class] bindings understand.
- *
- * This [StylingDiffer] class handles this conversion by creating a new input value each time
- * the inner representation of the binding value have changed.
- *
- * ## Why do we care about ngStyle/ngClass?
- * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
- * respect and understand the styling values emitted through ngStyle and ngClass (when they
- * are present and used in a template).
- *
- * Instead of having these directives manage styling on their own, they should be included
- * into the Angular styling algorithm that exists for [style] and [class] bindings.
- *
- * Here's why:
- *
- * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
- *   styles and classes would fall out of sync and be applied and updated at
- *   inconsistent times
- * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
- *   (they will write over them given the right combination of events)
- *
- *   ```
- *   <!-- if `w1` is updated then it will always override `w2`
- *        if `w2` is updated then it will always override `w1`
- *        if both are updated at the same time then `w1` wins -->
- *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
- *
- *   <!-- if `w1` is updated then it will always lose to `w2`
- *        if `w2` is updated then it will always override `w1`
- *        if both are updated at the same time then `w2` wins -->
- *   <div [style]="{width:w1}" [style.width]="w2">...</div>
- *   ```
- * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
- *   expensive data structures which were evaluated each time CD runs
- * @template T
- */
-class StylingDiffer {
-    /**
-     * @param {?} _name
-     * @param {?} _options
-     */
-    constructor(_name, _options) {
-        this._name = _name;
-        this._options = _options;
-        this.value = null;
-        this._lastSetValue = null;
-        this._lastSetValueType = 0 /* Null */;
-        this._lastSetValueIdentityChange = false;
-    }
-    /**
-     * Sets (updates) the styling value within the differ.
-     *
-     * Only when `hasValueChanged` is called then this new value will be evaluted
-     * and checked against the previous value.
-     *
-     * @param {?} value the new styling value provided from the ngClass/ngStyle binding
-     * @return {?}
-     */
-    setValue(value) {
-        if (Array.isArray(value)) {
-            this._lastSetValueType = 4 /* Array */;
-        }
-        else if (value instanceof Set) {
-            this._lastSetValueType = 8 /* Set */;
-        }
-        else if (value && typeof value === 'string') {
-            if (!(this._options & 4 /* AllowStringValue */)) {
-                throw new Error(this._name + ' string values are not allowed');
-            }
-            this._lastSetValueType = 1 /* String */;
-        }
-        else {
-            this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
-        }
-        this._lastSetValueIdentityChange = true;
-        this._lastSetValue = value || null;
-    }
-    /**
-     * Determines whether or not the value has changed.
-     *
-     * This function can be called right after `setValue()` is called, but it can also be
-     * called incase the existing value (if it's a collection) changes internally. If the
-     * value is indeed a collection it will do the necessary diffing work and produce a
-     * new object value as assign that to `value`.
-     *
-     * @return {?} whether or not the value has changed in some way.
-     */
-    hasValueChanged() {
-        /** @type {?} */
-        let valueHasChanged = this._lastSetValueIdentityChange;
-        if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
-            return false;
-        /** @type {?} */
-        let finalValue = null;
-        /** @type {?} */
-        const trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
-        /** @type {?} */
-        const parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
-        /** @type {?} */
-        const allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
-        switch (this._lastSetValueType) {
-            // case 1: [input]="string"
-            case 1 /* String */:
-                /** @type {?} */
-                const tokens = ((/** @type {?} */ (this._lastSetValue))).split(/\s+/g);
-                if (this._options & 16 /* ForceAsMap */) {
-                    finalValue = {};
-                    tokens.forEach((/**
-                     * @param {?} token
-                     * @param {?} i
-                     * @return {?}
-                     */
-                    (token, i) => ((/** @type {?} */ (finalValue)))[token] = true));
-                }
-                else {
-                    finalValue = tokens.reduce((/**
-                     * @param {?} str
-                     * @param {?} token
-                     * @param {?} i
-                     * @return {?}
-                     */
-                    (str, token, i) => str + (i ? ' ' : '') + token));
-                }
-                break;
-            // case 2: [input]="{key:value}"
-            case 2 /* Map */:
-                /** @type {?} */
-                const map = (/** @type {?} */ (this._lastSetValue));
-                /** @type {?} */
-                const keys = Object.keys(map);
-                if (!valueHasChanged) {
-                    if (this.value) {
-                        // we know that the classExp value exists and that it is
-                        // a map (otherwise an identity change would have occurred)
-                        valueHasChanged = mapHasChanged(keys, (/** @type {?} */ (this.value)), map);
-                    }
-                    else {
-                        valueHasChanged = true;
-                    }
-                }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
-                }
-                break;
-            // case 3a: [input]="[str1, str2, ...]"
-            // case 3b: [input]="Set"
-            case 4 /* Array */:
-            case 8 /* Set */:
-                /** @type {?} */
-                const values = Array.from((/** @type {?} */ (this._lastSetValue)));
-                if (!valueHasChanged) {
-                    /** @type {?} */
-                    const keys = Object.keys((/** @type {?} */ (this.value)));
-                    valueHasChanged = !arrayEqualsArray(keys, values);
-                }
-                if (valueHasChanged) {
-                    finalValue =
-                        bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
-                }
-                break;
-            // case 4: [input]="null|undefined"
-            default:
-                finalValue = null;
-                break;
-        }
-        if (valueHasChanged) {
-            ((/** @type {?} */ (this))).value = (/** @type {?} */ (finalValue));
-        }
-        return valueHasChanged;
-    }
-}
-if (false) {
-    /** @type {?} */
-    StylingDiffer.prototype.value;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValueType;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._lastSetValueIdentityChange;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._name;
-    /**
-     * @type {?}
-     * @private
-     */
-    StylingDiffer.prototype._options;
-}
-/** @enum {number} */
-const StylingDifferOptions = {
-    None: 0,
-    TrimProperties: 1,
-    AllowSubKeys: 2,
-    AllowStringValue: 4,
-    AllowUnits: 8,
-    ForceAsMap: 16,
-};
-/** @enum {number} */
-const StylingDifferValueTypes = {
-    Null: 0,
-    String: 1,
-    Map: 2,
-    Array: 4,
-    Set: 8,
-    Collection: 14,
-};
-/**
- * builds and returns a map based on the values input value
- *
- * If the `keys` param is provided then the `values` param is treated as a
- * string map. Otherwise `values` is treated as a string array.
- * @param {?} errorPrefix
- * @param {?} trim
- * @param {?} parseOutUnits
- * @param {?} allowSubKeys
- * @param {?} values
- * @param {?=} keys
- * @return {?}
- */
-function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
-    /** @type {?} */
-    const map = {};
-    if (keys) {
-        // case 1: map
-        for (let i = 0; i < keys.length; i++) {
-            /** @type {?} */
-            let key = keys[i];
-            key = trim ? key.trim() : key;
-            /** @type {?} */
-            const value = ((/** @type {?} */ (values)))[key];
-            setMapValues(map, key, value, parseOutUnits, allowSubKeys);
-        }
-    }
-    else {
-        // case 2: array
-        for (let i = 0; i < values.length; i++) {
-            /** @type {?} */
-            let value = ((/** @type {?} */ (values)))[i];
-            assertValidValue(errorPrefix, value);
-            value = trim ? value.trim() : value;
-            setMapValues(map, value, true, false, allowSubKeys);
-        }
-    }
-    return map;
-}
-/**
- * @param {?} errorPrefix
- * @param {?} value
- * @return {?}
- */
-function assertValidValue(errorPrefix, value) {
-    if (typeof value !== 'string') {
-        throw new Error(`${errorPrefix} can only toggle CSS classes expressed as strings, got ${value}`);
-    }
-}
-/**
- * @param {?} map
- * @param {?} key
- * @param {?} value
- * @param {?} parseOutUnits
- * @param {?} allowSubKeys
- * @return {?}
- */
-function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
-    if (allowSubKeys && key.indexOf(' ') > 0) {
-        /** @type {?} */
-        const innerKeys = key.split(/\s+/g);
-        for (let j = 0; j < innerKeys.length; j++) {
-            setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
-        }
-    }
-    else {
-        setIndividualMapValue(map, key, value, parseOutUnits);
-    }
-}
-/**
- * @param {?} map
- * @param {?} key
- * @param {?} value
- * @param {?} parseOutUnits
- * @return {?}
- */
-function setIndividualMapValue(map, key, value, parseOutUnits) {
-    if (parseOutUnits) {
-        /** @type {?} */
-        const values = normalizeStyleKeyAndValue(key, value);
-        value = values.value;
-        key = values.key;
-    }
-    map[key] = value;
-}
-/**
- * @param {?} key
- * @param {?} value
- * @return {?}
- */
-function normalizeStyleKeyAndValue(key, value) {
-    /** @type {?} */
-    const index = key.indexOf('.');
-    if (index > 0) {
-        /** @type {?} */
-        const unit = key.substr(index + 1);
-        key = key.substring(0, index);
-        if (value != null) { // we should not convert null values to string
-            value += unit;
-        }
-    }
-    return { key, value };
-}
-/**
- * @param {?} keys
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
-function mapHasChanged(keys, a, b) {
-    /** @type {?} */
-    const oldKeys = Object.keys(a);
-    /** @type {?} */
-    const newKeys = keys;
-    // the keys are different which means the map changed
-    if (!arrayEqualsArray(oldKeys, newKeys)) {
-        return true;
-    }
-    for (let i = 0; i < newKeys.length; i++) {
-        /** @type {?} */
-        const key = newKeys[i];
-        if (a[key] !== b[key]) {
-            return true;
-        }
-    }
-    return false;
-}
-/**
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
-function arrayEqualsArray(a, b) {
-    if (a && b) {
-        if (a.length !== b.length)
-            return false;
-        for (let i = 0; i < a.length; i++) {
-            if (b.indexOf(a[i]) === -1)
-                return false;
-        }
-        return true;
-    }
-    return false;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Used as a token for an injected service within the NgClass directive.
- *
- * NgClass behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[class]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- * @abstract
- */
-class NgClassImpl {
-}
-if (false) {
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgClassImpl.prototype.setClass = function (value) { };
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgClassImpl.prototype.setNgClass = function (value) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgClassImpl.prototype.applyChanges = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgClassImpl.prototype.getValue = function () { };
-}
-class NgClassR2Impl {
-    /**
-     * @param {?} _iterableDiffers
-     * @param {?} _keyValueDiffers
-     * @param {?} _ngEl
-     * @param {?} _renderer
-     */
-    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-        this._iterableDiffers = _iterableDiffers;
-        this._keyValueDiffers = _keyValueDiffers;
-        this._ngEl = _ngEl;
-        this._renderer = _renderer;
-        this._initialClasses = [];
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return null; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setClass(value) {
-        this._removeClasses(this._initialClasses);
-        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-        this._applyClasses(this._initialClasses);
-        this._applyClasses(this._rawClass);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgClass(value) {
-        this._removeClasses(this._rawClass);
-        this._applyClasses(this._initialClasses);
-        this._iterableDiffer = null;
-        this._keyValueDiffer = null;
-        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-        if (this._rawClass) {
-            if (ɵisListLikeIterable(this._rawClass)) {
-                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-            }
-            else {
-                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-            }
-        }
-    }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._iterableDiffer) {
-            /** @type {?} */
-            const iterableChanges = this._iterableDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (iterableChanges) {
-                this._applyIterableChanges(iterableChanges);
-            }
-        }
-        else if (this._keyValueDiffer) {
-            /** @type {?} */
-            const keyValueChanges = this._keyValueDiffer.diff((/** @type {?} */ (this._rawClass)));
-            if (keyValueChanges) {
-                this._applyKeyValueChanges(keyValueChanges);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyKeyValueChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.key, record.currentValue)));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (record.previousValue) {
-                this._toggleClass(record.key, false);
-            }
-        }));
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyIterableChanges(changes) {
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            if (typeof record.item === 'string') {
-                this._toggleClass(record.item, true);
-            }
-            else {
-                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
-            }
-        }));
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._toggleClass(record.item, false)));
-    }
-    /**
-     * Applies a collection of CSS classes to the DOM element.
-     *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _applyClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, true)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, !!rawClassVal[klass])));
-            }
-        }
-    }
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     * @private
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    _removeClasses(rawClassVal) {
-        if (rawClassVal) {
-            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                ((/** @type {?} */ (rawClassVal))).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                (klass) => this._toggleClass(klass, false)));
-            }
-            else {
-                Object.keys(rawClassVal).forEach((/**
-                 * @param {?} klass
-                 * @return {?}
-                 */
-                klass => this._toggleClass(klass, false)));
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} klass
-     * @param {?} enabled
-     * @return {?}
-     */
-    _toggleClass(klass, enabled) {
-        klass = klass.trim();
-        if (klass) {
-            klass.split(/\s+/g).forEach((/**
-             * @param {?} klass
-             * @return {?}
-             */
-            klass => {
-                if (enabled) {
-                    this._renderer.addClass(this._ngEl.nativeElement, klass);
-                }
-                else {
-                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
-                }
-            }));
-        }
-    }
-}
-NgClassR2Impl.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NgClassR2Impl.ctorParameters = () => [
-    { type: IterableDiffers },
-    { type: KeyValueDiffers },
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._iterableDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._keyValueDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._initialClasses;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._rawClass;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._iterableDiffers;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._keyValueDiffers;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._ngEl;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR2Impl.prototype._renderer;
-}
-class NgClassR3Impl {
-    constructor() {
-        this._value = null;
-        this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
-            2 /* AllowSubKeys */ |
-            4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer = null;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._value; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setClass(value) {
-        // early exit incase the binding gets emitted as an empty value which
-        // means there is no reason to instantiate and diff the values...
-        if (!value && !this._classStringDiffer)
-            return;
-        this._classStringDiffer = this._classStringDiffer ||
-            new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-        this._classStringDiffer.setValue(value);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgClass(value) {
-        this._ngClassDiffer.setValue(value);
-    }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        /** @type {?} */
-        const classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
-        /** @type {?} */
-        const ngClassChanged = this._ngClassDiffer.hasValueChanged();
-        if (classChanged || ngClassChanged) {
-            /** @type {?} */
-            let value = this._ngClassDiffer.value;
-            if (this._classStringDiffer) {
-                /** @type {?} */
-                let classValue = this._classStringDiffer.value;
-                if (classValue) {
-                    value = value ? Object.assign(Object.assign({}, classValue), value) : classValue;
-                }
-            }
-            this._value = value;
-        }
-    }
-}
-NgClassR3Impl.decorators = [
-    { type: Injectable }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._value;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._ngClassDiffer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgClassR3Impl.prototype._classStringDiffer;
-}
-// the implementation for both NgStyleR2Impl and NgStyleR3Impl are
-// not ivy_switch'd away, instead they are only hooked up into the
-// DI via NgStyle's directive's provider property.
-/** @type {?} */
-const NgClassImplProvider__PRE_R3__ = {
-    provide: NgClassImpl,
-    useClass: NgClassR2Impl
-};
-/** @type {?} */
-const NgClassImplProvider__POST_R3__ = {
-    provide: NgClassImpl,
-    useClass: NgClassR3Impl
-};
-/** @type {?} */
-const NgClassImplProvider = NgClassImplProvider__PRE_R3__;
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*
- * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
- *
- * If the VE is present (which is for older versions of Angular) then NgClass will inject
- * the legacy diffing algorithm as a service and delegate all styling changes to that.
- *
- * If the VE is not present then NgStyle will normalize (through the injected service) and
- * then write all styling changes to the `[style]` binding directly (through a host binding).
- * Then Angular will notice the host binding change and treat the changes as styling
- * changes and apply them via the core styling instructions that exist within Angular.
- */
-// used when the VE is present
-/** @type {?} */
-const ngClassDirectiveDef__PRE_R3__ = undefined;
-// used when the VE is not present (note the directive will
-// never be instantiated normally because it is apart of a
-// base class)
-const ɵ0 = /**
- * @return {?}
- */
-function () { }, ɵ1 = /**
- * @param {?} rf
- * @param {?} ctx
- * @param {?} elIndex
- * @return {?}
- */
-function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(1);
-    }
-    if (rf & 2 /* Update */) {
-        ɵɵclassMap(ctx.getValue());
-    }
-};
-/** @type {?} */
-const ngClassDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: (/** @type {?} */ ((ɵ0))),
-    selectors: (/** @type {?} */ (null)),
-    hostBindings: (ɵ1)
-});
-/** @type {?} */
-const ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
-/** @type {?} */
-const ngClassFactoryDef__PRE_R3__ = undefined;
-/** @type {?} */
-const ngClassFactoryDef__POST_R3__ = (/**
- * @return {?}
- */
-function () { });
-/** @type {?} */
-const ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
-/**
- * Serves as the base non-VE container for NgClass.
- *
- * While this is a base class that NgClass extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[class]` host binding (via the static
- * `ɵdir` property on the class).
- *
- * Note that the `ɵdir` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * \@publicApi
- */
-class NgClassBase {
-    /**
-     * @param {?} _delegate
-     */
-    constructor(_delegate) {
-        this._delegate = _delegate;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._delegate.getValue(); }
-}
-/** @nocollapse */ NgClassBase.ɵdir = ngClassDirectiveDef;
-/** @nocollapse */ NgClassBase.ɵfac = ngClassFactoryDef;
-if (false) {
-    /** @nocollapse @type {?} */
-    NgClassBase.ɵdir;
-    /** @nocollapse @type {?} */
-    NgClassBase.ɵfac;
-    /**
-     * @type {?}
-     * @protected
-     */
-    NgClassBase.prototype._delegate;
-}
-/**
- * \@ngModule CommonModule
- *
- * \@usageNotes
- * ```
- *     <some-element [ngClass]="'first second'">...</some-element>
- *
- *     <some-element [ngClass]="['first', 'second']">...</some-element>
- *
- *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
- *
- *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
- *
- *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
- * ```
- *
- * \@description
- *
- * Adds and removes CSS classes on an HTML element.
- *
- * The CSS classes are updated as follows, depending on the type of the expression evaluation:
- * - `string` - the CSS classes listed in the string (space delimited) are added,
- * - `Array` - the CSS classes declared as Array elements are added,
- * - `Object` - keys are CSS classes that get added when the expression given in the value
- *              evaluates to a truthy value, otherwise they are removed.
- *
- * \@publicApi
- */
-class NgClass extends NgClassBase {
-    /**
-     * @param {?} delegate
-     */
-    constructor(delegate) {
-        super(delegate);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set klass(value) { this._delegate.setClass(value); }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngClass(value) {
-        this._delegate.setNgClass(value);
-    }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() { this._delegate.applyChanges(); }
-}
-NgClass.decorators = [
-    { type: Directive, args: [{ selector: '[ngClass]', providers: [NgClassImplProvider] },] }
-];
-/** @nocollapse */
-NgClass.ctorParameters = () => [
-    { type: NgClassImpl }
-];
-NgClass.propDecorators = {
-    klass: [{ type: Input, args: ['class',] }],
-    ngClass: [{ type: Input, args: ['ngClass',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Used as a token for an injected service within the NgStyle directive.
- *
- * NgStyle behaves differenly whether or not VE is being used or not. If
- * present then the legacy ngClass diffing algorithm will be used as an
- * injected service. Otherwise the new diffing algorithm (which delegates
- * to the `[style]` binding) will be used. This toggle behavior is done so
- * via the ivy_switch mechanism.
- * @abstract
- */
-class NgStyleImpl {
-}
-if (false) {
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgStyleImpl.prototype.getValue = function () { };
-    /**
-     * @abstract
-     * @param {?} value
-     * @return {?}
-     */
-    NgStyleImpl.prototype.setNgStyle = function (value) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgStyleImpl.prototype.applyChanges = function () { };
-}
-class NgStyleR2Impl {
-    /**
-     * @param {?} _ngEl
-     * @param {?} _differs
-     * @param {?} _renderer
-     */
-    constructor(_ngEl, _differs, _renderer) {
-        this._ngEl = _ngEl;
-        this._differs = _differs;
-        this._renderer = _renderer;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return null; }
-    /**
-     * A map of style properties, specified as colon-separated
-     * key-value pairs.
-     * * The key is a style name, with an optional `.<unit>` suffix
-     *    (such as 'top.px', 'font-style.em').
-     * * The value is an expression to be evaluated.
-     * @param {?} values
-     * @return {?}
-     */
-    setNgStyle(values) {
-        this._ngStyle = values;
-        if (!this._differ && values) {
-            this._differ = this._differs.find(values).create();
-        }
-    }
-    /**
-     * Applies the new styles if needed.
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._differ) {
-            /** @type {?} */
-            const changes = this._differ.diff(this._ngStyle);
-            if (changes) {
-                this._applyChanges(changes);
-            }
-        }
-    }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _applyChanges(changes) {
-        changes.forEachRemovedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, null)));
-        changes.forEachAddedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-        changes.forEachChangedItem((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => this._setStyle(record.key, record.currentValue)));
-    }
-    /**
-     * @private
-     * @param {?} nameAndUnit
-     * @param {?} value
-     * @return {?}
-     */
-    _setStyle(nameAndUnit, value) {
-        const [name, unit] = nameAndUnit.split('.');
-        value = value != null && unit ? `${value}${unit}` : value;
-        if (value != null) {
-            this._renderer.setStyle(this._ngEl.nativeElement, name, (/** @type {?} */ (value)));
-        }
-        else {
-            this._renderer.removeStyle(this._ngEl.nativeElement, name);
-        }
-    }
-}
-NgStyleR2Impl.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NgStyleR2Impl.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyValueDiffers },
-    { type: Renderer2 }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._ngStyle;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._ngEl;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._differs;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR2Impl.prototype._renderer;
-}
-class NgStyleR3Impl {
-    constructor() {
-        this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
-        this._value = null;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._value; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    setNgStyle(value) { this._differ.setValue(value); }
-    /**
-     * @return {?}
-     */
-    applyChanges() {
-        if (this._differ.hasValueChanged()) {
-            this._value = this._differ.value;
-        }
-    }
-}
-NgStyleR3Impl.decorators = [
-    { type: Injectable }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR3Impl.prototype._differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgStyleR3Impl.prototype._value;
-}
-// the implementation for both NgClassR2Impl and NgClassR3Impl are
-// not ivy_switch'd away, instead they are only hooked up into the
-// DI via NgStyle's directive's provider property.
-/** @type {?} */
-const NgStyleImplProvider__PRE_R3__ = {
-    provide: NgStyleImpl,
-    useClass: NgStyleR2Impl
-};
-/** @type {?} */
-const NgStyleImplProvider__POST_R3__ = {
-    provide: NgStyleImpl,
-    useClass: NgStyleR3Impl
-};
-/** @type {?} */
-const NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/*
- * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
- *
- * If the VE is present (which is for older versions of Angular) then NgStyle will inject
- * the legacy diffing algorithm as a service and delegate all styling changes to that.
- *
- * If the VE is not present then NgStyle will normalize (through the injected service) and
- * then write all styling changes to the `[style]` binding directly (through a host binding).
- * Then Angular will notice the host binding change and treat the changes as styling
- * changes and apply them via the core styling instructions that exist within Angular.
- */
-// used when the VE is present
-/** @type {?} */
-const ngStyleDirectiveDef__PRE_R3__ = undefined;
-/** @type {?} */
-const ngStyleFactoryDef__PRE_R3__ = undefined;
-// used when the VE is not present (note the directive will
-// never be instantiated normally because it is apart of a
-// base class)
-const ɵ0$1 = /**
- * @return {?}
- */
-function () { }, ɵ1$1 = /**
- * @param {?} rf
- * @param {?} ctx
- * @param {?} elIndex
- * @return {?}
- */
-function (rf, ctx, elIndex) {
-    if (rf & 1 /* Create */) {
-        ɵɵallocHostVars(1);
-    }
-    if (rf & 2 /* Update */) {
-        ɵɵstyleMap(ctx.getValue());
-    }
-};
-/** @type {?} */
-const ngStyleDirectiveDef__POST_R3__ = ɵɵdefineDirective({
-    type: (/** @type {?} */ ((ɵ0$1))),
-    selectors: (/** @type {?} */ (null)),
-    hostBindings: (ɵ1$1)
-});
-/** @type {?} */
-const ngStyleFactoryDef__POST_R3__ = (/**
- * @return {?}
- */
-function () { });
-/** @type {?} */
-const ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
-/** @type {?} */
-const ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
-/**
- * Serves as the base non-VE container for NgStyle.
- *
- * While this is a base class that NgStyle extends from, the
- * class itself acts as a container for non-VE code to setup
- * a link to the `[style]` host binding (via the static
- * `ɵdir` property on the class).
- *
- * Note that the `ɵdir` property's code is switched
- * depending if VE is present or not (this allows for the
- * binding code to be set only for newer versions of Angular).
- *
- * \@publicApi
- */
-class NgStyleBase {
-    /**
-     * @param {?} _delegate
-     */
-    constructor(_delegate) {
-        this._delegate = _delegate;
-    }
-    /**
-     * @return {?}
-     */
-    getValue() { return this._delegate.getValue(); }
-}
-/** @nocollapse */ NgStyleBase.ɵdir = ngStyleDirectiveDef;
-/** @nocollapse */ NgStyleBase.ɵfac = ngStyleFactoryDef;
-if (false) {
-    /** @nocollapse @type {?} */
-    NgStyleBase.ɵdir;
-    /** @nocollapse @type {?} */
-    NgStyleBase.ɵfac;
-    /**
-     * @type {?}
-     * @protected
-     */
-    NgStyleBase.prototype._delegate;
-}
-/**
- * \@ngModule CommonModule
- *
- * \@usageNotes
- *
- * Set the font of the containing element to the result of an expression.
- *
- * ```
- * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
- * ```
- *
- * Set the width of the containing element to a pixel value returned by an expression.
- *
- * ```
- * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
- * ```
- *
- * Set a collection of style values using an expression that returns key-value pairs.
- *
- * ```
- * <some-element [ngStyle]="objExp">...</some-element>
- * ```
- *
- * \@description
- *
- * An attribute directive that updates styles for the containing HTML element.
- * Sets one or more style properties, specified as colon-separated key-value pairs.
- * The key is a style name, with an optional `.<unit>` suffix
- * (such as 'top.px', 'font-style.em').
- * The value is an expression to be evaluated.
- * The resulting non-null value, expressed in the given unit,
- * is assigned to the given style property.
- * If the result of evaluation is null, the corresponding style is removed.
- *
- * \@publicApi
- */
-class NgStyle extends NgStyleBase {
-    /**
-     * @param {?} delegate
-     */
-    constructor(delegate) {
-        super(delegate);
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set ngStyle(value) { this._delegate.setNgStyle(value); }
-    /**
-     * @return {?}
-     */
-    ngDoCheck() { this._delegate.applyChanges(); }
-}
-NgStyle.decorators = [
-    { type: Directive, args: [{ selector: '[ngStyle]', providers: [NgStyleImplProvider] },] }
-];
-/** @nocollapse */
-NgStyle.ctorParameters = () => [
-    { type: NgStyleImpl }
-];
-NgStyle.propDecorators = {
-    ngStyle: [{ type: Input, args: ['ngStyle',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/** @type {?} */
-let _DOM = (/** @type {?} */ (null));
-/**
- * @return {?}
- */
+let _DOM = null;
 function getDOM() {
     return _DOM;
 }
-/**
- * @param {?} adapter
- * @return {?}
- */
 function setDOM(adapter) {
     _DOM = adapter;
 }
-/**
- * @param {?} adapter
- * @return {?}
- */
 function setRootDomAdapter(adapter) {
     if (!_DOM) {
         _DOM = adapter;
@@ -1334,147 +29,18 @@ function setRootDomAdapter(adapter) {
 /**
  * Provides DOM operations in an environment-agnostic way.
  *
- * \@security Tread carefully! Interacting with the DOM directly is dangerous and
+ * @security Tread carefully! Interacting with the DOM directly is dangerous and
  * can introduce XSS risks.
- * @abstract
  */
 class DomAdapter {
 }
-if (false) {
-    /**
-     * @abstract
-     * @param {?} el
-     * @param {?} name
-     * @return {?}
-     */
-    DomAdapter.prototype.getProperty = function (el, name) { };
-    /**
-     * @abstract
-     * @param {?} el
-     * @param {?} evt
-     * @return {?}
-     */
-    DomAdapter.prototype.dispatchEvent = function (el, evt) { };
-    /**
-     * @abstract
-     * @param {?} error
-     * @return {?}
-     */
-    DomAdapter.prototype.log = function (error) { };
-    /**
-     * @abstract
-     * @param {?} error
-     * @return {?}
-     */
-    DomAdapter.prototype.logGroup = function (error) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.logGroupEnd = function () { };
-    /**
-     * @abstract
-     * @param {?} el
-     * @return {?}
-     */
-    DomAdapter.prototype.remove = function (el) { };
-    /**
-     * @abstract
-     * @param {?} tagName
-     * @param {?=} doc
-     * @return {?}
-     */
-    DomAdapter.prototype.createElement = function (tagName, doc) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.createHtmlDocument = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.getDefaultDocument = function () { };
-    /**
-     * @abstract
-     * @param {?} node
-     * @return {?}
-     */
-    DomAdapter.prototype.isElementNode = function (node) { };
-    /**
-     * @abstract
-     * @param {?} node
-     * @return {?}
-     */
-    DomAdapter.prototype.isShadowRoot = function (node) { };
-    /**
-     * @abstract
-     * @param {?} el
-     * @param {?} evt
-     * @param {?} listener
-     * @return {?}
-     */
-    DomAdapter.prototype.onAndCancel = function (el, evt, listener) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.supportsDOMEvents = function () { };
-    /**
-     * @abstract
-     * @param {?} doc
-     * @param {?} target
-     * @return {?}
-     */
-    DomAdapter.prototype.getGlobalEventTarget = function (doc, target) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.getHistory = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.getLocation = function () { };
-    /**
-     * This is the ambient Location definition, NOT Location from \@angular/common.
-     * @abstract
-     * @param {?} doc
-     * @return {?}
-     */
-    DomAdapter.prototype.getBaseHref = function (doc) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.resetBaseElement = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.getUserAgent = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.performanceNow = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    DomAdapter.prototype.supportsCookies = function () { };
-    /**
-     * @abstract
-     * @param {?} name
-     * @return {?}
-     */
-    DomAdapter.prototype.getCookie = function (name) { };
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
@@ -1482,40 +48,45 @@ if (false) {
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application in a Web Worker).
  *
- * \@publicApi
- * @type {?}
+ * @publicApi
  */
 const DOCUMENT = new InjectionToken('DocumentToken');
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * This class should not be used directly by an application developer. Instead, use
- * {\@link Location}.
+ * {@link Location}.
  *
- * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
- * agnostic.
+ * `PlatformLocation` encapsulates all calls to DOM APIs, which allows the Router to be
+ * platform-agnostic.
  * This means that we can have different implementation of `PlatformLocation` for the different
- * platforms that angular supports. For example, `\@angular/platform-browser` provides an
- * implementation specific to the browser environment, while `\@angular/platform-webworker` provides
- * one suitable for use with web workers.
+ * platforms that Angular supports. For example, `@angular/platform-browser` provides an
+ * implementation specific to the browser environment, while `@angular/platform-server` provides
+ * one suitable for use with server-side rendering.
  *
- * The `PlatformLocation` class is used directly by all implementations of {\@link LocationStrategy}
- * when they need to interact with the DOM apis like pushState, popState, etc...
+ * The `PlatformLocation` class is used directly by all implementations of {@link LocationStrategy}
+ * when they need to interact with the DOM APIs like pushState, popState, etc.
  *
- * {\@link LocationStrategy} in turn is used by the {\@link Location} service which is used directly
- * by the {\@link Router} in order to navigate between routes. Since all interactions between {\@link
+ * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
+ * by the {@link Router} in order to navigate between routes. Since all interactions between {@link
  * Router} /
- * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
- * class they are all platform independent.
+ * {@link Location} / {@link LocationStrategy} and DOM APIs flow through the `PlatformLocation`
+ * class, they are all platform-agnostic.
  *
- * \@publicApi
- * @abstract
+ * @publicApi
  */
 class PlatformLocation {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
+PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
 PlatformLocation.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'platform',
@@ -1523,205 +94,70 @@ PlatformLocation.decorators = [
                 useFactory: useBrowserPlatformLocation
             },] }
 ];
-/** @nocollapse */ PlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
-if (false) {
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.getBaseHrefFromDOM = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.getState = function () { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    PlatformLocation.prototype.onPopState = function (fn) { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    PlatformLocation.prototype.onHashChange = function (fn) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.href = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.protocol = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.hostname = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.port = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.pathname = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.search = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.hash = function () { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    PlatformLocation.prototype.replaceState = function (state, title, url) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
-    PlatformLocation.prototype.pushState = function (state, title, url) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.forward = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    PlatformLocation.prototype.back = function () { };
-}
-/**
- * @return {?}
- */
 function useBrowserPlatformLocation() {
     return ɵɵinject(BrowserPlatformLocation);
 }
 /**
- * \@description
+ * @description
  * Indicates when a location is initialized.
  *
- * \@publicApi
- * @type {?}
+ * @publicApi
  */
 const LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
 /**
- * \@description
- * A serializable version of the event from `onPopState` or `onHashChange`
- *
- * \@publicApi
- * @record
- */
-function LocationChangeEvent() { }
-if (false) {
-    /** @type {?} */
-    LocationChangeEvent.prototype.type;
-    /** @type {?} */
-    LocationChangeEvent.prototype.state;
-}
-/**
- * \@publicApi
- * @record
- */
-function LocationChangeListener() { }
-/**
  * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
  * This class should not be used directly by an application developer. Instead, use
- * {\@link Location}.
+ * {@link Location}.
  */
 class BrowserPlatformLocation extends PlatformLocation {
-    /**
-     * @param {?} _doc
-     */
     constructor(_doc) {
         super();
         this._doc = _doc;
         this._init();
     }
     // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
-    /**
-     * \@internal
-     * @return {?}
-     */
+    /** @internal */
     _init() {
-        ((/** @type {?} */ (this))).location = getDOM().getLocation();
-        this._history = getDOM().getHistory();
+        this.location = window.location;
+        this._history = window.history;
     }
-    /**
-     * @return {?}
-     */
-    getBaseHrefFromDOM() { return (/** @type {?} */ (getDOM().getBaseHref(this._doc))); }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
+    getBaseHrefFromDOM() {
+        return getDOM().getBaseHref(this._doc);
+    }
     onPopState(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+        const window = getDOM().getGlobalEventTarget(this._doc, 'window');
+        window.addEventListener('popstate', fn, false);
+        return () => window.removeEventListener('popstate', fn);
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     onHashChange(fn) {
-        getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+        const window = getDOM().getGlobalEventTarget(this._doc, 'window');
+        window.addEventListener('hashchange', fn, false);
+        return () => window.removeEventListener('hashchange', fn);
     }
-    /**
-     * @return {?}
-     */
-    get href() { return this.location.href; }
-    /**
-     * @return {?}
-     */
-    get protocol() { return this.location.protocol; }
-    /**
-     * @return {?}
-     */
-    get hostname() { return this.location.hostname; }
-    /**
-     * @return {?}
-     */
-    get port() { return this.location.port; }
-    /**
-     * @return {?}
-     */
-    get pathname() { return this.location.pathname; }
-    /**
-     * @return {?}
-     */
-    get search() { return this.location.search; }
-    /**
-     * @return {?}
-     */
-    get hash() { return this.location.hash; }
-    /**
-     * @param {?} newPath
-     * @return {?}
-     */
-    set pathname(newPath) { this.location.pathname = newPath; }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
+    get href() {
+        return this.location.href;
+    }
+    get protocol() {
+        return this.location.protocol;
+    }
+    get hostname() {
+        return this.location.hostname;
+    }
+    get port() {
+        return this.location.port;
+    }
+    get pathname() {
+        return this.location.pathname;
+    }
+    get search() {
+        return this.location.search;
+    }
+    get hash() {
+        return this.location.hash;
+    }
+    set pathname(newPath) {
+        this.location.pathname = newPath;
+    }
     pushState(state, title, url) {
         if (supportsState()) {
             this._history.pushState(state, title, url);
@@ -1730,12 +166,6 @@ class BrowserPlatformLocation extends PlatformLocation {
             this.location.hash = url;
         }
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @return {?}
-     */
     replaceState(state, title, url) {
         if (supportsState()) {
             this._history.replaceState(state, title, url);
@@ -1744,19 +174,20 @@ class BrowserPlatformLocation extends PlatformLocation {
             this.location.hash = url;
         }
     }
-    /**
-     * @return {?}
-     */
-    forward() { this._history.forward(); }
-    /**
-     * @return {?}
-     */
-    back() { this._history.back(); }
-    /**
-     * @return {?}
-     */
-    getState() { return this._history.state; }
+    forward() {
+        this._history.forward();
+    }
+    back() {
+        this._history.back();
+    }
+    historyGo(relativePosition = 0) {
+        this._history.go(relativePosition);
+    }
+    getState() {
+        return this._history.state;
+    }
 }
+BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
 BrowserPlatformLocation.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'platform',
@@ -1764,50 +195,27 @@ BrowserPlatformLocation.decorators = [
                 useFactory: createBrowserPlatformLocation,
             },] }
 ];
-/** @nocollapse */
 BrowserPlatformLocation.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
-/** @nocollapse */ BrowserPlatformLocation.ɵprov = ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
-if (false) {
-    /** @type {?} */
-    BrowserPlatformLocation.prototype.location;
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserPlatformLocation.prototype._history;
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserPlatformLocation.prototype._doc;
-}
-/**
- * @return {?}
- */
 function supportsState() {
     return !!window.history.pushState;
 }
-/**
- * @return {?}
- */
 function createBrowserPlatformLocation() {
     return new BrowserPlatformLocation(ɵɵinject(DOCUMENT));
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
@@ -1815,11 +223,11 @@ function createBrowserPlatformLocation() {
 /**
  * Joins two parts of a URL with a slash if needed.
  *
- * @param {?} start  URL string
- * @param {?} end    URL string
+ * @param start  URL string
+ * @param end    URL string
  *
  *
- * @return {?} The joined URL string.
+ * @returns The joined URL string.
  */
 function joinWithSlash(start, end) {
     if (start.length == 0) {
@@ -1828,7 +236,6 @@ function joinWithSlash(start, end) {
     if (end.length == 0) {
         return start;
     }
-    /** @type {?} */
     let slashes = 0;
     if (start.endsWith('/')) {
         slashes++;
@@ -1849,33 +256,33 @@ function joinWithSlash(start, end) {
  * Looks for the first occurrence of either `#`, `?`, or the end of the
  * line as `/` characters and removes the trailing slash if one exists.
  *
- * @param {?} url URL string.
+ * @param url URL string.
  *
- * @return {?} The URL string, modified if needed.
+ * @returns The URL string, modified if needed.
  */
 function stripTrailingSlash(url) {
-    /** @type {?} */
     const match = url.match(/#|\?|$/);
-    /** @type {?} */
     const pathEndIdx = match && match.index || url.length;
-    /** @type {?} */
     const droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
     return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
 }
 /**
  * Normalizes URL parameters by prepending with `?` if needed.
  *
- * @param {?} params String of URL parameters.
+ * @param  params String of URL parameters.
  *
- * @return {?} The normalized URL parameters string.
+ * @returns The normalized URL parameters string.
  */
 function normalizeQueryParams(params) {
     return params && params[0] !== '?' ? '?' + params : params;
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Enables the `Location` service to read route state from the browser's URL.
@@ -1892,77 +299,21 @@ function normalizeQueryParams(params) {
  *
  * See these two classes for more.
  *
- * \@publicApi
- * @abstract
+ * @publicApi
  */
 class LocationStrategy {
+    historyGo(relativePosition) {
+        throw new Error('Not implemented');
+    }
 }
+LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
 LocationStrategy.decorators = [
     { type: Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
 ];
-/** @nocollapse */ LocationStrategy.ɵprov = ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
-if (false) {
-    /**
-     * @abstract
-     * @param {?=} includeHash
-     * @return {?}
-     */
-    LocationStrategy.prototype.path = function (includeHash) { };
-    /**
-     * @abstract
-     * @param {?} internal
-     * @return {?}
-     */
-    LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
-    /**
-     * @abstract
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
-    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.forward = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.back = function () { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    LocationStrategy.prototype.onPopState = function (fn) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    LocationStrategy.prototype.getBaseHref = function () { };
-}
-/**
- * @param {?} platformLocation
- * @return {?}
- */
 function provideLocationStrategy(platformLocation) {
     // See #23917
-    /** @type {?} */
     const location = ɵɵinject(DOCUMENT).location;
-    return new PathLocationStrategy(ɵɵinject((/** @type {?} */ (PlatformLocation))), location && location.origin || '');
+    return new PathLocationStrategy(ɵɵinject(PlatformLocation), location && location.origin || '');
 }
 /**
  * A predefined [DI token](guide/glossary#di-token) for the base href
@@ -1970,60 +321,60 @@ function provideLocationStrategy(platformLocation) {
  * The base href is the URL prefix that should be preserved when generating
  * and recognizing URLs.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * The following example shows how to use this token to configure the root app injector
  * with a base href value, so that the DI framework can supply the dependency anywhere in the app.
  *
  * ```typescript
- * import {Component, NgModule} from '\@angular/core';
- * import {APP_BASE_HREF} from '\@angular/common';
+ * import {Component, NgModule} from '@angular/core';
+ * import {APP_BASE_HREF} from '@angular/common';
  *
- * \@NgModule({
+ * @NgModule({
  *   providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
  * })
  * class AppModule {}
  * ```
  *
- * \@publicApi
- * @type {?}
+ * @publicApi
  */
 const APP_BASE_HREF = new InjectionToken('appBaseHref');
 /**
- * \@description
- * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * @description
+ * A {@link LocationStrategy} used to configure the {@link Location} service to
  * represent its state in the
  * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
  * browser's URL.
  *
- * If you're using `PathLocationStrategy`, you must provide a {\@link APP_BASE_HREF}
- * or add a base element to the document. This URL prefix that will be preserved
- * when generating and recognizing URLs.
+ * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
+ * or add a `<base href>` element to the document.
  *
- * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+ * For instance, if you provide an `APP_BASE_HREF` of `'/my/app/'` and call
+ * `location.go('/foo')`, the browser's URL will become
+ * `example.com/my/app/foo`. To ensure all relative URIs resolve correctly,
+ * the `<base href>` and/or `APP_BASE_HREF` should end with a `/`.
+ *
+ * Similarly, if you add `<base href='/my/app/'/>` to the document and call
  * `location.go('/foo')`, the browser's URL will become
  * `example.com/my/app/foo`.
  *
- * Similarly, if you add `<base href='/my/app'/>` to the document and call
- * `location.go('/foo')`, the browser's URL will become
- * `example.com/my/app/foo`.
+ * Note that when using `PathLocationStrategy`, neither the query nor
+ * the fragment in the `<base href>` will be preserved, as outlined
+ * by the [RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2).
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Example
  *
- * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
+ * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * \@publicApi
+ * @publicApi
  */
 class PathLocationStrategy extends LocationStrategy {
-    /**
-     * @param {?} _platformLocation
-     * @param {?=} href
-     */
     constructor(_platformLocation, href) {
         super();
         this._platformLocation = _platformLocation;
+        this._removeListenerFns = [];
         if (href == null) {
             href = this._platformLocation.getBaseHrefFromDOM();
         }
@@ -2032,95 +383,62 @@ class PathLocationStrategy extends LocationStrategy {
         }
         this._baseHref = href;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
+    ngOnDestroy() {
+        while (this._removeListenerFns.length) {
+            this._removeListenerFns.pop()();
+        }
     }
-    /**
-     * @return {?}
-     */
-    getBaseHref() { return this._baseHref; }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
-    prepareExternalUrl(internal) { return joinWithSlash(this._baseHref, internal); }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
+    onPopState(fn) {
+        this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
+    }
+    getBaseHref() {
+        return this._baseHref;
+    }
+    prepareExternalUrl(internal) {
+        return joinWithSlash(this._baseHref, internal);
+    }
     path(includeHash = false) {
-        /** @type {?} */
         const pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
-        /** @type {?} */
         const hash = this._platformLocation.hash;
         return hash && includeHash ? `${pathname}${hash}` : pathname;
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
     pushState(state, title, url, queryParams) {
-        /** @type {?} */
         const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
         this._platformLocation.pushState(state, title, externalUrl);
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} url
-     * @param {?} queryParams
-     * @return {?}
-     */
     replaceState(state, title, url, queryParams) {
-        /** @type {?} */
         const externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
         this._platformLocation.replaceState(state, title, externalUrl);
     }
-    /**
-     * @return {?}
-     */
-    forward() { this._platformLocation.forward(); }
-    /**
-     * @return {?}
-     */
-    back() { this._platformLocation.back(); }
+    forward() {
+        this._platformLocation.forward();
+    }
+    back() {
+        this._platformLocation.back();
+    }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+    }
 }
 PathLocationStrategy.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
 PathLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation },
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    PathLocationStrategy.prototype._baseHref;
-    /**
-     * @type {?}
-     * @private
-     */
-    PathLocationStrategy.prototype._platformLocation;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@description
- * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * @description
+ * A {@link LocationStrategy} used to configure the {@link Location} service to
  * represent its state in the
  * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
  * of the browser's URL.
@@ -2128,149 +446,96 @@ if (false) {
  * For instance, if you call `location.go('/foo')`, the browser's URL will become
  * `example.com#/foo`.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Example
  *
- * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
+ * {@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- * \@publicApi
+ * @publicApi
  */
 class HashLocationStrategy extends LocationStrategy {
-    /**
-     * @param {?} _platformLocation
-     * @param {?=} _baseHref
-     */
     constructor(_platformLocation, _baseHref) {
         super();
         this._platformLocation = _platformLocation;
         this._baseHref = '';
+        this._removeListenerFns = [];
         if (_baseHref != null) {
             this._baseHref = _baseHref;
         }
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    onPopState(fn) {
-        this._platformLocation.onPopState(fn);
-        this._platformLocation.onHashChange(fn);
+    ngOnDestroy() {
+        while (this._removeListenerFns.length) {
+            this._removeListenerFns.pop()();
+        }
     }
-    /**
-     * @return {?}
-     */
-    getBaseHref() { return this._baseHref; }
-    /**
-     * @param {?=} includeHash
-     * @return {?}
-     */
+    onPopState(fn) {
+        this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
+    }
+    getBaseHref() {
+        return this._baseHref;
+    }
     path(includeHash = false) {
         // the hash value is always prefixed with a `#`
         // and if it is empty then it will stay empty
-        /** @type {?} */
         let path = this._platformLocation.hash;
         if (path == null)
             path = '#';
         return path.length > 0 ? path.substring(1) : path;
     }
-    /**
-     * @param {?} internal
-     * @return {?}
-     */
     prepareExternalUrl(internal) {
-        /** @type {?} */
         const url = joinWithSlash(this._baseHref, internal);
         return url.length > 0 ? ('#' + url) : url;
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} path
-     * @param {?} queryParams
-     * @return {?}
-     */
     pushState(state, title, path, queryParams) {
-        /** @type {?} */
         let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
         this._platformLocation.pushState(state, title, url);
     }
-    /**
-     * @param {?} state
-     * @param {?} title
-     * @param {?} path
-     * @param {?} queryParams
-     * @return {?}
-     */
     replaceState(state, title, path, queryParams) {
-        /** @type {?} */
         let url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
         this._platformLocation.replaceState(state, title, url);
     }
-    /**
-     * @return {?}
-     */
-    forward() { this._platformLocation.forward(); }
-    /**
-     * @return {?}
-     */
-    back() { this._platformLocation.back(); }
+    forward() {
+        this._platformLocation.forward();
+    }
+    back() {
+        this._platformLocation.back();
+    }
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+    }
 }
 HashLocationStrategy.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
 HashLocationStrategy.ctorParameters = () => [
     { type: PlatformLocation },
     { type: String, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    HashLocationStrategy.prototype._baseHref;
-    /**
-     * @type {?}
-     * @private
-     */
-    HashLocationStrategy.prototype._platformLocation;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@publicApi
- * @record
- */
-function PopStateEvent() { }
-if (false) {
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.pop;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.state;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.type;
-    /** @type {?|undefined} */
-    PopStateEvent.prototype.url;
-}
-/**
- * \@description
+ * @description
  *
  * A service that applications can use to interact with a browser's URL.
  *
  * Depending on the `LocationStrategy` used, `Location` persists
  * to the URL's path or the URL's hash segment.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * It's better to use the `Router#navigate` service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
@@ -2288,46 +553,33 @@ if (false) {
  * <code-example path='common/location/ts/path_location_component.ts'
  * region='LocationComponent'></code-example>
  *
- * \@publicApi
+ * @publicApi
  */
 class Location {
-    /**
-     * @param {?} platformStrategy
-     * @param {?} platformLocation
-     */
     constructor(platformStrategy, platformLocation) {
-        /**
-         * \@internal
-         */
+        /** @internal */
         this._subject = new EventEmitter();
-        /**
-         * \@internal
-         */
+        /** @internal */
         this._urlChangeListeners = [];
         this._platformStrategy = platformStrategy;
-        /** @type {?} */
         const browserBaseHref = this._platformStrategy.getBaseHref();
         this._platformLocation = platformLocation;
         this._baseHref = stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this._platformStrategy.onPopState((/**
-         * @param {?} ev
-         * @return {?}
-         */
-        (ev) => {
+        this._platformStrategy.onPopState((ev) => {
             this._subject.emit({
                 'url': this.path(true),
                 'pop': true,
                 'state': ev.state,
                 'type': ev.type,
             });
-        }));
+        });
     }
     /**
      * Normalizes the URL path for this location.
      *
-     * @param {?=} includeHash True to include an anchor fragment in the path.
+     * @param includeHash True to include an anchor fragment in the path.
      *
-     * @return {?} The normalized URL path.
+     * @returns The normalized URL path.
      */
     // TODO: vsavkin. Remove the boolean flag and always include hash once the deprecated router is
     // removed.
@@ -2336,16 +588,18 @@ class Location {
     }
     /**
      * Reports the current state of the location history.
-     * @return {?} The current value of the `history.state` object.
+     * @returns The current value of the `history.state` object.
      */
-    getState() { return this._platformLocation.getState(); }
+    getState() {
+        return this._platformLocation.getState();
+    }
     /**
      * Normalizes the given path and compares to the current normalized path.
      *
-     * @param {?} path The given URL path.
-     * @param {?=} query Query parameters.
+     * @param path The given URL path.
+     * @param query Query parameters.
      *
-     * @return {?} True if the given URL path is equal to the current normalized path, false
+     * @returns True if the given URL path is equal to the current normalized path, false
      * otherwise.
      */
     isCurrentPathEqualTo(path, query = '') {
@@ -2354,9 +608,9 @@ class Location {
     /**
      * Normalizes a URL path by stripping any trailing slashes.
      *
-     * @param {?} url String representing a URL.
+     * @param url String representing a URL.
      *
-     * @return {?} The normalized URL string.
+     * @returns The normalized URL string.
      */
     normalize(url) {
         return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
@@ -2367,9 +621,9 @@ class Location {
      * before normalizing. Adds a hash if `HashLocationStrategy` is
      * in use, or the `APP_BASE_HREF` if the `PathLocationStrategy` is in use.
      *
-     * @param {?} url String representing a URL.
+     * @param url String representing a URL.
      *
-     * @return {?} A normalized platform-specific URL.
+     * @returns  A normalized platform-specific URL.
      */
     prepareExternalUrl(url) {
         if (url && url[0] !== '/') {
@@ -2382,11 +636,10 @@ class Location {
      * Changes the browser's URL to a normalized version of a given URL, and pushes a
      * new item onto the platform's history.
      *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
+     * @param path  URL path to normalize.
+     * @param query Query parameters.
+     * @param state Location history state.
      *
-     * @return {?}
      */
     go(path, query = '', state = null) {
         this._platformStrategy.pushState(state, '', path, query);
@@ -2396,10 +649,9 @@ class Location {
      * Changes the browser's URL to a normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      *
-     * @param {?} path  URL path to normalize.
-     * @param {?=} query Query parameters.
-     * @param {?=} state Location history state.
-     * @return {?}
+     * @param path  URL path to normalize.
+     * @param query Query parameters.
+     * @param state Location history state.
      */
     replaceState(path, query = '', state = null) {
         this._platformStrategy.replaceState(state, '', path, query);
@@ -2407,49 +659,57 @@ class Location {
     }
     /**
      * Navigates forward in the platform's history.
-     * @return {?}
      */
-    forward() { this._platformStrategy.forward(); }
+    forward() {
+        this._platformStrategy.forward();
+    }
     /**
      * Navigates back in the platform's history.
-     * @return {?}
      */
-    back() { this._platformStrategy.back(); }
+    back() {
+        this._platformStrategy.back();
+    }
+    /**
+     * Navigate to a specific page from session history, identified by its relative position to the
+     * current page.
+     *
+     * @param relativePosition  Position of the target page in the history relative to the current
+     *     page.
+     * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+     * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+     * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+     * when `relativePosition` equals 0.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+     */
+    historyGo(relativePosition = 0) {
+        var _a, _b;
+        (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+    }
     /**
      * Registers a URL change listener. Use to catch updates performed by the Angular
      * framework that are not detectible through "popstate" or "hashchange" events.
      *
-     * @param {?} fn The change handler function, which take a URL and a location history state.
-     * @return {?}
+     * @param fn The change handler function, which take a URL and a location history state.
      */
     onUrlChange(fn) {
         this._urlChangeListeners.push(fn);
-        this.subscribe((/**
-         * @param {?} v
-         * @return {?}
-         */
-        v => { this._notifyUrlChangeListeners(v.url, v.state); }));
+        if (!this._urlChangeSubscription) {
+            this._urlChangeSubscription = this.subscribe(v => {
+                this._notifyUrlChangeListeners(v.url, v.state);
+            });
+        }
     }
-    /**
-     * \@internal
-     * @param {?=} url
-     * @param {?=} state
-     * @return {?}
-     */
+    /** @internal */
     _notifyUrlChangeListeners(url = '', state) {
-        this._urlChangeListeners.forEach((/**
-         * @param {?} fn
-         * @return {?}
-         */
-        fn => fn(url, state)));
+        this._urlChangeListeners.forEach(fn => fn(url, state));
     }
     /**
      * Subscribes to the platform's `popState` events.
      *
-     * @param {?} onNext
-     * @param {?=} onThrow
-     * @param {?=} onReturn
-     * @return {?} Subscribed events.
+     * @param value Event that is triggered when the state history changes.
+     * @param exception The exception to throw.
+     *
+     * @returns Subscribed events.
      */
     subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
@@ -2458,9 +718,9 @@ class Location {
 /**
  * Normalizes URL parameters by prepending with `?` if needed.
  *
- * @param params String of URL parameters.
+ * @param  params String of URL parameters.
  *
- * @return The normalized URL parameters string.
+ * @returns The normalized URL parameters string.
  */
 Location.normalizeQueryParams = normalizeQueryParams;
 /**
@@ -2470,7 +730,7 @@ Location.normalizeQueryParams = normalizeQueryParams;
  * @param end    URL string
  *
  *
- * @return The joined URL string.
+ * @returns The joined URL string.
  */
 Location.joinWithSlash = joinWithSlash;
 /**
@@ -2480,9 +740,10 @@ Location.joinWithSlash = joinWithSlash;
  *
  * @param url URL string.
  *
- * @return The URL string, modified if needed.
+ * @returns The URL string, modified if needed.
  */
 Location.stripTrailingSlash = stripTrailingSlash;
+Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
 Location.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -2490,119 +751,41 @@ Location.decorators = [
                 useFactory: createLocation,
             },] }
 ];
-/** @nocollapse */
 Location.ctorParameters = () => [
     { type: LocationStrategy },
     { type: PlatformLocation }
 ];
-/** @nocollapse */ Location.ɵprov = ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
-if (false) {
-    /**
-     * Normalizes URL parameters by prepending with `?` if needed.
-     *
-     * \@param params String of URL parameters.
-     *
-     * \@return The normalized URL parameters string.
-     * @type {?}
-     */
-    Location.normalizeQueryParams;
-    /**
-     * Joins two parts of a URL with a slash if needed.
-     *
-     * \@param start  URL string
-     * \@param end    URL string
-     *
-     *
-     * \@return The joined URL string.
-     * @type {?}
-     */
-    Location.joinWithSlash;
-    /**
-     * Removes a trailing slash from a URL string if needed.
-     * Looks for the first occurrence of either `#`, `?`, or the end of the
-     * line as `/` characters and removes the trailing slash if one exists.
-     *
-     * \@param url URL string.
-     *
-     * \@return The URL string, modified if needed.
-     * @type {?}
-     */
-    Location.stripTrailingSlash;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._subject;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._baseHref;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._platformStrategy;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._platformLocation;
-    /**
-     * \@internal
-     * @type {?}
-     */
-    Location.prototype._urlChangeListeners;
-}
-/**
- * @return {?}
- */
 function createLocation() {
-    return new Location(ɵɵinject((/** @type {?} */ (LocationStrategy))), ɵɵinject((/** @type {?} */ (PlatformLocation))));
+    return new Location(ɵɵinject(LocationStrategy), ɵɵinject(PlatformLocation));
 }
-/**
- * @param {?} baseHref
- * @param {?} url
- * @return {?}
- */
 function _stripBaseHref(baseHref, url) {
     return baseHref && url.startsWith(baseHref) ? url.substring(baseHref.length) : url;
 }
-/**
- * @param {?} url
- * @return {?}
- */
 function _stripIndexHtml(url) {
     return url.replace(/\/index.html$/, '');
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
+
 /**
- * \@internal
- * @type {?}
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
+/** @internal */
 const CURRENCIES_EN = {
     'ADP': [undefined, undefined, 0],
     'AFN': [undefined, undefined, 0],
     'ALL': [undefined, undefined, 0],
-    'AMD': [undefined, undefined, 0],
+    'AMD': [undefined, undefined, 2],
     'AOA': [undefined, 'Kz'],
     'ARS': [undefined, '$'],
     'AUD': ['A$', '$'],
@@ -2625,7 +808,7 @@ const CURRENCIES_EN = {
     'CLF': [undefined, undefined, 4],
     'CLP': [undefined, '$', 0],
     'CNY': ['CN¥', '¥'],
-    'COP': [undefined, '$', 0],
+    'COP': [undefined, '$', 2],
     'CRC': [undefined, '₡', 2],
     'CUC': [undefined, '$'],
     'CUP': [undefined, '$'],
@@ -2643,12 +826,12 @@ const CURRENCIES_EN = {
     'GIP': [undefined, '£'],
     'GNF': [undefined, 'FG', 0],
     'GTQ': [undefined, 'Q'],
-    'GYD': [undefined, '$', 0],
+    'GYD': [undefined, '$', 2],
     'HKD': ['HK$', '$'],
     'HNL': [undefined, 'L'],
     'HRK': [undefined, 'kn'],
     'HUF': [undefined, 'Ft', 2],
-    'IDR': [undefined, 'Rp', 0],
+    'IDR': [undefined, 'Rp', 2],
     'ILS': ['₪'],
     'INR': ['₹'],
     'IQD': [undefined, undefined, 0],
@@ -2676,9 +859,9 @@ const CURRENCIES_EN = {
     'MGA': [undefined, 'Ar', 0],
     'MGF': [undefined, undefined, 0],
     'MMK': [undefined, 'K', 0],
-    'MNT': [undefined, '₮', 0],
+    'MNT': [undefined, '₮', 2],
     'MRO': [undefined, undefined, 0],
-    'MUR': [undefined, 'Rs', 0],
+    'MUR': [undefined, 'Rs', 2],
     'MXN': ['MX$', '$'],
     'MYR': [undefined, 'RM'],
     'NAD': [undefined, '$'],
@@ -2689,7 +872,7 @@ const CURRENCIES_EN = {
     'NZD': ['NZ$', '$'],
     'OMR': [undefined, undefined, 3],
     'PHP': [undefined, '₱'],
-    'PKR': [undefined, 'Rs', 0],
+    'PKR': [undefined, 'Rs', 2],
     'PLN': [undefined, 'zł'],
     'PYG': [undefined, '₲', 0],
     'RON': [undefined, 'lei'],
@@ -2716,20 +899,22 @@ const CURRENCIES_EN = {
     'TRY': [undefined, '₺'],
     'TTD': [undefined, '$'],
     'TWD': ['NT$', '$', 2],
-    'TZS': [undefined, undefined, 0],
+    'TZS': [undefined, undefined, 2],
     'UAH': [undefined, '₴'],
     'UGX': [undefined, undefined, 0],
     'USD': ['$'],
     'UYI': [undefined, undefined, 0],
     'UYU': [undefined, '$'],
-    'UZS': [undefined, undefined, 0],
-    'VEF': [undefined, 'Bs'],
+    'UYW': [undefined, undefined, 4],
+    'UZS': [undefined, undefined, 2],
+    'VEF': [undefined, 'Bs', 2],
     'VND': ['₫', undefined, 0],
     'VUV': [undefined, undefined, 0],
     'XAF': ['FCFA', undefined, 0],
     'XCD': ['EC$', '$'],
     'XOF': ['CFA', undefined, 0],
     'XPF': ['CFPF', undefined, 0],
+    'XXX': ['¤'],
     'YER': [undefined, undefined, 0],
     'ZAR': [undefined, 'R'],
     'ZMK': [undefined, undefined, 0],
@@ -2738,198 +923,217 @@ const CURRENCIES_EN = {
 };
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/** @enum {number} */
-const NumberFormatStyle = {
-    Decimal: 0,
-    Percent: 1,
-    Currency: 2,
-    Scientific: 3,
-};
-NumberFormatStyle[NumberFormatStyle.Decimal] = 'Decimal';
-NumberFormatStyle[NumberFormatStyle.Percent] = 'Percent';
-NumberFormatStyle[NumberFormatStyle.Currency] = 'Currency';
-NumberFormatStyle[NumberFormatStyle.Scientific] = 'Scientific';
-/** @enum {number} */
-const Plural = {
-    Zero: 0,
-    One: 1,
-    Two: 2,
-    Few: 3,
-    Many: 4,
-    Other: 5,
-};
-Plural[Plural.Zero] = 'Zero';
-Plural[Plural.One] = 'One';
-Plural[Plural.Two] = 'Two';
-Plural[Plural.Few] = 'Few';
-Plural[Plural.Many] = 'Many';
-Plural[Plural.Other] = 'Other';
-/** @enum {number} */
-const FormStyle = {
-    Format: 0,
-    Standalone: 1,
-};
-FormStyle[FormStyle.Format] = 'Format';
-FormStyle[FormStyle.Standalone] = 'Standalone';
-/** @enum {number} */
-const TranslationWidth = {
+/**
+ * Format styles that can be used to represent numbers.
+ * @see `getLocaleNumberFormat()`.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+var NumberFormatStyle;
+(function (NumberFormatStyle) {
+    NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
+    NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
+    NumberFormatStyle[NumberFormatStyle["Currency"] = 2] = "Currency";
+    NumberFormatStyle[NumberFormatStyle["Scientific"] = 3] = "Scientific";
+})(NumberFormatStyle || (NumberFormatStyle = {}));
+/**
+ * Plurality cases used for translating plurals to different languages.
+ *
+ * @see `NgPlural`
+ * @see `NgPluralCase`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+var Plural;
+(function (Plural) {
+    Plural[Plural["Zero"] = 0] = "Zero";
+    Plural[Plural["One"] = 1] = "One";
+    Plural[Plural["Two"] = 2] = "Two";
+    Plural[Plural["Few"] = 3] = "Few";
+    Plural[Plural["Many"] = 4] = "Many";
+    Plural[Plural["Other"] = 5] = "Other";
+})(Plural || (Plural = {}));
+/**
+ * Context-dependant translation forms for strings.
+ * Typically the standalone version is for the nominative form of the word,
+ * and the format version is used for the genitive case.
+ * @see [CLDR website](http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+var FormStyle;
+(function (FormStyle) {
+    FormStyle[FormStyle["Format"] = 0] = "Format";
+    FormStyle[FormStyle["Standalone"] = 1] = "Standalone";
+})(FormStyle || (FormStyle = {}));
+/**
+ * String widths available for translations.
+ * The specific character widths are locale-specific.
+ * Examples are given for the word "Sunday" in English.
+ *
+ * @publicApi
+ */
+var TranslationWidth;
+(function (TranslationWidth) {
     /** 1 character for `en-US`. For example: 'S' */
-    Narrow: 0,
+    TranslationWidth[TranslationWidth["Narrow"] = 0] = "Narrow";
     /** 3 characters for `en-US`. For example: 'Sun' */
-    Abbreviated: 1,
+    TranslationWidth[TranslationWidth["Abbreviated"] = 1] = "Abbreviated";
     /** Full length for `en-US`. For example: "Sunday" */
-    Wide: 2,
+    TranslationWidth[TranslationWidth["Wide"] = 2] = "Wide";
     /** 2 characters for `en-US`, For example: "Su" */
-    Short: 3,
-};
-TranslationWidth[TranslationWidth.Narrow] = 'Narrow';
-TranslationWidth[TranslationWidth.Abbreviated] = 'Abbreviated';
-TranslationWidth[TranslationWidth.Wide] = 'Wide';
-TranslationWidth[TranslationWidth.Short] = 'Short';
-/** @enum {number} */
-const FormatWidth = {
+    TranslationWidth[TranslationWidth["Short"] = 3] = "Short";
+})(TranslationWidth || (TranslationWidth = {}));
+/**
+ * String widths available for date-time formats.
+ * The specific character widths are locale-specific.
+ * Examples are given for `en-US`.
+ *
+ * @see `getLocaleDateFormat()`
+ * @see `getLocaleTimeFormat()``
+ * @see `getLocaleDateTimeFormat()`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @publicApi
+ */
+var FormatWidth;
+(function (FormatWidth) {
     /**
      * For `en-US`, 'M/d/yy, h:mm a'`
      * (Example: `6/15/15, 9:03 AM`)
      */
-    Short: 0,
+    FormatWidth[FormatWidth["Short"] = 0] = "Short";
     /**
      * For `en-US`, `'MMM d, y, h:mm:ss a'`
      * (Example: `Jun 15, 2015, 9:03:01 AM`)
      */
-    Medium: 1,
+    FormatWidth[FormatWidth["Medium"] = 1] = "Medium";
     /**
      * For `en-US`, `'MMMM d, y, h:mm:ss a z'`
      * (Example: `June 15, 2015 at 9:03:01 AM GMT+1`)
      */
-    Long: 2,
+    FormatWidth[FormatWidth["Long"] = 2] = "Long";
     /**
      * For `en-US`, `'EEEE, MMMM d, y, h:mm:ss a zzzz'`
      * (Example: `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00`)
      */
-    Full: 3,
-};
-FormatWidth[FormatWidth.Short] = 'Short';
-FormatWidth[FormatWidth.Medium] = 'Medium';
-FormatWidth[FormatWidth.Long] = 'Long';
-FormatWidth[FormatWidth.Full] = 'Full';
-/** @enum {number} */
-const NumberSymbol = {
+    FormatWidth[FormatWidth["Full"] = 3] = "Full";
+})(FormatWidth || (FormatWidth = {}));
+/**
+ * Symbols that can be used to replace placeholders in number patterns.
+ * Examples are based on `en-US` values.
+ *
+ * @see `getLocaleNumberSymbol()`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
+ */
+var NumberSymbol;
+(function (NumberSymbol) {
     /**
      * Decimal separator.
      * For `en-US`, the dot character.
-     * Example : 2,345`.`67
+     * Example: 2,345`.`67
      */
-    Decimal: 0,
+    NumberSymbol[NumberSymbol["Decimal"] = 0] = "Decimal";
     /**
      * Grouping separator, typically for thousands.
      * For `en-US`, the comma character.
      * Example: 2`,`345.67
      */
-    Group: 1,
+    NumberSymbol[NumberSymbol["Group"] = 1] = "Group";
     /**
      * List-item separator.
      * Example: "one, two, and three"
      */
-    List: 2,
+    NumberSymbol[NumberSymbol["List"] = 2] = "List";
     /**
      * Sign for percentage (out of 100).
      * Example: 23.4%
      */
-    PercentSign: 3,
+    NumberSymbol[NumberSymbol["PercentSign"] = 3] = "PercentSign";
     /**
      * Sign for positive numbers.
      * Example: +23
      */
-    PlusSign: 4,
+    NumberSymbol[NumberSymbol["PlusSign"] = 4] = "PlusSign";
     /**
      * Sign for negative numbers.
      * Example: -23
      */
-    MinusSign: 5,
+    NumberSymbol[NumberSymbol["MinusSign"] = 5] = "MinusSign";
     /**
      * Computer notation for exponential value (n times a power of 10).
      * Example: 1.2E3
      */
-    Exponential: 6,
+    NumberSymbol[NumberSymbol["Exponential"] = 6] = "Exponential";
     /**
      * Human-readable format of exponential.
      * Example: 1.2x103
      */
-    SuperscriptingExponent: 7,
+    NumberSymbol[NumberSymbol["SuperscriptingExponent"] = 7] = "SuperscriptingExponent";
     /**
      * Sign for permille (out of 1000).
      * Example: 23.4‰
      */
-    PerMille: 8,
+    NumberSymbol[NumberSymbol["PerMille"] = 8] = "PerMille";
     /**
      * Infinity, can be used with plus and minus.
      * Example: ∞, +∞, -∞
      */
-    Infinity: 9,
+    NumberSymbol[NumberSymbol["Infinity"] = 9] = "Infinity";
     /**
      * Not a number.
      * Example: NaN
      */
-    NaN: 10,
+    NumberSymbol[NumberSymbol["NaN"] = 10] = "NaN";
     /**
      * Symbol used between time units.
      * Example: 10:52
      */
-    TimeSeparator: 11,
+    NumberSymbol[NumberSymbol["TimeSeparator"] = 11] = "TimeSeparator";
     /**
      * Decimal separator for currency values (fallback to `Decimal`).
      * Example: $2,345.67
      */
-    CurrencyDecimal: 12,
+    NumberSymbol[NumberSymbol["CurrencyDecimal"] = 12] = "CurrencyDecimal";
     /**
      * Group separator for currency values (fallback to `Group`).
      * Example: $2,345.67
      */
-    CurrencyGroup: 13,
-};
-NumberSymbol[NumberSymbol.Decimal] = 'Decimal';
-NumberSymbol[NumberSymbol.Group] = 'Group';
-NumberSymbol[NumberSymbol.List] = 'List';
-NumberSymbol[NumberSymbol.PercentSign] = 'PercentSign';
-NumberSymbol[NumberSymbol.PlusSign] = 'PlusSign';
-NumberSymbol[NumberSymbol.MinusSign] = 'MinusSign';
-NumberSymbol[NumberSymbol.Exponential] = 'Exponential';
-NumberSymbol[NumberSymbol.SuperscriptingExponent] = 'SuperscriptingExponent';
-NumberSymbol[NumberSymbol.PerMille] = 'PerMille';
-NumberSymbol[NumberSymbol.Infinity] = 'Infinity';
-NumberSymbol[NumberSymbol.NaN] = 'NaN';
-NumberSymbol[NumberSymbol.TimeSeparator] = 'TimeSeparator';
-NumberSymbol[NumberSymbol.CurrencyDecimal] = 'CurrencyDecimal';
-NumberSymbol[NumberSymbol.CurrencyGroup] = 'CurrencyGroup';
-/** @enum {number} */
-const WeekDay = {
-    Sunday: 0,
-    Monday: 1,
-    Tuesday: 2,
-    Wednesday: 3,
-    Thursday: 4,
-    Friday: 5,
-    Saturday: 6,
-};
-WeekDay[WeekDay.Sunday] = 'Sunday';
-WeekDay[WeekDay.Monday] = 'Monday';
-WeekDay[WeekDay.Tuesday] = 'Tuesday';
-WeekDay[WeekDay.Wednesday] = 'Wednesday';
-WeekDay[WeekDay.Thursday] = 'Thursday';
-WeekDay[WeekDay.Friday] = 'Friday';
-WeekDay[WeekDay.Saturday] = 'Saturday';
+    NumberSymbol[NumberSymbol["CurrencyGroup"] = 13] = "CurrencyGroup";
+})(NumberSymbol || (NumberSymbol = {}));
+/**
+ * The value for each day of the week, based on the `en-US` locale
+ *
+ * @publicApi
+ */
+var WeekDay;
+(function (WeekDay) {
+    WeekDay[WeekDay["Sunday"] = 0] = "Sunday";
+    WeekDay[WeekDay["Monday"] = 1] = "Monday";
+    WeekDay[WeekDay["Tuesday"] = 2] = "Tuesday";
+    WeekDay[WeekDay["Wednesday"] = 3] = "Wednesday";
+    WeekDay[WeekDay["Thursday"] = 4] = "Thursday";
+    WeekDay[WeekDay["Friday"] = 5] = "Friday";
+    WeekDay[WeekDay["Saturday"] = 6] = "Saturday";
+})(WeekDay || (WeekDay = {}));
 /**
  * Retrieves the locale ID from the currently loaded locale.
  * The loaded locale could be, for example, a global one rather than a regional one.
+ * @param locale A locale code, such as `fr-FR`.
+ * @returns The locale code. For example, `fr`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code, such as `fr-FR`.
- * @return {?} The locale code. For example, `fr`.
+ * @publicApi
  */
 function getLocaleId(locale) {
     return ɵfindLocaleData(locale)[ɵLocaleDataIndex.LocaleId];
@@ -2937,171 +1141,160 @@ function getLocaleId(locale) {
 /**
  * Retrieves day period strings for the given locale.
  *
+ * @param locale A locale code for the locale format rules to use.
+ * @param formStyle The required grammatical form.
+ * @param width The required character width.
+ * @returns An array of localized period strings. For example, `[AM, PM]` for `en-US`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} formStyle The required grammatical form.
- * @param {?} width The required character width.
- * @return {?} An array of localized period strings. For example, `[AM, PM]` for `en-US`.
+ * @publicApi
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
-    const amPmData = (/** @type {?} */ ([data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]]));
-    /** @type {?} */
+    const amPmData = [
+        data[ɵLocaleDataIndex.DayPeriodsFormat], data[ɵLocaleDataIndex.DayPeriodsStandalone]
+    ];
     const amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
 /**
  * Retrieves days of the week for the given locale, using the Gregorian calendar.
  *
+ * @param locale A locale code for the locale format rules to use.
+ * @param formStyle The required grammatical form.
+ * @param width The required character width.
+ * @returns An array of localized name strings.
+ * For example,`[Sunday, Monday, ... Saturday]` for `en-US`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} formStyle The required grammatical form.
- * @param {?} width The required character width.
- * @return {?} An array of localized name strings.
- * For example,`[Sunday, Monday, ... Saturday]` for `en-US`.
+ * @publicApi
  */
 function getLocaleDayNames(locale, formStyle, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
-    const daysData = (/** @type {?} */ ([data[ɵLocaleDataIndex.DaysFormat], data[ɵLocaleDataIndex.DaysStandalone]]));
-    /** @type {?} */
+    const daysData = [data[ɵLocaleDataIndex.DaysFormat], data[ɵLocaleDataIndex.DaysStandalone]];
     const days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
 /**
  * Retrieves months of the year for the given locale, using the Gregorian calendar.
  *
+ * @param locale A locale code for the locale format rules to use.
+ * @param formStyle The required grammatical form.
+ * @param width The required character width.
+ * @returns An array of localized name strings.
+ * For example,  `[January, February, ...]` for `en-US`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} formStyle The required grammatical form.
- * @param {?} width The required character width.
- * @return {?} An array of localized name strings.
- * For example,  `[January, February, ...]` for `en-US`.
+ * @publicApi
  */
 function getLocaleMonthNames(locale, formStyle, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
-    const monthsData = (/** @type {?} */ ([data[ɵLocaleDataIndex.MonthsFormat], data[ɵLocaleDataIndex.MonthsStandalone]]));
-    /** @type {?} */
+    const monthsData = [data[ɵLocaleDataIndex.MonthsFormat], data[ɵLocaleDataIndex.MonthsStandalone]];
     const months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
 /**
  * Retrieves Gregorian-calendar eras for the given locale.
+ * @param locale A locale code for the locale format rules to use.
+ * @param width The required character width.
+
+ * @returns An array of localized era strings.
+ * For example, `[AD, BC]` for `en-US`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} width The required character width.
- * @return {?} An array of localized era strings.
- * For example, `[AD, BC]` for `en-US`.
+ * @publicApi
  */
 function getLocaleEraNames(locale, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
-    const erasData = (/** @type {?} */ (data[ɵLocaleDataIndex.Eras]));
+    const erasData = data[ɵLocaleDataIndex.Eras];
     return getLastDefinedValue(erasData, width);
 }
 /**
  * Retrieves the first day of the week for the given locale.
  *
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} A day index number, using the 0-based week-day index for `en-US`
+ * @param locale A locale code for the locale format rules to use.
+ * @returns A day index number, using the 0-based week-day index for `en-US`
  * (Sunday = 0, Monday = 1, ...).
  * For example, for `fr-FR`, returns 1 to indicate that the first day is Monday.
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
  */
 function getLocaleFirstDayOfWeek(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.FirstDayOfWeek];
 }
 /**
  * Range of week days that are considered the week-end for the given locale.
  *
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The range of day values, `[startDay, endDay]`.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} The range of day values, `[startDay, endDay]`.
+ * @publicApi
  */
 function getLocaleWeekEndRange(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.WeekendRange];
 }
 /**
  * Retrieves a localized date-value formating string.
  *
- * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param locale A locale code for the locale format rules to use.
+ * @param width The format type.
+ * @returns The localized formating string.
+ * @see `FormatWidth`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} width The format type.
- * @return {?} The localized formating string.
+ * @publicApi
  */
 function getLocaleDateFormat(locale, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return getLastDefinedValue(data[ɵLocaleDataIndex.DateFormat], width);
 }
 /**
  * Retrieves a localized time-value formatting string.
  *
- * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} width The format type.
- * @return {?} The localized formatting string.
+ * @param locale A locale code for the locale format rules to use.
+ * @param width The format type.
+ * @returns The localized formatting string.
+ * @see `FormatWidth`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+
+ * @publicApi
  */
 function getLocaleTimeFormat(locale, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return getLastDefinedValue(data[ɵLocaleDataIndex.TimeFormat], width);
 }
 /**
  * Retrieves a localized date-time formatting string.
  *
- * @see `FormatWidth` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param locale A locale code for the locale format rules to use.
+ * @param width The format type.
+ * @returns The localized formatting string.
+ * @see `FormatWidth`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} width The format type.
- * @return {?} The localized formatting string.
+ * @publicApi
  */
 function getLocaleDateTimeFormat(locale, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
-    const dateTimeFormatData = (/** @type {?} */ (data[ɵLocaleDataIndex.DateTimeFormat]));
+    const dateTimeFormatData = data[ɵLocaleDataIndex.DateTimeFormat];
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
  * Retrieves a localized number symbol that can be used to replace placeholders in number formats.
- * @see `NumberSymbol` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param locale The locale code.
+ * @param symbol The symbol to localize.
+ * @returns The character for the localized symbol.
+ * @see `NumberSymbol`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale The locale code.
- * @param {?} symbol The symbol to localize.
- * @return {?} The character for the localized symbol.
+ * @publicApi
  */
 function getLocaleNumberSymbol(locale, symbol) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
-    /** @type {?} */
     const res = data[ɵLocaleDataIndex.NumberSymbols][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
@@ -3139,15 +1332,16 @@ function getLocaleNumberSymbol(locale, symbol) {
  * | E | Marks a scientific format. The E symbol may change position, but must be retained. |
  * | ' | Special characters used as literal characters are quoted with ASCII single quotes. |
  *
- * @see `NumberFormatStyle` / [CLDR website](http://cldr.unicode.org/translation/number-patterns) / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param locale A locale code for the locale format rules to use.
+ * @param type The type of numeric value to be formatted (such as `Decimal` or `Currency`.)
+ * @returns The localized format string.
+ * @see `NumberFormatStyle`
+ * @see [CLDR website](http://cldr.unicode.org/translation/number-patterns)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} type The type of numeric value to be formatted (such as `Decimal` or `Currency`.)
- * @return {?} The localized format string.
+ * @publicApi
  */
 function getLocaleNumberFormat(locale, type) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.NumberFormats][type];
 }
@@ -3155,57 +1349,63 @@ function getLocaleNumberFormat(locale, type) {
  * Retrieves the symbol used to represent the currency for the main country
  * corresponding to a given locale. For example, '$' for `en-US`.
  *
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The localized symbol character,
+ * or `null` if the main country cannot be determined.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} The localized symbol character,
- * or `null` if the main country cannot be determined.
+ * @publicApi
  */
 function getLocaleCurrencySymbol(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.CurrencySymbol] || null;
 }
 /**
  * Retrieves the name of the currency for the main country corresponding
  * to a given locale. For example, 'US Dollar' for `en-US`.
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The currency name,
+ * or `null` if the main country cannot be determined.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} The currency name,
- * or `null` if the main country cannot be determined.
+ * @publicApi
  */
 function getLocaleCurrencyName(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.CurrencyName] || null;
 }
 /**
+ * Retrieves the default currency code for the given locale.
+ *
+ * The default is defined as the first currency which is still in use.
+ *
+ * @param locale The code of the locale whose currency code we want.
+ * @returns The code of the default currency for the given locale.
+ *
+ * @publicApi
+ */
+function getLocaleCurrencyCode(locale) {
+    return ɵgetLocaleCurrencyCode(locale);
+}
+/**
  * Retrieves the currency values for a given locale.
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The currency values.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} The currency values.
  */
 function getLocaleCurrencies(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     return data[ɵLocaleDataIndex.Currencies];
 }
 /**
- * \@alias core/ɵgetLocalePluralCase
- * \@publicApi
- * @type {?}
+ * @alias core/ɵgetLocalePluralCase
+ * @publicApi
  */
 const getLocalePluralCase = ɵgetLocalePluralCase;
-/**
- * @param {?} data
- * @return {?}
- */
 function checkFullData(data) {
     if (!data[ɵLocaleDataIndex.ExtraData]) {
-        throw new Error(`Missing extra locale data for the locale "${data[ɵLocaleDataIndex.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
+        throw new Error(`Missing extra locale data for the locale "${data[ɵLocaleDataIndex
+            .LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`);
     }
 }
 /**
@@ -3221,30 +1421,25 @@ function checkFullData(data) {
  * This functionality is only available when you have loaded the full locale data.
  * See the ["I18n guide"](guide/i18n#i18n-pipes).
  *
- * @see `getLocaleExtraDayPeriods()` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @return {?} The rules for the locale, a single time value or array of *from-time, to-time*,
+ * @param locale A locale code for the locale format rules to use.
+ * @returns The rules for the locale, a single time value or array of *from-time, to-time*,
  * or null if no periods are available.
  *
+ * @see `getLocaleExtraDayPeriods()`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
  */
 function getLocaleExtraDayPeriodRules(locale) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     checkFullData(data);
-    /** @type {?} */
     const rules = data[ɵLocaleDataIndex.ExtraData][2 /* ExtraDayPeriodsRules */] || [];
-    return rules.map((/**
-     * @param {?} rule
-     * @return {?}
-     */
-    (rule) => {
+    return rules.map((rule) => {
         if (typeof rule === 'string') {
             return extractTime(rule);
         }
         return [extractTime(rule[0]), extractTime(rule[1])];
-    }));
+    });
 }
 /**
  * Retrieves locale-specific day periods, which indicate roughly how a day is broken up
@@ -3254,26 +1449,35 @@ function getLocaleExtraDayPeriodRules(locale) {
  * This functionality is only available when you have loaded the full locale data.
  * See the ["I18n guide"](guide/i18n#i18n-pipes).
  *
- * @see `getLocaleExtraDayPeriodRules()` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @param locale A locale code for the locale format rules to use.
+ * @param formStyle The required grammatical form.
+ * @param width The required character width.
+ * @returns The translated day-period strings.
+ * @see `getLocaleExtraDayPeriodRules()`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} formStyle The required grammatical form.
- * @param {?} width The required character width.
- * @return {?} The translated day-period strings.
+ * @publicApi
  */
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
-    /** @type {?} */
     const data = ɵfindLocaleData(locale);
     checkFullData(data);
-    /** @type {?} */
-    const dayPeriodsData = (/** @type {?} */ ([
+    const dayPeriodsData = [
         data[ɵLocaleDataIndex.ExtraData][0 /* ExtraDayPeriodFormats */],
         data[ɵLocaleDataIndex.ExtraData][1 /* ExtraDayPeriodStandalone */]
-    ]));
-    /** @type {?} */
+    ];
     const dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
+}
+/**
+ * Retrieves the writing direction of a specified locale
+ * @param locale A locale code for the locale format rules to use.
+ * @publicApi
+ * @returns 'rtl' or 'ltr'
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ */
+function getLocaleDirection(locale) {
+    const data = ɵfindLocaleData(locale);
+    return data[ɵLocaleDataIndex.Directionality];
 }
 /**
  * Retrieves the first value that is defined in an array, going backwards from an index position.
@@ -3281,13 +1485,12 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
  * To avoid repeating the same data (as when the "format" and "standalone" forms are the same)
  * add the first value to the locale data arrays, and add other values only if they are different.
  *
+ * @param data The data array to retrieve from.
+ * @param index A 0-based index into the array to start from.
+ * @returns The value immediately before the given index position.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @template T
- * @param {?} data The data array to retrieve from.
- * @param {?} index A 0-based index into the array to start from.
- * @return {?} The value immediately before the given index position.
+ * @publicApi
  */
 function getLastDefinedValue(data, index) {
     for (let i = index; i > -1; i--) {
@@ -3299,8 +1502,6 @@ function getLastDefinedValue(data, index) {
 }
 /**
  * Extracts the hours and minutes from a string like "15:45"
- * @param {?} time
- * @return {?}
  */
 function extractTime(time) {
     const [h, m] = time.split(':');
@@ -3312,19 +1513,17 @@ function extractTime(time) {
  * For example, for the default `en-US` locale, the code `USD` can
  * be represented by the narrow symbol `$` or the wide symbol `US$`.
  *
+ * @param code The currency code.
+ * @param format The format, `wide` or `narrow`.
+ * @param locale A locale code for the locale format rules to use.
+ *
+ * @returns The symbol, or the currency code if no symbol is available.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} code The currency code.
- * @param {?} format The format, `wide` or `narrow`.
- * @param {?=} locale A locale code for the locale format rules to use.
- *
- * @return {?} The symbol, or the currency code if no symbol is available.0
+ * @publicApi
  */
 function getCurrencySymbol(code, format, locale = 'en') {
-    /** @type {?} */
     const currency = getLocaleCurrencies(locale)[code] || CURRENCIES_EN[code] || [];
-    /** @type {?} */
     const symbolNarrow = currency[1 /* SymbolNarrow */];
     if (format === 'narrow' && typeof symbolNarrow === 'string') {
         return symbolNarrow;
@@ -3332,22 +1531,19 @@ function getCurrencySymbol(code, format, locale = 'en') {
     return currency[0 /* Symbol */] || code;
 }
 // Most currencies have cents, that's why the default is 2
-/** @type {?} */
 const DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
 /**
  * Reports the number of decimal digits for a given currency.
  * The value depends upon the presence of cents in that particular currency.
  *
+ * @param code The currency code.
+ * @returns The number of decimal digits, typically 0 or 2.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} code The currency code.
- * @return {?} The number of decimal digits, typically 0 or 2.
+ * @publicApi
  */
 function getNumberOfCurrencyDigits(code) {
-    /** @type {?} */
     let digits;
-    /** @type {?} */
     const currency = CURRENCIES_EN[code];
     if (currency) {
         digits = currency[2 /* NbOfDigits */];
@@ -3356,92 +1552,72 @@ function getNumberOfCurrencyDigits(code) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/** @type {?} */
 const ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 //    1        2       3         4          5          6          7          8  9     10      11
-/** @type {?} */
 const NAMED_FORMATS = {};
-/** @type {?} */
-const DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
-/** @enum {number} */
-const ZoneWidth = {
-    Short: 0,
-    ShortGMT: 1,
-    Long: 2,
-    Extended: 3,
-};
-ZoneWidth[ZoneWidth.Short] = 'Short';
-ZoneWidth[ZoneWidth.ShortGMT] = 'ShortGMT';
-ZoneWidth[ZoneWidth.Long] = 'Long';
-ZoneWidth[ZoneWidth.Extended] = 'Extended';
-/** @enum {number} */
-const DateType = {
-    FullYear: 0,
-    Month: 1,
-    Date: 2,
-    Hours: 3,
-    Minutes: 4,
-    Seconds: 5,
-    FractionalSeconds: 6,
-    Day: 7,
-};
-DateType[DateType.FullYear] = 'FullYear';
-DateType[DateType.Month] = 'Month';
-DateType[DateType.Date] = 'Date';
-DateType[DateType.Hours] = 'Hours';
-DateType[DateType.Minutes] = 'Minutes';
-DateType[DateType.Seconds] = 'Seconds';
-DateType[DateType.FractionalSeconds] = 'FractionalSeconds';
-DateType[DateType.Day] = 'Day';
-/** @enum {number} */
-const TranslationType = {
-    DayPeriods: 0,
-    Days: 1,
-    Months: 2,
-    Eras: 3,
-};
-TranslationType[TranslationType.DayPeriods] = 'DayPeriods';
-TranslationType[TranslationType.Days] = 'Days';
-TranslationType[TranslationType.Months] = 'Months';
-TranslationType[TranslationType.Eras] = 'Eras';
+const DATE_FORMATS_SPLIT = /((?:[^BEGHLMOSWYZabcdhmswyz']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|c{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+var ZoneWidth;
+(function (ZoneWidth) {
+    ZoneWidth[ZoneWidth["Short"] = 0] = "Short";
+    ZoneWidth[ZoneWidth["ShortGMT"] = 1] = "ShortGMT";
+    ZoneWidth[ZoneWidth["Long"] = 2] = "Long";
+    ZoneWidth[ZoneWidth["Extended"] = 3] = "Extended";
+})(ZoneWidth || (ZoneWidth = {}));
+var DateType;
+(function (DateType) {
+    DateType[DateType["FullYear"] = 0] = "FullYear";
+    DateType[DateType["Month"] = 1] = "Month";
+    DateType[DateType["Date"] = 2] = "Date";
+    DateType[DateType["Hours"] = 3] = "Hours";
+    DateType[DateType["Minutes"] = 4] = "Minutes";
+    DateType[DateType["Seconds"] = 5] = "Seconds";
+    DateType[DateType["FractionalSeconds"] = 6] = "FractionalSeconds";
+    DateType[DateType["Day"] = 7] = "Day";
+})(DateType || (DateType = {}));
+var TranslationType;
+(function (TranslationType) {
+    TranslationType[TranslationType["DayPeriods"] = 0] = "DayPeriods";
+    TranslationType[TranslationType["Days"] = 1] = "Days";
+    TranslationType[TranslationType["Months"] = 2] = "Months";
+    TranslationType[TranslationType["Eras"] = 3] = "Eras";
+})(TranslationType || (TranslationType = {}));
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Formats a date according to locale rules.
  *
- * @see `DatePipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- *
- * \@publicApi
- * @param {?} value The date to format, as a Date, or a number (milliseconds since UTC epoch)
+ * @param value The date to format, as a Date, or a number (milliseconds since UTC epoch)
  * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
- * @param {?} format The date-time components to include. See `DatePipe` for details.
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?=} timezone The time zone. A time zone offset from GMT (such as `'+0430'`),
+ * @param format The date-time components to include. See `DatePipe` for details.
+ * @param locale A locale code for the locale format rules to use.
+ * @param timezone The time zone. A time zone offset from GMT (such as `'+0430'`),
  * or a standard UTC/GMT or continental US time zone abbreviation.
  * If not specified, uses host system settings.
  *
- * @return {?} The formatted date string.
+ * @returns The formatted date string.
  *
+ * @see `DatePipe`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
  */
 function formatDate(value, format, locale, timezone) {
-    /** @type {?} */
     let date = toDate(value);
-    /** @type {?} */
     const namedFormat = getNamedFormat(locale, format);
     format = namedFormat || format;
-    /** @type {?} */
     let parts = [];
-    /** @type {?} */
     let match;
     while (format) {
         match = DATE_FORMATS_SPLIT.exec(format);
         if (match) {
             parts = parts.concat(match.slice(1));
-            /** @type {?} */
             const part = parts.pop();
             if (!part) {
                 break;
@@ -3453,40 +1629,54 @@ function formatDate(value, format, locale, timezone) {
             break;
         }
     }
-    /** @type {?} */
     let dateTimezoneOffset = date.getTimezoneOffset();
     if (timezone) {
         dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
         date = convertTimezoneToLocal(date, timezone, true);
     }
-    /** @type {?} */
     let text = '';
-    parts.forEach((/**
-     * @param {?} value
-     * @return {?}
-     */
-    value => {
-        /** @type {?} */
+    parts.forEach(value => {
         const dateFormatter = getDateFormatter(value);
         text += dateFormatter ?
             dateFormatter(date, locale, dateTimezoneOffset) :
             value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-    }));
+    });
     return text;
 }
 /**
- * @param {?} locale
- * @param {?} format
- * @return {?}
+ * Create a new Date object with the given date value, and the time set to midnight.
+ *
+ * We cannot use `new Date(year, month, date)` because it maps years between 0 and 99 to 1900-1999.
+ * See: https://github.com/angular/angular/issues/40377
+ *
+ * Note that this function returns a Date object whose time is midnight in the current locale's
+ * timezone. In the future we might want to change this to be midnight in UTC, but this would be a
+ * considerable breaking change.
  */
+function createDate(year, month, date) {
+    // The `newDate` is set to midnight (UTC) on January 1st 1970.
+    // - In PST this will be December 31st 1969 at 4pm.
+    // - In GMT this will be January 1st 1970 at 1am.
+    // Note that they even have different years, dates and months!
+    const newDate = new Date(0);
+    // `setFullYear()` allows years like 0001 to be set correctly. This function does not
+    // change the internal time of the date.
+    // Consider calling `setFullYear(2019, 8, 20)` (September 20, 2019).
+    // - In PST this will now be September 20, 2019 at 4pm
+    // - In GMT this will now be September 20, 2019 at 1am
+    newDate.setFullYear(year, month, date);
+    // We want the final date to be at local midnight, so we reset the time.
+    // - In PST this will now be September 20, 2019 at 12am
+    // - In GMT this will now be September 20, 2019 at 12am
+    newDate.setHours(0, 0, 0);
+    return newDate;
+}
 function getNamedFormat(locale, format) {
-    /** @type {?} */
     const localeId = getLocaleId(locale);
     NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
     if (NAMED_FORMATS[localeId][format]) {
         return NAMED_FORMATS[localeId][format];
     }
-    /** @type {?} */
     let formatValue = '';
     switch (format) {
         case 'shortDate':
@@ -3514,31 +1704,23 @@ function getNamedFormat(locale, format) {
             formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
             break;
         case 'short':
-            /** @type {?} */
             const shortTime = getNamedFormat(locale, 'shortTime');
-            /** @type {?} */
             const shortDate = getNamedFormat(locale, 'shortDate');
             formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
             break;
         case 'medium':
-            /** @type {?} */
             const mediumTime = getNamedFormat(locale, 'mediumTime');
-            /** @type {?} */
             const mediumDate = getNamedFormat(locale, 'mediumDate');
             formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
             break;
         case 'long':
-            /** @type {?} */
             const longTime = getNamedFormat(locale, 'longTime');
-            /** @type {?} */
             const longDate = getNamedFormat(locale, 'longDate');
             formatValue =
                 formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
             break;
         case 'full':
-            /** @type {?} */
             const fullTime = getNamedFormat(locale, 'fullTime');
-            /** @type {?} */
             const fullDate = getNamedFormat(locale, 'fullDate');
             formatValue =
                 formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
@@ -3549,34 +1731,15 @@ function getNamedFormat(locale, format) {
     }
     return formatValue;
 }
-/**
- * @param {?} str
- * @param {?} opt_values
- * @return {?}
- */
 function formatDateTime(str, opt_values) {
     if (opt_values) {
-        str = str.replace(/\{([^}]+)}/g, (/**
-         * @param {?} match
-         * @param {?} key
-         * @return {?}
-         */
-        function (match, key) {
+        str = str.replace(/\{([^}]+)}/g, function (match, key) {
             return (opt_values != null && key in opt_values) ? opt_values[key] : match;
-        }));
+        });
     }
     return str;
 }
-/**
- * @param {?} num
- * @param {?} digits
- * @param {?=} minusSign
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
- */
 function padNumber(num, digits, minusSign = '-', trim, negWrap) {
-    /** @type {?} */
     let neg = '';
     if (num < 0 || (negWrap && num <= 0)) {
         if (negWrap) {
@@ -3587,7 +1750,6 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
             neg = minusSign;
         }
     }
-    /** @type {?} */
     let strNum = String(num);
     while (strNum.length < digits) {
         strNum = '0' + strNum;
@@ -3597,33 +1759,15 @@ function padNumber(num, digits, minusSign = '-', trim, negWrap) {
     }
     return neg + strNum;
 }
-/**
- * @param {?} milliseconds
- * @param {?} digits
- * @return {?}
- */
 function formatFractionalSeconds(milliseconds, digits) {
-    /** @type {?} */
     const strMs = padNumber(milliseconds, 3);
     return strMs.substr(0, digits);
 }
 /**
  * Returns a date formatter that transforms a date into its locale digit representation
- * @param {?} name
- * @param {?} size
- * @param {?=} offset
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
  */
 function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
-    return (/**
-     * @param {?} date
-     * @param {?} locale
-     * @return {?}
-     */
-    function (date, locale) {
-        /** @type {?} */
+    return function (date, locale) {
         let part = getDatePart(name, date);
         if (offset > 0 || part > -offset) {
             part += offset;
@@ -3636,16 +1780,10 @@ function dateGetter(name, size, offset = 0, trim = false, negWrap = false) {
         else if (name === DateType.FractionalSeconds) {
             return formatFractionalSeconds(part, size);
         }
-        /** @type {?} */
         const localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
         return padNumber(part, size, localeMinus, trim, negWrap);
-    });
+    };
 }
-/**
- * @param {?} part
- * @param {?} date
- * @return {?}
- */
 function getDatePart(part, date) {
     switch (part) {
         case DateType.FullYear:
@@ -3670,31 +1808,14 @@ function getDatePart(part, date) {
 }
 /**
  * Returns a date formatter that transforms a date into its locale string representation
- * @param {?} name
- * @param {?} width
- * @param {?=} form
- * @param {?=} extended
- * @return {?}
  */
 function dateStrGetter(name, width, form = FormStyle.Format, extended = false) {
-    return (/**
-     * @param {?} date
-     * @param {?} locale
-     * @return {?}
-     */
-    function (date, locale) {
+    return function (date, locale) {
         return getDateTranslation(date, locale, name, width, form, extended);
-    });
+    };
 }
 /**
  * Returns the locale translation of a date for a given form, type and width
- * @param {?} date
- * @param {?} locale
- * @param {?} name
- * @param {?} width
- * @param {?} form
- * @param {?} extended
- * @return {?}
  */
 function getDateTranslation(date, locale, name, width, form, extended) {
     switch (name) {
@@ -3703,55 +1824,57 @@ function getDateTranslation(date, locale, name, width, form, extended) {
         case TranslationType.Days:
             return getLocaleDayNames(locale, form, width)[date.getDay()];
         case TranslationType.DayPeriods:
-            /** @type {?} */
             const currentHours = date.getHours();
-            /** @type {?} */
             const currentMinutes = date.getMinutes();
             if (extended) {
-                /** @type {?} */
                 const rules = getLocaleExtraDayPeriodRules(locale);
-                /** @type {?} */
                 const dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
-                /** @type {?} */
-                let result;
-                rules.forEach((/**
-                 * @param {?} rule
-                 * @param {?} index
-                 * @return {?}
-                 */
-                (rule, index) => {
+                const index = rules.findIndex(rule => {
                     if (Array.isArray(rule)) {
                         // morning, afternoon, evening, night
-                        const { hours: hoursFrom, minutes: minutesFrom } = rule[0];
-                        const { hours: hoursTo, minutes: minutesTo } = rule[1];
-                        if (currentHours >= hoursFrom && currentMinutes >= minutesFrom &&
-                            (currentHours < hoursTo ||
-                                (currentHours === hoursTo && currentMinutes < minutesTo))) {
-                            result = dayPeriods[index];
+                        const [from, to] = rule;
+                        const afterFrom = currentHours >= from.hours && currentMinutes >= from.minutes;
+                        const beforeTo = (currentHours < to.hours ||
+                            (currentHours === to.hours && currentMinutes < to.minutes));
+                        // We must account for normal rules that span a period during the day (e.g. 6am-9am)
+                        // where `from` is less (earlier) than `to`. But also rules that span midnight (e.g.
+                        // 10pm - 5am) where `from` is greater (later!) than `to`.
+                        //
+                        // In the first case the current time must be BOTH after `from` AND before `to`
+                        // (e.g. 8am is after 6am AND before 10am).
+                        //
+                        // In the second case the current time must be EITHER after `from` OR before `to`
+                        // (e.g. 4am is before 5am but not after 10pm; and 11pm is not before 5am but it is
+                        // after 10pm).
+                        if (from.hours < to.hours) {
+                            if (afterFrom && beforeTo) {
+                                return true;
+                            }
+                        }
+                        else if (afterFrom || beforeTo) {
+                            return true;
                         }
                     }
                     else { // noon or midnight
-                        // noon or midnight
-                        const { hours, minutes } = rule;
-                        if (hours === currentHours && minutes === currentMinutes) {
-                            result = dayPeriods[index];
+                        if (rule.hours === currentHours && rule.minutes === currentMinutes) {
+                            return true;
                         }
                     }
-                }));
-                if (result) {
-                    return result;
+                    return false;
+                });
+                if (index !== -1) {
+                    return dayPeriods[index];
                 }
             }
             // if no rules for the day periods, we use am/pm by default
-            return getLocaleDayPeriods(locale, form, (/** @type {?} */ (width)))[currentHours < 12 ? 0 : 1];
+            return getLocaleDayPeriods(locale, form, width)[currentHours < 12 ? 0 : 1];
         case TranslationType.Eras:
-            return getLocaleEraNames(locale, (/** @type {?} */ (width)))[date.getFullYear() <= 0 ? 0 : 1];
+            return getLocaleEraNames(locale, width)[date.getFullYear() <= 0 ? 0 : 1];
         default:
             // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
             // However Closure Compiler does not understand that and reports an error in typed mode.
             // The `throw new Error` below works around the problem, and the unexpected: never variable
             // makes sure tsc still checks this code is unreachable.
-            /** @type {?} */
             const unexpected = name;
             throw new Error(`unexpected translation type ${unexpected}`);
     }
@@ -3760,22 +1883,11 @@ function getDateTranslation(date, locale, name, width, form, extended) {
  * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
  * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
  * extended = +04:30)
- * @param {?} width
- * @return {?}
  */
 function timeZoneGetter(width) {
-    return (/**
-     * @param {?} date
-     * @param {?} locale
-     * @param {?} offset
-     * @return {?}
-     */
-    function (date, locale, offset) {
-        /** @type {?} */
+    return function (date, locale, offset) {
         const zone = -1 * offset;
-        /** @type {?} */
         const minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
-        /** @type {?} */
         const hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
         switch (width) {
             case ZoneWidth.Short:
@@ -3797,76 +1909,55 @@ function timeZoneGetter(width) {
             default:
                 throw new Error(`Unknown zone width "${width}"`);
         }
-    });
+    };
 }
-/** @type {?} */
 const JANUARY = 0;
-/** @type {?} */
 const THURSDAY = 4;
-/**
- * @param {?} year
- * @return {?}
- */
 function getFirstThursdayOfYear(year) {
-    /** @type {?} */
-    const firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+    const firstDayOfYear = createDate(year, JANUARY, 1).getDay();
+    return createDate(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
 }
-/**
- * @param {?} datetime
- * @return {?}
- */
 function getThursdayThisWeek(datetime) {
-    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+    return createDate(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
 }
-/**
- * @param {?} size
- * @param {?=} monthBased
- * @return {?}
- */
 function weekGetter(size, monthBased = false) {
-    return (/**
-     * @param {?} date
-     * @param {?} locale
-     * @return {?}
-     */
-    function (date, locale) {
-        /** @type {?} */
+    return function (date, locale) {
         let result;
         if (monthBased) {
-            /** @type {?} */
             const nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
-            /** @type {?} */
             const today = date.getDate();
             result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
         }
         else {
-            /** @type {?} */
-            const firstThurs = getFirstThursdayOfYear(date.getFullYear());
-            /** @type {?} */
             const thisThurs = getThursdayThisWeek(date);
-            /** @type {?} */
+            // Some days of a year are part of next year according to ISO 8601.
+            // Compute the firstThurs from the year of this week's Thursday
+            const firstThurs = getFirstThursdayOfYear(thisThurs.getFullYear());
             const diff = thisThurs.getTime() - firstThurs.getTime();
             result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
         }
         return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    });
+    };
 }
-/** @type {?} */
+/**
+ * Returns a date formatter that provides the week-numbering year for the input date.
+ */
+function weekNumberingYearGetter(size, trim = false) {
+    return function (date, locale) {
+        const thisThurs = getThursdayThisWeek(date);
+        const weekNumberingYear = thisThurs.getFullYear();
+        return padNumber(weekNumberingYear, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim);
+    };
+}
 const DATE_FORMATS = {};
 // Based on CLDR formats:
 // See complete list: http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 // See also explanations: http://cldr.unicode.org/translation/date-time
-// TODO(ocombe): support all missing cldr formats: Y, U, Q, D, F, e, c, j, J, C, A, v, V, X, x
-/**
- * @param {?} format
- * @return {?}
- */
+// TODO(ocombe): support all missing cldr formats: U, Q, D, F, e, j, J, C, A, v, V, X, x
 function getDateFormatter(format) {
     if (DATE_FORMATS[format]) {
         return DATE_FORMATS[format];
     }
-    /** @type {?} */
     let formatter;
     switch (format) {
         // Era name (AD/BC)
@@ -3896,6 +1987,24 @@ function getDateFormatter(format) {
         // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
         case 'yyyy':
             formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+            break;
+        // 1 digit representation of the week-numbering year, e.g. (AD 1 => 1, AD 199 => 199)
+        case 'Y':
+            formatter = weekNumberingYearGetter(1);
+            break;
+        // 2 digit representation of the week-numbering year, padded (00-99). (e.g. AD 2001 => 01, AD
+        // 2010 => 10)
+        case 'YY':
+            formatter = weekNumberingYearGetter(2, true);
+            break;
+        // 3 digit representation of the week-numbering year, padded (000-999). (e.g. AD 1 => 001, AD
+        // 2010 => 2010)
+        case 'YYY':
+            formatter = weekNumberingYearGetter(3);
+            break;
+        // 4 digit representation of the week-numbering year (e.g. AD 1 => 0001, AD 2010 => 2010)
+        case 'YYYY':
+            formatter = weekNumberingYearGetter(4);
             break;
         // Month of the year (1-12), numeric
         case 'M':
@@ -3946,6 +2055,25 @@ function getDateFormatter(format) {
             break;
         case 'dd':
             formatter = dateGetter(DateType.Date, 2);
+            break;
+        // Day of the Week StandAlone (1, 1, Mon, Monday, M, Mo)
+        case 'c':
+        case 'cc':
+            formatter = dateGetter(DateType.Day, 1);
+            break;
+        case 'ccc':
+            formatter =
+                dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated, FormStyle.Standalone);
+            break;
+        case 'cccc':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide, FormStyle.Standalone);
+            break;
+        case 'ccccc':
+            formatter =
+                dateStrGetter(TranslationType.Days, TranslationWidth.Narrow, FormStyle.Standalone);
+            break;
+        case 'cccccc':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short, FormStyle.Standalone);
             break;
         // Day of the Week
         case 'E':
@@ -4071,41 +2199,21 @@ function getDateFormatter(format) {
     DATE_FORMATS[format] = formatter;
     return formatter;
 }
-/**
- * @param {?} timezone
- * @param {?} fallback
- * @return {?}
- */
 function timezoneToOffset(timezone, fallback) {
-    // Support: IE 9-11 only, Edge 13-15+
+    // Support: IE 11 only, Edge 13-15+
     // IE/Edge do not "understand" colon (`:`) in timezone
     timezone = timezone.replace(/:/g, '');
-    /** @type {?} */
     const requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
     return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
 }
-/**
- * @param {?} date
- * @param {?} minutes
- * @return {?}
- */
 function addDateMinutes(date, minutes) {
     date = new Date(date.getTime());
     date.setMinutes(date.getMinutes() + minutes);
     return date;
 }
-/**
- * @param {?} date
- * @param {?} timezone
- * @param {?} reverse
- * @return {?}
- */
 function convertTimezoneToLocal(date, timezone, reverse) {
-    /** @type {?} */
     const reverseValue = reverse ? -1 : 1;
-    /** @type {?} */
     const dateTimezoneOffset = date.getTimezoneOffset();
-    /** @type {?} */
     const timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
     return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
 }
@@ -4120,8 +2228,6 @@ function convertTimezoneToLocal(date, timezone, reverse) {
  *   Note: ISO strings without time return a date without timeoffset.
  *
  * Throws if unable to convert to a date.
- * @param {?} value
- * @return {?}
  */
 function toDate(value) {
     if (isDate(value)) {
@@ -4132,35 +2238,28 @@ function toDate(value) {
     }
     if (typeof value === 'string') {
         value = value.trim();
-        /** @type {?} */
+        if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
+            /* For ISO Strings without time the day, month and year must be extracted from the ISO String
+            before Date creation to avoid time offset and errors in the new Date.
+            If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+            date, some browsers (e.g. IE 9) will throw an invalid Date error.
+            If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+            is applied.
+            Note: ISO months are 0 for January, 1 for February, ... */
+            const [y, m = 1, d = 1] = value.split('-').map((val) => +val);
+            return createDate(y, m - 1, d);
+        }
         const parsedNb = parseFloat(value);
         // any string that only contains numbers, like "1234" but not like "1234hello"
-        if (!isNaN((/** @type {?} */ (value)) - parsedNb)) {
+        if (!isNaN(value - parsedNb)) {
             return new Date(parsedNb);
         }
-        if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-            /* For ISO Strings without time the day, month and year must be extracted from the ISO String
-                  before Date creation to avoid time offset and errors in the new Date.
-                  If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-                  date, some browsers (e.g. IE 9) will throw an invalid Date error.
-                  If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-                  is applied.
-                  Note: ISO months are 0 for January, 1 for February, ... */
-            const [y, m, d] = value.split('-').map((/**
-             * @param {?} val
-             * @return {?}
-             */
-            (val) => +val));
-            return new Date(y, m - 1, d);
-        }
-        /** @type {?} */
         let match;
         if (match = value.match(ISO8601_DATE_REGEX)) {
             return isoStringToDate(match);
         }
     }
-    /** @type {?} */
-    const date = new Date((/** @type {?} */ (value)));
+    const date = new Date(value);
     if (!isDate(date)) {
         throw new Error(`Unable to convert "${value}" into a date`);
     }
@@ -4169,20 +2268,13 @@ function toDate(value) {
 /**
  * Converts a date in ISO8601 to a Date.
  * Used instead of `Date.parse` because of browser discrepancies.
- * @param {?} match
- * @return {?}
  */
 function isoStringToDate(match) {
-    /** @type {?} */
     const date = new Date(0);
-    /** @type {?} */
     let tzHour = 0;
-    /** @type {?} */
     let tzMin = 0;
     // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
-    /** @type {?} */
     const dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-    /** @type {?} */
     const timeSetter = match[8] ? date.setUTCHours : date.setHours;
     // if there is a timezone defined like "+01:00" or "+0100"
     if (match[9]) {
@@ -4190,89 +2282,60 @@ function isoStringToDate(match) {
         tzMin = Number(match[9] + match[11]);
     }
     dateSetter.call(date, Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-    /** @type {?} */
     const h = Number(match[4] || 0) - tzHour;
-    /** @type {?} */
     const m = Number(match[5] || 0) - tzMin;
-    /** @type {?} */
     const s = Number(match[6] || 0);
-    /** @type {?} */
-    const ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    // The ECMAScript specification (https://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.11)
+    // defines that `DateTime` milliseconds should always be rounded down, so that `999.9ms`
+    // becomes `999ms`.
+    const ms = Math.floor(parseFloat('0.' + (match[7] || 0)) * 1000);
     timeSetter.call(date, h, m, s, ms);
     return date;
 }
-/**
- * @param {?} value
- * @return {?}
- */
 function isDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/** @type {?} */
 const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
-/** @type {?} */
 const MAX_DIGITS = 22;
-/** @type {?} */
 const DECIMAL_SEP = '.';
-/** @type {?} */
 const ZERO_CHAR = '0';
-/** @type {?} */
 const PATTERN_SEP = ';';
-/** @type {?} */
 const GROUP_SEP = ',';
-/** @type {?} */
 const DIGIT_CHAR = '#';
-/** @type {?} */
 const CURRENCY_CHAR = '¤';
-/** @type {?} */
 const PERCENT_CHAR = '%';
 /**
  * Transforms a number to a locale string based on a style and a format.
- * @param {?} value
- * @param {?} pattern
- * @param {?} locale
- * @param {?} groupSymbol
- * @param {?} decimalSymbol
- * @param {?=} digitsInfo
- * @param {?=} isPercent
- * @return {?}
  */
 function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimalSymbol, digitsInfo, isPercent = false) {
-    /** @type {?} */
     let formattedText = '';
-    /** @type {?} */
     let isZero = false;
     if (!isFinite(value)) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
-        /** @type {?} */
         let parsedNumber = parseNumber(value);
         if (isPercent) {
             parsedNumber = toPercent(parsedNumber);
         }
-        /** @type {?} */
         let minInt = pattern.minInt;
-        /** @type {?} */
         let minFraction = pattern.minFrac;
-        /** @type {?} */
         let maxFraction = pattern.maxFrac;
         if (digitsInfo) {
-            /** @type {?} */
             const parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
             if (parts === null) {
                 throw new Error(`${digitsInfo} is not a valid digit info`);
             }
-            /** @type {?} */
             const minIntPart = parts[1];
-            /** @type {?} */
             const minFractionPart = parts[3];
-            /** @type {?} */
             const maxFractionPart = parts[5];
             if (minIntPart != null) {
                 minInt = parseIntAutoRadix(minIntPart);
@@ -4288,19 +2351,11 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
             }
         }
         roundNumber(parsedNumber, minFraction, maxFraction);
-        /** @type {?} */
         let digits = parsedNumber.digits;
-        /** @type {?} */
         let integerLen = parsedNumber.integerLen;
-        /** @type {?} */
         const exponent = parsedNumber.exponent;
-        /** @type {?} */
         let decimals = [];
-        isZero = digits.every((/**
-         * @param {?} d
-         * @return {?}
-         */
-        d => !d));
+        isZero = digits.every(d => !d);
         // pad zeros for small numbers
         for (; integerLen < minInt; integerLen++) {
             digits.unshift(0);
@@ -4318,7 +2373,6 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
             digits = [0];
         }
         // format the integer digits with grouping separators
-        /** @type {?} */
         const groups = [];
         if (digits.length >= pattern.lgSize) {
             groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
@@ -4347,117 +2401,94 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
     return formattedText;
 }
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Formats a number as currency using locale rules.
  *
- * @see `formatNumber()` / `DecimalPipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- *
- * \@publicApi
- * @param {?} value The number to format.
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?} currency A string containing the currency symbol or its name,
+ * @param value The number to format.
+ * @param locale A locale code for the locale format rules to use.
+ * @param currency A string containing the currency symbol or its name,
  * such as "$" or "Canadian Dollar". Used in output string, but does not affect the operation
  * of the function.
- * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
+ * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
  * currency code, such as `USD` for the US dollar and `EUR` for the euro.
  * Used to determine the number of digits in the decimal part.
- * @param {?=} digitsInfo
- * @return {?} The formatted currency value.
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
+ * @returns The formatted currency value.
+ *
+ * @see `formatNumber()`
+ * @see `DecimalPipe`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ *
+ * @publicApi
  */
 function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
-    /** @type {?} */
     const format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
-    /** @type {?} */
     const pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    pattern.minFrac = getNumberOfCurrencyDigits((/** @type {?} */ (currencyCode)));
+    pattern.minFrac = getNumberOfCurrencyDigits(currencyCode);
     pattern.maxFrac = pattern.minFrac;
-    /** @type {?} */
     const res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
     return res
         .replace(CURRENCY_CHAR, currency)
         // if we have 2 time the currency character, the second one is ignored
-        .replace(CURRENCY_CHAR, '');
+        .replace(CURRENCY_CHAR, '')
+        // If there is a spacing between currency character and the value and
+        // the currency character is supressed by passing an empty string, the
+        // spacing character would remain as part of the string. Then we
+        // should remove it.
+        .trim();
 }
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Formats a number as a percentage according to locale rules.
  *
- * @see `formatNumber()` / `DecimalPipe` / [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
- * \@publicApi
+ * @param value The number to format.
+ * @param locale A locale code for the locale format rules to use.
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
- * @param {?} value The number to format.
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?=} digitsInfo
- * @return {?} The formatted percentage value.
+ * @returns The formatted percentage value.
+ *
+ * @see `formatNumber()`
+ * @see `DecimalPipe`
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @publicApi
  *
  */
 function formatPercent(value, locale, digitsInfo) {
-    /** @type {?} */
     const format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
-    /** @type {?} */
     const pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    /** @type {?} */
     const res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo, true);
     return res.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
 }
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Formats a number as text, with group sizing, separator, and other
  * parameters based on the locale.
  *
+ * @param value The number to format.
+ * @param locale A locale code for the locale format rules to use.
+ * @param digitsInfo Decimal representation options, specified by a string in the following format:
+ * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
+ *
+ * @returns The formatted text string.
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  *
- * \@publicApi
- * @param {?} value The number to format.
- * @param {?} locale A locale code for the locale format rules to use.
- * @param {?=} digitsInfo
- * @return {?} The formatted text string.
+ * @publicApi
  */
 function formatNumber(value, locale, digitsInfo) {
-    /** @type {?} */
     const format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
-    /** @type {?} */
     const pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
     return formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
 }
-/**
- * @record
- */
-function ParsedNumberFormat() { }
-if (false) {
-    /** @type {?} */
-    ParsedNumberFormat.prototype.minInt;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.minFrac;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.maxFrac;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.posPre;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.posSuf;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.negPre;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.negSuf;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.gSize;
-    /** @type {?} */
-    ParsedNumberFormat.prototype.lgSize;
-}
-/**
- * @param {?} format
- * @param {?=} minusSign
- * @return {?}
- */
 function parseNumberFormat(format, minusSign = '-') {
-    /** @type {?} */
     const p = {
         minInt: 1,
         minFrac: 0,
@@ -4469,26 +2500,17 @@ function parseNumberFormat(format, minusSign = '-') {
         gSize: 0,
         lgSize: 0
     };
-    /** @type {?} */
     const patternParts = format.split(PATTERN_SEP);
-    /** @type {?} */
     const positive = patternParts[0];
-    /** @type {?} */
     const negative = patternParts[1];
-    /** @type {?} */
     const positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
         positive.split(DECIMAL_SEP) :
         [
             positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
             positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
-        ];
-    /** @type {?} */
-    const integer = positiveParts[0];
-    /** @type {?} */
-    const fraction = positiveParts[1] || '';
+        ], integer = positiveParts[0], fraction = positiveParts[1] || '';
     p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
     for (let i = 0; i < fraction.length; i++) {
-        /** @type {?} */
         const ch = fraction.charAt(i);
         if (ch === ZERO_CHAR) {
             p.minFrac = p.maxFrac = i + 1;
@@ -4500,15 +2522,11 @@ function parseNumberFormat(format, minusSign = '-') {
             p.posSuf += ch;
         }
     }
-    /** @type {?} */
     const groups = integer.split(GROUP_SEP);
     p.gSize = groups[1] ? groups[1].length : 0;
     p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
     if (negative) {
-        /** @type {?} */
-        const trunkLen = positive.length - p.posPre.length - p.posSuf.length;
-        /** @type {?} */
-        const pos = negative.indexOf(DIGIT_CHAR);
+        const trunkLen = positive.length - p.posPre.length - p.posSuf.length, pos = negative.indexOf(DIGIT_CHAR);
         p.negPre = negative.substr(0, pos).replace(/'/g, '');
         p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
     }
@@ -4518,30 +2536,13 @@ function parseNumberFormat(format, minusSign = '-') {
     }
     return p;
 }
-/**
- * @record
- */
-function ParsedNumber() { }
-if (false) {
-    /** @type {?} */
-    ParsedNumber.prototype.digits;
-    /** @type {?} */
-    ParsedNumber.prototype.exponent;
-    /** @type {?} */
-    ParsedNumber.prototype.integerLen;
-}
 // Transforms a parsed number into a percentage by multiplying it by 100
-/**
- * @param {?} parsedNumber
- * @return {?}
- */
 function toPercent(parsedNumber) {
     // if the number is 0, don't do anything
     if (parsedNumber.digits[0] === 0) {
         return parsedNumber;
     }
     // Getting the current number of decimals
-    /** @type {?} */
     const fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
     if (parsedNumber.exponent) {
         parsedNumber.exponent += 2;
@@ -4560,24 +2561,11 @@ function toPercent(parsedNumber) {
 /**
  * Parses a number.
  * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} num
- * @return {?}
  */
 function parseNumber(num) {
-    /** @type {?} */
     let numStr = Math.abs(num) + '';
-    /** @type {?} */
-    let exponent = 0;
-    /** @type {?} */
-    let digits;
-    /** @type {?} */
-    let integerLen;
-    /** @type {?} */
-    let i;
-    /** @type {?} */
-    let j;
-    /** @type {?} */
-    let zeros;
+    let exponent = 0, digits, integerLen;
+    let i, j, zeros;
     // Decimal point?
     if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
         numStr = numStr.replace(DECIMAL_SEP, '');
@@ -4626,25 +2614,16 @@ function parseNumber(num) {
 /**
  * Round the parsed number to the specified number of decimal places
  * This function changes the parsedNumber in-place
- * @param {?} parsedNumber
- * @param {?} minFrac
- * @param {?} maxFrac
- * @return {?}
  */
 function roundNumber(parsedNumber, minFrac, maxFrac) {
     if (minFrac > maxFrac) {
         throw new Error(`The minimum number of digits after fraction (${minFrac}) is higher than the maximum (${maxFrac}).`);
     }
-    /** @type {?} */
     let digits = parsedNumber.digits;
-    /** @type {?} */
     let fractionLen = digits.length - parsedNumber.integerLen;
-    /** @type {?} */
     const fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
     // The index of the digit to where rounding is to occur
-    /** @type {?} */
     let roundAt = fractionSize + parsedNumber.integerLen;
-    /** @type {?} */
     let digit = digits[roundAt];
     if (roundAt > 0) {
         // Drop fractional digits beyond `roundAt`
@@ -4679,22 +2658,12 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     // Pad out with zeros to get the required fraction length
     for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
         digits.push(0);
-    /** @type {?} */
     let dropTrailingZeros = fractionSize !== 0;
     // Minimal length = nb of decimals required + current nb of integers
     // Any number besides that is optional and can be removed if it's a trailing 0
-    /** @type {?} */
     const minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
-    /** @type {?} */
-    const carry = digits.reduceRight((/**
-     * @param {?} carry
-     * @param {?} d
-     * @param {?} i
-     * @param {?} digits
-     * @return {?}
-     */
-    function (carry, d, i, digits) {
+    const carry = digits.reduceRight(function (carry, d, i, digits) {
         d = d + carry;
         digits[i] = d < 10 ? d : d - 10; // d % 10
         if (dropTrailingZeros) {
@@ -4707,18 +2676,13 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
             }
         }
         return d >= 10 ? 1 : 0; // Math.floor(d / 10);
-    }), 0);
+    }, 0);
     if (carry) {
         digits.unshift(carry);
         parsedNumber.integerLen++;
     }
 }
-/**
- * @param {?} text
- * @return {?}
- */
 function parseIntAutoRadix(text) {
-    /** @type {?} */
     const result = parseInt(text);
     if (isNaN(result)) {
         throw new Error('Invalid integer literal when parsing ' + text);
@@ -4727,36 +2691,23 @@ function parseIntAutoRadix(text) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@publicApi
- * @abstract
+ * @publicApi
  */
 class NgLocalization {
-}
-if (false) {
-    /**
-     * @abstract
-     * @param {?} value
-     * @param {?=} locale
-     * @return {?}
-     */
-    NgLocalization.prototype.getPluralCategory = function (value, locale) { };
 }
 /**
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
- * @param {?} value
- * @param {?} cases
- * @param {?} ngLocalization
- * @param {?=} locale
- * @return {?}
  */
 function getPluralCategory(value, cases, ngLocalization, locale) {
-    /** @type {?} */
     let key = `=${value}`;
     if (cases.indexOf(key) > -1) {
         return key;
@@ -4773,23 +2724,14 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
 /**
  * Returns the plural case based on the locale
  *
- * \@publicApi
+ * @publicApi
  */
 class NgLocaleLocalization extends NgLocalization {
-    /**
-     * @param {?} locale
-     */
     constructor(locale) {
         super();
         this.locale = locale;
     }
-    /**
-     * @param {?} value
-     * @param {?=} locale
-     * @return {?}
-     */
     getPluralCategory(value, locale) {
-        /** @type {?} */
         const plural = getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
             case Plural.Zero:
@@ -4810,75 +2752,39 @@ class NgLocaleLocalization extends NgLocalization {
 NgLocaleLocalization.decorators = [
     { type: Injectable }
 ];
-/** @nocollapse */
 NgLocaleLocalization.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    NgLocaleLocalization.prototype.locale;
-}
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Register global data to be used internally by Angular. See the
- * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
- *
- * \@publicApi
- * @param {?} data
- * @param {?=} localeId
- * @param {?=} extraData
- * @return {?}
- */
-// The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
-function registerLocaleData(data, localeId, extraData) {
-    if (typeof localeId !== 'string') {
-        extraData = localeId;
-        localeId = data[ɵLocaleDataIndex.LocaleId];
-    }
-    localeId = localeId.toLowerCase().replace(/_/g, '-');
-    ɵLOCALE_DATA[localeId] = data;
-    if (extraData) {
-        ɵLOCALE_DATA[localeId][ɵLocaleDataIndex.ExtraData] = extraData;
-    }
-}
-/** @enum {number} */
-const ExtraLocaleDataIndex = {
-    ExtraDayPeriodFormats: 0,
-    ExtraDayPeriodStandalone: 1,
-    ExtraDayPeriodsRules: 2,
-};
-/** @enum {number} */
-const CurrencyIndex = {
-    Symbol: 0, SymbolNarrow: 1, NbOfDigits: 2,
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @param {?} cookieStr
- * @param {?} name
- * @return {?}
+ * Register global data to be used internally by Angular. See the
+ * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
+ *
+ * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
+ *
+ * @publicApi
+ */
+function registerLocaleData(data, localeId, extraData) {
+    return ɵregisterLocaleData(data, localeId, extraData);
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (const cookie of cookieStr.split(';')) {
-        /** @type {?} */
         const eqIndex = cookie.indexOf('=');
         const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
         if (cookieName.trim() === name) {
@@ -4889,23 +2795,187 @@ function parseCookieValue(cookieStr, name) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Instantiates a single {\@link Component} type and inserts its Host View into current View.
+ * @ngModule CommonModule
+ *
+ * @usageNotes
+ * ```
+ *     <some-element [ngClass]="'first second'">...</some-element>
+ *
+ *     <some-element [ngClass]="['first', 'second']">...</some-element>
+ *
+ *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+ *
+ *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+ *
+ *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+ * ```
+ *
+ * @description
+ *
+ * Adds and removes CSS classes on an HTML element.
+ *
+ * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+ * - `string` - the CSS classes listed in the string (space delimited) are added,
+ * - `Array` - the CSS classes declared as Array elements are added,
+ * - `Object` - keys are CSS classes that get added when the expression given in the value
+ *              evaluates to a truthy value, otherwise they are removed.
+ *
+ * @publicApi
+ */
+class NgClass {
+    constructor(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+        this._iterableDiffers = _iterableDiffers;
+        this._keyValueDiffers = _keyValueDiffers;
+        this._ngEl = _ngEl;
+        this._renderer = _renderer;
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
+        this._initialClasses = [];
+        this._rawClass = null;
+    }
+    set klass(value) {
+        this._removeClasses(this._initialClasses);
+        this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+        this._applyClasses(this._initialClasses);
+        this._applyClasses(this._rawClass);
+    }
+    set ngClass(value) {
+        this._removeClasses(this._rawClass);
+        this._applyClasses(this._initialClasses);
+        this._iterableDiffer = null;
+        this._keyValueDiffer = null;
+        this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+        if (this._rawClass) {
+            if (ɵisListLikeIterable(this._rawClass)) {
+                this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
+            }
+            else {
+                this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+            }
+        }
+    }
+    ngDoCheck() {
+        if (this._iterableDiffer) {
+            const iterableChanges = this._iterableDiffer.diff(this._rawClass);
+            if (iterableChanges) {
+                this._applyIterableChanges(iterableChanges);
+            }
+        }
+        else if (this._keyValueDiffer) {
+            const keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
+            if (keyValueChanges) {
+                this._applyKeyValueChanges(keyValueChanges);
+            }
+        }
+    }
+    _applyKeyValueChanges(changes) {
+        changes.forEachAddedItem((record) => this._toggleClass(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._toggleClass(record.key, record.currentValue));
+        changes.forEachRemovedItem((record) => {
+            if (record.previousValue) {
+                this._toggleClass(record.key, false);
+            }
+        });
+    }
+    _applyIterableChanges(changes) {
+        changes.forEachAddedItem((record) => {
+            if (typeof record.item === 'string') {
+                this._toggleClass(record.item, true);
+            }
+            else {
+                throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${ɵstringify(record.item)}`);
+            }
+        });
+        changes.forEachRemovedItem((record) => this._toggleClass(record.item, false));
+    }
+    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
+     */
+    _applyClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                rawClassVal.forEach((klass) => this._toggleClass(klass, true));
+            }
+            else {
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, !!rawClassVal[klass]));
+            }
+        }
+    }
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     */
+    _removeClasses(rawClassVal) {
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                rawClassVal.forEach((klass) => this._toggleClass(klass, false));
+            }
+            else {
+                Object.keys(rawClassVal).forEach(klass => this._toggleClass(klass, false));
+            }
+        }
+    }
+    _toggleClass(klass, enabled) {
+        klass = klass.trim();
+        if (klass) {
+            klass.split(/\s+/g).forEach(klass => {
+                if (enabled) {
+                    this._renderer.addClass(this._ngEl.nativeElement, klass);
+                }
+                else {
+                    this._renderer.removeClass(this._ngEl.nativeElement, klass);
+                }
+            });
+        }
+    }
+}
+NgClass.decorators = [
+    { type: Directive, args: [{ selector: '[ngClass]' },] }
+];
+NgClass.ctorParameters = () => [
+    { type: IterableDiffers },
+    { type: KeyValueDiffers },
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+NgClass.propDecorators = {
+    klass: [{ type: Input, args: ['class',] }],
+    ngClass: [{ type: Input, args: ['ngClass',] }]
+};
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Instantiates a single {@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
  *
  * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
  * any existing component will get destroyed.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Fine tune control
  *
  * You can control the component creation process by using the following optional attributes:
  *
- * * `ngComponentOutletInjector`: Optional custom {\@link Injector} that will be used as parent for
+ * * `ngComponentOutletInjector`: Optional custom {@link Injector} that will be used as parent for
  * the Component. Defaults to the injector of the current view container.
  *
  * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
@@ -4938,39 +3008,30 @@ function parseCookieValue(cookieStr, name) {
  *
  * ### A simple example
  *
- * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
+ * {@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
  *
  * A more complete example with additional options:
  *
- * {\@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
+ * {@example common/ngComponentOutlet/ts/module.ts region='CompleteExample'}
  *
- * \@publicApi
- * \@ngModule CommonModule
+ * @publicApi
+ * @ngModule CommonModule
  */
 class NgComponentOutlet {
-    /**
-     * @param {?} _viewContainerRef
-     */
     constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
         this._moduleRef = null;
     }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
     ngOnChanges(changes) {
         this._viewContainerRef.clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
-            /** @type {?} */
             const elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
             if (changes['ngComponentOutletNgModuleFactory']) {
                 if (this._moduleRef)
                     this._moduleRef.destroy();
                 if (this.ngComponentOutletNgModuleFactory) {
-                    /** @type {?} */
                     const parentModule = elInjector.get(NgModuleRef);
                     this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
@@ -4978,17 +3039,12 @@ class NgComponentOutlet {
                     this._moduleRef = null;
                 }
             }
-            /** @type {?} */
             const componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
                 elInjector.get(ComponentFactoryResolver);
-            /** @type {?} */
             const componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
             this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         if (this._moduleRef)
             this._moduleRef.destroy();
@@ -4997,7 +3053,6 @@ class NgComponentOutlet {
 NgComponentOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngComponentOutlet]' },] }
 ];
-/** @nocollapse */
 NgComponentOutlet.ctorParameters = () => [
     { type: ViewContainerRef }
 ];
@@ -5007,79 +3062,36 @@ NgComponentOutlet.propDecorators = {
     ngComponentOutletContent: [{ type: Input }],
     ngComponentOutletNgModuleFactory: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    NgComponentOutlet.prototype.ngComponentOutlet;
-    /** @type {?} */
-    NgComponentOutlet.prototype.ngComponentOutletInjector;
-    /** @type {?} */
-    NgComponentOutlet.prototype.ngComponentOutletContent;
-    /** @type {?} */
-    NgComponentOutlet.prototype.ngComponentOutletNgModuleFactory;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgComponentOutlet.prototype._componentRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgComponentOutlet.prototype._moduleRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgComponentOutlet.prototype._viewContainerRef;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@publicApi
- * @template T
+ * @publicApi
  */
 class NgForOfContext {
-    /**
-     * @param {?} $implicit
-     * @param {?} ngForOf
-     * @param {?} index
-     * @param {?} count
-     */
     constructor($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
         this.index = index;
         this.count = count;
     }
-    /**
-     * @return {?}
-     */
-    get first() { return this.index === 0; }
-    /**
-     * @return {?}
-     */
-    get last() { return this.index === this.count - 1; }
-    /**
-     * @return {?}
-     */
-    get even() { return this.index % 2 === 0; }
-    /**
-     * @return {?}
-     */
-    get odd() { return !this.even; }
-}
-if (false) {
-    /** @type {?} */
-    NgForOfContext.prototype.$implicit;
-    /** @type {?} */
-    NgForOfContext.prototype.ngForOf;
-    /** @type {?} */
-    NgForOfContext.prototype.index;
-    /** @type {?} */
-    NgForOfContext.prototype.count;
+    get first() {
+        return this.index === 0;
+    }
+    get last() {
+        return this.index === this.count - 1;
+    }
+    get even() {
+        return this.index % 2 === 0;
+    }
+    get odd() {
+        return !this.even;
+    }
 }
 /**
  * A [structural directive](guide/structural-directives) that renders
@@ -5088,7 +3100,7 @@ if (false) {
  * of the cloned templates.
  *
  * The `ngForOf` directive is generally used in the
- * [shorthand form](guide/structural-directives#the-asterisk--prefix) `*ngFor`.
+ * [shorthand form](guide/structural-directives#asterisk) `*ngFor`.
  * In this form, the template to be rendered for each iteration is the content
  * of an anchor element containing the directive.
  *
@@ -5117,13 +3129,13 @@ if (false) {
  * context according to its lexical position.
  *
  * When using the shorthand syntax, Angular allows only [one structural directive
- * on an element](guide/structural-directives#one-structural-directive-per-host-element).
+ * on an element](guide/built-in-directives#one-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
  * For futher discussion, see
- * [Structural Directives](guide/structural-directives#one-per-element).
+ * [Structural Directives](guide/built-in-directives#one-per-element).
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Local variables
  *
@@ -5131,7 +3143,7 @@ if (false) {
  * For example:
  *
  *  ```
- * <li *ngFor="let user of userObservable | async as users; index as i; first as isFirst">
+ * <li *ngFor="let user of users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
  * ```
@@ -5143,6 +3155,7 @@ if (false) {
  * more complex then a property access, for example when using the async pipe (`userStreams |
  * async`).
  * - `index: number`: The index of the current item in the iterable.
+ * - `count: number`: The length of the iterable.
  * - `first: boolean`: True when the item is the first item in the iterable.
  * - `last: boolean`: True when the item is the last item in the iterable.
  * - `even: boolean`: True when the item has an even index in the iterable.
@@ -5175,16 +3188,10 @@ if (false) {
  * If `trackBy` is given, Angular tracks changes by the return value of the function.
  *
  * @see [Structural Directives](guide/structural-directives)
- * \@ngModule CommonModule
- * \@publicApi
- * @template T
+ * @ngModule CommonModule
+ * @publicApi
  */
 class NgForOf {
-    /**
-     * @param {?} _viewContainer
-     * @param {?} _template
-     * @param {?} _differs
-     */
     constructor(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
@@ -5195,9 +3202,7 @@ class NgForOf {
     }
     /**
      * The value of the iterable expression, which can be used as a
-     * [template input variable](guide/structural-directives#template-input-variable).
-     * @param {?} ngForOf
-     * @return {?}
+     * [template input variable](guide/structural-directives#shorthand).
      */
     set ngForOf(ngForOf) {
         this._ngForOf = ngForOf;
@@ -5218,29 +3223,24 @@ class NgForOf {
      * rather than the identity of the object itself.
      *
      * The function receives two inputs,
-     * the iteration index and the node object ID.
-     * @param {?} fn
-     * @return {?}
+     * the iteration index and the associated node data.
      */
     set ngForTrackBy(fn) {
-        if (isDevMode() && fn != null && typeof fn !== 'function') {
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && fn != null && typeof fn !== 'function') {
             // TODO(vicb): use a log service once there is a public one available
-            if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
+            if (console && console.warn) {
                 console.warn(`trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
-                    `See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.`);
+                    `See https://angular.io/api/common/NgForOf#change-propagation for more information.`);
             }
         }
         this._trackByFn = fn;
     }
-    /**
-     * @return {?}
-     */
-    get ngForTrackBy() { return this._trackByFn; }
+    get ngForTrackBy() {
+        return this._trackByFn;
+    }
     /**
      * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
-     * @param {?} value
-     * @return {?}
+     * @see [template reference variable](guide/template-reference-variables)
      */
     set ngForTemplate(value) {
         // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
@@ -5252,13 +3252,11 @@ class NgForOf {
     }
     /**
      * Applies the changes when needed.
-     * @return {?}
      */
     ngDoCheck() {
         if (this._ngForOfDirty) {
             this._ngForOfDirty = false;
             // React on ngForOf changes only once all inputs have been initialized
-            /** @type {?} */
             const value = this._ngForOf;
             if (!this._differ && value) {
                 try {
@@ -5270,34 +3268,19 @@ class NgForOf {
             }
         }
         if (this._differ) {
-            /** @type {?} */
             const changes = this._differ.diff(this._ngForOf);
             if (changes)
                 this._applyChanges(changes);
         }
     }
-    /**
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
     _applyChanges(changes) {
-        /** @type {?} */
         const insertTuples = [];
-        changes.forEachOperation((/**
-         * @param {?} item
-         * @param {?} adjustedPreviousIndex
-         * @param {?} currentIndex
-         * @return {?}
-         */
-        (item, adjustedPreviousIndex, currentIndex) => {
+        changes.forEachOperation((item, adjustedPreviousIndex, currentIndex) => {
             if (item.previousIndex == null) {
                 // NgForOf is never "null" or "undefined" here because the differ detected
                 // that a new item needs to be inserted from the iterable. This implies that
                 // there is an iterable value for "_ngForOf".
-                /** @type {?} */
-                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext((/** @type {?} */ (null)), (/** @type {?} */ (this._ngForOf)), -1, -1), currentIndex === null ? undefined : currentIndex);
-                /** @type {?} */
+                const view = this._viewContainer.createEmbeddedView(this._template, new NgForOfContext(null, this._ngForOf, -1, -1), currentIndex === null ? undefined : currentIndex);
                 const tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
@@ -5305,40 +3288,26 @@ class NgForOf {
                 this._viewContainer.remove(adjustedPreviousIndex === null ? undefined : adjustedPreviousIndex);
             }
             else if (adjustedPreviousIndex !== null) {
-                /** @type {?} */
-                const view = (/** @type {?} */ (this._viewContainer.get(adjustedPreviousIndex)));
+                const view = this._viewContainer.get(adjustedPreviousIndex);
                 this._viewContainer.move(view, currentIndex);
-                /** @type {?} */
-                const tuple = new RecordViewTuple(item, (/** @type {?} */ (view)));
+                const tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
-        }));
+        });
         for (let i = 0; i < insertTuples.length; i++) {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
         for (let i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
-            /** @type {?} */
-            const viewRef = (/** @type {?} */ (this._viewContainer.get(i)));
+            const viewRef = this._viewContainer.get(i);
             viewRef.context.index = i;
             viewRef.context.count = ilen;
-            viewRef.context.ngForOf = (/** @type {?} */ (this._ngForOf));
+            viewRef.context.ngForOf = this._ngForOf;
         }
-        changes.forEachIdentityChange((/**
-         * @param {?} record
-         * @return {?}
-         */
-        (record) => {
-            /** @type {?} */
-            const viewRef = (/** @type {?} */ (this._viewContainer.get(record.currentIndex)));
+        changes.forEachIdentityChange((record) => {
+            const viewRef = this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
-        }));
+        });
     }
-    /**
-     * @private
-     * @param {?} view
-     * @param {?} record
-     * @return {?}
-     */
     _perViewChange(view, record) {
         view.context.$implicit = record.item;
     }
@@ -5347,10 +3316,6 @@ class NgForOf {
      *
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgForOf` structural directive renders its template with a specific context type.
-     * @template T
-     * @param {?} dir
-     * @param {?} ctx
-     * @return {?}
      */
     static ngTemplateContextGuard(dir, ctx) {
         return true;
@@ -5359,7 +3324,6 @@ class NgForOf {
 NgForOf.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
 ];
-/** @nocollapse */
 NgForOf.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
@@ -5370,73 +3334,22 @@ NgForOf.propDecorators = {
     ngForTrackBy: [{ type: Input }],
     ngForTemplate: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._ngForOf;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._ngForOfDirty;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._trackByFn;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._viewContainer;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._template;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgForOf.prototype._differs;
-}
-/**
- * @template T
- */
 class RecordViewTuple {
-    /**
-     * @param {?} record
-     * @param {?} view
-     */
     constructor(record, view) {
         this.record = record;
         this.view = view;
     }
 }
-if (false) {
-    /** @type {?} */
-    RecordViewTuple.prototype.record;
-    /** @type {?} */
-    RecordViewTuple.prototype.view;
-}
-/**
- * @param {?} type
- * @return {?}
- */
 function getTypeName(type) {
     return type['name'] || typeof type;
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A structural directive that conditionally includes a template based on the value of
@@ -5446,7 +3359,7 @@ function getTypeName(type) {
  * Angular renders the template provided in an optional `else` clause. The default
  * template for the `else` clause is blank.
  *
- * A [shorthand form](guide/structural-directives#the-asterisk--prefix) of the directive,
+ * A [shorthand form](guide/structural-directives#asterisk) of the directive,
  * `*ngIf="condition"`, is generally used, provided
  * as an attribute of the anchor element for the inserted template.
  * Angular expands this into a more explicit version, in which the anchor element
@@ -5487,13 +3400,13 @@ function getTypeName(type) {
  * <ng-template #elseBlock>Content to render when value is null.</ng-template>
  * ```
  *
- * \@usageNotes
+ * @usageNotes
  *
  * The `*ngIf` directive is most commonly used to conditionally show an inline template,
  * as seen in the following  example.
  * The default `else` template is blank.
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
+ * {@example common/ngIf/ts/module.ts region='NgIfSimple'}
  *
  * ### Showing an alternative template using `else`
  *
@@ -5503,7 +3416,7 @@ function getTypeName(type) {
  * The template can be defined anywhere in the component view, but is typically placed right after
  * `ngIf` for readability.
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
+ * {@example common/ngIf/ts/module.ts region='NgIfElse'}
  *
  * ### Using an external `then` template
  *
@@ -5512,16 +3425,16 @@ function getTypeName(type) {
  * externally, by referencing a labeled `<ng-template>` element. When you do this, you can
  * change which template to use at runtime, as shown in the following example.
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
+ * {@example common/ngIf/ts/module.ts region='NgIfThenElse'}
  *
  * ### Storing a conditional result in a variable
  *
  * You might want to show a set of properties from the same object. If you are waiting
  * for asynchronous data, the object can be undefined.
  * In this case, you can use `ngIf` and store the result of the condition in a local
- * variable as shown in the the following example.
+ * variable as shown in the following example.
  *
- * {\@example common/ngIf/ts/module.ts region='NgIfAs'}
+ * {@example common/ngIf/ts/module.ts region='NgIfAs'}
  *
  * This code uses only one `AsyncPipe`, so only one subscription is created.
  * The conditional statement stores the result of `userStream|async` in the local variable `user`.
@@ -5529,7 +3442,7 @@ function getTypeName(type) {
  *
  * The conditional displays the data only if `userStream` returns a value,
  * so you don't need to use the
- * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+ * safe-navigation-operator (`?.`)
  * to guard against null values when accessing properties.
  * You can display an alternative template while waiting for the data.
  *
@@ -5559,7 +3472,7 @@ function getTypeName(type) {
  * the content of this unlabeled `<ng-template>` tag.
  *
  * ```
- * <ng-template [ngIf]="hero-list" [ngIfElse]="loading">
+ * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
  *  <div class="hero-list">
  *   ...
  *  </div>
@@ -5572,16 +3485,12 @@ function getTypeName(type) {
  *
  * The presence of the implicit template object has implications for the nesting of
  * structural directives. For more on this subject, see
- * [Structural Directives](https://angular.io/guide/structural-directives#one-per-element).
+ * [Structural Directives](https://angular.io/guide/built-in-directives#one-per-element).
  *
- * \@ngModule CommonModule
- * \@publicApi
+ * @ngModule CommonModule
+ * @publicApi
  */
 class NgIf {
-    /**
-     * @param {?} _viewContainer
-     * @param {?} templateRef
-     */
     constructor(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -5593,8 +3502,6 @@ class NgIf {
     }
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
-     * @param {?} condition
-     * @return {?}
      */
     set ngIf(condition) {
         this._context.$implicit = this._context.ngIf = condition;
@@ -5602,8 +3509,6 @@ class NgIf {
     }
     /**
      * A template to show if the condition expression evaluates to true.
-     * @param {?} templateRef
-     * @return {?}
      */
     set ngIfThen(templateRef) {
         assertTemplate('ngIfThen', templateRef);
@@ -5613,8 +3518,6 @@ class NgIf {
     }
     /**
      * A template to show if the condition expression evaluates to false.
-     * @param {?} templateRef
-     * @return {?}
      */
     set ngIfElse(templateRef) {
         assertTemplate('ngIfElse', templateRef);
@@ -5622,10 +3525,6 @@ class NgIf {
         this._elseViewRef = null; // clear previous view if any.
         this._updateView();
     }
-    /**
-     * @private
-     * @return {?}
-     */
     _updateView() {
         if (this._context.$implicit) {
             if (!this._thenViewRef) {
@@ -5648,11 +3547,19 @@ class NgIf {
             }
         }
     }
+    /**
+     * Asserts the correct type of the context for the template that `NgIf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type-check compiler that the
+     * `NgIf` structural directive renders its template with a specific context type.
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
+    }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] }
 ];
-/** @nocollapse */
 NgIf.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef }
@@ -5662,55 +3569,8 @@ NgIf.propDecorators = {
     ngIfThen: [{ type: Input }],
     ngIfElse: [{ type: Input }]
 };
-if (false) {
-    /**
-     * \@internal
-     * @type {?}
-     */
-    NgIf.ngIfUseIfTypeGuard;
-    /**
-     * Assert the correct type of the expression bound to the `ngIf` input within the template.
-     *
-     * The presence of this static field is a signal to the Ivy template type check compiler that
-     * when the `NgIf` structural directive renders its template, the type of the expression bound
-     * to `ngIf` should be narrowed in some way. For `NgIf`, the binding expression itself is used to
-     * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgIf`.
-     * @type {?}
-     */
-    NgIf.ngTemplateGuard_ngIf;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._context;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._thenTemplateRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._elseTemplateRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._thenViewRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._elseViewRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgIf.prototype._viewContainer;
-}
 /**
- * \@publicApi
+ * @publicApi
  */
 class NgIfContext {
     constructor() {
@@ -5718,19 +3578,7 @@ class NgIfContext {
         this.ngIf = null;
     }
 }
-if (false) {
-    /** @type {?} */
-    NgIfContext.prototype.$implicit;
-    /** @type {?} */
-    NgIfContext.prototype.ngIf;
-}
-/**
- * @param {?} property
- * @param {?} templateRef
- * @return {?}
- */
 function assertTemplate(property, templateRef) {
-    /** @type {?} */
     const isTemplateRefOrNull = !!(!templateRef || templateRef.createEmbeddedView);
     if (!isTemplateRefOrNull) {
         throw new Error(`${property} must be a TemplateRef, but received '${ɵstringify(templateRef)}'.`);
@@ -5738,37 +3586,26 @@ function assertTemplate(property, templateRef) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 class SwitchView {
-    /**
-     * @param {?} _viewContainerRef
-     * @param {?} _templateRef
-     */
     constructor(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
         this._created = false;
     }
-    /**
-     * @return {?}
-     */
     create() {
         this._created = true;
         this._viewContainerRef.createEmbeddedView(this._templateRef);
     }
-    /**
-     * @return {?}
-     */
     destroy() {
         this._created = false;
         this._viewContainerRef.clear();
     }
-    /**
-     * @param {?} created
-     * @return {?}
-     */
     enforceState(created) {
         if (created && !this._created) {
             this.create();
@@ -5778,29 +3615,10 @@ class SwitchView {
         }
     }
 }
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    SwitchView.prototype._created;
-    /**
-     * @type {?}
-     * @private
-     */
-    SwitchView.prototype._viewContainerRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    SwitchView.prototype._templateRef;
-}
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description A structural directive that adds or removes templates (displaying or hiding views)
- * when the next match expression matches the switch expression.
- *
+ * @description
  * The `[ngSwitch]` directive on a container specifies an expression to match against.
  * The expressions to match are provided by `ngSwitchCase` directives on views within the container.
  * - Every view that matches is rendered.
@@ -5808,7 +3626,7 @@ if (false) {
  * - Elements within the `[NgSwitch]` statement but outside of any `NgSwitchCase`
  * or `ngSwitchDefault` directive are preserved at the location.
  *
- * \@usageNotes
+ * @usageNotes
  * Define a container element for the directive, and specify the switch expression
  * to match against as an attribute:
  *
@@ -5857,7 +3675,7 @@ if (false) {
  *     </container-element>
  * ```
  *
- * \@publicApi
+ * @publicApi
  * @see `NgSwitchCase`
  * @see `NgSwitchDefault`
  * @see [Structural Directives](guide/structural-directives)
@@ -5870,39 +3688,25 @@ class NgSwitch {
         this._lastCaseCheckIndex = 0;
         this._lastCasesMatched = false;
     }
-    /**
-     * @param {?} newValue
-     * @return {?}
-     */
     set ngSwitch(newValue) {
         this._ngSwitch = newValue;
         if (this._caseCount === 0) {
             this._updateDefaultCases(true);
         }
     }
-    /**
-     * \@internal
-     * @return {?}
-     */
-    _addCase() { return this._caseCount++; }
-    /**
-     * \@internal
-     * @param {?} view
-     * @return {?}
-     */
+    /** @internal */
+    _addCase() {
+        return this._caseCount++;
+    }
+    /** @internal */
     _addDefault(view) {
         if (!this._defaultViews) {
             this._defaultViews = [];
         }
         this._defaultViews.push(view);
     }
-    /**
-     * \@internal
-     * @param {?} value
-     * @return {?}
-     */
+    /** @internal */
     _matchCase(value) {
-        /** @type {?} */
         const matched = value == this._ngSwitch;
         this._lastCasesMatched = this._lastCasesMatched || matched;
         this._lastCaseCheckIndex++;
@@ -5913,16 +3717,10 @@ class NgSwitch {
         }
         return matched;
     }
-    /**
-     * @private
-     * @param {?} useDefault
-     * @return {?}
-     */
     _updateDefaultCases(useDefault) {
         if (this._defaultViews && useDefault !== this._defaultUsed) {
             this._defaultUsed = useDefault;
             for (let i = 0; i < this._defaultViews.length; i++) {
-                /** @type {?} */
                 const defaultView = this._defaultViews[i];
                 defaultView.enforceState(useDefault);
             }
@@ -5935,47 +3733,15 @@ NgSwitch.decorators = [
 NgSwitch.propDecorators = {
     ngSwitch: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._defaultViews;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._defaultUsed;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._caseCount;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._lastCaseCheckIndex;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._lastCasesMatched;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitch.prototype._ngSwitch;
-}
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description
+ * @description
  * Provides a switch case expression to match against an enclosing `ngSwitch` expression.
  * When the expressions match, the given `NgSwitchCase` template is rendered.
  * If multiple match expressions match the switch expression value, all of them are displayed.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * Within a switch container, `*ngSwitchCase` statements specify the match expressions
  * as attributes. Include `*ngSwitchDefault` as the final case.
@@ -5995,17 +3761,12 @@ if (false) {
  * Unlike JavaScript, which uses strict equality, Angular uses loose equality.
  * This means that the empty string, `""` matches 0.
  *
- * \@publicApi
+ * @publicApi
  * @see `NgSwitch`
  * @see `NgSwitchDefault`
  *
  */
 class NgSwitchCase {
-    /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
-     */
     constructor(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -6013,14 +3774,14 @@ class NgSwitchCase {
     }
     /**
      * Performs case matching. For internal use only.
-     * @return {?}
      */
-    ngDoCheck() { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); }
+    ngDoCheck() {
+        this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+    }
 }
 NgSwitchCase.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchCase]' },] }
 ];
-/** @nocollapse */
 NgSwitchCase.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
@@ -6029,43 +3790,21 @@ NgSwitchCase.ctorParameters = () => [
 NgSwitchCase.propDecorators = {
     ngSwitchCase: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitchCase.prototype._view;
-    /**
-     * Stores the HTML template to be selected on match.
-     * @type {?}
-     */
-    NgSwitchCase.prototype.ngSwitchCase;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgSwitchCase.prototype.ngSwitch;
-}
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description
+ * @description
  *
  * Creates a view that is rendered when no `NgSwitchCase` expressions
  * match the `NgSwitch` expression.
  * This statement should be the final case in an `NgSwitch`.
  *
- * \@publicApi
+ * @publicApi
  * @see `NgSwitch`
  * @see `NgSwitchCase`
  *
  */
 class NgSwitchDefault {
-    /**
-     * @param {?} viewContainer
-     * @param {?} templateRef
-     * @param {?} ngSwitch
-     */
     constructor(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
@@ -6073,7 +3812,6 @@ class NgSwitchDefault {
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] }
 ];
-/** @nocollapse */
 NgSwitchDefault.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
@@ -6081,13 +3819,16 @@ NgSwitchDefault.ctorParameters = () => [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@usageNotes
+ * @usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
@@ -6096,7 +3837,7 @@ NgSwitchDefault.ctorParameters = () => [
  * </some-element>
  * ```
  *
- * \@description
+ * @description
  *
  * Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
  *
@@ -6113,55 +3854,30 @@ NgSwitchDefault.ctorParameters = () => [
  *
  * See http://cldr.unicode.org/index/cldr-spec/plural-rules
  *
- * \@publicApi
+ * @publicApi
  */
 class NgPlural {
-    /**
-     * @param {?} _localization
-     */
     constructor(_localization) {
         this._localization = _localization;
         this._caseViews = {};
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set ngPlural(value) {
         this._switchValue = value;
         this._updateView();
     }
-    /**
-     * @param {?} value
-     * @param {?} switchView
-     * @return {?}
-     */
-    addCase(value, switchView) { this._caseViews[value] = switchView; }
-    /**
-     * @private
-     * @return {?}
-     */
+    addCase(value, switchView) {
+        this._caseViews[value] = switchView;
+    }
     _updateView() {
         this._clearViews();
-        /** @type {?} */
         const cases = Object.keys(this._caseViews);
-        /** @type {?} */
         const key = getPluralCategory(this._switchValue, cases, this._localization);
         this._activateView(this._caseViews[key]);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     _clearViews() {
         if (this._activeView)
             this._activeView.destroy();
     }
-    /**
-     * @private
-     * @param {?} view
-     * @return {?}
-     */
     _activateView(view) {
         if (view) {
             this._activeView = view;
@@ -6172,65 +3888,35 @@ class NgPlural {
 NgPlural.decorators = [
     { type: Directive, args: [{ selector: '[ngPlural]' },] }
 ];
-/** @nocollapse */
 NgPlural.ctorParameters = () => [
     { type: NgLocalization }
 ];
 NgPlural.propDecorators = {
     ngPlural: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgPlural.prototype._switchValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgPlural.prototype._activeView;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgPlural.prototype._caseViews;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgPlural.prototype._localization;
-}
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description
+ * @description
  *
- * Creates a view that will be added/removed from the parent {\@link NgPlural} when the
+ * Creates a view that will be added/removed from the parent {@link NgPlural} when the
  * given expression matches the plural expression according to CLDR rules.
  *
- * \@usageNotes
+ * @usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">...</ng-template>
  *   <ng-template ngPluralCase="other">...</ng-template>
  * </some-element>
- * ```
+ *```
  *
- * See {\@link NgPlural} for more details and example.
+ * See {@link NgPlural} for more details and example.
  *
- * \@publicApi
+ * @publicApi
  */
 class NgPluralCase {
-    /**
-     * @param {?} value
-     * @param {?} template
-     * @param {?} viewContainer
-     * @param {?} ngPlural
-     */
     constructor(value, template, viewContainer, ngPlural) {
         this.value = value;
-        /** @type {?} */
         const isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
@@ -6238,26 +3924,117 @@ class NgPluralCase {
 NgPluralCase.decorators = [
     { type: Directive, args: [{ selector: '[ngPluralCase]' },] }
 ];
-/** @nocollapse */
 NgPluralCase.ctorParameters = () => [
     { type: String, decorators: [{ type: Attribute, args: ['ngPluralCase',] }] },
     { type: TemplateRef },
     { type: ViewContainerRef },
     { type: NgPlural, decorators: [{ type: Host }] }
 ];
-if (false) {
-    /** @type {?} */
-    NgPluralCase.prototype.value;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
+ * @ngModule CommonModule
  *
- * \@description
+ * @usageNotes
+ *
+ * Set the font of the containing element to the result of an expression.
+ *
+ * ```
+ * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+ * ```
+ *
+ * Set the width of the containing element to a pixel value returned by an expression.
+ *
+ * ```
+ * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+ * ```
+ *
+ * Set a collection of style values using an expression that returns key-value pairs.
+ *
+ * ```
+ * <some-element [ngStyle]="objExp">...</some-element>
+ * ```
+ *
+ * @description
+ *
+ * An attribute directive that updates styles for the containing HTML element.
+ * Sets one or more style properties, specified as colon-separated key-value pairs.
+ * The key is a style name, with an optional `.<unit>` suffix
+ * (such as 'top.px', 'font-style.em').
+ * The value is an expression to be evaluated.
+ * The resulting non-null value, expressed in the given unit,
+ * is assigned to the given style property.
+ * If the result of evaluation is null, the corresponding style is removed.
+ *
+ * @publicApi
+ */
+class NgStyle {
+    constructor(_ngEl, _differs, _renderer) {
+        this._ngEl = _ngEl;
+        this._differs = _differs;
+        this._renderer = _renderer;
+        this._ngStyle = null;
+        this._differ = null;
+    }
+    set ngStyle(values) {
+        this._ngStyle = values;
+        if (!this._differ && values) {
+            this._differ = this._differs.find(values).create();
+        }
+    }
+    ngDoCheck() {
+        if (this._differ) {
+            const changes = this._differ.diff(this._ngStyle);
+            if (changes) {
+                this._applyChanges(changes);
+            }
+        }
+    }
+    _setStyle(nameAndUnit, value) {
+        const [name, unit] = nameAndUnit.split('.');
+        value = value != null && unit ? `${value}${unit}` : value;
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
+    }
+    _applyChanges(changes) {
+        changes.forEachRemovedItem((record) => this._setStyle(record.key, null));
+        changes.forEachAddedItem((record) => this._setStyle(record.key, record.currentValue));
+        changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
+    }
+}
+NgStyle.decorators = [
+    { type: Directive, args: [{ selector: '[ngStyle]' },] }
+];
+NgStyle.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyValueDiffers },
+    { type: Renderer2 }
+];
+NgStyle.propDecorators = {
+    ngStyle: [{ type: Input, args: ['ngStyle',] }]
+};
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @ngModule CommonModule
+ *
+ * @description
  *
  * Inserts an embedded view from a prepared `TemplateRef`.
  *
@@ -6265,7 +4042,7 @@ if (false) {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * \@usageNotes
+ * @usageNotes
  * ```
  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
  * ```
@@ -6274,19 +4051,16 @@ if (false) {
  *
  * ### Example
  *
- * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
+ * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@publicApi
+ * @publicApi
  */
 class NgTemplateOutlet {
-    /**
-     * @param {?} _viewContainerRef
-     */
     constructor(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._viewRef = null;
         /**
-         * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
+         * A context object to attach to the {@link EmbeddedViewRef}. This should be an
          * object, the object's keys will be available for binding by the local template `let`
          * declarations.
          * Using the key `$implicit` in the context object will set its value as default.
@@ -6297,15 +4071,8 @@ class NgTemplateOutlet {
          */
         this.ngTemplateOutlet = null;
     }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
     ngOnChanges(changes) {
-        /** @type {?} */
-        const recreateView = this._shouldRecreateView(changes);
-        if (recreateView) {
-            /** @type {?} */
+        if (changes['ngTemplateOutlet']) {
             const viewContainerRef = this._viewContainerRef;
             if (this._viewRef) {
                 viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
@@ -6314,63 +4081,14 @@ class NgTemplateOutlet {
                 viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
                 null;
         }
-        else if (this._viewRef && this.ngTemplateOutletContext) {
-            this._updateExistingContext(this.ngTemplateOutletContext);
-        }
-    }
-    /**
-     * We need to re-create existing embedded view if:
-     * - templateRef has changed
-     * - context has changes
-     *
-     * We mark context object as changed when the corresponding object
-     * shape changes (new properties are added or existing properties are removed).
-     * In other words we consider context with the same properties as "the same" even
-     * if object reference changes (see https://github.com/angular/angular/issues/13407).
-     * @private
-     * @param {?} changes
-     * @return {?}
-     */
-    _shouldRecreateView(changes) {
-        /** @type {?} */
-        const ctxChange = changes['ngTemplateOutletContext'];
-        return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-    }
-    /**
-     * @private
-     * @param {?} ctxChange
-     * @return {?}
-     */
-    _hasContextShapeChanged(ctxChange) {
-        /** @type {?} */
-        const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-        /** @type {?} */
-        const currCtxKeys = Object.keys(ctxChange.currentValue || {});
-        if (prevCtxKeys.length === currCtxKeys.length) {
-            for (let propName of currCtxKeys) {
-                if (prevCtxKeys.indexOf(propName) === -1) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
-    }
-    /**
-     * @private
-     * @param {?} ctx
-     * @return {?}
-     */
-    _updateExistingContext(ctx) {
-        for (let propName of Object.keys(ctx)) {
-            ((/** @type {?} */ ((/** @type {?} */ (this._viewRef)).context)))[propName] = ((/** @type {?} */ (this.ngTemplateOutletContext)))[propName];
+        else if (this._viewRef && changes['ngTemplateOutletContext'] && this.ngTemplateOutletContext) {
+            this._viewRef.context = this.ngTemplateOutletContext;
         }
     }
 }
 NgTemplateOutlet.decorators = [
     { type: Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
 ];
-/** @nocollapse */
 NgTemplateOutlet.ctorParameters = () => [
     { type: ViewContainerRef }
 ];
@@ -6378,40 +4096,17 @@ NgTemplateOutlet.propDecorators = {
     ngTemplateOutletContext: [{ type: Input }],
     ngTemplateOutlet: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    NgTemplateOutlet.prototype._viewRef;
-    /**
-     * A context object to attach to the {\@link EmbeddedViewRef}. This should be an
-     * object, the object's keys will be available for binding by the local template `let`
-     * declarations.
-     * Using the key `$implicit` in the context object will set its value as default.
-     * @type {?}
-     */
-    NgTemplateOutlet.prototype.ngTemplateOutletContext;
-    /**
-     * A string defining the template reference and optionally the context object for the template.
-     * @type {?}
-     */
-    NgTemplateOutlet.prototype.ngTemplateOutlet;
-    /**
-     * @type {?}
-     * @private
-     */
-    NgTemplateOutlet.prototype._viewContainerRef;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
- * @type {?}
  */
 const COMMON_DIRECTIVES = [
     NgClass,
@@ -6428,99 +4123,53 @@ const COMMON_DIRECTIVES = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} type
- * @param {?} value
- * @return {?}
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 function invalidPipeArgumentError(type, value) {
     return Error(`InvalidPipeArgument: '${value}' for pipe '${ɵstringify(type)}'`);
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @record
- */
-function SubscriptionStrategy() { }
-if (false) {
-    /**
-     * @param {?} async
-     * @param {?} updateLatestValue
-     * @return {?}
-     */
-    SubscriptionStrategy.prototype.createSubscription = function (async, updateLatestValue) { };
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    SubscriptionStrategy.prototype.dispose = function (subscription) { };
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    SubscriptionStrategy.prototype.onDestroy = function (subscription) { };
-}
-class ObservableStrategy {
-    /**
-     * @param {?} async
-     * @param {?} updateLatestValue
-     * @return {?}
-     */
+class SubscribableStrategy {
     createSubscription(async, updateLatestValue) {
-        return async.subscribe({ next: updateLatestValue, error: (/**
-             * @param {?} e
-             * @return {?}
-             */
-            (e) => { throw e; }) });
+        return async.subscribe({
+            next: updateLatestValue,
+            error: (e) => {
+                throw e;
+            }
+        });
     }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    dispose(subscription) { subscription.unsubscribe(); }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
-    onDestroy(subscription) { subscription.unsubscribe(); }
+    dispose(subscription) {
+        subscription.unsubscribe();
+    }
+    onDestroy(subscription) {
+        subscription.unsubscribe();
+    }
 }
 class PromiseStrategy {
-    /**
-     * @param {?} async
-     * @param {?} updateLatestValue
-     * @return {?}
-     */
     createSubscription(async, updateLatestValue) {
-        return async.then(updateLatestValue, (/**
-         * @param {?} e
-         * @return {?}
-         */
-        e => { throw e; }));
+        return async.then(updateLatestValue, e => {
+            throw e;
+        });
     }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
     dispose(subscription) { }
-    /**
-     * @param {?} subscription
-     * @return {?}
-     */
     onDestroy(subscription) { }
 }
-/** @type {?} */
 const _promiseStrategy = new PromiseStrategy();
-/** @type {?} */
-const _observableStrategy = new ObservableStrategy();
+const _subscribableStrategy = new SubscribableStrategy();
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Unwraps a value from an asynchronous primitive.
  *
@@ -6529,109 +4178,68 @@ const _observableStrategy = new ObservableStrategy();
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
  * potential memory leaks.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Examples
  *
  * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
  * promise.
  *
- * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
+ * {@example common/pipes/ts/async_pipe.ts region='AsyncPipePromise'}
  *
  * It's also possible to use `async` with Observables. The example below binds the `time` Observable
  * to the view. The Observable continuously updates the view with the current time.
  *
- * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
+ * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@publicApi
+ * @publicApi
  */
 class AsyncPipe {
-    /**
-     * @param {?} _ref
-     */
     constructor(_ref) {
         this._ref = _ref;
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
-        this._strategy = (/** @type {?} */ (null));
+        this._strategy = null;
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         if (this._subscription) {
             this._dispose();
         }
     }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
     transform(obj) {
         if (!this._obj) {
             if (obj) {
                 this._subscribe(obj);
             }
-            this._latestReturnedValue = this._latestValue;
             return this._latestValue;
         }
         if (obj !== this._obj) {
             this._dispose();
-            return this.transform((/** @type {?} */ (obj)));
+            return this.transform(obj);
         }
-        if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-            return this._latestReturnedValue;
-        }
-        this._latestReturnedValue = this._latestValue;
-        return WrappedValue.wrap(this._latestValue);
+        return this._latestValue;
     }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
     _subscribe(obj) {
         this._obj = obj;
         this._strategy = this._selectStrategy(obj);
-        this._subscription = this._strategy.createSubscription(obj, (/**
-         * @param {?} value
-         * @return {?}
-         */
-        (value) => this._updateLatestValue(obj, value)));
+        this._subscription = this._strategy.createSubscription(obj, (value) => this._updateLatestValue(obj, value));
     }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
     _selectStrategy(obj) {
         if (ɵisPromise(obj)) {
             return _promiseStrategy;
         }
-        if (ɵisObservable(obj)) {
-            return _observableStrategy;
+        if (ɵisSubscribable(obj)) {
+            return _subscribableStrategy;
         }
         throw invalidPipeArgumentError(AsyncPipe, obj);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     _dispose() {
-        this._strategy.dispose((/** @type {?} */ (this._subscription)));
+        this._strategy.dispose(this._subscription);
         this._latestValue = null;
-        this._latestReturnedValue = null;
         this._subscription = null;
         this._obj = null;
     }
-    /**
-     * @private
-     * @param {?} async
-     * @param {?} value
-     * @return {?}
-     */
     _updateLatestValue(async, value) {
         if (async === this._obj) {
             this._latestValue = value;
@@ -6642,70 +4250,36 @@ class AsyncPipe {
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] }
 ];
-/** @nocollapse */
 AsyncPipe.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._latestValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._latestReturnedValue;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._subscription;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._obj;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._strategy;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsyncPipe.prototype._ref;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Transforms text to all lower case.
  *
  * @see `UpperCasePipe`
  * @see `TitleCasePipe`
- * \@usageNotes
+ * @usageNotes
  *
  * The following example defines a view that allows the user to enter
  * text, and then uses the pipe to convert the input text to all lower case.
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- * \@ngModule CommonModule
- * \@publicApi
+ * @ngModule CommonModule
+ * @publicApi
  */
 class LowerCasePipe {
-    /**
-     * @param {?} value The string to transform to lower case.
-     * @return {?}
-     */
     transform(value) {
-        if (!value)
-            return value;
+        if (value == null)
+            return null;
         if (typeof value !== 'string') {
             throw invalidPipeArgumentError(LowerCasePipe, value);
         }
@@ -6718,46 +4292,37 @@ LowerCasePipe.decorators = [
 //
 // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
 // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
-// (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
+// (https://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
 // transpilation of this functionality down to ES5 without external tool, the only solution is
 // to use already transpiled form. Example can be found here -
 // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
 //
-/** @type {?} */
 const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08BD\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312E\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FEA\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AE\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDF00-\uDF19]|\uD806[\uDCA0-\uDCDF\uDCFF\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE83\uDE86-\uDE89\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F\uDFE0\uDFE1]|\uD821[\uDC00-\uDFEC]|\uD822[\uDC00-\uDEF2]|\uD82C[\uDC00-\uDD1E\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D])\S*/g;
 /**
  * Transforms text to title case.
- * Capitalizes the first letter of each word, and transforms the
+ * Capitalizes the first letter of each word and transforms the
  * rest of the word to lower case.
  * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
  *
  * @see `LowerCasePipe`
  * @see `UpperCasePipe`
  *
- * \@usageNotes
+ * @usageNotes
  * The following example shows the result of transforming various strings into title case.
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- * \@ngModule CommonModule
- * \@publicApi
+ * @ngModule CommonModule
+ * @publicApi
  */
 class TitleCasePipe {
-    /**
-     * @param {?} value The string to transform to title case.
-     * @return {?}
-     */
     transform(value) {
-        if (!value)
-            return value;
+        if (value == null)
+            return null;
         if (typeof value !== 'string') {
             throw invalidPipeArgumentError(TitleCasePipe, value);
         }
-        return value.replace(unicodeWordMatch, ((/**
-         * @param {?} txt
-         * @return {?}
-         */
-        txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase())));
+        return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
     }
 }
 TitleCasePipe.decorators = [
@@ -6768,17 +4333,13 @@ TitleCasePipe.decorators = [
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
  *
- * \@ngModule CommonModule
- * \@publicApi
+ * @ngModule CommonModule
+ * @publicApi
  */
 class UpperCasePipe {
-    /**
-     * @param {?} value The string to transform to upper case.
-     * @return {?}
-     */
     transform(value) {
-        if (!value)
-            return value;
+        if (value == null)
+            return null;
         if (typeof value !== 'string') {
             throw invalidPipeArgumentError(UpperCasePipe, value);
         }
@@ -6790,13 +4351,16 @@ UpperCasePipe.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 // clang-format off
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Formats a date value according to locale rules.
  *
@@ -6807,7 +4371,7 @@ UpperCasePipe.decorators = [
  * @see `formatDate()`
  *
  *
- * \@usageNotes
+ * @usageNotes
  *
  * The result of this pipe is not reevaluated when the input is mutated. To avoid the need to
  * reformat the date on every change-detection cycle, treat the date as an immutable object
@@ -6815,22 +4379,20 @@ UpperCasePipe.decorators = [
  *
  * ### Pre-defined format options
  *
- * Examples are given in `en-US` locale.
- *
- * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
- * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
- * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
- * GMT+1`).
- * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`).
- * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
- * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
- * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
- * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
- * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
- * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
- * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
- * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+ * | Option        | Equivalent to                       | Examples (given in `en-US` locale)              |
+ * |---------------|-------------------------------------|-------------------------------------------------|
+ * | `'short'`     | `'M/d/yy, h:mm a'`                  | `6/15/15, 9:03 AM`                              |
+ * | `'medium'`    | `'MMM d, y, h:mm:ss a'`             | `Jun 15, 2015, 9:03:01 AM`                      |
+ * | `'long'`      | `'MMMM d, y, h:mm:ss a z'`          | `June 15, 2015 at 9:03:01 AM GMT+1`             |
+ * | `'full'`      | `'EEEE, MMMM d, y, h:mm:ss a zzzz'` | `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00` |
+ * | `'shortDate'` | `'M/d/yy'`                          | `6/15/15`                                       |
+ * | `'mediumDate'`| `'MMM d, y'`                        | `Jun 15, 2015`                                  |
+ * | `'longDate'`  | `'MMMM d, y'`                       | `June 15, 2015`                                 |
+ * | `'fullDate'`  | `'EEEE, MMMM d, y'`                 | `Monday, June 15, 2015`                         |
+ * | `'shortTime'` | `'h:mm a'`                          | `9:03 AM`                                       |
+ * | `'mediumTime'`| `'h:mm:ss a'`                       | `9:03:01 AM`                                    |
+ * | `'longTime'`  | `'h:mm:ss a z'`                     | `9:03:01 AM GMT+1`                              |
+ * | `'fullTime'`  | `'h:mm:ss a zzzz'`                  | `9:03:01 AM GMT+01:00`                          |
  *
  * ### Custom format options
  *
@@ -6839,63 +4401,71 @@ UpperCasePipe.decorators = [
  * Format details depend on the locale.
  * Fields marked with (*) are only available in the extra data set for the given locale.
  *
- *  | Field type         | Format      | Description                                                   | Example Value                                              |
- *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
- *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
- *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
- *  |                    | GGGGG       | Narrow                                                        | A                                                          |
- *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
- *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
- *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
- *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
- *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
- *  |                    | MMMM        | Wide                                                          | September                                                  |
- *  |                    | MMMMM       | Narrow                                                        | S                                                          |
- *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
- *  |                    | LLLL        | Wide                                                          | September                                                  |
- *  |                    | LLLLL       | Narrow                                                        | S                                                          |
- *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
- *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
- *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
- *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
- *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
- *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
- *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
- *  |                    | EEEEE       | Narrow                                                        | T                                                          |
- *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
- *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
- *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
- *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
- *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
- *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | BBBBB       | Narrow                                                        | md                                                         |
- *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
- *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | bbbbb       | Narrow                                                        | md                                                         |
- *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
- *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
- *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
- *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
- *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
- *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
- *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
- *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
- *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
- *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
- *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
- *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
- *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
- *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
- *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
- *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
- *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
- *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *  | Field type          | Format      | Description                                                   | Example Value                                              |
+ *  |-------------------- |-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                 | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                     | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                     | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year                | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                     | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                     | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                     | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Week-numbering year | Y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                     | YY          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                     | YYY         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                     | YYYY        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month               | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                     | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                     | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                     | MMMM        | Wide                                                          | September                                                  |
+ *  |                     | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone    | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                     | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                     | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                     | LLLL        | Wide                                                          | September                                                  |
+ *  |                     | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year        | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                     | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month       | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month        | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                     | dd          | Numeric: 2 digits + zero padded                               | 01                                                         |
+ *  | Week day            | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                     | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                     | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                     | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Week day standalone | c, cc       | Numeric: 1 digit                                              | 2                                                          |
+ *  |                     | ccc         | Abbreviated                                                   | Tue                                                        |
+ *  |                     | cccc        | Wide                                                          | Tuesday                                                    |
+ *  |                     | ccccc       | Narrow                                                        | T                                                          |
+ *  |                     | cccccc      | Short                                                         | Tu                                                         |
+ *  | Period              | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                     | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                     | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*             | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                     | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                     | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone*  | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                     | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                     | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12           | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                     | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23           | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                     | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute              | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                     | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second              | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                     | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds  | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                     | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                     | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone                | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                     | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                     | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                     | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                     | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                     | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                     | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
  *
- * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
  *
  * ### Format examples
  *
@@ -6916,7 +4486,7 @@ UpperCasePipe.decorators = [
  * The following component uses a date pipe to display the current date in different formats.
  *
  * ```
- * \@Component({
+ * @Component({
  *  selector: 'date-pipe',
  *  template: `<div>
  *    <p>Today is {{today | date}}</p>
@@ -6930,29 +4500,13 @@ UpperCasePipe.decorators = [
  * }
  * ```
  *
- * \@publicApi
+ * @publicApi
  */
 // clang-format on
 class DatePipe {
-    /**
-     * @param {?} locale
-     */
     constructor(locale) {
         this.locale = locale;
     }
-    /**
-     * @param {?} value The date expression: a `Date` object,  a number
-     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
-     * @param {?=} format The date/time components to include, using predefined options or a
-     * custom format string.
-     * @param {?=} timezone A timezone offset (such as `'+0430'`), or a standard
-     * UTC/GMT or continental US timezone abbreviation.
-     * When not supplied, uses the end-user's local system timezone.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?} A date string in the desired format.
-     */
     transform(value, format = 'mediumDate', timezone, locale) {
         if (value == null || value === '' || value !== value)
             return null;
@@ -6967,52 +4521,42 @@ class DatePipe {
 DatePipe.decorators = [
     { type: Pipe, args: [{ name: 'date', pure: true },] }
 ];
-/** @nocollapse */
 DatePipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    DatePipe.prototype.locale;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-/** @type {?} */
 const _INTERPOLATION_REGEXP = /#/g;
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Maps a value to a string that pluralizes the value according to locale rules.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Example
  *
- * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
+ * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
- * \@publicApi
+ * @publicApi
  */
 class I18nPluralPipe {
-    /**
-     * @param {?} _localization
-     */
     constructor(_localization) {
         this._localization = _localization;
     }
     /**
-     * @param {?} value the number to be formatted
-     * @param {?} pluralMap an object that mimics the ICU format, see
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
      * http://userguide.icu-project.org/formatparse/messages.
-     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
-     * @return {?}
      */
     transform(value, pluralMap, locale) {
         if (value == null)
@@ -7020,7 +4564,6 @@ class I18nPluralPipe {
         if (typeof pluralMap !== 'object' || pluralMap === null) {
             throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
-        /** @type {?} */
         const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     }
@@ -7028,45 +4571,39 @@ class I18nPluralPipe {
 I18nPluralPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nPlural', pure: true },] }
 ];
-/** @nocollapse */
 I18nPluralPipe.ctorParameters = () => [
     { type: NgLocalization }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    I18nPluralPipe.prototype._localization;
-}
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Generic selector that displays the string that matches the current value.
  *
  * If none of the keys of the `mapping` match the `value`, then the content
  * of the `other` key is returned when present, otherwise an empty string is returned.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * ### Example
  *
- * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+ * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
- * \@publicApi
+ * @publicApi
  */
 class I18nSelectPipe {
     /**
-     * @param {?} value a string to be internationalized.
-     * @param {?} mapping an object that indicates the text that should be displayed
+     * @param value a string to be internationalized.
+     * @param mapping an object that indicates the text that should be displayed
      * for different values of the provided `value`.
-     * @return {?}
      */
     transform(value, mapping) {
         if (value == null)
@@ -7088,66 +4625,52 @@ I18nSelectPipe.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Converts a value into its JSON-format representation.  Useful for debugging.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * The following component uses a JSON pipe to convert an object
  * to JSON format, and displays the string in both formats for comparison.
  *
- * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+ * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * \@publicApi
+ * @publicApi
  */
 class JsonPipe {
     /**
-     * @param {?} value A value of any type to convert into a JSON-format string.
-     * @return {?}
+     * @param value A value of any type to convert into a JSON-format string.
      */
-    transform(value) { return JSON.stringify(value, null, 2); }
+    transform(value) {
+        return JSON.stringify(value, null, 2);
+    }
 }
 JsonPipe.decorators = [
     { type: Pipe, args: [{ name: 'json', pure: false },] }
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @template K, V
- * @param {?} key
- * @param {?} value
- * @return {?}
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 function makeKeyValuePair(key, value) {
     return { key: key, value: value };
 }
 /**
- * A key value pair.
- * Usually used to represent the key value pairs from a Map or Object.
- *
- * \@publicApi
- * @record
- * @template K, V
- */
-function KeyValue() { }
-if (false) {
-    /** @type {?} */
-    KeyValue.prototype.key;
-    /** @type {?} */
-    KeyValue.prototype.value;
-}
-/**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Transforms Object or Map into an array of key value pairs.
  *
@@ -7155,30 +4678,21 @@ if (false) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * \@usageNotes
+ * @usageNotes
  * ### Examples
  *
- * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
- * pipe.
+ * This examples show how an Object or a Map can be iterated by ngFor with the use of this
+ * keyvalue pipe.
  *
- * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
  *
- * \@publicApi
+ * @publicApi
  */
 class KeyValuePipe {
-    /**
-     * @param {?} differs
-     */
     constructor(differs) {
         this.differs = differs;
         this.keyValues = [];
     }
-    /**
-     * @template K, V
-     * @param {?} input
-     * @param {?=} compareFn
-     * @return {?}
-     */
     transform(input, compareFn = defaultComparator) {
         if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
             return null;
@@ -7187,17 +4701,12 @@ class KeyValuePipe {
             // make a differ for whatever type we've been passed in
             this.differ = this.differs.find(input).create();
         }
-        /** @type {?} */
-        const differChanges = this.differ.diff((/** @type {?} */ (input)));
+        const differChanges = this.differ.diff(input);
         if (differChanges) {
             this.keyValues = [];
-            differChanges.forEachItem((/**
-             * @param {?} r
-             * @return {?}
-             */
-            (r) => {
-                this.keyValues.push(makeKeyValuePair(r.key, (/** @type {?} */ (r.currentValue))));
-            }));
+            differChanges.forEachItem((r) => {
+                this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
+            });
             this.keyValues.sort(compareFn);
         }
         return this.keyValues;
@@ -7206,37 +4715,11 @@ class KeyValuePipe {
 KeyValuePipe.decorators = [
     { type: Pipe, args: [{ name: 'keyvalue', pure: false },] }
 ];
-/** @nocollapse */
 KeyValuePipe.ctorParameters = () => [
     { type: KeyValueDiffers }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    KeyValuePipe.prototype.differ;
-    /**
-     * @type {?}
-     * @private
-     */
-    KeyValuePipe.prototype.keyValues;
-    /**
-     * @type {?}
-     * @private
-     */
-    KeyValuePipe.prototype.differs;
-}
-/**
- * @template K, V
- * @param {?} keyValueA
- * @param {?} keyValueB
- * @return {?}
- */
 function defaultComparator(keyValueA, keyValueB) {
-    /** @type {?} */
     const a = keyValueA.key;
-    /** @type {?} */
     const b = keyValueB.key;
     // if same exit with 0;
     if (a === b)
@@ -7261,81 +4744,97 @@ function defaultComparator(keyValueA, keyValueB) {
         return a < b ? -1 : 1;
     }
     // `a` and `b` are of different types. Compare their string values.
-    /** @type {?} */
     const aString = String(a);
-    /** @type {?} */
     const bString = String(b);
     return aString == bString ? 0 : aString < bString ? -1 : 1;
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
- * Transforms a number into a string,
- * formatted according to locale rules that determine group sizing and
- * separator, decimal-point character, and other locale-specific
- * configurations.
- *
- * If no parameters are specified, the function rounds off to the nearest value using this
- * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
- * The behavior differs from that of the JavaScript ```Math.round()``` function.
- * In the following case for example, the pipe rounds down where
- * ```Math.round()``` rounds up:
- *
- * ```html
- * -2.5 | number:'1.0-0'
- * > -3
- * Math.round(-2.5)
- * > -2
- * ```
+ * Formats a value according to digit options and locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
  *
  * @see `formatNumber()`
  *
- * \@usageNotes
- * The following code shows how the pipe transforms numbers
- * into text strings, according to various format specifications,
- * where the caller's default locale is `en-US`.
+ * @usageNotes
+ *
+ * ### digitsInfo
+ *
+ * The value's decimal representation is specified by the `digitsInfo`
+ * parameter, written in the following format:<br>
+ *
+ * ```
+ * {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+ * ```
+ *
+ *  - `minIntegerDigits`:
+ * The minimum number of integer digits before the decimal point.
+ * Default is 1.
+ *
+ * - `minFractionDigits`:
+ * The minimum number of digits after the decimal point.
+ * Default is 0.
+ *
+ *  - `maxFractionDigits`:
+ * The maximum number of digits after the decimal point.
+ * Default is 3.
+ *
+ * If the formatted value is truncated it will be rounded using the "to-nearest" method:
+ *
+ * ```
+ * {{3.6 | number: '1.0-0'}}
+ * <!--will output '4'-->
+ *
+ * {{-3.6 | number:'1.0-0'}}
+ * <!--will output '-4'-->
+ * ```
+ *
+ * ### locale
+ *
+ * `locale` will format a value according to locale rules.
+ * Locale determines group sizing and separator,
+ * decimal point character, and other locale-specific configurations.
+ *
+ * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+ *
+ * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
  *
  * ### Example
  *
+ * The following code shows how the pipe transforms values
+ * according to various format specifications,
+ * where the caller's default locale is `en-US`.
+ *
  * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
- * \@publicApi
+ * @publicApi
  */
 class DecimalPipe {
-    /**
-     * @param {?} _locale
-     */
     constructor(_locale) {
         this._locale = _locale;
     }
     /**
-     * @param {?} value The number to be formatted.
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `3`.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
+     * @param value The value to be formatted.
+     * @param digitsInfo Sets digit and decimal representation.
+     * [See more](#digitsinfo).
+     * @param locale Specifies what locale format rules to use.
+     * [See more](#locale).
      */
     transform(value, digitsInfo, locale) {
-        if (isEmpty(value))
+        if (!isValue(value))
             return null;
         locale = locale || this._locale;
         try {
-            /** @type {?} */
             const num = strToNumber(value);
             return formatNumber(num, locale, digitsInfo);
         }
@@ -7347,20 +4846,12 @@ class DecimalPipe {
 DecimalPipe.decorators = [
     { type: Pipe, args: [{ name: 'number' },] }
 ];
-/** @nocollapse */
 DecimalPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    DecimalPipe.prototype._locale;
-}
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Transforms a number to a percentage
  * string, formatted according to locale rules that determine group sizing and
@@ -7369,45 +4860,24 @@ if (false) {
  *
  * @see `formatPercent()`
  *
- * \@usageNotes
+ * @usageNotes
  * The following code shows how the pipe transforms numbers
  * into text strings, according to various format specifications,
  * where the caller's default locale is `en-US`.
  *
  * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
  *
- * \@publicApi
+ * @publicApi
  */
 class PercentPipe {
-    /**
-     * @param {?} _locale
-     */
     constructor(_locale) {
         this._locale = _locale;
     }
-    /**
-     *
-     * @param {?} value The number to be formatted as a percentage.
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `0`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `0`.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
-     */
     transform(value, digitsInfo, locale) {
-        if (isEmpty(value))
+        if (!isValue(value))
             return null;
         locale = locale || this._locale;
         try {
-            /** @type {?} */
             const num = strToNumber(value);
             return formatPercent(num, locale, digitsInfo);
         }
@@ -7419,89 +4889,65 @@ class PercentPipe {
 PercentPipe.decorators = [
     { type: Pipe, args: [{ name: 'percent' },] }
 ];
-/** @nocollapse */
 PercentPipe.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    PercentPipe.prototype._locale;
-}
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Transforms a number to a currency string, formatted according to locale rules
  * that determine group sizing and separator, decimal-point character,
  * and other locale-specific configurations.
  *
+ * {@a currency-code-deprecation}
+ * <div class="alert is-helpful">
+ *
+ * **Deprecation notice:**
+ *
+ * The default currency code is currently always `USD` but this is deprecated from v9.
+ *
+ * **In v11 the default currency code will be taken from the current locale identified by
+ * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * more information.**
+ *
+ * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+ * your application `NgModule`:
+ *
+ * ```ts
+ * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+ * ```
+ *
+ * </div>
+ *
  * @see `getCurrencySymbol()`
  * @see `formatCurrency()`
  *
- * \@usageNotes
+ * @usageNotes
  * The following code shows how the pipe transforms numbers
  * into text strings, according to various format specifications,
  * where the caller's default locale is `en-US`.
  *
  * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
  *
- * \@publicApi
+ * @publicApi
  */
 class CurrencyPipe {
-    /**
-     * @param {?} _locale
-     */
-    constructor(_locale) {
+    constructor(_locale, _defaultCurrencyCode = 'USD') {
         this._locale = _locale;
+        this._defaultCurrencyCode = _defaultCurrencyCode;
     }
-    /**
-     *
-     * @param {?} value The number to be formatted as currency.
-     * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-     * such as `USD` for the US dollar and `EUR` for the euro.
-     * @param {?=} display The format for the currency indicator. One of the following:
-     *   - `code`: Show the code (such as `USD`).
-     *   - `symbol`(default): Show the symbol (such as `$`).
-     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-     * currency.
-     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-     * locale has no narrow symbol, uses the standard symbol for the locale.
-     *   - String: Use the given string value instead of a code or a symbol.
-     * For example, an empty string will suppress the currency & symbol.
-     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
-     *
-     * @param {?=} digitsInfo Decimal representation options, specified by a string
-     * in the following format:<br>
-     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-     * Default is `1`.
-     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-     * Default is `2`.
-     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-     * Default is `2`.
-     * If not provided, the number will be formatted with the proper amount of digits,
-     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-     * @param {?=} locale A locale code for the locale format rules to use.
-     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-     * @return {?}
-     */
     transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
-        if (isEmpty(value))
+        if (!isValue(value))
             return null;
         locale = locale || this._locale;
         if (typeof display === 'boolean') {
-            if ((/** @type {?} */ (console)) && (/** @type {?} */ (console.warn))) {
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && console && console.warn) {
                 console.warn(`Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are "code", "symbol" or "symbol-narrow".`);
             }
             display = display ? 'symbol' : 'code';
         }
-        /** @type {?} */
-        let currency = currencyCode || 'USD';
+        let currency = currencyCode || this._defaultCurrencyCode;
         if (display !== 'code') {
             if (display === 'symbol' || display === 'symbol-narrow') {
                 currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
@@ -7511,7 +4957,6 @@ class CurrencyPipe {
             }
         }
         try {
-            /** @type {?} */
             const num = strToNumber(value);
             return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
         }
@@ -7523,28 +4968,15 @@ class CurrencyPipe {
 CurrencyPipe.decorators = [
     { type: Pipe, args: [{ name: 'currency' },] }
 ];
-/** @nocollapse */
 CurrencyPipe.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] }
+    { type: String, decorators: [{ type: Inject, args: [LOCALE_ID,] }] },
+    { type: String, decorators: [{ type: Inject, args: [DEFAULT_CURRENCY_CODE,] }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CurrencyPipe.prototype._locale;
-}
-/**
- * @param {?} value
- * @return {?}
- */
-function isEmpty(value) {
-    return value == null || value === '' || value !== value;
+function isValue(value) {
+    return !(value == null || value === '' || value !== value);
 }
 /**
  * Transforms a string into a number (if needed).
- * @param {?} value
- * @return {?}
  */
 function strToNumber(value) {
     // Convert strings to numbers
@@ -7558,16 +4990,19 @@ function strToNumber(value) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@ngModule CommonModule
- * \@description
+ * @ngModule CommonModule
+ * @description
  *
  * Creates a new `Array` or `String` containing a subset (slice) of the elements.
  *
- * \@usageNotes
+ * @usageNotes
  *
  * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
  * and `String.prototype.slice()`.
@@ -7581,7 +5016,7 @@ function strToNumber(value) {
  *
  * This `ngFor` example:
  *
- * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
+ * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_list'}
  *
  * produces the following:
  *
@@ -7592,43 +5027,36 @@ function strToNumber(value) {
  *
  * ### String Examples
  *
- * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
+ * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
- * \@publicApi
+ * @publicApi
  */
 class SlicePipe {
-    /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
-     * @return {?}
-     */
     transform(value, start, end) {
         if (value == null)
-            return value;
+            return null;
         if (!this.supports(value)) {
             throw invalidPipeArgumentError(SlicePipe, value);
         }
         return value.slice(start, end);
     }
-    /**
-     * @private
-     * @param {?} obj
-     * @return {?}
-     */
-    supports(obj) { return typeof obj === 'string' || Array.isArray(obj); }
+    supports(obj) {
+        return typeof obj === 'string' || Array.isArray(obj);
+    }
 }
 SlicePipe.decorators = [
     { type: Pipe, args: [{ name: 'slice', pure: false },] }
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
- * @type {?}
  */
 const COMMON_PIPES = [
     AsyncPipe,
@@ -7647,8 +5075,11 @@ const COMMON_PIPES = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 // Note: This does not contain the location providers,
 // as they need some platform specific implementations to work.
@@ -7663,7 +5094,7 @@ const COMMON_PIPES = [
  * * The `exports` options make the declared directives and pipes available for import
  * by other NgModules.
  *
- * \@publicApi
+ * @publicApi
  */
 class CommonModule {
 }
@@ -7678,170 +5109,97 @@ CommonModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/** @type {?} */
 const PLATFORM_BROWSER_ID = 'browser';
-/** @type {?} */
 const PLATFORM_SERVER_ID = 'server';
-/** @type {?} */
 const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
-/** @type {?} */
 const PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
- * \@publicApi
- * @param {?} platformId
- * @return {?}
+ * @publicApi
  */
 function isPlatformBrowser(platformId) {
     return platformId === PLATFORM_BROWSER_ID;
 }
 /**
  * Returns whether a platform id represents a server platform.
- * \@publicApi
- * @param {?} platformId
- * @return {?}
+ * @publicApi
  */
 function isPlatformServer(platformId) {
     return platformId === PLATFORM_SERVER_ID;
 }
 /**
  * Returns whether a platform id represents a web worker app platform.
- * \@publicApi
- * @param {?} platformId
- * @return {?}
+ * @publicApi
  */
 function isPlatformWorkerApp(platformId) {
     return platformId === PLATFORM_WORKER_APP_ID;
 }
 /**
  * Returns whether a platform id represents a web worker UI platform.
- * \@publicApi
- * @param {?} platformId
- * @return {?}
+ * @publicApi
  */
 function isPlatformWorkerUi(platformId) {
     return platformId === PLATFORM_WORKER_UI_ID;
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@publicApi
- * @type {?}
+ * @publicApi
  */
-const VERSION = new Version('9.0.0-next.12+69.sha-1f498ab.with-local-changes');
+const VERSION = new Version('12.0.0-next.8+121.sha-72c4288');
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
- * \@publicApi
- * @abstract
+ * @publicApi
  */
 class ViewportScroller {
 }
 // De-sugared tree-shakable injection
 // See #23917
 /** @nocollapse */
-/** @nocollapse */ ViewportScroller.ɵprov = ɵɵdefineInjectable({
+ViewportScroller.ɵprov = ɵɵdefineInjectable({
     token: ViewportScroller,
     providedIn: 'root',
-    factory: (/**
-     * @nocollapse @return {?}
-     */
-    () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window, ɵɵinject(ErrorHandler)))
+    factory: () => new BrowserViewportScroller(ɵɵinject(DOCUMENT), window)
 });
-if (false) {
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ViewportScroller.ɵprov;
-    /**
-     * Configures the top offset used when scrolling to an anchor.
-     * @abstract
-     * @param {?} offset A position in screen coordinates (a tuple with x and y values)
-     * or a function that returns the top offset position.
-     *
-     * @return {?}
-     */
-    ViewportScroller.prototype.setOffset = function (offset) { };
-    /**
-     * Retrieves the current scroll position.
-     * @abstract
-     * @return {?} A position in screen coordinates (a tuple with x and y values).
-     */
-    ViewportScroller.prototype.getScrollPosition = function () { };
-    /**
-     * Scrolls to a specified position.
-     * @abstract
-     * @param {?} position A position in screen coordinates (a tuple with x and y values).
-     * @return {?}
-     */
-    ViewportScroller.prototype.scrollToPosition = function (position) { };
-    /**
-     * Scrolls to an anchor element.
-     * @abstract
-     * @param {?} anchor The ID of the anchor element.
-     * @return {?}
-     */
-    ViewportScroller.prototype.scrollToAnchor = function (anchor) { };
-    /**
-     * Disables automatic scroll restoration provided by the browser.
-     * See also [window.history.scrollRestoration
-     * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration).
-     * @abstract
-     * @param {?} scrollRestoration
-     * @return {?}
-     */
-    ViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
-}
 /**
  * Manages the scroll position for a browser window.
  */
 class BrowserViewportScroller {
-    /**
-     * @param {?} document
-     * @param {?} window
-     * @param {?} errorHandler
-     */
-    constructor(document, window, errorHandler) {
+    constructor(document, window) {
         this.document = document;
         this.window = window;
-        this.errorHandler = errorHandler;
-        this.offset = (/**
-         * @return {?}
-         */
-        () => [0, 0]);
+        this.offset = () => [0, 0];
     }
     /**
      * Configures the top offset used when scrolling to an anchor.
-     * @param {?} offset A position in screen coordinates (a tuple with x and y values)
+     * @param offset A position in screen coordinates (a tuple with x and y values)
      * or a function that returns the top offset position.
      *
-     * @return {?}
      */
     setOffset(offset) {
         if (Array.isArray(offset)) {
-            this.offset = (/**
-             * @return {?}
-             */
-            () => offset);
+            this.offset = () => offset;
         }
         else {
             this.offset = offset;
@@ -7849,11 +5207,11 @@ class BrowserViewportScroller {
     }
     /**
      * Retrieves the current scroll position.
-     * @return {?} The position in screen coordinates.
+     * @returns The position in screen coordinates.
      */
     getScrollPosition() {
-        if (this.supportScrollRestoration()) {
-            return [this.window.scrollX, this.window.scrollY];
+        if (this.supportsScrolling()) {
+            return [this.window.pageXOffset, this.window.pageYOffset];
         }
         else {
             return [0, 0];
@@ -7861,56 +5219,44 @@ class BrowserViewportScroller {
     }
     /**
      * Sets the scroll position.
-     * @param {?} position The new position in screen coordinates.
-     * @return {?}
+     * @param position The new position in screen coordinates.
      */
     scrollToPosition(position) {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             this.window.scrollTo(position[0], position[1]);
         }
     }
     /**
-     * Scrolls to an anchor element.
-     * @param {?} anchor The ID of the anchor element.
-     * @return {?}
+     * Scrolls to an element and attempts to focus the element.
+     *
+     * Note that the function name here is misleading in that the target string may be an ID for a
+     * non-anchor element.
+     *
+     * @param target The ID of an element or name of the anchor.
+     *
+     * @see https://html.spec.whatwg.org/#the-indicated-part-of-the-document
+     * @see https://html.spec.whatwg.org/#scroll-to-fragid
      */
-    scrollToAnchor(anchor) {
-        if (this.supportScrollRestoration()) {
-            // Escape anything passed to `querySelector` as it can throw errors and stop the application
-            // from working if invalid values are passed.
-            if (this.window.CSS && this.window.CSS.escape) {
-                anchor = this.window.CSS.escape(anchor);
-            }
-            else {
-                anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
-            }
-            try {
-                /** @type {?} */
-                const elSelectedById = this.document.querySelector(`#${anchor}`);
-                if (elSelectedById) {
-                    this.scrollToElement(elSelectedById);
-                    return;
-                }
-                /** @type {?} */
-                const elSelectedByName = this.document.querySelector(`[name='${anchor}']`);
-                if (elSelectedByName) {
-                    this.scrollToElement(elSelectedByName);
-                    return;
-                }
-            }
-            catch (e) {
-                this.errorHandler.handleError(e);
-            }
+    scrollToAnchor(target) {
+        if (!this.supportsScrolling()) {
+            return;
+        }
+        // TODO(atscott): The correct behavior for `getElementsByName` would be to also verify that the
+        // element is an anchor. However, this could be considered a breaking change and should be
+        // done in a major version.
+        const elSelected = findAnchorFromDocument(this.document, target);
+        if (elSelected) {
+            this.scrollToElement(elSelected);
+            // After scrolling to the element, the spec dictates that we follow the focus steps for the
+            // target. Rather than following the robust steps, simply attempt focus.
+            this.attemptFocus(elSelected);
         }
     }
     /**
      * Disables automatic scroll restoration provided by the browser.
-     * @param {?} scrollRestoration
-     * @return {?}
      */
     setHistoryScrollRestoration(scrollRestoration) {
         if (this.supportScrollRestoration()) {
-            /** @type {?} */
             const history = this.window.history;
             if (history && history.scrollRestoration) {
                 history.scrollRestoration = scrollRestoration;
@@ -7918,20 +5264,31 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * @private
-     * @param {?} el
-     * @return {?}
+     * Scrolls to an element using the native offset and the specified offset set on this scroller.
+     *
+     * The offset can be used when we know that there is a floating header and scrolling naively to an
+     * element (ex: `scrollIntoView`) leaves the element hidden behind the floating header.
      */
     scrollToElement(el) {
-        /** @type {?} */
         const rect = el.getBoundingClientRect();
-        /** @type {?} */
         const left = rect.left + this.window.pageXOffset;
-        /** @type {?} */
         const top = rect.top + this.window.pageYOffset;
-        /** @type {?} */
         const offset = this.offset();
         this.window.scrollTo(left - offset[0], top - offset[1]);
+    }
+    /**
+     * Calls `focus` on the `focusTarget` and returns `true` if the element was focused successfully.
+     *
+     * If `false`, further steps may be necessary to determine a valid substitute to be focused
+     * instead.
+     *
+     * @see https://html.spec.whatwg.org/#get-the-focusable-area
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
+     * @see https://html.spec.whatwg.org/#focusable-area
+     */
+    attemptFocus(focusTarget) {
+        focusTarget.focus();
+        return this.document.activeElement === focusTarget;
     }
     /**
      * We only support scroll restoration when we can get a hold of window.
@@ -7940,94 +5297,133 @@ class BrowserViewportScroller {
      * Lifting this restriction right now would require more changes in the dom adapter.
      * Since webworkers aren't widely used, we will lift it once RouterScroller is
      * battle-tested.
-     * @private
-     * @return {?}
      */
     supportScrollRestoration() {
         try {
-            return !!this.window && !!this.window.scrollTo;
+            if (!this.supportsScrolling()) {
+                return false;
+            }
+            // The `scrollRestoration` property could be on the `history` instance or its prototype.
+            const scrollRestorationDescriptor = getScrollRestorationProperty(this.window.history) ||
+                getScrollRestorationProperty(Object.getPrototypeOf(this.window.history));
+            // We can write to the `scrollRestoration` property if it is a writable data field or it has a
+            // setter function.
+            return !!scrollRestorationDescriptor &&
+                !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
+        }
+        catch (_a) {
+            return false;
+        }
+    }
+    supportsScrolling() {
+        try {
+            return !!this.window && !!this.window.scrollTo && 'pageXOffset' in this.window;
         }
         catch (_a) {
             return false;
         }
     }
 }
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserViewportScroller.prototype.offset;
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserViewportScroller.prototype.document;
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserViewportScroller.prototype.window;
-    /**
-     * @type {?}
-     * @private
-     */
-    BrowserViewportScroller.prototype.errorHandler;
+function getScrollRestorationProperty(obj) {
+    return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
+}
+function findAnchorFromDocument(document, target) {
+    const documentResult = document.getElementById(target) || document.getElementsByName(target)[0];
+    if (documentResult) {
+        return documentResult;
+    }
+    // `getElementById` and `getElementsByName` won't pierce through the shadow DOM so we
+    // have to traverse the DOM manually and do the lookup through the shadow roots.
+    if (typeof document.createTreeWalker === 'function' && document.body &&
+        (document.body.createShadowRoot || document.body.attachShadow)) {
+        const treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+        let currentNode = treeWalker.currentNode;
+        while (currentNode) {
+            const shadowRoot = currentNode.shadowRoot;
+            if (shadowRoot) {
+                // Note that `ShadowRoot` doesn't support `getElementsByName`
+                // so we have to fall back to `querySelector`.
+                const result = shadowRoot.getElementById(target) || shadowRoot.querySelector(`[name="${target}"]`);
+                if (result) {
+                    return result;
+                }
+            }
+            currentNode = treeWalker.nextNode();
+        }
+    }
+    return null;
 }
 /**
- * Provides an empty implementation of the viewport scroller. This will
- * live in \@angular/common as it will be used by both platform-server and platform-webworker.
+ * Provides an empty implementation of the viewport scroller.
  */
 class NullViewportScroller {
     /**
      * Empty implementation
-     * @param {?} offset
-     * @return {?}
      */
     setOffset(offset) { }
     /**
      * Empty implementation
-     * @return {?}
      */
-    getScrollPosition() { return [0, 0]; }
+    getScrollPosition() {
+        return [0, 0];
+    }
     /**
      * Empty implementation
-     * @param {?} position
-     * @return {?}
      */
     scrollToPosition(position) { }
     /**
      * Empty implementation
-     * @param {?} anchor
-     * @return {?}
      */
     scrollToAnchor(anchor) { }
     /**
      * Empty implementation
-     * @param {?} scrollRestoration
-     * @return {?}
      */
     setHistoryScrollRestoration(scrollRestoration) { }
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A wrapper around the `XMLHttpRequest` constructor.
+ *
+ * @publicApi
+ */
+class XhrFactory {
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
+// This file only reexports content of the `src` folder. Keep it that way.
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { COMMON_DIRECTIVES as ɵangular_packages_common_common_k, NgClassImplProvider as ɵangular_packages_common_common_c, NgClassImplProvider__PRE_R3__ as ɵangular_packages_common_common_b, NgClassR3Impl as ɵangular_packages_common_common_a, NgStyleImplProvider as ɵangular_packages_common_common_f, NgStyleImplProvider__PRE_R3__ as ɵangular_packages_common_common_e, NgStyleR3Impl as ɵangular_packages_common_common_d, createLocation as ɵangular_packages_common_common_i, provideLocationStrategy as ɵangular_packages_common_common_j, createBrowserPlatformLocation as ɵangular_packages_common_common_h, useBrowserPlatformLocation as ɵangular_packages_common_common_g, COMMON_PIPES as ɵangular_packages_common_common_l, registerLocaleData as ɵregisterLocaleData, registerLocaleData, formatDate, formatCurrency, formatNumber, formatPercent, NgLocaleLocalization, NgLocalization, Plural, NumberFormatStyle, FormStyle, TranslationWidth, FormatWidth, NumberSymbol, WeekDay, getNumberOfCurrencyDigits, getCurrencySymbol, getLocaleDayPeriods, getLocaleDayNames, getLocaleMonthNames, getLocaleId, getLocaleEraNames, getLocaleWeekEndRange, getLocaleFirstDayOfWeek, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocalePluralCase, getLocaleTimeFormat, getLocaleNumberSymbol, getLocaleNumberFormat, getLocaleCurrencyName, getLocaleCurrencySymbol, parseCookieValue as ɵparseCookieValue, CommonModule, NgClass, NgClassBase, NgForOf, NgForOfContext, NgIf, NgIfContext, NgPlural, NgPluralCase, NgStyle, NgStyleBase, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NgComponentOutlet, DOCUMENT, AsyncPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, LowerCasePipe, CurrencyPipe, DecimalPipe, PercentPipe, SlicePipe, UpperCasePipe, TitleCasePipe, KeyValuePipe, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, VERSION, ViewportScroller, NullViewportScroller as ɵNullViewportScroller, ngClassDirectiveDef__POST_R3__ as ɵngClassDirectiveDef__POST_R3__, ngClassFactoryDef__POST_R3__ as ɵngClassFactoryDef__POST_R3__, NgClassImpl as ɵNgClassImpl, NgClassImplProvider__POST_R3__ as ɵNgClassImplProvider__POST_R3__, NgClassR2Impl as ɵNgClassR2Impl, ngStyleDirectiveDef__POST_R3__ as ɵngStyleDirectiveDef__POST_R3__, ngStyleFactoryDef__POST_R3__ as ɵngStyleFactoryDef__POST_R3__, NgStyleImpl as ɵNgStyleImpl, NgStyleImplProvider__POST_R3__ as ɵNgStyleImplProvider__POST_R3__, NgStyleR2Impl as ɵNgStyleR2Impl, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter, BrowserPlatformLocation as ɵBrowserPlatformLocation, HashLocationStrategy, Location, APP_BASE_HREF, LocationStrategy, PathLocationStrategy, LOCATION_INITIALIZED, PlatformLocation };
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DOCUMENT, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, LOCATION_INITIALIZED, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PathLocationStrategy, PercentPipe, PlatformLocation, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, VERSION, ViewportScroller, WeekDay, XhrFactory, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, isPlatformWorkerApp, isPlatformWorkerUi, registerLocaleData, BrowserPlatformLocation as ɵBrowserPlatformLocation, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PLATFORM_WORKER_APP_ID as ɵPLATFORM_WORKER_APP_ID, PLATFORM_WORKER_UI_ID as ɵPLATFORM_WORKER_UI_ID, useBrowserPlatformLocation as ɵangular_packages_common_common_a, createBrowserPlatformLocation as ɵangular_packages_common_common_b, createLocation as ɵangular_packages_common_common_c, provideLocationStrategy as ɵangular_packages_common_common_d, COMMON_DIRECTIVES as ɵangular_packages_common_common_e, COMMON_PIPES as ɵangular_packages_common_common_f, getDOM as ɵgetDOM, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
 //# sourceMappingURL=common.js.map
