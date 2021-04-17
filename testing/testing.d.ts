@@ -1,6 +1,6 @@
 /**
- * @license Angular v9.0.0-rc.1+246.sha-d3cfad7.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.8+77.sha-917664e
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -51,26 +51,29 @@ export declare class MockLocationStrategy extends LocationStrategy {
 export declare class MockPlatformLocation implements PlatformLocation {
     private baseHref;
     private hashUpdate;
+    private urlChangeIndex;
     private urlChanges;
     constructor(config?: MockPlatformLocationConfig);
-    readonly hostname: string;
-    readonly protocol: string;
-    readonly port: string;
-    readonly pathname: string;
-    readonly search: string;
-    readonly hash: string;
-    readonly state: unknown;
+    get hostname(): string;
+    get protocol(): string;
+    get port(): string;
+    get pathname(): string;
+    get search(): string;
+    get hash(): string;
+    get state(): unknown;
     getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): void;
-    onHashChange(fn: LocationChangeListener): void;
-    readonly href: string;
-    readonly url: string;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
+    get href(): string;
+    get url(): string;
     private parseChanges;
     replaceState(state: any, title: string, newUrl: string): void;
     pushState(state: any, title: string, newUrl: string): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     getState(): unknown;
+    private scheduleHashUpdate;
 }
 
 /**
@@ -104,6 +107,7 @@ export declare class SpyLocation implements Location {
     replaceState(path: string, query?: string, state?: any): void;
     forward(): void;
     back(): void;
+    historyGo(relativePosition?: number): void;
     onUrlChange(fn: (url: string, state: unknown) => void): void;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;

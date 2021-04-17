@@ -1,6 +1,6 @@
 /**
- * @license Angular v9.0.0-rc.1+246.sha-d3cfad7.with-local-changes
- * (c) 2010-2019 Google LLC. https://angular.io/
+ * @license Angular v12.0.0-next.8+77.sha-917664e
+ * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
@@ -10,985 +10,9 @@
     (global = global || self, factory((global.ng = global.ng || {}, global.ng.common = {}), global.ng.core));
 }(this, (function (exports, i0) { 'use strict';
 
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
-    }
-
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-    }
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
-                }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-
-    function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m) return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-    }
-
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-        }
-        catch (error) { e = { error: error }; }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
-            }
-            finally { if (e) throw e.error; }
-        }
-        return ar;
-    }
-
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    };
-
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-    }
-
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-    }
-
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-        return cooked;
-    };
-
-    function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
-        return result;
-    }
-
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
-
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    /**
-     * Used to diff and convert ngStyle/ngClass instructions into [style] and [class] bindings.
-     *
-     * ngStyle and ngClass both accept various forms of input and behave differently than that
-     * of how [style] and [class] behave in Angular.
-     *
-     * The differences are:
-     *  - ngStyle and ngClass both **watch** their binding values for changes each time CD runs
-     *    while [style] and [class] bindings do not (they check for identity changes)
-     *  - ngStyle allows for unit-based keys (e.g. `{'max-width.px':value}`) and [style] does not
-     *  - ngClass supports arrays of class values and [class] only accepts map and string values
-     *  - ngClass allows for multiple className keys (space-separated) within an array or map
-     *     (as the * key) while [class] only accepts a simple key/value map object
-     *
-     * Having Angular understand and adapt to all the different forms of behavior is complicated
-     * and unnecessary. Instead, ngClass and ngStyle should have their input values be converted
-     * into something that the core-level [style] and [class] bindings understand.
-     *
-     * This [StylingDiffer] class handles this conversion by creating a new input value each time
-     * the inner representation of the binding value have changed.
-     *
-     * ## Why do we care about ngStyle/ngClass?
-     * The styling algorithm code (documented inside of `render3/interfaces/styling.ts`) needs to
-     * respect and understand the styling values emitted through ngStyle and ngClass (when they
-     * are present and used in a template).
-     *
-     * Instead of having these directives manage styling on their own, they should be included
-     * into the Angular styling algorithm that exists for [style] and [class] bindings.
-     *
-     * Here's why:
-     *
-     * - If ngStyle/ngClass is used in combination with [style]/[class] bindings then the
-     *   styles and classes would fall out of sync and be applied and updated at
-     *   inconsistent times
-     * - Both ngClass/ngStyle do not respect [class.name] and [style.prop] bindings
-     *   (they will write over them given the right combination of events)
-     *
-     *   ```
-     *   <!-- if `w1` is updated then it will always override `w2`
-     *        if `w2` is updated then it will always override `w1`
-     *        if both are updated at the same time then `w1` wins -->
-     *   <div [ngStyle]="{width:w1}" [style.width]="w2">...</div>
-     *
-     *   <!-- if `w1` is updated then it will always lose to `w2`
-     *        if `w2` is updated then it will always override `w1`
-     *        if both are updated at the same time then `w2` wins -->
-     *   <div [style]="{width:w1}" [style.width]="w2">...</div>
-     *   ```
-     * - ngClass/ngStyle were written as a directives and made use of maps, closures and other
-     *   expensive data structures which were evaluated each time CD runs
-     */
-    var StylingDiffer = /** @class */ (function () {
-        function StylingDiffer(_name, _options) {
-            this._name = _name;
-            this._options = _options;
-            this.value = null;
-            this._lastSetValue = null;
-            this._lastSetValueType = 0 /* Null */;
-            this._lastSetValueIdentityChange = false;
-        }
-        /**
-         * Sets (updates) the styling value within the differ.
-         *
-         * Only when `hasValueChanged` is called then this new value will be evaluted
-         * and checked against the previous value.
-         *
-         * @param value the new styling value provided from the ngClass/ngStyle binding
-         */
-        StylingDiffer.prototype.setValue = function (value) {
-            if (Array.isArray(value)) {
-                this._lastSetValueType = 4 /* Array */;
-            }
-            else if (value instanceof Set) {
-                this._lastSetValueType = 8 /* Set */;
-            }
-            else if (value && typeof value === 'string') {
-                if (!(this._options & 4 /* AllowStringValue */)) {
-                    throw new Error(this._name + ' string values are not allowed');
-                }
-                this._lastSetValueType = 1 /* String */;
-            }
-            else {
-                this._lastSetValueType = value ? 2 /* Map */ : 0 /* Null */;
-            }
-            this._lastSetValueIdentityChange = true;
-            this._lastSetValue = value || null;
-        };
-        /**
-         * Determines whether or not the value has changed.
-         *
-         * This function can be called right after `setValue()` is called, but it can also be
-         * called incase the existing value (if it's a collection) changes internally. If the
-         * value is indeed a collection it will do the necessary diffing work and produce a
-         * new object value as assign that to `value`.
-         *
-         * @returns whether or not the value has changed in some way.
-         */
-        StylingDiffer.prototype.hasValueChanged = function () {
-            var valueHasChanged = this._lastSetValueIdentityChange;
-            if (!valueHasChanged && !(this._lastSetValueType & 14 /* Collection */))
-                return false;
-            var finalValue = null;
-            var trimValues = (this._options & 1 /* TrimProperties */) ? true : false;
-            var parseOutUnits = (this._options & 8 /* AllowUnits */) ? true : false;
-            var allowSubKeys = (this._options & 2 /* AllowSubKeys */) ? true : false;
-            switch (this._lastSetValueType) {
-                // case 1: [input]="string"
-                case 1 /* String */:
-                    var tokens = this._lastSetValue.split(/\s+/g);
-                    if (this._options & 16 /* ForceAsMap */) {
-                        finalValue = {};
-                        tokens.forEach(function (token, i) { return finalValue[token] = true; });
-                    }
-                    else {
-                        finalValue = tokens.reduce(function (str, token, i) { return str + (i ? ' ' : '') + token; });
-                    }
-                    break;
-                // case 2: [input]="{key:value}"
-                case 2 /* Map */:
-                    var map = this._lastSetValue;
-                    var keys = Object.keys(map);
-                    if (!valueHasChanged) {
-                        if (this.value) {
-                            // we know that the classExp value exists and that it is
-                            // a map (otherwise an identity change would have occurred)
-                            valueHasChanged = mapHasChanged(keys, this.value, map);
-                        }
-                        else {
-                            valueHasChanged = true;
-                        }
-                    }
-                    if (valueHasChanged) {
-                        finalValue =
-                            bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, map, keys);
-                    }
-                    break;
-                // case 3a: [input]="[str1, str2, ...]"
-                // case 3b: [input]="Set"
-                case 4 /* Array */:
-                case 8 /* Set */:
-                    var values = Array.from(this._lastSetValue);
-                    if (!valueHasChanged) {
-                        var keys_1 = Object.keys(this.value);
-                        valueHasChanged = !arrayEqualsArray(keys_1, values);
-                    }
-                    if (valueHasChanged) {
-                        finalValue =
-                            bulidMapFromValues(this._name, trimValues, parseOutUnits, allowSubKeys, values);
-                    }
-                    break;
-                // case 4: [input]="null|undefined"
-                default:
-                    finalValue = null;
-                    break;
-            }
-            if (valueHasChanged) {
-                this.value = finalValue;
-            }
-            return valueHasChanged;
-        };
-        return StylingDiffer;
-    }());
-    /**
-     * builds and returns a map based on the values input value
-     *
-     * If the `keys` param is provided then the `values` param is treated as a
-     * string map. Otherwise `values` is treated as a string array.
-     */
-    function bulidMapFromValues(errorPrefix, trim, parseOutUnits, allowSubKeys, values, keys) {
-        var map = {};
-        if (keys) {
-            // case 1: map
-            for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                key = trim ? key.trim() : key;
-                var value = values[key];
-                setMapValues(map, key, value, parseOutUnits, allowSubKeys);
-            }
-        }
-        else {
-            // case 2: array
-            for (var i = 0; i < values.length; i++) {
-                var value = values[i];
-                assertValidValue(errorPrefix, value);
-                value = trim ? value.trim() : value;
-                setMapValues(map, value, true, false, allowSubKeys);
-            }
-        }
-        return map;
-    }
-    function assertValidValue(errorPrefix, value) {
-        if (typeof value !== 'string') {
-            throw new Error(errorPrefix + " can only toggle CSS classes expressed as strings, got " + value);
-        }
-    }
-    function setMapValues(map, key, value, parseOutUnits, allowSubKeys) {
-        if (allowSubKeys && key.indexOf(' ') > 0) {
-            var innerKeys = key.split(/\s+/g);
-            for (var j = 0; j < innerKeys.length; j++) {
-                setIndividualMapValue(map, innerKeys[j], value, parseOutUnits);
-            }
-        }
-        else {
-            setIndividualMapValue(map, key, value, parseOutUnits);
-        }
-    }
-    function setIndividualMapValue(map, key, value, parseOutUnits) {
-        if (parseOutUnits) {
-            var values = normalizeStyleKeyAndValue(key, value);
-            value = values.value;
-            key = values.key;
-        }
-        map[key] = value;
-    }
-    function normalizeStyleKeyAndValue(key, value) {
-        var index = key.indexOf('.');
-        if (index > 0) {
-            var unit = key.substr(index + 1); // ignore the . ([width.px]="'40'" => "40px")
-            key = key.substring(0, index);
-            if (value != null) { // we should not convert null values to string
-                value += unit;
-            }
-        }
-        return { key: key, value: value };
-    }
-    function mapHasChanged(keys, a, b) {
-        var oldKeys = Object.keys(a);
-        var newKeys = keys;
-        // the keys are different which means the map changed
-        if (!arrayEqualsArray(oldKeys, newKeys)) {
-            return true;
-        }
-        for (var i = 0; i < newKeys.length; i++) {
-            var key = newKeys[i];
-            if (a[key] !== b[key]) {
-                return true;
-            }
-        }
-        return false;
-    }
-    function arrayEqualsArray(a, b) {
-        if (a && b) {
-            if (a.length !== b.length)
-                return false;
-            for (var i = 0; i < a.length; i++) {
-                if (b.indexOf(a[i]) === -1)
-                    return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Used as a token for an injected service within the NgClass directive.
-     *
-     * NgClass behaves differenly whether or not VE is being used or not. If
-     * present then the legacy ngClass diffing algorithm will be used as an
-     * injected service. Otherwise the new diffing algorithm (which delegates
-     * to the `[class]` binding) will be used. This toggle behavior is done so
-     * via the ivy_switch mechanism.
-     */
-    var NgClassImpl = /** @class */ (function () {
-        function NgClassImpl() {
-        }
-        return NgClassImpl;
-    }());
-    var NgClassR2Impl = /** @class */ (function () {
-        function NgClassR2Impl(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
-            this._iterableDiffers = _iterableDiffers;
-            this._keyValueDiffers = _keyValueDiffers;
-            this._ngEl = _ngEl;
-            this._renderer = _renderer;
-            this._initialClasses = [];
-        }
-        NgClassR2Impl.prototype.getValue = function () { return null; };
-        NgClassR2Impl.prototype.setClass = function (value) {
-            this._removeClasses(this._initialClasses);
-            this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
-            this._applyClasses(this._initialClasses);
-            this._applyClasses(this._rawClass);
-        };
-        NgClassR2Impl.prototype.setNgClass = function (value) {
-            this._removeClasses(this._rawClass);
-            this._applyClasses(this._initialClasses);
-            this._iterableDiffer = null;
-            this._keyValueDiffer = null;
-            this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
-            if (this._rawClass) {
-                if (i0.ɵisListLikeIterable(this._rawClass)) {
-                    this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
-                }
-                else {
-                    this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
-                }
-            }
-        };
-        NgClassR2Impl.prototype.applyChanges = function () {
-            if (this._iterableDiffer) {
-                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
-                if (iterableChanges) {
-                    this._applyIterableChanges(iterableChanges);
-                }
-            }
-            else if (this._keyValueDiffer) {
-                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
-                if (keyValueChanges) {
-                    this._applyKeyValueChanges(keyValueChanges);
-                }
-            }
-        };
-        NgClassR2Impl.prototype._applyKeyValueChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
-            changes.forEachRemovedItem(function (record) {
-                if (record.previousValue) {
-                    _this._toggleClass(record.key, false);
-                }
-            });
-        };
-        NgClassR2Impl.prototype._applyIterableChanges = function (changes) {
-            var _this = this;
-            changes.forEachAddedItem(function (record) {
-                if (typeof record.item === 'string') {
-                    _this._toggleClass(record.item, true);
-                }
-                else {
-                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + i0.ɵstringify(record.item));
-                }
-            });
-            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
-        };
-        /**
-         * Applies a collection of CSS classes to the DOM element.
-         *
-         * For argument of type Set and Array CSS class names contained in those collections are always
-         * added.
-         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-         * for truthy and removed for falsy).
-         */
-        NgClassR2Impl.prototype._applyClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
-                }
-            }
-        };
-        /**
-         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-         * purposes.
-         */
-        NgClassR2Impl.prototype._removeClasses = function (rawClassVal) {
-            var _this = this;
-            if (rawClassVal) {
-                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-                else {
-                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
-                }
-            }
-        };
-        NgClassR2Impl.prototype._toggleClass = function (klass, enabled) {
-            var _this = this;
-            klass = klass.trim();
-            if (klass) {
-                klass.split(/\s+/g).forEach(function (klass) {
-                    if (enabled) {
-                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
-                    }
-                    else {
-                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
-                    }
-                });
-            }
-        };
-        NgClassR2Impl = __decorate([
-            i0.Injectable(),
-            __metadata("design:paramtypes", [i0.IterableDiffers, i0.KeyValueDiffers,
-                i0.ElementRef, i0.Renderer2])
-        ], NgClassR2Impl);
-        return NgClassR2Impl;
-    }());
-    var NgClassR3Impl = /** @class */ (function () {
-        function NgClassR3Impl() {
-            this._value = null;
-            this._ngClassDiffer = new StylingDiffer('NgClass', 1 /* TrimProperties */ |
-                2 /* AllowSubKeys */ |
-                4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-            this._classStringDiffer = null;
-        }
-        NgClassR3Impl.prototype.getValue = function () { return this._value; };
-        NgClassR3Impl.prototype.setClass = function (value) {
-            // early exit incase the binding gets emitted as an empty value which
-            // means there is no reason to instantiate and diff the values...
-            if (!value && !this._classStringDiffer)
-                return;
-            this._classStringDiffer = this._classStringDiffer ||
-                new StylingDiffer('class', 4 /* AllowStringValue */ | 16 /* ForceAsMap */);
-            this._classStringDiffer.setValue(value);
-        };
-        NgClassR3Impl.prototype.setNgClass = function (value) {
-            this._ngClassDiffer.setValue(value);
-        };
-        NgClassR3Impl.prototype.applyChanges = function () {
-            var classChanged = this._classStringDiffer ? this._classStringDiffer.hasValueChanged() : false;
-            var ngClassChanged = this._ngClassDiffer.hasValueChanged();
-            if (classChanged || ngClassChanged) {
-                var value = this._ngClassDiffer.value;
-                if (this._classStringDiffer) {
-                    var classValue = this._classStringDiffer.value;
-                    if (classValue) {
-                        value = value ? __assign(__assign({}, classValue), value) : classValue;
-                    }
-                }
-                this._value = value;
-            }
-        };
-        NgClassR3Impl = __decorate([
-            i0.Injectable()
-        ], NgClassR3Impl);
-        return NgClassR3Impl;
-    }());
-    // the implementation for both NgStyleR2Impl and NgStyleR3Impl are
-    // not ivy_switch'd away, instead they are only hooked up into the
-    // DI via NgStyle's directive's provider property.
-    var NgClassImplProvider__PRE_R3__ = {
-        provide: NgClassImpl,
-        useClass: NgClassR2Impl
-    };
-    var NgClassImplProvider__POST_R3__ = {
-        provide: NgClassImpl,
-        useClass: NgClassR3Impl
-    };
-    var NgClassImplProvider = NgClassImplProvider__PRE_R3__;
-
-    /*
-     * NgClass (as well as NgStyle) behaves differently when loaded in the VE and when not.
-     *
-     * If the VE is present (which is for older versions of Angular) then NgClass will inject
-     * the legacy diffing algorithm as a service and delegate all styling changes to that.
-     *
-     * If the VE is not present then NgStyle will normalize (through the injected service) and
-     * then write all styling changes to the `[style]` binding directly (through a host binding).
-     * Then Angular will notice the host binding change and treat the changes as styling
-     * changes and apply them via the core styling instructions that exist within Angular.
-     */
-    // used when the VE is present
-    var ngClassDirectiveDef__PRE_R3__ = undefined;
-    var ɵ0 = function () { }, ɵ1 = function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            i0.ɵɵallocHostVars(2);
-        }
-        if (rf & 2 /* Update */) {
-            i0.ɵɵclassMap(ctx.getValue());
-        }
-    };
-    // used when the VE is not present (note the directive will
-    // never be instantiated normally because it is apart of a
-    // base class)
-    var ngClassDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
-        type: ɵ0,
-        selectors: null,
-        hostBindings: ɵ1
-    });
-    var ngClassDirectiveDef = ngClassDirectiveDef__PRE_R3__;
-    var ngClassFactoryDef__PRE_R3__ = undefined;
-    var ngClassFactoryDef__POST_R3__ = function () { };
-    var ngClassFactoryDef = ngClassFactoryDef__PRE_R3__;
-    /**
-     * Serves as the base non-VE container for NgClass.
-     *
-     * While this is a base class that NgClass extends from, the
-     * class itself acts as a container for non-VE code to setup
-     * a link to the `[class]` host binding (via the static
-     * `ɵdir` property on the class).
-     *
-     * Note that the `ɵdir` property's code is switched
-     * depending if VE is present or not (this allows for the
-     * binding code to be set only for newer versions of Angular).
-     *
-     * @publicApi
-     */
-    var NgClassBase = /** @class */ (function () {
-        function NgClassBase(_delegate) {
-            this._delegate = _delegate;
-        }
-        NgClassBase.prototype.getValue = function () { return this._delegate.getValue(); };
-        NgClassBase.ɵdir = ngClassDirectiveDef;
-        NgClassBase.ɵfac = ngClassFactoryDef;
-        return NgClassBase;
-    }());
-    /**
-     * @ngModule CommonModule
-     *
-     * @usageNotes
-     * ```
-     *     <some-element [ngClass]="'first second'">...</some-element>
-     *
-     *     <some-element [ngClass]="['first', 'second']">...</some-element>
-     *
-     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
-     *
-     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
-     *
-     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
-     * ```
-     *
-     * @description
-     *
-     * Adds and removes CSS classes on an HTML element.
-     *
-     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
-     * - `string` - the CSS classes listed in the string (space delimited) are added,
-     * - `Array` - the CSS classes declared as Array elements are added,
-     * - `Object` - keys are CSS classes that get added when the expression given in the value
-     *              evaluates to a truthy value, otherwise they are removed.
-     *
-     * @publicApi
-     */
-    var NgClass = /** @class */ (function (_super) {
-        __extends(NgClass, _super);
-        function NgClass(delegate) {
-            return _super.call(this, delegate) || this;
-        }
-        Object.defineProperty(NgClass.prototype, "klass", {
-            set: function (value) { this._delegate.setClass(value); },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(NgClass.prototype, "ngClass", {
-            set: function (value) {
-                this._delegate.setNgClass(value);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        NgClass.prototype.ngDoCheck = function () { this._delegate.applyChanges(); };
-        __decorate([
-            i0.Input('class'),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
-        ], NgClass.prototype, "klass", null);
-        __decorate([
-            i0.Input('ngClass'),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgClass.prototype, "ngClass", null);
-        NgClass = __decorate([
-            i0.Directive({ selector: '[ngClass]', providers: [NgClassImplProvider] }),
-            __metadata("design:paramtypes", [NgClassImpl])
-        ], NgClass);
-        return NgClass;
-    }(NgClassBase));
-
-    /**
-     * Used as a token for an injected service within the NgStyle directive.
-     *
-     * NgStyle behaves differenly whether or not VE is being used or not. If
-     * present then the legacy ngClass diffing algorithm will be used as an
-     * injected service. Otherwise the new diffing algorithm (which delegates
-     * to the `[style]` binding) will be used. This toggle behavior is done so
-     * via the ivy_switch mechanism.
-     */
-    var NgStyleImpl = /** @class */ (function () {
-        function NgStyleImpl() {
-        }
-        return NgStyleImpl;
-    }());
-    var NgStyleR2Impl = /** @class */ (function () {
-        function NgStyleR2Impl(_ngEl, _differs, _renderer) {
-            this._ngEl = _ngEl;
-            this._differs = _differs;
-            this._renderer = _renderer;
-        }
-        NgStyleR2Impl.prototype.getValue = function () { return null; };
-        /**
-         * A map of style properties, specified as colon-separated
-         * key-value pairs.
-         * * The key is a style name, with an optional `.<unit>` suffix
-         *    (such as 'top.px', 'font-style.em').
-         * * The value is an expression to be evaluated.
-         */
-        NgStyleR2Impl.prototype.setNgStyle = function (values) {
-            this._ngStyle = values;
-            if (!this._differ && values) {
-                this._differ = this._differs.find(values).create();
-            }
-        };
-        /**
-         * Applies the new styles if needed.
-         */
-        NgStyleR2Impl.prototype.applyChanges = function () {
-            if (this._differ) {
-                var changes = this._differ.diff(this._ngStyle);
-                if (changes) {
-                    this._applyChanges(changes);
-                }
-            }
-        };
-        NgStyleR2Impl.prototype._applyChanges = function (changes) {
-            var _this = this;
-            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
-            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
-        };
-        NgStyleR2Impl.prototype._setStyle = function (nameAndUnit, value) {
-            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
-            value = value != null && unit ? "" + value + unit : value;
-            if (value != null) {
-                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
-            }
-            else {
-                this._renderer.removeStyle(this._ngEl.nativeElement, name);
-            }
-        };
-        NgStyleR2Impl = __decorate([
-            i0.Injectable(),
-            __metadata("design:paramtypes", [i0.ElementRef, i0.KeyValueDiffers, i0.Renderer2])
-        ], NgStyleR2Impl);
-        return NgStyleR2Impl;
-    }());
-    var NgStyleR3Impl = /** @class */ (function () {
-        function NgStyleR3Impl() {
-            this._differ = new StylingDiffer('NgStyle', 8 /* AllowUnits */);
-            this._value = null;
-        }
-        NgStyleR3Impl.prototype.getValue = function () { return this._value; };
-        NgStyleR3Impl.prototype.setNgStyle = function (value) { this._differ.setValue(value); };
-        NgStyleR3Impl.prototype.applyChanges = function () {
-            if (this._differ.hasValueChanged()) {
-                this._value = this._differ.value;
-            }
-        };
-        NgStyleR3Impl = __decorate([
-            i0.Injectable()
-        ], NgStyleR3Impl);
-        return NgStyleR3Impl;
-    }());
-    // the implementation for both NgClassR2Impl and NgClassR3Impl are
-    // not ivy_switch'd away, instead they are only hooked up into the
-    // DI via NgStyle's directive's provider property.
-    var NgStyleImplProvider__PRE_R3__ = {
-        provide: NgStyleImpl,
-        useClass: NgStyleR2Impl
-    };
-    var NgStyleImplProvider__POST_R3__ = {
-        provide: NgStyleImpl,
-        useClass: NgStyleR3Impl
-    };
-    var NgStyleImplProvider = NgStyleImplProvider__PRE_R3__;
-
-    /*
-     * NgStyle (as well as NgClass) behaves differently when loaded in the VE and when not.
-     *
-     * If the VE is present (which is for older versions of Angular) then NgStyle will inject
-     * the legacy diffing algorithm as a service and delegate all styling changes to that.
-     *
-     * If the VE is not present then NgStyle will normalize (through the injected service) and
-     * then write all styling changes to the `[style]` binding directly (through a host binding).
-     * Then Angular will notice the host binding change and treat the changes as styling
-     * changes and apply them via the core styling instructions that exist within Angular.
-     */
-    // used when the VE is present
-    var ngStyleDirectiveDef__PRE_R3__ = undefined;
-    var ngStyleFactoryDef__PRE_R3__ = undefined;
-    var ɵ0$1 = function () { }, ɵ1$1 = function (rf, ctx, elIndex) {
-        if (rf & 1 /* Create */) {
-            i0.ɵɵallocHostVars(2);
-        }
-        if (rf & 2 /* Update */) {
-            i0.ɵɵstyleMap(ctx.getValue());
-        }
-    };
-    // used when the VE is not present (note the directive will
-    // never be instantiated normally because it is apart of a
-    // base class)
-    var ngStyleDirectiveDef__POST_R3__ = i0.ɵɵdefineDirective({
-        type: ɵ0$1,
-        selectors: null,
-        hostBindings: ɵ1$1
-    });
-    var ngStyleFactoryDef__POST_R3__ = function () { };
-    var ngStyleDirectiveDef = ngStyleDirectiveDef__PRE_R3__;
-    var ngStyleFactoryDef = ngStyleDirectiveDef__PRE_R3__;
-    /**
-     * Serves as the base non-VE container for NgStyle.
-     *
-     * While this is a base class that NgStyle extends from, the
-     * class itself acts as a container for non-VE code to setup
-     * a link to the `[style]` host binding (via the static
-     * `ɵdir` property on the class).
-     *
-     * Note that the `ɵdir` property's code is switched
-     * depending if VE is present or not (this allows for the
-     * binding code to be set only for newer versions of Angular).
-     *
-     * @publicApi
-     */
-    var NgStyleBase = /** @class */ (function () {
-        function NgStyleBase(_delegate) {
-            this._delegate = _delegate;
-        }
-        NgStyleBase.prototype.getValue = function () { return this._delegate.getValue(); };
-        NgStyleBase.ɵdir = ngStyleDirectiveDef;
-        NgStyleBase.ɵfac = ngStyleFactoryDef;
-        return NgStyleBase;
-    }());
-    /**
-     * @ngModule CommonModule
-     *
-     * @usageNotes
-     *
-     * Set the font of the containing element to the result of an expression.
-     *
-     * ```
-     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
-     * ```
-     *
-     * Set the width of the containing element to a pixel value returned by an expression.
-     *
-     * ```
-     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
-     * ```
-     *
-     * Set a collection of style values using an expression that returns key-value pairs.
-     *
-     * ```
-     * <some-element [ngStyle]="objExp">...</some-element>
-     * ```
-     *
-     * @description
-     *
-     * An attribute directive that updates styles for the containing HTML element.
-     * Sets one or more style properties, specified as colon-separated key-value pairs.
-     * The key is a style name, with an optional `.<unit>` suffix
-     * (such as 'top.px', 'font-style.em').
-     * The value is an expression to be evaluated.
-     * The resulting non-null value, expressed in the given unit,
-     * is assigned to the given style property.
-     * If the result of evaluation is null, the corresponding style is removed.
-     *
-     * @publicApi
-     */
-    var NgStyle = /** @class */ (function (_super) {
-        __extends(NgStyle, _super);
-        function NgStyle(delegate) {
-            return _super.call(this, delegate) || this;
-        }
-        Object.defineProperty(NgStyle.prototype, "ngStyle", {
-            set: function (value) { this._delegate.setNgStyle(value); },
-            enumerable: true,
-            configurable: true
-        });
-        NgStyle.prototype.ngDoCheck = function () { this._delegate.applyChanges(); };
-        __decorate([
-            i0.Input('ngStyle'),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgStyle.prototype, "ngStyle", null);
-        NgStyle = __decorate([
-            i0.Directive({ selector: '[ngStyle]', providers: [NgStyleImplProvider] }),
-            __metadata("design:paramtypes", [NgStyleImpl])
-        ], NgStyle);
-        return NgStyle;
-    }(NgStyleBase));
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1018,9 +42,321 @@
         return DomAdapter;
     }());
 
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (Object.prototype.hasOwnProperty.call(b, p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+                t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    }
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); };
+    }
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
+    }
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                }
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+    var __createBinding = Object.create ? (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
+    }) : (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        o[k2] = m[k];
+    });
+    function __exportStar(m, o) {
+        for (var p in m)
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
+    }
+    function __values(o) {
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m)
+            return m.call(o);
+        if (o && typeof o.length === "number")
+            return {
+                next: function () {
+                    if (o && i >= o.length)
+                        o = void 0;
+                    return { value: o && o[i++], done: !o };
+                }
+            };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    /** @deprecated */
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+    /** @deprecated */
+    function __spreadArrays() {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+            s += arguments[i].length;
+        for (var r = Array(s), k = 0, i = 0; i < il; i++)
+            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+                r[k] = a[j];
+        return r;
+    }
+    function __spreadArray(to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
+    }
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n])
+            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try {
+            step(g[n](v));
+        }
+        catch (e) {
+            settle(q[0][3], e);
+        } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length)
+            resume(q[0][0], q[0][1]); }
+    }
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
+    }
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) {
+            Object.defineProperty(cooked, "raw", { value: raw });
+        }
+        else {
+            cooked.raw = raw;
+        }
+        return cooked;
+    }
+    ;
+    var __setModuleDefault = Object.create ? (function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function (o, v) {
+        o["default"] = v;
+    };
+    function __importStar(mod) {
+        if (mod && mod.__esModule)
+            return mod;
+        var result = {};
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
+        return result;
+    }
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    }
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+    }
+
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1039,37 +375,40 @@
      * This class should not be used directly by an application developer. Instead, use
      * {@link Location}.
      *
-     * `PlatformLocation` encapsulates all calls to DOM apis, which allows the Router to be platform
-     * agnostic.
+     * `PlatformLocation` encapsulates all calls to DOM APIs, which allows the Router to be
+     * platform-agnostic.
      * This means that we can have different implementation of `PlatformLocation` for the different
-     * platforms that angular supports. For example, `@angular/platform-browser` provides an
-     * implementation specific to the browser environment, while `@angular/platform-webworker` provides
-     * one suitable for use with web workers.
+     * platforms that Angular supports. For example, `@angular/platform-browser` provides an
+     * implementation specific to the browser environment, while `@angular/platform-server` provides
+     * one suitable for use with server-side rendering.
      *
      * The `PlatformLocation` class is used directly by all implementations of {@link LocationStrategy}
-     * when they need to interact with the DOM apis like pushState, popState, etc...
+     * when they need to interact with the DOM APIs like pushState, popState, etc.
      *
      * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
      * by the {@link Router} in order to navigate between routes. Since all interactions between {@link
      * Router} /
-     * {@link Location} / {@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
-     * class they are all platform independent.
+     * {@link Location} / {@link LocationStrategy} and DOM APIs flow through the `PlatformLocation`
+     * class, they are all platform-agnostic.
      *
      * @publicApi
      */
     var PlatformLocation = /** @class */ (function () {
         function PlatformLocation() {
         }
-        PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
-        PlatformLocation = __decorate([
-            i0.Injectable({
-                providedIn: 'platform',
-                // See #23917
-                useFactory: useBrowserPlatformLocation
-            })
-        ], PlatformLocation);
+        PlatformLocation.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return PlatformLocation;
     }());
+    PlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: useBrowserPlatformLocation, token: PlatformLocation, providedIn: "platform" });
+    PlatformLocation.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: useBrowserPlatformLocation
+                },] }
+    ];
     function useBrowserPlatformLocation() {
         return i0.ɵɵinject(BrowserPlatformLocation);
     }
@@ -1096,50 +435,72 @@
         // This is moved to its own method so that `MockPlatformLocationStrategy` can overwrite it
         /** @internal */
         BrowserPlatformLocation.prototype._init = function () {
-            this.location = getDOM().getLocation();
-            this._history = getDOM().getHistory();
+            this.location = window.location;
+            this._history = window.history;
         };
-        BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function () { return getDOM().getBaseHref(this._doc); };
+        BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function () {
+            return getDOM().getBaseHref(this._doc);
+        };
         BrowserPlatformLocation.prototype.onPopState = function (fn) {
-            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('popstate', fn, false);
+            var window = getDOM().getGlobalEventTarget(this._doc, 'window');
+            window.addEventListener('popstate', fn, false);
+            return function () { return window.removeEventListener('popstate', fn); };
         };
         BrowserPlatformLocation.prototype.onHashChange = function (fn) {
-            getDOM().getGlobalEventTarget(this._doc, 'window').addEventListener('hashchange', fn, false);
+            var window = getDOM().getGlobalEventTarget(this._doc, 'window');
+            window.addEventListener('hashchange', fn, false);
+            return function () { return window.removeEventListener('hashchange', fn); };
         };
         Object.defineProperty(BrowserPlatformLocation.prototype, "href", {
-            get: function () { return this.location.href; },
-            enumerable: true,
+            get: function () {
+                return this.location.href;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "protocol", {
-            get: function () { return this.location.protocol; },
-            enumerable: true,
+            get: function () {
+                return this.location.protocol;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "hostname", {
-            get: function () { return this.location.hostname; },
-            enumerable: true,
+            get: function () {
+                return this.location.hostname;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "port", {
-            get: function () { return this.location.port; },
-            enumerable: true,
+            get: function () {
+                return this.location.port;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "pathname", {
-            get: function () { return this.location.pathname; },
-            set: function (newPath) { this.location.pathname = newPath; },
-            enumerable: true,
+            get: function () {
+                return this.location.pathname;
+            },
+            set: function (newPath) {
+                this.location.pathname = newPath;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "search", {
-            get: function () { return this.location.search; },
-            enumerable: true,
+            get: function () {
+                return this.location.search;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(BrowserPlatformLocation.prototype, "hash", {
-            get: function () { return this.location.hash; },
-            enumerable: true,
+            get: function () {
+                return this.location.hash;
+            },
+            enumerable: false,
             configurable: true
         });
         BrowserPlatformLocation.prototype.pushState = function (state, title, url) {
@@ -1158,21 +519,32 @@
                 this.location.hash = url;
             }
         };
-        BrowserPlatformLocation.prototype.forward = function () { this._history.forward(); };
-        BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
-        BrowserPlatformLocation.prototype.getState = function () { return this._history.state; };
-        BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
-        BrowserPlatformLocation = __decorate([
-            i0.Injectable({
-                providedIn: 'platform',
-                // See #23917
-                useFactory: createBrowserPlatformLocation,
-            }),
-            __param(0, i0.Inject(DOCUMENT)),
-            __metadata("design:paramtypes", [Object])
-        ], BrowserPlatformLocation);
+        BrowserPlatformLocation.prototype.forward = function () {
+            this._history.forward();
+        };
+        BrowserPlatformLocation.prototype.back = function () {
+            this._history.back();
+        };
+        BrowserPlatformLocation.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            this._history.go(relativePosition);
+        };
+        BrowserPlatformLocation.prototype.getState = function () {
+            return this._history.state;
+        };
         return BrowserPlatformLocation;
     }(PlatformLocation));
+    BrowserPlatformLocation.ɵprov = i0.ɵɵdefineInjectable({ factory: createBrowserPlatformLocation, token: BrowserPlatformLocation, providedIn: "platform" });
+    BrowserPlatformLocation.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'platform',
+                    // See #23917
+                    useFactory: createBrowserPlatformLocation,
+                },] }
+    ];
+    BrowserPlatformLocation.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Inject, args: [DOCUMENT,] }] }
+    ]; };
     function supportsState() {
         return !!window.history.pushState;
     }
@@ -1182,7 +554,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1190,7 +562,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1272,12 +644,15 @@
     var LocationStrategy = /** @class */ (function () {
         function LocationStrategy() {
         }
-        LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
-        LocationStrategy = __decorate([
-            i0.Injectable({ providedIn: 'root', useFactory: provideLocationStrategy })
-        ], LocationStrategy);
+        LocationStrategy.prototype.historyGo = function (relativePosition) {
+            throw new Error('Not implemented');
+        };
         return LocationStrategy;
     }());
+    LocationStrategy.ɵprov = i0.ɵɵdefineInjectable({ factory: provideLocationStrategy, token: LocationStrategy, providedIn: "root" });
+    LocationStrategy.decorators = [
+        { type: i0.Injectable, args: [{ providedIn: 'root', useFactory: provideLocationStrategy },] }
+    ];
     function provideLocationStrategy(platformLocation) {
         // See #23917
         var location = i0.ɵɵinject(DOCUMENT).location;
@@ -1315,16 +690,20 @@
      * browser's URL.
      *
      * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
-     * or add a base element to the document. This URL prefix that will be preserved
-     * when generating and recognizing URLs.
+     * or add a `<base href>` element to the document.
      *
-     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app'` and call
+     * For instance, if you provide an `APP_BASE_HREF` of `'/my/app/'` and call
+     * `location.go('/foo')`, the browser's URL will become
+     * `example.com/my/app/foo`. To ensure all relative URIs resolve correctly,
+     * the `<base href>` and/or `APP_BASE_HREF` should end with a `/`.
+     *
+     * Similarly, if you add `<base href='/my/app/'/>` to the document and call
      * `location.go('/foo')`, the browser's URL will become
      * `example.com/my/app/foo`.
      *
-     * Similarly, if you add `<base href='/my/app'/>` to the document and call
-     * `location.go('/foo')`, the browser's URL will become
-     * `example.com/my/app/foo`.
+     * Note that when using `PathLocationStrategy`, neither the query nor
+     * the fragment in the `<base href>` will be preserved, as outlined
+     * by the [RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2).
      *
      * @usageNotes
      *
@@ -1339,6 +718,7 @@
         function PathLocationStrategy(_platformLocation, href) {
             var _this = _super.call(this) || this;
             _this._platformLocation = _platformLocation;
+            _this._removeListenerFns = [];
             if (href == null) {
                 href = _this._platformLocation.getBaseHrefFromDOM();
             }
@@ -1348,12 +728,20 @@
             _this._baseHref = href;
             return _this;
         }
-        PathLocationStrategy.prototype.onPopState = function (fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
+        PathLocationStrategy.prototype.ngOnDestroy = function () {
+            while (this._removeListenerFns.length) {
+                this._removeListenerFns.pop()();
+            }
         };
-        PathLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
-        PathLocationStrategy.prototype.prepareExternalUrl = function (internal) { return joinWithSlash(this._baseHref, internal); };
+        PathLocationStrategy.prototype.onPopState = function (fn) {
+            this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
+        };
+        PathLocationStrategy.prototype.getBaseHref = function () {
+            return this._baseHref;
+        };
+        PathLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+            return joinWithSlash(this._baseHref, internal);
+        };
         PathLocationStrategy.prototype.path = function (includeHash) {
             if (includeHash === void 0) { includeHash = false; }
             var pathname = this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
@@ -1368,23 +756,27 @@
             var externalUrl = this.prepareExternalUrl(url + normalizeQueryParams(queryParams));
             this._platformLocation.replaceState(state, title, externalUrl);
         };
-        PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-        PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        PathLocationStrategy = __decorate([
-            i0.Injectable(),
-            __param(1, i0.Optional()), __param(1, i0.Inject(APP_BASE_HREF)),
-            __metadata("design:paramtypes", [PlatformLocation, String])
-        ], PathLocationStrategy);
+        PathLocationStrategy.prototype.forward = function () {
+            this._platformLocation.forward();
+        };
+        PathLocationStrategy.prototype.back = function () {
+            this._platformLocation.back();
+        };
+        PathLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+        };
         return PathLocationStrategy;
     }(LocationStrategy));
+    PathLocationStrategy.decorators = [
+        { type: i0.Injectable }
+    ];
+    PathLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [APP_BASE_HREF,] }] }
+    ]; };
 
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
     /**
      * @description
      * A {@link LocationStrategy} used to configure the {@link Location} service to
@@ -1409,16 +801,23 @@
             var _this = _super.call(this) || this;
             _this._platformLocation = _platformLocation;
             _this._baseHref = '';
+            _this._removeListenerFns = [];
             if (_baseHref != null) {
                 _this._baseHref = _baseHref;
             }
             return _this;
         }
-        HashLocationStrategy.prototype.onPopState = function (fn) {
-            this._platformLocation.onPopState(fn);
-            this._platformLocation.onHashChange(fn);
+        HashLocationStrategy.prototype.ngOnDestroy = function () {
+            while (this._removeListenerFns.length) {
+                this._removeListenerFns.pop()();
+            }
         };
-        HashLocationStrategy.prototype.getBaseHref = function () { return this._baseHref; };
+        HashLocationStrategy.prototype.onPopState = function (fn) {
+            this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
+        };
+        HashLocationStrategy.prototype.getBaseHref = function () {
+            return this._baseHref;
+        };
         HashLocationStrategy.prototype.path = function (includeHash) {
             if (includeHash === void 0) { includeHash = false; }
             // the hash value is always prefixed with a `#`
@@ -1446,16 +845,34 @@
             }
             this._platformLocation.replaceState(state, title, url);
         };
-        HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
-        HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
-        HashLocationStrategy = __decorate([
-            i0.Injectable(),
-            __param(1, i0.Optional()), __param(1, i0.Inject(APP_BASE_HREF)),
-            __metadata("design:paramtypes", [PlatformLocation, String])
-        ], HashLocationStrategy);
+        HashLocationStrategy.prototype.forward = function () {
+            this._platformLocation.forward();
+        };
+        HashLocationStrategy.prototype.back = function () {
+            this._platformLocation.back();
+        };
+        HashLocationStrategy.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+        };
         return HashLocationStrategy;
     }(LocationStrategy));
+    HashLocationStrategy.decorators = [
+        { type: i0.Injectable }
+    ];
+    HashLocationStrategy.ctorParameters = function () { return [
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [APP_BASE_HREF,] }] }
+    ]; };
 
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * @description
      *
@@ -1504,7 +921,6 @@
                 });
             });
         }
-        Location_1 = Location;
         /**
          * Normalizes the URL path for this location.
          *
@@ -1522,7 +938,9 @@
          * Reports the current state of the location history.
          * @returns The current value of the `history.state` object.
          */
-        Location.prototype.getState = function () { return this._platformLocation.getState(); };
+        Location.prototype.getState = function () {
+            return this._platformLocation.getState();
+        };
         /**
          * Normalizes the given path and compares to the current normalized path.
          *
@@ -1544,7 +962,7 @@
          * @returns The normalized URL string.
          */
         Location.prototype.normalize = function (url) {
-            return Location_1.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
+            return Location.stripTrailingSlash(_stripBaseHref(this._baseHref, _stripIndexHtml(url)));
         };
         /**
          * Normalizes an external URL path.
@@ -1595,11 +1013,32 @@
         /**
          * Navigates forward in the platform's history.
          */
-        Location.prototype.forward = function () { this._platformStrategy.forward(); };
+        Location.prototype.forward = function () {
+            this._platformStrategy.forward();
+        };
         /**
          * Navigates back in the platform's history.
          */
-        Location.prototype.back = function () { this._platformStrategy.back(); };
+        Location.prototype.back = function () {
+            this._platformStrategy.back();
+        };
+        /**
+         * Navigate to a specific page from session history, identified by its relative position to the
+         * current page.
+         *
+         * @param relativePosition  Position of the target page in the history relative to the current
+         *     page.
+         * A negative value moves backwards, a positive value moves forwards, e.g. `location.historyGo(2)`
+         * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
+         * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
+         * when `relativePosition` equals 0.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+         */
+        Location.prototype.historyGo = function (relativePosition) {
+            if (relativePosition === void 0) { relativePosition = 0; }
+            var _a, _b;
+            (_b = (_a = this._platformStrategy).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
+        };
         /**
          * Registers a URL change listener. Use to catch updates performed by the Angular
          * framework that are not detectible through "popstate" or "hashchange" events.
@@ -1609,7 +1048,11 @@
         Location.prototype.onUrlChange = function (fn) {
             var _this = this;
             this._urlChangeListeners.push(fn);
-            this.subscribe(function (v) { _this._notifyUrlChangeListeners(v.url, v.state); });
+            if (!this._urlChangeSubscription) {
+                this._urlChangeSubscription = this.subscribe(function (v) {
+                    _this._notifyUrlChangeListeners(v.url, v.state);
+                });
+            }
         };
         /** @internal */
         Location.prototype._notifyUrlChangeListeners = function (url, state) {
@@ -1627,46 +1070,48 @@
         Location.prototype.subscribe = function (onNext, onThrow, onReturn) {
             return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
         };
-        var Location_1;
-        /**
-         * Normalizes URL parameters by prepending with `?` if needed.
-         *
-         * @param  params String of URL parameters.
-         *
-         * @returns The normalized URL parameters string.
-         */
-        Location.normalizeQueryParams = normalizeQueryParams;
-        /**
-         * Joins two parts of a URL with a slash if needed.
-         *
-         * @param start  URL string
-         * @param end    URL string
-         *
-         *
-         * @returns The joined URL string.
-         */
-        Location.joinWithSlash = joinWithSlash;
-        /**
-         * Removes a trailing slash from a URL string if needed.
-         * Looks for the first occurrence of either `#`, `?`, or the end of the
-         * line as `/` characters and removes the trailing slash if one exists.
-         *
-         * @param url URL string.
-         *
-         * @returns The URL string, modified if needed.
-         */
-        Location.stripTrailingSlash = stripTrailingSlash;
-        Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
-        Location = Location_1 = __decorate([
-            i0.Injectable({
-                providedIn: 'root',
-                // See #23917
-                useFactory: createLocation,
-            }),
-            __metadata("design:paramtypes", [LocationStrategy, PlatformLocation])
-        ], Location);
         return Location;
     }());
+    /**
+     * Normalizes URL parameters by prepending with `?` if needed.
+     *
+     * @param  params String of URL parameters.
+     *
+     * @returns The normalized URL parameters string.
+     */
+    Location.normalizeQueryParams = normalizeQueryParams;
+    /**
+     * Joins two parts of a URL with a slash if needed.
+     *
+     * @param start  URL string
+     * @param end    URL string
+     *
+     *
+     * @returns The joined URL string.
+     */
+    Location.joinWithSlash = joinWithSlash;
+    /**
+     * Removes a trailing slash from a URL string if needed.
+     * Looks for the first occurrence of either `#`, `?`, or the end of the
+     * line as `/` characters and removes the trailing slash if one exists.
+     *
+     * @param url URL string.
+     *
+     * @returns The URL string, modified if needed.
+     */
+    Location.stripTrailingSlash = stripTrailingSlash;
+    Location.ɵprov = i0.ɵɵdefineInjectable({ factory: createLocation, token: Location, providedIn: "root" });
+    Location.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                    // See #23917
+                    useFactory: createLocation,
+                },] }
+    ];
+    Location.ctorParameters = function () { return [
+        { type: LocationStrategy },
+        { type: PlatformLocation }
+    ]; };
     function createLocation() {
         return new Location(i0.ɵɵinject(LocationStrategy), i0.ɵɵinject(PlatformLocation));
     }
@@ -1679,7 +1124,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1687,7 +1132,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -1834,13 +1279,6 @@
         'ZWD': [undefined, undefined, 0]
     };
 
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
     (function (NumberFormatStyle) {
         NumberFormatStyle[NumberFormatStyle["Decimal"] = 0] = "Decimal";
         NumberFormatStyle[NumberFormatStyle["Percent"] = 1] = "Percent";
@@ -1895,7 +1333,7 @@
         /**
          * Decimal separator.
          * For `en-US`, the dot character.
-         * Example : 2,345`.`67
+         * Example: 2,345`.`67
          */
         NumberSymbol[NumberSymbol["Decimal"] = 0] = "Decimal";
         /**
@@ -1999,7 +1437,9 @@
      */
     function getLocaleDayPeriods(locale, formStyle, width) {
         var data = i0.ɵfindLocaleData(locale);
-        var amPmData = [data[i0.ɵLocaleDataIndex.DayPeriodsFormat], data[i0.ɵLocaleDataIndex.DayPeriodsStandalone]];
+        var amPmData = [
+            data[i0.ɵLocaleDataIndex.DayPeriodsFormat], data[i0.ɵLocaleDataIndex.DayPeriodsStandalone]
+        ];
         var amPm = getLastDefinedValue(amPmData, formStyle);
         return getLastDefinedValue(amPm, width);
     }
@@ -2042,7 +1482,6 @@
     /**
      * Retrieves Gregorian-calendar eras for the given locale.
      * @param locale A locale code for the locale format rules to use.
-     * @param formStyle The required grammatical form.
      * @param width The required character width.
 
      * @returns An array of localized era strings.
@@ -2222,6 +1661,19 @@
         return data[i0.ɵLocaleDataIndex.CurrencyName] || null;
     }
     /**
+     * Retrieves the default currency code for the given locale.
+     *
+     * The default is defined as the first currency which is still in use.
+     *
+     * @param locale The code of the locale whose currency code we want.
+     * @returns The code of the default currency for the given locale.
+     *
+     * @publicApi
+     */
+    function getLocaleCurrencyCode(locale) {
+        return i0.ɵgetLocaleCurrencyCode(locale);
+    }
+    /**
      * Retrieves the currency values for a given locale.
      * @param locale A locale code for the locale format rules to use.
      * @returns The currency values.
@@ -2238,7 +1690,8 @@
     var getLocalePluralCase = i0.ɵgetLocalePluralCase;
     function checkFullData(data) {
         if (!data[i0.ɵLocaleDataIndex.ExtraData]) {
-            throw new Error("Missing extra locale data for the locale \"" + data[i0.ɵLocaleDataIndex.LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
+            throw new Error("Missing extra locale data for the locale \"" + data[i0.ɵLocaleDataIndex
+                .LocaleId] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
         }
     }
     /**
@@ -2300,6 +1753,17 @@
         ];
         var dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
         return getLastDefinedValue(dayPeriods, width) || [];
+    }
+    /**
+     * Retrieves the writing direction of a specified locale
+     * @param locale A locale code for the locale format rules to use.
+     * @publicApi
+     * @returns 'rtl' or 'ltr'
+     * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+     */
+    function getLocaleDirection(locale) {
+        var data = i0.ɵfindLocaleData(locale);
+        return data[i0.ɵLocaleDataIndex.Directionality];
     }
     /**
      * Retrieves the first value that is defined in an array, going backwards from an index position.
@@ -2374,17 +1838,10 @@
         return typeof digits === 'number' ? digits : DEFAULT_NB_OF_CURRENCY_DIGITS;
     }
 
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
     var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
     //    1        2       3         4          5          6          7          8  9     10      11
     var NAMED_FORMATS = {};
-    var DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+    var DATE_FORMATS_SPLIT = /((?:[^BEGHLMOSWYZabcdhmswyz']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|c{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
     var ZoneWidth;
     (function (ZoneWidth) {
         ZoneWidth[ZoneWidth["Short"] = 0] = "Short";
@@ -2465,6 +1922,34 @@
                 value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
         });
         return text;
+    }
+    /**
+     * Create a new Date object with the given date value, and the time set to midnight.
+     *
+     * We cannot use `new Date(year, month, date)` because it maps years between 0 and 99 to 1900-1999.
+     * See: https://github.com/angular/angular/issues/40377
+     *
+     * Note that this function returns a Date object whose time is midnight in the current locale's
+     * timezone. In the future we might want to change this to be midnight in UTC, but this would be a
+     * considerable breaking change.
+     */
+    function createDate(year, month, date) {
+        // The `newDate` is set to midnight (UTC) on January 1st 1970.
+        // - In PST this will be December 31st 1969 at 4pm.
+        // - In GMT this will be January 1st 1970 at 1am.
+        // Note that they even have different years, dates and months!
+        var newDate = new Date(0);
+        // `setFullYear()` allows years like 0001 to be set correctly. This function does not
+        // change the internal time of the date.
+        // Consider calling `setFullYear(2019, 8, 20)` (September 20, 2019).
+        // - In PST this will now be September 20, 2019 at 4pm
+        // - In GMT this will now be September 20, 2019 at 1am
+        newDate.setFullYear(year, month, date);
+        // We want the final date to be at local midnight, so we reset the time.
+        // - In PST this will now be September 20, 2019 at 12am
+        // - In GMT this will now be September 20, 2019 at 12am
+        newDate.setHours(0, 0, 0);
+        return newDate;
     }
     function getNamedFormat(locale, format) {
         var localeId = getLocaleId(locale);
@@ -2629,28 +2114,42 @@
                 var currentMinutes_1 = date.getMinutes();
                 if (extended) {
                     var rules = getLocaleExtraDayPeriodRules(locale);
-                    var dayPeriods_1 = getLocaleExtraDayPeriods(locale, form, width);
-                    var result_1;
-                    rules.forEach(function (rule, index) {
+                    var dayPeriods = getLocaleExtraDayPeriods(locale, form, width);
+                    var index = rules.findIndex(function (rule) {
                         if (Array.isArray(rule)) {
                             // morning, afternoon, evening, night
-                            var _a = rule[0], hoursFrom = _a.hours, minutesFrom = _a.minutes;
-                            var _b = rule[1], hoursTo = _b.hours, minutesTo = _b.minutes;
-                            if (currentHours_1 >= hoursFrom && currentMinutes_1 >= minutesFrom &&
-                                (currentHours_1 < hoursTo ||
-                                    (currentHours_1 === hoursTo && currentMinutes_1 < minutesTo))) {
-                                result_1 = dayPeriods_1[index];
+                            var _a = __read(rule, 2), from = _a[0], to = _a[1];
+                            var afterFrom = currentHours_1 >= from.hours && currentMinutes_1 >= from.minutes;
+                            var beforeTo = (currentHours_1 < to.hours ||
+                                (currentHours_1 === to.hours && currentMinutes_1 < to.minutes));
+                            // We must account for normal rules that span a period during the day (e.g. 6am-9am)
+                            // where `from` is less (earlier) than `to`. But also rules that span midnight (e.g.
+                            // 10pm - 5am) where `from` is greater (later!) than `to`.
+                            //
+                            // In the first case the current time must be BOTH after `from` AND before `to`
+                            // (e.g. 8am is after 6am AND before 10am).
+                            //
+                            // In the second case the current time must be EITHER after `from` OR before `to`
+                            // (e.g. 4am is before 5am but not after 10pm; and 11pm is not before 5am but it is
+                            // after 10pm).
+                            if (from.hours < to.hours) {
+                                if (afterFrom && beforeTo) {
+                                    return true;
+                                }
+                            }
+                            else if (afterFrom || beforeTo) {
+                                return true;
                             }
                         }
                         else { // noon or midnight
-                            var hours = rule.hours, minutes = rule.minutes;
-                            if (hours === currentHours_1 && minutes === currentMinutes_1) {
-                                result_1 = dayPeriods_1[index];
+                            if (rule.hours === currentHours_1 && rule.minutes === currentMinutes_1) {
+                                return true;
                             }
                         }
+                        return false;
                     });
-                    if (result_1) {
-                        return result_1;
+                    if (index !== -1) {
+                        return dayPeriods[index];
                     }
                 }
                 // if no rules for the day periods, we use am/pm by default
@@ -2701,11 +2200,11 @@
     var JANUARY = 0;
     var THURSDAY = 4;
     function getFirstThursdayOfYear(year) {
-        var firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-        return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+        var firstDayOfYear = createDate(year, JANUARY, 1).getDay();
+        return createDate(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
     }
     function getThursdayThisWeek(datetime) {
-        return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+        return createDate(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
     }
     function weekGetter(size, monthBased) {
         if (monthBased === void 0) { monthBased = false; }
@@ -2717,19 +2216,32 @@
                 result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
             }
             else {
-                var firstThurs = getFirstThursdayOfYear(date.getFullYear());
                 var thisThurs = getThursdayThisWeek(date);
+                // Some days of a year are part of next year according to ISO 8601.
+                // Compute the firstThurs from the year of this week's Thursday
+                var firstThurs = getFirstThursdayOfYear(thisThurs.getFullYear());
                 var diff = thisThurs.getTime() - firstThurs.getTime();
                 result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
             }
             return padNumber(result, size, getLocaleNumberSymbol(locale, exports.NumberSymbol.MinusSign));
         };
     }
+    /**
+     * Returns a date formatter that provides the week-numbering year for the input date.
+     */
+    function weekNumberingYearGetter(size, trim) {
+        if (trim === void 0) { trim = false; }
+        return function (date, locale) {
+            var thisThurs = getThursdayThisWeek(date);
+            var weekNumberingYear = thisThurs.getFullYear();
+            return padNumber(weekNumberingYear, size, getLocaleNumberSymbol(locale, exports.NumberSymbol.MinusSign), trim);
+        };
+    }
     var DATE_FORMATS = {};
     // Based on CLDR formats:
     // See complete list: http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
     // See also explanations: http://cldr.unicode.org/translation/date-time
-    // TODO(ocombe): support all missing cldr formats: Y, U, Q, D, F, e, c, j, J, C, A, v, V, X, x
+    // TODO(ocombe): support all missing cldr formats: U, Q, D, F, e, j, J, C, A, v, V, X, x
     function getDateFormatter(format) {
         if (DATE_FORMATS[format]) {
             return DATE_FORMATS[format];
@@ -2763,6 +2275,24 @@
             // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
             case 'yyyy':
                 formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+                break;
+            // 1 digit representation of the week-numbering year, e.g. (AD 1 => 1, AD 199 => 199)
+            case 'Y':
+                formatter = weekNumberingYearGetter(1);
+                break;
+            // 2 digit representation of the week-numbering year, padded (00-99). (e.g. AD 2001 => 01, AD
+            // 2010 => 10)
+            case 'YY':
+                formatter = weekNumberingYearGetter(2, true);
+                break;
+            // 3 digit representation of the week-numbering year, padded (000-999). (e.g. AD 1 => 001, AD
+            // 2010 => 2010)
+            case 'YYY':
+                formatter = weekNumberingYearGetter(3);
+                break;
+            // 4 digit representation of the week-numbering year (e.g. AD 1 => 0001, AD 2010 => 2010)
+            case 'YYYY':
+                formatter = weekNumberingYearGetter(4);
                 break;
             // Month of the year (1-12), numeric
             case 'M':
@@ -2813,6 +2343,25 @@
                 break;
             case 'dd':
                 formatter = dateGetter(DateType.Date, 2);
+                break;
+            // Day of the Week StandAlone (1, 1, Mon, Monday, M, Mo)
+            case 'c':
+            case 'cc':
+                formatter = dateGetter(DateType.Day, 1);
+                break;
+            case 'ccc':
+                formatter =
+                    dateStrGetter(TranslationType.Days, exports.TranslationWidth.Abbreviated, exports.FormStyle.Standalone);
+                break;
+            case 'cccc':
+                formatter = dateStrGetter(TranslationType.Days, exports.TranslationWidth.Wide, exports.FormStyle.Standalone);
+                break;
+            case 'ccccc':
+                formatter =
+                    dateStrGetter(TranslationType.Days, exports.TranslationWidth.Narrow, exports.FormStyle.Standalone);
+                break;
+            case 'cccccc':
+                formatter = dateStrGetter(TranslationType.Days, exports.TranslationWidth.Short, exports.FormStyle.Standalone);
                 break;
             // Day of the Week
             case 'E':
@@ -2939,7 +2488,7 @@
         return formatter;
     }
     function timezoneToOffset(timezone, fallback) {
-        // Support: IE 9-11 only, Edge 13-15+
+        // Support: IE 11 only, Edge 13-15+
         // IE/Edge do not "understand" colon (`:`) in timezone
         timezone = timezone.replace(/:/g, '');
         var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
@@ -2977,12 +2526,7 @@
         }
         if (typeof value === 'string') {
             value = value.trim();
-            var parsedNb = parseFloat(value);
-            // any string that only contains numbers, like "1234" but not like "1234hello"
-            if (!isNaN(value - parsedNb)) {
-                return new Date(parsedNb);
-            }
-            if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            if (/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(value)) {
                 /* For ISO Strings without time the day, month and year must be extracted from the ISO String
                 before Date creation to avoid time offset and errors in the new Date.
                 If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
@@ -2990,8 +2534,13 @@
                 If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
                 is applied.
                 Note: ISO months are 0 for January, 1 for February, ... */
-                var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], m = _a[1], d = _a[2];
-                return new Date(y, m - 1, d);
+                var _a = __read(value.split('-').map(function (val) { return +val; }), 3), y = _a[0], _b = _a[1], m = _b === void 0 ? 1 : _b, _c = _a[2], d = _c === void 0 ? 1 : _c;
+                return createDate(y, m - 1, d);
+            }
+            var parsedNb = parseFloat(value);
+            // any string that only contains numbers, like "1234" but not like "1234hello"
+            if (!isNaN(value - parsedNb)) {
+                return new Date(parsedNb);
             }
             var match = void 0;
             if (match = value.match(ISO8601_DATE_REGEX)) {
@@ -3024,7 +2573,10 @@
         var h = Number(match[4] || 0) - tzHour;
         var m = Number(match[5] || 0) - tzMin;
         var s = Number(match[6] || 0);
-        var ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+        // The ECMAScript specification (https://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.11)
+        // defines that `DateTime` milliseconds should always be rounded down, so that `999.9ms`
+        // becomes `999ms`.
+        var ms = Math.floor(parseFloat('0.' + (match[7] || 0)) * 1000);
         timeSetter.call(date, h, m, s, ms);
         return date;
     }
@@ -3034,7 +2586,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3151,7 +2703,7 @@
      * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
      * currency code, such as `USD` for the US dollar and `EUR` for the euro.
      * Used to determine the number of digits in the decimal part.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted currency value.
@@ -3171,7 +2723,12 @@
         return res
             .replace(CURRENCY_CHAR, currency)
             // if we have 2 time the currency character, the second one is ignored
-            .replace(CURRENCY_CHAR, '');
+            .replace(CURRENCY_CHAR, '')
+            // If there is a spacing between currency character and the value and
+            // the currency character is supressed by passing an empty string, the
+            // spacing character would remain as part of the string. Then we
+            // should remove it.
+            .trim();
     }
     /**
      * @ngModule CommonModule
@@ -3181,7 +2738,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted percentage value.
@@ -3207,7 +2764,7 @@
      *
      * @param value The number to format.
      * @param locale A locale code for the locale format rules to use.
-     * @param digitInfo Decimal representation options, specified by a string in the following format:
+     * @param digitsInfo Decimal representation options, specified by a string in the following format:
      * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
      *
      * @returns The formatted text string.
@@ -3424,13 +2981,6 @@
     }
 
     /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    /**
      * @publicApi
      */
     var NgLocalization = /** @class */ (function () {
@@ -3486,17 +3036,18 @@
                     return 'other';
             }
         };
-        NgLocaleLocalization = __decorate([
-            i0.Injectable(),
-            __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
-        ], NgLocaleLocalization);
         return NgLocaleLocalization;
     }(NgLocalization));
+    NgLocaleLocalization.decorators = [
+        { type: i0.Injectable }
+    ];
+    NgLocaleLocalization.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3515,7 +3066,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3545,7 +3096,182 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @ngModule CommonModule
+     *
+     * @usageNotes
+     * ```
+     *     <some-element [ngClass]="'first second'">...</some-element>
+     *
+     *     <some-element [ngClass]="['first', 'second']">...</some-element>
+     *
+     *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+     *
+     *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
+     *
+     *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+     * ```
+     *
+     * @description
+     *
+     * Adds and removes CSS classes on an HTML element.
+     *
+     * The CSS classes are updated as follows, depending on the type of the expression evaluation:
+     * - `string` - the CSS classes listed in the string (space delimited) are added,
+     * - `Array` - the CSS classes declared as Array elements are added,
+     * - `Object` - keys are CSS classes that get added when the expression given in the value
+     *              evaluates to a truthy value, otherwise they are removed.
+     *
+     * @publicApi
+     */
+    var NgClass = /** @class */ (function () {
+        function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
+            this._iterableDiffers = _iterableDiffers;
+            this._keyValueDiffers = _keyValueDiffers;
+            this._ngEl = _ngEl;
+            this._renderer = _renderer;
+            this._iterableDiffer = null;
+            this._keyValueDiffer = null;
+            this._initialClasses = [];
+            this._rawClass = null;
+        }
+        Object.defineProperty(NgClass.prototype, "klass", {
+            set: function (value) {
+                this._removeClasses(this._initialClasses);
+                this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+                this._applyClasses(this._initialClasses);
+                this._applyClasses(this._rawClass);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(NgClass.prototype, "ngClass", {
+            set: function (value) {
+                this._removeClasses(this._rawClass);
+                this._applyClasses(this._initialClasses);
+                this._iterableDiffer = null;
+                this._keyValueDiffer = null;
+                this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
+                if (this._rawClass) {
+                    if (i0.ɵisListLikeIterable(this._rawClass)) {
+                        this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
+                    }
+                    else {
+                        this._keyValueDiffer = this._keyValueDiffers.find(this._rawClass).create();
+                    }
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        NgClass.prototype.ngDoCheck = function () {
+            if (this._iterableDiffer) {
+                var iterableChanges = this._iterableDiffer.diff(this._rawClass);
+                if (iterableChanges) {
+                    this._applyIterableChanges(iterableChanges);
+                }
+            }
+            else if (this._keyValueDiffer) {
+                var keyValueChanges = this._keyValueDiffer.diff(this._rawClass);
+                if (keyValueChanges) {
+                    this._applyKeyValueChanges(keyValueChanges);
+                }
+            }
+        };
+        NgClass.prototype._applyKeyValueChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._toggleClass(record.key, record.currentValue); });
+            changes.forEachRemovedItem(function (record) {
+                if (record.previousValue) {
+                    _this._toggleClass(record.key, false);
+                }
+            });
+        };
+        NgClass.prototype._applyIterableChanges = function (changes) {
+            var _this = this;
+            changes.forEachAddedItem(function (record) {
+                if (typeof record.item === 'string') {
+                    _this._toggleClass(record.item, true);
+                }
+                else {
+                    throw new Error("NgClass can only toggle CSS classes expressed as strings, got " + i0.ɵstringify(record.item));
+                }
+            });
+            changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
+        };
+        /**
+         * Applies a collection of CSS classes to the DOM element.
+         *
+         * For argument of type Set and Array CSS class names contained in those collections are always
+         * added.
+         * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+         * for truthy and removed for falsy).
+         */
+        NgClass.prototype._applyClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, true); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
+                }
+            }
+        };
+        /**
+         * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+         * purposes.
+         */
+        NgClass.prototype._removeClasses = function (rawClassVal) {
+            var _this = this;
+            if (rawClassVal) {
+                if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                    rawClassVal.forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+                else {
+                    Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
+                }
+            }
+        };
+        NgClass.prototype._toggleClass = function (klass, enabled) {
+            var _this = this;
+            klass = klass.trim();
+            if (klass) {
+                klass.split(/\s+/g).forEach(function (klass) {
+                    if (enabled) {
+                        _this._renderer.addClass(_this._ngEl.nativeElement, klass);
+                    }
+                    else {
+                        _this._renderer.removeClass(_this._ngEl.nativeElement, klass);
+                    }
+                });
+            }
+        };
+        return NgClass;
+    }());
+    NgClass.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngClass]' },] }
+    ];
+    NgClass.ctorParameters = function () { return [
+        { type: i0.IterableDiffers },
+        { type: i0.KeyValueDiffers },
+        { type: i0.ElementRef },
+        { type: i0.Renderer2 }
+    ]; };
+    NgClass.propDecorators = {
+        klass: [{ type: i0.Input, args: ['class',] }],
+        ngClass: [{ type: i0.Input, args: ['ngClass',] }]
+    };
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3637,32 +3363,24 @@
             if (this._moduleRef)
                 this._moduleRef.destroy();
         };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", i0.Type)
-        ], NgComponentOutlet.prototype, "ngComponentOutlet", void 0);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", i0.Injector)
-        ], NgComponentOutlet.prototype, "ngComponentOutletInjector", void 0);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Array)
-        ], NgComponentOutlet.prototype, "ngComponentOutletContent", void 0);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", i0.NgModuleFactory)
-        ], NgComponentOutlet.prototype, "ngComponentOutletNgModuleFactory", void 0);
-        NgComponentOutlet = __decorate([
-            i0.Directive({ selector: '[ngComponentOutlet]' }),
-            __metadata("design:paramtypes", [i0.ViewContainerRef])
-        ], NgComponentOutlet);
         return NgComponentOutlet;
     }());
+    NgComponentOutlet.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngComponentOutlet]' },] }
+    ];
+    NgComponentOutlet.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef }
+    ]; };
+    NgComponentOutlet.propDecorators = {
+        ngComponentOutlet: [{ type: i0.Input }],
+        ngComponentOutletInjector: [{ type: i0.Input }],
+        ngComponentOutletContent: [{ type: i0.Input }],
+        ngComponentOutletNgModuleFactory: [{ type: i0.Input }]
+    };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3678,23 +3396,31 @@
             this.count = count;
         }
         Object.defineProperty(NgForOfContext.prototype, "first", {
-            get: function () { return this.index === 0; },
-            enumerable: true,
+            get: function () {
+                return this.index === 0;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "last", {
-            get: function () { return this.index === this.count - 1; },
-            enumerable: true,
+            get: function () {
+                return this.index === this.count - 1;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "even", {
-            get: function () { return this.index % 2 === 0; },
-            enumerable: true,
+            get: function () {
+                return this.index % 2 === 0;
+            },
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOfContext.prototype, "odd", {
-            get: function () { return !this.even; },
-            enumerable: true,
+            get: function () {
+                return !this.even;
+            },
+            enumerable: false,
             configurable: true
         });
         return NgForOfContext;
@@ -3706,7 +3432,7 @@
      * of the cloned templates.
      *
      * The `ngForOf` directive is generally used in the
-     * [shorthand form](guide/structural-directives#the-asterisk--prefix) `*ngFor`.
+     * [shorthand form](guide/structural-directives#asterisk) `*ngFor`.
      * In this form, the template to be rendered for each iteration is the content
      * of an anchor element containing the directive.
      *
@@ -3735,11 +3461,11 @@
      * context according to its lexical position.
      *
      * When using the shorthand syntax, Angular allows only [one structural directive
-     * on an element](guide/structural-directives#one-structural-directive-per-host-element).
+     * on an element](guide/built-in-directives#one-per-element).
      * If you want to iterate conditionally, for example,
      * put the `*ngIf` on a container element that wraps the `*ngFor` element.
      * For futher discussion, see
-     * [Structural Directives](guide/structural-directives#one-per-element).
+     * [Structural Directives](guide/built-in-directives#one-per-element).
      *
      * @usageNotes
      *
@@ -3761,6 +3487,7 @@
      * more complex then a property access, for example when using the async pipe (`userStreams |
      * async`).
      * - `index: number`: The index of the current item in the iterable.
+     * - `count: number`: The length of the iterable.
      * - `first: boolean`: True when the item is the first item in the iterable.
      * - `last: boolean`: True when the item is the last item in the iterable.
      * - `even: boolean`: True when the item has an even index in the iterable.
@@ -3808,17 +3535,19 @@
         Object.defineProperty(NgForOf.prototype, "ngForOf", {
             /**
              * The value of the iterable expression, which can be used as a
-             * [template input variable](guide/structural-directives#template-input-variable).
+             * [template input variable](guide/structural-directives#shorthand).
              */
             set: function (ngForOf) {
                 this._ngForOf = ngForOf;
                 this._ngForOfDirty = true;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
-            get: function () { return this._trackByFn; },
+            get: function () {
+                return this._trackByFn;
+            },
             /**
              * A function that defines how to track changes for items in the iterable.
              *
@@ -3834,25 +3563,25 @@
              * rather than the identity of the object itself.
              *
              * The function receives two inputs,
-             * the iteration index and the node object ID.
+             * the iteration index and the associated node data.
              */
             set: function (fn) {
-                if (i0.isDevMode() && fn != null && typeof fn !== 'function') {
+                if ((typeof ngDevMode === 'undefined' || ngDevMode) && fn != null && typeof fn !== 'function') {
                     // TODO(vicb): use a log service once there is a public one available
                     if (console && console.warn) {
                         console.warn("trackBy must be a function, but received " + JSON.stringify(fn) + ". " +
-                            "See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.");
+                            "See https://angular.io/api/common/NgForOf#change-propagation for more information.");
                     }
                 }
                 this._trackByFn = fn;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgForOf.prototype, "ngForTemplate", {
             /**
              * A reference to the template that is stamped out for each item in the iterable.
-             * @see [template reference variable](guide/template-syntax#template-reference-variables--var-)
+             * @see [template reference variable](guide/template-reference-variables)
              */
             set: function (value) {
                 // TODO(TS2.1): make TemplateRef<Partial<NgForRowOf<T>>> once we move to TS v2.1
@@ -3862,7 +3591,7 @@
                     this._template = value;
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3936,28 +3665,21 @@
         NgForOf.ngTemplateContextGuard = function (dir, ctx) {
             return true;
         };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgForOf.prototype, "ngForOf", null);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Function),
-            __metadata("design:paramtypes", [Function])
-        ], NgForOf.prototype, "ngForTrackBy", null);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", i0.TemplateRef),
-            __metadata("design:paramtypes", [i0.TemplateRef])
-        ], NgForOf.prototype, "ngForTemplate", null);
-        NgForOf = __decorate([
-            i0.Directive({ selector: '[ngFor][ngForOf]' }),
-            __metadata("design:paramtypes", [i0.ViewContainerRef, i0.TemplateRef,
-                i0.IterableDiffers])
-        ], NgForOf);
         return NgForOf;
     }());
+    NgForOf.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngFor][ngForOf]' },] }
+    ];
+    NgForOf.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef },
+        { type: i0.TemplateRef },
+        { type: i0.IterableDiffers }
+    ]; };
+    NgForOf.propDecorators = {
+        ngForOf: [{ type: i0.Input }],
+        ngForTrackBy: [{ type: i0.Input }],
+        ngForTemplate: [{ type: i0.Input }]
+    };
     var RecordViewTuple = /** @class */ (function () {
         function RecordViewTuple(record, view) {
             this.record = record;
@@ -3971,7 +3693,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -3984,7 +3706,7 @@
      * Angular renders the template provided in an optional `else` clause. The default
      * template for the `else` clause is blank.
      *
-     * A [shorthand form](guide/structural-directives#the-asterisk--prefix) of the directive,
+     * A [shorthand form](guide/structural-directives#asterisk) of the directive,
      * `*ngIf="condition"`, is generally used, provided
      * as an attribute of the anchor element for the inserted template.
      * Angular expands this into a more explicit version, in which the anchor element
@@ -4057,7 +3779,7 @@
      * You might want to show a set of properties from the same object. If you are waiting
      * for asynchronous data, the object can be undefined.
      * In this case, you can use `ngIf` and store the result of the condition in a local
-     * variable as shown in the the following example.
+     * variable as shown in the following example.
      *
      * {@example common/ngIf/ts/module.ts region='NgIfAs'}
      *
@@ -4067,7 +3789,7 @@
      *
      * The conditional displays the data only if `userStream` returns a value,
      * so you don't need to use the
-     * [safe-navigation-operator](guide/template-syntax#safe-navigation-operator) (`?.`)
+     * safe-navigation-operator (`?.`)
      * to guard against null values when accessing properties.
      * You can display an alternative template while waiting for the data.
      *
@@ -4110,7 +3832,7 @@
      *
      * The presence of the implicit template object has implications for the nesting of
      * structural directives. For more on this subject, see
-     * [Structural Directives](https://angular.io/guide/structural-directives#one-per-element).
+     * [Structural Directives](https://angular.io/guide/built-in-directives#one-per-element).
      *
      * @ngModule CommonModule
      * @publicApi
@@ -4133,7 +3855,7 @@
                 this._context.$implicit = this._context.ngIf = condition;
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgIf.prototype, "ngIfThen", {
@@ -4146,7 +3868,7 @@
                 this._thenViewRef = null; // clear previous view if any.
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(NgIf.prototype, "ngIfElse", {
@@ -4159,7 +3881,7 @@
                 this._elseViewRef = null; // clear previous view if any.
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         NgIf.prototype._updateView = function () {
@@ -4184,27 +3906,29 @@
                 }
             }
         };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgIf.prototype, "ngIf", null);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgIf.prototype, "ngIfThen", null);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgIf.prototype, "ngIfElse", null);
-        NgIf = __decorate([
-            i0.Directive({ selector: '[ngIf]' }),
-            __metadata("design:paramtypes", [i0.ViewContainerRef, i0.TemplateRef])
-        ], NgIf);
+        /**
+         * Asserts the correct type of the context for the template that `NgIf` will render.
+         *
+         * The presence of this method is a signal to the Ivy template type-check compiler that the
+         * `NgIf` structural directive renders its template with a specific context type.
+         */
+        NgIf.ngTemplateContextGuard = function (dir, ctx) {
+            return true;
+        };
         return NgIf;
     }());
+    NgIf.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngIf]' },] }
+    ];
+    NgIf.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef },
+        { type: i0.TemplateRef }
+    ]; };
+    NgIf.propDecorators = {
+        ngIf: [{ type: i0.Input }],
+        ngIfThen: [{ type: i0.Input }],
+        ngIfElse: [{ type: i0.Input }]
+    };
     /**
      * @publicApi
      */
@@ -4224,7 +3948,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4256,9 +3980,7 @@
     /**
      * @ngModule CommonModule
      *
-     * @description A structural directive that adds or removes templates (displaying or hiding views)
-     * when the next match expression matches the switch expression.
-     *
+     * @description
      * The `[ngSwitch]` directive on a container specifies an expression to match against.
      * The expressions to match are provided by `ngSwitchCase` directives on views within the container.
      * - Every view that matches is rendered.
@@ -4335,11 +4057,13 @@
                     this._updateDefaultCases(true);
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /** @internal */
-        NgSwitch.prototype._addCase = function () { return this._caseCount++; };
+        NgSwitch.prototype._addCase = function () {
+            return this._caseCount++;
+        };
         /** @internal */
         NgSwitch.prototype._addDefault = function (view) {
             if (!this._defaultViews) {
@@ -4368,16 +4092,14 @@
                 }
             }
         };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object),
-            __metadata("design:paramtypes", [Object])
-        ], NgSwitch.prototype, "ngSwitch", null);
-        NgSwitch = __decorate([
-            i0.Directive({ selector: '[ngSwitch]' })
-        ], NgSwitch);
         return NgSwitch;
     }());
+    NgSwitch.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngSwitch]' },] }
+    ];
+    NgSwitch.propDecorators = {
+        ngSwitch: [{ type: i0.Input }]
+    };
     /**
      * @ngModule CommonModule
      *
@@ -4420,19 +4142,22 @@
         /**
          * Performs case matching. For internal use only.
          */
-        NgSwitchCase.prototype.ngDoCheck = function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object)
-        ], NgSwitchCase.prototype, "ngSwitchCase", void 0);
-        NgSwitchCase = __decorate([
-            i0.Directive({ selector: '[ngSwitchCase]' }),
-            __param(2, i0.Host()),
-            __metadata("design:paramtypes", [i0.ViewContainerRef, i0.TemplateRef,
-                NgSwitch])
-        ], NgSwitchCase);
+        NgSwitchCase.prototype.ngDoCheck = function () {
+            this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
+        };
         return NgSwitchCase;
     }());
+    NgSwitchCase.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngSwitchCase]' },] }
+    ];
+    NgSwitchCase.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef },
+        { type: i0.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: i0.Host }] }
+    ]; };
+    NgSwitchCase.propDecorators = {
+        ngSwitchCase: [{ type: i0.Input }]
+    };
     /**
      * @ngModule CommonModule
      *
@@ -4451,18 +4176,20 @@
         function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
-        NgSwitchDefault = __decorate([
-            i0.Directive({ selector: '[ngSwitchDefault]' }),
-            __param(2, i0.Host()),
-            __metadata("design:paramtypes", [i0.ViewContainerRef, i0.TemplateRef,
-                NgSwitch])
-        ], NgSwitchDefault);
         return NgSwitchDefault;
     }());
+    NgSwitchDefault.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngSwitchDefault]' },] }
+    ];
+    NgSwitchDefault.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef },
+        { type: i0.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: i0.Host }] }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4508,10 +4235,12 @@
                 this._switchValue = value;
                 this._updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
-        NgPlural.prototype.addCase = function (value, switchView) { this._caseViews[value] = switchView; };
+        NgPlural.prototype.addCase = function (value, switchView) {
+            this._caseViews[value] = switchView;
+        };
         NgPlural.prototype._updateView = function () {
             this._clearViews();
             var cases = Object.keys(this._caseViews);
@@ -4528,17 +4257,17 @@
                 this._activeView.create();
             }
         };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Number),
-            __metadata("design:paramtypes", [Number])
-        ], NgPlural.prototype, "ngPlural", null);
-        NgPlural = __decorate([
-            i0.Directive({ selector: '[ngPlural]' }),
-            __metadata("design:paramtypes", [NgLocalization])
-        ], NgPlural);
         return NgPlural;
     }());
+    NgPlural.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngPlural]' },] }
+    ];
+    NgPlural.ctorParameters = function () { return [
+        { type: NgLocalization }
+    ]; };
+    NgPlural.propDecorators = {
+        ngPlural: [{ type: i0.Input }]
+    };
     /**
      * @ngModule CommonModule
      *
@@ -4565,19 +4294,113 @@
             var isANumber = !isNaN(Number(value));
             ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
         }
-        NgPluralCase = __decorate([
-            i0.Directive({ selector: '[ngPluralCase]' }),
-            __param(0, i0.Attribute('ngPluralCase')),
-            __param(3, i0.Host()),
-            __metadata("design:paramtypes", [String, i0.TemplateRef,
-                i0.ViewContainerRef, NgPlural])
-        ], NgPluralCase);
         return NgPluralCase;
     }());
+    NgPluralCase.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngPluralCase]' },] }
+    ];
+    NgPluralCase.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Attribute, args: ['ngPluralCase',] }] },
+        { type: i0.TemplateRef },
+        { type: i0.ViewContainerRef },
+        { type: NgPlural, decorators: [{ type: i0.Host }] }
+    ]; };
+
+    /**
+     * @ngModule CommonModule
+     *
+     * @usageNotes
+     *
+     * Set the font of the containing element to the result of an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
+     * ```
+     *
+     * Set the width of the containing element to a pixel value returned by an expression.
+     *
+     * ```
+     * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
+     * ```
+     *
+     * Set a collection of style values using an expression that returns key-value pairs.
+     *
+     * ```
+     * <some-element [ngStyle]="objExp">...</some-element>
+     * ```
+     *
+     * @description
+     *
+     * An attribute directive that updates styles for the containing HTML element.
+     * Sets one or more style properties, specified as colon-separated key-value pairs.
+     * The key is a style name, with an optional `.<unit>` suffix
+     * (such as 'top.px', 'font-style.em').
+     * The value is an expression to be evaluated.
+     * The resulting non-null value, expressed in the given unit,
+     * is assigned to the given style property.
+     * If the result of evaluation is null, the corresponding style is removed.
+     *
+     * @publicApi
+     */
+    var NgStyle = /** @class */ (function () {
+        function NgStyle(_ngEl, _differs, _renderer) {
+            this._ngEl = _ngEl;
+            this._differs = _differs;
+            this._renderer = _renderer;
+            this._ngStyle = null;
+            this._differ = null;
+        }
+        Object.defineProperty(NgStyle.prototype, "ngStyle", {
+            set: function (values) {
+                this._ngStyle = values;
+                if (!this._differ && values) {
+                    this._differ = this._differs.find(values).create();
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        NgStyle.prototype.ngDoCheck = function () {
+            if (this._differ) {
+                var changes = this._differ.diff(this._ngStyle);
+                if (changes) {
+                    this._applyChanges(changes);
+                }
+            }
+        };
+        NgStyle.prototype._setStyle = function (nameAndUnit, value) {
+            var _a = __read(nameAndUnit.split('.'), 2), name = _a[0], unit = _a[1];
+            value = value != null && unit ? "" + value + unit : value;
+            if (value != null) {
+                this._renderer.setStyle(this._ngEl.nativeElement, name, value);
+            }
+            else {
+                this._renderer.removeStyle(this._ngEl.nativeElement, name);
+            }
+        };
+        NgStyle.prototype._applyChanges = function (changes) {
+            var _this = this;
+            changes.forEachRemovedItem(function (record) { return _this._setStyle(record.key, null); });
+            changes.forEachAddedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+            changes.forEachChangedItem(function (record) { return _this._setStyle(record.key, record.currentValue); });
+        };
+        return NgStyle;
+    }());
+    NgStyle.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngStyle]' },] }
+    ];
+    NgStyle.ctorParameters = function () { return [
+        { type: i0.ElementRef },
+        { type: i0.KeyValueDiffers },
+        { type: i0.Renderer2 }
+    ]; };
+    NgStyle.propDecorators = {
+        ngStyle: [{ type: i0.Input, args: ['ngStyle',] }]
+    };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4623,8 +4446,7 @@
             this.ngTemplateOutlet = null;
         }
         NgTemplateOutlet.prototype.ngOnChanges = function (changes) {
-            var recreateView = this._shouldRecreateView(changes);
-            if (recreateView) {
+            if (changes['ngTemplateOutlet']) {
                 var viewContainerRef = this._viewContainerRef;
                 if (this._viewRef) {
                     viewContainerRef.remove(viewContainerRef.indexOf(this._viewRef));
@@ -4633,82 +4455,26 @@
                     viewContainerRef.createEmbeddedView(this.ngTemplateOutlet, this.ngTemplateOutletContext) :
                     null;
             }
-            else if (this._viewRef && this.ngTemplateOutletContext) {
-                this._updateExistingContext(this.ngTemplateOutletContext);
+            else if (this._viewRef && changes['ngTemplateOutletContext'] && this.ngTemplateOutletContext) {
+                this._viewRef.context = this.ngTemplateOutletContext;
             }
         };
-        /**
-         * We need to re-create existing embedded view if:
-         * - templateRef has changed
-         * - context has changes
-         *
-         * We mark context object as changed when the corresponding object
-         * shape changes (new properties are added or existing properties are removed).
-         * In other words we consider context with the same properties as "the same" even
-         * if object reference changes (see https://github.com/angular/angular/issues/13407).
-         */
-        NgTemplateOutlet.prototype._shouldRecreateView = function (changes) {
-            var ctxChange = changes['ngTemplateOutletContext'];
-            return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
-        };
-        NgTemplateOutlet.prototype._hasContextShapeChanged = function (ctxChange) {
-            var e_1, _a;
-            var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-            var currCtxKeys = Object.keys(ctxChange.currentValue || {});
-            if (prevCtxKeys.length === currCtxKeys.length) {
-                try {
-                    for (var currCtxKeys_1 = __values(currCtxKeys), currCtxKeys_1_1 = currCtxKeys_1.next(); !currCtxKeys_1_1.done; currCtxKeys_1_1 = currCtxKeys_1.next()) {
-                        var propName = currCtxKeys_1_1.value;
-                        if (prevCtxKeys.indexOf(propName) === -1) {
-                            return true;
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (currCtxKeys_1_1 && !currCtxKeys_1_1.done && (_a = currCtxKeys_1.return)) _a.call(currCtxKeys_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                return false;
-            }
-            return true;
-        };
-        NgTemplateOutlet.prototype._updateExistingContext = function (ctx) {
-            var e_2, _a;
-            try {
-                for (var _b = __values(Object.keys(ctx)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var propName = _c.value;
-                    this._viewRef.context[propName] = this.ngTemplateOutletContext[propName];
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-        };
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object)
-        ], NgTemplateOutlet.prototype, "ngTemplateOutletContext", void 0);
-        __decorate([
-            i0.Input(),
-            __metadata("design:type", Object)
-        ], NgTemplateOutlet.prototype, "ngTemplateOutlet", void 0);
-        NgTemplateOutlet = __decorate([
-            i0.Directive({ selector: '[ngTemplateOutlet]' }),
-            __metadata("design:paramtypes", [i0.ViewContainerRef])
-        ], NgTemplateOutlet);
         return NgTemplateOutlet;
     }());
+    NgTemplateOutlet.decorators = [
+        { type: i0.Directive, args: [{ selector: '[ngTemplateOutlet]' },] }
+    ];
+    NgTemplateOutlet.ctorParameters = function () { return [
+        { type: i0.ViewContainerRef }
+    ]; };
+    NgTemplateOutlet.propDecorators = {
+        ngTemplateOutletContext: [{ type: i0.Input }],
+        ngTemplateOutlet: [{ type: i0.Input }]
+    };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4733,7 +4499,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4744,33 +4510,44 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
      */
-    var ObservableStrategy = /** @class */ (function () {
-        function ObservableStrategy() {
+    var SubscribableStrategy = /** @class */ (function () {
+        function SubscribableStrategy() {
         }
-        ObservableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.subscribe({ next: updateLatestValue, error: function (e) { throw e; } });
+        SubscribableStrategy.prototype.createSubscription = function (async, updateLatestValue) {
+            return async.subscribe({
+                next: updateLatestValue,
+                error: function (e) {
+                    throw e;
+                }
+            });
         };
-        ObservableStrategy.prototype.dispose = function (subscription) { subscription.unsubscribe(); };
-        ObservableStrategy.prototype.onDestroy = function (subscription) { subscription.unsubscribe(); };
-        return ObservableStrategy;
+        SubscribableStrategy.prototype.dispose = function (subscription) {
+            subscription.unsubscribe();
+        };
+        SubscribableStrategy.prototype.onDestroy = function (subscription) {
+            subscription.unsubscribe();
+        };
+        return SubscribableStrategy;
     }());
     var PromiseStrategy = /** @class */ (function () {
         function PromiseStrategy() {
         }
         PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-            return async.then(updateLatestValue, function (e) { throw e; });
+            return async.then(updateLatestValue, function (e) {
+                throw e;
+            });
         };
         PromiseStrategy.prototype.dispose = function (subscription) { };
         PromiseStrategy.prototype.onDestroy = function (subscription) { };
         return PromiseStrategy;
     }());
     var _promiseStrategy = new PromiseStrategy();
-    var _observableStrategy = new ObservableStrategy();
+    var _subscribableStrategy = new SubscribableStrategy();
     /**
      * @ngModule CommonModule
      * @description
@@ -4802,12 +4579,10 @@
         function AsyncPipe(_ref) {
             this._ref = _ref;
             this._latestValue = null;
-            this._latestReturnedValue = null;
             this._subscription = null;
             this._obj = null;
             this._strategy = null;
         }
-        AsyncPipe_1 = AsyncPipe;
         AsyncPipe.prototype.ngOnDestroy = function () {
             if (this._subscription) {
                 this._dispose();
@@ -4818,18 +4593,13 @@
                 if (obj) {
                     this._subscribe(obj);
                 }
-                this._latestReturnedValue = this._latestValue;
                 return this._latestValue;
             }
             if (obj !== this._obj) {
                 this._dispose();
                 return this.transform(obj);
             }
-            if (i0.ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-                return this._latestReturnedValue;
-            }
-            this._latestReturnedValue = this._latestValue;
-            return i0.WrappedValue.wrap(this._latestValue);
+            return this._latestValue;
         };
         AsyncPipe.prototype._subscribe = function (obj) {
             var _this = this;
@@ -4841,15 +4611,14 @@
             if (i0.ɵisPromise(obj)) {
                 return _promiseStrategy;
             }
-            if (i0.ɵisObservable(obj)) {
-                return _observableStrategy;
+            if (i0.ɵisSubscribable(obj)) {
+                return _subscribableStrategy;
             }
-            throw invalidPipeArgumentError(AsyncPipe_1, obj);
+            throw invalidPipeArgumentError(AsyncPipe, obj);
         };
         AsyncPipe.prototype._dispose = function () {
             this._strategy.dispose(this._subscription);
             this._latestValue = null;
-            this._latestReturnedValue = null;
             this._subscription = null;
             this._obj = null;
         };
@@ -4859,17 +4628,18 @@
                 this._ref.markForCheck();
             }
         };
-        var AsyncPipe_1;
-        AsyncPipe = AsyncPipe_1 = __decorate([
-            i0.Pipe({ name: 'async', pure: false }),
-            __metadata("design:paramtypes", [i0.ChangeDetectorRef])
-        ], AsyncPipe);
         return AsyncPipe;
     }());
+    AsyncPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'async', pure: false },] }
+    ];
+    AsyncPipe.ctorParameters = function () { return [
+        { type: i0.ChangeDetectorRef }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -4892,28 +4662,23 @@
     var LowerCasePipe = /** @class */ (function () {
         function LowerCasePipe() {
         }
-        LowerCasePipe_1 = LowerCasePipe;
-        /**
-         * @param value The string to transform to lower case.
-         */
         LowerCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
+            if (value == null)
+                return null;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(LowerCasePipe_1, value);
+                throw invalidPipeArgumentError(LowerCasePipe, value);
             }
             return value.toLowerCase();
         };
-        var LowerCasePipe_1;
-        LowerCasePipe = LowerCasePipe_1 = __decorate([
-            i0.Pipe({ name: 'lowercase' })
-        ], LowerCasePipe);
         return LowerCasePipe;
     }());
+    LowerCasePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'lowercase' },] }
+    ];
     //
     // Regex below matches any Unicode word and compatible with ES5. In ES2018 the same result
     // can be achieved by using /\p{L}\S*/gu and also known as Unicode Property Escapes
-    // (http://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
+    // (https://2ality.com/2017/07/regexp-unicode-property-escapes.html). Since there is no
     // transpilation of this functionality down to ES5 without external tool, the only solution is
     // to use already transpiled form. Example can be found here -
     // https://mothereff.in/regexpu#input=var+regex+%3D+/%5Cp%7BL%7D/u%3B&unicodePropertyEscape=1
@@ -4921,7 +4686,7 @@
     var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08BD\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312E\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FEA\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AE\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDF00-\uDF19]|\uD806[\uDCA0-\uDCDF\uDCFF\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE83\uDE86-\uDE89\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F\uDFE0\uDFE1]|\uD821[\uDC00-\uDFEC]|\uD822[\uDC00-\uDEF2]|\uD82C[\uDC00-\uDD1E\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D])\S*/g;
     /**
      * Transforms text to title case.
-     * Capitalizes the first letter of each word, and transforms the
+     * Capitalizes the first letter of each word and transforms the
      * rest of the word to lower case.
      * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
      *
@@ -4939,24 +4704,19 @@
     var TitleCasePipe = /** @class */ (function () {
         function TitleCasePipe() {
         }
-        TitleCasePipe_1 = TitleCasePipe;
-        /**
-         * @param value The string to transform to title case.
-         */
         TitleCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
+            if (value == null)
+                return null;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(TitleCasePipe_1, value);
+                throw invalidPipeArgumentError(TitleCasePipe, value);
             }
             return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
         };
-        var TitleCasePipe_1;
-        TitleCasePipe = TitleCasePipe_1 = __decorate([
-            i0.Pipe({ name: 'titlecase' })
-        ], TitleCasePipe);
         return TitleCasePipe;
     }());
+    TitleCasePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'titlecase' },] }
+    ];
     /**
      * Transforms text to all upper case.
      * @see `LowerCasePipe`
@@ -4968,28 +4728,23 @@
     var UpperCasePipe = /** @class */ (function () {
         function UpperCasePipe() {
         }
-        UpperCasePipe_1 = UpperCasePipe;
-        /**
-         * @param value The string to transform to upper case.
-         */
         UpperCasePipe.prototype.transform = function (value) {
-            if (!value)
-                return value;
+            if (value == null)
+                return null;
             if (typeof value !== 'string') {
-                throw invalidPipeArgumentError(UpperCasePipe_1, value);
+                throw invalidPipeArgumentError(UpperCasePipe, value);
             }
             return value.toUpperCase();
         };
-        var UpperCasePipe_1;
-        UpperCasePipe = UpperCasePipe_1 = __decorate([
-            i0.Pipe({ name: 'uppercase' })
-        ], UpperCasePipe);
         return UpperCasePipe;
     }());
+    UpperCasePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'uppercase' },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5016,22 +4771,20 @@
      *
      * ### Pre-defined format options
      *
-     * Examples are given in `en-US` locale.
-     *
-     * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
-     * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
-     * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
-     * GMT+1`).
-     * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
-     * 9:03:01 AM GMT+01:00`).
-     * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
-     * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
-     * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
-     * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
-     * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
-     * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
-     * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
-     * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+     * | Option        | Equivalent to                       | Examples (given in `en-US` locale)              |
+     * |---------------|-------------------------------------|-------------------------------------------------|
+     * | `'short'`     | `'M/d/yy, h:mm a'`                  | `6/15/15, 9:03 AM`                              |
+     * | `'medium'`    | `'MMM d, y, h:mm:ss a'`             | `Jun 15, 2015, 9:03:01 AM`                      |
+     * | `'long'`      | `'MMMM d, y, h:mm:ss a z'`          | `June 15, 2015 at 9:03:01 AM GMT+1`             |
+     * | `'full'`      | `'EEEE, MMMM d, y, h:mm:ss a zzzz'` | `Monday, June 15, 2015 at 9:03:01 AM GMT+01:00` |
+     * | `'shortDate'` | `'M/d/yy'`                          | `6/15/15`                                       |
+     * | `'mediumDate'`| `'MMM d, y'`                        | `Jun 15, 2015`                                  |
+     * | `'longDate'`  | `'MMMM d, y'`                       | `June 15, 2015`                                 |
+     * | `'fullDate'`  | `'EEEE, MMMM d, y'`                 | `Monday, June 15, 2015`                         |
+     * | `'shortTime'` | `'h:mm a'`                          | `9:03 AM`                                       |
+     * | `'mediumTime'`| `'h:mm:ss a'`                       | `9:03:01 AM`                                    |
+     * | `'longTime'`  | `'h:mm:ss a z'`                     | `9:03:01 AM GMT+1`                              |
+     * | `'fullTime'`  | `'h:mm:ss a zzzz'`                  | `9:03:01 AM GMT+01:00`                          |
      *
      * ### Custom format options
      *
@@ -5040,63 +4793,71 @@
      * Format details depend on the locale.
      * Fields marked with (*) are only available in the extra data set for the given locale.
      *
-     *  | Field type         | Format      | Description                                                   | Example Value                                              |
-     *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
-     *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
-     *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
-     *  |                    | GGGGG       | Narrow                                                        | A                                                          |
-     *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
-     *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
-     *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
-     *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
-     *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | MMMM        | Wide                                                          | September                                                  |
-     *  |                    | MMMMM       | Narrow                                                        | S                                                          |
-     *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
-     *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
-     *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
-     *  |                    | LLLL        | Wide                                                          | September                                                  |
-     *  |                    | LLLLL       | Narrow                                                        | S                                                          |
-     *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
-     *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
-     *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
-     *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
-     *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
-     *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
-     *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
-     *  |                    | EEEEE       | Narrow                                                        | T                                                          |
-     *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
-     *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
-     *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
-     *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
-     *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
-     *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | BBBBB       | Narrow                                                        | md                                                         |
-     *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
-     *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
-     *  |                    | bbbbb       | Narrow                                                        | md                                                         |
-     *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
-     *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
-     *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
-     *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
-     *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
-     *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
-     *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
-     *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
-     *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
-     *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
-     *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
-     *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
-     *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
-     *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
-     *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
-     *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
-     *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
-     *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+     *  | Field type          | Format      | Description                                                   | Example Value                                              |
+     *  |-------------------- |-------------|---------------------------------------------------------------|------------------------------------------------------------|
+     *  | Era                 | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+     *  |                     | GGGG        | Wide                                                          | Anno Domini                                                |
+     *  |                     | GGGGG       | Narrow                                                        | A                                                          |
+     *  | Year                | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                     | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                     | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                     | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Week-numbering year | Y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+     *  |                     | YY          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+     *  |                     | YYY         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+     *  |                     | YYYY        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+     *  | Month               | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                     | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                     | MMM         | Abbreviated                                                   | Sep                                                        |
+     *  |                     | MMMM        | Wide                                                          | September                                                  |
+     *  |                     | MMMMM       | Narrow                                                        | S                                                          |
+     *  | Month standalone    | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+     *  |                     | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+     *  |                     | LLL         | Abbreviated                                                   | Sep                                                        |
+     *  |                     | LLLL        | Wide                                                          | September                                                  |
+     *  |                     | LLLLL       | Narrow                                                        | S                                                          |
+     *  | Week of year        | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+     *  |                     | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+     *  | Week of month       | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+     *  | Day of month        | d           | Numeric: minimum digits                                       | 1                                                          |
+     *  |                     | dd          | Numeric: 2 digits + zero padded                               | 01                                                         |
+     *  | Week day            | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+     *  |                     | EEEE        | Wide                                                          | Tuesday                                                    |
+     *  |                     | EEEEE       | Narrow                                                        | T                                                          |
+     *  |                     | EEEEEE      | Short                                                         | Tu                                                         |
+     *  | Week day standalone | c, cc       | Numeric: 1 digit                                              | 2                                                          |
+     *  |                     | ccc         | Abbreviated                                                   | Tue                                                        |
+     *  |                     | cccc        | Wide                                                          | Tuesday                                                    |
+     *  |                     | ccccc       | Narrow                                                        | T                                                          |
+     *  |                     | cccccc      | Short                                                         | Tu                                                         |
+     *  | Period              | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+     *  |                     | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+     *  |                     | aaaaa       | Narrow                                                        | a/p                                                        |
+     *  | Period*             | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+     *  |                     | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                     | BBBBB       | Narrow                                                        | md                                                         |
+     *  | Period standalone*  | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+     *  |                     | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+     *  |                     | bbbbb       | Narrow                                                        | md                                                         |
+     *  | Hour 1-12           | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+     *  |                     | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+     *  | Hour 0-23           | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+     *  |                     | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+     *  | Minute              | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+     *  |                     | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+     *  | Second              | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+     *  |                     | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+     *  | Fractional seconds  | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+     *  |                     | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+     *  |                     | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+     *  | Zone                | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+     *  |                     | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+     *  |                     | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+     *  |                     | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+     *  |                     | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+     *  |                     | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+     *  |                     | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
      *
-     * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
      *
      * ### Format examples
      *
@@ -5138,20 +4899,6 @@
         function DatePipe(locale) {
             this.locale = locale;
         }
-        DatePipe_1 = DatePipe;
-        /**
-         * @param value The date expression: a `Date` object,  a number
-         * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
-         * @param format The date/time components to include, using predefined options or a
-         * custom format string.
-         * @param timezone A timezone offset (such as `'+0430'`), or a standard
-         * UTC/GMT or continental US timezone abbreviation.
-         * When not supplied, uses the end-user's local system timezone.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         * @returns A date string in the desired format.
-         */
         DatePipe.prototype.transform = function (value, format, timezone, locale) {
             if (format === void 0) { format = 'mediumDate'; }
             if (value == null || value === '' || value !== value)
@@ -5160,21 +4907,21 @@
                 return formatDate(value, format, locale || this.locale, timezone);
             }
             catch (error) {
-                throw invalidPipeArgumentError(DatePipe_1, error.message);
+                throw invalidPipeArgumentError(DatePipe, error.message);
             }
         };
-        var DatePipe_1;
-        DatePipe = DatePipe_1 = __decorate([
-            i0.Pipe({ name: 'date', pure: true }),
-            __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
-        ], DatePipe);
         return DatePipe;
     }());
+    DatePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'date', pure: true },] }
+    ];
+    DatePipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5198,7 +4945,6 @@
         function I18nPluralPipe(_localization) {
             this._localization = _localization;
         }
-        I18nPluralPipe_1 = I18nPluralPipe;
         /**
          * @param value the number to be formatted
          * @param pluralMap an object that mimics the ICU format, see
@@ -5210,22 +4956,23 @@
             if (value == null)
                 return '';
             if (typeof pluralMap !== 'object' || pluralMap === null) {
-                throw invalidPipeArgumentError(I18nPluralPipe_1, pluralMap);
+                throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
             }
             var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
             return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
         };
-        var I18nPluralPipe_1;
-        I18nPluralPipe = I18nPluralPipe_1 = __decorate([
-            i0.Pipe({ name: 'i18nPlural', pure: true }),
-            __metadata("design:paramtypes", [NgLocalization])
-        ], I18nPluralPipe);
         return I18nPluralPipe;
     }());
+    I18nPluralPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'i18nPlural', pure: true },] }
+    ];
+    I18nPluralPipe.ctorParameters = function () { return [
+        { type: NgLocalization }
+    ]; };
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5250,7 +4997,6 @@
     var I18nSelectPipe = /** @class */ (function () {
         function I18nSelectPipe() {
         }
-        I18nSelectPipe_1 = I18nSelectPipe;
         /**
          * @param value a string to be internationalized.
          * @param mapping an object that indicates the text that should be displayed
@@ -5260,7 +5006,7 @@
             if (value == null)
                 return '';
             if (typeof mapping !== 'object' || typeof value !== 'string') {
-                throw invalidPipeArgumentError(I18nSelectPipe_1, mapping);
+                throw invalidPipeArgumentError(I18nSelectPipe, mapping);
             }
             if (mapping.hasOwnProperty(value)) {
                 return mapping[value];
@@ -5270,16 +5016,15 @@
             }
             return '';
         };
-        var I18nSelectPipe_1;
-        I18nSelectPipe = I18nSelectPipe_1 = __decorate([
-            i0.Pipe({ name: 'i18nSelect', pure: true })
-        ], I18nSelectPipe);
         return I18nSelectPipe;
     }());
+    I18nSelectPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'i18nSelect', pure: true },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5305,16 +5050,18 @@
         /**
          * @param value A value of any type to convert into a JSON-format string.
          */
-        JsonPipe.prototype.transform = function (value) { return JSON.stringify(value, null, 2); };
-        JsonPipe = __decorate([
-            i0.Pipe({ name: 'json', pure: false })
-        ], JsonPipe);
+        JsonPipe.prototype.transform = function (value) {
+            return JSON.stringify(value, null, 2);
+        };
         return JsonPipe;
     }());
+    JsonPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'json', pure: false },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5335,8 +5082,8 @@
      * @usageNotes
      * ### Examples
      *
-     * This examples show how an Object or a Map can be iterated by ngFor with the use of this keyvalue
-     * pipe.
+     * This examples show how an Object or a Map can be iterated by ngFor with the use of this
+     * keyvalue pipe.
      *
      * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
      *
@@ -5367,12 +5114,14 @@
             }
             return this.keyValues;
         };
-        KeyValuePipe = __decorate([
-            i0.Pipe({ name: 'keyvalue', pure: false }),
-            __metadata("design:paramtypes", [i0.KeyValueDiffers])
-        ], KeyValuePipe);
         return KeyValuePipe;
     }());
+    KeyValuePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'keyvalue', pure: false },] }
+    ];
+    KeyValuePipe.ctorParameters = function () { return [
+        { type: i0.KeyValueDiffers }
+    ]; };
     function defaultComparator(keyValueA, keyValueB) {
         var a = keyValueA.key;
         var b = keyValueB.key;
@@ -5406,7 +5155,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5415,32 +5164,60 @@
      * @ngModule CommonModule
      * @description
      *
-     * Transforms a number into a string,
-     * formatted according to locale rules that determine group sizing and
-     * separator, decimal-point character, and other locale-specific
-     * configurations.
-     *
-     * If no parameters are specified, the function rounds off to the nearest value using this
-     * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
-     * The behavior differs from that of the JavaScript ```Math.round()``` function.
-     * In the following case for example, the pipe rounds down where
-     * ```Math.round()``` rounds up:
-     *
-     * ```html
-     * -2.5 | number:'1.0-0'
-     * > -3
-     * Math.round(-2.5)
-     * > -2
-     * ```
+     * Formats a value according to digit options and locale rules.
+     * Locale determines group sizing and separator,
+     * decimal point character, and other locale-specific configurations.
      *
      * @see `formatNumber()`
      *
      * @usageNotes
-     * The following code shows how the pipe transforms numbers
-     * into text strings, according to various format specifications,
-     * where the caller's default locale is `en-US`.
+     *
+     * ### digitsInfo
+     *
+     * The value's decimal representation is specified by the `digitsInfo`
+     * parameter, written in the following format:<br>
+     *
+     * ```
+     * {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+     * ```
+     *
+     *  - `minIntegerDigits`:
+     * The minimum number of integer digits before the decimal point.
+     * Default is 1.
+     *
+     * - `minFractionDigits`:
+     * The minimum number of digits after the decimal point.
+     * Default is 0.
+     *
+     *  - `maxFractionDigits`:
+     * The maximum number of digits after the decimal point.
+     * Default is 3.
+     *
+     * If the formatted value is truncated it will be rounded using the "to-nearest" method:
+     *
+     * ```
+     * {{3.6 | number: '1.0-0'}}
+     * <!--will output '4'-->
+     *
+     * {{-3.6 | number:'1.0-0'}}
+     * <!--will output '-4'-->
+     * ```
+     *
+     * ### locale
+     *
+     * `locale` will format a value according to locale rules.
+     * Locale determines group sizing and separator,
+     * decimal point character, and other locale-specific configurations.
+     *
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     *
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      *
      * ### Example
+     *
+     * The following code shows how the pipe transforms values
+     * according to various format specifications,
+     * where the caller's default locale is `en-US`.
      *
      * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
      *
@@ -5450,24 +5227,15 @@
         function DecimalPipe(_locale) {
             this._locale = _locale;
         }
-        DecimalPipe_1 = DecimalPipe;
         /**
-         * @param value The number to be formatted.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `3`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+         * @param value The value to be formatted.
+         * @param digitsInfo Sets digit and decimal representation.
+         * [See more](#digitsinfo).
+         * @param locale Specifies what locale format rules to use.
+         * [See more](#locale).
          */
         DecimalPipe.prototype.transform = function (value, digitsInfo, locale) {
-            if (isEmpty(value))
+            if (!isValue(value))
                 return null;
             locale = locale || this._locale;
             try {
@@ -5475,17 +5243,17 @@
                 return formatNumber(num, locale, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(DecimalPipe_1, error.message);
+                throw invalidPipeArgumentError(DecimalPipe, error.message);
             }
         };
-        var DecimalPipe_1;
-        DecimalPipe = DecimalPipe_1 = __decorate([
-            i0.Pipe({ name: 'number' }),
-            __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
-        ], DecimalPipe);
         return DecimalPipe;
     }());
+    DecimalPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'number' },] }
+    ];
+    DecimalPipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
+    ]; };
     /**
      * @ngModule CommonModule
      * @description
@@ -5510,25 +5278,8 @@
         function PercentPipe(_locale) {
             this._locale = _locale;
         }
-        PercentPipe_1 = PercentPipe;
-        /**
-         *
-         * @param value The number to be formatted as a percentage.
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `0`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `0`.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
         PercentPipe.prototype.transform = function (value, digitsInfo, locale) {
-            if (isEmpty(value))
+            if (!isValue(value))
                 return null;
             locale = locale || this._locale;
             try {
@@ -5536,17 +5287,17 @@
                 return formatPercent(num, locale, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(PercentPipe_1, error.message);
+                throw invalidPipeArgumentError(PercentPipe, error.message);
             }
         };
-        var PercentPipe_1;
-        PercentPipe = PercentPipe_1 = __decorate([
-            i0.Pipe({ name: 'percent' }),
-            __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
-        ], PercentPipe);
         return PercentPipe;
     }());
+    PercentPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'percent' },] }
+    ];
+    PercentPipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] }
+    ]; };
     /**
      * @ngModule CommonModule
      * @description
@@ -5554,6 +5305,26 @@
      * Transforms a number to a currency string, formatted according to locale rules
      * that determine group sizing and separator, decimal-point character,
      * and other locale-specific configurations.
+     *
+     * {@a currency-code-deprecation}
+     * <div class="alert is-helpful">
+     *
+     * **Deprecation notice:**
+     *
+     * The default currency code is currently always `USD` but this is deprecated from v9.
+     *
+     * **In v11 the default currency code will be taken from the current locale identified by
+     * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+     * more information.**
+     *
+     * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
+     * your application `NgModule`:
+     *
+     * ```ts
+     * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
+     * ```
+     *
+     * </div>
      *
      * @see `getCurrencySymbol()`
      * @see `formatCurrency()`
@@ -5568,54 +5339,23 @@
      * @publicApi
      */
     var CurrencyPipe = /** @class */ (function () {
-        function CurrencyPipe(_locale) {
+        function CurrencyPipe(_locale, _defaultCurrencyCode) {
+            if (_defaultCurrencyCode === void 0) { _defaultCurrencyCode = 'USD'; }
             this._locale = _locale;
+            this._defaultCurrencyCode = _defaultCurrencyCode;
         }
-        CurrencyPipe_1 = CurrencyPipe;
-        /**
-         *
-         * @param value The number to be formatted as currency.
-         * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-         * such as `USD` for the US dollar and `EUR` for the euro.
-         * @param display The format for the currency indicator. One of the following:
-         *   - `code`: Show the code (such as `USD`).
-         *   - `symbol`(default): Show the symbol (such as `$`).
-         *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-         * currency.
-         * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-         * locale has no narrow symbol, uses the standard symbol for the locale.
-         *   - String: Use the given string value instead of a code or a symbol.
-         * For example, an empty string will suppress the currency & symbol.
-         *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
-         *
-         * @param digitsInfo Decimal representation options, specified by a string
-         * in the following format:<br>
-         * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-         *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-         * Default is `1`.
-         *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-         * Default is `2`.
-         *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-         * Default is `2`.
-         * If not provided, the number will be formatted with the proper amount of digits,
-         * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-         * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-         * @param locale A locale code for the locale format rules to use.
-         * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-         * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
-         */
         CurrencyPipe.prototype.transform = function (value, currencyCode, display, digitsInfo, locale) {
             if (display === void 0) { display = 'symbol'; }
-            if (isEmpty(value))
+            if (!isValue(value))
                 return null;
             locale = locale || this._locale;
             if (typeof display === 'boolean') {
-                if (console && console.warn) {
+                if ((typeof ngDevMode === 'undefined' || ngDevMode) && console && console.warn) {
                     console.warn("Warning: the currency pipe has been changed in Angular v5. The symbolDisplay option (third parameter) is now a string instead of a boolean. The accepted values are \"code\", \"symbol\" or \"symbol-narrow\".");
                 }
                 display = display ? 'symbol' : 'code';
             }
-            var currency = currencyCode || 'USD';
+            var currency = currencyCode || this._defaultCurrencyCode;
             if (display !== 'code') {
                 if (display === 'symbol' || display === 'symbol-narrow') {
                     currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
@@ -5629,19 +5369,20 @@
                 return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
             }
             catch (error) {
-                throw invalidPipeArgumentError(CurrencyPipe_1, error.message);
+                throw invalidPipeArgumentError(CurrencyPipe, error.message);
             }
         };
-        var CurrencyPipe_1;
-        CurrencyPipe = CurrencyPipe_1 = __decorate([
-            i0.Pipe({ name: 'currency' }),
-            __param(0, i0.Inject(i0.LOCALE_ID)),
-            __metadata("design:paramtypes", [String])
-        ], CurrencyPipe);
         return CurrencyPipe;
     }());
-    function isEmpty(value) {
-        return value == null || value === '' || value !== value;
+    CurrencyPipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'currency' },] }
+    ];
+    CurrencyPipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.LOCALE_ID,] }] },
+        { type: String, decorators: [{ type: i0.Inject, args: [i0.DEFAULT_CURRENCY_CODE,] }] }
+    ]; };
+    function isValue(value) {
+        return !(value == null || value === '' || value !== value);
     }
     /**
      * Transforms a string into a number (if needed).
@@ -5659,7 +5400,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5702,26 +5443,26 @@
     var SlicePipe = /** @class */ (function () {
         function SlicePipe() {
         }
-        SlicePipe_1 = SlicePipe;
         SlicePipe.prototype.transform = function (value, start, end) {
             if (value == null)
-                return value;
+                return null;
             if (!this.supports(value)) {
-                throw invalidPipeArgumentError(SlicePipe_1, value);
+                throw invalidPipeArgumentError(SlicePipe, value);
             }
             return value.slice(start, end);
         };
-        SlicePipe.prototype.supports = function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
-        var SlicePipe_1;
-        SlicePipe = SlicePipe_1 = __decorate([
-            i0.Pipe({ name: 'slice', pure: false })
-        ], SlicePipe);
+        SlicePipe.prototype.supports = function (obj) {
+            return typeof obj === 'string' || Array.isArray(obj);
+        };
         return SlicePipe;
     }());
+    SlicePipe.decorators = [
+        { type: i0.Pipe, args: [{ name: 'slice', pure: false },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5747,7 +5488,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5770,21 +5511,21 @@
     var CommonModule = /** @class */ (function () {
         function CommonModule() {
         }
-        CommonModule = __decorate([
-            i0.NgModule({
-                declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
-                exports: [COMMON_DIRECTIVES, COMMON_PIPES],
-                providers: [
-                    { provide: NgLocalization, useClass: NgLocaleLocalization },
-                ],
-            })
-        ], CommonModule);
         return CommonModule;
     }());
+    CommonModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    exports: [COMMON_DIRECTIVES, COMMON_PIPES],
+                    providers: [
+                        { provide: NgLocalization, useClass: NgLocaleLocalization },
+                    ],
+                },] }
+    ];
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5824,7 +5565,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5832,11 +5573,11 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('9.0.0-rc.1+246.sha-d3cfad7.with-local-changes');
+    var VERSION = new i0.Version('12.0.0-next.8+77.sha-917664e');
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -5849,24 +5590,23 @@
     var ViewportScroller = /** @class */ (function () {
         function ViewportScroller() {
         }
-        // De-sugared tree-shakable injection
-        // See #23917
-        /** @nocollapse */
-        ViewportScroller.ɵprov = i0.ɵɵdefineInjectable({
-            token: ViewportScroller,
-            providedIn: 'root',
-            factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window, i0.ɵɵinject(i0.ErrorHandler)); }
-        });
         return ViewportScroller;
     }());
+    // De-sugared tree-shakable injection
+    // See #23917
+    /** @nocollapse */
+    ViewportScroller.ɵprov = i0.ɵɵdefineInjectable({
+        token: ViewportScroller,
+        providedIn: 'root',
+        factory: function () { return new BrowserViewportScroller(i0.ɵɵinject(DOCUMENT), window); }
+    });
     /**
      * Manages the scroll position for a browser window.
      */
     var BrowserViewportScroller = /** @class */ (function () {
-        function BrowserViewportScroller(document, window, errorHandler) {
+        function BrowserViewportScroller(document, window) {
             this.document = document;
             this.window = window;
-            this.errorHandler = errorHandler;
             this.offset = function () { return [0, 0]; };
         }
         /**
@@ -5888,8 +5628,8 @@
          * @returns The position in screen coordinates.
          */
         BrowserViewportScroller.prototype.getScrollPosition = function () {
-            if (this.supportScrollRestoration()) {
-                return [this.window.scrollX, this.window.scrollY];
+            if (this.supportsScrolling()) {
+                return [this.window.pageXOffset, this.window.pageYOffset];
             }
             else {
                 return [0, 0];
@@ -5900,58 +5640,75 @@
          * @param position The new position in screen coordinates.
          */
         BrowserViewportScroller.prototype.scrollToPosition = function (position) {
-            if (this.supportScrollRestoration()) {
+            if (this.supportsScrolling()) {
                 this.window.scrollTo(position[0], position[1]);
             }
         };
         /**
-         * Scrolls to an anchor element.
-         * @param anchor The ID of the anchor element.
+         * Scrolls to an element and attempts to focus the element.
+         *
+         * Note that the function name here is misleading in that the target string may be an ID for a
+         * non-anchor element.
+         *
+         * @param target The ID of an element or name of the anchor.
+         *
+         * @see https://html.spec.whatwg.org/#the-indicated-part-of-the-document
+         * @see https://html.spec.whatwg.org/#scroll-to-fragid
          */
-        BrowserViewportScroller.prototype.scrollToAnchor = function (anchor) {
-            if (this.supportScrollRestoration()) {
-                // Escape anything passed to `querySelector` as it can throw errors and stop the application
-                // from working if invalid values are passed.
-                if (this.window.CSS && this.window.CSS.escape) {
-                    anchor = this.window.CSS.escape(anchor);
-                }
-                else {
-                    anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
-                }
-                try {
-                    var elSelectedById = this.document.querySelector("#" + anchor);
-                    if (elSelectedById) {
-                        this.scrollToElement(elSelectedById);
-                        return;
-                    }
-                    var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
-                    if (elSelectedByName) {
-                        this.scrollToElement(elSelectedByName);
-                        return;
-                    }
-                }
-                catch (e) {
-                    this.errorHandler.handleError(e);
-                }
+        BrowserViewportScroller.prototype.scrollToAnchor = function (target) {
+            var _a;
+            if (!this.supportsScrolling()) {
+                return;
             }
+            // TODO(atscott): The correct behavior for `getElementsByName` would be to also verify that the
+            // element is an anchor. However, this could be considered a breaking change and should be
+            // done in a major version.
+            var elSelected = (_a = this.document.getElementById(target)) !== null && _a !== void 0 ? _a : this.document.getElementsByName(target)[0];
+            if (elSelected === undefined) {
+                return;
+            }
+            this.scrollToElement(elSelected);
+            // After scrolling to the element, the spec dictates that we follow the focus steps for the
+            // target. Rather than following the robust steps, simply attempt focus.
+            this.attemptFocus(elSelected);
         };
         /**
          * Disables automatic scroll restoration provided by the browser.
          */
         BrowserViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) {
             if (this.supportScrollRestoration()) {
-                var history_1 = this.window.history;
-                if (history_1 && history_1.scrollRestoration) {
-                    history_1.scrollRestoration = scrollRestoration;
+                var history = this.window.history;
+                if (history && history.scrollRestoration) {
+                    history.scrollRestoration = scrollRestoration;
                 }
             }
         };
+        /**
+         * Scrolls to an element using the native offset and the specified offset set on this scroller.
+         *
+         * The offset can be used when we know that there is a floating header and scrolling naively to an
+         * element (ex: `scrollIntoView`) leaves the element hidden behind the floating header.
+         */
         BrowserViewportScroller.prototype.scrollToElement = function (el) {
             var rect = el.getBoundingClientRect();
             var left = rect.left + this.window.pageXOffset;
             var top = rect.top + this.window.pageYOffset;
             var offset = this.offset();
             this.window.scrollTo(left - offset[0], top - offset[1]);
+        };
+        /**
+         * Calls `focus` on the `focusTarget` and returns `true` if the element was focused successfully.
+         *
+         * If `false`, further steps may be necessary to determine a valid substitute to be focused
+         * instead.
+         *
+         * @see https://html.spec.whatwg.org/#get-the-focusable-area
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
+         * @see https://html.spec.whatwg.org/#focusable-area
+         */
+        BrowserViewportScroller.prototype.attemptFocus = function (focusTarget) {
+            focusTarget.focus();
+            return this.document.activeElement === focusTarget;
         };
         /**
          * We only support scroll restoration when we can get a hold of window.
@@ -5963,7 +5720,24 @@
          */
         BrowserViewportScroller.prototype.supportScrollRestoration = function () {
             try {
-                return !!this.window && !!this.window.scrollTo;
+                if (!this.supportsScrolling()) {
+                    return false;
+                }
+                // The `scrollRestoration` property could be on the `history` instance or its prototype.
+                var scrollRestorationDescriptor = getScrollRestorationProperty(this.window.history) ||
+                    getScrollRestorationProperty(Object.getPrototypeOf(this.window.history));
+                // We can write to the `scrollRestoration` property if it is a writable data field or it has a
+                // setter function.
+                return !!scrollRestorationDescriptor &&
+                    !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
+            }
+            catch (_a) {
+                return false;
+            }
+        };
+        BrowserViewportScroller.prototype.supportsScrolling = function () {
+            try {
+                return !!this.window && !!this.window.scrollTo && 'pageXOffset' in this.window;
             }
             catch (_a) {
                 return false;
@@ -5971,9 +5745,11 @@
         };
         return BrowserViewportScroller;
     }());
+    function getScrollRestorationProperty(obj) {
+        return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
+    }
     /**
-     * Provides an empty implementation of the viewport scroller. This will
-     * live in @angular/common as it will be used by both platform-server and platform-webworker.
+     * Provides an empty implementation of the viewport scroller.
      */
     var NullViewportScroller = /** @class */ (function () {
         function NullViewportScroller() {
@@ -5985,7 +5761,9 @@
         /**
          * Empty implementation
          */
-        NullViewportScroller.prototype.getScrollPosition = function () { return [0, 0]; };
+        NullViewportScroller.prototype.getScrollPosition = function () {
+            return [0, 0];
+        };
         /**
          * Empty implementation
          */
@@ -6003,7 +5781,25 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * @publicApi
+     */
+    var XhrFactory = /** @class */ (function () {
+        function XhrFactory() {
+        }
+        return XhrFactory;
+    }());
+
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -6011,7 +5807,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -6020,7 +5816,7 @@
 
     /**
      * @license
-     * Copyright Google Inc. All Rights Reserved.
+     * Copyright Google LLC All Rights Reserved.
      *
      * Use of this source code is governed by an MIT-style license that can be
      * found in the LICENSE file at https://angular.io/license
@@ -6047,7 +5843,6 @@
     exports.LocationStrategy = LocationStrategy;
     exports.LowerCasePipe = LowerCasePipe;
     exports.NgClass = NgClass;
-    exports.NgClassBase = NgClassBase;
     exports.NgComponentOutlet = NgComponentOutlet;
     exports.NgForOf = NgForOf;
     exports.NgForOfContext = NgForOfContext;
@@ -6058,7 +5853,6 @@
     exports.NgPlural = NgPlural;
     exports.NgPluralCase = NgPluralCase;
     exports.NgStyle = NgStyle;
-    exports.NgStyleBase = NgStyleBase;
     exports.NgSwitch = NgSwitch;
     exports.NgSwitchCase = NgSwitchCase;
     exports.NgSwitchDefault = NgSwitchDefault;
@@ -6071,17 +5865,20 @@
     exports.UpperCasePipe = UpperCasePipe;
     exports.VERSION = VERSION;
     exports.ViewportScroller = ViewportScroller;
+    exports.XhrFactory = XhrFactory;
     exports.formatCurrency = formatCurrency;
     exports.formatDate = formatDate;
     exports.formatNumber = formatNumber;
     exports.formatPercent = formatPercent;
     exports.getCurrencySymbol = getCurrencySymbol;
+    exports.getLocaleCurrencyCode = getLocaleCurrencyCode;
     exports.getLocaleCurrencyName = getLocaleCurrencyName;
     exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
     exports.getLocaleDateFormat = getLocaleDateFormat;
     exports.getLocaleDateTimeFormat = getLocaleDateTimeFormat;
     exports.getLocaleDayNames = getLocaleDayNames;
     exports.getLocaleDayPeriods = getLocaleDayPeriods;
+    exports.getLocaleDirection = getLocaleDirection;
     exports.getLocaleEraNames = getLocaleEraNames;
     exports.getLocaleExtraDayPeriodRules = getLocaleExtraDayPeriodRules;
     exports.getLocaleExtraDayPeriods = getLocaleExtraDayPeriods;
@@ -6101,34 +5898,18 @@
     exports.registerLocaleData = registerLocaleData;
     exports.ɵBrowserPlatformLocation = BrowserPlatformLocation;
     exports.ɵDomAdapter = DomAdapter;
-    exports.ɵNgClassImpl = NgClassImpl;
-    exports.ɵNgClassImplProvider__POST_R3__ = NgClassImplProvider__POST_R3__;
-    exports.ɵNgClassR2Impl = NgClassR2Impl;
-    exports.ɵNgStyleImpl = NgStyleImpl;
-    exports.ɵNgStyleImplProvider__POST_R3__ = NgStyleImplProvider__POST_R3__;
-    exports.ɵNgStyleR2Impl = NgStyleR2Impl;
     exports.ɵNullViewportScroller = NullViewportScroller;
     exports.ɵPLATFORM_BROWSER_ID = PLATFORM_BROWSER_ID;
     exports.ɵPLATFORM_SERVER_ID = PLATFORM_SERVER_ID;
     exports.ɵPLATFORM_WORKER_APP_ID = PLATFORM_WORKER_APP_ID;
     exports.ɵPLATFORM_WORKER_UI_ID = PLATFORM_WORKER_UI_ID;
-    exports.ɵangular_packages_common_common_a = NgClassR3Impl;
-    exports.ɵangular_packages_common_common_b = NgClassImplProvider__PRE_R3__;
-    exports.ɵangular_packages_common_common_c = NgClassImplProvider;
-    exports.ɵangular_packages_common_common_d = NgStyleR3Impl;
-    exports.ɵangular_packages_common_common_e = NgStyleImplProvider__PRE_R3__;
-    exports.ɵangular_packages_common_common_f = NgStyleImplProvider;
-    exports.ɵangular_packages_common_common_g = useBrowserPlatformLocation;
-    exports.ɵangular_packages_common_common_h = createBrowserPlatformLocation;
-    exports.ɵangular_packages_common_common_i = createLocation;
-    exports.ɵangular_packages_common_common_j = provideLocationStrategy;
-    exports.ɵangular_packages_common_common_k = COMMON_DIRECTIVES;
-    exports.ɵangular_packages_common_common_l = COMMON_PIPES;
+    exports.ɵangular_packages_common_common_a = useBrowserPlatformLocation;
+    exports.ɵangular_packages_common_common_b = createBrowserPlatformLocation;
+    exports.ɵangular_packages_common_common_c = createLocation;
+    exports.ɵangular_packages_common_common_d = provideLocationStrategy;
+    exports.ɵangular_packages_common_common_e = COMMON_DIRECTIVES;
+    exports.ɵangular_packages_common_common_f = COMMON_PIPES;
     exports.ɵgetDOM = getDOM;
-    exports.ɵngClassDirectiveDef__POST_R3__ = ngClassDirectiveDef__POST_R3__;
-    exports.ɵngClassFactoryDef__POST_R3__ = ngClassFactoryDef__POST_R3__;
-    exports.ɵngStyleDirectiveDef__POST_R3__ = ngStyleDirectiveDef__POST_R3__;
-    exports.ɵngStyleFactoryDef__POST_R3__ = ngStyleFactoryDef__POST_R3__;
     exports.ɵparseCookieValue = parseCookieValue;
     exports.ɵsetRootDomAdapter = setRootDomAdapter;
 
