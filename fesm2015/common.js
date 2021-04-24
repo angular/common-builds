@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.8+111.sha-baf0b3b
+ * @license Angular v12.0.0-next.8+215.sha-b3d9c5e
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5158,7 +5158,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.8+111.sha-baf0b3b');
+const VERSION = new Version('12.0.0-next.8+215.sha-b3d9c5e');
 
 /**
  * @license
@@ -5238,21 +5238,19 @@ class BrowserViewportScroller {
      * @see https://html.spec.whatwg.org/#scroll-to-fragid
      */
     scrollToAnchor(target) {
-        var _a;
         if (!this.supportsScrolling()) {
             return;
         }
         // TODO(atscott): The correct behavior for `getElementsByName` would be to also verify that the
         // element is an anchor. However, this could be considered a breaking change and should be
         // done in a major version.
-        const elSelected = (_a = this.document.getElementById(target)) !== null && _a !== void 0 ? _a : this.document.getElementsByName(target)[0];
-        if (elSelected === undefined) {
-            return;
+        const elSelected = findAnchorFromDocument(this.document, target);
+        if (elSelected) {
+            this.scrollToElement(elSelected);
+            // After scrolling to the element, the spec dictates that we follow the focus steps for the
+            // target. Rather than following the robust steps, simply attempt focus.
+            this.attemptFocus(elSelected);
         }
-        this.scrollToElement(elSelected);
-        // After scrolling to the element, the spec dictates that we follow the focus steps for the
-        // target. Rather than following the robust steps, simply attempt focus.
-        this.attemptFocus(elSelected);
     }
     /**
      * Disables automatic scroll restoration provided by the browser.
@@ -5328,6 +5326,32 @@ class BrowserViewportScroller {
 }
 function getScrollRestorationProperty(obj) {
     return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
+}
+function findAnchorFromDocument(document, target) {
+    const documentResult = document.getElementById(target) || document.getElementsByName(target)[0];
+    if (documentResult) {
+        return documentResult;
+    }
+    // `getElementById` and `getElementsByName` won't pierce through the shadow DOM so we
+    // have to traverse the DOM manually and do the lookup through the shadow roots.
+    if (typeof document.createTreeWalker === 'function' && document.body &&
+        (document.body.createShadowRoot || document.body.attachShadow)) {
+        const treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+        let currentNode = treeWalker.currentNode;
+        while (currentNode) {
+            const shadowRoot = currentNode.shadowRoot;
+            if (shadowRoot) {
+                // Note that `ShadowRoot` doesn't support `getElementsByName`
+                // so we have to fall back to `querySelector`.
+                const result = shadowRoot.getElementById(target) || shadowRoot.querySelector(`[name="${target}"]`);
+                if (result) {
+                    return result;
+                }
+            }
+            currentNode = treeWalker.nextNode();
+        }
+    }
+    return null;
 }
 /**
  * Provides an empty implementation of the viewport scroller.
