@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.12+12.sha-7e9ef4d
+ * @license Angular v11.2.12+18.sha-a75a317
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -745,9 +745,9 @@ class HttpRequest {
         if (this.body instanceof HttpParams) {
             return 'application/x-www-form-urlencoded;charset=UTF-8';
         }
-        // Arrays, objects, and numbers will be encoded as JSON.
+        // Arrays, objects, boolean and numbers will be encoded as JSON.
         if (typeof this.body === 'object' || typeof this.body === 'number' ||
-            Array.isArray(this.body)) {
+            typeof this.body === 'boolean') {
             return 'application/json';
         }
         // No type could be inferred.
