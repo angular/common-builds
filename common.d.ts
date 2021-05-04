@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.12+18.sha-a75a317
+ * @license Angular v11.2.12+22.sha-7a86ebf
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13,6 +13,7 @@ import { IterableDiffers } from '@angular/core';
 import { KeyValueDiffers } from '@angular/core';
 import { NgIterable } from '@angular/core';
 import { NgModuleFactory } from '@angular/core';
+import { Observable } from 'rxjs';
 import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { PipeTransform } from '@angular/core';
@@ -87,9 +88,9 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _strategy;
     constructor(_ref: ChangeDetectorRef);
     ngOnDestroy(): void;
-    transform<T>(obj: Subscribable<T> | Promise<T>): T | null;
+    transform<T>(obj: Observable<T> | Subscribable<T> | Promise<T>): T | null;
     transform<T>(obj: null | undefined): null;
-    transform<T>(obj: Subscribable<T> | Promise<T> | null | undefined): T | null;
+    transform<T>(obj: Observable<T> | Subscribable<T> | Promise<T> | null | undefined): T | null;
     private _subscribe;
     private _selectStrategy;
     private _dispose;
