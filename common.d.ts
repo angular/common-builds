@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.12+22.sha-7a86ebf
+ * @license Angular v11.2.12+27.sha-46069ff
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -533,7 +533,7 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  * Examples are given for `en-US`.
  *
  * @see `getLocaleDateFormat()`
- * @see `getLocaleTimeFormat()``
+ * @see `getLocaleTimeFormat()`
  * @see `getLocaleDateTimeFormat()`
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
  * @publicApi
