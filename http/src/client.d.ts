@@ -480,6 +480,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob` and returns
@@ -502,6 +503,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<Blob>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text string and returns
@@ -524,6 +526,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<string>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
@@ -547,6 +550,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob`
@@ -570,6 +574,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text string
@@ -593,6 +598,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a JSON object
@@ -616,6 +622,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `DELETE`request that interprets the body as a JSON object
@@ -639,6 +646,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer` and returns
@@ -661,6 +669,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob` and returns the full
@@ -683,6 +692,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text stream and
@@ -705,6 +715,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `DELETE` request the interprets the body as a JSON object and returns
@@ -728,6 +739,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a JSON object
@@ -750,6 +762,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a JSON object and
@@ -772,6 +785,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<Object>;
     /**
      * Constructs a DELETE request that interprets the body as a JSON object and returns
@@ -794,6 +808,7 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        body?: any | null;
     }): Observable<T>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns the
