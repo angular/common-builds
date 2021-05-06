@@ -1,10 +1,10 @@
 /**
- * @license Angular v12.0.0-next.8+352.sha-3a5f006
+ * @license Angular v12.0.0-next.8+354.sha-640ec78
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, TemplateRef, Host, ɵɵinjectAttribute, Attribute, ɵisPromise, ɵisSubscribable, ChangeDetectorRef, ɵɵdefinePipe, Pipe, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule, ɵɵsetNgModuleScope, Version } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, ɵsetClassMetadata, Injectable, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, ɵɵdirectiveInject, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, ɵɵdefineDirective, Directive, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, ɵɵNgOnChangesFeature, TemplateRef, Host, ɵRuntimeError, ɵɵinjectAttribute, Attribute, ɵisPromise, ɵisSubscribable, ChangeDetectorRef, ɵɵdefinePipe, Pipe, DEFAULT_CURRENCY_CODE, ɵɵdefineNgModule, ɵɵdefineInjector, NgModule, ɵɵsetNgModuleScope, Version } from '@angular/core';
 
 /**
  * @license
@@ -3783,6 +3783,9 @@ NgSwitch.ɵdir = /*@__PURE__*/ ɵɵdefineDirective({ type: NgSwitch, selectors: 
 class NgSwitchCase {
     constructor(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+            throwNgSwitchProviderNotFoundError('ngSwitchCase', 'NgSwitchCase');
+        }
         ngSwitch._addCase();
         this._view = new SwitchView(viewContainer, templateRef);
     }
@@ -3793,12 +3796,14 @@ class NgSwitchCase {
         this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
     }
 }
-NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
+NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 9)); };
 NgSwitchCase.ɵdir = /*@__PURE__*/ ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(NgSwitchCase, [{
         type: Directive,
         args: [{ selector: '[ngSwitchCase]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{
+                type: Optional
+            }, {
                 type: Host
             }] }]; }, { ngSwitchCase: [{
             type: Input
@@ -3819,17 +3824,27 @@ NgSwitchCase.ɵdir = /*@__PURE__*/ ɵɵdefineDirective({ type: NgSwitchCase, sel
  */
 class NgSwitchDefault {
     constructor(viewContainer, templateRef, ngSwitch) {
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+            throwNgSwitchProviderNotFoundError('ngSwitchDefault', 'NgSwitchDefault');
+        }
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
 }
-NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 1)); };
+NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef), ɵɵdirectiveInject(NgSwitch, 9)); };
 NgSwitchDefault.ɵdir = /*@__PURE__*/ ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
 (function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassMetadata(NgSwitchDefault, [{
         type: Directive,
         args: [{ selector: '[ngSwitchDefault]' }]
     }], function () { return [{ type: ViewContainerRef }, { type: TemplateRef }, { type: NgSwitch, decorators: [{
+                type: Optional
+            }, {
                 type: Host
             }] }]; }, null); })();
+function throwNgSwitchProviderNotFoundError(attrName, directiveName) {
+    throw new ɵRuntimeError("305" /* TEMPLATE_STRUCTURE_ERROR */, `An element with the "${attrName}" attribute ` +
+        `(matching the "${directiveName}" directive) must be located inside an element with the "ngSwitch" attribute ` +
+        `(matching "NgSwitch" directive)`);
+}
 
 /**
  * @license
@@ -5209,7 +5224,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.0-next.8+352.sha-3a5f006');
+const VERSION = new Version('12.0.0-next.8+354.sha-640ec78');
 
 /**
  * @license

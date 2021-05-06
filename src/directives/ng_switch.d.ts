@@ -139,7 +139,7 @@ export declare class NgSwitchCase implements DoCheck {
      * Performs case matching. For internal use only.
      */
     ngDoCheck(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { host: true; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { optional: true; host: true; }]>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never>;
 }
 /**
@@ -158,6 +158,6 @@ export declare class NgSwitchCase implements DoCheck {
  */
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
-    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchDefault, [null, null, { host: true; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchDefault, [null, null, { optional: true; host: true; }]>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
 }

@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.8+352.sha-3a5f006
+ * @license Angular v12.0.0-next.8+354.sha-640ec78
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4182,6 +4182,9 @@
     var NgSwitchCase = /** @class */ (function () {
         function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
             this.ngSwitch = ngSwitch;
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+                throwNgSwitchProviderNotFoundError('ngSwitchCase', 'NgSwitchCase');
+            }
             ngSwitch._addCase();
             this._view = new SwitchView(viewContainer, templateRef);
         }
@@ -4193,7 +4196,7 @@
         };
         return NgSwitchCase;
     }());
-    NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(i0.ɵɵdirectiveInject(i0.ViewContainerRef), i0.ɵɵdirectiveInject(i0.TemplateRef), i0.ɵɵdirectiveInject(NgSwitch, 1)); };
+    NgSwitchCase.ɵfac = function NgSwitchCase_Factory(t) { return new (t || NgSwitchCase)(i0.ɵɵdirectiveInject(i0.ViewContainerRef), i0.ɵɵdirectiveInject(i0.TemplateRef), i0.ɵɵdirectiveInject(NgSwitch, 9)); };
     NgSwitchCase.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: NgSwitchCase, selectors: [["", "ngSwitchCase", ""]], inputs: { ngSwitchCase: "ngSwitchCase" } });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NgSwitchCase, [{
@@ -4201,6 +4204,8 @@
                 args: [{ selector: '[ngSwitchCase]' }]
             }], function () {
             return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }, { type: NgSwitch, decorators: [{
+                            type: i0.Optional
+                        }, {
                             type: i0.Host
                         }] }];
         }, { ngSwitchCase: [{
@@ -4223,11 +4228,14 @@
      */
     var NgSwitchDefault = /** @class */ (function () {
         function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+                throwNgSwitchProviderNotFoundError('ngSwitchDefault', 'NgSwitchDefault');
+            }
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
         return NgSwitchDefault;
     }());
-    NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(i0.ɵɵdirectiveInject(i0.ViewContainerRef), i0.ɵɵdirectiveInject(i0.TemplateRef), i0.ɵɵdirectiveInject(NgSwitch, 1)); };
+    NgSwitchDefault.ɵfac = function NgSwitchDefault_Factory(t) { return new (t || NgSwitchDefault)(i0.ɵɵdirectiveInject(i0.ViewContainerRef), i0.ɵɵdirectiveInject(i0.TemplateRef), i0.ɵɵdirectiveInject(NgSwitch, 9)); };
     NgSwitchDefault.ɵdir = /*@__PURE__*/ i0.ɵɵdefineDirective({ type: NgSwitchDefault, selectors: [["", "ngSwitchDefault", ""]] });
     (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NgSwitchDefault, [{
@@ -4235,10 +4243,17 @@
                 args: [{ selector: '[ngSwitchDefault]' }]
             }], function () {
             return [{ type: i0.ViewContainerRef }, { type: i0.TemplateRef }, { type: NgSwitch, decorators: [{
+                            type: i0.Optional
+                        }, {
                             type: i0.Host
                         }] }];
         }, null);
     })();
+    function throwNgSwitchProviderNotFoundError(attrName, directiveName) {
+        throw new i0.ɵRuntimeError("305" /* TEMPLATE_STRUCTURE_ERROR */, "An element with the \"" + attrName + "\" attribute " +
+            ("(matching the \"" + directiveName + "\" directive) must be located inside an element with the \"ngSwitch\" attribute ") +
+            "(matching \"NgSwitch\" directive)");
+    }
 
     /**
      * @license
@@ -5710,7 +5725,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.0-next.8+352.sha-3a5f006');
+    var VERSION = new i0.Version('12.0.0-next.8+354.sha-640ec78');
 
     /**
      * @license
