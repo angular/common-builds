@@ -1,10 +1,10 @@
 /**
- * @license Angular v11.2.13+4.sha-c7bef55
+ * @license Angular v11.2.13+6.sha-e090a6d
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { InjectionToken, ɵɵdefineInjectable, Injectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, TemplateRef, Host, Attribute, ɵisPromise, ɵisSubscribable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version } from '@angular/core';
+import { InjectionToken, ɵɵdefineInjectable, Injectable, ɵɵinject, Inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, IterableDiffers, KeyValueDiffers, ElementRef, Renderer2, Input, NgModuleRef, ComponentFactoryResolver, ViewContainerRef, TemplateRef, Host, ɵRuntimeError, Attribute, ɵisPromise, ɵisSubscribable, Pipe, ChangeDetectorRef, DEFAULT_CURRENCY_CODE, NgModule, Version } from '@angular/core';
 
 /**
  * @license
@@ -3703,6 +3703,9 @@ NgSwitch.propDecorators = {
 class NgSwitchCase {
     constructor(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+            throwNgSwitchProviderNotFoundError('ngSwitchCase', 'NgSwitchCase');
+        }
         ngSwitch._addCase();
         this._view = new SwitchView(viewContainer, templateRef);
     }
@@ -3719,7 +3722,7 @@ NgSwitchCase.decorators = [
 NgSwitchCase.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
-    { type: NgSwitch, decorators: [{ type: Host }] }
+    { type: NgSwitch, decorators: [{ type: Optional }, { type: Host }] }
 ];
 NgSwitchCase.propDecorators = {
     ngSwitchCase: [{ type: Input }]
@@ -3740,6 +3743,9 @@ NgSwitchCase.propDecorators = {
  */
 class NgSwitchDefault {
     constructor(viewContainer, templateRef, ngSwitch) {
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+            throwNgSwitchProviderNotFoundError('ngSwitchDefault', 'NgSwitchDefault');
+        }
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
 }
@@ -3749,8 +3755,13 @@ NgSwitchDefault.decorators = [
 NgSwitchDefault.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
-    { type: NgSwitch, decorators: [{ type: Host }] }
+    { type: NgSwitch, decorators: [{ type: Optional }, { type: Host }] }
 ];
+function throwNgSwitchProviderNotFoundError(attrName, directiveName) {
+    throw new ɵRuntimeError("305" /* TEMPLATE_STRUCTURE_ERROR */, `An element with the "${attrName}" attribute ` +
+        `(matching the "${directiveName}" directive) must be located inside an element with the "ngSwitch" attribute ` +
+        `(matching "NgSwitch" directive)`);
+}
 
 /**
  * @license
@@ -5120,7 +5131,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('11.2.13+4.sha-c7bef55');
+const VERSION = new Version('11.2.13+6.sha-e090a6d');
 
 /**
  * @license

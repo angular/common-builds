@@ -1,5 +1,5 @@
 /**
- * @license Angular v11.2.13+4.sha-c7bef55
+ * @license Angular v11.2.13+6.sha-e090a6d
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4055,6 +4055,9 @@
     var NgSwitchCase = /** @class */ (function () {
         function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
             this.ngSwitch = ngSwitch;
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+                throwNgSwitchProviderNotFoundError('ngSwitchCase', 'NgSwitchCase');
+            }
             ngSwitch._addCase();
             this._view = new SwitchView(viewContainer, templateRef);
         }
@@ -4072,7 +4075,7 @@
     NgSwitchCase.ctorParameters = function () { return [
         { type: i0.ViewContainerRef },
         { type: i0.TemplateRef },
-        { type: NgSwitch, decorators: [{ type: i0.Host }] }
+        { type: NgSwitch, decorators: [{ type: i0.Optional }, { type: i0.Host }] }
     ]; };
     NgSwitchCase.propDecorators = {
         ngSwitchCase: [{ type: i0.Input }]
@@ -4093,6 +4096,9 @@
      */
     var NgSwitchDefault = /** @class */ (function () {
         function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
+            if ((typeof ngDevMode === 'undefined' || ngDevMode) && !ngSwitch) {
+                throwNgSwitchProviderNotFoundError('ngSwitchDefault', 'NgSwitchDefault');
+            }
             ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
         }
         return NgSwitchDefault;
@@ -4103,8 +4109,13 @@
     NgSwitchDefault.ctorParameters = function () { return [
         { type: i0.ViewContainerRef },
         { type: i0.TemplateRef },
-        { type: NgSwitch, decorators: [{ type: i0.Host }] }
+        { type: NgSwitch, decorators: [{ type: i0.Optional }, { type: i0.Host }] }
     ]; };
+    function throwNgSwitchProviderNotFoundError(attrName, directiveName) {
+        throw new i0.ɵRuntimeError("305" /* TEMPLATE_STRUCTURE_ERROR */, "An element with the \"" + attrName + "\" attribute " +
+            ("(matching the \"" + directiveName + "\" directive) must be located inside an element with the \"ngSwitch\" attribute ") +
+            "(matching \"NgSwitch\" directive)");
+    }
 
     /**
      * @license
@@ -5535,7 +5546,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('11.2.13+4.sha-c7bef55');
+    var VERSION = new i0.Version('11.2.13+6.sha-e090a6d');
 
     /**
      * @license
