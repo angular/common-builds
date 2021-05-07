@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.0-next.8+367.sha-cb418bd
+ * @license Angular v12.0.0-next.8+370.sha-4bc3cf2
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -685,6 +685,14 @@ function isFormData(value) {
     return typeof FormData !== 'undefined' && value instanceof FormData;
 }
 /**
+ * Safely assert whether the given value is a URLSearchParams instance.
+ *
+ * In some execution environments URLSearchParams is not defined.
+ */
+function isUrlSearchParams(value) {
+    return typeof URLSearchParams !== 'undefined' && value instanceof URLSearchParams;
+}
+/**
  * An outgoing HTTP request with an optional typed body.
  *
  * `HttpRequest` represents an outgoing request, including URL, method,
@@ -805,7 +813,7 @@ class HttpRequest {
         // Check whether the body is already in a serialized form. If so,
         // it can just be returned directly.
         if (isArrayBuffer(this.body) || isBlob(this.body) || isFormData(this.body) ||
-            typeof this.body === 'string') {
+            isUrlSearchParams(this.body) || typeof this.body === 'string') {
             return this.body;
         }
         // Check whether the body is an instance of HttpUrlEncodedParams.
