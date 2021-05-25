@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.1+38.sha-12b1e87
+ * @license Angular v12.0.1+66.sha-c01da21
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1074,7 +1074,7 @@ export declare class KeyValuePipe implements PipeTransform {
  *
  * @usageNotes
  *
- * It's better to use the `Router#navigate` service to trigger route changes. Use
+ * It's better to use the `Router.navigate()` service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -1186,8 +1186,13 @@ export declare class Location {
     /**
      * Subscribes to the platform's `popState` events.
      *
+     * Note: `Location.go()` does not trigger the `popState` event in the browser. Use
+     * `Location.onUrlChange()` to subscribe to URL changes instead.
+     *
      * @param value Event that is triggered when the state history changes.
      * @param exception The exception to throw.
+     *
+     * @see [onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate)
      *
      * @returns Subscribed events.
      */
