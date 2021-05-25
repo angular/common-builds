@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.1.0-next.2+65.sha-f74fd64
+ * @license Angular v12.1.0-next.2+63.sha-c3cbfc2
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -549,7 +549,7 @@ HashLocationStrategy.ɵprov = /*@__PURE__*/ ɵɵdefineInjectable({ token: HashLo
  *
  * @usageNotes
  *
- * It's better to use the `Router.navigate()` service to trigger route changes. Use
+ * It's better to use the `Router#navigate` service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -718,13 +718,8 @@ class Location {
     /**
      * Subscribes to the platform's `popState` events.
      *
-     * Note: `Location.go()` does not trigger the `popState` event in the browser. Use
-     * `Location.onUrlChange()` to subscribe to URL changes instead.
-     *
      * @param value Event that is triggered when the state history changes.
      * @param exception The exception to throw.
-     *
-     * @see [onpopstate](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate)
      *
      * @returns Subscribed events.
      */
@@ -5229,7 +5224,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.1.0-next.2+65.sha-f74fd64');
+const VERSION = new Version('12.1.0-next.2+63.sha-c3cbfc2');
 
 /**
  * @license
