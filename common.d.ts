@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.1+66.sha-c01da21
+ * @license Angular v12.0.1+83.sha-54b23ae
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -201,6 +201,14 @@ export declare class CurrencyPipe implements PipeTransform {
  * @description
  *
  * Formats a date value according to locale rules.
+ *
+ * `DatePipe` is executed only when it detects a pure change to the input value.
+ * A pure change is either a change to a primitive input value
+ * (such as `String`, `Number`, `Boolean`, or `Symbol`),
+ * or a changed object reference (such as `Date`, `Array`, `Function`, or `Object`).
+ *
+ * Note that mutating a `Date` object does not cause the pipe to be rendered again.
+ * To ensure that the pipe is executed, you must create a new `Date` object.
  *
  * Only the `en-US` locale data comes with Angular. To localize dates
  * in another language, you must import the corresponding locale data.
