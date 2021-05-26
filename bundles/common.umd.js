@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.1.0-next.3+6.sha-38b0e71
+ * @license Angular v12.1.0-next.3+9.sha-de8a6ae
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3554,21 +3554,22 @@
                 return this._trackByFn;
             },
             /**
-             * A function that defines how to track changes for items in the iterable.
+             * Specifies a custom `TrackByFunction` to compute the identity of items in an iterable.
              *
-             * When items are added, moved, or removed in the iterable,
-             * the directive must re-render the appropriate DOM nodes.
-             * To minimize churn in the DOM, only nodes that have changed
-             * are re-rendered.
+             * If a custom `TrackByFunction` is not provided, `NgForOf` will use the item's [object
+             * identity](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+             * as the key.
              *
-             * By default, the change detector assumes that
-             * the object instance identifies the node in the iterable.
-             * When this function is supplied, the directive uses
-             * the result of calling this function to identify the item node,
-             * rather than the identity of the object itself.
+             * `NgForOf` uses the computed key to associate items in an iterable with DOM elements
+             * it produces for these items.
              *
-             * The function receives two inputs,
-             * the iteration index and the associated node data.
+             * A custom `TrackByFunction` is useful to provide good user experience in cases when items in an
+             * iterable rendered using `NgForOf` have a natural identifier (for example, custom ID or a
+             * primary key), and this iterable could be updated with new object instances that still
+             * represent the same underlying entity (for example, when data is re-fetched from the server,
+             * and the iterable is recreated and re-rendered, but most of the data is still the same).
+             *
+             * @see `TrackByFunction`
              */
             set: function (fn) {
                 if ((typeof ngDevMode === 'undefined' || ngDevMode) && fn != null && typeof fn !== 'function') {
@@ -5597,7 +5598,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.1.0-next.3+6.sha-38b0e71');
+    var VERSION = new i0.Version('12.1.0-next.3+9.sha-de8a6ae');
 
     /**
      * @license
