@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.3+11.sha-0a1d8e5
+ * @license Angular v12.0.3+17.sha-0dad375
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4962,7 +4962,7 @@ class CurrencyPipe {
         this._locale = _locale;
         this._defaultCurrencyCode = _defaultCurrencyCode;
     }
-    transform(value, currencyCode, display = 'symbol', digitsInfo, locale) {
+    transform(value, currencyCode = this._defaultCurrencyCode, display = 'symbol', digitsInfo, locale) {
         if (!isValue(value))
             return null;
         locale = locale || this._locale;
@@ -5183,7 +5183,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.0.3+11.sha-0a1d8e5');
+const VERSION = new Version('12.0.3+17.sha-0dad375');
 
 /**
  * @license

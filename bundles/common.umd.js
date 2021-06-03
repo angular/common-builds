@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.0.3+11.sha-0a1d8e5
+ * @license Angular v12.0.3+17.sha-0dad375
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5370,6 +5370,7 @@
             this._defaultCurrencyCode = _defaultCurrencyCode;
         }
         CurrencyPipe.prototype.transform = function (value, currencyCode, display, digitsInfo, locale) {
+            if (currencyCode === void 0) { currencyCode = this._defaultCurrencyCode; }
             if (display === void 0) { display = 'symbol'; }
             if (!isValue(value))
                 return null;
@@ -5598,7 +5599,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.0.3+11.sha-0a1d8e5');
+    var VERSION = new i0.Version('12.0.3+17.sha-0dad375');
 
     /**
      * @license
