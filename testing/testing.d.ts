@@ -1,11 +1,11 @@
 /**
- * @license Angular v12.2.0-next.1+9.sha-e81efe6
+ * @license Angular v12.2.0-next.1+12.sha-e99af18
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { InjectionToken } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location as Location_2 } from '@angular/common';
 import { LocationChangeListener } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
@@ -91,7 +91,7 @@ export declare interface MockPlatformLocationConfig {
  *
  * @publicApi
  */
-export declare class SpyLocation implements Location {
+export declare class SpyLocation implements Location_2 {
     urlChanges: string[];
     private _history;
     private _historyIndex;
