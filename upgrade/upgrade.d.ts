@@ -1,12 +1,12 @@
 /**
- * @license Angular v12.1.1+7.sha-aa261e7
+ * @license Angular v12.1.1+12.sha-6da24e6
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { HashLocationStrategy } from '@angular/common';
 import { InjectionToken } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location as Location_2 } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
 import { ModuleWithProviders } from '@angular/core';
 import { PathLocationStrategy } from '@angular/common';
@@ -41,7 +41,7 @@ export declare class $locationShim {
     private $$changeListeners;
     private cachedState;
     private urlChanges;
-    constructor($injector: any, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
+    constructor($injector: any, location: Location_2, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
     private initialize;
     private resetBrowserUpdate;
     private lastHistoryState;
@@ -257,7 +257,7 @@ export declare class $locationShimProvider {
     private platformLocation;
     private urlCodec;
     private locationStrategy;
-    constructor(ngUpgrade: UpgradeModule, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
+    constructor(ngUpgrade: UpgradeModule, location: Location_2, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
     /**
      * Factory method that returns an instance of the $locationShim
      */
@@ -449,6 +449,6 @@ export declare function ɵangular_packages_common_upgrade_upgrade_b(config: Loca
 
 export declare function ɵangular_packages_common_upgrade_upgrade_c(platformLocation: PlatformLocation, baseHref: string, options?: LocationUpgradeConfig): HashLocationStrategy | PathLocationStrategy;
 
-export declare function ɵangular_packages_common_upgrade_upgrade_d(ngUpgrade: UpgradeModule, location: Location, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy): $locationShim;
+export declare function ɵangular_packages_common_upgrade_upgrade_d(ngUpgrade: UpgradeModule, location: Location_2, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy): $locationShim;
 
 export { }

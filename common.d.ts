@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.1.1+7.sha-aa261e7
+ * @license Angular v12.1.1+12.sha-6da24e6
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1067,7 +1067,7 @@ export declare class KeyValuePipe implements PipeTransform {
  *
  * @publicApi
  */
-export declare class Location {
+declare class Location_2 {
     constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
     /**
      * Normalizes the URL path for this location.
@@ -1171,7 +1171,7 @@ export declare class Location {
      *
      * @returns Subscribed events.
      */
-    subscribe(onNext: (value: PopStateEvent) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
+    subscribe(onNext: (value: PopStateEvent_2) => void, onThrow?: ((exception: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     /**
      * Normalizes URL parameters by prepending with `?` if needed.
      *
@@ -1201,6 +1201,7 @@ export declare class Location {
      */
     static stripTrailingSlash: (url: string) => string;
 }
+export { Location_2 as Location }
 
 /**
  * @description
@@ -2328,12 +2329,13 @@ export declare enum Plural {
 }
 
 /** @publicApi */
-export declare interface PopStateEvent {
+declare interface PopStateEvent_2 {
     pop?: boolean;
     state?: any;
     type?: string;
     url?: string;
 }
+export { PopStateEvent_2 as PopStateEvent }
 
 
 /**
@@ -2559,7 +2561,7 @@ export declare function ɵangular_packages_common_common_a(): ɵBrowserPlatformL
 
 export declare function ɵangular_packages_common_common_b(): ɵBrowserPlatformLocation;
 
-export declare function ɵangular_packages_common_common_c(): Location;
+export declare function ɵangular_packages_common_common_c(): Location_2;
 
 export declare function ɵangular_packages_common_common_d(platformLocation: PlatformLocation): PathLocationStrategy;
 
