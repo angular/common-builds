@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.0-next.1+50.sha-3791ae0
+ * @license Angular v12.2.0-next.1+53.sha-9d58ebf
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -906,63 +906,63 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
 }
 
 declare namespace i1 {
-  export {
-    NgClass
-  }
+    export {
+        NgClass
+    }
 }
 
 declare namespace i10 {
-  export {
-    LowerCasePipe,
-    TitleCasePipe,
-    UpperCasePipe
-  }
+    export {
+        LowerCasePipe,
+        TitleCasePipe,
+        UpperCasePipe
+    }
 }
 
 declare namespace i11 {
-  export {
-    JsonPipe
-  }
+    export {
+        JsonPipe
+    }
 }
 
 declare namespace i12 {
-  export {
-    SlicePipe
-  }
+    export {
+        SlicePipe
+    }
 }
 
 declare namespace i13 {
-  export {
-    DecimalPipe,
-    PercentPipe,
-    CurrencyPipe
-  }
+    export {
+        DecimalPipe,
+        PercentPipe,
+        CurrencyPipe
+    }
 }
 
 declare namespace i14 {
-  export {
-    DatePipe
-  }
+    export {
+        DatePipe
+    }
 }
 
 declare namespace i15 {
-  export {
-    I18nPluralPipe
-  }
+    export {
+        I18nPluralPipe
+    }
 }
 
 declare namespace i16 {
-  export {
-    I18nSelectPipe
-  }
+    export {
+        I18nSelectPipe
+    }
 }
 
 declare namespace i17 {
-  export {
-    defaultComparator,
-    KeyValue,
-    KeyValuePipe
-  }
+    export {
+        defaultComparator,
+        KeyValue,
+        KeyValuePipe
+    }
 }
 
 /**
@@ -1027,57 +1027,57 @@ export declare class I18nSelectPipe implements PipeTransform {
 }
 
 declare namespace i2 {
-  export {
-    NgComponentOutlet
-  }
+    export {
+        NgComponentOutlet
+    }
 }
 
 declare namespace i3 {
-  export {
-    NgForOfContext,
-    NgForOf
-  }
+    export {
+        NgForOfContext,
+        NgForOf
+    }
 }
 
 declare namespace i4 {
-  export {
-    NgIf,
-    NgIfContext
-  }
+    export {
+        NgIf,
+        NgIfContext
+    }
 }
 
 declare namespace i5 {
-  export {
-    NgTemplateOutlet
-  }
+    export {
+        NgTemplateOutlet
+    }
 }
 
 declare namespace i6 {
-  export {
-    NgStyle
-  }
+    export {
+        NgStyle
+    }
 }
 
 declare namespace i7 {
-  export {
-    SwitchView,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault
-  }
+    export {
+        SwitchView,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault
+    }
 }
 
 declare namespace i8 {
-  export {
-    NgPlural,
-    NgPluralCase
-  }
+    export {
+        NgPlural,
+        NgPluralCase
+    }
 }
 
 declare namespace i9 {
-  export {
-    AsyncPipe
-  }
+    export {
+        AsyncPipe
+    }
 }
 
 /**
