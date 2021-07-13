@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.0-next.1+100.sha-81dce5c
+ * @license Angular v12.2.0-next.1+101.sha-e42aa6c
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5124,6 +5124,7 @@
         function KeyValuePipe(differs) {
             this.differs = differs;
             this.keyValues = [];
+            this.compareFn = defaultComparator;
         }
         KeyValuePipe.prototype.transform = function (input, compareFn) {
             var _this = this;
@@ -5136,12 +5137,16 @@
                 this.differ = this.differs.find(input).create();
             }
             var differChanges = this.differ.diff(input);
+            var compareFnChanged = compareFn !== this.compareFn;
             if (differChanges) {
                 this.keyValues = [];
                 differChanges.forEachItem(function (r) {
                     _this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
                 });
+            }
+            if (differChanges || compareFnChanged) {
                 this.keyValues.sort(compareFn);
+                this.compareFn = compareFn;
             }
             return this.keyValues;
         };
@@ -5654,7 +5659,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.2.0-next.1+100.sha-81dce5c');
+    var VERSION = new i0.Version('12.2.0-next.1+101.sha-e42aa6c');
 
     /**
      * @license

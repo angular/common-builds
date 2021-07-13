@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.0-next.1+100.sha-81dce5c
+ * @license Angular v12.2.0-next.1+101.sha-e42aa6c
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4717,6 +4717,7 @@ class KeyValuePipe {
     constructor(differs) {
         this.differs = differs;
         this.keyValues = [];
+        this.compareFn = defaultComparator;
     }
     transform(input, compareFn = defaultComparator) {
         if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
@@ -4727,12 +4728,16 @@ class KeyValuePipe {
             this.differ = this.differs.find(input).create();
         }
         const differChanges = this.differ.diff(input);
+        const compareFnChanged = compareFn !== this.compareFn;
         if (differChanges) {
             this.keyValues = [];
             differChanges.forEachItem((r) => {
                 this.keyValues.push(makeKeyValuePair(r.key, r.currentValue));
             });
+        }
+        if (differChanges || compareFnChanged) {
             this.keyValues.sort(compareFn);
+            this.compareFn = compareFn;
         }
         return this.keyValues;
     }
@@ -5232,7 +5237,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('12.2.0-next.1+100.sha-81dce5c');
+const VERSION = new Version('12.2.0-next.1+101.sha-e42aa6c');
 
 /**
  * @license
