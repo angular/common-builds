@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.1.1+92.sha-b101ad0
+ * @license Angular v12.1.1+93.sha-d654c79
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1030,6 +1030,7 @@ export declare class KeyValuePipe implements PipeTransform {
     constructor(differs: KeyValueDiffers);
     private differ;
     private keyValues;
+    private compareFn;
     transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
     transform<K extends number, V>(input: Record<K, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
     transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
