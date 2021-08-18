@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.1+30.sha-e31ed3d.with-local-changes
+ * @license Angular v12.2.1+31.sha-e849e57.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3149,11 +3149,11 @@
      * found in the LICENSE file at https://angular.io/license
      */
     /**
-     * Instantiates a single {@link Component} type and inserts its Host View into current View.
+     * Instantiates a {@link Component} type and inserts its Host View into the current View.
      * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
      *
      * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
-     * any existing component will get destroyed.
+     * any existing component will be destroyed.
      *
      * @usageNotes
      *
@@ -3165,10 +3165,10 @@
      * the Component. Defaults to the injector of the current view container.
      *
      * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
-     * section of the component, if exists.
+     * section of the component, if it exists.
      *
-     * * `ngComponentOutletNgModuleFactory`: Optional module factory to allow dynamically loading other
-     * module, then load a component from that module.
+     * * `ngComponentOutletNgModuleFactory`: Optional module factory to allow loading another
+     * module dynamically, then loading a component from that module.
      *
      * ### Syntax
      *
@@ -5520,7 +5520,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.2.1+30.sha-e31ed3d.with-local-changes');
+    var VERSION = new i0.Version('12.2.1+31.sha-e849e57.with-local-changes');
 
     /**
      * @license
