@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-next.4+11.sha-fc3b50e.with-local-changes
+ * @license Angular v13.0.0-next.4+12.sha-c6a9300.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,6 +7,70 @@
 import { EventEmitter, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, InjectionToken, ɵɵinject, Inject, Optional } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { Subject } from 'rxjs';
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Joins two parts of a URL with a slash if needed.
+ *
+ * @param start  URL string
+ * @param end    URL string
+ *
+ *
+ * @returns The joined URL string.
+ */
+function joinWithSlash(start, end) {
+    if (start.length == 0) {
+        return end;
+    }
+    if (end.length == 0) {
+        return start;
+    }
+    let slashes = 0;
+    if (start.endsWith('/')) {
+        slashes++;
+    }
+    if (end.startsWith('/')) {
+        slashes++;
+    }
+    if (slashes == 2) {
+        return start + end.substring(1);
+    }
+    if (slashes == 1) {
+        return start + end;
+    }
+    return start + '/' + end;
+}
+/**
+ * Removes a trailing slash from a URL string if needed.
+ * Looks for the first occurrence of either `#`, `?`, or the end of the
+ * line as `/` characters and removes the trailing slash if one exists.
+ *
+ * @param url URL string.
+ *
+ * @returns The URL string, modified if needed.
+ */
+function stripTrailingSlash(url) {
+    const match = url.match(/#|\?|$/);
+    const pathEndIdx = match && match.index || url.length;
+    const droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+    return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+}
+/**
+ * Normalizes URL parameters by prepending with `?` if needed.
+ *
+ * @param  params String of URL parameters.
+ *
+ * @returns The normalized URL parameters string.
+ */
+function normalizeQueryParams(params) {
+    return params && params[0] !== '?' ? '?' + params : params;
+}
 
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
@@ -50,9 +114,12 @@ class SpyLocation {
         this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
     }
     simulateHashChange(pathname) {
-        // Because we don't prevent the native event, the browser will independently update the path
-        this.setInitialPath(pathname);
+        const path = this.prepareExternalUrl(pathname);
+        this.pushHistory(path, '', null);
         this.urlChanges.push('hash: ' + pathname);
+        // the browser will automatically fire popstate event before each `hashchange` event, so we need
+        // to simulate it.
+        this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
         this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'hashchange' });
     }
     prepareExternalUrl(url) {
@@ -63,18 +130,14 @@ class SpyLocation {
     }
     go(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
-        if (this._historyIndex > 0) {
-            this._history.splice(this._historyIndex + 1);
-        }
-        this._history.push(new LocationState(path, query, state));
-        this._historyIndex = this._history.length - 1;
+        this.pushHistory(path, query, state);
         const locationState = this._history[this._historyIndex - 1];
         if (locationState.path == path && locationState.query == query) {
             return;
         }
         const url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
-        this._subject.emit({ 'url': url, 'pop': false });
+        this._notifyUrlChangeListeners(path + normalizeQueryParams(query), state);
     }
     replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
@@ -87,17 +150,18 @@ class SpyLocation {
         history.state = state;
         const url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
+        this._notifyUrlChangeListeners(path + normalizeQueryParams(query), state);
     }
     forward() {
         if (this._historyIndex < (this._history.length - 1)) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
         }
     }
     back() {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true });
+            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
         }
     }
     historyGo(relativePosition = 0) {
@@ -124,6 +188,13 @@ class SpyLocation {
     }
     normalize(url) {
         return null;
+    }
+    pushHistory(path, query, state) {
+        if (this._historyIndex > 0) {
+            this._history.splice(this._historyIndex + 1);
+        }
+        this._history.push(new LocationState(path, query, state));
+        this._historyIndex = this._history.length - 1;
     }
 }
 SpyLocation.ɵfac = function SpyLocation_Factory(t) { return new (t || SpyLocation)(); };
