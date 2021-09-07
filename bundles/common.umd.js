@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.4+18.sha-01d2f03.with-local-changes
+ * @license Angular v12.2.4+19.sha-c02e5e1.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5520,7 +5520,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.2.4+18.sha-01d2f03.with-local-changes');
+    var VERSION = new i0.Version('12.2.4+19.sha-c02e5e1.with-local-changes');
 
     /**
      * @license
@@ -5606,9 +5606,6 @@
             if (!this.supportsScrolling()) {
                 return;
             }
-            // TODO(atscott): The correct behavior for `getElementsByName` would be to also verify that the
-            // element is an anchor. However, this could be considered a breaking change and should be
-            // done in a major version.
             var elSelected = findAnchorFromDocument(this.document, target);
             if (elSelected) {
                 this.scrollToElement(elSelected);
