@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-next.4+18.sha-da0403e.with-local-changes
+ * @license Angular v13.0.0-next.4+20.sha-359f26e.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1353,7 +1353,7 @@ class HttpClient {
     /**
      * Constructs an `Observable` that, when subscribed, causes the configured
      * `OPTIONS` request to execute on the server. This method allows the client
-     * to determine the supported HTTP methods and other capabilites of an endpoint,
+     * to determine the supported HTTP methods and other capabilities of an endpoint,
      * without implying a resource action. See the individual overloads for
      * details on the return type.
      */
