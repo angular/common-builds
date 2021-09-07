@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.4+10.sha-aa1782c.with-local-changes
+ * @license Angular v12.2.4+12.sha-3b4f121.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1704,7 +1704,7 @@
         /**
          * Constructs an `Observable` that, when subscribed, causes the configured
          * `OPTIONS` request to execute on the server. This method allows the client
-         * to determine the supported HTTP methods and other capabilites of an endpoint,
+         * to determine the supported HTTP methods and other capabilities of an endpoint,
          * without implying a resource action. See the individual overloads for
          * details on the return type.
          */

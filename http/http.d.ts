@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.4+10.sha-aa1782c.with-local-changes
+ * @license Angular v12.2.4+12.sha-3b4f121.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -469,7 +469,7 @@ export declare class HttpClient {
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the reuested response, wuth body of type `any`.
+     * @return An `Observable` of the requested response, with body of type `any`.
      */
     request(method: string, url: string, options?: {
         body?: any;
@@ -1454,7 +1454,7 @@ export declare class HttpClient {
      * @param options The HTTP options to send with the request.
      *
      * @return An `Observable` of the `HttpResponse` for the request,
-     * with a responmse body of the requested type.
+     * with a response body of the requested type.
      */
     head<T>(url: string, options: {
         headers?: HttpHeaders | {
