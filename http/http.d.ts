@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-next.6+59.sha-ce406e3.with-local-changes
+ * @license Angular v13.0.0-next.6+61.sha-6ff0eef.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3333,7 +3333,7 @@ export declare class HttpHeaders {
  * @usageNotes
  *
  * To use the same instance of `HttpInterceptors` for the entire app, import the `HttpClientModule`
- * only in your `AppModule`, and add the interceptors to the root application injector .
+ * only in your `AppModule`, and add the interceptors to the root application injector.
  * If you import `HttpClientModule` multiple times across different modules (for example, in lazy
  * loading modules), each import creates a new copy of the `HttpClientModule`, which overwrites the
  * interceptors provided in the root module.
