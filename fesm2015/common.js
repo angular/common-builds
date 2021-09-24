@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-next.7+11.sha-ea61ec2.with-local-changes
+ * @license Angular v13.0.0-next.7+29.sha-d9d8f95.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -798,7 +798,7 @@ const CURRENCIES_EN = { "ADP": [undefined, undefined, 0], "AFN": [undefined, und
 /**
  * Format styles that can be used to represent numbers.
  * @see `getLocaleNumberFormat()`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -814,7 +814,7 @@ var NumberFormatStyle;
  *
  * @see `NgPlural`
  * @see `NgPluralCase`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -832,7 +832,7 @@ var Plural;
  * Typically the standalone version is for the nominative form of the word,
  * and the format version is used for the genitive case.
  * @see [CLDR website](http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles)
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -867,7 +867,7 @@ var TranslationWidth;
  * @see `getLocaleDateFormat()`
  * @see `getLocaleTimeFormat()`
  * @see `getLocaleDateTimeFormat()`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  * @publicApi
  */
 var FormatWidth;
@@ -898,7 +898,7 @@ var FormatWidth;
  * Examples are based on `en-US` values.
  *
  * @see `getLocaleNumberSymbol()`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -997,7 +997,7 @@ var WeekDay;
  * The loaded locale could be, for example, a global one rather than a regional one.
  * @param locale A locale code, such as `fr-FR`.
  * @returns The locale code. For example, `fr`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1011,7 +1011,7 @@ function getLocaleId(locale) {
  * @param formStyle The required grammatical form.
  * @param width The required character width.
  * @returns An array of localized period strings. For example, `[AM, PM]` for `en-US`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1031,7 +1031,7 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  * @param width The required character width.
  * @returns An array of localized name strings.
  * For example,`[Sunday, Monday, ... Saturday]` for `en-US`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1049,7 +1049,7 @@ function getLocaleDayNames(locale, formStyle, width) {
  * @param width The required character width.
  * @returns An array of localized name strings.
  * For example,  `[January, February, ...]` for `en-US`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1066,7 +1066,7 @@ function getLocaleMonthNames(locale, formStyle, width) {
 
  * @returns An array of localized era strings.
  * For example, `[AD, BC]` for `en-US`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1082,7 +1082,7 @@ function getLocaleEraNames(locale, width) {
  * @returns A day index number, using the 0-based week-day index for `en-US`
  * (Sunday = 0, Monday = 1, ...).
  * For example, for `fr-FR`, returns 1 to indicate that the first day is Monday.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1095,7 +1095,7 @@ function getLocaleFirstDayOfWeek(locale) {
  *
  * @param locale A locale code for the locale format rules to use.
  * @returns The range of day values, `[startDay, endDay]`.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1110,7 +1110,7 @@ function getLocaleWeekEndRange(locale) {
  * @param width The format type.
  * @returns The localized formating string.
  * @see `FormatWidth`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1125,7 +1125,7 @@ function getLocaleDateFormat(locale, width) {
  * @param width The format type.
  * @returns The localized formatting string.
  * @see `FormatWidth`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
 
  * @publicApi
  */
@@ -1140,7 +1140,7 @@ function getLocaleTimeFormat(locale, width) {
  * @param width The format type.
  * @returns The localized formatting string.
  * @see `FormatWidth`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1155,7 +1155,7 @@ function getLocaleDateTimeFormat(locale, width) {
  * @param symbol The symbol to localize.
  * @returns The character for the localized symbol.
  * @see `NumberSymbol`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1203,7 +1203,7 @@ function getLocaleNumberSymbol(locale, symbol) {
  * @returns The localized format string.
  * @see `NumberFormatStyle`
  * @see [CLDR website](http://cldr.unicode.org/translation/number-patterns)
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1218,7 +1218,7 @@ function getLocaleNumberFormat(locale, type) {
  * @param locale A locale code for the locale format rules to use.
  * @returns The localized symbol character,
  * or `null` if the main country cannot be determined.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1232,7 +1232,7 @@ function getLocaleCurrencySymbol(locale) {
  * @param locale A locale code for the locale format rules to use.
  * @returns The currency name,
  * or `null` if the main country cannot be determined.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1257,7 +1257,7 @@ function getLocaleCurrencyCode(locale) {
  * Retrieves the currency values for a given locale.
  * @param locale A locale code for the locale format rules to use.
  * @returns The currency values.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  */
 function getLocaleCurrencies(locale) {
     const data = ɵfindLocaleData(locale);
@@ -1285,14 +1285,14 @@ function checkFullData(data) {
  * A rule can specify a period as time range, or as a single time value.
  *
  * This functionality is only available when you have loaded the full locale data.
- * See the ["I18n guide"](guide/i18n#i18n-pipes).
+ * See the ["I18n guide"](guide/i18n-common-format-data-locale).
  *
  * @param locale A locale code for the locale format rules to use.
  * @returns The rules for the locale, a single time value or array of *from-time, to-time*,
  * or null if no periods are available.
  *
  * @see `getLocaleExtraDayPeriods()`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1313,14 +1313,14 @@ function getLocaleExtraDayPeriodRules(locale) {
  * For example, for `en-US`, periods are morning, noon, afternoon, evening, and midnight.
  *
  * This functionality is only available when you have loaded the full locale data.
- * See the ["I18n guide"](guide/i18n#i18n-pipes).
+ * See the ["I18n guide"](guide/i18n-common-format-data-locale).
  *
  * @param locale A locale code for the locale format rules to use.
  * @param formStyle The required grammatical form.
  * @param width The required character width.
  * @returns The translated day-period strings.
  * @see `getLocaleExtraDayPeriodRules()`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1339,7 +1339,7 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
  * @param locale A locale code for the locale format rules to use.
  * @publicApi
  * @returns 'rtl' or 'ltr'
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  */
 function getLocaleDirection(locale) {
     const data = ɵfindLocaleData(locale);
@@ -1354,7 +1354,7 @@ function getLocaleDirection(locale) {
  * @param data The data array to retrieve from.
  * @param index A 0-based index into the array to start from.
  * @returns The value immediately before the given index position.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1384,7 +1384,7 @@ function extractTime(time) {
  * @param locale A locale code for the locale format rules to use.
  *
  * @returns The symbol, or the currency code if no symbol is available.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1404,7 +1404,7 @@ const DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
  *
  * @param code The currency code.
  * @returns The number of decimal digits, typically 0 or 2.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -1470,7 +1470,7 @@ var TranslationType;
  * @returns The formatted date string.
  *
  * @see `DatePipe`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -2287,7 +2287,7 @@ function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimal
  *
  * @see `formatNumber()`
  * @see `DecimalPipe`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -2322,7 +2322,7 @@ function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
  *
  * @see `formatNumber()`
  * @see `DecimalPipe`
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  * @publicApi
  *
  */
@@ -2345,7 +2345,7 @@ function formatPercent(value, locale, digitsInfo) {
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
- * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n)
+ * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
  * @publicApi
  */
@@ -2631,7 +2631,8 @@ NgLocaleLocalization.ctorParameters = () => [
  */
 /**
  * Register global data to be used internally by Angular. See the
- * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
+ * ["I18n guide"](guide/i18n-common-format-data-locale) to know how to import additional locale
+ * data.
  *
  * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1
  *
@@ -4252,7 +4253,7 @@ UpperCasePipe.decorators = [
  *
  * Only the `en-US` locale data comes with Angular. To localize dates
  * in another language, you must import the corresponding locale data.
- * See the [I18n guide](guide/i18n#i18n-pipes) for more information.
+ * See the [I18n guide](guide/i18n-common-format-data-locale) for more information.
  *
  * @see `formatDate()`
  *
@@ -4698,7 +4699,7 @@ function defaultComparator(keyValueA, keyValueB) {
  *
  * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
  *
- * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+ * See [Setting your app locale](guide/i18n-common-locale-id).
  *
  * ### Example
  *
@@ -4778,7 +4779,7 @@ class PercentPipe {
      * Default is `0`.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * See [Setting your app locale](guide/i18n-common-locale-id).
      */
     transform(value, digitsInfo, locale) {
         if (!isValue(value))
@@ -4815,7 +4816,7 @@ PercentPipe.ctorParameters = () => [
  * The default currency code is currently always `USD` but this is deprecated from v9.
  *
  * **In v11 the default currency code will be taken from the current locale identified by
- * the `LOCALE_ID` token. See the [i18n guide](guide/i18n#setting-up-the-locale-of-your-app) for
+ * the `LOCALE_ID` token. See the [i18n guide](guide/i18n-common-locale-id) for
  * more information.**
  *
  * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
@@ -4875,7 +4876,7 @@ class CurrencyPipe {
      * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * See [Setting your app locale](guide/i18n-common-locale-id).
      */
     transform(value, currencyCode = this._defaultCurrencyCode, display = 'symbol', digitsInfo, locale) {
         if (!isValue(value))
@@ -5098,7 +5099,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('13.0.0-next.7+11.sha-ea61ec2.with-local-changes');
+const VERSION = new Version('13.0.0-next.7+29.sha-d9d8f95.with-local-changes');
 
 /**
  * @license
