@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "13.0.0-next.9+10.sha-9eba260.with-local-changes",
+  "version": "13.0.0-next.9+84.sha-c15b8c7.with-local-changes",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -11,8 +11,49 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "exports": {
+    "./locales/global/*": {
+      "default": "./locales/global/*.js"
+    },
+    "./locales/*": {
+      "default": "./locales/*.mjs"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./common.d.ts",
+      "es2015": "./fesm2015/common.mjs",
+      "node": "./fesm2015/common.mjs",
+      "default": "./fesm2020/common.mjs"
+    },
+    "./http": {
+      "types": "./http/http.d.ts",
+      "es2015": "./fesm2015/http.mjs",
+      "node": "./fesm2015/http.mjs",
+      "default": "./fesm2020/http.mjs"
+    },
+    "./http/testing": {
+      "types": "./http/testing/testing.d.ts",
+      "es2015": "./fesm2015/http/testing.mjs",
+      "node": "./fesm2015/http/testing.mjs",
+      "default": "./fesm2020/http/testing.mjs"
+    },
+    "./testing": {
+      "types": "./testing/testing.d.ts",
+      "es2015": "./fesm2015/testing.mjs",
+      "node": "./fesm2015/testing.mjs",
+      "default": "./fesm2020/testing.mjs"
+    },
+    "./upgrade": {
+      "types": "./upgrade/upgrade.d.ts",
+      "es2015": "./fesm2015/upgrade.mjs",
+      "node": "./fesm2015/upgrade.mjs",
+      "default": "./fesm2020/upgrade.mjs"
+    }
+  },
   "peerDependencies": {
-    "@angular/core": "13.0.0-next.9+10.sha-9eba260.with-local-changes",
+    "@angular/core": "13.0.0-next.9+84.sha-c15b8c7.with-local-changes",
     "rxjs": "^6.5.3 || ^7.0.0"
   },
   "repository": {
@@ -44,10 +85,11 @@
     "**/global/*.js",
     "**/closure-locale.*"
   ],
-  "main": "./bundles/common.umd.js",
-  "fesm2015": "./fesm2015/common.js",
-  "esm2015": "./esm2015/common.js",
+  "fesm2020": "./fesm2020/common.mjs",
+  "fesm2015": "./fesm2015/common.mjs",
+  "esm2020": "./esm2020/common.mjs",
   "typings": "./common.d.ts",
-  "module": "./fesm2015/common.js",
-  "es2015": "./fesm2015/common.js"
+  "module": "./fesm2015/common.mjs",
+  "es2020": "./fesm2020/common.mjs",
+  "type": "module"
 }

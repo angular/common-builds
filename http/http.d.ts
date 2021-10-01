@@ -1,9 +1,10 @@
 /**
- * @license Angular v13.0.0-next.9+10.sha-9eba260.with-local-changes
+ * @license Angular v13.0.0-next.9+84.sha-c15b8c7.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { Injector } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
@@ -2943,6 +2944,8 @@ export declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<T>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
 }
 
 /**
@@ -2957,6 +2960,9 @@ export declare class HttpClient {
  * @publicApi
  */
 export declare class HttpClientJsonpModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientJsonpModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientJsonpModule, never, never, never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientJsonpModule>;
 }
 
 /**
@@ -2969,6 +2975,9 @@ export declare class HttpClientJsonpModule {
  * @publicApi
  */
 export declare class HttpClientModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientModule>;
 }
 
 /**
@@ -3000,6 +3009,9 @@ export declare class HttpClientXsrfModule {
         cookieName?: string;
         headerName?: string;
     }): ModuleWithProviders<HttpClientXsrfModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientXsrfModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientXsrfModule, never, never, never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientXsrfModule>;
 }
 
 /**
@@ -3865,6 +3877,8 @@ export declare class HttpXhrBackend implements HttpBackend {
      * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpXhrBackend, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpXhrBackend>;
 }
 
 /**
@@ -3882,6 +3896,17 @@ export declare abstract class HttpXsrfTokenExtractor {
 }
 
 /**
+ * DI token/abstract type representing a map of JSONP callbacks.
+ *
+ * In the browser, this should always be the `window` object.
+ *
+ *
+ */
+declare abstract class JsonpCallbackContext {
+    [key: string]: (data: any) => void;
+}
+
+/**
  * Processes an `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  * @see `HttpHandler`
@@ -3896,7 +3921,7 @@ export declare class JsonpClientBackend implements HttpBackend {
      * A resolved promise that can be used to schedule microtasks in the event handlers.
      */
     private readonly resolvedPromise;
-    constructor(callbackMap: ɵangular_packages_common_http_http_b, document: any);
+    constructor(callbackMap: JsonpCallbackContext, document: any);
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
      */
@@ -3908,6 +3933,8 @@ export declare class JsonpClientBackend implements HttpBackend {
      *
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<JsonpClientBackend, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpClientBackend>;
 }
 
 /**
@@ -3929,6 +3956,8 @@ export declare class JsonpInterceptor {
      * @returns An observable of the event stream.
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<JsonpInterceptor, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpInterceptor>;
 }
 
 /**
@@ -3951,58 +3980,6 @@ export declare type XhrFactory = XhrFactory_2;
  */
 export declare const XhrFactory: typeof XhrFactory_2;
 
-export declare class ɵangular_packages_common_http_http_a implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
-}
-
-/**
- * DI token/abstract type representing a map of JSONP callbacks.
- *
- * In the browser, this should always be the `window` object.
- *
- *
- */
-export declare abstract class ɵangular_packages_common_http_http_b {
-    [key: string]: (data: any) => void;
-}
-
-/**
- * Factory function that determines where to store JSONP callbacks.
- *
- * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
- * in test environments. In that case, callbacks are stored on an anonymous object instead.
- *
- *
- */
-export declare function ɵangular_packages_common_http_http_c(): Object;
-
-export declare const ɵangular_packages_common_http_http_d: InjectionToken<string>;
-
-export declare const ɵangular_packages_common_http_http_e: InjectionToken<string>;
-
-/**
- * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
- */
-export declare class ɵangular_packages_common_http_http_f implements HttpXsrfTokenExtractor {
-    private doc;
-    private platform;
-    private cookieName;
-    private lastCookieString;
-    private lastToken;
-    constructor(doc: any, platform: string, cookieName: string);
-    getToken(): string | null;
-}
-
-/**
- * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
- */
-export declare class ɵangular_packages_common_http_http_g implements HttpInterceptor {
-    private tokenService;
-    private headerName;
-    constructor(tokenService: HttpXsrfTokenExtractor, headerName: string);
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
-}
-
 /**
  * An injectable `HttpHandler` that applies multiple interceptors
  * to a request before passing it to the given `HttpBackend`.
@@ -4018,6 +3995,8 @@ export declare class ɵHttpInterceptingHandler implements HttpHandler {
     private chain;
     constructor(backend: HttpBackend, injector: Injector);
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ɵHttpInterceptingHandler, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ɵHttpInterceptingHandler>;
 }
 
 export { }

@@ -1,15 +1,15 @@
 /**
- * @license Angular v13.0.0-next.9+10.sha-9eba260.with-local-changes
+ * @license Angular v13.0.0-next.9+84.sha-c15b8c7.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HashLocationStrategy } from '@angular/common';
+import * as i0 from '@angular/core';
+import * as i1 from '@angular/common';
 import { InjectionToken } from '@angular/core';
 import { Location as Location_2 } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
 import { ModuleWithProviders } from '@angular/core';
-import { PathLocationStrategy } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
 import { UpgradeModule } from '@angular/upgrade/static';
 
@@ -353,6 +353,9 @@ export declare interface LocationUpgradeConfig {
  */
 export declare class LocationUpgradeModule {
     static config(config?: LocationUpgradeConfig): ModuleWithProviders<LocationUpgradeModule>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LocationUpgradeModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<LocationUpgradeModule>;
 }
 
 
@@ -442,13 +445,5 @@ export declare abstract class UrlCodec {
         pathname: string;
     };
 }
-
-export declare function ɵangular_packages_common_upgrade_upgrade_a(config: LocationUpgradeConfig, appBaseHref?: string): string;
-
-export declare function ɵangular_packages_common_upgrade_upgrade_b(config: LocationUpgradeConfig): any;
-
-export declare function ɵangular_packages_common_upgrade_upgrade_c(platformLocation: PlatformLocation, baseHref: string, options?: LocationUpgradeConfig): HashLocationStrategy | PathLocationStrategy;
-
-export declare function ɵangular_packages_common_upgrade_upgrade_d(ngUpgrade: UpgradeModule, location: Location_2, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy): $locationShim;
 
 export { }

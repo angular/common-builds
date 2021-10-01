@@ -1,9 +1,10 @@
 /**
- * @license Angular v13.0.0-next.9+10.sha-9eba260.with-local-changes
+ * @license Angular v13.0.0-next.9+84.sha-c15b8c7.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { Location as Location_2 } from '@angular/common';
 import { LocationChangeListener } from '@angular/common';
@@ -41,6 +42,8 @@ export declare class MockLocationStrategy extends LocationStrategy {
     back(): void;
     forward(): void;
     getState(): unknown;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MockLocationStrategy, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MockLocationStrategy>;
 }
 
 /**
@@ -74,6 +77,8 @@ export declare class MockPlatformLocation implements PlatformLocation {
     historyGo(relativePosition?: number): void;
     getState(): unknown;
     private scheduleHashUpdate;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MockPlatformLocation>;
 }
 
 /**
@@ -112,6 +117,8 @@ export declare class SpyLocation implements Location_2 {
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;
     private pushHistory;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
 }
 
 export { }
