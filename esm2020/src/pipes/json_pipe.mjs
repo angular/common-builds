@@ -30,9 +30,9 @@ export class JsonPipe {
         return JSON.stringify(value, null, 2);
     }
 }
-JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.10+9.sha-a268c44.with-local-changes", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.0.0-next.10+9.sha-a268c44.with-local-changes", ngImport: i0, type: JsonPipe, name: "json", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.10+9.sha-a268c44.with-local-changes", ngImport: i0, type: JsonPipe, decorators: [{
+JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.10+11.sha-6d1c2f7.with-local-changes", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.0.0-next.10+11.sha-6d1c2f7.with-local-changes", ngImport: i0, type: JsonPipe, name: "json", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.10+11.sha-6d1c2f7.with-local-changes", ngImport: i0, type: JsonPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'json', pure: false }]
         }] });
