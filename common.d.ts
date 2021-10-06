@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-next.12+17.sha-5d7229e.with-local-changes
+ * @license Angular v13.0.0-next.13+3.sha-04fec60.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -170,6 +170,12 @@ export declare class CurrencyPipe implements PipeTransform {
 }
 
 /**
+ * Optionally-provided default timezone to use for all instances of `DatePipe` (such as `'+0430'`).
+ * If the value isn't provided, the `DatePipe` will use the end-user's local system timezone.
+ */
+export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
+
+/**
  * @ngModule CommonModule
  * @description
  *
@@ -186,6 +192,11 @@ export declare class CurrencyPipe implements PipeTransform {
  * Only the `en-US` locale data comes with Angular. To localize dates
  * in another language, you must import the corresponding locale data.
  * See the [I18n guide](guide/i18n-common-format-data-locale) for more information.
+ *
+ * The time zone of the formatted value can be specified either by passing it in as the second
+ * parameter of the pipe, or by setting the default through the `DATE_PIPE_DEFAULT_TIMEZONE`
+ * injection token. The value that is passed in as the second parameter takes precedence over
+ * the one defined using the injection token.
  *
  * @see `formatDate()`
  *
@@ -323,15 +334,16 @@ export declare class CurrencyPipe implements PipeTransform {
  */
 export declare class DatePipe implements PipeTransform {
     private locale;
-    constructor(locale: string);
+    private defaultTimezone?;
+    constructor(locale: string, defaultTimezone?: string | null | undefined);
     /**
      * @param value The date expression: a `Date` object,  a number
      * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
      * @param format The date/time components to include, using predefined options or a
      * custom format string.
-     * @param timezone A timezone offset (such as `'+0430'`), or a standard
-     * UTC/GMT or continental US timezone abbreviation.
-     * When not supplied, uses the end-user's local system timezone.
+     * @param timezone A timezone offset (such as `'+0430'`), or a standard UTC/GMT, or continental US
+     * timezone abbreviation. When not supplied, either the value of the `DATE_PIPE_DEFAULT_TIMEZONE`
+     * injection token is used or the end-user's local system timezone.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n-common-locale-id).
@@ -340,7 +352,7 @@ export declare class DatePipe implements PipeTransform {
     transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
     transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
-    static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, [null, { optional: true; }]>;
     static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date">;
 }
 
@@ -941,6 +953,7 @@ declare namespace i13 {
 
 declare namespace i14 {
     export {
+        DATE_PIPE_DEFAULT_TIMEZONE,
         DatePipe
     }
 }
