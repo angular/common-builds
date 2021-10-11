@@ -19,16 +19,16 @@ import * as i0 from "@angular/core";
  */
 export class HttpClientTestingModule {
 }
-HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+19.sha-8b29714.with-local-changes", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.0.0-next.14+19.sha-8b29714.with-local-changes", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
-HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.0.0-next.14+19.sha-8b29714.with-local-changes", ngImport: i0, type: HttpClientTestingModule, providers: [
+HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+20.sha-33d6b58.with-local-changes", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.0.0-next.14+20.sha-33d6b58.with-local-changes", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
+HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.0.0-next.14+20.sha-33d6b58.with-local-changes", ngImport: i0, type: HttpClientTestingModule, providers: [
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
     ], imports: [[
             HttpClientModule,
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+19.sha-8b29714.with-local-changes", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+20.sha-33d6b58.with-local-changes", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
