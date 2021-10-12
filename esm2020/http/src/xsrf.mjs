@@ -45,9 +45,9 @@ export class HttpXsrfCookieExtractor {
         return this.lastToken;
     }
 }
-HttpXsrfCookieExtractor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpXsrfCookieExtractor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
+HttpXsrfCookieExtractor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpXsrfCookieExtractor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: undefined, decorators: [{
                     type: Inject,
@@ -85,9 +85,9 @@ export class HttpXsrfInterceptor {
         return next.handle(req);
     }
 }
-HttpXsrfInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: HttpXsrfTokenExtractor }, { token: XSRF_HEADER_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpXsrfInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+32.sha-62494c9.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
+HttpXsrfInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: HttpXsrfTokenExtractor }, { token: XSRF_HEADER_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpXsrfInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0-next.14+33.sha-d151a3c.with-local-changes", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
                     type: Inject,
