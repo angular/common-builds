@@ -6,5 +6,5 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/extra/nn" />
-declare const _default: never[];
+declare const _default: (string | string[])[][];
 export default _default;

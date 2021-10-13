@@ -6,12 +6,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/it-SM" />
-declare function plural(n: number): number;
+declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
     BRL: (string | undefined)[];
     BYN: (string | undefined)[];
     EGP: (string | undefined)[];
     HKD: (string | undefined)[];
+    INR: (string | undefined)[];
     JPY: (string | undefined)[];
     KRW: (string | undefined)[];
     MXN: (string | undefined)[];
@@ -19,5 +20,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     THB: string[];
     TWD: (string | undefined)[];
     USD: (string | undefined)[];
+    VND: (string | undefined)[];
 } | undefined)[];
 export default _default;

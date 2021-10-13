@@ -6,5 +6,5 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/extra/ar-IL" />
-declare const _default: (string[][] | undefined)[];
+declare const _default: string[][][];
 export default _default;

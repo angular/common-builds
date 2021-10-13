@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/fa" />
-declare function plural(n: number): number;
+declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
     AFN: string[];
     CAD: string[];
@@ -15,6 +15,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     IRR: string[];
     MXN: string[];
     NZD: string[];
+    PHP: (string | undefined)[];
     THB: string[];
     XCD: string[];
 } | undefined)[];

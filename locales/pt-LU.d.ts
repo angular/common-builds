@@ -6,11 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/pt-LU" />
-declare function plural(n: number): number;
+declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
     AUD: string[];
     JPY: string[];
     LUF: string[];
+    PHP: (string | undefined)[];
     PTE: string[];
     RON: (string | undefined)[];
     THB: string[];
