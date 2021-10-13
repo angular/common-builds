@@ -6,10 +6,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/bg" />
-declare function plural(n: number): number;
+declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
+    AFN: (string | undefined)[];
+    AMD: never[];
     ARS: never[];
     AUD: never[];
+    AZN: never[];
     BBD: never[];
     BDT: never[];
     BGN: string[];
@@ -29,6 +32,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     FJD: never[];
     FKP: never[];
     GBP: (string | undefined)[];
+    GHS: never[];
     GIP: never[];
     GYD: never[];
     HKD: never[];

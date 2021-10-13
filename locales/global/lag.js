@@ -12,8 +12,8 @@
     global.ng.common = global.ng.common || {};
     global.ng.common.locales = global.ng.common.locales || {};
     const u = undefined;
-    function plural(n) {
-const i = Math.floor(Math.abs(n));
+    function plural(val) {
+const n = val, i = Math.floor(Math.abs(val));
 
 if (n === 0)
     return 0;

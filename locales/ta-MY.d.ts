@@ -6,9 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/common/locales/ta-MY" />
-declare function plural(n: number): number;
+declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
     MYR: string[];
+    PHP: (string | undefined)[];
     SGD: string[];
     THB: string[];
     TWD: string[];
