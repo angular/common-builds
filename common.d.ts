@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.0.0-rc.2+1.sha-8d89b28.with-local-changes
+ * @license Angular v13.0.0-rc.2+5.sha-f225bfd.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -62,7 +62,8 @@ export declare const APP_BASE_HREF: InjectionToken<string>;
  * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
  * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
- * potential memory leaks.
+ * potential memory leaks. When the reference of the expression changes, the `async` pipe
+ * automatically unsubscribes from the old `Observable` or `Promise` and subscribes to the new one.
  *
  * @usageNotes
  *
