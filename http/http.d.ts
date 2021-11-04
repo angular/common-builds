@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.1.0-next.0+4.sha-a0c2e07.with-local-changes
+ * @license Angular v13.1.0-next.0+7.sha-b6798f3.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3074,6 +3074,14 @@ export declare class HttpContext {
      * @returns A reference to itself for easy chaining.
      */
     delete(token: HttpContextToken<unknown>): HttpContext;
+    /**
+     * Checks for existence of a given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns True if the token exists, false otherwise.
+     */
+    has(token: HttpContextToken<unknown>): boolean;
     /**
      * @returns a list of tokens currently stored in the context.
      */
