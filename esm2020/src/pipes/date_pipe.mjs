@@ -189,9 +189,9 @@ export class DatePipe {
         }
     }
 }
-DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0-next.0+71.sha-18cc7c8.with-local-changes", ngImport: i0, type: DatePipe, deps: [{ token: LOCALE_ID }, { token: DATE_PIPE_DEFAULT_TIMEZONE, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
-DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.0-next.0+71.sha-18cc7c8.with-local-changes", ngImport: i0, type: DatePipe, name: "date" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0-next.0+71.sha-18cc7c8.with-local-changes", ngImport: i0, type: DatePipe, decorators: [{
+DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0-next.0+70.sha-ac7d5fa.with-local-changes", ngImport: i0, type: DatePipe, deps: [{ token: LOCALE_ID }, { token: DATE_PIPE_DEFAULT_TIMEZONE, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
+DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.0-next.0+70.sha-ac7d5fa.with-local-changes", ngImport: i0, type: DatePipe, name: "date" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0-next.0+70.sha-ac7d5fa.with-local-changes", ngImport: i0, type: DatePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'date', pure: true }]
         }], ctorParameters: function () { return [{ type: undefined, decorators: [{
