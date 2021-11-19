@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.1.0-next.2+24.sha-53bdbc6.with-local-changes
+ * @license Angular v13.1.0-next.2+25.sha-489cf42.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -152,19 +152,30 @@ export declare class TestRequest {
     }): void;
     /**
      * Resolve the request by returning an `ErrorEvent` (e.g. simulating a network failure).
+     * @deprecated Http requests never emit an `ErrorEvent`. Please specify a `ProgressEvent`.
      */
-    error(error: ErrorEvent, opts?: {
-        headers?: HttpHeaders | {
-            [name: string]: string | string[];
-        };
-        status?: number;
-        statusText?: string;
-    }): void;
+    error(error: ErrorEvent, opts?: TestRequestErrorOptions): void;
+    /**
+     * Resolve the request by returning an `ProgressEvent` (e.g. simulating a network failure).
+     */
+    error(error: ProgressEvent, opts?: TestRequestErrorOptions): void;
     /**
      * Deliver an arbitrary `HttpEvent` (such as a progress event) on the response stream for this
      * request.
      */
     event(event: HttpEvent<any>): void;
 }
+
+/**
+ * Type that describes options that can be used to create an error
+ * in `TestRequest`.
+ */
+declare type TestRequestErrorOptions = {
+    headers?: HttpHeaders | {
+        [name: string]: string | string[];
+    };
+    status?: number;
+    statusText?: string;
+};
 
 export { }
