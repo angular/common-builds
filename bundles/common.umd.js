@@ -1,5 +1,5 @@
 /**
- * @license Angular v12.2.11+20.sha-515949e.with-local-changes
+ * @license Angular v12.2.13+9.sha-a1bd9d7.with-local-changes
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4442,7 +4442,8 @@
      * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
      * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
      * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
-     * potential memory leaks.
+     * potential memory leaks. When the reference of the expression changes, the `async` pipe
+     * automatically unsubscribes from the old `Observable` or `Promise` and subscribes to the new one.
      *
      * @usageNotes
      *
@@ -5521,7 +5522,7 @@
     /**
      * @publicApi
      */
-    var VERSION = new i0.Version('12.2.11+20.sha-515949e.with-local-changes');
+    var VERSION = new i0.Version('12.2.13+9.sha-a1bd9d7.with-local-changes');
 
     /**
      * @license
