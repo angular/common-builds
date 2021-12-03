@@ -60,9 +60,9 @@ export class NgLocaleLocalization extends NgLocalization {
         }
     }
 }
-NgLocaleLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.3+5.sha-a8f96e8.with-local-changes", ngImport: i0, type: NgLocaleLocalization, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
-NgLocaleLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.3+5.sha-a8f96e8.with-local-changes", ngImport: i0, type: NgLocaleLocalization });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.3+5.sha-a8f96e8.with-local-changes", ngImport: i0, type: NgLocaleLocalization, decorators: [{
+NgLocaleLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.3+7.sha-e8e21ac.with-local-changes", ngImport: i0, type: NgLocaleLocalization, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
+NgLocaleLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.0.3+7.sha-e8e21ac.with-local-changes", ngImport: i0, type: NgLocaleLocalization });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.3+7.sha-e8e21ac.with-local-changes", ngImport: i0, type: NgLocaleLocalization, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: undefined, decorators: [{
                     type: Inject,
