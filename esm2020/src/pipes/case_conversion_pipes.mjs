@@ -33,9 +33,9 @@ export class LowerCasePipe {
         return value.toLowerCase();
     }
 }
-LowerCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: LowerCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-LowerCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: LowerCasePipe, name: "lowercase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: LowerCasePipe, decorators: [{
+LowerCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: LowerCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+LowerCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: LowerCasePipe, name: "lowercase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: LowerCasePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'lowercase' }]
         }] });
@@ -75,9 +75,9 @@ export class TitleCasePipe {
         return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
     }
 }
-TitleCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: TitleCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-TitleCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: TitleCasePipe, name: "titlecase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: TitleCasePipe, decorators: [{
+TitleCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: TitleCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+TitleCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: TitleCasePipe, name: "titlecase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: TitleCasePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'titlecase' }]
         }] });
@@ -99,9 +99,9 @@ export class UpperCasePipe {
         return value.toUpperCase();
     }
 }
-UpperCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: UpperCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-UpperCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: UpperCasePipe, name: "uppercase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+2.sha-e6beeab.with-local-changes", ngImport: i0, type: UpperCasePipe, decorators: [{
+UpperCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: UpperCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+UpperCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: UpperCasePipe, name: "uppercase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1+3.sha-2469b88.with-local-changes", ngImport: i0, type: UpperCasePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'uppercase' }]
         }] });
