@@ -30,9 +30,9 @@ export class JsonPipe {
         return JSON.stringify(value, null, 2);
     }
 }
-JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2+4.sha-ec95631.with-local-changes", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.2+4.sha-ec95631.with-local-changes", ngImport: i0, type: JsonPipe, name: "json", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2+4.sha-ec95631.with-local-changes", ngImport: i0, type: JsonPipe, decorators: [{
+JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2+10.sha-44ff4fb.with-local-changes", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.2+10.sha-44ff4fb.with-local-changes", ngImport: i0, type: JsonPipe, name: "json", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2+10.sha-44ff4fb.with-local-changes", ngImport: i0, type: JsonPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'json', pure: false }]
         }] });
