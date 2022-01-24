@@ -46,9 +46,9 @@ export class I18nSelectPipe {
         return '';
     }
 }
-I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: I18nSelectPipe, name: "i18nSelect" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: I18nSelectPipe, decorators: [{
+I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: I18nSelectPipe, name: "i18nSelect" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: I18nSelectPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'i18nSelect', pure: true }]
         }] });

@@ -56,9 +56,9 @@ export class SlicePipe {
         return typeof obj === 'string' || Array.isArray(obj);
     }
 }
-SlicePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-SlicePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: SlicePipe, name: "slice", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0-rc.1+7.sha-94bfcdd.with-local-changes", ngImport: i0, type: SlicePipe, decorators: [{
+SlicePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+SlicePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: SlicePipe, name: "slice", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0-rc.1+9.sha-a4aa9b3.with-local-changes", ngImport: i0, type: SlicePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'slice', pure: false }]
         }] });
