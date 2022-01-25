@@ -176,9 +176,9 @@ export class MockPlatformLocation {
         }
     }
 }
-MockPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.3+27.sha-dd7364f.with-local-changes", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-MockPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.3+27.sha-dd7364f.with-local-changes", ngImport: i0, type: MockPlatformLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.3+27.sha-dd7364f.with-local-changes", ngImport: i0, type: MockPlatformLocation, decorators: [{
+MockPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.3+29.sha-02d3d65.with-local-changes", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+MockPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.3+29.sha-02d3d65.with-local-changes", ngImport: i0, type: MockPlatformLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.3+29.sha-02d3d65.with-local-changes", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: undefined, decorators: [{
                     type: Inject,
