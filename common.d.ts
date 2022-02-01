@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.0+1078.sha-ab003a4.with-local-changes
+ * @license Angular v14.0.0-next.0+1079.sha-c89cf63.with-local-changes
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1522,8 +1522,12 @@ export declare class NgClass implements DoCheck {
  * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
  * section of the component, if it exists.
  *
- * * `ngComponentOutletNgModuleFactory`: Optional module factory to allow loading another
+ * * `ngComponentOutletNgModule`: Optional NgModule class reference to allow loading another
  * module dynamically, then loading a component from that module.
+ *
+ * * `ngComponentOutletNgModuleFactory`: Deprecated config option that allows providing optional
+ * NgModule factory to allow loading another module dynamically, then loading a component from that
+ * module. Use `ngComponentOutletNgModule` instead.
  *
  * ### Syntax
  *
@@ -1540,10 +1544,10 @@ export declare class NgClass implements DoCheck {
  * </ng-container>
  * ```
  *
- * Customized ngModuleFactory
+ * Customized NgModule reference
  * ```
  * <ng-container *ngComponentOutlet="componentTypeExpression;
- *                                   ngModuleFactory: moduleFactory;">
+ *                                   ngModule: ngModuleClass;">
  * </ng-container>
  * ```
  *
@@ -1561,16 +1565,20 @@ export declare class NgClass implements DoCheck {
 export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     private _viewContainerRef;
     ngComponentOutlet: Type<any>;
-    ngComponentOutletInjector: Injector;
-    ngComponentOutletContent: any[][];
-    ngComponentOutletNgModuleFactory: NgModuleFactory<any>;
+    ngComponentOutletInjector?: Injector;
+    ngComponentOutletContent?: any[][];
+    ngComponentOutletNgModule?: Type<any>;
+    /**
+     * @deprecated This input is deprecated, use `ngComponentOutletNgModule` instead.
+     */
+    ngComponentOutletNgModuleFactory?: NgModuleFactory<any>;
     private _componentRef;
     private _moduleRef;
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModule": "ngComponentOutletNgModule"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never>;
 }
 
 /**
