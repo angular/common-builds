@@ -19,16 +19,16 @@ import * as i0 from "@angular/core";
  */
 export class HttpClientTestingModule {
 }
-HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.1+21.sha-cd97d87.with-local-changes", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.1+21.sha-cd97d87.with-local-changes", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
-HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.1+21.sha-cd97d87.with-local-changes", ngImport: i0, type: HttpClientTestingModule, providers: [
+HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.1+23.sha-604a67f.with-local-changes", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.1+23.sha-604a67f.with-local-changes", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
+HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.1+23.sha-604a67f.with-local-changes", ngImport: i0, type: HttpClientTestingModule, providers: [
         HttpClientTestingBackend,
         { provide: HttpBackend, useExisting: HttpClientTestingBackend },
         { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
     ], imports: [[
             HttpClientModule,
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.1+21.sha-cd97d87.with-local-changes", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.1+23.sha-604a67f.with-local-changes", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
