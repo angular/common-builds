@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.2.1+30.sha-7a47add.with-local-changes
+ * @license Angular v13.2.2+5.sha-835b326.with-local-changes
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -904,6 +904,7 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
     private _baseHref;
     private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, _baseHref?: string);
+    /** @nodoc */
     ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
@@ -1567,7 +1568,9 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     private _componentRef;
     private _moduleRef;
     constructor(_viewContainerRef: ViewContainerRef);
+    /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
+    /** @nodoc */
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never>;
@@ -1712,6 +1715,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
      * Applies the changes when needed.
+     * @nodoc
      */
     ngDoCheck(): void;
     private _applyChanges;
@@ -2197,6 +2201,7 @@ export declare class NgSwitchCase implements DoCheck {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     /**
      * Performs case matching. For internal use only.
+     * @nodoc
      */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { optional: true; host: true; }]>;
@@ -2262,6 +2267,7 @@ export declare class NgTemplateOutlet implements OnChanges {
      */
     ngTemplateOutlet: TemplateRef<any> | null;
     constructor(_viewContainerRef: ViewContainerRef);
+    /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; }, {}, never>;
@@ -2402,6 +2408,7 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
     private _baseHref;
     private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, href?: string);
+    /** @nodoc */
     ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
