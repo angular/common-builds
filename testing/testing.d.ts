@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.2+28.sha-f17e26f.with-local-changes
+ * @license Angular v14.0.0-next.2+29.sha-bedb257.with-local-changes
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -100,6 +100,7 @@ export declare class SpyLocation implements Location_2 {
     urlChanges: string[];
     private _history;
     private _historyIndex;
+    ngOnDestroy(): void;
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
     path(): string;
@@ -113,7 +114,7 @@ export declare class SpyLocation implements Location_2 {
     forward(): void;
     back(): void;
     historyGo(relativePosition?: number): void;
-    onUrlChange(fn: (url: string, state: unknown) => void): void;
+    onUrlChange(fn: (url: string, state: unknown) => void): VoidFunction;
     subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
     normalize(url: string): string;
     private pushHistory;
