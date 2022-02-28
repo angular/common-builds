@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.4+30.sha-9366a3c
+ * @license Angular v14.0.0-next.4+31.sha-94c949a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2277,11 +2277,13 @@ export declare class NgTemplateOutlet implements OnChanges {
      * A string defining the template reference and optionally the context object for the template.
      */
     ngTemplateOutlet: TemplateRef<any> | null;
+    /** Injector to be used within the embedded view. */
+    ngTemplateOutletInjector: Injector | null;
     constructor(_viewContainerRef: ViewContainerRef);
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; "ngTemplateOutletInjector": "ngTemplateOutletInjector"; }, {}, never>;
 }
 
 
