@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.4+41.sha-c8e4d62
+ * @license Angular v14.0.0-next.4+42.sha-05d50b8
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1962,6 +1962,8 @@ export declare class NgLocaleLocalization extends NgLocalization {
  */
 export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any, locale?: string): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgLocalization, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<NgLocalization>;
 }
 
 /**
