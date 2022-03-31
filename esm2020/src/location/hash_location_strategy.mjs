@@ -87,9 +87,9 @@ export class HashLocationStrategy extends LocationStrategy {
         this._platformLocation.historyGo?.(relativePosition);
     }
 }
-HashLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.0-next.10+2.sha-99154cf", ngImport: i0, type: HashLocationStrategy, deps: [{ token: i1.PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-HashLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.0-next.10+2.sha-99154cf", ngImport: i0, type: HashLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.0-next.10+2.sha-99154cf", ngImport: i0, type: HashLocationStrategy, decorators: [{
+HashLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.0-next.10+3.sha-71e9068", ngImport: i0, type: HashLocationStrategy, deps: [{ token: i1.PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+HashLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.0-next.10+3.sha-71e9068", ngImport: i0, type: HashLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.0-next.10+3.sha-71e9068", ngImport: i0, type: HashLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.PlatformLocation }, { type: undefined, decorators: [{
                     type: Optional
