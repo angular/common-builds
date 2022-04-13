@@ -147,9 +147,9 @@ export class NgClass {
         }
     }
 }
-NgClass.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.2+19.sha-fc145d0", ngImport: i0, type: NgClass, deps: [{ token: i0.IterableDiffers }, { token: i0.KeyValueDiffers }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
-NgClass.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.2+19.sha-fc145d0", type: NgClass, selector: "[ngClass]", inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.2+19.sha-fc145d0", ngImport: i0, type: NgClass, decorators: [{
+NgClass.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.2+23.sha-5fe5970", ngImport: i0, type: NgClass, deps: [{ token: i0.IterableDiffers }, { token: i0.KeyValueDiffers }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+NgClass.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.2+23.sha-5fe5970", type: NgClass, selector: "[ngClass]", inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.2+23.sha-5fe5970", ngImport: i0, type: NgClass, decorators: [{
             type: Directive,
             args: [{ selector: '[ngClass]' }]
         }], ctorParameters: function () { return [{ type: i0.IterableDiffers }, { type: i0.KeyValueDiffers }, { type: i0.ElementRef }, { type: i0.Renderer2 }]; }, propDecorators: { klass: [{
