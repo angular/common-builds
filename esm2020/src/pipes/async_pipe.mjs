@@ -116,9 +116,9 @@ export class AsyncPipe {
         }
     }
 }
-AsyncPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3+26.sha-dd7eeb6", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe });
-AsyncPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3+26.sha-dd7eeb6", ngImport: i0, type: AsyncPipe, name: "async", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3+26.sha-dd7eeb6", ngImport: i0, type: AsyncPipe, decorators: [{
+AsyncPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3+27.sha-2ea541f", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe });
+AsyncPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3+27.sha-2ea541f", ngImport: i0, type: AsyncPipe, name: "async", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3+27.sha-2ea541f", ngImport: i0, type: AsyncPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'async', pure: false }]
         }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; } });
