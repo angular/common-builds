@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.13+44.sha-989e840
+ * @license Angular v14.0.0-next.13+54.sha-b8d3389
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -97,7 +97,7 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _dispose;
     private _updateLatestValue;
     static ɵfac: i0.ɵɵFactoryDeclaration<AsyncPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<AsyncPipe, "async">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<AsyncPipe, "async", false>;
 }
 
 /**
@@ -167,7 +167,7 @@ export declare class CurrencyPipe implements PipeTransform {
     transform(value: null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<CurrencyPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<CurrencyPipe, "currency">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<CurrencyPipe, "currency", false>;
 }
 
 /**
@@ -354,7 +354,7 @@ export declare class DatePipe implements PipeTransform {
     transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, [null, { optional: true; }]>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date", false>;
 }
 
 /**
@@ -427,7 +427,7 @@ export declare class DecimalPipe implements PipeTransform {
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DecimalPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<DecimalPipe, "number">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<DecimalPipe, "number", false>;
 }
 
 declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;
@@ -1008,7 +1008,7 @@ export declare class I18nPluralPipe implements PipeTransform {
         [count: string]: string;
     }, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<I18nPluralPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<I18nPluralPipe, "i18nPlural">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<I18nPluralPipe, "i18nPlural", false>;
 }
 
 /**
@@ -1038,7 +1038,7 @@ export declare class I18nSelectPipe implements PipeTransform {
         [key: string]: string;
     }): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<I18nSelectPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect", false>;
 }
 
 declare namespace i2 {
@@ -1140,7 +1140,7 @@ export declare class JsonPipe implements PipeTransform {
      */
     transform(value: any): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<JsonPipe, "json">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<JsonPipe, "json", false>;
 }
 
 /**
@@ -1188,7 +1188,7 @@ export declare class KeyValuePipe implements PipeTransform {
     transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
     transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<KeyValuePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue", false>;
 }
 
 /**
@@ -1440,7 +1440,7 @@ export declare class LowerCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LowerCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase", false>;
 }
 
 /**
@@ -1504,7 +1504,7 @@ export declare class NgClass implements DoCheck {
     private _removeClasses;
     private _toggleClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgClass, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never, never, false>;
 }
 
 /**
@@ -1584,7 +1584,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     /** @nodoc */
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModule": "ngComponentOutletNgModule"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModule": "ngComponentOutletNgModule"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never, never, false>;
 }
 
 /**
@@ -1738,7 +1738,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      */
     static ngTemplateContextGuard<T, U extends NgIterable<T>>(dir: NgForOf<T, U>, ctx: any): ctx is NgForOfContext<T, U>;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgForOf<any, any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never, never, false>;
 }
 
 /**
@@ -1933,7 +1933,7 @@ export declare class NgIf<T = unknown> {
      */
     static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<Exclude<T, false | 0 | '' | null | undefined>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgIf<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never, never, false>;
 }
 
 /**
@@ -2009,7 +2009,7 @@ export declare class NgPlural {
     private _clearViews;
     private _activateView;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgPlural, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never, never, false>;
 }
 
 /**
@@ -2036,7 +2036,7 @@ export declare class NgPluralCase {
     value: string;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef, ngPlural: NgPlural);
     static ɵfac: i0.ɵɵFactoryDeclaration<NgPluralCase, [{ attribute: "ngPluralCase"; }, null, null, { host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPluralCase, "[ngPluralCase]", never, {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPluralCase, "[ngPluralCase]", never, {}, {}, never, never, false>;
 }
 
 /**
@@ -2089,7 +2089,7 @@ export declare class NgStyle implements DoCheck {
     private _setStyle;
     private _applyChanges;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgStyle, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never, never, false>;
 }
 
 /**
@@ -2168,7 +2168,7 @@ export declare class NgSwitch {
     set ngSwitch(newValue: any);
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitch, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never, never, false>;
 }
 
 /**
@@ -2218,7 +2218,7 @@ export declare class NgSwitchCase implements DoCheck {
      */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { optional: true; host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never, never, false>;
 }
 
 /**
@@ -2238,7 +2238,7 @@ export declare class NgSwitchCase implements DoCheck {
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchDefault, [null, null, { optional: true; host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never, never, false>;
 }
 
 /**
@@ -2285,7 +2285,7 @@ export declare class NgTemplateOutlet implements OnChanges {
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; "ngTemplateOutletInjector": "ngTemplateOutletInjector"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; "ngTemplateOutletInjector": "ngTemplateOutletInjector"; }, {}, never, never, false>;
 }
 
 
@@ -2465,7 +2465,7 @@ export declare class PercentPipe implements PipeTransform {
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<PercentPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<PercentPipe, "percent">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<PercentPipe, "percent", false>;
 }
 
 /**
@@ -2614,7 +2614,7 @@ export declare class SlicePipe implements PipeTransform {
     transform(value: string | null | undefined, start: number, end?: number): string | null;
     private supports;
     static ɵfac: i0.ɵɵFactoryDeclaration<SlicePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice", false>;
 }
 
 declare class SwitchView {
@@ -2662,7 +2662,7 @@ export declare class TitleCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<TitleCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<TitleCasePipe, "titlecase">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<TitleCasePipe, "titlecase", false>;
 }
 
 /**
@@ -2699,7 +2699,7 @@ export declare class UpperCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<UpperCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<UpperCasePipe, "uppercase">;
+    static ɵpipe: i0.ɵɵPipeDeclaration<UpperCasePipe, "uppercase", false>;
 }
 
 /**
