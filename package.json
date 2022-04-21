@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "14.0.0-next.14+9.sha-3dee3d1",
+  "version": "14.0.0-next.14+16.sha-612d6e0",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -22,7 +22,7 @@
       "default": "./package.json"
     },
     ".": {
-      "types": "./common.d.ts",
+      "types": "./index.d.ts",
       "esm2020": "./esm2020/common.mjs",
       "es2020": "./fesm2020/common.mjs",
       "es2015": "./fesm2015/common.mjs",
@@ -30,7 +30,7 @@
       "default": "./fesm2020/common.mjs"
     },
     "./http": {
-      "types": "./http/http.d.ts",
+      "types": "./http/index.d.ts",
       "esm2020": "./esm2020/http/http.mjs",
       "es2020": "./fesm2020/http.mjs",
       "es2015": "./fesm2015/http.mjs",
@@ -38,7 +38,7 @@
       "default": "./fesm2020/http.mjs"
     },
     "./http/testing": {
-      "types": "./http/testing/testing.d.ts",
+      "types": "./http/testing/index.d.ts",
       "esm2020": "./esm2020/http/testing/testing.mjs",
       "es2020": "./fesm2020/http/testing.mjs",
       "es2015": "./fesm2015/http/testing.mjs",
@@ -46,7 +46,7 @@
       "default": "./fesm2020/http/testing.mjs"
     },
     "./testing": {
-      "types": "./testing/testing.d.ts",
+      "types": "./testing/index.d.ts",
       "esm2020": "./esm2020/testing/testing.mjs",
       "es2020": "./fesm2020/testing.mjs",
       "es2015": "./fesm2015/testing.mjs",
@@ -54,7 +54,7 @@
       "default": "./fesm2020/testing.mjs"
     },
     "./upgrade": {
-      "types": "./upgrade/upgrade.d.ts",
+      "types": "./upgrade/index.d.ts",
       "esm2020": "./esm2020/upgrade/upgrade.mjs",
       "es2020": "./fesm2020/upgrade.mjs",
       "es2015": "./fesm2015/upgrade.mjs",
@@ -63,7 +63,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "14.0.0-next.14+9.sha-3dee3d1",
+    "@angular/core": "14.0.0-next.14+16.sha-612d6e0",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
@@ -98,7 +98,7 @@
   "fesm2020": "./fesm2020/common.mjs",
   "fesm2015": "./fesm2015/common.mjs",
   "esm2020": "./esm2020/common.mjs",
-  "typings": "./common.d.ts",
+  "typings": "./index.d.ts",
   "module": "./fesm2015/common.mjs",
   "es2020": "./fesm2020/common.mjs",
   "type": "module"
