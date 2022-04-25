@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.0.0-next.14+20.sha-970a3b5
+ * @license Angular v14.0.0-next.14+22.sha-31d7c3b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -915,6 +915,7 @@ export declare class HashLocationStrategy extends LocationStrategy implements On
     replaceState(state: any, title: string, path: string, queryParams: string): void;
     forward(): void;
     back(): void;
+    getState(): unknown;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HashLocationStrategy, [null, { optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HashLocationStrategy>;
@@ -1221,7 +1222,7 @@ export declare class KeyValuePipe implements PipeTransform {
  * @publicApi
  */
 declare class Location_2 implements OnDestroy {
-    constructor(platformStrategy: LocationStrategy, platformLocation: PlatformLocation);
+    constructor(locationStrategy: LocationStrategy);
     /** @nodoc */
     ngOnDestroy(): void;
     /**
@@ -1407,6 +1408,7 @@ export declare interface LocationChangeListener {
 export declare abstract class LocationStrategy {
     abstract path(includeHash?: boolean): string;
     abstract prepareExternalUrl(internal: string): string;
+    abstract getState(): unknown;
     abstract pushState(state: any, title: string, url: string, queryParams: string): void;
     abstract replaceState(state: any, title: string, url: string, queryParams: string): void;
     abstract forward(): void;
@@ -2434,6 +2436,7 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
     replaceState(state: any, title: string, url: string, queryParams: string): void;
     forward(): void;
     back(): void;
+    getState(): unknown;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PathLocationStrategy, [null, { optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<PathLocationStrategy>;
