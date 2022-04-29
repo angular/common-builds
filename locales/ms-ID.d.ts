@@ -8,6 +8,7 @@
 /// <amd-module name="@angular/common/locales/ms-ID" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
+    BYN: (string | undefined)[];
     CAD: (string | undefined)[];
     IDR: string[];
     JPY: string[];

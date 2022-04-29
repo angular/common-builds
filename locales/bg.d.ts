@@ -20,7 +20,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BND: never[];
     BRL: never[];
     BSD: never[];
-    BYN: never[];
     BZD: never[];
     CAD: never[];
     CLP: never[];

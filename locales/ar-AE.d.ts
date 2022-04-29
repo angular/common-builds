@@ -15,6 +15,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BHD: string[];
     BMD: (string | undefined)[];
     BSD: (string | undefined)[];
+    BYN: (string | undefined)[];
     BZD: (string | undefined)[];
     CAD: string[];
     CLP: (string | undefined)[];
@@ -57,7 +58,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     TWD: string[];
     USD: string[];
     UYU: (string | undefined)[];
-    XXX: string[];
     YER: string[];
 } | undefined)[];
 export default _default;

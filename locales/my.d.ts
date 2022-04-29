@@ -12,6 +12,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     AWG: string[];
     BBD: (string | undefined)[];
     BSD: (string | undefined)[];
+    BYN: (string | undefined)[];
     HTG: string[];
     JPY: string[];
     MMK: string[];

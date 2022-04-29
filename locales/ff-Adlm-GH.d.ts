@@ -8,6 +8,7 @@
 /// <amd-module name="@angular/common/locales/ff-Adlm-GH" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
+    BYN: (string | undefined)[];
     GHS: string[];
     GNF: (string | undefined)[];
     JPY: string[];

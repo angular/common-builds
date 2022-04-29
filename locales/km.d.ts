@@ -8,8 +8,10 @@
 /// <amd-module name="@angular/common/locales/km" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
+    BYN: (string | undefined)[];
     JPY: string[];
     KHR: string[];
+    LSL: string[];
     PHP: (string | undefined)[];
     THB: string[];
     TWD: string[];

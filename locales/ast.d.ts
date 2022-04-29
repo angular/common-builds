@@ -8,14 +8,12 @@
 /// <amd-module name="@angular/common/locales/ast" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    BYN: never[];
     DKK: never[];
     HRK: never[];
     ISK: never[];
     NOK: never[];
     PHP: (string | undefined)[];
     PLN: never[];
-    RUR: never[];
     SEK: never[];
     THB: string[];
     TWD: string[];

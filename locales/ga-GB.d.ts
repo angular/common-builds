@@ -8,6 +8,7 @@
 /// <amd-module name="@angular/common/locales/ga-GB" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
+    RUR: (string | undefined)[];
     THB: string[];
     TWD: string[];
     XXX: never[];

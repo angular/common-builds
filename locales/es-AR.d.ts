@@ -11,6 +11,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     ARS: string[];
     AUD: (string | undefined)[];
     BRL: (string | undefined)[];
+    BYN: (string | undefined)[];
     CAD: (string | undefined)[];
     CNY: (string | undefined)[];
     ESP: string[];

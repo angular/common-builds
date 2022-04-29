@@ -12,6 +12,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BMD: (string | undefined)[];
     BRL: (string | undefined)[];
     BSD: (string | undefined)[];
+    BYN: (string | undefined)[];
     BZD: (string | undefined)[];
     CAD: (string | undefined)[];
     DOP: (string | undefined)[];

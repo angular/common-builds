@@ -9,10 +9,12 @@
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
     AUD: string[];
+    BYN: (string | undefined)[];
     CAD: string[];
     FJD: string[];
     JPY: string[];
     PHP: (string | undefined)[];
+    RUR: (string | undefined)[];
     SBD: string[];
     THB: string[];
     TWD: string[];

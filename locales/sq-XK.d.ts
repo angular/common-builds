@@ -24,7 +24,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BRL: never[];
     BSD: never[];
     BWP: never[];
-    BYN: never[];
     BZD: never[];
     CAD: string[];
     CLP: never[];
@@ -37,7 +36,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     DKK: never[];
     DOP: never[];
     EGP: never[];
-    EUR: string[];
     FJD: never[];
     FKP: never[];
     GBP: string[];

@@ -13,5 +13,5 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     KES: string[];
     SOS: string[];
     USD: string[];
-} | undefined)[];
+})[];
 export default _default;

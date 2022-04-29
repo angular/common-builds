@@ -13,6 +13,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BEF: string[];
     BMD: string[];
     BND: string[];
+    BYN: (string | undefined)[];
     BZD: string[];
     CAD: string[];
     CDF: string[];
