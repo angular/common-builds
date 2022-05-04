@@ -33,9 +33,9 @@ export class LocationStrategy {
         throw new Error('Not implemented');
     }
 }
-LocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-LocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: provideLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: LocationStrategy, decorators: [{
+LocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+LocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: provideLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: LocationStrategy, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root', useFactory: provideLocationStrategy }]
         }] });
@@ -153,9 +153,9 @@ export class PathLocationStrategy extends LocationStrategy {
         this._platformLocation.historyGo?.(relativePosition);
     }
 }
-PathLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: PathLocationStrategy, deps: [{ token: i1.PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-PathLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: PathLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-aef5c92", ngImport: i0, type: PathLocationStrategy, decorators: [{
+PathLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: PathLocationStrategy, deps: [{ token: i1.PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+PathLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: PathLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-68a6a07", ngImport: i0, type: PathLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.PlatformLocation }, { type: undefined, decorators: [{
                     type: Optional
