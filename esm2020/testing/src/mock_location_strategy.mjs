@@ -77,9 +77,9 @@ export class MockLocationStrategy extends LocationStrategy {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
 }
-MockLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.5+9.sha-e3b657e", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-MockLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.5+9.sha-e3b657e", ngImport: i0, type: MockLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.5+9.sha-e3b657e", ngImport: i0, type: MockLocationStrategy, decorators: [{
+MockLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6+1.sha-0928025", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+MockLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.6+1.sha-0928025", ngImport: i0, type: MockLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6+1.sha-0928025", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return []; } });
 class _MockPopStateEvent {
