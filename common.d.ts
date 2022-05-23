@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.3.9+4.sha-f6c265d
+ * @license Angular v13.3.9+13.sha-123782b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1612,11 +1612,11 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * context according to its lexical position.
  *
  * When using the shorthand syntax, Angular allows only [one structural directive
- * on an element](guide/built-in-directives#one-per-element).
+ * on an element](guide/structural-directives#one-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
  * For futher discussion, see
- * [Structural Directives](guide/built-in-directives#one-per-element).
+ * [Structural Directives](guide/structural-directives#one-per-element).
  *
  * @usageNotes
  *
@@ -1879,7 +1879,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The presence of the implicit template object has implications for the nesting of
  * structural directives. For more on this subject, see
- * [Structural Directives](https://angular.io/guide/built-in-directives#one-per-element).
+ * [Structural Directives](guide/structural-directives#one-per-element).
  *
  * @ngModule CommonModule
  * @publicApi
