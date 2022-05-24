@@ -8,7 +8,6 @@
 /// <amd-module name="@angular/common/locales/sw-KE" />
 declare function plural(val: number): number;
 declare const _default: (string | number | number[] | (string | undefined)[] | typeof plural | (string[] | undefined)[] | {
-    BYN: (string | undefined)[];
     JPY: string[];
     KES: string[];
     PHP: (string | undefined)[];

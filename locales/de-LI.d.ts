@@ -12,7 +12,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     AUD: string[];
     BGM: string[];
     BGO: string[];
-    BYN: (string | undefined)[];
     CUC: (string | undefined)[];
     DEM: string[];
     EUR: (string | undefined)[];
@@ -22,7 +21,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     KMF: (string | undefined)[];
     PHP: (string | undefined)[];
     RON: (string | undefined)[];
-    RUR: (string | undefined)[];
     RWF: (string | undefined)[];
     SYP: never[];
     THB: string[];

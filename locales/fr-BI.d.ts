@@ -14,7 +14,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BIF: string[];
     BMD: string[];
     BND: string[];
-    BYN: (string | undefined)[];
     BZD: string[];
     CAD: string[];
     CLP: string[];

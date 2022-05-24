@@ -11,13 +11,11 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     AUD: (string | undefined)[];
     BAM: string[];
     BRL: (string | undefined)[];
-    BYN: (string | undefined)[];
     CAD: (string | undefined)[];
     CNY: (string | undefined)[];
     EUR: (string | undefined)[];
     GBP: (string | undefined)[];
     HKD: (string | undefined)[];
-    HRK: string[];
     ILS: (string | undefined)[];
     INR: (string | undefined)[];
     JPY: (string | undefined)[];
@@ -25,7 +23,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     MXN: (string | undefined)[];
     NZD: (string | undefined)[];
     PHP: (string | undefined)[];
-    RUR: (string | undefined)[];
     TWD: (string | undefined)[];
     USD: (string | undefined)[];
     VND: (string | undefined)[];
