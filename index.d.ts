@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-58bbe5e
+ * @license Angular v14.1.0-next.0+sha-7081f50
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2898,7 +2898,21 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; }, {}, never, never, true>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; }, {}, never, never, false>;
+}
+
+/**
+ * NgModule that declares and exports the `NgOptimizedImage` directive.
+ * This NgModule is a compatibility layer for apps that use pre-v14
+ * versions of Angular (before the `standalone` flag became available).
+ *
+ * The `NgOptimizedImage` will become a standalone directive in v14 and
+ * this NgModule will be removed.
+ */
+export declare class ɵNgOptimizedImageModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImageModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<ɵNgOptimizedImageModule, [typeof ɵNgOptimizedImage], never, [typeof ɵNgOptimizedImage]>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<ɵNgOptimizedImageModule>;
 }
 
 /**
