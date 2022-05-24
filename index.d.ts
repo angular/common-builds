@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-c3205d0
+ * @license Angular v14.1.0-next.0+sha-58bbe5e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -18,6 +18,7 @@ import { NgModuleFactory } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { PipeTransform } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
@@ -1096,6 +1097,11 @@ declare namespace i9 {
         AsyncPipe
     }
 }
+
+/**
+ * Represents an image loader function.
+ */
+declare type ImageLoader = (config: ɵImageLoaderConfig) => string;
 
 /**
  * Returns whether a platform id represents a browser platform.
@@ -2831,6 +2837,69 @@ export declare abstract class ɵDomAdapter {
 
 
 export declare function ɵgetDOM(): ɵDomAdapter;
+
+/**
+ * Special token that allows to configure a function that will be used to produce an image URL based
+ * on the specified input.
+ */
+export declare const ɵIMAGE_LOADER: InjectionToken<ImageLoader>;
+
+/**
+ * Config options recognized by the image loader function.
+ */
+export declare interface ɵImageLoaderConfig {
+    src: string;
+    width?: number;
+}
+
+/**
+ * ** EXPERIMENTAL **
+ *
+ * TODO: add Image directive description.
+ *
+ * @usageNotes
+ * TODO: add Image directive usage notes.
+ */
+export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy {
+    private imageLoader;
+    private renderer;
+    private imgElement;
+    private injector;
+    constructor(imageLoader: ImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
+    private _width?;
+    private _height?;
+    private _priority;
+    /**
+     * Name of the source image.
+     * Image name will be processed by the image loader and the final URL will be applied as the `src`
+     * property of the image.
+     */
+    rawSrc: string;
+    /**
+     * The intrinsic width of the image in px.
+     */
+    set width(value: string | number | undefined);
+    get width(): number | undefined;
+    /**
+     * The intrinsic height of the image in px.
+     */
+    set height(value: string | number | undefined);
+    get height(): number | undefined;
+    /**
+     * Indicates whether this image should have a high priority.
+     */
+    set priority(value: string | boolean | undefined);
+    get priority(): boolean;
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    private getLoadingBehavior;
+    private getFetchPriority;
+    private getRewrittenSrc;
+    ngOnDestroy(): void;
+    private setHostAttribute;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; }, {}, never, never, true>;
+}
 
 /**
  * Provides an empty implementation of the viewport scroller.
