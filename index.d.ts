@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-7081f50
+ * @license Angular v14.1.0-next.0+sha-7234871
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2876,6 +2876,16 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
      */
     rawSrc: string;
     /**
+     * A comma separated list of width or density descriptors.
+     * The image name will be taken from `rawSrc` and combined with the list of width or density
+     * descriptors to generate the final `srcset` property of the image.
+     *
+     * Example:
+     * <img rawSrc="hello.jpg" rawSrcset="100w, 200w" />  =>
+     * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
+     */
+    rawSrcset: string;
+    /**
      * The intrinsic width of the image in px.
      */
     set width(value: string | number | undefined);
@@ -2890,15 +2900,17 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
      */
     set priority(value: string | boolean | undefined);
     get priority(): boolean;
+    srcset?: string;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private getLoadingBehavior;
     private getFetchPriority;
     private getRewrittenSrc;
+    private getRewrittenSrcset;
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, false>;
 }
 
 /**
