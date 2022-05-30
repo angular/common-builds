@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-7234871
+ * @license Angular v14.1.0-next.0+sha-9e3369c
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2896,6 +2896,13 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     set height(value: string | number | undefined);
     get height(): number | undefined;
     /**
+     * The desired loading behavior (lazy, eager, or auto).
+     * The primary use case for this input is opting-out non-priority images
+     * from lazy loading by marking them loading='eager' or loading='auto'.
+     * This input should not be used with priority images.
+     */
+    loading?: string;
+    /**
      * Indicates whether this image should have a high priority.
      */
     set priority(value: string | boolean | undefined);
@@ -2910,7 +2917,7 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, false>;
 }
 
 /**
