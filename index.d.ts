@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-9e3369c
+ * @license Angular v14.1.0-next.0+sha-7b9569d
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -20,6 +20,7 @@ import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { PipeTransform } from '@angular/core';
+import { Provider } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
 import { Subscribable } from 'rxjs';
@@ -1097,11 +1098,6 @@ declare namespace i9 {
         AsyncPipe
     }
 }
-
-/**
- * Represents an image loader function.
- */
-declare type ImageLoader = (config: ɵImageLoaderConfig) => string;
 
 /**
  * Returns whether a platform id represents a browser platform.
@@ -2842,7 +2838,12 @@ export declare function ɵgetDOM(): ɵDomAdapter;
  * Special token that allows to configure a function that will be used to produce an image URL based
  * on the specified input.
  */
-export declare const ɵIMAGE_LOADER: InjectionToken<ImageLoader>;
+export declare const ɵIMAGE_LOADER: InjectionToken<ɵImageLoader>;
+
+/**
+ * Represents an image loader function.
+ */
+export declare type ɵImageLoader = (config: ɵImageLoaderConfig) => string;
 
 /**
  * Config options recognized by the image loader function.
@@ -2865,7 +2866,7 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     private renderer;
     private imgElement;
     private injector;
-    constructor(imageLoader: ImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
+    constructor(imageLoader: ɵImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
     private _width?;
     private _height?;
     private _priority;
@@ -2971,6 +2972,16 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
 export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
 
 export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
+
+/**
+ * Function that generates a built-in ImageLoader for Imgix and turns it
+ * into an Angular provider.
+ *
+ * @param path path to the desired Imgix origin,
+ * e.g. https://somepath.imgix.net or https://images.mysite.com
+ * @returns Provider that provides an ImageLoader function
+ */
+export declare function ɵprovideImgixLoader(path: string): Provider;
 
 export declare function ɵsetRootDomAdapter(adapter: ɵDomAdapter): void;
 
