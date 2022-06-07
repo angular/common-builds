@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-7173711
+ * @license Angular v14.1.0-next.0+sha-7e8be93
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2870,6 +2870,7 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     private _width?;
     private _height?;
     private _priority;
+    private _rewrittenSrc;
     /**
      * Name of the source image.
      * Image name will be processed by the image loader and the final URL will be applied as the `src`
@@ -2972,6 +2973,24 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
 export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
 
 export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
+
+/**
+ * Multi-provider injection token to configure which origins should be excluded
+ * from the preconnect checks. If can either be a single string or an array of strings
+ * to represent a group of origins, for example:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true, useValue: 'https://your-domain.com'}
+ * ```
+ *
+ * or:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true,
+ *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
+ * ```
+ */
+export declare const ɵPRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
 
 /**
  * Function that generates a built-in ImageLoader for Imgix and turns it
