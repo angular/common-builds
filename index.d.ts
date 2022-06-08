@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-850d972
+ * @license Angular v14.1.0-next.0+sha-0201016
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3000,7 +3000,9 @@ export declare const ɵPRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | stri
  * e.g. https://somepath.imgix.net or https://images.mysite.com
  * @returns Provider that provides an ImageLoader function
  */
-export declare function ɵprovideImgixLoader(path: string): Provider;
+export declare function ɵprovideImgixLoader(path: string, options?: {
+    ensurePreconnect?: boolean;
+}): Provider[];
 
 export declare function ɵsetRootDomAdapter(adapter: ɵDomAdapter): void;
 
