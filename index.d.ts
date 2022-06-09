@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-0201016
+ * @license Angular v14.1.0-next.0+sha-fbe005e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2998,7 +2998,11 @@ export declare const ɵPRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | stri
  *
  * @param path path to the desired Imgix origin,
  * e.g. https://somepath.imgix.net or https://images.mysite.com
- * @returns Provider that provides an ImageLoader function
+ * @param options An object that allows to provide extra configuration:
+ * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
+ *                       should verify that there is a corresponding `<link rel="preconnect">`
+ *                       present in the document's `<head>`.
+ * @returns Set of providers to configure the Imgix loader.
  */
 export declare function ɵprovideImgixLoader(path: string, options?: {
     ensurePreconnect?: boolean;
