@@ -1,5 +1,5 @@
 /**
- * @license Angular v13.3.9+23.sha-872282c
+ * @license Angular v13.3.11+sha-9dd43f2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -19,6 +19,7 @@ import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { PipeTransform } from '@angular/core';
+import { Provider } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
 import { Subscribable } from 'rxjs';
@@ -1095,11 +1096,6 @@ declare namespace i9 {
         AsyncPipe
     }
 }
-
-/**
- * Represents an image loader function.
- */
-declare type ImageLoader = (config: ɵImageLoaderConfig) => string;
 
 /**
  * Returns whether a platform id represents a browser platform.
@@ -2825,7 +2821,12 @@ export declare function ɵgetDOM(): ɵDomAdapter;
  * Special token that allows to configure a function that will be used to produce an image URL based
  * on the specified input.
  */
-export declare const ɵIMAGE_LOADER: InjectionToken<ImageLoader>;
+export declare const ɵIMAGE_LOADER: InjectionToken<ɵImageLoader>;
+
+/**
+ * Represents an image loader function.
+ */
+export declare type ɵImageLoader = (config: ɵImageLoaderConfig) => string;
 
 /**
  * Config options recognized by the image loader function.
@@ -2848,16 +2849,27 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     private renderer;
     private imgElement;
     private injector;
-    constructor(imageLoader: ImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
+    constructor(imageLoader: ɵImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
     private _width?;
     private _height?;
     private _priority;
+    private _rewrittenSrc;
     /**
      * Name of the source image.
      * Image name will be processed by the image loader and the final URL will be applied as the `src`
      * property of the image.
      */
     rawSrc: string;
+    /**
+     * A comma separated list of width or density descriptors.
+     * The image name will be taken from `rawSrc` and combined with the list of width or density
+     * descriptors to generate the final `srcset` property of the image.
+     *
+     * Example:
+     * <img rawSrc="hello.jpg" rawSrcset="100w, 200w" />  =>
+     * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
+     */
+    rawSrcset: string;
     /**
      * The intrinsic width of the image in px.
      */
@@ -2869,19 +2881,28 @@ export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy 
     set height(value: string | number | undefined);
     get height(): number | undefined;
     /**
+     * The desired loading behavior (lazy, eager, or auto).
+     * The primary use case for this input is opting-out non-priority images
+     * from lazy loading by marking them loading='eager' or loading='auto'.
+     * This input should not be used with priority images.
+     */
+    loading?: string;
+    /**
      * Indicates whether this image should have a high priority.
      */
     set priority(value: string | boolean | undefined);
     get priority(): boolean;
+    srcset?: string;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private getLoadingBehavior;
     private getFetchPriority;
     private getRewrittenSrc;
+    private getRewrittenSrcset;
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "width": "width"; "height": "height"; "priority": "priority"; "src": "src"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never>;
 }
 
 /**
@@ -2935,6 +2956,40 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
 export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
 
 export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
+
+/**
+ * Multi-provider injection token to configure which origins should be excluded
+ * from the preconnect checks. If can either be a single string or an array of strings
+ * to represent a group of origins, for example:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true, useValue: 'https://your-domain.com'}
+ * ```
+ *
+ * or:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true,
+ *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
+ * ```
+ */
+export declare const ɵPRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
+
+/**
+ * Function that generates a built-in ImageLoader for Imgix and turns it
+ * into an Angular provider.
+ *
+ * @param path path to the desired Imgix origin,
+ * e.g. https://somepath.imgix.net or https://images.mysite.com
+ * @param options An object that allows to provide extra configuration:
+ * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
+ *                       should verify that there is a corresponding `<link rel="preconnect">`
+ *                       present in the document's `<head>`.
+ * @returns Set of providers to configure the Imgix loader.
+ */
+export declare const ɵprovideImgixLoader: (path: string, options?: {
+    ensurePreconnect?: boolean | undefined;
+}) => Provider[];
 
 export declare function ɵsetRootDomAdapter(adapter: ɵDomAdapter): void;
 
