@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.2+sha-b417370
+ * @license Angular v14.1.0-next.2+sha-d24d54b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -98,7 +98,7 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _dispose;
     private _updateLatestValue;
     static ɵfac: i0.ɵɵFactoryDeclaration<AsyncPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<AsyncPipe, "async", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<AsyncPipe, "async", true>;
 }
 
 /**
@@ -116,7 +116,7 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
  */
 export declare class CommonModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<CommonModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase], [typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
@@ -168,7 +168,7 @@ export declare class CurrencyPipe implements PipeTransform {
     transform(value: null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | string | boolean, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<CurrencyPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<CurrencyPipe, "currency", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<CurrencyPipe, "currency", true>;
 }
 
 /**
@@ -355,7 +355,7 @@ export declare class DatePipe implements PipeTransform {
     transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, [null, { optional: true; }]>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date", true>;
 }
 
 /**
@@ -428,7 +428,7 @@ export declare class DecimalPipe implements PipeTransform {
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DecimalPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<DecimalPipe, "number", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<DecimalPipe, "number", true>;
 }
 
 declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;
@@ -1010,7 +1010,7 @@ export declare class I18nPluralPipe implements PipeTransform {
         [count: string]: string;
     }, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<I18nPluralPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<I18nPluralPipe, "i18nPlural", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<I18nPluralPipe, "i18nPlural", true>;
 }
 
 /**
@@ -1040,7 +1040,7 @@ export declare class I18nSelectPipe implements PipeTransform {
         [key: string]: string;
     }): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<I18nSelectPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect", true>;
 }
 
 declare namespace i2 {
@@ -1142,7 +1142,7 @@ export declare class JsonPipe implements PipeTransform {
      */
     transform(value: any): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<JsonPipe, "json", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<JsonPipe, "json", true>;
 }
 
 /**
@@ -1190,7 +1190,7 @@ export declare class KeyValuePipe implements PipeTransform {
     transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
     transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<KeyValuePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue", true>;
 }
 
 /**
@@ -1443,7 +1443,7 @@ export declare class LowerCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LowerCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase", true>;
 }
 
 /**
@@ -2469,7 +2469,7 @@ export declare class PercentPipe implements PipeTransform {
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<PercentPipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<PercentPipe, "percent", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<PercentPipe, "percent", true>;
 }
 
 /**
@@ -2618,7 +2618,7 @@ export declare class SlicePipe implements PipeTransform {
     transform(value: string | null | undefined, start: number, end?: number): string | null;
     private supports;
     static ɵfac: i0.ɵɵFactoryDeclaration<SlicePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice", true>;
 }
 
 declare class SwitchView {
@@ -2666,7 +2666,7 @@ export declare class TitleCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<TitleCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<TitleCasePipe, "titlecase", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<TitleCasePipe, "titlecase", true>;
 }
 
 /**
@@ -2703,7 +2703,7 @@ export declare class UpperCasePipe implements PipeTransform {
     transform(value: null | undefined): null;
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<UpperCasePipe, never>;
-    static ɵpipe: i0.ɵɵPipeDeclaration<UpperCasePipe, "uppercase", false>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<UpperCasePipe, "uppercase", true>;
 }
 
 /**
