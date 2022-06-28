@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.2+sha-ee39cf6
+ * @license Angular v14.1.0-next.2+sha-a7597dd
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -107,16 +107,11 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
  * Re-exported by `BrowserModule`, which is included automatically in the root
  * `AppModule` when you create a new app with the CLI `new` command.
  *
- * * The `providers` options configure the NgModule's injector to provide
- * localization dependencies to members.
- * * The `exports` options make the declared directives and pipes available for import
- * by other NgModules.
- *
  * @publicApi
  */
 export declare class CommonModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<CommonModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<CommonModule, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase], [typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<CommonModule, never, [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe], [typeof i1.NgClass, typeof i2.NgComponentOutlet, typeof i3.NgForOf, typeof i4.NgIf, typeof i5.NgTemplateOutlet, typeof i6.NgStyle, typeof i7.NgSwitch, typeof i7.NgSwitchCase, typeof i7.NgSwitchDefault, typeof i8.NgPlural, typeof i8.NgPluralCase, typeof i9.AsyncPipe, typeof i10.UpperCasePipe, typeof i10.LowerCasePipe, typeof i11.JsonPipe, typeof i12.SlicePipe, typeof i13.DecimalPipe, typeof i13.PercentPipe, typeof i10.TitleCasePipe, typeof i13.CurrencyPipe, typeof i14.DatePipe, typeof i15.I18nPluralPipe, typeof i16.I18nSelectPipe, typeof i17.KeyValuePipe]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
@@ -1507,7 +1502,7 @@ export declare class NgClass implements DoCheck {
     private _removeClasses;
     private _toggleClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgClass, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never, never, true>;
 }
 
 /**
@@ -1587,7 +1582,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     /** @nodoc */
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModule": "ngComponentOutletNgModule"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": "ngComponentOutlet"; "ngComponentOutletInjector": "ngComponentOutletInjector"; "ngComponentOutletContent": "ngComponentOutletContent"; "ngComponentOutletNgModule": "ngComponentOutletNgModule"; "ngComponentOutletNgModuleFactory": "ngComponentOutletNgModuleFactory"; }, {}, never, never, true>;
 }
 
 /**
@@ -1741,7 +1736,7 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
      */
     static ngTemplateContextGuard<T, U extends NgIterable<T>>(dir: NgForOf<T, U>, ctx: any): ctx is NgForOfContext<T, U>;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgForOf<any, any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never, never, true>;
 }
 
 /**
@@ -1936,7 +1931,7 @@ export declare class NgIf<T = unknown> {
      */
     static ngTemplateContextGuard<T>(dir: NgIf<T>, ctx: any): ctx is NgIfContext<Exclude<T, false | 0 | '' | null | undefined>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgIf<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgIf<any>, "[ngIf]", never, { "ngIf": "ngIf"; "ngIfThen": "ngIfThen"; "ngIfElse": "ngIfElse"; }, {}, never, never, true>;
 }
 
 /**
@@ -2012,7 +2007,7 @@ export declare class NgPlural {
     private _clearViews;
     private _activateView;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgPlural, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPlural, "[ngPlural]", never, { "ngPlural": "ngPlural"; }, {}, never, never, true>;
 }
 
 /**
@@ -2039,7 +2034,7 @@ export declare class NgPluralCase {
     value: string;
     constructor(value: string, template: TemplateRef<Object>, viewContainer: ViewContainerRef, ngPlural: NgPlural);
     static ɵfac: i0.ɵɵFactoryDeclaration<NgPluralCase, [{ attribute: "ngPluralCase"; }, null, null, { host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPluralCase, "[ngPluralCase]", never, {}, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgPluralCase, "[ngPluralCase]", never, {}, {}, never, never, true>;
 }
 
 /**
@@ -2092,7 +2087,7 @@ export declare class NgStyle implements DoCheck {
     private _setStyle;
     private _applyChanges;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgStyle, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgStyle, "[ngStyle]", never, { "ngStyle": "ngStyle"; }, {}, never, never, true>;
 }
 
 /**
@@ -2171,7 +2166,7 @@ export declare class NgSwitch {
     set ngSwitch(newValue: any);
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitch, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitch, "[ngSwitch]", never, { "ngSwitch": "ngSwitch"; }, {}, never, never, true>;
 }
 
 /**
@@ -2221,7 +2216,7 @@ export declare class NgSwitchCase implements DoCheck {
      */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { optional: true; host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchCase, "[ngSwitchCase]", never, { "ngSwitchCase": "ngSwitchCase"; }, {}, never, never, true>;
 }
 
 /**
@@ -2241,7 +2236,7 @@ export declare class NgSwitchCase implements DoCheck {
 export declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchDefault, [null, null, { optional: true; host: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgSwitchDefault, "[ngSwitchDefault]", never, {}, {}, never, never, true>;
 }
 
 /**
@@ -2288,7 +2283,7 @@ export declare class NgTemplateOutlet implements OnChanges {
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; "ngTemplateOutletInjector": "ngTemplateOutletInjector"; }, {}, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": "ngTemplateOutletContext"; "ngTemplateOutlet": "ngTemplateOutlet"; "ngTemplateOutletInjector": "ngTemplateOutletInjector"; }, {}, never, never, true>;
 }
 
 
