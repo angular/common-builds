@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.4+sha-cee207e
+ * @license Angular v14.1.0-next.4+sha-c14c701
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -631,11 +631,11 @@ export declare function getLocaleCurrencyName(locale: string): string | null;
 export declare function getLocaleCurrencySymbol(locale: string): string | null;
 
 /**
- * Retrieves a localized date-value formating string.
+ * Retrieves a localized date-value formatting string.
  *
  * @param locale A locale code for the locale format rules to use.
  * @param width The format type.
- * @returns The localized formating string.
+ * @returns The localized formatting string.
  * @see `FormatWidth`
  * @see [Internationalization (i18n) Guide](https://angular.io/guide/i18n-overview)
  *
@@ -1624,7 +1624,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * on an element](guide/structural-directives#one-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
- * For futher discussion, see
+ * For further discussion, see
  * [Structural Directives](guide/structural-directives#one-per-element).
  *
  * @usageNotes
