@@ -59,9 +59,9 @@ export class KeyValuePipe {
         return this.keyValues;
     }
 }
-KeyValuePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.6+sha-676bf04", ngImport: i0, type: KeyValuePipe, deps: [{ token: i0.KeyValueDiffers }], target: i0.ɵɵFactoryTarget.Pipe });
-KeyValuePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "14.0.6+sha-676bf04", ngImport: i0, type: KeyValuePipe, name: "keyvalue", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.6+sha-676bf04", ngImport: i0, type: KeyValuePipe, decorators: [{
+KeyValuePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.6+sha-f8a25f7", ngImport: i0, type: KeyValuePipe, deps: [{ token: i0.KeyValueDiffers }], target: i0.ɵɵFactoryTarget.Pipe });
+KeyValuePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "14.0.6+sha-f8a25f7", ngImport: i0, type: KeyValuePipe, name: "keyvalue", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.6+sha-f8a25f7", ngImport: i0, type: KeyValuePipe, decorators: [{
             type: Pipe,
             args: [{ name: 'keyvalue', pure: false }]
         }], ctorParameters: function () { return [{ type: i0.KeyValueDiffers }]; } });
