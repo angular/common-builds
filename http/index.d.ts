@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-1314b1c
+ * @license Angular v14.2.0-next.0+sha-186245a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3310,7 +3310,7 @@ export declare class HttpHeaders {
      * in the returned object.
      *
      * @param name The header name.
-     * @param value The value or values to set or overide for the given header.
+     * @param value The value or values to set or override for the given header.
      *
      * @returns A clone of the HTTP headers object with the newly set header value.
      */

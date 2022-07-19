@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-1314b1c
+ * @license Angular v14.2.0-next.0+sha-186245a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -27,7 +27,7 @@ export declare class $locationShim {
     private platformLocation;
     private urlCodec;
     private locationStrategy;
-    private initalizing;
+    private initializing;
     private updateBrowser;
     private $$absUrl;
     private $$url;
@@ -248,7 +248,7 @@ export declare class $locationShim {
 
 /**
  * The factory function used to create an instance of the `$locationShim` in Angular,
- * and provides an API-compatiable `$locationProvider` for AngularJS.
+ * and provides an API-compatible `$locationProvider` for AngularJS.
  *
  * @publicApi
  */

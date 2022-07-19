@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-1314b1c
+ * @license Angular v14.2.0-next.0+sha-186245a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -77,7 +77,7 @@ class $locationShim {
         this.platformLocation = platformLocation;
         this.urlCodec = urlCodec;
         this.locationStrategy = locationStrategy;
-        this.initalizing = true;
+        this.initializing = true;
         this.updateBrowser = false;
         this.$$absUrl = '';
         this.$$url = '';
@@ -172,7 +172,7 @@ class $locationShim {
                 this.$$notifyChangeListeners(this.url(), this.$$state, oldUrl, oldState);
             }
             else {
-                this.initalizing = false;
+                this.initializing = false;
                 $rootScope.$broadcast('$locationChangeSuccess', newUrl, oldUrl, newState, oldState);
                 this.resetBrowserUpdate();
             }
@@ -182,7 +182,7 @@ class $locationShim {
         });
         // update browser
         $rootScope.$watch(() => {
-            if (this.initalizing || this.updateBrowser) {
+            if (this.initializing || this.updateBrowser) {
                 this.updateBrowser = false;
                 const oldUrl = this.browserUrl();
                 const newUrl = this.absUrl();
@@ -193,8 +193,8 @@ class $locationShim {
                 // next tick (thus inside $evalAsync()) in order for listeners to be registered
                 // before the event fires. Mimicing behavior from $locationWatch:
                 // https://github.com/angular/angular.js/blob/master/src/ng/location.js#L983
-                if (this.initalizing || urlOrStateChanged) {
-                    this.initalizing = false;
+                if (this.initializing || urlOrStateChanged) {
+                    this.initializing = false;
                     $rootScope.$evalAsync(() => {
                         // Get the new URL again since it could have changed due to async update
                         const newUrl = this.absUrl();
@@ -210,8 +210,8 @@ class $locationShim {
                             this.$$state = oldState;
                         }
                         else {
-                            // This block doesn't run when initalizing because it's going to perform the update to
-                            // the URL which shouldn't be needed when initalizing.
+                            // This block doesn't run when initializing because it's going to perform the update
+                            // to the URL which shouldn't be needed when initializing.
                             if (urlOrStateChanged) {
                                 this.setBrowserUrlWithFallback(newUrl, currentReplace, oldState === this.$$state ? null : this.$$state);
                                 this.$$replace = false;
@@ -574,7 +574,7 @@ class $locationShim {
 }
 /**
  * The factory function used to create an instance of the `$locationShim` in Angular,
- * and provides an API-compatiable `$locationProvider` for AngularJS.
+ * and provides an API-compatible `$locationProvider` for AngularJS.
  *
  * @publicApi
  */
@@ -881,10 +881,10 @@ class LocationUpgradeModule {
         };
     }
 }
-LocationUpgradeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-LocationUpgradeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-LocationUpgradeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+LocationUpgradeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+LocationUpgradeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+LocationUpgradeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });

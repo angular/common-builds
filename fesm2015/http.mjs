@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0-next.0+sha-1314b1c
+ * @license Angular v14.2.0-next.0+sha-186245a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -96,6 +96,9 @@ class HttpHeaders {
         }
         else {
             this.lazyInit = () => {
+                if (typeof ngDevMode === 'undefined' || ngDevMode) {
+                    assertValidHeaders(headers);
+                }
                 this.headers = new Map();
                 Object.keys(headers).forEach(name => {
                     let values = headers[name];
@@ -172,7 +175,7 @@ class HttpHeaders {
      * in the returned object.
      *
      * @param name The header name.
-     * @param value The value or values to set or overide for the given header.
+     * @param value The value or values to set or override for the given header.
      *
      * @returns A clone of the HTTP headers object with the newly set header value.
      */
@@ -271,6 +274,19 @@ class HttpHeaders {
         this.init();
         Array.from(this.normalizedNames.keys())
             .forEach(key => fn(this.normalizedNames.get(key), this.headers.get(key)));
+    }
+}
+/**
+ * Verifies that the headers object has the right shape: the values
+ * must be either strings or arrays. Throws an error if an invalid
+ * header value is present.
+ */
+function assertValidHeaders(headers) {
+    for (const [key, value] of Object.entries(headers)) {
+        if (typeof value !== 'string' && !Array.isArray(value)) {
+            throw new Error(`Unexpected value of the \`${key}\` header provided. ` +
+                `Expecting either a string or an array, but got: \`${value}\`.`);
+        }
     }
 }
 
@@ -1400,9 +1416,9 @@ class HttpClient {
         return this.request('PUT', url, addBody(options, body));
     }
 }
-HttpClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClient });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClient, decorators: [{
+HttpClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClient });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClient, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: HttpHandler }]; } });
 
@@ -1439,9 +1455,9 @@ class NoopInterceptor {
         return next.handle(req);
     }
 }
-NoopInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: NoopInterceptor, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-NoopInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: NoopInterceptor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: NoopInterceptor, decorators: [{
+NoopInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: NoopInterceptor, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+NoopInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: NoopInterceptor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: NoopInterceptor, decorators: [{
             type: Injectable
         }] });
 
@@ -1637,9 +1653,9 @@ class JsonpClientBackend {
         foreignDocument.adoptNode(script);
     }
 }
-JsonpClientBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-JsonpClientBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpClientBackend });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpClientBackend, decorators: [{
+JsonpClientBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+JsonpClientBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpClientBackend });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpClientBackend, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
@@ -1674,9 +1690,9 @@ class JsonpInterceptor {
         return next.handle(req);
     }
 }
-JsonpInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpInterceptor, deps: [{ token: JsonpClientBackend }], target: i0.ɵɵFactoryTarget.Injectable });
-JsonpInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpInterceptor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: JsonpInterceptor, decorators: [{
+JsonpInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpInterceptor, deps: [{ token: JsonpClientBackend }], target: i0.ɵɵFactoryTarget.Injectable });
+JsonpInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpInterceptor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: JsonpInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: JsonpClientBackend }]; } });
 
@@ -1860,7 +1876,7 @@ class HttpXhrBackend {
             // The sentHeaders flag tracks whether the HttpResponseHeaders event
             // has been sent on the stream. This is necessary to track if progress
             // is enabled since the event will be sent on only the first download
-            // progerss event.
+            // progress event.
             let sentHeaders = false;
             // The download progress event handler, which is only registered if
             // progress events are enabled.
@@ -1945,9 +1961,9 @@ class HttpXhrBackend {
         });
     }
 }
-HttpXhrBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpXhrBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXhrBackend });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXhrBackend, decorators: [{
+HttpXhrBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpXhrBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXhrBackend });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXhrBackend, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.XhrFactory }]; } });
 
@@ -1995,9 +2011,9 @@ class HttpXsrfCookieExtractor {
         return this.lastToken;
     }
 }
-HttpXsrfCookieExtractor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpXsrfCookieExtractor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfCookieExtractor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
+HttpXsrfCookieExtractor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpXsrfCookieExtractor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfCookieExtractor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
@@ -2037,9 +2053,9 @@ class HttpXsrfInterceptor {
         return next.handle(req);
     }
 }
-HttpXsrfInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: HttpXsrfTokenExtractor }, { token: XSRF_HEADER_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpXsrfInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfInterceptor });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
+HttpXsrfInterceptor.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: HttpXsrfTokenExtractor }, { token: XSRF_HEADER_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpXsrfInterceptor.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfInterceptor });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: HttpXsrfTokenExtractor }, { type: undefined, decorators: [{
@@ -2078,9 +2094,9 @@ class HttpInterceptingHandler {
         return this.chain.handle(req);
     }
 }
-HttpInterceptingHandler.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpInterceptingHandler, deps: [{ token: HttpBackend }, { token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable });
-HttpInterceptingHandler.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpInterceptingHandler });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpInterceptingHandler, decorators: [{
+HttpInterceptingHandler.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpInterceptingHandler, deps: [{ token: HttpBackend }, { token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable });
+HttpInterceptingHandler.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpInterceptingHandler });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpInterceptingHandler, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: HttpBackend }, { type: i0.Injector }]; } });
 /**
@@ -2153,16 +2169,16 @@ class HttpClientXsrfModule {
         };
     }
 }
-HttpClientXsrfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientXsrfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientXsrfModule });
-HttpClientXsrfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientXsrfModule, providers: [
+HttpClientXsrfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientXsrfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientXsrfModule });
+HttpClientXsrfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientXsrfModule, providers: [
         HttpXsrfInterceptor,
         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
         { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
         { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
         { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
     ] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
@@ -2185,9 +2201,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sh
  */
 class HttpClientModule {
 }
-HttpClientModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientModule, imports: [HttpClientXsrfModule] });
-HttpClientModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientModule, providers: [
+HttpClientModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientModule, imports: [HttpClientXsrfModule] });
+HttpClientModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientModule, providers: [
         HttpClient,
         { provide: HttpHandler, useClass: HttpInterceptingHandler },
         HttpXhrBackend,
@@ -2196,7 +2212,7 @@ HttpClientModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", versio
             cookieName: 'XSRF-TOKEN',
             headerName: 'X-XSRF-TOKEN',
         })] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientModule, decorators: [{
             type: NgModule,
             args: [{
                     /**
@@ -2233,14 +2249,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sh
  */
 class HttpClientJsonpModule {
 }
-HttpClientJsonpModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientJsonpModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientJsonpModule });
-HttpClientJsonpModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientJsonpModule, providers: [
+HttpClientJsonpModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientJsonpModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientJsonpModule });
+HttpClientJsonpModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientJsonpModule, providers: [
         JsonpClientBackend,
         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
         { provide: HTTP_INTERCEPTORS, useClass: JsonpInterceptor, multi: true },
     ] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0-next.0+sha-1314b1c", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0-next.0+sha-186245a", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
