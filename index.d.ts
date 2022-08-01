@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.1.0+sha-d05d05e
+ * @license Angular v14.1.0+sha-3f162f5
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2392,8 +2392,8 @@ export declare enum NumberSymbol {
  * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
  * browser's URL.
  *
- * If you're using `PathLocationStrategy`, you must provide a {@link APP_BASE_HREF}
- * or add a `<base href>` element to the document.
+ * If you're using `PathLocationStrategy`, you may provide a {@link APP_BASE_HREF}
+ * or add a `<base href>` element to the document to override the default.
  *
  * For instance, if you provide an `APP_BASE_HREF` of `'/my/app/'` and call
  * `location.go('/foo')`, the browser's URL will become
