@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.0-next.0+sha-cb0fe50
+ * @license Angular v14.2.0-next.0+sha-6174151
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1095,6 +1095,40 @@ declare namespace i9 {
 }
 
 /**
+ * Special token that allows to configure a function that will be used to produce an image URL based
+ * on the specified input.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
+export { IMAGE_LOADER }
+export { IMAGE_LOADER as ɵIMAGE_LOADER }
+
+/**
+ * Represents an image loader function.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare type ImageLoader = (config: ImageLoaderConfig) => string;
+export { ImageLoader }
+export { ImageLoader as ɵImageLoader }
+
+/**
+ * Config options recognized by the image loader function.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare interface ImageLoaderConfig {
+    src: string;
+    width?: number;
+}
+export { ImageLoaderConfig }
+export { ImageLoaderConfig as ɵImageLoaderConfig }
+
+/**
  * Returns whether a platform id represents a browser platform.
  * @publicApi
  */
@@ -1967,6 +2001,82 @@ export declare abstract class NgLocalization {
 }
 
 /**
+ * ** EXPERIMENTAL **
+ *
+ * TODO: add Image directive description.
+ *
+ * @usageNotes
+ * TODO: add Image directive usage notes.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
+    private imageLoader;
+    private renderer;
+    private imgElement;
+    private injector;
+    constructor(imageLoader: ImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
+    private _width?;
+    private _height?;
+    private _priority;
+    private _rewrittenSrc;
+    /**
+     * Name of the source image.
+     * Image name will be processed by the image loader and the final URL will be applied as the `src`
+     * property of the image.
+     */
+    rawSrc: string;
+    /**
+     * A comma separated list of width or density descriptors.
+     * The image name will be taken from `rawSrc` and combined with the list of width or density
+     * descriptors to generate the final `srcset` property of the image.
+     *
+     * Example:
+     * ```
+     * <img rawSrc="hello.jpg" rawSrcset="100w, 200w" />  =>
+     * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
+     * ```
+     */
+    rawSrcset: string;
+    /**
+     * The intrinsic width of the image in px.
+     */
+    set width(value: string | number | undefined);
+    get width(): number | undefined;
+    /**
+     * The intrinsic height of the image in px.
+     */
+    set height(value: string | number | undefined);
+    get height(): number | undefined;
+    /**
+     * The desired loading behavior (lazy, eager, or auto).
+     * The primary use case for this input is opting-out non-priority images
+     * from lazy loading by marking them loading='eager' or loading='auto'.
+     * This input should not be used with priority images.
+     */
+    loading?: string;
+    /**
+     * Indicates whether this image should have a high priority.
+     */
+    set priority(value: string | boolean | undefined);
+    get priority(): boolean;
+    srcset?: string;
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    private getLoadingBehavior;
+    private getFetchPriority;
+    private getRewrittenSrc;
+    private getRewrittenSrcset;
+    ngOnDestroy(): void;
+    private setHostAttribute;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true>;
+}
+export { NgOptimizedImage }
+export { NgOptimizedImage as ɵNgOptimizedImage }
+
+/**
  * @ngModule CommonModule
  *
  * @usageNotes
@@ -2545,6 +2655,110 @@ declare interface PopStateEvent_2 {
 }
 export { PopStateEvent_2 as PopStateEvent }
 
+/**
+ * Multi-provider injection token to configure which origins should be excluded
+ * from the preconnect checks. If can either be a single string or an array of strings
+ * to represent a group of origins, for example:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true, useValue: 'https://your-domain.com'}
+ * ```
+ *
+ * or:
+ *
+ * ```typescript
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true,
+ *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
+ * ```
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
+export { PRECONNECT_CHECK_BLOCKLIST }
+export { PRECONNECT_CHECK_BLOCKLIST as ɵPRECONNECT_CHECK_BLOCKLIST }
+
+/**
+ * Function that generates a built-in ImageLoader for Cloudflare Image Resizing
+ * and turns it into an Angular provider. Note: Cloudflare has multiple image
+ * products - this provider is specifically for Cloudflare Image Resizing;
+ * it will not work with Cloudflare Images or Cloudflare Polish.
+ *
+ * @param path Your domain name
+ * e.g. https://mysite.com
+ * @returns Provider that provides an ImageLoader function
+ *
+ * @publicApi
+ * @developerPreview
+ */
+export declare const provideCloudflareLoader: (path: string, options?: {
+    ensurePreconnect?: boolean | undefined;
+}) => Provider[];
+
+/**
+ * Function that generates a built-in ImageLoader for Cloudinary
+ * and turns it into an Angular provider.
+ *
+ * @param path Base URL of your Cloudinary images
+ * This URL should match one of the following formats:
+ * https://res.cloudinary.com/mysite
+ * https://mysite.cloudinary.com
+ * https://subdomain.mysite.com
+ * @param options An object that allows to provide extra configuration:
+ * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
+ *                       should verify that there is a corresponding `<link rel="preconnect">`
+ *                       present in the document's `<head>`.
+ * @returns Set of providers to configure the Cloudinary loader.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+export declare const provideCloudinaryLoader: (path: string, options?: {
+    ensurePreconnect?: boolean | undefined;
+}) => Provider[];
+
+/**
+ * Function that generates a built-in ImageLoader for ImageKit
+ * and turns it into an Angular provider.
+ *
+ * @param path Base URL of your ImageKit images
+ * This URL should match one of the following formats:
+ * https://ik.imagekit.io/myaccount
+ * https://subdomain.mysite.com
+ * @param options An object that allows to provide extra configuration:
+ * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
+ *                       should verify that there is a corresponding `<link rel="preconnect">`
+ *                       present in the document's `<head>`.
+ * @returns Set of providers to configure the ImageKit loader.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+export declare const provideImageKitLoader: (path: string, options?: {
+    ensurePreconnect?: boolean | undefined;
+}) => Provider[];
+
+/**
+ * Function that generates a built-in ImageLoader for Imgix and turns it
+ * into an Angular provider.
+ *
+ * @param path path to the desired Imgix origin,
+ * e.g. https://somepath.imgix.net or https://images.mysite.com
+ * @param options An object that allows to provide extra configuration:
+ * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
+ *                       should verify that there is a corresponding `<link rel="preconnect">`
+ *                       present in the document's `<head>`.
+ * @returns Set of providers to configure the Imgix loader.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+declare const provideImgixLoader: (path: string, options?: {
+    ensurePreconnect?: boolean | undefined;
+}) => Provider[];
+export { provideImgixLoader }
+export { provideImgixLoader as ɵprovideImgixLoader }
+
 
 /**
  * Register global data to be used internally by Angular. See the
@@ -2830,94 +3044,6 @@ export declare abstract class ɵDomAdapter {
 export declare function ɵgetDOM(): ɵDomAdapter;
 
 /**
- * Special token that allows to configure a function that will be used to produce an image URL based
- * on the specified input.
- */
-export declare const ɵIMAGE_LOADER: InjectionToken<ɵImageLoader>;
-
-/**
- * Represents an image loader function.
- */
-export declare type ɵImageLoader = (config: ɵImageLoaderConfig) => string;
-
-/**
- * Config options recognized by the image loader function.
- */
-export declare interface ɵImageLoaderConfig {
-    src: string;
-    width?: number;
-}
-
-/**
- * ** EXPERIMENTAL **
- *
- * TODO: add Image directive description.
- *
- * @usageNotes
- * TODO: add Image directive usage notes.
- */
-export declare class ɵNgOptimizedImage implements OnInit, OnChanges, OnDestroy {
-    private imageLoader;
-    private renderer;
-    private imgElement;
-    private injector;
-    constructor(imageLoader: ɵImageLoader, renderer: Renderer2, imgElement: ElementRef, injector: Injector);
-    private _width?;
-    private _height?;
-    private _priority;
-    private _rewrittenSrc;
-    /**
-     * Name of the source image.
-     * Image name will be processed by the image loader and the final URL will be applied as the `src`
-     * property of the image.
-     */
-    rawSrc: string;
-    /**
-     * A comma separated list of width or density descriptors.
-     * The image name will be taken from `rawSrc` and combined with the list of width or density
-     * descriptors to generate the final `srcset` property of the image.
-     *
-     * Example:
-     * <img rawSrc="hello.jpg" rawSrcset="100w, 200w" />  =>
-     * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
-     */
-    rawSrcset: string;
-    /**
-     * The intrinsic width of the image in px.
-     */
-    set width(value: string | number | undefined);
-    get width(): number | undefined;
-    /**
-     * The intrinsic height of the image in px.
-     */
-    set height(value: string | number | undefined);
-    get height(): number | undefined;
-    /**
-     * The desired loading behavior (lazy, eager, or auto).
-     * The primary use case for this input is opting-out non-priority images
-     * from lazy loading by marking them loading='eager' or loading='auto'.
-     * This input should not be used with priority images.
-     */
-    loading?: string;
-    /**
-     * Indicates whether this image should have a high priority.
-     */
-    set priority(value: string | boolean | undefined);
-    get priority(): boolean;
-    srcset?: string;
-    ngOnInit(): void;
-    ngOnChanges(changes: SimpleChanges): void;
-    private getLoadingBehavior;
-    private getFetchPriority;
-    private getRewrittenSrc;
-    private getRewrittenSrcset;
-    ngOnDestroy(): void;
-    private setHostAttribute;
-    static ɵfac: i0.ɵɵFactoryDeclaration<ɵNgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ɵNgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true>;
-}
-
-/**
  * Provides an empty implementation of the viewport scroller.
  */
 export declare class ɵNullViewportScroller implements ViewportScroller {
@@ -2954,40 +3080,6 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
 export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
 
 export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
-
-/**
- * Multi-provider injection token to configure which origins should be excluded
- * from the preconnect checks. If can either be a single string or an array of strings
- * to represent a group of origins, for example:
- *
- * ```typescript
- *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true, useValue: 'https://your-domain.com'}
- * ```
- *
- * or:
- *
- * ```typescript
- *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true,
- *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
- * ```
- */
-export declare const ɵPRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
-
-/**
- * Function that generates a built-in ImageLoader for Imgix and turns it
- * into an Angular provider.
- *
- * @param path path to the desired Imgix origin,
- * e.g. https://somepath.imgix.net or https://images.mysite.com
- * @param options An object that allows to provide extra configuration:
- * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
- *                       should verify that there is a corresponding `<link rel="preconnect">`
- *                       present in the document's `<head>`.
- * @returns Set of providers to configure the Imgix loader.
- */
-export declare const ɵprovideImgixLoader: (path: string, options?: {
-    ensurePreconnect?: boolean | undefined;
-}) => Provider[];
 
 export declare function ɵsetRootDomAdapter(adapter: ɵDomAdapter): void;
 
