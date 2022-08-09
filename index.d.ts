@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.0-next.0+sha-58e604c
+ * @license Angular v14.2.0-next.0+sha-bedf537
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2082,7 +2082,7 @@ export declare class NgStyle implements DoCheck {
     constructor(_ngEl: ElementRef, _differs: KeyValueDiffers, _renderer: Renderer2);
     set ngStyle(values: {
         [klass: string]: any;
-    } | null);
+    } | null | undefined);
     ngDoCheck(): void;
     private _setStyle;
     private _applyChanges;
