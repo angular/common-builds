@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.0-next.0+sha-30ed35f
+ * @license Angular v14.2.0-next.0+sha-0a9601b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2733,7 +2733,7 @@ export { PopStateEvent_2 as PopStateEvent }
 
 /**
  * Multi-provider injection token to configure which origins should be excluded
- * from the preconnect checks. If can either be a single string or an array of strings
+ * from the preconnect checks. It can either be a single string or an array of strings
  * to represent a group of origins, for example:
  *
  * ```typescript
