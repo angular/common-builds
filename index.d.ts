@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.0-rc.0+sha-9e02af8
+ * @license Angular v14.2.0-rc.0+sha-c5db867
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2107,6 +2107,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private renderer;
     private imgElement;
     private injector;
+    private lcpObserver;
     /**
      * Calculate the rewritten `src` once and store it.
      * This is needed to avoid repetitive calculations and make sure the directive cleanup in the
