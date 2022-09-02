@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.0+sha-0bb3aff
+ * @license Angular v15.0.0-next.0+sha-5dd72b7
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -794,7 +794,7 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a JSON object and
-     * returns the response body as a JSON object.
+     * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
@@ -1132,13 +1132,13 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `GET` request that interprets the body as a JSON object and
-     * returns the response body as a JSON object.
+     * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
      *
-     * @return An `Observable` of the response body as a JSON object.
+     * @return An `Observable` of the response body as an object parsed from JSON.
      */
     get(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1473,12 +1473,12 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a JSON object and
-     * returns the response body as a JSON object.
+     * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the response, with the response body as a JSON object.
+     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
      */
     head(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1836,12 +1836,12 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a JSON object and returns the
-     * response body as a JSON object.
+     * response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as a JSON object.
+     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
      */
     options(url: string, options?: {
         headers?: HttpHeaders | {
@@ -2189,13 +2189,13 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a JSON object and
-     * returns the response body as a JSON object.
+     * returns the response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param body The resources to edit.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as a JSON object.
+     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
      */
     patch(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
@@ -2545,13 +2545,13 @@ export declare class HttpClient {
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `POST` request that interprets the body as a
-     * JSON object and returns the response body as a JSON object.
+     * JSON object and returns the response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
      * @param options HTTP options
      *
-     * @return An `Observable` of the response, with the response body as a JSON object.
+     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
      */
     post(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
