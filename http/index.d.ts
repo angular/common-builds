@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.0+sha-af975d5
+ * @license Angular v14.2.0+sha-626340b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -247,8 +247,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a request which interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a request which interprets the body as a JavaScript object and returns the full
+     * event stream.
      *
      * @param method  The HTTP method.
      * @param url     The endpoint URL.
@@ -272,8 +272,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<any>>;
     /**
-     * Constructs a request which interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a request which interprets the body as a JavaScript object and returns the full
+     * event stream.
      *
      * @param method  The HTTP method.
      * @param url     The endpoint URL.
@@ -368,7 +368,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a request which interprets the body as a JSON object and returns the full
+     * Constructs a request which interprets the body as a JavaScript object and returns the full
      * `HttpResponse`.
      *
      * @param method  The HTTP method.
@@ -393,7 +393,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a request which interprets the body as a JSON object and returns
+     * Constructs a request which interprets the body as a JavaScript object and returns
      * the full `HttpResponse` with the response body in the requested type.
      *
      * @param method  The HTTP method.
@@ -417,8 +417,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<R>>;
     /**
-     * Constructs a request which interprets the body as a JSON object and returns the full
-     * `HttpResponse` as a JSON object.
+     * Constructs a request which interprets the body as a JavaScript object and returns the full
+     * `HttpResponse` as a JavaScript object.
      *
      * @param method  The HTTP method.
      * @param url     The endpoint URL.
@@ -441,7 +441,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs a request which interprets the body as a JSON object
+     * Constructs a request which interprets the body as a JavaScript object
      * with the response body of the requested type.
      *
      * @param method  The HTTP method.
@@ -629,7 +629,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `DELETE` request that interprets the body as a JSON object
+     * Constructs a `DELETE` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url     The endpoint URL.
@@ -653,7 +653,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `DELETE`request that interprets the body as a JSON object
+     * Constructs a `DELETE`request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url     The endpoint URL.
@@ -746,7 +746,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `DELETE` request the interprets the body as a JSON object and returns
+     * Constructs a `DELETE` request the interprets the body as a JavaScript object and returns
      * the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -770,7 +770,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `DELETE` request that interprets the body as a JSON object
+     * Constructs a `DELETE` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -793,7 +793,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `DELETE` request that interprets the body as a JSON object and
+     * Constructs a `DELETE` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
@@ -816,7 +816,7 @@ export declare class HttpClient {
         body?: any | null;
     }): Observable<Object>;
     /**
-     * Constructs a DELETE request that interprets the body as a JSON object and returns
+     * Constructs a DELETE request that interprets the body as JSON and returns
      * the response in a given type.
      *
      * @param url     The endpoint URL.
@@ -972,7 +972,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object
+     * Constructs a `GET` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url     The endpoint URL.
@@ -994,8 +994,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a `GET` request that interprets the body as JSON and returns the full
+     * event stream.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
@@ -1085,7 +1085,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object and
+     * Constructs a `GET` request that interprets the body as JSON and
      * returns the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -1108,7 +1108,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object and
+     * Constructs a `GET` request that interprets the body as JSON and
      * returns the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -1131,14 +1131,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object and
+     * Constructs a `GET` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
      *
-     * @return An `Observable` of the response body as an object parsed from JSON.
+     * @return An `Observable` of the response body as a JavaScript object.
      */
     get(url: string, options?: {
         headers?: HttpHeaders | {
@@ -1154,7 +1154,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs a `GET` request that interprets the body as a JSON object and returns
+     * Constructs a `GET` request that interprets the body as JSON and returns
      * the response body in a given type.
      *
      * @param url     The endpoint URL.
@@ -1311,7 +1311,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object
+     * Constructs a `HEAD` request that interprets the body as JSON
      * and returns the full HTTP event stream.
      *
      * @param url     The endpoint URL.
@@ -1334,7 +1334,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object and
+     * Constructs a `HEAD` request that interprets the body as JSON and
      * returns the full event stream.
      *
      * @return An `Observable` of all the `HttpEvent`s for the request,
@@ -1426,7 +1426,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object and
+     * Constructs a `HEAD` request that interprets the body as JSON and
      * returns the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -1449,7 +1449,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object
+     * Constructs a `HEAD` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url     The endpoint URL.
@@ -1472,7 +1472,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object and
+
+     * Constructs a `HEAD` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
@@ -1494,7 +1495,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a JSON object and returns
+     * Constructs a `HEAD` request that interprets the body as JSON and returns
      * the response in a given type.
      *
      * @param url     The endpoint URL.
@@ -1674,7 +1675,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object
+     * Constructs an `OPTIONS` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url The endpoint URL.
@@ -1697,7 +1698,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object and
+     * Constructs an `OPTIONS` request that interprets the body as JSON and
      * returns the full event stream.
      *
      * @param url The endpoint URL.
@@ -1789,7 +1790,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object
+     * Constructs an `OPTIONS` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url The endpoint URL.
@@ -1812,7 +1813,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object and
+     * Constructs an `OPTIONS` request that interprets the body as JSON and
      * returns the full `HttpResponse`.
      *
      * @param url The endpoint URL.
@@ -1835,7 +1836,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object and returns the
+
+     * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
      * response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
@@ -1857,7 +1859,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a JSON object and returns the
+     * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
      * response in a given type.
      *
      * @param url The endpoint URL.
@@ -2020,7 +2022,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url The endpoint URL.
@@ -2044,7 +2046,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url The endpoint URL.
@@ -2140,7 +2142,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url The endpoint URL.
@@ -2164,7 +2166,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url The endpoint URL.
@@ -2188,7 +2190,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object and
+
+     * Constructs a `PATCH` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
@@ -2211,7 +2214,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a JSON object
+     * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the response in a given type.
      *
      * @param url The endpoint URL.
@@ -2375,8 +2378,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a POST request that interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a POST request that interprets the body as JSON and returns the full
+     * event stream.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
@@ -2399,8 +2402,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a POST request that interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a POST request that interprets the body as JSON and returns the full
+     * event stream.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
@@ -2495,7 +2498,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `POST` request that interprets the body as a JSON object
+     * Constructs a `POST` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
      *
      * @param url The endpoint URL.
@@ -2519,8 +2522,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `POST` request that interprets the body as a JSON object and returns the full
-     * `HttpResponse`.
+     * Constructs a `POST` request that interprets the body as JSON and returns the
+     * full `HttpResponse`.
      *
      *
      * @param url The endpoint URL.
@@ -2544,8 +2547,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `POST` request that interprets the body as a
-     * JSON object and returns the response body as an object parsed from JSON.
+     * Constructs a `POST` request that interprets the body as JSON
+     * and returns the response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
@@ -2567,7 +2570,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<Object>;
     /**
-     * Constructs a `POST` request that interprets the body as a JSON object
+     * Constructs a `POST` request that interprets the body as JSON
      * and returns an observable of the response.
      *
      * @param url The endpoint URL.
@@ -2732,8 +2735,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `PUT` request that interprets the body as a JSON object and returns the full event
-     * stream.
+     * Constructs a `PUT` request that interprets the body as JSON and returns the full
+     * event stream.
      *
      * @param url The endpoint URL.
      * @param body The resources to add/update.
@@ -2756,7 +2759,7 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `PUT` request that interprets the body as a JSON object and returns the
+     * Constructs a `PUT` request that interprets the body as JSON and returns the
      * full event stream.
      *
      * @param url The endpoint URL.
@@ -2852,8 +2855,8 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `PUT` request that interprets the body as a JSON object and returns the full HTTP
-     * response.
+     * Constructs a `PUT` request that interprets the body as JSON and returns the full
+     * HTTP response.
      *
      * @param url The endpoint URL.
      * @param body The resources to add/update.
@@ -2900,14 +2903,14 @@ export declare class HttpClient {
         withCredentials?: boolean;
     }): Observable<HttpResponse<T>>;
     /**
-     * Constructs a `PUT` request that interprets the body as a JSON object
-     * and returns an observable of JSON object.
+     * Constructs a `PUT` request that interprets the body as JSON
+     * and returns an observable of JavaScript object.
      *
      * @param url The endpoint URL.
      * @param body The resources to add/update.
      * @param options HTTP options
      *
-     * @return An `Observable` of the response as a JSON object.
+     * @return An `Observable` of the response as a JavaScript object.
      */
     put(url: string, body: any | null, options?: {
         headers?: HttpHeaders | {
