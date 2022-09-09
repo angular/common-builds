@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.1+sha-710d1da
+ * @license Angular v15.0.0-next.1+sha-ca7bf65
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2029,8 +2029,8 @@ export declare abstract class NgLocalization {
  * Follow the steps below to enable and use the directive:
  * 1. Import it into the necessary NgModule or a standalone Component.
  * 2. Optionally provide an `ImageLoader` if you use an image hosting service.
- * 3. Update the necessary `<img>` tags in templates and replace `src` attributes with `rawSrc`.
- * Using a `rawSrc` allows the directive to control when the `src` gets set, which triggers an image
+ * 3. Update the necessary `<img>` tags in templates and replace `src` attributes with `ngSrc`.
+ * Using a `ngSrc` allows the directive to control when the `src` gets set, which triggers an image
  * download.
  *
  * Step 1: import the `NgOptimizedImage` directive.
@@ -2056,7 +2056,7 @@ export declare abstract class NgLocalization {
  *
  * To use the **default loader**: no additional code changes are necessary. The URL returned by the
  * generic loader will always match the value of "src". In other words, this loader applies no
- * transformations to the resource URL and the value of the `rawSrc` attribute will be used as is.
+ * transformations to the resource URL and the value of the `ngSrc` attribute will be used as is.
  *
  * To use an existing loader for a **third-party image service**: add the provider factory for your
  * chosen service to the `providers` array. In the example below, the Imgix loader is used:
@@ -2096,10 +2096,10 @@ export declare abstract class NgLocalization {
  * ],
  * ```
  *
- * Step 3: update `<img>` tags in templates to use `rawSrc` instead of `src`.
+ * Step 3: update `<img>` tags in templates to use `ngSrc` instead of `src`.
  *
  * ```
- * <img rawSrc="logo.png" width="200" height="100">
+ * <img ngSrc="logo.png" width="200" height="100">
  * ```
  *
  * @publicApi
@@ -2119,23 +2119,34 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     private _renderedSrc;
     /**
+     * Previously, the `rawSrc` attribute was used to activate the directive.
+     * The attribute was renamed to `ngSrc` and this input just produces an error,
+     * suggesting to switch to `ngSrc` instead.
+     *
+     * This error should be removed in v15.
+     *
+     * @nodoc
+     * @deprecated Use `ngSrc` instead.
+     */
+    set rawSrc(value: string);
+    /**
      * Name of the source image.
      * Image name will be processed by the image loader and the final URL will be applied as the `src`
      * property of the image.
      */
-    rawSrc: string;
+    ngSrc: string;
     /**
      * A comma separated list of width or density descriptors.
-     * The image name will be taken from `rawSrc` and combined with the list of width or density
+     * The image name will be taken from `ngSrc` and combined with the list of width or density
      * descriptors to generate the final `srcset` property of the image.
      *
      * Example:
      * ```
-     * <img rawSrc="hello.jpg" rawSrcset="100w, 200w" />  =>
+     * <img ngSrc="hello.jpg" ngSrcset="100w, 200w" />  =>
      * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
      * ```
      */
-    rawSrcset: string;
+    ngSrcset: string;
     /**
      * The intrinsic width of the image in pixels.
      */
@@ -2171,7 +2182,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[rawSrc]", never, { "rawSrc": "rawSrc"; "rawSrcset": "rawSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
 }
 
 /**
