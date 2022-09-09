@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.1+sha-a3e1303
+ * @license Angular v14.2.1+sha-403b970
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1049,7 +1049,8 @@ declare namespace i2 {
 declare namespace i3 {
     export {
         NgForOfContext,
-        NgForOf
+        NgForOf,
+        NgForOf as NgFor
     }
 }
 
@@ -1723,7 +1724,7 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
  * @ngModule CommonModule
  * @publicApi
  */
-export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
+declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;
     private _template;
     private _differs;
@@ -1778,6 +1779,8 @@ export declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> impleme
     static ɵfac: i0.ɵɵFactoryDeclaration<NgForOf<any, any>, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgForOf<any, any>, "[ngFor][ngForOf]", never, { "ngForOf": "ngForOf"; "ngForTrackBy": "ngForTrackBy"; "ngForTemplate": "ngForTemplate"; }, {}, never, never, true>;
 }
+export { NgForOf as NgFor }
+export { NgForOf }
 
 /**
  * @publicApi
