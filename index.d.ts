@@ -1,5 +1,5 @@
 /**
- * @license Angular v14.2.4+sha-c8d891e
+ * @license Angular v14.2.4+sha-98d8423
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -999,7 +999,7 @@ export declare class I18nPluralPipe implements PipeTransform {
     /**
      * @param value the number to be formatted
      * @param pluralMap an object that mimics the ICU format, see
-     * http://userguide.icu-project.org/formatparse/messages.
+     * https://unicode-org.github.io/icu/userguide/format_parse/messages/.
      * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
      * default).
      */
