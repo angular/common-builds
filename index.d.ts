@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.4+sha-ec1105d
+ * @license Angular v15.0.0-next.4+sha-d3c25f2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2765,18 +2765,18 @@ declare interface PopStateEvent_2 {
 export { PopStateEvent_2 as PopStateEvent }
 
 /**
- * Multi-provider injection token to configure which origins should be excluded
+ * Injection token to configure which origins should be excluded
  * from the preconnect checks. It can either be a single string or an array of strings
  * to represent a group of origins, for example:
  *
  * ```typescript
- *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true, useValue: 'https://your-domain.com'}
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST, useValue: 'https://your-domain.com'}
  * ```
  *
  * or:
  *
  * ```typescript
- *  {provide: PRECONNECT_CHECK_BLOCKLIST, multi: true,
+ *  {provide: PRECONNECT_CHECK_BLOCKLIST,
  *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
  * ```
  *
@@ -2792,18 +2792,12 @@ export declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string
  * Cloudflare Image Resizing; it will not work with Cloudflare Images or Cloudflare Polish.
  *
  * @param path Your domain name, e.g. https://mysite.com
- * @param options An object with extra configuration:
- * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
- *                       should verify that there is a corresponding `<link rel="preconnect">`
- *                       present in the document's `<head>`.
  * @returns Provider that provides an ImageLoader function
  *
  * @publicApi
  * @developerPreview
  */
-export declare const provideCloudflareLoader: (path: string, options?: {
-    ensurePreconnect?: boolean | undefined;
-}) => Provider[];
+export declare const provideCloudflareLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Cloudinary and turns it into an Angular provider.
@@ -2813,18 +2807,12 @@ export declare const provideCloudflareLoader: (path: string, options?: {
  * https://res.cloudinary.com/mysite
  * https://mysite.cloudinary.com
  * https://subdomain.mysite.com
- * @param options An object with extra configuration:
- * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
- *                       should verify that there is a corresponding `<link rel="preconnect">`
- *                       present in the document's `<head>`.
  * @returns Set of providers to configure the Cloudinary loader.
  *
  * @publicApi
  * @developerPreview
  */
-export declare const provideCloudinaryLoader: (path: string, options?: {
-    ensurePreconnect?: boolean | undefined;
-}) => Provider[];
+export declare const provideCloudinaryLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for ImageKit and turns it into an Angular provider.
@@ -2833,36 +2821,24 @@ export declare const provideCloudinaryLoader: (path: string, options?: {
  * This URL should match one of the following formats:
  * https://ik.imagekit.io/myaccount
  * https://subdomain.mysite.com
- * @param options An object with extra configuration:
- * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
- *                       should verify that there is a corresponding `<link rel="preconnect">`
- *                       present in the document's `<head>`.
  * @returns Set of providers to configure the ImageKit loader.
  *
  * @publicApi
  * @developerPreview
  */
-export declare const provideImageKitLoader: (path: string, options?: {
-    ensurePreconnect?: boolean | undefined;
-}) => Provider[];
+export declare const provideImageKitLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Imgix and turns it into an Angular provider.
  *
  * @param path path to the desired Imgix origin,
  * e.g. https://somepath.imgix.net or https://images.mysite.com
- * @param options An object with extra configuration:
- * - `ensurePreconnect`: boolean flag indicating whether the NgOptimizedImage directive
- *                       should verify that there is a corresponding `<link rel="preconnect">`
- *                       present in the document's `<head>`.
  * @returns Set of providers to configure the Imgix loader.
  *
  * @publicApi
  * @developerPreview
  */
-export declare const provideImgixLoader: (path: string, options?: {
-    ensurePreconnect?: boolean | undefined;
-}) => Provider[];
+export declare const provideImgixLoader: (path: string) => Provider[];
 
 
 /**
