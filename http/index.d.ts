@@ -1,15 +1,16 @@
 /**
- * @license Angular v15.0.0-next.5+sha-16c8f55
+ * @license Angular v15.0.0-next.5+sha-c09c1bb
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
 
 
+import { EnvironmentInjector } from '@angular/core';
 import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
-import { Injector } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Provider } from '@angular/core';
 import { XhrFactory as XhrFactory_2 } from '@angular/common';
 
 /**
@@ -2958,9 +2959,6 @@ export declare class HttpClient {
  * Without this module, Jsonp requests reach the backend
  * with method JSONP, where they are rejected.
  *
- * You can add interceptors to the chain behind `HttpClient` by binding them to the
- * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
- *
  * @publicApi
  */
 export declare class HttpClientJsonpModule {
@@ -2980,7 +2978,7 @@ export declare class HttpClientJsonpModule {
  */
 export declare class HttpClientModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientModule, never, [typeof HttpClientXsrfModule], never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientModule, never, never, never>;
     static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientModule>;
 }
 
@@ -3189,6 +3187,20 @@ export declare enum HttpEventType {
     User = 5
 }
 
+export declare interface HttpFeature<KindT extends HttpFeatureKind> {
+    ɵkind: KindT;
+    ɵproviders: Provider[];
+}
+
+export declare enum HttpFeatureKind {
+    Interceptors = 0,
+    LegacyInterceptors = 1,
+    CustomXsrfConfiguration = 2,
+    NoXsrfProtection = 3,
+    JsonpSupport = 4,
+    RequestsMadeViaParent = 5
+}
+
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
  * `HttpResponse`.
@@ -3204,6 +3216,23 @@ export declare enum HttpEventType {
 export declare abstract class HttpHandler {
     abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
+
+/**
+ * Represents the next interceptor in an interceptor chain, or the real backend if there are no
+ * further interceptors.
+ *
+ * Most interceptors will delegate to this function, and either modify the outgoing request or the
+ * response when it arrives. Within the scope of the current request, however, this function may be
+ * called any number of times, for any number of downstream requests. Such downstream requests need
+ * not be to the same URL or even the same origin as the current request. It is also valid to not
+ * call the downstream handler at all, and process the current request entirely within the
+ * interceptor.
+ *
+ * This function should only be called within the scope of the request that's currently being
+ * intercepted. Once that request is complete, this downstream handler function should not be
+ * called.
+ */
+export declare type HttpHandlerFn = (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>;
 
 /**
  * A partial HTTP response which only includes the status and header data,
@@ -3361,7 +3390,6 @@ export declare class HttpHeaders {
  * If you import `HttpClientModule` multiple times across different modules (for example, in lazy
  * loading modules), each import creates a new copy of the `HttpClientModule`, which overwrites the
  * interceptors provided in the root module.
- *
  */
 export declare interface HttpInterceptor {
     /**
@@ -3373,6 +3401,34 @@ export declare interface HttpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
+
+/**
+ * An interceptor for HTTP requests made via `HttpClient`.
+ *
+ * `HttpInterceptorFn`s are middleware functions which `HttpClient` calls when a request is made.
+ * These functions have the opportunity to modify the outgoing request or any response that comes
+ * back, as well as block, redirect, or otherwise change the request or response semantics.
+ *
+ * An `HttpHandlerFn` representing the next interceptor (or the backend which will make a real HTTP
+ * request) is provided. Most interceptors will delegate to this function, but that is not required
+ * (see `HttpHandlerFn` for more details).
+ *
+ * `HttpInterceptorFn`s have access to `inject()` via the `EnvironmentInjector` from which they were
+ * configured.
+ */
+export declare type HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => Observable<HttpEvent<unknown>>;
+
+declare class HttpInterceptorHandler extends HttpHandler {
+    private backend;
+    private injector;
+    private chain;
+    constructor(backend: HttpBackend, injector: EnvironmentInjector);
+    handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpInterceptorHandler>;
+}
+export { HttpInterceptorHandler as ɵHttpInterceptingHandler }
+export { HttpInterceptorHandler as ɵHttpInterceptorHandler }
 
 
 /**
@@ -3959,19 +4015,39 @@ export declare class JsonpClientBackend implements HttpBackend {
  * @publicApi
  */
 export declare class JsonpInterceptor {
-    private jsonp;
-    constructor(jsonp: JsonpClientBackend);
+    private injector;
+    constructor(injector: EnvironmentInjector);
     /**
      * Identifies and handles a given JSONP request.
-     * @param req The outgoing request object to handle.
+     * @param initialRequest The outgoing request object to handle.
      * @param next The next interceptor in the chain, or the backend
      * if no interceptors remain in the chain.
      * @returns An observable of the event stream.
      */
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    intercept(initialRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpInterceptor, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<JsonpInterceptor>;
 }
+
+export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): Provider[];
+
+export declare function withInterceptors(interceptorFns: HttpInterceptorFn[]): HttpFeature<HttpFeatureKind.Interceptors>;
+
+export declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSupport>;
+
+export declare function withLegacyInterceptors(): HttpFeature<HttpFeatureKind.LegacyInterceptors>;
+
+export declare function withNoXsrfProtection(): HttpFeature<HttpFeatureKind.NoXsrfProtection>;
+
+/**
+ * @developerPreview
+ */
+export declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.RequestsMadeViaParent>;
+
+export declare function withXsrfConfiguration({ cookieName, headerName }: {
+    cookieName?: string;
+    headerName?: string;
+}): HttpFeature<HttpFeatureKind.CustomXsrfConfiguration>;
 
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
@@ -3992,24 +4068,5 @@ export declare type XhrFactory = XhrFactory_2;
  * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
  */
 export declare const XhrFactory: typeof XhrFactory_2;
-
-/**
- * An injectable `HttpHandler` that applies multiple interceptors
- * to a request before passing it to the given `HttpBackend`.
- *
- * The interceptors are loaded lazily from the injector, to allow
- * interceptors to themselves inject classes depending indirectly
- * on `HttpInterceptingHandler` itself.
- * @see `HttpInterceptor`
- */
-export declare class ɵHttpInterceptingHandler implements HttpHandler {
-    private backend;
-    private injector;
-    private chain;
-    constructor(backend: HttpBackend, injector: Injector);
-    handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDeclaration<ɵHttpInterceptingHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<ɵHttpInterceptingHandler>;
-}
 
 export { }

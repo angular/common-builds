@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.5+sha-16c8f55
+ * @license Angular v15.0.0-next.5+sha-c09c1bb
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -11,6 +11,7 @@ import { HttpRequest } from '@angular/common/http';
 import * as i0 from '@angular/core';
 import * as i1 from '@angular/common/http';
 import { Observer } from 'rxjs';
+import { Provider } from '@angular/core';
 
 /**
  * Configures `HttpClientTestingBackend` as the `HttpBackend` used by `HttpClient`.
@@ -109,6 +110,8 @@ export declare abstract class HttpTestingController {
         ignoreCancelled?: boolean;
     }): void;
 }
+
+export declare function provideHttpClientTesting(): Provider[];
 
 /**
  * Defines a matcher for requests based on URL, method, or both.

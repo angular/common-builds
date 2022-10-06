@@ -1,10 +1,10 @@
 /**
- * @license Angular v15.0.0-next.5+sha-16c8f55
+ * @license Angular v15.0.0-next.5+sha-c09c1bb
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpClientModule, HttpBackend } from '@angular/common/http';
+import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpEventType, HttpBackend, HttpClientModule } from '@angular/common/http';
 import * as i0 from '@angular/core';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -330,15 +330,30 @@ class HttpClientTestingBackend {
         }
     }
 }
-HttpClientTestingBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-HttpClientTestingBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingBackend });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
+HttpClientTestingBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+HttpClientTestingBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingBackend });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
             type: Injectable
         }] });
 function describeRequest(testRequest) {
     const url = testRequest.request.urlWithParams;
     const method = testRequest.request.method;
     return `${method} ${url}`;
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+function provideHttpClientTesting() {
+    return [
+        HttpClientTestingBackend,
+        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
+        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+    ];
 }
 
 /**
@@ -357,23 +372,19 @@ function describeRequest(testRequest) {
  */
 class HttpClientTestingModule {
 }
-HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
-HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingModule, providers: [
-        HttpClientTestingBackend,
-        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
+HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingModule, providers: [
+        provideHttpClientTesting(),
     ], imports: [HttpClientModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-16c8f55", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-c09c1bb", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
                         HttpClientModule,
                     ],
                     providers: [
-                        HttpClientTestingBackend,
-                        { provide: HttpBackend, useExisting: HttpClientTestingBackend },
-                        { provide: HttpTestingController, useExisting: HttpClientTestingBackend },
+                        provideHttpClientTesting(),
                     ],
                 }]
         }] });
@@ -398,5 +409,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sh
  * Generated bundle index. Do not edit.
  */
 
-export { HttpClientTestingModule, HttpTestingController, TestRequest };
+export { HttpClientTestingModule, HttpTestingController, TestRequest, provideHttpClientTesting };
 //# sourceMappingURL=testing.mjs.map
