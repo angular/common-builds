@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.5+sha-a792bf1
+ * @license Angular v15.0.0-next.5+sha-bdb5371
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -169,8 +169,43 @@ export declare class CurrencyPipe implements PipeTransform {
 }
 
 /**
+ * DI token that allows to provide default configuration for the `DatePipe` instances in an
+ * application. The value is an object which can include the following fields:
+ * - `dateFormat`: configures the default date format. If not provided, the `DatePipe`
+ * will use the 'mediumDate' as a value.
+ * - `timezone`: configures the default timezone. If not provided, the `DatePipe` will
+ * use the end-user's local system timezone.
+ *
+ * @see `DatePipeConfig`
+ *
+ * @usageNotes
+ *
+ * Various date pipe default values can be overwritten by providing this token with
+ * the value that has this interface.
+ *
+ * For example:
+ *
+ * Override the default date format by providing a value using the token:
+ * ```typescript
+ * providers: [
+ *   {provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {dateFormat: 'shortDate'}}
+ * ]
+ * ```
+ *
+ * Override the default timezone by providing a value using the token:
+ * ```typescript
+ * providers: [
+ *   {provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {timezone: '-1200'}}
+ * ]
+ * ```
+ */
+export declare const DATE_PIPE_DEFAULT_OPTIONS: InjectionToken<DatePipeConfig>;
+
+/**
  * Optionally-provided default timezone to use for all instances of `DatePipe` (such as `'+0430'`).
  * If the value isn't provided, the `DatePipe` will use the end-user's local system timezone.
+ *
+ * @deprecated use DATE_PIPE_DEFAULT_OPTIONS token to configure DatePipe
  */
 export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
 
@@ -334,25 +369,46 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
 export declare class DatePipe implements PipeTransform {
     private locale;
     private defaultTimezone?;
-    constructor(locale: string, defaultTimezone?: string | null | undefined);
+    private defaultOptions?;
+    constructor(locale: string, defaultTimezone?: string | null | undefined, defaultOptions?: DatePipeConfig | null | undefined);
     /**
      * @param value The date expression: a `Date` object,  a number
      * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
      * @param format The date/time components to include, using predefined options or a
-     * custom format string.
+     * custom format string.  When not provided, the `DatePipe` looks for the value using the
+     * `DATE_PIPE_DEFAULT_OPTIONS` injection token (and reads the `dateFormat` property).
+     * If the token is not configured, the `mediumDate` is used as a value.
      * @param timezone A timezone offset (such as `'+0430'`), or a standard UTC/GMT, or continental US
-     * timezone abbreviation. When not supplied, either the value of the `DATE_PIPE_DEFAULT_TIMEZONE`
-     * injection token is used or the end-user's local system timezone.
+     * timezone abbreviation. When not provided, the `DatePipe` looks for the value using the
+     * `DATE_PIPE_DEFAULT_OPTIONS` injection token (and reads the `timezone` property). If the token
+     * is not configured, the end-user's local system timezone is used as a value.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n-common-locale-id).
+     *
+     * @see `DATE_PIPE_DEFAULT_OPTIONS`
+     *
      * @returns A date string in the desired format.
      */
     transform(value: Date | string | number, format?: string, timezone?: string, locale?: string): string | null;
     transform(value: null | undefined, format?: string, timezone?: string, locale?: string): null;
     transform(value: Date | string | number | null | undefined, format?: string, timezone?: string, locale?: string): string | null;
-    static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, [null, { optional: true; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DatePipe, [null, { optional: true; }, { optional: true; }]>;
     static ɵpipe: i0.ɵɵPipeDeclaration<DatePipe, "date", true>;
+}
+
+
+/**
+ * An interface that describes the date pipe configuration, which can be provided using the
+ * `DATE_PIPE_DEFAULT_OPTIONS` token.
+ *
+ * @see `DATE_PIPE_DEFAULT_OPTIONS`
+ *
+ * @publicApi
+ */
+export declare interface DatePipeConfig {
+    dateFormat: string;
+    timezone: string;
 }
 
 /**
@@ -955,6 +1011,7 @@ declare namespace i13 {
 declare namespace i14 {
     export {
         DATE_PIPE_DEFAULT_TIMEZONE,
+        DATE_PIPE_DEFAULT_OPTIONS,
         DatePipe
     }
 }
