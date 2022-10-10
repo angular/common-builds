@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.5+sha-ed11a13
+ * @license Angular v15.0.0-next.5+sha-4fde292
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2075,6 +2075,7 @@ export declare abstract class NgLocalization {
  *
  * In addition, the directive:
  * - Generates appropriate asset URLs if a corresponding `ImageLoader` function is provided
+ * - Automatically generates a srcset
  * - Requires that `width` and `height` are set
  * - Warns if `width` or `height` have been set incorrectly
  * - Warns if the image will be visually distorted when rendered
@@ -2164,6 +2165,7 @@ export declare abstract class NgLocalization {
  */
 export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private imageLoader;
+    private config;
     private renderer;
     private imgElement;
     private injector;
@@ -2205,6 +2207,11 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     ngSrcset: string;
     /**
+     * The base `sizes` attribute passed through to the `<img>` element.
+     * Providing sizes causes the image to create an automatic responsive srcset.
+     */
+    sizes?: string;
+    /**
      * The intrinsic width of the image in pixels.
      */
     set width(value: string | number | undefined);
@@ -2229,6 +2236,12 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     set priority(value: string | boolean | undefined);
     get priority(): boolean;
     private _priority;
+    /**
+     * Disables automatic srcset generation for this image.
+     */
+    set disableOptimizedSrcset(value: string | boolean | undefined);
+    get disableOptimizedSrcset(): boolean;
+    private _disableOptimizedSrcset;
     ngOnInit(): void;
     private setHostAttributes;
     ngOnChanges(changes: SimpleChanges): void;
@@ -2236,10 +2249,13 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private getFetchPriority;
     private getRewrittenSrc;
     private getRewrittenSrcset;
+    private getAutomaticSrcset;
+    private getResponsiveSrcset;
+    private getFixedSrcset;
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
 }
 
 /**
