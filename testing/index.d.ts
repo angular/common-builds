@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.5+sha-4fde292
+ * @license Angular v15.0.0-next.5+sha-a8569e3
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -11,6 +11,7 @@ import { Location as Location_2 } from '@angular/common';
 import { LocationChangeListener } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
+import { Provider } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 
 /**
@@ -91,6 +92,15 @@ export declare interface MockPlatformLocationConfig {
     startUrl?: string;
     appBaseHref?: string;
 }
+
+/**
+ * Returns mock providers for the `Location` and `LocationStrategy` classes.
+ * The mocks are helpful in tests to fire simulated location events.
+ *
+ * @developerPreview
+ * @publicApi
+ */
+export declare function provideLocationMocks(): Provider[];
 
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
