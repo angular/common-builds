@@ -18,12 +18,12 @@ import * as i0 from "@angular/core";
  */
 export class HttpClientTestingModule {
 }
-HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-39b72e2", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.0.0-next.5+sha-39b72e2", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
-HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-39b72e2", ngImport: i0, type: HttpClientTestingModule, providers: [
+HttpClientTestingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-1b9fd46", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientTestingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.0.0-next.5+sha-1b9fd46", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
+HttpClientTestingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-1b9fd46", ngImport: i0, type: HttpClientTestingModule, providers: [
         provideHttpClientTesting(),
     ], imports: [HttpClientModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-39b72e2", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.0-next.5+sha-1b9fd46", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
