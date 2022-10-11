@@ -1,11 +1,11 @@
 {
   "name": "@angular/common",
-  "version": "15.0.0-next.5+sha-b618b5a",
+  "version": "15.0.0-next.5+sha-39b72e2",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
   "engines": {
-    "node": "^14.15.0 || >=16.10.0"
+    "node": "^14.20.0 || ^16.13.0 || >=18.10.0"
   },
   "locales": "locales",
   "dependencies": {
@@ -63,7 +63,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "15.0.0-next.5+sha-b618b5a",
+    "@angular/core": "15.0.0-next.5+sha-39b72e2",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
