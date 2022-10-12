@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.5+sha-3a9c452
+ * @license Angular v15.0.0-next.5+sha-9483343
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2244,6 +2244,13 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     set disableOptimizedSrcset(value: string | boolean | undefined);
     get disableOptimizedSrcset(): boolean;
     private _disableOptimizedSrcset;
+    /**
+     * Sets the image to "fill mode," which eliminates the height/width requirement and adds
+     * styles such that the image fills its containing element.
+     */
+    set fill(value: string | boolean | undefined);
+    get fill(): boolean;
+    private _fill;
     ngOnInit(): void;
     private setHostAttributes;
     ngOnChanges(changes: SimpleChanges): void;
@@ -2257,7 +2264,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "fill": "fill"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
 }
 
 /**
