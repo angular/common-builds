@@ -1,11 +1,12 @@
 /**
- * @license Angular v15.1.0-next.0+sha-6c98ca4
+ * @license Angular v15.1.0-next.0+sha-ddbc493
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
 
 
 import { EnvironmentInjector } from '@angular/core';
+import { EnvironmentProviders } from '@angular/core';
 import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
@@ -4029,7 +4030,7 @@ export declare class JsonpInterceptor {
     static ɵprov: i0.ɵɵInjectableDeclaration<JsonpInterceptor>;
 }
 
-export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): Provider[];
+export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): EnvironmentProviders;
 
 export declare function withInterceptors(interceptorFns: HttpInterceptorFn[]): HttpFeature<HttpFeatureKind.Interceptors>;
 
