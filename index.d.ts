@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.0+sha-38ec156
+ * @license Angular v15.1.0-next.0+sha-af8afee
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2233,7 +2233,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     get disableOptimizedSrcset(): boolean;
     private _disableOptimizedSrcset;
     /**
-     * Sets the image to "fill mode," which eliminates the height/width requirement and adds
+     * Sets the image to "fill mode", which eliminates the height/width requirement and adds
      * styles such that the image fills its containing element.
      *
      * @developerPreview
@@ -2241,8 +2241,10 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     set fill(value: string | boolean | undefined);
     get fill(): boolean;
     private _fill;
+    /** @nodoc */
     ngOnInit(): void;
     private setHostAttributes;
+    /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     private getLoadingBehavior;
     private getFetchPriority;
@@ -2251,6 +2253,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private getAutomaticSrcset;
     private getResponsiveSrcset;
     private getFixedSrcset;
+    /** @nodoc */
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
