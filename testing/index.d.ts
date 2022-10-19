@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.6+sha-b6fd814
+ * @license Angular v15.0.0-next.6+sha-420d6b3
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -97,7 +97,6 @@ export declare interface MockPlatformLocationConfig {
  * Returns mock providers for the `Location` and `LocationStrategy` classes.
  * The mocks are helpful in tests to fire simulated location events.
  *
- * @developerPreview
  * @publicApi
  */
 export declare function provideLocationMocks(): Provider[];

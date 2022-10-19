@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.6+sha-b6fd814
+ * @license Angular v15.0.0-next.6+sha-420d6b3
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2180,17 +2180,6 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     private _renderedSrc;
     /**
-     * Previously, the `rawSrc` attribute was used to activate the directive.
-     * The attribute was renamed to `ngSrc` and this input just produces an error,
-     * suggesting to switch to `ngSrc` instead.
-     *
-     * This error should be removed in v15.
-     *
-     * @nodoc
-     * @deprecated Use `ngSrc` instead.
-     */
-    set rawSrc(value: string);
-    /**
      * Name of the source image.
      * Image name will be processed by the image loader and the final URL will be applied as the `src`
      * property of the image.
@@ -2214,13 +2203,16 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     sizes?: string;
     /**
-     * The intrinsic width of the image in pixels.
+     * For responsive images: the intrinsic width of the image in pixels.
+     * For fixed size images: the desired rendered width of the image in pixels.
      */
     set width(value: string | number | undefined);
     get width(): number | undefined;
     private _width?;
     /**
-     * The intrinsic height of the image in pixels.
+     * For responsive images: the intrinsic height of the image in pixels.
+     * For fixed size images: the desired rendered height of the image in pixels.* The intrinsic
+     * height of the image in pixels.
      */
     set height(value: string | number | undefined);
     get height(): number | undefined;
@@ -2264,7 +2256,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc],img[rawSrc]", never, { "rawSrc": "rawSrc"; "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "fill": "fill"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "fill": "fill"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
 }
 
 /**
