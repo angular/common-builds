@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-next.6+sha-420d6b3
+ * @license Angular v15.0.0-next.6+sha-716352c
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1158,7 +1158,6 @@ declare namespace i9 {
  * @see `ImageLoader`
  * @see `NgOptimizedImage`
  * @publicApi
- * @developerPreview
  */
 export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
 
@@ -1167,7 +1166,6 @@ export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
  * NgOptimizedImage directive to produce full image URL based on the image name and its width.
  *
  * @publicApi
- * @developerPreview
  */
 export declare type ImageLoader = (config: ImageLoaderConfig) => string;
 
@@ -1177,7 +1175,6 @@ export declare type ImageLoader = (config: ImageLoaderConfig) => string;
  * @see `ImageLoader`
  * @see `NgOptimizedImage`
  * @publicApi
- * @developerPreview
  */
 export declare interface ImageLoaderConfig {
     /**
@@ -2161,7 +2158,6 @@ export declare abstract class NgLocalization {
  * ```
  *
  * @publicApi
- * @developerPreview
  */
 export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private imageLoader;
@@ -2239,6 +2235,8 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     /**
      * Sets the image to "fill mode," which eliminates the height/width requirement and adds
      * styles such that the image fills its containing element.
+     *
+     * @developerPreview
      */
     set fill(value: string | boolean | undefined);
     get fill(): boolean;
@@ -2855,7 +2853,6 @@ export { PopStateEvent_2 as PopStateEvent }
  * ```
  *
  * @publicApi
- * @developerPreview
  */
 export declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
 
@@ -2869,7 +2866,6 @@ export declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string
  * @returns Provider that provides an ImageLoader function
  *
  * @publicApi
- * @developerPreview
  */
 export declare const provideCloudflareLoader: (path: string) => Provider[];
 
@@ -2884,7 +2880,6 @@ export declare const provideCloudflareLoader: (path: string) => Provider[];
  * @returns Set of providers to configure the Cloudinary loader.
  *
  * @publicApi
- * @developerPreview
  */
 export declare const provideCloudinaryLoader: (path: string) => Provider[];
 
@@ -2898,7 +2893,6 @@ export declare const provideCloudinaryLoader: (path: string) => Provider[];
  * @returns Set of providers to configure the ImageKit loader.
  *
  * @publicApi
- * @developerPreview
  */
 export declare const provideImageKitLoader: (path: string) => Provider[];
 
@@ -2910,7 +2904,6 @@ export declare const provideImageKitLoader: (path: string) => Provider[];
  * @returns Set of providers to configure the Imgix loader.
  *
  * @publicApi
- * @developerPreview
  */
 export declare const provideImgixLoader: (path: string) => Provider[];
 
