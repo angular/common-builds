@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0-rc.3+sha-a1b6610
+ * @license Angular v15.0.0-rc.3+sha-933d481
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1153,6 +1153,15 @@ declare namespace i9 {
 }
 
 /**
+ * Injection token that configures the image optimized image functionality.
+ *
+ * @see `NgOptimizedImage`
+ * @publicApi
+ * @developerPreview
+ */
+export declare const IMAGE_CONFIG: InjectionToken<ImageConfig>;
+
+/**
  * Injection token that configures the image loader function.
  *
  * @see `ImageLoader`
@@ -1160,6 +1169,20 @@ declare namespace i9 {
  * @publicApi
  */
 export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
+
+/**
+ * A configuration object for the NgOptimizedImage directive. Contains:
+ * - breakpoints: An array of integer breakpoints used to generate
+ *      srcsets for responsive images.
+ *
+ * Learn more about the responsive image configuration in [the NgOptimizedImage
+ * guide](guide/image-directive).
+ * @publicApi
+ * @developerPreview
+ */
+export declare type ImageConfig = {
+    breakpoints?: number[];
+};
 
 /**
  * Represents an image loader function. Image loader functions are used by the
