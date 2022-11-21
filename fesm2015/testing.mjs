@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.0+sha-f376bf8
+ * @license Angular v15.1.0-next.0+sha-1976e37
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -148,12 +148,12 @@ class SpyLocation {
     replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
         const history = this._history[this._historyIndex];
+        history.state = state;
         if (history.path == path && history.query == query) {
             return;
         }
         history.path = path;
         history.query = query;
-        history.state = state;
         const url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
         this._notifyUrlChangeListeners(path + normalizeQueryParams(query), state);
@@ -212,9 +212,9 @@ class SpyLocation {
         this._historyIndex = this._history.length - 1;
     }
 }
-SpyLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-SpyLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: SpyLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: SpyLocation, decorators: [{
+SpyLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+SpyLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: SpyLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
@@ -301,9 +301,9 @@ class MockLocationStrategy extends LocationStrategy {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
 }
-MockLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-MockLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockLocationStrategy, decorators: [{
+MockLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+MockLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return []; } });
 class _MockPopStateEvent {
@@ -388,6 +388,7 @@ class MockPlatformLocation {
     constructor(config) {
         this.baseHref = '';
         this.hashUpdate = new Subject();
+        this.popStateSubject = new Subject();
         this.urlChangeIndex = 0;
         this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
         if (config) {
@@ -421,9 +422,8 @@ class MockPlatformLocation {
         return this.baseHref;
     }
     onPopState(fn) {
-        // No-op: a state stack is not implemented, so
-        // no events will ever come.
-        return () => { };
+        const subscription = this.popStateSubject.subscribe(fn);
+        return () => subscription.unsubscribe();
     }
     onHashChange(fn) {
         const subscription = this.hashUpdate.subscribe(fn);
@@ -460,7 +460,7 @@ class MockPlatformLocation {
         if (this.urlChangeIndex < this.urlChanges.length) {
             this.urlChangeIndex++;
         }
-        this.scheduleHashUpdate(oldHash, oldUrl);
+        this.emitEvents(oldHash, oldUrl);
     }
     back() {
         const oldUrl = this.url;
@@ -468,7 +468,7 @@ class MockPlatformLocation {
         if (this.urlChangeIndex > 0) {
             this.urlChangeIndex--;
         }
-        this.scheduleHashUpdate(oldHash, oldUrl);
+        this.emitEvents(oldHash, oldUrl);
     }
     historyGo(relativePosition = 0) {
         const oldUrl = this.url;
@@ -477,20 +477,31 @@ class MockPlatformLocation {
         if (nextPageIndex >= 0 && nextPageIndex < this.urlChanges.length) {
             this.urlChangeIndex = nextPageIndex;
         }
-        this.scheduleHashUpdate(oldHash, oldUrl);
+        this.emitEvents(oldHash, oldUrl);
     }
     getState() {
         return this.state;
     }
-    scheduleHashUpdate(oldHash, oldUrl) {
+    /**
+     * Browsers are inconsistent in when they fire events and perform the state updates
+     * The most easiest thing to do in our mock is synchronous and that happens to match
+     * Firefox and Chrome, at least somewhat closely
+     *
+     * https://github.com/WICG/navigation-api#watching-for-navigations
+     * https://docs.google.com/document/d/1Pdve-DJ1JCGilj9Yqf5HxRJyBKSel5owgOvUJqTauwU/edit#heading=h.3ye4v71wsz94
+     * popstate is always sent before hashchange:
+     * https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event#when_popstate_is_sent
+     */
+    emitEvents(oldHash, oldUrl) {
+        this.popStateSubject.next({ type: 'popstate', state: this.getState(), oldUrl, newUrl: this.url });
         if (oldHash !== this.hash) {
-            scheduleMicroTask(() => this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url }));
+            this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url });
         }
     }
 }
-MockPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-MockPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockPlatformLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-f376bf8", ngImport: i0, type: MockPlatformLocation, decorators: [{
+MockPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+MockPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockPlatformLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sha-1976e37", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
@@ -500,9 +511,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.0+sh
                         type: Optional
                     }] }];
     } });
-function scheduleMicroTask(cb) {
-    Promise.resolve().then(cb);
-}
 
 /**
  * @license
