@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.0+sha-890feb9
+ * @license Angular v15.0.0+sha-cc8b76e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -56,6 +56,7 @@ export declare class MockLocationStrategy extends LocationStrategy {
 export declare class MockPlatformLocation implements PlatformLocation {
     private baseHref;
     private hashUpdate;
+    private popStateSubject;
     private urlChangeIndex;
     private urlChanges;
     constructor(config?: MockPlatformLocationConfig);
@@ -78,7 +79,17 @@ export declare class MockPlatformLocation implements PlatformLocation {
     back(): void;
     historyGo(relativePosition?: number): void;
     getState(): unknown;
-    private scheduleHashUpdate;
+    /**
+     * Browsers are inconsistent in when they fire events and perform the state updates
+     * The most easiest thing to do in our mock is synchronous and that happens to match
+     * Firefox and Chrome, at least somewhat closely
+     *
+     * https://github.com/WICG/navigation-api#watching-for-navigations
+     * https://docs.google.com/document/d/1Pdve-DJ1JCGilj9Yqf5HxRJyBKSel5owgOvUJqTauwU/edit#heading=h.3ye4v71wsz94
+     * popstate is always sent before hashchange:
+     * https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event#when_popstate_is_sent
+     */
+    private emitEvents;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MockPlatformLocation>;
 }
