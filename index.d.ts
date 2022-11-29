@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.0.1+sha-a192dea
+ * @license Angular v15.0.1+sha-bec0007
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -228,7 +228,7 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
  * See the [I18n guide](guide/i18n-common-format-data-locale) for more information.
  *
  * The time zone of the formatted value can be specified either by passing it in as the second
- * parameter of the pipe, or by setting the default through the `DATE_PIPE_DEFAULT_TIMEZONE`
+ * parameter of the pipe, or by setting the default through the `DATE_PIPE_DEFAULT_OPTIONS`
  * injection token. The value that is passed in as the second parameter takes precedence over
  * the one defined using the injection token.
  *
