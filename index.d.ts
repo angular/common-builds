@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.1+sha-408aed7
+ * @license Angular v15.1.0-next.1+sha-8e52ca2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2276,6 +2276,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private getAutomaticSrcset;
     private getResponsiveSrcset;
     private getFixedSrcset;
+    private shouldGenerateAutomaticSrcset;
     /** @nodoc */
     ngOnDestroy(): void;
     private setHostAttribute;
