@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.2+sha-caa1ad0
+ * @license Angular v15.1.0-next.2+sha-a6d953e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -49,7 +49,7 @@ export declare abstract class HttpBackend implements HttpHandler {
 
  *
  * @usageNotes
- * Sample HTTP requests for the [Tour of Heroes](/tutorial/toh-pt0) application.
+ * Sample HTTP requests for the [Tour of Heroes](/tutorial/tour-of-heroes/toh-pt0) application.
  *
  * ### HTTP Request Example
  *
