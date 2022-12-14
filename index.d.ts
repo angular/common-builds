@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.2+sha-4ab3ed3
+ * @license Angular v15.1.0-next.2+sha-fe50813
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -102,6 +102,41 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     static ɵfac: i0.ɵɵFactoryDeclaration<AsyncPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<AsyncPipe, "async", true>;
 }
+
+/**
+ * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
+ * This class should not be used directly by an application developer. Instead, use
+ * {@link Location}.
+ *
+ * @publicApi
+ */
+declare class BrowserPlatformLocation extends PlatformLocation {
+    private _doc;
+    private _location;
+    private _history;
+    constructor(_doc: any);
+    getBaseHrefFromDOM(): string;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
+    get href(): string;
+    get protocol(): string;
+    get hostname(): string;
+    get port(): string;
+    get pathname(): string;
+    get search(): string;
+    get hash(): string;
+    set pathname(newPath: string);
+    pushState(state: any, title: string, url: string): void;
+    replaceState(state: any, title: string, url: string): void;
+    forward(): void;
+    back(): void;
+    historyGo(relativePosition?: number): void;
+    getState(): unknown;
+    static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<BrowserPlatformLocation>;
+}
+export { BrowserPlatformLocation }
+export { BrowserPlatformLocation as ɵBrowserPlatformLocation }
 
 /**
  * Exports all the basic Angular directives and pipes,
@@ -3159,37 +3194,6 @@ export declare enum WeekDay {
  */
 export declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
-}
-
-/**
- * `PlatformLocation` encapsulates all of the direct calls to platform APIs.
- * This class should not be used directly by an application developer. Instead, use
- * {@link Location}.
- */
-export declare class ɵBrowserPlatformLocation extends PlatformLocation {
-    private _doc;
-    readonly location: Location;
-    private _history;
-    constructor(_doc: any);
-    getBaseHrefFromDOM(): string;
-    onPopState(fn: LocationChangeListener): VoidFunction;
-    onHashChange(fn: LocationChangeListener): VoidFunction;
-    get href(): string;
-    get protocol(): string;
-    get hostname(): string;
-    get port(): string;
-    get pathname(): string;
-    get search(): string;
-    get hash(): string;
-    set pathname(newPath: string);
-    pushState(state: any, title: string, url: string): void;
-    replaceState(state: any, title: string, url: string): void;
-    forward(): void;
-    back(): void;
-    historyGo(relativePosition?: number): void;
-    getState(): unknown;
-    static ɵfac: i0.ɵɵFactoryDeclaration<ɵBrowserPlatformLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<ɵBrowserPlatformLocation>;
 }
 
 /**
