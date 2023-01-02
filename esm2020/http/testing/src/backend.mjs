@@ -135,9 +135,9 @@ export class HttpClientTestingBackend {
         }
     }
 }
-HttpClientTestingBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-HttpClientTestingBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HttpClientTestingBackend });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
+HttpClientTestingBackend.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+HttpClientTestingBackend.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HttpClientTestingBackend });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
             type: Injectable
         }] });
 function describeRequest(testRequest) {

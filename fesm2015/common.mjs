@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.3+sha-cc284af
+ * @license Angular v15.1.0-next.3+sha-2d539e1
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,13 +7,6 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, Injectable, ɵɵinject, Inject, inject, Optional, EventEmitter, ɵfindLocaleData, ɵLocaleDataIndex, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, LOCALE_ID, ɵregisterLocaleData, ɵisListLikeIterable, ɵstringify, Directive, Input, createNgModule, NgModuleRef, ɵRuntimeError, Host, Attribute, RendererStyleFlags2, ɵisPromise, ɵisSubscribable, Pipe, DEFAULT_CURRENCY_CODE, NgModule, Version, ɵɵdefineInjectable, ɵformatRuntimeError, Renderer2, ElementRef, Injector, PLATFORM_ID, NgZone } from '@angular/core';
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 let _DOM = null;
 function getDOM() {
     return _DOM;
@@ -34,13 +27,6 @@ class DomAdapter {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
  *
  * Note: Document might not be available in the Application Context when Application and Rendering
@@ -50,13 +36,6 @@ class DomAdapter {
  */
 const DOCUMENT = new InjectionToken('DocumentToken');
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * This class should not be used directly by an application developer. Instead, use
  * {@link Location}.
@@ -84,9 +63,9 @@ class PlatformLocation {
         throw new Error('Not implemented');
     }
 }
-PlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PlatformLocation, providedIn: 'platform', useFactory: useBrowserPlatformLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PlatformLocation, decorators: [{
+PlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PlatformLocation, providedIn: 'platform', useFactory: useBrowserPlatformLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PlatformLocation, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'platform',
@@ -184,9 +163,9 @@ class BrowserPlatformLocation extends PlatformLocation {
         return this._history.state;
     }
 }
-BrowserPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: BrowserPlatformLocation, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-BrowserPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: BrowserPlatformLocation, providedIn: 'platform', useFactory: createBrowserPlatformLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: BrowserPlatformLocation, decorators: [{
+BrowserPlatformLocation.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: BrowserPlatformLocation, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+BrowserPlatformLocation.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: BrowserPlatformLocation, providedIn: 'platform', useFactory: createBrowserPlatformLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: BrowserPlatformLocation, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'platform',
@@ -206,21 +185,6 @@ function createBrowserPlatformLocation() {
     return new BrowserPlatformLocation(ɵɵinject(DOCUMENT));
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Joins two parts of a URL with a slash if needed.
  *
@@ -279,13 +243,6 @@ function normalizeQueryParams(params) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Enables the `Location` service to read route state from the browser's URL.
  * Angular provides two strategies:
  * `HashLocationStrategy` and `PathLocationStrategy`.
@@ -307,9 +264,9 @@ class LocationStrategy {
         throw new Error('Not implemented');
     }
 }
-LocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-LocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: () => inject(PathLocationStrategy) });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationStrategy, decorators: [{
+LocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+LocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: () => inject(PathLocationStrategy) });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationStrategy, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root', useFactory: () => inject(PathLocationStrategy) }]
         }] });
@@ -418,9 +375,9 @@ class PathLocationStrategy extends LocationStrategy {
         (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
 }
-PathLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PathLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-PathLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PathLocationStrategy, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PathLocationStrategy, decorators: [{
+PathLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PathLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+PathLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PathLocationStrategy, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PathLocationStrategy, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () {
@@ -432,13 +389,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                     }] }];
     } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @description
  * A {@link LocationStrategy} used to configure the {@link Location} service to
@@ -519,9 +469,9 @@ class HashLocationStrategy extends LocationStrategy {
         (_b = (_a = this._platformLocation).historyGo) === null || _b === void 0 ? void 0 : _b.call(_a, relativePosition);
     }
 }
-HashLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HashLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-HashLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HashLocationStrategy });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: HashLocationStrategy, decorators: [{
+HashLocationStrategy.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HashLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+HashLocationStrategy.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HashLocationStrategy });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: HashLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -532,13 +482,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                     }] }];
     } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @description
  *
@@ -783,9 +726,9 @@ Location.joinWithSlash = joinWithSlash;
  * @returns The URL string, modified if needed.
  */
 Location.stripTrailingSlash = stripTrailingSlash;
-Location.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: Location, deps: [{ token: LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
-Location.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: Location, decorators: [{
+Location.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: Location, deps: [{ token: LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
+Location.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: Location, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root',
@@ -816,31 +759,9 @@ function _stripOrigin(baseHref) {
     return baseHref;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @internal */
 const CURRENCIES_EN = { "ADP": [undefined, undefined, 0], "AFN": [undefined, "؋", 0], "ALL": [undefined, undefined, 0], "AMD": [undefined, "֏", 2], "AOA": [undefined, "Kz"], "ARS": [undefined, "$"], "AUD": ["A$", "$"], "AZN": [undefined, "₼"], "BAM": [undefined, "KM"], "BBD": [undefined, "$"], "BDT": [undefined, "৳"], "BHD": [undefined, undefined, 3], "BIF": [undefined, undefined, 0], "BMD": [undefined, "$"], "BND": [undefined, "$"], "BOB": [undefined, "Bs"], "BRL": ["R$"], "BSD": [undefined, "$"], "BWP": [undefined, "P"], "BYN": [undefined, undefined, 2], "BYR": [undefined, undefined, 0], "BZD": [undefined, "$"], "CAD": ["CA$", "$", 2], "CHF": [undefined, undefined, 2], "CLF": [undefined, undefined, 4], "CLP": [undefined, "$", 0], "CNY": ["CN¥", "¥"], "COP": [undefined, "$", 2], "CRC": [undefined, "₡", 2], "CUC": [undefined, "$"], "CUP": [undefined, "$"], "CZK": [undefined, "Kč", 2], "DJF": [undefined, undefined, 0], "DKK": [undefined, "kr", 2], "DOP": [undefined, "$"], "EGP": [undefined, "E£"], "ESP": [undefined, "₧", 0], "EUR": ["€"], "FJD": [undefined, "$"], "FKP": [undefined, "£"], "GBP": ["£"], "GEL": [undefined, "₾"], "GHS": [undefined, "GH₵"], "GIP": [undefined, "£"], "GNF": [undefined, "FG", 0], "GTQ": [undefined, "Q"], "GYD": [undefined, "$", 2], "HKD": ["HK$", "$"], "HNL": [undefined, "L"], "HRK": [undefined, "kn"], "HUF": [undefined, "Ft", 2], "IDR": [undefined, "Rp", 2], "ILS": ["₪"], "INR": ["₹"], "IQD": [undefined, undefined, 0], "IRR": [undefined, undefined, 0], "ISK": [undefined, "kr", 0], "ITL": [undefined, undefined, 0], "JMD": [undefined, "$"], "JOD": [undefined, undefined, 3], "JPY": ["¥", undefined, 0], "KHR": [undefined, "៛"], "KMF": [undefined, "CF", 0], "KPW": [undefined, "₩", 0], "KRW": ["₩", undefined, 0], "KWD": [undefined, undefined, 3], "KYD": [undefined, "$"], "KZT": [undefined, "₸"], "LAK": [undefined, "₭", 0], "LBP": [undefined, "L£", 0], "LKR": [undefined, "Rs"], "LRD": [undefined, "$"], "LTL": [undefined, "Lt"], "LUF": [undefined, undefined, 0], "LVL": [undefined, "Ls"], "LYD": [undefined, undefined, 3], "MGA": [undefined, "Ar", 0], "MGF": [undefined, undefined, 0], "MMK": [undefined, "K", 0], "MNT": [undefined, "₮", 2], "MRO": [undefined, undefined, 0], "MUR": [undefined, "Rs", 2], "MXN": ["MX$", "$"], "MYR": [undefined, "RM"], "NAD": [undefined, "$"], "NGN": [undefined, "₦"], "NIO": [undefined, "C$"], "NOK": [undefined, "kr", 2], "NPR": [undefined, "Rs"], "NZD": ["NZ$", "$"], "OMR": [undefined, undefined, 3], "PHP": ["₱"], "PKR": [undefined, "Rs", 2], "PLN": [undefined, "zł"], "PYG": [undefined, "₲", 0], "RON": [undefined, "lei"], "RSD": [undefined, undefined, 0], "RUB": [undefined, "₽"], "RWF": [undefined, "RF", 0], "SBD": [undefined, "$"], "SEK": [undefined, "kr", 2], "SGD": [undefined, "$"], "SHP": [undefined, "£"], "SLE": [undefined, undefined, 2], "SLL": [undefined, undefined, 0], "SOS": [undefined, undefined, 0], "SRD": [undefined, "$"], "SSP": [undefined, "£"], "STD": [undefined, undefined, 0], "STN": [undefined, "Db"], "SYP": [undefined, "£", 0], "THB": [undefined, "฿"], "TMM": [undefined, undefined, 0], "TND": [undefined, undefined, 3], "TOP": [undefined, "T$"], "TRL": [undefined, undefined, 0], "TRY": [undefined, "₺"], "TTD": [undefined, "$"], "TWD": ["NT$", "$", 2], "TZS": [undefined, undefined, 2], "UAH": [undefined, "₴"], "UGX": [undefined, undefined, 0], "USD": ["$"], "UYI": [undefined, undefined, 0], "UYU": [undefined, "$"], "UYW": [undefined, undefined, 4], "UZS": [undefined, undefined, 2], "VEF": [undefined, "Bs", 2], "VND": ["₫", undefined, 0], "VUV": [undefined, undefined, 0], "XAF": ["FCFA", undefined, 0], "XCD": ["EC$", "$"], "XOF": ["F CFA", undefined, 0], "XPF": ["CFPF", undefined, 0], "XXX": ["¤"], "YER": [undefined, undefined, 0], "ZAR": [undefined, "R"], "ZMK": [undefined, undefined, 0], "ZMW": [undefined, "ZK"], "ZWD": [undefined, undefined, 0] };
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Format styles that can be used to represent numbers.
  * @see `getLocaleNumberFormat()`.
@@ -1463,13 +1384,6 @@ function getNumberOfCurrencyDigits(code) {
     return typeof digits === 'number' ? digits : DEFAULT_NB_OF_CURRENCY_DIGITS;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const ISO8601_DATE_REGEX = /^(\d{4,})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 //    1        2       3         4          5          6          7          8  9     10      11
 const NAMED_FORMATS = {};
@@ -2208,13 +2122,6 @@ function isDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
 const MAX_DIGITS = 22;
 const DECIMAL_SEP = '.';
@@ -2603,20 +2510,13 @@ function parseIntAutoRadix(text) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @publicApi
  */
 class NgLocalization {
 }
-NgLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocalization, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-NgLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocalization, providedIn: 'root', useFactory: (locale) => new NgLocaleLocalization(locale), deps: [{ token: LOCALE_ID }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocalization, decorators: [{
+NgLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocalization, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+NgLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocalization, providedIn: 'root', useFactory: (locale) => new NgLocaleLocalization(locale), deps: [{ token: LOCALE_ID }] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocalization, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root',
@@ -2671,9 +2571,9 @@ class NgLocaleLocalization extends NgLocalization {
         }
     }
 }
-NgLocaleLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocaleLocalization, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
-NgLocaleLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocaleLocalization });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgLocaleLocalization, decorators: [{
+NgLocaleLocalization.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocaleLocalization, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
+NgLocaleLocalization.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocaleLocalization });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgLocaleLocalization, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
@@ -2682,13 +2582,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                     }] }];
     } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Register global data to be used internally by Angular. See the
  * ["I18n guide"](guide/i18n-common-format-data-locale) to know how to import additional locale
@@ -2702,13 +2595,6 @@ function registerLocaleData(data, localeId, extraData) {
     return ɵregisterLocaleData(data, localeId, extraData);
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (const cookie of cookieStr.split(';')) {
@@ -2721,13 +2607,6 @@ function parseCookieValue(cookieStr, name) {
     return null;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  *
@@ -2868,9 +2747,9 @@ class NgClass {
         }
     }
 }
-NgClass.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgClass, deps: [{ token: i0.IterableDiffers }, { token: i0.KeyValueDiffers }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
-NgClass.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgClass, isStandalone: true, selector: "[ngClass]", inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgClass, decorators: [{
+NgClass.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgClass, deps: [{ token: i0.IterableDiffers }, { token: i0.KeyValueDiffers }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+NgClass.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgClass, isStandalone: true, selector: "[ngClass]", inputs: { klass: ["class", "klass"], ngClass: "ngClass" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgClass, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngClass]',
@@ -2884,13 +2763,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 args: ['ngClass']
             }] } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Instantiates a {@link Component} type and inserts its Host View into the current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
@@ -2989,9 +2861,9 @@ class NgComponentOutlet {
             this._moduleRef.destroy();
     }
 }
-NgComponentOutlet.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgComponentOutlet, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Directive });
-NgComponentOutlet.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgComponentOutlet, isStandalone: true, selector: "[ngComponentOutlet]", inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModule: "ngComponentOutletNgModule", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgComponentOutlet, decorators: [{
+NgComponentOutlet.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgComponentOutlet, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Directive });
+NgComponentOutlet.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgComponentOutlet, isStandalone: true, selector: "[ngComponentOutlet]", inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModule: "ngComponentOutletNgModule", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgComponentOutlet, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngComponentOutlet]',
@@ -3014,13 +2886,6 @@ function getParentInjector(injector) {
     return parentNgModule.injector;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const NG_DEV_MODE = typeof ngDevMode === 'undefined' || !!ngDevMode;
 /**
  * @publicApi
@@ -3281,9 +3146,9 @@ class NgForOf {
         return true;
     }
 }
-NgForOf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgForOf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: i0.IterableDiffers }], target: i0.ɵɵFactoryTarget.Directive });
-NgForOf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgForOf, isStandalone: true, selector: "[ngFor][ngForOf]", inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgForOf, decorators: [{
+NgForOf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgForOf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: i0.IterableDiffers }], target: i0.ɵɵFactoryTarget.Directive });
+NgForOf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgForOf, isStandalone: true, selector: "[ngFor][ngForOf]", inputs: { ngForOf: "ngForOf", ngForTrackBy: "ngForTrackBy", ngForTemplate: "ngForTemplate" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgForOf, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngFor][ngForOf]',
@@ -3303,13 +3168,6 @@ function getTypeName(type) {
     return type['name'] || typeof type;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * A structural directive that conditionally includes a template based on the value of
  * an expression coerced to Boolean.
@@ -3516,9 +3374,9 @@ class NgIf {
         return true;
     }
 }
-NgIf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgIf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
-NgIf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgIf, isStandalone: true, selector: "[ngIf]", inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgIf, decorators: [{
+NgIf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgIf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
+NgIf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgIf, isStandalone: true, selector: "[ngIf]", inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgIf, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngIf]',
@@ -3547,13 +3405,6 @@ function assertTemplate(property, templateRef) {
     }
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 class SwitchView {
     constructor(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -3689,9 +3540,9 @@ class NgSwitch {
         }
     }
 }
-NgSwitch.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitch, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitch.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgSwitch, isStandalone: true, selector: "[ngSwitch]", inputs: { ngSwitch: "ngSwitch" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitch, decorators: [{
+NgSwitch.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitch, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitch.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgSwitch, isStandalone: true, selector: "[ngSwitch]", inputs: { ngSwitch: "ngSwitch" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitch, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitch]',
@@ -3750,9 +3601,9 @@ class NgSwitchCase {
         this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
     }
 }
-NgSwitchCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitchCase, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitchCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgSwitchCase, isStandalone: true, selector: "[ngSwitchCase]", inputs: { ngSwitchCase: "ngSwitchCase" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitchCase, decorators: [{
+NgSwitchCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitchCase, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitchCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgSwitchCase, isStandalone: true, selector: "[ngSwitchCase]", inputs: { ngSwitchCase: "ngSwitchCase" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitchCase, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitchCase]',
@@ -3789,9 +3640,9 @@ class NgSwitchDefault {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
 }
-NgSwitchDefault.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitchDefault, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitchDefault.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgSwitchDefault, isStandalone: true, selector: "[ngSwitchDefault]", ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgSwitchDefault, decorators: [{
+NgSwitchDefault.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitchDefault, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitchDefault.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgSwitchDefault, isStandalone: true, selector: "[ngSwitchDefault]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgSwitchDefault, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitchDefault]',
@@ -3810,13 +3661,6 @@ function throwNgSwitchProviderNotFoundError(attrName, directiveName) {
         `(matching "NgSwitch" directive)`);
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  *
@@ -3877,9 +3721,9 @@ class NgPlural {
         }
     }
 }
-NgPlural.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgPlural, deps: [{ token: NgLocalization }], target: i0.ɵɵFactoryTarget.Directive });
-NgPlural.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgPlural, isStandalone: true, selector: "[ngPlural]", inputs: { ngPlural: "ngPlural" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgPlural, decorators: [{
+NgPlural.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgPlural, deps: [{ token: NgLocalization }], target: i0.ɵɵFactoryTarget.Directive });
+NgPlural.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgPlural, isStandalone: true, selector: "[ngPlural]", inputs: { ngPlural: "ngPlural" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgPlural, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngPlural]',
@@ -3915,9 +3759,9 @@ class NgPluralCase {
         ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
 }
-NgPluralCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgPluralCase, deps: [{ token: 'ngPluralCase', attribute: true }, { token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: NgPlural, host: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgPluralCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgPluralCase, isStandalone: true, selector: "[ngPluralCase]", ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgPluralCase, decorators: [{
+NgPluralCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgPluralCase, deps: [{ token: 'ngPluralCase', attribute: true }, { token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: NgPlural, host: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgPluralCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgPluralCase, isStandalone: true, selector: "[ngPluralCase]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgPluralCase, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngPluralCase]',
@@ -3932,13 +3776,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                     }] }];
     } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  *
@@ -4013,9 +3850,9 @@ class NgStyle {
         changes.forEachChangedItem((record) => this._setStyle(record.key, record.currentValue));
     }
 }
-NgStyle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgStyle, deps: [{ token: i0.ElementRef }, { token: i0.KeyValueDiffers }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
-NgStyle.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgStyle, isStandalone: true, selector: "[ngStyle]", inputs: { ngStyle: "ngStyle" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgStyle, decorators: [{
+NgStyle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgStyle, deps: [{ token: i0.ElementRef }, { token: i0.KeyValueDiffers }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+NgStyle.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgStyle, isStandalone: true, selector: "[ngStyle]", inputs: { ngStyle: "ngStyle" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgStyle, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngStyle]',
@@ -4026,13 +3863,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 args: ['ngStyle']
             }] } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  *
@@ -4095,9 +3925,9 @@ class NgTemplateOutlet {
         }
     }
 }
-NgTemplateOutlet.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgTemplateOutlet, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Directive });
-NgTemplateOutlet.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgTemplateOutlet, isStandalone: true, selector: "[ngTemplateOutlet]", inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet", ngTemplateOutletInjector: "ngTemplateOutletInjector" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgTemplateOutlet, decorators: [{
+NgTemplateOutlet.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgTemplateOutlet, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Directive });
+NgTemplateOutlet.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgTemplateOutlet, isStandalone: true, selector: "[ngTemplateOutlet]", inputs: { ngTemplateOutletContext: "ngTemplateOutletContext", ngTemplateOutlet: "ngTemplateOutlet", ngTemplateOutletInjector: "ngTemplateOutletInjector" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgTemplateOutlet, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngTemplateOutlet]',
@@ -4111,13 +3941,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 type: Input
             }] } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
@@ -4136,24 +3959,10 @@ const COMMON_DIRECTIVES = [
     NgPluralCase,
 ];
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 function invalidPipeArgumentError(type, value) {
     return new ɵRuntimeError(2100 /* RuntimeErrorCode.INVALID_PIPE_ARGUMENT */, ngDevMode && `InvalidPipeArgument: '${value}' for pipe '${ɵstringify(type)}'`);
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 class SubscribableStrategy {
     createSubscription(async, updateLatestValue) {
         return async.subscribe({
@@ -4269,9 +4078,9 @@ class AsyncPipe {
         }
     }
 }
-AsyncPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe });
-AsyncPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: AsyncPipe, isStandalone: true, name: "async", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: AsyncPipe, decorators: [{
+AsyncPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe });
+AsyncPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: AsyncPipe, isStandalone: true, name: "async", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: AsyncPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'async',
@@ -4280,13 +4089,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 }]
         }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Transforms text to all lower case.
  *
@@ -4312,9 +4114,9 @@ class LowerCasePipe {
         return value.toLowerCase();
     }
 }
-LowerCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LowerCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-LowerCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LowerCasePipe, isStandalone: true, name: "lowercase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LowerCasePipe, decorators: [{
+LowerCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LowerCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+LowerCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LowerCasePipe, isStandalone: true, name: "lowercase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LowerCasePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'lowercase',
@@ -4357,9 +4159,9 @@ class TitleCasePipe {
         return value.replace(unicodeWordMatch, (txt => txt[0].toUpperCase() + txt.slice(1).toLowerCase()));
     }
 }
-TitleCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: TitleCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-TitleCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: TitleCasePipe, isStandalone: true, name: "titlecase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: TitleCasePipe, decorators: [{
+TitleCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: TitleCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+TitleCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: TitleCasePipe, isStandalone: true, name: "titlecase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: TitleCasePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'titlecase',
@@ -4384,9 +4186,9 @@ class UpperCasePipe {
         return value.toUpperCase();
     }
 }
-UpperCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: UpperCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-UpperCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: UpperCasePipe, isStandalone: true, name: "uppercase" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: UpperCasePipe, decorators: [{
+UpperCasePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: UpperCasePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+UpperCasePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: UpperCasePipe, isStandalone: true, name: "uppercase" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: UpperCasePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'uppercase',
@@ -4395,25 +4197,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
         }] });
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * The default date format of Angular date pipe, which corresponds to the following format:
  * `'MMM d,y'` (e.g. `Jun 15, 2015`)
  */
 const DEFAULT_DATE_FORMAT = 'mediumDate';
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Optionally-provided default timezone to use for all instances of `DatePipe` (such as `'+0430'`).
  * If the value isn't provided, the `DatePipe` will use the end-user's local system timezone.
@@ -4632,9 +4420,9 @@ class DatePipe {
         }
     }
 }
-DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DatePipe, deps: [{ token: LOCALE_ID }, { token: DATE_PIPE_DEFAULT_TIMEZONE, optional: true }, { token: DATE_PIPE_DEFAULT_OPTIONS, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
-DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DatePipe, isStandalone: true, name: "date" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DatePipe, decorators: [{
+DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DatePipe, deps: [{ token: LOCALE_ID }, { token: DATE_PIPE_DEFAULT_TIMEZONE, optional: true }, { token: DATE_PIPE_DEFAULT_OPTIONS, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
+DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DatePipe, isStandalone: true, name: "date" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DatePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'date',
@@ -4658,13 +4446,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                     }] }];
     } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const _INTERPOLATION_REGEXP = /#/g;
 /**
  * @ngModule CommonModule
@@ -4701,9 +4482,9 @@ class I18nPluralPipe {
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     }
 }
-I18nPluralPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nPluralPipe, deps: [{ token: NgLocalization }], target: i0.ɵɵFactoryTarget.Pipe });
-I18nPluralPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nPluralPipe, isStandalone: true, name: "i18nPlural" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nPluralPipe, decorators: [{
+I18nPluralPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nPluralPipe, deps: [{ token: NgLocalization }], target: i0.ɵɵFactoryTarget.Pipe });
+I18nPluralPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nPluralPipe, isStandalone: true, name: "i18nPlural" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nPluralPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'i18nPlural',
@@ -4712,13 +4493,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 }]
         }], ctorParameters: function () { return [{ type: NgLocalization }]; } });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  * @description
@@ -4757,9 +4531,9 @@ class I18nSelectPipe {
         return '';
     }
 }
-I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nSelectPipe, isStandalone: true, name: "i18nSelect" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: I18nSelectPipe, decorators: [{
+I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nSelectPipe, isStandalone: true, name: "i18nSelect" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: I18nSelectPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'i18nSelect',
@@ -4768,13 +4542,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 }]
         }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  * @description
@@ -4798,9 +4565,9 @@ class JsonPipe {
         return JSON.stringify(value, null, 2);
     }
 }
-JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: JsonPipe, isStandalone: true, name: "json", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: JsonPipe, decorators: [{
+JsonPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+JsonPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: JsonPipe, isStandalone: true, name: "json", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: JsonPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'json',
@@ -4809,13 +4576,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 }]
         }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 function makeKeyValuePair(key, value) {
     return { key: key, value: value };
 }
@@ -4868,9 +4628,9 @@ class KeyValuePipe {
         return this.keyValues;
     }
 }
-KeyValuePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: KeyValuePipe, deps: [{ token: i0.KeyValueDiffers }], target: i0.ɵɵFactoryTarget.Pipe });
-KeyValuePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: KeyValuePipe, isStandalone: true, name: "keyvalue", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: KeyValuePipe, decorators: [{
+KeyValuePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: KeyValuePipe, deps: [{ token: i0.KeyValueDiffers }], target: i0.ɵɵFactoryTarget.Pipe });
+KeyValuePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: KeyValuePipe, isStandalone: true, name: "keyvalue", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: KeyValuePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'keyvalue',
@@ -4909,13 +4669,6 @@ function defaultComparator(keyValueA, keyValueB) {
     return aString == bString ? 0 : aString < bString ? -1 : 1;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  * @description
@@ -5003,9 +4756,9 @@ class DecimalPipe {
         }
     }
 }
-DecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DecimalPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
-DecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DecimalPipe, isStandalone: true, name: "number" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: DecimalPipe, decorators: [{
+DecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DecimalPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
+DecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DecimalPipe, isStandalone: true, name: "number" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: DecimalPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'number',
@@ -5070,9 +4823,9 @@ class PercentPipe {
         }
     }
 }
-PercentPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PercentPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
-PercentPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PercentPipe, isStandalone: true, name: "percent" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PercentPipe, decorators: [{
+PercentPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PercentPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
+PercentPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PercentPipe, isStandalone: true, name: "percent" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PercentPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'percent',
@@ -5190,9 +4943,9 @@ class CurrencyPipe {
         }
     }
 }
-CurrencyPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CurrencyPipe, deps: [{ token: LOCALE_ID }, { token: DEFAULT_CURRENCY_CODE }], target: i0.ɵɵFactoryTarget.Pipe });
-CurrencyPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CurrencyPipe, isStandalone: true, name: "currency" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CurrencyPipe, decorators: [{
+CurrencyPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CurrencyPipe, deps: [{ token: LOCALE_ID }, { token: DEFAULT_CURRENCY_CODE }], target: i0.ɵɵFactoryTarget.Pipe });
+CurrencyPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CurrencyPipe, isStandalone: true, name: "currency" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CurrencyPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'currency',
@@ -5224,13 +4977,6 @@ function strToNumber(value) {
     return value;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @ngModule CommonModule
  * @description
@@ -5279,9 +5025,9 @@ class SlicePipe {
         return typeof obj === 'string' || Array.isArray(obj);
     }
 }
-SlicePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-SlicePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: SlicePipe, isStandalone: true, name: "slice", pure: false });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: SlicePipe, decorators: [{
+SlicePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+SlicePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: SlicePipe, isStandalone: true, name: "slice", pure: false });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: SlicePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'slice',
@@ -5291,11 +5037,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
         }] });
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @module
+ * @description
+ * This module provides a set of common Pipes.
  */
 /**
  * A collection of Angular pipes that are likely to be used in each and every application.
@@ -5316,13 +5060,6 @@ const COMMON_PIPES = [
     KeyValuePipe,
 ];
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // Note: This does not contain the location providers,
 // as they need some platform specific implementations to work.
 /**
@@ -5335,10 +5072,10 @@ const COMMON_PIPES = [
  */
 class CommonModule {
 }
-CommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CommonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-CommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CommonModule, imports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] });
-CommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CommonModule });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: CommonModule, decorators: [{
+CommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CommonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+CommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CommonModule, imports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe], exports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe] });
+CommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CommonModule });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: CommonModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [COMMON_DIRECTIVES, COMMON_PIPES],
@@ -5346,13 +5083,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sh
                 }]
         }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const PLATFORM_BROWSER_ID = 'browser';
 const PLATFORM_SERVER_ID = 'server';
 const PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
@@ -5387,24 +5117,15 @@ function isPlatformWorkerUi(platformId) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
  */
 /**
  * @publicApi
  */
-const VERSION = new Version('15.1.0-next.3+sha-cc284af');
+const VERSION = new Version('15.1.0-next.3+sha-2d539e1');
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
  *
@@ -5607,13 +5328,6 @@ class NullViewportScroller {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A wrapper around the `XMLHttpRequest` constructor.
  *
  * @publicApi
@@ -5621,13 +5335,6 @@ class NullViewportScroller {
 class XhrFactory {
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // Converts a string that represents a URL into a URL class instance.
 function getUrl(src, win) {
     // Don't use a base URL is the URL is absolute.
@@ -5663,13 +5370,6 @@ function normalizeSrc(src) {
     return src.startsWith('/') ? src.slice(1) : src;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Noop image loader that does no transformation to the original src and just returns it as is.
  * This loader is used as a default one if more specific logic is not provided in an app config.
@@ -5736,13 +5436,6 @@ function throwUnexpectedAbsoluteUrlError(path, url) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Function that generates an ImageLoader for [Cloudflare Image
  * Resizing](https://developers.cloudflare.com/images/image-resizing/) and turns it into an Angular
  * provider. Note: Cloudflare has multiple image products - this provider is specifically for
@@ -5764,13 +5457,6 @@ function createCloudflareUrl(path, config) {
     return `${path}/cdn-cgi/image/${params}/${config.src}`;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Name and URL tester for Cloudinary.
  */
@@ -5816,13 +5502,6 @@ function createCloudinaryUrl(path, config) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Name and URL tester for ImageKit.
  */
 const imageKitLoaderInfo = {
@@ -5859,13 +5538,6 @@ function createImagekitUrl(path, config) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Name and URL tester for Imgix.
  */
 const imgixLoaderInfo = {
@@ -5899,26 +5571,12 @@ function createImgixUrl(path, config) {
     return url.href;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // Assembles directive details string, useful for error messages.
 function imgDirectiveDetails(ngSrc, includeNgSrc = true) {
     const ngSrcInfo = includeNgSrc ? `(activated on an <img> element with the \`ngSrc="${ngSrc}"\`) ` : '';
     return `The NgOptimizedImage directive ${ngSrcInfo}has detected that`;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Asserts that the application is in development mode. Throws an error if the application is in
  * production mode. This assert can be used to make sure that there is no dev-mode code invoked in
@@ -5931,13 +5589,6 @@ function assertDevMode(checkName) {
     }
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Observer that detects whether an image with `NgOptimizedImage`
  * is treated as a Largest Contentful Paint (LCP) element. If so,
@@ -6011,9 +5662,9 @@ class LCPImageObserver {
         this.alreadyWarned.clear();
     }
 }
-LCPImageObserver.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-LCPImageObserver.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LCPImageObserver, decorators: [{
+LCPImageObserver.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+LCPImageObserver.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LCPImageObserver, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return []; } });
@@ -6025,13 +5676,6 @@ function logMissingPriorityWarning(ngSrc) {
         `To fix this, add the "priority" attribute.`));
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // Set of origins that are always excluded from the preconnect checks.
 const INTERNAL_PRECONNECT_CHECK_BLOCKLIST = new Set(['localhost', '127.0.0.1', '0.0.0.0']);
 /**
@@ -6095,7 +5739,7 @@ class PreconnectLinkChecker {
         }
     }
     /**
-     * Checks that a preconnect resource hint exists in the head fo rthe
+     * Checks that a preconnect resource hint exists in the head for the
      * given src.
      *
      * @param rewrittenSrc src formatted with loader
@@ -6140,9 +5784,9 @@ class PreconnectLinkChecker {
         this.alreadySeen.clear();
     }
 }
-PreconnectLinkChecker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PreconnectLinkChecker.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
+PreconnectLinkChecker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PreconnectLinkChecker.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return []; } });
@@ -6156,13 +5800,6 @@ function deepForEach(input, fn) {
     }
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * In SSR scenarios, a preload `<link>` element is generated for priority images.
  * Having a large number of preload tags may negatively affect the performance,
@@ -6179,13 +5816,6 @@ const DEFAULT_PRELOADED_IMAGES_LIMIT = 5;
  */
 const PRELOADED_IMAGES = new InjectionToken('NG_OPTIMIZED_PRELOADED_IMAGES', { providedIn: 'root', factory: () => new Set() });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @description Contains the logic needed to track and add preload link tags to the `<head>` tag. It
  * will also track what images have already had preload link tags added so as to not duplicate link
@@ -6243,20 +5873,13 @@ class PreloadLinkCreator {
         renderer.appendChild(this.document.head, preload);
     }
 }
-PreloadLinkCreator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PreloadLinkCreator.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+PreloadLinkCreator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PreloadLinkCreator.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * When a Base64-encoded image is passed as an input to the `NgOptimizedImage` directive,
  * an error is thrown. The image content (as a string) might be very long, thus making
@@ -6660,9 +6283,9 @@ class NgOptimizedImage {
         this.renderer.setAttribute(this.imgElement, name, value);
     }
 }
-NgOptimizedImage.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-NgOptimizedImage.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: "ngSrc", ngSrcset: "ngSrcset", sizes: "sizes", width: "width", height: "height", loading: "loading", priority: "priority", disableOptimizedSrcset: "disableOptimizedSrcset", fill: "fill", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0px\" : null" } }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: NgOptimizedImage, decorators: [{
+NgOptimizedImage.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+NgOptimizedImage.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: "ngSrc", ngSrcset: "ngSrcset", sizes: "sizes", width: "width", height: "height", loading: "loading", priority: "priority", disableOptimizedSrcset: "disableOptimizedSrcset", fill: "fill", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0px\" : null" } }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: NgOptimizedImage, decorators: [{
             type: Directive,
             args: [{
                     standalone: true,
@@ -7036,38 +6659,22 @@ function assertNotMissingBuiltInLoader(ngSrc, imageLoader) {
     }
 }
 
+// These exports represent the set of symbols exposed as a public API.
+
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
  */
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
  */
 // This file only reexports content of the `src` folder. Keep it that way.
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+// This file is not used to build this module. It is only used during editing
 
 /**
  * Generated bundle index. Do not edit.

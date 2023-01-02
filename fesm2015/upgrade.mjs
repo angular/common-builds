@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-next.3+sha-cc284af
+ * @license Angular v15.1.0-next.3+sha-2d539e1
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,13 +10,6 @@ import * as i0 from '@angular/core';
 import { InjectionToken, Inject, Optional, NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 function stripPrefix(val, prefix) {
     return val.startsWith(prefix) ? val.substring(prefix.length) : val;
 }
@@ -48,13 +41,6 @@ function isPromise(obj) {
     return !!obj && typeof obj.then === 'function';
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const PATH_MATCH = /^([^?#]*)(\?([^#]*))?(#(.*))?$/;
 const DOUBLE_SLASH_REGEX = /^\s*[\\/]{2,}/;
 const IGNORE_URI_REGEXP = /^\s*(javascript|mailto):/i;
@@ -609,13 +595,6 @@ class $locationShimProvider {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A codec for encoding and decoding URL parts.
  *
  * @publicApi
@@ -830,13 +809,6 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A provider token used to configure the location upgrade module.
  *
  * @publicApi
@@ -881,10 +853,10 @@ class LocationUpgradeModule {
         };
     }
 }
-LocationUpgradeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-LocationUpgradeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-LocationUpgradeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-cc284af", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+LocationUpgradeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+LocationUpgradeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+LocationUpgradeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0-next.3+sha-2d539e1", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
@@ -911,29 +883,13 @@ function provide$location(ngUpgrade, location, platformLocation, urlCodec, locat
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * @module
+ * @description
+ * Entry point for all public APIs of this package.
  */
 // This file only reexports content of the `src` folder. Keep it that way.
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+// This file is not used to build this module. It is only used during editing
 
 /**
  * Generated bundle index. Do not edit.
