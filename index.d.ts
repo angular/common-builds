@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.1.0-rc.0+sha-28ea114
+ * @license Angular v15.1.0-rc.0+sha-61fc474
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2352,8 +2352,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
  */
 export declare class NgPlural {
     private _localization;
-    private _switchValue;
-    private _activeView;
+    private _activeView?;
     private _caseViews;
     constructor(_localization: NgLocalization);
     set ngPlural(value: number);
