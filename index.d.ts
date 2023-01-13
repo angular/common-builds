@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.2.0-next.0+sha-5bb1223
+ * @license Angular v15.2.0-next.0+sha-5f21c6d
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1627,32 +1627,17 @@ export declare class NgClass implements DoCheck {
     private _keyValueDiffers;
     private _ngEl;
     private _renderer;
-    private _iterableDiffer;
-    private _keyValueDiffer;
-    private _initialClasses;
-    private _rawClass;
+    private initialClasses;
+    private rawClass;
+    private stateMap;
     constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
     set klass(value: string);
     set ngClass(value: string | string[] | Set<string> | {
         [klass: string]: any;
     } | null | undefined);
     ngDoCheck(): void;
-    private _applyKeyValueChanges;
-    private _applyIterableChanges;
-    /**
-     * Applies a collection of CSS classes to the DOM element.
-     *
-     * For argument of type Set and Array CSS class names contained in those collections are always
-     * added.
-     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
-     * for truthy and removed for falsy).
-     */
-    private _applyClasses;
-    /**
-     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
-     * purposes.
-     */
-    private _removeClasses;
+    private _updateState;
+    private _applyStateDiff;
     private _toggleClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgClass, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgClass, "[ngClass]", never, { "klass": "class"; "ngClass": "ngClass"; }, {}, never, never, true, never>;
