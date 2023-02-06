@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.2.0-next.3+sha-759db12
+ * @license Angular v15.2.0-next.3+sha-54b24eb
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1224,6 +1224,12 @@ export declare interface ImageLoaderConfig {
      * Width of the requested image (to be used when generating srcset).
      */
     width?: number;
+    /**
+     * Additional user-provided parameters for use by the ImageLoader.
+     */
+    loaderParams?: {
+        [key: string]: any;
+    };
 }
 
 /**
@@ -2251,6 +2257,12 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     get priority(): boolean;
     private _priority;
     /**
+     * Data to pass through to custom loaders.
+     */
+    loaderParams?: {
+        [key: string]: any;
+    };
+    /**
      * Disables automatic srcset generation for this image.
      */
     set disableOptimizedSrcset(value: string | boolean | undefined);
@@ -2270,6 +2282,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private setHostAttributes;
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
+    private callImageLoader;
     private getLoadingBehavior;
     private getFetchPriority;
     private getRewrittenSrc;
@@ -2282,7 +2295,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "fill": "fill"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": "ngSrc"; "ngSrcset": "ngSrcset"; "sizes": "sizes"; "width": "width"; "height": "height"; "loading": "loading"; "priority": "priority"; "loaderParams": "loaderParams"; "disableOptimizedSrcset": "disableOptimizedSrcset"; "fill": "fill"; "src": "src"; "srcset": "srcset"; }, {}, never, never, true, never>;
 }
 
 /**
