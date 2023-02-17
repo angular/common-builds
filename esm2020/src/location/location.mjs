@@ -251,9 +251,9 @@ Location.joinWithSlash = joinWithSlash;
  * @returns The URL string, modified if needed.
  */
 Location.stripTrailingSlash = stripTrailingSlash;
-Location.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: Location, deps: [{ token: i1.LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
-Location.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: Location, decorators: [{
+Location.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-9b9c818", ngImport: i0, type: Location, deps: [{ token: i1.LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
+Location.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-9b9c818", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-9b9c818", ngImport: i0, type: Location, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root',
