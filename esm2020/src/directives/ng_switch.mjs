@@ -139,9 +139,9 @@ export class NgSwitch {
         }
     }
 }
-NgSwitch.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitch, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitch.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-0b3eacb", type: NgSwitch, isStandalone: true, selector: "[ngSwitch]", inputs: { ngSwitch: "ngSwitch" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitch, decorators: [{
+NgSwitch.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitch, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitch.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-18c7fac", type: NgSwitch, isStandalone: true, selector: "[ngSwitch]", inputs: { ngSwitch: "ngSwitch" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitch, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitch]',
@@ -200,9 +200,9 @@ export class NgSwitchCase {
         this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
     }
 }
-NgSwitchCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitchCase, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitchCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-0b3eacb", type: NgSwitchCase, isStandalone: true, selector: "[ngSwitchCase]", inputs: { ngSwitchCase: "ngSwitchCase" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitchCase, decorators: [{
+NgSwitchCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitchCase, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitchCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-18c7fac", type: NgSwitchCase, isStandalone: true, selector: "[ngSwitchCase]", inputs: { ngSwitchCase: "ngSwitchCase" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitchCase, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitchCase]',
@@ -237,9 +237,9 @@ export class NgSwitchDefault {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
 }
-NgSwitchDefault.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitchDefault, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgSwitchDefault.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-0b3eacb", type: NgSwitchDefault, isStandalone: true, selector: "[ngSwitchDefault]", ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-0b3eacb", ngImport: i0, type: NgSwitchDefault, decorators: [{
+NgSwitchDefault.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitchDefault, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }, { token: NgSwitch, host: true, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgSwitchDefault.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.0+sha-18c7fac", type: NgSwitchDefault, isStandalone: true, selector: "[ngSwitchDefault]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-18c7fac", ngImport: i0, type: NgSwitchDefault, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngSwitchDefault]',
