@@ -66,9 +66,9 @@ export class PreloadLinkCreator {
         renderer.appendChild(this.document.head, preload);
     }
 }
-PreloadLinkCreator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-d1ac3aa", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PreloadLinkCreator.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-d1ac3aa", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-d1ac3aa", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+PreloadLinkCreator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-47ef9e8", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PreloadLinkCreator.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-47ef9e8", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.0+sha-47ef9e8", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
