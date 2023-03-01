@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.0.0-next.1+sha-17abe6d
+ * @license Angular v16.0.0-next.1+sha-c41a216
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -12,7 +12,7 @@ import { InjectionToken } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Provider } from '@angular/core';
-import { XhrFactory as XhrFactory_2 } from '@angular/common';
+import { XhrFactory } from '@angular/common';
 
 /**
  * A multi-provider token that represents the array of registered
@@ -3953,7 +3953,7 @@ export declare interface HttpUserEvent<T> {
  */
 export declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;
-    constructor(xhrFactory: XhrFactory_2);
+    constructor(xhrFactory: XhrFactory);
     /**
      * Processes a request and returns a stream of response events.
      * @param req The request object.
@@ -4133,25 +4133,5 @@ export declare function withXsrfConfiguration({ cookieName, headerName }: {
     cookieName?: string;
     headerName?: string;
 }): HttpFeature<HttpFeatureKind.CustomXsrfConfiguration>;
-
-/**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- * @see `XhrFactory`
- * @deprecated
- * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
- */
-export declare type XhrFactory = XhrFactory_2;
-
-/**
- * A wrapper around the `XMLHttpRequest` constructor.
- *
- * @publicApi
- * @see `XhrFactory`
- * @deprecated
- * `XhrFactory` has moved, please import `XhrFactory` from `@angular/common` instead.
- */
-export declare const XhrFactory: typeof XhrFactory_2;
 
 export { }
