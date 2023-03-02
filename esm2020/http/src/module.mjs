@@ -49,9 +49,9 @@ class HttpClientXsrfModule {
         };
     }
 }
-HttpClientXsrfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientXsrfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientXsrfModule });
-HttpClientXsrfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientXsrfModule, providers: [
+HttpClientXsrfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientXsrfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientXsrfModule });
+HttpClientXsrfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientXsrfModule, providers: [
         HttpXsrfInterceptor,
         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
         { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -62,7 +62,7 @@ HttpClientXsrfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", ve
         { provide: XSRF_ENABLED, useValue: true },
     ] });
 export { HttpClientXsrfModule };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
@@ -88,13 +88,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sh
  */
 class HttpClientModule {
 }
-HttpClientModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientModule });
-HttpClientModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientModule, providers: [
+HttpClientModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientModule });
+HttpClientModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientModule, providers: [
         provideHttpClient(withInterceptorsFromDi()),
     ] });
 export { HttpClientModule };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientModule, decorators: [{
             type: NgModule,
             args: [{
                     /**
@@ -116,13 +116,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sh
  */
 class HttpClientJsonpModule {
 }
-HttpClientJsonpModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-HttpClientJsonpModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientJsonpModule });
-HttpClientJsonpModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientJsonpModule, providers: [
+HttpClientJsonpModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+HttpClientJsonpModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientJsonpModule });
+HttpClientJsonpModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientJsonpModule, providers: [
         withJsonpSupport().ɵproviders,
     ] });
 export { HttpClientJsonpModule };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ea32c32", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-51d7cfb", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
