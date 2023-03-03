@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.2.1+sha-13e675e
+ * @license Angular v15.2.1+sha-f321e65
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -110,7 +110,7 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
  *
  * @publicApi
  */
-declare class BrowserPlatformLocation extends PlatformLocation {
+export declare class BrowserPlatformLocation extends PlatformLocation {
     private _doc;
     private _location;
     private _history;
@@ -135,8 +135,6 @@ declare class BrowserPlatformLocation extends PlatformLocation {
     static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<BrowserPlatformLocation>;
 }
-export { BrowserPlatformLocation }
-export { BrowserPlatformLocation as ɵBrowserPlatformLocation }
 
 /**
  * Exports all the basic Angular directives and pipes,
