@@ -69,10 +69,10 @@ class NgPlural {
         }
     }
 }
-NgPlural.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ed23974", ngImport: i0, type: NgPlural, deps: [{ token: i1.NgLocalization }], target: i0.ɵɵFactoryTarget.Directive });
-NgPlural.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-ed23974", type: NgPlural, isStandalone: true, selector: "[ngPlural]", inputs: { ngPlural: "ngPlural" }, ngImport: i0 });
+NgPlural.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-7749b19", ngImport: i0, type: NgPlural, deps: [{ token: i1.NgLocalization }], target: i0.ɵɵFactoryTarget.Directive });
+NgPlural.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-7749b19", type: NgPlural, isStandalone: true, selector: "[ngPlural]", inputs: { ngPlural: "ngPlural" }, ngImport: i0 });
 export { NgPlural };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ed23974", ngImport: i0, type: NgPlural, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-7749b19", ngImport: i0, type: NgPlural, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngPlural]',
@@ -108,10 +108,10 @@ class NgPluralCase {
         ngPlural.addCase(isANumber ? `=${value}` : value, new SwitchView(viewContainer, template));
     }
 }
-NgPluralCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ed23974", ngImport: i0, type: NgPluralCase, deps: [{ token: 'ngPluralCase', attribute: true }, { token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: NgPlural, host: true }], target: i0.ɵɵFactoryTarget.Directive });
-NgPluralCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-ed23974", type: NgPluralCase, isStandalone: true, selector: "[ngPluralCase]", ngImport: i0 });
+NgPluralCase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-7749b19", ngImport: i0, type: NgPluralCase, deps: [{ token: 'ngPluralCase', attribute: true }, { token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: NgPlural, host: true }], target: i0.ɵɵFactoryTarget.Directive });
+NgPluralCase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-next.1+sha-7749b19", type: NgPluralCase, isStandalone: true, selector: "[ngPluralCase]", ngImport: i0 });
 export { NgPluralCase };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-ed23974", ngImport: i0, type: NgPluralCase, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.1+sha-7749b19", ngImport: i0, type: NgPluralCase, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngPluralCase]',
