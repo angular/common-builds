@@ -46,10 +46,10 @@ class I18nSelectPipe {
         return '';
     }
 }
-I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.2+sha-a50ff60", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.2+sha-a50ff60", ngImport: i0, type: I18nSelectPipe, isStandalone: true, name: "i18nSelect" });
+I18nSelectPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.2+sha-c10962b", ngImport: i0, type: I18nSelectPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+I18nSelectPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.2+sha-c10962b", ngImport: i0, type: I18nSelectPipe, isStandalone: true, name: "i18nSelect" });
 export { I18nSelectPipe };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.2+sha-a50ff60", ngImport: i0, type: I18nSelectPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.2+sha-c10962b", ngImport: i0, type: I18nSelectPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'i18nSelect',
