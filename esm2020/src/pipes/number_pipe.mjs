@@ -97,10 +97,10 @@ class DecimalPipe {
         }
     }
 }
-DecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: DecimalPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
-DecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: DecimalPipe, isStandalone: true, name: "number" });
+DecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: DecimalPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
+DecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: DecimalPipe, isStandalone: true, name: "number" });
 export { DecimalPipe };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: DecimalPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: DecimalPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'number',
@@ -163,10 +163,10 @@ class PercentPipe {
         }
     }
 }
-PercentPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: PercentPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
-PercentPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: PercentPipe, isStandalone: true, name: "percent" });
+PercentPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: PercentPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe });
+PercentPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: PercentPipe, isStandalone: true, name: "percent" });
 export { PercentPipe };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: PercentPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: PercentPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'percent',
@@ -263,10 +263,10 @@ class CurrencyPipe {
         }
     }
 }
-CurrencyPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: CurrencyPipe, deps: [{ token: LOCALE_ID }, { token: DEFAULT_CURRENCY_CODE }], target: i0.ɵɵFactoryTarget.Pipe });
-CurrencyPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: CurrencyPipe, isStandalone: true, name: "currency" });
+CurrencyPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: CurrencyPipe, deps: [{ token: LOCALE_ID }, { token: DEFAULT_CURRENCY_CODE }], target: i0.ɵɵFactoryTarget.Pipe });
+CurrencyPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: CurrencyPipe, isStandalone: true, name: "currency" });
 export { CurrencyPipe };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-8ea1fb7", ngImport: i0, type: CurrencyPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-next.3+sha-0851bd5", ngImport: i0, type: CurrencyPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'currency',
