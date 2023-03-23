@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.0.0-next.4+sha-585e34b
+ * @license Angular v16.0.0-next.4+sha-73d2f3c
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2594,7 +2594,7 @@ export declare class NgSwitchDefault {
  *
  * @publicApi
  */
-export declare class NgTemplateOutlet implements OnChanges {
+export declare class NgTemplateOutlet<C = unknown> implements OnChanges {
     private _viewContainerRef;
     private _viewRef;
     /**
@@ -2603,18 +2603,18 @@ export declare class NgTemplateOutlet implements OnChanges {
      * declarations.
      * Using the key `$implicit` in the context object will set its value as default.
      */
-    ngTemplateOutletContext: Object | null;
+    ngTemplateOutletContext: C | null;
     /**
      * A string defining the template reference and optionally the context object for the template.
      */
-    ngTemplateOutlet: TemplateRef<any> | null;
+    ngTemplateOutlet: TemplateRef<C> | null;
     /** Injector to be used within the embedded view. */
     ngTemplateOutletInjector: Injector | null;
     constructor(_viewContainerRef: ViewContainerRef);
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": { "alias": "ngTemplateOutletContext"; "required": false; }; "ngTemplateOutlet": { "alias": "ngTemplateOutlet"; "required": false; }; "ngTemplateOutletInjector": { "alias": "ngTemplateOutletInjector"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet<any>, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet<any>, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": { "alias": "ngTemplateOutletContext"; "required": false; }; "ngTemplateOutlet": { "alias": "ngTemplateOutlet"; "required": false; }; "ngTemplateOutletInjector": { "alias": "ngTemplateOutletInjector"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 
