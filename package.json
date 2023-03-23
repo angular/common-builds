@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "16.0.0-next.4+sha-07cbaa3",
+  "version": "16.0.0-next.4+sha-6161c50",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -23,47 +23,37 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2020": "./esm2020/common.mjs",
-      "es2020": "./fesm2020/common.mjs",
-      "es2015": "./fesm2015/common.mjs",
-      "node": "./fesm2015/common.mjs",
-      "default": "./fesm2020/common.mjs"
+      "esm2022": "./esm2022/common.mjs",
+      "esm": "./esm2022/common.mjs",
+      "default": "./fesm2022/common.mjs"
     },
     "./http": {
       "types": "./http/index.d.ts",
-      "esm2020": "./esm2020/http/http.mjs",
-      "es2020": "./fesm2020/http.mjs",
-      "es2015": "./fesm2015/http.mjs",
-      "node": "./fesm2015/http.mjs",
-      "default": "./fesm2020/http.mjs"
+      "esm2022": "./esm2022/http/http.mjs",
+      "esm": "./esm2022/http/http.mjs",
+      "default": "./fesm2022/http.mjs"
     },
     "./http/testing": {
       "types": "./http/testing/index.d.ts",
-      "esm2020": "./esm2020/http/testing/testing.mjs",
-      "es2020": "./fesm2020/http/testing.mjs",
-      "es2015": "./fesm2015/http/testing.mjs",
-      "node": "./fesm2015/http/testing.mjs",
-      "default": "./fesm2020/http/testing.mjs"
+      "esm2022": "./esm2022/http/testing/testing.mjs",
+      "esm": "./esm2022/http/testing/testing.mjs",
+      "default": "./fesm2022/http/testing.mjs"
     },
     "./testing": {
       "types": "./testing/index.d.ts",
-      "esm2020": "./esm2020/testing/testing.mjs",
-      "es2020": "./fesm2020/testing.mjs",
-      "es2015": "./fesm2015/testing.mjs",
-      "node": "./fesm2015/testing.mjs",
-      "default": "./fesm2020/testing.mjs"
+      "esm2022": "./esm2022/testing/testing.mjs",
+      "esm": "./esm2022/testing/testing.mjs",
+      "default": "./fesm2022/testing.mjs"
     },
     "./upgrade": {
       "types": "./upgrade/index.d.ts",
-      "esm2020": "./esm2020/upgrade/upgrade.mjs",
-      "es2020": "./fesm2020/upgrade.mjs",
-      "es2015": "./fesm2015/upgrade.mjs",
-      "node": "./fesm2015/upgrade.mjs",
-      "default": "./fesm2020/upgrade.mjs"
+      "esm2022": "./esm2022/upgrade/upgrade.mjs",
+      "esm": "./esm2022/upgrade/upgrade.mjs",
+      "default": "./fesm2022/upgrade.mjs"
     }
   },
   "peerDependencies": {
-    "@angular/core": "16.0.0-next.4+sha-07cbaa3",
+    "@angular/core": "16.0.0-next.4+sha-6161c50",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
@@ -95,11 +85,7 @@
     "**/global/*.js",
     "**/closure-locale.*"
   ],
-  "fesm2020": "./fesm2020/common.mjs",
-  "fesm2015": "./fesm2015/common.mjs",
-  "esm2020": "./esm2020/common.mjs",
+  "module": "./fesm2022/common.mjs",
   "typings": "./index.d.ts",
-  "module": "./fesm2015/common.mjs",
-  "es2020": "./fesm2020/common.mjs",
   "type": "module"
 }
