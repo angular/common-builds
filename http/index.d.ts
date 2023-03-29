@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.0.0-next.4+sha-ef149de
+ * @license Angular v16.0.0-next.4+sha-e994608
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -11,6 +11,7 @@ import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 import { Provider } from '@angular/core';
 import { XhrFactory } from '@angular/common';
 
@@ -3951,8 +3952,9 @@ export declare interface HttpUserEvent<T> {
  *
  * @publicApi
  */
-export declare class HttpXhrBackend implements HttpBackend {
+export declare class HttpXhrBackend implements HttpBackend, OnDestroy {
     private xhrFactory;
+    private macroTaskCanceller;
     constructor(xhrFactory: XhrFactory);
     /**
      * Processes a request and returns a stream of response events.
@@ -3960,6 +3962,7 @@ export declare class HttpXhrBackend implements HttpBackend {
      * @returns An observable of the response events.
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+    ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpXhrBackend, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpXhrBackend>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "16.0.0-next.4+sha-ef149de",
+  "version": "16.0.0-next.4+sha-e994608",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -53,7 +53,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "16.0.0-next.4+sha-ef149de",
+    "@angular/core": "16.0.0-next.4+sha-e994608",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
