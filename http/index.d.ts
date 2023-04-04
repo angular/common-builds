@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.0.0-next.6+sha-b35fa73
+ * @license Angular v16.0.0-next.6+sha-b203e4c
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4136,5 +4136,18 @@ export declare function withXsrfConfiguration({ cookieName, headerName }: {
     cookieName?: string;
     headerName?: string;
 }): HttpFeature<HttpFeatureKind.CustomXsrfConfiguration>;
+
+/**
+ * Returns the DI providers needed to enable HTTP transfer cache.
+ *
+ * By default, when using server rendering, requests are performed twice: once on the server and
+ * other one on the browser.
+ *
+ * When these providers are added, requests performed on the server are cached and reused during the
+ * bootstrapping of the application in the browser thus avoiding duplicate requests and reducing
+ * load time.
+ *
+ */
+export declare function ɵwithHttpTransferCache(): Provider[];
 
 export { }
