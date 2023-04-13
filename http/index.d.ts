@@ -1,5 +1,5 @@
 /**
- * @license Angular v15.2.7+sha-1d761bd
+ * @license Angular v15.2.7+sha-f266a05
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3309,7 +3309,7 @@ export declare class HttpHeaders {
     private lazyUpdate;
     /**  Constructs a new HTTP header object with the given values.*/
     constructor(headers?: string | {
-        [name: string]: string | string[];
+        [name: string]: string | number | (string | number)[];
     });
     /**
      * Checks for existence of a given header.
