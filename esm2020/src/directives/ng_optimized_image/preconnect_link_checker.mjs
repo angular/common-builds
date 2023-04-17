@@ -118,9 +118,9 @@ export class PreconnectLinkChecker {
         this.alreadySeen.clear();
     }
 }
-PreconnectLinkChecker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.7+sha-0a9d106", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PreconnectLinkChecker.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.7+sha-0a9d106", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7+sha-0a9d106", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
+PreconnectLinkChecker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.7+sha-628c520", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PreconnectLinkChecker.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.7+sha-628c520", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7+sha-628c520", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return []; } });
