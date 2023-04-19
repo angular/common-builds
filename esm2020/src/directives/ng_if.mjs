@@ -213,9 +213,9 @@ export class NgIf {
         return true;
     }
 }
-NgIf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.7+sha-0454158", ngImport: i0, type: NgIf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
-NgIf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.7+sha-0454158", type: NgIf, isStandalone: true, selector: "[ngIf]", inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7+sha-0454158", ngImport: i0, type: NgIf, decorators: [{
+NgIf.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.7+sha-2fff8fa", ngImport: i0, type: NgIf, deps: [{ token: i0.ViewContainerRef }, { token: i0.TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
+NgIf.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.7+sha-2fff8fa", type: NgIf, isStandalone: true, selector: "[ngIf]", inputs: { ngIf: "ngIf", ngIfThen: "ngIfThen", ngIfElse: "ngIfElse" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7+sha-2fff8fa", ngImport: i0, type: NgIf, decorators: [{
             type: Directive,
             args: [{
                     selector: '[ngIf]',
