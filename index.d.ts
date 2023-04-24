@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.0+sha-27093a7
+ * @license Angular v16.1.0-next.0+sha-2487d41
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -501,10 +501,9 @@ export declare class DecimalPipe implements PipeTransform {
 declare function defaultComparator<K, V>(keyValueA: KeyValue<K, V>, keyValueB: KeyValue<K, V>): number;
 
 /**
- * A DI Token representing the main rendering context. In a browser this is the DOM Document.
- *
- * Note: Document might not be available in the Application Context when Application and Rendering
- * Contexts are not the same (e.g. when running the application in a Web Worker).
+ * A DI Token representing the main rendering context.
+ * In a browser and SSR this is the DOM Document.
+ * When using SSR, that document is created by [Domino](https://github.com/angular/domino).
  *
  * @publicApi
  */
