@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.0+sha-109eb88
+ * @license Angular v16.1.0-next.0+sha-f49c6d0
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1244,12 +1244,16 @@ export declare function isPlatformServer(platformId: Object): boolean;
 /**
  * Returns whether a platform id represents a web worker app platform.
  * @publicApi
+ * @deprecated This function serves no purpose since the removal of the Webworker platform. It will
+ *     always return `false`.
  */
 export declare function isPlatformWorkerApp(platformId: Object): boolean;
 
 /**
  * Returns whether a platform id represents a web worker UI platform.
  * @publicApi
+ * @deprecated This function serves no purpose since the removal of the Webworker platform. It will
+ *     always return `false`.
  */
 export declare function isPlatformWorkerUi(platformId: Object): boolean;
 
