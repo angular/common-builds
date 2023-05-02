@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.0+sha-d0a9150
+ * @license Angular v16.1.0-next.0+sha-8741670
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3946,8 +3946,8 @@ export declare interface HttpUserEvent<T> {
 
 /**
  * Uses `XMLHttpRequest` to send requests to a backend server.
- * @see `HttpHandler`
- * @see `JsonpClientBackend`
+ * @see {@link HttpHandler}
+ * @see {@link JsonpClientBackend}
  *
  * @publicApi
  */
@@ -3992,8 +3992,8 @@ declare abstract class JsonpCallbackContext {
 /**
  * Processes an `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
- * @see `HttpHandler`
- * @see `HttpXhrBackend`
+ * @see {@link HttpHandler}
+ * @see {@link HttpXhrBackend}
  *
  * @publicApi
  */
@@ -4025,7 +4025,7 @@ export declare class JsonpClientBackend implements HttpBackend {
  * Identifies requests with the method JSONP and
  * shifts them to the `JsonpClientBackend`.
  *
- * @see `HttpInterceptor`
+ * @see {@link HttpInterceptor}
  *
  * @publicApi
  */
@@ -4052,12 +4052,12 @@ export declare class JsonpInterceptor {
  * feature functions to `provideHttpClient`. For example, HTTP interceptors can be added using the
  * `withInterceptors(...)` feature.
  *
- * @see withInterceptors
- * @see withInterceptorsFromDi
- * @see withXsrfConfiguration
- * @see withNoXsrfProtection
- * @see withJsonpSupport
- * @see withRequestsMadeViaParent
+ * @see {@link withInterceptors}
+ * @see {@link withInterceptorsFromDi}
+ * @see {@link withXsrfConfiguration}
+ * @see {@link withNoXsrfProtection}
+ * @see {@link withJsonpSupport}
+ * @see {@link withRequestsMadeViaParent}
  */
 export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): EnvironmentProviders;
 
@@ -4065,8 +4065,8 @@ export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKi
  * Adds one or more functional-style HTTP interceptors to the configuration of the `HttpClient`
  * instance.
  *
- * @see HttpInterceptorFn
- * @see provideHttpClient
+ * @see {@link HttpInterceptorFn}
+ * @see {@link provideHttpClient}
  * @publicApi
  */
 export declare function withInterceptors(interceptorFns: HttpInterceptorFn[]): HttpFeature<HttpFeatureKind.Interceptors>;
@@ -4078,16 +4078,16 @@ export declare function withInterceptors(interceptorFns: HttpInterceptorFn[]): H
  * Prefer `withInterceptors` and functional interceptors instead, as support for DI-provided
  * interceptors may be phased out in a later release.
  *
- * @see HttpInterceptor
- * @see HTTP_INTERCEPTORS
- * @see provideHttpClient
+ * @see {@link HttpInterceptor}
+ * @see {@link HTTP_INTERCEPTORS}
+ * @see {@link provideHttpClient}
  */
 export declare function withInterceptorsFromDi(): HttpFeature<HttpFeatureKind.LegacyInterceptors>;
 
 /**
  * Add JSONP support to the configuration of the current `HttpClient` instance.
  *
- * @see provideHttpClient
+ * @see {@link provideHttpClient}
  */
 export declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSupport>;
 
@@ -4096,7 +4096,7 @@ export declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSup
  *
  * This feature is incompatible with the `withXsrfConfiguration` feature.
  *
- * @see provideHttpClient
+ * @see {@link provideHttpClient}
  */
 export declare function withNoXsrfProtection(): HttpFeature<HttpFeatureKind.NoXsrfProtection>;
 
@@ -4117,7 +4117,7 @@ export declare function withNoXsrfProtection(): HttpFeature<HttpFeatureKind.NoXs
  * "bubble up" until either reaching the root level or an `HttpClient` which was not configured with
  * this option.
  *
- * @see provideHttpClient
+ * @see {@link provideHttpClient}
  * @developerPreview
  */
 export declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.RequestsMadeViaParent>;
@@ -4127,7 +4127,7 @@ export declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind
  *
  * This feature is incompatible with the `withNoXsrfProtection` feature.
  *
- * @see provideHttpClient
+ * @see {@link provideHttpClient}
  */
 export declare function withXsrfConfiguration({ cookieName, headerName }: {
     cookieName?: string;
