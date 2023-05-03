@@ -290,11 +290,11 @@ class HttpXhrBackend {
             };
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-796273d", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-796273d", ngImport: i0, type: HttpXhrBackend }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-b381ad7", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-b381ad7", ngImport: i0, type: HttpXhrBackend }); }
 }
 export { HttpXhrBackend };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-796273d", ngImport: i0, type: HttpXhrBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-rc.4+sha-b381ad7", ngImport: i0, type: HttpXhrBackend, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.XhrFactory }]; } });
 // Cannot use `Number.MAX_VALUE` as it does not fit into a 32-bit signed integer.
