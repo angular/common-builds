@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.0+sha-f755853
+ * @license Angular v16.1.0-next.0+sha-0f40756
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -111,10 +111,10 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
  * @publicApi
  */
 export declare class BrowserPlatformLocation extends PlatformLocation {
-    private _doc;
     private _location;
     private _history;
-    constructor(_doc: any);
+    private _doc;
+    constructor();
     getBaseHrefFromDOM(): string;
     onPopState(fn: LocationChangeListener): VoidFunction;
     onHashChange(fn: LocationChangeListener): VoidFunction;
