@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.0.3+sha-f517d18
+ * @license Angular v16.0.3+sha-f26c9a2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3437,6 +3437,7 @@ declare class HttpInterceptorHandler extends HttpHandler {
     private backend;
     private injector;
     private chain;
+    private readonly pendingTasks;
     constructor(backend: HttpBackend, injector: EnvironmentInjector);
     handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
