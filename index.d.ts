@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.2+sha-7ca301a
+ * @license Angular v16.1.0-next.2+sha-915abc6
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2197,7 +2197,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private imgElement;
     private injector;
     private readonly isServer;
-    private readonly preloadLinkChecker;
+    private readonly preloadLinkCreator;
     private lcpObserver;
     /**
      * Calculate the rewritten `src` once and store it.
