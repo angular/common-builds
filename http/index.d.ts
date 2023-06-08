@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0-next.3+sha-9648fc4
+ * @license Angular v16.1.0-next.3+sha-85c5427
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13,6 +13,29 @@ import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Provider } from '@angular/core';
 import { XhrFactory } from '@angular/common';
+
+/**
+ * Uses `fetch` to send requests to a backend server.
+ *
+ * This `FetchBackend` requires the support of the
+ * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available on all
+ * supported browsers and on Node.js v18 or later.
+ *
+ * @see {@link HttpHandler}
+ *
+ * @publicApi
+ * @developerPreview
+ */
+export declare class FetchBackend implements HttpBackend {
+    private readonly fetchImpl;
+    handle(request: HttpRequest<any>): Observable<HttpEvent<any>>;
+    private doRequest;
+    private parseBody;
+    private createRequestInit;
+    private concatChunks;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FetchBackend, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<FetchBackend>;
+}
 
 /**
  * A multi-provider token that represents the array of registered
@@ -3168,6 +3191,8 @@ export declare enum HttpEventType {
     Sent = 0,
     /**
      * An upload progress event was received.
+     *
+     * Note: The `FetchBackend` doesn't support progress report on uploads.
      */
     UploadProgress = 1,
     /**
@@ -3209,7 +3234,8 @@ export declare enum HttpFeatureKind {
     CustomXsrfConfiguration = 2,
     NoXsrfProtection = 3,
     JsonpSupport = 4,
-    RequestsMadeViaParent = 5
+    RequestsMadeViaParent = 5,
+    Fetch = 6
 }
 
 /**
@@ -3310,7 +3336,7 @@ export declare class HttpHeaders {
     /**  Constructs a new HTTP header object with the given values.*/
     constructor(headers?: string | {
         [name: string]: string | number | (string | number)[];
-    });
+    } | Headers);
     /**
      * Checks for existence of a given header.
      *
@@ -3376,6 +3402,7 @@ export declare class HttpHeaders {
     private copyFrom;
     private clone;
     private applyUpdate;
+    private setHeaderEntries;
 }
 
 /**
@@ -3613,6 +3640,8 @@ export declare class HttpRequest<T> {
      *
      * Progress events are expensive (change detection runs on each event) and so
      * they should only be requested if the consumer intends to monitor them.
+     *
+     * Note: The `FetchBackend` doesn't support progress report on uploads.
      */
     readonly reportProgress: boolean;
     /**
@@ -3890,6 +3919,8 @@ export declare const enum HttpStatusCode {
 /**
  * An upload progress event.
  *
+ * Note: The `FetchBackend` doesn't support progress report on uploads.
+ *
  * @publicApi
  */
 export declare interface HttpUploadProgressEvent extends HttpProgressEvent {
@@ -4059,8 +4090,22 @@ export declare class JsonpInterceptor {
  * @see {@link withNoXsrfProtection}
  * @see {@link withJsonpSupport}
  * @see {@link withRequestsMadeViaParent}
+ * @see {@link withFetch}
  */
 export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): EnvironmentProviders;
+
+/**
+ * Configures the current `HttpClient` instance to make requests using the fetch API.
+ *
+ * This `FetchBackend` requires the support of the Fetch API which is available on all evergreen
+ * browsers and on NodeJS from v18 onward.
+ *
+ * Note: The Fetch API doesn't support progress report on uploads.
+ *
+ * @publicApi
+ * @developerPreview
+ */
+export declare function withFetch(): HttpFeature<HttpFeatureKind.Fetch>;
 
 /**
  * Adds one or more functional-style HTTP interceptors to the configuration of the `HttpClient`
