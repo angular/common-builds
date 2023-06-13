@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0-next.0+sha-307f8ee
+ * @license Angular v16.2.0-next.0+sha-cefa3de
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2233,17 +2233,13 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      * For responsive images: the intrinsic width of the image in pixels.
      * For fixed size images: the desired rendered width of the image in pixels.
      */
-    set width(value: string | number | undefined);
-    get width(): number | undefined;
-    private _width?;
+    width: number | undefined;
     /**
      * For responsive images: the intrinsic height of the image in pixels.
      * For fixed size images: the desired rendered height of the image in pixels.* The intrinsic
      * height of the image in pixels.
      */
-    set height(value: string | number | undefined);
-    get height(): number | undefined;
-    private _height?;
+    height: number | undefined;
     /**
      * The desired loading behavior (lazy, eager, or auto).
      *
@@ -2254,9 +2250,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     /**
      * Indicates whether this image should have a high priority.
      */
-    set priority(value: string | boolean | undefined);
-    get priority(): boolean;
-    private _priority;
+    priority: boolean;
     /**
      * Data to pass through to custom loaders.
      */
@@ -2266,18 +2260,14 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     /**
      * Disables automatic srcset generation for this image.
      */
-    set disableOptimizedSrcset(value: string | boolean | undefined);
-    get disableOptimizedSrcset(): boolean;
-    private _disableOptimizedSrcset;
+    disableOptimizedSrcset: boolean;
     /**
      * Sets the image to "fill mode", which eliminates the height/width requirement and adds
      * styles such that the image fills its containing element.
      *
      * @developerPreview
      */
-    set fill(value: string | boolean | undefined);
-    get fill(): boolean;
-    private _fill;
+    fill: boolean;
     /** @nodoc */
     ngOnInit(): void;
     private setHostAttributes;
@@ -2296,7 +2286,12 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": false; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never, false>;
+    static ngAcceptInputType_width: unknown;
+    static ngAcceptInputType_height: unknown;
+    static ngAcceptInputType_priority: unknown;
+    static ngAcceptInputType_disableOptimizedSrcset: unknown;
+    static ngAcceptInputType_fill: unknown;
 }
 
 /**
