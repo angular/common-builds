@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.0+sha-f48c0bc
+ * @license Angular v16.1.0+sha-0a72df6
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -159,8 +159,8 @@ export declare class CommonModule {
  * and other locale-specific configurations.
  *
  *
- * @see `getCurrencySymbol()`
- * @see `formatCurrency()`
+ * @see {@link getCurrencySymbol}
+ * @see {@link formatCurrency}
  *
  * @usageNotes
  * The following code shows how the pipe transforms numbers
@@ -190,7 +190,7 @@ export declare class CurrencyPipe implements PipeTransform {
  * - `timezone`: configures the default timezone. If not provided, the `DatePipe` will
  * use the end-user's local system timezone.
  *
- * @see `DatePipeConfig`
+ * @see {@link DatePipeConfig}
  *
  * @usageNotes
  *
@@ -246,7 +246,7 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
  * injection token. The value that is passed in as the second parameter takes precedence over
  * the one defined using the injection token.
  *
- * @see `formatDate()`
+ * @see {@link formatDate}
  *
  *
  * @usageNotes
@@ -400,7 +400,7 @@ export declare class DatePipe implements PipeTransform {
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n-common-locale-id).
      *
-     * @see `DATE_PIPE_DEFAULT_OPTIONS`
+     * @see {@link DATE_PIPE_DEFAULT_OPTIONS}
      *
      * @returns A date string in the desired format.
      */
@@ -416,7 +416,7 @@ export declare class DatePipe implements PipeTransform {
  * An interface that describes the date pipe configuration, which can be provided using the
  * `DATE_PIPE_DEFAULT_OPTIONS` token.
  *
- * @see `DATE_PIPE_DEFAULT_OPTIONS`
+ * @see {@link DATE_PIPE_DEFAULT_OPTIONS}
  *
  * @publicApi
  */
@@ -433,7 +433,7 @@ export declare interface DatePipeConfig {
  * Locale determines group sizing and separator,
  * decimal point character, and other locale-specific configurations.
  *
- * @see `formatNumber()`
+ * @see {@link formatNumber}
  *
  * @usageNotes
  *
@@ -528,8 +528,8 @@ export declare const DOCUMENT: InjectionToken<Document>;
  *
  * @returns The formatted currency value.
  *
- * @see `formatNumber()`
- * @see `DecimalPipe`
+ * @see {@link formatNumber}
+ * @see {@link DecimalPipe}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -552,7 +552,7 @@ export declare function formatCurrency(value: number, locale: string, currency: 
  *
  * @returns The formatted date string.
  *
- * @see `DatePipe`
+ * @see {@link DatePipe}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -591,8 +591,8 @@ export declare function formatNumber(value: number, locale: string, digitsInfo?:
  *
  * @returns The formatted percentage value.
  *
- * @see `formatNumber()`
- * @see `DecimalPipe`
+ * @see {@link formatNumber}
+ * @see {@link DecimalPipe}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  * @publicApi
  *
@@ -604,9 +604,9 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  * The specific character widths are locale-specific.
  * Examples are given for `en-US`.
  *
- * @see `getLocaleDateFormat()`
- * @see `getLocaleTimeFormat()`
- * @see `getLocaleDateTimeFormat()`
+ * @see {@link getLocaleDateFormat}
+ * @see {@link getLocaleTimeFormat}
+ * @see {@link getLocaleDateTimeFormat}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  * @publicApi
  */
@@ -707,7 +707,7 @@ export declare function getLocaleCurrencySymbol(locale: string): string | null;
  * @param locale A locale code for the locale format rules to use.
  * @param width The format type.
  * @returns The localized formatting string.
- * @see `FormatWidth`
+ * @see {@link FormatWidth}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -720,7 +720,7 @@ export declare function getLocaleDateFormat(locale: string, width: FormatWidth):
  * @param locale A locale code for the locale format rules to use.
  * @param width The format type.
  * @returns The localized formatting string.
- * @see `FormatWidth`
+ * @see {@link FormatWidth}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -793,7 +793,7 @@ export declare function getLocaleEraNames(locale: string, width: TranslationWidt
  * @returns The rules for the locale, a single time value or array of *from-time, to-time*,
  * or null if no periods are available.
  *
- * @see `getLocaleExtraDayPeriods()`
+ * @see {@link getLocaleExtraDayPeriods}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -812,7 +812,7 @@ export declare function getLocaleExtraDayPeriodRules(locale: string): (Time | [T
  * @param formStyle The required grammatical form.
  * @param width The required character width.
  * @returns The translated day-period strings.
- * @see `getLocaleExtraDayPeriodRules()`
+ * @see {@link getLocaleExtraDayPeriodRules}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -886,7 +886,7 @@ export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle
  * @param locale A locale code for the locale format rules to use.
  * @param type The type of numeric value to be formatted (such as `Decimal` or `Currency`.)
  * @returns The localized format string.
- * @see `NumberFormatStyle`
+ * @see {@link NumberFormatStyle}
  * @see [CLDR website](http://cldr.unicode.org/translation/number-patterns)
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
@@ -899,7 +899,7 @@ export declare function getLocaleNumberFormat(locale: string, type: NumberFormat
  * @param locale The locale code.
  * @param symbol The symbol to localize.
  * @returns The character for the localized symbol.
- * @see `NumberSymbol`
+ * @see {@link NumberSymbol}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -918,7 +918,7 @@ export declare const getLocalePluralCase: (locale: string) => ((value: number) =
  * @param locale A locale code for the locale format rules to use.
  * @param width The format type.
  * @returns The localized formatting string.
- * @see `FormatWidth`
+ * @see {@link FormatWidth}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
 
  * @publicApi
@@ -1168,7 +1168,7 @@ declare namespace i9 {
 /**
  * Injection token that configures the image optimized image functionality.
  *
- * @see `NgOptimizedImage`
+ * @see {@link NgOptimizedImage}
  * @publicApi
  * @developerPreview
  */
@@ -1177,8 +1177,8 @@ export declare const IMAGE_CONFIG: InjectionToken<ImageConfig>;
 /**
  * Injection token that configures the image loader function.
  *
- * @see `ImageLoader`
- * @see `NgOptimizedImage`
+ * @see {@link ImageLoader}
+ * @see {@link NgOptimizedImage}
  * @publicApi
  */
 export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
@@ -1208,8 +1208,8 @@ export declare type ImageLoader = (config: ImageLoaderConfig) => string;
 /**
  * Config options recognized by the image loader function.
  *
- * @see `ImageLoader`
- * @see `NgOptimizedImage`
+ * @see {@link ImageLoader}
+ * @see {@link NgOptimizedImage}
  * @publicApi
  */
 export declare interface ImageLoaderConfig {
@@ -1559,8 +1559,8 @@ export declare abstract class LocationStrategy {
 /**
  * Transforms text to all lower case.
  *
- * @see `UpperCasePipe`
- * @see `TitleCasePipe`
+ * @see {@link UpperCasePipe}
+ * @see {@link TitleCasePipe}
  * @usageNotes
  *
  * The following example defines a view that allows the user to enter
@@ -1834,7 +1834,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
      * represent the same underlying entity (for example, when data is re-fetched from the server,
      * and the iterable is recreated and re-rendered, but most of the data is still the same).
      *
-     * @see `TrackByFunction`
+     * @see {@link TrackByFunction}
      */
     set ngForTrackBy(fn: TrackByFunction<T>);
     get ngForTrackBy(): TrackByFunction<T>;
@@ -2480,8 +2480,8 @@ export declare class NgStyle implements DoCheck {
  * ```
  *
  * @publicApi
- * @see `NgSwitchCase`
- * @see `NgSwitchDefault`
+ * @see {@link NgSwitchCase}
+ * @see {@link NgSwitchDefault}
  * @see [Structural Directives](guide/structural-directives)
  *
  */
@@ -2527,8 +2527,8 @@ export declare class NgSwitch {
  * This means that the empty string, `""` matches 0.
  *
  * @publicApi
- * @see `NgSwitch`
- * @see `NgSwitchDefault`
+ * @see {@link NgSwitch}
+ * @see {@link NgSwitchDefault}
  *
  */
 export declare class NgSwitchCase implements DoCheck {
@@ -2558,8 +2558,8 @@ export declare class NgSwitchCase implements DoCheck {
  * This statement should be the final case in an `NgSwitch`.
  *
  * @publicApi
- * @see `NgSwitch`
- * @see `NgSwitchCase`
+ * @see {@link NgSwitch}
+ * @see {@link NgSwitchCase}
  *
  */
 export declare class NgSwitchDefault {
@@ -2618,7 +2618,7 @@ export declare class NgTemplateOutlet<C = unknown> implements OnChanges {
 
 /**
  * Format styles that can be used to represent numbers.
- * @see `getLocaleNumberFormat()`.
+ * @see {@link getLocaleNumberFormat}.
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -2634,7 +2634,7 @@ export declare enum NumberFormatStyle {
  * Symbols that can be used to replace placeholders in number patterns.
  * Examples are based on `en-US` values.
  *
- * @see `getLocaleNumberSymbol()`
+ * @see {@link getLocaleNumberSymbol}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -2775,7 +2775,7 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
  * separator, decimal-point character, and other locale-specific
  * configurations.
  *
- * @see `formatPercent()`
+ * @see {@link formatPercent}
  *
  * @usageNotes
  * The following code shows how the pipe transforms numbers
@@ -2848,8 +2848,8 @@ export declare abstract class PlatformLocation {
 /**
  * Plurality cases used for translating plurals to different languages.
  *
- * @see `NgPlural`
- * @see `NgPluralCase`
+ * @see {@link NgPlural}
+ * @see {@link NgPluralCase}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
@@ -3042,8 +3042,8 @@ export declare type Time = {
  * rest of the word to lower case.
  * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
  *
- * @see `LowerCasePipe`
- * @see `UpperCasePipe`
+ * @see {@link LowerCasePipe}
+ * @see {@link UpperCasePipe}
  *
  * @usageNotes
  * The following example shows the result of transforming various strings into title case.
@@ -3084,8 +3084,8 @@ export declare enum TranslationWidth {
 
 /**
  * Transforms text to all upper case.
- * @see `LowerCasePipe`
- * @see `TitleCasePipe`
+ * @see {@link LowerCasePipe}
+ * @see {@link TitleCasePipe}
  *
  * @ngModule CommonModule
  * @publicApi
