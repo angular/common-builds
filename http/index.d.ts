@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0-next.0+sha-d64864e
+ * @license Angular v16.2.0-next.0+sha-9f2fb7c
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -109,7 +109,7 @@ export declare abstract class HttpBackend implements HttpHandler {
  * }
  * ```
  *
- * @see [HTTP Guide](guide/http)
+ * @see [HTTP Guide](guide/understanding-communicating-with-http)
  * @see [HTTP Request](api/common/http/HttpRequest)
  *
  * @publicApi
@@ -3271,7 +3271,7 @@ export declare abstract class HttpHandler {
  *
  * @publicApi
  *
- * @see [HTTP Guide](guide/http#intercepting-requests-and-responses)
+ * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
  */
 export declare type HttpHandlerFn = (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>;
 
@@ -3423,7 +3423,7 @@ export declare class HttpHeaders {
  *
  * @publicApi
  *
- * @see [HTTP Guide](guide/http#intercepting-requests-and-responses)
+ * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
  *
  * @usageNotes
  *
