@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0-next.0+sha-b36ec7a
+ * @license Angular v16.2.0-next.0+sha-d6b1fed
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1170,7 +1170,6 @@ declare namespace i9 {
  *
  * @see {@link NgOptimizedImage}
  * @publicApi
- * @developerPreview
  */
 export declare const IMAGE_CONFIG: InjectionToken<ImageConfig>;
 
@@ -1191,7 +1190,6 @@ export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
  * Learn more about the responsive image configuration in [the NgOptimizedImage
  * guide](guide/image-directive).
  * @publicApi
- * @developerPreview
  */
 export declare type ImageConfig = {
     breakpoints?: number[];
@@ -2264,8 +2262,6 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     /**
      * Sets the image to "fill mode", which eliminates the height/width requirement and adds
      * styles such that the image fills its containing element.
-     *
-     * @developerPreview
      */
     fill: boolean;
     /** @nodoc */
