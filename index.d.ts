@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0-next.2+sha-7410d68
+ * @license Angular v16.2.0-next.2+sha-109737b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2239,10 +2239,12 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     height: number | undefined;
     /**
-     * The desired loading behavior (lazy, eager, or auto).
+     * The desired loading behavior (lazy, eager, or auto). Defaults to `lazy`,
+     * which is recommended for most images.
      *
-     * Setting images as loading='eager' or loading='auto' marks them
-     * as non-priority images. Avoid changing this input for priority images.
+     * Warning: Setting images as loading="eager" or loading="auto" marks them
+     * as non-priority images and can hurt loading performance. For images which
+     * may be the LCP element, use the `priority` attribute instead of `loading`.
      */
     loading?: 'lazy' | 'eager' | 'auto';
     /**
