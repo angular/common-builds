@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.1.6+sha-7cfc365
+ * @license Angular v16.1.6+sha-de0d3d7
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2620,7 +2620,7 @@ export declare class NgTemplateOutlet<C = unknown> implements OnChanges {
 
 /**
  * Format styles that can be used to represent numbers.
- * @see {@link getLocaleNumberFormat}.
+ * @see {@link getLocaleNumberFormat}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
