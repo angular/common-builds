@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0-next.3+sha-daaa0a4
+ * @license Angular v16.2.0-next.3+sha-d886887
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1642,6 +1642,9 @@ export declare class NgClass implements DoCheck {
  *
  * You can control the component creation process by using the following optional attributes:
  *
+ * * `ngComponentOutletInputs`: Optional component inputs object, which will be bind to the
+ * component.
+ *
  * * `ngComponentOutletInjector`: Optional custom {@link Injector} that will be used as parent for
  * the Component. Defaults to the injector of the current view container.
  *
@@ -1660,6 +1663,13 @@ export declare class NgClass implements DoCheck {
  * Simple
  * ```
  * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
+ * ```
+ *
+ * With inputs
+ * ```
+ * <ng-container *ngComponentOutlet="componentTypeExpression;
+ *                                   inputs: inputsExpression;">
+ * </ng-container>
  * ```
  *
  * Customized injector/content
@@ -1688,9 +1698,10 @@ export declare class NgClass implements DoCheck {
  * @publicApi
  * @ngModule CommonModule
  */
-export declare class NgComponentOutlet implements OnChanges, OnDestroy {
+export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy {
     private _viewContainerRef;
     ngComponentOutlet: Type<any> | null;
+    ngComponentOutletInputs?: Record<string, unknown>;
     ngComponentOutletInjector?: Injector;
     ngComponentOutletContent?: any[][];
     ngComponentOutletNgModule?: Type<any>;
@@ -1700,13 +1711,24 @@ export declare class NgComponentOutlet implements OnChanges, OnDestroy {
     ngComponentOutletNgModuleFactory?: NgModuleFactory<any>;
     private _componentRef;
     private _moduleRef;
+    /**
+     * A helper data structure that allows us to track inputs that were part of the
+     * ngComponentOutletInputs expression. Tracking inputs is necessary for proper removal of ones
+     * that are no longer referenced.
+     */
+    private _inputsUsed;
     constructor(_viewContainerRef: ViewContainerRef);
+    private _needToReCreateNgModuleInstance;
+    private _needToReCreateComponentInstance;
     /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
     /** @nodoc */
+    ngDoCheck(): void;
+    /** @nodoc */
     ngOnDestroy(): void;
+    private _applyInputStateDiff;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 /**
