@@ -138,10 +138,10 @@ export class SpyLocation {
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-464b458", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-464b458", ngImport: i0, type: SpyLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-b2661fe", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-b2661fe", ngImport: i0, type: SpyLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-464b458", ngImport: i0, type: SpyLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.3.0-next.0+sha-b2661fe", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
