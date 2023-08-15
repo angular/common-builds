@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.0+sha-83b7082
+ * @license Angular v17.0.0-next.0+sha-17c6ad7
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3425,6 +3425,7 @@ export declare class HttpHeaders {
  * @publicApi
  *
  * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
+ * @see {@link HttpInterceptorFn}
  *
  * @usageNotes
  *
@@ -3456,8 +3457,35 @@ export declare interface HttpInterceptor {
  * request) is provided. Most interceptors will delegate to this function, but that is not required
  * (see `HttpHandlerFn` for more details).
  *
- * `HttpInterceptorFn`s have access to `inject()` via the `EnvironmentInjector` from which they were
- * configured.
+ * `HttpInterceptorFn`s are executed in an [injection context](/guide/dependency-injection-context).
+ * They have access to `inject()` via the `EnvironmentInjector` from which they were configured.
+ *
+ * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
+ * @see {@link withInterceptors}
+ *
+ * @usageNotes
+ * Here is a noop interceptor that passes the request through without modifying it:
+ * ```typescript
+ * export const noopInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
+ * HttpHandlerFn) => {
+ *   return next(modifiedReq);
+ * };
+ * ```
+ *
+ * If you want to alter a request, clone it first and modify the clone before passing it to the
+ * `next()` handler function.
+ *
+ * Here is a basic interceptor that adds a bearer token to the headers
+ * ```typescript
+ * export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
+ * HttpHandlerFn) => {
+ *    const userToken = 'MY_TOKEN'; const modifiedReq = req.clone({
+ *      headers: req.headers.set('Authorization', `Bearer ${userToken}`),
+ *    });
+ *
+ *    return next(modifiedReq);
+ * };
+ * ```
  */
 export declare type HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => Observable<HttpEvent<unknown>>;
 
