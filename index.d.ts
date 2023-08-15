@@ -1,5 +1,5 @@
 /**
- * @license Angular v16.2.0+sha-252b111
+ * @license Angular v16.2.0+sha-03619ad
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -357,6 +357,7 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
  * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
  * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
  * {{ dateObj | date:'mm:ss' }}       // output is '43:11'
+ * {{ dateObj | date:"MMM dd, yyyy 'at' hh:mm a" }}  // output is 'Jun 15, 2015 at 09:43 PM'
  * ```
  *
  * ### Usage example
