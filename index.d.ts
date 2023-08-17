@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.0+sha-e650393
+ * @license Angular v17.0.0-next.0+sha-d910bf8
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -30,6 +30,18 @@ import { TrackByFunction } from '@angular/core';
 import { Type } from '@angular/core';
 import { Version } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType.Html): value is SafeHtml;
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType.ResourceUrl): value is SafeResourceUrl;
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType.Script): value is SafeScript;
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType.Style): value is SafeStyle;
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType.Url): value is SafeUrl;
+
+declare function allowSanitizationBypassAndThrow(value: any, type: BypassType): boolean;
 
 /**
  * A predefined [DI token](guide/glossary#di-token) for the base href
@@ -134,6 +146,70 @@ export declare class BrowserPlatformLocation extends PlatformLocation {
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<BrowserPlatformLocation>;
+}
+
+/**
+ * Mark `html` string as trusted.
+ *
+ * This function wraps the trusted string in `String` and brands it in a way which makes it
+ * recognizable to {@link htmlSanitizer} to be trusted implicitly.
+ *
+ * @param trustedHtml `html` string which needs to be implicitly trusted.
+ * @returns a `html` which has been branded to be implicitly trusted.
+ */
+declare function bypassSanitizationTrustHtml(trustedHtml: string): SafeHtml;
+
+/**
+ * Mark `url` string as trusted.
+ *
+ * This function wraps the trusted string in `String` and brands it in a way which makes it
+ * recognizable to {@link resourceUrlSanitizer} to be trusted implicitly.
+ *
+ * @param trustedResourceUrl `url` string which needs to be implicitly trusted.
+ * @returns a `url` which has been branded to be implicitly trusted.
+ */
+declare function bypassSanitizationTrustResourceUrl(trustedResourceUrl: string): SafeResourceUrl;
+
+/**
+ * Mark `script` string as trusted.
+ *
+ * This function wraps the trusted string in `String` and brands it in a way which makes it
+ * recognizable to {@link scriptSanitizer} to be trusted implicitly.
+ *
+ * @param trustedScript `script` string which needs to be implicitly trusted.
+ * @returns a `script` which has been branded to be implicitly trusted.
+ */
+declare function bypassSanitizationTrustScript(trustedScript: string): SafeScript;
+
+/**
+ * Mark `style` string as trusted.
+ *
+ * This function wraps the trusted string in `String` and brands it in a way which makes it
+ * recognizable to {@link styleSanitizer} to be trusted implicitly.
+ *
+ * @param trustedStyle `style` string which needs to be implicitly trusted.
+ * @returns a `style` hich has been branded to be implicitly trusted.
+ */
+declare function bypassSanitizationTrustStyle(trustedStyle: string): SafeStyle;
+
+/**
+ * Mark `url` string as trusted.
+ *
+ * This function wraps the trusted string in `String` and brands it in a way which makes it
+ * recognizable to {@link urlSanitizer} to be trusted implicitly.
+ *
+ * @param trustedUrl `url` string which needs to be implicitly trusted.
+ * @returns a `url`  which has been branded to be implicitly trusted.
+ */
+declare function bypassSanitizationTrustUrl(trustedUrl: string): SafeUrl;
+
+
+declare const enum BypassType {
+    Url = "URL",
+    Html = "HTML",
+    ResourceUrl = "ResourceURL",
+    Script = "Script",
+    Style = "Style"
 }
 
 /**
@@ -949,6 +1025,8 @@ export declare function getLocaleWeekEndRange(locale: string): [WeekDay, WeekDay
  */
 export declare function getNumberOfCurrencyDigits(code: string): number;
 
+declare function getSanitizationBypassType(value: any): BypassType | null;
+
 /**
  * @description
  * A {@link LocationStrategy} used to configure the {@link Location} service to
@@ -1109,6 +1187,26 @@ export declare class I18nSelectPipe implements PipeTransform {
     }): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<I18nSelectPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<I18nSelectPipe, "i18nSelect", true>;
+}
+
+declare namespace i1_2 {
+    export {
+        unwrapSafeValue,
+        allowSanitizationBypassAndThrow,
+        getSanitizationBypassType,
+        bypassSanitizationTrustHtml,
+        bypassSanitizationTrustStyle,
+        bypassSanitizationTrustScript,
+        bypassSanitizationTrustUrl,
+        bypassSanitizationTrustResourceUrl,
+        BypassType,
+        SafeValue,
+        SafeHtml,
+        SafeStyle,
+        SafeScript,
+        SafeUrl,
+        SafeResourceUrl
+    }
 }
 
 declare namespace i2 {
@@ -2309,6 +2407,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
+    static ngAcceptInputType_ngSrc: string | i1_2.SafeValue;
     static ngAcceptInputType_width: unknown;
     static ngAcceptInputType_height: unknown;
     static ngAcceptInputType_priority: unknown;
@@ -2978,6 +3077,54 @@ export declare const provideImgixLoader: (path: string) => Provider[];
 export declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
 
 /**
+ * Marker interface for a value that's safe to use as HTML.
+ *
+ * @publicApi
+ */
+declare interface SafeHtml extends SafeValue {
+}
+
+/**
+ * Marker interface for a value that's safe to use as a URL to load executable code from.
+ *
+ * @publicApi
+ */
+declare interface SafeResourceUrl extends SafeValue {
+}
+
+/**
+ * Marker interface for a value that's safe to use as JavaScript.
+ *
+ * @publicApi
+ */
+declare interface SafeScript extends SafeValue {
+}
+
+/**
+ * Marker interface for a value that's safe to use as style (CSS).
+ *
+ * @publicApi
+ */
+declare interface SafeStyle extends SafeValue {
+}
+
+/**
+ * Marker interface for a value that's safe to use as a URL linking to a document.
+ *
+ * @publicApi
+ */
+declare interface SafeUrl extends SafeValue {
+}
+
+/**
+ * Marker interface for a value that's safe to use in a particular context.
+ *
+ * @publicApi
+ */
+declare interface SafeValue {
+}
+
+/**
  * @ngModule CommonModule
  * @description
  *
@@ -3103,6 +3250,10 @@ export declare enum TranslationWidth {
     /** 2 characters for `en-US`, For example: "Su" */
     Short = 3
 }
+
+declare function unwrapSafeValue(value: SafeValue): string;
+
+declare function unwrapSafeValue<T>(value: T): T;
 
 /**
  * Transforms text to all upper case.
