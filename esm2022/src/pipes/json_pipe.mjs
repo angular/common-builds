@@ -29,10 +29,10 @@ export class JsonPipe {
     transform(value) {
         return JSON.stringify(value, null, 2);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-8ef5cc6", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.0.0-next.1+sha-8ef5cc6", ngImport: i0, type: JsonPipe, isStandalone: true, name: "json", pure: false }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-1f7e7df", ngImport: i0, type: JsonPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.0.0-next.1+sha-1f7e7df", ngImport: i0, type: JsonPipe, isStandalone: true, name: "json", pure: false }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-8ef5cc6", ngImport: i0, type: JsonPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-1f7e7df", ngImport: i0, type: JsonPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'json',
