@@ -1,70 +1,13 @@
 /**
- * @license Angular v17.0.0-next.1+sha-7ed4c56
+ * @license Angular v17.0.0-next.1+sha-5ee6c7e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
 
+import { ɵnormalizeQueryParams, LocationStrategy, Location } from '@angular/common';
 import * as i0 from '@angular/core';
 import { EventEmitter, Injectable, InjectionToken, Inject, Optional } from '@angular/core';
-import { LocationStrategy, Location } from '@angular/common';
 import { Subject } from 'rxjs';
-
-/**
- * Joins two parts of a URL with a slash if needed.
- *
- * @param start  URL string
- * @param end    URL string
- *
- *
- * @returns The joined URL string.
- */
-function joinWithSlash(start, end) {
-    if (start.length == 0) {
-        return end;
-    }
-    if (end.length == 0) {
-        return start;
-    }
-    let slashes = 0;
-    if (start.endsWith('/')) {
-        slashes++;
-    }
-    if (end.startsWith('/')) {
-        slashes++;
-    }
-    if (slashes == 2) {
-        return start + end.substring(1);
-    }
-    if (slashes == 1) {
-        return start + end;
-    }
-    return start + '/' + end;
-}
-/**
- * Removes a trailing slash from a URL string if needed.
- * Looks for the first occurrence of either `#`, `?`, or the end of the
- * line as `/` characters and removes the trailing slash if one exists.
- *
- * @param url URL string.
- *
- * @returns The URL string, modified if needed.
- */
-function stripTrailingSlash(url) {
-    const match = url.match(/#|\?|$/);
-    const pathEndIdx = match && match.index || url.length;
-    const droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
-    return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
-}
-/**
- * Normalizes URL parameters by prepending with `?` if needed.
- *
- * @param  params String of URL parameters.
- *
- * @returns The normalized URL parameters string.
- */
-function normalizeQueryParams(params) {
-    return params && params[0] !== '?' ? '?' + params : params;
-}
 
 /**
  * A spy for {@link Location} that allows tests to fire simulated location events.
@@ -136,7 +79,7 @@ class SpyLocation {
         }
         const url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
-        this._notifyUrlChangeListeners(path + normalizeQueryParams(query), state);
+        this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
     }
     replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
@@ -149,7 +92,7 @@ class SpyLocation {
         history.query = query;
         const url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
-        this._notifyUrlChangeListeners(path + normalizeQueryParams(query), state);
+        this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
     }
     forward() {
         if (this._historyIndex < (this._history.length - 1)) {
@@ -203,10 +146,10 @@ class SpyLocation {
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: SpyLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: SpyLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: SpyLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
@@ -285,10 +228,10 @@ class MockLocationStrategy extends LocationStrategy {
     getState() {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockLocationStrategy }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockLocationStrategy }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockLocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return []; } });
 class _MockPopStateEvent {
@@ -484,10 +427,10 @@ class MockPlatformLocation {
             this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url });
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockPlatformLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockPlatformLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-7ed4c56", ngImport: i0, type: MockPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.0-next.1+sha-5ee6c7e", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: undefined, decorators: [{
                     type: Inject,
