@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.1+sha-a610eb1
+ * @license Angular v17.0.0-next.1+sha-0b6aae8
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3368,6 +3368,15 @@ export declare abstract class ɵDomAdapter {
 
 
 export declare function ɵgetDOM(): ɵDomAdapter;
+
+/**
+ * Normalizes URL parameters by prepending with `?` if needed.
+ *
+ * @param  params String of URL parameters.
+ *
+ * @returns The normalized URL parameters string.
+ */
+export declare function ɵnormalizeQueryParams(params: string): string;
 
 /**
  * Provides an empty implementation of the viewport scroller.
