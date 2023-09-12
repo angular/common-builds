@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.3+sha-92113d7
+ * @license Angular v17.0.0-next.3+sha-635318f
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ export declare class FetchBackend implements HttpBackend {
  *
  * @publicApi
  */
-export declare const HTTP_INTERCEPTORS: InjectionToken<HttpInterceptor[]>;
+export declare const HTTP_INTERCEPTORS: InjectionToken<readonly HttpInterceptor[]>;
 
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
