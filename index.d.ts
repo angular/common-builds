@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.6+sha-ee0d04b
+ * @license Angular v17.0.0-next.7+sha-0d3373b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2730,8 +2730,19 @@ export declare class NgTemplateOutlet<C = unknown> implements OnChanges {
     /** Injector to be used within the embedded view. */
     ngTemplateOutletInjector: Injector | null;
     constructor(_viewContainerRef: ViewContainerRef);
-    /** @nodoc */
     ngOnChanges(changes: SimpleChanges): void;
+    /**
+     * We need to re-create existing embedded view if either is true:
+     * - the outlet changed.
+     * - the injector changed.
+     */
+    private _shouldRecreateView;
+    /**
+     * For a given outlet instance, we create a proxy object that delegates
+     * to the user-specified context. This allows changing, or swapping out
+     * the context object completely without having to destroy/re-create the view.
+     */
+    private _createContextForwardProxy;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgTemplateOutlet<any>, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgTemplateOutlet<any>, "[ngTemplateOutlet]", never, { "ngTemplateOutletContext": { "alias": "ngTemplateOutletContext"; "required": false; }; "ngTemplateOutlet": { "alias": "ngTemplateOutlet"; "required": false; }; "ngTemplateOutletInjector": { "alias": "ngTemplateOutletInjector"; "required": false; }; }, {}, never, never, true, never>;
 }
