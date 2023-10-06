@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.7+sha-b6b9eae
+ * @license Angular v17.0.0-next.7+sha-048f400
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -148,6 +148,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a request that interprets the body as a blob and returns
@@ -172,6 +175,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Blob>;
     /**
      * Constructs a request that interprets the body as a text string and
@@ -196,6 +202,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<string>;
     /**
      * Constructs a request that interprets the body as an `ArrayBuffer` and returns the
@@ -221,6 +230,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a request that interprets the body as a `Blob` and returns
@@ -246,6 +258,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a request which interprets the body as a text string and returns the full event
@@ -271,6 +286,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -296,6 +314,9 @@ export declare class HttpClient {
         };
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<any>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -321,6 +342,9 @@ export declare class HttpClient {
         };
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<R>>;
     /**
      * Constructs a request which interprets the body as an `ArrayBuffer`
@@ -345,6 +369,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a request which interprets the body as a `Blob` and returns the full `HttpResponse`.
@@ -368,6 +395,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a request which interprets the body as a text stream and returns the full
@@ -392,6 +422,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -441,6 +474,9 @@ export declare class HttpClient {
         };
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<R>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -465,6 +501,9 @@ export declare class HttpClient {
         responseType?: 'json';
         reportProgress?: boolean;
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Object>;
     /**
      * Constructs a request which interprets the body as a JavaScript object
@@ -489,6 +528,9 @@ export declare class HttpClient {
         responseType?: 'json';
         reportProgress?: boolean;
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<R>;
     /**
      * Constructs a request where response type and requested observable are not known statically.
@@ -512,6 +554,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<any>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
@@ -885,6 +930,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob`
@@ -907,6 +955,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Blob>;
     /**
      * Constructs a `GET` request that interprets the body as a text string
@@ -929,6 +980,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<string>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns
@@ -952,6 +1006,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
@@ -974,6 +1031,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text string and returns
@@ -996,6 +1056,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON
@@ -1018,6 +1081,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns the full
@@ -1040,6 +1106,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and
@@ -1063,6 +1132,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
@@ -1086,6 +1158,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text stream and
@@ -1109,6 +1184,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1132,6 +1210,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1155,6 +1236,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1178,6 +1262,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Object>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns
@@ -1200,6 +1287,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<T>;
     /**
      * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer` and
@@ -1222,6 +1312,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
@@ -1244,6 +1337,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Blob>;
     /**
      * Constructs a `HEAD` request that interprets the body as a text string and returns the response
@@ -1266,6 +1362,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<string>;
     /**
      * Constructs a `HEAD` request that interprets the body as an  `ArrayBuffer`
@@ -1289,6 +1388,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and
@@ -1312,6 +1414,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a text string
@@ -1335,6 +1440,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON
@@ -1358,6 +1466,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and
@@ -1381,6 +1492,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer`
@@ -1404,6 +1518,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
@@ -1427,6 +1544,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `HEAD` request that interprets the body as text stream
@@ -1450,6 +1570,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and
@@ -1473,6 +1596,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON
@@ -1496,6 +1622,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<T>>;
     /**
 
@@ -1519,6 +1648,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Object>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and returns
@@ -1542,6 +1674,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<T>;
     /**
      * Constructs a `JSONP` request for the given URL and name of the callback parameter.
@@ -2285,6 +2420,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob` and returns the
@@ -2308,6 +2446,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Blob>;
     /**
      * Constructs a `POST` request that interprets the body as a text string and
@@ -2331,6 +2472,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<string>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and
@@ -2355,6 +2499,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob`
@@ -2378,6 +2525,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text string and returns the full
@@ -2402,6 +2552,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
@@ -2426,6 +2579,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
@@ -2450,6 +2606,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a POST request that interprets the body as an `ArrayBuffer`
@@ -2474,6 +2633,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob` and returns the full
@@ -2498,6 +2660,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text stream and returns
@@ -2522,6 +2687,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -2546,6 +2714,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON and returns the
@@ -2571,6 +2742,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -2594,6 +2768,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<Object>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -2618,6 +2795,9 @@ export declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     }): Observable<T>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and returns the
@@ -3703,7 +3883,32 @@ export declare class HttpRequest<T> {
      * The outgoing URL with all URL parameters set.
      */
     readonly urlWithParams: string;
-    constructor(method: 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS', url: string, init?: {
+    /**
+     * The HttpTransferCache option for the request
+     */
+    readonly transferCache?: {
+        includeHeaders?: string[];
+    } | boolean;
+    constructor(method: 'GET' | 'HEAD', url: string, init?: {
+        headers?: HttpHeaders;
+        context?: HttpContext;
+        reportProgress?: boolean;
+        params?: HttpParams;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+        /**
+         * This property accepts either a boolean to enable/disable transferring cache for eligible
+         * requests performed using `HttpClient`, or an object, which allows to configure cache
+         * parameters, such as which headers should be included (no headers are included by default).
+         *
+         * Setting this property will override the options passed to `provideClientHydration()` for this
+         * particular request
+         */
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
+    });
+    constructor(method: 'DELETE' | 'JSONP' | 'OPTIONS', url: string, init?: {
         headers?: HttpHeaders;
         context?: HttpContext;
         reportProgress?: boolean;
@@ -3711,7 +3916,26 @@ export declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     });
-    constructor(method: 'POST' | 'PUT' | 'PATCH', url: string, body: T | null, init?: {
+    constructor(method: 'POST', url: string, body: T | null, init?: {
+        headers?: HttpHeaders;
+        context?: HttpContext;
+        reportProgress?: boolean;
+        params?: HttpParams;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+        /**
+         * This property accepts either a boolean to enable/disable transferring cache for eligible
+         * requests performed using `HttpClient`, or an object, which allows to configure cache
+         * parameters, such as which headers should be included (no headers are included by default).
+         *
+         * Setting this property will override the options passed to `provideClientHydration()` for this
+         * particular request
+         */
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
+    });
+    constructor(method: 'PUT' | 'PATCH', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
         context?: HttpContext;
         reportProgress?: boolean;
@@ -3726,6 +3950,17 @@ export declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        /**
+         * This property accepts either a boolean to enable/disable transferring cache for eligible
+         * requests performed using `HttpClient`, or an object, which allows to configure cache
+         * parameters, such as which headers should be included (no headers are included by default).
+         *
+         * Setting this property will override the options passed to `provideClientHydration()` for this
+         * particular request
+         */
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
     });
     /**
      * Transform the free-form body into a serialized format suitable for
@@ -3944,6 +4179,25 @@ export declare const enum HttpStatusCode {
     NotExtended = 510,
     NetworkAuthenticationRequired = 511
 }
+
+/**
+ * Options to configure how TransferCache should be used to cache requests made via HttpClient.
+ *
+ * @param includeHeaders Specifies which headers should be included into cached responses. No
+ *     headers are included by default.
+ * @param filter A function that receives a request as an argument and returns a boolean to indicate
+ *     whether a request should be included into the cache.
+ * @param includePostRequests Enables caching for POST requests. By default, only GET and HEAD
+ *     requests are cached. This option can be enabled if POST requests are used to retrieve data
+ *     (for example using GraphQL).
+ *
+ * @publicApi
+ */
+export declare type HttpTransferCacheOptions = {
+    includeHeaders?: string[];
+    filter?: (req: HttpRequest<unknown>) => boolean;
+    includePostRequests?: boolean;
+};
 
 /**
  * An upload progress event.
@@ -4233,6 +4487,6 @@ export declare function withXsrfConfiguration({ cookieName, headerName }: {
  * load time.
  *
  */
-export declare function ɵwithHttpTransferCache(): Provider[];
+export declare function ɵwithHttpTransferCache(cacheOptions: HttpTransferCacheOptions): Provider[];
 
 export { }

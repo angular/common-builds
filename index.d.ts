@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.7+sha-b6b9eae
+ * @license Angular v17.0.0-next.7+sha-048f400
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9,6 +9,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DoCheck } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import * as i0 from '@angular/core';
+import { ɵIMAGE_CONFIG as IMAGE_CONFIG } from '@angular/core';
+import { ɵImageConfig as ImageConfig } from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { Injector } from '@angular/core';
 import { IterableDiffers } from '@angular/core';
@@ -498,8 +500,8 @@ export declare class DatePipe implements PipeTransform {
  * @publicApi
  */
 export declare interface DatePipeConfig {
-    dateFormat: string;
-    timezone: string;
+    dateFormat?: string;
+    timezone?: string;
 }
 
 /**
@@ -1264,13 +1266,7 @@ declare namespace i9 {
     }
 }
 
-/**
- * Injection token that configures the image optimized image functionality.
- *
- * @see {@link NgOptimizedImage}
- * @publicApi
- */
-export declare const IMAGE_CONFIG: InjectionToken<ImageConfig>;
+export { IMAGE_CONFIG }
 
 /**
  * Injection token that configures the image loader function.
@@ -1281,18 +1277,7 @@ export declare const IMAGE_CONFIG: InjectionToken<ImageConfig>;
  */
 export declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
 
-/**
- * A configuration object for the NgOptimizedImage directive. Contains:
- * - breakpoints: An array of integer breakpoints used to generate
- *      srcsets for responsive images.
- *
- * Learn more about the responsive image configuration in [the NgOptimizedImage
- * guide](guide/image-directive).
- * @publicApi
- */
-export declare type ImageConfig = {
-    breakpoints?: number[];
-};
+export { ImageConfig }
 
 /**
  * Represents an image loader function. Image loader functions are used by the
