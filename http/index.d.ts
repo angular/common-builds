@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.7+sha-05d1fac
+ * @license Angular v17.0.0-next.7+sha-22fa9fe
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4112,6 +4112,19 @@ export declare class JsonpInterceptor {
  * protection of outgoing requests. Additional configuration options can be provided by passing
  * feature functions to `provideHttpClient`. For example, HTTP interceptors can be added using the
  * `withInterceptors(...)` feature.
+ *
+ * <div class="alert is-helpful">
+ *
+ * It's strongly recommended to enable
+ * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for applications that use
+ * Server-Side Rendering for better performance and compatibility. To enable `fetch`, add
+ * `withFetch()` feature to the `provideHttpClient()` call at the root of the application:
+ *
+ * ```
+ * provideHttpClient(withFetch());
+ * ```
+ *
+ * </div>
  *
  * @see {@link withInterceptors}
  * @see {@link withInterceptorsFromDi}
