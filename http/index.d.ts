@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-next.8+sha-eccbf36
+ * @license Angular v17.0.0-next.8+sha-1091239
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -24,7 +24,6 @@ import { XhrFactory } from '@angular/common';
  * @see {@link HttpHandler}
  *
  * @publicApi
- * @developerPreview
  */
 export declare class FetchBackend implements HttpBackend {
     private readonly fetchImpl;
@@ -4399,7 +4398,6 @@ export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKi
  * Note: The Fetch API doesn't support progress report on uploads.
  *
  * @publicApi
- * @developerPreview
  */
 export declare function withFetch(): HttpFeature<HttpFeatureKind.Fetch>;
 
