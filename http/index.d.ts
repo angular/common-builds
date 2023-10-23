@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-rc.0+sha-569f57d
+ * @license Angular v17.0.0-rc.0+sha-f206d10
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4473,6 +4473,11 @@ export declare function withXsrfConfiguration({ cookieName, headerName }: {
     cookieName?: string;
     headerName?: string;
 }): HttpFeature<HttpFeatureKind.CustomXsrfConfiguration>;
+
+/**
+ * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
+ */
+export declare const ɵHTTP_ROOT_INTERCEPTOR_FNS: InjectionToken<readonly HttpInterceptorFn[]>;
 
 /**
  * Returns the DI providers needed to enable HTTP transfer cache.
