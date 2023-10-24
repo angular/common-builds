@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.1.0-next.0+sha-47ab069
+ * @license Angular v17.1.0-next.0+sha-dcc4a80
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2203,7 +2203,7 @@ export declare abstract class NgLocalization {
  * prioritized by:
  * - Automatically setting the `fetchpriority` attribute on the `<img>` tag
  * - Lazy loading non-priority images by default
- * - Asserting that there is a corresponding preconnect link tag in the document head
+ * - Automatically generating a preconnect link tag in the document head
  *
  * In addition, the directive:
  * - Generates appropriate asset URLs if a corresponding `ImageLoader` function is provided
