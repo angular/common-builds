@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.0-rc.0+sha-1dd8558
+ * @license Angular v17.0.0-rc.0+sha-4c878f9
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -57,7 +57,7 @@ declare function allowSanitizationBypassAndThrow(value: any, type: BypassType): 
  * with a base href value, so that the DI framework can supply the dependency anywhere in the app.
  *
  * ```typescript
- * import {Component, NgModule} from '@angular/core';
+ * import {NgModule} from '@angular/core';
  * import {APP_BASE_HREF} from '@angular/common';
  *
  * @NgModule({
