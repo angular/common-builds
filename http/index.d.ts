@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.1.0-next.0+sha-9692aeb
+ * @license Angular v17.1.0-next.0+sha-ebbc7a2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4113,7 +4113,7 @@ export declare interface HttpSentEvent {
  * As per https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
  * @publicApi
  */
-export declare const enum HttpStatusCode {
+export declare enum HttpStatusCode {
     Continue = 100,
     SwitchingProtocols = 101,
     Processing = 102,
