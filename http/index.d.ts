@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.1.0-next.0+sha-12f979d
+ * @license Angular v17.1.0-next.0+sha-291ba38
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4478,6 +4478,11 @@ export declare function withXsrfConfiguration({ cookieName, headerName }: {
  * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
  */
 export declare const ɵHTTP_ROOT_INTERCEPTOR_FNS: InjectionToken<readonly HttpInterceptorFn[]>;
+
+/**
+ * A provider to set a global primary http backend. If set, it will override the default one
+ */
+export declare const ɵPRIMARY_HTTP_BACKEND: InjectionToken<HttpBackend>;
 
 /**
  * Returns the DI providers needed to enable HTTP transfer cache.
