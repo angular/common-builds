@@ -130,10 +130,10 @@ export class AsyncPipe {
             this._ref.markForCheck();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.2+sha-38aab6a", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.0.2+sha-38aab6a", ngImport: i0, type: AsyncPipe, isStandalone: true, name: "async", pure: false }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.2+sha-54a7b33", ngImport: i0, type: AsyncPipe, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.0.2+sha-54a7b33", ngImport: i0, type: AsyncPipe, isStandalone: true, name: "async", pure: false }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.2+sha-38aab6a", ngImport: i0, type: AsyncPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.2+sha-54a7b33", ngImport: i0, type: AsyncPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'async',
