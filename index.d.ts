@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.0.8+sha-8e49e38
+ * @license Angular v17.0.8+sha-c22b513
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1595,14 +1595,12 @@ export declare class LowerCasePipe implements PipeTransform {
  * @publicApi
  */
 export declare class NgClass implements DoCheck {
-    private _iterableDiffers;
-    private _keyValueDiffers;
     private _ngEl;
     private _renderer;
     private initialClasses;
     private rawClass;
     private stateMap;
-    constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers, _ngEl: ElementRef, _renderer: Renderer2);
+    constructor(_ngEl: ElementRef, _renderer: Renderer2);
     set klass(value: string);
     set ngClass(value: string | string[] | Set<string> | {
         [klass: string]: any;
