@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-271755d
+ * @license Angular v17.2.0-next.0+sha-89ab1c1
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -348,9 +348,7 @@ class $locationShim {
             throw new Error(`Invalid url "${url}", missing path prefix "${this.getServerBase()}".`);
         }
         this.parseAppUrl(pathUrl);
-        if (!this.$$path) {
-            this.$$path = '/';
-        }
+        this.$$path ||= '/';
         this.composeUrls();
     }
     /**
@@ -847,11 +845,11 @@ class LocationUpgradeModule {
             ],
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-271755d", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.0-next.0+sha-271755d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-271755d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-89ab1c1", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.0-next.0+sha-89ab1c1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-89ab1c1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-271755d", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-89ab1c1", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
