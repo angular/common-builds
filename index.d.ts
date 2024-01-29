@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-45288f7
+ * @license Angular v17.2.0-next.0+sha-f5c520b
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1206,11 +1206,26 @@ export declare interface ImageLoaderConfig {
      */
     width?: number;
     /**
+     * Whether the loader should generate a URL for a small image placeholder instead of a full-sized
+     * image.
+     */
+    isPlaceholder?: boolean;
+    /**
      * Additional user-provided parameters for use by the ImageLoader.
      */
     loaderParams?: {
         [key: string]: any;
     };
+}
+
+/**
+ * Config options used in rendering placeholder images.
+ *
+ * @see {@link NgOptimizedImage}
+ * @publicApi
+ */
+export declare interface ImagePlaceholderConfig {
+    blur?: boolean;
 }
 
 /**
@@ -2272,6 +2287,15 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      * styles such that the image fills its containing element.
      */
     fill: boolean;
+    /**
+     * A URL or data URL for an image to be used as a placeholder while this image loads.
+     */
+    placeholder?: string | boolean;
+    /**
+     * Configuration object for placeholder settings. Options:
+     *   * blur: Setting this to false disables the automatic CSS blur.
+     */
+    placeholderConfig?: ImagePlaceholderConfig;
     /** @nodoc */
     ngOnInit(): void;
     private setHostAttributes;
@@ -2287,17 +2311,30 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private updateSrcAndSrcset;
     private getFixedSrcset;
     private shouldGenerateAutomaticSrcset;
+    /**
+     * Returns an image url formatted for use with the CSS background-image property. Expects one of:
+     * * A base64 encoded image, which is wrapped and passed through.
+     * * A boolean. If true, calls the image loader to generate a small placeholder url.
+     */
+    private generatePlaceholder;
+    /**
+     * Determines if blur should be applied, based on an optional boolean
+     * property `blur` within the optional configuration object `placeholderConfig`.
+     */
+    private shouldBlurPlaceholder;
+    private removePlaceholderOnLoad;
     /** @nodoc */
     ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "placeholderConfig": { "alias": "placeholderConfig"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
     static ngAcceptInputType_ngSrc: string | i0.ɵSafeValue;
     static ngAcceptInputType_width: unknown;
     static ngAcceptInputType_height: unknown;
     static ngAcceptInputType_priority: unknown;
     static ngAcceptInputType_disableOptimizedSrcset: unknown;
     static ngAcceptInputType_fill: unknown;
+    static ngAcceptInputType_placeholder: boolean | string;
 }
 
 /**
