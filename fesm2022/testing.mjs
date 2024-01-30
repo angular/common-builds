@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.1.1+sha-57174bb
+ * @license Angular v17.1.1+sha-4c2b0d9
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -49,8 +49,10 @@ class SpyLocation {
     }
     isCurrentPathEqualTo(path, query = '') {
         const givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
-        const currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
-        return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+        const currPath = this.path().endsWith('/')
+            ? this.path().substring(0, this.path().length - 1)
+            : this.path();
+        return currPath == givenPath + (query.length > 0 ? '?' + query : '');
     }
     simulateUrlPop(pathname) {
         this._subject.emit({ 'url': pathname, 'pop': true, 'type': 'popstate' });
@@ -77,7 +79,7 @@ class SpyLocation {
         if (locationState.path == path && locationState.query == query) {
             return;
         }
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const url = path + (query.length > 0 ? '?' + query : '');
         this.urlChanges.push(url);
         this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
     }
@@ -90,32 +92,47 @@ class SpyLocation {
         }
         history.path = path;
         history.query = query;
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const url = path + (query.length > 0 ? '?' + query : '');
         this.urlChanges.push('replace: ' + url);
         this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
     }
     forward() {
-        if (this._historyIndex < (this._history.length - 1)) {
+        if (this._historyIndex < this._history.length - 1) {
             this._historyIndex++;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
+            this._subject.emit({
+                'url': this.path(),
+                'state': this.getState(),
+                'pop': true,
+                'type': 'popstate',
+            });
         }
     }
     back() {
         if (this._historyIndex > 0) {
             this._historyIndex--;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
+            this._subject.emit({
+                'url': this.path(),
+                'state': this.getState(),
+                'pop': true,
+                'type': 'popstate',
+            });
         }
     }
     historyGo(relativePosition = 0) {
         const nextPageIndex = this._historyIndex + relativePosition;
         if (nextPageIndex >= 0 && nextPageIndex < this._history.length) {
             this._historyIndex = nextPageIndex;
-            this._subject.emit({ 'url': this.path(), 'state': this.getState(), 'pop': true, 'type': 'popstate' });
+            this._subject.emit({
+                'url': this.path(),
+                'state': this.getState(),
+                'pop': true,
+                'type': 'popstate',
+            });
         }
     }
     onUrlChange(fn) {
         this._urlChangeListeners.push(fn);
-        this._urlChangeSubscription ??= this.subscribe(v => {
+        this._urlChangeSubscription ??= this.subscribe((v) => {
             this._notifyUrlChangeListeners(v.url, v.state);
         });
         return () => {
@@ -129,7 +146,7 @@ class SpyLocation {
     }
     /** @internal */
     _notifyUrlChangeListeners(url = '', state) {
-        this._urlChangeListeners.forEach(fn => fn(url, state));
+        this._urlChangeListeners.forEach((fn) => fn(url, state));
     }
     subscribe(onNext, onThrow, onReturn) {
         return this._subject.subscribe({ next: onNext, error: onThrow, complete: onReturn });
@@ -144,10 +161,10 @@ class SpyLocation {
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: SpyLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: SpyLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: SpyLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
@@ -192,7 +209,7 @@ class MockLocationStrategy extends LocationStrategy {
         // Add state change to changes array
         this.stateChanges.push(ctx);
         this.internalTitle = title;
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const url = path + (query.length > 0 ? '?' + query : '');
         this.internalPath = url;
         const externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push(externalUrl);
@@ -201,7 +218,7 @@ class MockLocationStrategy extends LocationStrategy {
         // Reset the last index of stateChanges to the ctx (state) object
         this.stateChanges[(this.stateChanges.length || 1) - 1] = ctx;
         this.internalTitle = title;
-        const url = path + (query.length > 0 ? ('?' + query) : '');
+        const url = path + (query.length > 0 ? '?' + query : '');
         this.internalPath = url;
         const externalUrl = this.prepareExternalUrl(url);
         this.urlChanges.push('replace: ' + externalUrl);
@@ -226,10 +243,10 @@ class MockLocationStrategy extends LocationStrategy {
     getState() {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockLocationStrategy }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockLocationStrategy }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockLocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 class _MockPopStateEvent {
@@ -291,9 +308,9 @@ function parseUrl(urlStr, baseHref) {
         parsedUrl.pathname = parsedUrl.pathname.substring(baseHref.length);
     }
     return {
-        hostname: !serverBase && parsedUrl.hostname || '',
-        protocol: !serverBase && parsedUrl.protocol || '',
-        port: !serverBase && parsedUrl.port || '',
+        hostname: (!serverBase && parsedUrl.hostname) || '',
+        protocol: (!serverBase && parsedUrl.protocol) || '',
+        port: (!serverBase && parsedUrl.port) || '',
         pathname: parsedUrl.pathname || '/',
         search: parsedUrl.search || '',
         hash: parsedUrl.hash || '',
@@ -370,15 +387,26 @@ class MockPlatformLocation {
     }
     replaceState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
-        this.urlChanges[this.urlChangeIndex] =
-            { ...this.urlChanges[this.urlChangeIndex], pathname, search, hash, state: parsedState };
+        this.urlChanges[this.urlChangeIndex] = {
+            ...this.urlChanges[this.urlChangeIndex],
+            pathname,
+            search,
+            hash,
+            state: parsedState,
+        };
     }
     pushState(state, title, newUrl) {
         const { pathname, search, state: parsedState, hash } = this.parseChanges(state, newUrl);
         if (this.urlChangeIndex > 0) {
             this.urlChanges.splice(this.urlChangeIndex + 1);
         }
-        this.urlChanges.push({ ...this.urlChanges[this.urlChangeIndex], pathname, search, hash, state: parsedState });
+        this.urlChanges.push({
+            ...this.urlChanges[this.urlChangeIndex],
+            pathname,
+            search,
+            hash,
+            state: parsedState,
+        });
         this.urlChangeIndex = this.urlChanges.length - 1;
     }
     forward() {
@@ -420,15 +448,25 @@ class MockPlatformLocation {
      * https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event#when_popstate_is_sent
      */
     emitEvents(oldHash, oldUrl) {
-        this.popStateSubject.next({ type: 'popstate', state: this.getState(), oldUrl, newUrl: this.url });
+        this.popStateSubject.next({
+            type: 'popstate',
+            state: this.getState(),
+            oldUrl,
+            newUrl: this.url,
+        });
         if (oldHash !== this.hash) {
-            this.hashUpdate.next({ type: 'hashchange', state: null, oldUrl, newUrl: this.url });
+            this.hashUpdate.next({
+                type: 'hashchange',
+                state: null,
+                oldUrl,
+                newUrl: this.url,
+            });
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockPlatformLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockPlatformLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: MockPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,

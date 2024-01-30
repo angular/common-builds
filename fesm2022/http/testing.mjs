@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.1.1+sha-57174bb
+ * @license Angular v17.1.1+sha-4c2b0d9
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -54,7 +54,7 @@ class TestRequest {
             throw new Error(`Cannot flush a cancelled request.`);
         }
         const url = this.request.urlWithParams;
-        const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        const headers = opts.headers instanceof HttpHeaders ? opts.headers : new HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
         let statusText = opts.statusText;
         let status = opts.status !== undefined ? opts.status : HttpStatusCode.Ok;
@@ -85,7 +85,7 @@ class TestRequest {
         if (opts.status && opts.status >= 200 && opts.status < 300) {
             throw new Error(`error() called with a successful status.`);
         }
-        const headers = (opts.headers instanceof HttpHeaders) ? opts.headers : new HttpHeaders(opts.headers);
+        const headers = opts.headers instanceof HttpHeaders ? opts.headers : new HttpHeaders(opts.headers);
         this.observer.error(new HttpErrorResponse({
             error,
             headers,
@@ -142,8 +142,11 @@ function _toJsonBody(body, format = 'JSON') {
     if (typeof Blob !== 'undefined' && body instanceof Blob) {
         throw new Error(`Automatic conversion to ${format} is not supported for Blobs.`);
     }
-    if (typeof body === 'string' || typeof body === 'number' || typeof body === 'object' ||
-        typeof body === 'boolean' || Array.isArray(body)) {
+    if (typeof body === 'string' ||
+        typeof body === 'number' ||
+        typeof body === 'object' ||
+        typeof body === 'boolean' ||
+        Array.isArray(body)) {
         return body;
     }
     throw new Error(`Automatic conversion to ${format} is not supported for response type.`);
@@ -220,13 +223,13 @@ class HttpClientTestingBackend {
      */
     _match(match) {
         if (typeof match === 'string') {
-            return this.open.filter(testReq => testReq.request.urlWithParams === match);
+            return this.open.filter((testReq) => testReq.request.urlWithParams === match);
         }
         else if (typeof match === 'function') {
-            return this.open.filter(testReq => match(testReq.request));
+            return this.open.filter((testReq) => match(testReq.request));
         }
         else {
-            return this.open.filter(testReq => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+            return this.open.filter((testReq) => (!match.method || testReq.request.method === match.method.toUpperCase()) &&
                 (!match.url || testReq.request.urlWithParams === match.url));
         }
     }
@@ -236,7 +239,7 @@ class HttpClientTestingBackend {
      */
     match(match) {
         const results = this._match(match);
-        results.forEach(result => {
+        results.forEach((result) => {
             const index = this.open.indexOf(result);
             if (index !== -1) {
                 this.open.splice(index, 1);
@@ -287,7 +290,7 @@ class HttpClientTestingBackend {
         // It's possible that some requests may be cancelled, and this is expected.
         // The user can ask to ignore open requests which have been cancelled.
         if (opts.ignoreCancelled) {
-            open = open.filter(testReq => !testReq.cancelled);
+            open = open.filter((testReq) => !testReq.cancelled);
         }
         if (open.length > 0) {
             // Show the methods and URLs of open requests in the error, for convenience.
@@ -308,10 +311,10 @@ class HttpClientTestingBackend {
             return `Match by function: ${matcher.name}`;
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingBackend }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingBackend }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
             type: Injectable
         }] });
 function describeRequest(testRequest) {
@@ -336,21 +339,15 @@ function provideHttpClientTesting() {
  * @publicApi
  */
 class HttpClientTestingModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingModule, providers: [
-            provideHttpClientTesting(),
-        ], imports: [HttpClientModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingModule, providers: [provideHttpClientTesting()], imports: [HttpClientModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-57174bb", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.1+sha-4c2b0d9", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        HttpClientModule,
-                    ],
-                    providers: [
-                        provideHttpClientTesting(),
-                    ],
+                    imports: [HttpClientModule],
+                    providers: [provideHttpClientTesting()],
                 }]
         }] });
 
