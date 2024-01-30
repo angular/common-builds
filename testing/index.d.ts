@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-7b4d275
+ * @license Angular v17.2.0-next.0+sha-f3567bb
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -143,5 +143,10 @@ export declare class SpyLocation implements Location_2 {
     static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
 }
+
+/**
+ * Return a provider for the `FakeNavigation` in place of the real Navigation API.
+ */
+export declare function ɵprovideFakePlatformNavigation(): Provider[];
 
 export { }
