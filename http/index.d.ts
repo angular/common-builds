@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-f3567bb
+ * @license Angular v17.2.0-next.0+sha-0460a9d
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4469,7 +4469,7 @@ export declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind
  *
  * @see {@link provideHttpClient}
  */
-export declare function withXsrfConfiguration({ cookieName, headerName }: {
+export declare function withXsrfConfiguration({ cookieName, headerName, }: {
     cookieName?: string;
     headerName?: string;
 }): HttpFeature<HttpFeatureKind.CustomXsrfConfiguration>;

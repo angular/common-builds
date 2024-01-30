@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-f3567bb
+ * @license Angular v17.2.0-next.0+sha-0460a9d
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -22,7 +22,7 @@ function deepEqual(a, b) {
     }
     else {
         try {
-            if ((a.prototype !== b.prototype) || (Array.isArray(a) && Array.isArray(b))) {
+            if (a.prototype !== b.prototype || (Array.isArray(a) && Array.isArray(b))) {
                 return false;
             }
             return JSON.stringify(a) === JSON.stringify(b);
@@ -42,7 +42,7 @@ const IGNORE_URI_REGEXP = /^\s*(javascript|mailto):/i;
 const DEFAULT_PORTS = {
     'http:': 80,
     'https:': 443,
-    'ftp:': 21
+    'ftp:': 21,
 };
 /**
  * Location service that provides a drop-in replacement for the $location service
@@ -88,7 +88,7 @@ class $locationShim {
             this.urlChanges.next({ newUrl, newState });
         });
         if (ɵisPromise($injector)) {
-            $injector.then($i => this.initialize($i));
+            $injector.then(($i) => this.initialize($i));
         }
         else {
             this.initialize($injector);
@@ -98,7 +98,10 @@ class $locationShim {
         const $rootScope = $injector.get('$rootScope');
         const $rootElement = $injector.get('$rootElement');
         $rootElement.on('click', (event) => {
-            if (event.ctrlKey || event.metaKey || event.shiftKey || event.which === 2 ||
+            if (event.ctrlKey ||
+                event.metaKey ||
+                event.shiftKey ||
+                event.which === 2 ||
                 event.button === 2) {
                 return;
             }
@@ -138,8 +141,7 @@ class $locationShim {
             this.$$parse(newUrl);
             newUrl = this.absUrl();
             this.$$state = newState;
-            const defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl, newState, oldState)
-                .defaultPrevented;
+            const defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl, newState, oldState).defaultPrevented;
             // if the location was changed by a `$locationChangeStart` handler then stop
             // processing this location change
             if (this.absUrl() !== newUrl)
@@ -179,9 +181,7 @@ class $locationShim {
                     $rootScope.$evalAsync(() => {
                         // Get the new URL again since it could have changed due to async update
                         const newUrl = this.absUrl();
-                        const defaultPrevented = $rootScope
-                            .$broadcast('$locationChangeStart', newUrl, oldUrl, this.$$state, oldState)
-                            .defaultPrevented;
+                        const defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl, this.$$state, oldState).defaultPrevented;
                         // if the location was changed by a `$locationChangeStart` handler then stop
                         // processing this location change
                         if (this.absUrl() !== newUrl)
@@ -286,7 +286,7 @@ class $locationShim {
         if (DOUBLE_SLASH_REGEX.test(url)) {
             throw new Error(`Bad Path - URL cannot start with double slashes: ${url}`);
         }
-        let prefixed = (url.charAt(0) !== '/');
+        let prefixed = url.charAt(0) !== '/';
         if (prefixed) {
             url = '/' + url;
         }
@@ -610,7 +610,7 @@ class AngularJSUrlCodec {
             segments[i] = encodeUriSegment(segments[i].replace(/%2F/g, '/'));
         }
         path = segments.join('/');
-        return _stripIndexHtml((path && path[0] !== '/' && '/' || '') + path);
+        return _stripIndexHtml(((path && path[0] !== '/' && '/') || '') + path);
     }
     // https://github.com/angular/angular.js/blob/864c7f0/src/ng/location.js#L42
     encodeSearch(search) {
@@ -658,8 +658,8 @@ class AngularJSUrlCodec {
         }
         else {
             const encPath = this.encodePath(pathOrHref);
-            const encSearch = search && this.encodeSearch(search) || '';
-            const encHash = hash && this.encodeHash(hash) || '';
+            const encSearch = (search && this.encodeSearch(search)) || '';
+            const encHash = (hash && this.encodeHash(hash)) || '';
             let joinedPath = (baseUrl || '') + encPath;
             if (!joinedPath.length || joinedPath[0] !== '/') {
                 joinedPath = '/' + joinedPath;
@@ -683,7 +683,7 @@ class AngularJSUrlCodec {
                 hash: parsed.hash ? parsed.hash.replace(/^#/, '') : '',
                 hostname: parsed.hostname,
                 port: parsed.port,
-                pathname: (parsed.pathname.charAt(0) === '/') ? parsed.pathname : '/' + parsed.pathname
+                pathname: parsed.pathname.charAt(0) === '/' ? parsed.pathname : '/' + parsed.pathname,
             };
         }
         catch (e) {
@@ -798,7 +798,7 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
         .replace(/%24/g, '$')
         .replace(/%2C/gi, ',')
         .replace(/%3B/gi, ';')
-        .replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+        .replace(/%20/g, pctEncodeSpaces ? '%20' : '+');
 }
 
 /**
@@ -824,32 +824,28 @@ class LocationUpgradeModule {
                 {
                     provide: $locationShim,
                     useFactory: provide$location,
-                    deps: [UpgradeModule, Location, PlatformLocation, UrlCodec, LocationStrategy]
+                    deps: [UpgradeModule, Location, PlatformLocation, UrlCodec, LocationStrategy],
                 },
                 { provide: LOCATION_UPGRADE_CONFIGURATION, useValue: config ? config : {} },
                 { provide: UrlCodec, useFactory: provideUrlCodec, deps: [LOCATION_UPGRADE_CONFIGURATION] },
                 {
                     provide: APP_BASE_HREF_RESOLVED,
                     useFactory: provideAppBaseHref,
-                    deps: [LOCATION_UPGRADE_CONFIGURATION, [new Inject(APP_BASE_HREF), new Optional()]]
+                    deps: [LOCATION_UPGRADE_CONFIGURATION, [new Inject(APP_BASE_HREF), new Optional()]],
                 },
                 {
                     provide: LocationStrategy,
                     useFactory: provideLocationStrategy,
-                    deps: [
-                        PlatformLocation,
-                        APP_BASE_HREF_RESOLVED,
-                        LOCATION_UPGRADE_CONFIGURATION,
-                    ]
+                    deps: [PlatformLocation, APP_BASE_HREF_RESOLVED, LOCATION_UPGRADE_CONFIGURATION],
                 },
             ],
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-f3567bb", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.0-next.0+sha-f3567bb", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-f3567bb", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-0460a9d", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.0-next.0+sha-0460a9d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-0460a9d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-f3567bb", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.0-next.0+sha-0460a9d", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
@@ -863,12 +859,13 @@ function provideAppBaseHref(config, appBaseHref) {
     return '';
 }
 function provideUrlCodec(config) {
-    const codec = config && config.urlCodec || AngularJSUrlCodec;
+    const codec = (config && config.urlCodec) || AngularJSUrlCodec;
     return new codec();
 }
 function provideLocationStrategy(platformLocation, baseHref, options = {}) {
-    return options.useHash ? new HashLocationStrategy(platformLocation, baseHref) :
-        new PathLocationStrategy(platformLocation, baseHref);
+    return options.useHash
+        ? new HashLocationStrategy(platformLocation, baseHref)
+        : new PathLocationStrategy(platformLocation, baseHref);
 }
 function provide$location(ngUpgrade, location, platformLocation, urlCodec, locationStrategy) {
     const $locationProvider = new $locationShimProvider(ngUpgrade, location, platformLocation, urlCodec, locationStrategy);
