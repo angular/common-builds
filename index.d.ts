@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.0+sha-260d3ed
+ * @license Angular v17.2.0-next.0+sha-4a44f73
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2697,8 +2697,8 @@ export declare class NgSwitch {
  * that defines the subtree to be selected if the value of the match expression
  * matches the value of the switch expression.
  *
- * Unlike JavaScript, which uses strict equality, Angular uses loose equality.
- * This means that the empty string, `""` matches 0.
+ * As of Angular v17 the NgSwitch directive uses strict equality comparison (`===`) instead of
+ * loose equality (`==`) to match different cases.
  *
  * @publicApi
  * @see {@link NgSwitch}
