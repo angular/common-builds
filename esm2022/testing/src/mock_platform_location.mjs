@@ -207,10 +207,10 @@ export class MockPlatformLocation {
             });
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.2+sha-46a2c5f", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.2+sha-46a2c5f", ngImport: i0, type: MockPlatformLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.1.2+sha-f933a38", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.1.2+sha-f933a38", ngImport: i0, type: MockPlatformLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.2+sha-46a2c5f", ngImport: i0, type: MockPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.1.2+sha-f933a38", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
