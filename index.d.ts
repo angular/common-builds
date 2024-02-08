@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.0-next.1+sha-9c2bad9
+ * @license Angular v17.2.0-next.1+sha-03c3b3e
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3127,6 +3127,16 @@ export declare const provideImageKitLoader: (path: string) => Provider[];
  * @publicApi
  */
 export declare const provideImgixLoader: (path: string) => Provider[];
+
+/**
+ * Function that generates an ImageLoader for Netlify and turns it into an Angular provider.
+ *
+ * @param path optional URL of the desired Netlify site. Defaults to the current site.
+ * @returns Set of providers to configure the Netlify loader.
+ *
+ * @publicApi
+ */
+export declare function provideNetlifyLoader(path?: string): Provider[];
 
 
 /**
