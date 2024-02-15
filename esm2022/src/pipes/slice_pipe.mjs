@@ -55,10 +55,10 @@ export class SlicePipe {
     supports(obj) {
         return typeof obj === 'string' || Array.isArray(obj);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0-next.0+sha-03acdbe", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.0-next.0+sha-03acdbe", ngImport: i0, type: SlicePipe, isStandalone: true, name: "slice", pure: false }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0-next.0+sha-96e9dbe", ngImport: i0, type: SlicePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.0-next.0+sha-96e9dbe", ngImport: i0, type: SlicePipe, isStandalone: true, name: "slice", pure: false }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0-next.0+sha-03acdbe", ngImport: i0, type: SlicePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0-next.0+sha-96e9dbe", ngImport: i0, type: SlicePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'slice',
