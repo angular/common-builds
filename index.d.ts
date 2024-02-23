@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.2.2+sha-600a8cd
+ * @license Angular v17.2.2+sha-1a526f2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -89,6 +89,7 @@ export declare const APP_BASE_HREF: InjectionToken<string>;
 export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _ref;
     private _latestValue;
+    private markForCheckOnValueUpdate;
     private _subscription;
     private _obj;
     private _strategy;
