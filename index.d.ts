@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.3.0-next.0+sha-54b5a2f
+ * @license Angular v17.3.0-next.0+sha-3e0b3a1
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -901,7 +901,7 @@ export declare function getLocaleNumberFormat(locale: string, type: NumberFormat
 /**
  * Retrieves a localized number symbol that can be used to replace placeholders in number formats.
  * @param locale The locale code.
- * @param symbol The symbol to localize.
+ * @param symbol The symbol to localize. Must be one of `NumberSymbol`.
  * @returns The character for the localized symbol.
  * @see {@link NumberSymbol}
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
@@ -2824,81 +2824,84 @@ export declare enum NumberFormatStyle {
  * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
  *
  * @publicApi
+ * @object-literal-as-enum
  */
-export declare enum NumberSymbol {
+export declare const NumberSymbol: {
     /**
      * Decimal separator.
      * For `en-US`, the dot character.
      * Example: 2,345`.`67
      */
-    Decimal = 0,
+    readonly Decimal: 0;
     /**
      * Grouping separator, typically for thousands.
      * For `en-US`, the comma character.
      * Example: 2`,`345.67
      */
-    Group = 1,
+    readonly Group: 1;
     /**
      * List-item separator.
      * Example: "one, two, and three"
      */
-    List = 2,
+    readonly List: 2;
     /**
      * Sign for percentage (out of 100).
      * Example: 23.4%
      */
-    PercentSign = 3,
+    readonly PercentSign: 3;
     /**
      * Sign for positive numbers.
      * Example: +23
      */
-    PlusSign = 4,
+    readonly PlusSign: 4;
     /**
      * Sign for negative numbers.
      * Example: -23
      */
-    MinusSign = 5,
+    readonly MinusSign: 5;
     /**
      * Computer notation for exponential value (n times a power of 10).
      * Example: 1.2E3
      */
-    Exponential = 6,
+    readonly Exponential: 6;
     /**
      * Human-readable format of exponential.
      * Example: 1.2x103
      */
-    SuperscriptingExponent = 7,
+    readonly SuperscriptingExponent: 7;
     /**
      * Sign for permille (out of 1000).
      * Example: 23.4‰
      */
-    PerMille = 8,
+    readonly PerMille: 8;
     /**
      * Infinity, can be used with plus and minus.
      * Example: ∞, +∞, -∞
      */
-    Infinity = 9,
+    readonly Infinity: 9;
     /**
      * Not a number.
      * Example: NaN
      */
-    NaN = 10,
+    readonly NaN: 10;
     /**
      * Symbol used between time units.
      * Example: 10:52
      */
-    TimeSeparator = 11,
+    readonly TimeSeparator: 11;
     /**
      * Decimal separator for currency values (fallback to `Decimal`).
      * Example: $2,345.67
      */
-    CurrencyDecimal = 12,
+    readonly CurrencyDecimal: 12;
     /**
      * Group separator for currency values (fallback to `Group`).
      * Example: $2,345.67
      */
-    CurrencyGroup = 13
-}
+    readonly CurrencyGroup: 13;
+};
+
+export declare type NumberSymbol = (typeof NumberSymbol)[keyof typeof NumberSymbol];
 
 /**
  * @description
