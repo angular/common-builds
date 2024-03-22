@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.3.1+sha-78d4ad2
+ * @license Angular v17.3.1+sha-1f7e81a
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3981,6 +3981,9 @@ export declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
         body?: T | null;
         method?: string;
         url?: string;
@@ -3998,6 +4001,9 @@ export declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
         body?: V | null;
         method?: string;
         url?: string;
