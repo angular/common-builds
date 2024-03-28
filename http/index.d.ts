@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.2+sha-914e453
+ * @license Angular v18.0.0-next.2+sha-b87b2fc
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3158,7 +3158,7 @@ export declare class HttpClient {
 }
 
 /**
- * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+ * Configures the dependency injector for `HttpClient`
  * with supporting services for JSONP.
  * Without this module, Jsonp requests reach the backend
  * with method JSONP, where they are rejected.
@@ -3172,11 +3172,11 @@ export declare class HttpClientJsonpModule {
 }
 
 /**
- * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+ * Configures the dependency injector for `HttpClient`
  * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
  *
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
- * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
+ * multiprovider for built-in DI token `HTTP_INTERCEPTORS`.
  *
  * @publicApi
  */

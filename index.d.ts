@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.2+sha-914e453
+ * @license Angular v18.0.0-next.2+sha-b87b2fc
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -34,7 +34,7 @@ import { Version } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
 
 /**
- * A predefined [DI token](guide/glossary#di-token) for the base href
+ * A predefined DI token for the base href
  * to be used with the `PathLocationStrategy`.
  * The base href is the URL prefix that should be preserved when generating
  * and recognizing URLs.
