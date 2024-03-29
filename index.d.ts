@@ -1,5 +1,5 @@
 /**
- * @license Angular v17.3.2+sha-d10dc5c
+ * @license Angular v17.3.2+sha-949dec2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2387,8 +2387,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     width: number | undefined;
     /**
      * For responsive images: the intrinsic height of the image in pixels.
-     * For fixed size images: the desired rendered height of the image in pixels.* The intrinsic
-     * height of the image in pixels.
+     * For fixed size images: the desired rendered height of the image in pixels.
      */
     height: number | undefined;
     /**
