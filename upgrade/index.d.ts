@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.3+sha-216199d
+ * @license Angular v18.0.0-next.3+sha-1c6553e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -348,7 +348,7 @@ export declare interface LocationUpgradeConfig {
 /**
  * `NgModule` used for providing and configuring Angular's Unified Location Service for upgrading.
  *
- * @see [Using the Unified Angular Location Service](guide/upgrade#using-the-unified-angular-location-service)
+ * @see [Using the Unified Angular Location Service](https://angular.io/guide/upgrade#using-the-unified-angular-location-service)
  *
  * @publicApi
  */

@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.3+sha-216199d
+ * @license Angular v18.0.0-next.3+sha-1c6553e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -242,7 +242,7 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
  *
  * Only the `en-US` locale data comes with Angular. To localize dates
  * in another language, you must import the corresponding locale data.
- * See the [I18n guide](guide/i18n-common-format-data-locale) for more information.
+ * See the [I18n guide](guide/i18n/format-data-locale) for more information.
  *
  * The time zone of the formatted value can be specified either by passing it in as the second
  * parameter of the pipe, or by setting the default through the `DATE_PIPE_DEFAULT_OPTIONS`
@@ -402,7 +402,7 @@ export declare class DatePipe implements PipeTransform {
      * is not configured, the end-user's local system timezone is used as a value.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-     * See [Setting your app locale](guide/i18n-common-locale-id).
+     * See [Setting your app locale](guide/i18n/locale-id).
      *
      * @see {@link DATE_PIPE_DEFAULT_OPTIONS}
      *
@@ -480,7 +480,7 @@ export declare interface DatePipeConfig {
  *
  * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
  *
- * See [Setting your app locale](guide/i18n-common-locale-id).
+ * See [Setting your app locale](guide/i18n/locale-id).
  *
  * ### Example
  *
@@ -534,7 +534,7 @@ export declare const DOCUMENT: InjectionToken<Document>;
  *
  * @see {@link formatNumber}
  * @see {@link DecimalPipe}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -557,7 +557,7 @@ export declare function formatCurrency(value: number, locale: string, currency: 
  * @returns The formatted date string.
  *
  * @see {@link DatePipe}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -576,7 +576,7 @@ export declare function formatDate(value: string | number | Date, format: string
  * `{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}`. See `DecimalPipe` for more details.
  *
  * @returns The formatted text string.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -597,7 +597,7 @@ export declare function formatNumber(value: number, locale: string, digitsInfo?:
  *
  * @see {@link formatNumber}
  * @see {@link DecimalPipe}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  * @publicApi
  *
  */
@@ -611,7 +611,7 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  * @see {@link getLocaleDateFormat}
  * @see {@link getLocaleTimeFormat}
  * @see {@link getLocaleDateTimeFormat}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  * @publicApi
  */
 export declare enum FormatWidth {
@@ -642,7 +642,7 @@ export declare enum FormatWidth {
  * Typically the standalone version is for the nominative form of the word,
  * and the format version is used for the genitive case.
  * @see [CLDR website](http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles)
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -662,7 +662,7 @@ export declare enum FormStyle {
  * @param locale A locale code for the locale format rules to use.
  *
  * @returns The symbol, or the currency code if no symbol is available.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -686,7 +686,7 @@ export declare function getLocaleCurrencyCode(locale: string): string | null;
  * @param locale A locale code for the locale format rules to use.
  * @returns The currency name,
  * or `null` if the main country cannot be determined.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -699,7 +699,7 @@ export declare function getLocaleCurrencyName(locale: string): string | null;
  * @param locale A locale code for the locale format rules to use.
  * @returns The localized symbol character,
  * or `null` if the main country cannot be determined.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -712,7 +712,7 @@ export declare function getLocaleCurrencySymbol(locale: string): string | null;
  * @param width The format type.
  * @returns The localized formatting string.
  * @see {@link FormatWidth}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -725,7 +725,7 @@ export declare function getLocaleDateFormat(locale: string, width: FormatWidth):
  * @param width The format type.
  * @returns The localized formatting string.
  * @see {@link FormatWidth}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -739,7 +739,7 @@ export declare function getLocaleDateTimeFormat(locale: string, width: FormatWid
  * @param width The required character width.
  * @returns An array of localized name strings.
  * For example,`[Sunday, Monday, ... Saturday]` for `en-US`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -752,7 +752,7 @@ export declare function getLocaleDayNames(locale: string, formStyle: FormStyle, 
  * @param formStyle The required grammatical form.
  * @param width The required character width.
  * @returns An array of localized period strings. For example, `[AM, PM]` for `en-US`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -763,7 +763,7 @@ export declare function getLocaleDayPeriods(locale: string, formStyle: FormStyle
  * @param locale A locale code for the locale format rules to use.
  * @publicApi
  * @returns 'rtl' or 'ltr'
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  */
 export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
 
@@ -774,7 +774,7 @@ export declare function getLocaleDirection(locale: string): 'ltr' | 'rtl';
 
  * @returns An array of localized era strings.
  * For example, `[AD, BC]` for `en-US`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -791,14 +791,14 @@ export declare function getLocaleEraNames(locale: string, width: TranslationWidt
  * A rule can specify a period as time range, or as a single time value.
  *
  * This functionality is only available when you have loaded the full locale data.
- * See the ["I18n guide"](guide/i18n-common-format-data-locale).
+ * See the ["I18n guide"](guide/i18n/format-data-locale).
  *
  * @param locale A locale code for the locale format rules to use.
  * @returns The rules for the locale, a single time value or array of *from-time, to-time*,
  * or null if no periods are available.
  *
  * @see {@link getLocaleExtraDayPeriods}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -810,14 +810,14 @@ export declare function getLocaleExtraDayPeriodRules(locale: string): (Time | [T
  * For example, for `en-US`, periods are morning, noon, afternoon, evening, and midnight.
  *
  * This functionality is only available when you have loaded the full locale data.
- * See the ["I18n guide"](guide/i18n-common-format-data-locale).
+ * See the ["I18n guide"](guide/i18n/format-data-locale).
  *
  * @param locale A locale code for the locale format rules to use.
  * @param formStyle The required grammatical form.
  * @param width The required character width.
  * @returns The translated day-period strings.
  * @see {@link getLocaleExtraDayPeriodRules}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -830,7 +830,7 @@ export declare function getLocaleExtraDayPeriods(locale: string, formStyle: Form
  * @returns A day index number, using the 0-based week-day index for `en-US`
  * (Sunday = 0, Monday = 1, ...).
  * For example, for `fr-FR`, returns 1 to indicate that the first day is Monday.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -841,7 +841,7 @@ export declare function getLocaleFirstDayOfWeek(locale: string): WeekDay;
  * The loaded locale could be, for example, a global one rather than a regional one.
  * @param locale A locale code, such as `fr-FR`.
  * @returns The locale code. For example, `fr`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -855,7 +855,7 @@ export declare function getLocaleId(locale: string): string;
  * @param width The required character width.
  * @returns An array of localized name strings.
  * For example,  `[January, February, ...]` for `en-US`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -892,7 +892,7 @@ export declare function getLocaleMonthNames(locale: string, formStyle: FormStyle
  * @returns The localized format string.
  * @see {@link NumberFormatStyle}
  * @see [CLDR website](http://cldr.unicode.org/translation/number-patterns)
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -904,7 +904,7 @@ export declare function getLocaleNumberFormat(locale: string, type: NumberFormat
  * @param symbol The symbol to localize. Must be one of `NumberSymbol`.
  * @returns The character for the localized symbol.
  * @see {@link NumberSymbol}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -923,7 +923,7 @@ export declare const getLocalePluralCase: (locale: string) => (value: number) =>
  * @param width The format type.
  * @returns The localized formatting string.
  * @see {@link FormatWidth}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
 
  * @publicApi
  */
@@ -934,7 +934,7 @@ export declare function getLocaleTimeFormat(locale: string, width: FormatWidth):
  *
  * @param locale A locale code for the locale format rules to use.
  * @returns The range of day values, `[startDay, endDay]`.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -946,7 +946,7 @@ export declare function getLocaleWeekEndRange(locale: string): [WeekDay, WeekDay
  *
  * @param code The currency code.
  * @returns The number of decimal digits, typically 0 or 2.
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -1863,13 +1863,13 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
 }
 
 /**
- * A [structural directive](guide/structural-directives) that renders
+ * A [structural directive](guide/directives/structural-directives) that renders
  * a template for each item in a collection.
  * The directive is placed on an element, which becomes the parent
  * of the cloned templates.
  *
  * The `ngForOf` directive is generally used in the
- * [shorthand form](guide/structural-directives#asterisk) `*ngFor`.
+ * [shorthand form](guide/directives/structural-directives#asterisk) `*ngFor`.
  * In this form, the template to be rendered for each iteration is the content
  * of an anchor element containing the directive.
  *
@@ -1898,11 +1898,11 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  * context according to its lexical position.
  *
  * When using the shorthand syntax, Angular allows only [one structural directive
- * on an element](guide/structural-directives#one-per-element).
+ * on an element](guide/directives/structural-directives#one-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
  * For further discussion, see
- * [Structural Directives](guide/structural-directives#one-per-element).
+ * [Structural Directives](guide/directives/structural-directives#one-per-element).
  *
  * @usageNotes
  *
@@ -1943,7 +1943,7 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  * controls that are present, such as `<input>` elements that accept user input. Inserted rows can
  * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
  * such as user input.
- * For more on animations, see [Transitions and Triggers](guide/transition-and-triggers).
+ * For more on animations, see [Transitions and Triggers](guide/animations/transition-and-triggers).
  *
  * The identities of elements in the iterator can change while the data does not.
  * This can happen, for example, if the iterator is produced from an RPC to the server, and that
@@ -1956,7 +1956,7 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  * `trackBy` takes a function that has two arguments: `index` and `item`.
  * If `trackBy` is given, Angular tracks changes by the return value of the function.
  *
- * @see [Structural Directives](guide/structural-directives)
+ * @see [Structural Directives](guide/directives/structural-directives)
  * @ngModule CommonModule
  * @publicApi
  */
@@ -1966,7 +1966,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     private _differs;
     /**
      * The value of the iterable expression, which can be used as a
-     * [template input variable](guide/structural-directives#shorthand).
+     * [template input variable](guide/directives/structural-directives#shorthand).
      */
     set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
     /**
@@ -1996,7 +1996,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/template-reference-variables)
+     * @see [template reference variable](guide/templates/reference-variables)
      */
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
@@ -2041,7 +2041,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * Angular renders the template provided in an optional `else` clause. The default
  * template for the `else` clause is blank.
  *
- * A [shorthand form](guide/structural-directives#asterisk) of the directive,
+ * A [shorthand form](guide/directives/structural-directives#asterisk) of the directive,
  * `*ngIf="condition"`, is generally used, provided
  * as an attribute of the anchor element for the inserted template.
  * Angular expands this into a more explicit version, in which the anchor element
@@ -2167,7 +2167,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * The presence of the implicit template object has implications for the nesting of
  * structural directives. For more on this subject, see
- * [Structural Directives](guide/structural-directives#one-per-element).
+ * [Structural Directives](guide/directives/structural-directives#one-per-element).
  *
  * @ngModule CommonModule
  * @publicApi
@@ -2260,7 +2260,7 @@ export declare abstract class NgLocalization {
  * - Warns if the image will be visually distorted when rendered
  *
  * @usageNotes
- * The `NgOptimizedImage` directive is marked as [standalone](guide/standalone-components) and can
+ * The `NgOptimizedImage` directive is marked as [standalone](guide/components/importing) and can
  * be imported directly.
  *
  * Follow the steps below to enable and use the directive:
@@ -2656,7 +2656,7 @@ export declare class NgStyle implements DoCheck {
  * @publicApi
  * @see {@link NgSwitchCase}
  * @see {@link NgSwitchDefault}
- * @see [Structural Directives](guide/structural-directives)
+ * @see [Structural Directives](guide/directives/structural-directives)
  *
  */
 export declare class NgSwitch {
@@ -2804,7 +2804,7 @@ export declare class NgTemplateOutlet<C = unknown> implements OnChanges {
 /**
  * Format styles that can be used to represent numbers.
  * @see {@link getLocaleNumberFormat}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -2820,7 +2820,7 @@ export declare enum NumberFormatStyle {
  * Examples are based on `en-US` values.
  *
  * @see {@link getLocaleNumberSymbol}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  * @object-literal-as-enum
@@ -3038,7 +3038,7 @@ export declare abstract class PlatformLocation {
  *
  * @see {@link NgPlural}
  * @see {@link NgPluralCase}
- * @see [Internationalization (i18n) Guide](/guide/i18n-overview)
+ * @see [Internationalization (i18n) Guide](guide/i18n)
  *
  * @publicApi
  */
@@ -3144,7 +3144,7 @@ export declare function provideNetlifyLoader(path?: string): Provider[];
 
 /**
  * Register global data to be used internally by Angular. See the
- * ["I18n guide"](guide/i18n-common-format-data-locale) to know how to import additional locale
+ * ["I18n guide"](guide/i18n/format-data-locale) to know how to import additional locale
  * data.
  *
  * The signature registerLocaleData(data: any, extraData?: any) is deprecated since v5.1

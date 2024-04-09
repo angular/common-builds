@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.3+sha-216199d
+ * @license Angular v18.0.0-next.3+sha-1c6553e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -70,9 +70,8 @@ export declare abstract class HttpBackend implements HttpHandler {
  * A single overload version of the method handles each response type.
  * The value of `responseType` cannot be a union, as the combined signature could imply.
 
- *
+ * TODO(adev): review
  * @usageNotes
- * Sample HTTP requests for the [Tour of Heroes](/tutorial/tour-of-heroes/toh-pt0) application.
  *
  * ### HTTP Request Example
  *
@@ -109,7 +108,7 @@ export declare abstract class HttpBackend implements HttpHandler {
  * }
  * ```
  *
- * @see [HTTP Guide](guide/understanding-communicating-with-http)
+ * @see [HTTP Guide](guide/http)
  * @see [HTTP Request](api/common/http/HttpRequest)
  *
  * @publicApi
@@ -3451,7 +3450,7 @@ export declare abstract class HttpHandler {
  *
  * @publicApi
  *
- * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
+ * @see [HTTP Guide](guide/http/interceptors)
  */
 export declare type HttpHandlerFn = (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>;
 
@@ -3603,7 +3602,7 @@ export declare class HttpHeaders {
  *
  * @publicApi
  *
- * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
+ * @see [HTTP Guide](guide/http/interceptors)
  * @see {@link HttpInterceptorFn}
  *
  * @usageNotes
@@ -3636,10 +3635,10 @@ export declare interface HttpInterceptor {
  * request) is provided. Most interceptors will delegate to this function, but that is not required
  * (see `HttpHandlerFn` for more details).
  *
- * `HttpInterceptorFn`s are executed in an [injection context](/guide/dependency-injection-context).
+ * `HttpInterceptorFn`s are executed in an [injection context](guide/di/dependency-injection-context).
  * They have access to `inject()` via the `EnvironmentInjector` from which they were configured.
  *
- * @see [HTTP Guide](guide/http-intercept-requests-and-responses)
+ * @see [HTTP Guide](guide/http/interceptors)
  * @see {@link withInterceptors}
  *
  * @usageNotes
