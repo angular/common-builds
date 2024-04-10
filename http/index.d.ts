@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.3+sha-cae993c
+ * @license Angular v18.0.0-next.3+sha-6993146
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3672,6 +3672,7 @@ declare class HttpInterceptorHandler extends HttpHandler {
     private injector;
     private chain;
     private readonly pendingTasks;
+    private readonly contributeToStability;
     constructor(backend: HttpBackend, injector: EnvironmentInjector);
     handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
@@ -4488,6 +4489,8 @@ export declare const ɵHTTP_ROOT_INTERCEPTOR_FNS: InjectionToken<readonly HttpIn
  * A provider to set a global primary http backend. If set, it will override the default one
  */
 export declare const ɵPRIMARY_HTTP_BACKEND: InjectionToken<HttpBackend>;
+
+export declare const ɵREQUESTS_CONTRIBUTE_TO_STABILITY: InjectionToken<boolean>;
 
 /**
  * Returns the DI providers needed to enable HTTP transfer cache.
