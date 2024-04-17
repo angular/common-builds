@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.4+sha-5f85972
+ * @license Angular v18.0.0-next.4+sha-c778977
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1240,22 +1240,6 @@ export declare function isPlatformBrowser(platformId: Object): boolean;
  * @publicApi
  */
 export declare function isPlatformServer(platformId: Object): boolean;
-
-/**
- * Returns whether a platform id represents a web worker app platform.
- * @publicApi
- * @deprecated This function serves no purpose since the removal of the Webworker platform. It will
- *     always return `false`.
- */
-export declare function isPlatformWorkerApp(platformId: Object): boolean;
-
-/**
- * Returns whether a platform id represents a web worker UI platform.
- * @publicApi
- * @deprecated This function serves no purpose since the removal of the Webworker platform. It will
- *     always return `false`.
- */
-export declare function isPlatformWorkerUi(platformId: Object): boolean;
 
 /**
  * @ngModule CommonModule
@@ -3436,10 +3420,6 @@ export declare function ɵparseCookieValue(cookieStr: string, name: string): str
 export declare const ɵPLATFORM_BROWSER_ID = "browser";
 
 export declare const ɵPLATFORM_SERVER_ID = "server";
-
-export declare const ɵPLATFORM_WORKER_APP_ID = "browserWorkerApp";
-
-export declare const ɵPLATFORM_WORKER_UI_ID = "browserWorkerUi";
 
 /**
  * This class wraps the platform Navigation API which allows server-specific and test
