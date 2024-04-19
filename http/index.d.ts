@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.5+sha-ca517d7
+ * @license Angular v18.0.0-next.5+sha-164dde4
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4195,6 +4195,8 @@ export declare enum HttpStatusCode {
  * @param includePostRequests Enables caching for POST requests. By default, only GET and HEAD
  *     requests are cached. This option can be enabled if POST requests are used to retrieve data
  *     (for example using GraphQL).
+ * @param includeRequestsWithAuthHeaders Enables caching of requests containing either `Authorization`
+ *     or `Proxy-Authorization` headers. By default, these requests are excluded from caching.
  *
  * @publicApi
  */
@@ -4202,6 +4204,7 @@ export declare type HttpTransferCacheOptions = {
     includeHeaders?: string[];
     filter?: (req: HttpRequest<unknown>) => boolean;
     includePostRequests?: boolean;
+    includeRequestsWithAuthHeaders?: boolean;
 };
 
 /**
