@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.5+sha-74333e6
+ * @license Angular v18.0.0-next.5+sha-ebfba77
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -44,6 +44,34 @@ export declare class FetchBackend implements HttpBackend {
  * @publicApi
  */
 export declare const HTTP_INTERCEPTORS: InjectionToken<readonly HttpInterceptor[]>;
+
+/**
+ * If your application uses different HTTP origins to make API calls (via `HttpClient`) on the server and
+ * on the client, the `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token allows you to establish a mapping
+ * between those origins, so that `HttpTransferCache` feature can recognize those requests as the same
+ * ones and reuse the data cached on the server during hydration on the client.
+ *
+ * **Important note**: the `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token should *only* be provided in
+ * the *server* code of your application (typically in the `app.server.config.ts` script). Angular throws an
+ * error if it detects that the token is defined while running on the client.
+ *
+ * @usageNotes
+ *
+ * When the same API endpoint is accessed via `http://internal-domain.com:8080` on the server and
+ * via `https://external-domain.com` on the client, you can use the following configuration:
+ * ```typescript
+ * // in app.server.config.ts
+ * {
+ *     provide: HTTP_TRANSFER_CACHE_ORIGIN_MAP,
+ *     useValue: {
+ *         'http://internal-domain.com:8080': 'https://external-domain.com'
+ *     }
+ * }
+ * ```
+ *
+ * @publicApi
+ */
+export declare const HTTP_TRANSFER_CACHE_ORIGIN_MAP: InjectionToken<Record<string, string>>;
 
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
