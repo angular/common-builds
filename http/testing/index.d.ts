@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.5+sha-3d84c98
+ * @license Angular v18.0.0-next.5+sha-f914f6a
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -19,6 +19,8 @@ import { Provider } from '@angular/core';
  * Inject `HttpTestingController` to expect and flush requests in your tests.
  *
  * @publicApi
+ *
+ * @deprecated Add `provideHttpClientTesting()` to your providers instead.
  */
 export declare class HttpClientTestingModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientTestingModule, never>;

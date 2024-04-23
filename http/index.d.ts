@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-next.5+sha-3d84c98
+ * @license Angular v18.0.0-next.5+sha-f914f6a
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3191,6 +3191,7 @@ export declare class HttpClient {
  * with method JSONP, where they are rejected.
  *
  * @publicApi
+ * @deprecated `withJsonpSupport()` as providers instead
  */
 export declare class HttpClientJsonpModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientJsonpModule, never>;
@@ -3206,6 +3207,7 @@ export declare class HttpClientJsonpModule {
  * multiprovider for built-in DI token `HTTP_INTERCEPTORS`.
  *
  * @publicApi
+ * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead
  */
 export declare class HttpClientModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientModule, never>;
@@ -3224,6 +3226,8 @@ export declare class HttpClientModule {
  * and the default header name is `X-XSRF-TOKEN`.
  *
  * @publicApi
+ * @deprecated Use withXsrfConfiguration({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'}) as
+ *     providers instead or `withNoXsrfProtection` if you want to disabled XSRF protection.
  */
 export declare class HttpClientXsrfModule {
     /**
