@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.1.0-next.0+sha-aea3b57
+ * @license Angular v18.1.0-next.0+sha-4c895c9
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4433,9 +4433,6 @@ export declare function provideHttpClient(...features: HttpFeature<HttpFeatureKi
 /**
  * Configures the current `HttpClient` instance to make requests using the fetch API.
  *
- * This `FetchBackend` requires the support of the Fetch API which is available on all evergreen
- * browsers and on NodeJS from v18 onward.
- *
  * Note: The Fetch API doesn't support progress report on uploads.
  *
  * @publicApi
@@ -4519,11 +4516,6 @@ export declare function withXsrfConfiguration({ cookieName, headerName, }: {
  * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
  */
 export declare const ɵHTTP_ROOT_INTERCEPTOR_FNS: InjectionToken<readonly HttpInterceptorFn[]>;
-
-/**
- * A provider to set a global primary http backend. If set, it will override the default one
- */
-export declare const ɵPRIMARY_HTTP_BACKEND: InjectionToken<HttpBackend>;
 
 export declare const ɵREQUESTS_CONTRIBUTE_TO_STABILITY: InjectionToken<boolean>;
 
