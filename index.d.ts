@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.1.0-next.0+sha-1360110
+ * @license Angular v18.1.0-next.1+sha-567c2f6
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -388,7 +388,7 @@ export declare class DatePipe implements PipeTransform {
     private locale;
     private defaultTimezone?;
     private defaultOptions?;
-    constructor(locale: string, defaultTimezone?: string | null | undefined, defaultOptions?: DatePipeConfig | null | undefined);
+    constructor(locale: string, defaultTimezone?: (string | null) | undefined, defaultOptions?: (DatePipeConfig | null) | undefined);
     /**
      * @param value The date expression: a `Date` object,  a number
      * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
@@ -618,7 +618,7 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  */
 export declare enum FormatWidth {
     /**
-     * For `en-US`, 'M/d/yy, h:mm a'`
+     * For `en-US`, `'M/d/yy, h:mm a'`
      * (Example: `6/15/15, 9:03 AM`)
      */
     Short = 0,
