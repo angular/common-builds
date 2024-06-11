@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.0.0-rc.2+sha-69a8399
+ * @license Angular v18.0.2+sha-ca78553
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -618,7 +618,7 @@ export declare function formatPercent(value: number, locale: string, digitsInfo?
  */
 export declare enum FormatWidth {
     /**
-     * For `en-US`, 'M/d/yy, h:mm a'`
+     * For `en-US`, `'M/d/yy, h:mm a'`
      * (Example: `6/15/15, 9:03 AM`)
      */
     Short = 0,
