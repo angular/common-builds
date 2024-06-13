@@ -248,10 +248,10 @@ export class Location {
      * @returns The URL string, modified if needed.
      */
     static { this.stripTrailingSlash = stripTrailingSlash; }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.3+sha-be09f0b", ngImport: i0, type: Location, deps: [{ token: i1.LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.3+sha-be09f0b", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.3+sha-7c76eb5", ngImport: i0, type: Location, deps: [{ token: i1.LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.3+sha-7c76eb5", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.3+sha-be09f0b", ngImport: i0, type: Location, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.3+sha-7c76eb5", ngImport: i0, type: Location, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root',
