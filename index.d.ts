@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.0+sha-9e87593
+ * @license Angular v19.0.0-next.0+sha-32ddac1
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -396,10 +396,10 @@ export declare class DatePipe implements PipeTransform {
      * custom format string.  When not provided, the `DatePipe` looks for the value using the
      * `DATE_PIPE_DEFAULT_OPTIONS` injection token (and reads the `dateFormat` property).
      * If the token is not configured, the `mediumDate` is used as a value.
-     * @param timezone A timezone offset (such as `'+0430'`), or a standard UTC/GMT, or continental US
-     * timezone abbreviation. When not provided, the `DatePipe` looks for the value using the
-     * `DATE_PIPE_DEFAULT_OPTIONS` injection token (and reads the `timezone` property). If the token
-     * is not configured, the end-user's local system timezone is used as a value.
+     * @param timezone A timezone offset (such as `'+0430'`). When not provided, the `DatePipe`
+     * looks for the value using the `DATE_PIPE_DEFAULT_OPTIONS` injection token (and reads
+     * the `timezone` property). If the token is not configured, the end-user's local system
+     * timezone is used as a value.
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
      * See [Setting your app locale](guide/i18n/locale-id).
@@ -550,8 +550,7 @@ export declare function formatCurrency(value: number, locale: string, currency: 
  * or an [ISO date-time string](https://www.w3.org/TR/NOTE-datetime).
  * @param format The date-time components to include. See `DatePipe` for details.
  * @param locale A locale code for the locale format rules to use.
- * @param timezone The time zone. A time zone offset from GMT (such as `'+0430'`),
- * or a standard UTC/GMT or continental US time zone abbreviation.
+ * @param timezone The time zone. A time zone offset from GMT (such as `'+0430'`).
  * If not specified, uses host system settings.
  *
  * @returns The formatted date string.
