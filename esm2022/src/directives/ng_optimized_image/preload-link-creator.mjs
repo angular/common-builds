@@ -65,10 +65,10 @@ export class PreloadLinkCreator {
         }
         renderer.appendChild(this.document.head, preload);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-c9d9078", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-c9d9078", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-969dadc", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-969dadc", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-c9d9078", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.1+sha-969dadc", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
