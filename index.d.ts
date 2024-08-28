@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.1+sha-226a67d
+ * @license Angular v19.0.0-next.1+sha-774d983
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2052,7 +2052,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T, U>>, _differs: IterableDiffers);
     /**
      * A reference to the template that is stamped out for each item in the iterable.
-     * @see [template reference variable](guide/templates/reference-variables)
+     * @see [template reference variable](guide/templates/variables#template-reference-variables)
      */
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
