@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.7+sha-1549afe
+ * @license Angular v19.0.0-next.7+sha-0aae371
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1589,7 +1589,7 @@ export declare interface LocationChangeListener {
  * interact with application route state.
  *
  * For instance, `HashLocationStrategy` produces URLs like
- * <code class="no-auto-link">http://example.com#/foo</code>,
+ * <code class="no-auto-link">http://example.com/#/foo</code>,
  * and `PathLocationStrategy` produces
  * <code class="no-auto-link">http://example.com/foo</code> as an equivalent URL.
  *
