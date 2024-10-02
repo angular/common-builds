@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.2.7+sha-46b088a
+ * @license Angular v18.2.7+sha-dc911c6
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2078,11 +2078,31 @@ export { NgForOf }
  * @publicApi
  */
 export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
+    /** Reference to the current item from the collection. */
     $implicit: T;
+    /**
+     * The value of the iterable expression. Useful when the expression is
+     * more complex then a property access, for example when using the async pipe
+     * (`userStreams | async`).
+     */
     ngForOf: U;
+    /** Returns an index of the current item in the collection. */
     index: number;
+    /** Returns total amount of items in the collection. */
     count: number;
-    constructor($implicit: T, ngForOf: U, index: number, count: number);
+    constructor(
+    /** Reference to the current item from the collection. */
+    $implicit: T, 
+    /**
+     * The value of the iterable expression. Useful when the expression is
+     * more complex then a property access, for example when using the async pipe
+     * (`userStreams | async`).
+     */
+    ngForOf: U, 
+    /** Returns an index of the current item in the collection. */
+    index: number, 
+    /** Returns total amount of items in the collection. */
+    count: number);
     get first(): boolean;
     get last(): boolean;
     get even(): boolean;
