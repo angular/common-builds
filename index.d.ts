@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.8+sha-0eb1c5c
+ * @license Angular v19.0.0-next.8+sha-a36744e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -495,6 +495,13 @@ export declare interface DatePipeConfig {
 export declare class DecimalPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
+    /**
+     * @param value The value to be formatted.
+     * @param digitsInfo Sets digit and decimal representation.
+     * [See more](#digitsinfo).
+     * @param locale Specifies what locale format rules to use.
+     * [See more](#locale).
+     */
     transform(value: number | string, digitsInfo?: string, locale?: string): string | null;
     transform(value: null | undefined, digitsInfo?: string, locale?: string): null;
     transform(value: number | string | null | undefined, digitsInfo?: string, locale?: string): string | null;
