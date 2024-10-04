@@ -1,5 +1,5 @@
 /**
- * @license Angular v18.2.7+sha-39a851f
+ * @license Angular v18.2.7+sha-ccf2c7f
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2403,7 +2403,7 @@ export declare abstract class NgLocalization {
  *   {
  *      provide: IMAGE_LOADER,
  *      useValue: (config: ImageLoaderConfig) => {
- *        return `https://example.com/${config.src}-${config.width}.jpg}`;
+ *        return `https://example.com/${config.src}-${config.width}.jpg`;
  *      }
  *   },
  * ],
