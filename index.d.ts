@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.10+sha-d3f8153
+ * @license Angular v19.0.0-next.10+sha-13c1306
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1397,6 +1397,7 @@ export declare interface KeyValue<K, V> {
  * The output array will be ordered by keys.
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
+ * Passing `null` as the compareFn will use natural ordering of the input.
  *
  * @usageNotes
  * ### Examples
@@ -1414,13 +1415,13 @@ export declare class KeyValuePipe implements PipeTransform {
     private differ;
     private keyValues;
     private compareFn;
-    transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    transform<K extends number, V>(input: Record<K, V>, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>>;
-    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V>, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>>;
-    transform(input: null | undefined, compareFn?: (a: KeyValue<unknown, unknown>, b: KeyValue<unknown, unknown>) => number): null;
-    transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
-    transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: (a: KeyValue<string, V>, b: KeyValue<string, V>) => number): Array<KeyValue<string, V>> | null;
-    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: (a: KeyValue<K, V>, b: KeyValue<K, V>) => number): Array<KeyValue<K, V>> | null;
+    transform<K, V>(input: ReadonlyMap<K, V>, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>>;
+    transform<K extends number, V>(input: Record<K, V>, compareFn?: ((a: KeyValue<string, V>, b: KeyValue<string, V>) => number) | null): Array<KeyValue<string, V>>;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V>, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>>;
+    transform(input: null | undefined, compareFn?: ((a: KeyValue<unknown, unknown>, b: KeyValue<unknown, unknown>) => number) | null): null;
+    transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>> | null;
+    transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: ((a: KeyValue<string, V>, b: KeyValue<string, V>) => number) | null): Array<KeyValue<string, V>> | null;
+    transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>> | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<KeyValuePipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue", true>;
 }
