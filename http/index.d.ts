@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.10+sha-13c1306
+ * @license Angular v19.0.0-next.10+sha-4b9accd
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4497,7 +4497,7 @@ export declare function withNoXsrfProtection(): HttpFeature<HttpFeatureKind.NoXs
  * this option.
  *
  * @see {@link provideHttpClient}
- * @developerPreview
+ * @publicApi
  */
 export declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.RequestsMadeViaParent>;
 
