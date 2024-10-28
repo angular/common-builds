@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-next.0+sha-0f2f7ec
+ * @license Angular v19.1.0-next.0+sha-db467e1
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -53,26 +53,30 @@ const DEFAULT_PORTS = {
  * @publicApi
  */
 class $locationShim {
+    location;
+    platformLocation;
+    urlCodec;
+    locationStrategy;
+    initializing = true;
+    updateBrowser = false;
+    $$absUrl = '';
+    $$url = '';
+    $$protocol;
+    $$host = '';
+    $$port;
+    $$replace = false;
+    $$path = '';
+    $$search = '';
+    $$hash = '';
+    $$state;
+    $$changeListeners = [];
+    cachedState = null;
+    urlChanges = new ReplaySubject(1);
     constructor($injector, location, platformLocation, urlCodec, locationStrategy) {
         this.location = location;
         this.platformLocation = platformLocation;
         this.urlCodec = urlCodec;
         this.locationStrategy = locationStrategy;
-        this.initializing = true;
-        this.updateBrowser = false;
-        this.$$absUrl = '';
-        this.$$url = '';
-        this.$$host = '';
-        this.$$replace = false;
-        this.$$path = '';
-        this.$$search = '';
-        this.$$hash = '';
-        this.$$changeListeners = [];
-        this.cachedState = null;
-        this.urlChanges = new ReplaySubject(1);
-        this.lastBrowserUrl = '';
-        // This variable should be used *only* inside the cacheState function.
-        this.lastCachedState = null;
         const initialUrl = this.browserUrl();
         let parsedUrl = this.urlCodec.parse(initialUrl);
         if (typeof parsedUrl === 'string') {
@@ -214,6 +218,8 @@ class $locationShim {
         this.updateBrowser = false;
         this.lastBrowserUrl = this.browserUrl();
     }
+    lastHistoryState;
+    lastBrowserUrl = '';
     browserUrl(url, replace, state) {
         // In modern browsers `history.state` is `null` by default; treating it separately
         // from `undefined` would cause `$browser.url('/foo')` to change `history.state`
@@ -250,6 +256,8 @@ class $locationShim {
             return this.platformLocation.href;
         }
     }
+    // This variable should be used *only* inside the cacheState function.
+    lastCachedState = null;
     cacheState() {
         // This should be the only place in $browser where `history.state` is read.
         this.cachedState = this.platformLocation.getState();
@@ -558,6 +566,11 @@ class $locationShim {
  * @publicApi
  */
 class $locationShimProvider {
+    ngUpgrade;
+    location;
+    platformLocation;
+    urlCodec;
+    locationStrategy;
     constructor(ngUpgrade, location, platformLocation, urlCodec, locationStrategy) {
         this.ngUpgrade = ngUpgrade;
         this.location = location;
@@ -841,11 +854,11 @@ class LocationUpgradeModule {
             ],
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-0f2f7ec", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.0-next.0+sha-0f2f7ec", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-0f2f7ec", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-db467e1", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.0-next.0+sha-db467e1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-db467e1", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-0f2f7ec", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.0-next.0+sha-db467e1", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
