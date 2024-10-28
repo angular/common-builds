@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.11+sha-395cb34
+ * @license Angular v19.0.0-next.11+sha-f815d7b
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -14,10 +14,10 @@ import { Subject } from 'rxjs';
  * implementations.
  */
 class PlatformNavigation {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: PlatformNavigation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: PlatformNavigation, providedIn: 'platform', useFactory: () => window.navigation }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: PlatformNavigation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: PlatformNavigation, providedIn: 'platform', useFactory: () => window.navigation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: PlatformNavigation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: PlatformNavigation, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'platform', useFactory: () => window.navigation }]
         }] });
@@ -28,6 +28,50 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+s
  * things like traversal delay.
  */
 class FakeNavigation {
+    window;
+    /**
+     * The fake implementation of an entries array. Only same-document entries
+     * allowed.
+     */
+    entriesArr = [];
+    /**
+     * The current active entry index into `entriesArr`.
+     */
+    currentEntryIndex = 0;
+    /**
+     * The current navigate event.
+     */
+    navigateEvent = undefined;
+    /**
+     * A Map of pending traversals, so that traversals to the same entry can be
+     * re-used.
+     */
+    traversalQueue = new Map();
+    /**
+     * A Promise that resolves when the previous traversals have finished. Used to
+     * simulate the cross-process communication necessary for traversals.
+     */
+    nextTraversal = Promise.resolve();
+    /**
+     * A prospective current active entry index, which includes unresolved
+     * traversals. Used by `go` to determine where navigations are intended to go.
+     */
+    prospectiveEntryIndex = 0;
+    /**
+     * A test-only option to make traversals synchronous, rather than emulate
+     * cross-process communication.
+     */
+    synchronousTraversals = false;
+    /** Whether to allow a call to setInitialEntryForTesting. */
+    canSetInitialEntry = true;
+    /** `EventTarget` to dispatch events. */
+    eventTarget;
+    /** The next unique id for created entries. Replace recreates this id. */
+    nextId = 0;
+    /** The next unique key for created entries. Replace inherits this id. */
+    nextKey = 0;
+    /** Whether this fake is disposed. */
+    disposed = false;
     /** Equivalent to `navigation.currentEntry`. */
     get currentEntry() {
         return this.entriesArr[this.currentEntryIndex];
@@ -40,47 +84,6 @@ class FakeNavigation {
     }
     constructor(window, startURL) {
         this.window = window;
-        /**
-         * The fake implementation of an entries array. Only same-document entries
-         * allowed.
-         */
-        this.entriesArr = [];
-        /**
-         * The current active entry index into `entriesArr`.
-         */
-        this.currentEntryIndex = 0;
-        /**
-         * The current navigate event.
-         */
-        this.navigateEvent = undefined;
-        /**
-         * A Map of pending traversals, so that traversals to the same entry can be
-         * re-used.
-         */
-        this.traversalQueue = new Map();
-        /**
-         * A Promise that resolves when the previous traversals have finished. Used to
-         * simulate the cross-process communication necessary for traversals.
-         */
-        this.nextTraversal = Promise.resolve();
-        /**
-         * A prospective current active entry index, which includes unresolved
-         * traversals. Used by `go` to determine where navigations are intended to go.
-         */
-        this.prospectiveEntryIndex = 0;
-        /**
-         * A test-only option to make traversals synchronous, rather than emulate
-         * cross-process communication.
-         */
-        this.synchronousTraversals = false;
-        /** Whether to allow a call to setInitialEntryForTesting. */
-        this.canSetInitialEntry = true;
-        /** The next unique id for created entries. Replace recreates this id. */
-        this.nextId = 0;
-        /** The next unique key for created entries. Replace inherits this id. */
-        this.nextKey = 0;
-        /** Whether this fake is disposed. */
-        this.disposed = false;
         this.eventTarget = this.window.document.createElement('div');
         // First entry.
         this.setInitialEntryForTesting(startURL);
@@ -494,10 +497,17 @@ class FakeNavigation {
  * Fake equivalent of `NavigationHistoryEntry`.
  */
 class FakeNavigationHistoryEntry {
+    url;
+    sameDocument;
+    id;
+    key;
+    index;
+    state;
+    historyState;
+    // tslint:disable-next-line:no-any
+    ondispose = null;
     constructor(url, { id, key, index, sameDocument, state, historyState, }) {
         this.url = url;
-        // tslint:disable-next-line:no-any
-        this.ondispose = null;
         this.id = id;
         this.key = key;
         this.index = index;
@@ -634,6 +644,13 @@ function createPopStateEvent({ state }) {
  * Fake equivalent of `NavigationDestination`.
  */
 class FakeNavigationDestination {
+    url;
+    sameDocument;
+    key;
+    id;
+    index;
+    state;
+    historyState;
     constructor({ url, sameDocument, historyState, state, key = null, id = null, index = -1, }) {
         this.url = url;
         this.sameDocument = sameDocument;
@@ -659,11 +676,17 @@ function isHashChange(from, to) {
 }
 /** Internal utility class for representing the result of a navigation.  */
 class InternalNavigationResult {
+    committedResolve;
+    committedReject;
+    finishedResolve;
+    finishedReject;
+    committed;
+    finished;
     get signal() {
         return this.abortController.signal;
     }
+    abortController = new AbortController();
     constructor() {
-        this.abortController = new AbortController();
         this.committed = new Promise((resolve, reject) => {
             this.committedResolve = resolve;
             this.committedReject = reject;
@@ -752,12 +775,12 @@ const MOCK_PLATFORM_LOCATION_CONFIG = new InjectionToken('MOCK_PLATFORM_LOCATION
  * @publicApi
  */
 class MockPlatformLocation {
+    baseHref = '';
+    hashUpdate = new Subject();
+    popStateSubject = new Subject();
+    urlChangeIndex = 0;
+    urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
     constructor(config) {
-        this.baseHref = '';
-        this.hashUpdate = new Subject();
-        this.popStateSubject = new Subject();
-        this.urlChangeIndex = 0;
-        this.urlChanges = [{ hostname: '', protocol: '', port: '', pathname: '/', search: '', hash: '', state: null }];
         if (config) {
             this.baseHref = config.appBaseHref || '';
             const parsedChanges = this.parseChanges(null, config.startUrl || 'http://_empty_/', this.baseHref);
@@ -887,10 +910,10 @@ class MockPlatformLocation {
             });
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockPlatformLocation }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockPlatformLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -902,15 +925,15 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+s
  * Mock implementation of URL state.
  */
 class FakeNavigationPlatformLocation {
+    _platformNavigation = inject(ɵPlatformNavigation);
+    window = inject(DOCUMENT).defaultView;
     constructor() {
-        this._platformNavigation = inject(ɵPlatformNavigation);
-        this.window = inject(DOCUMENT).defaultView;
-        this.config = inject(MOCK_PLATFORM_LOCATION_CONFIG, { optional: true });
         if (!(this._platformNavigation instanceof FakeNavigation)) {
             throw new Error('FakePlatformNavigation cannot be used without FakeNavigation. Use ' +
                 '`provideFakeNavigation` to have all these services provided together.');
         }
     }
+    config = inject(MOCK_PLATFORM_LOCATION_CONFIG, { optional: true });
     getBaseHrefFromDOM() {
         return this.config?.appBaseHref ?? '';
     }
@@ -961,10 +984,10 @@ class FakeNavigationPlatformLocation {
     getState() {
         return this._platformNavigation.currentEntry.getHistoryState();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FakeNavigationPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FakeNavigationPlatformLocation }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FakeNavigationPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FakeNavigationPlatformLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FakeNavigationPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FakeNavigationPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 
@@ -990,21 +1013,19 @@ function provideFakePlatformNavigation() {
  * @publicApi
  */
 class SpyLocation {
-    constructor() {
-        this.urlChanges = [];
-        this._history = [new LocationState('', '', null)];
-        this._historyIndex = 0;
-        /** @internal */
-        this._subject = new Subject();
-        /** @internal */
-        this._basePath = '';
-        /** @internal */
-        this._locationStrategy = null;
-        /** @internal */
-        this._urlChangeListeners = [];
-        /** @internal */
-        this._urlChangeSubscription = null;
-    }
+    urlChanges = [];
+    _history = [new LocationState('', '', null)];
+    _historyIndex = 0;
+    /** @internal */
+    _subject = new Subject();
+    /** @internal */
+    _basePath = '';
+    /** @internal */
+    _locationStrategy = null;
+    /** @internal */
+    _urlChangeListeners = [];
+    /** @internal */
+    _urlChangeSubscription = null;
     /** @nodoc */
     ngOnDestroy() {
         this._urlChangeSubscription?.unsubscribe();
@@ -1140,13 +1161,16 @@ class SpyLocation {
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: SpyLocation }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: SpyLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: SpyLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
+    path;
+    query;
+    state;
     constructor(path, query, state) {
         this.path = path;
         this.query = query;
@@ -1161,15 +1185,15 @@ class LocationState {
  * @publicApi
  */
 class MockLocationStrategy extends LocationStrategy {
+    internalBaseHref = '/';
+    internalPath = '/';
+    internalTitle = '';
+    urlChanges = [];
+    /** @internal */
+    _subject = new Subject();
+    stateChanges = [];
     constructor() {
         super();
-        this.internalBaseHref = '/';
-        this.internalPath = '/';
-        this.internalTitle = '';
-        this.urlChanges = [];
-        /** @internal */
-        this._subject = new Subject();
-        this.stateChanges = [];
     }
     simulatePopState(url) {
         this.internalPath = url;
@@ -1222,17 +1246,18 @@ class MockLocationStrategy extends LocationStrategy {
     getState() {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockLocationStrategy }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockLocationStrategy });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: MockLocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 class _MockPopStateEvent {
+    newUrl;
+    pop = true;
+    type = 'popstate';
     constructor(newUrl) {
         this.newUrl = newUrl;
-        this.pop = true;
-        this.type = 'popstate';
     }
 }
 

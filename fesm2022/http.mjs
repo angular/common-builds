@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.0-next.11+sha-395cb34
+ * @license Angular v19.0.0-next.11+sha-f815d7b
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -46,17 +46,26 @@ class HttpBackend {
  * @publicApi
  */
 class HttpHeaders {
+    /**
+     * Internal map of lowercase header names to values.
+     */
+    // TODO(issue/24571): remove '!'.
+    headers;
+    /**
+     * Internal map of lowercased header names to the normalized
+     * form of the name (the form seen first).
+     */
+    normalizedNames = new Map();
+    /**
+     * Complete the lazy initialization of this object (needed before reading).
+     */
+    lazyInit;
+    /**
+     * Queued updates to be materialized the next initialization.
+     */
+    lazyUpdate = null;
     /**  Constructs a new HTTP header object with the given values.*/
     constructor(headers) {
-        /**
-         * Internal map of lowercased header names to the normalized
-         * form of the name (the form seen first).
-         */
-        this.normalizedNames = new Map();
-        /**
-         * Queued updates to be materialized the next initialization.
-         */
-        this.lazyUpdate = null;
         if (!headers) {
             this.headers = new Map();
         }
@@ -373,9 +382,11 @@ function valueToString(value) {
  * @publicApi
  */
 class HttpParams {
+    map;
+    encoder;
+    updates = null;
+    cloneFrom = null;
     constructor(options = {}) {
-        this.updates = null;
-        this.cloneFrom = null;
         this.encoder = options.encoder || new HttpUrlEncodingCodec();
         if (!!options.fromString) {
             if (!!options.fromObject) {
@@ -556,6 +567,7 @@ class HttpParams {
  * @publicApi
  */
 class HttpContextToken {
+    defaultValue;
     constructor(defaultValue) {
         this.defaultValue = defaultValue;
     }
@@ -594,9 +606,7 @@ class HttpContextToken {
  * @publicApi
  */
 class HttpContext {
-    constructor() {
-        this.map = new Map();
-    }
+    map = new Map();
     /**
      * Store a value in the context. If a value is already present it will be overwritten.
      *
@@ -709,36 +719,70 @@ function isUrlSearchParams(value) {
  * @publicApi
  */
 class HttpRequest {
+    url;
+    /**
+     * The request body, or `null` if one isn't set.
+     *
+     * Bodies are not enforced to be immutable, as they can include a reference to any
+     * user-defined data type. However, interceptors should take care to preserve
+     * idempotence by treating them as such.
+     */
+    body = null;
+    /**
+     * Outgoing headers for this request.
+     */
+    // TODO(issue/24571): remove '!'.
+    headers;
+    /**
+     * Shared and mutable context that can be used by interceptors
+     */
+    context;
+    /**
+     * Whether this request should be made in a way that exposes progress events.
+     *
+     * Progress events are expensive (change detection runs on each event) and so
+     * they should only be requested if the consumer intends to monitor them.
+     *
+     * Note: The `FetchBackend` doesn't support progress report on uploads.
+     */
+    reportProgress = false;
+    /**
+     * Whether this request should be sent with outgoing credentials (cookies).
+     */
+    withCredentials = false;
+    /**
+     * The expected response type of the server.
+     *
+     * This is used to parse the response appropriately before returning it to
+     * the requestee.
+     */
+    responseType = 'json';
+    /**
+     * The outgoing HTTP request method.
+     */
+    method;
+    /**
+     * Outgoing URL parameters.
+     *
+     * To pass a string representation of HTTP parameters in the URL-query-string format,
+     * the `HttpParamsOptions`' `fromString` may be used. For example:
+     *
+     * ```
+     * new HttpParams({fromString: 'angular=awesome'})
+     * ```
+     */
+    // TODO(issue/24571): remove '!'.
+    params;
+    /**
+     * The outgoing URL with all URL parameters set.
+     */
+    urlWithParams;
+    /**
+     * The HttpTransferCache option for the request
+     */
+    transferCache;
     constructor(method, url, third, fourth) {
         this.url = url;
-        /**
-         * The request body, or `null` if one isn't set.
-         *
-         * Bodies are not enforced to be immutable, as they can include a reference to any
-         * user-defined data type. However, interceptors should take care to preserve
-         * idempotence by treating them as such.
-         */
-        this.body = null;
-        /**
-         * Whether this request should be made in a way that exposes progress events.
-         *
-         * Progress events are expensive (change detection runs on each event) and so
-         * they should only be requested if the consumer intends to monitor them.
-         *
-         * Note: The `FetchBackend` doesn't support progress report on uploads.
-         */
-        this.reportProgress = false;
-        /**
-         * Whether this request should be sent with outgoing credentials (cookies).
-         */
-        this.withCredentials = false;
-        /**
-         * The expected response type of the server.
-         *
-         * This is used to parse the response appropriately before returning it to
-         * the requestee.
-         */
-        this.responseType = 'json';
         this.method = method.toUpperCase();
         // Next, need to figure out which argument holds the HttpRequestInit
         // options, if any.
@@ -968,6 +1012,33 @@ var HttpEventType;
  */
 class HttpResponseBase {
     /**
+     * All response headers.
+     */
+    headers;
+    /**
+     * Response status code.
+     */
+    status;
+    /**
+     * Textual description of response status code, defaults to OK.
+     *
+     * Do not depend on this.
+     */
+    statusText;
+    /**
+     * URL of the resource retrieved, or null if not available.
+     */
+    url;
+    /**
+     * Whether the status code falls in the 2xx range.
+     */
+    ok;
+    /**
+     * Type of the response, narrowed to either the full response or the header.
+     */
+    // TODO(issue/24571): remove '!'.
+    type;
+    /**
      * Super-constructor for all responses.
      *
      * The single parameter accepted is an initialization hash. Any properties
@@ -999,8 +1070,8 @@ class HttpHeaderResponse extends HttpResponseBase {
      */
     constructor(init = {}) {
         super(init);
-        this.type = HttpEventType.ResponseHeader;
     }
+    type = HttpEventType.ResponseHeader;
     /**
      * Copy this `HttpHeaderResponse`, overriding its contents with the
      * given parameter hash.
@@ -1027,13 +1098,17 @@ class HttpHeaderResponse extends HttpResponseBase {
  */
 class HttpResponse extends HttpResponseBase {
     /**
+     * The response body, or `null` if one was not returned.
+     */
+    body;
+    /**
      * Construct a new `HttpResponse`.
      */
     constructor(init = {}) {
         super(init);
-        this.type = HttpEventType.Response;
         this.body = init.body !== undefined ? init.body : null;
     }
+    type = HttpEventType.Response;
     clone(update = {}) {
         return new HttpResponse({
             body: update.body !== undefined ? update.body : this.body,
@@ -1058,14 +1133,16 @@ class HttpResponse extends HttpResponseBase {
  * @publicApi
  */
 class HttpErrorResponse extends HttpResponseBase {
+    name = 'HttpErrorResponse';
+    message;
+    error;
+    /**
+     * Errors are never okay, even when the status code is in the 2xx success range.
+     */
+    ok = false;
     constructor(init) {
         // Initialize with a default status of 0 / Unknown Error.
         super(init, 0, 'Unknown Error');
-        this.name = 'HttpErrorResponse';
-        /**
-         * Errors are never okay, even when the status code is in the 2xx success range.
-         */
-        this.ok = false;
         // If the response was successful, then this was a parse error. Otherwise, it was
         // a protocol-level failure of some sort. Either the request failed in transit
         // or the server returned an unsuccessful status code.
@@ -1234,6 +1311,7 @@ function addBody(options, body) {
  * @publicApi
  */
 class HttpClient {
+    handler;
     constructor(handler) {
         this.handler = handler;
     }
@@ -1457,10 +1535,10 @@ class HttpClient {
     put(url, body, options = {}) {
         return this.request('PUT', url, addBody(options, body));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClient }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClient });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClient, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: HttpHandler }] });
 
@@ -1490,13 +1568,11 @@ function getResponseUrl$1(response) {
  * @publicApi
  */
 class FetchBackend {
-    constructor() {
-        // We use an arrow function to always reference the current global implementation of `fetch`.
-        // This is helpful for cases when the global `fetch` implementation is modified by external code,
-        // see https://github.com/angular/angular/issues/57527.
-        this.fetchImpl = inject(FetchFactory, { optional: true })?.fetch ?? ((...args) => globalThis.fetch(...args));
-        this.ngZone = inject(NgZone);
-    }
+    // We use an arrow function to always reference the current global implementation of `fetch`.
+    // This is helpful for cases when the global `fetch` implementation is modified by external code,
+    // see https://github.com/angular/angular/issues/57527.
+    fetchImpl = inject(FetchFactory, { optional: true })?.fetch ?? ((...args) => globalThis.fetch(...args));
+    ngZone = inject(NgZone);
     handle(request) {
         return new Observable((observer) => {
             const aborter = new AbortController();
@@ -1673,10 +1749,10 @@ class FetchBackend {
         }
         return chunksAll;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FetchBackend }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FetchBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: FetchBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: FetchBackend, decorators: [{
             type: Injectable
         }] });
 /**
@@ -1765,13 +1841,15 @@ function resetFetchBackendWarningFlag() {
     fetchBackendWarningDisplayed = false;
 }
 class HttpInterceptorHandler extends HttpHandler {
+    backend;
+    injector;
+    chain = null;
+    pendingTasks = inject(ɵPendingTasks);
+    contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
     constructor(backend, injector) {
         super();
         this.backend = backend;
         this.injector = injector;
-        this.chain = null;
-        this.pendingTasks = inject(ɵPendingTasks);
-        this.contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
         // We strongly recommend using fetch backend for HTTP calls when SSR is used
         // for an application. The logic below checks if that's the case and produces
         // a warning otherwise.
@@ -1810,10 +1888,10 @@ class HttpInterceptorHandler extends HttpHandler {
             return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpInterceptorHandler }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpInterceptorHandler });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
 
@@ -1869,13 +1947,15 @@ function jsonpCallbackContext() {
  * @publicApi
  */
 class JsonpClientBackend {
+    callbackMap;
+    document;
+    /**
+     * A resolved promise that can be used to schedule microtasks in the event handlers.
+     */
+    resolvedPromise = Promise.resolve();
     constructor(callbackMap, document) {
         this.callbackMap = callbackMap;
         this.document = document;
-        /**
-         * A resolved promise that can be used to schedule microtasks in the event handlers.
-         */
-        this.resolvedPromise = Promise.resolve();
     }
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
@@ -2013,10 +2093,10 @@ class JsonpClientBackend {
         foreignDocument ??= this.document.implementation.createHTMLDocument();
         foreignDocument.adoptNode(script);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpClientBackend }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpClientBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpClientBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpClientBackend, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                     type: Inject,
@@ -2041,6 +2121,7 @@ function jsonpInterceptorFn(req, next) {
  * @publicApi
  */
 class JsonpInterceptor {
+    injector;
     constructor(injector) {
         this.injector = injector;
     }
@@ -2054,10 +2135,10 @@ class JsonpInterceptor {
     intercept(initialRequest, next) {
         return runInInjectionContext(this.injector, () => jsonpInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpInterceptor }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: JsonpInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: JsonpInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
@@ -2083,6 +2164,7 @@ function getResponseUrl(xhr) {
  * @publicApi
  */
 class HttpXhrBackend {
+    xhrFactory;
     constructor(xhrFactory) {
         this.xhrFactory = xhrFactory;
     }
@@ -2337,10 +2419,10 @@ class HttpXhrBackend {
             });
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXhrBackend }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXhrBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXhrBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXhrBackend, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1.XhrFactory }] });
 
@@ -2366,16 +2448,19 @@ class HttpXsrfTokenExtractor {
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
 class HttpXsrfCookieExtractor {
+    doc;
+    platform;
+    cookieName;
+    lastCookieString = '';
+    lastToken = null;
+    /**
+     * @internal for testing
+     */
+    parseCount = 0;
     constructor(doc, platform, cookieName) {
         this.doc = doc;
         this.platform = platform;
         this.cookieName = cookieName;
-        this.lastCookieString = '';
-        this.lastToken = null;
-        /**
-         * @internal for testing
-         */
-        this.parseCount = 0;
     }
     getToken() {
         if (this.platform === 'server') {
@@ -2389,10 +2474,10 @@ class HttpXsrfCookieExtractor {
         }
         return this.lastToken;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfCookieExtractor }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfCookieExtractor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -2429,16 +2514,17 @@ function xsrfInterceptorFn(req, next) {
  * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
  */
 class HttpXsrfInterceptor {
+    injector;
     constructor(injector) {
         this.injector = injector;
     }
     intercept(initialRequest, next) {
         return runInInjectionContext(this.injector, () => xsrfInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfInterceptor }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
@@ -2703,9 +2789,9 @@ class HttpClientXsrfModule {
             providers: withXsrfConfiguration(options).ɵproviders,
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientXsrfModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientXsrfModule, providers: [
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientXsrfModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientXsrfModule, providers: [
             HttpXsrfInterceptor,
             { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
             { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -2714,9 +2800,9 @@ class HttpClientXsrfModule {
                 headerName: XSRF_DEFAULT_HEADER_NAME,
             }).ɵproviders,
             { provide: XSRF_ENABLED, useValue: true },
-        ] }); }
+        ] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
@@ -2742,11 +2828,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+s
  * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead
  */
 class HttpClientModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientModule, decorators: [{
             type: NgModule,
             args: [{
                     /**
@@ -2766,11 +2852,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+s
  * @deprecated `withJsonpSupport()` as providers instead
  */
 class HttpClientJsonpModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientJsonpModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientJsonpModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-395cb34", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.11+sha-f815d7b", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [withJsonpSupport().ɵproviders],
