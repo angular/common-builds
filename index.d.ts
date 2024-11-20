@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-next.0+sha-466d557
+ * @license Angular v19.1.0-next.0+sha-6ad3059
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1926,8 +1926,9 @@ export declare class NgClass implements DoCheck {
  * @publicApi
  * @ngModule CommonModule
  */
-export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy {
+export declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestroy {
     private _viewContainerRef;
+    /** Component that should be rendered in the outlet. */
     ngComponentOutlet: Type<any> | null;
     ngComponentOutletInputs?: Record<string, unknown>;
     ngComponentOutletInjector?: Injector;
@@ -1945,6 +1946,11 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
      * that are no longer referenced.
      */
     private _inputsUsed;
+    /**
+     * Gets the instance of the currently-rendered component.
+     * Will be null if no component has been rendered.
+     */
+    get componentInstance(): T | null;
     constructor(_viewContainerRef: ViewContainerRef);
     private _needToReCreateNgModuleInstance;
     private _needToReCreateComponentInstance;
@@ -1955,8 +1961,8 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
     /** @nodoc */
     ngOnDestroy(): void;
     private _applyInputStateDiff;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet, "[ngComponentOutlet]", never, { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet<any>, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet<any>, "[ngComponentOutlet]", ["ngComponentOutlet"], { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 /**
