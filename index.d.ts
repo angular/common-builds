@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-next.0+sha-c56ec5e
+ * @license Angular v19.1.0-next.0+sha-e395364
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -421,7 +421,7 @@ export declare class DatePipe implements PipeTransform {
     private locale;
     private defaultTimezone?;
     private defaultOptions?;
-    constructor(locale: string, defaultTimezone?: (string | null) | undefined, defaultOptions?: (DatePipeConfig | null) | undefined);
+    constructor(locale: string, defaultTimezone?: string | null | undefined, defaultOptions?: (DatePipeConfig | null) | undefined);
     /**
      * @param value The date expression: a `Date` object,  a number
      * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
