@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.2+sha-6ae3ce7
+ * @license Angular v19.0.2+sha-5f3ba06
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -44,7 +44,7 @@ import { ViewContainerRef } from '@angular/core';
  * The following example shows how to use this token to configure the root app injector
  * with a base href value, so that the DI framework can supply the dependency anywhere in the app.
  *
- * ```typescript
+ * ```ts
  * import {NgModule} from '@angular/core';
  * import {APP_BASE_HREF} from '@angular/common';
  *
@@ -236,14 +236,14 @@ export declare class CurrencyPipe implements PipeTransform {
  * For example:
  *
  * Override the default date format by providing a value using the token:
- * ```typescript
+ * ```ts
  * providers: [
  *   {provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {dateFormat: 'shortDate'}}
  * ]
  * ```
  *
  * Override the default timezone by providing a value using the token:
- * ```typescript
+ * ```ts
  * providers: [
  *   {provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {timezone: '-1200'}}
  * ]
@@ -400,7 +400,7 @@ export declare const DATE_PIPE_DEFAULT_TIMEZONE: InjectionToken<string>;
  *
  * The following component uses a date pipe to display the current date in different formats.
  *
- * ```
+ * ```angular-ts
  * @Component({
  *  selector: 'date-pipe',
  *  template: `<div>
@@ -1814,7 +1814,7 @@ declare interface NavigationUpdateCurrentEntryOptions {
  * @ngModule CommonModule
  *
  * @usageNotes
- * ```
+ * ```html
  *     <some-element [ngClass]="'first second'">...</some-element>
  *
  *     <some-element [ngClass]="['first', 'second']">...</some-element>
@@ -1889,19 +1889,19 @@ export declare class NgClass implements DoCheck {
  * ### Syntax
  *
  * Simple
- * ```
+ * ```html
  * <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container>
  * ```
  *
  * With inputs
- * ```
+ * ```html
  * <ng-container *ngComponentOutlet="componentTypeExpression;
  *                                   inputs: inputsExpression;">
  * </ng-container>
  * ```
  *
  * Customized injector/content
- * ```
+ * ```html
  * <ng-container *ngComponentOutlet="componentTypeExpression;
  *                                   injector: injectorExpression;
  *                                   content: contentNodesExpression;">
@@ -1909,7 +1909,7 @@ export declare class NgClass implements DoCheck {
  * ```
  *
  * Customized NgModule reference
- * ```
+ * ```html
  * <ng-container *ngComponentOutlet="componentTypeExpression;
  *                                   ngModule: ngModuleClass;">
  * </ng-container>
@@ -1973,7 +1973,7 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  * The following example shows the shorthand syntax with some options,
  * contained in an `<li>` element.
  *
- * ```
+ * ```html
  * <li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>
  * ```
  *
@@ -1984,7 +1984,7 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  *
  * Here is the expanded version of the short-form example.
  *
- * ```
+ * ```html
  * <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn">
  *   <li>...</li>
  * </ng-template>
@@ -2008,7 +2008,7 @@ export declare class NgComponentOutlet implements OnChanges, DoCheck, OnDestroy 
  * `NgForOf` provides exported values that can be aliased to local variables.
  * For example:
  *
- *  ```
+ *  ```html
  * <li *ngFor="let user of users; index as i; first as isFirst">
  *    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
  * </li>
@@ -2166,27 +2166,27 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * Simple form with shorthand syntax:
  *
- * ```
+ * ```html
  * <div *ngIf="condition">Content to render when condition is true.</div>
  * ```
  *
  * Simple form with expanded syntax:
  *
- * ```
+ * ```html
  * <ng-template [ngIf]="condition"><div>Content to render when condition is
  * true.</div></ng-template>
  * ```
  *
  * Form with an "else" block:
  *
- * ```
+ * ```html
  * <div *ngIf="condition; else elseBlock">Content to render when condition is true.</div>
  * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
  * ```
  *
  * Shorthand form with "then" and "else" blocks:
  *
- * ```
+ * ```html
  * <div *ngIf="condition; then thenBlock else elseBlock"></div>
  * <ng-template #thenBlock>Content to render when condition is true.</ng-template>
  * <ng-template #elseBlock>Content to render when condition is false.</ng-template>
@@ -2194,7 +2194,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  *
  * Form with storing the value locally:
  *
- * ```
+ * ```html
  * <div *ngIf="condition as value; else elseBlock">{{value}}</div>
  * <ng-template #elseBlock>Content to render when value is null.</ng-template>
  * ```
@@ -2251,7 +2251,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * for the "then" and "else" clauses. For example, consider the following shorthand statement,
  * that is meant to show a loading page while waiting for data to be loaded.
  *
- * ```
+ * ```html
  * <div class="hero-list" *ngIf="heroes else loading">
  *  ...
  * </div>
@@ -2270,7 +2270,7 @@ export declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> 
  * The anchor element containing the template for the "then" clause becomes
  * the content of this unlabeled `<ng-template>` tag.
  *
- * ```
+ * ```html
  * <ng-template [ngIf]="heroes" [ngIfElse]="loading">
  *  <div class="hero-list">
  *   ...
@@ -2389,7 +2389,7 @@ export declare abstract class NgLocalization {
  *
  * Step 1: import the `NgOptimizedImage` directive.
  *
- * ```typescript
+ * ```ts
  * import { NgOptimizedImage } from '@angular/common';
  *
  * // Include it into the necessary NgModule
@@ -2414,7 +2414,7 @@ export declare abstract class NgLocalization {
  * To use an existing loader for a **third-party image service**: add the provider factory for your
  * chosen service to the `providers` array. In the example below, the Imgix loader is used:
  *
- * ```typescript
+ * ```ts
  * import {provideImgixLoader} from '@angular/common';
  *
  * // Call the function and add the result to the `providers` array:
@@ -2435,7 +2435,7 @@ export declare abstract class NgLocalization {
  * To use a **custom loader**: provide your loader function as a value for the `IMAGE_LOADER` DI
  * token.
  *
- * ```typescript
+ * ```ts
  * import {IMAGE_LOADER, ImageLoaderConfig} from '@angular/common';
  *
  * // Configure the loader using the `IMAGE_LOADER` token.
@@ -2451,7 +2451,7 @@ export declare abstract class NgLocalization {
  *
  * Step 3: update `<img>` tags in templates to use `ngSrc` instead of `src`.
  *
- * ```
+ * ```html
  * <img ngSrc="logo.png" width="200" height="100">
  * ```
  *
@@ -2588,7 +2588,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
  * @ngModule CommonModule
  *
  * @usageNotes
- * ```
+ * ```html
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
  *   <ng-template ngPluralCase="=1">there is one</ng-template>
@@ -2638,7 +2638,7 @@ export declare class NgPlural {
  * given expression matches the plural expression according to CLDR rules.
  *
  * @usageNotes
- * ```
+ * ```html
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">...</ng-template>
  *   <ng-template ngPluralCase="other">...</ng-template>
@@ -2663,19 +2663,19 @@ export declare class NgPluralCase {
  *
  * Set the font of the containing element to the result of an expression.
  *
- * ```
+ * ```html
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  * ```
  *
  * Set the width of the containing element to a pixel value returned by an expression.
  *
- * ```
+ * ```html
  * <some-element [ngStyle]="{'max-width.px': widthExp}">...</some-element>
  * ```
  *
  * Set a collection of style values using an expression that returns key-value pairs.
  *
- * ```
+ * ```html
  * <some-element [ngStyle]="objExp">...</some-element>
  * ```
  *
@@ -2724,14 +2724,14 @@ export declare class NgStyle implements DoCheck {
  * Define a container element for the directive, and specify the switch expression
  * to match against as an attribute:
  *
- * ```
+ * ```html
  * <container-element [ngSwitch]="switch_expression">
  * ```
  *
  * Within the container, `*ngSwitchCase` statements specify the match expressions
  * as attributes. Include `*ngSwitchDefault` as the final case.
  *
- * ```
+ * ```html
  * <container-element [ngSwitch]="switch_expression">
  *    <some-element *ngSwitchCase="match_expression_1">...</some-element>
  * ...
@@ -2743,7 +2743,7 @@ export declare class NgStyle implements DoCheck {
  *
  * The following example shows how to use more than one case to display the same view:
  *
- * ```
+ * ```html
  * <container-element [ngSwitch]="switch_expression">
  *   <!-- the same view can be shown in more than one case -->
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -2755,7 +2755,7 @@ export declare class NgStyle implements DoCheck {
  * ```
  *
  * The following example shows how cases can be nested:
- * ```
+ * ```html
  * <container-element [ngSwitch]="switch_expression">
  *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
  *       <some-element *ngSwitchCase="match_expression_2">...</some-element>
@@ -2801,7 +2801,7 @@ export declare class NgSwitch {
  * Within a switch container, `*ngSwitchCase` statements specify the match expressions
  * as attributes. Include `*ngSwitchDefault` as the final case.
  *
- * ```
+ * ```html
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
  *   ...
@@ -2870,7 +2870,7 @@ export declare class NgSwitchDefault {
  * by the local template `let` declarations.
  *
  * @usageNotes
- * ```
+ * ```html
  * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
  * ```
  *
@@ -3188,13 +3188,13 @@ export { PopStateEvent_2 as PopStateEvent }
  * from the preconnect checks. It can either be a single string or an array of strings
  * to represent a group of origins, for example:
  *
- * ```typescript
+ * ```ts
  *  {provide: PRECONNECT_CHECK_BLOCKLIST, useValue: 'https://your-domain.com'}
  * ```
  *
  * or:
  *
- * ```typescript
+ * ```ts
  *  {provide: PRECONNECT_CHECK_BLOCKLIST,
  *   useValue: ['https://your-domain-1.com', 'https://your-domain-2.com']}
  * ```

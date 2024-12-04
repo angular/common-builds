@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.2+sha-6ae3ce7
+ * @license Angular v19.0.2+sha-5f3ba06
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -59,7 +59,7 @@ export declare const HTTP_INTERCEPTORS: InjectionToken<readonly HttpInterceptor[
  *
  * When the same API endpoint is accessed via `http://internal-domain.com:8080` on the server and
  * via `https://external-domain.com` on the client, you can use the following configuration:
- * ```typescript
+ * ```ts
  * // in app.server.config.ts
  * {
  *     provide: HTTP_TRANSFER_CACHE_ORIGIN_MAP,
@@ -103,7 +103,7 @@ export declare abstract class HttpBackend implements HttpHandler {
  *
  * ### HTTP Request Example
  *
- * ```
+ * ```ts
  *  // GET heroes whose name contains search term
  * searchHeroes(term: string): observable<Hero[]>{
  *
@@ -114,20 +114,20 @@ export declare abstract class HttpBackend implements HttpHandler {
  *
  * Alternatively, the parameter string can be used without invoking HttpParams
  * by directly joining to the URL.
- * ```
+ * ```ts
  * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
  * ```
  *
  *
  * ### JSONP Example
- * ```
+ * ```ts
  * requestJsonp(url, callback = 'callback') {
  *  return this.httpClient.jsonp(this.heroesURL, callback);
  * }
  * ```
  *
  * ### PATCH Example
- * ```
+ * ```ts
  * // PATCH one of the heroes' name
  * patchHero (id: number, heroName: string): Observable<{}> {
  * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
@@ -3261,7 +3261,7 @@ export declare class HttpClientXsrfModule {
  *
  * ### Usage Example
  *
- * ```typescript
+ * ```ts
  * // inside cache.interceptors.ts
  * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
  *
@@ -3676,7 +3676,7 @@ export declare interface HttpInterceptor {
  *
  * @usageNotes
  * Here is a noop interceptor that passes the request through without modifying it:
- * ```typescript
+ * ```ts
  * export const noopInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
  * HttpHandlerFn) => {
  *   return next(modifiedReq);
@@ -3687,7 +3687,7 @@ export declare interface HttpInterceptor {
  * `next()` handler function.
  *
  * Here is a basic interceptor that adds a bearer token to the headers
- * ```typescript
+ * ```ts
  * export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:
  * HttpHandlerFn) => {
  *    const userToken = 'MY_TOKEN'; const modifiedReq = req.clone({
@@ -4415,7 +4415,7 @@ export declare class JsonpInterceptor {
  * Server-Side Rendering for better performance and compatibility. To enable `fetch`, add
  * `withFetch()` feature to the `provideHttpClient()` call at the root of the application:
  *
- * ```
+ * ```ts
  * provideHttpClient(withFetch());
  * ```
  *
