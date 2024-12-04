@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.2+sha-5f3ba06
+ * @license Angular v19.0.2+sha-7ad1f27
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -170,7 +170,7 @@ export declare class CommonModule {
  * into text strings, according to various format specifications,
  * where the caller's default locale is `en-US`.
  *
- * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
+ * {@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
  * @publicApi
  */
@@ -521,7 +521,7 @@ export declare interface DatePipeConfig {
  * according to various format specifications,
  * where the caller's default locale is `en-US`.
  *
- * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
+ * {@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
  * @publicApi
  */
@@ -1449,8 +1449,7 @@ export declare class KeyValuePipe implements PipeTransform {
  *
  * ### Example
  *
- * <code-example path='common/location/ts/path_location_component.ts'
- * region='LocationComponent'></code-example>
+ * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
  * @publicApi
  */
@@ -1663,7 +1662,7 @@ export declare abstract class LocationStrategy {
  * The following example defines a view that allows the user to enter
  * text, and then uses the pipe to convert the input text to all lower case.
  *
- * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
+ * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
  *
  * @ngModule CommonModule
  * @publicApi
@@ -3091,7 +3090,7 @@ export declare class PathLocationStrategy extends LocationStrategy implements On
  * into text strings, according to various format specifications,
  * where the caller's default locale is `en-US`.
  *
- * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
+ * {@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
  * @publicApi
  */
@@ -3371,7 +3370,7 @@ export declare type Time = {
  * @usageNotes
  * The following example shows the result of transforming various strings into title case.
  *
- * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
+ * {@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
  * @ngModule CommonModule
  * @publicApi
