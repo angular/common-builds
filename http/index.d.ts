@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-next.0+sha-f073bed
+ * @license Angular v19.1.0-next.0+sha-8d6ea5b
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4408,7 +4408,7 @@ export declare class JsonpInterceptor {
  * feature functions to `provideHttpClient`. For example, HTTP interceptors can be added using the
  * `withInterceptors(...)` feature.
  *
- * <div class="alert is-helpful">
+ * <div class="docs-alert docs-alert-helpful">
  *
  * It's strongly recommended to enable
  * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for applications that use
