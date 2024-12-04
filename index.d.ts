@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.0.1+sha-b8a2ae0
+ * @license Angular v19.0.1+sha-0df7b1e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2400,7 +2400,6 @@ export declare abstract class NgLocalization {
  *
  * // ... or a standalone Component
  * @Component({
- *   standalone: true
  *   imports: [NgOptimizedImage],
  * })
  * class MyStandaloneComponent {}
