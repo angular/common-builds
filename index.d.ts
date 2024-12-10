@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-next.2+sha-46f00f9
+ * @license Angular v19.1.0-next.2+sha-f3729ce
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3517,7 +3517,7 @@ export declare abstract class ɵDomAdapter {
     abstract getDefaultDocument(): Document;
     abstract isElementNode(node: any): boolean;
     abstract isShadowRoot(node: any): boolean;
-    abstract onAndCancel(el: any, evt: any, listener: any): Function;
+    abstract onAndCancel(el: any, evt: any, listener: any, options?: any): Function;
     abstract getGlobalEventTarget(doc: Document, target: string): any;
     abstract getBaseHref(doc: Document): string | null;
     abstract resetBaseElement(): void;
