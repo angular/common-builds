@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.0-next.0+sha-265265a
+ * @license Angular v19.2.0-next.0+sha-b9155b5
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2490,7 +2490,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges {
      * descriptors to generate the final `srcset` property of the image.
      *
      * Example:
-     * ```
+     * ```html
      * <img ngSrc="hello.jpg" ngSrcset="100w, 200w" />  =>
      * <img src="path/hello.jpg" srcset="path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w" />
      * ```
