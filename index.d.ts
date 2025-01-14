@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-rc.0+sha-3913893
+ * @license Angular v19.1.0-rc.0+sha-99c542a
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2462,7 +2462,7 @@ export declare abstract class NgLocalization {
  *
  * @publicApi
  */
-export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
+export declare class NgOptimizedImage implements OnInit, OnChanges {
     private imageLoader;
     private config;
     private renderer;
@@ -2470,7 +2470,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
     private injector;
     private readonly isServer;
     private readonly preloadLinkCreator;
-    private lcpObserver;
+    private lcpObserver?;
     /**
      * Calculate the rewritten `src` once and store it.
      * This is needed to avoid repetitive calculations and make sure the directive cleanup in the
@@ -2548,6 +2548,7 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      *   * blur: Setting this to false disables the automatic CSS blur.
      */
     placeholderConfig?: ImagePlaceholderConfig;
+    constructor();
     /** @nodoc */
     ngOnInit(): void;
     private setHostAttributes;
@@ -2575,8 +2576,6 @@ export declare class NgOptimizedImage implements OnInit, OnChanges, OnDestroy {
      */
     private shouldBlurPlaceholder;
     private removePlaceholderOnLoad;
-    /** @nodoc */
-    ngOnDestroy(): void;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "placeholderConfig": { "alias": "placeholderConfig"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
