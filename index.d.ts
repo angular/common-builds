@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.0-rc.0+sha-f8e1f85
+ * @license Angular v19.1.0-rc.0+sha-e2b7359
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1814,17 +1814,23 @@ declare interface NavigationUpdateCurrentEntryOptions {
  *
  * @usageNotes
  * ```html
- *     <some-element [ngClass]="'first second'">...</some-element>
+ * <some-element [ngClass]="stringExp|arrayExp|objExp|Set">...</some-element>
  *
- *     <some-element [ngClass]="['first', 'second']">...</some-element>
- *
- *     <some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
- *
- *     <some-element [ngClass]="stringExp|arrayExp|objExp">...</some-element>
- *
- *     <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
+ * <some-element [ngClass]="{'class1 class2 class3' : true}">...</some-element>
  * ```
  *
+ * For more simple use cases you can use the [class bindings](/guide/templates/binding#css-class-and-style-property-bindings) directly.
+ * It doesn't require importing a directive.
+ *
+ * ```html
+ * <some-element [class]="'first second'">...</some-element>
+ *
+ * <some-element [class.expanded]="isExpanded">...</some-element>
+ *
+ * <some-element [class]="['first', 'second']">...</some-element>
+ *
+ * <some-element [class]="{'first': true, 'second': true, 'third': false}">...</some-element>
+ * ```
  * @description
  *
  * Adds and removes CSS classes on an HTML element.
@@ -1834,6 +1840,9 @@ declare interface NavigationUpdateCurrentEntryOptions {
  * - `Array` - the CSS classes declared as Array elements are added,
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
+ *
+ *
+ * @see [Class bindings](/guide/templates/binding#css-class-and-style-property-bindings)
  *
  * @publicApi
  */
@@ -2665,12 +2674,6 @@ export declare class NgPluralCase {
  *
  * @usageNotes
  *
- * Set the font of the containing element to the result of an expression.
- *
- * ```html
- * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
- * ```
- *
  * Set the width of the containing element to a pixel value returned by an expression.
  *
  * ```html
@@ -2683,6 +2686,15 @@ export declare class NgPluralCase {
  * <some-element [ngStyle]="objExp">...</some-element>
  * ```
  *
+ * For more simple use cases you can use the [style bindings](/guide/templates/binding#css-class-and-style-property-bindings) directly.
+ * It doesn't require importing a directive.
+ *
+ * Set the font of the containing element to the result of an expression.
+ *
+ * ```html
+ * <some-element [style]="{'font-style': styleExp}">...</some-element>
+ * ```
+ *
  * @description
  *
  * An attribute directive that updates styles for the containing HTML element.
@@ -2693,6 +2705,8 @@ export declare class NgPluralCase {
  * The resulting non-null value, expressed in the given unit,
  * is assigned to the given style property.
  * If the result of evaluation is null, the corresponding style is removed.
+ *
+ * @see [Style bindings](/guide/templates/binding#css-class-and-style-property-bindings)
  *
  * @publicApi
  */
