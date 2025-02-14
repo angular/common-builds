@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.0-next.3+sha-47d5e1e
+ * @license Angular v19.2.0-next.3+sha-3e39da5
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9,9 +9,14 @@ import { EnvironmentInjector } from '@angular/core';
 import { EnvironmentProviders } from '@angular/core';
 import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
+import type { Injector } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Provider } from '@angular/core';
+import type { ResourceRef } from '@angular/core';
+import type { Signal } from '@angular/core';
+import type { ValueEqualityFn } from '@angular/core';
+import type { WritableResource } from '@angular/core';
 import { XhrFactory } from '@angular/common';
 
 /**
@@ -4047,6 +4052,259 @@ export declare class HttpRequest<T> {
             [param: string]: string;
         };
     }): HttpRequest<V>;
+}
+
+/**
+ * `httpResource` makes a reactive HTTP request and exposes the request status and response value as
+ * a `WritableResource`. By default, it assumes that the backend will return JSON data. To make a
+ * request that expects a different kind of data, you can use a sub-constructor of `httpResource`,
+ * such as `httpResource.text`.
+ *
+ * @experimental
+ * @initializerApiFunction
+ */
+export declare const httpResource: HttpResourceFn;
+
+/**
+ * Type for the `httpRequest` top-level function, which includes the call signatures for the JSON-
+ * based `httpRequest` as well as sub-functions for `ArrayBuffer`, `Blob`, and `string` type
+ * requests.
+ *
+ * @experimental
+ */
+export declare interface HttpResourceFn {
+    /**
+     * Create a `Resource` that fetches data with an HTTP GET request to the given URL.
+     *
+     * If a reactive function is passed for the URL, the resource will update when the URL changes via
+     * signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
+     * `httpResource`, such as `httpResource.text()`, to parse the response differently.
+     *
+     * @experimental
+     */
+    <TResult = unknown>(url: string | (() => string | undefined), options: HttpResourceOptions<TResult, unknown> & {
+        defaultValue: NoInfer<TResult>;
+    }): HttpResourceRef<TResult>;
+    /**
+     * Create a `Resource` that fetches data with an HTTP GET request to the given URL.
+     *
+     * If a reactive function is passed for the URL, the resource will update when the URL changes via
+     * signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
+     * `httpResource`, such as `httpResource.text()`, to parse the response differently.
+     *
+     * @experimental
+     */
+    <TResult = unknown>(url: string | (() => string | undefined), options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    /**
+     * Create a `Resource` that fetches data with the configured HTTP request.
+     *
+     * If a reactive function is passed for the request, the resource will update when the request
+     * changes via signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
+     * `httpResource`, such as `httpResource.text()`, to parse the response differently.
+     *
+     * @experimental
+     */
+    <TResult = unknown>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options: HttpResourceOptions<TResult, unknown> & {
+        defaultValue: NoInfer<TResult>;
+    }): HttpResourceRef<TResult>;
+    /**
+     * Create a `Resource` that fetches data with the configured HTTP request.
+     *
+     * If a reactive function is passed for the request, the resource will update when the request
+     * changes via signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
+     * `httpResource`, such as `httpResource.text()`, to parse the response differently.
+     *
+     * @experimental
+     */
+    <TResult = unknown>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    /**
+     * Create a `Resource` that fetches data with the configured HTTP request.
+     *
+     * If a reactive function is passed for the URL or request, the resource will update when the
+     * URL or request changes via signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed into an `ArrayBuffer`.
+     *
+     * @experimental
+     */
+    arrayBuffer: {
+        <TResult = ArrayBuffer>(url: string | (() => string | undefined), options: HttpResourceOptions<TResult, ArrayBuffer> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = ArrayBuffer>(url: string | (() => string | undefined), options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+        <TResult = ArrayBuffer>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options: HttpResourceOptions<TResult, ArrayBuffer> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = ArrayBuffer>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+    };
+    /**
+     * Create a `Resource` that fetches data with the configured HTTP request.
+     *
+     * If a reactive function is passed for the URL or request, the resource will update when the
+     * URL or request changes via signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed into a `Blob`.
+     *
+     * @experimental
+     */
+    blob: {
+        <TResult = Blob>(url: string | (() => string | undefined), options: HttpResourceOptions<TResult, Blob> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = Blob>(url: string | (() => string | undefined), options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+        <TResult = Blob>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options: HttpResourceOptions<TResult, Blob> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = Blob>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+    };
+    /**
+     * Create a `Resource` that fetches data with the configured HTTP request.
+     *
+     * If a reactive function is passed for the URL or request, the resource will update when the
+     * URL or request changes via signals.
+     *
+     * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
+     * of the `HttpClient` API. Data is parsed as a `string`.
+     *
+     * @experimental
+     */
+    text: {
+        <TResult = string>(url: string | (() => string | undefined), options: HttpResourceOptions<TResult, string> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = string>(url: string | (() => string | undefined), options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+        <TResult = string>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options: HttpResourceOptions<TResult, string> & {
+            defaultValue: NoInfer<TResult>;
+        }): HttpResourceRef<TResult>;
+        <TResult = string>(request: HttpResourceRequest | (() => HttpResourceRequest | undefined), options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+    };
+}
+
+/**
+ * Options for creating an `httpResource`.
+ *
+ * @experimental
+ */
+export declare interface HttpResourceOptions<TResult, TRaw> {
+    /**
+     * Transform the result of the HTTP request before it's delivered to the resource.
+     *
+     * `map` receives the value from the HTTP layer as its raw type (e.g. as `unknown` for JSON data).
+     * It can be used to validate or transform the type of the resource, and return a more specific
+     * type. This is also useful for validating backend responses using a runtime schema validation
+     * library such as Zod.
+     */
+    map?: (value: TRaw) => TResult;
+    /**
+     * Value that the resource will take when in Idle, Loading, or Error states.
+     *
+     * If not set, the resource will use `undefined` as its default value.
+     */
+    defaultValue?: NoInfer<TResult>;
+    /**
+     * The `Injector` in which to create the `httpResource`.
+     *
+     * If this is not provided, the current [injection context](guide/di/dependency-injection-context)
+     * will be used instead (via `inject`).
+     */
+    injector?: Injector;
+    /**
+     * A comparison function which defines equality for the response value.
+     */
+    equal?: ValueEqualityFn<NoInfer<TResult>>;
+}
+
+/**
+ * A `WritableResource` that represents the results of a reactive HTTP request.
+ *
+ * `HttpResource`s are backed by `HttpClient`, including support for interceptors, testing, and the
+ * other features of the `HttpClient` API.
+ *
+ * @experimental
+ */
+export declare interface HttpResourceRef<T> extends WritableResource<T>, ResourceRef<T> {
+    /**
+     * Signal of the response headers, when available.
+     */
+    readonly headers: Signal<HttpHeaders | undefined>;
+    /**
+     * Signal of the response status code, when available.
+     */
+    readonly statusCode: Signal<number | undefined>;
+    /**
+     * Signal of the latest progress update, if the request was made with `reportProgress: true`.
+     */
+    readonly progress: Signal<HttpProgressEvent | undefined>;
+    hasValue(): this is HttpResourceRef<Exclude<T, undefined>>;
+    destroy(): void;
+}
+
+/**
+ * The structure of an `httpResource` request which will be sent to the backend.
+ *
+ * @experimental
+ */
+export declare interface HttpResourceRequest {
+    /**
+     * URL of the request.
+     *
+     * This URL should not include query parameters. Instead, specify query parameters through the
+     * `params` field.
+     */
+    url: string;
+    /**
+     * HTTP method of the request, which defaults to GET if not specified.
+     */
+    method?: string;
+    /**
+     * Body to send with the request, if there is one.
+     *
+     * If no Content-Type header is specified by the user, Angular will attempt to set one based on
+     * the type of `body`.
+     */
+    body?: unknown;
+    /**
+     * Dictionary of query parameters which will be appeneded to the request URL.
+     */
+    params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
+    /**
+     * Dictionary of headers to include with the outgoing request.
+     */
+    headers?: HttpHeaders | Record<string, string | ReadonlyArray<string>>;
+    /**
+     * If `true`, progress events will be enabled for the request and delivered through the
+     * `HttpResource.progress` signal.
+     */
+    reportProgress?: boolean;
+    /**
+     * Specifies whether the `withCredentials` flag should be set on the outgoing request.
+     *
+     * This flag causes the browser to send cookies and other authentication information along with
+     * the request.
+     */
+    withCredentials?: boolean;
+    /**
+     * Configures the server-side rendering transfer cache for this request.
+     *
+     * See the documentation on the transfer cache for more information.
+     */
+    transferCache?: {
+        includeHeaders?: string[];
+    } | boolean;
 }
 
 /**
