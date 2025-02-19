@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.6+sha-4ec0e66
+ * @license Angular v19.1.6+sha-e16394a
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3348,7 +3348,6 @@ export declare class SlicePipe implements PipeTransform {
     transform<T>(value: ReadonlyArray<T> | null | undefined, start: number, end?: number): Array<T> | null;
     transform(value: string, start: number, end?: number): string;
     transform(value: string | null | undefined, start: number, end?: number): string | null;
-    private supports;
     static ɵfac: i0.ɵɵFactoryDeclaration<SlicePipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<SlicePipe, "slice", true>;
 }
