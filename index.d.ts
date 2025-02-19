@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.1.7+sha-5a66f60
+ * @license Angular v19.1.7+sha-c2102c5
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -32,6 +32,16 @@ import { TrackByFunction } from '@angular/core';
 import { Type } from '@angular/core';
 import { Version } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
+import { ɵNavigateEvent } from '@angular/core';
+import { ɵNavigation } from '@angular/core';
+import { ɵNavigationCurrentEntryChangeEvent } from '@angular/core';
+import { ɵNavigationHistoryEntry } from '@angular/core';
+import { ɵNavigationNavigateOptions } from '@angular/core';
+import { ɵNavigationOptions } from '@angular/core';
+import { ɵNavigationReloadOptions } from '@angular/core';
+import { ɵNavigationResult } from '@angular/core';
+import { ɵNavigationTransition } from '@angular/core';
+import { ɵNavigationUpdateCurrentEntryOptions } from '@angular/core';
 
 /**
  * A predefined DI token for the base href
@@ -1676,137 +1686,6 @@ export declare class LowerCasePipe implements PipeTransform {
     transform(value: string | null | undefined): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LowerCasePipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<LowerCasePipe, "lowercase", true>;
-}
-
-declare class NavigateEvent extends Event {
-    constructor(type: string, eventInit?: NavigateEventInit);
-    readonly navigationType: NavigationTypeString;
-    readonly canIntercept: boolean;
-    readonly userInitiated: boolean;
-    readonly hashChange: boolean;
-    readonly destination: NavigationDestination;
-    readonly signal: AbortSignal;
-    readonly formData: FormData | null;
-    readonly downloadRequest: string | null;
-    readonly info?: unknown;
-    intercept(options?: NavigationInterceptOptions): void;
-    scroll(): void;
-}
-
-declare interface NavigateEventInit extends EventInit {
-    navigationType?: NavigationTypeString;
-    canIntercept?: boolean;
-    userInitiated?: boolean;
-    hashChange?: boolean;
-    destination: NavigationDestination;
-    signal: AbortSignal;
-    formData?: FormData | null;
-    downloadRequest?: string | null;
-    info?: unknown;
-}
-
-declare class Navigation extends EventTarget {
-    entries(): NavigationHistoryEntry[];
-    readonly currentEntry: NavigationHistoryEntry | null;
-    updateCurrentEntry(options: NavigationUpdateCurrentEntryOptions): void;
-    readonly transition: NavigationTransition | null;
-    readonly canGoBack: boolean;
-    readonly canGoForward: boolean;
-    navigate(url: string, options?: NavigationNavigateOptions): NavigationResult;
-    reload(options?: NavigationReloadOptions): NavigationResult;
-    traverseTo(key: string, options?: NavigationOptions): NavigationResult;
-    back(options?: NavigationOptions): NavigationResult;
-    forward(options?: NavigationOptions): NavigationResult;
-    onnavigate: ((this: Navigation, ev: NavigateEvent) => any) | null;
-    onnavigatesuccess: ((this: Navigation, ev: Event) => any) | null;
-    onnavigateerror: ((this: Navigation, ev: ErrorEvent) => any) | null;
-    oncurrententrychange: ((this: Navigation, ev: NavigationCurrentEntryChangeEvent) => any) | null;
-    addEventListener<K extends keyof NavigationEventMap>(type: K, listener: (this: Navigation, ev: NavigationEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-    removeEventListener<K extends keyof NavigationEventMap>(type: K, listener: (this: Navigation, ev: NavigationEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-}
-
-declare class NavigationCurrentEntryChangeEvent extends Event {
-    constructor(type: string, eventInit?: NavigationCurrentEntryChangeEventInit);
-    readonly navigationType: NavigationTypeString | null;
-    readonly from: NavigationHistoryEntry;
-}
-
-declare interface NavigationCurrentEntryChangeEventInit extends EventInit {
-    navigationType?: NavigationTypeString | null;
-    from: NavigationHistoryEntry;
-}
-
-declare class NavigationDestination {
-    readonly url: string;
-    readonly key: string | null;
-    readonly id: string | null;
-    readonly index: number;
-    readonly sameDocument: boolean;
-    getState(): unknown;
-}
-
-
-declare interface NavigationEventMap {
-    navigate: NavigateEvent;
-    navigatesuccess: Event;
-    navigateerror: ErrorEvent;
-    currententrychange: NavigationCurrentEntryChangeEvent;
-}
-
-declare class NavigationHistoryEntry extends EventTarget {
-    readonly key: string;
-    readonly id: string;
-    readonly url: string | null;
-    readonly index: number;
-    readonly sameDocument: boolean;
-    getState(): unknown;
-    ondispose: ((this: NavigationHistoryEntry, ev: Event) => any) | null;
-    addEventListener<K extends keyof NavigationHistoryEntryEventMap>(type: K, listener: (this: NavigationHistoryEntry, ev: NavigationHistoryEntryEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-    removeEventListener<K extends keyof NavigationHistoryEntryEventMap>(type: K, listener: (this: NavigationHistoryEntry, ev: NavigationHistoryEntryEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-}
-
-declare interface NavigationHistoryEntryEventMap {
-    dispose: Event;
-}
-
-declare interface NavigationInterceptOptions {
-    handler?: () => Promise<void>;
-    focusReset?: 'after-transition' | 'manual';
-    scroll?: 'after-transition' | 'manual';
-}
-
-declare interface NavigationNavigateOptions extends NavigationOptions {
-    state?: unknown;
-    history?: 'auto' | 'push' | 'replace';
-}
-
-declare interface NavigationOptions {
-    info?: unknown;
-}
-
-declare interface NavigationReloadOptions extends NavigationOptions {
-    state?: unknown;
-}
-
-declare interface NavigationResult {
-    committed: Promise<NavigationHistoryEntry>;
-    finished: Promise<NavigationHistoryEntry>;
-}
-
-declare class NavigationTransition {
-    readonly navigationType: NavigationTypeString;
-    readonly from: NavigationHistoryEntry;
-    readonly finished: Promise<void>;
-}
-
-declare type NavigationTypeString = 'reload' | 'push' | 'replace' | 'traverse';
-
-declare interface NavigationUpdateCurrentEntryOptions {
-    state: unknown;
 }
 
 /**
@@ -3585,22 +3464,22 @@ export declare const ɵPLATFORM_SERVER_ID = "server";
  * This class wraps the platform Navigation API which allows server-specific and test
  * implementations.
  */
-export declare abstract class ɵPlatformNavigation implements Navigation {
-    abstract entries(): NavigationHistoryEntry[];
-    abstract currentEntry: NavigationHistoryEntry | null;
-    abstract updateCurrentEntry(options: NavigationUpdateCurrentEntryOptions): void;
-    abstract transition: NavigationTransition | null;
+export declare abstract class ɵPlatformNavigation implements ɵNavigation {
+    abstract entries(): ɵNavigationHistoryEntry[];
+    abstract currentEntry: ɵNavigationHistoryEntry | null;
+    abstract updateCurrentEntry(options: ɵNavigationUpdateCurrentEntryOptions): void;
+    abstract transition: ɵNavigationTransition | null;
     abstract canGoBack: boolean;
     abstract canGoForward: boolean;
-    abstract navigate(url: string, options?: NavigationNavigateOptions | undefined): NavigationResult;
-    abstract reload(options?: NavigationReloadOptions | undefined): NavigationResult;
-    abstract traverseTo(key: string, options?: NavigationOptions | undefined): NavigationResult;
-    abstract back(options?: NavigationOptions | undefined): NavigationResult;
-    abstract forward(options?: NavigationOptions | undefined): NavigationResult;
-    abstract onnavigate: ((this: Navigation, ev: NavigateEvent) => any) | null;
-    abstract onnavigatesuccess: ((this: Navigation, ev: Event) => any) | null;
-    abstract onnavigateerror: ((this: Navigation, ev: ErrorEvent) => any) | null;
-    abstract oncurrententrychange: ((this: Navigation, ev: NavigationCurrentEntryChangeEvent) => any) | null;
+    abstract navigate(url: string, options?: ɵNavigationNavigateOptions | undefined): ɵNavigationResult;
+    abstract reload(options?: ɵNavigationReloadOptions | undefined): ɵNavigationResult;
+    abstract traverseTo(key: string, options?: ɵNavigationOptions | undefined): ɵNavigationResult;
+    abstract back(options?: ɵNavigationOptions | undefined): ɵNavigationResult;
+    abstract forward(options?: ɵNavigationOptions | undefined): ɵNavigationResult;
+    abstract onnavigate: ((this: ɵNavigation, ev: ɵNavigateEvent) => any) | null;
+    abstract onnavigatesuccess: ((this: ɵNavigation, ev: Event) => any) | null;
+    abstract onnavigateerror: ((this: ɵNavigation, ev: ErrorEvent) => any) | null;
+    abstract oncurrententrychange: ((this: ɵNavigation, ev: ɵNavigationCurrentEntryChangeEvent) => any) | null;
     abstract addEventListener(type: unknown, listener: unknown, options?: unknown): void;
     abstract removeEventListener(type: unknown, listener: unknown, options?: unknown): void;
     abstract dispatchEvent(event: Event): boolean;
