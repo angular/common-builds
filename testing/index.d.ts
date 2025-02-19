@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.0-rc.0+sha-11ea0a0
+ * @license Angular v19.2.0-rc.0+sha-f88ed8e
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13,6 +13,7 @@ import { LocationStrategy } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
 import { Provider } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
+import { ɵFakeNavigation } from '@angular/core/testing';
 
 /**
  * Provider for mock platform location config
@@ -143,6 +144,8 @@ export declare class SpyLocation implements Location_2 {
     static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
 }
+
+export { ɵFakeNavigation }
 
 /**
  * Return a provider for the `FakeNavigation` in place of the real Navigation API.
