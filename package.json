@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "19.2.0-rc.0+sha-02a768e",
+  "version": "19.2.0-rc.0+sha-9c5a6a6",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -44,7 +44,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "19.2.0-rc.0+sha-02a768e",
+    "@angular/core": "19.2.0-rc.0+sha-9c5a6a6",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
