@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.0+sha-51b8ff2
+ * @license Angular v20.0.0-next.0+sha-36b60a9
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -42,6 +42,7 @@ export declare class $locationShim {
     private $$changeListeners;
     private cachedState;
     private urlChanges;
+    private readonly removeOnUrlChangeFn;
     constructor($injector: any, location: Location_2, platformLocation: PlatformLocation, urlCodec: UrlCodec, locationStrategy: LocationStrategy);
     private initialize;
     private resetBrowserUpdate;
