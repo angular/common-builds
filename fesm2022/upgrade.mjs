@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.0+sha-1dd9447
+ * @license Angular v19.2.0+sha-c2de5f6
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -72,6 +72,7 @@ class $locationShim {
     $$changeListeners = [];
     cachedState = null;
     urlChanges = new ReplaySubject(1);
+    removeOnUrlChangeFn;
     constructor($injector, location, platformLocation, urlCodec, locationStrategy) {
         this.location = location;
         this.platformLocation = platformLocation;
@@ -88,7 +89,7 @@ class $locationShim {
         this.$$parseLinkUrl(initialUrl, initialUrl);
         this.cacheState();
         this.$$state = this.browserState();
-        this.location.onUrlChange((newUrl, newState) => {
+        this.removeOnUrlChangeFn = this.location.onUrlChange((newUrl, newState) => {
             this.urlChanges.next({ newUrl, newState });
         });
         if (ɵisPromise($injector)) {
@@ -215,6 +216,7 @@ class $locationShim {
             this.$$replace = false;
         });
         $rootScope.$on('$destroy', () => {
+            this.removeOnUrlChangeFn();
             // Complete the subject to release all active observers when the root
             // scope is destroyed. Before this change, we subscribed to the `urlChanges`
             // subject, and the subscriber captured `this`, leading to a memory leak
@@ -864,11 +866,11 @@ class LocationUpgradeModule {
             ],
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.0+sha-1dd9447", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.0+sha-1dd9447", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.0+sha-1dd9447", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.0+sha-c2de5f6", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.0+sha-c2de5f6", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.0+sha-c2de5f6", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.0+sha-1dd9447", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.0+sha-c2de5f6", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
