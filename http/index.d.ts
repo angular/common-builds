@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.0+sha-6f6d9f1
+ * @license Angular v20.0.0-next.0+sha-bb14fe8
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3800,6 +3800,10 @@ export declare interface HttpResourceRequest {
      * Dictionary of headers to include with the outgoing request.
      */
     headers?: HttpHeaders | Record<string, string | ReadonlyArray<string>>;
+    /**
+     * Context of the request stored in a dictionary of key-value pairs.
+     */
+    context?: HttpContext;
     /**
      * If `true`, progress events will be enabled for the request and delivered through the
      * `HttpResource.progress` signal.
