@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.0+sha-bb14fe8
+ * @license Angular v20.0.0-next.0+sha-286e4da
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1746,7 +1746,7 @@ export declare class NgClass implements DoCheck {
 }
 
 /**
- * Instantiates a {@link Component} type and inserts its Host View into the current View.
+ * Instantiates a {@link /api/core/Component Component} type and inserts its Host View into the current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
  *
  * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
@@ -3016,8 +3016,8 @@ export declare class PercentPipe implements PipeTransform {
  * when they need to interact with the DOM APIs like pushState, popState, etc.
  *
  * {@link LocationStrategy} in turn is used by the {@link Location} service which is used directly
- * by the {@link Router} in order to navigate between routes. Since all interactions between {@link
- * Router} /
+ * by the {@link /api/router/Router Router} in order to navigate between routes. Since all interactions between
+ * {@link /api/router/Router Router} /
  * {@link Location} / {@link LocationStrategy} and DOM APIs flow through the `PlatformLocation`
  * class, they are all platform-agnostic.
  *
