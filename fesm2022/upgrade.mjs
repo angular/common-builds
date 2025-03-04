@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.0+sha-2e03a86
+ * @license Angular v20.0.0-next.0+sha-0007d20
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -866,11 +866,11 @@ class LocationUpgradeModule {
             ],
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-2e03a86", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.0+sha-2e03a86", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-2e03a86", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-0007d20", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.0+sha-0007d20", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-0007d20", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-2e03a86", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.0+sha-0007d20", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
