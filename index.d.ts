@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.0+sha-0007d20
+ * @license Angular v20.0.0-next.0+sha-326d48a
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -103,6 +103,7 @@ export declare class AsyncPipe implements OnDestroy, PipeTransform {
     private _subscription;
     private _obj;
     private _strategy;
+    private readonly applicationErrorHandler;
     constructor(ref: ChangeDetectorRef);
     ngOnDestroy(): void;
     transform<T>(obj: Observable<T> | Subscribable<T> | Promise<T>): T | null;
