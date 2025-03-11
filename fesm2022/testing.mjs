@@ -1,14 +1,14 @@
 /**
- * @license Angular v19.2.1+sha-56b551d
+ * @license Angular v19.2.1+sha-044dac9
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { ɵPlatformNavigation, DOCUMENT, PlatformLocation, ɵnormalizeQueryParams, LocationStrategy, Location } from '@angular/common';
+import { ɵPlatformNavigation as _PlatformNavigation, DOCUMENT, PlatformLocation, ɵnormalizeQueryParams as _normalizeQueryParams, LocationStrategy, Location } from '@angular/common';
 import * as i0 from '@angular/core';
-import { InjectionToken, Injectable, Inject, Optional, inject } from '@angular/core';
+import { InjectionToken, inject, Inject, Optional, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ɵFakeNavigation } from '@angular/core/testing';
+import { ɵFakeNavigation as _FakeNavigation } from '@angular/core/testing';
 export { ɵFakeNavigation } from '@angular/core/testing';
 
 /**
@@ -217,10 +217,10 @@ class MockPlatformLocation {
             });
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockPlatformLocation });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockPlatformLocation, deps: [{ token: MOCK_PLATFORM_LOCATION_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockPlatformLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -232,10 +232,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b55
  * Mock implementation of URL state.
  */
 class FakeNavigationPlatformLocation {
-    _platformNavigation = inject(ɵPlatformNavigation);
+    _platformNavigation = inject(_PlatformNavigation);
     window = inject(DOCUMENT).defaultView;
     constructor() {
-        if (!(this._platformNavigation instanceof ɵFakeNavigation)) {
+        if (!(this._platformNavigation instanceof _FakeNavigation)) {
             throw new Error('FakePlatformNavigation cannot be used without FakeNavigation. Use ' +
                 '`provideFakeNavigation` to have all these services provided together.');
         }
@@ -291,10 +291,10 @@ class FakeNavigationPlatformLocation {
     getState() {
         return this._platformNavigation.currentEntry.getHistoryState();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: FakeNavigationPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: FakeNavigationPlatformLocation });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: FakeNavigationPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: FakeNavigationPlatformLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: FakeNavigationPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: FakeNavigationPlatformLocation, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 
@@ -304,10 +304,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b55
 function provideFakePlatformNavigation() {
     return [
         {
-            provide: ɵPlatformNavigation,
+            provide: _PlatformNavigation,
             useFactory: () => {
                 const config = inject(MOCK_PLATFORM_LOCATION_CONFIG, { optional: true });
-                return new ɵFakeNavigation(inject(DOCUMENT).defaultView, config?.startUrl ?? 'http://_empty_/');
+                return new _FakeNavigation(inject(DOCUMENT).defaultView, config?.startUrl ?? 'http://_empty_/');
             },
         },
         { provide: PlatformLocation, useClass: FakeNavigationPlatformLocation },
@@ -384,7 +384,7 @@ class SpyLocation {
         }
         const url = path + (query.length > 0 ? '?' + query : '');
         this.urlChanges.push(url);
-        this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
+        this._notifyUrlChangeListeners(path + _normalizeQueryParams(query), state);
     }
     replaceState(path, query = '', state = null) {
         path = this.prepareExternalUrl(path);
@@ -397,7 +397,7 @@ class SpyLocation {
         history.query = query;
         const url = path + (query.length > 0 ? '?' + query : '');
         this.urlChanges.push('replace: ' + url);
-        this._notifyUrlChangeListeners(path + ɵnormalizeQueryParams(query), state);
+        this._notifyUrlChangeListeners(path + _normalizeQueryParams(query), state);
     }
     forward() {
         if (this._historyIndex < this._history.length - 1) {
@@ -468,10 +468,10 @@ class SpyLocation {
         this._history.push(new LocationState(path, query, state));
         this._historyIndex = this._history.length - 1;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: SpyLocation });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: SpyLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: SpyLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: SpyLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: SpyLocation, decorators: [{
             type: Injectable
         }] });
 class LocationState {
@@ -553,10 +553,10 @@ class MockLocationStrategy extends LocationStrategy {
     getState() {
         return this.stateChanges[(this.stateChanges.length || 1) - 1];
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockLocationStrategy });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockLocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockLocationStrategy });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-56b551d", ngImport: i0, type: MockLocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.1+sha-044dac9", ngImport: i0, type: MockLocationStrategy, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 class _MockPopStateEvent {
