@@ -1,15 +1,15 @@
 /**
- * @license Angular v20.0.0-next.1+sha-8be6e38
+ * @license Angular v20.0.0-next.1+sha-4fa5d18
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵRuntimeError, Injectable, InjectionToken, inject, NgZone, ɵPendingTasksInternal, PLATFORM_ID, ɵConsole, ɵformatRuntimeError, runInInjectionContext, Inject, makeEnvironmentProviders, NgModule, assertInInjectionContext, Injector, ɵResourceImpl, linkedSignal, computed, ResourceStatus, signal, ɵperformanceMarkFeature, APP_BOOTSTRAP_LISTENER, ApplicationRef, TransferState, makeStateKey, ɵtruncateMiddle } from '@angular/core';
+import { ɵRuntimeError as _RuntimeError, Injectable, inject, NgZone, InjectionToken, ɵPendingTasksInternal as _PendingTasksInternal, PLATFORM_ID, ɵConsole as _Console, ɵformatRuntimeError as _formatRuntimeError, runInInjectionContext, Inject, makeEnvironmentProviders, NgModule, assertInInjectionContext, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ResourceStatus, signal, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, makeStateKey, ɵtruncateMiddle as _truncateMiddle } from '@angular/core';
 import { of, Observable, from } from 'rxjs';
 import { concatMap, filter, map, finalize, switchMap, tap } from 'rxjs/operators';
 import * as i1 from '@angular/common';
-import { isPlatformServer, DOCUMENT, ɵparseCookieValue } from '@angular/common';
+import { isPlatformServer, DOCUMENT, ɵparseCookieValue as _parseCookieValue } from '@angular/common';
 
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
@@ -390,7 +390,7 @@ class HttpParams {
         this.encoder = options.encoder || new HttpUrlEncodingCodec();
         if (options.fromString) {
             if (options.fromObject) {
-                throw new ɵRuntimeError(2805 /* RuntimeErrorCode.CANNOT_SPECIFY_BOTH_FROM_STRING_AND_FROM_OBJECT */, ngDevMode && 'Cannot specify both fromString and fromObject.');
+                throw new _RuntimeError(2805 /* RuntimeErrorCode.CANNOT_SPECIFY_BOTH_FROM_STRING_AND_FROM_OBJECT */, ngDevMode && 'Cannot specify both fromString and fromObject.');
             }
             this.map = paramParser(options.fromString, this.encoder);
         }
@@ -1445,7 +1445,7 @@ class HttpClient {
                         return res$.pipe(map((res) => {
                             // Validate that the body is an ArrayBuffer.
                             if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
-                                throw new ɵRuntimeError(2806 /* RuntimeErrorCode.RESPONSE_IS_NOT_AN_ARRAY_BUFFER */, ngDevMode && 'Response is not an ArrayBuffer.');
+                                throw new _RuntimeError(2806 /* RuntimeErrorCode.RESPONSE_IS_NOT_AN_ARRAY_BUFFER */, ngDevMode && 'Response is not an ArrayBuffer.');
                             }
                             return res.body;
                         }));
@@ -1453,7 +1453,7 @@ class HttpClient {
                         return res$.pipe(map((res) => {
                             // Validate that the body is a Blob.
                             if (res.body !== null && !(res.body instanceof Blob)) {
-                                throw new ɵRuntimeError(2807 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_BLOB */, ngDevMode && 'Response is not a Blob.');
+                                throw new _RuntimeError(2807 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_BLOB */, ngDevMode && 'Response is not a Blob.');
                             }
                             return res.body;
                         }));
@@ -1461,7 +1461,7 @@ class HttpClient {
                         return res$.pipe(map((res) => {
                             // Validate that the body is a string.
                             if (res.body !== null && typeof res.body !== 'string') {
-                                throw new ɵRuntimeError(2808 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_STRING */, ngDevMode && 'Response is not a string.');
+                                throw new _RuntimeError(2808 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_STRING */, ngDevMode && 'Response is not a string.');
                             }
                             return res.body;
                         }));
@@ -1475,7 +1475,7 @@ class HttpClient {
                 return res$;
             default:
                 // Guard against new future observe types being added.
-                throw new ɵRuntimeError(2809 /* RuntimeErrorCode.UNHANDLED_OBSERVE_TYPE */, ngDevMode && `Unreachable: unhandled observe type ${options.observe}}`);
+                throw new _RuntimeError(2809 /* RuntimeErrorCode.UNHANDLED_OBSERVE_TYPE */, ngDevMode && `Unreachable: unhandled observe type ${options.observe}}`);
         }
     }
     /**
@@ -1569,10 +1569,10 @@ class HttpClient {
     put(url, body, options = {}) {
         return this.request('PUT', url, addBody(options, body));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClient });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClient });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClient, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: HttpHandler }] });
 
@@ -1787,10 +1787,10 @@ class FetchBackend {
         }
         return chunksAll;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: FetchBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: FetchBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: FetchBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: FetchBackend, decorators: [{
             type: Injectable
         }] });
 /**
@@ -1862,7 +1862,7 @@ function legacyInterceptorFnFactory() {
             // out.
             chain = interceptors.reduceRight(adaptLegacyInterceptorToChain, interceptorChainEndFn);
         }
-        const pendingTasks = inject(ɵPendingTasksInternal);
+        const pendingTasks = inject(_PendingTasksInternal);
         const contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
         if (contributeToStability) {
             const taskId = pendingTasks.add();
@@ -1878,7 +1878,7 @@ class HttpInterceptorHandler extends HttpHandler {
     backend;
     injector;
     chain = null;
-    pendingTasks = inject(ɵPendingTasksInternal);
+    pendingTasks = inject(_PendingTasksInternal);
     contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
     constructor(backend, injector) {
         super();
@@ -1897,8 +1897,8 @@ class HttpInterceptorHandler extends HttpHandler {
             if (isServer && !(this.backend instanceof FetchBackend) && !isTestingBackend) {
                 fetchBackendWarningDisplayed = true;
                 injector
-                    .get(ɵConsole)
-                    .warn(ɵformatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
+                    .get(_Console)
+                    .warn(_formatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
                     "to use `fetch` APIs. It's strongly recommended to " +
                     'enable `fetch` for applications that use Server-Side Rendering ' +
                     'for better performance and compatibility. ' +
@@ -1927,10 +1927,10 @@ class HttpInterceptorHandler extends HttpHandler {
             return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpInterceptorHandler });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpInterceptorHandler });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
 
@@ -2012,15 +2012,15 @@ class JsonpClientBackend {
         // Firstly, check both the method and response type. If either doesn't match
         // then the request was improperly routed here and cannot be handled.
         if (req.method !== 'JSONP') {
-            throw new ɵRuntimeError(2810 /* RuntimeErrorCode.JSONP_WRONG_METHOD */, ngDevMode && JSONP_ERR_WRONG_METHOD);
+            throw new _RuntimeError(2810 /* RuntimeErrorCode.JSONP_WRONG_METHOD */, ngDevMode && JSONP_ERR_WRONG_METHOD);
         }
         else if (req.responseType !== 'json') {
-            throw new ɵRuntimeError(2811 /* RuntimeErrorCode.JSONP_WRONG_RESPONSE_TYPE */, ngDevMode && JSONP_ERR_WRONG_RESPONSE_TYPE);
+            throw new _RuntimeError(2811 /* RuntimeErrorCode.JSONP_WRONG_RESPONSE_TYPE */, ngDevMode && JSONP_ERR_WRONG_RESPONSE_TYPE);
         }
         // Check the request headers. JSONP doesn't support headers and
         // cannot set any that were supplied.
         if (req.headers.keys().length > 0) {
-            throw new ɵRuntimeError(2812 /* RuntimeErrorCode.JSONP_HEADERS_NOT_SUPPORTED */, ngDevMode && JSONP_ERR_HEADERS_NOT_SUPPORTED);
+            throw new _RuntimeError(2812 /* RuntimeErrorCode.JSONP_HEADERS_NOT_SUPPORTED */, ngDevMode && JSONP_ERR_HEADERS_NOT_SUPPORTED);
         }
         // Everything else happens inside the Observable boundary.
         return new Observable((observer) => {
@@ -2132,10 +2132,10 @@ class JsonpClientBackend {
         foreignDocument ??= this.document.implementation.createHTMLDocument();
         foreignDocument.adoptNode(script);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpClientBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpClientBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpClientBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpClientBackend, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
                     type: Inject,
@@ -2174,10 +2174,10 @@ class JsonpInterceptor {
     intercept(initialRequest, next) {
         return runInInjectionContext(this.injector, () => jsonpInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpInterceptor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: JsonpInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: JsonpInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
@@ -2217,7 +2217,7 @@ class HttpXhrBackend {
         // Quick check to give a better error message when a user attempts to use
         // HttpClient.jsonp() without installing the HttpClientJsonpModule
         if (req.method === 'JSONP') {
-            throw new ɵRuntimeError(-2800 /* RuntimeErrorCode.MISSING_JSONP_MODULE */, (typeof ngDevMode === 'undefined' || ngDevMode) &&
+            throw new _RuntimeError(-2800 /* RuntimeErrorCode.MISSING_JSONP_MODULE */, (typeof ngDevMode === 'undefined' || ngDevMode) &&
                 `Cannot make a JSONP request without JSONP support. To fix the problem, either add the \`withJsonpSupport()\` call (if \`provideHttpClient()\` is used) or import the \`HttpClientJsonpModule\` in the root NgModule.`);
         }
         // Check whether this factory has a special function to load an XHR implementation
@@ -2459,10 +2459,10 @@ class HttpXhrBackend {
             });
         }));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXhrBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXhrBackend, deps: [{ token: i1.XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXhrBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXhrBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXhrBackend, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1.XhrFactory }] });
 
@@ -2509,15 +2509,15 @@ class HttpXsrfCookieExtractor {
         const cookieString = this.doc.cookie || '';
         if (cookieString !== this.lastCookieString) {
             this.parseCount++;
-            this.lastToken = ɵparseCookieValue(cookieString, this.cookieName);
+            this.lastToken = _parseCookieValue(cookieString, this.cookieName);
             this.lastCookieString = cookieString;
         }
         return this.lastToken;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfCookieExtractor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: PLATFORM_ID }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfCookieExtractor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -2561,10 +2561,10 @@ class HttpXsrfInterceptor {
     intercept(initialRequest, next) {
         return runInInjectionContext(this.injector, () => xsrfInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfInterceptor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
@@ -2830,9 +2830,9 @@ class HttpClientXsrfModule {
             providers: withXsrfConfiguration(options).ɵproviders,
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientXsrfModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientXsrfModule, providers: [
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientXsrfModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientXsrfModule, providers: [
             HttpXsrfInterceptor,
             { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
             { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -2843,7 +2843,7 @@ class HttpClientXsrfModule {
             { provide: XSRF_ENABLED, useValue: true },
         ] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
@@ -2869,11 +2869,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sh
  * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead
  */
 class HttpClientModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientModule, decorators: [{
             type: NgModule,
             args: [{
                     /**
@@ -2893,11 +2893,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sh
  * @deprecated `withJsonpSupport()` as providers instead
  */
 class HttpClientJsonpModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientJsonpModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientJsonpModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-8be6e38", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.1+sha-4fa5d18", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [withJsonpSupport().ɵproviders],
@@ -2951,7 +2951,7 @@ function normalizeRequest(request, responseType) {
         transferCache: unwrappedRequest.transferCache,
     });
 }
-class HttpResourceImpl extends ɵResourceImpl {
+class HttpResourceImpl extends _ResourceImpl {
     client;
     _headers = linkedSignal({
         source: this.extRequest,
@@ -3081,7 +3081,7 @@ function transferCacheInterceptorFn(req, next) {
         optional: true,
     });
     if (typeof ngServerMode !== 'undefined' && !ngServerMode && originMap) {
-        throw new ɵRuntimeError(2803 /* RuntimeErrorCode.HTTP_ORIGIN_MAP_USED_IN_CLIENT */, ngDevMode &&
+        throw new _RuntimeError(2803 /* RuntimeErrorCode.HTTP_ORIGIN_MAP_USED_IN_CLIENT */, ngDevMode &&
             'Angular detected that the `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token is configured and ' +
                 'present in the client side code. Please ensure that this token is only provided in the ' +
                 'server code of the application.');
@@ -3210,7 +3210,7 @@ function withHttpTransferCache(cacheOptions) {
         {
             provide: CACHE_OPTIONS,
             useFactory: () => {
-                ɵperformanceMarkFeature('NgHttpTransferCache');
+                _performanceMarkFeature('NgHttpTransferCache');
                 return { isCacheActive: true, ...cacheOptions };
             },
         },
@@ -3252,9 +3252,9 @@ function appendMissingHeadersDetection(url, headers, headersToInclude) {
                 const key = (prop + ':' + headerName).toLowerCase(); // e.g. `get:cache-control`
                 if (!headersToInclude.includes(headerName) && !warningProduced.has(key)) {
                     warningProduced.add(key);
-                    const truncatedUrl = ɵtruncateMiddle(url);
+                    const truncatedUrl = _truncateMiddle(url);
                     // TODO: create Error guide for this warning
-                    console.warn(ɵformatRuntimeError(2802 /* RuntimeErrorCode.HEADERS_ALTERED_BY_TRANSFER_CACHE */, `Angular detected that the \`${headerName}\` header is accessed, but the value of the header ` +
+                    console.warn(_formatRuntimeError(2802 /* RuntimeErrorCode.HEADERS_ALTERED_BY_TRANSFER_CACHE */, `Angular detected that the \`${headerName}\` header is accessed, but the value of the header ` +
                         `was not transferred from the server to the client by the HttpTransferCache. ` +
                         `To include the value of the \`${headerName}\` header for the \`${truncatedUrl}\` request, ` +
                         `use the \`includeHeaders\` list. The \`includeHeaders\` can be defined either ` +
@@ -3281,7 +3281,7 @@ function mapRequestOriginUrl(url, originMap) {
 }
 function verifyMappedOrigin(url) {
     if (new URL(url, 'resolve://').pathname !== '/') {
-        throw new ɵRuntimeError(2804 /* RuntimeErrorCode.HTTP_ORIGIN_MAP_CONTAINS_PATH */, 'Angular detected a URL with a path segment in the value provided for the ' +
+        throw new _RuntimeError(2804 /* RuntimeErrorCode.HTTP_ORIGIN_MAP_CONTAINS_PATH */, 'Angular detected a URL with a path segment in the value provided for the ' +
             `\`HTTP_TRANSFER_CACHE_ORIGIN_MAP\` token: ${url}. The map should only contain origins ` +
             'without any other segments.');
     }
