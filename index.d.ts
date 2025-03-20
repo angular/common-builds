@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.3+sha-164bb3f
+ * @license Angular v20.0.0-next.3+sha-911ad40
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3218,12 +3218,12 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
      * * A base64 encoded image, which is wrapped and passed through.
      * * A boolean. If true, calls the image loader to generate a small placeholder url.
      */
-    private generatePlaceholder;
+    protected generatePlaceholder(placeholderInput: string | boolean): string | boolean | null;
     /**
      * Determines if blur should be applied, based on an optional boolean
      * property `blur` within the optional configuration object `placeholderConfig`.
      */
-    private shouldBlurPlaceholder;
+    protected shouldBlurPlaceholder(placeholderConfig?: ImagePlaceholderConfig): boolean;
     private removePlaceholderOnLoad;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
