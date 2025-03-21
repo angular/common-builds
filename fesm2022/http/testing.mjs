@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.3+sha-c667d54
+ * @license Angular v19.2.3+sha-877456e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -315,10 +315,10 @@ class HttpClientTestingBackend {
             return `Match by function: ${matcher.name}`;
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingBackend, decorators: [{
             type: Injectable
         }] });
 function describeRequest(testRequest) {
@@ -346,11 +346,11 @@ function provideHttpClientTesting() {
  * @deprecated Add `provideHttpClientTesting()` to your providers instead.
  */
 class HttpClientTestingModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingModule, providers: [provideHttpClientTesting()], imports: [HttpClientModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingModule, imports: [HttpClientModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingModule, providers: [provideHttpClientTesting()], imports: [HttpClientModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.3+sha-c667d54", ngImport: i0, type: HttpClientTestingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.3+sha-877456e", ngImport: i0, type: HttpClientTestingModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [HttpClientModule],
