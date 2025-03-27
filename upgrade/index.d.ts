@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.4+sha-5948cd0
+ * @license Angular v20.0.0-next.4+sha-0b34c58
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -439,4 +439,5 @@ declare class LocationUpgradeModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<LocationUpgradeModule>;
 }
 
-export { $locationShim, $locationShimProvider, AngularJSUrlCodec, LOCATION_UPGRADE_CONFIGURATION, type LocationUpgradeConfig, LocationUpgradeModule, UrlCodec };
+export { $locationShim, $locationShimProvider, AngularJSUrlCodec, LOCATION_UPGRADE_CONFIGURATION, LocationUpgradeModule, UrlCodec };
+export type { LocationUpgradeConfig };
