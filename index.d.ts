@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.4+sha-152261c
+ * @license Angular v20.0.0-next.4+sha-e40b5c9
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1340,6 +1340,8 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
 
 /**
  * @publicApi
+ *
+ * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
  */
 declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
     /** Reference to the current item from the collection. */
@@ -1469,6 +1471,8 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * @see [Structural Directives](guide/directives/structural-directives)
  * @ngModule CommonModule
  * @publicApi
+ *
+ * @deprecated Use the @for block instead. Intent to remove in v22
  */
 declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;
@@ -1664,6 +1668,8 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
  *
  * @ngModule CommonModule
  * @publicApi
+ *
+ * @deprecated Use the @if block instead. Intent to remove in v22
  */
 declare class NgIf<T = unknown> {
     private _viewContainer;
@@ -1903,6 +1909,7 @@ declare class SwitchView {
  * @see {@link NgSwitchDefault}
  * @see [Structural Directives](guide/directives/structural-directives)
  *
+ * @deprecated Use the @switch block instead. Intent to remove in v22
  */
 declare class NgSwitch {
     private _defaultViews;
@@ -1948,6 +1955,7 @@ declare class NgSwitch {
  * @see {@link NgSwitch}
  * @see {@link NgSwitchDefault}
  *
+ * @deprecated Use the @case block within a @switch block instead. Intent to remove in v22
  */
 declare class NgSwitchCase implements DoCheck {
     private ngSwitch;
@@ -1978,6 +1986,7 @@ declare class NgSwitchCase implements DoCheck {
  * @see {@link NgSwitch}
  * @see {@link NgSwitchCase}
  *
+ * @deprecated Use the @default block within a @switch block instead. Intent to remove in v22
  */
 declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
