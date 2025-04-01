@@ -1,11 +1,10 @@
 /**
- * @license Angular v19.2.4+sha-bd1a755
+ * @license Angular v19.2.4+sha-d0c979e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import * as i1 from '@angular/common/http';
-import { HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { H as HttpRequest, a as HttpEvent, b as HttpHeaders, i as HttpClientModule } from '../../module.d-BJA_GXII.js';
 import { Observer } from 'rxjs';
 import * as i0 from '@angular/core';
 import { Provider } from '@angular/core';
@@ -173,7 +172,7 @@ declare abstract class HttpTestingController {
  */
 declare class HttpClientTestingModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientTestingModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientTestingModule, never, [typeof i1.HttpClientModule], never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HttpClientTestingModule, never, [typeof HttpClientModule], never>;
     static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientTestingModule>;
 }
 

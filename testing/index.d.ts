@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.4+sha-bd1a755
+ * @license Angular v19.2.4+sha-d0c979e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,8 +7,9 @@
 import * as i0 from '@angular/core';
 import { Provider, InjectionToken } from '@angular/core';
 export { ɵFakeNavigation } from '@angular/core/testing';
-import { Location, LocationStrategy, PlatformLocation, LocationChangeListener } from '@angular/common';
+import { Location, LocationStrategy } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
+import { P as PlatformLocation, L as LocationChangeListener } from '../platform_location.d-BWJDgVlg.js';
 
 /**
  * Return a provider for the `FakeNavigation` in place of the real Navigation API.
