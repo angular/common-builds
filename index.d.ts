@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.4+sha-eb97303
+ * @license Angular v20.0.0-next.4+sha-b927ce8
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,8 +7,8 @@
 import * as i0 from '@angular/core';
 import { ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, OnDestroy, Version, InjectionToken, Provider, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
-import { L as LocationStrategy } from './common_module.d-YL1l6yqJ.js';
-export { y as APP_BASE_HREF, A as AsyncPipe, C as CommonModule, t as CurrencyPipe, q as DATE_PIPE_DEFAULT_OPTIONS, p as DATE_PIPE_DEFAULT_TIMEZONE, D as DatePipe, o as DatePipeConfig, u as DecimalPipe, I as I18nPluralPipe, r as I18nSelectPipe, J as JsonPipe, v as KeyValue, K as KeyValuePipe, w as Location, s as LowerCasePipe, b as NgClass, n as NgComponentOutlet, c as NgFor, c as NgForOf, d as NgForOfContext, e as NgIf, f as NgIfContext, N as NgLocaleLocalization, a as NgLocalization, g as NgPlural, h as NgPluralCase, i as NgStyle, j as NgSwitch, k as NgSwitchCase, l as NgSwitchDefault, m as NgTemplateOutlet, z as PathLocationStrategy, P as PercentPipe, x as PopStateEvent, S as SlicePipe, T as TitleCasePipe, U as UpperCasePipe } from './common_module.d-YL1l6yqJ.js';
+import { L as LocationStrategy } from './common_module.d-BP8xLQft.js';
+export { y as APP_BASE_HREF, A as AsyncPipe, C as CommonModule, t as CurrencyPipe, q as DATE_PIPE_DEFAULT_OPTIONS, p as DATE_PIPE_DEFAULT_TIMEZONE, D as DatePipe, o as DatePipeConfig, u as DecimalPipe, I as I18nPluralPipe, r as I18nSelectPipe, J as JsonPipe, v as KeyValue, K as KeyValuePipe, w as Location, s as LowerCasePipe, b as NgClass, n as NgComponentOutlet, c as NgFor, c as NgForOf, d as NgForOfContext, e as NgIf, f as NgIfContext, N as NgLocaleLocalization, a as NgLocalization, g as NgPlural, h as NgPluralCase, i as NgStyle, j as NgSwitch, k as NgSwitchCase, l as NgSwitchDefault, m as NgTemplateOutlet, z as PathLocationStrategy, P as PercentPipe, x as PopStateEvent, S as SlicePipe, T as TitleCasePipe, U as UpperCasePipe } from './common_module.d-BP8xLQft.js';
 import { P as PlatformLocation, L as LocationChangeListener } from './platform_location.d-BWJDgVlg.js';
 export { B as BrowserPlatformLocation, a as LOCATION_INITIALIZED, b as LocationChangeEvent } from './platform_location.d-BWJDgVlg.js';
 export { X as XhrFactory } from './xhr.d-Bbgj1reV.js';
