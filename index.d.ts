@@ -1,12 +1,12 @@
 /**
- * @license Angular v20.0.0-next.4+sha-4f5216e
+ * @license Angular v20.0.0-next.4+sha-accc65c
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
 import { ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, NgModuleFactory, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef, Version, Provider, OnInit } from '@angular/core';
-export { ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
+export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
 import { SubscriptionLike, Observable, Subscribable } from 'rxjs';
 
 declare function getDOM(): DomAdapter;
@@ -2806,15 +2806,6 @@ declare class CommonModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
-/**
- * A DI Token representing the main rendering context.
- * In a browser and SSR this is the DOM Document.
- * When using SSR, that document is created by [Domino](https://github.com/angular/domino).
- *
- * @publicApi
- */
-declare const DOCUMENT: InjectionToken<Document>;
-
 declare const PLATFORM_BROWSER_ID = "browser";
 declare const PLATFORM_SERVER_ID = "server";
 /**
@@ -3275,5 +3266,5 @@ declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
  */
 declare function normalizeQueryParams(params: string): string;
 
-export { APP_BASE_HREF, AsyncPipe, BrowserPlatformLocation, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DOCUMENT, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, IMAGE_LOADER, JsonPipe, KeyValuePipe, LOCATION_INITIALIZED, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgOptimizedImage, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PathLocationStrategy, PercentPipe, PlatformLocation, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, VERSION, ViewportScroller, WeekDay, XhrFactory, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PlatformNavigation as ɵPlatformNavigation, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
+export { APP_BASE_HREF, AsyncPipe, BrowserPlatformLocation, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, IMAGE_LOADER, JsonPipe, KeyValuePipe, LOCATION_INITIALIZED, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgOptimizedImage, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PathLocationStrategy, PercentPipe, PlatformLocation, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, VERSION, ViewportScroller, WeekDay, XhrFactory, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PlatformNavigation as ɵPlatformNavigation, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
 export type { DatePipeConfig, ImageLoader, ImageLoaderConfig, ImagePlaceholderConfig, KeyValue, LocationChangeEvent, LocationChangeListener, PopStateEvent, Time };
