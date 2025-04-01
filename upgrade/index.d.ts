@@ -1,14 +1,15 @@
 /**
- * @license Angular v20.0.0-next.4+sha-5db7e4c
+ * @license Angular v20.0.0-next.4+sha-eb97303
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import * as i1 from '@angular/common';
-import { Location, PlatformLocation, LocationStrategy } from '@angular/common';
+import { w as Location, L as LocationStrategy, C as CommonModule } from '../common_module.d-YL1l6yqJ.js';
+import { P as PlatformLocation } from '../platform_location.d-BWJDgVlg.js';
 import { UpgradeModule } from '@angular/upgrade/static';
 import * as i0 from '@angular/core';
 import { InjectionToken, ModuleWithProviders } from '@angular/core';
+import 'rxjs';
 
 /**
  * A codec for encoding and decoding URL parts.
@@ -435,7 +436,7 @@ declare const LOCATION_UPGRADE_CONFIGURATION: InjectionToken<LocationUpgradeConf
 declare class LocationUpgradeModule {
     static config(config?: LocationUpgradeConfig): ModuleWithProviders<LocationUpgradeModule>;
     static ɵfac: i0.ɵɵFactoryDeclaration<LocationUpgradeModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<LocationUpgradeModule, never, [typeof i1.CommonModule], never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<LocationUpgradeModule, never, [typeof CommonModule], never>;
     static ɵinj: i0.ɵɵInjectorDeclaration<LocationUpgradeModule>;
 }
 
