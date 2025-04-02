@@ -1,10 +1,10 @@
 /**
- * @license Angular v20.0.0-next.5+sha-1c6d5b2
+ * @license Angular v20.0.0-next.5+sha-1c1ad12
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-export { V as AsyncPipe, D as CommonModule, a2 as CurrencyPipe, Z as DATE_PIPE_DEFAULT_OPTIONS, Y as DATE_PIPE_DEFAULT_TIMEZONE, X as DatePipe, a3 as DecimalPipe, F as FormStyle, g as FormatWidth, a9 as HashLocationStrategy, _ as I18nPluralPipe, $ as I18nSelectPipe, a0 as JsonPipe, a8 as KeyValuePipe, a1 as LowerCasePipe, E as NgClass, U as NgComponentOutlet, G as NgFor, G as NgForOf, H as NgForOfContext, I as NgIf, J as NgIfContext, N as NgLocaleLocalization, d as NgLocalization, K as NgPlural, L as NgPluralCase, M as NgStyle, O as NgSwitch, Q as NgSwitchCase, R as NgSwitchDefault, S as NgTemplateOutlet, e as NumberFormatStyle, h as NumberSymbol, a4 as PercentPipe, P as Plural, a5 as SlicePipe, a7 as TitleCasePipe, T as TranslationWidth, a6 as UpperCasePipe, W as WeekDay, a as formatCurrency, f as formatDate, b as formatNumber, c as formatPercent, j as getCurrencySymbol, z as getLocaleCurrencyCode, A as getLocaleCurrencyName, B as getLocaleCurrencySymbol, r as getLocaleDateFormat, s as getLocaleDateTimeFormat, l as getLocaleDayNames, k as getLocaleDayPeriods, C as getLocaleDirection, o as getLocaleEraNames, t as getLocaleExtraDayPeriodRules, u as getLocaleExtraDayPeriods, q as getLocaleFirstDayOfWeek, n as getLocaleId, m as getLocaleMonthNames, y as getLocaleNumberFormat, x as getLocaleNumberSymbol, v as getLocalePluralCase, w as getLocaleTimeFormat, p as getLocaleWeekEndRange, i as getNumberOfCurrencyDigits } from './common_module-DXqIruqL.mjs';
+export { V as AsyncPipe, D as CommonModule, a2 as CurrencyPipe, Z as DATE_PIPE_DEFAULT_OPTIONS, Y as DATE_PIPE_DEFAULT_TIMEZONE, X as DatePipe, a3 as DecimalPipe, F as FormStyle, g as FormatWidth, a9 as HashLocationStrategy, _ as I18nPluralPipe, $ as I18nSelectPipe, a0 as JsonPipe, a8 as KeyValuePipe, a1 as LowerCasePipe, E as NgClass, U as NgComponentOutlet, G as NgFor, G as NgForOf, H as NgForOfContext, I as NgIf, J as NgIfContext, N as NgLocaleLocalization, d as NgLocalization, K as NgPlural, L as NgPluralCase, M as NgStyle, O as NgSwitch, Q as NgSwitchCase, R as NgSwitchDefault, S as NgTemplateOutlet, e as NumberFormatStyle, h as NumberSymbol, a4 as PercentPipe, P as Plural, a5 as SlicePipe, a7 as TitleCasePipe, T as TranslationWidth, a6 as UpperCasePipe, W as WeekDay, a as formatCurrency, f as formatDate, b as formatNumber, c as formatPercent, j as getCurrencySymbol, z as getLocaleCurrencyCode, A as getLocaleCurrencyName, B as getLocaleCurrencySymbol, r as getLocaleDateFormat, s as getLocaleDateTimeFormat, l as getLocaleDayNames, k as getLocaleDayPeriods, C as getLocaleDirection, o as getLocaleEraNames, t as getLocaleExtraDayPeriodRules, u as getLocaleExtraDayPeriods, q as getLocaleFirstDayOfWeek, n as getLocaleId, m as getLocaleMonthNames, y as getLocaleNumberFormat, x as getLocaleNumberSymbol, v as getLocalePluralCase, w as getLocaleTimeFormat, p as getLocaleWeekEndRange, i as getNumberOfCurrencyDigits } from './common_module-8aKBcg-3.mjs';
 import * as i0 from '@angular/core';
 import { ɵregisterLocaleData as _registerLocaleData, Version, ɵɵdefineInjectable as __defineInjectable, inject, DOCUMENT, InjectionToken, ɵRuntimeError as _RuntimeError, ɵformatRuntimeError as _formatRuntimeError, PLATFORM_ID, Injectable, ɵIMAGE_CONFIG as _IMAGE_CONFIG, Renderer2, ElementRef, Injector, DestroyRef, ɵperformanceMarkFeature as _performanceMarkFeature, NgZone, ApplicationRef, booleanAttribute, numberAttribute, ChangeDetectorRef, ɵIMAGE_CONFIG_DEFAULTS as _IMAGE_CONFIG_DEFAULTS, ɵunwrapSafeValue as _unwrapSafeValue, Input, Directive } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG } from '@angular/core';
@@ -35,7 +35,7 @@ function registerLocaleData(data, localeId, extraData) {
 /**
  * @publicApi
  */
-const VERSION = new Version('20.0.0-next.5+sha-1c6d5b2');
+const VERSION = new Version('20.0.0-next.5+sha-1c1ad12');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -645,10 +645,10 @@ class LCPImageObserver {
         this.observer.disconnect();
         this.images.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: LCPImageObserver, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: LCPImageObserver, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -767,10 +767,10 @@ class PreconnectLinkChecker {
         this.preconnectLinks?.clear();
         this.alreadySeen.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -857,10 +857,10 @@ class PreloadLinkCreator {
         }
         renderer.appendChild(this.document.head, preload);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -1428,10 +1428,10 @@ class NgOptimizedImage {
     setHostAttribute(name, value) {
         this.renderer.setAttribute(this.imgElement, name, value);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "20.0.0-next.5+sha-1c6d5b2", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "20.0.0-next.5+sha-1c1ad12", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c6d5b2", ngImport: i0, type: NgOptimizedImage, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.0-next.5+sha-1c1ad12", ngImport: i0, type: NgOptimizedImage, decorators: [{
             type: Directive,
             args: [{
                     selector: 'img[ngSrc]',
