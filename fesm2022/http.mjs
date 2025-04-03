@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.0.0-next.5+sha-2348f26
+ * @license Angular v20.0.0-next.5+sha-5795e03
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { H as HttpEventType, a as HttpClient, b as HttpHeaders, c as HttpParams, d as HttpRequest, e as HTTP_ROOT_INTERCEPTOR_FNS, f as HttpResponse } from './module-TRKGK7nU.mjs';
-export { F as FetchBackend, k as HTTP_INTERCEPTORS, g as HttpBackend, n as HttpClientJsonpModule, o as HttpClientModule, p as HttpClientXsrfModule, i as HttpContext, j as HttpContextToken, A as HttpErrorResponse, r as HttpFeatureKind, h as HttpHandler, B as HttpHeaderResponse, C as HttpResponseBase, D as HttpStatusCode, q as HttpUrlEncodingCodec, E as HttpXhrBackend, G as HttpXsrfTokenExtractor, J as JsonpClientBackend, m as JsonpInterceptor, s as provideHttpClient, w as withFetch, t as withInterceptors, u as withInterceptorsFromDi, v as withJsonpSupport, x as withNoXsrfProtection, y as withRequestsMadeViaParent, z as withXsrfConfiguration, l as ɵHttpInterceptingHandler, l as ɵHttpInterceptorHandler, R as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-TRKGK7nU.mjs';
+import { H as HttpEventType, a as HttpClient, b as HttpHeaders, c as HttpParams, d as HttpRequest, e as HTTP_ROOT_INTERCEPTOR_FNS, f as HttpResponse } from './module-DSNamxbP.mjs';
+export { F as FetchBackend, k as HTTP_INTERCEPTORS, g as HttpBackend, n as HttpClientJsonpModule, o as HttpClientModule, p as HttpClientXsrfModule, i as HttpContext, j as HttpContextToken, A as HttpErrorResponse, r as HttpFeatureKind, h as HttpHandler, B as HttpHeaderResponse, C as HttpResponseBase, D as HttpStatusCode, q as HttpUrlEncodingCodec, E as HttpXhrBackend, G as HttpXsrfTokenExtractor, J as JsonpClientBackend, m as JsonpInterceptor, s as provideHttpClient, w as withFetch, t as withInterceptors, u as withInterceptorsFromDi, v as withJsonpSupport, x as withNoXsrfProtection, y as withRequestsMadeViaParent, z as withXsrfConfiguration, l as ɵHttpInterceptingHandler, l as ɵHttpInterceptorHandler, R as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-DSNamxbP.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ResourceStatus, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
