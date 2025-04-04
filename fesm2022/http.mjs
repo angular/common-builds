@@ -1,15 +1,15 @@
 /**
- * @license Angular v20.0.0-next.5+sha-1899358
+ * @license Angular v20.0.0-next.5+sha-3ea0163
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { H as HttpEventType, a as HttpClient, b as HttpHeaders, c as HttpParams, d as HttpRequest, e as HTTP_ROOT_INTERCEPTOR_FNS, f as HttpResponse } from './module-DSNamxbP.mjs';
-export { F as FetchBackend, k as HTTP_INTERCEPTORS, g as HttpBackend, n as HttpClientJsonpModule, o as HttpClientModule, p as HttpClientXsrfModule, i as HttpContext, j as HttpContextToken, A as HttpErrorResponse, r as HttpFeatureKind, h as HttpHandler, B as HttpHeaderResponse, C as HttpResponseBase, D as HttpStatusCode, q as HttpUrlEncodingCodec, E as HttpXhrBackend, G as HttpXsrfTokenExtractor, J as JsonpClientBackend, m as JsonpInterceptor, s as provideHttpClient, w as withFetch, t as withInterceptors, u as withInterceptorsFromDi, v as withJsonpSupport, x as withNoXsrfProtection, y as withRequestsMadeViaParent, z as withXsrfConfiguration, l as ɵHttpInterceptingHandler, l as ɵHttpInterceptorHandler, R as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-DSNamxbP.mjs';
+import { HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-C4LakRc7.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-C4LakRc7.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ResourceStatus, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import './xhr-BdgfMvBr.mjs';
+import './xhr-BfNfxNDv.mjs';
 
 /**
  * `httpResource` makes a reactive HTTP request and exposes the request status and response value as

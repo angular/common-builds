@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.5+sha-1899358
+ * @license Angular v20.0.0-next.5+sha-3ea0163
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,7 +7,7 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, NgModuleFactory, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike, Observable, Subscribable } from 'rxjs';
-import { L as LocationChangeListener, P as PlatformLocation } from './platform_location.d-BWJDgVlg.js';
+import { LocationChangeListener, PlatformLocation } from './platform_location.d-Lbv6Ueec.js';
 
 /**
  * Enables the `Location` service to read route state from the browser's URL.
@@ -1943,5 +1943,5 @@ declare class CommonModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
-export { AsyncPipe as A, CommonModule as C, DatePipe as D, I18nPluralPipe as I, JsonPipe as J, KeyValuePipe as K, LocationStrategy as L, NgLocaleLocalization as N, PercentPipe as P, SlicePipe as S, TitleCasePipe as T, UpperCasePipe as U, NgLocalization as a, NgClass as b, NgForOf as c, NgForOfContext as d, NgIf as e, NgIfContext as f, NgPlural as g, NgPluralCase as h, NgStyle as i, NgSwitch as j, NgSwitchCase as k, NgSwitchDefault as l, NgTemplateOutlet as m, NgComponentOutlet as n, DATE_PIPE_DEFAULT_TIMEZONE as p, DATE_PIPE_DEFAULT_OPTIONS as q, I18nSelectPipe as r, LowerCasePipe as s, CurrencyPipe as t, DecimalPipe as u, Location as w, APP_BASE_HREF as y, PathLocationStrategy as z };
-export type { DatePipeConfig as o, KeyValue as v, PopStateEvent as x };
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe };
+export type { DatePipeConfig, KeyValue, PopStateEvent };

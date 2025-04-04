@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.5+sha-1899358
+ * @license Angular v20.0.0-next.5+sha-3ea0163
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -922,5 +922,5 @@ declare class HttpClientJsonpModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<HttpClientJsonpModule>;
 }
 
-export { HttpRequest as H, HttpHeaders as b, HttpContext as c, HttpParams as d, HttpResponse as e, HttpContextToken as g, HttpClientJsonpModule as h, HttpClientModule as i, HttpClientXsrfModule as j, HttpUrlEncodingCodec as m, HttpErrorResponse as o, HttpEventType as p, HttpHeaderResponse as q, HttpResponseBase as r, HttpStatusCode as t };
-export type { HttpEvent as a, HttpProgressEvent as f, HttpParameterCodec as k, HttpParamsOptions as l, HttpDownloadProgressEvent as n, HttpSentEvent as s, HttpUploadProgressEvent as u, HttpUserEvent as v };
+export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec };
+export type { HttpDownloadProgressEvent, HttpEvent, HttpParameterCodec, HttpParamsOptions, HttpProgressEvent, HttpSentEvent, HttpUploadProgressEvent, HttpUserEvent };
