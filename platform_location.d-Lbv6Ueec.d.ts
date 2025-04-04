@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.5+sha-1b36f6e
+ * @license Angular v19.2.5+sha-e9a719e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -111,5 +111,5 @@ declare class BrowserPlatformLocation extends PlatformLocation {
     static ɵprov: i0.ɵɵInjectableDeclaration<BrowserPlatformLocation>;
 }
 
-export { BrowserPlatformLocation as B, PlatformLocation as P, LOCATION_INITIALIZED as a };
-export type { LocationChangeListener as L, LocationChangeEvent as b };
+export { BrowserPlatformLocation, LOCATION_INITIALIZED, PlatformLocation };
+export type { LocationChangeEvent, LocationChangeListener };

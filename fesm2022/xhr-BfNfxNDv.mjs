@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.5+sha-1b36f6e
+ * @license Angular v19.2.5+sha-e9a719e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -41,5 +41,5 @@ function isPlatformServer(platformId) {
 class XhrFactory {
 }
 
-export { PLATFORM_BROWSER_ID as P, XhrFactory as X, PLATFORM_SERVER_ID as a, isPlatformServer as b, isPlatformBrowser as i, parseCookieValue as p };
-//# sourceMappingURL=xhr-BdgfMvBr.mjs.map
+export { PLATFORM_BROWSER_ID, PLATFORM_SERVER_ID, XhrFactory, isPlatformBrowser, isPlatformServer, parseCookieValue };
+//# sourceMappingURL=xhr-BfNfxNDv.mjs.map

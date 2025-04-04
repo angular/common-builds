@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.5+sha-1b36f6e
+ * @license Angular v19.2.5+sha-e9a719e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13,4 +13,4 @@ declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
 }
 
-export { XhrFactory as X };
+export { XhrFactory };

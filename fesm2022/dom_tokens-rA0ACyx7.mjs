@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.5+sha-1b36f6e
+ * @license Angular v19.2.5+sha-e9a719e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -15,5 +15,5 @@ import { InjectionToken } from '@angular/core';
  */
 const DOCUMENT = new InjectionToken(ngDevMode ? 'DocumentToken' : '');
 
-export { DOCUMENT as D };
-//# sourceMappingURL=dom_tokens-CNpAxedO.mjs.map
+export { DOCUMENT };
+//# sourceMappingURL=dom_tokens-rA0ACyx7.mjs.map

@@ -1,15 +1,15 @@
 /**
- * @license Angular v19.2.5+sha-1b36f6e
+ * @license Angular v19.2.5+sha-e9a719e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { Observable } from 'rxjs';
-import { H as HttpRequest, a as HttpEvent, b as HttpHeaders, c as HttpContext, d as HttpParams, e as HttpResponse, f as HttpProgressEvent } from '../module.d-BJA_GXII.js';
-export { h as HttpClientJsonpModule, i as HttpClientModule, j as HttpClientXsrfModule, g as HttpContextToken, n as HttpDownloadProgressEvent, o as HttpErrorResponse, p as HttpEventType, q as HttpHeaderResponse, k as HttpParameterCodec, l as HttpParamsOptions, r as HttpResponseBase, s as HttpSentEvent, t as HttpStatusCode, u as HttpUploadProgressEvent, m as HttpUrlEncodingCodec, v as HttpUserEvent } from '../module.d-BJA_GXII.js';
+import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from '../module.d-CnjH8Dlt.js';
+export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from '../module.d-CnjH8Dlt.js';
 import * as i0 from '@angular/core';
 import { InjectionToken, EnvironmentInjector, Provider, EnvironmentProviders, WritableResource, ResourceRef, Signal, Injector, ValueEqualityFn } from '@angular/core';
-import { X as XhrFactory } from '../xhr.d-Bbgj1reV.js';
+import { XhrFactory } from '../xhr.d-D_1kTQR5.js';
 
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
