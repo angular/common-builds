@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.0.0-next.6+sha-ea58402
+ * @license Angular v20.0.0-next.6+sha-9f31947
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-C4LakRc7.mjs';
-export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-C4LakRc7.mjs';
+import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-C4LakRc7.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-C4LakRc7.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ResourceStatus, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -111,7 +111,13 @@ class HttpResourceImpl extends _ResourceImpl {
                             break;
                     }
                 },
-                error: (error) => send({ error }),
+                error: (error) => {
+                    if (error instanceof HttpErrorResponse) {
+                        this._headers.set(error.headers);
+                        this._statusCode.set(error.status);
+                    }
+                    send({ error });
+                },
                 complete: () => {
                     if (resolve) {
                         send({ error: new Error('Resource completed before producing a value') });
@@ -391,5 +397,5 @@ function verifyMappedOrigin(url) {
     }
 }
 
-export { HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse, httpResource, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, withHttpTransferCache as ɵwithHttpTransferCache };
+export { HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse, httpResource, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, withHttpTransferCache as ɵwithHttpTransferCache };
 //# sourceMappingURL=http.mjs.map
