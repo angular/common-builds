@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.6+sha-2a65a12
+ * @license Angular v19.2.6+sha-37ab681
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function registerLocaleData(data, localeId, extraData) {
 /**
  * @publicApi
  */
-const VERSION = new Version('19.2.6+sha-2a65a12');
+const VERSION = new Version('19.2.6+sha-37ab681');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -646,10 +646,10 @@ class LCPImageObserver {
         this.observer.disconnect();
         this.images.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: LCPImageObserver, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: LCPImageObserver, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -768,10 +768,10 @@ class PreconnectLinkChecker {
         this.preconnectLinks?.clear();
         this.alreadySeen.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -815,6 +815,7 @@ const PRELOADED_IMAGES = new InjectionToken(typeof ngDevMode === 'undefined' || 
 class PreloadLinkCreator {
     preloadedImages = inject(PRELOADED_IMAGES);
     document = inject(DOCUMENT);
+    errorShown = false;
     /**
      * @description Add a preload `<link>` to the `<head>` of the `index.html` that is served from the
      * server while using Angular Universal and SSR to kick off image loads for high priority images.
@@ -832,14 +833,14 @@ class PreloadLinkCreator {
      * @param sizes The value of the `sizes` attribute passed in to the `<img>` tag
      */
     createPreloadLinkTag(renderer, src, srcset, sizes) {
-        if (ngDevMode) {
-            if (this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
-                throw new _RuntimeError(2961 /* RuntimeErrorCode.TOO_MANY_PRELOADED_IMAGES */, ngDevMode &&
-                    `The \`NgOptimizedImage\` directive has detected that more than ` +
-                        `${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. ` +
-                        `This might negatively affect an overall performance of the page. ` +
-                        `To fix this, remove the "priority" attribute from images with less priority.`);
-            }
+        if (ngDevMode &&
+            !this.errorShown &&
+            this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
+            this.errorShown = true;
+            console.warn(_formatRuntimeError(2961 /* RuntimeErrorCode.TOO_MANY_PRELOADED_IMAGES */, `The \`NgOptimizedImage\` directive has detected that more than ` +
+                `${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. ` +
+                `This might negatively affect an overall performance of the page. ` +
+                `To fix this, remove the "priority" attribute from images with less priority.`));
         }
         if (this.preloadedImages.has(src)) {
             return;
@@ -858,10 +859,10 @@ class PreloadLinkCreator {
         }
         renderer.appendChild(this.document.head, preload);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -1433,10 +1434,10 @@ class NgOptimizedImage {
     setHostAttribute(name, value) {
         this.renderer.setAttribute(this.imgElement, name, value);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "19.2.6+sha-2a65a12", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "19.2.6+sha-37ab681", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-2a65a12", ngImport: i0, type: NgOptimizedImage, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.6+sha-37ab681", ngImport: i0, type: NgOptimizedImage, decorators: [{
             type: Directive,
             args: [{
                     selector: 'img[ngSrc]',
