@@ -1,12 +1,12 @@
 /**
- * @license Angular v20.0.0-next.8+sha-57794f0
+ * @license Angular v20.0.0-next.8+sha-4bcf183
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-C4LakRc7.mjs';
 export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-C4LakRc7.mjs';
-import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ResourceStatus, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
+import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import './xhr-BfNfxNDv.mjs';
@@ -72,13 +72,11 @@ class HttpResourceImpl extends _ResourceImpl {
         source: this.extRequest,
         computation: () => undefined,
     });
-    headers = computed(() => this.status() === ResourceStatus.Resolved || this.status() === ResourceStatus.Error
-        ? this._headers()
-        : undefined);
+    headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined);
     progress = this._progress.asReadonly();
     statusCode = this._statusCode.asReadonly();
     constructor(injector, request, defaultValue, parse, equal) {
-        super(request, ({ request, abortSignal }) => {
+        super(request, ({ params: request, abortSignal }) => {
             let sub;
             // Track the abort listener so it can be removed if the Observable completes (as a memory
             // optimization).
