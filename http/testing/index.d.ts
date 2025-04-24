@@ -1,10 +1,10 @@
 /**
- * @license Angular v20.0.0-next.8+sha-e711f99
+ * @license Angular v20.0.0-next.8+sha-ccc5cc0
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpRequest, HttpEvent, HttpHeaders, HttpClientModule } from '../../module.d-CnjH8Dlt.js';
+import { HttpRequest, HttpEvent, HttpHeaders, HttpClientModule } from '../../module.d-yNBsZ8gb.js';
 import { Observer } from 'rxjs';
 import * as i0 from '@angular/core';
 import { Provider } from '@angular/core';

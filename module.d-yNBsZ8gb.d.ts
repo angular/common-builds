@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.8+sha-e711f99
+ * @license Angular v20.0.0-next.8+sha-ccc5cc0
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -376,6 +376,10 @@ declare class HttpRequest<T> {
      */
     readonly withCredentials: boolean;
     /**
+     * When using the fetch implementation and set to `true`, the browser will not abort the associated request if the page that initiated it is unloaded before the request is complete.
+     */
+    readonly keepalive: boolean;
+    /**
      * The expected response type of the server.
      *
      * This is used to parse the response appropriately before returning it to
@@ -414,6 +418,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -433,6 +438,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
     });
     constructor(method: 'POST', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -441,6 +447,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -460,6 +467,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -468,6 +476,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -500,6 +509,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        keepalive?: boolean;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -519,6 +529,7 @@ declare class HttpRequest<T> {
         reportProgress?: boolean;
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        keepalive?: boolean;
         withCredentials?: boolean;
         transferCache?: {
             includeHeaders?: string[];
