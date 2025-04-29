@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.8+sha-b250bb0
+ * @license Angular v20.0.0-next.8+sha-b7d3f3d
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -609,7 +609,7 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * @ngModule CommonModule
  * @publicApi
  *
- * @deprecated Use the @for block instead. Intent to remove in v22
+ * @deprecated Use the `@for` block instead. Intent to remove in v22
  */
 declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;

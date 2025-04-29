@@ -1,10 +1,10 @@
 /**
- * @license Angular v20.0.0-next.8+sha-b250bb0
+ * @license Angular v20.0.0-next.8+sha-b7d3f3d
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { Location, LocationStrategy, CommonModule } from '../common_module.d-1Ij4nFjY.js';
+import { Location, LocationStrategy, CommonModule } from '../common_module.d-ClF75kAz.js';
 import { PlatformLocation } from '../platform_location.d-Lbv6Ueec.js';
 import { UpgradeModule } from '@angular/upgrade/static';
 import * as i0 from '@angular/core';
