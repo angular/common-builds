@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.0+sha-5f31c95
+ * @license Angular v20.1.0-next.0+sha-8828a84
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -618,6 +618,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     /**
      * The value of the iterable expression, which can be used as a
      * [template input variable](guide/directives/structural-directives#shorthand).
+     * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
      */
     set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
     /**
@@ -637,6 +638,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
      * and the iterable is recreated and re-rendered, but most of the data is still the same).
      *
      * @see {@link TrackByFunction}
+     * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
      */
     set ngForTrackBy(fn: TrackByFunction<T>);
     get ngForTrackBy(): TrackByFunction<T>;
@@ -648,6 +650,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     /**
      * A reference to the template that is stamped out for each item in the iterable.
      * @see [template reference variable](guide/templates/variables#template-reference-variables)
+     * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
      */
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
@@ -818,14 +821,17 @@ declare class NgIf<T = unknown> {
     constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext<T>>);
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
+     * @deprecated Use the @if block instead. Intent to remove in v22
      */
     set ngIf(condition: T);
     /**
      * A template to show if the condition expression evaluates to true.
+     * @deprecated Use the @if block instead. Intent to remove in v22
      */
     set ngIfThen(templateRef: TemplateRef<NgIfContext<T>> | null);
     /**
      * A template to show if the condition expression evaluates to false.
+     * @deprecated Use the @if block instead. Intent to remove in v22
      */
     set ngIfElse(templateRef: TemplateRef<NgIfContext<T>> | null);
     private _updateView;
@@ -1055,6 +1061,7 @@ declare class NgSwitch {
     private _lastCaseCheckIndex;
     private _lastCasesMatched;
     private _ngSwitch;
+    /** @deprecated Use the @switch block instead. Intent to remove in v22 */
     set ngSwitch(newValue: any);
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitch, never>;
@@ -1099,6 +1106,7 @@ declare class NgSwitchCase implements DoCheck {
     private _view;
     /**
      * Stores the HTML template to be selected on match.
+     * @deprecated Use the @case block within a @switch block instead. Intent to remove in v22
      */
     ngSwitchCase: any;
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
