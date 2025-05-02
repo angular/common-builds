@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-next.9+sha-bbdb166
+ * @license Angular v20.0.0-next.9+sha-782c6e1
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -478,7 +478,8 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
 /**
  * @publicApi
  *
- * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
+ * @deprecated 20.0
+ * The `ngFor` directive is deprecated. Use the `@for` block instead.
  */
 declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
     /** Reference to the current item from the collection. */
@@ -609,7 +610,8 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * @ngModule CommonModule
  * @publicApi
  *
- * @deprecated Use the `@for` block instead. Intent to remove in v22
+ * @deprecated 20.0
+ * Use the `@for` block instead. Intent to remove in v22
  */
 declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;
@@ -809,7 +811,8 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
  * @ngModule CommonModule
  * @publicApi
  *
- * @deprecated Use the @if block instead. Intent to remove in v22
+ * @deprecated 20.0
+ * Use the @if block instead. Intent to remove in v22
  */
 declare class NgIf<T = unknown> {
     private _viewContainer;
@@ -856,6 +859,9 @@ declare class NgIf<T = unknown> {
 }
 /**
  * @publicApi
+ *
+ * @deprecated 20.0
+ * The ngIf directive is deprecated in favor of the @if block instead.
  */
 declare class NgIfContext<T = unknown> {
     $implicit: T;
@@ -1052,7 +1058,8 @@ declare class SwitchView {
  * @see {@link NgSwitchDefault}
  * @see [Structural Directives](guide/directives/structural-directives)
  *
- * @deprecated Use the @switch block instead. Intent to remove in v22
+ * @deprecated 20.0
+ * Use the @switch block instead. Intent to remove in v22
  */
 declare class NgSwitch {
     private _defaultViews;
@@ -1099,7 +1106,8 @@ declare class NgSwitch {
  * @see {@link NgSwitch}
  * @see {@link NgSwitchDefault}
  *
- * @deprecated Use the @case block within a @switch block instead. Intent to remove in v22
+ * @deprecated 20.0
+ * Use the @case block within a @switch block instead. Intent to remove in v22
  */
 declare class NgSwitchCase implements DoCheck {
     private ngSwitch;
@@ -1131,7 +1139,8 @@ declare class NgSwitchCase implements DoCheck {
  * @see {@link NgSwitch}
  * @see {@link NgSwitchCase}
  *
- * @deprecated Use the @default block within a @switch block instead. Intent to remove in v22
+ * @deprecated 20.0
+ * Use the @default block within a @switch block instead. Intent to remove in v22
  */
 declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
