@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.0.0-rc.0+sha-c1b9d3e
+ * @license Angular v20.0.0-rc.0+sha-1b4b44e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, OnDestroy, Version, InjectionToken, Provider, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, OnDestroy, Version, Provider, InjectionToken, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
 import { LocationStrategy } from './common_module.d-B42WMLw4.js';
 export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, Location, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './common_module.d-B42WMLw4.js';
@@ -872,7 +872,7 @@ declare class NullViewportScroller implements ViewportScroller {
  *
  * @publicApi
  */
-declare const provideCloudflareLoader: (path: string) => i0.Provider[];
+declare const provideCloudflareLoader: (path: string) => Provider[];
 
 /**
  * Config options recognized by the image loader function.
@@ -930,7 +930,7 @@ declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
  *
  * @publicApi
  */
-declare const provideCloudinaryLoader: (path: string) => i0.Provider[];
+declare const provideCloudinaryLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for ImageKit and turns it into an Angular provider.
@@ -943,7 +943,7 @@ declare const provideCloudinaryLoader: (path: string) => i0.Provider[];
  *
  * @publicApi
  */
-declare const provideImageKitLoader: (path: string) => i0.Provider[];
+declare const provideImageKitLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Imgix and turns it into an Angular provider.
@@ -954,7 +954,7 @@ declare const provideImageKitLoader: (path: string) => i0.Provider[];
  *
  * @publicApi
  */
-declare const provideImgixLoader: (path: string) => i0.Provider[];
+declare const provideImgixLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Netlify and turns it into an Angular provider.
