@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.10+sha-7be6e5d
+ * @license Angular v19.2.10+sha-899cb4a
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -880,7 +880,7 @@ declare class NullViewportScroller implements ViewportScroller {
  *
  * @publicApi
  */
-declare const provideCloudflareLoader: (path: string) => i0.Provider[];
+declare const provideCloudflareLoader: (path: string) => Provider[];
 
 /**
  * Config options recognized by the image loader function.
@@ -938,7 +938,7 @@ declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
  *
  * @publicApi
  */
-declare const provideCloudinaryLoader: (path: string) => i0.Provider[];
+declare const provideCloudinaryLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for ImageKit and turns it into an Angular provider.
@@ -951,7 +951,7 @@ declare const provideCloudinaryLoader: (path: string) => i0.Provider[];
  *
  * @publicApi
  */
-declare const provideImageKitLoader: (path: string) => i0.Provider[];
+declare const provideImageKitLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Imgix and turns it into an Angular provider.
@@ -962,7 +962,7 @@ declare const provideImageKitLoader: (path: string) => i0.Provider[];
  *
  * @publicApi
  */
-declare const provideImgixLoader: (path: string) => i0.Provider[];
+declare const provideImgixLoader: (path: string) => Provider[];
 
 /**
  * Function that generates an ImageLoader for Netlify and turns it into an Angular provider.
