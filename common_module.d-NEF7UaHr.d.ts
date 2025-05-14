@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.10+sha-c92c34d
+ * @license Angular v19.2.10+sha-42f203e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -100,7 +100,7 @@ declare class PathLocationStrategy extends LocationStrategy implements OnDestroy
     private _baseHref;
     private _removeListenerFns;
     constructor(_platformLocation: PlatformLocation, href?: string);
-    /** @nodoc */
+    /** @docs-private */
     ngOnDestroy(): void;
     onPopState(fn: LocationChangeListener): void;
     getBaseHref(): string;
@@ -152,7 +152,7 @@ interface PopStateEvent {
  */
 declare class Location implements OnDestroy {
     constructor(locationStrategy: LocationStrategy);
-    /** @nodoc */
+    /** @docs-private */
     ngOnDestroy(): void;
     /**
      * Normalizes the URL path for this location.
@@ -464,11 +464,11 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     constructor(_viewContainerRef: ViewContainerRef);
     private _needToReCreateNgModuleInstance;
     private _needToReCreateComponentInstance;
-    /** @nodoc */
+    /** @docs-private */
     ngOnChanges(changes: SimpleChanges): void;
-    /** @nodoc */
+    /** @docs-private */
     ngDoCheck(): void;
-    /** @nodoc */
+    /** @docs-private */
     ngOnDestroy(): void;
     private _applyInputStateDiff;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet<any>, never>;
@@ -648,7 +648,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     set ngForTemplate(value: TemplateRef<NgForOfContext<T, U>>);
     /**
      * Applies the changes when needed.
-     * @nodoc
+     * @docs-private
      */
     ngDoCheck(): void;
     private _applyChanges;
@@ -1096,7 +1096,7 @@ declare class NgSwitchCase implements DoCheck {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
     /**
      * Performs case matching. For internal use only.
-     * @nodoc
+     * @docs-private
      */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitchCase, [null, null, { optional: true; host: true; }]>;

@@ -1,5 +1,5 @@
 /**
- * @license Angular v19.2.10+sha-c92c34d
+ * @license Angular v19.2.10+sha-42f203e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -25,7 +25,7 @@ declare class SpyLocation implements Location {
     urlChanges: string[];
     private _history;
     private _historyIndex;
-    /** @nodoc */
+    /** @docs-private */
     ngOnDestroy(): void;
     setInitialPath(url: string): void;
     setBaseHref(url: string): void;
