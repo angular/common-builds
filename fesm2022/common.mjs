@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.0+sha-8768894
+ * @license Angular v20.1.0-next.0+sha-f1f3789
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -34,7 +34,7 @@ function registerLocaleData(data, localeId, extraData) {
 /**
  * @publicApi
  */
-const VERSION = new Version('20.1.0-next.0+sha-8768894');
+const VERSION = new Version('20.1.0-next.0+sha-f1f3789');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
