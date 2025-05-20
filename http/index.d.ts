@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-rc.1+sha-5dbeb42
+ * @license Angular v20.0.0-rc.1+sha-966df84
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2787,6 +2787,7 @@ declare class HttpClient {
 declare class FetchBackend implements HttpBackend {
     private readonly fetchImpl;
     private readonly ngZone;
+    private readonly appRef;
     handle(request: HttpRequest<any>): Observable<HttpEvent<any>>;
     private doRequest;
     private parseBody;
