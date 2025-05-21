@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.0.0-rc.1+sha-0a82e58
+ * @license Angular v20.0.0-rc.1+sha-3cc0910
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-CUXOrH-6.mjs';
-export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-CUXOrH-6.mjs';
+import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-o122bowN.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-o122bowN.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
