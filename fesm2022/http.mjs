@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.0.0-rc.1+sha-abdade9
+ * @license Angular v20.0.0-rc.1+sha-d97892a
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-o122bowN.mjs';
-export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-o122bowN.mjs';
+import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-BCyfXG3l.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-BCyfXG3l.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, ɵRuntimeError as _RuntimeError, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -117,6 +117,7 @@ class HttpResourceImpl extends _ResourceImpl {
                         this._statusCode.set(error.status);
                     }
                     send({ error });
+                    abortSignal.removeEventListener('abort', onAbort);
                 },
                 complete: () => {
                     if (resolve) {
