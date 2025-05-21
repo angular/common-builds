@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.0+sha-46af023
+ * @license Angular v20.1.0-next.0+sha-e7656b8
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -29,7 +29,9 @@ const httpResource = (() => {
 })();
 function makeHttpResourceFn(responseType) {
     return function httpResource(request, options) {
-        options?.injector || assertInInjectionContext(httpResource);
+        if (ngDevMode && !options?.injector) {
+            assertInInjectionContext(httpResource);
+        }
         const injector = options?.injector ?? inject(Injector);
         return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.parse, options?.equal);
     };
