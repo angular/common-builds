@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0-rc.2+sha-f1568ef
+ * @license Angular v20.0.0-rc.2+sha-2e5362a
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -901,13 +901,13 @@ declare class NgTemplateOutlet<C = unknown> implements OnChanges {
      * declarations.
      * Using the key `$implicit` in the context object will set its value as default.
      */
-    ngTemplateOutletContext: C | null;
+    ngTemplateOutletContext: C | null | undefined;
     /**
      * A string defining the template reference and optionally the context object for the template.
      */
-    ngTemplateOutlet: TemplateRef<C> | null;
+    ngTemplateOutlet: TemplateRef<C> | null | undefined;
     /** Injector to be used within the embedded view. */
-    ngTemplateOutletInjector: Injector | null;
+    ngTemplateOutletInjector: Injector | null | undefined;
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
     /**
