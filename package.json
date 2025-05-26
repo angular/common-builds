@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "19.2.13+sha-61c731a",
+  "version": "19.2.13+sha-9e1cd49",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -17,7 +17,7 @@
     },
     "./locales/*": {
       "types": "./locales/*.d.ts",
-      "default": "./locales/*.mjs"
+      "default": "./locales/*.js"
     },
     "./package.json": {
       "default": "./package.json"
@@ -44,7 +44,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "19.2.13+sha-61c731a",
+    "@angular/core": "19.2.13+sha-9e1cd49",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
