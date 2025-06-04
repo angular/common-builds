@@ -1,15 +1,15 @@
 /**
- * @license Angular v20.0.0+sha-bdf882c
+ * @license Angular v20.0.0+sha-41b1039
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-Bc_q5C8l.mjs';
-export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-Bc_q5C8l.mjs';
+import { HttpErrorResponse, HttpEventType, HttpClient, HttpHeaders, HttpParams, HttpRequest, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-9-_NJo3W.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-9-_NJo3W.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, ɵRuntimeError as _RuntimeError, ɵencapsulateResourceError as _encapsulateResourceError, InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, ApplicationRef, TransferState, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import './xhr-BfNfxNDv.mjs';
+import './xhr-CEmSPUGj.mjs';
 
 /**
  * `httpResource` makes a reactive HTTP request and exposes the request status and response value as
