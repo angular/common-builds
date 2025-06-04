@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.0+sha-b93fa22
+ * @license Angular v20.0.0+sha-2bf7249
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3190,7 +3190,7 @@ interface HttpResourceOptions<TResult, TRaw> {
      */
     parse?: (value: TRaw) => TResult;
     /**
-     * Value that the resource will take when in Idle, Loading, or Error states.
+     * Value that the resource will take when in Idle or Loading states.
      *
      * If not set, the resource will use `undefined` as its default value.
      */
