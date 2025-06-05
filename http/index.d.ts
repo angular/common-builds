@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.1+sha-49e273a
+ * @license Angular v20.0.1+sha-e98ef80
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from '../module.d-yNBsZ8gb.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from '../module.d-yNBsZ8gb.js';
 import * as i0 from '@angular/core';
-import { InjectionToken, EnvironmentInjector, Provider, EnvironmentProviders, WritableResource, ResourceRef, Signal, Injector, ValueEqualityFn } from '@angular/core';
+import { InjectionToken, EnvironmentInjector, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
 import { XhrFactory } from '../xhr.d-D_1kTQR5.js';
 
 /**
