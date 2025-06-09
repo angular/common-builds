@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.0+sha-21fc93b
+ * @license Angular v20.1.0-next.0+sha-ef10aa4
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1120,6 +1120,17 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
      */
     height: number | undefined;
     /**
+     * The desired decoding behavior for the image. Defaults to `auto`
+     * if not explicitly set, matching native browser behavior.
+     *
+     * Use `async` to decode the image off the main thread (non-blocking),
+     * `sync` for immediate decoding (blocking), or `auto` to let the
+     * browser decide the optimal strategy.
+     *
+     * [Spec](https://html.spec.whatwg.org/multipage/images.html#image-decoding-hint)
+     */
+    decoding?: 'sync' | 'async' | 'auto';
+    /**
      * The desired loading behavior (lazy, eager, or auto). Defaults to `lazy`,
      * which is recommended for most images.
      *
@@ -1165,6 +1176,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     private callImageLoader;
     private getLoadingBehavior;
     private getFetchPriority;
+    private getDecoding;
     private getRewrittenSrc;
     private getRewrittenSrcset;
     private getAutomaticSrcset;
@@ -1186,7 +1198,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     private removePlaceholderOnLoad;
     private setHostAttribute;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgOptimizedImage, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "placeholderConfig": { "alias": "placeholderConfig"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgOptimizedImage, "img[ngSrc]", never, { "ngSrc": { "alias": "ngSrc"; "required": true; }; "ngSrcset": { "alias": "ngSrcset"; "required": false; }; "sizes": { "alias": "sizes"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "decoding": { "alias": "decoding"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "priority": { "alias": "priority"; "required": false; }; "loaderParams": { "alias": "loaderParams"; "required": false; }; "disableOptimizedSrcset": { "alias": "disableOptimizedSrcset"; "required": false; }; "fill": { "alias": "fill"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "placeholderConfig": { "alias": "placeholderConfig"; "required": false; }; "src": { "alias": "src"; "required": false; }; "srcset": { "alias": "srcset"; "required": false; }; }, {}, never, never, true, never>;
     static ngAcceptInputType_ngSrc: string | i0.ɵSafeValue;
     static ngAcceptInputType_width: unknown;
     static ngAcceptInputType_height: unknown;
