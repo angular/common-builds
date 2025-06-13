@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.3+sha-67f657e
+ * @license Angular v20.0.3+sha-9b33089
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -12,10 +12,10 @@ import { Injectable } from '@angular/core';
  * implementations.
  */
 class PlatformNavigation {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.3+sha-67f657e", ngImport: i0, type: PlatformNavigation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.3+sha-67f657e", ngImport: i0, type: PlatformNavigation, providedIn: 'platform', useFactory: () => window.navigation });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.3+sha-9b33089", ngImport: i0, type: PlatformNavigation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.3+sha-9b33089", ngImport: i0, type: PlatformNavigation, providedIn: 'platform', useFactory: () => window.navigation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.3+sha-67f657e", ngImport: i0, type: PlatformNavigation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.3+sha-9b33089", ngImport: i0, type: PlatformNavigation, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'platform', useFactory: () => window.navigation }]
         }] });
