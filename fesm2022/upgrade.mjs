@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.0.4+sha-f9fe897
+ * @license Angular v20.0.4+sha-76dbd72
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,8 +8,8 @@ import * as i0 from '@angular/core';
 import { ɵisPromise as _isPromise, InjectionToken, Inject, Optional, NgModule } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, PathLocationStrategy } from './location-BIEtBxGx.mjs';
-import { CommonModule, HashLocationStrategy } from './common_module-D4mHDfs1.mjs';
+import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, PathLocationStrategy } from './location.mjs';
+import { CommonModule, HashLocationStrategy } from './common_module.mjs';
 
 function deepEqual(a, b) {
     if (a === b) {
@@ -864,11 +864,11 @@ class LocationUpgradeModule {
             ],
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.4+sha-f9fe897", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.4+sha-f9fe897", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.4+sha-f9fe897", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.4+sha-76dbd72", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.4+sha-76dbd72", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.4+sha-76dbd72", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.4+sha-f9fe897", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.4+sha-76dbd72", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
