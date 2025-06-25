@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.2+sha-20c1f99
+ * @license Angular v20.1.0-next.2+sha-73269cf
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3165,6 +3165,10 @@ interface HttpResourceRequest {
      * the request.
      */
     withCredentials?: boolean;
+    /**
+     * When using the fetch implementation and set to `true`, the browser will not abort the associated request if the page that initiated it is unloaded before the request is complete.
+     */
+    keepalive?: boolean;
     /**
      * Configures the server-side rendering transfer cache for this request.
      *

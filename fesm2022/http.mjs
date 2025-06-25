@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.2+sha-20c1f99
+ * @license Angular v20.1.0-next.2+sha-73269cf
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -55,6 +55,7 @@ function normalizeRequest(request, responseType) {
         params,
         reportProgress: unwrappedRequest.reportProgress,
         withCredentials: unwrappedRequest.withCredentials,
+        keepalive: unwrappedRequest.keepalive,
         responseType,
         context: unwrappedRequest.context,
         transferCache: unwrappedRequest.transferCache,
