@@ -1,11 +1,11 @@
 /**
- * @license Angular v20.1.0-next.2+sha-ba75583
+ * @license Angular v20.1.0-next.3+sha-85fe323
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, NgModuleFactory, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
+import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, EnvironmentInjector, NgModuleFactory, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike, Observable, Subscribable } from 'rxjs';
 import { LocationChangeListener, PlatformLocation } from './platform_location.d.js';
 
@@ -386,6 +386,9 @@ declare class NgClass implements DoCheck {
  * * `ngComponentOutletInjector`: Optional custom {@link Injector} that will be used as parent for
  * the Component. Defaults to the injector of the current view container.
  *
+ * * `ngComponentOutletEnvironmentInjector`: Optional custom {@link EnvironmentInjector} which will
+ * provide the component's environment.
+ *
  * * `ngComponentOutletContent`: Optional list of projectable nodes to insert into the content
  * section of the component, if it exists.
  *
@@ -442,6 +445,7 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     ngComponentOutlet: Type<any> | null;
     ngComponentOutletInputs?: Record<string, unknown>;
     ngComponentOutletInjector?: Injector;
+    ngComponentOutletEnvironmentInjector?: EnvironmentInjector;
     ngComponentOutletContent?: any[][];
     ngComponentOutletNgModule?: Type<any>;
     /**
@@ -472,7 +476,7 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     ngOnDestroy(): void;
     private _applyInputStateDiff;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet<any>, "[ngComponentOutlet]", ["ngComponentOutlet"], { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet<any>, "[ngComponentOutlet]", ["ngComponentOutlet"], { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletEnvironmentInjector": { "alias": "ngComponentOutletEnvironmentInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 /**
