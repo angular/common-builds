@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.2+sha-73269cf
+ * @license Angular v20.1.0-next.2+sha-b489f9f
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -380,6 +380,15 @@ declare class HttpRequest<T> {
      */
     readonly keepalive: boolean;
     /**
+     * Controls how the request will interact with the browser's HTTP cache.
+     * This affects whether a response is retrieved from the cache, how it is stored, or if it bypasses the cache altogether.
+     */
+    readonly cache: RequestCache;
+    /**
+     * Indicates the relative priority of the request. This may be used by the browser to decide the order in which requests are dispatched and resources fetched.
+     */
+    readonly priority: RequestPriority;
+    /**
      * The expected response type of the server.
      *
      * This is used to parse the response appropriately before returning it to
@@ -419,6 +428,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -439,6 +450,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     });
     constructor(method: 'POST', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -448,6 +461,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -468,6 +483,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -477,6 +494,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -510,6 +529,8 @@ declare class HttpRequest<T> {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -530,6 +551,8 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         withCredentials?: boolean;
         transferCache?: {
             includeHeaders?: string[];

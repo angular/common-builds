@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.2+sha-73269cf
+ * @license Angular v20.1.0-next.2+sha-b489f9f
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -122,7 +122,8 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
-        keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -147,6 +148,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -171,6 +174,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -196,6 +201,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -221,6 +228,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -246,6 +255,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -271,6 +282,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -296,6 +309,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -320,6 +335,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -343,6 +360,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -367,6 +386,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -392,6 +413,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns
@@ -413,6 +436,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -437,6 +462,8 @@ declare class HttpClient {
         reportProgress?: boolean;
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -461,6 +488,8 @@ declare class HttpClient {
         reportProgress?: boolean;
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -484,6 +513,8 @@ declare class HttpClient {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -506,6 +537,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<ArrayBuffer>;
     /**
@@ -526,6 +559,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<Blob>;
     /**
@@ -546,6 +581,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<string>;
     /**
@@ -567,6 +604,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
@@ -588,6 +627,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpEvent<Blob>>;
     /**
@@ -609,6 +650,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpEvent<string>>;
     /**
@@ -630,6 +673,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpEvent<Object>>;
     /**
@@ -651,6 +696,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpEvent<T>>;
     /**
@@ -671,6 +718,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
@@ -691,6 +740,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpResponse<Blob>>;
     /**
@@ -711,6 +762,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpResponse<string>>;
     /**
@@ -732,6 +785,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpResponse<Object>>;
     /**
@@ -752,6 +807,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<HttpResponse<T>>;
     /**
@@ -772,6 +829,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<Object>;
     /**
@@ -792,6 +851,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         body?: any | null;
     }): Observable<T>;
     /**
@@ -812,6 +873,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -834,6 +897,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -856,6 +921,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -879,6 +946,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -901,6 +970,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -923,6 +994,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -945,6 +1018,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -967,6 +1042,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -990,6 +1067,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1013,6 +1092,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1036,6 +1117,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1059,6 +1142,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1082,6 +1167,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1105,6 +1192,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1127,6 +1216,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1149,6 +1240,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1171,6 +1264,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1193,6 +1288,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1216,6 +1313,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1239,6 +1338,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1262,6 +1363,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1285,6 +1388,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1308,6 +1413,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1331,6 +1438,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1354,6 +1463,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1377,6 +1488,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1400,6 +1513,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1423,6 +1538,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1446,6 +1563,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1469,6 +1588,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1513,6 +1634,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and returns
@@ -1532,6 +1655,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Blob>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string and
@@ -1551,6 +1676,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<string>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -1571,6 +1698,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and
@@ -1591,6 +1720,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string
@@ -1611,6 +1742,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -1631,6 +1764,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -1651,6 +1786,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -1671,6 +1808,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob`
@@ -1691,6 +1830,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as text stream
@@ -1711,6 +1852,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -1731,6 +1874,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -1751,6 +1896,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -1771,6 +1918,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Object>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
@@ -1790,6 +1939,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<T>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and returns
@@ -1810,6 +1961,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the response
@@ -1830,6 +1983,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Blob>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -1850,6 +2005,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<string>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and
@@ -1871,6 +2028,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob`
@@ -1892,6 +2051,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -1913,6 +2074,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -1934,6 +2097,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -1955,6 +2120,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer`
@@ -1976,6 +2143,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the full
@@ -1997,6 +2166,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text stream and returns the
@@ -2018,6 +2189,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2039,6 +2212,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2060,6 +2235,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -2081,6 +2258,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Object>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2102,6 +2281,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<T>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
@@ -2122,6 +2303,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2145,6 +2328,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2168,6 +2353,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2192,6 +2379,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2215,6 +2404,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2239,6 +2430,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2263,6 +2456,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2287,6 +2482,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2311,6 +2508,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2335,6 +2534,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2359,6 +2560,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2383,6 +2586,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2408,6 +2613,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2431,6 +2638,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2455,6 +2664,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2478,6 +2689,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns
@@ -2498,6 +2711,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Blob>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and
@@ -2518,6 +2733,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<string>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and
@@ -2539,6 +2756,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the full event
@@ -2560,6 +2779,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and returns the full event
@@ -2581,6 +2802,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -2602,6 +2825,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the
@@ -2623,6 +2848,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as an
@@ -2644,6 +2871,8 @@ declare class HttpClient {
         responseType: 'arraybuffer';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the
@@ -2665,6 +2894,8 @@ declare class HttpClient {
         responseType: 'blob';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text stream and returns the
@@ -2686,6 +2917,8 @@ declare class HttpClient {
         responseType: 'text';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -2707,6 +2940,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type and
@@ -2728,6 +2963,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON
@@ -2748,6 +2985,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<Object>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type
@@ -2768,6 +3007,8 @@ declare class HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         keepalive?: boolean;
+        priority?: RequestPriority;
+        cache?: RequestCache;
     }): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
