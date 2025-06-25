@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.2+sha-b489f9f
+ * @license Angular v20.1.0-next.2+sha-4f0126e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -240,19 +240,24 @@ function transferCacheInterceptorFn(req, next) {
             url,
         }));
     }
-    // Request not found in cache. Make the request and cache it if on the server.
-    return next(req).pipe(tap((event) => {
-        if (event instanceof HttpResponse && typeof ngServerMode !== 'undefined' && ngServerMode) {
-            transferState.set(storeKey, {
-                [BODY]: event.body,
-                [HEADERS]: getFilteredHeaders(event.headers, headersToInclude),
-                [STATUS]: event.status,
-                [STATUS_TEXT]: event.statusText,
-                [REQ_URL]: requestUrl,
-                [RESPONSE_TYPE]: req.responseType,
-            });
-        }
-    }));
+    const event$ = next(req);
+    if (typeof ngServerMode !== 'undefined' && ngServerMode) {
+        // Request not found in cache. Make the request and cache it if on the server.
+        return event$.pipe(tap((event) => {
+            // Only cache successful HTTP responses.
+            if (event instanceof HttpResponse) {
+                transferState.set(storeKey, {
+                    [BODY]: event.body,
+                    [HEADERS]: getFilteredHeaders(event.headers, headersToInclude),
+                    [STATUS]: event.status,
+                    [STATUS_TEXT]: event.statusText,
+                    [REQ_URL]: requestUrl,
+                    [RESPONSE_TYPE]: req.responseType,
+                });
+            }
+        }));
+    }
+    return event$;
 }
 /** @returns true when the requests contains autorization related headers. */
 function hasAuthHeaders(req) {
