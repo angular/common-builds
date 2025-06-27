@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-b2afa11
+ * @license Angular v20.1.0-next.3+sha-27b7ec0
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3661,6 +3661,16 @@ interface HttpResourceRequest {
      * Indicates the relative priority of the request. This may be used by the browser to decide the order in which requests are dispatched and resources fetched.
      */
     priority?: RequestPriority | (string & {});
+    /**
+     * The mode of the request, which determines how the request will interact with the browser's security model.
+     * This can affect things like CORS (Cross-Origin Resource Sharing) and same-origin policies.
+     */
+    mode?: RequestMode | (string & {});
+    /**
+     * The redirect mode of the request, which determines how redirects are handled.
+     * This can affect whether the request follows redirects automatically, or if it fails when a redirect occurs.
+     */
+    redirect?: RequestRedirect | (string & {});
     /**
      * Configures the server-side rendering transfer cache for this request.
      *

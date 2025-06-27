@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-b2afa11
+ * @license Angular v20.1.0-next.3+sha-27b7ec0
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -58,6 +58,8 @@ function normalizeRequest(request, responseType) {
         keepalive: unwrappedRequest.keepalive,
         cache: unwrappedRequest.cache,
         priority: unwrappedRequest.priority,
+        mode: unwrappedRequest.mode,
+        redirect: unwrappedRequest.redirect,
         responseType,
         context: unwrappedRequest.context,
         transferCache: unwrappedRequest.transferCache,
