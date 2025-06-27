@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-f849803
+ * @license Angular v20.1.0-next.3+sha-599baa2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -61,6 +61,7 @@ function normalizeRequest(request, responseType) {
         responseType,
         context: unwrappedRequest.context,
         transferCache: unwrappedRequest.transferCache,
+        timeout: unwrappedRequest.timeout,
     });
 }
 class HttpResourceImpl extends _ResourceImpl {
