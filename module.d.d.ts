@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-e8addbf
+ * @license Angular v20.1.0-next.3+sha-c4cffe2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -420,6 +420,10 @@ declare class HttpRequest<T> {
     readonly transferCache?: {
         includeHeaders?: string[];
     } | boolean;
+    /**
+     * The timeout for the backend HTTP request in ms.
+     */
+    readonly timeout?: number;
     constructor(method: 'GET' | 'HEAD', url: string, init?: {
         headers?: HttpHeaders;
         context?: HttpContext;
@@ -441,6 +445,7 @@ declare class HttpRequest<T> {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     });
     constructor(method: 'DELETE' | 'JSONP' | 'OPTIONS', url: string, init?: {
         headers?: HttpHeaders;
@@ -452,6 +457,7 @@ declare class HttpRequest<T> {
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
+        timeout?: number;
     });
     constructor(method: 'POST', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -474,6 +480,7 @@ declare class HttpRequest<T> {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     });
     constructor(method: 'PUT' | 'PATCH', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -485,6 +492,7 @@ declare class HttpRequest<T> {
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
+        timeout?: number;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -507,6 +515,7 @@ declare class HttpRequest<T> {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     });
     /**
      * Transform the free-form body into a serialized format suitable for
@@ -534,6 +543,7 @@ declare class HttpRequest<T> {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
         body?: T | null;
         method?: string;
         url?: string;
@@ -557,6 +567,7 @@ declare class HttpRequest<T> {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
         body?: V | null;
         method?: string;
         url?: string;

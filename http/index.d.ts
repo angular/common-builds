@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-e8addbf
+ * @license Angular v20.1.0-next.3+sha-c4cffe2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -3410,6 +3410,15 @@ interface HttpResourceRequest {
      * When using the fetch implementation and set to `true`, the browser will not abort the associated request if the page that initiated it is unloaded before the request is complete.
      */
     keepalive?: boolean;
+    /**
+     * Controls how the request will interact with the browser's HTTP cache.
+     * This affects whether a response is retrieved from the cache, how it is stored, or if it bypasses the cache altogether.
+     */
+    cache?: RequestCache | (string & {});
+    /**
+     * Indicates the relative priority of the request. This may be used by the browser to decide the order in which requests are dispatched and resources fetched.
+     */
+    priority?: RequestPriority | (string & {});
     /**
      * Configures the server-side rendering transfer cache for this request.
      *
