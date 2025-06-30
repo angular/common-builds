@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-d283595
+ * @license Angular v20.1.0-next.3+sha-f0965c7
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -376,6 +376,11 @@ declare class HttpRequest<T> {
      */
     readonly withCredentials: boolean;
     /**
+     *  The credentials mode of the request, which determines how cookies and HTTP authentication are handled.
+     *  This can affect whether cookies are sent with the request, and how authentication is handled.
+     */
+    readonly credentials: RequestCredentials;
+    /**
      * When using the fetch implementation and set to `true`, the browser will not abort the associated request if the page that initiated it is unloaded before the request is complete.
      */
     readonly keepalive: boolean;
@@ -441,6 +446,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -466,6 +472,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -480,6 +487,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -505,6 +513,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -519,6 +528,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -557,6 +567,7 @@ declare class HttpRequest<T> {
         params?: HttpParams;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -588,6 +599,7 @@ declare class HttpRequest<T> {
         mode?: RequestMode;
         redirect?: RequestRedirect;
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;

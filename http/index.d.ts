@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.0-next.3+sha-d283595
+ * @license Angular v20.1.0-next.3+sha-f0965c7
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -122,6 +122,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         priority?: RequestPriority;
         cache?: RequestCache;
         mode?: RequestMode;
@@ -149,6 +150,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -177,6 +179,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -206,6 +209,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -235,6 +239,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -264,6 +269,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -293,6 +299,7 @@ declare class HttpClient {
         params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -322,6 +329,7 @@ declare class HttpClient {
         params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -350,6 +358,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -377,6 +386,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -405,6 +415,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -434,6 +445,7 @@ declare class HttpClient {
         params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -459,6 +471,7 @@ declare class HttpClient {
         params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -487,6 +500,7 @@ declare class HttpClient {
         responseType?: 'json';
         reportProgress?: boolean;
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -515,6 +529,7 @@ declare class HttpClient {
         responseType?: 'json';
         reportProgress?: boolean;
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -542,6 +557,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -568,6 +584,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -592,6 +609,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -616,6 +634,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -641,6 +660,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -666,6 +686,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -691,6 +712,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -716,6 +738,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -741,6 +764,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -765,6 +789,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -789,6 +814,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -813,6 +839,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -838,6 +865,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -862,6 +890,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -886,6 +915,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -910,6 +940,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -934,6 +965,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -960,6 +992,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -986,6 +1019,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1013,6 +1047,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1039,6 +1074,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1065,6 +1101,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1091,6 +1128,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1117,6 +1155,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1144,6 +1183,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1171,6 +1211,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1198,6 +1239,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1225,6 +1267,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1252,6 +1295,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1279,6 +1323,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1305,6 +1350,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1331,6 +1377,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1357,6 +1404,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1383,6 +1431,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1410,6 +1459,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1437,6 +1487,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1464,6 +1515,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1491,6 +1543,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1518,6 +1571,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1545,6 +1599,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1572,6 +1627,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1599,6 +1655,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1626,6 +1683,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1653,6 +1711,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1680,6 +1739,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1707,6 +1767,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1755,6 +1816,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1778,6 +1840,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1801,6 +1864,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1825,6 +1889,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1849,6 +1914,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1873,6 +1939,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1897,6 +1964,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1921,6 +1989,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1945,6 +2014,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1969,6 +2039,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -1993,6 +2064,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2017,6 +2089,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2041,6 +2114,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2065,6 +2139,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2088,6 +2163,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2112,6 +2188,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2136,6 +2213,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2160,6 +2238,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2185,6 +2264,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2210,6 +2290,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2235,6 +2316,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2260,6 +2342,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2285,6 +2368,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2310,6 +2394,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2335,6 +2420,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2360,6 +2446,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2385,6 +2472,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2410,6 +2498,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2435,6 +2524,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2460,6 +2550,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2484,6 +2575,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2511,6 +2603,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2538,6 +2631,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2566,6 +2660,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2593,6 +2688,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2621,6 +2717,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2649,6 +2746,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2677,6 +2775,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2705,6 +2804,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2733,6 +2833,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2761,6 +2862,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2789,6 +2891,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2818,6 +2921,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2845,6 +2949,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2873,6 +2978,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2900,6 +3006,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2924,6 +3031,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2948,6 +3056,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2973,6 +3082,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -2998,6 +3108,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3023,6 +3134,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3048,6 +3160,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3073,6 +3186,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3098,6 +3212,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'arraybuffer';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3123,6 +3238,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'blob';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3148,6 +3264,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType: 'text';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3173,6 +3290,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3198,6 +3316,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3222,6 +3341,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
@@ -3246,6 +3366,7 @@ declare class HttpClient {
         reportProgress?: boolean;
         responseType?: 'json';
         withCredentials?: boolean;
+        credentials?: RequestCredentials;
         keepalive?: boolean;
         priority?: RequestPriority;
         cache?: RequestCache;
