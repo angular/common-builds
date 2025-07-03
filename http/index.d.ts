@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.0+sha-e39bf3c
+ * @license Angular v20.2.0-next.0+sha-99069c2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -127,6 +127,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -156,6 +158,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -185,6 +189,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -215,6 +221,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -245,6 +253,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -275,6 +285,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -305,6 +317,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -335,6 +349,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -364,6 +380,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -392,6 +410,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -421,6 +441,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -451,6 +473,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns
@@ -477,6 +501,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -506,6 +532,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -535,6 +563,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -563,6 +593,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -590,6 +622,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<ArrayBuffer>;
     /**
@@ -615,6 +649,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<Blob>;
     /**
@@ -640,6 +676,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<string>;
     /**
@@ -666,6 +704,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
@@ -692,6 +732,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpEvent<Blob>>;
     /**
@@ -718,6 +760,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpEvent<string>>;
     /**
@@ -744,6 +788,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpEvent<Object>>;
     /**
@@ -770,6 +816,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpEvent<T>>;
     /**
@@ -795,6 +843,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
@@ -820,6 +870,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpResponse<Blob>>;
     /**
@@ -845,6 +897,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpResponse<string>>;
     /**
@@ -871,6 +925,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpResponse<Object>>;
     /**
@@ -896,6 +952,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<HttpResponse<T>>;
     /**
@@ -921,6 +979,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<Object>;
     /**
@@ -946,6 +1006,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         body?: any | null;
     }): Observable<T>;
     /**
@@ -971,6 +1033,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -998,6 +1062,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1025,6 +1091,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1053,6 +1121,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1080,6 +1150,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1107,6 +1179,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1134,6 +1208,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1161,6 +1237,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1189,6 +1267,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1217,6 +1297,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1245,6 +1327,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1273,6 +1357,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1301,6 +1387,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1329,6 +1417,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1356,6 +1446,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1383,6 +1475,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1410,6 +1504,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1437,6 +1533,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1465,6 +1563,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1493,6 +1593,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1521,6 +1623,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1549,6 +1653,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1577,6 +1683,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1605,6 +1713,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1633,6 +1743,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1661,6 +1773,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1689,6 +1803,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1717,6 +1833,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1745,6 +1863,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1773,6 +1893,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -1822,6 +1944,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and returns
@@ -1846,6 +1970,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Blob>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string and
@@ -1870,6 +1996,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<string>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -1895,6 +2023,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and
@@ -1920,6 +2050,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string
@@ -1945,6 +2077,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -1970,6 +2104,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -1995,6 +2131,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -2020,6 +2158,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob`
@@ -2045,6 +2185,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as text stream
@@ -2070,6 +2212,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -2095,6 +2239,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -2120,6 +2266,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -2145,6 +2293,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Object>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
@@ -2169,6 +2319,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<T>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and returns
@@ -2194,6 +2346,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the response
@@ -2219,6 +2373,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Blob>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -2244,6 +2400,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<string>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and
@@ -2270,6 +2428,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob`
@@ -2296,6 +2456,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -2322,6 +2484,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2348,6 +2512,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2374,6 +2540,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer`
@@ -2400,6 +2568,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the full
@@ -2426,6 +2596,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text stream and returns the
@@ -2452,6 +2624,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2478,6 +2652,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2504,6 +2680,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -2530,6 +2708,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Object>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2556,6 +2736,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<T>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
@@ -2581,6 +2763,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2609,6 +2793,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2637,6 +2823,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2666,6 +2854,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2694,6 +2884,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2723,6 +2915,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2752,6 +2946,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2781,6 +2977,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2810,6 +3008,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2839,6 +3039,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2868,6 +3070,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2897,6 +3101,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2927,6 +3133,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2955,6 +3163,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -2984,6 +3194,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -3012,6 +3224,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns
@@ -3037,6 +3251,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Blob>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and
@@ -3062,6 +3278,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<string>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and
@@ -3088,6 +3306,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the full event
@@ -3114,6 +3334,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and returns the full event
@@ -3140,6 +3362,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -3166,6 +3390,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the
@@ -3192,6 +3418,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as an
@@ -3218,6 +3446,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the
@@ -3244,6 +3474,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text stream and returns the
@@ -3270,6 +3502,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -3296,6 +3530,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type and
@@ -3322,6 +3558,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON
@@ -3347,6 +3585,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<Object>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type
@@ -3372,6 +3612,8 @@ declare class HttpClient {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     }): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;

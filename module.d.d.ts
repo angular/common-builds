@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.0+sha-e39bf3c
+ * @license Angular v20.2.0-next.0+sha-99069c2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -404,6 +404,17 @@ declare class HttpRequest<T> {
      */
     readonly redirect: RequestRedirect;
     /**
+     * The referrer of the request, which can be used to indicate the origin of the request.
+     * This is useful for security and analytics purposes.
+     * Value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
+     */
+    readonly referrer: string;
+    /**
+     * The integrity metadata of the request, which can be used to ensure the request is made with the expected content.
+     * A cryptographic hash of the resource to be fetched by request
+     */
+    readonly integrity: string;
+    /**
      * The expected response type of the server.
      *
      * This is used to parse the response appropriately before returning it to
@@ -452,6 +463,8 @@ declare class HttpRequest<T> {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -479,6 +492,8 @@ declare class HttpRequest<T> {
         timeout?: number;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     });
     constructor(method: 'POST', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -493,6 +508,8 @@ declare class HttpRequest<T> {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -520,6 +537,8 @@ declare class HttpRequest<T> {
         timeout?: number;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -534,6 +553,8 @@ declare class HttpRequest<T> {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -573,6 +594,8 @@ declare class HttpRequest<T> {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -598,6 +621,8 @@ declare class HttpRequest<T> {
         cache?: RequestCache;
         mode?: RequestMode;
         redirect?: RequestRedirect;
+        referrer?: string;
+        integrity?: string;
         withCredentials?: boolean;
         credentials?: RequestCredentials;
         transferCache?: {
