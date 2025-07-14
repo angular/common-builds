@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.0+sha-1cff7ca
+ * @license Angular v20.2.0-next.0+sha-be811fe
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -64,6 +64,8 @@ function normalizeRequest(request, responseType) {
         context: unwrappedRequest.context,
         transferCache: unwrappedRequest.transferCache,
         credentials: unwrappedRequest.credentials,
+        referrer: unwrappedRequest.referrer,
+        integrity: unwrappedRequest.integrity,
         timeout: unwrappedRequest.timeout,
     });
 }

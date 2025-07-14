@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.0+sha-1cff7ca
+ * @license Angular v20.2.0-next.0+sha-be811fe
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4039,6 +4039,17 @@ interface HttpResourceRequest {
      * This can affect whether the request follows redirects automatically, or if it fails when a redirect occurs.
      */
     redirect?: RequestRedirect | (string & {});
+    /**
+     * The referrer of the request, which can be used to indicate the origin of the request.
+     * This is useful for security and analytics purposes.
+     * Value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
+     */
+    referrer?: string;
+    /**
+     * The integrity metadata of the request, which can be used to ensure the request is made with the expected content.
+     * A cryptographic hash of the resource to be fetched by request
+     */
+    integrity?: string;
     /**
      * Configures the server-side rendering transfer cache for this request.
      *
