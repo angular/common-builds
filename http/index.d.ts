@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.0+sha-eca2334
+ * @license Angular v20.2.0-next.0+sha-e8c5603
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -132,6 +132,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a request that interprets the body as a blob and returns
@@ -163,6 +164,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a request that interprets the body as a text string and
@@ -194,6 +196,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a request that interprets the body as an `ArrayBuffer` and returns the
@@ -226,6 +229,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a request that interprets the body as a `Blob` and returns
@@ -258,6 +262,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a request which interprets the body as a text string and returns the full event
@@ -290,6 +295,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -322,6 +328,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<any>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -354,6 +361,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<R>>;
     /**
      * Constructs a request which interprets the body as an `ArrayBuffer`
@@ -385,6 +393,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a request which interprets the body as a `Blob` and returns the full `HttpResponse`.
@@ -415,6 +424,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a request which interprets the body as a text stream and returns the full
@@ -446,6 +456,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
@@ -475,6 +486,10 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        transferCache?: {
+            includeHeaders?: string[];
+        } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns
@@ -537,6 +552,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a request which interprets the body as a JavaScript object
@@ -568,6 +584,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<R>;
     /**
      * Constructs a request where response type and requested observable are not known statically.
@@ -598,6 +615,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<any>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
@@ -651,6 +669,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<Blob>;
     /**
@@ -678,6 +697,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<string>;
     /**
@@ -706,6 +726,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
@@ -734,6 +755,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpEvent<Blob>>;
     /**
@@ -762,6 +784,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpEvent<string>>;
     /**
@@ -790,6 +813,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpEvent<Object>>;
     /**
@@ -818,6 +842,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpEvent<T>>;
     /**
@@ -845,6 +870,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
@@ -872,6 +898,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpResponse<Blob>>;
     /**
@@ -899,6 +926,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpResponse<string>>;
     /**
@@ -927,6 +955,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpResponse<Object>>;
     /**
@@ -954,6 +983,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<HttpResponse<T>>;
     /**
@@ -981,6 +1011,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<Object>;
     /**
@@ -1008,6 +1039,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
         body?: any | null;
     }): Observable<T>;
     /**
@@ -1038,6 +1070,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob`
@@ -1067,6 +1100,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a `GET` request that interprets the body as a text string
@@ -1096,6 +1130,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns
@@ -1126,6 +1161,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
@@ -1155,6 +1191,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text string and returns
@@ -1184,6 +1221,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON
@@ -1213,6 +1251,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns the full
@@ -1242,6 +1281,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and
@@ -1272,6 +1312,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
@@ -1302,6 +1343,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text stream and
@@ -1332,6 +1374,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1362,6 +1405,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1392,6 +1436,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
@@ -1422,6 +1467,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns
@@ -1451,6 +1497,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<T>;
     /**
      * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer` and
@@ -1480,6 +1527,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
@@ -1509,6 +1557,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a `HEAD` request that interprets the body as a text string and returns the response
@@ -1538,6 +1587,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a `HEAD` request that interprets the body as an  `ArrayBuffer`
@@ -1568,6 +1618,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and
@@ -1598,6 +1649,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a text string
@@ -1628,6 +1680,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON
@@ -1658,6 +1711,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and
@@ -1688,6 +1742,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer`
@@ -1718,6 +1773,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
@@ -1748,6 +1804,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `HEAD` request that interprets the body as text stream
@@ -1778,6 +1835,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and
@@ -1808,6 +1866,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON
@@ -1838,6 +1897,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -1868,6 +1928,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a `HEAD` request that interprets the body as JSON and returns
@@ -1898,6 +1959,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<T>;
     /**
      * Constructs a `JSONP` request for the given URL and name of the callback parameter.
@@ -1946,6 +2008,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and returns
@@ -1972,6 +2035,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string and
@@ -1998,6 +2062,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -2025,6 +2090,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob` and
@@ -2052,6 +2118,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a text string
@@ -2079,6 +2146,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -2106,6 +2174,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -2133,6 +2202,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
@@ -2160,6 +2230,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as a `Blob`
@@ -2187,6 +2258,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as text stream
@@ -2214,6 +2286,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON
@@ -2241,6 +2314,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and
@@ -2268,6 +2342,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -2295,6 +2370,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
@@ -2321,6 +2397,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<T>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and returns
@@ -2348,6 +2425,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the response
@@ -2375,6 +2453,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -2402,6 +2481,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and
@@ -2430,6 +2510,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob`
@@ -2458,6 +2539,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
@@ -2486,6 +2568,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2514,6 +2597,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2542,6 +2626,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer`
@@ -2570,6 +2655,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the full
@@ -2598,6 +2684,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text stream and returns the
@@ -2626,6 +2713,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2654,6 +2742,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2682,6 +2771,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
   
@@ -2710,6 +2800,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
@@ -2738,6 +2829,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<T>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
@@ -2768,6 +2860,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob` and returns the
@@ -2798,6 +2891,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a `POST` request that interprets the body as a text string and
@@ -2828,6 +2922,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and
@@ -2859,6 +2954,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob`
@@ -2889,6 +2985,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text string and returns the full
@@ -2920,6 +3017,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
@@ -2951,6 +3049,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
@@ -2982,6 +3081,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a POST request that interprets the body as an `ArrayBuffer`
@@ -3013,6 +3113,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob` and returns the full
@@ -3044,6 +3145,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text stream and returns
@@ -3075,6 +3177,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -3106,6 +3209,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON and returns the
@@ -3138,6 +3242,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -3168,6 +3273,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
@@ -3199,6 +3305,7 @@ declare class HttpClient {
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
+        timeout?: number;
     }): Observable<T>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and returns the
@@ -3226,6 +3333,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<ArrayBuffer>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns
@@ -3253,6 +3361,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Blob>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and
@@ -3280,6 +3389,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<string>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and
@@ -3308,6 +3418,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the full event
@@ -3336,6 +3447,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and returns the full event
@@ -3364,6 +3476,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -3392,6 +3505,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the
@@ -3420,6 +3534,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as an
@@ -3448,6 +3563,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the
@@ -3476,6 +3592,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text stream and returns the
@@ -3504,6 +3621,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
@@ -3532,6 +3650,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type and
@@ -3560,6 +3679,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<HttpResponse<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON
@@ -3587,6 +3707,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<Object>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type
@@ -3614,6 +3735,7 @@ declare class HttpClient {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        timeout?: number;
     }): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
