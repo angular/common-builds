@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.0-next.2+sha-6d01168
+ * @license Angular v20.2.0-next.2+sha-8ebc1e7
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -780,6 +780,12 @@ declare abstract class HttpResponseBase {
      */
     readonly type: HttpEventType.Response | HttpEventType.ResponseHeader;
     /**
+     * Indicates whether the HTTP response was redirected during the request.
+     * This property is only available when using the Fetch API using `withFetch()`
+     * When using the default XHR Request this property will be `undefined`
+     */
+    readonly redirected?: boolean;
+    /**
      * Super-constructor for all responses.
      *
      * The single parameter accepted is an initialization hash. Any properties
@@ -790,6 +796,7 @@ declare abstract class HttpResponseBase {
         status?: number;
         statusText?: string;
         url?: string;
+        redirected?: boolean;
     }, defaultStatus?: number, defaultStatusText?: string);
 }
 /**
@@ -846,6 +853,7 @@ declare class HttpResponse<T> extends HttpResponseBase {
         status?: number;
         statusText?: string;
         url?: string;
+        redirected?: boolean;
     });
     readonly type: HttpEventType.Response;
     clone(): HttpResponse<T>;
@@ -854,6 +862,7 @@ declare class HttpResponse<T> extends HttpResponseBase {
         status?: number;
         statusText?: string;
         url?: string;
+        redirected?: boolean;
     }): HttpResponse<T>;
     clone<V>(update: {
         body?: V | null;
@@ -861,6 +870,7 @@ declare class HttpResponse<T> extends HttpResponseBase {
         status?: number;
         statusText?: string;
         url?: string;
+        redirected?: boolean;
     }): HttpResponse<V>;
 }
 /**
@@ -890,6 +900,7 @@ declare class HttpErrorResponse extends HttpResponseBase implements Error {
         status?: number;
         statusText?: string;
         url?: string;
+        redirected?: boolean;
     });
 }
 /**
