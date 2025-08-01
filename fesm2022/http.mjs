@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.1.4+sha-216d883
+ * @license Angular v20.1.4+sha-ae443f8
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -138,6 +138,12 @@ class HttpResourceImpl extends _ResourceImpl {
             return promise;
         }, defaultValue, equal, injector);
         this.client = injector.get(HttpClient);
+    }
+    set(value) {
+        super.set(value);
+        this._headers.set(undefined);
+        this._progress.set(undefined);
+        this._statusCode.set(undefined);
     }
 }
 
