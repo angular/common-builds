@@ -1,41 +1,14 @@
 /**
- * @license Angular v21.0.0-next.0+sha-e7cc89e
+ * @license Angular v21.0.0-next.0+sha-4bed062
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵRuntimeError as _RuntimeError, Injectable, InjectionToken, inject, NgZone, DestroyRef, ɵformatRuntimeError as _formatRuntimeError, PendingTasks, ɵConsole as _Console, runInInjectionContext, DOCUMENT, Inject, makeEnvironmentProviders, NgModule } from '@angular/core';
-import { concatMap, filter, map, finalize, switchMap } from 'rxjs/operators';
-import { of, Observable, from } from 'rxjs';
+import { ɵRuntimeError as _RuntimeError, InjectionToken, inject, NgZone, DestroyRef, Injectable, ɵformatRuntimeError as _formatRuntimeError, runInInjectionContext, PendingTasks, ɵConsole as _Console, DOCUMENT, Inject, makeEnvironmentProviders, NgModule } from '@angular/core';
+import { switchMap, finalize, concatMap, filter, map } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
 import { XhrFactory, parseCookieValue } from './xhr.mjs';
-
-/**
- * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
- * `HttpResponse`.
- *
- * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
- * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
- * `HttpBackend`.
- *
- * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
- *
- * @publicApi
- */
-class HttpHandler {
-}
-/**
- * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
- *
- * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
- *
- * When injected, `HttpBackend` dispatches requests directly to the backend, without going
- * through the interceptor chain.
- *
- * @publicApi
- */
-class HttpBackend {
-}
 
 /**
  * Represents the header configuration options for an HTTP request.
@@ -285,6 +258,106 @@ function assertValidHeaders(headers) {
             throw new Error(`Unexpected value of the \`${key}\` header provided. ` +
                 `Expecting either a string, a number or an array, but got: \`${value}\`.`);
         }
+    }
+}
+
+/**
+ * A token used to manipulate and access values stored in `HttpContext`.
+ *
+ * @publicApi
+ */
+class HttpContextToken {
+    defaultValue;
+    constructor(defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+}
+/**
+ * Http context stores arbitrary user defined values and ensures type safety without
+ * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
+ *
+ * This context is mutable and is shared between cloned requests unless explicitly specified.
+ *
+ * @usageNotes
+ *
+ * ### Usage Example
+ *
+ * ```ts
+ * // inside cache.interceptors.ts
+ * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+ *
+ * export class CacheInterceptor implements HttpInterceptor {
+ *
+ *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
+ *     if (req.context.get(IS_CACHE_ENABLED) === true) {
+ *       return ...;
+ *     }
+ *     return delegate.handle(req);
+ *   }
+ * }
+ *
+ * // inside a service
+ *
+ * this.httpClient.get('/api/weather', {
+ *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
+ * }).subscribe(...);
+ * ```
+ *
+ * @publicApi
+ */
+class HttpContext {
+    map = new Map();
+    /**
+     * Store a value in the context. If a value is already present it will be overwritten.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     * @param value The value to store.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    set(token, value) {
+        this.map.set(token, value);
+        return this;
+    }
+    /**
+     * Retrieve the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns The stored value or default if one is defined.
+     */
+    get(token) {
+        if (!this.map.has(token)) {
+            this.map.set(token, token.defaultValue());
+        }
+        return this.map.get(token);
+    }
+    /**
+     * Delete the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    delete(token) {
+        this.map.delete(token);
+        return this;
+    }
+    /**
+     * Checks for existence of a given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns True if the token exists, false otherwise.
+     */
+    has(token) {
+        return this.map.has(token);
+    }
+    /**
+     * @returns a list of tokens currently stored in the context.
+     */
+    keys() {
+        return this.map.keys();
     }
 }
 
@@ -556,106 +629,6 @@ class HttpParams {
             });
             this.cloneFrom = this.updates = null;
         }
-    }
-}
-
-/**
- * A token used to manipulate and access values stored in `HttpContext`.
- *
- * @publicApi
- */
-class HttpContextToken {
-    defaultValue;
-    constructor(defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-}
-/**
- * Http context stores arbitrary user defined values and ensures type safety without
- * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
- *
- * This context is mutable and is shared between cloned requests unless explicitly specified.
- *
- * @usageNotes
- *
- * ### Usage Example
- *
- * ```ts
- * // inside cache.interceptors.ts
- * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
- *
- * export class CacheInterceptor implements HttpInterceptor {
- *
- *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
- *     if (req.context.get(IS_CACHE_ENABLED) === true) {
- *       return ...;
- *     }
- *     return delegate.handle(req);
- *   }
- * }
- *
- * // inside a service
- *
- * this.httpClient.get('/api/weather', {
- *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
- * }).subscribe(...);
- * ```
- *
- * @publicApi
- */
-class HttpContext {
-    map = new Map();
-    /**
-     * Store a value in the context. If a value is already present it will be overwritten.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     * @param value The value to store.
-     *
-     * @returns A reference to itself for easy chaining.
-     */
-    set(token, value) {
-        this.map.set(token, value);
-        return this;
-    }
-    /**
-     * Retrieve the value associated with the given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns The stored value or default if one is defined.
-     */
-    get(token) {
-        if (!this.map.has(token)) {
-            this.map.set(token, token.defaultValue());
-        }
-        return this.map.get(token);
-    }
-    /**
-     * Delete the value associated with the given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns A reference to itself for easy chaining.
-     */
-    delete(token) {
-        this.map.delete(token);
-        return this;
-    }
-    /**
-     * Checks for existence of a given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns True if the token exists, false otherwise.
-     */
-    has(token) {
-        return this.map.has(token);
-    }
-    /**
-     * @returns a list of tokens currently stored in the context.
-     */
-    keys() {
-        return this.map.keys();
     }
 }
 
@@ -1361,332 +1334,6 @@ var HttpStatusCode;
     HttpStatusCode[HttpStatusCode["NetworkAuthenticationRequired"] = 511] = "NetworkAuthenticationRequired";
 })(HttpStatusCode || (HttpStatusCode = {}));
 
-/**
- * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
- * the given `body`. This function clones the object and adds the body.
- *
- * Note that the `responseType` *options* value is a String that identifies the
- * single data type of the response.
- * A single overload version of the method handles each response type.
- * The value of `responseType` cannot be a union, as the combined signature could imply.
- *
- */
-function addBody(options, body) {
-    return {
-        body,
-        headers: options.headers,
-        context: options.context,
-        observe: options.observe,
-        params: options.params,
-        reportProgress: options.reportProgress,
-        responseType: options.responseType,
-        withCredentials: options.withCredentials,
-        credentials: options.credentials,
-        transferCache: options.transferCache,
-        timeout: options.timeout,
-        keepalive: options.keepalive,
-        priority: options.priority,
-        cache: options.cache,
-        mode: options.mode,
-        redirect: options.redirect,
-        integrity: options.integrity,
-        referrer: options.referrer,
-    };
-}
-/**
- * Performs HTTP requests.
- * This service is available as an injectable class, with methods to perform HTTP requests.
- * Each request method has multiple signatures, and the return type varies based on
- * the signature that is called (mainly the values of `observe` and `responseType`).
- *
- * Note that the `responseType` *options* value is a String that identifies the
- * single data type of the response.
- * A single overload version of the method handles each response type.
- * The value of `responseType` cannot be a union, as the combined signature could imply.
- *
- * @usageNotes
- *
- * ### HTTP Request Example
- *
- * ```ts
- *  // GET heroes whose name contains search term
- * searchHeroes(term: string): observable<Hero[]>{
- *
- *  const params = new HttpParams({fromString: 'name=term'});
- *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
- * }
- * ```
- *
- * Alternatively, the parameter string can be used without invoking HttpParams
- * by directly joining to the URL.
- * ```ts
- * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
- * ```
- *
- *
- * ### JSONP Example
- * ```ts
- * requestJsonp(url, callback = 'callback') {
- *  return this.httpClient.jsonp(this.heroesURL, callback);
- * }
- * ```
- *
- * ### PATCH Example
- * ```ts
- * // PATCH one of the heroes' name
- * patchHero (id: number, heroName: string): Observable<{}> {
- * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
- *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
- *    .pipe(catchError(this.handleError('patchHero')));
- * }
- * ```
- *
- * @see [HTTP Guide](guide/http)
- * @see [HTTP Request](api/common/http/HttpRequest)
- *
- * @publicApi
- */
-class HttpClient {
-    handler;
-    constructor(handler) {
-        this.handler = handler;
-    }
-    /**
-     * Constructs an observable for a generic HTTP request that, when subscribed,
-     * fires the request through the chain of registered interceptors and on to the
-     * server.
-     *
-     * You can pass an `HttpRequest` directly as the only parameter. In this case,
-     * the call returns an observable of the raw `HttpEvent` stream.
-     *
-     * Alternatively you can pass an HTTP method as the first parameter,
-     * a URL string as the second, and an options hash containing the request body as the third.
-     * See `addBody()`. In this case, the specified `responseType` and `observe` options determine the
-     * type of returned observable.
-     *   * The `responseType` value determines how a successful response body is parsed.
-     *   * If `responseType` is the default `json`, you can pass a type interface for the resulting
-     * object as a type parameter to the call.
-     *
-     * The `observe` value determines the return type, according to what you are interested in
-     * observing.
-     *   * An `observe` value of events returns an observable of the raw `HttpEvent` stream, including
-     * progress events by default.
-     *   * An `observe` value of response returns an observable of `HttpResponse<T>`,
-     * where the `T` parameter depends on the `responseType` and any optionally provided type
-     * parameter.
-     *   * An `observe` value of body returns an observable of `<T>` with the same `T` body type.
-     *
-     */
-    request(first, url, options = {}) {
-        let req;
-        // First, check whether the primary argument is an instance of `HttpRequest`.
-        if (first instanceof HttpRequest) {
-            // It is. The other arguments must be undefined (per the signatures) and can be
-            // ignored.
-            req = first;
-        }
-        else {
-            // It's a string, so it represents a URL. Construct a request based on it,
-            // and incorporate the remaining arguments (assuming `GET` unless a method is
-            // provided.
-            // Figure out the headers.
-            let headers = undefined;
-            if (options.headers instanceof HttpHeaders) {
-                headers = options.headers;
-            }
-            else {
-                headers = new HttpHeaders(options.headers);
-            }
-            // Sort out parameters.
-            let params = undefined;
-            if (!!options.params) {
-                if (options.params instanceof HttpParams) {
-                    params = options.params;
-                }
-                else {
-                    params = new HttpParams({ fromObject: options.params });
-                }
-            }
-            // Construct the request.
-            req = new HttpRequest(first, url, options.body !== undefined ? options.body : null, {
-                headers,
-                context: options.context,
-                params,
-                reportProgress: options.reportProgress,
-                // By default, JSON is assumed to be returned for all calls.
-                responseType: options.responseType || 'json',
-                withCredentials: options.withCredentials,
-                transferCache: options.transferCache,
-                keepalive: options.keepalive,
-                priority: options.priority,
-                cache: options.cache,
-                mode: options.mode,
-                redirect: options.redirect,
-                credentials: options.credentials,
-                referrer: options.referrer,
-                integrity: options.integrity,
-                timeout: options.timeout,
-            });
-        }
-        // Start with an Observable.of() the initial request, and run the handler (which
-        // includes all interceptors) inside a concatMap(). This way, the handler runs
-        // inside an Observable chain, which causes interceptors to be re-run on every
-        // subscription (this also makes retries re-run the handler, including interceptors).
-        const events$ = of(req).pipe(concatMap((req) => this.handler.handle(req)));
-        // If coming via the API signature which accepts a previously constructed HttpRequest,
-        // the only option is to get the event stream. Otherwise, return the event stream if
-        // that is what was requested.
-        if (first instanceof HttpRequest || options.observe === 'events') {
-            return events$;
-        }
-        // The requested stream contains either the full response or the body. In either
-        // case, the first step is to filter the event stream to extract a stream of
-        // responses(s).
-        const res$ = (events$.pipe(filter((event) => event instanceof HttpResponse)));
-        // Decide which stream to return.
-        switch (options.observe || 'body') {
-            case 'body':
-                // The requested stream is the body. Map the response stream to the response
-                // body. This could be done more simply, but a misbehaving interceptor might
-                // transform the response body into a different format and ignore the requested
-                // responseType. Guard against this by validating that the response is of the
-                // requested type.
-                switch (req.responseType) {
-                    case 'arraybuffer':
-                        return res$.pipe(map((res) => {
-                            // Validate that the body is an ArrayBuffer.
-                            if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
-                                throw new _RuntimeError(2806 /* RuntimeErrorCode.RESPONSE_IS_NOT_AN_ARRAY_BUFFER */, ngDevMode && 'Response is not an ArrayBuffer.');
-                            }
-                            return res.body;
-                        }));
-                    case 'blob':
-                        return res$.pipe(map((res) => {
-                            // Validate that the body is a Blob.
-                            if (res.body !== null && !(res.body instanceof Blob)) {
-                                throw new _RuntimeError(2807 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_BLOB */, ngDevMode && 'Response is not a Blob.');
-                            }
-                            return res.body;
-                        }));
-                    case 'text':
-                        return res$.pipe(map((res) => {
-                            // Validate that the body is a string.
-                            if (res.body !== null && typeof res.body !== 'string') {
-                                throw new _RuntimeError(2808 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_STRING */, ngDevMode && 'Response is not a string.');
-                            }
-                            return res.body;
-                        }));
-                    case 'json':
-                    default:
-                        // No validation needed for JSON responses, as they can be of any type.
-                        return res$.pipe(map((res) => res.body));
-                }
-            case 'response':
-                // The response stream was requested directly, so return it.
-                return res$;
-            default:
-                // Guard against new future observe types being added.
-                throw new _RuntimeError(2809 /* RuntimeErrorCode.UNHANDLED_OBSERVE_TYPE */, ngDevMode && `Unreachable: unhandled observe type ${options.observe}}`);
-        }
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `DELETE` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     *
-     * @param url     The endpoint URL.
-     * @param options The HTTP options to send with the request.
-     *
-     */
-    delete(url, options = {}) {
-        return this.request('DELETE', url, options);
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `GET` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     */
-    get(url, options = {}) {
-        return this.request('GET', url, options);
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `HEAD` request to execute on the server. The `HEAD` method returns
-     * meta information about the resource without transferring the
-     * resource itself. See the individual overloads for
-     * details on the return type.
-     */
-    head(url, options = {}) {
-        return this.request('HEAD', url, options);
-    }
-    /**
-     * Constructs an `Observable` that, when subscribed, causes a request with the special method
-     * `JSONP` to be dispatched via the interceptor pipeline.
-     * The [JSONP pattern](https://en.wikipedia.org/wiki/JSONP) works around limitations of certain
-     * API endpoints that don't support newer,
-     * and preferable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protocol.
-     * JSONP treats the endpoint API as a JavaScript file and tricks the browser to process the
-     * requests even if the API endpoint is not located on the same domain (origin) as the client-side
-     * application making the request.
-     * The endpoint API must support JSONP callback for JSONP requests to work.
-     * The resource API returns the JSON response wrapped in a callback function.
-     * You can pass the callback function name as one of the query parameters.
-     * Note that JSONP requests can only be used with `GET` requests.
-     *
-     * @param url The resource URL.
-     * @param callbackParam The callback function name.
-     *
-     */
-    jsonp(url, callbackParam) {
-        return this.request('JSONP', url, {
-            params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
-            observe: 'body',
-            responseType: 'json',
-        });
-    }
-    /**
-     * Constructs an `Observable` that, when subscribed, causes the configured
-     * `OPTIONS` request to execute on the server. This method allows the client
-     * to determine the supported HTTP methods and other capabilities of an endpoint,
-     * without implying a resource action. See the individual overloads for
-     * details on the return type.
-     */
-    options(url, options = {}) {
-        return this.request('OPTIONS', url, options);
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `PATCH` request to execute on the server. See the individual overloads for
-     * details on the return type.
-     */
-    patch(url, body, options = {}) {
-        return this.request('PATCH', url, addBody(options, body));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `POST` request to execute on the server. The server responds with the location of
-     * the replaced resource. See the individual overloads for
-     * details on the return type.
-     */
-    post(url, body, options = {}) {
-        return this.request('POST', url, addBody(options, body));
-    }
-    /**
-     * Constructs an observable that, when subscribed, causes the configured
-     * `PUT` request to execute on the server. The `PUT` method replaces an existing resource
-     * with a new set of values.
-     * See the individual overloads for details on the return type.
-     */
-    put(url, body, options = {}) {
-        return this.request('PUT', url, addBody(options, body));
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClient });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClient, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: HttpHandler }] });
-
 const XSSI_PREFIX$1 = /^\)\]\}',?\n/;
 /**
  * Determine an appropriate URL for the response, by checking either
@@ -1976,10 +1623,10 @@ class FetchBackend {
         }
         return chunksAll;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: FetchBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: FetchBackend });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: FetchBackend, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: FetchBackend, decorators: [{
             type: Injectable
         }], ctorParameters: () => [] });
 /**
@@ -2002,380 +1649,6 @@ function warningOptionsMessage(req) {
 function silenceSuperfluousUnhandledPromiseRejection(promise) {
     promise.then(noop, noop);
 }
-
-function interceptorChainEndFn(req, finalHandlerFn) {
-    return finalHandlerFn(req);
-}
-/**
- * Constructs a `ChainedInterceptorFn` which adapts a legacy `HttpInterceptor` to the
- * `ChainedInterceptorFn` interface.
- */
-function adaptLegacyInterceptorToChain(chainTailFn, interceptor) {
-    return (initialRequest, finalHandlerFn) => interceptor.intercept(initialRequest, {
-        handle: (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn),
-    });
-}
-/**
- * Constructs a `ChainedInterceptorFn` which wraps and invokes a functional interceptor in the given
- * injector.
- */
-function chainedInterceptorFn(chainTailFn, interceptorFn, injector) {
-    return (initialRequest, finalHandlerFn) => runInInjectionContext(injector, () => interceptorFn(initialRequest, (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn)));
-}
-/**
- * A multi-provider token that represents the array of registered
- * `HttpInterceptor` objects.
- *
- * @publicApi
- */
-const HTTP_INTERCEPTORS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTORS' : '');
-/**
- * A multi-provided token of `HttpInterceptorFn`s.
- */
-const HTTP_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTOR_FNS' : '');
-/**
- * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
- */
-const HTTP_ROOT_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_ROOT_INTERCEPTOR_FNS' : '');
-// TODO(atscott): We need a larger discussion about stability and what should contribute to stability.
-// Should the whole interceptor chain contribute to stability or just the backend request #55075?
-// Should HttpClient contribute to stability automatically at all?
-const REQUESTS_CONTRIBUTE_TO_STABILITY = new InjectionToken(ngDevMode ? 'REQUESTS_CONTRIBUTE_TO_STABILITY' : '', { providedIn: 'root', factory: () => true });
-/**
- * Creates an `HttpInterceptorFn` which lazily initializes an interceptor chain from the legacy
- * class-based interceptors and runs the request through it.
- */
-function legacyInterceptorFnFactory() {
-    let chain = null;
-    return (req, handler) => {
-        if (chain === null) {
-            const interceptors = inject(HTTP_INTERCEPTORS, { optional: true }) ?? [];
-            // Note: interceptors are wrapped right-to-left so that final execution order is
-            // left-to-right. That is, if `interceptors` is the array `[a, b, c]`, we want to
-            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
-            // out.
-            chain = interceptors.reduceRight(adaptLegacyInterceptorToChain, interceptorChainEndFn);
-        }
-        const pendingTasks = inject(PendingTasks);
-        const contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
-        if (contributeToStability) {
-            const removeTask = pendingTasks.add();
-            return chain(req, handler).pipe(finalize(removeTask));
-        }
-        else {
-            return chain(req, handler);
-        }
-    };
-}
-let fetchBackendWarningDisplayed = false;
-class HttpInterceptorHandler extends HttpHandler {
-    backend;
-    injector;
-    chain = null;
-    pendingTasks = inject(PendingTasks);
-    contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
-    constructor(backend, injector) {
-        super();
-        this.backend = backend;
-        this.injector = injector;
-        // We strongly recommend using fetch backend for HTTP calls when SSR is used
-        // for an application. The logic below checks if that's the case and produces
-        // a warning otherwise.
-        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !fetchBackendWarningDisplayed) {
-            // This flag is necessary because provideHttpClientTesting() overrides the backend
-            // even if `withFetch()` is used within the test. When the testing HTTP backend is provided,
-            // no HTTP calls are actually performed during the test, so producing a warning would be
-            // misleading.
-            const isTestingBackend = this.backend.isTestingBackend;
-            if (typeof ngServerMode !== 'undefined' &&
-                ngServerMode &&
-                !(this.backend instanceof FetchBackend) &&
-                !isTestingBackend) {
-                fetchBackendWarningDisplayed = true;
-                injector
-                    .get(_Console)
-                    .warn(_formatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
-                    "to use `fetch` APIs. It's strongly recommended to " +
-                    'enable `fetch` for applications that use Server-Side Rendering ' +
-                    'for better performance and compatibility. ' +
-                    'To enable `fetch`, add the `withFetch()` to the `provideHttpClient()` ' +
-                    'call at the root of the application.'));
-            }
-        }
-    }
-    handle(initialRequest) {
-        if (this.chain === null) {
-            const dedupedInterceptorFns = Array.from(new Set([
-                ...this.injector.get(HTTP_INTERCEPTOR_FNS),
-                ...this.injector.get(HTTP_ROOT_INTERCEPTOR_FNS, []),
-            ]));
-            // Note: interceptors are wrapped right-to-left so that final execution order is
-            // left-to-right. That is, if `dedupedInterceptorFns` is the array `[a, b, c]`, we want to
-            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
-            // out.
-            this.chain = dedupedInterceptorFns.reduceRight((nextSequencedFn, interceptorFn) => chainedInterceptorFn(nextSequencedFn, interceptorFn, this.injector), interceptorChainEndFn);
-        }
-        if (this.contributeToStability) {
-            const removeTask = this.pendingTasks.add();
-            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest)).pipe(finalize(removeTask));
-        }
-        else {
-            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
-        }
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpInterceptorHandler });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
-
-// Every request made through JSONP needs a callback name that's unique across the
-// whole page. Each request is assigned an id and the callback name is constructed
-// from that. The next id to be assigned is tracked in a global variable here that
-// is shared among all applications on the page.
-let nextRequestId = 0;
-/**
- * When a pending <script> is unsubscribed we'll move it to this document, so it won't be
- * executed.
- */
-let foreignDocument;
-// Error text given when a JSONP script is injected, but doesn't invoke the callback
-// passed in its URL.
-const JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
-// Error text given when a request is passed to the JsonpClientBackend that doesn't
-// have a request method JSONP.
-const JSONP_ERR_WRONG_METHOD = 'JSONP requests must use JSONP request method.';
-const JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response type.';
-// Error text given when a request is passed to the JsonpClientBackend that has
-// headers set
-const JSONP_ERR_HEADERS_NOT_SUPPORTED = 'JSONP requests do not support headers.';
-/**
- * DI token/abstract type representing a map of JSONP callbacks.
- *
- * In the browser, this should always be the `window` object.
- *
- *
- */
-class JsonpCallbackContext {
-}
-/**
- * Factory function that determines where to store JSONP callbacks.
- *
- * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
- * in test environments. In that case, callbacks are stored on an anonymous object instead.
- *
- *
- */
-function jsonpCallbackContext() {
-    if (typeof window === 'object') {
-        return window;
-    }
-    return {};
-}
-/**
- * Processes an `HttpRequest` with the JSONP method,
- * by performing JSONP style requests.
- * @see {@link HttpHandler}
- * @see {@link HttpXhrBackend}
- *
- * @publicApi
- */
-class JsonpClientBackend {
-    callbackMap;
-    document;
-    /**
-     * A resolved promise that can be used to schedule microtasks in the event handlers.
-     */
-    resolvedPromise = Promise.resolve();
-    constructor(callbackMap, document) {
-        this.callbackMap = callbackMap;
-        this.document = document;
-    }
-    /**
-     * Get the name of the next callback method, by incrementing the global `nextRequestId`.
-     */
-    nextCallback() {
-        return `ng_jsonp_callback_${nextRequestId++}`;
-    }
-    /**
-     * Processes a JSONP request and returns an event stream of the results.
-     * @param req The request object.
-     * @returns An observable of the response events.
-     *
-     */
-    handle(req) {
-        // Firstly, check both the method and response type. If either doesn't match
-        // then the request was improperly routed here and cannot be handled.
-        if (req.method !== 'JSONP') {
-            throw new _RuntimeError(2810 /* RuntimeErrorCode.JSONP_WRONG_METHOD */, ngDevMode && JSONP_ERR_WRONG_METHOD);
-        }
-        else if (req.responseType !== 'json') {
-            throw new _RuntimeError(2811 /* RuntimeErrorCode.JSONP_WRONG_RESPONSE_TYPE */, ngDevMode && JSONP_ERR_WRONG_RESPONSE_TYPE);
-        }
-        // Check the request headers. JSONP doesn't support headers and
-        // cannot set any that were supplied.
-        if (req.headers.keys().length > 0) {
-            throw new _RuntimeError(2812 /* RuntimeErrorCode.JSONP_HEADERS_NOT_SUPPORTED */, ngDevMode && JSONP_ERR_HEADERS_NOT_SUPPORTED);
-        }
-        // Everything else happens inside the Observable boundary.
-        return new Observable((observer) => {
-            // The first step to make a request is to generate the callback name, and replace the
-            // callback placeholder in the URL with the name. Care has to be taken here to ensure
-            // a trailing &, if matched, gets inserted back into the URL in the correct place.
-            const callback = this.nextCallback();
-            const url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
-            // Construct the <script> tag and point it at the URL.
-            const node = this.document.createElement('script');
-            node.src = url;
-            // A JSONP request requires waiting for multiple callbacks. These variables
-            // are closed over and track state across those callbacks.
-            // The response object, if one has been received, or null otherwise.
-            let body = null;
-            // Whether the response callback has been called.
-            let finished = false;
-            // Set the response callback in this.callbackMap (which will be the window
-            // object in the browser. The script being loaded via the <script> tag will
-            // eventually call this callback.
-            this.callbackMap[callback] = (data) => {
-                // Data has been received from the JSONP script. Firstly, delete this callback.
-                delete this.callbackMap[callback];
-                // Set state to indicate data was received.
-                body = data;
-                finished = true;
-            };
-            // cleanup() is a utility closure that removes the <script> from the page and
-            // the response callback from the window. This logic is used in both the
-            // success, error, and cancellation paths, so it's extracted out for convenience.
-            const cleanup = () => {
-                node.removeEventListener('load', onLoad);
-                node.removeEventListener('error', onError);
-                // Remove the <script> tag if it's still on the page.
-                node.remove();
-                // Remove the response callback from the callbackMap (window object in the
-                // browser).
-                delete this.callbackMap[callback];
-            };
-            // onLoad() is the success callback which runs after the response callback
-            // if the JSONP script loads successfully. The event itself is unimportant.
-            // If something went wrong, onLoad() may run without the response callback
-            // having been invoked.
-            const onLoad = () => {
-                // We wrap it in an extra Promise, to ensure the microtask
-                // is scheduled after the loaded endpoint has executed any potential microtask itself,
-                // which is not guaranteed in Internet Explorer and EdgeHTML. See issue #39496
-                this.resolvedPromise.then(() => {
-                    // Cleanup the page.
-                    cleanup();
-                    // Check whether the response callback has run.
-                    if (!finished) {
-                        // It hasn't, something went wrong with the request. Return an error via
-                        // the Observable error path. All JSONP errors have status 0.
-                        observer.error(new HttpErrorResponse({
-                            url,
-                            status: 0,
-                            statusText: 'JSONP Error',
-                            error: new Error(JSONP_ERR_NO_CALLBACK),
-                        }));
-                        return;
-                    }
-                    // Success. body either contains the response body or null if none was
-                    // returned.
-                    observer.next(new HttpResponse({
-                        body,
-                        status: HTTP_STATUS_CODE_OK,
-                        statusText: 'OK',
-                        url,
-                    }));
-                    // Complete the stream, the response is over.
-                    observer.complete();
-                });
-            };
-            // onError() is the error callback, which runs if the script returned generates
-            // a Javascript error. It emits the error via the Observable error channel as
-            // a HttpErrorResponse.
-            const onError = (error) => {
-                cleanup();
-                // Wrap the error in a HttpErrorResponse.
-                observer.error(new HttpErrorResponse({
-                    error,
-                    status: 0,
-                    statusText: 'JSONP Error',
-                    url,
-                }));
-            };
-            // Subscribe to both the success (load) and error events on the <script> tag,
-            // and add it to the page.
-            node.addEventListener('load', onLoad);
-            node.addEventListener('error', onError);
-            this.document.body.appendChild(node);
-            // The request has now been successfully sent.
-            observer.next({ type: HttpEventType.Sent });
-            // Cancellation handler.
-            return () => {
-                if (!finished) {
-                    this.removeListeners(node);
-                }
-                // And finally, clean up the page.
-                cleanup();
-            };
-        });
-    }
-    removeListeners(script) {
-        // Issue #34818
-        // Changing <script>'s ownerDocument will prevent it from execution.
-        // https://html.spec.whatwg.org/multipage/scripting.html#execute-the-script-block
-        foreignDocument ??= this.document.implementation.createHTMLDocument();
-        foreignDocument.adoptNode(script);
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpClientBackend });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpClientBackend, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }] });
-/**
- * Identifies requests with the method JSONP and shifts them to the `JsonpClientBackend`.
- */
-function jsonpInterceptorFn(req, next) {
-    if (req.method === 'JSONP') {
-        return inject(JsonpClientBackend).handle(req);
-    }
-    // Fall through for normal HTTP requests.
-    return next(req);
-}
-/**
- * Identifies requests with the method JSONP and
- * shifts them to the `JsonpClientBackend`.
- *
- * @see {@link HttpInterceptor}
- *
- * @publicApi
- */
-class JsonpInterceptor {
-    injector;
-    constructor(injector) {
-        this.injector = injector;
-    }
-    /**
-     * Identifies and handles a given JSONP request.
-     * @param initialRequest The outgoing request object to handle.
-     * @param next The next interceptor in the chain, or the backend
-     * if no interceptors remain in the chain.
-     * @returns An observable of the event stream.
-     */
-    intercept(initialRequest, next) {
-        return runInInjectionContext(this.injector, () => jsonpInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpInterceptor });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: JsonpInterceptor, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
 const XSSI_PREFIX = /^\)\]\}',?\n/;
 const X_REQUEST_URL_REGEXP = RegExp(`^${X_REQUEST_URL_HEADER}:`, 'm');
@@ -2725,14 +1998,757 @@ class HttpXhrBackend {
             });
         }));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXhrBackend, deps: [{ token: XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXhrBackend });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXhrBackend, deps: [{ token: XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXhrBackend, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXhrBackend, decorators: [{
-            type: Injectable
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXhrBackend, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: XhrFactory }] });
 
-const XSRF_ENABLED = new InjectionToken(ngDevMode ? 'XSRF_ENABLED' : '');
+function interceptorChainEndFn(req, finalHandlerFn) {
+    return finalHandlerFn(req);
+}
+/**
+ * Constructs a `ChainedInterceptorFn` which adapts a legacy `HttpInterceptor` to the
+ * `ChainedInterceptorFn` interface.
+ */
+function adaptLegacyInterceptorToChain(chainTailFn, interceptor) {
+    return (initialRequest, finalHandlerFn) => interceptor.intercept(initialRequest, {
+        handle: (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn),
+    });
+}
+/**
+ * Constructs a `ChainedInterceptorFn` which wraps and invokes a functional interceptor in the given
+ * injector.
+ */
+function chainedInterceptorFn(chainTailFn, interceptorFn, injector) {
+    return (initialRequest, finalHandlerFn) => runInInjectionContext(injector, () => interceptorFn(initialRequest, (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn)));
+}
+/**
+ * A multi-provider token that represents the array of registered
+ * `HttpInterceptor` objects.
+ *
+ * @publicApi
+ */
+const HTTP_INTERCEPTORS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTORS' : '');
+/**
+ * A multi-provided token of `HttpInterceptorFn`s.
+ */
+const HTTP_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTOR_FNS' : '', { factory: () => [] });
+/**
+ * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
+ */
+const HTTP_ROOT_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_ROOT_INTERCEPTOR_FNS' : '');
+// TODO(atscott): We need a larger discussion about stability and what should contribute to stability.
+// Should the whole interceptor chain contribute to stability or just the backend request #55075?
+// Should HttpClient contribute to stability automatically at all?
+const REQUESTS_CONTRIBUTE_TO_STABILITY = new InjectionToken(ngDevMode ? 'REQUESTS_CONTRIBUTE_TO_STABILITY' : '', { providedIn: 'root', factory: () => true });
+/**
+ * Creates an `HttpInterceptorFn` which lazily initializes an interceptor chain from the legacy
+ * class-based interceptors and runs the request through it.
+ */
+function legacyInterceptorFnFactory() {
+    let chain = null;
+    return (req, handler) => {
+        if (chain === null) {
+            const interceptors = inject(HTTP_INTERCEPTORS, { optional: true }) ?? [];
+            // Note: interceptors are wrapped right-to-left so that final execution order is
+            // left-to-right. That is, if `interceptors` is the array `[a, b, c]`, we want to
+            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
+            // out.
+            chain = interceptors.reduceRight(adaptLegacyInterceptorToChain, interceptorChainEndFn);
+        }
+        const pendingTasks = inject(PendingTasks);
+        const contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
+        if (contributeToStability) {
+            const removeTask = pendingTasks.add();
+            return chain(req, handler).pipe(finalize(removeTask));
+        }
+        else {
+            return chain(req, handler);
+        }
+    };
+}
+
+/**
+ * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
+ *
+ * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
+ *
+ * When injected, `HttpBackend` dispatches requests directly to the backend, without going
+ * through the interceptor chain.
+ *
+ * @publicApi
+ */
+class HttpBackend {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpBackend, providedIn: 'root', useExisting: HttpXhrBackend });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpBackend, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root', useExisting: HttpXhrBackend }]
+        }] });
+let fetchBackendWarningDisplayed = false;
+class HttpInterceptorHandler {
+    backend;
+    injector;
+    chain = null;
+    pendingTasks = inject(PendingTasks);
+    contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
+    constructor(backend, injector) {
+        this.backend = backend;
+        this.injector = injector;
+        // We strongly recommend using fetch backend for HTTP calls when SSR is used
+        // for an application. The logic below checks if that's the case and produces
+        // a warning otherwise.
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !fetchBackendWarningDisplayed) {
+            // This flag is necessary because provideHttpClientTesting() overrides the backend
+            // even if `withFetch()` is used within the test. When the testing HTTP backend is provided,
+            // no HTTP calls are actually performed during the test, so producing a warning would be
+            // misleading.
+            const isTestingBackend = this.backend.isTestingBackend;
+            if (typeof ngServerMode !== 'undefined' &&
+                ngServerMode &&
+                !(this.backend instanceof FetchBackend) &&
+                !isTestingBackend) {
+                fetchBackendWarningDisplayed = true;
+                injector
+                    .get(_Console)
+                    .warn(_formatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
+                    "to use `fetch` APIs. It's strongly recommended to " +
+                    'enable `fetch` for applications that use Server-Side Rendering ' +
+                    'for better performance and compatibility. ' +
+                    'To enable `fetch`, add the `withFetch()` to the `provideHttpClient()` ' +
+                    'call at the root of the application.'));
+            }
+        }
+    }
+    handle(initialRequest) {
+        if (this.chain === null) {
+            const dedupedInterceptorFns = Array.from(new Set([
+                ...this.injector.get(HTTP_INTERCEPTOR_FNS),
+                ...this.injector.get(HTTP_ROOT_INTERCEPTOR_FNS, []),
+            ]));
+            // Note: interceptors are wrapped right-to-left so that final execution order is
+            // left-to-right. That is, if `dedupedInterceptorFns` is the array `[a, b, c]`, we want to
+            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
+            // out.
+            this.chain = dedupedInterceptorFns.reduceRight((nextSequencedFn, interceptorFn) => chainedInterceptorFn(nextSequencedFn, interceptorFn, this.injector), interceptorChainEndFn);
+        }
+        if (this.contributeToStability) {
+            const removeTask = this.pendingTasks.add();
+            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest)).pipe(finalize(removeTask));
+        }
+        else {
+            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpInterceptorHandler, providedIn: 'root' });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
+/**
+ * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
+ * `HttpResponse`.
+ *
+ * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
+ * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
+ * `HttpBackend`.
+ *
+ * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
+ *
+ * @publicApi
+ */
+class HttpHandler {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpHandler, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpHandler, providedIn: 'root', useExisting: HttpInterceptorHandler });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpHandler, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root', useExisting: HttpInterceptorHandler }]
+        }] });
+
+/**
+ * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
+ * the given `body`. This function clones the object and adds the body.
+ *
+ * Note that the `responseType` *options* value is a String that identifies the
+ * single data type of the response.
+ * A single overload version of the method handles each response type.
+ * The value of `responseType` cannot be a union, as the combined signature could imply.
+ *
+ */
+function addBody(options, body) {
+    return {
+        body,
+        headers: options.headers,
+        context: options.context,
+        observe: options.observe,
+        params: options.params,
+        reportProgress: options.reportProgress,
+        responseType: options.responseType,
+        withCredentials: options.withCredentials,
+        credentials: options.credentials,
+        transferCache: options.transferCache,
+        timeout: options.timeout,
+        keepalive: options.keepalive,
+        priority: options.priority,
+        cache: options.cache,
+        mode: options.mode,
+        redirect: options.redirect,
+        integrity: options.integrity,
+        referrer: options.referrer,
+    };
+}
+/**
+ * Performs HTTP requests.
+ * This service is available as an injectable class, with methods to perform HTTP requests.
+ * Each request method has multiple signatures, and the return type varies based on
+ * the signature that is called (mainly the values of `observe` and `responseType`).
+ *
+ * Note that the `responseType` *options* value is a String that identifies the
+ * single data type of the response.
+ * A single overload version of the method handles each response type.
+ * The value of `responseType` cannot be a union, as the combined signature could imply.
+ *
+ * @usageNotes
+ *
+ * ### HTTP Request Example
+ *
+ * ```ts
+ *  // GET heroes whose name contains search term
+ * searchHeroes(term: string): observable<Hero[]>{
+ *
+ *  const params = new HttpParams({fromString: 'name=term'});
+ *    return this.httpClient.request('GET', this.heroesUrl, {responseType:'json', params});
+ * }
+ * ```
+ *
+ * Alternatively, the parameter string can be used without invoking HttpParams
+ * by directly joining to the URL.
+ * ```ts
+ * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
+ * ```
+ *
+ *
+ * ### JSONP Example
+ * ```ts
+ * requestJsonp(url, callback = 'callback') {
+ *  return this.httpClient.jsonp(this.heroesURL, callback);
+ * }
+ * ```
+ *
+ * ### PATCH Example
+ * ```ts
+ * // PATCH one of the heroes' name
+ * patchHero (id: number, heroName: string): Observable<{}> {
+ * const url = `${this.heroesUrl}/${id}`;   // PATCH api/heroes/42
+ *  return this.httpClient.patch(url, {name: heroName}, httpOptions)
+ *    .pipe(catchError(this.handleError('patchHero')));
+ * }
+ * ```
+ *
+ * @see [HTTP Guide](guide/http)
+ * @see [HTTP Request](api/common/http/HttpRequest)
+ *
+ * @publicApi
+ */
+class HttpClient {
+    handler;
+    constructor(handler) {
+        this.handler = handler;
+    }
+    /**
+     * Constructs an observable for a generic HTTP request that, when subscribed,
+     * fires the request through the chain of registered interceptors and on to the
+     * server.
+     *
+     * You can pass an `HttpRequest` directly as the only parameter. In this case,
+     * the call returns an observable of the raw `HttpEvent` stream.
+     *
+     * Alternatively you can pass an HTTP method as the first parameter,
+     * a URL string as the second, and an options hash containing the request body as the third.
+     * See `addBody()`. In this case, the specified `responseType` and `observe` options determine the
+     * type of returned observable.
+     *   * The `responseType` value determines how a successful response body is parsed.
+     *   * If `responseType` is the default `json`, you can pass a type interface for the resulting
+     * object as a type parameter to the call.
+     *
+     * The `observe` value determines the return type, according to what you are interested in
+     * observing.
+     *   * An `observe` value of events returns an observable of the raw `HttpEvent` stream, including
+     * progress events by default.
+     *   * An `observe` value of response returns an observable of `HttpResponse<T>`,
+     * where the `T` parameter depends on the `responseType` and any optionally provided type
+     * parameter.
+     *   * An `observe` value of body returns an observable of `<T>` with the same `T` body type.
+     *
+     */
+    request(first, url, options = {}) {
+        let req;
+        // First, check whether the primary argument is an instance of `HttpRequest`.
+        if (first instanceof HttpRequest) {
+            // It is. The other arguments must be undefined (per the signatures) and can be
+            // ignored.
+            req = first;
+        }
+        else {
+            // It's a string, so it represents a URL. Construct a request based on it,
+            // and incorporate the remaining arguments (assuming `GET` unless a method is
+            // provided.
+            // Figure out the headers.
+            let headers = undefined;
+            if (options.headers instanceof HttpHeaders) {
+                headers = options.headers;
+            }
+            else {
+                headers = new HttpHeaders(options.headers);
+            }
+            // Sort out parameters.
+            let params = undefined;
+            if (!!options.params) {
+                if (options.params instanceof HttpParams) {
+                    params = options.params;
+                }
+                else {
+                    params = new HttpParams({ fromObject: options.params });
+                }
+            }
+            // Construct the request.
+            req = new HttpRequest(first, url, options.body !== undefined ? options.body : null, {
+                headers,
+                context: options.context,
+                params,
+                reportProgress: options.reportProgress,
+                // By default, JSON is assumed to be returned for all calls.
+                responseType: options.responseType || 'json',
+                withCredentials: options.withCredentials,
+                transferCache: options.transferCache,
+                keepalive: options.keepalive,
+                priority: options.priority,
+                cache: options.cache,
+                mode: options.mode,
+                redirect: options.redirect,
+                credentials: options.credentials,
+                referrer: options.referrer,
+                integrity: options.integrity,
+                timeout: options.timeout,
+            });
+        }
+        // Start with an Observable.of() the initial request, and run the handler (which
+        // includes all interceptors) inside a concatMap(). This way, the handler runs
+        // inside an Observable chain, which causes interceptors to be re-run on every
+        // subscription (this also makes retries re-run the handler, including interceptors).
+        const events$ = of(req).pipe(concatMap((req) => this.handler.handle(req)));
+        // If coming via the API signature which accepts a previously constructed HttpRequest,
+        // the only option is to get the event stream. Otherwise, return the event stream if
+        // that is what was requested.
+        if (first instanceof HttpRequest || options.observe === 'events') {
+            return events$;
+        }
+        // The requested stream contains either the full response or the body. In either
+        // case, the first step is to filter the event stream to extract a stream of
+        // responses(s).
+        const res$ = (events$.pipe(filter((event) => event instanceof HttpResponse)));
+        // Decide which stream to return.
+        switch (options.observe || 'body') {
+            case 'body':
+                // The requested stream is the body. Map the response stream to the response
+                // body. This could be done more simply, but a misbehaving interceptor might
+                // transform the response body into a different format and ignore the requested
+                // responseType. Guard against this by validating that the response is of the
+                // requested type.
+                switch (req.responseType) {
+                    case 'arraybuffer':
+                        return res$.pipe(map((res) => {
+                            // Validate that the body is an ArrayBuffer.
+                            if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
+                                throw new _RuntimeError(2806 /* RuntimeErrorCode.RESPONSE_IS_NOT_AN_ARRAY_BUFFER */, ngDevMode && 'Response is not an ArrayBuffer.');
+                            }
+                            return res.body;
+                        }));
+                    case 'blob':
+                        return res$.pipe(map((res) => {
+                            // Validate that the body is a Blob.
+                            if (res.body !== null && !(res.body instanceof Blob)) {
+                                throw new _RuntimeError(2807 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_BLOB */, ngDevMode && 'Response is not a Blob.');
+                            }
+                            return res.body;
+                        }));
+                    case 'text':
+                        return res$.pipe(map((res) => {
+                            // Validate that the body is a string.
+                            if (res.body !== null && typeof res.body !== 'string') {
+                                throw new _RuntimeError(2808 /* RuntimeErrorCode.RESPONSE_IS_NOT_A_STRING */, ngDevMode && 'Response is not a string.');
+                            }
+                            return res.body;
+                        }));
+                    case 'json':
+                    default:
+                        // No validation needed for JSON responses, as they can be of any type.
+                        return res$.pipe(map((res) => res.body));
+                }
+            case 'response':
+                // The response stream was requested directly, so return it.
+                return res$;
+            default:
+                // Guard against new future observe types being added.
+                throw new _RuntimeError(2809 /* RuntimeErrorCode.UNHANDLED_OBSERVE_TYPE */, ngDevMode && `Unreachable: unhandled observe type ${options.observe}}`);
+        }
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `DELETE` request to execute on the server. See the individual overloads for
+     * details on the return type.
+     *
+     * @param url     The endpoint URL.
+     * @param options The HTTP options to send with the request.
+     *
+     */
+    delete(url, options = {}) {
+        return this.request('DELETE', url, options);
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `GET` request to execute on the server. See the individual overloads for
+     * details on the return type.
+     */
+    get(url, options = {}) {
+        return this.request('GET', url, options);
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `HEAD` request to execute on the server. The `HEAD` method returns
+     * meta information about the resource without transferring the
+     * resource itself. See the individual overloads for
+     * details on the return type.
+     */
+    head(url, options = {}) {
+        return this.request('HEAD', url, options);
+    }
+    /**
+     * Constructs an `Observable` that, when subscribed, causes a request with the special method
+     * `JSONP` to be dispatched via the interceptor pipeline.
+     * The [JSONP pattern](https://en.wikipedia.org/wiki/JSONP) works around limitations of certain
+     * API endpoints that don't support newer,
+     * and preferable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protocol.
+     * JSONP treats the endpoint API as a JavaScript file and tricks the browser to process the
+     * requests even if the API endpoint is not located on the same domain (origin) as the client-side
+     * application making the request.
+     * The endpoint API must support JSONP callback for JSONP requests to work.
+     * The resource API returns the JSON response wrapped in a callback function.
+     * You can pass the callback function name as one of the query parameters.
+     * Note that JSONP requests can only be used with `GET` requests.
+     *
+     * @param url The resource URL.
+     * @param callbackParam The callback function name.
+     *
+     */
+    jsonp(url, callbackParam) {
+        return this.request('JSONP', url, {
+            params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
+            observe: 'body',
+            responseType: 'json',
+        });
+    }
+    /**
+     * Constructs an `Observable` that, when subscribed, causes the configured
+     * `OPTIONS` request to execute on the server. This method allows the client
+     * to determine the supported HTTP methods and other capabilities of an endpoint,
+     * without implying a resource action. See the individual overloads for
+     * details on the return type.
+     */
+    options(url, options = {}) {
+        return this.request('OPTIONS', url, options);
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `PATCH` request to execute on the server. See the individual overloads for
+     * details on the return type.
+     */
+    patch(url, body, options = {}) {
+        return this.request('PATCH', url, addBody(options, body));
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `POST` request to execute on the server. The server responds with the location of
+     * the replaced resource. See the individual overloads for
+     * details on the return type.
+     */
+    post(url, body, options = {}) {
+        return this.request('POST', url, addBody(options, body));
+    }
+    /**
+     * Constructs an observable that, when subscribed, causes the configured
+     * `PUT` request to execute on the server. The `PUT` method replaces an existing resource
+     * with a new set of values.
+     * See the individual overloads for details on the return type.
+     */
+    put(url, body, options = {}) {
+        return this.request('PUT', url, addBody(options, body));
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClient, providedIn: 'root' });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: HttpHandler }] });
+
+// Every request made through JSONP needs a callback name that's unique across the
+// whole page. Each request is assigned an id and the callback name is constructed
+// from that. The next id to be assigned is tracked in a global variable here that
+// is shared among all applications on the page.
+let nextRequestId = 0;
+/**
+ * When a pending <script> is unsubscribed we'll move it to this document, so it won't be
+ * executed.
+ */
+let foreignDocument;
+// Error text given when a JSONP script is injected, but doesn't invoke the callback
+// passed in its URL.
+const JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
+// Error text given when a request is passed to the JsonpClientBackend that doesn't
+// have a request method JSONP.
+const JSONP_ERR_WRONG_METHOD = 'JSONP requests must use JSONP request method.';
+const JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response type.';
+// Error text given when a request is passed to the JsonpClientBackend that has
+// headers set
+const JSONP_ERR_HEADERS_NOT_SUPPORTED = 'JSONP requests do not support headers.';
+/**
+ * DI token/abstract type representing a map of JSONP callbacks.
+ *
+ * In the browser, this should always be the `window` object.
+ *
+ *
+ */
+class JsonpCallbackContext {
+}
+/**
+ * Factory function that determines where to store JSONP callbacks.
+ *
+ * Ordinarily JSONP callbacks are stored on the `window` object, but this may not exist
+ * in test environments. In that case, callbacks are stored on an anonymous object instead.
+ *
+ *
+ */
+function jsonpCallbackContext() {
+    if (typeof window === 'object') {
+        return window;
+    }
+    return {};
+}
+/**
+ * Processes an `HttpRequest` with the JSONP method,
+ * by performing JSONP style requests.
+ * @see {@link HttpHandler}
+ * @see {@link HttpXhrBackend}
+ *
+ * @publicApi
+ */
+class JsonpClientBackend {
+    callbackMap;
+    document;
+    /**
+     * A resolved promise that can be used to schedule microtasks in the event handlers.
+     */
+    resolvedPromise = Promise.resolve();
+    constructor(callbackMap, document) {
+        this.callbackMap = callbackMap;
+        this.document = document;
+    }
+    /**
+     * Get the name of the next callback method, by incrementing the global `nextRequestId`.
+     */
+    nextCallback() {
+        return `ng_jsonp_callback_${nextRequestId++}`;
+    }
+    /**
+     * Processes a JSONP request and returns an event stream of the results.
+     * @param req The request object.
+     * @returns An observable of the response events.
+     *
+     */
+    handle(req) {
+        // Firstly, check both the method and response type. If either doesn't match
+        // then the request was improperly routed here and cannot be handled.
+        if (req.method !== 'JSONP') {
+            throw new _RuntimeError(2810 /* RuntimeErrorCode.JSONP_WRONG_METHOD */, ngDevMode && JSONP_ERR_WRONG_METHOD);
+        }
+        else if (req.responseType !== 'json') {
+            throw new _RuntimeError(2811 /* RuntimeErrorCode.JSONP_WRONG_RESPONSE_TYPE */, ngDevMode && JSONP_ERR_WRONG_RESPONSE_TYPE);
+        }
+        // Check the request headers. JSONP doesn't support headers and
+        // cannot set any that were supplied.
+        if (req.headers.keys().length > 0) {
+            throw new _RuntimeError(2812 /* RuntimeErrorCode.JSONP_HEADERS_NOT_SUPPORTED */, ngDevMode && JSONP_ERR_HEADERS_NOT_SUPPORTED);
+        }
+        // Everything else happens inside the Observable boundary.
+        return new Observable((observer) => {
+            // The first step to make a request is to generate the callback name, and replace the
+            // callback placeholder in the URL with the name. Care has to be taken here to ensure
+            // a trailing &, if matched, gets inserted back into the URL in the correct place.
+            const callback = this.nextCallback();
+            const url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, `=${callback}$1`);
+            // Construct the <script> tag and point it at the URL.
+            const node = this.document.createElement('script');
+            node.src = url;
+            // A JSONP request requires waiting for multiple callbacks. These variables
+            // are closed over and track state across those callbacks.
+            // The response object, if one has been received, or null otherwise.
+            let body = null;
+            // Whether the response callback has been called.
+            let finished = false;
+            // Set the response callback in this.callbackMap (which will be the window
+            // object in the browser. The script being loaded via the <script> tag will
+            // eventually call this callback.
+            this.callbackMap[callback] = (data) => {
+                // Data has been received from the JSONP script. Firstly, delete this callback.
+                delete this.callbackMap[callback];
+                // Set state to indicate data was received.
+                body = data;
+                finished = true;
+            };
+            // cleanup() is a utility closure that removes the <script> from the page and
+            // the response callback from the window. This logic is used in both the
+            // success, error, and cancellation paths, so it's extracted out for convenience.
+            const cleanup = () => {
+                node.removeEventListener('load', onLoad);
+                node.removeEventListener('error', onError);
+                // Remove the <script> tag if it's still on the page.
+                node.remove();
+                // Remove the response callback from the callbackMap (window object in the
+                // browser).
+                delete this.callbackMap[callback];
+            };
+            // onLoad() is the success callback which runs after the response callback
+            // if the JSONP script loads successfully. The event itself is unimportant.
+            // If something went wrong, onLoad() may run without the response callback
+            // having been invoked.
+            const onLoad = () => {
+                // We wrap it in an extra Promise, to ensure the microtask
+                // is scheduled after the loaded endpoint has executed any potential microtask itself,
+                // which is not guaranteed in Internet Explorer and EdgeHTML. See issue #39496
+                this.resolvedPromise.then(() => {
+                    // Cleanup the page.
+                    cleanup();
+                    // Check whether the response callback has run.
+                    if (!finished) {
+                        // It hasn't, something went wrong with the request. Return an error via
+                        // the Observable error path. All JSONP errors have status 0.
+                        observer.error(new HttpErrorResponse({
+                            url,
+                            status: 0,
+                            statusText: 'JSONP Error',
+                            error: new Error(JSONP_ERR_NO_CALLBACK),
+                        }));
+                        return;
+                    }
+                    // Success. body either contains the response body or null if none was
+                    // returned.
+                    observer.next(new HttpResponse({
+                        body,
+                        status: HTTP_STATUS_CODE_OK,
+                        statusText: 'OK',
+                        url,
+                    }));
+                    // Complete the stream, the response is over.
+                    observer.complete();
+                });
+            };
+            // onError() is the error callback, which runs if the script returned generates
+            // a Javascript error. It emits the error via the Observable error channel as
+            // a HttpErrorResponse.
+            const onError = (error) => {
+                cleanup();
+                // Wrap the error in a HttpErrorResponse.
+                observer.error(new HttpErrorResponse({
+                    error,
+                    status: 0,
+                    statusText: 'JSONP Error',
+                    url,
+                }));
+            };
+            // Subscribe to both the success (load) and error events on the <script> tag,
+            // and add it to the page.
+            node.addEventListener('load', onLoad);
+            node.addEventListener('error', onError);
+            this.document.body.appendChild(node);
+            // The request has now been successfully sent.
+            observer.next({ type: HttpEventType.Sent });
+            // Cancellation handler.
+            return () => {
+                if (!finished) {
+                    this.removeListeners(node);
+                }
+                // And finally, clean up the page.
+                cleanup();
+            };
+        });
+    }
+    removeListeners(script) {
+        // Issue #34818
+        // Changing <script>'s ownerDocument will prevent it from execution.
+        // https://html.spec.whatwg.org/multipage/scripting.html#execute-the-script-block
+        foreignDocument ??= this.document.implementation.createHTMLDocument();
+        foreignDocument.adoptNode(script);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpClientBackend, deps: [{ token: JsonpCallbackContext }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpClientBackend });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpClientBackend, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: JsonpCallbackContext }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }] });
+/**
+ * Identifies requests with the method JSONP and shifts them to the `JsonpClientBackend`.
+ */
+function jsonpInterceptorFn(req, next) {
+    if (req.method === 'JSONP') {
+        return inject(JsonpClientBackend).handle(req);
+    }
+    // Fall through for normal HTTP requests.
+    return next(req);
+}
+/**
+ * Identifies requests with the method JSONP and
+ * shifts them to the `JsonpClientBackend`.
+ *
+ * @see {@link HttpInterceptor}
+ *
+ * @publicApi
+ */
+class JsonpInterceptor {
+    injector;
+    constructor(injector) {
+        this.injector = injector;
+    }
+    /**
+     * Identifies and handles a given JSONP request.
+     * @param initialRequest The outgoing request object to handle.
+     * @param next The next interceptor in the chain, or the backend
+     * if no interceptors remain in the chain.
+     * @returns An observable of the event stream.
+     */
+    intercept(initialRequest, next) {
+        return runInInjectionContext(this.injector, () => jsonpInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpInterceptor });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: JsonpInterceptor, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
+
+const XSRF_ENABLED = new InjectionToken(ngDevMode ? 'XSRF_ENABLED' : '', {
+    factory: () => true,
+});
 const XSRF_DEFAULT_COOKIE_NAME = 'XSRF-TOKEN';
 const XSRF_COOKIE_NAME = new InjectionToken(ngDevMode ? 'XSRF_COOKIE_NAME' : '', {
     providedIn: 'root',
@@ -2743,13 +2759,6 @@ const XSRF_HEADER_NAME = new InjectionToken(ngDevMode ? 'XSRF_HEADER_NAME' : '',
     providedIn: 'root',
     factory: () => XSRF_DEFAULT_HEADER_NAME,
 });
-/**
- * Retrieves the current XSRF token to use with the next outgoing request.
- *
- * @publicApi
- */
-class HttpXsrfTokenExtractor {
-}
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
@@ -2778,11 +2787,12 @@ class HttpXsrfCookieExtractor {
         }
         return this.lastToken;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfCookieExtractor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfCookieExtractor, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
-            type: Injectable
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
@@ -2790,6 +2800,19 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sh
                     type: Inject,
                     args: [XSRF_COOKIE_NAME]
                 }] }] });
+/**
+ * Retrieves the current XSRF token to use with the next outgoing request.
+ *
+ * @publicApi
+ */
+class HttpXsrfTokenExtractor {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfTokenExtractor, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfTokenExtractor, providedIn: 'root', useExisting: HttpXsrfCookieExtractor });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfTokenExtractor, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root', useExisting: HttpXsrfCookieExtractor }]
+        }] });
 function xsrfInterceptorFn(req, next) {
     const lcUrl = req.url.toLowerCase();
     // Skip both non-mutating requests and absolute URLs.
@@ -2822,10 +2845,10 @@ class HttpXsrfInterceptor {
     intercept(initialRequest, next) {
         return runInInjectionContext(this.injector, () => xsrfInterceptorFn(initialRequest, (downstreamRequest) => next.handle(downstreamRequest)));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfInterceptor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfInterceptor, deps: [{ token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpXsrfInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
@@ -2891,7 +2914,6 @@ function provideHttpClient(...features) {
     }
     const providers = [
         HttpClient,
-        HttpXhrBackend,
         HttpInterceptorHandler,
         { provide: HttpHandler, useExisting: HttpInterceptorHandler },
         {
@@ -2905,8 +2927,6 @@ function provideHttpClient(...features) {
             useValue: xsrfInterceptorFn,
             multi: true,
         },
-        { provide: XSRF_ENABLED, useValue: true },
-        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
     ];
     for (const feature of features) {
         providers.push(...feature.ɵproviders);
@@ -3091,9 +3111,9 @@ class HttpClientXsrfModule {
             providers: withXsrfConfiguration(options).ɵproviders,
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientXsrfModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientXsrfModule, providers: [
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientXsrfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientXsrfModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientXsrfModule, providers: [
             HttpXsrfInterceptor,
             { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
             { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
@@ -3104,7 +3124,7 @@ class HttpClientXsrfModule {
             { provide: XSRF_ENABLED, useValue: true },
         ] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientXsrfModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [
@@ -3130,11 +3150,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sh
  * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead
  */
 class HttpClientModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientModule, providers: [provideHttpClient(withInterceptorsFromDi())] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientModule, decorators: [{
             type: NgModule,
             args: [{
                     /**
@@ -3154,11 +3174,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sh
  * @deprecated `withJsonpSupport()` as providers instead
  */
 class HttpClientJsonpModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientJsonpModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientJsonpModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientJsonpModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientJsonpModule, providers: [withJsonpSupport().ɵproviders] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-e7cc89e", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.0+sha-4bed062", ngImport: i0, type: HttpClientJsonpModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [withJsonpSupport().ɵproviders],
