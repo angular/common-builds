@@ -1,11 +1,11 @@
 /**
- * @license Angular v21.0.0-next.0+sha-4dfa6f1
+ * @license Angular v21.0.0-next.0+sha-25f593c
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, EnvironmentInjector, NgModuleFactory, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
+import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, EnvironmentInjector, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike, Observable, Subscribable } from 'rxjs';
 import { LocationChangeListener, PlatformLocation } from './platform_location.d.js';
 
@@ -448,10 +448,6 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     ngComponentOutletEnvironmentInjector?: EnvironmentInjector;
     ngComponentOutletContent?: any[][];
     ngComponentOutletNgModule?: Type<any>;
-    /**
-     * @deprecated This input is deprecated, use `ngComponentOutletNgModule` instead.
-     */
-    ngComponentOutletNgModuleFactory?: NgModuleFactory<any>;
     private _componentRef;
     private _moduleRef;
     /**
@@ -476,7 +472,7 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     ngOnDestroy(): void;
     private _applyInputStateDiff;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgComponentOutlet<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet<any>, "[ngComponentOutlet]", ["ngComponentOutlet"], { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletEnvironmentInjector": { "alias": "ngComponentOutletEnvironmentInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; "ngComponentOutletNgModuleFactory": { "alias": "ngComponentOutletNgModuleFactory"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NgComponentOutlet<any>, "[ngComponentOutlet]", ["ngComponentOutlet"], { "ngComponentOutlet": { "alias": "ngComponentOutlet"; "required": false; }; "ngComponentOutletInputs": { "alias": "ngComponentOutletInputs"; "required": false; }; "ngComponentOutletInjector": { "alias": "ngComponentOutletInjector"; "required": false; }; "ngComponentOutletEnvironmentInjector": { "alias": "ngComponentOutletEnvironmentInjector"; "required": false; }; "ngComponentOutletContent": { "alias": "ngComponentOutletContent"; "required": false; }; "ngComponentOutletNgModule": { "alias": "ngComponentOutletNgModule"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 /**

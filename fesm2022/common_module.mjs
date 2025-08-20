@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.0+sha-4dfa6f1
+ * @license Angular v21.0.0-next.0+sha-25f593c
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -2275,10 +2275,6 @@ class NgComponentOutlet {
     ngComponentOutletEnvironmentInjector;
     ngComponentOutletContent;
     ngComponentOutletNgModule;
-    /**
-     * @deprecated This input is deprecated, use `ngComponentOutletNgModule` instead.
-     */
-    ngComponentOutletNgModuleFactory;
     _componentRef;
     _moduleRef;
     /**
@@ -2327,9 +2323,6 @@ class NgComponentOutlet {
                     if (this.ngComponentOutletNgModule) {
                         this._moduleRef = createNgModule(this.ngComponentOutletNgModule, getParentInjector(injector));
                     }
-                    else if (this.ngComponentOutletNgModuleFactory) {
-                        this._moduleRef = this.ngComponentOutletNgModuleFactory.create(getParentInjector(injector));
-                    }
                     else {
                         this._moduleRef = undefined;
                     }
@@ -2373,7 +2366,7 @@ class NgComponentOutlet {
         }
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: NgComponentOutlet, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Directive });
-    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "20.2.0-next.2", type: NgComponentOutlet, isStandalone: true, selector: "[ngComponentOutlet]", inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInputs: "ngComponentOutletInputs", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletEnvironmentInjector: "ngComponentOutletEnvironmentInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModule: "ngComponentOutletNgModule", ngComponentOutletNgModuleFactory: "ngComponentOutletNgModuleFactory" }, exportAs: ["ngComponentOutlet"], usesOnChanges: true, ngImport: i0 });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "20.2.0-next.2", type: NgComponentOutlet, isStandalone: true, selector: "[ngComponentOutlet]", inputs: { ngComponentOutlet: "ngComponentOutlet", ngComponentOutletInputs: "ngComponentOutletInputs", ngComponentOutletInjector: "ngComponentOutletInjector", ngComponentOutletEnvironmentInjector: "ngComponentOutletEnvironmentInjector", ngComponentOutletContent: "ngComponentOutletContent", ngComponentOutletNgModule: "ngComponentOutletNgModule" }, exportAs: ["ngComponentOutlet"], usesOnChanges: true, ngImport: i0 });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: NgComponentOutlet, decorators: [{
             type: Directive,
@@ -2392,8 +2385,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", 
             }], ngComponentOutletContent: [{
                 type: Input
             }], ngComponentOutletNgModule: [{
-                type: Input
-            }], ngComponentOutletNgModuleFactory: [{
                 type: Input
             }] } });
 // Helper function that returns an Injector instance of a parent NgModule.
