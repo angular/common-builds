@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.0+sha-d025a07
+ * @license Angular v21.0.0-next.0+sha-1ebba54
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -691,12 +691,6 @@ const CONTENT_TYPE_HEADER = 'Content-Type';
  */
 const ACCEPT_HEADER = 'Accept';
 /**
- * `X-Request-URL` is a custom HTTP header used in older browser versions,
- * including Firefox (< 32), Chrome (< 37), Safari (< 8), and Internet Explorer,
- * to include the full URL of the request in cross-origin requests.
- */
-const X_REQUEST_URL_HEADER = 'X-Request-URL';
-/**
  * `text/plain` is a content type used to indicate that the content being
  * sent is plain text with no special formatting or structured data
  * like HTML, XML, or JSON.
@@ -1336,18 +1330,6 @@ var HttpStatusCode;
 
 const XSSI_PREFIX$1 = /^\)\]\}',?\n/;
 /**
- * Determine an appropriate URL for the response, by checking either
- * response url or the X-Request-URL header.
- */
-function getResponseUrl$1(response) {
-    if (response.url) {
-        return response.url;
-    }
-    // stored as lowercase in the map
-    const xRequestUrl = X_REQUEST_URL_HEADER.toLocaleLowerCase();
-    return response.headers.get(xRequestUrl);
-}
-/**
  * An internal injection token to reference `FetchBackend` implementation
  * in a tree-shakable way.
  */
@@ -1426,7 +1408,7 @@ class FetchBackend {
         }
         const headers = new HttpHeaders(response.headers);
         const statusText = response.statusText;
-        const url = getResponseUrl$1(response) ?? request.urlWithParams;
+        const url = response.url || request.urlWithParams;
         let status = response.status;
         let body = null;
         if (request.reportProgress) {
@@ -1505,7 +1487,7 @@ class FetchBackend {
                     headers: new HttpHeaders(response.headers),
                     status: response.status,
                     statusText: response.statusText,
-                    url: getResponseUrl$1(response) ?? request.urlWithParams,
+                    url: response.url || request.urlWithParams,
                 }));
                 return;
             }
@@ -1651,20 +1633,6 @@ function silenceSuperfluousUnhandledPromiseRejection(promise) {
 }
 
 const XSSI_PREFIX = /^\)\]\}',?\n/;
-const X_REQUEST_URL_REGEXP = RegExp(`^${X_REQUEST_URL_HEADER}:`, 'm');
-/**
- * Determine an appropriate URL for the response, by checking either
- * XMLHttpRequest.responseURL or the X-Request-URL header.
- */
-function getResponseUrl(xhr) {
-    if ('responseURL' in xhr && xhr.responseURL) {
-        return xhr.responseURL;
-    }
-    if (X_REQUEST_URL_REGEXP.test(xhr.getAllResponseHeaders())) {
-        return xhr.getResponseHeader(X_REQUEST_URL_HEADER);
-    }
-    return null;
-}
 /**
  * Validates whether the request is compatible with the XHR backend.
  * Show a warning if the request contains options that are not supported by XHR.
@@ -1807,7 +1775,7 @@ class HttpXhrBackend {
                     const headers = new HttpHeaders(xhr.getAllResponseHeaders());
                     // Read the response URL from the XMLHttpResponse instance and fall back on the
                     // request URL.
-                    const url = getResponseUrl(xhr) || req.url;
+                    const url = xhr.responseURL || req.url;
                     // Construct the HttpHeaderResponse and memoize it.
                     headerResponse = new HttpHeaderResponse({ headers, status: xhr.status, statusText, url });
                     return headerResponse;
