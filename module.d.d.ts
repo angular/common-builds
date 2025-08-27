@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.1+sha-f868465
+ * @license Angular v21.0.0-next.1+sha-3a3bd36
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -746,7 +746,7 @@ interface HttpUserEvent<T> {
  *
  * @publicApi
  */
-type HttpEvent<T> = HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>;
+type HttpEvent<T> = HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpDownloadProgressEvent | HttpUploadProgressEvent | HttpUserEvent<T>;
 /**
  * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
