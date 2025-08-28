@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.1+sha-ed3d1f2
+ * @license Angular v21.0.0-next.1+sha-07e6788
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1132,6 +1132,20 @@ class HttpResponseBase {
      */
     redirected;
     /**
+     * Indicates the type of the HTTP response, based on how the request was made and how the browser handles the response.
+     *
+     * This corresponds to the `type` property of the Fetch API's `Response` object, which can indicate values such as:
+     * - `'basic'`: A same-origin response, allowing full access to the body and headers.
+     * - `'cors'`: A cross-origin response with CORS enabled, exposing only safe response headers.
+     * - `'opaque'`: A cross-origin response made with `no-cors`, where the response body and headers are inaccessible.
+     * - `'opaqueredirect'`: A response resulting from a redirect followed in `no-cors` mode.
+     * - `'error'`: A response representing a network error or similar failure.
+     *
+     * This property is only available when using the Fetch-based backend (via `withFetch()`).
+     * When using Angular's (XHR) backend, this value will be `undefined`.
+     */
+    responseType;
+    /**
      * Super-constructor for all responses.
      *
      * The single parameter accepted is an initialization hash. Any properties
@@ -1145,6 +1159,7 @@ class HttpResponseBase {
         this.statusText = init.statusText || defaultStatusText;
         this.url = init.url || null;
         this.redirected = init.redirected;
+        this.responseType = init.responseType;
         // Cache the ok value to avoid defining a getter.
         this.ok = this.status >= 200 && this.status < 300;
     }
@@ -1211,6 +1226,7 @@ class HttpResponse extends HttpResponseBase {
             statusText: update.statusText || this.statusText,
             url: update.url || this.url || undefined,
             redirected: update.redirected ?? this.redirected,
+            responseType: update.responseType ?? this.responseType,
         });
     }
 }
@@ -1502,6 +1518,7 @@ class FetchBackend {
         // asked for JSON data and the body cannot be parsed as such.
         const ok = status >= 200 && status < 300;
         const redirected = response.redirected;
+        const responseType = response.type;
         if (ok) {
             observer.next(new HttpResponse({
                 body,
@@ -1510,6 +1527,7 @@ class FetchBackend {
                 statusText,
                 url,
                 redirected,
+                responseType,
             }));
             // The full body has been received and delivered, no further events
             // are possible. This request is complete.
@@ -1523,6 +1541,7 @@ class FetchBackend {
                 statusText,
                 url,
                 redirected,
+                responseType,
             }));
         }
     }
