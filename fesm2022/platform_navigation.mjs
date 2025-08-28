@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.1+sha-147c743
+ * @license Angular v21.0.0-next.1+sha-1a26fd3
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10,6 +10,11 @@ import { Injectable } from '@angular/core';
 /**
  * This class wraps the platform Navigation API which allows server-specific and test
  * implementations.
+ *
+ * Browser support is limited, so this API may not be available in all environments,
+ * may contain bugs, and is experimental.
+ *
+ * @experimental 21.0.0
  */
 class PlatformNavigation {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: PlatformNavigation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });

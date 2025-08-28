@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.1+sha-147c743
+ * @license Angular v21.0.0-next.1+sha-1a26fd3
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,9 +8,9 @@ export { AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_
 import * as i0 from '@angular/core';
 import { ɵregisterLocaleData as _registerLocaleData, Version, ɵɵdefineInjectable as __defineInjectable, inject, DOCUMENT, ɵformatRuntimeError as _formatRuntimeError, InjectionToken, ɵRuntimeError as _RuntimeError, Injectable, ɵIMAGE_CONFIG as _IMAGE_CONFIG, Renderer2, ElementRef, Injector, DestroyRef, ɵperformanceMarkFeature as _performanceMarkFeature, NgZone, ApplicationRef, numberAttribute, booleanAttribute, Directive, Input, ɵIMAGE_CONFIG_DEFAULTS as _IMAGE_CONFIG_DEFAULTS, ɵunwrapSafeValue as _unwrapSafeValue, ChangeDetectorRef } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG } from '@angular/core';
+export { PlatformNavigation } from './platform_navigation.mjs';
 export { XhrFactory, parseCookieValue as ɵparseCookieValue } from './xhr.mjs';
 export { APP_BASE_HREF, BrowserPlatformLocation, LOCATION_INITIALIZED, Location, LocationStrategy, PathLocationStrategy, PlatformLocation, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, setRootDomAdapter as ɵsetRootDomAdapter } from './location.mjs';
-export { PlatformNavigation as ɵPlatformNavigation } from './platform_navigation.mjs';
 import 'rxjs';
 
 /**
@@ -51,7 +51,7 @@ function isPlatformServer(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('21.0.0-next.1+sha-147c743');
+const VERSION = new Version('21.0.0-next.1+sha-1a26fd3');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
