@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.2.2+sha-cef1449
+ * @license Angular v20.2.2+sha-b549cd2
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -51,7 +51,7 @@ function isPlatformServer(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('20.2.2+sha-cef1449');
+const VERSION = new Version('20.2.2+sha-b549cd2');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
