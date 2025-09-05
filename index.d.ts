@@ -1,11 +1,11 @@
 /**
- * @license Angular v21.0.0-next.2+sha-8401f89
+ * @license Angular v20.3.0-next.0+sha-11a54d1
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { OnDestroy, ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, Version, Provider, InjectionToken, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, OnDestroy, Version, Provider, InjectionToken, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
 import { LocationStrategy } from './common_module.d.js';
 export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, Location, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './common_module.d.js';
@@ -37,6 +37,33 @@ declare abstract class DomAdapter {
     abstract resetBaseElement(): void;
     abstract getUserAgent(): string;
     abstract getCookie(name: string): string | null;
+}
+
+/**
+ * This class wraps the platform Navigation API which allows server-specific and test
+ * implementations.
+ */
+declare abstract class PlatformNavigation implements _Navigation {
+    abstract entries(): _NavigationHistoryEntry[];
+    abstract currentEntry: _NavigationHistoryEntry | null;
+    abstract updateCurrentEntry(options: _NavigationUpdateCurrentEntryOptions): void;
+    abstract transition: _NavigationTransition | null;
+    abstract canGoBack: boolean;
+    abstract canGoForward: boolean;
+    abstract navigate(url: string, options?: _NavigationNavigateOptions | undefined): _NavigationResult;
+    abstract reload(options?: _NavigationReloadOptions | undefined): _NavigationResult;
+    abstract traverseTo(key: string, options?: _NavigationOptions | undefined): _NavigationResult;
+    abstract back(options?: _NavigationOptions | undefined): _NavigationResult;
+    abstract forward(options?: _NavigationOptions | undefined): _NavigationResult;
+    abstract onnavigate: ((this: _Navigation, ev: _NavigateEvent) => any) | null;
+    abstract onnavigatesuccess: ((this: _Navigation, ev: Event) => any) | null;
+    abstract onnavigateerror: ((this: _Navigation, ev: ErrorEvent) => any) | null;
+    abstract oncurrententrychange: ((this: _Navigation, ev: _NavigationCurrentEntryChangeEvent) => any) | null;
+    abstract addEventListener(type: unknown, listener: unknown, options?: unknown): void;
+    abstract removeEventListener(type: unknown, listener: unknown, options?: unknown): void;
+    abstract dispatchEvent(event: Event): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PlatformNavigation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<PlatformNavigation>;
 }
 
 /**
@@ -175,38 +202,6 @@ declare function formatNumber(value: number, locale: string, digitsInfo?: string
  * @publicApi
  */
 declare function registerLocaleData(data: any, localeId?: string | any, extraData?: any): void;
-
-/**
- * This class wraps the platform Navigation API which allows server-specific and test
- * implementations.
- *
- * Browser support is limited, so this API may not be available in all environments,
- * may contain bugs, and is experimental.
- *
- * @experimental 21.0.0
- */
-declare abstract class PlatformNavigation implements _Navigation {
-    abstract entries(): _NavigationHistoryEntry[];
-    abstract currentEntry: _NavigationHistoryEntry | null;
-    abstract updateCurrentEntry(options: _NavigationUpdateCurrentEntryOptions): void;
-    abstract transition: _NavigationTransition | null;
-    abstract canGoBack: boolean;
-    abstract canGoForward: boolean;
-    abstract navigate(url: string, options?: _NavigationNavigateOptions | undefined): _NavigationResult;
-    abstract reload(options?: _NavigationReloadOptions | undefined): _NavigationResult;
-    abstract traverseTo(key: string, options?: _NavigationOptions | undefined): _NavigationResult;
-    abstract back(options?: _NavigationOptions | undefined): _NavigationResult;
-    abstract forward(options?: _NavigationOptions | undefined): _NavigationResult;
-    abstract onnavigate: ((this: _Navigation, ev: _NavigateEvent) => any) | null;
-    abstract onnavigatesuccess: ((this: _Navigation, ev: Event) => any) | null;
-    abstract onnavigateerror: ((this: _Navigation, ev: ErrorEvent) => any) | null;
-    abstract oncurrententrychange: ((this: _Navigation, ev: _NavigationCurrentEntryChangeEvent) => any) | null;
-    abstract addEventListener(type: unknown, listener: unknown, options?: unknown): void;
-    abstract removeEventListener(type: unknown, listener: unknown, options?: unknown): void;
-    abstract dispatchEvent(event: Event): boolean;
-    static ɵfac: i0.ɵɵFactoryDeclaration<PlatformNavigation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<PlatformNavigation>;
-}
 
 /**
  * Format styles that can be used to represent numbers.
@@ -1242,5 +1237,5 @@ declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
  */
 declare function normalizeQueryParams(params: string): string;
 
-export { FormStyle, FormatWidth, HashLocationStrategy, IMAGE_LOADER, LocationChangeListener, LocationStrategy, NgOptimizedImage, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PlatformLocation, PlatformNavigation, Plural, TranslationWidth, VERSION, ViewportScroller, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
+export { FormStyle, FormatWidth, HashLocationStrategy, IMAGE_LOADER, LocationChangeListener, LocationStrategy, NgOptimizedImage, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PlatformLocation, Plural, TranslationWidth, VERSION, ViewportScroller, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, PlatformNavigation as ɵPlatformNavigation, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
 export type { ImageLoader, ImageLoaderConfig, ImagePlaceholderConfig, Time };

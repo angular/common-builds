@@ -1,14 +1,41 @@
 /**
- * @license Angular v21.0.0-next.2+sha-8401f89
+ * @license Angular v20.3.0-next.0+sha-11a54d1
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵRuntimeError as _RuntimeError, InjectionToken, inject, NgZone, DestroyRef, Injectable, ɵformatRuntimeError as _formatRuntimeError, runInInjectionContext, PendingTasks, ɵConsole as _Console, DOCUMENT, Inject, makeEnvironmentProviders, NgModule } from '@angular/core';
-import { switchMap, finalize, concatMap, filter, map } from 'rxjs/operators';
-import { Observable, from, of } from 'rxjs';
+import { ɵRuntimeError as _RuntimeError, Injectable, InjectionToken, inject, NgZone, DestroyRef, ɵformatRuntimeError as _formatRuntimeError, PendingTasks, ɵConsole as _Console, runInInjectionContext, DOCUMENT, Inject, makeEnvironmentProviders, NgModule } from '@angular/core';
+import { concatMap, filter, map, finalize, switchMap } from 'rxjs/operators';
+import { of, Observable, from } from 'rxjs';
 import { XhrFactory, parseCookieValue } from './xhr.mjs';
+
+/**
+ * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
+ * `HttpResponse`.
+ *
+ * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
+ * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
+ * `HttpBackend`.
+ *
+ * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
+ *
+ * @publicApi
+ */
+class HttpHandler {
+}
+/**
+ * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
+ *
+ * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
+ *
+ * When injected, `HttpBackend` dispatches requests directly to the backend, without going
+ * through the interceptor chain.
+ *
+ * @publicApi
+ */
+class HttpBackend {
+}
 
 /**
  * Represents the header configuration options for an HTTP request.
@@ -258,106 +285,6 @@ function assertValidHeaders(headers) {
             throw new Error(`Unexpected value of the \`${key}\` header provided. ` +
                 `Expecting either a string, a number or an array, but got: \`${value}\`.`);
         }
-    }
-}
-
-/**
- * A token used to manipulate and access values stored in `HttpContext`.
- *
- * @publicApi
- */
-class HttpContextToken {
-    defaultValue;
-    constructor(defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-}
-/**
- * Http context stores arbitrary user defined values and ensures type safety without
- * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
- *
- * This context is mutable and is shared between cloned requests unless explicitly specified.
- *
- * @usageNotes
- *
- * ### Usage Example
- *
- * ```ts
- * // inside cache.interceptors.ts
- * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
- *
- * export class CacheInterceptor implements HttpInterceptor {
- *
- *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
- *     if (req.context.get(IS_CACHE_ENABLED) === true) {
- *       return ...;
- *     }
- *     return delegate.handle(req);
- *   }
- * }
- *
- * // inside a service
- *
- * this.httpClient.get('/api/weather', {
- *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
- * }).subscribe(...);
- * ```
- *
- * @publicApi
- */
-class HttpContext {
-    map = new Map();
-    /**
-     * Store a value in the context. If a value is already present it will be overwritten.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     * @param value The value to store.
-     *
-     * @returns A reference to itself for easy chaining.
-     */
-    set(token, value) {
-        this.map.set(token, value);
-        return this;
-    }
-    /**
-     * Retrieve the value associated with the given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns The stored value or default if one is defined.
-     */
-    get(token) {
-        if (!this.map.has(token)) {
-            this.map.set(token, token.defaultValue());
-        }
-        return this.map.get(token);
-    }
-    /**
-     * Delete the value associated with the given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns A reference to itself for easy chaining.
-     */
-    delete(token) {
-        this.map.delete(token);
-        return this;
-    }
-    /**
-     * Checks for existence of a given token.
-     *
-     * @param token The reference to an instance of `HttpContextToken`.
-     *
-     * @returns True if the token exists, false otherwise.
-     */
-    has(token) {
-        return this.map.has(token);
-    }
-    /**
-     * @returns a list of tokens currently stored in the context.
-     */
-    keys() {
-        return this.map.keys();
     }
 }
 
@@ -633,6 +560,106 @@ class HttpParams {
 }
 
 /**
+ * A token used to manipulate and access values stored in `HttpContext`.
+ *
+ * @publicApi
+ */
+class HttpContextToken {
+    defaultValue;
+    constructor(defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+}
+/**
+ * Http context stores arbitrary user defined values and ensures type safety without
+ * actually knowing the types. It is backed by a `Map` and guarantees that keys do not clash.
+ *
+ * This context is mutable and is shared between cloned requests unless explicitly specified.
+ *
+ * @usageNotes
+ *
+ * ### Usage Example
+ *
+ * ```ts
+ * // inside cache.interceptors.ts
+ * export const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+ *
+ * export class CacheInterceptor implements HttpInterceptor {
+ *
+ *   intercept(req: HttpRequest<any>, delegate: HttpHandler): Observable<HttpEvent<any>> {
+ *     if (req.context.get(IS_CACHE_ENABLED) === true) {
+ *       return ...;
+ *     }
+ *     return delegate.handle(req);
+ *   }
+ * }
+ *
+ * // inside a service
+ *
+ * this.httpClient.get('/api/weather', {
+ *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
+ * }).subscribe(...);
+ * ```
+ *
+ * @publicApi
+ */
+class HttpContext {
+    map = new Map();
+    /**
+     * Store a value in the context. If a value is already present it will be overwritten.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     * @param value The value to store.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    set(token, value) {
+        this.map.set(token, value);
+        return this;
+    }
+    /**
+     * Retrieve the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns The stored value or default if one is defined.
+     */
+    get(token) {
+        if (!this.map.has(token)) {
+            this.map.set(token, token.defaultValue());
+        }
+        return this.map.get(token);
+    }
+    /**
+     * Delete the value associated with the given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns A reference to itself for easy chaining.
+     */
+    delete(token) {
+        this.map.delete(token);
+        return this;
+    }
+    /**
+     * Checks for existence of a given token.
+     *
+     * @param token The reference to an instance of `HttpContextToken`.
+     *
+     * @returns True if the token exists, false otherwise.
+     */
+    has(token) {
+        return this.map.has(token);
+    }
+    /**
+     * @returns a list of tokens currently stored in the context.
+     */
+    keys() {
+        return this.map.keys();
+    }
+}
+
+/**
  * Determine whether the given HTTP method may include a body.
  */
 function mightHaveBody(method) {
@@ -690,6 +717,12 @@ const CONTENT_TYPE_HEADER = 'Content-Type';
  * (or content types) the client is willing to receive from the server.
  */
 const ACCEPT_HEADER = 'Accept';
+/**
+ * `X-Request-URL` is a custom HTTP header used in older browser versions,
+ * including Firefox (< 32), Chrome (< 37), Safari (< 8), and Internet Explorer,
+ * to include the full URL of the request in cross-origin requests.
+ */
+const X_REQUEST_URL_HEADER = 'X-Request-URL';
 /**
  * `text/plain` is a content type used to indicate that the content being
  * sent is plain text with no special formatting or structured data
@@ -1132,20 +1165,6 @@ class HttpResponseBase {
      */
     redirected;
     /**
-     * Indicates the type of the HTTP response, based on how the request was made and how the browser handles the response.
-     *
-     * This corresponds to the `type` property of the Fetch API's `Response` object, which can indicate values such as:
-     * - `'basic'`: A same-origin response, allowing full access to the body and headers.
-     * - `'cors'`: A cross-origin response with CORS enabled, exposing only safe response headers.
-     * - `'opaque'`: A cross-origin response made with `no-cors`, where the response body and headers are inaccessible.
-     * - `'opaqueredirect'`: A response resulting from a redirect followed in `no-cors` mode.
-     * - `'error'`: A response representing a network error or similar failure.
-     *
-     * This property is only available when using the Fetch-based backend (via `withFetch()`).
-     * When using Angular's (XHR) backend, this value will be `undefined`.
-     */
-    responseType;
-    /**
      * Super-constructor for all responses.
      *
      * The single parameter accepted is an initialization hash. Any properties
@@ -1159,7 +1178,6 @@ class HttpResponseBase {
         this.statusText = init.statusText || defaultStatusText;
         this.url = init.url || null;
         this.redirected = init.redirected;
-        this.responseType = init.responseType;
         // Cache the ok value to avoid defining a getter.
         this.ok = this.status >= 200 && this.status < 300;
     }
@@ -1226,7 +1244,6 @@ class HttpResponse extends HttpResponseBase {
             statusText: update.statusText || this.statusText,
             url: update.url || this.url || undefined,
             redirected: update.redirected ?? this.redirected,
-            responseType: update.responseType ?? this.responseType,
         });
     }
 }
@@ -1343,821 +1360,6 @@ var HttpStatusCode;
     HttpStatusCode[HttpStatusCode["NotExtended"] = 510] = "NotExtended";
     HttpStatusCode[HttpStatusCode["NetworkAuthenticationRequired"] = 511] = "NetworkAuthenticationRequired";
 })(HttpStatusCode || (HttpStatusCode = {}));
-
-const XSSI_PREFIX$1 = /^\)\]\}',?\n/;
-/**
- * An internal injection token to reference `FetchBackend` implementation
- * in a tree-shakable way.
- */
-const FETCH_BACKEND = new InjectionToken(typeof ngDevMode === 'undefined' || ngDevMode ? 'FETCH_BACKEND' : '');
-/**
- * Uses `fetch` to send requests to a backend server.
- *
- * This `FetchBackend` requires the support of the
- * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available on all
- * supported browsers and on Node.js v18 or later.
- *
- * @see {@link HttpHandler}
- *
- * @publicApi
- */
-class FetchBackend {
-    // We use an arrow function to always reference the current global implementation of `fetch`.
-    // This is helpful for cases when the global `fetch` implementation is modified by external code,
-    // see https://github.com/angular/angular/issues/57527.
-    fetchImpl = inject(FetchFactory, { optional: true })?.fetch ?? ((...args) => globalThis.fetch(...args));
-    ngZone = inject(NgZone);
-    destroyRef = inject(DestroyRef);
-    destroyed = false;
-    constructor() {
-        this.destroyRef.onDestroy(() => {
-            this.destroyed = true;
-        });
-    }
-    handle(request) {
-        return new Observable((observer) => {
-            const aborter = new AbortController();
-            this.doRequest(request, aborter.signal, observer).then(noop, (error) => observer.error(new HttpErrorResponse({ error })));
-            let timeoutId;
-            if (request.timeout) {
-                // TODO: Replace with AbortSignal.any([aborter.signal, AbortSignal.timeout(request.timeout)])
-                // when AbortSignal.any support is Baseline widely available (NET nov. 2026)
-                timeoutId = this.ngZone.runOutsideAngular(() => setTimeout(() => {
-                    if (!aborter.signal.aborted) {
-                        aborter.abort(new DOMException('signal timed out', 'TimeoutError'));
-                    }
-                }, request.timeout));
-            }
-            return () => {
-                if (timeoutId !== undefined) {
-                    clearTimeout(timeoutId);
-                }
-                aborter.abort();
-            };
-        });
-    }
-    async doRequest(request, signal, observer) {
-        const init = this.createRequestInit(request);
-        let response;
-        try {
-            // Run fetch outside of Angular zone.
-            // This is due to Node.js fetch implementation (Undici) which uses a number of setTimeouts to check if
-            // the response should eventually timeout which causes extra CD cycles every 500ms
-            const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, { signal, ...init }));
-            // Make sure Zone.js doesn't trigger false-positive unhandled promise
-            // error in case the Promise is rejected synchronously. See function
-            // description for additional information.
-            silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
-            // Send the `Sent` event before awaiting the response.
-            observer.next({ type: HttpEventType.Sent });
-            response = await fetchPromise;
-        }
-        catch (error) {
-            observer.error(new HttpErrorResponse({
-                error,
-                status: error.status ?? 0,
-                statusText: error.statusText,
-                url: request.urlWithParams,
-                headers: error.headers,
-            }));
-            return;
-        }
-        const headers = new HttpHeaders(response.headers);
-        const statusText = response.statusText;
-        const url = response.url || request.urlWithParams;
-        let status = response.status;
-        let body = null;
-        if (request.reportProgress) {
-            observer.next(new HttpHeaderResponse({ headers, status, statusText, url }));
-        }
-        if (response.body) {
-            // Read Progress
-            const contentLength = response.headers.get('content-length');
-            const chunks = [];
-            const reader = response.body.getReader();
-            let receivedLength = 0;
-            let decoder;
-            let partialText;
-            // We have to check whether the Zone is defined in the global scope because this may be called
-            // when the zone is nooped.
-            const reqZone = typeof Zone !== 'undefined' && Zone.current;
-            let canceled = false;
-            // Perform response processing outside of Angular zone to
-            // ensure no excessive change detection runs are executed
-            // Here calling the async ReadableStreamDefaultReader.read() is responsible for triggering CD
-            await this.ngZone.runOutsideAngular(async () => {
-                while (true) {
-                    // Prevent reading chunks if the app is destroyed. Otherwise, we risk doing
-                    // unnecessary work or triggering side effects after teardown.
-                    // This may happen if the app was explicitly destroyed before
-                    // the response returned entirely.
-                    if (this.destroyed) {
-                        // Streams left in a pending state (due to `break` without cancel) may
-                        // continue consuming or holding onto data behind the scenes.
-                        // Calling `reader.cancel()` allows the browser or the underlying
-                        // system to release any network or memory resources associated with the stream.
-                        await reader.cancel();
-                        canceled = true;
-                        break;
-                    }
-                    const { done, value } = await reader.read();
-                    if (done) {
-                        break;
-                    }
-                    chunks.push(value);
-                    receivedLength += value.length;
-                    if (request.reportProgress) {
-                        partialText =
-                            request.responseType === 'text'
-                                ? (partialText ?? '') +
-                                    (decoder ??= new TextDecoder()).decode(value, { stream: true })
-                                : undefined;
-                        const reportProgress = () => observer.next({
-                            type: HttpEventType.DownloadProgress,
-                            total: contentLength ? +contentLength : undefined,
-                            loaded: receivedLength,
-                            partialText,
-                        });
-                        reqZone ? reqZone.run(reportProgress) : reportProgress();
-                    }
-                }
-            });
-            // We need to manage the canceled state — because the Streams API does not
-            // expose a direct `.state` property on the reader.
-            // We need to `return` because `parseBody` may not be able to parse chunks
-            // that were only partially read (due to cancellation caused by app destruction).
-            if (canceled) {
-                observer.complete();
-                return;
-            }
-            // Combine all chunks.
-            const chunksAll = this.concatChunks(chunks, receivedLength);
-            try {
-                const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? '';
-                body = this.parseBody(request, chunksAll, contentType, status);
-            }
-            catch (error) {
-                // Body loading or parsing failed
-                observer.error(new HttpErrorResponse({
-                    error,
-                    headers: new HttpHeaders(response.headers),
-                    status: response.status,
-                    statusText: response.statusText,
-                    url: response.url || request.urlWithParams,
-                }));
-                return;
-            }
-        }
-        // Same behavior as the XhrBackend
-        if (status === 0) {
-            status = body ? HTTP_STATUS_CODE_OK : 0;
-        }
-        // ok determines whether the response will be transmitted on the event or
-        // error channel. Unsuccessful status codes (not 2xx) will always be errors,
-        // but a successful status code can still result in an error if the user
-        // asked for JSON data and the body cannot be parsed as such.
-        const ok = status >= 200 && status < 300;
-        const redirected = response.redirected;
-        const responseType = response.type;
-        if (ok) {
-            observer.next(new HttpResponse({
-                body,
-                headers,
-                status,
-                statusText,
-                url,
-                redirected,
-                responseType,
-            }));
-            // The full body has been received and delivered, no further events
-            // are possible. This request is complete.
-            observer.complete();
-        }
-        else {
-            observer.error(new HttpErrorResponse({
-                error: body,
-                headers,
-                status,
-                statusText,
-                url,
-                redirected,
-                responseType,
-            }));
-        }
-    }
-    parseBody(request, binContent, contentType, status) {
-        switch (request.responseType) {
-            case 'json':
-                // stripping the XSSI when present
-                const text = new TextDecoder().decode(binContent).replace(XSSI_PREFIX$1, '');
-                if (text === '') {
-                    return null;
-                }
-                try {
-                    return JSON.parse(text);
-                }
-                catch (e) {
-                    // Allow handling non-JSON errors (!) as plain text, same as the XHR
-                    // backend. Without this special sauce, any non-JSON error would be
-                    // completely inaccessible downstream as the `HttpErrorResponse.error`
-                    // would be set to the `SyntaxError` from then failing `JSON.parse`.
-                    if (status < 200 || status >= 300) {
-                        return text;
-                    }
-                    throw e;
-                }
-            case 'text':
-                return new TextDecoder().decode(binContent);
-            case 'blob':
-                return new Blob([binContent], { type: contentType });
-            case 'arraybuffer':
-                return binContent.buffer;
-        }
-    }
-    createRequestInit(req) {
-        // We could share some of this logic with the XhrBackend
-        const headers = {};
-        let credentials;
-        // If the request has a credentials property, use it.
-        // Otherwise, if the request has withCredentials set to true, use 'include'.
-        credentials = req.credentials;
-        // If withCredentials is true should be set to 'include', for compatibility
-        if (req.withCredentials) {
-            // A warning is logged in development mode if the request has both
-            (typeof ngDevMode === 'undefined' || ngDevMode) && warningOptionsMessage(req);
-            credentials = 'include';
-        }
-        // Setting all the requested headers.
-        req.headers.forEach((name, values) => (headers[name] = values.join(',')));
-        // Add an Accept header if one isn't present already.
-        if (!req.headers.has(ACCEPT_HEADER)) {
-            headers[ACCEPT_HEADER] = ACCEPT_HEADER_VALUE;
-        }
-        // Auto-detect the Content-Type header if one isn't present already.
-        if (!req.headers.has(CONTENT_TYPE_HEADER)) {
-            const detectedType = req.detectContentTypeHeader();
-            // Sometimes Content-Type detection fails.
-            if (detectedType !== null) {
-                headers[CONTENT_TYPE_HEADER] = detectedType;
-            }
-        }
-        return {
-            body: req.serializeBody(),
-            method: req.method,
-            headers,
-            credentials,
-            keepalive: req.keepalive,
-            cache: req.cache,
-            priority: req.priority,
-            mode: req.mode,
-            redirect: req.redirect,
-            referrer: req.referrer,
-            integrity: req.integrity,
-        };
-    }
-    concatChunks(chunks, totalLength) {
-        const chunksAll = new Uint8Array(totalLength);
-        let position = 0;
-        for (const chunk of chunks) {
-            chunksAll.set(chunk, position);
-            position += chunk.length;
-        }
-        return chunksAll;
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [] });
-/**
- * Abstract class to provide a mocked implementation of `fetch()`
- */
-class FetchFactory {
-}
-function noop() { }
-function warningOptionsMessage(req) {
-    if (req.credentials && req.withCredentials) {
-        console.warn(_formatRuntimeError(2819 /* RuntimeErrorCode.WITH_CREDENTIALS_OVERRIDES_EXPLICIT_CREDENTIALS */, `Angular detected that a \`HttpClient\` request has both \`withCredentials: true\` and \`credentials: '${req.credentials}'\` options. The \`withCredentials\` option is overriding the explicit \`credentials\` setting to 'include'. Consider removing \`withCredentials\` and using \`credentials: '${req.credentials}'\` directly for clarity.`));
-    }
-}
-/**
- * Zone.js treats a rejected promise that has not yet been awaited
- * as an unhandled error. This function adds a noop `.then` to make
- * sure that Zone.js doesn't throw an error if the Promise is rejected
- * synchronously.
- */
-function silenceSuperfluousUnhandledPromiseRejection(promise) {
-    promise.then(noop, noop);
-}
-
-const XSSI_PREFIX = /^\)\]\}',?\n/;
-/**
- * Validates whether the request is compatible with the XHR backend.
- * Show a warning if the request contains options that are not supported by XHR.
- */
-function validateXhrCompatibility(req) {
-    const unsupportedOptions = [
-        {
-            property: 'keepalive',
-            errorCode: 2813 /* RuntimeErrorCode.KEEPALIVE_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'cache',
-            errorCode: 2814 /* RuntimeErrorCode.CACHE_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'priority',
-            errorCode: 2815 /* RuntimeErrorCode.PRIORITY_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'mode',
-            errorCode: 2816 /* RuntimeErrorCode.MODE_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'redirect',
-            errorCode: 2817 /* RuntimeErrorCode.REDIRECT_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'credentials',
-            errorCode: 2818 /* RuntimeErrorCode.CREDENTIALS_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'integrity',
-            errorCode: 2820 /* RuntimeErrorCode.INTEGRITY_NOT_SUPPORTED_WITH_XHR */,
-        },
-        {
-            property: 'referrer',
-            errorCode: 2821 /* RuntimeErrorCode.REFERRER_NOT_SUPPORTED_WITH_XHR */,
-        },
-    ];
-    // Check each unsupported option and warn if present
-    for (const { property, errorCode } of unsupportedOptions) {
-        if (req[property]) {
-            console.warn(_formatRuntimeError(errorCode, `Angular detected that a \`HttpClient\` request with the \`${property}\` option was sent using XHR, which does not support it. To use the \`${property}\` option, enable Fetch API support by passing \`withFetch()\` as an argument to \`provideHttpClient()\`.`));
-        }
-    }
-}
-/**
- * Uses `XMLHttpRequest` to send requests to a backend server.
- * @see {@link HttpHandler}
- * @see {@link JsonpClientBackend}
- *
- * @publicApi
- */
-class HttpXhrBackend {
-    xhrFactory;
-    constructor(xhrFactory) {
-        this.xhrFactory = xhrFactory;
-    }
-    /**
-     * Processes a request and returns a stream of response events.
-     * @param req The request object.
-     * @returns An observable of the response events.
-     */
-    handle(req) {
-        // Quick check to give a better error message when a user attempts to use
-        // HttpClient.jsonp() without installing the HttpClientJsonpModule
-        if (req.method === 'JSONP') {
-            throw new _RuntimeError(-2800 /* RuntimeErrorCode.MISSING_JSONP_MODULE */, (typeof ngDevMode === 'undefined' || ngDevMode) &&
-                `Cannot make a JSONP request without JSONP support. To fix the problem, either add the \`withJsonpSupport()\` call (if \`provideHttpClient()\` is used) or import the \`HttpClientJsonpModule\` in the root NgModule.`);
-        }
-        // Validate that the request is compatible with the XHR backend.
-        ngDevMode && validateXhrCompatibility(req);
-        // Check whether this factory has a special function to load an XHR implementation
-        // for various non-browser environments. We currently limit it to only `ServerXhr`
-        // class, which needs to load an XHR implementation.
-        const xhrFactory = this.xhrFactory;
-        const source = 
-        // Note that `ɵloadImpl` is never defined in client bundles and can be
-        // safely dropped whenever we're running in the browser.
-        // This branching is redundant.
-        // The `ngServerMode` guard also enables tree-shaking of the `from()`
-        // function from the common bundle, as it's only used in server code.
-        typeof ngServerMode !== 'undefined' && ngServerMode && xhrFactory.ɵloadImpl
-            ? from(xhrFactory.ɵloadImpl())
-            : of(null);
-        return source.pipe(switchMap(() => {
-            // Everything happens on Observable subscription.
-            return new Observable((observer) => {
-                // Start by setting up the XHR object with request method, URL, and withCredentials
-                // flag.
-                const xhr = xhrFactory.build();
-                xhr.open(req.method, req.urlWithParams);
-                if (req.withCredentials) {
-                    xhr.withCredentials = true;
-                }
-                // Add all the requested headers.
-                req.headers.forEach((name, values) => xhr.setRequestHeader(name, values.join(',')));
-                // Add an Accept header if one isn't present already.
-                if (!req.headers.has(ACCEPT_HEADER)) {
-                    xhr.setRequestHeader(ACCEPT_HEADER, ACCEPT_HEADER_VALUE);
-                }
-                // Auto-detect the Content-Type header if one isn't present already.
-                if (!req.headers.has(CONTENT_TYPE_HEADER)) {
-                    const detectedType = req.detectContentTypeHeader();
-                    // Sometimes Content-Type detection fails.
-                    if (detectedType !== null) {
-                        xhr.setRequestHeader(CONTENT_TYPE_HEADER, detectedType);
-                    }
-                }
-                if (req.timeout) {
-                    xhr.timeout = req.timeout;
-                }
-                // Set the responseType if one was requested.
-                if (req.responseType) {
-                    const responseType = req.responseType.toLowerCase();
-                    // JSON responses need to be processed as text. This is because if the server
-                    // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
-                    // xhr.response will be null, and xhr.responseText cannot be accessed to
-                    // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
-                    // is parsed by first requesting text and then applying JSON.parse.
-                    xhr.responseType = (responseType !== 'json' ? responseType : 'text');
-                }
-                // Serialize the request body if one is present. If not, this will be set to null.
-                const reqBody = req.serializeBody();
-                // If progress events are enabled, response headers will be delivered
-                // in two events - the HttpHeaderResponse event and the full HttpResponse
-                // event. However, since response headers don't change in between these
-                // two events, it doesn't make sense to parse them twice. So headerResponse
-                // caches the data extracted from the response whenever it's first parsed,
-                // to ensure parsing isn't duplicated.
-                let headerResponse = null;
-                // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
-                // state, and memoizes it into headerResponse.
-                const partialFromXhr = () => {
-                    if (headerResponse !== null) {
-                        return headerResponse;
-                    }
-                    const statusText = xhr.statusText || 'OK';
-                    // Parse headers from XMLHttpRequest - this step is lazy.
-                    const headers = new HttpHeaders(xhr.getAllResponseHeaders());
-                    // Read the response URL from the XMLHttpResponse instance and fall back on the
-                    // request URL.
-                    const url = xhr.responseURL || req.url;
-                    // Construct the HttpHeaderResponse and memoize it.
-                    headerResponse = new HttpHeaderResponse({ headers, status: xhr.status, statusText, url });
-                    return headerResponse;
-                };
-                // Next, a few closures are defined for the various events which XMLHttpRequest can
-                // emit. This allows them to be unregistered as event listeners later.
-                // First up is the load event, which represents a response being fully available.
-                const onLoad = () => {
-                    // Read response state from the memoized partial data.
-                    let { headers, status, statusText, url } = partialFromXhr();
-                    // The body will be read out if present.
-                    let body = null;
-                    if (status !== HTTP_STATUS_CODE_NO_CONTENT) {
-                        // Use XMLHttpRequest.response if set, responseText otherwise.
-                        body = typeof xhr.response === 'undefined' ? xhr.responseText : xhr.response;
-                    }
-                    // Normalize another potential bug (this one comes from CORS).
-                    if (status === 0) {
-                        status = !!body ? HTTP_STATUS_CODE_OK : 0;
-                    }
-                    // ok determines whether the response will be transmitted on the event or
-                    // error channel. Unsuccessful status codes (not 2xx) will always be errors,
-                    // but a successful status code can still result in an error if the user
-                    // asked for JSON data and the body cannot be parsed as such.
-                    let ok = status >= 200 && status < 300;
-                    // Check whether the body needs to be parsed as JSON (in many cases the browser
-                    // will have done that already).
-                    if (req.responseType === 'json' && typeof body === 'string') {
-                        // Save the original body, before attempting XSSI prefix stripping.
-                        const originalBody = body;
-                        body = body.replace(XSSI_PREFIX, '');
-                        try {
-                            // Attempt the parse. If it fails, a parse error should be delivered to the
-                            // user.
-                            body = body !== '' ? JSON.parse(body) : null;
-                        }
-                        catch (error) {
-                            // Since the JSON.parse failed, it's reasonable to assume this might not have
-                            // been a JSON response. Restore the original body (including any XSSI prefix)
-                            // to deliver a better error response.
-                            body = originalBody;
-                            // If this was an error request to begin with, leave it as a string, it
-                            // probably just isn't JSON. Otherwise, deliver the parsing error to the user.
-                            if (ok) {
-                                // Even though the response status was 2xx, this is still an error.
-                                ok = false;
-                                // The parse error contains the text of the body that failed to parse.
-                                body = { error, text: body };
-                            }
-                        }
-                    }
-                    if (ok) {
-                        // A successful response is delivered on the event stream.
-                        observer.next(new HttpResponse({
-                            body,
-                            headers,
-                            status,
-                            statusText,
-                            url: url || undefined,
-                        }));
-                        // The full body has been received and delivered, no further events
-                        // are possible. This request is complete.
-                        observer.complete();
-                    }
-                    else {
-                        // An unsuccessful request is delivered on the error channel.
-                        observer.error(new HttpErrorResponse({
-                            // The error in this case is the response body (error from the server).
-                            error: body,
-                            headers,
-                            status,
-                            statusText,
-                            url: url || undefined,
-                        }));
-                    }
-                };
-                // The onError callback is called when something goes wrong at the network level.
-                // Connection timeout, DNS error, offline, etc. These are actual errors, and are
-                // transmitted on the error channel.
-                const onError = (error) => {
-                    const { url } = partialFromXhr();
-                    const res = new HttpErrorResponse({
-                        error,
-                        status: xhr.status || 0,
-                        statusText: xhr.statusText || 'Unknown Error',
-                        url: url || undefined,
-                    });
-                    observer.error(res);
-                };
-                let onTimeout = onError;
-                if (req.timeout) {
-                    onTimeout = (_) => {
-                        const { url } = partialFromXhr();
-                        const res = new HttpErrorResponse({
-                            error: new DOMException('Request timed out', 'TimeoutError'),
-                            status: xhr.status || 0,
-                            statusText: xhr.statusText || 'Request timeout',
-                            url: url || undefined,
-                        });
-                        observer.error(res);
-                    };
-                }
-                // The sentHeaders flag tracks whether the HttpResponseHeaders event
-                // has been sent on the stream. This is necessary to track if progress
-                // is enabled since the event will be sent on only the first download
-                // progress event.
-                let sentHeaders = false;
-                // The download progress event handler, which is only registered if
-                // progress events are enabled.
-                const onDownProgress = (event) => {
-                    // Send the HttpResponseHeaders event if it hasn't been sent already.
-                    if (!sentHeaders) {
-                        observer.next(partialFromXhr());
-                        sentHeaders = true;
-                    }
-                    // Start building the download progress event to deliver on the response
-                    // event stream.
-                    let progressEvent = {
-                        type: HttpEventType.DownloadProgress,
-                        loaded: event.loaded,
-                    };
-                    // Set the total number of bytes in the event if it's available.
-                    if (event.lengthComputable) {
-                        progressEvent.total = event.total;
-                    }
-                    // If the request was for text content and a partial response is
-                    // available on XMLHttpRequest, include it in the progress event
-                    // to allow for streaming reads.
-                    if (req.responseType === 'text' && !!xhr.responseText) {
-                        progressEvent.partialText = xhr.responseText;
-                    }
-                    // Finally, fire the event.
-                    observer.next(progressEvent);
-                };
-                // The upload progress event handler, which is only registered if
-                // progress events are enabled.
-                const onUpProgress = (event) => {
-                    // Upload progress events are simpler. Begin building the progress
-                    // event.
-                    let progress = {
-                        type: HttpEventType.UploadProgress,
-                        loaded: event.loaded,
-                    };
-                    // If the total number of bytes being uploaded is available, include
-                    // it.
-                    if (event.lengthComputable) {
-                        progress.total = event.total;
-                    }
-                    // Send the event.
-                    observer.next(progress);
-                };
-                // By default, register for load and error events.
-                xhr.addEventListener('load', onLoad);
-                xhr.addEventListener('error', onError);
-                xhr.addEventListener('timeout', onTimeout);
-                xhr.addEventListener('abort', onError);
-                // Progress events are only enabled if requested.
-                if (req.reportProgress) {
-                    // Download progress is always enabled if requested.
-                    xhr.addEventListener('progress', onDownProgress);
-                    // Upload progress depends on whether there is a body to upload.
-                    if (reqBody !== null && xhr.upload) {
-                        xhr.upload.addEventListener('progress', onUpProgress);
-                    }
-                }
-                // Fire the request, and notify the event stream that it was fired.
-                xhr.send(reqBody);
-                observer.next({ type: HttpEventType.Sent });
-                // This is the return from the Observable function, which is the
-                // request cancellation handler.
-                return () => {
-                    // On a cancellation, remove all registered event listeners.
-                    xhr.removeEventListener('error', onError);
-                    xhr.removeEventListener('abort', onError);
-                    xhr.removeEventListener('load', onLoad);
-                    xhr.removeEventListener('timeout', onTimeout);
-                    if (req.reportProgress) {
-                        xhr.removeEventListener('progress', onDownProgress);
-                        if (reqBody !== null && xhr.upload) {
-                            xhr.upload.removeEventListener('progress', onUpProgress);
-                        }
-                    }
-                    // Finally, abort the in-flight request.
-                    if (xhr.readyState !== xhr.DONE) {
-                        xhr.abort();
-                    }
-                };
-            });
-        }));
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend, deps: [{ token: XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend, providedIn: 'root' });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: XhrFactory }] });
-
-function interceptorChainEndFn(req, finalHandlerFn) {
-    return finalHandlerFn(req);
-}
-/**
- * Constructs a `ChainedInterceptorFn` which adapts a legacy `HttpInterceptor` to the
- * `ChainedInterceptorFn` interface.
- */
-function adaptLegacyInterceptorToChain(chainTailFn, interceptor) {
-    return (initialRequest, finalHandlerFn) => interceptor.intercept(initialRequest, {
-        handle: (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn),
-    });
-}
-/**
- * Constructs a `ChainedInterceptorFn` which wraps and invokes a functional interceptor in the given
- * injector.
- */
-function chainedInterceptorFn(chainTailFn, interceptorFn, injector) {
-    return (initialRequest, finalHandlerFn) => runInInjectionContext(injector, () => interceptorFn(initialRequest, (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn)));
-}
-/**
- * A multi-provider token that represents the array of registered
- * `HttpInterceptor` objects.
- *
- * @publicApi
- */
-const HTTP_INTERCEPTORS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTORS' : '');
-/**
- * A multi-provided token of `HttpInterceptorFn`s.
- */
-const HTTP_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTOR_FNS' : '', { factory: () => [] });
-/**
- * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
- */
-const HTTP_ROOT_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_ROOT_INTERCEPTOR_FNS' : '');
-// TODO(atscott): We need a larger discussion about stability and what should contribute to stability.
-// Should the whole interceptor chain contribute to stability or just the backend request #55075?
-// Should HttpClient contribute to stability automatically at all?
-const REQUESTS_CONTRIBUTE_TO_STABILITY = new InjectionToken(ngDevMode ? 'REQUESTS_CONTRIBUTE_TO_STABILITY' : '', { providedIn: 'root', factory: () => true });
-/**
- * Creates an `HttpInterceptorFn` which lazily initializes an interceptor chain from the legacy
- * class-based interceptors and runs the request through it.
- */
-function legacyInterceptorFnFactory() {
-    let chain = null;
-    return (req, handler) => {
-        if (chain === null) {
-            const interceptors = inject(HTTP_INTERCEPTORS, { optional: true }) ?? [];
-            // Note: interceptors are wrapped right-to-left so that final execution order is
-            // left-to-right. That is, if `interceptors` is the array `[a, b, c]`, we want to
-            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
-            // out.
-            chain = interceptors.reduceRight(adaptLegacyInterceptorToChain, interceptorChainEndFn);
-        }
-        const pendingTasks = inject(PendingTasks);
-        const contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
-        if (contributeToStability) {
-            const removeTask = pendingTasks.add();
-            return chain(req, handler).pipe(finalize(removeTask));
-        }
-        else {
-            return chain(req, handler);
-        }
-    };
-}
-
-/**
- * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
- *
- * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
- *
- * When injected, `HttpBackend` dispatches requests directly to the backend, without going
- * through the interceptor chain.
- *
- * @publicApi
- */
-class HttpBackend {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpBackend, providedIn: 'root', useExisting: HttpXhrBackend });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpBackend, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root', useExisting: HttpXhrBackend }]
-        }] });
-let fetchBackendWarningDisplayed = false;
-class HttpInterceptorHandler {
-    backend;
-    injector;
-    chain = null;
-    pendingTasks = inject(PendingTasks);
-    contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
-    constructor(backend, injector) {
-        this.backend = backend;
-        this.injector = injector;
-        // We strongly recommend using fetch backend for HTTP calls when SSR is used
-        // for an application. The logic below checks if that's the case and produces
-        // a warning otherwise.
-        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !fetchBackendWarningDisplayed) {
-            // This flag is necessary because provideHttpClientTesting() overrides the backend
-            // even if `withFetch()` is used within the test. When the testing HTTP backend is provided,
-            // no HTTP calls are actually performed during the test, so producing a warning would be
-            // misleading.
-            const isTestingBackend = this.backend.isTestingBackend;
-            if (typeof ngServerMode !== 'undefined' &&
-                ngServerMode &&
-                !(this.backend instanceof FetchBackend) &&
-                !isTestingBackend) {
-                fetchBackendWarningDisplayed = true;
-                injector
-                    .get(_Console)
-                    .warn(_formatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
-                    "to use `fetch` APIs. It's strongly recommended to " +
-                    'enable `fetch` for applications that use Server-Side Rendering ' +
-                    'for better performance and compatibility. ' +
-                    'To enable `fetch`, add the `withFetch()` to the `provideHttpClient()` ' +
-                    'call at the root of the application.'));
-            }
-        }
-    }
-    handle(initialRequest) {
-        if (this.chain === null) {
-            const dedupedInterceptorFns = Array.from(new Set([
-                ...this.injector.get(HTTP_INTERCEPTOR_FNS),
-                ...this.injector.get(HTTP_ROOT_INTERCEPTOR_FNS, []),
-            ]));
-            // Note: interceptors are wrapped right-to-left so that final execution order is
-            // left-to-right. That is, if `dedupedInterceptorFns` is the array `[a, b, c]`, we want to
-            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
-            // out.
-            this.chain = dedupedInterceptorFns.reduceRight((nextSequencedFn, interceptorFn) => chainedInterceptorFn(nextSequencedFn, interceptorFn, this.injector), interceptorChainEndFn);
-        }
-        if (this.contributeToStability) {
-            const removeTask = this.pendingTasks.add();
-            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest)).pipe(finalize(removeTask));
-        }
-        else {
-            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
-        }
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler, providedIn: 'root' });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
-/**
- * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
- * `HttpResponse`.
- *
- * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
- * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
- * `HttpBackend`.
- *
- * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
- *
- * @publicApi
- */
-class HttpHandler {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpHandler, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpHandler, providedIn: 'root', useExisting: HttpInterceptorHandler });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpHandler, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root', useExisting: HttpInterceptorHandler }]
-        }] });
 
 /**
  * Constructs an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
@@ -2479,12 +1681,454 @@ class HttpClient {
         return this.request('PUT', url, addBody(options, body));
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpClient, deps: [{ token: HttpHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpClient, providedIn: 'root' });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpClient });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
+            type: Injectable
         }], ctorParameters: () => [{ type: HttpHandler }] });
+
+const XSSI_PREFIX$1 = /^\)\]\}',?\n/;
+/**
+ * Determine an appropriate URL for the response, by checking either
+ * response url or the X-Request-URL header.
+ */
+function getResponseUrl$1(response) {
+    if (response.url) {
+        return response.url;
+    }
+    // stored as lowercase in the map
+    const xRequestUrl = X_REQUEST_URL_HEADER.toLocaleLowerCase();
+    return response.headers.get(xRequestUrl);
+}
+/**
+ * An internal injection token to reference `FetchBackend` implementation
+ * in a tree-shakable way.
+ */
+const FETCH_BACKEND = new InjectionToken(typeof ngDevMode === 'undefined' || ngDevMode ? 'FETCH_BACKEND' : '');
+/**
+ * Uses `fetch` to send requests to a backend server.
+ *
+ * This `FetchBackend` requires the support of the
+ * [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available on all
+ * supported browsers and on Node.js v18 or later.
+ *
+ * @see {@link HttpHandler}
+ *
+ * @publicApi
+ */
+class FetchBackend {
+    // We use an arrow function to always reference the current global implementation of `fetch`.
+    // This is helpful for cases when the global `fetch` implementation is modified by external code,
+    // see https://github.com/angular/angular/issues/57527.
+    fetchImpl = inject(FetchFactory, { optional: true })?.fetch ?? ((...args) => globalThis.fetch(...args));
+    ngZone = inject(NgZone);
+    destroyRef = inject(DestroyRef);
+    destroyed = false;
+    constructor() {
+        this.destroyRef.onDestroy(() => {
+            this.destroyed = true;
+        });
+    }
+    handle(request) {
+        return new Observable((observer) => {
+            const aborter = new AbortController();
+            this.doRequest(request, aborter.signal, observer).then(noop, (error) => observer.error(new HttpErrorResponse({ error })));
+            let timeoutId;
+            if (request.timeout) {
+                // TODO: Replace with AbortSignal.any([aborter.signal, AbortSignal.timeout(request.timeout)])
+                // when AbortSignal.any support is Baseline widely available (NET nov. 2026)
+                timeoutId = this.ngZone.runOutsideAngular(() => setTimeout(() => {
+                    if (!aborter.signal.aborted) {
+                        aborter.abort(new DOMException('signal timed out', 'TimeoutError'));
+                    }
+                }, request.timeout));
+            }
+            return () => {
+                if (timeoutId !== undefined) {
+                    clearTimeout(timeoutId);
+                }
+                aborter.abort();
+            };
+        });
+    }
+    async doRequest(request, signal, observer) {
+        const init = this.createRequestInit(request);
+        let response;
+        try {
+            // Run fetch outside of Angular zone.
+            // This is due to Node.js fetch implementation (Undici) which uses a number of setTimeouts to check if
+            // the response should eventually timeout which causes extra CD cycles every 500ms
+            const fetchPromise = this.ngZone.runOutsideAngular(() => this.fetchImpl(request.urlWithParams, { signal, ...init }));
+            // Make sure Zone.js doesn't trigger false-positive unhandled promise
+            // error in case the Promise is rejected synchronously. See function
+            // description for additional information.
+            silenceSuperfluousUnhandledPromiseRejection(fetchPromise);
+            // Send the `Sent` event before awaiting the response.
+            observer.next({ type: HttpEventType.Sent });
+            response = await fetchPromise;
+        }
+        catch (error) {
+            observer.error(new HttpErrorResponse({
+                error,
+                status: error.status ?? 0,
+                statusText: error.statusText,
+                url: request.urlWithParams,
+                headers: error.headers,
+            }));
+            return;
+        }
+        const headers = new HttpHeaders(response.headers);
+        const statusText = response.statusText;
+        const url = getResponseUrl$1(response) ?? request.urlWithParams;
+        let status = response.status;
+        let body = null;
+        if (request.reportProgress) {
+            observer.next(new HttpHeaderResponse({ headers, status, statusText, url }));
+        }
+        if (response.body) {
+            // Read Progress
+            const contentLength = response.headers.get('content-length');
+            const chunks = [];
+            const reader = response.body.getReader();
+            let receivedLength = 0;
+            let decoder;
+            let partialText;
+            // We have to check whether the Zone is defined in the global scope because this may be called
+            // when the zone is nooped.
+            const reqZone = typeof Zone !== 'undefined' && Zone.current;
+            let canceled = false;
+            // Perform response processing outside of Angular zone to
+            // ensure no excessive change detection runs are executed
+            // Here calling the async ReadableStreamDefaultReader.read() is responsible for triggering CD
+            await this.ngZone.runOutsideAngular(async () => {
+                while (true) {
+                    // Prevent reading chunks if the app is destroyed. Otherwise, we risk doing
+                    // unnecessary work or triggering side effects after teardown.
+                    // This may happen if the app was explicitly destroyed before
+                    // the response returned entirely.
+                    if (this.destroyed) {
+                        // Streams left in a pending state (due to `break` without cancel) may
+                        // continue consuming or holding onto data behind the scenes.
+                        // Calling `reader.cancel()` allows the browser or the underlying
+                        // system to release any network or memory resources associated with the stream.
+                        await reader.cancel();
+                        canceled = true;
+                        break;
+                    }
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        break;
+                    }
+                    chunks.push(value);
+                    receivedLength += value.length;
+                    if (request.reportProgress) {
+                        partialText =
+                            request.responseType === 'text'
+                                ? (partialText ?? '') +
+                                    (decoder ??= new TextDecoder()).decode(value, { stream: true })
+                                : undefined;
+                        const reportProgress = () => observer.next({
+                            type: HttpEventType.DownloadProgress,
+                            total: contentLength ? +contentLength : undefined,
+                            loaded: receivedLength,
+                            partialText,
+                        });
+                        reqZone ? reqZone.run(reportProgress) : reportProgress();
+                    }
+                }
+            });
+            // We need to manage the canceled state — because the Streams API does not
+            // expose a direct `.state` property on the reader.
+            // We need to `return` because `parseBody` may not be able to parse chunks
+            // that were only partially read (due to cancellation caused by app destruction).
+            if (canceled) {
+                observer.complete();
+                return;
+            }
+            // Combine all chunks.
+            const chunksAll = this.concatChunks(chunks, receivedLength);
+            try {
+                const contentType = response.headers.get(CONTENT_TYPE_HEADER) ?? '';
+                body = this.parseBody(request, chunksAll, contentType, status);
+            }
+            catch (error) {
+                // Body loading or parsing failed
+                observer.error(new HttpErrorResponse({
+                    error,
+                    headers: new HttpHeaders(response.headers),
+                    status: response.status,
+                    statusText: response.statusText,
+                    url: getResponseUrl$1(response) ?? request.urlWithParams,
+                }));
+                return;
+            }
+        }
+        // Same behavior as the XhrBackend
+        if (status === 0) {
+            status = body ? HTTP_STATUS_CODE_OK : 0;
+        }
+        // ok determines whether the response will be transmitted on the event or
+        // error channel. Unsuccessful status codes (not 2xx) will always be errors,
+        // but a successful status code can still result in an error if the user
+        // asked for JSON data and the body cannot be parsed as such.
+        const ok = status >= 200 && status < 300;
+        const redirected = response.redirected;
+        if (ok) {
+            observer.next(new HttpResponse({
+                body,
+                headers,
+                status,
+                statusText,
+                url,
+                redirected,
+            }));
+            // The full body has been received and delivered, no further events
+            // are possible. This request is complete.
+            observer.complete();
+        }
+        else {
+            observer.error(new HttpErrorResponse({
+                error: body,
+                headers,
+                status,
+                statusText,
+                url,
+                redirected,
+            }));
+        }
+    }
+    parseBody(request, binContent, contentType, status) {
+        switch (request.responseType) {
+            case 'json':
+                // stripping the XSSI when present
+                const text = new TextDecoder().decode(binContent).replace(XSSI_PREFIX$1, '');
+                if (text === '') {
+                    return null;
+                }
+                try {
+                    return JSON.parse(text);
+                }
+                catch (e) {
+                    // Allow handling non-JSON errors (!) as plain text, same as the XHR
+                    // backend. Without this special sauce, any non-JSON error would be
+                    // completely inaccessible downstream as the `HttpErrorResponse.error`
+                    // would be set to the `SyntaxError` from then failing `JSON.parse`.
+                    if (status < 200 || status >= 300) {
+                        return text;
+                    }
+                    throw e;
+                }
+            case 'text':
+                return new TextDecoder().decode(binContent);
+            case 'blob':
+                return new Blob([binContent], { type: contentType });
+            case 'arraybuffer':
+                return binContent.buffer;
+        }
+    }
+    createRequestInit(req) {
+        // We could share some of this logic with the XhrBackend
+        const headers = {};
+        let credentials;
+        // If the request has a credentials property, use it.
+        // Otherwise, if the request has withCredentials set to true, use 'include'.
+        credentials = req.credentials;
+        // If withCredentials is true should be set to 'include', for compatibility
+        if (req.withCredentials) {
+            // A warning is logged in development mode if the request has both
+            (typeof ngDevMode === 'undefined' || ngDevMode) && warningOptionsMessage(req);
+            credentials = 'include';
+        }
+        // Setting all the requested headers.
+        req.headers.forEach((name, values) => (headers[name] = values.join(',')));
+        // Add an Accept header if one isn't present already.
+        if (!req.headers.has(ACCEPT_HEADER)) {
+            headers[ACCEPT_HEADER] = ACCEPT_HEADER_VALUE;
+        }
+        // Auto-detect the Content-Type header if one isn't present already.
+        if (!req.headers.has(CONTENT_TYPE_HEADER)) {
+            const detectedType = req.detectContentTypeHeader();
+            // Sometimes Content-Type detection fails.
+            if (detectedType !== null) {
+                headers[CONTENT_TYPE_HEADER] = detectedType;
+            }
+        }
+        return {
+            body: req.serializeBody(),
+            method: req.method,
+            headers,
+            credentials,
+            keepalive: req.keepalive,
+            cache: req.cache,
+            priority: req.priority,
+            mode: req.mode,
+            redirect: req.redirect,
+            referrer: req.referrer,
+            integrity: req.integrity,
+        };
+    }
+    concatChunks(chunks, totalLength) {
+        const chunksAll = new Uint8Array(totalLength);
+        let position = 0;
+        for (const chunk of chunks) {
+            chunksAll.set(chunk, position);
+            position += chunk.length;
+        }
+        return chunksAll;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: FetchBackend, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [] });
+/**
+ * Abstract class to provide a mocked implementation of `fetch()`
+ */
+class FetchFactory {
+}
+function noop() { }
+function warningOptionsMessage(req) {
+    if (req.credentials && req.withCredentials) {
+        console.warn(_formatRuntimeError(2819 /* RuntimeErrorCode.WITH_CREDENTIALS_OVERRIDES_EXPLICIT_CREDENTIALS */, `Angular detected that a \`HttpClient\` request has both \`withCredentials: true\` and \`credentials: '${req.credentials}'\` options. The \`withCredentials\` option is overriding the explicit \`credentials\` setting to 'include'. Consider removing \`withCredentials\` and using \`credentials: '${req.credentials}'\` directly for clarity.`));
+    }
+}
+/**
+ * Zone.js treats a rejected promise that has not yet been awaited
+ * as an unhandled error. This function adds a noop `.then` to make
+ * sure that Zone.js doesn't throw an error if the Promise is rejected
+ * synchronously.
+ */
+function silenceSuperfluousUnhandledPromiseRejection(promise) {
+    promise.then(noop, noop);
+}
+
+function interceptorChainEndFn(req, finalHandlerFn) {
+    return finalHandlerFn(req);
+}
+/**
+ * Constructs a `ChainedInterceptorFn` which adapts a legacy `HttpInterceptor` to the
+ * `ChainedInterceptorFn` interface.
+ */
+function adaptLegacyInterceptorToChain(chainTailFn, interceptor) {
+    return (initialRequest, finalHandlerFn) => interceptor.intercept(initialRequest, {
+        handle: (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn),
+    });
+}
+/**
+ * Constructs a `ChainedInterceptorFn` which wraps and invokes a functional interceptor in the given
+ * injector.
+ */
+function chainedInterceptorFn(chainTailFn, interceptorFn, injector) {
+    return (initialRequest, finalHandlerFn) => runInInjectionContext(injector, () => interceptorFn(initialRequest, (downstreamRequest) => chainTailFn(downstreamRequest, finalHandlerFn)));
+}
+/**
+ * A multi-provider token that represents the array of registered
+ * `HttpInterceptor` objects.
+ *
+ * @publicApi
+ */
+const HTTP_INTERCEPTORS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTORS' : '');
+/**
+ * A multi-provided token of `HttpInterceptorFn`s.
+ */
+const HTTP_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_INTERCEPTOR_FNS' : '');
+/**
+ * A multi-provided token of `HttpInterceptorFn`s that are only set in root.
+ */
+const HTTP_ROOT_INTERCEPTOR_FNS = new InjectionToken(ngDevMode ? 'HTTP_ROOT_INTERCEPTOR_FNS' : '');
+// TODO(atscott): We need a larger discussion about stability and what should contribute to stability.
+// Should the whole interceptor chain contribute to stability or just the backend request #55075?
+// Should HttpClient contribute to stability automatically at all?
+const REQUESTS_CONTRIBUTE_TO_STABILITY = new InjectionToken(ngDevMode ? 'REQUESTS_CONTRIBUTE_TO_STABILITY' : '', { providedIn: 'root', factory: () => true });
+/**
+ * Creates an `HttpInterceptorFn` which lazily initializes an interceptor chain from the legacy
+ * class-based interceptors and runs the request through it.
+ */
+function legacyInterceptorFnFactory() {
+    let chain = null;
+    return (req, handler) => {
+        if (chain === null) {
+            const interceptors = inject(HTTP_INTERCEPTORS, { optional: true }) ?? [];
+            // Note: interceptors are wrapped right-to-left so that final execution order is
+            // left-to-right. That is, if `interceptors` is the array `[a, b, c]`, we want to
+            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
+            // out.
+            chain = interceptors.reduceRight(adaptLegacyInterceptorToChain, interceptorChainEndFn);
+        }
+        const pendingTasks = inject(PendingTasks);
+        const contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
+        if (contributeToStability) {
+            const removeTask = pendingTasks.add();
+            return chain(req, handler).pipe(finalize(removeTask));
+        }
+        else {
+            return chain(req, handler);
+        }
+    };
+}
+let fetchBackendWarningDisplayed = false;
+class HttpInterceptorHandler extends HttpHandler {
+    backend;
+    injector;
+    chain = null;
+    pendingTasks = inject(PendingTasks);
+    contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
+    constructor(backend, injector) {
+        super();
+        this.backend = backend;
+        this.injector = injector;
+        // We strongly recommend using fetch backend for HTTP calls when SSR is used
+        // for an application. The logic below checks if that's the case and produces
+        // a warning otherwise.
+        if ((typeof ngDevMode === 'undefined' || ngDevMode) && !fetchBackendWarningDisplayed) {
+            // This flag is necessary because provideHttpClientTesting() overrides the backend
+            // even if `withFetch()` is used within the test. When the testing HTTP backend is provided,
+            // no HTTP calls are actually performed during the test, so producing a warning would be
+            // misleading.
+            const isTestingBackend = this.backend.isTestingBackend;
+            if (typeof ngServerMode !== 'undefined' &&
+                ngServerMode &&
+                !(this.backend instanceof FetchBackend) &&
+                !isTestingBackend) {
+                fetchBackendWarningDisplayed = true;
+                injector
+                    .get(_Console)
+                    .warn(_formatRuntimeError(2801 /* RuntimeErrorCode.NOT_USING_FETCH_BACKEND_IN_SSR */, 'Angular detected that `HttpClient` is not configured ' +
+                    "to use `fetch` APIs. It's strongly recommended to " +
+                    'enable `fetch` for applications that use Server-Side Rendering ' +
+                    'for better performance and compatibility. ' +
+                    'To enable `fetch`, add the `withFetch()` to the `provideHttpClient()` ' +
+                    'call at the root of the application.'));
+            }
+        }
+    }
+    handle(initialRequest) {
+        if (this.chain === null) {
+            const dedupedInterceptorFns = Array.from(new Set([
+                ...this.injector.get(HTTP_INTERCEPTOR_FNS),
+                ...this.injector.get(HTTP_ROOT_INTERCEPTOR_FNS, []),
+            ]));
+            // Note: interceptors are wrapped right-to-left so that final execution order is
+            // left-to-right. That is, if `dedupedInterceptorFns` is the array `[a, b, c]`, we want to
+            // produce a chain that is conceptually `c(b(a(end)))`, which we build from the inside
+            // out.
+            this.chain = dedupedInterceptorFns.reduceRight((nextSequencedFn, interceptorFn) => chainedInterceptorFn(nextSequencedFn, interceptorFn, this.injector), interceptorChainEndFn);
+        }
+        if (this.contributeToStability) {
+            const removeTask = this.pendingTasks.add();
+            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest)).pipe(finalize(removeTask));
+        }
+        else {
+            return this.chain(initialRequest, (downstreamRequest) => this.backend.handle(downstreamRequest));
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler, deps: [{ token: HttpBackend }, { token: i0.EnvironmentInjector }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpInterceptorHandler, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: HttpBackend }, { type: i0.EnvironmentInjector }] });
 
 // Every request made through JSONP needs a callback name that's unique across the
 // whole page. Each request is assigned an id and the callback name is constructed
@@ -2733,9 +2377,362 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", 
             type: Injectable
         }], ctorParameters: () => [{ type: i0.EnvironmentInjector }] });
 
-const XSRF_ENABLED = new InjectionToken(ngDevMode ? 'XSRF_ENABLED' : '', {
-    factory: () => true,
-});
+const XSSI_PREFIX = /^\)\]\}',?\n/;
+const X_REQUEST_URL_REGEXP = RegExp(`^${X_REQUEST_URL_HEADER}:`, 'm');
+/**
+ * Determine an appropriate URL for the response, by checking either
+ * XMLHttpRequest.responseURL or the X-Request-URL header.
+ */
+function getResponseUrl(xhr) {
+    if ('responseURL' in xhr && xhr.responseURL) {
+        return xhr.responseURL;
+    }
+    if (X_REQUEST_URL_REGEXP.test(xhr.getAllResponseHeaders())) {
+        return xhr.getResponseHeader(X_REQUEST_URL_HEADER);
+    }
+    return null;
+}
+/**
+ * Validates whether the request is compatible with the XHR backend.
+ * Show a warning if the request contains options that are not supported by XHR.
+ */
+function validateXhrCompatibility(req) {
+    const unsupportedOptions = [
+        {
+            property: 'keepalive',
+            errorCode: 2813 /* RuntimeErrorCode.KEEPALIVE_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'cache',
+            errorCode: 2814 /* RuntimeErrorCode.CACHE_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'priority',
+            errorCode: 2815 /* RuntimeErrorCode.PRIORITY_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'mode',
+            errorCode: 2816 /* RuntimeErrorCode.MODE_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'redirect',
+            errorCode: 2817 /* RuntimeErrorCode.REDIRECT_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'credentials',
+            errorCode: 2818 /* RuntimeErrorCode.CREDENTIALS_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'integrity',
+            errorCode: 2820 /* RuntimeErrorCode.INTEGRITY_NOT_SUPPORTED_WITH_XHR */,
+        },
+        {
+            property: 'referrer',
+            errorCode: 2821 /* RuntimeErrorCode.REFERRER_NOT_SUPPORTED_WITH_XHR */,
+        },
+    ];
+    // Check each unsupported option and warn if present
+    for (const { property, errorCode } of unsupportedOptions) {
+        if (req[property]) {
+            console.warn(_formatRuntimeError(errorCode, `Angular detected that a \`HttpClient\` request with the \`${property}\` option was sent using XHR, which does not support it. To use the \`${property}\` option, enable Fetch API support by passing \`withFetch()\` as an argument to \`provideHttpClient()\`.`));
+        }
+    }
+}
+/**
+ * Uses `XMLHttpRequest` to send requests to a backend server.
+ * @see {@link HttpHandler}
+ * @see {@link JsonpClientBackend}
+ *
+ * @publicApi
+ */
+class HttpXhrBackend {
+    xhrFactory;
+    constructor(xhrFactory) {
+        this.xhrFactory = xhrFactory;
+    }
+    /**
+     * Processes a request and returns a stream of response events.
+     * @param req The request object.
+     * @returns An observable of the response events.
+     */
+    handle(req) {
+        // Quick check to give a better error message when a user attempts to use
+        // HttpClient.jsonp() without installing the HttpClientJsonpModule
+        if (req.method === 'JSONP') {
+            throw new _RuntimeError(-2800 /* RuntimeErrorCode.MISSING_JSONP_MODULE */, (typeof ngDevMode === 'undefined' || ngDevMode) &&
+                `Cannot make a JSONP request without JSONP support. To fix the problem, either add the \`withJsonpSupport()\` call (if \`provideHttpClient()\` is used) or import the \`HttpClientJsonpModule\` in the root NgModule.`);
+        }
+        // Validate that the request is compatible with the XHR backend.
+        ngDevMode && validateXhrCompatibility(req);
+        // Check whether this factory has a special function to load an XHR implementation
+        // for various non-browser environments. We currently limit it to only `ServerXhr`
+        // class, which needs to load an XHR implementation.
+        const xhrFactory = this.xhrFactory;
+        const source = 
+        // Note that `ɵloadImpl` is never defined in client bundles and can be
+        // safely dropped whenever we're running in the browser.
+        // This branching is redundant.
+        // The `ngServerMode` guard also enables tree-shaking of the `from()`
+        // function from the common bundle, as it's only used in server code.
+        typeof ngServerMode !== 'undefined' && ngServerMode && xhrFactory.ɵloadImpl
+            ? from(xhrFactory.ɵloadImpl())
+            : of(null);
+        return source.pipe(switchMap(() => {
+            // Everything happens on Observable subscription.
+            return new Observable((observer) => {
+                // Start by setting up the XHR object with request method, URL, and withCredentials
+                // flag.
+                const xhr = xhrFactory.build();
+                xhr.open(req.method, req.urlWithParams);
+                if (req.withCredentials) {
+                    xhr.withCredentials = true;
+                }
+                // Add all the requested headers.
+                req.headers.forEach((name, values) => xhr.setRequestHeader(name, values.join(',')));
+                // Add an Accept header if one isn't present already.
+                if (!req.headers.has(ACCEPT_HEADER)) {
+                    xhr.setRequestHeader(ACCEPT_HEADER, ACCEPT_HEADER_VALUE);
+                }
+                // Auto-detect the Content-Type header if one isn't present already.
+                if (!req.headers.has(CONTENT_TYPE_HEADER)) {
+                    const detectedType = req.detectContentTypeHeader();
+                    // Sometimes Content-Type detection fails.
+                    if (detectedType !== null) {
+                        xhr.setRequestHeader(CONTENT_TYPE_HEADER, detectedType);
+                    }
+                }
+                if (req.timeout) {
+                    xhr.timeout = req.timeout;
+                }
+                // Set the responseType if one was requested.
+                if (req.responseType) {
+                    const responseType = req.responseType.toLowerCase();
+                    // JSON responses need to be processed as text. This is because if the server
+                    // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
+                    // xhr.response will be null, and xhr.responseText cannot be accessed to
+                    // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
+                    // is parsed by first requesting text and then applying JSON.parse.
+                    xhr.responseType = (responseType !== 'json' ? responseType : 'text');
+                }
+                // Serialize the request body if one is present. If not, this will be set to null.
+                const reqBody = req.serializeBody();
+                // If progress events are enabled, response headers will be delivered
+                // in two events - the HttpHeaderResponse event and the full HttpResponse
+                // event. However, since response headers don't change in between these
+                // two events, it doesn't make sense to parse them twice. So headerResponse
+                // caches the data extracted from the response whenever it's first parsed,
+                // to ensure parsing isn't duplicated.
+                let headerResponse = null;
+                // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
+                // state, and memoizes it into headerResponse.
+                const partialFromXhr = () => {
+                    if (headerResponse !== null) {
+                        return headerResponse;
+                    }
+                    const statusText = xhr.statusText || 'OK';
+                    // Parse headers from XMLHttpRequest - this step is lazy.
+                    const headers = new HttpHeaders(xhr.getAllResponseHeaders());
+                    // Read the response URL from the XMLHttpResponse instance and fall back on the
+                    // request URL.
+                    const url = getResponseUrl(xhr) || req.url;
+                    // Construct the HttpHeaderResponse and memoize it.
+                    headerResponse = new HttpHeaderResponse({ headers, status: xhr.status, statusText, url });
+                    return headerResponse;
+                };
+                // Next, a few closures are defined for the various events which XMLHttpRequest can
+                // emit. This allows them to be unregistered as event listeners later.
+                // First up is the load event, which represents a response being fully available.
+                const onLoad = () => {
+                    // Read response state from the memoized partial data.
+                    let { headers, status, statusText, url } = partialFromXhr();
+                    // The body will be read out if present.
+                    let body = null;
+                    if (status !== HTTP_STATUS_CODE_NO_CONTENT) {
+                        // Use XMLHttpRequest.response if set, responseText otherwise.
+                        body = typeof xhr.response === 'undefined' ? xhr.responseText : xhr.response;
+                    }
+                    // Normalize another potential bug (this one comes from CORS).
+                    if (status === 0) {
+                        status = !!body ? HTTP_STATUS_CODE_OK : 0;
+                    }
+                    // ok determines whether the response will be transmitted on the event or
+                    // error channel. Unsuccessful status codes (not 2xx) will always be errors,
+                    // but a successful status code can still result in an error if the user
+                    // asked for JSON data and the body cannot be parsed as such.
+                    let ok = status >= 200 && status < 300;
+                    // Check whether the body needs to be parsed as JSON (in many cases the browser
+                    // will have done that already).
+                    if (req.responseType === 'json' && typeof body === 'string') {
+                        // Save the original body, before attempting XSSI prefix stripping.
+                        const originalBody = body;
+                        body = body.replace(XSSI_PREFIX, '');
+                        try {
+                            // Attempt the parse. If it fails, a parse error should be delivered to the
+                            // user.
+                            body = body !== '' ? JSON.parse(body) : null;
+                        }
+                        catch (error) {
+                            // Since the JSON.parse failed, it's reasonable to assume this might not have
+                            // been a JSON response. Restore the original body (including any XSSI prefix)
+                            // to deliver a better error response.
+                            body = originalBody;
+                            // If this was an error request to begin with, leave it as a string, it
+                            // probably just isn't JSON. Otherwise, deliver the parsing error to the user.
+                            if (ok) {
+                                // Even though the response status was 2xx, this is still an error.
+                                ok = false;
+                                // The parse error contains the text of the body that failed to parse.
+                                body = { error, text: body };
+                            }
+                        }
+                    }
+                    if (ok) {
+                        // A successful response is delivered on the event stream.
+                        observer.next(new HttpResponse({
+                            body,
+                            headers,
+                            status,
+                            statusText,
+                            url: url || undefined,
+                        }));
+                        // The full body has been received and delivered, no further events
+                        // are possible. This request is complete.
+                        observer.complete();
+                    }
+                    else {
+                        // An unsuccessful request is delivered on the error channel.
+                        observer.error(new HttpErrorResponse({
+                            // The error in this case is the response body (error from the server).
+                            error: body,
+                            headers,
+                            status,
+                            statusText,
+                            url: url || undefined,
+                        }));
+                    }
+                };
+                // The onError callback is called when something goes wrong at the network level.
+                // Connection timeout, DNS error, offline, etc. These are actual errors, and are
+                // transmitted on the error channel.
+                const onError = (error) => {
+                    const { url } = partialFromXhr();
+                    const res = new HttpErrorResponse({
+                        error,
+                        status: xhr.status || 0,
+                        statusText: xhr.statusText || 'Unknown Error',
+                        url: url || undefined,
+                    });
+                    observer.error(res);
+                };
+                let onTimeout = onError;
+                if (req.timeout) {
+                    onTimeout = (_) => {
+                        const { url } = partialFromXhr();
+                        const res = new HttpErrorResponse({
+                            error: new DOMException('Request timed out', 'TimeoutError'),
+                            status: xhr.status || 0,
+                            statusText: xhr.statusText || 'Request timeout',
+                            url: url || undefined,
+                        });
+                        observer.error(res);
+                    };
+                }
+                // The sentHeaders flag tracks whether the HttpResponseHeaders event
+                // has been sent on the stream. This is necessary to track if progress
+                // is enabled since the event will be sent on only the first download
+                // progress event.
+                let sentHeaders = false;
+                // The download progress event handler, which is only registered if
+                // progress events are enabled.
+                const onDownProgress = (event) => {
+                    // Send the HttpResponseHeaders event if it hasn't been sent already.
+                    if (!sentHeaders) {
+                        observer.next(partialFromXhr());
+                        sentHeaders = true;
+                    }
+                    // Start building the download progress event to deliver on the response
+                    // event stream.
+                    let progressEvent = {
+                        type: HttpEventType.DownloadProgress,
+                        loaded: event.loaded,
+                    };
+                    // Set the total number of bytes in the event if it's available.
+                    if (event.lengthComputable) {
+                        progressEvent.total = event.total;
+                    }
+                    // If the request was for text content and a partial response is
+                    // available on XMLHttpRequest, include it in the progress event
+                    // to allow for streaming reads.
+                    if (req.responseType === 'text' && !!xhr.responseText) {
+                        progressEvent.partialText = xhr.responseText;
+                    }
+                    // Finally, fire the event.
+                    observer.next(progressEvent);
+                };
+                // The upload progress event handler, which is only registered if
+                // progress events are enabled.
+                const onUpProgress = (event) => {
+                    // Upload progress events are simpler. Begin building the progress
+                    // event.
+                    let progress = {
+                        type: HttpEventType.UploadProgress,
+                        loaded: event.loaded,
+                    };
+                    // If the total number of bytes being uploaded is available, include
+                    // it.
+                    if (event.lengthComputable) {
+                        progress.total = event.total;
+                    }
+                    // Send the event.
+                    observer.next(progress);
+                };
+                // By default, register for load and error events.
+                xhr.addEventListener('load', onLoad);
+                xhr.addEventListener('error', onError);
+                xhr.addEventListener('timeout', onTimeout);
+                xhr.addEventListener('abort', onError);
+                // Progress events are only enabled if requested.
+                if (req.reportProgress) {
+                    // Download progress is always enabled if requested.
+                    xhr.addEventListener('progress', onDownProgress);
+                    // Upload progress depends on whether there is a body to upload.
+                    if (reqBody !== null && xhr.upload) {
+                        xhr.upload.addEventListener('progress', onUpProgress);
+                    }
+                }
+                // Fire the request, and notify the event stream that it was fired.
+                xhr.send(reqBody);
+                observer.next({ type: HttpEventType.Sent });
+                // This is the return from the Observable function, which is the
+                // request cancellation handler.
+                return () => {
+                    // On a cancellation, remove all registered event listeners.
+                    xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('abort', onError);
+                    xhr.removeEventListener('load', onLoad);
+                    xhr.removeEventListener('timeout', onTimeout);
+                    if (req.reportProgress) {
+                        xhr.removeEventListener('progress', onDownProgress);
+                        if (reqBody !== null && xhr.upload) {
+                            xhr.upload.removeEventListener('progress', onUpProgress);
+                        }
+                    }
+                    // Finally, abort the in-flight request.
+                    if (xhr.readyState !== xhr.DONE) {
+                        xhr.abort();
+                    }
+                };
+            });
+        }));
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend, deps: [{ token: XhrFactory }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXhrBackend, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: XhrFactory }] });
+
+const XSRF_ENABLED = new InjectionToken(ngDevMode ? 'XSRF_ENABLED' : '');
 const XSRF_DEFAULT_COOKIE_NAME = 'XSRF-TOKEN';
 const XSRF_COOKIE_NAME = new InjectionToken(ngDevMode ? 'XSRF_COOKIE_NAME' : '', {
     providedIn: 'root',
@@ -2746,6 +2743,13 @@ const XSRF_HEADER_NAME = new InjectionToken(ngDevMode ? 'XSRF_HEADER_NAME' : '',
     providedIn: 'root',
     factory: () => XSRF_DEFAULT_HEADER_NAME,
 });
+/**
+ * Retrieves the current XSRF token to use with the next outgoing request.
+ *
+ * @publicApi
+ */
+class HttpXsrfTokenExtractor {
+}
 /**
  * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
  */
@@ -2775,11 +2779,10 @@ class HttpXsrfCookieExtractor {
         return this.lastToken;
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfCookieExtractor, deps: [{ token: DOCUMENT }, { token: XSRF_COOKIE_NAME }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfCookieExtractor, providedIn: 'root' });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfCookieExtractor });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfCookieExtractor, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
+            type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
@@ -2787,19 +2790,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", 
                     type: Inject,
                     args: [XSRF_COOKIE_NAME]
                 }] }] });
-/**
- * Retrieves the current XSRF token to use with the next outgoing request.
- *
- * @publicApi
- */
-class HttpXsrfTokenExtractor {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfTokenExtractor, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfTokenExtractor, providedIn: 'root', useExisting: HttpXsrfCookieExtractor });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.2.0-next.2", ngImport: i0, type: HttpXsrfTokenExtractor, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root', useExisting: HttpXsrfCookieExtractor }]
-        }] });
 function xsrfInterceptorFn(req, next) {
     const lcUrl = req.url.toLowerCase();
     // Skip both non-mutating requests and absolute URLs.
@@ -2901,6 +2891,7 @@ function provideHttpClient(...features) {
     }
     const providers = [
         HttpClient,
+        HttpXhrBackend,
         HttpInterceptorHandler,
         { provide: HttpHandler, useExisting: HttpInterceptorHandler },
         {
@@ -2914,6 +2905,8 @@ function provideHttpClient(...features) {
             useValue: xsrfInterceptorFn,
             multi: true,
         },
+        { provide: XSRF_ENABLED, useValue: true },
+        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
     ];
     for (const feature of features) {
         providers.push(...feature.ɵproviders);

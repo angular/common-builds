@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.2+sha-8401f89
+ * @license Angular v20.3.0-next.0+sha-11a54d1
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8,35 +8,9 @@ import { Observable } from 'rxjs';
 import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from '../module.d.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from '../module.d.js';
 import * as i0 from '@angular/core';
-import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
+import { InjectionToken, EnvironmentInjector, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
 import { XhrFactory } from '../xhr.d.js';
 
-/**
- * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
- *
- * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
- *
- * When injected, `HttpBackend` dispatches requests directly to the backend, without going
- * through the interceptor chain.
- *
- * @publicApi
- */
-declare abstract class HttpBackend implements HttpHandler {
-    abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDeclaration<HttpBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpBackend>;
-}
-declare class HttpInterceptorHandler implements HttpHandler {
-    private backend;
-    private injector;
-    private chain;
-    private readonly pendingTasks;
-    private readonly contributeToStability;
-    constructor(backend: HttpBackend, injector: EnvironmentInjector);
-    handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpInterceptorHandler>;
-}
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
  * `HttpResponse`.
@@ -51,8 +25,19 @@ declare class HttpInterceptorHandler implements HttpHandler {
  */
 declare abstract class HttpHandler {
     abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
-    static ɵfac: i0.ɵɵFactoryDeclaration<HttpHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpHandler>;
+}
+/**
+ * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
+ *
+ * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
+ *
+ * When injected, `HttpBackend` dispatches requests directly to the backend, without going
+ * through the interceptor chain.
+ *
+ * @publicApi
+ */
+declare abstract class HttpBackend implements HttpHandler {
+    abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
 
 /**
@@ -3895,6 +3880,17 @@ declare const HTTP_INTERCEPTORS: InjectionToken<readonly HttpInterceptor[]>;
  */
 declare const HTTP_ROOT_INTERCEPTOR_FNS: InjectionToken<readonly HttpInterceptorFn[]>;
 declare const REQUESTS_CONTRIBUTE_TO_STABILITY: InjectionToken<boolean>;
+declare class HttpInterceptorHandler extends HttpHandler {
+    private backend;
+    private injector;
+    private chain;
+    private readonly pendingTasks;
+    private readonly contributeToStability;
+    constructor(backend: HttpBackend, injector: EnvironmentInjector);
+    handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<HttpInterceptorHandler>;
+}
 
 /**
  * DI token/abstract type representing a map of JSONP callbacks.
@@ -4472,9 +4468,7 @@ declare abstract class HttpXsrfTokenExtractor {
      * Will be called for every request, so the token may change between requests.
      */
     abstract getToken(): string | null;
-    static ɵfac: i0.ɵɵFactoryDeclaration<HttpXsrfTokenExtractor, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
 }
 
-export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
+export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, HttpInterceptorHandler as ɵHttpInterceptorHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
 export type { HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };

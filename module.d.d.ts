@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.2+sha-8401f89
+ * @license Angular v20.3.0-next.0+sha-11a54d1
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -786,20 +786,6 @@ declare abstract class HttpResponseBase {
      */
     readonly redirected?: boolean;
     /**
-     * Indicates the type of the HTTP response, based on how the request was made and how the browser handles the response.
-     *
-     * This corresponds to the `type` property of the Fetch API's `Response` object, which can indicate values such as:
-     * - `'basic'`: A same-origin response, allowing full access to the body and headers.
-     * - `'cors'`: A cross-origin response with CORS enabled, exposing only safe response headers.
-     * - `'opaque'`: A cross-origin response made with `no-cors`, where the response body and headers are inaccessible.
-     * - `'opaqueredirect'`: A response resulting from a redirect followed in `no-cors` mode.
-     * - `'error'`: A response representing a network error or similar failure.
-     *
-     * This property is only available when using the Fetch-based backend (via `withFetch()`).
-     * When using Angular's (XHR) backend, this value will be `undefined`.
-     */
-    readonly responseType?: ResponseType;
-    /**
      * Super-constructor for all responses.
      *
      * The single parameter accepted is an initialization hash. Any properties
@@ -811,7 +797,6 @@ declare abstract class HttpResponseBase {
         statusText?: string;
         url?: string;
         redirected?: boolean;
-        responseType?: ResponseType;
     }, defaultStatus?: number, defaultStatusText?: string);
 }
 /**
@@ -869,7 +854,6 @@ declare class HttpResponse<T> extends HttpResponseBase {
         statusText?: string;
         url?: string;
         redirected?: boolean;
-        responseType?: ResponseType;
     });
     readonly type: HttpEventType.Response;
     clone(): HttpResponse<T>;
@@ -879,7 +863,6 @@ declare class HttpResponse<T> extends HttpResponseBase {
         statusText?: string;
         url?: string;
         redirected?: boolean;
-        responseType?: ResponseType;
     }): HttpResponse<T>;
     clone<V>(update: {
         body?: V | null;
@@ -888,7 +871,6 @@ declare class HttpResponse<T> extends HttpResponseBase {
         statusText?: string;
         url?: string;
         redirected?: boolean;
-        responseType?: ResponseType;
     }): HttpResponse<V>;
 }
 /**
@@ -919,7 +901,6 @@ declare class HttpErrorResponse extends HttpResponseBase implements Error {
         statusText?: string;
         url?: string;
         redirected?: boolean;
-        responseType?: ResponseType;
     });
 }
 /**
