@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.3+sha-94a0880
+ * @license Angular v21.0.0-next.3+sha-7a4b225
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -446,7 +446,7 @@ declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestro
     ngComponentOutletInputs?: Record<string, unknown>;
     ngComponentOutletInjector?: Injector;
     ngComponentOutletEnvironmentInjector?: EnvironmentInjector;
-    ngComponentOutletContent?: any[][];
+    ngComponentOutletContent?: Node[][];
     ngComponentOutletNgModule?: Type<any>;
     private _componentRef;
     private _moduleRef;
