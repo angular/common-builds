@@ -45,10 +45,10 @@ export class I18nPluralPipe {
         const key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13+sha-1d86de1", ngImport: i0, type: I18nPluralPipe, deps: [{ token: i1.NgLocalization }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.13+sha-1d86de1", ngImport: i0, type: I18nPluralPipe, isStandalone: true, name: "i18nPlural" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.14+sha-98db109", ngImport: i0, type: I18nPluralPipe, deps: [{ token: i1.NgLocalization }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.14+sha-98db109", ngImport: i0, type: I18nPluralPipe, isStandalone: true, name: "i18nPlural" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13+sha-1d86de1", ngImport: i0, type: I18nPluralPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.14+sha-98db109", ngImport: i0, type: I18nPluralPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'i18nPlural',
