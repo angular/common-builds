@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.3+sha-d2163f3
+ * @license Angular v21.0.0-next.3+sha-cfe0f03
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -386,8 +386,7 @@ function appendMissingHeadersDetection(url, headers, headersToInclude) {
                 if (!headersToInclude.includes(headerName) && !warningProduced.has(key)) {
                     warningProduced.add(key);
                     const truncatedUrl = _truncateMiddle(url);
-                    // TODO: create Error guide for this warning
-                    console.warn(_formatRuntimeError(2802 /* RuntimeErrorCode.HEADERS_ALTERED_BY_TRANSFER_CACHE */, `Angular detected that the \`${headerName}\` header is accessed, but the value of the header ` +
+                    console.warn(_formatRuntimeError(-2802 /* RuntimeErrorCode.HEADERS_ALTERED_BY_TRANSFER_CACHE */, `Angular detected that the \`${headerName}\` header is accessed, but the value of the header ` +
                         `was not transferred from the server to the client by the HttpTransferCache. ` +
                         `To include the value of the \`${headerName}\` header for the \`${truncatedUrl}\` request, ` +
                         `use the \`includeHeaders\` list. The \`includeHeaders\` can be defined either ` +
