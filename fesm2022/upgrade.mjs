@@ -1,15 +1,15 @@
 /**
- * @license Angular v21.0.0-next.3+sha-d53ac26
+ * @license Angular v21.0.0-next.3+sha-6d5c45d
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵisPromise as _isPromise, InjectionToken, Inject, Optional, NgModule } from '@angular/core';
+import { ɵisPromise as _isPromise, InjectionToken, NgModule, inject } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Location, PlatformLocation, LocationStrategy, APP_BASE_HREF, PathLocationStrategy } from './location.mjs';
 import { CommonModule, HashLocationStrategy } from './common_module.mjs';
+import { Location, LocationStrategy, APP_BASE_HREF, PlatformLocation, PathLocationStrategy } from './location.mjs';
 
 function deepEqual(a, b) {
     if (a === b) {
@@ -847,32 +847,31 @@ class LocationUpgradeModule {
                 {
                     provide: $locationShim,
                     useFactory: provide$location,
-                    deps: [UpgradeModule, Location, PlatformLocation, UrlCodec, LocationStrategy],
                 },
                 { provide: LOCATION_UPGRADE_CONFIGURATION, useValue: config ? config : {} },
-                { provide: UrlCodec, useFactory: provideUrlCodec, deps: [LOCATION_UPGRADE_CONFIGURATION] },
+                { provide: UrlCodec, useFactory: provideUrlCodec },
                 {
                     provide: APP_BASE_HREF_RESOLVED,
                     useFactory: provideAppBaseHref,
-                    deps: [LOCATION_UPGRADE_CONFIGURATION, [new Inject(APP_BASE_HREF), new Optional()]],
                 },
                 {
                     provide: LocationStrategy,
                     useFactory: provideLocationStrategy,
-                    deps: [PlatformLocation, APP_BASE_HREF_RESOLVED, LOCATION_UPGRADE_CONFIGURATION],
                 },
             ],
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-d53ac26", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.3+sha-d53ac26", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-d53ac26", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-6d5c45d", ngImport: i0, type: LocationUpgradeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "21.0.0-next.3+sha-6d5c45d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-6d5c45d", ngImport: i0, type: LocationUpgradeModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-d53ac26", ngImport: i0, type: LocationUpgradeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.0.0-next.3+sha-6d5c45d", ngImport: i0, type: LocationUpgradeModule, decorators: [{
             type: NgModule,
             args: [{ imports: [CommonModule] }]
         }] });
-function provideAppBaseHref(config, appBaseHref) {
+function provideAppBaseHref() {
+    const config = inject(LOCATION_UPGRADE_CONFIGURATION);
+    const appBaseHref = inject(APP_BASE_HREF, { optional: true });
     if (config && config.appBaseHref != null) {
         return config.appBaseHref;
     }
@@ -881,17 +880,21 @@ function provideAppBaseHref(config, appBaseHref) {
     }
     return '';
 }
-function provideUrlCodec(config) {
+function provideUrlCodec() {
+    const config = inject(LOCATION_UPGRADE_CONFIGURATION);
     const codec = (config && config.urlCodec) || AngularJSUrlCodec;
     return new codec();
 }
-function provideLocationStrategy(platformLocation, baseHref, options = {}) {
+function provideLocationStrategy() {
+    const platformLocation = inject(PlatformLocation);
+    const baseHref = inject(APP_BASE_HREF_RESOLVED);
+    const options = inject(LOCATION_UPGRADE_CONFIGURATION);
     return options.useHash
         ? new HashLocationStrategy(platformLocation, baseHref)
         : new PathLocationStrategy(platformLocation, baseHref);
 }
-function provide$location(ngUpgrade, location, platformLocation, urlCodec, locationStrategy) {
-    const $locationProvider = new $locationShimProvider(ngUpgrade, location, platformLocation, urlCodec, locationStrategy);
+function provide$location() {
+    const $locationProvider = new $locationShimProvider(inject(UpgradeModule), inject(Location), inject(PlatformLocation), inject(UrlCodec), inject(LocationStrategy));
     return $locationProvider.$get();
 }
 
