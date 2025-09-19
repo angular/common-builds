@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.4+sha-56cb093
+ * @license Angular v21.0.0-next.4+sha-40ae5af
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -175,7 +175,7 @@ class HttpResourceImpl extends _ResourceImpl {
  *
  * @publicApi
  */
-const HTTP_TRANSFER_CACHE_ORIGIN_MAP = new InjectionToken(ngDevMode ? 'HTTP_TRANSFER_CACHE_ORIGIN_MAP' : '');
+const HTTP_TRANSFER_CACHE_ORIGIN_MAP = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'HTTP_TRANSFER_CACHE_ORIGIN_MAP' : '');
 /**
  * Keys within cached response data structure.
  */
@@ -185,7 +185,7 @@ const STATUS = 's';
 const STATUS_TEXT = 'st';
 const REQ_URL = 'u';
 const RESPONSE_TYPE = 'rt';
-const CACHE_OPTIONS = new InjectionToken(ngDevMode ? 'HTTP_TRANSFER_STATE_CACHE_OPTIONS' : '');
+const CACHE_OPTIONS = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'HTTP_TRANSFER_STATE_CACHE_OPTIONS' : '');
 /**
  * A list of allowed HTTP methods to cache.
  */
