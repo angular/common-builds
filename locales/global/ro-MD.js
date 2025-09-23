@@ -17,7 +17,7 @@ const n = val, i = Math.floor(Math.abs(val)), v = val.toString().replace(/^[^.]*
 
 if (i === 1 && v === 0)
     return 1;
-if (!(v === 0) || (n === 0 || n % 100 === Math.floor(n % 100) && (n % 100 >= 2 && n % 100 <= 19)))
+if (!(v === 0) || (n === 0 || !(n === 1) && (n % 100 === Math.floor(n % 100) && (n % 100 >= 1 && n % 100 <= 19))))
     return 3;
 return 5;
 }
