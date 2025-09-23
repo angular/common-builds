@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.4+sha-3d1e8fa
+ * @license Angular v21.0.0-next.4+sha-50d9d55
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -4243,7 +4243,8 @@ interface HttpResourceRef<T> extends WritableResource<T>, ResourceRef<T> {
      * Signal of the latest progress update, if the request was made with `reportProgress: true`.
      */
     readonly progress: Signal<HttpProgressEvent | undefined>;
-    hasValue(): this is HttpResourceRef<Exclude<T, undefined>>;
+    hasValue(this: T extends undefined ? this : never): this is HttpResourceRef<Exclude<T, undefined>>;
+    hasValue(): boolean;
     destroy(): void;
 }
 
