@@ -12,7 +12,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     BYN: (string | undefined)[];
     CAD: (string | undefined)[];
     CNY: (string | undefined)[];
-    EGP: (string | undefined)[];
+    EGP: never[];
     ESP: string[];
     GBP: (string | undefined)[];
     HKD: (string | undefined)[];

@@ -23,10 +23,10 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     RON: (string | undefined)[];
     RUR: (string | undefined)[];
     RWF: (string | undefined)[];
-    SYP: (string | undefined)[];
+    SYP: never[];
     THB: string[];
     TWD: string[];
     XXX: never[];
     ZMW: (string | undefined)[];
-} | undefined)[];
+})[];
 export default _default;
