@@ -1,15 +1,15 @@
 /**
- * @license Angular v21.0.0-next.5+sha-377d1a0
+ * @license Angular v21.0.0-next.5+sha-fc643c9
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpHeaders, HttpParams, HttpRequest, HttpEventType, HttpErrorResponse, HttpClient, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module.mjs';
-export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module.mjs';
+import { HttpHeaders, HttpParams, HttpRequest, HttpEventType, HttpErrorResponse, HttpClient, HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse } from './module-Bbg6Z7XQ.mjs';
+export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './module-Bbg6Z7XQ.mjs';
 import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, ɵencapsulateResourceError as _encapsulateResourceError, ɵRuntimeError as _RuntimeError, InjectionToken, ɵperformanceMarkFeature as _performanceMarkFeature, APP_BOOTSTRAP_LISTENER, ApplicationRef, TransferState, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import './xhr.mjs';
+import './xhr-CEmSPUGj.mjs';
 
 /**
  * `httpResource` makes a reactive HTTP request and exposes the request status and response value as
