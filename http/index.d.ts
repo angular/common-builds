@@ -1,15 +1,15 @@
 /**
- * @license Angular v21.0.0-next.5+sha-768a09d
+ * @license Angular v21.0.0-next.5+sha-78cee8e
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { Observable } from 'rxjs';
-import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from '../module.d.js';
-export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from '../module.d.js';
+import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from '../module.js';
+export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from '../module.js';
 import * as i0 from '@angular/core';
 import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
-import { XhrFactory } from '../xhr.d.js';
+import { XhrFactory } from '../xhr.js';
 
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
