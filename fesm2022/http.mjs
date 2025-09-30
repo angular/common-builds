@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.2+sha-8e80083
+ * @license Angular v20.3.2+sha-612ce99
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -71,18 +71,21 @@ function normalizeRequest(request, responseType) {
 }
 class HttpResourceImpl extends _ResourceImpl {
     client;
-    _headers = linkedSignal({
-        source: this.extRequest,
-        computation: () => undefined,
-    });
-    _progress = linkedSignal({
-        source: this.extRequest,
-        computation: () => undefined,
-    });
-    _statusCode = linkedSignal({
-        source: this.extRequest,
-        computation: () => undefined,
-    });
+    _headers = linkedSignal(...(ngDevMode ? [{ debugName: "_headers", source: this.extRequest,
+            computation: () => undefined }] : [{
+            source: this.extRequest,
+            computation: () => undefined,
+        }]));
+    _progress = linkedSignal(...(ngDevMode ? [{ debugName: "_progress", source: this.extRequest,
+            computation: () => undefined }] : [{
+            source: this.extRequest,
+            computation: () => undefined,
+        }]));
+    _statusCode = linkedSignal(...(ngDevMode ? [{ debugName: "_statusCode", source: this.extRequest,
+            computation: () => undefined }] : [{
+            source: this.extRequest,
+            computation: () => undefined,
+        }]));
     headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, ...(ngDevMode ? [{ debugName: "headers" }] : []));
     progress = this._progress.asReadonly();
     statusCode = this._statusCode.asReadonly();
