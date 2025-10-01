@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "21.0.0-next.5+sha-51a0b59",
+  "version": "21.0.0-next.5+sha-2f6caef",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -31,8 +31,8 @@
       "default": "./fesm2022/http.mjs"
     },
     "./http/testing": {
-      "types": "./types/http/testing.d.ts",
-      "default": "./fesm2022/http/testing.mjs"
+      "types": "./types/http-testing.d.ts",
+      "default": "./fesm2022/http-testing.mjs"
     },
     "./testing": {
       "types": "./types/testing.d.ts",
@@ -44,7 +44,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "21.0.0-next.5+sha-51a0b59",
+    "@angular/core": "21.0.0-next.5+sha-2f6caef",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {

@@ -1,15 +1,15 @@
 /**
- * @license Angular v21.0.0-next.5+sha-51a0b59
+ * @license Angular v21.0.0-next.5+sha-2f6caef
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
 import { Observable } from 'rxjs';
-import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from './module.d-BWnQRvZX.js';
-export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './module.d-BWnQRvZX.js';
+import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from './_module-chunk.js';
+export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import * as i0 from '@angular/core';
 import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
-import { XhrFactory } from './xhr.d-D_1kTQR5.js';
+import { XhrFactory } from './_xhr-chunk.js';
 
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.

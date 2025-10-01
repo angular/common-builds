@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.5+sha-51a0b59
+ * @license Angular v21.0.0-next.5+sha-2f6caef
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,7 +7,7 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, OnDestroy, DoCheck, ElementRef, Renderer2, OnChanges, Type, Injector, EnvironmentInjector, ViewContainerRef, SimpleChanges, NgIterable, TrackByFunction, TemplateRef, IterableDiffers, KeyValueDiffers, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { SubscriptionLike, Observable, Subscribable } from 'rxjs';
-import { LocationChangeListener, PlatformLocation } from './platform_location.d-Lbv6Ueec.js';
+import { LocationChangeListener, PlatformLocation } from './_platform_location-chunk.js';
 
 /**
  * Enables the `Location` service to read route state from the browser's URL.

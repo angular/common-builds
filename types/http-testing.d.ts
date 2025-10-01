@@ -1,10 +1,10 @@
 /**
- * @license Angular v21.0.0-next.5+sha-51a0b59
+ * @license Angular v21.0.0-next.5+sha-2f6caef
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
 
-import { HttpRequest, HttpEvent, HttpHeaders, HttpClientModule } from '../module.d-BWnQRvZX.js';
+import { HttpRequest, HttpEvent, HttpHeaders, HttpClientModule } from './_module-chunk.js';
 import { Observer } from 'rxjs';
 import * as i0 from '@angular/core';
 import { Provider } from '@angular/core';
