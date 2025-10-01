@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.5+sha-1b102c2
+ * @license Angular v21.0.0-next.5+sha-0537083
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1942,7 +1942,6 @@ declare class KeyValuePipe implements PipeTransform {
     transform<K, V>(input: ReadonlyMap<K, V> | null | undefined, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>> | null;
     transform<K extends number, V>(input: Record<K, V> | null | undefined, compareFn?: ((a: KeyValue<string, V>, b: KeyValue<string, V>) => number) | null): Array<KeyValue<string, V>> | null;
     transform<K extends string, V>(input: Record<K, V> | ReadonlyMap<K, V> | null | undefined, compareFn?: ((a: KeyValue<K, V>, b: KeyValue<K, V>) => number) | null): Array<KeyValue<K, V>> | null;
-    transform<T, K extends keyof T>(input: T, compareFn?: (a: T[K], b: T[K]) => number): T extends null ? null : Array<T[K]>;
     static ɵfac: i0.ɵɵFactoryDeclaration<KeyValuePipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<KeyValuePipe, "keyvalue", true>;
 }
