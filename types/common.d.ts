@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.5+sha-159be56
+ * @license Angular v21.0.0-next.5+sha-99c5269
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -7,8 +7,8 @@
 import * as i0 from '@angular/core';
 import { OnDestroy, ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, Version, Provider, InjectionToken, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
-import { LocationStrategy } from './common_module.d-G59qThBh.js';
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, Location, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './common_module.d-G59qThBh.js';
+import { LocationStrategy } from './common_module.d-DB4VzbsP.js';
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, Location, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './common_module.d-DB4VzbsP.js';
 import { PlatformLocation, LocationChangeListener } from './platform_location.d-Lbv6Ueec.js';
 export { BrowserPlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent } from './platform_location.d-Lbv6Ueec.js';
 export { XhrFactory } from './xhr.d-D_1kTQR5.js';
