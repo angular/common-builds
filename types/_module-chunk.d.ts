@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.6+sha-6169fa5
+ * @license Angular v21.0.0-next.6+sha-50866b6
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -765,6 +765,8 @@ declare abstract class HttpResponseBase {
      * Textual description of response status code, defaults to OK.
      *
      * Do not depend on this.
+     *
+     * @deprecated With HTTP/2 and later versions, this will incorrectly remain set to 'OK' even when the status code of a response is not 200.
      */
     readonly statusText: string;
     /**
