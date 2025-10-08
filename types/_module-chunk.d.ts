@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.6+sha-b49db16
+ * @license Angular v21.0.0-next.6+sha-5cbdefc
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -415,6 +415,11 @@ declare class HttpRequest<T> {
      */
     readonly integrity: string;
     /**
+     * The referrer policy of the request, which can be used to specify the referrer information to be included with the request.
+     * This can affect the amount of referrer information sent with the request, and can be used to enhance privacy and security.
+     */
+    readonly referrerPolicy: ReferrerPolicy;
+    /**
      * The expected response type of the server.
      *
      * This is used to parse the response appropriately before returning it to
@@ -465,6 +470,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -494,6 +500,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
     });
     constructor(method: 'POST', url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -510,6 +517,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -539,6 +547,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
     });
     constructor(method: string, url: string, body: T | null, init?: {
         headers?: HttpHeaders;
@@ -555,6 +564,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
         /**
          * This property accepts either a boolean to enable/disable transferring cache for eligible
          * requests performed using `HttpClient`, or an object, which allows to configure cache
@@ -596,6 +606,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
         transferCache?: {
             includeHeaders?: string[];
         } | boolean;
@@ -623,6 +634,7 @@ declare class HttpRequest<T> {
         redirect?: RequestRedirect;
         referrer?: string;
         integrity?: string;
+        referrerPolicy?: ReferrerPolicy;
         withCredentials?: boolean;
         credentials?: RequestCredentials;
         transferCache?: {
