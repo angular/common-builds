@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.7+sha-09a927a
+ * @license Angular v21.0.0-next.7+sha-eee8eab
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4292,6 +4292,11 @@ interface HttpResourceRequest {
      * Value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
      */
     referrer?: string;
+    /**
+     * The referrer policy of the request, which can be used to specify the referrer information to be included with the request.
+     * This can affect the amount of referrer information sent with the request, and can be used to enhance privacy and security.
+     */
+    referrerPolicy?: ReferrerPolicy | (string & {});
     /**
      * The integrity metadata of the request, which can be used to ensure the request is made with the expected content.
      * A cryptographic hash of the resource to be fetched by request
