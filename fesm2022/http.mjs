@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.4+sha-c2e817b
+ * @license Angular v20.3.4+sha-5f4f624
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -33,7 +33,7 @@ function makeHttpResourceFn(responseType) {
             assertInInjectionContext(httpResource);
         }
         const injector = options?.injector ?? inject(Injector);
-        return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.debugName, options?.parse, options?.equal);
+        return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.parse, options?.equal);
     };
 }
 function normalizeRequest(request, responseType) {
@@ -89,7 +89,7 @@ class HttpResourceImpl extends _ResourceImpl {
     headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, ...(ngDevMode ? [{ debugName: "headers" }] : []));
     progress = this._progress.asReadonly();
     statusCode = this._statusCode.asReadonly();
-    constructor(injector, request, defaultValue, debugName, parse, equal) {
+    constructor(injector, request, defaultValue, parse, equal) {
         super(request, ({ params: request, abortSignal }) => {
             let sub;
             // Track the abort listener so it can be removed if the Observable completes (as a memory
@@ -141,7 +141,7 @@ class HttpResourceImpl extends _ResourceImpl {
                 },
             });
             return promise;
-        }, defaultValue, equal, debugName, injector);
+        }, defaultValue, equal, injector);
         this.client = injector.get(HttpClient);
     }
     set(value) {
