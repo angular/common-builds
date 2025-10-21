@@ -12,7 +12,6 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     CNY: string[];
     ILR: string[];
     JPY: string[];
-    KRW: string[];
     PHP: (string | undefined)[];
     RUR: (string | undefined)[];
     TWD: string[];

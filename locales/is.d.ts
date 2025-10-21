@@ -10,14 +10,18 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     AUD: (string | undefined)[];
     BRL: (string | undefined)[];
     CAD: (string | undefined)[];
+    DKK: (string | undefined)[];
     EUR: (string | undefined)[];
     GBP: (string | undefined)[];
     INR: (string | undefined)[];
+    ISK: string[];
     JPY: string[];
     KRW: (string | undefined)[];
     MXN: (string | undefined)[];
+    NOK: (string | undefined)[];
     NZD: (string | undefined)[];
     PHP: (string | undefined)[];
+    SEK: (string | undefined)[];
     TWD: (string | undefined)[];
     USD: (string | undefined)[];
     VND: (string | undefined)[];

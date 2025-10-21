@@ -11,7 +11,9 @@ function plural(val) {
     const n = val;
     if (n === 1)
         return 1;
-    if (n === 0 || n % 100 === Math.floor(n % 100) && (n % 100 >= 2 && n % 100 <= 10))
+    if (n === 2)
+        return 2;
+    if (n === 0 || n % 100 === Math.floor(n % 100) && (n % 100 >= 3 && n % 100 <= 10))
         return 3;
     if (n % 100 === Math.floor(n % 100) && (n % 100 >= 11 && n % 100 <= 19))
         return 4;

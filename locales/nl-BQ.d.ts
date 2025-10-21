@@ -17,6 +17,7 @@ declare const _default: (string | number | number[] | (string | undefined)[] | t
     SBD: string[];
     THB: string[];
     TWD: string[];
+    XCG: string[];
     XPF: never[];
     XXX: never[];
 } | undefined)[];
