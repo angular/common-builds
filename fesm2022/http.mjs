@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.7+sha-6daabb0
+ * @license Angular v20.3.7+sha-14b5590
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -339,6 +339,8 @@ function generateHash(value) {
  * When these providers are added, requests performed on the server are cached and reused during the
  * bootstrapping of the application in the browser thus avoiding duplicate requests and reducing
  * load time.
+ *
+ * @see [Caching data when using HttpClient](guide/ssr#configuring-the-caching-options)
  *
  */
 function withHttpTransferCache(cacheOptions) {
