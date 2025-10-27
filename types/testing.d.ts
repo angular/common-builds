@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-b5f8d0b
+ * @license Angular v21.1.0-next.0+sha-25e8bcb
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -7,73 +7,14 @@
 import * as i0 from '@angular/core';
 import { Provider, InjectionToken } from '@angular/core';
 export { ɵFakeNavigation } from '@angular/core/testing';
+import { PlatformLocation, LocationChangeListener } from './_platform_location-chunk.js';
 import { Location, LocationStrategy } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
-import { PlatformLocation, LocationChangeListener } from './_platform_location-chunk.js';
 
 /**
  * Return a provider for the `FakeNavigation` in place of the real Navigation API.
  */
 declare function provideFakePlatformNavigation(): Provider[];
-
-/**
- * A spy for {@link Location} that allows tests to fire simulated location events.
- *
- * @publicApi
- */
-declare class SpyLocation implements Location {
-    urlChanges: string[];
-    private _history;
-    private _historyIndex;
-    /** @docs-private */
-    ngOnDestroy(): void;
-    setInitialPath(url: string): void;
-    setBaseHref(url: string): void;
-    path(): string;
-    getState(): unknown;
-    isCurrentPathEqualTo(path: string, query?: string): boolean;
-    simulateUrlPop(pathname: string): void;
-    simulateHashChange(pathname: string): void;
-    prepareExternalUrl(url: string): string;
-    go(path: string, query?: string, state?: any): void;
-    replaceState(path: string, query?: string, state?: any): void;
-    forward(): void;
-    back(): void;
-    historyGo(relativePosition?: number): void;
-    onUrlChange(fn: (url: string, state: unknown) => void): VoidFunction;
-    subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
-    normalize(url: string): string;
-    private pushHistory;
-    static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
-}
-
-/**
- * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
- * location events.
- *
- * @publicApi
- */
-declare class MockLocationStrategy extends LocationStrategy {
-    internalBaseHref: string;
-    internalPath: string;
-    internalTitle: string;
-    urlChanges: string[];
-    private stateChanges;
-    constructor();
-    simulatePopState(url: string): void;
-    path(includeHash?: boolean): string;
-    prepareExternalUrl(internal: string): string;
-    pushState(ctx: any, title: string, path: string, query: string): void;
-    replaceState(ctx: any, title: string, path: string, query: string): void;
-    onPopState(fn: (value: any) => void): void;
-    getBaseHref(): string;
-    back(): void;
-    forward(): void;
-    getState(): unknown;
-    static ɵfac: i0.ɵɵFactoryDeclaration<MockLocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<MockLocationStrategy>;
-}
 
 /**
  * Mock platform location config
@@ -135,6 +76,91 @@ declare class MockPlatformLocation implements PlatformLocation {
     static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MockPlatformLocation>;
 }
+/**
+ * Mock implementation of URL state.
+ */
+declare class FakeNavigationPlatformLocation implements PlatformLocation {
+    private readonly _platformNavigation;
+    constructor();
+    private config;
+    getBaseHrefFromDOM(): string;
+    onPopState(fn: LocationChangeListener): VoidFunction;
+    onHashChange(fn: LocationChangeListener): VoidFunction;
+    get href(): string;
+    get protocol(): string;
+    get hostname(): string;
+    get port(): string;
+    get pathname(): string;
+    get search(): string;
+    get hash(): string;
+    pushState(state: any, title: string, url: string): void;
+    replaceState(state: any, title: string, url: string): void;
+    forward(): void;
+    back(): void;
+    historyGo(relativePosition?: number): void;
+    getState(): unknown;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FakeNavigationPlatformLocation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<FakeNavigationPlatformLocation>;
+}
+
+/**
+ * A spy for {@link Location} that allows tests to fire simulated location events.
+ *
+ * @publicApi
+ */
+declare class SpyLocation implements Location {
+    urlChanges: string[];
+    private _history;
+    private _historyIndex;
+    /** @docs-private */
+    ngOnDestroy(): void;
+    setInitialPath(url: string): void;
+    setBaseHref(url: string): void;
+    path(): string;
+    getState(): unknown;
+    isCurrentPathEqualTo(path: string, query?: string): boolean;
+    simulateUrlPop(pathname: string): void;
+    simulateHashChange(pathname: string): void;
+    prepareExternalUrl(url: string): string;
+    go(path: string, query?: string, state?: any): void;
+    replaceState(path: string, query?: string, state?: any): void;
+    forward(): void;
+    back(): void;
+    historyGo(relativePosition?: number): void;
+    onUrlChange(fn: (url: string, state: unknown) => void): VoidFunction;
+    subscribe(onNext: (value: any) => void, onThrow?: ((error: any) => void) | null, onReturn?: (() => void) | null): SubscriptionLike;
+    normalize(url: string): string;
+    private pushHistory;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
+}
+
+/**
+ * A mock implementation of {@link LocationStrategy} that allows tests to fire simulated
+ * location events.
+ *
+ * @publicApi
+ */
+declare class MockLocationStrategy extends LocationStrategy {
+    internalBaseHref: string;
+    internalPath: string;
+    internalTitle: string;
+    urlChanges: string[];
+    private stateChanges;
+    constructor();
+    simulatePopState(url: string): void;
+    path(includeHash?: boolean): string;
+    prepareExternalUrl(internal: string): string;
+    pushState(ctx: any, title: string, path: string, query: string): void;
+    replaceState(ctx: any, title: string, path: string, query: string): void;
+    onPopState(fn: (value: any) => void): void;
+    getBaseHref(): string;
+    back(): void;
+    forward(): void;
+    getState(): unknown;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MockLocationStrategy, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MockLocationStrategy>;
+}
 
 /**
  * Returns mock providers for the `Location` and `LocationStrategy` classes.
@@ -144,5 +170,5 @@ declare class MockPlatformLocation implements PlatformLocation {
  */
 declare function provideLocationMocks(): Provider[];
 
-export { MOCK_PLATFORM_LOCATION_CONFIG, MockLocationStrategy, MockPlatformLocation, SpyLocation, provideLocationMocks, provideFakePlatformNavigation as ɵprovideFakePlatformNavigation };
+export { MOCK_PLATFORM_LOCATION_CONFIG, MockLocationStrategy, MockPlatformLocation, SpyLocation, provideLocationMocks, FakeNavigationPlatformLocation as ɵFakeNavigationPlatformLocation, provideFakePlatformNavigation as ɵprovideFakePlatformNavigation };
 export type { MockPlatformLocationConfig };
