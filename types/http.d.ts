@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.9+sha-9e8b4eb
+ * @license Angular v21.0.0-next.9+sha-a1b4e38
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4008,6 +4008,8 @@ type HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => Obs
  * A multi-provider token that represents the array of registered
  * `HttpInterceptor` objects.
  *
+ * @see [HTTP Guide](guide/http/interceptors)
+ *
  * @publicApi
  */
 declare const HTTP_INTERCEPTORS: InjectionToken<readonly HttpInterceptor[]>;
@@ -4124,7 +4126,7 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
  * ```
  *
  * </div>
- *
+ * @see [HTTP Client](guide/http/setup)
  * @see {@link withInterceptors}
  * @see {@link withInterceptorsFromDi}
  * @see {@link withXsrfConfiguration}
@@ -4197,6 +4199,7 @@ declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSupport>;
  * "bubble up" until either reaching the root level or an `HttpClient` which was not configured with
  * this option.
  *
+ * @see [HTTP client setup](guide/http/setup#withrequestsmadeviaparent)
  * @see {@link provideHttpClient}
  * @publicApi 19.0
  */
@@ -4205,6 +4208,8 @@ declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.Reques
  * Configures the current `HttpClient` instance to make requests using the fetch API.
  *
  * Note: The Fetch API doesn't support progress report on uploads.
+ *
+ * @see [Advanced fetch Options](guide/http/making-requests#advanced-fetch-options)
  *
  * @publicApi
  */
@@ -4519,6 +4524,8 @@ declare const httpResource: HttpResourceFn;
  * @param includeRequestsWithAuthHeaders Enables caching of requests containing either `Authorization`
  *     or `Proxy-Authorization` headers. By default, these requests are excluded from caching.
  *
+ * @see [Configuring the caching options](guide/ssr#configuring-the-caching-options)
+ *
  * @publicApi
  */
 type HttpTransferCacheOptions = {
@@ -4563,6 +4570,8 @@ declare const HTTP_TRANSFER_CACHE_ORIGIN_MAP: InjectionToken<Record<string, stri
  * When these providers are added, requests performed on the server are cached and reused during the
  * bootstrapping of the application in the browser thus avoiding duplicate requests and reducing
  * load time.
+ *
+ * @see [Caching data when using HttpClient](guide/ssr#configuring-the-caching-options)
  *
  */
 declare function withHttpTransferCache(cacheOptions: HttpTransferCacheOptions): Provider[];

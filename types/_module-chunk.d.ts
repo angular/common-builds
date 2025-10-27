@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.9+sha-9e8b4eb
+ * @license Angular v21.0.0-next.9+sha-a1b4e38
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -9,6 +9,8 @@ import { ModuleWithProviders } from '@angular/core';
 
 /**
  * A token used to manipulate and access values stored in `HttpContext`.
+ *
+ * @see [Request and response metadata](guide/http/interceptors#request-and-response-metadata)
  *
  * @publicApi
  */
@@ -46,6 +48,8 @@ declare class HttpContextToken<T> {
  *   context: new HttpContext().set(IS_CACHE_ENABLED, true)
  * }).subscribe(...);
  * ```
+ *
+ * @see [Request and response metadata](guide/http/interceptors#request-and-response-metadata)
  *
  * @publicApi
  */
@@ -94,6 +98,8 @@ declare class HttpContext {
  * Represents the header configuration options for an HTTP request.
  * Instances are immutable. Modifying methods return a cloned
  * instance with the change. The original object is never changed.
+ *
+ * @see [Setting request headers](guide/http/making-requests#setting-request-headers)
  *
  * @publicApi
  */
@@ -193,6 +199,8 @@ declare class HttpHeaders {
  *
  * Used by `HttpParams`.
  *
+ * @see [Custom parameter encoding](guide/http/making-requests#custom-parameter-encoding)
+ *
  * @publicApi
  **/
 interface HttpParameterCodec {
@@ -240,6 +248,9 @@ declare class HttpUrlEncodingCodec implements HttpParameterCodec {
 /**
  * Options used to construct an `HttpParams` instance.
  *
+ * @see [Setting URL parameters](guide/http/making-requests#setting-url-parameters)
+ * @see [Custom parameter encoding](guide/http/making-requests#custom-parameter-encoding)
+ *
  * @publicApi
  */
 interface HttpParamsOptions {
@@ -260,6 +271,8 @@ interface HttpParamsOptions {
  * per the MIME type `application/x-www-form-urlencoded`.
  *
  * This class is immutable; all mutation operations return a new instance.
+ *
+ * @see [Setting URL parameters](guide/http/making-requests#setting-url-parameters)
  *
  * @publicApi
  */
@@ -656,6 +669,8 @@ declare class HttpRequest<T> {
 /**
  * Type enumeration for the different kinds of `HttpEvent`.
  *
+ * @see [Receiving raw progress event](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 declare enum HttpEventType {
@@ -689,6 +704,8 @@ declare enum HttpEventType {
 /**
  * Base interface for progress events.
  *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 interface HttpProgressEvent {
@@ -709,6 +726,8 @@ interface HttpProgressEvent {
 /**
  * A download progress event.
  *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 interface HttpDownloadProgressEvent extends HttpProgressEvent {
@@ -725,6 +744,8 @@ interface HttpDownloadProgressEvent extends HttpProgressEvent {
  *
  * Note: The `FetchBackend` doesn't support progress report on uploads.
  *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 interface HttpUploadProgressEvent extends HttpProgressEvent {
@@ -734,6 +755,8 @@ interface HttpUploadProgressEvent extends HttpProgressEvent {
  * An event indicating that the request was sent to the server. Useful
  * when a request may be retried multiple times, to distinguish between
  * retries on the final event stream.
+ *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
  *
  * @publicApi
  */
@@ -746,6 +769,8 @@ interface HttpSentEvent {
  * Grouping all custom events under this type ensures they will be handled
  * and forwarded by all implementations of interceptors.
  *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 interface HttpUserEvent<T> {
@@ -756,6 +781,7 @@ interface HttpUserEvent<T> {
  *
  * Typed according to the expected type of the response.
  *
+ * @see [Intercepting response events](guide/http/interceptors#intercepting-response-events)
  * @publicApi
  */
 type HttpEvent<T> = HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpDownloadProgressEvent | HttpUploadProgressEvent | HttpUserEvent<T>;
@@ -835,6 +861,8 @@ declare abstract class HttpResponseBase {
  * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
+ * @see [Receiving raw progress events](guide/http/making-requests#receiving-raw-progress-events)
+ *
  * @publicApi
  */
 declare class HttpHeaderResponse extends HttpResponseBase {
@@ -865,6 +893,8 @@ declare class HttpHeaderResponse extends HttpResponseBase {
  *
  * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
+ *
+ * @see [Interacting with the server response events](guide/http/making-requests#interacting-with-the-server-response-events)
  *
  * @publicApi
  */
@@ -915,6 +945,8 @@ declare class HttpResponse<T> extends HttpResponseBase {
  * the state of the HTTP layer when the error occurred. The error property
  * will contain either a wrapped Error object or the error response returned
  * from the server.
+ *
+ * @see [Handling request failure](guide/http/making-requests#handling-request-failure)
  *
  * @publicApi
  */

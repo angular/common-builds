@@ -1,14 +1,14 @@
 /**
- * @license Angular v21.0.0-next.9+sha-9e8b4eb
+ * @license Angular v21.0.0-next.9+sha-a1b4e38
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
 
+import { Location, LocationStrategy } from './_common_module-chunk.js';
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './_common_module-chunk.js';
 import * as i0 from '@angular/core';
 import { OnDestroy, ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, Version, Provider, InjectionToken, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
-import { LocationStrategy } from './_common_module-chunk.js';
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, Location, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './_common_module-chunk.js';
 import { PlatformLocation, LocationChangeListener } from './_platform_location-chunk.js';
 export { BrowserPlatformLocation, LOCATION_INITIALIZED, LocationChangeEvent } from './_platform_location-chunk.js';
 export { XhrFactory } from './_xhr-chunk.js';
@@ -37,6 +37,36 @@ declare abstract class DomAdapter {
     abstract resetBaseElement(): void;
     abstract getUserAgent(): string;
     abstract getCookie(name: string): string | null;
+}
+
+/**
+ * A `Location` implementation that uses the browser's `Navigation` API.
+ *
+ * This class is an adapter that maps the methods of the `Location` service to the newer
+ * browser `Navigation` API. It is used when the `Navigation` API is available.
+ *
+ * This adapter uses `navigation.navigate()` for `go` and `replaceState` to ensure a single source
+ * of truth for the navigation state. The Navigation API's state and `history.state` are separate.
+ *
+ * Note that `navigation.back()` and `navigation.forward()` can differ from the traditional
+ * `history` API in how they traverse the joint session history.
+ *
+ * @see {@link Location}
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API
+ */
+declare class NavigationAdapterForLocation extends Location {
+    private readonly navigation;
+    private readonly destroyRef;
+    constructor();
+    private registerNavigationListeners;
+    getState(): unknown;
+    replaceState(path: string, query?: string, state?: any): void;
+    go(path: string, query?: string, state?: any): void;
+    back(): void;
+    forward(): void;
+    onUrlChange(fn: (url: string, state: unknown) => void): VoidFunction;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NavigationAdapterForLocation, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<NavigationAdapterForLocation>;
 }
 
 /**
@@ -1243,5 +1273,5 @@ declare const PRECONNECT_CHECK_BLOCKLIST: InjectionToken<(string | string[])[]>;
  */
 declare function normalizeQueryParams(params: string): string;
 
-export { FormStyle, FormatWidth, HashLocationStrategy, IMAGE_LOADER, LocationChangeListener, LocationStrategy, NgOptimizedImage, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PlatformLocation, PlatformNavigation, Plural, TranslationWidth, VERSION, ViewportScroller, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
+export { FormStyle, FormatWidth, HashLocationStrategy, IMAGE_LOADER, Location, LocationChangeListener, LocationStrategy, NgOptimizedImage, NumberFormatStyle, NumberSymbol, PRECONNECT_CHECK_BLOCKLIST, PlatformLocation, PlatformNavigation, Plural, TranslationWidth, VERSION, ViewportScroller, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits, isPlatformBrowser, isPlatformServer, provideCloudflareLoader, provideCloudinaryLoader, provideImageKitLoader, provideImgixLoader, provideNetlifyLoader, registerLocaleData, DomAdapter as ɵDomAdapter, NavigationAdapterForLocation as ɵNavigationAdapterForLocation, NullViewportScroller as ɵNullViewportScroller, PLATFORM_BROWSER_ID as ɵPLATFORM_BROWSER_ID, PLATFORM_SERVER_ID as ɵPLATFORM_SERVER_ID, getDOM as ɵgetDOM, normalizeQueryParams as ɵnormalizeQueryParams, parseCookieValue as ɵparseCookieValue, setRootDomAdapter as ɵsetRootDomAdapter };
 export type { ImageLoader, ImageLoaderConfig, ImagePlaceholderConfig, Time };
