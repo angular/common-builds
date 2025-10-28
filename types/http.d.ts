@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-next.9+sha-81b8765
+ * @license Angular v21.0.0-next.9+sha-3fbaaa0
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4585,7 +4585,9 @@ declare function withHttpTransferCache(cacheOptions: HttpTransferCacheOptions): 
  */
 declare class HttpXhrBackend implements HttpBackend {
     private xhrFactory;
+    private readonly tracingService;
     constructor(xhrFactory: XhrFactory);
+    private maybePropagateTrace;
     /**
      * Processes a request and returns a stream of response events.
      * @param req The request object.
