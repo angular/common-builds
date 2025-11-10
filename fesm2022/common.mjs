@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-4ff6348
+ * @license Angular v21.1.0-next.0+sha-feb86e3
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -62,7 +62,7 @@ class NavigationAdapterForLocation extends Location {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: NavigationAdapterForLocation,
     deps: [],
@@ -70,14 +70,14 @@ class NavigationAdapterForLocation extends Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: NavigationAdapterForLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-4ff6348",
+  version: "21.1.0-next.0+sha-feb86e3",
   ngImport: i0,
   type: NavigationAdapterForLocation,
   decorators: [{
@@ -99,7 +99,7 @@ function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
 
-const VERSION = new Version('21.1.0-next.0+sha-4ff6348');
+const VERSION = /* @__PURE__ */new Version('21.1.0-next.0+sha-feb86e3');
 
 class ViewportScroller {
   static ɵprov =
@@ -463,7 +463,7 @@ class LCPImageObserver {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: LCPImageObserver,
     deps: [],
@@ -471,7 +471,7 @@ class LCPImageObserver {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: LCPImageObserver,
     providedIn: 'root'
@@ -479,7 +479,7 @@ class LCPImageObserver {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-4ff6348",
+  version: "21.1.0-next.0+sha-feb86e3",
   ngImport: i0,
   type: LCPImageObserver,
   decorators: [{
@@ -550,7 +550,7 @@ class PreconnectLinkChecker {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: PreconnectLinkChecker,
     deps: [],
@@ -558,7 +558,7 @@ class PreconnectLinkChecker {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: PreconnectLinkChecker,
     providedIn: 'root'
@@ -566,7 +566,7 @@ class PreconnectLinkChecker {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-4ff6348",
+  version: "21.1.0-next.0+sha-feb86e3",
   ngImport: i0,
   type: PreconnectLinkChecker,
   decorators: [{
@@ -616,7 +616,7 @@ class PreloadLinkCreator {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: PreloadLinkCreator,
     deps: [],
@@ -624,7 +624,7 @@ class PreloadLinkCreator {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: PreloadLinkCreator,
     providedIn: 'root'
@@ -632,7 +632,7 @@ class PreloadLinkCreator {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-4ff6348",
+  version: "21.1.0-next.0+sha-feb86e3",
   ngImport: i0,
   type: PreloadLinkCreator,
   decorators: [{
@@ -666,6 +666,7 @@ class NgOptimizedImage {
   renderer = inject(Renderer2);
   imgElement = inject(ElementRef).nativeElement;
   injector = inject(Injector);
+  destroyRef = inject(DestroyRef);
   lcpObserver;
   _renderedSrc = null;
   ngSrc;
@@ -686,8 +687,7 @@ class NgOptimizedImage {
   constructor() {
     if (ngDevMode) {
       this.lcpObserver = this.injector.get(LCPImageObserver);
-      const destroyRef = inject(DestroyRef);
-      destroyRef.onDestroy(() => {
+      this.destroyRef.onDestroy(() => {
         if (!this.priority && this._renderedSrc !== null) {
           this.lcpObserver.unregisterImage(this._renderedSrc);
         }
@@ -708,7 +708,7 @@ class NgOptimizedImage {
       assertNotBlobUrl(this);
       if (this.fill) {
         assertEmptyWidthAndHeight(this);
-        ngZone.runOutsideAngular(() => assertNonZeroRenderedHeight(this, this.imgElement, this.renderer));
+        ngZone.runOutsideAngular(() => assertNonZeroRenderedHeight(this, this.imgElement, this.renderer, this.destroyRef));
       } else {
         assertNonEmptyWidthAndHeight(this);
         if (this.height !== undefined) {
@@ -717,7 +717,7 @@ class NgOptimizedImage {
         if (this.width !== undefined) {
           assertGreaterThanZero(this, this.width, 'width');
         }
-        ngZone.runOutsideAngular(() => assertNoImageDistortion(this, this.imgElement, this.renderer));
+        ngZone.runOutsideAngular(() => assertNoImageDistortion(this, this.imgElement, this.renderer, this.destroyRef));
       }
       assertValidLoadingInput(this);
       assertValidDecodingInput(this);
@@ -920,6 +920,10 @@ class NgOptimizedImage {
     };
     const removeLoadListenerFn = this.renderer.listen(img, 'load', callback);
     const removeErrorListenerFn = this.renderer.listen(img, 'error', callback);
+    this.destroyRef.onDestroy(() => {
+      removeLoadListenerFn();
+      removeErrorListenerFn();
+    });
     callOnLoadIfImageIsLoaded(img, callback);
   }
   setHostAttribute(name, value) {
@@ -927,7 +931,7 @@ class NgOptimizedImage {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     ngImport: i0,
     type: NgOptimizedImage,
     deps: [],
@@ -935,7 +939,7 @@ class NgOptimizedImage {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "16.1.0",
-    version: "21.1.0-next.0+sha-4ff6348",
+    version: "21.1.0-next.0+sha-feb86e3",
     type: NgOptimizedImage,
     isStandalone: true,
     selector: "img[ngSrc]",
@@ -975,7 +979,7 @@ class NgOptimizedImage {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-4ff6348",
+  version: "21.1.0-next.0+sha-feb86e3",
   ngImport: i0,
   type: NgOptimizedImage,
   decorators: [{
@@ -1185,7 +1189,7 @@ function assertGreaterThanZero(dir, inputValue, inputName) {
     throw new _RuntimeError(2952, `${imgDirectiveDetails(dir.ngSrc)} \`${inputName}\` has an invalid value. ` + `To fix this, provide \`${inputName}\` as a number greater than 0.`);
   }
 }
-function assertNoImageDistortion(dir, img, renderer) {
+function assertNoImageDistortion(dir, img, renderer, destroyRef) {
   const callback = () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
@@ -1230,6 +1234,10 @@ function assertNoImageDistortion(dir, img, renderer) {
     removeLoadListenerFn();
     removeErrorListenerFn();
   });
+  destroyRef.onDestroy(() => {
+    removeLoadListenerFn();
+    removeErrorListenerFn();
+  });
   callOnLoadIfImageIsLoaded(img, callback);
 }
 function assertNonEmptyWidthAndHeight(dir) {
@@ -1245,7 +1253,7 @@ function assertEmptyWidthAndHeight(dir) {
     throw new _RuntimeError(2952, `${imgDirectiveDetails(dir.ngSrc)} the attributes \`height\` and/or \`width\` are present ` + `along with the \`fill\` attribute. Because \`fill\` mode causes an image to fill its containing ` + `element, the size attributes have no effect and should be removed.`);
   }
 }
-function assertNonZeroRenderedHeight(dir, img, renderer) {
+function assertNonZeroRenderedHeight(dir, img, renderer, destroyRef) {
   const callback = () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
@@ -1256,6 +1264,10 @@ function assertNonZeroRenderedHeight(dir, img, renderer) {
   };
   const removeLoadListenerFn = renderer.listen(img, 'load', callback);
   const removeErrorListenerFn = renderer.listen(img, 'error', () => {
+    removeLoadListenerFn();
+    removeErrorListenerFn();
+  });
+  destroyRef.onDestroy(() => {
     removeLoadListenerFn();
     removeErrorListenerFn();
   });
