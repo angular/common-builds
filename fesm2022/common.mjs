@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.10+sha-2ad6b72
+ * @license Angular v20.3.10+sha-5047849
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -51,7 +51,7 @@ function isPlatformServer(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new Version('20.3.10+sha-2ad6b72');
+const VERSION = /* @__PURE__ */ new Version('20.3.10+sha-5047849');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -674,10 +674,10 @@ class LCPImageObserver {
         this.observer.disconnect();
         this.images.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: LCPImageObserver, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: LCPImageObserver, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: LCPImageObserver, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: LCPImageObserver, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -795,10 +795,10 @@ class PreconnectLinkChecker {
         this.preconnectLinks?.clear();
         this.alreadySeen.clear();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreconnectLinkChecker, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreconnectLinkChecker, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreconnectLinkChecker, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -886,10 +886,10 @@ class PreloadLinkCreator {
         }
         renderer.appendChild(this.document.head, preload);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreloadLinkCreator, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreloadLinkCreator, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: PreloadLinkCreator, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: PreloadLinkCreator, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -1084,6 +1084,7 @@ class NgOptimizedImage {
     renderer = inject(Renderer2);
     imgElement = inject(ElementRef).nativeElement;
     injector = inject(Injector);
+    destroyRef = inject(DestroyRef);
     // An LCP image observer should be injected only in development mode.
     // Do not assign it to `null` to avoid having a redundant property in the production bundle.
     lcpObserver;
@@ -1190,10 +1191,7 @@ class NgOptimizedImage {
     constructor() {
         if (ngDevMode) {
             this.lcpObserver = this.injector.get(LCPImageObserver);
-            // Using `DestroyRef` to avoid having an empty `ngOnDestroy` method since this
-            // is only run in development mode.
-            const destroyRef = inject(DestroyRef);
-            destroyRef.onDestroy(() => {
+            this.destroyRef.onDestroy(() => {
                 if (!this.priority && this._renderedSrc !== null) {
                     this.lcpObserver.unregisterImage(this._renderedSrc);
                 }
@@ -1217,7 +1215,7 @@ class NgOptimizedImage {
                 assertEmptyWidthAndHeight(this);
                 // This leaves the Angular zone to avoid triggering unnecessary change detection cycles when
                 // `load` tasks are invoked on images.
-                ngZone.runOutsideAngular(() => assertNonZeroRenderedHeight(this, this.imgElement, this.renderer));
+                ngZone.runOutsideAngular(() => assertNonZeroRenderedHeight(this, this.imgElement, this.renderer, this.destroyRef));
             }
             else {
                 assertNonEmptyWidthAndHeight(this);
@@ -1229,7 +1227,7 @@ class NgOptimizedImage {
                 }
                 // Only check for distorted images when not in fill mode, where
                 // images may be intentionally stretched, cropped or letterboxed.
-                ngZone.runOutsideAngular(() => assertNoImageDistortion(this, this.imgElement, this.renderer));
+                ngZone.runOutsideAngular(() => assertNoImageDistortion(this, this.imgElement, this.renderer, this.destroyRef));
             }
             assertValidLoadingInput(this);
             assertValidDecodingInput(this);
@@ -1479,15 +1477,22 @@ class NgOptimizedImage {
         };
         const removeLoadListenerFn = this.renderer.listen(img, 'load', callback);
         const removeErrorListenerFn = this.renderer.listen(img, 'error', callback);
+        // Clean up listeners once the view is destroyed, before the image
+        // loads or fails to load, to avoid element from being captured
+        // in memory and redundant change detection.
+        this.destroyRef.onDestroy(() => {
+            removeLoadListenerFn();
+            removeErrorListenerFn();
+        });
         callOnLoadIfImageIsLoaded(img, callback);
     }
     setHostAttribute(name, value) {
         this.renderer.setAttribute(this.imgElement, name, value);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "20.3.10+sha-2ad6b72", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], decoding: "decoding", loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "20.3.10+sha-5047849", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: ["ngSrc", "ngSrc", unwrapSafeUrl], ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], decoding: "decoding", loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], placeholder: ["placeholder", "placeholder", booleanOrUrlAttribute], placeholderConfig: "placeholderConfig", src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0\" : null", "style.background-size": "placeholder ? \"cover\" : null", "style.background-position": "placeholder ? \"50% 50%\" : null", "style.background-repeat": "placeholder ? \"no-repeat\" : null", "style.background-image": "placeholder ? generatePlaceholder(placeholder) : null", "style.filter": "placeholder && shouldBlurPlaceholder(placeholderConfig) ? \"blur(15px)\" : null" } }, usesOnChanges: true, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-2ad6b72", ngImport: i0, type: NgOptimizedImage, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.10+sha-5047849", ngImport: i0, type: NgOptimizedImage, decorators: [{
             type: Directive,
             args: [{
                     selector: 'img[ngSrc]',
@@ -1761,7 +1766,7 @@ function assertGreaterThanZero(dir, inputValue, inputName) {
  * - Whether the "width" and "height" attributes reflect the actual dimensions of the image.
  * - Whether image styling is "correct" (see below for a longer explanation).
  */
-function assertNoImageDistortion(dir, img, renderer) {
+function assertNoImageDistortion(dir, img, renderer, destroyRef) {
     const callback = () => {
         removeLoadListenerFn();
         removeErrorListenerFn();
@@ -1840,6 +1845,13 @@ function assertNoImageDistortion(dir, img, renderer) {
         removeLoadListenerFn();
         removeErrorListenerFn();
     });
+    // Clean up listeners once the view is destroyed, before the image
+    // loads or fails to load, to avoid element from being captured
+    // in memory and redundant change detection.
+    destroyRef.onDestroy(() => {
+        removeLoadListenerFn();
+        removeErrorListenerFn();
+    });
     callOnLoadIfImageIsLoaded(img, callback);
 }
 /**
@@ -1874,7 +1886,7 @@ function assertEmptyWidthAndHeight(dir) {
  * Verifies that the rendered image has a nonzero height. If the image is in fill mode, provides
  * guidance that this can be caused by the containing element's CSS position property.
  */
-function assertNonZeroRenderedHeight(dir, img, renderer) {
+function assertNonZeroRenderedHeight(dir, img, renderer, destroyRef) {
     const callback = () => {
         removeLoadListenerFn();
         removeErrorListenerFn();
@@ -1890,6 +1902,13 @@ function assertNonZeroRenderedHeight(dir, img, renderer) {
     const removeLoadListenerFn = renderer.listen(img, 'load', callback);
     // See comments in the `assertNoImageDistortion`.
     const removeErrorListenerFn = renderer.listen(img, 'error', () => {
+        removeLoadListenerFn();
+        removeErrorListenerFn();
+    });
+    // Clean up listeners once the view is destroyed, before the image
+    // loads or fails to load, to avoid element from being captured
+    // in memory and redundant change detection.
+    destroyRef.onDestroy(() => {
         removeLoadListenerFn();
         removeErrorListenerFn();
     });
