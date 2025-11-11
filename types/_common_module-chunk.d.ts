@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0-rc.1+sha-557213e
+ * @license Angular v21.0.0-rc.1+sha-91dbb4b
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1245,6 +1245,8 @@ declare class NgPluralCase {
  *
  * {@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @publicApi
  */
 declare class AsyncPipe implements OnDestroy, PipeTransform {
@@ -1280,6 +1282,8 @@ declare class AsyncPipe implements OnDestroy, PipeTransform {
  *
  * {@example common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @ngModule CommonModule
  * @publicApi
  */
@@ -1307,6 +1311,8 @@ declare class LowerCasePipe implements PipeTransform {
  *
  * {@example common/pipes/ts/titlecase_pipe.ts region='TitleCasePipe'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @ngModule CommonModule
  * @publicApi
  */
@@ -1324,6 +1330,7 @@ declare class TitleCasePipe implements PipeTransform {
  * Transforms text to all upper case.
  * @see {@link LowerCasePipe}
  * @see {@link TitleCasePipe}
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @ngModule CommonModule
  * @publicApi
@@ -1351,6 +1358,8 @@ declare class UpperCasePipe implements PipeTransform {
  * to JSON format, and displays the string in both formats for comparison.
  *
  * {@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
+ *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @publicApi
  */
@@ -1395,6 +1404,8 @@ declare class JsonPipe implements PipeTransform {
  * ### String Examples
  *
  * {@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
+ *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @publicApi
  */
@@ -1484,6 +1495,8 @@ declare class SlicePipe implements PipeTransform {
  *
  * {@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @publicApi
  */
 declare class DecimalPipe implements PipeTransform {
@@ -1520,6 +1533,8 @@ declare class DecimalPipe implements PipeTransform {
  *
  * {@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @publicApi
  */
 declare class PercentPipe implements PipeTransform {
@@ -1549,6 +1564,8 @@ declare class PercentPipe implements PipeTransform {
  * where the caller's default locale is `en-US`.
  *
  * {@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
+ *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @publicApi
  */
@@ -1804,6 +1821,8 @@ declare const DATE_PIPE_DEFAULT_OPTIONS: InjectionToken<DatePipeConfig>;
  * }
  * ```
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @publicApi
  */
 declare class DatePipe implements PipeTransform {
@@ -1849,6 +1868,8 @@ declare class DatePipe implements PipeTransform {
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
+ *
  * @publicApi
  */
 declare class I18nPluralPipe implements PipeTransform {
@@ -1882,6 +1903,8 @@ declare class I18nPluralPipe implements PipeTransform {
  * ### Example
  *
  * {@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
+ *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @publicApi
  */
@@ -1926,6 +1949,8 @@ interface KeyValue<K, V> {
  * keyvalue pipe.
  *
  * {@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ *
+ * @see [Built-in Pipes](guide/templates/pipes#built-in-pipes)
  *
  * @publicApi
  */
