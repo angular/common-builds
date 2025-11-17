@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-ee5947d
+ * @license Angular v21.1.0-next.0+sha-0432e76
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -395,9 +395,6 @@ declare class NgClass implements DoCheck {
  * * `ngComponentOutletNgModule`: Optional NgModule class reference to allow loading another
  * module dynamically, then loading a component from that module.
  *
- * * `ngComponentOutletNgModuleFactory`: Deprecated config option that allows providing optional
- * NgModule factory to allow loading another module dynamically, then loading a component from that
- * module. Use `ngComponentOutletNgModule` instead.
  *
  * ### Syntax
  *
