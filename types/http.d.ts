@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0+sha-102cb87
+ * @license Angular v21.0.0+sha-9852033
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4350,6 +4350,10 @@ interface HttpResourceOptions<TResult, TRaw> {
      * A comparison function which defines equality for the response value.
      */
     equal?: ValueEqualityFn<NoInfer<TResult>>;
+    /**
+     * A debug name for the reactive node. Used in Angular DevTools to identify the node.
+     */
+    debugName?: string;
 }
 /**
  * A `WritableResource` that represents the results of a reactive HTTP request.

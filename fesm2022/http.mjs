@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.0+sha-102cb87
+ * @license Angular v21.0.0+sha-9852033
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -24,7 +24,7 @@ function makeHttpResourceFn(responseType) {
       assertInInjectionContext(httpResource);
     }
     const injector = options?.injector ?? inject(Injector);
-    return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.parse, options?.equal);
+    return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.debugName, options?.parse, options?.equal);
   };
 }
 function normalizeRequest(request, responseType) {
@@ -62,36 +62,35 @@ function normalizeRequest(request, responseType) {
 }
 class HttpResourceImpl extends _ResourceImpl {
   client;
-  _headers = linkedSignal(...(ngDevMode ? [{
-    debugName: "_headers",
+  _headers = linkedSignal({
+    ...(ngDevMode ? {
+      debugName: "_headers"
+    } : {}),
     source: this.extRequest,
     computation: () => undefined
-  }] : [{
+  });
+  _progress = linkedSignal({
+    ...(ngDevMode ? {
+      debugName: "_progress"
+    } : {}),
     source: this.extRequest,
     computation: () => undefined
-  }]));
-  _progress = linkedSignal(...(ngDevMode ? [{
-    debugName: "_progress",
+  });
+  _statusCode = linkedSignal({
+    ...(ngDevMode ? {
+      debugName: "_statusCode"
+    } : {}),
     source: this.extRequest,
     computation: () => undefined
-  }] : [{
-    source: this.extRequest,
-    computation: () => undefined
-  }]));
-  _statusCode = linkedSignal(...(ngDevMode ? [{
-    debugName: "_statusCode",
-    source: this.extRequest,
-    computation: () => undefined
-  }] : [{
-    source: this.extRequest,
-    computation: () => undefined
-  }]));
-  headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, ...(ngDevMode ? [{
-    debugName: "headers"
-  }] : []));
+  });
+  headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, {
+    ...(ngDevMode ? {
+      debugName: "headers"
+    } : {})
+  });
   progress = this._progress.asReadonly();
   statusCode = this._statusCode.asReadonly();
-  constructor(injector, request, defaultValue, parse, equal) {
+  constructor(injector, request, defaultValue, debugName, parse, equal) {
     super(request, ({
       params: request,
       abortSignal
@@ -101,9 +100,11 @@ class HttpResourceImpl extends _ResourceImpl {
       abortSignal.addEventListener('abort', onAbort);
       const stream = signal({
         value: undefined
-      }, ...(ngDevMode ? [{
-        debugName: "stream"
-      }] : []));
+      }, {
+        ...(ngDevMode ? {
+          debugName: "stream"
+        } : {})
+      });
       let resolve;
       const promise = new Promise(r => resolve = r);
       const send = value => {
@@ -152,7 +153,7 @@ class HttpResourceImpl extends _ResourceImpl {
         }
       });
       return promise;
-    }, defaultValue, equal, injector);
+    }, defaultValue, equal, debugName, injector);
     this.client = injector.get(HttpClient);
   }
   set(value) {
