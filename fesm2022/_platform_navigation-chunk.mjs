@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-400fc82
+ * @license Angular v21.1.0-next.0+sha-40790ef
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 class PlatformNavigation {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-400fc82",
+    version: "21.1.0-next.0+sha-40790ef",
     ngImport: i0,
     type: PlatformNavigation,
     deps: [],
@@ -18,7 +18,7 @@ class PlatformNavigation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-400fc82",
+    version: "21.1.0-next.0+sha-40790ef",
     ngImport: i0,
     type: PlatformNavigation,
     providedIn: 'platform',
@@ -27,7 +27,7 @@ class PlatformNavigation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-400fc82",
+  version: "21.1.0-next.0+sha-40790ef",
   ngImport: i0,
   type: PlatformNavigation,
   decorators: [{
