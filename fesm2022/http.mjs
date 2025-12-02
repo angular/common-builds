@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.2+sha-017672f
+ * @license Angular v21.0.2+sha-5a80a48
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -83,11 +83,9 @@ class HttpResourceImpl extends _ResourceImpl {
     source: this.extRequest,
     computation: () => undefined
   });
-  headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, {
-    ...(ngDevMode ? {
-      debugName: "headers"
-    } : {})
-  });
+  headers = computed(() => this.status() === 'resolved' || this.status() === 'error' ? this._headers() : undefined, ...(ngDevMode ? [{
+    debugName: "headers"
+  }] : []));
   progress = this._progress.asReadonly();
   statusCode = this._statusCode.asReadonly();
   constructor(injector, request, defaultValue, debugName, parse, equal) {
@@ -100,11 +98,9 @@ class HttpResourceImpl extends _ResourceImpl {
       abortSignal.addEventListener('abort', onAbort);
       const stream = signal({
         value: undefined
-      }, {
-        ...(ngDevMode ? {
-          debugName: "stream"
-        } : {})
-      });
+      }, ...(ngDevMode ? [{
+        debugName: "stream"
+      }] : []));
       let resolve;
       const promise = new Promise(r => resolve = r);
       const send = value => {
