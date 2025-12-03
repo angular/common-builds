@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-819b640
+ * @license Angular v21.1.0-next.0+sha-0659d11
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -9,7 +9,8 @@ import { ɵisPromise as _isPromise, InjectionToken, NgModule, inject } from '@an
 import { ReplaySubject } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { CommonModule, HashLocationStrategy } from './_common_module-chunk.mjs';
-import { Location, LocationStrategy, APP_BASE_HREF, PlatformLocation, PathLocationStrategy } from './_location-chunk.mjs';
+import { Location, LocationStrategy, APP_BASE_HREF, PathLocationStrategy } from './_location-chunk.mjs';
+import { PlatformLocation } from './_platform_location-chunk.mjs';
 
 function deepEqual(a, b) {
   if (a === b) {
@@ -600,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -608,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -623,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
+  version: "21.1.0-next.0+sha-0659d11",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{

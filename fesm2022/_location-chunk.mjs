@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.0+sha-819b640
+ * @license Angular v21.1.0-next.0+sha-0659d11
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -7,146 +7,7 @@
 import * as i0 from '@angular/core';
 import { inject, Injectable, InjectionToken, DOCUMENT, Optional, Inject, ɵɵinject as __inject } from '@angular/core';
 import { Subject } from 'rxjs';
-
-let _DOM = null;
-function getDOM() {
-  return _DOM;
-}
-function setRootDomAdapter(adapter) {
-  _DOM ??= adapter;
-}
-class DomAdapter {}
-
-class PlatformLocation {
-  historyGo(relativePosition) {
-    throw new Error(ngDevMode ? 'Not implemented' : '');
-  }
-  static ɵfac = i0.ɵɵngDeclareFactory({
-    minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
-    ngImport: i0,
-    type: PlatformLocation,
-    deps: [],
-    target: i0.ɵɵFactoryTarget.Injectable
-  });
-  static ɵprov = i0.ɵɵngDeclareInjectable({
-    minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
-    ngImport: i0,
-    type: PlatformLocation,
-    providedIn: 'platform',
-    useFactory: () => inject(BrowserPlatformLocation)
-  });
-}
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
-  ngImport: i0,
-  type: PlatformLocation,
-  decorators: [{
-    type: Injectable,
-    args: [{
-      providedIn: 'platform',
-      useFactory: () => inject(BrowserPlatformLocation)
-    }]
-  }]
-});
-const LOCATION_INITIALIZED = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'Location Initialized' : '');
-class BrowserPlatformLocation extends PlatformLocation {
-  _location;
-  _history;
-  _doc = inject(DOCUMENT);
-  constructor() {
-    super();
-    this._location = window.location;
-    this._history = window.history;
-  }
-  getBaseHrefFromDOM() {
-    return getDOM().getBaseHref(this._doc);
-  }
-  onPopState(fn) {
-    const window = getDOM().getGlobalEventTarget(this._doc, 'window');
-    window.addEventListener('popstate', fn, false);
-    return () => window.removeEventListener('popstate', fn);
-  }
-  onHashChange(fn) {
-    const window = getDOM().getGlobalEventTarget(this._doc, 'window');
-    window.addEventListener('hashchange', fn, false);
-    return () => window.removeEventListener('hashchange', fn);
-  }
-  get href() {
-    return this._location.href;
-  }
-  get protocol() {
-    return this._location.protocol;
-  }
-  get hostname() {
-    return this._location.hostname;
-  }
-  get port() {
-    return this._location.port;
-  }
-  get pathname() {
-    return this._location.pathname;
-  }
-  get search() {
-    return this._location.search;
-  }
-  get hash() {
-    return this._location.hash;
-  }
-  set pathname(newPath) {
-    this._location.pathname = newPath;
-  }
-  pushState(state, title, url) {
-    this._history.pushState(state, title, url);
-  }
-  replaceState(state, title, url) {
-    this._history.replaceState(state, title, url);
-  }
-  forward() {
-    this._history.forward();
-  }
-  back() {
-    this._history.back();
-  }
-  historyGo(relativePosition = 0) {
-    this._history.go(relativePosition);
-  }
-  getState() {
-    return this._history.state;
-  }
-  static ɵfac = i0.ɵɵngDeclareFactory({
-    minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
-    ngImport: i0,
-    type: BrowserPlatformLocation,
-    deps: [],
-    target: i0.ɵɵFactoryTarget.Injectable
-  });
-  static ɵprov = i0.ɵɵngDeclareInjectable({
-    minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
-    ngImport: i0,
-    type: BrowserPlatformLocation,
-    providedIn: 'platform',
-    useFactory: () => new BrowserPlatformLocation()
-  });
-}
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
-  ngImport: i0,
-  type: BrowserPlatformLocation,
-  decorators: [{
-    type: Injectable,
-    args: [{
-      providedIn: 'platform',
-      useFactory: () => new BrowserPlatformLocation()
-    }]
-  }],
-  ctorParameters: () => []
-});
+import { PlatformLocation } from './_platform_location-chunk.mjs';
 
 function joinWithSlash(start, end) {
   if (!start) return end;
@@ -170,7 +31,7 @@ class LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: LocationStrategy,
     deps: [],
@@ -178,7 +39,7 @@ class LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: LocationStrategy,
     providedIn: 'root',
@@ -187,7 +48,7 @@ class LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
+  version: "21.1.0-next.0+sha-0659d11",
   ngImport: i0,
   type: LocationStrategy,
   decorators: [{
@@ -249,7 +110,7 @@ class PathLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: PathLocationStrategy,
     deps: [{
@@ -262,7 +123,7 @@ class PathLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: PathLocationStrategy,
     providedIn: 'root'
@@ -270,7 +131,7 @@ class PathLocationStrategy extends LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
+  version: "21.1.0-next.0+sha-0659d11",
   ngImport: i0,
   type: PathLocationStrategy,
   decorators: [{
@@ -379,7 +240,7 @@ class Location {
   static stripTrailingSlash = stripTrailingSlash;
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: Location,
     deps: [{
@@ -389,7 +250,7 @@ class Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.0+sha-819b640",
+    version: "21.1.0-next.0+sha-0659d11",
     ngImport: i0,
     type: Location,
     providedIn: 'root',
@@ -398,7 +259,7 @@ class Location {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.0+sha-819b640",
+  version: "21.1.0-next.0+sha-0659d11",
   ngImport: i0,
   type: Location,
   decorators: [{
@@ -437,5 +298,5 @@ function _stripOrigin(baseHref) {
   return baseHref;
 }
 
-export { APP_BASE_HREF, BrowserPlatformLocation, DomAdapter, LOCATION_INITIALIZED, Location, LocationStrategy, PathLocationStrategy, PlatformLocation, getDOM, joinWithSlash, normalizeQueryParams, setRootDomAdapter };
+export { APP_BASE_HREF, Location, LocationStrategy, PathLocationStrategy, joinWithSlash, normalizeQueryParams };
 //# sourceMappingURL=_location-chunk.mjs.map
