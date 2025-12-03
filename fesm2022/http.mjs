@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.2+sha-0f50ea8
+ * @license Angular v21.0.2+sha-20474d3
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _Resource
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import './_xhr-chunk.mjs';
+import './_platform_location-chunk.mjs';
 
 const httpResource = (() => {
   const jsonFn = makeHttpResourceFn('json');

@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.2+sha-0f50ea8
+ * @license Angular v21.0.2+sha-20474d3
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpStatusCode, HttpEventType, HttpBackend, REQUESTS_CONTRIBUTE_TO_STABILITY, HttpClientModule } from './_module-chunk.mjs';
 import 'rxjs/operators';
 import './_xhr-chunk.mjs';
+import './_platform_location-chunk.mjs';
 
 class HttpTestingController {}
 
@@ -226,7 +227,7 @@ class HttpClientTestingBackend {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.0.2+sha-0f50ea8",
+    version: "21.0.2+sha-20474d3",
     ngImport: i0,
     type: HttpClientTestingBackend,
     deps: [],
@@ -234,14 +235,14 @@ class HttpClientTestingBackend {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.0.2+sha-0f50ea8",
+    version: "21.0.2+sha-20474d3",
     ngImport: i0,
     type: HttpClientTestingBackend
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.0.2+sha-0f50ea8",
+  version: "21.0.2+sha-20474d3",
   ngImport: i0,
   type: HttpClientTestingBackend,
   decorators: [{
@@ -270,7 +271,7 @@ function provideHttpClientTesting() {
 class HttpClientTestingModule {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.0.2+sha-0f50ea8",
+    version: "21.0.2+sha-20474d3",
     ngImport: i0,
     type: HttpClientTestingModule,
     deps: [],
@@ -278,14 +279,14 @@ class HttpClientTestingModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "21.0.2+sha-0f50ea8",
+    version: "21.0.2+sha-20474d3",
     ngImport: i0,
     type: HttpClientTestingModule,
     imports: [HttpClientModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "21.0.2+sha-0f50ea8",
+    version: "21.0.2+sha-20474d3",
     ngImport: i0,
     type: HttpClientTestingModule,
     providers: [provideHttpClientTesting()],
@@ -294,7 +295,7 @@ class HttpClientTestingModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.0.2+sha-0f50ea8",
+  version: "21.0.2+sha-20474d3",
   ngImport: i0,
   type: HttpClientTestingModule,
   decorators: [{
