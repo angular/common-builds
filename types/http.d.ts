@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.3+sha-5b911d6
+ * @license Angular v21.0.3+sha-56418b1
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4542,7 +4542,7 @@ type HttpTransferCacheOptions = {
  * between those origins, so that `HttpTransferCache` feature can recognize those requests as the same
  * ones and reuse the data cached on the server during hydration on the client.
  *
- * **Important note**: the `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token should *only* be provided in
+ * IMPORTANT: The `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token should *only* be provided in
  * the *server* code of your application (typically in the `app.server.config.ts` script). Angular throws an
  * error if it detects that the token is defined while running on the client.
  *
