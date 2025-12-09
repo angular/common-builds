@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.3+sha-7f96799
+ * @license Angular v21.0.3+sha-96bb4c6
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -575,8 +575,8 @@ function encodeUriQuery(val, pctEncodeSpaces = false) {
   return encodeURIComponent(val).replace(/%40/g, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%3B/gi, ';').replace(/%20/g, pctEncodeSpaces ? '%20' : '+');
 }
 
-const LOCATION_UPGRADE_CONFIGURATION = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'LOCATION_UPGRADE_CONFIGURATION' : '');
-const APP_BASE_HREF_RESOLVED = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'APP_BASE_HREF_RESOLVED' : '');
+const LOCATION_UPGRADE_CONFIGURATION = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'LOCATION_UPGRADE_CONFIGURATION' : '');
+const APP_BASE_HREF_RESOLVED = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'APP_BASE_HREF_RESOLVED' : '');
 class LocationUpgradeModule {
   static config(config) {
     return {
@@ -601,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.0.3+sha-7f96799",
+    version: "21.0.3+sha-96bb4c6",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -609,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "21.0.3+sha-7f96799",
+    version: "21.0.3+sha-96bb4c6",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "21.0.3+sha-7f96799",
+    version: "21.0.3+sha-96bb4c6",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -624,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.0.3+sha-7f96799",
+  version: "21.0.3+sha-96bb4c6",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{

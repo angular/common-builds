@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.3+sha-7f96799
+ * @license Angular v21.0.3+sha-96bb4c6
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -161,14 +161,14 @@ class HttpResourceImpl extends _ResourceImpl {
   }
 }
 
-const HTTP_TRANSFER_CACHE_ORIGIN_MAP = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'HTTP_TRANSFER_CACHE_ORIGIN_MAP' : '');
+const HTTP_TRANSFER_CACHE_ORIGIN_MAP = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'HTTP_TRANSFER_CACHE_ORIGIN_MAP' : '');
 const BODY = 'b';
 const HEADERS = 'h';
 const STATUS = 's';
 const STATUS_TEXT = 'st';
 const REQ_URL = 'u';
 const RESPONSE_TYPE = 'rt';
-const CACHE_OPTIONS = new InjectionToken(typeof ngDevMode !== undefined && ngDevMode ? 'HTTP_TRANSFER_STATE_CACHE_OPTIONS' : '');
+const CACHE_OPTIONS = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'HTTP_TRANSFER_STATE_CACHE_OPTIONS' : '');
 const ALLOWED_METHODS = ['GET', 'HEAD'];
 function transferCacheInterceptorFn(req, next) {
   const {
