@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.4+sha-5a146b3
+ * @license Angular v21.1.0-next.4+sha-d868a5b
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -63,7 +63,7 @@ class NavigationAdapterForLocation extends Location {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: NavigationAdapterForLocation,
     deps: [],
@@ -71,14 +71,14 @@ class NavigationAdapterForLocation extends Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: NavigationAdapterForLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-5a146b3",
+  version: "21.1.0-next.4+sha-d868a5b",
   ngImport: i0,
   type: NavigationAdapterForLocation,
   decorators: [{
@@ -100,7 +100,7 @@ function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
 
-const VERSION = /* @__PURE__ */new Version('21.1.0-next.4+sha-5a146b3');
+const VERSION = /* @__PURE__ */new Version('21.1.0-next.4+sha-d868a5b');
 
 class ViewportScroller {
   static ɵprov =
@@ -256,6 +256,13 @@ function throwUnexpectedAbsoluteUrlError(path, url) {
   throw new _RuntimeError(2959, ngDevMode && `Image loader has detected a \`<img>\` tag with an invalid \`ngSrc\` attribute: ${url}. ` + `This image loader expects \`ngSrc\` to be a relative URL - ` + `however the provided value is an absolute URL. ` + `To fix this, provide \`ngSrc\` as a path relative to the base URL ` + `configured for this loader (\`${path}\`).`);
 }
 
+function normalizeLoaderTransform(transform, separator) {
+  if (typeof transform === 'string') {
+    return transform;
+  }
+  return Object.entries(transform).map(([key, value]) => `${key}${separator}${value}`).join(',');
+}
+
 const provideCloudflareLoader = createImageLoader(createCloudflareUrl, ngDevMode ? ['https://<ZONE>/cdn-cgi/image/<OPTIONS>/<SOURCE-IMAGE>'] : undefined);
 function createCloudflareUrl(path, config) {
   let params = `format=auto`;
@@ -264,6 +271,10 @@ function createCloudflareUrl(path, config) {
   }
   if (config.isPlaceholder) {
     params += `,quality=${PLACEHOLDER_QUALITY}`;
+  }
+  if (config.loaderParams?.['transform']) {
+    const transformStr = normalizeLoaderTransform(config.loaderParams['transform'], '=');
+    params += `,${transformStr}`;
   }
   return `${path}/cdn-cgi/image/${params}/${config.src}`;
 }
@@ -285,6 +296,10 @@ function createCloudinaryUrl(path, config) {
   }
   if (config.loaderParams?.['rounded']) {
     params += `,r_max`;
+  }
+  if (config.loaderParams?.['transform']) {
+    const transformStr = normalizeLoaderTransform(config.loaderParams['transform'], '_');
+    params += `,${transformStr}`;
   }
   return `${path}/image/upload/${params}/${config.src}`;
 }
@@ -464,7 +479,7 @@ class LCPImageObserver {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: LCPImageObserver,
     deps: [],
@@ -472,7 +487,7 @@ class LCPImageObserver {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: LCPImageObserver,
     providedIn: 'root'
@@ -480,7 +495,7 @@ class LCPImageObserver {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-5a146b3",
+  version: "21.1.0-next.4+sha-d868a5b",
   ngImport: i0,
   type: LCPImageObserver,
   decorators: [{
@@ -551,7 +566,7 @@ class PreconnectLinkChecker {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: PreconnectLinkChecker,
     deps: [],
@@ -559,7 +574,7 @@ class PreconnectLinkChecker {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: PreconnectLinkChecker,
     providedIn: 'root'
@@ -567,7 +582,7 @@ class PreconnectLinkChecker {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-5a146b3",
+  version: "21.1.0-next.4+sha-d868a5b",
   ngImport: i0,
   type: PreconnectLinkChecker,
   decorators: [{
@@ -617,7 +632,7 @@ class PreloadLinkCreator {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: PreloadLinkCreator,
     deps: [],
@@ -625,7 +640,7 @@ class PreloadLinkCreator {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: PreloadLinkCreator,
     providedIn: 'root'
@@ -633,7 +648,7 @@ class PreloadLinkCreator {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-5a146b3",
+  version: "21.1.0-next.4+sha-d868a5b",
   ngImport: i0,
   type: PreloadLinkCreator,
   decorators: [{
@@ -932,7 +947,7 @@ class NgOptimizedImage {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     ngImport: i0,
     type: NgOptimizedImage,
     deps: [],
@@ -940,7 +955,7 @@ class NgOptimizedImage {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "16.1.0",
-    version: "21.1.0-next.4+sha-5a146b3",
+    version: "21.1.0-next.4+sha-d868a5b",
     type: NgOptimizedImage,
     isStandalone: true,
     selector: "img[ngSrc]",
@@ -980,7 +995,7 @@ class NgOptimizedImage {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-5a146b3",
+  version: "21.1.0-next.4+sha-d868a5b",
   ngImport: i0,
   type: NgOptimizedImage,
   decorators: [{
