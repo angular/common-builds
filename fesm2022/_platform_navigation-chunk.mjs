@@ -1,16 +1,21 @@
 /**
- * @license Angular v21.1.0-next.4+sha-91dc91b
+ * @license Angular v21.1.0-next.4+sha-53d3ae0
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { Injectable } from '@angular/core';
+import { InjectionToken, Injectable } from '@angular/core';
 
+const PRECOMMIT_HANDLER_SUPPORTED = new InjectionToken('', {
+  factory: () => {
+    return typeof window !== 'undefined' && typeof window.NavigationPrecommitController !== 'undefined';
+  }
+});
 class PlatformNavigation {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: PlatformNavigation,
     deps: [],
@@ -18,7 +23,7 @@ class PlatformNavigation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: PlatformNavigation,
     providedIn: 'platform',
@@ -27,7 +32,7 @@ class PlatformNavigation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-91dc91b",
+  version: "21.1.0-next.4+sha-53d3ae0",
   ngImport: i0,
   type: PlatformNavigation,
   decorators: [{
@@ -39,5 +44,5 @@ i0.ɵɵngDeclareClassMetadata({
   }]
 });
 
-export { PlatformNavigation };
+export { PRECOMMIT_HANDLER_SUPPORTED, PlatformNavigation };
 //# sourceMappingURL=_platform_navigation-chunk.mjs.map

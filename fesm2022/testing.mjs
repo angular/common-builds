@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.4+sha-91dc91b
+ * @license Angular v21.1.0-next.4+sha-53d3ae0
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { ɵnormalizeQueryParams as _normalizeQueryParams, LocationStrategy } fro
 import * as i0 from '@angular/core';
 import { InjectionToken, Injectable, Inject, Optional, inject, DOCUMENT } from '@angular/core';
 import { Subject } from 'rxjs';
-import { PlatformNavigation } from './_platform_navigation-chunk.mjs';
+import { PlatformNavigation, PRECOMMIT_HANDLER_SUPPORTED } from './_platform_navigation-chunk.mjs';
 import { ɵFakeNavigation as _FakeNavigation } from '@angular/core/testing';
 export { ɵFakeNavigation } from '@angular/core/testing';
 import { Location, LocationStrategy as LocationStrategy$1 } from './_location-chunk.mjs';
@@ -202,7 +202,7 @@ class MockPlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: MockPlatformLocation,
     deps: [{
@@ -213,14 +213,14 @@ class MockPlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: MockPlatformLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-91dc91b",
+  version: "21.1.0-next.4+sha-53d3ae0",
   ngImport: i0,
   type: MockPlatformLocation,
   decorators: [{
@@ -300,7 +300,7 @@ class FakeNavigationPlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: FakeNavigationPlatformLocation,
     deps: [],
@@ -308,14 +308,14 @@ class FakeNavigationPlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: FakeNavigationPlatformLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-91dc91b",
+  version: "21.1.0-next.4+sha-53d3ae0",
   ngImport: i0,
   type: FakeNavigationPlatformLocation,
   decorators: [{
@@ -343,6 +343,9 @@ function provideFakePlatformNavigation() {
   }, {
     provide: PlatformLocation,
     useClass: FakeNavigationPlatformLocation
+  }, {
+    provide: PRECOMMIT_HANDLER_SUPPORTED,
+    useValue: true
   }];
 }
 
@@ -498,7 +501,7 @@ class SpyLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: SpyLocation,
     deps: [],
@@ -506,14 +509,14 @@ class SpyLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: SpyLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-91dc91b",
+  version: "21.1.0-next.4+sha-53d3ae0",
   ngImport: i0,
   type: SpyLocation,
   decorators: [{
@@ -594,7 +597,7 @@ class MockLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: MockLocationStrategy,
     deps: [],
@@ -602,14 +605,14 @@ class MockLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-91dc91b",
+    version: "21.1.0-next.4+sha-53d3ae0",
     ngImport: i0,
     type: MockLocationStrategy
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-91dc91b",
+  version: "21.1.0-next.4+sha-53d3ae0",
   ngImport: i0,
   type: MockLocationStrategy,
   decorators: [{
