@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.0.6+sha-0ff2d5a
+ * @license Angular v21.0.6+sha-c1e9627
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -905,6 +905,7 @@ declare class NullViewportScroller implements ViewportScroller {
  * @param path Your domain name, e.g. https://mysite.com
  * @returns Provider that provides an ImageLoader function
  *
+ * @see [Image Optimization Guide](guide/image-optimization)
  * @publicApi
  */
 declare const provideCloudflareLoader: (path: string) => Provider[];
@@ -963,6 +964,7 @@ declare const IMAGE_LOADER: InjectionToken<ImageLoader>;
  * https://subdomain.mysite.com
  * @returns Set of providers to configure the Cloudinary loader.
  *
+ * @see [Image Optimization Guide](guide/image-optimization)
  * @publicApi
  */
 declare const provideCloudinaryLoader: (path: string) => Provider[];
@@ -976,6 +978,7 @@ declare const provideCloudinaryLoader: (path: string) => Provider[];
  * https://subdomain.mysite.com
  * @returns Set of providers to configure the ImageKit loader.
  *
+ * @see [Image Optimization Guide](guide/image-optimization)
  * @publicApi
  */
 declare const provideImageKitLoader: (path: string) => Provider[];
@@ -987,6 +990,7 @@ declare const provideImageKitLoader: (path: string) => Provider[];
  * e.g. https://somepath.imgix.net or https://images.mysite.com
  * @returns Set of providers to configure the Imgix loader.
  *
+ * @see [Image Optimization Guide](guide/image-optimization)
  * @publicApi
  */
 declare const provideImgixLoader: (path: string) => Provider[];
