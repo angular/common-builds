@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.4+sha-86dc128
+ * @license Angular v21.1.0-next.4+sha-a2b9429
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -124,16 +124,6 @@ interface PopStateEvent {
     url?: string;
 }
 /**
- * A token that can be provided to configure whether the `Location` service should
- * strip trailing slashes from URLs.
- *
- * If `true`, the `Location` service will remove trailing slashes from URLs.
- * If `false`, the `Location` service will not remove trailing slashes from URLs.
- *
- * @publicApi
- */
-declare const REMOVE_TRAILING_SLASH: InjectionToken<boolean>;
-/**
  * @description
  *
  * A service that applications can use to interact with a browser's URL.
@@ -148,18 +138,15 @@ declare const REMOVE_TRAILING_SLASH: InjectionToken<boolean>;
  * routing.
  *
  * `Location` is responsible for normalizing the URL against the application's base href.
- * A normalized URL is absolute from the URL host, includes the application's base href, and may
- * have a trailing slash:
+ * A normalized URL is absolute from the URL host, includes the application's base href, and has no
+ * trailing slash:
  * - `/my/app/user/123` is normalized
  * - `my/app/user/123` **is not** normalized
- * - `/my/app/user/123/` **is** normalized if `REMOVE_TRAILING_SLASH` is `false`
+ * - `/my/app/user/123/` **is not** normalized
  *
  * ### Example
  *
  * {@example common/location/ts/path_location_component.ts region='LocationComponent'}
- *
- * @see {@link LocationStrategy}
- * @see [Routing and Navigation Guide](guide/routing/common-router-tasks)
  *
  * @publicApi
  */
@@ -1996,5 +1983,5 @@ declare class CommonModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, REMOVE_TRAILING_SLASH, SlicePipe, TitleCasePipe, UpperCasePipe };
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe };
 export type { DatePipeConfig, KeyValue, PopStateEvent };
