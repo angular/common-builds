@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.0-next.4+sha-7003e8d
+ * @license Angular v21.1.0-next.4+sha-12fccc5
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31,7 +31,7 @@ class LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: LocationStrategy,
     deps: [],
@@ -39,7 +39,7 @@ class LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: LocationStrategy,
     providedIn: 'root',
@@ -48,7 +48,7 @@ class LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-7003e8d",
+  version: "21.1.0-next.4+sha-12fccc5",
   ngImport: i0,
   type: LocationStrategy,
   decorators: [{
@@ -110,7 +110,7 @@ class PathLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: PathLocationStrategy,
     deps: [{
@@ -123,7 +123,7 @@ class PathLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: PathLocationStrategy,
     providedIn: 'root'
@@ -131,7 +131,7 @@ class PathLocationStrategy extends LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-7003e8d",
+  version: "21.1.0-next.4+sha-12fccc5",
   ngImport: i0,
   type: PathLocationStrategy,
   decorators: [{
@@ -153,14 +153,25 @@ i0.ɵɵngDeclareClassMetadata({
   }]
 });
 
+const REMOVE_TRAILING_SLASH = new InjectionToken(typeof ngDevMode === 'undefined' || ngDevMode ? 'remove trailing slash' : '', {
+  factory: () => true
+});
 class Location {
   _subject = new Subject();
   _basePath;
   _locationStrategy;
   _urlChangeListeners = [];
   _urlChangeSubscription = null;
+  _stripTrailingSlash;
   constructor(locationStrategy) {
     this._locationStrategy = locationStrategy;
+    try {
+      this._stripTrailingSlash = inject(REMOVE_TRAILING_SLASH, {
+        optional: true
+      }) ?? true;
+    } catch {
+      this._stripTrailingSlash = true;
+    }
     const baseHref = this._locationStrategy.getBaseHref();
     this._basePath = _stripOrigin(stripTrailingSlash(_stripIndexHtml(baseHref)));
     this._locationStrategy.onPopState(ev => {
@@ -186,7 +197,8 @@ class Location {
     return this.path() == this.normalize(path + normalizeQueryParams(query));
   }
   normalize(url) {
-    return Location.stripTrailingSlash(_stripBasePath(this._basePath, _stripIndexHtml(url)));
+    const s = _stripBasePath(this._basePath, _stripIndexHtml(url));
+    return this._stripTrailingSlash ? Location.stripTrailingSlash(s) : s;
   }
   prepareExternalUrl(url) {
     if (url && url[0] !== '/') {
@@ -240,7 +252,7 @@ class Location {
   static stripTrailingSlash = stripTrailingSlash;
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: Location,
     deps: [{
@@ -250,7 +262,7 @@ class Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.1.0-next.4+sha-7003e8d",
+    version: "21.1.0-next.4+sha-12fccc5",
     ngImport: i0,
     type: Location,
     providedIn: 'root',
@@ -259,7 +271,7 @@ class Location {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.0-next.4+sha-7003e8d",
+  version: "21.1.0-next.4+sha-12fccc5",
   ngImport: i0,
   type: Location,
   decorators: [{
@@ -298,5 +310,5 @@ function _stripOrigin(baseHref) {
   return baseHref;
 }
 
-export { APP_BASE_HREF, Location, LocationStrategy, PathLocationStrategy, joinWithSlash, normalizeQueryParams };
+export { APP_BASE_HREF, Location, LocationStrategy, PathLocationStrategy, REMOVE_TRAILING_SLASH, joinWithSlash, normalizeQueryParams };
 //# sourceMappingURL=_location-chunk.mjs.map

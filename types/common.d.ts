@@ -1,11 +1,11 @@
 /**
- * @license Angular v21.1.0-next.4+sha-7003e8d
+ * @license Angular v21.1.0-next.4+sha-12fccc5
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import { Location, LocationStrategy } from './_common_module-chunk.js';
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, SlicePipe, TitleCasePipe, UpperCasePipe } from './_common_module-chunk.js';
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DatePipeConfig, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValue, KeyValuePipe, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, PopStateEvent, REMOVE_TRAILING_SLASH, SlicePipe, TitleCasePipe, UpperCasePipe } from './_common_module-chunk.js';
 import * as i0 from '@angular/core';
 import { InjectionToken, ɵNavigation as _Navigation, ɵNavigationHistoryEntry as _NavigationHistoryEntry, ɵNavigationUpdateCurrentEntryOptions as _NavigationUpdateCurrentEntryOptions, ɵNavigationTransition as _NavigationTransition, ɵNavigationNavigateOptions as _NavigationNavigateOptions, ɵNavigationResult as _NavigationResult, ɵNavigationReloadOptions as _NavigationReloadOptions, ɵNavigationOptions as _NavigationOptions, ɵNavigateEvent as _NavigateEvent, ɵNavigationCurrentEntryChangeEvent as _NavigationCurrentEntryChangeEvent, OnDestroy, Version, Provider, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG, ɵImageConfig as ImageConfig } from '@angular/core';
