@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.1+sha-f7eb996
+ * @license Angular v21.1.1+sha-b203ab0
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -601,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.1.1+sha-f7eb996",
+    version: "21.1.1+sha-b203ab0",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -609,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "21.1.1+sha-f7eb996",
+    version: "21.1.1+sha-b203ab0",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "21.1.1+sha-f7eb996",
+    version: "21.1.1+sha-b203ab0",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -624,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.1.1+sha-f7eb996",
+  version: "21.1.1+sha-b203ab0",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{
