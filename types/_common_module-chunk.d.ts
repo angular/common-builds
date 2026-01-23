@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.0+sha-6fb39d9
+ * @license Angular v21.2.0-next.0+sha-8bbe6dc
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -87,6 +87,9 @@ declare const APP_BASE_HREF: InjectionToken<string>;
  * the fragment in the `<base href>` will be preserved, as outlined
  * by the [RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2).
  *
+ * To ensure that trailing slashes are always present or never present in the URL, use
+ * {@link TrailingSlashPathLocationStrategy} or {@link NoTrailingSlashPathLocationStrategy}.
+ *
  * @usageNotes
  *
  * ### Example
@@ -114,6 +117,30 @@ declare class PathLocationStrategy extends LocationStrategy implements OnDestroy
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PathLocationStrategy, [null, { optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<PathLocationStrategy>;
+}
+/**
+ * A `LocationStrategy` that ensures URLs never have a trailing slash.
+ * This strategy only affects the URL written to the browser.
+ * `Location.path()` and `Location.normalize()` will continue to strip trailing slashes when reading the URL.
+ *
+ * @publicApi
+ */
+declare class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
+    prepareExternalUrl(internal: string): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NoTrailingSlashPathLocationStrategy, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<NoTrailingSlashPathLocationStrategy>;
+}
+/**
+ * A `LocationStrategy` that ensures URLs always have a trailing slash.
+ * This strategy only affects the URL written to the browser.
+ * `Location.path()` and `Location.normalize()` will continue to strip trailing slashes when reading the URL.
+ *
+ * @publicApi
+ */
+declare class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
+    prepareExternalUrl(internal: string): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<TrailingSlashPathLocationStrategy, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<TrailingSlashPathLocationStrategy>;
 }
 
 /** @publicApi */
@@ -1983,5 +2010,5 @@ declare class CommonModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<CommonModule>;
 }
 
-export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, PathLocationStrategy, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe };
+export { APP_BASE_HREF, AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, Location, LocationStrategy, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NoTrailingSlashPathLocationStrategy, PathLocationStrategy, PercentPipe, SlicePipe, TitleCasePipe, TrailingSlashPathLocationStrategy, UpperCasePipe };
 export type { DatePipeConfig, KeyValue, PopStateEvent };

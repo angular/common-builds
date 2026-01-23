@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.0+sha-6fb39d9
+ * @license Angular v21.2.0-next.0+sha-8bbe6dc
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31,7 +31,7 @@ class LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: LocationStrategy,
     deps: [],
@@ -39,7 +39,7 @@ class LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: LocationStrategy,
     providedIn: 'root',
@@ -48,7 +48,7 @@ class LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.0+sha-6fb39d9",
+  version: "21.2.0-next.0+sha-8bbe6dc",
   ngImport: i0,
   type: LocationStrategy,
   decorators: [{
@@ -110,7 +110,7 @@ class PathLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: PathLocationStrategy,
     deps: [{
@@ -123,7 +123,7 @@ class PathLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: PathLocationStrategy,
     providedIn: 'root'
@@ -131,7 +131,7 @@ class PathLocationStrategy extends LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.0+sha-6fb39d9",
+  version: "21.2.0-next.0+sha-8bbe6dc",
   ngImport: i0,
   type: PathLocationStrategy,
   decorators: [{
@@ -152,6 +152,83 @@ i0.ɵɵngDeclareClassMetadata({
     }]
   }]
 });
+class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
+  prepareExternalUrl(internal) {
+    const path = extractUrlPath(internal);
+    if (path.endsWith('/') && path.length > 1) {
+      internal = path.slice(0, -1) + internal.slice(path.length);
+    }
+    return super.prepareExternalUrl(internal);
+  }
+  static ɵfac = i0.ɵɵngDeclareFactory({
+    minVersion: "12.0.0",
+    version: "21.2.0-next.0+sha-8bbe6dc",
+    ngImport: i0,
+    type: NoTrailingSlashPathLocationStrategy,
+    deps: null,
+    target: i0.ɵɵFactoryTarget.Injectable
+  });
+  static ɵprov = i0.ɵɵngDeclareInjectable({
+    minVersion: "12.0.0",
+    version: "21.2.0-next.0+sha-8bbe6dc",
+    ngImport: i0,
+    type: NoTrailingSlashPathLocationStrategy,
+    providedIn: 'root'
+  });
+}
+i0.ɵɵngDeclareClassMetadata({
+  minVersion: "12.0.0",
+  version: "21.2.0-next.0+sha-8bbe6dc",
+  ngImport: i0,
+  type: NoTrailingSlashPathLocationStrategy,
+  decorators: [{
+    type: Injectable,
+    args: [{
+      providedIn: 'root'
+    }]
+  }]
+});
+class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
+  prepareExternalUrl(internal) {
+    const path = extractUrlPath(internal);
+    if (!path.endsWith('/')) {
+      internal = path + '/' + internal.slice(path.length);
+    }
+    return super.prepareExternalUrl(internal);
+  }
+  static ɵfac = i0.ɵɵngDeclareFactory({
+    minVersion: "12.0.0",
+    version: "21.2.0-next.0+sha-8bbe6dc",
+    ngImport: i0,
+    type: TrailingSlashPathLocationStrategy,
+    deps: null,
+    target: i0.ɵɵFactoryTarget.Injectable
+  });
+  static ɵprov = i0.ɵɵngDeclareInjectable({
+    minVersion: "12.0.0",
+    version: "21.2.0-next.0+sha-8bbe6dc",
+    ngImport: i0,
+    type: TrailingSlashPathLocationStrategy,
+    providedIn: 'root'
+  });
+}
+i0.ɵɵngDeclareClassMetadata({
+  minVersion: "12.0.0",
+  version: "21.2.0-next.0+sha-8bbe6dc",
+  ngImport: i0,
+  type: TrailingSlashPathLocationStrategy,
+  decorators: [{
+    type: Injectable,
+    args: [{
+      providedIn: 'root'
+    }]
+  }]
+});
+function extractUrlPath(url) {
+  const questionMarkOrHashIndex = url.search(/[?#]/);
+  const pathEnd = questionMarkOrHashIndex > -1 ? questionMarkOrHashIndex : url.length;
+  return url.slice(0, pathEnd);
+}
 
 class Location {
   _subject = new Subject();
@@ -240,7 +317,7 @@ class Location {
   static stripTrailingSlash = stripTrailingSlash;
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: Location,
     deps: [{
@@ -250,7 +327,7 @@ class Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.0+sha-6fb39d9",
+    version: "21.2.0-next.0+sha-8bbe6dc",
     ngImport: i0,
     type: Location,
     providedIn: 'root',
@@ -259,7 +336,7 @@ class Location {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.0+sha-6fb39d9",
+  version: "21.2.0-next.0+sha-8bbe6dc",
   ngImport: i0,
   type: Location,
   decorators: [{
@@ -298,5 +375,5 @@ function _stripOrigin(baseHref) {
   return baseHref;
 }
 
-export { APP_BASE_HREF, Location, LocationStrategy, PathLocationStrategy, joinWithSlash, normalizeQueryParams };
+export { APP_BASE_HREF, Location, LocationStrategy, NoTrailingSlashPathLocationStrategy, PathLocationStrategy, TrailingSlashPathLocationStrategy, joinWithSlash, normalizeQueryParams };
 //# sourceMappingURL=_location-chunk.mjs.map
