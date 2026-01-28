@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.1+sha-31e6f0d
+ * @license Angular v21.1.1+sha-affd236
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1036,11 +1036,9 @@ interface ImagePlaceholderConfig {
  * - Warns if the image will be visually distorted when rendered
  *
  * @usageNotes
- * The `NgOptimizedImage` directive is marked as [standalone](guide/components/importing) and can
- * be imported directly.
  *
  * Follow the steps below to enable and use the directive:
- * 1. Import it into the necessary NgModule or a standalone Component.
+ * 1. Import it into a Component.
  * 2. Optionally provide an `ImageLoader` if you use an image hosting service.
  * 3. Update the necessary `<img>` tags in templates and replace `src` attributes with `ngSrc`.
  * Using a `ngSrc` allows the directive to control when the `src` gets set, which triggers an image
@@ -1049,19 +1047,10 @@ interface ImagePlaceholderConfig {
  * Step 1: import the `NgOptimizedImage` directive.
  *
  * ```ts
- * import { NgOptimizedImage } from '@angular/common';
- *
- * // Include it into the necessary NgModule
- * @NgModule({
- *   imports: [NgOptimizedImage],
- * })
- * class AppModule {}
- *
- * // ... or a standalone Component
  * @Component({
  *   imports: [NgOptimizedImage],
  * })
- * class MyStandaloneComponent {}
+ * class MyPage {}
  * ```
  *
  * Step 2: configure a loader.
