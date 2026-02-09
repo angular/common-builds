@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.2+sha-e53c8ab
+ * @license Angular v21.2.0-next.2+sha-51cc914
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -932,6 +932,10 @@ interface ImageLoaderConfig {
      */
     width?: number;
     /**
+     * Height of the requested image (to be used when generating srcset).
+     */
+    height?: number;
+    /**
      * Whether the loader should generate a URL for a small image placeholder instead of a full-sized
      * image.
      */
@@ -1208,6 +1212,11 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     private setHostAttributes;
     /** @docs-private */
     ngOnChanges(changes: SimpleChanges): void;
+    /**
+     * Calculates the aspect ratio of the image based on width and height.
+     * Returns null if the aspect ratio cannot be calculated (missing dimensions or height is 0).
+     */
+    private getAspectRatio;
     private callImageLoader;
     private getLoadingBehavior;
     private getFetchPriority;

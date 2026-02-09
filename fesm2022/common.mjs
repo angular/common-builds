@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.2+sha-e53c8ab
+ * @license Angular v21.2.0-next.2+sha-51cc914
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -64,7 +64,7 @@ class NavigationAdapterForLocation extends Location {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: NavigationAdapterForLocation,
     deps: [],
@@ -72,14 +72,14 @@ class NavigationAdapterForLocation extends Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: NavigationAdapterForLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.2+sha-e53c8ab",
+  version: "21.2.0-next.2+sha-51cc914",
   ngImport: i0,
   type: NavigationAdapterForLocation,
   decorators: [{
@@ -101,7 +101,7 @@ function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
 
-const VERSION = /* @__PURE__ */new Version('21.2.0-next.2+sha-e53c8ab');
+const VERSION = /* @__PURE__ */new Version('21.2.0-next.2+sha-51cc914');
 
 class ViewportScroller {
   static ɵprov =
@@ -270,6 +270,9 @@ function createCloudflareUrl(path, config) {
   if (config.width) {
     params += `,width=${config.width}`;
   }
+  if (config.height) {
+    params += `,height=${config.height}`;
+  }
   if (config.isPlaceholder) {
     params += `,quality=${PLACEHOLDER_QUALITY}`;
   }
@@ -294,6 +297,9 @@ function createCloudinaryUrl(path, config) {
   let params = `f_auto,${quality}`;
   if (config.width) {
     params += `,w_${config.width}`;
+  }
+  if (config.height) {
+    params += `,h_${config.height}`;
   }
   if (config.loaderParams?.['rounded']) {
     params += `,r_max`;
@@ -323,6 +329,9 @@ function createImagekitUrl(path, config) {
   if (width) {
     params.push(`w-${width}`);
   }
+  if (config.height) {
+    params.push(`h-${config.height}`);
+  }
   if (config.isPlaceholder) {
     params.push(`q-${PLACEHOLDER_QUALITY}`);
   }
@@ -349,6 +358,9 @@ function createImgixUrl(path, config) {
   params.push('auto=format');
   if (config.width) {
     params.push(`w=${config.width}`);
+  }
+  if (config.height) {
+    params.push(`h=${config.height}`);
   }
   if (config.isPlaceholder) {
     params.push(`q=${PLACEHOLDER_QUALITY}`);
@@ -397,6 +409,9 @@ function createNetlifyUrl(config, path) {
   url.searchParams.set('url', config.src);
   if (config.width) {
     url.searchParams.set('w', config.width.toString());
+  }
+  if (config.height) {
+    url.searchParams.set('h', config.height.toString());
   }
   const configQuality = config.loaderParams?.['quality'] ?? config.loaderParams?.['q'];
   if (config.isPlaceholder && !configQuality) {
@@ -490,7 +505,7 @@ class LCPImageObserver {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: LCPImageObserver,
     deps: [],
@@ -498,7 +513,7 @@ class LCPImageObserver {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: LCPImageObserver,
     providedIn: 'root'
@@ -506,7 +521,7 @@ class LCPImageObserver {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.2+sha-e53c8ab",
+  version: "21.2.0-next.2+sha-51cc914",
   ngImport: i0,
   type: LCPImageObserver,
   decorators: [{
@@ -577,7 +592,7 @@ class PreconnectLinkChecker {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: PreconnectLinkChecker,
     deps: [],
@@ -585,7 +600,7 @@ class PreconnectLinkChecker {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: PreconnectLinkChecker,
     providedIn: 'root'
@@ -593,7 +608,7 @@ class PreconnectLinkChecker {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.2+sha-e53c8ab",
+  version: "21.2.0-next.2+sha-51cc914",
   ngImport: i0,
   type: PreconnectLinkChecker,
   decorators: [{
@@ -643,7 +658,7 @@ class PreloadLinkCreator {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: PreloadLinkCreator,
     deps: [],
@@ -651,7 +666,7 @@ class PreloadLinkCreator {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: PreloadLinkCreator,
     providedIn: 'root'
@@ -659,7 +674,7 @@ class PreloadLinkCreator {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.2+sha-e53c8ab",
+  version: "21.2.0-next.2+sha-51cc914",
   ngImport: i0,
   type: PreloadLinkCreator,
   decorators: [{
@@ -821,10 +836,20 @@ class NgOptimizedImage {
       assertPlaceholderDimensions(this, this.imgElement);
     }
   }
+  getAspectRatio() {
+    if (this.width && this.height && this.height !== 0) {
+      return this.width / this.height;
+    }
+    return null;
+  }
   callImageLoader(configWithoutCustomParams) {
     let augmentedConfig = configWithoutCustomParams;
     if (this.loaderParams) {
       augmentedConfig.loaderParams = this.loaderParams;
+    }
+    const ratio = this.getAspectRatio();
+    if (ratio !== null && augmentedConfig.width) {
+      augmentedConfig.height = Math.round(augmentedConfig.width / ratio);
     }
     return this.imageLoader(augmentedConfig);
   }
@@ -958,7 +983,7 @@ class NgOptimizedImage {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     ngImport: i0,
     type: NgOptimizedImage,
     deps: [],
@@ -966,7 +991,7 @@ class NgOptimizedImage {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "16.1.0",
-    version: "21.2.0-next.2+sha-e53c8ab",
+    version: "21.2.0-next.2+sha-51cc914",
     type: NgOptimizedImage,
     isStandalone: true,
     selector: "img[ngSrc]",
@@ -1006,7 +1031,7 @@ class NgOptimizedImage {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.2+sha-e53c8ab",
+  version: "21.2.0-next.2+sha-51cc914",
   ngImport: i0,
   type: NgOptimizedImage,
   decorators: [{
