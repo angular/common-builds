@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.2+sha-4b3b149
+ * @license Angular v21.2.0-next.2+sha-cb1163e
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -208,10 +208,10 @@ function transferCacheInterceptorFn(req, next) {
     let body = undecodedBody;
     switch (responseType) {
       case 'arraybuffer':
-        body = new TextEncoder().encode(undecodedBody).buffer;
+        body = fromBase64(undecodedBody);
         break;
       case 'blob':
-        body = new Blob([undecodedBody]);
+        body = new Blob([fromBase64(undecodedBody)]);
         break;
     }
     let headers = new HttpHeaders(httpHeaders);
@@ -231,7 +231,7 @@ function transferCacheInterceptorFn(req, next) {
     return event$.pipe(tap(event => {
       if (event instanceof HttpResponse) {
         transferState.set(storeKey, {
-          [BODY]: event.body,
+          [BODY]: req.responseType === 'arraybuffer' || req.responseType === 'blob' ? toBase64(event.body) : event.body,
           [HEADERS]: getFilteredHeaders(event.headers, headersToInclude),
           [STATUS]: event.status,
           [STATUS_TEXT]: event.statusText,
@@ -286,6 +286,21 @@ function generateHash(value) {
   }
   hash += 2147483647 + 1;
   return hash.toString();
+}
+function toBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  const CHUNK_SIZE = 0x8000;
+  let binaryString = '';
+  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
+    const chunk = bytes.subarray(i, i + CHUNK_SIZE);
+    binaryString += String.fromCharCode.apply(null, chunk);
+  }
+  return btoa(binaryString);
+}
+function fromBase64(base64) {
+  const binary = atob(base64);
+  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+  return bytes.buffer;
 }
 function withHttpTransferCache(cacheOptions) {
   return [{
