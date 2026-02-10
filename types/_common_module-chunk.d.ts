@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.2+sha-0f47fda
+ * @license Angular v21.2.0-next.2+sha-18003a3
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -930,10 +930,18 @@ declare class NgTemplateOutlet<C = unknown> implements OnChanges {
      * A string defining the template reference and optionally the context object for the template.
      */
     ngTemplateOutlet: TemplateRef<C> | null | undefined;
-    /** Injector to be used within the embedded view. */
-    ngTemplateOutletInjector: Injector | null | undefined;
+    /**
+     * Injector to be used within the embedded view. A value of "outlet" can be used to indicate
+     * that the injector should be inherited from the template outlet's location in the instantiated DOM.
+     */
+    ngTemplateOutletInjector: Injector | 'outlet' | null | undefined;
+    protected injector: Injector;
     constructor(_viewContainerRef: ViewContainerRef);
     ngOnChanges(changes: SimpleChanges): void;
+    /**
+     * Gets the injector to use for the template outlet based on ngTemplateOutletInjector.
+     */
+    private _getInjector;
     /**
      * We need to re-create existing embedded view if either is true:
      * - the outlet changed.
