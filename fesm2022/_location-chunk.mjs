@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.3+sha-2d99878
+ * @license Angular v21.2.0-next.3+sha-a6a0347
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31,7 +31,7 @@ class LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: LocationStrategy,
     deps: [],
@@ -39,7 +39,7 @@ class LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: LocationStrategy,
     providedIn: 'root',
@@ -48,7 +48,7 @@ class LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-2d99878",
+  version: "21.2.0-next.3+sha-a6a0347",
   ngImport: i0,
   type: LocationStrategy,
   decorators: [{
@@ -110,7 +110,7 @@ class PathLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: PathLocationStrategy,
     deps: [{
@@ -123,7 +123,7 @@ class PathLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: PathLocationStrategy,
     providedIn: 'root'
@@ -131,7 +131,7 @@ class PathLocationStrategy extends LocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-2d99878",
+  version: "21.2.0-next.3+sha-a6a0347",
   ngImport: i0,
   type: PathLocationStrategy,
   decorators: [{
@@ -162,7 +162,7 @@ class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: NoTrailingSlashPathLocationStrategy,
     deps: null,
@@ -170,7 +170,7 @@ class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: NoTrailingSlashPathLocationStrategy,
     providedIn: 'root'
@@ -178,7 +178,7 @@ class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-2d99878",
+  version: "21.2.0-next.3+sha-a6a0347",
   ngImport: i0,
   type: NoTrailingSlashPathLocationStrategy,
   decorators: [{
@@ -198,7 +198,7 @@ class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: TrailingSlashPathLocationStrategy,
     deps: null,
@@ -206,7 +206,7 @@ class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: TrailingSlashPathLocationStrategy,
     providedIn: 'root'
@@ -214,7 +214,7 @@ class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-2d99878",
+  version: "21.2.0-next.3+sha-a6a0347",
   ngImport: i0,
   type: TrailingSlashPathLocationStrategy,
   decorators: [{
@@ -317,7 +317,7 @@ class Location {
   static stripTrailingSlash = stripTrailingSlash;
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: Location,
     deps: [{
@@ -327,7 +327,7 @@ class Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-2d99878",
+    version: "21.2.0-next.3+sha-a6a0347",
     ngImport: i0,
     type: Location,
     providedIn: 'root',
@@ -336,7 +336,7 @@ class Location {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-2d99878",
+  version: "21.2.0-next.3+sha-a6a0347",
   ngImport: i0,
   type: Location,
   decorators: [{
