@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.1.4+sha-5cf357b
+ * @license Angular v21.1.4+sha-55b501a
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1117,7 +1117,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     /**
      * Calculate the rewritten `src` once and store it.
      * This is needed to avoid repetitive calculations and make sure the directive cleanup in the
-     * `ngOnDestroy` does not rely on the `IMAGE_LOADER` logic (which in turn can rely on some other
+     * `DestroyRef.onDestroy` does not rely on the `IMAGE_LOADER` logic (which in turn can rely on some other
      * instance that might be already destroyed).
      */
     private _renderedSrc;
@@ -1207,7 +1207,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     ngOnInit(): void;
     private setHostAttributes;
     /** @docs-private */
-    ngOnChanges(changes: SimpleChanges): void;
+    ngOnChanges(changes: SimpleChanges<NgOptimizedImage>): void;
     private callImageLoader;
     private getLoadingBehavior;
     private getFetchPriority;
