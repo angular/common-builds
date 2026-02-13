@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.3+sha-5b59dbd
+ * @license Angular v21.2.0-next.3+sha-ddfc833
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -64,7 +64,7 @@ class NavigationAdapterForLocation extends Location {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: NavigationAdapterForLocation,
     deps: [],
@@ -72,14 +72,14 @@ class NavigationAdapterForLocation extends Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: NavigationAdapterForLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-5b59dbd",
+  version: "21.2.0-next.3+sha-ddfc833",
   ngImport: i0,
   type: NavigationAdapterForLocation,
   decorators: [{
@@ -101,7 +101,7 @@ function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
 
-const VERSION = /* @__PURE__ */new Version('21.2.0-next.3+sha-5b59dbd');
+const VERSION = /* @__PURE__ */new Version('21.2.0-next.3+sha-ddfc833');
 
 class ViewportScroller {
   static ɵprov =
@@ -474,7 +474,7 @@ class LCPImageObserver {
     });
     return observer;
   }
-  registerImage(rewrittenSrc, originalNgSrc, isPriority) {
+  registerImage(rewrittenSrc, isPriority) {
     if (!this.observer) return;
     const newObservedImageState = {
       priority: isPriority,
@@ -505,7 +505,7 @@ class LCPImageObserver {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: LCPImageObserver,
     deps: [],
@@ -513,7 +513,7 @@ class LCPImageObserver {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: LCPImageObserver,
     providedIn: 'root'
@@ -521,7 +521,7 @@ class LCPImageObserver {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-5b59dbd",
+  version: "21.2.0-next.3+sha-ddfc833",
   ngImport: i0,
   type: LCPImageObserver,
   decorators: [{
@@ -592,7 +592,7 @@ class PreconnectLinkChecker {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: PreconnectLinkChecker,
     deps: [],
@@ -600,7 +600,7 @@ class PreconnectLinkChecker {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: PreconnectLinkChecker,
     providedIn: 'root'
@@ -608,7 +608,7 @@ class PreconnectLinkChecker {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-5b59dbd",
+  version: "21.2.0-next.3+sha-ddfc833",
   ngImport: i0,
   type: PreconnectLinkChecker,
   decorators: [{
@@ -658,7 +658,7 @@ class PreloadLinkCreator {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: PreloadLinkCreator,
     deps: [],
@@ -666,7 +666,7 @@ class PreloadLinkCreator {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: PreloadLinkCreator,
     providedIn: 'root'
@@ -674,7 +674,7 @@ class PreloadLinkCreator {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-5b59dbd",
+  version: "21.2.0-next.3+sha-ddfc833",
   ngImport: i0,
   type: PreloadLinkCreator,
   decorators: [{
@@ -771,7 +771,7 @@ class NgOptimizedImage {
       assertNoNgSrcsetWithoutLoader(this, this.imageLoader);
       assertNoLoaderParamsWithoutLoader(this, this.imageLoader);
       ngZone.runOutsideAngular(() => {
-        this.lcpObserver.registerImage(this.getRewrittenSrc(), this.ngSrc, this.priority);
+        this.lcpObserver.registerImage(this.getRewrittenSrc(), this.priority);
       });
       if (this.priority) {
         const checker = this.injector.get(PreconnectLinkChecker);
@@ -983,7 +983,7 @@ class NgOptimizedImage {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     ngImport: i0,
     type: NgOptimizedImage,
     deps: [],
@@ -991,7 +991,7 @@ class NgOptimizedImage {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "16.1.0",
-    version: "21.2.0-next.3+sha-5b59dbd",
+    version: "21.2.0-next.3+sha-ddfc833",
     type: NgOptimizedImage,
     isStandalone: true,
     selector: "img[ngSrc]",
@@ -1031,7 +1031,7 @@ class NgOptimizedImage {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.0-next.3+sha-5b59dbd",
+  version: "21.2.0-next.3+sha-ddfc833",
   ngImport: i0,
   type: NgOptimizedImage,
   decorators: [{

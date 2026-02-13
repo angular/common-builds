@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.0-next.3+sha-5b59dbd
+ * @license Angular v21.2.0-next.3+sha-ddfc833
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1121,7 +1121,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     /**
      * Calculate the rewritten `src` once and store it.
      * This is needed to avoid repetitive calculations and make sure the directive cleanup in the
-     * `ngOnDestroy` does not rely on the `IMAGE_LOADER` logic (which in turn can rely on some other
+     * `DestroyRef.onDestroy` does not rely on the `IMAGE_LOADER` logic (which in turn can rely on some other
      * instance that might be already destroyed).
      */
     private _renderedSrc;
@@ -1211,7 +1211,7 @@ declare class NgOptimizedImage implements OnInit, OnChanges {
     ngOnInit(): void;
     private setHostAttributes;
     /** @docs-private */
-    ngOnChanges(changes: SimpleChanges): void;
+    ngOnChanges(changes: SimpleChanges<NgOptimizedImage>): void;
     /**
      * Calculates the aspect ratio of the image based on width and height.
      * Returns null if the aspect ratio cannot be calculated (missing dimensions or height is 0).
