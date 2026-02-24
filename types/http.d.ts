@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-8f5214e
+ * @license Angular v22.0.0-next.0+sha-8af73eb
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4093,7 +4093,8 @@ declare enum HttpFeatureKind {
     NoXsrfProtection = 3,
     JsonpSupport = 4,
     RequestsMadeViaParent = 5,
-    Fetch = 6
+    Fetch = 6,
+    Xhr = 7
 }
 /**
  * A feature for use when configuring `provideHttpClient`.
@@ -4131,7 +4132,7 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
  * @see {@link withNoXsrfProtection}
  * @see {@link withJsonpSupport}
  * @see {@link withRequestsMadeViaParent}
- * @see {@link withFetch}
+ * @see {@link withXhr}
  */
 declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): EnvironmentProviders;
 /**
@@ -4212,6 +4213,15 @@ declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.Reques
  * @publicApi
  */
 declare function withFetch(): HttpFeature<HttpFeatureKind.Fetch>;
+/**
+ * Configures the current `HttpClient` instance to make requests using the Xhr API.
+ *
+ * Use this feature if you want to report progress on uploads as the Xhr API supports it.
+ *
+ * @see {@link provideHttpClient}
+ * @publicApi
+ */
+declare function withXhr(): HttpFeature<HttpFeatureKind.Xhr>;
 
 /**
  * The structure of an `httpResource` request which will be sent to the backend.
@@ -4616,5 +4626,5 @@ declare abstract class HttpXsrfTokenExtractor {
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
 }
 
-export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
+export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
 export type { HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };
