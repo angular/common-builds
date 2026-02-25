@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-957466d
+ * @license Angular v22.0.0-next.0+sha-f9d8da6
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1080,6 +1080,9 @@ declare class HttpClientXsrfModule {
  *
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in DI token `HTTP_INTERCEPTORS`.
+ *
+ * When importing the `HttpClientModule`, the `HttpBackend` is set to using the `HttpXhrBackend`.
+ * If you want to use the `FetchBackend`, use `provideHttpClient` instead.
  *
  * @publicApi
  * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead
