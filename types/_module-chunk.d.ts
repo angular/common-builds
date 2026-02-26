@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-d1ebbbe
+ * @license Angular v22.0.0-next.0+sha-03db2ae
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -381,7 +381,8 @@ declare class HttpRequest<T> {
      * Progress events are expensive (change detection runs on each event) and so
      * they should only be requested if the consumer intends to monitor them.
      *
-     * Note: The `FetchBackend` doesn't support progress report on uploads.
+     * Note: The default `HttpBackend` based on fetch, does not support progress report for uploads.
+     * Set the `HttpXhrBackend` with `withXhr()` if you need this feature.
      */
     readonly reportProgress: boolean;
     /**

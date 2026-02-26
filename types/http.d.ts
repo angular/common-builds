@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-d1ebbbe
+ * @license Angular v22.0.0-next.0+sha-03db2ae
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4211,6 +4211,7 @@ declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.Reques
  * @see [Advanced fetch Options](guide/http/making-requests#advanced-fetch-options)
  *
  * @publicApi
+ * @deprecated `withFetch` is not required anymore. `FetchBackend` is the default `HttpBackend`.
  */
 declare function withFetch(): HttpFeature<HttpFeatureKind.Fetch>;
 /**
