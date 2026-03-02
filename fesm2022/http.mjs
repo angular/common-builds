@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-35175b0
+ * @license Angular v22.0.0-next.0+sha-2206efa
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -293,11 +293,11 @@ function makeHttpResourceFn(responseType) {
       }
       return undefined;
     };
-    return new HttpResourceImpl(injector, () => normalizeRequest(request, responseType), options?.defaultValue, options?.debugName, options?.parse, options?.equal, getInitialStream);
+    return new HttpResourceImpl(injector, ctx => normalizeRequest(ctx, request, responseType), options?.defaultValue, options?.debugName, options?.parse, options?.equal, getInitialStream);
   };
 }
-function normalizeRequest(request, responseType) {
-  let unwrappedRequest = typeof request === 'function' ? request() : request;
+function normalizeRequest(ctx, request, responseType) {
+  let unwrappedRequest = typeof request === 'function' ? request(ctx) : request;
   if (unwrappedRequest === undefined) {
     return undefined;
   } else if (typeof unwrappedRequest === 'string') {

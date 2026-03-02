@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-35175b0
+ * @license Angular v22.0.0-next.0+sha-2206efa
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from './_module-chunk.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import * as i0 from '@angular/core';
-import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
+import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal, ResourceParamsContext } from '@angular/core';
 import { XhrFactory } from './_xhr-chunk.js';
 
 /**
@@ -4411,7 +4411,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(url: () => string | undefined, options: HttpResourceOptions<TResult, unknown> & {
+    <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
     }): HttpResourceRef<TResult>;
     /**
@@ -4425,7 +4425,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(url: () => string | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
      *
@@ -4437,7 +4437,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, unknown> & {
+    <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
     }): HttpResourceRef<TResult>;
     /**
@@ -4451,7 +4451,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
      *
@@ -4463,14 +4463,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     arrayBuffer: {
-        <TResult = ArrayBuffer>(url: () => string | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
+        <TResult = ArrayBuffer>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = ArrayBuffer>(url: () => string | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
-        <TResult = ArrayBuffer>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
+        <TResult = ArrayBuffer>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+        <TResult = ArrayBuffer>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = ArrayBuffer>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+        <TResult = ArrayBuffer>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
     };
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
@@ -4483,14 +4483,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     blob: {
-        <TResult = Blob>(url: () => string | undefined, options: HttpResourceOptions<TResult, Blob> & {
+        <TResult = Blob>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, Blob> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = Blob>(url: () => string | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
-        <TResult = Blob>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, Blob> & {
+        <TResult = Blob>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+        <TResult = Blob>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, Blob> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = Blob>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+        <TResult = Blob>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
     };
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
@@ -4503,14 +4503,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     text: {
-        <TResult = string>(url: () => string | undefined, options: HttpResourceOptions<TResult, string> & {
+        <TResult = string>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, string> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = string>(url: () => string | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
-        <TResult = string>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, string> & {
+        <TResult = string>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+        <TResult = string>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, string> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = string>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+        <TResult = string>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
     };
 }
 /**
