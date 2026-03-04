@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.0+sha-d9e40cb
+ * @license Angular v22.0.0-next.0+sha-0c40212
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -8,9 +8,37 @@ import { HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse, HttpHeaders, HttpParams, HttpR
 export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './_module-chunk.mjs';
 import { InjectionToken, ɵperformanceMarkFeature as _performanceMarkFeature, APP_BOOTSTRAP_LISTENER, inject, ApplicationRef, TransferState, makeStateKey, ɵRuntimeError as _RuntimeError, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError, assertInInjectionContext, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, ɵencapsulateResourceError as _encapsulateResourceError } from '@angular/core';
 import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import './_xhr-chunk.mjs';
 import './_platform_location-chunk.mjs';
+
+function hasToBase64(u8) {
+  return typeof u8.toBase64 === 'function';
+}
+function hasFromBase64(ctor) {
+  return typeof ctor.fromBase64 === 'function';
+}
+function toBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  if (hasToBase64(bytes)) {
+    return bytes.toBase64();
+  }
+  const CHUNK_SIZE = 0x8000;
+  let binaryString = '';
+  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
+    const chunk = bytes.subarray(i, i + CHUNK_SIZE);
+    binaryString += String.fromCharCode.apply(null, chunk);
+  }
+  return btoa(binaryString);
+}
+function fromBase64(base64) {
+  if (hasFromBase64(Uint8Array)) {
+    return Uint8Array.fromBase64(base64).buffer;
+  }
+  const binary = atob(base64);
+  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+  return bytes.buffer;
+}
 
 const HTTP_TRANSFER_CACHE_ORIGIN_MAP = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'HTTP_TRANSFER_CACHE_ORIGIN_MAP' : '');
 const BODY = 'b';
@@ -112,10 +140,17 @@ function transferCacheInterceptorFn(req, next) {
   }
   const event$ = next(req);
   if (typeof ngServerMode !== 'undefined' && ngServerMode) {
-    return event$.pipe(tap(event => {
+    return event$.pipe(concatMap(async event => {
       if (event instanceof HttpResponse) {
+        let body = event.body;
+        if (req.responseType === 'blob') {
+          const arrayBuffer = await event.body.arrayBuffer();
+          body = toBase64(arrayBuffer);
+        } else if (req.responseType === 'arraybuffer') {
+          body = toBase64(event.body);
+        }
         transferState.set(storeKey, {
-          [BODY]: req.responseType === 'arraybuffer' || req.responseType === 'blob' ? toBase64(event.body) : event.body,
+          [BODY]: body,
           [HEADERS]: getFilteredHeaders(event.headers, headersToInclude),
           [STATUS]: event.status,
           [STATUS_TEXT]: event.statusText,
@@ -123,6 +158,7 @@ function transferCacheInterceptorFn(req, next) {
           [RESPONSE_TYPE]: req.responseType
         });
       }
+      return event;
     }));
   }
   return event$;
@@ -170,21 +206,6 @@ function generateHash(value) {
   }
   hash += 2147483647 + 1;
   return hash.toString();
-}
-function toBase64(buffer) {
-  const bytes = new Uint8Array(buffer);
-  const CHUNK_SIZE = 0x8000;
-  let binaryString = '';
-  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
-    const chunk = bytes.subarray(i, i + CHUNK_SIZE);
-    binaryString += String.fromCharCode.apply(null, chunk);
-  }
-  return btoa(binaryString);
-}
-function fromBase64(base64) {
-  const binary = atob(base64);
-  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-  return bytes.buffer;
 }
 function withHttpTransferCache(cacheOptions) {
   return [{
