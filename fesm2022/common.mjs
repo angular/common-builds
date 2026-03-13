@@ -1,19 +1,19 @@
 /**
- * @license Angular v21.2.4+sha-334ae10
+ * @license Angular v21.2.4+sha-21cab20
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
+import { Location, LocationStrategy, normalizeQueryParams } from './_location-chunk.mjs';
+export { APP_BASE_HREF, NoTrailingSlashPathLocationStrategy, PathLocationStrategy, TrailingSlashPathLocationStrategy } from './_location-chunk.mjs';
 export { AsyncPipe, CommonModule, CurrencyPipe, DATE_PIPE_DEFAULT_OPTIONS, DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, DecimalPipe, FormStyle, FormatWidth, HashLocationStrategy, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, LowerCasePipe, NgClass, NgComponentOutlet, NgForOf as NgFor, NgForOf, NgForOfContext, NgIf, NgIfContext, NgLocaleLocalization, NgLocalization, NgPlural, NgPluralCase, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet, NumberFormatStyle, NumberSymbol, PercentPipe, Plural, SlicePipe, TitleCasePipe, TranslationWidth, UpperCasePipe, WeekDay, formatCurrency, formatDate, formatNumber, formatPercent, getCurrencySymbol, getLocaleCurrencyCode, getLocaleCurrencyName, getLocaleCurrencySymbol, getLocaleDateFormat, getLocaleDateTimeFormat, getLocaleDayNames, getLocaleDayPeriods, getLocaleDirection, getLocaleEraNames, getLocaleExtraDayPeriodRules, getLocaleExtraDayPeriods, getLocaleFirstDayOfWeek, getLocaleId, getLocaleMonthNames, getLocaleNumberFormat, getLocaleNumberSymbol, getLocalePluralCase, getLocaleTimeFormat, getLocaleWeekEndRange, getNumberOfCurrencyDigits } from './_common_module-chunk.mjs';
+export { BrowserPlatformLocation, LOCATION_INITIALIZED, PlatformLocation, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter } from './_platform_location-chunk.mjs';
 import * as i0 from '@angular/core';
-import { inject, DestroyRef, Injectable, ɵregisterLocaleData as _registerLocaleData, Version, ɵɵdefineInjectable as __defineInjectable, DOCUMENT, ɵformatRuntimeError as _formatRuntimeError, InjectionToken, ɵRuntimeError as _RuntimeError, ɵIMAGE_CONFIG as _IMAGE_CONFIG, Renderer2, ElementRef, Injector, ɵperformanceMarkFeature as _performanceMarkFeature, NgZone, ApplicationRef, numberAttribute, booleanAttribute, Directive, Input, ɵIMAGE_CONFIG_DEFAULTS as _IMAGE_CONFIG_DEFAULTS, ɵunwrapSafeValue as _unwrapSafeValue, ChangeDetectorRef } from '@angular/core';
+import { inject, DestroyRef, Injectable, ɵregisterLocaleData as _registerLocaleData, Version, ɵɵdefineInjectable as __defineInjectable, DOCUMENT, ɵformatRuntimeError as _formatRuntimeError, InjectionToken, ɵRuntimeError as _RuntimeError, ɵIMAGE_CONFIG as _IMAGE_CONFIG, Renderer2, ElementRef, Injector, ɵperformanceMarkFeature as _performanceMarkFeature, NgZone, ApplicationRef, booleanAttribute, numberAttribute, ChangeDetectorRef, ɵIMAGE_CONFIG_DEFAULTS as _IMAGE_CONFIG_DEFAULTS, ɵunwrapSafeValue as _unwrapSafeValue, Input, Directive } from '@angular/core';
 export { DOCUMENT, ɵIMAGE_CONFIG as IMAGE_CONFIG } from '@angular/core';
 import { PlatformNavigation } from './_platform_navigation-chunk.mjs';
 export { PRECOMMIT_HANDLER_SUPPORTED as ɵPRECOMMIT_HANDLER_SUPPORTED } from './_platform_navigation-chunk.mjs';
 export { XhrFactory, parseCookieValue as ɵparseCookieValue } from './_xhr-chunk.mjs';
-import { Location, LocationStrategy, normalizeQueryParams } from './_location-chunk.mjs';
-export { APP_BASE_HREF, NoTrailingSlashPathLocationStrategy, PathLocationStrategy, TrailingSlashPathLocationStrategy } from './_location-chunk.mjs';
-export { BrowserPlatformLocation, LOCATION_INITIALIZED, PlatformLocation, DomAdapter as ɵDomAdapter, getDOM as ɵgetDOM, setRootDomAdapter as ɵsetRootDomAdapter } from './_platform_location-chunk.mjs';
 import 'rxjs';
 
 class NavigationAdapterForLocation extends Location {
@@ -64,7 +64,7 @@ class NavigationAdapterForLocation extends Location {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: NavigationAdapterForLocation,
     deps: [],
@@ -72,14 +72,14 @@ class NavigationAdapterForLocation extends Location {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: NavigationAdapterForLocation
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: NavigationAdapterForLocation,
   decorators: [{
@@ -101,7 +101,7 @@ function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
 
-const VERSION = /* @__PURE__ */new Version('21.2.4+sha-334ae10');
+const VERSION = /* @__PURE__ */new Version('21.2.4+sha-21cab20');
 
 class ViewportScroller {
   static ɵprov =
@@ -538,7 +538,7 @@ class LCPImageObserver {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: LCPImageObserver,
     deps: [],
@@ -546,7 +546,7 @@ class LCPImageObserver {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: LCPImageObserver,
     providedIn: 'root'
@@ -554,7 +554,7 @@ class LCPImageObserver {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: LCPImageObserver,
   decorators: [{
@@ -625,7 +625,7 @@ class PreconnectLinkChecker {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: PreconnectLinkChecker,
     deps: [],
@@ -633,7 +633,7 @@ class PreconnectLinkChecker {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: PreconnectLinkChecker,
     providedIn: 'root'
@@ -641,7 +641,7 @@ class PreconnectLinkChecker {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: PreconnectLinkChecker,
   decorators: [{
@@ -691,7 +691,7 @@ class PreloadLinkCreator {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: PreloadLinkCreator,
     deps: [],
@@ -699,7 +699,7 @@ class PreloadLinkCreator {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: PreloadLinkCreator,
     providedIn: 'root'
@@ -707,7 +707,7 @@ class PreloadLinkCreator {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: PreloadLinkCreator,
   decorators: [{
@@ -1016,7 +1016,7 @@ class NgOptimizedImage {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: NgOptimizedImage,
     deps: [],
@@ -1024,7 +1024,7 @@ class NgOptimizedImage {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "16.1.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     type: NgOptimizedImage,
     isStandalone: true,
     selector: "img[ngSrc]",
@@ -1064,7 +1064,7 @@ class NgOptimizedImage {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: NgOptimizedImage,
   decorators: [{

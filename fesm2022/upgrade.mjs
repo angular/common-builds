@@ -1,11 +1,11 @@
 /**
- * @license Angular v21.2.4+sha-334ae10
+ * @license Angular v21.2.4+sha-21cab20
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import * as i0 from '@angular/core';
-import { ɵisPromise as _isPromise, InjectionToken, NgModule, inject } from '@angular/core';
+import { ɵisPromise as _isPromise, InjectionToken, inject, NgModule } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { CommonModule, HashLocationStrategy } from './_common_module-chunk.mjs';
@@ -601,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -609,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "21.2.4+sha-334ae10",
+    version: "21.2.4+sha-21cab20",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -624,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "21.2.4+sha-334ae10",
+  version: "21.2.4+sha-21cab20",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{
