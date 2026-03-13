@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.3+sha-412788f
+ * @license Angular v22.0.0-next.3+sha-e127927
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -7,7 +7,7 @@
 import * as i0 from '@angular/core';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpResponse, HttpErrorResponse, HttpStatusCode, HttpEventType, HttpBackend, REQUESTS_CONTRIBUTE_TO_STABILITY, HttpClientModule } from './_module-chunk.mjs';
+import { HttpHeaders, HttpResponse, HttpStatusCode, HttpErrorResponse, HttpEventType, HttpBackend, REQUESTS_CONTRIBUTE_TO_STABILITY, HttpClientModule } from './_module-chunk.mjs';
 import 'rxjs/operators';
 import './_xhr-chunk.mjs';
 import './_platform_location-chunk.mjs';
@@ -227,7 +227,7 @@ class HttpClientTestingBackend {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.0.0-next.3+sha-412788f",
+    version: "22.0.0-next.3+sha-e127927",
     ngImport: i0,
     type: HttpClientTestingBackend,
     deps: [],
@@ -235,14 +235,14 @@ class HttpClientTestingBackend {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.0.0-next.3+sha-412788f",
+    version: "22.0.0-next.3+sha-e127927",
     ngImport: i0,
     type: HttpClientTestingBackend
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.0.0-next.3+sha-412788f",
+  version: "22.0.0-next.3+sha-e127927",
   ngImport: i0,
   type: HttpClientTestingBackend,
   decorators: [{
@@ -271,7 +271,7 @@ function provideHttpClientTesting() {
 class HttpClientTestingModule {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.0.0-next.3+sha-412788f",
+    version: "22.0.0-next.3+sha-e127927",
     ngImport: i0,
     type: HttpClientTestingModule,
     deps: [],
@@ -279,14 +279,14 @@ class HttpClientTestingModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.0.0-next.3+sha-412788f",
+    version: "22.0.0-next.3+sha-e127927",
     ngImport: i0,
     type: HttpClientTestingModule,
     imports: [HttpClientModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.0.0-next.3+sha-412788f",
+    version: "22.0.0-next.3+sha-e127927",
     ngImport: i0,
     type: HttpClientTestingModule,
     providers: [provideHttpClientTesting()],
@@ -295,7 +295,7 @@ class HttpClientTestingModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.0.0-next.3+sha-412788f",
+  version: "22.0.0-next.3+sha-e127927",
   ngImport: i0,
   type: HttpClientTestingModule,
   decorators: [{

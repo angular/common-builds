@@ -1,12 +1,12 @@
 /**
- * @license Angular v22.0.0-next.3+sha-412788f
+ * @license Angular v22.0.0-next.3+sha-e127927
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
-import { HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse, HttpHeaders, HttpParams, HttpRequest, HttpEventType, HttpErrorResponse, HttpClient } from './_module-chunk.mjs';
+import { HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse, HttpHeaders, HttpErrorResponse, HttpEventType, HttpClient, HttpParams, HttpRequest } from './_module-chunk.mjs';
 export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './_module-chunk.mjs';
-import { InjectionToken, ɵperformanceMarkFeature as _performanceMarkFeature, APP_BOOTSTRAP_LISTENER, inject, ApplicationRef, TransferState, makeStateKey, ɵRuntimeError as _RuntimeError, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError, assertInInjectionContext, Injector, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, signal, ɵencapsulateResourceError as _encapsulateResourceError } from '@angular/core';
+import { InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, inject, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError, assertInInjectionContext, Injector, signal, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ɵencapsulateResourceError as _encapsulateResourceError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import './_xhr-chunk.mjs';
