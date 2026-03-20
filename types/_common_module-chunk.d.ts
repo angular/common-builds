@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.4+sha-50e599e
+ * @license Angular v22.0.0-next.4+sha-621c908
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -321,7 +321,7 @@ declare class Location implements OnDestroy {
  * @publicApi
  */
 declare abstract class NgLocalization {
-    abstract getPluralCategory(value: any, locale?: string): string;
+    abstract getPluralCategory(value: number, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgLocalization, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<NgLocalization>;
 }
@@ -333,7 +333,7 @@ declare abstract class NgLocalization {
 declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
     constructor(locale: string);
-    getPluralCategory(value: any, locale?: string): string;
+    getPluralCategory(value: number, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgLocaleLocalization, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<NgLocaleLocalization>;
 }
@@ -1399,7 +1399,7 @@ declare class JsonPipe implements PipeTransform {
     /**
      * @param value A value of any type to convert into a JSON-format string.
      */
-    transform(value: any): string;
+    transform(value: unknown): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonPipe, never>;
     static ɵpipe: i0.ɵɵPipeDeclaration<JsonPipe, "json", true>;
 }
