@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.4+sha-6d2eed6
+ * @license Angular v22.0.0-next.4+sha-2615f35
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4108,6 +4108,8 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
 /**
  * Configures Angular's `HttpClient` service to be available for injection.
  *
+ * The `HttpClient` service is provided in the root by default.
+ *
  * By default, `HttpClient` will be configured for injection with its default options for XSRF
  * protection of outgoing requests. Additional configuration options can be provided by passing
  * feature functions to `provideHttpClient`. For example, HTTP interceptors can be added using the
@@ -4115,16 +4117,18 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
  *
  * <div class="docs-alert docs-alert-helpful">
  *
- * It's strongly recommended to enable
- * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for applications that use
- * Server-Side Rendering for better performance and compatibility. To enable `fetch`, add
- * `withFetch()` feature to the `provideHttpClient()` call at the root of the application:
+ * By default, `HttpClient` uses the
+ * [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make requests.
+ * This is strongly recommended for applications that use
+ * Server-Side Rendering for better performance and compatibility.
+ * To use the `XMLHttpRequest` API instead, add the {@link withXhr} feature:
  *
  * ```ts
- * provideHttpClient(withFetch());
+ * provideHttpClient(withXhr());
  * ```
  *
  * </div>
+ *
  * @see [HTTP Client](guide/http/setup)
  * @see {@link withInterceptors}
  * @see {@link withInterceptorsFromDi}
