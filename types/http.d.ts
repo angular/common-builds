@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.7+sha-43ba6b6
+ * @license Angular v22.0.0-next.7+sha-39e382a
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4042,6 +4042,7 @@ declare class JsonpClientBackend implements HttpBackend {
      * A resolved promise that can be used to schedule microtasks in the event handlers.
      */
     private readonly resolvedPromise;
+    private readonly nonce;
     constructor(callbackMap: JsonpCallbackContext, document: any);
     /**
      * Get the name of the next callback method, by incrementing the global `nextRequestId`.
