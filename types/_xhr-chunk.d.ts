@@ -1,8 +1,10 @@
 /**
- * @license Angular v22.0.0-next.7+sha-f25c7ce
+ * @license Angular v22.0.0-next.7+sha-70368ea
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
+
+import * as i0 from '@angular/core';
 
 /**
  * A wrapper around the `XMLHttpRequest` constructor.
@@ -11,6 +13,8 @@
  */
 declare abstract class XhrFactory {
     abstract build(): XMLHttpRequest;
+    static ɵfac: i0.ɵɵFactoryDeclaration<XhrFactory, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<XhrFactory>;
 }
 
 export { XhrFactory };
