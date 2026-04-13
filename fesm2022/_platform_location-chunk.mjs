@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.7+sha-973ede6
+ * @license Angular v22.0.0-next.7+sha-5f74e7e
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -22,7 +22,7 @@ class PlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.0.0-next.7+sha-973ede6",
+    version: "22.0.0-next.7+sha-5f74e7e",
     ngImport: i0,
     type: PlatformLocation,
     deps: [],
@@ -30,7 +30,7 @@ class PlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.0.0-next.7+sha-973ede6",
+    version: "22.0.0-next.7+sha-5f74e7e",
     ngImport: i0,
     type: PlatformLocation,
     providedIn: 'platform',
@@ -39,7 +39,7 @@ class PlatformLocation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.0.0-next.7+sha-973ede6",
+  version: "22.0.0-next.7+sha-5f74e7e",
   ngImport: i0,
   type: PlatformLocation,
   decorators: [{
@@ -117,7 +117,7 @@ class BrowserPlatformLocation extends PlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.0.0-next.7+sha-973ede6",
+    version: "22.0.0-next.7+sha-5f74e7e",
     ngImport: i0,
     type: BrowserPlatformLocation,
     deps: [],
@@ -125,7 +125,7 @@ class BrowserPlatformLocation extends PlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.0.0-next.7+sha-973ede6",
+    version: "22.0.0-next.7+sha-5f74e7e",
     ngImport: i0,
     type: BrowserPlatformLocation,
     providedIn: 'platform',
@@ -134,7 +134,7 @@ class BrowserPlatformLocation extends PlatformLocation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.0.0-next.7+sha-973ede6",
+  version: "22.0.0-next.7+sha-5f74e7e",
   ngImport: i0,
   type: BrowserPlatformLocation,
   decorators: [{
