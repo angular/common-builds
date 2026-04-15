@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.8+sha-c326548
+ * @license Angular v21.3.0-next.0+sha-4835277
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -381,8 +381,7 @@ declare class HttpRequest<T> {
      * Progress events are expensive (change detection runs on each event) and so
      * they should only be requested if the consumer intends to monitor them.
      *
-     * Note: The default `HttpBackend` based on fetch, does not support progress report for uploads.
-     * Set the `HttpXhrBackend` with `withXhr()` if you need this feature.
+     * Note: The `FetchBackend` doesn't support progress report on uploads.
      */
     readonly reportProgress: boolean;
     /**
@@ -1081,9 +1080,6 @@ declare class HttpClientXsrfModule {
  *
  * You can add interceptors to the chain behind `HttpClient` by binding them to the
  * multiprovider for built-in DI token `HTTP_INTERCEPTORS`.
- *
- * When importing the `HttpClientModule`, the `HttpBackend` is set to using the `HttpXhrBackend`.
- * If you want to use the `FetchBackend`, use `provideHttpClient` instead.
  *
  * @publicApi
  * @deprecated use `provideHttpClient(withInterceptorsFromDi())` as providers instead

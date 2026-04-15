@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.8+sha-c326548
+ * @license Angular v21.3.0-next.0+sha-4835277
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from './_module-chunk.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import * as i0 from '@angular/core';
-import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal, ResourceParamsContext } from '@angular/core';
+import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal } from '@angular/core';
 import { XhrFactory } from './_xhr-chunk.js';
 
 /**
@@ -4094,8 +4094,7 @@ declare enum HttpFeatureKind {
     NoXsrfProtection = 3,
     JsonpSupport = 4,
     RequestsMadeViaParent = 5,
-    Fetch = 6,
-    Xhr = 7
+    Fetch = 6
 }
 /**
  * A feature for use when configuring `provideHttpClient`.
@@ -4109,8 +4108,6 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
 /**
  * Configures Angular's `HttpClient` service to be available for injection.
  *
- * The `HttpClient` service is provided in the root by default.
- *
  * By default, `HttpClient` will be configured for injection with its default options for XSRF
  * protection of outgoing requests. Additional configuration options can be provided by passing
  * feature functions to `provideHttpClient`. For example, HTTP interceptors can be added using the
@@ -4118,18 +4115,16 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
  *
  * <div class="docs-alert docs-alert-helpful">
  *
- * By default, `HttpClient` uses the
- * [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make requests.
- * This is strongly recommended for applications that use
- * Server-Side Rendering for better performance and compatibility.
- * To use the `XMLHttpRequest` API instead, add the {@link withXhr} feature:
+ * It's strongly recommended to enable
+ * [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for applications that use
+ * Server-Side Rendering for better performance and compatibility. To enable `fetch`, add
+ * `withFetch()` feature to the `provideHttpClient()` call at the root of the application:
  *
  * ```ts
- * provideHttpClient(withXhr());
+ * provideHttpClient(withFetch());
  * ```
  *
  * </div>
- *
  * @see [HTTP Client](guide/http/setup)
  * @see {@link withInterceptors}
  * @see {@link withInterceptorsFromDi}
@@ -4137,7 +4132,7 @@ interface HttpFeature<KindT extends HttpFeatureKind> {
  * @see {@link withNoXsrfProtection}
  * @see {@link withJsonpSupport}
  * @see {@link withRequestsMadeViaParent}
- * @see {@link withXhr}
+ * @see {@link withFetch}
  */
 declare function provideHttpClient(...features: HttpFeature<HttpFeatureKind>[]): EnvironmentProviders;
 /**
@@ -4216,18 +4211,8 @@ declare function withRequestsMadeViaParent(): HttpFeature<HttpFeatureKind.Reques
  * @see [Advanced fetch Options](guide/http/making-requests#advanced-fetch-options)
  *
  * @publicApi
- * @deprecated `withFetch` is not required anymore. `FetchBackend` is the default `HttpBackend`.
  */
 declare function withFetch(): HttpFeature<HttpFeatureKind.Fetch>;
-/**
- * Configures the current `HttpClient` instance to make requests using the Xhr API.
- *
- * Use this feature if you want to report progress on uploads as the Xhr API supports it.
- *
- * @see {@link provideHttpClient}
- * @publicApi
- */
-declare function withXhr(): HttpFeature<HttpFeatureKind.Xhr>;
 
 /**
  * The structure of an `httpResource` request which will be sent to the backend.
@@ -4416,7 +4401,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, unknown> & {
+    <TResult = unknown>(url: () => string | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
     }): HttpResourceRef<TResult>;
     /**
@@ -4430,7 +4415,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    <TResult = unknown>(url: () => string | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
      *
@@ -4442,7 +4427,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, unknown> & {
+    <TResult = unknown>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
     }): HttpResourceRef<TResult>;
     /**
@@ -4456,7 +4441,7 @@ interface HttpResourceFn {
      *
      * @experimental 19.2
      */
-    <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
+    <TResult = unknown>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
      *
@@ -4468,14 +4453,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     arrayBuffer: {
-        <TResult = ArrayBuffer>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
+        <TResult = ArrayBuffer>(url: () => string | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = ArrayBuffer>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
-        <TResult = ArrayBuffer>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
+        <TResult = ArrayBuffer>(url: () => string | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+        <TResult = ArrayBuffer>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = ArrayBuffer>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
+        <TResult = ArrayBuffer>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, ArrayBuffer>): HttpResourceRef<TResult | undefined>;
     };
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
@@ -4488,14 +4473,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     blob: {
-        <TResult = Blob>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, Blob> & {
+        <TResult = Blob>(url: () => string | undefined, options: HttpResourceOptions<TResult, Blob> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = Blob>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
-        <TResult = Blob>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, Blob> & {
+        <TResult = Blob>(url: () => string | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+        <TResult = Blob>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, Blob> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = Blob>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
+        <TResult = Blob>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, Blob>): HttpResourceRef<TResult | undefined>;
     };
     /**
      * Create a `Resource` that fetches data with the configured HTTP request.
@@ -4508,14 +4493,14 @@ interface HttpResourceFn {
      * @experimental 19.2
      */
     text: {
-        <TResult = string>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, string> & {
+        <TResult = string>(url: () => string | undefined, options: HttpResourceOptions<TResult, string> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = string>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
-        <TResult = string>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, string> & {
+        <TResult = string>(url: () => string | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+        <TResult = string>(request: () => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, string> & {
             defaultValue: NoInfer<TResult>;
         }): HttpResourceRef<TResult>;
-        <TResult = string>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
+        <TResult = string>(request: () => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, string>): HttpResourceRef<TResult | undefined>;
     };
 }
 /**
@@ -4632,5 +4617,5 @@ declare abstract class HttpXsrfTokenExtractor {
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
 }
 
-export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
+export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
 export type { HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };
