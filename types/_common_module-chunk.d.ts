@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.7+sha-8b4581d
+ * @license Angular v22.0.0-next.7+sha-281a2db
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -462,6 +462,8 @@ declare class NgClass implements DoCheck {
  *
  * @publicApi
  * @ngModule CommonModule
+ *
+ * @see [Using NgComponentOutlet](guide/components/programmatic-rendering#using-ngcomponentoutlet)
  */
 declare class NgComponentOutlet<T = any> implements OnChanges, DoCheck, OnDestroy {
     private _viewContainerRef;
@@ -915,6 +917,8 @@ declare class NgIfContext<T = unknown> {
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
  * @publicApi
+ *
+ * @see [Using NgTemplateOutlet](guide/templates/ng-template#using-ngtemplateoutlet)
  */
 declare class NgTemplateOutlet<C = unknown> implements OnChanges {
     private _viewContainerRef;
