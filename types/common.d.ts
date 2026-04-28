@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.10+sha-d07f502
+ * @license Angular v21.2.10+sha-10ad3c0
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -866,6 +866,7 @@ declare abstract class ViewportScroller {
     /**
      * Scrolls to an anchor element.
      * @param anchor The ID of the anchor element.
+     * @param options Scroll options
      */
     abstract scrollToAnchor(anchor: string, options?: ScrollOptions): void;
     /**
@@ -943,7 +944,7 @@ declare class NullViewportScroller implements ViewportScroller {
     /**
      * Empty implementation
      */
-    scrollToAnchor(anchor: string): void;
+    scrollToAnchor(anchor: string, options?: ScrollOptions): void;
     /**
      * Empty implementation
      */
