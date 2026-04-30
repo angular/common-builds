@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.10+sha-4c9afb6
+ * @license Angular v22.0.0-next.10+sha-ebffd80
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -347,6 +347,42 @@ declare class HttpParams {
     private init;
 }
 
+type HttpResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
+type HttpTransferCacheRequestOptions = {
+    includeHeaders?: string[];
+} | boolean;
+/**
+ * Options to configure the `HttpRequest`, like headers, parameters, etc.
+ *
+ * @publicApi 22.0
+ */
+interface HttpRequestOptions {
+    headers?: HttpHeaders;
+    context?: HttpContext;
+    reportProgress?: boolean;
+    params?: HttpParams;
+    responseType?: HttpResponseType;
+    withCredentials?: boolean;
+    credentials?: RequestCredentials;
+    keepalive?: boolean;
+    priority?: RequestPriority;
+    cache?: RequestCache;
+    mode?: RequestMode;
+    redirect?: RequestRedirect;
+    referrer?: string;
+    integrity?: string;
+    referrerPolicy?: ReferrerPolicy;
+    /**
+     * This property accepts either a boolean to enable/disable transferring cache for eligible
+     * requests performed using `HttpClient`, or an object, which allows to configure cache
+     * parameters, such as which headers should be included (no headers are included by default).
+     *
+     * Setting this property will override the options passed to `provideClientHydration()` for this
+     * particular request
+     */
+    transferCache?: HttpTransferCacheRequestOptions;
+    timeout?: number;
+}
 /**
  * An outgoing HTTP request with an optional typed body.
  *
@@ -357,7 +393,7 @@ declare class HttpParams {
  *
  * @publicApi
  */
-declare class HttpRequest<T> {
+declare class HttpRequest<T> implements HttpRequestOptions {
     readonly url: string;
     /**
      * The request body, or `null` if one isn't set.
@@ -439,7 +475,7 @@ declare class HttpRequest<T> {
      * This is used to parse the response appropriately before returning it to
      * the requestee.
      */
-    readonly responseType: 'arraybuffer' | 'blob' | 'json' | 'text';
+    readonly responseType: HttpResponseType;
     /**
      * The outgoing HTTP request method.
      */
@@ -462,136 +498,16 @@ declare class HttpRequest<T> {
     /**
      * The HttpTransferCache option for the request
      */
-    readonly transferCache?: {
-        includeHeaders?: string[];
-    } | boolean;
+    readonly transferCache?: HttpTransferCacheRequestOptions;
     /**
      * The timeout for the backend HTTP request in ms.
      */
     readonly timeout?: number;
-    constructor(method: 'GET' | 'HEAD', url: string, init?: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        /**
-         * This property accepts either a boolean to enable/disable transferring cache for eligible
-         * requests performed using `HttpClient`, or an object, which allows to configure cache
-         * parameters, such as which headers should be included (no headers are included by default).
-         *
-         * Setting this property will override the options passed to `provideClientHydration()` for this
-         * particular request
-         */
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    });
-    constructor(method: 'DELETE' | 'JSONP' | 'OPTIONS', url: string, init?: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        timeout?: number;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-    });
-    constructor(method: 'POST', url: string, body: T | null, init?: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        /**
-         * This property accepts either a boolean to enable/disable transferring cache for eligible
-         * requests performed using `HttpClient`, or an object, which allows to configure cache
-         * parameters, such as which headers should be included (no headers are included by default).
-         *
-         * Setting this property will override the options passed to `provideClientHydration()` for this
-         * particular request
-         */
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    });
-    constructor(method: 'PUT' | 'PATCH', url: string, body: T | null, init?: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        timeout?: number;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-    });
-    constructor(method: string, url: string, body: T | null, init?: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        /**
-         * This property accepts either a boolean to enable/disable transferring cache for eligible
-         * requests performed using `HttpClient`, or an object, which allows to configure cache
-         * parameters, such as which headers should be included (no headers are included by default).
-         *
-         * Setting this property will override the options passed to `provideClientHydration()` for this
-         * particular request
-         */
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    });
+    constructor(method: 'GET' | 'HEAD', url: string, init?: HttpRequestOptions);
+    constructor(method: 'DELETE' | 'JSONP' | 'OPTIONS', url: string, init?: HttpRequestOptions);
+    constructor(method: 'POST', url: string, body: T | null, init?: HttpRequestOptions);
+    constructor(method: 'PUT' | 'PATCH', url: string, body: T | null, init?: HttpRequestOptions);
+    constructor(method: string, url: string, body: T | null, init?: HttpRequestOptions);
     /**
      * Transform the free-form body into a serialized format suitable for
      * transmission to the server.
@@ -605,26 +521,7 @@ declare class HttpRequest<T> {
      */
     detectContentTypeHeader(): string | null;
     clone(): HttpRequest<T>;
-    clone(update: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
+    clone(update: HttpRequestOptions & {
         body?: T | null;
         method?: string;
         url?: string;
@@ -635,26 +532,7 @@ declare class HttpRequest<T> {
             [param: string]: string;
         };
     }): HttpRequest<T>;
-    clone<V>(update: {
-        headers?: HttpHeaders;
-        context?: HttpContext;
-        reportProgress?: boolean;
-        params?: HttpParams;
-        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
+    clone<V>(update: HttpRequestOptions & {
         body?: V | null;
         method?: string;
         url?: string;
@@ -1109,4 +987,4 @@ declare class HttpClientJsonpModule {
 }
 
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpHeaders, HttpParams, HttpRequest, HttpResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec };
-export type { HttpDownloadProgressEvent, HttpEvent, HttpParameterCodec, HttpParamsOptions, HttpProgressEvent, HttpSentEvent, HttpUploadProgressEvent, HttpUserEvent };
+export type { HttpDownloadProgressEvent, HttpEvent, HttpParameterCodec, HttpParamsOptions, HttpProgressEvent, HttpRequestOptions, HttpSentEvent, HttpUploadProgressEvent, HttpUserEvent };

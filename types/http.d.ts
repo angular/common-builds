@@ -1,11 +1,11 @@
 /**
- * @license Angular v22.0.0-next.10+sha-4c9afb6
+ * @license Angular v22.0.0-next.10+sha-ebffd80
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import { Observable } from 'rxjs';
-import { HttpRequest, HttpEvent, HttpHeaders, HttpContext, HttpParams, HttpResponse, HttpProgressEvent } from './_module-chunk.js';
+import { HttpRequest, HttpEvent, HttpRequestOptions, HttpHeaders, HttpParams, HttpResponse, HttpProgressEvent, HttpContext } from './_module-chunk.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import * as i0 from '@angular/core';
 import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal, ResourceParamsContext } from '@angular/core';
@@ -55,6 +55,20 @@ declare abstract class HttpHandler {
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpHandler>;
 }
 
+/**
+ * Common options for HttpClient requests.
+ *
+ * @publicApi 22.0
+ */
+interface HttpClientCommonOptions extends Omit<HttpRequestOptions, 'headers' | 'params'> {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: 'body' | 'events' | 'response';
+    params?: HttpParams | {
+        [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
+    };
+}
 /**
  * Performs HTTP requests.
  * This service is available as an injectable class, with methods to perform HTTP requests.
@@ -130,26 +144,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
      * Constructs a request that interprets the body as a blob and returns
      * the response as a blob.
@@ -162,27 +159,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
      * Constructs a request that interprets the body as a text string and
      * returns a string value.
@@ -195,27 +174,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a request that interprets the body as an `ArrayBuffer` and returns the
      * the full event stream.
@@ -229,27 +190,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         observe: 'events';
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a request that interprets the body as a `Blob` and returns
      * the full event stream.
@@ -263,27 +206,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a request which interprets the body as a text string and returns the full event
      * stream.
@@ -297,27 +222,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
      * event stream.
@@ -331,27 +238,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        reportProgress?: boolean;
         observe: 'events';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<any>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<any>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
      * event stream.
@@ -365,27 +254,9 @@ declare class HttpClient {
      */
     request<R>(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        reportProgress?: boolean;
         observe: 'events';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<R>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<R>>;
     /**
      * Constructs a request which interprets the body as an `ArrayBuffer`
      * and returns the full `HttpResponse`.
@@ -398,27 +269,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a request which interprets the body as a `Blob` and returns the full `HttpResponse`.
      *
@@ -430,27 +283,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a request which interprets the body as a text stream and returns the full
      * `HttpResponse`.
@@ -463,27 +298,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
      * `HttpResponse`.
@@ -497,27 +314,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        reportProgress?: boolean;
         observe: 'response';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns
      * the full `HttpResponse` with the response body in the requested type.
@@ -530,26 +329,9 @@ declare class HttpClient {
      */
     request<R>(method: string, url: string, options: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        reportProgress?: boolean;
         observe: 'response';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-    }): Observable<HttpResponse<R>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<R>>;
     /**
      * Constructs a request which interprets the body as a JavaScript object and returns the full
      * `HttpResponse` as a JavaScript object.
@@ -562,27 +344,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options?: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        reportProgress?: boolean;
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Object>;
+    } & HttpClientCommonOptions): Observable<Object>;
     /**
      * Constructs a request which interprets the body as a JavaScript object
      * with the response body of the requested type.
@@ -595,27 +359,9 @@ declare class HttpClient {
      */
     request<R>(method: string, url: string, options?: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         responseType?: 'json';
-        reportProgress?: boolean;
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<R>;
+    } & HttpClientCommonOptions): Observable<R>;
     /**
      * Constructs a request where response type and requested observable are not known statically.
      *
@@ -627,27 +373,9 @@ declare class HttpClient {
      */
     request(method: string, url: string, options?: {
         body?: any;
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
         observe?: 'body' | 'events' | 'response';
-        reportProgress?: boolean;
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<any>;
+    } & HttpClientCommonOptions): Observable<any>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
      *  and returns the response as an `ArrayBuffer`.
@@ -658,24 +386,10 @@ declare class HttpClient {
      * @return  An `Observable` of the response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
         body?: any | null;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob` and returns
      * the response as a `Blob`.
@@ -686,25 +400,10 @@ declare class HttpClient {
      * @return An `Observable` of the response body as a `Blob`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text string and returns
      * a string.
@@ -715,25 +414,10 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body of type string.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer`
      *  and returns the full event stream.
@@ -745,25 +429,10 @@ declare class HttpClient {
      * with response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob`
      *  and returns the full event stream.
@@ -775,25 +444,10 @@ declare class HttpClient {
      * `Blob`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text string
      * and returns the full event stream.
@@ -805,25 +459,10 @@ declare class HttpClient {
      * body of type string.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a `DELETE` request that interprets the body as JSON
      * and returns the full event stream.
@@ -835,25 +474,10 @@ declare class HttpClient {
      * type `Object`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `DELETE`request that interprets the body as JSON
      * and returns the full event stream.
@@ -865,25 +489,10 @@ declare class HttpClient {
      * body in the requested type.
      */
     delete<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | (string | number | boolean)[]>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs a `DELETE` request that interprets the body as an `ArrayBuffer` and returns
      *  the full `HttpResponse`.
@@ -894,25 +503,10 @@ declare class HttpClient {
      * @return An `Observable` of the full `HttpResponse`, with the response body as an `ArrayBuffer`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a `Blob` and returns the full
      * `HttpResponse`.
@@ -923,25 +517,10 @@ declare class HttpClient {
      * @return An `Observable` of the `HttpResponse`, with the response body of type `Blob`.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `DELETE` request that interprets the body as a text stream and
      *  returns the full `HttpResponse`.
@@ -952,25 +531,10 @@ declare class HttpClient {
      * @return An `Observable` of the full `HttpResponse`, with the response body of type string.
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a `DELETE` request the interprets the body as a JavaScript object and returns
      * the full `HttpResponse`.
@@ -982,25 +546,10 @@ declare class HttpClient {
      *
      */
     delete(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `DELETE` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
@@ -1011,25 +560,10 @@ declare class HttpClient {
      * @return An `Observable` of the `HttpResponse`, with the response body of the requested type.
      */
     delete<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
      * Constructs a `DELETE` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
@@ -1040,25 +574,10 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body of type `Object`.
      */
     delete(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<Object>;
+    } & HttpClientCommonOptions): Observable<Object>;
     /**
      * Constructs a DELETE request that interprets the body as JSON and returns
      * the response in a given type.
@@ -1069,25 +588,10 @@ declare class HttpClient {
      * @return An `Observable` of the `HttpResponse`, with response body in the requested type.
      */
     delete<T>(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
         body?: any | null;
-    }): Observable<T>;
+    } & HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns the
      * response in an `ArrayBuffer`.
@@ -1098,27 +602,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob`
      * and returns the response as a `Blob`.
@@ -1129,27 +615,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
      * Constructs a `GET` request that interprets the body as a text string
      * and returns the response as a string value.
@@ -1160,27 +628,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body of type string.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and returns
      *  the full event stream.
@@ -1192,27 +642,9 @@ declare class HttpClient {
      * body as an `ArrayBuffer`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
      * returns the full event stream.
@@ -1223,27 +655,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text string and returns
      * the full event stream.
@@ -1254,27 +668,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body of type string.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON
      * and returns the full event stream.
@@ -1285,27 +681,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body of type `Object`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns the full
      * event stream.
@@ -1316,27 +694,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with a response body in the requested type.
      */
     get<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs a `GET` request that interprets the body as an `ArrayBuffer` and
      * returns the full `HttpResponse`.
@@ -1348,27 +708,9 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `GET` request that interprets the body as a `Blob` and
      * returns the full `HttpResponse`.
@@ -1380,27 +722,9 @@ declare class HttpClient {
      * with the response body as a `Blob`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `GET` request that interprets the body as a text stream and
      * returns the full `HttpResponse`.
@@ -1412,27 +736,9 @@ declare class HttpClient {
      * with the response body of type string.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
      * returns the full `HttpResponse`.
@@ -1444,59 +750,22 @@ declare class HttpClient {
      * with the response body of type `Object`.
      */
     get(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `GET` request that interprets the body as JSON and
-     * returns the full `HttpResponse`.
+     * Constructs a `GET` request that interprets the body as JSON and returns
+     * the full `HttpResponse` with the response body in the requested type.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the full `HttpResponse` for the request,
-     * with a response body in the requested type.
+     * @return An `Observable` of the full `HttpResponse`, with the response body in the requested type.
      */
     get<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
@@ -1508,27 +777,9 @@ declare class HttpClient {
      * @return An `Observable` of the response body as a JavaScript object.
      */
     get(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Object>;
+    } & HttpClientCommonOptions): Observable<Object>;
     /**
      * Constructs a `GET` request that interprets the body as JSON and returns
      * the response body in a given type.
@@ -1539,27 +790,9 @@ declare class HttpClient {
      * @return An `Observable` of the `HttpResponse`, with a response body in the requested type.
      */
     get<T>(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<T>;
+    } & HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer` and
      * returns the response as an `ArrayBuffer`.
@@ -1570,473 +803,197 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
-     * the response as a `Blob`.
+     * Constructs a \`HEAD\` request that interprets the body as a \`Blob\` and returns
+     * the response as a \`Blob\`.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return  An `Observable` of the response, with the response body as a `Blob`.
+     * @return  An \`Observable\` of the response, with the response body as a \`Blob\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a text string and returns the response
+     * Constructs a \`HEAD\` request that interprets the body as a text string and returns the response
      * as a string value.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the response, with the response body of type string.
+     * @return An \`Observable\` of the response, with the response body of type string.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
-     * Constructs a `HEAD` request that interprets the body as an  `ArrayBuffer`
+     * Constructs a \`HEAD\` request that interprets the body as an  \`ArrayBuffer\`
      *  and returns the full event stream.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of all `HttpEvent`s for the request,
-     * with the response body as an `ArrayBuffer`.
+     * @return An \`Observable\` of all \`HttpEvent\`s for the request,
+     * with the response body as an \`ArrayBuffer\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a `Blob` and
+     * Constructs a \`HEAD\` request that interprets the body as a \`Blob\` and
      * returns the full event stream.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of all `HttpEvent`s for the request,
-     * with the response body as a `Blob`.
+     * @return An \`Observable\` of all \`HttpEvent\`s for the request,
+     * with the response body as a \`Blob\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a text string
+     * Constructs a \`HEAD\` request that interprets the body as a text string
      * and returns the full event stream.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of all `HttpEvent`s for the request, with the response body of type
+     * @return An \`Observable\` of all \`HttpEvent\`s for the request, with the response body of type
      * string.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as JSON
+     * Constructs a \`HEAD\` request that interprets the body as JSON
      * and returns the full HTTP event stream.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of all `HttpEvent`s for the request, with a response body of
-     * type `Object`.
+     * @return An \`Observable\` of all \`HttpEvent\`s for the request, with a response body of
+     * type \`Object\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as JSON and
+     * Constructs a \`HEAD\` request that interprets the body as JSON and
      * returns the full event stream.
      *
-     * @return An `Observable` of all the `HttpEvent`s for the request,
+     * @return An \`Observable\` of all the \`HttpEvent\`s for the request,
      * with a response body in the requested type.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      */
     head<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as an `ArrayBuffer`
+     * Constructs a \`HEAD\` request that interprets the body as an \`ArrayBuffer\`
      *  and returns the full HTTP response.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
-     * with the response body as an `ArrayBuffer`.
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
+     * with the response body as an \`ArrayBuffer\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as a `Blob` and returns
-     * the full `HttpResponse`.
+     * Constructs a \`HEAD\` request that interprets the body as a \`Blob\` and returns
+     * the full \`HttpResponse\`.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with the response body as a blob.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as text stream
-     * and returns the full `HttpResponse`.
+     * Constructs a \`HEAD\` request that interprets the body as text stream
+     * and returns the full \`HttpResponse\`.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with the response body of type string.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as JSON and
-     * returns the full `HttpResponse`.
+     * Constructs a \`HEAD\` request that interprets the body as JSON and
+     * returns the full \`HttpResponse\`.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
-     * with the response body of type `Object`.
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
+     * with the response body of type \`Object\`.
      */
     head(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
-     * Constructs a `HEAD` request that interprets the body as JSON
-     * and returns the full `HttpResponse`.
+     * Constructs a \`HEAD\` request that interprets the body as JSON
+     * and returns the full \`HttpResponse\`.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with a response body of the requested type.
      */
     head<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
   
-     * Constructs a `HEAD` request that interprets the body as JSON and
+     * Constructs a \`HEAD\` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
+     * @return An \`Observable\` of the response, with the response body as an object parsed from JSON.
      */
-    head(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Object>;
+    head(url: string, options?: HttpClientCommonOptions): Observable<Object>;
     /**
-     * Constructs a `HEAD` request that interprets the body as JSON and returns
+     * Constructs a \`HEAD\` request that interprets the body as JSON and returns
      * the response in a given type.
      *
      * @param url     The endpoint URL.
      * @param options The HTTP options to send with the request.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with a response body of the given type.
      */
-    head<T>(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<T>;
+    head<T>(url: string, options?: HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `JSONP` request for the given URL and name of the callback parameter.
      *
@@ -2069,80 +1026,35 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a `Blob` and returns
-     * the response as a `Blob`.
+     * Constructs an \`OPTIONS\` request that interprets the body as a \`Blob\` and returns
+     * the response as a \`Blob\`.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as a `Blob`.
+     * @return An \`Observable\` of the response, with the response body as a \`Blob\`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a text string and
+     * Constructs an \`OPTIONS\` request that interprets the body as a text string and
      * returns a string value.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body of type string.
+     * @return An \`Observable\` of the response, with the response body of type string.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
      *  and returns the full event stream.
@@ -2154,140 +1066,65 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a `Blob` and
+     * Constructs an \`OPTIONS\` request that interprets the body as a \`Blob\` and
      * returns the full event stream.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of all `HttpEvent`s for the request,
-     * with the response body as a `Blob`.
+     * @return An \`Observable\` of all \`HttpEvent\`s for the request,
+     * with the response body as a \`Blob\`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a text string
+     * Constructs an \`OPTIONS\` request that interprets the body as a text string
      * and returns the full event stream.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of all the `HttpEvent`s for the request,
+     * @return An \`Observable\` of all the \`HttpEvent\`s for the request,
      * with the response body of type string.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as JSON
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON
      * and returns the full event stream.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of all the `HttpEvent`s for the request with the response
-     * body of type `Object`.
+     * @return An \`Observable\` of all the \`HttpEvent\`s for the request with the response
+     * body of type \`Object\`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as JSON and
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON and
      * returns the full event stream.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of all the `HttpEvent`s for the request,
+     * @return An \`Observable\` of all the \`HttpEvent\`s for the request,
      * with a response body in the requested type.
      */
     options<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs an `OPTIONS` request that interprets the body as an `ArrayBuffer`
      *  and returns the full HTTP response.
@@ -2299,197 +1136,86 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as a `Blob`
-     *  and returns the full `HttpResponse`.
+     * Constructs an \`OPTIONS\` request that interprets the body as a \`Blob\`
+     *  and returns the full \`HttpResponse\`.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
-     * with the response body as a `Blob`.
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
+     * with the response body as a \`Blob\`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as text stream
-     * and returns the full `HttpResponse`.
+     * Constructs an \`OPTIONS\` request that interprets the body as text stream
+     * and returns the full \`HttpResponse\`.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with the response body of type string.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as JSON
-     * and returns the full `HttpResponse`.
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON
+     * and returns the full \`HttpResponse\`.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
-     * with the response body of type `Object`.
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
+     * with the response body of type \`Object\`.
      */
     options(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as JSON and
-     * returns the full `HttpResponse`.
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON and
+     * returns the full \`HttpResponse\`.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the `HttpResponse` for the request,
+     * @return An \`Observable\` of the \`HttpResponse\` for the request,
      * with a response body in the requested type.
      */
     options<T>(url: string, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
   
-     * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON and returns the
      * response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
+     * @return An \`Observable\` of the response, with the response body as an object parsed from JSON.
      */
-    options(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Object>;
+    options(url: string, options?: HttpClientCommonOptions): Observable<Object>;
     /**
-     * Constructs an `OPTIONS` request that interprets the body as JSON and returns the
+     * Constructs an \`OPTIONS\` request that interprets the body as JSON and returns the
      * response in a given type.
      *
      * @param url The endpoint URL.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the `HttpResponse`, with a response body of the given type.
+     * @return An \`Observable\` of the \`HttpResponse\`, with a response body of the given type.
      */
-    options<T>(url: string, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<T>;
+    options<T>(url: string, options?: HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and returns
      * the response as an `ArrayBuffer`.
@@ -2501,82 +1227,37 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the response
-     * as a `Blob`.
+     * Constructs a \`PATCH\` request that interprets the body as a \`Blob\` and returns the response
+     * as a \`Blob\`.
      *
      * @param url The endpoint URL.
      * @param body The resources to edit.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as a `Blob`.
+     * @return An \`Observable\` of the response, with the response body as a \`Blob\`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
-     * Constructs a `PATCH` request that interprets the body as a text string and
+     * Constructs a \`PATCH\` request that interprets the body as a text string and
      * returns the response as a string value.
      *
      * @param url The endpoint URL.
      * @param body The resources to edit.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with a response body of type string.
+     * @return An \`Observable\` of the response, with a response body of type string.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer` and
      *  returns the full event stream.
@@ -2589,24 +1270,9 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob`
      *  and returns the full event stream.
@@ -2619,24 +1285,9 @@ declare class HttpClient {
      * response body as `Blob`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text string and
      * returns the full event stream.
@@ -2649,24 +1300,9 @@ declare class HttpClient {
      * response body of type string.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full event stream.
@@ -2679,24 +1315,9 @@ declare class HttpClient {
      * with a response body of type `Object`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full event stream.
@@ -2709,24 +1330,9 @@ declare class HttpClient {
      * with a response body in the requested type.
      */
     patch<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PATCH` request that interprets the body as an `ArrayBuffer`
      *  and returns the full `HttpResponse`.
@@ -2739,24 +1345,9 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a `Blob` and returns the full
      * `HttpResponse`.
@@ -2769,24 +1360,9 @@ declare class HttpClient {
      * with the response body as a `Blob`.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PATCH` request that interprets the body as a text stream and returns the
      * full `HttpResponse`.
@@ -2799,24 +1375,9 @@ declare class HttpClient {
      * with a response body of type string.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
@@ -2829,24 +1390,9 @@ declare class HttpClient {
      * with a response body in the requested type.
      */
     patch(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PATCH` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
@@ -2859,84 +1405,32 @@ declare class HttpClient {
      * with a response body in the given type.
      */
     patch<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
-  
-     * Constructs a `PATCH` request that interprets the body as JSON and
+     * Constructs a \`PATCH\` request that interprets the body as JSON and
      * returns the response body as an object parsed from JSON.
      *
      * @param url The endpoint URL.
      * @param body The resources to edit.
      * @param options HTTP options.
      *
-     * @return An `Observable` of the response, with the response body as an object parsed from JSON.
+     * @return An \`Observable\` of the response, with the response body as an object parsed from JSON.
      */
-    patch(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Object>;
+    patch(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<Object>;
     /**
-     * Constructs a `PATCH` request that interprets the body as JSON
+     * Constructs a \`PATCH\` request that interprets the body as JSON
      * and returns the response in a given type.
      *
      * @param url The endpoint URL.
      * @param body The resources to edit.
      * @param options HTTP options.
      *
-     * @return  An `Observable` of the `HttpResponse` for the request,
+     * @return  An \`Observable\` of the \`HttpResponse\` for the request,
      * with a response body in the given type.
      */
-    patch<T>(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<T>;
+    patch<T>(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and returns
      * an `ArrayBuffer`.
@@ -2948,91 +1442,37 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
-     * Constructs a `POST` request that interprets the body as a `Blob` and returns the
-     * response as a `Blob`.
+     * Constructs a \`POST\` request that interprets the body as a \`Blob\` and returns the
+     * response as a \`Blob\`.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
      * @param options HTTP options
      *
-     * @return An `Observable` of the response, with the response body as a `Blob`.
+     * @return An \`Observable\` of the response, with the response body as a \`Blob\`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
-     * Constructs a `POST` request that interprets the body as a text string and
+     * Constructs a \`POST\` request that interprets the body as a text string and
      * returns the response as a string value.
      *
      * @param url The endpoint URL.
      * @param body The content to replace with.
      * @param options HTTP options
      *
-     * @return An `Observable` of the response, with a response body of type string.
+     * @return An \`Observable\` of the response, with a response body of type string.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a `POST` request that interprets the body as an `ArrayBuffer` and
      * returns the full event stream.
@@ -3045,27 +1485,9 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob`
      * and returns the response in an observable of the full event stream.
@@ -3077,27 +1499,9 @@ declare class HttpClient {
      * @return An `Observable` of all `HttpEvent`s for the request, with the response body as `Blob`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text string and returns the full
      * event stream.
@@ -3110,27 +1514,9 @@ declare class HttpClient {
      * with a response body of type string.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
      * event stream.
@@ -3143,27 +1529,9 @@ declare class HttpClient {
      * with a response body of type `Object`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
      * Constructs a POST request that interprets the body as JSON and returns the full
      * event stream.
@@ -3176,27 +1544,9 @@ declare class HttpClient {
      * with a response body in the requested type.
      */
     post<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs a POST request that interprets the body as an `ArrayBuffer`
      *  and returns the full `HttpResponse`.
@@ -3209,27 +1559,9 @@ declare class HttpClient {
      * `ArrayBuffer`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `POST` request that interprets the body as a `Blob` and returns the full
      * `HttpResponse`.
@@ -3242,27 +1574,9 @@ declare class HttpClient {
      * with the response body as a `Blob`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `POST` request that interprets the body as a text stream and returns
      * the full `HttpResponse`.
@@ -3275,27 +1589,9 @@ declare class HttpClient {
      * with a response body of type string.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
      * and returns the full `HttpResponse`.
@@ -3308,27 +1604,9 @@ declare class HttpClient {
      * `Object`.
      */
     post(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON and returns the
      * full `HttpResponse`.
@@ -3342,27 +1620,9 @@ declare class HttpClient {
      * requested type.
      */
     post<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
      * and returns the response body as an object parsed from JSON.
@@ -3373,28 +1633,7 @@ declare class HttpClient {
      *
      * @return An `Observable` of the response, with the response body as an object parsed from JSON.
      */
-    post(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<Object>;
+    post(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<Object>;
     /**
      * Constructs a `POST` request that interprets the body as JSON
      * and returns an observable of the response.
@@ -3406,28 +1645,7 @@ declare class HttpClient {
      * @return  An `Observable` of the `HttpResponse` for the request, with a response body in the
      * requested type.
      */
-    post<T>(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        transferCache?: {
-            includeHeaders?: string[];
-        } | boolean;
-        timeout?: number;
-    }): Observable<T>;
+    post<T>(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<T>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and returns the
      * response as an `ArrayBuffer`.
@@ -3439,24 +1657,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as an `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<ArrayBuffer>;
+    } & HttpClientCommonOptions): Observable<ArrayBuffer>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns
      * the response as a `Blob`.
@@ -3468,24 +1671,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Blob>;
+    } & HttpClientCommonOptions): Observable<Blob>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and
      * returns the response as a string value.
@@ -3497,24 +1685,9 @@ declare class HttpClient {
      * @return An `Observable` of the response, with a response body of type string.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
         observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<string>;
+    } & HttpClientCommonOptions): Observable<string>;
     /**
      * Constructs a `PUT` request that interprets the body as an `ArrayBuffer` and
      * returns the full event stream.
@@ -3527,24 +1700,9 @@ declare class HttpClient {
      * with the response body as an `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the full event
      * stream.
@@ -3557,24 +1715,9 @@ declare class HttpClient {
      * with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text string and returns the full event
      * stream.
@@ -3587,24 +1730,9 @@ declare class HttpClient {
      * of type string.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<string>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
      * event stream.
@@ -3617,24 +1745,9 @@ declare class HttpClient {
      * type `Object`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the
      * full event stream.
@@ -3647,24 +1760,9 @@ declare class HttpClient {
      * with a response body in the requested type.
      */
     put<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'events';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpEvent<T>>;
+    } & HttpClientCommonOptions): Observable<HttpEvent<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as an
      * `ArrayBuffer` and returns an observable of the full HTTP response.
@@ -3677,24 +1775,9 @@ declare class HttpClient {
      * `ArrayBuffer`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'arraybuffer';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<ArrayBuffer>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<ArrayBuffer>>;
     /**
      * Constructs a `PUT` request that interprets the body as a `Blob` and returns the
      * full HTTP response.
@@ -3707,24 +1790,9 @@ declare class HttpClient {
      * with the response body as a `Blob`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'blob';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Blob>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Blob>>;
     /**
      * Constructs a `PUT` request that interprets the body as a text stream and returns the
      * full HTTP response.
@@ -3737,24 +1805,9 @@ declare class HttpClient {
      * string.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType: 'text';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<string>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<string>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON and returns the full
      * HTTP response.
@@ -3767,24 +1820,9 @@ declare class HttpClient {
      * of type 'Object`.
      */
     put(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<Object>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<Object>>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type and
      * returns the full HTTP response.
@@ -3797,24 +1835,9 @@ declare class HttpClient {
      * with a response body in the requested type.
      */
     put<T>(url: string, body: any | null, options: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
         observe: 'response';
-        context?: HttpContext;
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
         responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<HttpResponse<T>>;
+    } & HttpClientCommonOptions): Observable<HttpResponse<T>>;
     /**
      * Constructs a `PUT` request that interprets the body as JSON
      * and returns an observable of JavaScript object.
@@ -3825,25 +1848,7 @@ declare class HttpClient {
      *
      * @return An `Observable` of the response as a JavaScript object.
      */
-    put(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<Object>;
+    put(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<Object>;
     /**
      * Constructs a `PUT` request that interprets the body as an instance of the requested type
      * and returns an observable of the requested type.
@@ -3854,25 +1859,7 @@ declare class HttpClient {
      *
      * @return An `Observable` of the requested type.
      */
-    put<T>(url: string, body: any | null, options?: {
-        headers?: HttpHeaders | Record<string, string | string[]>;
-        context?: HttpContext;
-        observe?: 'body';
-        params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
-        reportProgress?: boolean;
-        responseType?: 'json';
-        withCredentials?: boolean;
-        credentials?: RequestCredentials;
-        keepalive?: boolean;
-        priority?: RequestPriority;
-        cache?: RequestCache;
-        mode?: RequestMode;
-        redirect?: RequestRedirect;
-        referrer?: string;
-        integrity?: string;
-        referrerPolicy?: ReferrerPolicy;
-        timeout?: number;
-    }): Observable<T>;
+    put<T>(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
 }
@@ -4632,5 +2619,5 @@ declare abstract class HttpXsrfTokenExtractor {
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
 }
 
-export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
-export type { HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };
+export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpRequestOptions, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
+export type { HttpClientCommonOptions, HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };
