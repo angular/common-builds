@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.10+sha-ebffd80
+ * @license Angular v22.0.0-next.10+sha-2b62458
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -637,7 +637,7 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * @publicApi
  *
  * @deprecated 20.0
- * Use the `@for` block instead. Intent to remove in v22
+ * Use the `@for` block instead. Intent to remove in a future major release
  */
 declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoCheck {
     private _viewContainer;
@@ -838,7 +838,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
  * @publicApi
  *
  * @deprecated 20.0
- * Use the `@if` block instead. Intent to remove in v22
+ * Use the `@if` block instead. Intent to remove in a future major release
  */
 declare class NgIf<T = unknown> {
     private _viewContainer;
@@ -850,17 +850,17 @@ declare class NgIf<T = unknown> {
     constructor(_viewContainer: ViewContainerRef, templateRef: TemplateRef<NgIfContext<T>>);
     /**
      * The Boolean expression to evaluate as the condition for showing a template.
-     * @deprecated Use the `@if` block instead. Intent to remove in v22
+     * @deprecated Use the `@if` block instead. Intent to remove in a future major release
      */
     set ngIf(condition: T);
     /**
      * A template to show if the condition expression evaluates to true.
-     * @deprecated Use the `@if` block instead. Intent to remove in v22
+     * @deprecated Use the `@if` block instead. Intent to remove in a future major release
      */
     set ngIfThen(templateRef: TemplateRef<NgIfContext<T>> | null);
     /**
      * A template to show if the condition expression evaluates to false.
-     * @deprecated Use the `@if` block instead. Intent to remove in v22
+     * @deprecated Use the `@if` block instead. Intent to remove in a future major release
      */
     set ngIfElse(templateRef: TemplateRef<NgIfContext<T>> | null);
     private _updateView;
@@ -1095,7 +1095,7 @@ declare class SwitchView {
  * @see [Structural Directives](guide/directives/structural-directives)
  *
  * @deprecated 20.0
- * Use the `@switch` block instead. Intent to remove in v22
+ * Use the `@switch` block instead. Intent to remove in a future major release
  */
 declare class NgSwitch {
     private _defaultViews;
@@ -1104,7 +1104,7 @@ declare class NgSwitch {
     private _lastCaseCheckIndex;
     private _lastCasesMatched;
     private _ngSwitch;
-    /** @deprecated Use the `@switch` block instead. Intent to remove in v22 */
+    /** @deprecated Use the `@switch` block instead. Intent to remove in a future major release */
     set ngSwitch(newValue: any);
     private _updateDefaultCases;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgSwitch, never>;
@@ -1143,14 +1143,14 @@ declare class NgSwitch {
  * @see {@link NgSwitchDefault}
  *
  * @deprecated 20.0
- * Use the `@case` block within a `@switch` block instead. Intent to remove in v22
+ * Use the `@case` block within a `@switch` block instead. Intent to remove in a future major release
  */
 declare class NgSwitchCase implements DoCheck {
     private ngSwitch;
     private _view;
     /**
      * Stores the HTML template to be selected on match.
-     * @deprecated Use the `@case` block within a `@switch` block instead. Intent to remove in v22
+     * @deprecated Use the `@case` block within a `@switch` block instead. Intent to remove in a future major release
      */
     ngSwitchCase: any;
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
@@ -1176,7 +1176,7 @@ declare class NgSwitchCase implements DoCheck {
  * @see {@link NgSwitchCase}
  *
  * @deprecated 20.0
- * Use the `@default` block within a `@switch` block instead. Intent to remove in v22
+ * Use the `@default` block within a `@switch` block instead. Intent to remove in a future major release
  */
 declare class NgSwitchDefault {
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<Object>, ngSwitch: NgSwitch);
