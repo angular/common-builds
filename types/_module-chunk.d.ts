@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.10+sha-a4145de
+ * @license Angular v22.0.0-next.10+sha-c84642a
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -359,7 +359,13 @@ type HttpTransferCacheRequestOptions = {
 interface HttpRequestOptions {
     headers?: HttpHeaders;
     context?: HttpContext;
+    /** @deprecated 22.0 Use `reportUploadProgress` and `reportDownloadProgress` instead */
     reportProgress?: boolean;
+    /**
+     * When set to `true` a request emited against the `FetchBackend` will throw an error.
+     */
+    reportUploadProgress?: boolean;
+    reportDownloadProgress?: boolean;
     params?: HttpParams;
     responseType?: HttpResponseType;
     withCredentials?: boolean;
@@ -419,8 +425,15 @@ declare class HttpRequest<T> implements HttpRequestOptions {
      *
      * Note: The default `HttpBackend` based on fetch, does not support progress report for uploads.
      * Set the `HttpXhrBackend` with `withXhr()` if you need this feature.
+     *
+     * @deprecated 22.0 Use `reportUploadProgress` and `reportDownloadProgress` instead
      */
     readonly reportProgress: boolean;
+    /**
+     * When set to `true` a request emited against the `FetchBackend` will throw an error.
+     */
+    readonly reportUploadProgress: boolean;
+    readonly reportDownloadProgress: boolean;
     /**
      * Whether this request should be sent with outgoing credentials (cookies).
      */
