@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.10+sha-8a7f955
+ * @license Angular v22.0.0-next.10+sha-f81fa6e
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2389,7 +2389,7 @@ interface HttpResourceRef<T> extends WritableResource<T>, ResourceRef<T> {
  * based `httpRequest` as well as sub-functions for `ArrayBuffer`, `Blob`, and `string` type
  * requests.
  *
- * @experimental 19.2
+ * @publicApi 22.0
  */
 interface HttpResourceFn {
     /**
@@ -2401,7 +2401,7 @@ interface HttpResourceFn {
      * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
      * `httpResource`, such as `httpResource.text()`, to parse the response differently.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
@@ -2415,7 +2415,7 @@ interface HttpResourceFn {
      * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
      * `httpResource`, such as `httpResource.text()`, to parse the response differently.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     <TResult = unknown>(url: (ctx: ResourceParamsContext) => string | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
@@ -2427,7 +2427,7 @@ interface HttpResourceFn {
      * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
      * `httpResource`, such as `httpResource.text()`, to parse the response differently.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options: HttpResourceOptions<TResult, unknown> & {
         defaultValue: NoInfer<TResult>;
@@ -2441,7 +2441,7 @@ interface HttpResourceFn {
      * of the `HttpClient` API. Data is parsed as JSON by default - use a sub-function of
      * `httpResource`, such as `httpResource.text()`, to parse the response differently.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     <TResult = unknown>(request: (ctx: ResourceParamsContext) => HttpResourceRequest | undefined, options?: HttpResourceOptions<TResult, unknown>): HttpResourceRef<TResult | undefined>;
     /**
@@ -2452,7 +2452,7 @@ interface HttpResourceFn {
      * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
      * of the `HttpClient` API. Data is parsed into an `ArrayBuffer`.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     arrayBuffer: {
         <TResult = ArrayBuffer>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, ArrayBuffer> & {
@@ -2472,7 +2472,7 @@ interface HttpResourceFn {
      * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
      * of the `HttpClient` API. Data is parsed into a `Blob`.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     blob: {
         <TResult = Blob>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, Blob> & {
@@ -2492,7 +2492,7 @@ interface HttpResourceFn {
      * Uses `HttpClient` to make requests and supports interceptors, testing, and the other features
      * of the `HttpClient` API. Data is parsed as a `string`.
      *
-     * @experimental 19.2
+     * @publicApi 22.0
      */
     text: {
         <TResult = string>(url: (ctx: ResourceParamsContext) => string | undefined, options: HttpResourceOptions<TResult, string> & {
@@ -2511,7 +2511,7 @@ interface HttpResourceFn {
  * request that expects a different kind of data, you can use a sub-constructor of `httpResource`,
  * such as `httpResource.text`.
  *
- * @experimental 19.2
+ * @publicApi 22.0
  * @initializerApiFunction
  */
 declare const httpResource: HttpResourceFn;
