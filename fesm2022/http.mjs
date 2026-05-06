@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.10+sha-188b0d5
+ * @license Angular v22.0.0-next.10+sha-5a7c1e6
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -418,7 +418,7 @@ class HttpResourceImpl extends _ResourceImpl {
         }
       });
       return promise;
-    }, defaultValue, equal, debugName, injector, getInitialStream);
+    }, defaultValue, equal, debugName, injector, undefined, getInitialStream);
     this.client = injector.get(HttpClient);
   }
   set(value) {
