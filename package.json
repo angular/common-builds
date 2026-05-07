@@ -1,6 +1,6 @@
 {
   "name": "@angular/common",
-  "version": "21.2.12+sha-bca94ee",
+  "version": "21.2.12+sha-2a1e6ec",
   "description": "Angular - commonly needed directives and services",
   "author": "angular",
   "license": "MIT",
@@ -44,7 +44,7 @@
     }
   },
   "peerDependencies": {
-    "@angular/core": "21.2.12+sha-bca94ee",
+    "@angular/core": "21.2.12+sha-2a1e6ec",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "repository": {
