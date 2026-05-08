@@ -1,14 +1,14 @@
 /**
- * @license Angular v22.1.0-next.0+sha-7b4791f
+ * @license Angular v22.1.0-next.0+sha-c72ebcb
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import { Observable } from 'rxjs';
-import { HttpRequest, HttpEvent, HttpRequestOptions, HttpHeaders, HttpParams, HttpResponse, HttpProgressEvent, HttpContext } from './_module-chunk.js';
-export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import * as i0 from '@angular/core';
 import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal, ResourceParamsContext } from '@angular/core';
+import { HttpRequest, HttpEvent, HttpRequestOptions, HttpHeaders, HttpParams, HttpResponse, HttpProgressEvent, HttpContext } from './_module-chunk.js';
+export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
 import { XhrFactory } from './_xhr-chunk.js';
 
 /**
