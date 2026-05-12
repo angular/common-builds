@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-next.12+sha-e9d1c7e
+ * @license Angular v22.0.0-next.12+sha-cc0fa6e
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2219,7 +2219,7 @@ declare function withXhr(): HttpFeature<HttpFeatureKind.Xhr>;
 /**
  * The structure of an `httpResource` request which will be sent to the backend.
  *
- * @experimental 19.2
+ * @publicApi 22.0
  */
 interface HttpResourceRequest {
     /**
@@ -2324,7 +2324,7 @@ interface HttpResourceRequest {
 /**
  * Options for creating an `httpResource`.
  *
- * @experimental 19.2
+ * @publicApi 22.0
  */
 interface HttpResourceOptions<TResult, TRaw> {
     /**
@@ -2364,7 +2364,7 @@ interface HttpResourceOptions<TResult, TRaw> {
  * `HttpResource`s are backed by `HttpClient`, including support for interceptors, testing, and the
  * other features of the `HttpClient` API.
  *
- * @experimental 19.2
+ * @publicApi 22.0
  */
 interface HttpResourceRef<T> extends WritableResource<T>, ResourceRef<T> {
     /**
