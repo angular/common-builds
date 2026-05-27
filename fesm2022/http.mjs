@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.21+sha-591fa53
+ * @license Angular v20.3.21+sha-3d135ce
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -199,10 +199,12 @@ function transferCacheInterceptorFn(req, next) {
     // In the following situations we do not want to cache the request
     if (!isCacheActive ||
         requestOptions === false ||
+        // Do not cache requests sent with credentials.
+        req.withCredentials ||
         // POST requests are allowed either globally or at request level
         (requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions) ||
         (requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod)) ||
-        // Do not cache request that require authorization when includeRequestsWithAuthHeaders is falsey
+        // Do not cache requests with authentication or cookie headers unless explicitly enabled.
         (!globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req)) ||
         globalOptions.filter?.(req) === false) {
         return next(req);
@@ -276,9 +278,11 @@ function transferCacheInterceptorFn(req, next) {
     }
     return event$;
 }
-/** @returns true when the requests contains autorization related headers. */
+/** @returns true when the request contains authentication or cookie headers. */
 function hasAuthHeaders(req) {
-    return req.headers.has('authorization') || req.headers.has('proxy-authorization');
+    return (req.headers.has('authorization') ||
+        req.headers.has('proxy-authorization') ||
+        req.headers.has('cookie'));
 }
 function getFilteredHeaders(headers, includeHeaders) {
     if (!includeHeaders) {
