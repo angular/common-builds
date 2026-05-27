@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-rc.1+sha-618c850
+ * @license Angular v22.0.0-rc.1+sha-d88b796
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -1865,6 +1865,15 @@ declare class HttpClient {
 }
 
 /**
+ * Configures the maximum buffered response body size for `FetchBackend`.
+ *
+ * The limit is only enabled by default in SSR mode to prevent unbounded buffering
+ * when a response stream never terminates.
+ *
+ * Set to `null` to disable the limit.
+ */
+declare const HTTP_FETCH_MAX_RESPONSE_SIZE: InjectionToken<number | null>;
+/**
  * Uses `fetch` to send requests to a backend server.
  *
  * This `FetchBackend` requires the support of the
@@ -1879,6 +1888,7 @@ declare class FetchBackend implements HttpBackend {
     private readonly fetchImpl;
     private readonly ngZone;
     private readonly destroyRef;
+    private readonly maxResponseSize;
     handle(request: HttpRequest<any>): Observable<HttpEvent<any>>;
     private doRequest;
     private parseBody;
@@ -2620,5 +2630,5 @@ declare abstract class HttpXsrfTokenExtractor {
     static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
 }
 
-export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpRequestOptions, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
+export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpRequestOptions, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_FETCH_MAX_RESPONSE_SIZE as ɵHTTP_FETCH_MAX_RESPONSE_SIZE, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };
 export type { HttpClientCommonOptions, HttpFeature, HttpHandlerFn, HttpInterceptor, HttpInterceptorFn, HttpResourceFn, HttpResourceOptions, HttpResourceRef, HttpResourceRequest, HttpTransferCacheOptions };
