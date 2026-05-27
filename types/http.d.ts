@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.14+sha-29ceeff
+ * @license Angular v21.2.14+sha-582a417
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4524,8 +4524,9 @@ declare const httpResource: HttpResourceFn;
  * @param includePostRequests Enables caching for POST requests. By default, only GET and HEAD
  *     requests are cached. This option can be enabled if POST requests are used to retrieve data
  *     (for example using GraphQL).
- * @param includeRequestsWithAuthHeaders Enables caching of requests containing either `Authorization`
- *     or `Proxy-Authorization` headers. By default, these requests are excluded from caching.
+ * @param includeRequestsWithAuthHeaders Enables caching of requests containing `Authorization`,
+ *     `Proxy-Authorization`, or `Cookie` headers. By default, these requests are excluded from
+ *     caching. Requests sent using `withCredentials` are also excluded by default.
  *
  * @see [Configuring the caching options](guide/ssr#configuring-the-caching-options)
  *
