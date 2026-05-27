@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-rc.1+sha-e6cfaf5
+ * @license Angular v22.0.0-rc.1+sha-618c850
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -30,7 +30,7 @@ function shouldCacheRequest(req, options) {
     transferCache: requestOptions,
     method: requestMethod
   } = req;
-  if (!isCacheActive || requestOptions === false || requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || globalOptions.filter?.(req) === false) {
+  if (!isCacheActive || requestOptions === false || req.withCredentials || requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || globalOptions.filter?.(req) === false) {
     return false;
   }
   return true;
@@ -128,7 +128,7 @@ function transferCacheInterceptorFn(req, next) {
   return event$;
 }
 function hasAuthHeaders(req) {
-  return req.headers.has('authorization') || req.headers.has('proxy-authorization');
+  return req.headers.has('authorization') || req.headers.has('proxy-authorization') || req.headers.has('cookie');
 }
 function getFilteredHeaders(headers, includeHeaders) {
   if (!includeHeaders) {
