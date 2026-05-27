@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0-rc.1+sha-d9c38e5
+ * @license Angular v22.0.0-rc.1+sha-e6cfaf5
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -363,7 +363,11 @@ class HttpResourceImpl extends _ResourceImpl {
       abortSignal
     }) => {
       let sub;
-      const onAbort = () => sub.unsubscribe();
+      let aborted = false;
+      const onAbort = () => {
+        aborted = true;
+        sub?.unsubscribe();
+      };
       abortSignal.addEventListener('abort', onAbort);
       const stream = signal({
         value: undefined
@@ -417,6 +421,9 @@ class HttpResourceImpl extends _ResourceImpl {
           abortSignal.removeEventListener('abort', onAbort);
         }
       });
+      if (aborted) {
+        sub.unsubscribe();
+      }
       return promise;
     }, defaultValue, equal, debugName, injector, undefined, getInitialStream);
     this.client = injector.get(HttpClient);
