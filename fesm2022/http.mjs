@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.24+sha-768a349
+ * @license Angular v20.3.24+sha-566ad05
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -200,12 +200,16 @@ function transferCacheInterceptorFn(req, next) {
     if (!isCacheActive ||
         requestOptions === false ||
         // Do not cache requests sent with credentials.
-        req.withCredentials ||
+        hasOutgoingCredentials(req) ||
         // POST requests are allowed either globally or at request level
         (requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions) ||
         (requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod)) ||
         // Do not cache requests with authentication or cookie headers unless explicitly enabled.
         (!globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req)) ||
+        // Do not cache requests that explicitly forbid caching via Cache-Control
+        // or Fetch API cache mode.
+        hasUncacheableCacheControl(req.headers) ||
+        isNonCacheableRequest(req.cache) ||
         globalOptions.filter?.(req) === false) {
         return next(req);
     }
@@ -263,8 +267,9 @@ function transferCacheInterceptorFn(req, next) {
     if (typeof ngServerMode !== 'undefined' && ngServerMode) {
         // Request not found in cache. Make the request and cache it if on the server.
         return event$.pipe(tap((event) => {
-            // Only cache successful HTTP responses.
-            if (event instanceof HttpResponse) {
+            // Only cache successful HTTP responses that do not have Cache-Control
+            // directives that forbid shared caching (no-store or private).
+            if (event instanceof HttpResponse && !hasUncacheableCacheControl(event.headers)) {
                 transferState.set(storeKey, {
                     [BODY]: event.body,
                     [HEADERS]: getFilteredHeaders(event.headers, headersToInclude),
@@ -283,6 +288,23 @@ function hasAuthHeaders(req) {
     return (req.headers.has('authorization') ||
         req.headers.has('proxy-authorization') ||
         req.headers.has('cookie'));
+}
+const UNCACHEABLE_CACHE_CONTROL_DIRECTIVES = new Set(['no-store', 'private', 'no-cache']);
+function hasUncacheableCacheControl(headers) {
+    const cacheControl = headers.get('cache-control');
+    if (!cacheControl) {
+        return false;
+    }
+    return cacheControl.split(',').some((directive) => {
+        const directiveName = directive.split('=', 1)[0].trim().toLowerCase();
+        return UNCACHEABLE_CACHE_CONTROL_DIRECTIVES.has(directiveName);
+    });
+}
+function isNonCacheableRequest(cache) {
+    return cache === 'no-cache' || cache === 'no-store';
+}
+function hasOutgoingCredentials(req) {
+    return req.withCredentials || req.credentials === 'include' || req.credentials === 'same-origin';
 }
 function getFilteredHeaders(headers, includeHeaders) {
     if (!includeHeaders) {
