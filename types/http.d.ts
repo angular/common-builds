@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.0+sha-df77e42
+ * @license Angular v22.1.0-next.0+sha-af04e26
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -97,14 +97,6 @@ interface HttpClientCommonOptions extends Omit<HttpRequestOptions, 'headers' | '
  * by directly joining to the URL.
  * ```ts
  * this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
- * ```
- *
- *
- * ### JSONP Example
- * ```ts
- * requestJsonp(url, callback = 'callback') {
- *  return this.httpClient.jsonp(this.heroesURL, callback);
- * }
  * ```
  *
  * ### PATCH Example
@@ -1001,6 +993,7 @@ declare class HttpClient {
      * @param callbackParam The callback function name.
      *
      * @return An `Observable` of the response object, with response body as an object.
+     * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
      */
     jsonp(url: string, callbackParam: string): Observable<Object>;
     /**
@@ -1014,6 +1007,7 @@ declare class HttpClient {
      * then the `JSONP` request can be rejected by the configured backend.
      *
      * @return An `Observable` of the response object, with response body in the requested type.
+     * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
      */
     jsonp<T>(url: string, callbackParam: string): Observable<T>;
     /**
@@ -2019,7 +2013,7 @@ declare const REQUESTS_CONTRIBUTE_TO_STABILITY: InjectionToken<boolean>;
  *
  * In the browser, this should always be the `window` object.
  *
- *
+ * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
  */
 declare abstract class JsonpCallbackContext {
     [key: string]: (data: any) => void;
@@ -2031,6 +2025,7 @@ declare abstract class JsonpCallbackContext {
  * @see {@link HttpXhrBackend}
  *
  * @publicApi
+ * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
  */
 declare class JsonpClientBackend implements HttpBackend {
     private callbackMap;
@@ -2063,6 +2058,7 @@ declare class JsonpClientBackend implements HttpBackend {
  * @see {@link HttpInterceptor}
  *
  * @publicApi
+ * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
  */
 declare class JsonpInterceptor {
     private injector;
@@ -2181,6 +2177,7 @@ declare function withNoXsrfProtection(): HttpFeature<HttpFeatureKind.NoXsrfProte
  * Add JSONP support to the configuration of the current `HttpClient` instance.
  *
  * @see {@link provideHttpClient}
+ * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Use standard HTTP requests instead. Intent to remove in future versions of Angular.
  */
 declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSupport>;
 /**

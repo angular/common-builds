@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.0+sha-df77e42
+ * @license Angular v22.1.0-next.0+sha-af04e26
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -991,7 +991,7 @@ declare class HttpClientModule {
  * with method JSONP, where they are rejected.
  *
  * @publicApi
- * @deprecated `withJsonpSupport()` as providers instead
+ * @deprecated 22.1 JSONP is deprecated as it can cause XSS vulnerabilities. Intent to remove in future versions of Angular.
  */
 declare class HttpClientJsonpModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClientJsonpModule, never>;
