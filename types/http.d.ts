@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.16+sha-dc9c996
+ * @license Angular v21.2.16+sha-d846326
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -4526,7 +4526,8 @@ declare const httpResource: HttpResourceFn;
  *     (for example using GraphQL).
  * @param includeRequestsWithAuthHeaders Enables caching of requests containing `Authorization`,
  *     `Proxy-Authorization`, or `Cookie` headers. By default, these requests are excluded from
- *     caching. Requests sent using `withCredentials` are also excluded by default.
+ *     caching. Requests sent using `withCredentials` or Fetch API `credentials` modes that can send
+ *     credentials are also excluded by default.
  *
  * @see [Configuring the caching options](guide/ssr#configuring-the-caching-options)
  *
