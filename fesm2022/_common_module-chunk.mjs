@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.0+sha-ed2420c
+ * @license Angular v22.1.0-next.0+sha-5f36274
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -61,7 +61,7 @@ class HashLocationStrategy extends LocationStrategy {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: HashLocationStrategy,
     deps: [{
@@ -74,14 +74,14 @@ class HashLocationStrategy extends LocationStrategy {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: HashLocationStrategy
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: HashLocationStrategy,
   decorators: [{
@@ -448,8 +448,10 @@ function getNumberOfCurrencyDigits(code) {
 const ISO8601_DATE_REGEX = /^(\d{4,})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
 const NAMED_FORMATS = {};
 const DATE_FORMATS_SPLIT = /((?:[^BEGHLMOSWYZabcdhmswyz']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|c{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+const MAX_DATE_FORMAT_LENGTH = 256;
 function formatDate(value, format, locale, timezone) {
   let date = toDate(value);
+  assertValidDateFormatLength(format);
   const namedFormat = getNamedFormat(locale, format);
   format = namedFormat || format;
   let parts = [];
@@ -482,6 +484,11 @@ function formatDate(value, format, locale, timezone) {
     text += dateFormatter ? dateFormatter(date, locale, dateTimezoneOffset) : value === "''" ? "'" : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
   });
   return text;
+}
+function assertValidDateFormatLength(format) {
+  if (format.length > MAX_DATE_FORMAT_LENGTH) {
+    throw new _RuntimeError(2300, ngDevMode && `Date format is too long. Exceeded maximum length of ${MAX_DATE_FORMAT_LENGTH} characters.`);
+  }
 }
 function assertValidDateFormat(parts) {
   if (parts.some(part => /^Y+$/.test(part)) && !parts.some(part => /^w+$/.test(part))) {
@@ -1276,7 +1283,7 @@ function parseIntAutoRadix(text) {
 class NgLocalization {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgLocalization,
     deps: [],
@@ -1284,7 +1291,7 @@ class NgLocalization {
   });
   static ɵprov = i0.ɵɵngDeclareService({
     minVersion: "22.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgLocalization,
     factory: () => new NgLocaleLocalization(inject(LOCALE_ID))
@@ -1292,7 +1299,7 @@ class NgLocalization {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgLocalization,
   decorators: [{
@@ -1341,7 +1348,7 @@ class NgLocaleLocalization extends NgLocalization {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgLocaleLocalization,
     deps: [{
@@ -1351,14 +1358,14 @@ class NgLocaleLocalization extends NgLocalization {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgLocaleLocalization
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgLocaleLocalization,
   decorators: [{
@@ -1458,7 +1465,7 @@ class NgClass {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgClass,
     deps: [{
@@ -1470,7 +1477,7 @@ class NgClass {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgClass,
     isStandalone: true,
     selector: "[ngClass]",
@@ -1483,7 +1490,7 @@ class NgClass {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgClass,
   decorators: [{
@@ -1582,7 +1589,7 @@ class NgComponentOutlet {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgComponentOutlet,
     deps: [{
@@ -1592,7 +1599,7 @@ class NgComponentOutlet {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgComponentOutlet,
     isStandalone: true,
     selector: "[ngComponentOutlet]",
@@ -1611,7 +1618,7 @@ class NgComponentOutlet {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgComponentOutlet,
   decorators: [{
@@ -1760,7 +1767,7 @@ class NgForOf {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgForOf,
     deps: [{
@@ -1774,7 +1781,7 @@ class NgForOf {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgForOf,
     isStandalone: true,
     selector: "[ngFor][ngForOf]",
@@ -1788,7 +1795,7 @@ class NgForOf {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgForOf,
   decorators: [{
@@ -1876,7 +1883,7 @@ class NgIf {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgIf,
     deps: [{
@@ -1888,7 +1895,7 @@ class NgIf {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgIf,
     isStandalone: true,
     selector: "[ngIf]",
@@ -1902,7 +1909,7 @@ class NgIf {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgIf,
   decorators: [{
@@ -2002,7 +2009,7 @@ class NgSwitch {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgSwitch,
     deps: [],
@@ -2010,7 +2017,7 @@ class NgSwitch {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgSwitch,
     isStandalone: true,
     selector: "[ngSwitch]",
@@ -2022,7 +2029,7 @@ class NgSwitch {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgSwitch,
   decorators: [{
@@ -2054,7 +2061,7 @@ class NgSwitchCase {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgSwitchCase,
     deps: [{
@@ -2070,7 +2077,7 @@ class NgSwitchCase {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgSwitchCase,
     isStandalone: true,
     selector: "[ngSwitchCase]",
@@ -2082,7 +2089,7 @@ class NgSwitchCase {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgSwitchCase,
   decorators: [{
@@ -2118,7 +2125,7 @@ class NgSwitchDefault {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgSwitchDefault,
     deps: [{
@@ -2134,7 +2141,7 @@ class NgSwitchDefault {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgSwitchDefault,
     isStandalone: true,
     selector: "[ngSwitchDefault]",
@@ -2143,7 +2150,7 @@ class NgSwitchDefault {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgSwitchDefault,
   decorators: [{
@@ -2199,7 +2206,7 @@ class NgPlural {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgPlural,
     deps: [{
@@ -2209,7 +2216,7 @@ class NgPlural {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgPlural,
     isStandalone: true,
     selector: "[ngPlural]",
@@ -2221,7 +2228,7 @@ class NgPlural {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgPlural,
   decorators: [{
@@ -2248,7 +2255,7 @@ class NgPluralCase {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgPluralCase,
     deps: [{
@@ -2266,7 +2273,7 @@ class NgPluralCase {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgPluralCase,
     isStandalone: true,
     selector: "[ngPluralCase]",
@@ -2275,7 +2282,7 @@ class NgPluralCase {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgPluralCase,
   decorators: [{
@@ -2343,7 +2350,7 @@ class NgStyle {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgStyle,
     deps: [{
@@ -2357,7 +2364,7 @@ class NgStyle {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgStyle,
     isStandalone: true,
     selector: "[ngStyle]",
@@ -2369,7 +2376,7 @@ class NgStyle {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgStyle,
   decorators: [{
@@ -2446,7 +2453,7 @@ class NgTemplateOutlet {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: NgTemplateOutlet,
     deps: [{
@@ -2456,7 +2463,7 @@ class NgTemplateOutlet {
   });
   static ɵdir = i0.ɵɵngDeclareDirective({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     type: NgTemplateOutlet,
     isStandalone: true,
     selector: "[ngTemplateOutlet]",
@@ -2471,7 +2478,7 @@ class NgTemplateOutlet {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: NgTemplateOutlet,
   decorators: [{
@@ -2599,7 +2606,7 @@ class AsyncPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: AsyncPipe,
     deps: [{
@@ -2609,7 +2616,7 @@ class AsyncPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: AsyncPipe,
     isStandalone: true,
@@ -2619,7 +2626,7 @@ class AsyncPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: AsyncPipe,
   decorators: [{
@@ -2642,7 +2649,7 @@ class LowerCasePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: LowerCasePipe,
     deps: [],
@@ -2650,7 +2657,7 @@ class LowerCasePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: LowerCasePipe,
     isStandalone: true,
@@ -2659,7 +2666,7 @@ class LowerCasePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: LowerCasePipe,
   decorators: [{
@@ -2678,7 +2685,7 @@ class TitleCasePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: TitleCasePipe,
     deps: [],
@@ -2686,7 +2693,7 @@ class TitleCasePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: TitleCasePipe,
     isStandalone: true,
@@ -2695,7 +2702,7 @@ class TitleCasePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: TitleCasePipe,
   decorators: [{
@@ -2713,7 +2720,7 @@ class UpperCasePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: UpperCasePipe,
     deps: [],
@@ -2721,7 +2728,7 @@ class UpperCasePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: UpperCasePipe,
     isStandalone: true,
@@ -2730,7 +2737,7 @@ class UpperCasePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: UpperCasePipe,
   decorators: [{
@@ -2771,7 +2778,7 @@ class DatePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: DatePipe,
     deps: [{
@@ -2787,7 +2794,7 @@ class DatePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: DatePipe,
     isStandalone: true,
@@ -2796,7 +2803,7 @@ class DatePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: DatePipe,
   decorators: [{
@@ -2846,7 +2853,7 @@ class I18nPluralPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: I18nPluralPipe,
     deps: [{
@@ -2856,7 +2863,7 @@ class I18nPluralPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: I18nPluralPipe,
     isStandalone: true,
@@ -2865,7 +2872,7 @@ class I18nPluralPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: I18nPluralPipe,
   decorators: [{
@@ -2895,7 +2902,7 @@ class I18nSelectPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: I18nSelectPipe,
     deps: [],
@@ -2903,7 +2910,7 @@ class I18nSelectPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: I18nSelectPipe,
     isStandalone: true,
@@ -2912,7 +2919,7 @@ class I18nSelectPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: I18nSelectPipe,
   decorators: [{
@@ -2930,7 +2937,7 @@ class JsonPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: JsonPipe,
     deps: [],
@@ -2938,7 +2945,7 @@ class JsonPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: JsonPipe,
     isStandalone: true,
@@ -2948,7 +2955,7 @@ class JsonPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: JsonPipe,
   decorators: [{
@@ -2998,7 +3005,7 @@ class KeyValuePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: KeyValuePipe,
     deps: [{
@@ -3008,7 +3015,7 @@ class KeyValuePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: KeyValuePipe,
     isStandalone: true,
@@ -3018,7 +3025,7 @@ class KeyValuePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: KeyValuePipe,
   decorators: [{
@@ -3069,7 +3076,7 @@ class DecimalPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: DecimalPipe,
     deps: [{
@@ -3079,7 +3086,7 @@ class DecimalPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: DecimalPipe,
     isStandalone: true,
@@ -3088,7 +3095,7 @@ class DecimalPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: DecimalPipe,
   decorators: [{
@@ -3122,7 +3129,7 @@ class PercentPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: PercentPipe,
     deps: [{
@@ -3132,7 +3139,7 @@ class PercentPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: PercentPipe,
     isStandalone: true,
@@ -3141,7 +3148,7 @@ class PercentPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: PercentPipe,
   decorators: [{
@@ -3191,7 +3198,7 @@ class CurrencyPipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: CurrencyPipe,
     deps: [{
@@ -3203,7 +3210,7 @@ class CurrencyPipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: CurrencyPipe,
     isStandalone: true,
@@ -3212,7 +3219,7 @@ class CurrencyPipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: CurrencyPipe,
   decorators: [{
@@ -3259,7 +3266,7 @@ class SlicePipe {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: SlicePipe,
     deps: [],
@@ -3267,7 +3274,7 @@ class SlicePipe {
   });
   static ɵpipe = i0.ɵɵngDeclarePipe({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: SlicePipe,
     isStandalone: true,
@@ -3277,7 +3284,7 @@ class SlicePipe {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: SlicePipe,
   decorators: [{
@@ -3294,7 +3301,7 @@ const COMMON_PIPES = [AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePi
 class CommonModule {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: CommonModule,
     deps: [],
@@ -3302,7 +3309,7 @@ class CommonModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: CommonModule,
     imports: [NgClass, NgComponentOutlet, NgForOf, NgIf, NgTemplateOutlet, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgPlural, NgPluralCase, AsyncPipe, UpperCasePipe, LowerCasePipe, JsonPipe, SlicePipe, DecimalPipe, PercentPipe, TitleCasePipe, CurrencyPipe, DatePipe, I18nPluralPipe, I18nSelectPipe, KeyValuePipe],
@@ -3310,14 +3317,14 @@ class CommonModule {
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.1.0-next.0+sha-ed2420c",
+    version: "22.1.0-next.0+sha-5f36274",
     ngImport: i0,
     type: CommonModule
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.0+sha-ed2420c",
+  version: "22.1.0-next.0+sha-5f36274",
   ngImport: i0,
   type: CommonModule,
   decorators: [{
