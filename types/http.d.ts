@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.0+sha-393b84c
+ * @license Angular v22.0.0+sha-167bd4c
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2053,6 +2053,7 @@ declare class JsonpClientBackend implements HttpBackend {
      */
     handle(req: HttpRequest<never>): Observable<HttpEvent<any>>;
     private removeListeners;
+    private isAllowedJsonpUrl;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpClientBackend, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<JsonpClientBackend>;
 }
