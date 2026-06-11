@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.1+sha-21bdff5
+ * @license Angular v22.0.1+sha-6867f77
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -30,7 +30,7 @@ function canUseOrCacheRequest(req, options) {
     transferCache: requestOptions,
     method: requestMethod
   } = req;
-  if (!isCacheActive || requestOptions === false || req.withCredentials || requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || globalOptions.filter?.(req) === false) {
+  if (!isCacheActive || requestOptions === false || hasOutgoingCredentials(req) || requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || hasUncacheableCacheControl(req.headers) || isNonCacheableRequest(req.cache) || globalOptions.filter?.(req) === false) {
     return false;
   }
   return true;
@@ -147,6 +147,16 @@ function hasUncacheableCacheControl(headers) {
     return UNCACHEABLE_CACHE_CONTROL_DIRECTIVES.has(directiveName);
   });
 }
+function isNonCacheableRequest(cache) {
+  return cache === 'no-cache' || cache === 'no-store';
+}
+function hasOutgoingCredentials(req) {
+  const {
+    withCredentials,
+    credentials
+  } = req;
+  return withCredentials || credentials === 'include' || credentials === 'same-origin';
+}
 function getFilteredHeaders(headers, includeHeaders) {
   if (!includeHeaders) {
     return {};
@@ -161,7 +171,9 @@ function getFilteredHeaders(headers, includeHeaders) {
   return headersMap;
 }
 function sortAndConcatParams(params) {
-  return [...params.keys()].sort().map(k => `${k}=${params.getAll(k)}`).join('&');
+  const searchParams = new URLSearchParams(params instanceof URLSearchParams ? params : params.toString());
+  searchParams.sort();
+  return searchParams.toString();
 }
 function makeCacheKey(request, mappedRequestUrl) {
   const {
