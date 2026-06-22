@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.1+sha-a286a32
+ * @license Angular v22.1.0-next.1+sha-792edab
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -15,7 +15,7 @@ const PRECOMMIT_HANDLER_SUPPORTED = new InjectionToken('', {
 class PlatformNavigation {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.0-next.1+sha-a286a32",
+    version: "22.1.0-next.1+sha-792edab",
     ngImport: i0,
     type: PlatformNavigation,
     deps: [],
@@ -23,7 +23,7 @@ class PlatformNavigation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.1.0-next.1+sha-a286a32",
+    version: "22.1.0-next.1+sha-792edab",
     ngImport: i0,
     type: PlatformNavigation,
     providedIn: 'platform',
@@ -32,7 +32,7 @@ class PlatformNavigation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.0-next.1+sha-a286a32",
+  version: "22.1.0-next.1+sha-792edab",
   ngImport: i0,
   type: PlatformNavigation,
   decorators: [{
