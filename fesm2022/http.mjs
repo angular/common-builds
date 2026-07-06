@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.4+sha-b126dc9
+ * @license Angular v22.1.0-next.4+sha-731d665
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -24,13 +24,17 @@ const ALLOWED_METHODS = ['GET', 'HEAD'];
 function canUseOrCacheRequest(req, options) {
   const {
     isCacheActive,
-    ...globalOptions
+    filter,
+    includePostRequests,
+    includeRequestsWithAuthHeaders,
+    includeRequestsWithCredentials,
+    includeNonCacheableRequests
   } = options;
   const {
     transferCache: requestOptions,
     method: requestMethod
   } = req;
-  if (!isCacheActive || requestOptions === false || hasOutgoingCredentials(req) || requestMethod === 'POST' && !globalOptions.includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !globalOptions.includeRequestsWithAuthHeaders && hasAuthHeaders(req) || hasUncacheableCacheControl(req.headers) || isNonCacheableRequest(req.cache) || globalOptions.filter?.(req) === false) {
+  if (!isCacheActive || requestOptions === false || requestMethod === 'POST' && !includePostRequests && !requestOptions || requestMethod !== 'POST' && !ALLOWED_METHODS.includes(requestMethod) || !includeRequestsWithAuthHeaders && hasAuthHeaders(req) || !includeRequestsWithCredentials && hasOutgoingCredentials(req) || !includeNonCacheableRequests && (hasUncacheableCacheControl(req.headers) || isNonCacheableRequest(req.cache)) || filter?.(req) === false) {
     return false;
   }
   return true;
@@ -111,7 +115,7 @@ function transferCacheInterceptorFn(req, next) {
           status,
           statusText
         } = event;
-        if (hasUncacheableCacheControl(headers) || hasSetCookieHeader(headers)) {
+        if (!options.includeNonCacheableRequests && (hasUncacheableCacheControl(headers) || hasSetCookieHeader(headers))) {
           return;
         }
         const {

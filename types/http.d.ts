@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.4+sha-b126dc9
+ * @license Angular v22.1.0-next.4+sha-731d665
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2536,28 +2536,42 @@ declare const httpResource: HttpResourceFn;
 /**
  * Options to configure how TransferCache should be used to cache requests made via HttpClient.
  *
- * @param includeHeaders Specifies which headers should be included into cached responses. No
- *     headers are included by default.
- * @param filter A function that receives a request as an argument and returns a boolean to indicate
- *     whether a request should be included into the cache.
- * @param includePostRequests Enables caching for POST requests. By default, only GET and HEAD
- *     requests are cached. This option can be enabled if POST requests are used to retrieve data
- *     (for example using GraphQL).
- * @param includeRequestsWithAuthHeaders Enables caching of requests containing `Authorization`,
- *     `Proxy-Authorization`, or `Cookie` headers. By default, these requests are excluded from
- *     caching. Requests sent using `withCredentials` or Fetch API `credentials` modes that can send
- *     credentials are also excluded by default.
- *
  * @see [Configuring the caching options](guide/ssr#configuring-the-caching-options)
  *
  * @publicApi
  */
-type HttpTransferCacheOptions = {
-    includeHeaders?: string[];
+interface HttpTransferCacheOptions {
+    /**
+     * A function that receives a request as an argument and returns a boolean to indicate
+     * whether a request should be included into the cache.
+     */
     filter?: (req: HttpRequest<unknown>) => boolean;
+    /**
+     * Specifies which headers should be included into cached responses. No headers are included by default.
+     */
+    includeHeaders?: string[];
+    /**
+     * Enables caching for `POST` requests. By default, only `GET` and `HEAD` requests are cached.
+     * This option can be enabled if `POST` requests are used to retrieve data (for example using `GraphQL`).
+     */
     includePostRequests?: boolean;
+    /**
+     * Enables caching of requests containing `Authorization`, `Proxy-Authorization`, or `Cookie` headers.
+     * By default, these requests are excluded from caching.
+     */
     includeRequestsWithAuthHeaders?: boolean;
-};
+    /**
+     * Enables caching of requests sent using `withCredentials` or Fetch API `credentials` modes (`include` or `same-origin`).
+     * By default, these requests are excluded from caching.
+     */
+    includeRequestsWithCredentials?: boolean;
+    /**
+     * Enables caching of requests and responses with `Cache-Control` directives that forbid caching
+     * (such as `no-cache`, `no-store`, or `private`), responses with a `Set-Cookie` header, or requests using Fetch API `no-cache` or `no-store` modes.
+     * By default, these requests/responses are excluded from caching.
+     */
+    includeNonCacheableRequests?: boolean;
+}
 /**
  * If your application uses different HTTP origins to make API calls (via `HttpClient`) on the server and
  * on the client, the `HTTP_TRANSFER_CACHE_ORIGIN_MAP` token allows you to establish a mapping
