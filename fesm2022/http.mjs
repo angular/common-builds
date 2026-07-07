@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.17+sha-8d22cc9
+ * @license Angular v21.2.17+sha-91df739
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -111,7 +111,7 @@ function transferCacheInterceptorFn(req, next) {
           status,
           statusText
         } = event;
-        if (hasUncacheableCacheControl(headers)) {
+        if (hasUncacheableCacheControl(headers) || hasSetCookieHeader(headers)) {
           return;
         }
         const {
@@ -153,6 +153,9 @@ function hasUncacheableCacheControl(headers) {
     const directiveName = directive.split('=', 1)[0].trim().toLowerCase();
     return UNCACHEABLE_CACHE_CONTROL_DIRECTIVES.has(directiveName);
   });
+}
+function hasSetCookieHeader(headers) {
+  return headers.has('set-cookie');
 }
 function isNonCacheableRequest(cache) {
   return cache === 'no-cache' || cache === 'no-store';
