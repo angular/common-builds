@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.0.5+sha-e839891
+ * @license Angular v22.0.5+sha-ab721b4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -542,7 +542,7 @@ function parseKeyValue(keyValue) {
       key = tryDecodeURIComponent(key);
       if (typeof key !== 'undefined') {
         val = typeof val !== 'undefined' ? tryDecodeURIComponent(val) : true;
-        if (!obj.hasOwnProperty(key)) {
+        if (!Object.hasOwn(obj, key)) {
           obj[key] = val;
         } else if (Array.isArray(obj[key])) {
           obj[key].push(val);
@@ -601,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.0.5+sha-e839891",
+    version: "22.0.5+sha-ab721b4",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -609,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.0.5+sha-e839891",
+    version: "22.0.5+sha-ab721b4",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.0.5+sha-e839891",
+    version: "22.0.5+sha-ab721b4",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -624,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.0.5+sha-e839891",
+  version: "22.0.5+sha-ab721b4",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{
