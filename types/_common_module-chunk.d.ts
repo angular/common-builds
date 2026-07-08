@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.4+sha-42862f7
+ * @license Angular v22.1.0-next.4+sha-c1829f6
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -545,7 +545,7 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * of the cloned templates.
  *
  * The `ngForOf` directive is generally used in the
- * [shorthand form](guide/directives/structural-directives#asterisk) `*ngFor`.
+ * [shorthand form](guide/directives/structural-directives#structural-directive-shorthand) `*ngFor`.
  * In this form, the template to be rendered for each iteration is the content
  * of an anchor element containing the directive.
  *
@@ -574,11 +574,11 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * context according to its lexical position.
  *
  * When using the shorthand syntax, Angular allows only [one structural directive
- * on an element](guide/directives/structural-directives#one-per-element).
+ * on an element](guide/directives/structural-directives#one-structural-directive-per-element).
  * If you want to iterate conditionally, for example,
  * put the `*ngIf` on a container element that wraps the `*ngFor` element.
  * For further discussion, see
- * [Structural Directives](guide/directives/structural-directives#one-per-element).
+ * [Structural Directives](guide/directives/structural-directives#one-structural-directive-per-element).
  *
  * @usageNotes
  *
@@ -619,7 +619,7 @@ declare class NgForOfContext<T, U extends NgIterable<T> = NgIterable<T>> {
  * controls that are present, such as `<input>` elements that accept user input. Inserted rows can
  * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
  * such as user input.
- * For more on animations, see [Transitions and Triggers](guide/animations/transition-and-triggers).
+ * For more on animations, see [Transitions and Triggers](guide/legacy-animations/transition-and-triggers).
  *
  * The identities of elements in the iterator can change while the data does not.
  * This can happen, for example, if the iterator is produced from an RPC to the server, and that
@@ -645,7 +645,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
     private _differs;
     /**
      * The value of the iterable expression, which can be used as a
-     * [template input variable](guide/directives/structural-directives#shorthand).
+     * [template input variable](guide/directives/structural-directives#structural-directive-shorthand).
      * @deprecated The `ngFor` directive is deprecated. Use the `@for` block instead.
      */
     set ngForOf(ngForOf: (U & NgIterable<T>) | undefined | null);
@@ -706,7 +706,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
  * Angular renders the template provided in an optional `else` clause. The default
  * template for the `else` clause is blank.
  *
- * A [shorthand form](guide/directives/structural-directives#asterisk) of the directive,
+ * A [shorthand form](guide/directives/structural-directives#structural-directive-shorthand) of the directive,
  * `*ngIf="condition"`, is generally used, provided
  * as an attribute of the anchor element for the inserted template.
  * Angular expands this into a more explicit version, in which the anchor element
@@ -832,7 +832,7 @@ declare class NgForOf<T, U extends NgIterable<T> = NgIterable<T>> implements DoC
  *
  * The presence of the implicit template object has implications for the nesting of
  * structural directives. For more on this subject, see
- * [Structural Directives](guide/directives/structural-directives#one-per-element).
+ * [Structural Directives](guide/directives/structural-directives#one-structural-directive-per-element).
  *
  * @ngModule CommonModule
  * @publicApi

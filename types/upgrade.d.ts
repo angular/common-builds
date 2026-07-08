@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.4+sha-42862f7
+ * @license Angular v22.1.0-next.4+sha-c1829f6
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -134,8 +134,6 @@ declare class AngularJSUrlCodec implements UrlCodec {
 /**
  * Location service that provides a drop-in replacement for the $location service
  * provided in AngularJS.
- *
- * @see [Using the Angular Unified Location Service](guide/upgrade#using-the-unified-angular-location-service)
  *
  * @publicApi
  */
