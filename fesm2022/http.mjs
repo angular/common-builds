@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0-next.6+sha-00699f3
+ * @license Angular v22.1.0-next.6+sha-3192dcc
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -195,7 +195,7 @@ function makeCacheKey(request, mappedRequestUrl) {
   } else if (typeof serializedBody !== 'string') {
     serializedBody = '';
   }
-  const key = [method, responseType, mappedRequestUrl, serializedBody, encodedParams].join('|');
+  const key = [method, responseType, mappedRequestUrl, serializedBody, encodedParams].join('\0');
   const hash = generateHash(key);
   return makeStateKey(hash);
 }
