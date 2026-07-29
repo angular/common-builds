@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.26+sha-4d62760
+ * @license Angular v20.3.26+sha-db0d4a1
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -327,13 +327,11 @@ function getFilteredHeaders(headers, includeHeaders) {
     return headersMap;
 }
 function sortAndConcatParams(params) {
-    return [...params.keys()]
-        .sort()
-        .map((k) => `${k}=${params.getAll(k)}`)
-        .join('&');
+    const searchParams = new URLSearchParams(params instanceof URLSearchParams ? params : params.toString());
+    searchParams.sort();
+    return searchParams.toString();
 }
 function makeCacheKey(request, mappedRequestUrl) {
-    // make the params encoded same as a url so it's easy to identify
     const { params, method, responseType } = request;
     const encodedParams = sortAndConcatParams(params);
     let serializedBody = request.serializeBody();
