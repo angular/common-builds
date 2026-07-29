@@ -1,5 +1,5 @@
 /**
- * @license Angular v21.2.18+sha-9949dcc
+ * @license Angular v21.2.18+sha-7b884f5
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -174,7 +174,9 @@ function getFilteredHeaders(headers, includeHeaders) {
   return headersMap;
 }
 function sortAndConcatParams(params) {
-  return [...params.keys()].sort().map(k => `${k}=${params.getAll(k)}`).join('&');
+  const searchParams = new URLSearchParams(params instanceof URLSearchParams ? params : params.toString());
+  searchParams.sort();
+  return searchParams.toString();
 }
 function makeCacheKey(request, mappedRequestUrl) {
   const {
