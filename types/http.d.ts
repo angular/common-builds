@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.0+sha-8c6f5e7
+ * @license Angular v22.1.0+sha-a13b968
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2197,6 +2197,9 @@ declare function withJsonpSupport(): HttpFeature<HttpFeatureKind.JsonpSupport>;
  * `withRequestsMadeViaParent` to be used at multiple levels, which will cause the request to
  * "bubble up" until either reaching the root level or an `HttpClient` which was not configured with
  * this option.
+ *
+ * This feature cannot be combined with `withFetch` or `withXhr` in the same
+ * `provideHttpClient()` call.
  *
  * @see [HTTP client setup](guide/http/setup#withrequestsmadeviaparent)
  * @see {@link provideHttpClient}
