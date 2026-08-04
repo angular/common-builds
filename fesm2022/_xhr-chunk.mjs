@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.0-next.0+sha-337053e
+ * @license Angular v22.2.0-next.0+sha-280d09b
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -12,9 +12,17 @@ function parseCookieValue(cookieStr, name) {
   for (const cookie of cookieStr.split(';')) {
     const eqIndex = cookie.indexOf('=');
     const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
-    if (cookieName.trim() === name) {
-      return decodeURIComponent(cookieValue);
+    if (cookieName.trim() !== name) {
+      continue;
     }
+    let value = cookieValue;
+    try {
+      value = decodeURIComponent(cookieValue);
+    } catch {}
+    if (value.length > 1 && value[0] === '"' && value[value.length - 1] === '"') {
+      value = value.slice(1, -1);
+    }
+    return value;
   }
   return null;
 }
@@ -25,7 +33,7 @@ class BrowserXhr {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.2.0-next.0+sha-337053e",
+    version: "22.2.0-next.0+sha-280d09b",
     ngImport: i0,
     type: BrowserXhr,
     deps: [],
@@ -33,14 +41,14 @@ class BrowserXhr {
   });
   static ɵprov = i0.ɵɵngDeclareService({
     minVersion: "22.0.0",
-    version: "22.2.0-next.0+sha-337053e",
+    version: "22.2.0-next.0+sha-280d09b",
     ngImport: i0,
     type: BrowserXhr
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.2.0-next.0+sha-337053e",
+  version: "22.2.0-next.0+sha-280d09b",
   ngImport: i0,
   type: BrowserXhr,
   decorators: [{
@@ -50,7 +58,7 @@ i0.ɵɵngDeclareClassMetadata({
 class XhrFactory {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.2.0-next.0+sha-337053e",
+    version: "22.2.0-next.0+sha-280d09b",
     ngImport: i0,
     type: XhrFactory,
     deps: [],
@@ -58,7 +66,7 @@ class XhrFactory {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.2.0-next.0+sha-337053e",
+    version: "22.2.0-next.0+sha-280d09b",
     ngImport: i0,
     type: XhrFactory,
     providedIn: 'root',
@@ -67,7 +75,7 @@ class XhrFactory {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.2.0-next.0+sha-337053e",
+  version: "22.2.0-next.0+sha-280d09b",
   ngImport: i0,
   type: XhrFactory,
   decorators: [{
