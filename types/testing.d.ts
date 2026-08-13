@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.1+sha-e9660b1
+ * @license Angular v22.1.1+sha-910f391
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -7,7 +7,7 @@
 import * as i0 from '@angular/core';
 import { Provider, InjectionToken } from '@angular/core';
 export { ɵFakeNavigation } from '@angular/core/testing';
-import { PlatformLocation, LocationChangeListener } from './_platform_location-chunk.js';
+import { PlatformLocation, LocationChangeListener } from './common.js';
 import { Location, LocationStrategy } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
 

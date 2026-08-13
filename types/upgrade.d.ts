@@ -1,11 +1,11 @@
 /**
- * @license Angular v22.1.1+sha-e9660b1
+ * @license Angular v22.1.1+sha-910f391
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
-import { Location, LocationStrategy, CommonModule } from './_common_module-chunk.js';
-import { PlatformLocation } from './_platform_location-chunk.js';
+import { Location, LocationStrategy, CommonModule } from './common.js';
+import { PlatformLocation } from './common.js';
 import { UpgradeModule } from '@angular/upgrade/static';
 import * as i0 from '@angular/core';
 import { InjectionToken, ModuleWithProviders } from '@angular/core';

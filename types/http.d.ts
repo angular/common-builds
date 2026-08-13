@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.1+sha-e9660b1
+ * @license Angular v22.1.1+sha-910f391
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -9,7 +9,7 @@ import * as i0 from '@angular/core';
 import { EnvironmentInjector, InjectionToken, Provider, EnvironmentProviders, Injector, ValueEqualityFn, WritableResource, ResourceRef, Signal, ResourceParamsContext } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpRequestOptions, HttpHeaders, HttpParams, HttpResponse, HttpProgressEvent, HttpContext } from './_module-chunk.js';
 export { HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContextToken, HttpDownloadProgressEvent, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpParameterCodec, HttpParamsOptions, HttpResponseBase, HttpSentEvent, HttpStatusCode, HttpUploadProgressEvent, HttpUrlEncodingCodec, HttpUserEvent } from './_module-chunk.js';
-import { XhrFactory } from './_xhr-chunk.js';
+import { XhrFactory } from './common.js';
 
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
