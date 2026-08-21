@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.3+sha-004cf3a
+ * @license Angular v22.1.3+sha-ee63c0a
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -368,13 +368,13 @@ class $locationShim {
         if (typeof search === 'string' || typeof search === 'number') {
           this.$$search = this.urlCodec.decodeSearch(search.toString());
         } else if (typeof search === 'object' && search !== null) {
-          search = {
-            ...search
-          };
-          for (const key in search) {
-            if (search[key] == null) delete search[key];
+          const searchObj = Object.create(null);
+          for (const [key, value] of Object.entries(search)) {
+            if (value != null) {
+              searchObj[key] = value;
+            }
           }
-          this.$$search = search;
+          this.$$search = searchObj;
         } else {
           throw new Error('LocationProvider.search(): First argument must be a string or an object.');
         }
@@ -601,7 +601,7 @@ class LocationUpgradeModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.3+sha-004cf3a",
+    version: "22.1.3+sha-ee63c0a",
     ngImport: i0,
     type: LocationUpgradeModule,
     deps: [],
@@ -609,14 +609,14 @@ class LocationUpgradeModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.1.3+sha-004cf3a",
+    version: "22.1.3+sha-ee63c0a",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.1.3+sha-004cf3a",
+    version: "22.1.3+sha-ee63c0a",
     ngImport: i0,
     type: LocationUpgradeModule,
     imports: [CommonModule]
@@ -624,7 +624,7 @@ class LocationUpgradeModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.3+sha-004cf3a",
+  version: "22.1.3+sha-ee63c0a",
   ngImport: i0,
   type: LocationUpgradeModule,
   decorators: [{
