@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.3+sha-7c752d4
+ * @license Angular v22.1.3+sha-745cc30
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -33,7 +33,7 @@ class BrowserXhr {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.3+sha-7c752d4",
+    version: "22.1.3+sha-745cc30",
     ngImport: i0,
     type: BrowserXhr,
     deps: [],
@@ -41,14 +41,14 @@ class BrowserXhr {
   });
   static ɵprov = i0.ɵɵngDeclareService({
     minVersion: "22.0.0",
-    version: "22.1.3+sha-7c752d4",
+    version: "22.1.3+sha-745cc30",
     ngImport: i0,
     type: BrowserXhr
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.3+sha-7c752d4",
+  version: "22.1.3+sha-745cc30",
   ngImport: i0,
   type: BrowserXhr,
   decorators: [{
@@ -58,7 +58,7 @@ i0.ɵɵngDeclareClassMetadata({
 class XhrFactory {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.1.3+sha-7c752d4",
+    version: "22.1.3+sha-745cc30",
     ngImport: i0,
     type: XhrFactory,
     deps: [],
@@ -66,7 +66,7 @@ class XhrFactory {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.1.3+sha-7c752d4",
+    version: "22.1.3+sha-745cc30",
     ngImport: i0,
     type: XhrFactory,
     providedIn: 'root',
@@ -75,7 +75,7 @@ class XhrFactory {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.1.3+sha-7c752d4",
+  version: "22.1.3+sha-745cc30",
   ngImport: i0,
   type: XhrFactory,
   decorators: [{
