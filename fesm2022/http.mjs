@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.0-next.4+sha-d8e74e7
+ * @license Angular v22.2.0-next.4+sha-9f44090
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -513,7 +513,7 @@ class HttpResourceImpl extends _ResourceImpl {
         complete: () => {
           if (resolve) {
             send({
-              error: new _RuntimeError(991, ngDevMode && 'Resource completed before producing a value')
+              error: new _RuntimeError(-991, ngDevMode && 'Resource completed before producing a value')
             });
           }
           abortSignal.removeEventListener('abort', onAbort);
