@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.4+sha-94b1d3d
+ * @license Angular v22.1.4+sha-731b959
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -149,6 +149,8 @@ interface PopStateEvent {
     state?: any;
     type?: string;
     url?: string;
+    /** Whether the user agent performed a visual transition for this navigation. */
+    hasUAVisualTransition?: boolean;
 }
 /**
  * @description
