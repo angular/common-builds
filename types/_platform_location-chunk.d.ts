@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.0-next.5+sha-81c3f3a
+ * @license Angular v22.2.0-next.5+sha-74c1716
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -53,7 +53,7 @@ declare abstract class PlatformLocation {
     abstract back(): void;
     historyGo?(relativePosition: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PlatformLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<PlatformLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * @description
@@ -110,7 +110,7 @@ declare class BrowserPlatformLocation extends PlatformLocation {
     historyGo(relativePosition?: number): void;
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<BrowserPlatformLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<BrowserPlatformLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 export { BrowserPlatformLocation, LOCATION_INITIALIZED, PlatformLocation };

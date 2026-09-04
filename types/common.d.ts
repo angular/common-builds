@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.0-next.5+sha-81c3f3a
+ * @license Angular v22.2.0-next.5+sha-74c1716
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -66,7 +66,7 @@ declare class NavigationAdapterForLocation extends Location {
     forward(): void;
     onUrlChange(fn: (url: string, state: unknown) => void): VoidFunction;
     static ɵfac: i0.ɵɵFactoryDeclaration<NavigationAdapterForLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<NavigationAdapterForLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -103,7 +103,7 @@ declare abstract class PlatformNavigation implements _Navigation {
     abstract removeEventListener(type: unknown, listener: unknown, options?: unknown): void;
     abstract dispatchEvent(event: Event): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<PlatformNavigation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<PlatformNavigation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -142,7 +142,7 @@ declare class HashLocationStrategy extends LocationStrategy implements OnDestroy
     getState(): unknown;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HashLocationStrategy, [null, { optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HashLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**

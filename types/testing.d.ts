@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.0-next.5+sha-81c3f3a
+ * @license Angular v22.2.0-next.5+sha-74c1716
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -74,7 +74,7 @@ declare class MockPlatformLocation implements PlatformLocation {
      */
     private emitEvents;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockPlatformLocation, [{ optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<MockPlatformLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * Mock implementation of URL state.
@@ -100,7 +100,7 @@ declare class FakeNavigationPlatformLocation implements PlatformLocation {
     historyGo(relativePosition?: number): void;
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<FakeNavigationPlatformLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<FakeNavigationPlatformLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -132,7 +132,7 @@ declare class SpyLocation implements Location {
     normalize(url: string): string;
     private pushHistory;
     static ɵfac: i0.ɵɵFactoryDeclaration<SpyLocation, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<SpyLocation>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -159,7 +159,7 @@ declare class MockLocationStrategy extends LocationStrategy {
     forward(): void;
     getState(): unknown;
     static ɵfac: i0.ɵɵFactoryDeclaration<MockLocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<MockLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
