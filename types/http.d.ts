@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.5+sha-468b65b
+ * @license Angular v22.1.5+sha-dfe7be4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -24,7 +24,7 @@ import { XhrFactory } from './common.js';
 declare abstract class HttpBackend implements HttpHandler {
     abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 declare class HttpInterceptorHandler implements HttpHandler {
     private backend;
@@ -35,7 +35,7 @@ declare class HttpInterceptorHandler implements HttpHandler {
     constructor(backend: HttpBackend, injector: EnvironmentInjector);
     handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpInterceptorHandler>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
@@ -52,7 +52,7 @@ declare class HttpInterceptorHandler implements HttpHandler {
 declare abstract class HttpHandler {
     abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpHandler, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpHandler>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -1855,7 +1855,7 @@ declare class HttpClient {
      */
     put<T>(url: string, body: any | null, options?: HttpClientCommonOptions): Observable<T>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpClient, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpClient>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -1889,7 +1889,7 @@ declare class FetchBackend implements HttpBackend {
     private createRequestInit;
     private concatChunks;
     static ɵfac: i0.ɵɵFactoryDeclaration<FetchBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<FetchBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -2050,7 +2050,7 @@ declare class JsonpClientBackend implements HttpBackend {
     private removeListeners;
     private isAllowedJsonpUrl;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpClientBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpClientBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * Identifies requests with the method JSONP and
@@ -2073,7 +2073,7 @@ declare class JsonpInterceptor {
      */
     intercept(initialRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<JsonpInterceptor, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<JsonpInterceptor>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -2636,7 +2636,7 @@ declare class HttpXhrBackend implements HttpBackend {
      */
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpXhrBackend, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpXhrBackend>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -2652,7 +2652,7 @@ declare abstract class HttpXsrfTokenExtractor {
      */
     abstract getToken(): string | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpXsrfTokenExtractor, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<HttpXsrfTokenExtractor>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 export { FetchBackend, HTTP_INTERCEPTORS, HTTP_TRANSFER_CACHE_ORIGIN_MAP, HttpBackend, HttpClient, HttpContext, HttpEvent, HttpFeatureKind, HttpHandler, HttpHeaders, HttpParams, HttpProgressEvent, HttpRequest, HttpRequestOptions, HttpResponse, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, httpResource, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_FETCH_MAX_RESPONSE_SIZE as ɵHTTP_FETCH_MAX_RESPONSE_SIZE, HTTP_ROOT_INTERCEPTOR_FNS as ɵHTTP_ROOT_INTERCEPTOR_FNS, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY, withHttpTransferCache as ɵwithHttpTransferCache };

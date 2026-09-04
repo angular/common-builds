@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.5+sha-468b65b
+ * @license Angular v22.1.5+sha-dfe7be4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -38,7 +38,7 @@ declare abstract class LocationStrategy {
     abstract onPopState(fn: LocationChangeListener): void;
     abstract getBaseHref(): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<LocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<LocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * A predefined DI token for the base href
@@ -116,7 +116,7 @@ declare class PathLocationStrategy extends LocationStrategy implements OnDestroy
     getState(): unknown;
     historyGo(relativePosition?: number): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PathLocationStrategy, [null, { optional: true; }]>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<PathLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * A `LocationStrategy` that ensures URLs never have a trailing slash.
@@ -128,7 +128,7 @@ declare class PathLocationStrategy extends LocationStrategy implements OnDestroy
 declare class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
     prepareExternalUrl(internal: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NoTrailingSlashPathLocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<NoTrailingSlashPathLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * A `LocationStrategy` that ensures URLs always have a trailing slash.
@@ -140,7 +140,7 @@ declare class NoTrailingSlashPathLocationStrategy extends PathLocationStrategy {
 declare class TrailingSlashPathLocationStrategy extends PathLocationStrategy {
     prepareExternalUrl(internal: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<TrailingSlashPathLocationStrategy, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<TrailingSlashPathLocationStrategy>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /** @publicApi */
@@ -316,7 +316,7 @@ declare class Location implements OnDestroy {
      */
     static stripTrailingSlash: (url: string) => string;
     static ɵfac: i0.ɵɵFactoryDeclaration<Location, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<Location>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
@@ -325,7 +325,7 @@ declare class Location implements OnDestroy {
 declare abstract class NgLocalization {
     abstract getPluralCategory(value: number, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgLocalization, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<NgLocalization>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 /**
  * Returns the plural case based on the locale
@@ -337,7 +337,7 @@ declare class NgLocaleLocalization extends NgLocalization {
     constructor(locale: string);
     getPluralCategory(value: number, locale?: string): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgLocaleLocalization, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<NgLocaleLocalization>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<any>;
 }
 
 /**
