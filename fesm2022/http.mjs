@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.1.7+sha-78c7ab3
+ * @license Angular v22.1.7+sha-805aa91
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -466,7 +466,9 @@ class HttpResourceImpl extends _ResourceImpl {
         aborted = true;
         sub?.unsubscribe();
       };
-      abortSignal.addEventListener('abort', onAbort);
+      abortSignal.addEventListener('abort', onAbort, {
+        once: true
+      });
       const stream = signal({
         value: undefined
       }, ...(ngDevMode ? [{
