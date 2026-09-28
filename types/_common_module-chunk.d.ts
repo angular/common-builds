@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0-next.0+sha-3eaae88
+ * @license Angular v22.3.0-next.0+sha-fac2f23
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -262,7 +262,7 @@ declare class Location implements OnDestroy {
      * moves forward two pages and `location.historyGo(-2)` moves back two pages. When we try to go
      * beyond what's stored in the history session, we stay in the current page. Same behaviour occurs
      * when `relativePosition` equals 0.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history
+     * @see [Moving to a specific point in history](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Moving_to_a_specific_point_in_history)
      */
     historyGo(relativePosition?: number): void;
     /**
