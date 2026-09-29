@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0-next.0+sha-8d1204a
+ * @license Angular v22.3.0-next.0+sha-2b89a3b
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -410,7 +410,7 @@ function normalizeRequest(ctx, request, responseType) {
   return new HttpRequest(unwrappedRequest.method ?? 'GET', unwrappedRequest.url, unwrappedRequest.body ?? null, {
     headers,
     params,
-    reportProgress: unwrappedRequest.reportProgress,
+    reportDownloadProgress: unwrappedRequest.reportProgress,
     withCredentials: unwrappedRequest.withCredentials,
     keepalive: unwrappedRequest.keepalive,
     cache: unwrappedRequest.cache,
