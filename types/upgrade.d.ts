@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0-next.1+sha-1f1f1f1-with-local-changes
+ * @license Angular v22.3.0-next.1+sha-3881615-with-local-changes
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -32,7 +32,7 @@ declare abstract class UrlCodec {
     /**
      * Encodes the search string from the provided string or object
      *
-     * @param path The path string or object
+     * @param search The search string or object
      */
     abstract encodeSearch(search: string | {
         [k: string]: unknown;
@@ -40,7 +40,7 @@ declare abstract class UrlCodec {
     /**
      * Decodes the search objects from the provided string
      *
-     * @param path The path string
+     * @param search The search string
      */
     abstract decodeSearch(search: string): {
         [k: string]: unknown;
@@ -48,19 +48,19 @@ declare abstract class UrlCodec {
     /**
      * Encodes the hash from the provided string
      *
-     * @param path The hash string
+     * @param hash The hash string
      */
     abstract encodeHash(hash: string): string;
     /**
      * Decodes the hash from the provided string
      *
-     * @param path The hash string
+     * @param hash The hash string
      */
     abstract decodeHash(hash: string): string;
     /**
      * Normalizes the URL from the provided string
      *
-     * @param path The URL string
+     * @param href The URL string
      */
     abstract normalize(href: string): string;
     /**
@@ -68,7 +68,7 @@ declare abstract class UrlCodec {
      *
      * @param path The URL path
      * @param search The search object
-     * @param hash The has string
+     * @param hash The hash string
      * @param baseUrl The base URL for the URL
      */
     abstract normalize(path: string, search: {
