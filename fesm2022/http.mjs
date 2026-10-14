@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.33+sha-2e8bde1
+ * @license Angular v20.3.33+sha-fc0e50a
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -10,6 +10,7 @@ import { assertInInjectionContext, inject, Injector, ɵResourceImpl as _Resource
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import './xhr.mjs';
+import './platform_location.mjs';
 
 /**
  * `httpResource` makes a reactive HTTP request and exposes the request status and response value as
