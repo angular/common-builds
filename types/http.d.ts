@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.3+sha-566facf
+ * @license Angular v22.2.3+sha-6f2fb3d
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2532,7 +2532,6 @@ interface HttpResourceFn {
  * such as `httpResource.text`.
  *
  * @publicApi 22.0
- * @initializerApiFunction
  */
 declare const httpResource: HttpResourceFn;
 
