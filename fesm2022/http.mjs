@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.2.3+sha-b83a7be
+ * @license Angular v22.2.3+sha-5706791
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -142,14 +142,14 @@ function hasAuthHeaders(req) {
 }
 const UNCACHEABLE_CACHE_CONTROL_DIRECTIVES = new Set(['no-store', 'private', 'no-cache']);
 function hasUncacheableCacheControl(headers) {
-  const cacheControl = headers.get('cache-control');
-  if (!cacheControl) {
+  const cacheControlValues = headers.getAll('cache-control');
+  if (!cacheControlValues) {
     return false;
   }
-  return cacheControl.split(',').some(directive => {
+  return cacheControlValues.some(cacheControl => cacheControl.split(',').some(directive => {
     const directiveName = directive.split('=', 1)[0].trim().toLowerCase();
     return UNCACHEABLE_CACHE_CONTROL_DIRECTIVES.has(directiveName);
-  });
+  }));
 }
 function hasSetCookieHeader(headers) {
   return headers.has('set-cookie');
