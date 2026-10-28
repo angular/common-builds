@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.34+sha-3291728
+ * @license Angular v20.3.34+sha-59ee277
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -82,10 +82,10 @@ class LocationStrategy {
     historyGo(relativePosition) {
         throw new Error(ngDevMode ? 'Not implemented' : '');
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: () => inject(PathLocationStrategy) });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: LocationStrategy, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: LocationStrategy, providedIn: 'root', useFactory: () => inject(PathLocationStrategy) });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: LocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: LocationStrategy, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root', useFactory: () => inject(PathLocationStrategy) }]
         }] });
@@ -197,10 +197,10 @@ class PathLocationStrategy extends LocationStrategy {
     historyGo(relativePosition = 0) {
         this._platformLocation.historyGo?.(relativePosition);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PathLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PathLocationStrategy, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PathLocationStrategy, deps: [{ token: PlatformLocation }, { token: APP_BASE_HREF, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PathLocationStrategy, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PathLocationStrategy, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PathLocationStrategy, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: PlatformLocation }, { type: undefined, decorators: [{
@@ -455,10 +455,10 @@ class Location {
      * @returns The URL string, modified if needed.
      */
     static stripTrailingSlash = stripTrailingSlash;
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: Location, deps: [{ token: LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: Location, deps: [{ token: LocationStrategy }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: Location, providedIn: 'root', useFactory: createLocation });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: Location, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: Location, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root',

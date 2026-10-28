@@ -1,5 +1,5 @@
 /**
- * @license Angular v20.3.34+sha-3291728
+ * @license Angular v20.3.34+sha-59ee277
  * (c) 2010-2025 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -49,10 +49,10 @@ class PlatformLocation {
     historyGo(relativePosition) {
         throw new Error(ngDevMode ? 'Not implemented' : '');
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PlatformLocation, providedIn: 'platform', useFactory: () => inject(BrowserPlatformLocation) });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PlatformLocation, providedIn: 'platform', useFactory: () => inject(BrowserPlatformLocation) });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: PlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: PlatformLocation, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'platform', useFactory: () => inject(BrowserPlatformLocation) }]
         }] });
@@ -134,10 +134,10 @@ class BrowserPlatformLocation extends PlatformLocation {
     getState() {
         return this._history.state;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: BrowserPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: BrowserPlatformLocation, providedIn: 'platform', useFactory: () => new BrowserPlatformLocation() });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: BrowserPlatformLocation, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: BrowserPlatformLocation, providedIn: 'platform', useFactory: () => new BrowserPlatformLocation() });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-3291728", ngImport: i0, type: BrowserPlatformLocation, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.34+sha-59ee277", ngImport: i0, type: BrowserPlatformLocation, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'platform',
