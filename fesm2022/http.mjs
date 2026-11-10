@@ -1,12 +1,12 @@
 /**
- * @license Angular v22.3.0-next.4+sha-9760c80
+ * @license Angular v22.3.0-next.4+sha-7638a3c
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
 
 import { HTTP_ROOT_INTERCEPTOR_FNS, HttpResponse, HttpHeaders, HttpErrorResponse, HttpEventType, HttpClient, HttpParams, HttpRequest } from './_module-chunk.mjs';
 export { FetchBackend, HTTP_INTERCEPTORS, HttpBackend, HttpClientJsonpModule, HttpClientModule, HttpClientXsrfModule, HttpContext, HttpContextToken, HttpFeatureKind, HttpHandler, HttpHeaderResponse, HttpResponseBase, HttpStatusCode, HttpUrlEncodingCodec, HttpXhrBackend, HttpXsrfTokenExtractor, JsonpClientBackend, JsonpInterceptor, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection, withRequestsMadeViaParent, withXhr, withXsrfConfiguration, HTTP_FETCH_MAX_RESPONSE_SIZE as ɵHTTP_FETCH_MAX_RESPONSE_SIZE, HttpInterceptorHandler as ɵHttpInterceptingHandler, REQUESTS_CONTRIBUTE_TO_STABILITY as ɵREQUESTS_CONTRIBUTE_TO_STABILITY } from './_module-chunk.mjs';
-import { InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, inject, ApplicationRef, TransferState, makeStateKey, ɵRuntimeError as _RuntimeError, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError, assertInInjectionContext, Injector, signal, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ɵencapsulateResourceError as _encapsulateResourceError } from '@angular/core';
+import { InjectionToken, APP_BOOTSTRAP_LISTENER, ɵperformanceMarkFeature as _performanceMarkFeature, inject, ApplicationRef, TransferState, ɵRuntimeError as _RuntimeError, makeStateKey, ɵtruncateMiddle as _truncateMiddle, ɵformatRuntimeError as _formatRuntimeError, assertInInjectionContext, Injector, signal, ɵResourceImpl as _ResourceImpl, linkedSignal, computed, ɵencapsulateResourceError as _encapsulateResourceError } from '@angular/core';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import './_xhr-chunk.mjs';
@@ -221,7 +221,8 @@ function withHttpTransferCache(cacheOptions) {
       _performanceMarkFeature('NgHttpTransferCache');
       return {
         isCacheActive: true,
-        ...cacheOptions
+        ...cacheOptions,
+        readCache: retrieveStateFromCache
       };
     }
   }, {
@@ -350,7 +351,7 @@ function generateHash(value) {
   return [hashState0, hashState1, hashState2, hashState3, hashState4, hashState5, hashState6, hashState7].map(x => x.toString(16).padStart(8, '0')).join('');
 }
 
-const httpResource = (() => {
+const httpResource = /* @__PURE__ */(() => {
   const jsonFn = makeHttpResourceFn('json');
   jsonFn.arrayBuffer = makeHttpResourceFn('arraybuffer');
   jsonFn.blob = makeHttpResourceFn('blob');
@@ -374,7 +375,7 @@ function makeHttpResourceFn(responseType) {
     });
     const getInitialStream = req => {
       if (cacheOptions && transferState && req) {
-        const cachedResponse = retrieveStateFromCache(req, cacheOptions, transferState, originMap);
+        const cachedResponse = cacheOptions.readCache(req, cacheOptions, transferState, originMap);
         if (cachedResponse) {
           try {
             const body = cachedResponse.body;
