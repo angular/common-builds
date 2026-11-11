@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0-next.4+sha-cf37344
+ * @license Angular v22.3.0-next.4+sha-effbe56
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -518,7 +518,7 @@ declare class HttpRequest<T> implements HttpRequestOptions {
     readonly timeout?: number;
     constructor(method: 'GET' | 'HEAD', url: string, init?: HttpRequestOptions);
     constructor(method: 'DELETE' | 'JSONP' | 'OPTIONS', url: string, init?: HttpRequestOptions);
-    constructor(method: 'POST', url: string, body: T | null, init?: HttpRequestOptions);
+    constructor(method: 'POST' | 'QUERY', url: string, body: T | null, init?: HttpRequestOptions);
     constructor(method: 'PUT' | 'PATCH', url: string, body: T | null, init?: HttpRequestOptions);
     constructor(method: string, url: string, body: T | null, init?: HttpRequestOptions);
     /**

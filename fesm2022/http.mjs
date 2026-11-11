@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0-next.4+sha-cf37344
+ * @license Angular v22.3.0-next.4+sha-effbe56
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -20,7 +20,7 @@ const STATUS_TEXT = 'st';
 const REQ_URL = 'u';
 const RESPONSE_TYPE = 'rt';
 const CACHE_OPTIONS = new InjectionToken(typeof ngDevMode !== 'undefined' && ngDevMode ? 'HTTP_TRANSFER_STATE_CACHE_OPTIONS' : '');
-const ALLOWED_METHODS = ['GET', 'HEAD'];
+const ALLOWED_METHODS = ['GET', 'HEAD', 'QUERY'];
 function canUseOrCacheRequest(req, options) {
   const {
     isCacheActive,
