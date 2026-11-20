@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.4.0-next.0+sha-5aa0b0e
+ * @license Angular v22.4.0-next.0+sha-6838c9b
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2476,7 +2476,7 @@ interface HttpResourceRequest {
      */
     body?: unknown;
     /**
-     * Dictionary of query parameters which will be appeneded to the request URL.
+     * Dictionary of query parameters which will be appended to the request URL.
      */
     params?: HttpParams | Record<string, string | number | boolean | ReadonlyArray<string | number | boolean>>;
     /**
