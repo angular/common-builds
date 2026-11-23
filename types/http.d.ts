@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0+sha-bb930fe
+ * @license Angular v22.3.0+sha-6e61b2c
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -32,6 +32,7 @@ declare class HttpInterceptorHandler implements HttpHandler {
     private chain;
     private readonly pendingTasks;
     private readonly contributeToStability;
+    private readonly destroyRef;
     constructor(backend: HttpBackend, injector: EnvironmentInjector);
     handle(initialRequest: HttpRequest<any>): Observable<HttpEvent<any>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HttpInterceptorHandler, never>;

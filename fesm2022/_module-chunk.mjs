@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0+sha-bb930fe
+ * @license Angular v22.3.0+sha-6e61b2c
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -777,24 +777,40 @@ class FetchBackend {
   maxResponseSize = inject(HTTP_FETCH_MAX_RESPONSE_SIZE);
   handle(request) {
     return new Observable(observer => {
+      if (this.destroyRef.destroyed) {
+        observer.unsubscribe();
+        return undefined;
+      }
       const aborter = new AbortController();
       let done = false;
       const wrappedObserver = {
         next: val => {
+          if (this.destroyRef.destroyed) {
+            return;
+          }
           if (val.type === HttpEventType.Response) {
             done = true;
           }
           observer.next(val);
         },
         error: err => {
+          if (this.destroyRef.destroyed) {
+            return;
+          }
           done = true;
           observer.error(err);
         },
         complete: () => {
+          if (this.destroyRef.destroyed) {
+            return;
+          }
           done = true;
           observer.complete();
         }
       };
+      const unregisterOnDestroy = this.destroyRef.onDestroy(() => {
+        observer.unsubscribe();
+      });
       this.doRequest(request, aborter.signal, wrappedObserver).then(noop, error => wrappedObserver.error(new HttpErrorResponse({
         error
       })));
@@ -807,6 +823,7 @@ class FetchBackend {
         }, request.timeout));
       }
       return () => {
+        unregisterOnDestroy();
         if (timeoutId !== undefined) {
           clearTimeout(timeoutId);
         }
@@ -837,6 +854,10 @@ class FetchBackend {
         url: request.urlWithParams,
         headers: error.headers
       }));
+      return;
+    }
+    if (this.destroyRef.destroyed) {
+      await response.body?.cancel();
       return;
     }
     const headers = new HttpHeaders(response.headers);
@@ -879,6 +900,13 @@ class FetchBackend {
             done,
             value
           } = await reader.read();
+          if (this.destroyRef.destroyed) {
+            if (!done) {
+              await reader.cancel();
+            }
+            canceled = true;
+            break;
+          }
           if (done) {
             break;
           }
@@ -903,7 +931,6 @@ class FetchBackend {
         }
       });
       if (canceled) {
-        observer.complete();
         return;
       }
       const chunksAll = this.concatChunks(chunks, receivedLength);
@@ -1021,7 +1048,7 @@ class FetchBackend {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: FetchBackend,
     deps: [],
@@ -1029,14 +1056,14 @@ class FetchBackend {
   });
   static ɵprov = i0.ɵɵngDeclareService({
     minVersion: "22.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: FetchBackend
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: FetchBackend,
   decorators: [{
@@ -1098,7 +1125,7 @@ class HttpXsrfCookieExtractor {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfCookieExtractor,
     deps: [],
@@ -1106,14 +1133,14 @@ class HttpXsrfCookieExtractor {
   });
   static ɵprov = i0.ɵɵngDeclareService({
     minVersion: "22.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfCookieExtractor
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpXsrfCookieExtractor,
   decorators: [{
@@ -1123,7 +1150,7 @@ i0.ɵɵngDeclareClassMetadata({
 class HttpXsrfTokenExtractor {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfTokenExtractor,
     deps: [],
@@ -1131,7 +1158,7 @@ class HttpXsrfTokenExtractor {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfTokenExtractor,
     providedIn: 'root',
@@ -1140,7 +1167,7 @@ class HttpXsrfTokenExtractor {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpXsrfTokenExtractor,
   decorators: [{
@@ -1185,7 +1212,7 @@ class HttpXsrfInterceptor {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfInterceptor,
     deps: [],
@@ -1193,14 +1220,14 @@ class HttpXsrfInterceptor {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXsrfInterceptor
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpXsrfInterceptor,
   decorators: [{
@@ -1243,7 +1270,7 @@ function legacyInterceptorFnFactory() {
 class HttpBackend {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpBackend,
     deps: [],
@@ -1251,7 +1278,7 @@ class HttpBackend {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpBackend,
     providedIn: 'root',
@@ -1260,7 +1287,7 @@ class HttpBackend {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpBackend,
   decorators: [{
@@ -1278,6 +1305,7 @@ class HttpInterceptorHandler {
   chain = null;
   pendingTasks = inject(PendingTasks);
   contributeToStability = inject(REQUESTS_CONTRIBUTE_TO_STABILITY);
+  destroyRef = inject(DestroyRef);
   constructor(backend, injector) {
     this.backend = backend;
     this.injector = injector;
@@ -1302,12 +1330,17 @@ class HttpInterceptorHandler {
       this.chain = dedupedInterceptorFns.reduceRight((nextSequencedFn, interceptorFn) => chainedInterceptorFn(nextSequencedFn, interceptorFn, this.injector), interceptorChainEndFn);
     }
     const chain = this.chain;
-    if (this.contributeToStability) {
+    if (this.contributeToStability && !this.destroyRef.destroyed) {
       const removeTask = this.pendingTasks.add();
-      try {
-        return untracked(() => chain(initialRequest, downstreamRequest => this.backend.handle(downstreamRequest))).pipe(finalize(removeTask));
-      } catch (error) {
+      const unregisterDestroy = this.destroyRef.onDestroy(removeTask);
+      const cleanup = () => {
+        unregisterDestroy();
         removeTask();
+      };
+      try {
+        return untracked(() => chain(initialRequest, downstreamRequest => this.backend.handle(downstreamRequest))).pipe(finalize(cleanup));
+      } catch (error) {
+        cleanup();
         throw error;
       }
     } else {
@@ -1316,7 +1349,7 @@ class HttpInterceptorHandler {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpInterceptorHandler,
     deps: [{
@@ -1328,7 +1361,7 @@ class HttpInterceptorHandler {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpInterceptorHandler,
     providedIn: 'root'
@@ -1336,7 +1369,7 @@ class HttpInterceptorHandler {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpInterceptorHandler,
   decorators: [{
@@ -1354,7 +1387,7 @@ i0.ɵɵngDeclareClassMetadata({
 class HttpHandler {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpHandler,
     deps: [],
@@ -1362,7 +1395,7 @@ class HttpHandler {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpHandler,
     providedIn: 'root',
@@ -1371,7 +1404,7 @@ class HttpHandler {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpHandler,
   decorators: [{
@@ -1509,7 +1542,7 @@ class HttpClient {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClient,
     deps: [{
@@ -1519,7 +1552,7 @@ class HttpClient {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClient,
     providedIn: 'root'
@@ -1527,7 +1560,7 @@ class HttpClient {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpClient,
   decorators: [{
@@ -1658,7 +1691,7 @@ class JsonpClientBackend {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: JsonpClientBackend,
     deps: [{
@@ -1670,14 +1703,14 @@ class JsonpClientBackend {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: JsonpClientBackend
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: JsonpClientBackend,
   decorators: [{
@@ -1709,7 +1742,7 @@ class JsonpInterceptor {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: JsonpInterceptor,
     deps: [{
@@ -1719,14 +1752,14 @@ class JsonpInterceptor {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: JsonpInterceptor
   });
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: JsonpInterceptor,
   decorators: [{
@@ -1976,7 +2009,7 @@ class HttpXhrBackend {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXhrBackend,
     deps: [{
@@ -1986,7 +2019,7 @@ class HttpXhrBackend {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpXhrBackend,
     providedIn: 'root'
@@ -1994,7 +2027,7 @@ class HttpXhrBackend {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpXhrBackend,
   decorators: [{
@@ -2152,7 +2185,7 @@ class HttpClientXsrfModule {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientXsrfModule,
     deps: [],
@@ -2160,13 +2193,13 @@ class HttpClientXsrfModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientXsrfModule
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientXsrfModule,
     providers: [HttpXsrfInterceptor, {
@@ -2187,7 +2220,7 @@ class HttpClientXsrfModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpClientXsrfModule,
   decorators: [{
@@ -2213,7 +2246,7 @@ i0.ɵɵngDeclareClassMetadata({
 class HttpClientModule {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientModule,
     deps: [],
@@ -2221,13 +2254,13 @@ class HttpClientModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientModule
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientModule,
     providers: [provideHttpClient(withInterceptorsFromDi(), withXhr())]
@@ -2235,7 +2268,7 @@ class HttpClientModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpClientModule,
   decorators: [{
@@ -2248,7 +2281,7 @@ i0.ɵɵngDeclareClassMetadata({
 class HttpClientJsonpModule {
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientJsonpModule,
     deps: [],
@@ -2256,13 +2289,13 @@ class HttpClientJsonpModule {
   });
   static ɵmod = i0.ɵɵngDeclareNgModule({
     minVersion: "14.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientJsonpModule
   });
   static ɵinj = i0.ɵɵngDeclareInjector({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-bb930fe",
+    version: "22.3.0+sha-6e61b2c",
     ngImport: i0,
     type: HttpClientJsonpModule,
     providers: [withJsonpSupport().ɵproviders]
@@ -2270,7 +2303,7 @@ class HttpClientJsonpModule {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-bb930fe",
+  version: "22.3.0+sha-6e61b2c",
   ngImport: i0,
   type: HttpClientJsonpModule,
   decorators: [{
