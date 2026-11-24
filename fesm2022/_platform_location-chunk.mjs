@@ -1,5 +1,5 @@
 /**
- * @license Angular v22.3.0+sha-6178bfe
+ * @license Angular v22.3.0+sha-36c892e
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -22,7 +22,7 @@ class PlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-6178bfe",
+    version: "22.3.0+sha-36c892e",
     ngImport: i0,
     type: PlatformLocation,
     deps: [],
@@ -30,7 +30,7 @@ class PlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-6178bfe",
+    version: "22.3.0+sha-36c892e",
     ngImport: i0,
     type: PlatformLocation,
     providedIn: 'platform',
@@ -39,7 +39,7 @@ class PlatformLocation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-6178bfe",
+  version: "22.3.0+sha-36c892e",
   ngImport: i0,
   type: PlatformLocation,
   decorators: [{
@@ -101,7 +101,12 @@ class BrowserPlatformLocation extends PlatformLocation {
     this._history.pushState(state, title, url);
   }
   replaceState(state, title, url) {
-    this._history.replaceState(state, title, url);
+    const targetUrl = url === '' ? this.href : new URL(url, this._doc.baseURI).href;
+    if (targetUrl === this.href) {
+      this._history.replaceState(state, title);
+    } else {
+      this._history.replaceState(state, title, url);
+    }
   }
   forward() {
     this._history.forward();
@@ -117,7 +122,7 @@ class BrowserPlatformLocation extends PlatformLocation {
   }
   static ɵfac = i0.ɵɵngDeclareFactory({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-6178bfe",
+    version: "22.3.0+sha-36c892e",
     ngImport: i0,
     type: BrowserPlatformLocation,
     deps: [],
@@ -125,7 +130,7 @@ class BrowserPlatformLocation extends PlatformLocation {
   });
   static ɵprov = i0.ɵɵngDeclareInjectable({
     minVersion: "12.0.0",
-    version: "22.3.0+sha-6178bfe",
+    version: "22.3.0+sha-36c892e",
     ngImport: i0,
     type: BrowserPlatformLocation,
     providedIn: 'platform',
@@ -134,7 +139,7 @@ class BrowserPlatformLocation extends PlatformLocation {
 }
 i0.ɵɵngDeclareClassMetadata({
   minVersion: "12.0.0",
-  version: "22.3.0+sha-6178bfe",
+  version: "22.3.0+sha-36c892e",
   ngImport: i0,
   type: BrowserPlatformLocation,
   decorators: [{
